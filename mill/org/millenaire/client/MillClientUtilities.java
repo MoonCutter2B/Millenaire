@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ForgeChunkManager;
 
 import org.lwjgl.input.Keyboard;
@@ -48,8 +47,6 @@ public class MillClientUtilities {
 
 		if (textSize!=MLN.textureSize) {
 			MLN.textureSize=textSize;
-
-			MinecraftForgeClient.preloadTexture(MLN.getSpritesPath());
 		}
 	}
 

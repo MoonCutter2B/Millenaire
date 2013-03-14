@@ -186,7 +186,7 @@ public class MillCommonUtilities {
 	public static Icon getIcon(IconRegister register,String iconName) {
 		return register.func_94245_a(Mill.modId+":"+iconName+MLN.getTextSuffix());
 	}
-	
+
 	public static boolean canStandInBlock(World world, Point p) {
 
 		if (!AStarStatic.isPassableBlock(world, p.getiX(), p.getiY(), p.getiZ(), MillVillager.DEFAULT_JPS_CONFIG))
@@ -208,34 +208,86 @@ public class MillCommonUtilities {
 	static public boolean chanceOn(int i) {
 		return getRandom().nextInt(i)==0;
 	}
-	
+
 	static public void changeMoney(IInventory chest,int toChange,EntityPlayer player) {
-		
-		final int current_denier = getItemsFromChest(chest,Mill.denier.itemID,0,Integer.MAX_VALUE);
-		final int current_denier_argent = getItemsFromChest(chest,Mill.denier_argent.itemID,0,Integer.MAX_VALUE);
-		final int current_denier_or = getItemsFromChest(chest,Mill.denier_or.itemID,0,Integer.MAX_VALUE);
-		
-		int finalChange=current_denier_or*64*64+current_denier_argent*64+current_denier+toChange;
-		
-		for (int i=0;i<chest.getSizeInventory() && finalChange!=0;i++) {
+
+		boolean hasPurse=false;
+
+		for (int i=0;i<chest.getSizeInventory() && !hasPurse;i++) {
 			final ItemStack stack = chest.getStackInSlot(i);
 			if (stack !=null) {
 				if (stack.itemID == Mill.purse.itemID) {					
-					int content=Mill.purse.totalDeniers(stack)+finalChange;
-					
-					if (content>=0) {
-						Mill.purse.setDeniers(stack, player, content);
-						finalChange=0;
-					} else {
-						Mill.purse.setDeniers(stack, player, 0);
-						finalChange=content;
+					hasPurse=true;
+				}
+			}
+		}
+
+		if (hasPurse) {
+
+			final int current_denier = getItemsFromChest(chest,Mill.denier.itemID,0,Integer.MAX_VALUE);
+			final int current_denier_argent = getItemsFromChest(chest,Mill.denier_argent.itemID,0,Integer.MAX_VALUE);
+			final int current_denier_or = getItemsFromChest(chest,Mill.denier_or.itemID,0,Integer.MAX_VALUE);
+
+			int finalChange=current_denier_or*64*64+current_denier_argent*64+current_denier+toChange;
+
+			for (int i=0;i<chest.getSizeInventory() && finalChange!=0;i++) {
+				final ItemStack stack = chest.getStackInSlot(i);
+				if (stack !=null) {
+					if (stack.itemID == Mill.purse.itemID) {					
+						int content=Mill.purse.totalDeniers(stack)+finalChange;
+
+						if (content>=0) {
+							Mill.purse.setDeniers(stack, player, content);
+							finalChange=0;
+						} else {
+							Mill.purse.setDeniers(stack, player, 0);
+							finalChange=content;
+						}
 					}
 				}
 			}
-		}		
+		} else {
+			
+			final int total = toChange+countMoney(chest);
+
+			final int denier = total % 64;
+			final int denier_argent = ((total-denier)/64) % 64;
+			final int denier_or = (total-denier-(denier_argent*64))/(64*64);
+
+			if (player!=null && denier_or>0) {
+				player.addStat(MillAchievements.cresus, 1);
+			}
+			
+			final int current_denier = countChestItems(chest,Mill.denier.itemID,0);
+			final int current_denier_argent = countChestItems(chest,Mill.denier_argent.itemID,0);
+			final int current_denier_or = countChestItems(chest,Mill.denier_or.itemID,0);
+
+			if (MLN.WifeAI>=MLN.MAJOR) {
+				MLN.major(null, "Putting: "+denier+"/"+denier_argent+"/"+denier_or+" replacing "+current_denier+"/"+current_denier_argent+"/"+current_denier_or);
+			}
+
+			if (denier < current_denier) {
+				getItemsFromChest(chest,Mill.denier.itemID,0,current_denier-denier);
+			} else if (denier > current_denier) {
+				putItemsInChest(chest,Mill.denier.itemID,0,denier-current_denier);
+			}
+
+			if (denier_argent < current_denier_argent) {
+				getItemsFromChest(chest,Mill.denier_argent.itemID,0,current_denier_argent-denier_argent);
+			} else if (denier_argent > current_denier_argent) {
+				putItemsInChest(chest,Mill.denier_argent.itemID,0,denier_argent-current_denier_argent);
+			}
+
+			if (denier_or < current_denier_or) {
+				getItemsFromChest(chest,Mill.denier_or.itemID,0,current_denier_or-denier_or);
+			} else if (denier_or > current_denier_or) {
+				putItemsInChest(chest,Mill.denier_or.itemID,0,denier_or-current_denier_or);
+			}
+			
+		}
 	}
 
-	static public void changeMoney2(IInventory chest,int toChange,EntityPlayer player) {
+	static public void changeMoneyObsolete(IInventory chest,int toChange,EntityPlayer player) {
 
 		final int total = toChange+countMoney(chest);
 
@@ -564,7 +616,7 @@ public class MillCommonUtilities {
 
 				if (!item.isDead ) {
 					for (final InvItem key : items) {
-						if ((item.func_92014_d().itemID == key.id()) && (item.func_92014_d().getItemDamage() == key.meta)) {
+						if ((item.getEntityItem().itemID == key.id()) && (item.getEntityItem().getItemDamage() == key.meta)) {
 							final double dist=item.getDistanceSq(p.x, p.y, p.z);
 							if (dist < bestdist) {
 								bestdist=dist;
@@ -1199,9 +1251,9 @@ public class MillCommonUtilities {
 		}
 
 		if (notify) {
-			world.setBlockWithNotify(p.getiX(), p.getiY(), p.getiZ(), bid);
+			world.setBlockAndMetadataWithNotify(p.getiX(), p.getiY(), p.getiZ(), bid,0,3);
 		} else {
-			world.setBlock(p.getiX(), p.getiY(), p.getiZ(), bid);
+			world.setBlockAndMetadataWithNotify(p.getiX(), p.getiY(), p.getiZ(), bid,0,2);
 		}
 
 		if (playSound && (bid>0)) {
@@ -1219,41 +1271,46 @@ public class MillCommonUtilities {
 		return setBlockAndMetadata(world,p,bid,metadata,true,false);
 	}
 
-	public static boolean setBlockAndMetadata(World world,Point p,int bid, int metadata, boolean notify, boolean playSound)
+	public static boolean setBlockAndMetadata(World world,int x,int y,int z,int bid, int metadata, boolean notify, boolean playSound)
 	{
-		if((p.x < 0xfe17b800) || (p.z < 0xfe17b800) || (p.x >= 0x1e84800) || (p.z > 0x1e84800))
+		if((x < 0xfe17b800) || (z < 0xfe17b800) || (x >= 0x1e84800) || (z > 0x1e84800))
 			return false;
-		if(p.y < 0)
+		if(y < 0)
 			return false;
-		if(p.y >= 256)
+		if(y >= 256)
 			return false;
 
 		if (playSound && (bid==0)) {
-			final int oldBid=world.getBlockId(p.getiX(), p.getiY(), p.getiZ());
+			final int oldBid=world.getBlockId(x,y,z);
 
 			if (oldBid>0) {
 				final Block block = Block.blocksList[oldBid];
 				if ((block!=null) && (block.stepSound!=null)) {
-					playSoundBlockBreaking(world,p,block,2.0f);
+					playSoundBlockBreaking(world,new Point(x,y,z),block,2.0f);
 				}
 
 			}
 		}
 
 		if (notify) {
-			world.setBlockAndMetadataWithNotify(p.getiX(), p.getiY(), p.getiZ(), bid, metadata);
+			world.setBlockAndMetadataWithNotify(x,y,z, bid, metadata,3);
 		} else {
-			world.setBlockAndMetadata(p.getiX(), p.getiY(), p.getiZ(), bid, metadata);
+			world.setBlockAndMetadataWithNotify(x,y,z, bid, metadata,2);
 		}
 
 		if (playSound && (bid>0)) {
 			final Block block = Block.blocksList[bid];
 			if ((block!=null) && (block.stepSound!=null)) {
-				playSoundBlockPlaced(world,p,block,2.0f);
+				playSoundBlockPlaced(world,new Point(x,y,z),block,2.0f);
 			}
 		}
 
 		return true;
+	}
+
+	public static boolean setBlockAndMetadata(World world,Point p,int bid, int metadata, boolean notify, boolean playSound)
+	{
+		return setBlockAndMetadata(world,p.getiX(),p.getiY(),p.getiZ(),bid,metadata,notify,playSound);
 	}
 
 	public static boolean setBlockMetadata(World world,Point p, int metadata)
@@ -1261,22 +1318,28 @@ public class MillCommonUtilities {
 		return setBlockMetadata(world,p,metadata,true);
 	}
 
-	public static boolean setBlockMetadata(World world,Point p, int metadata, boolean notify)
+	public static boolean setBlockMetadata(World world,int x,int y,int z, int metadata, boolean notify)
 	{
-		if((p.x < 0xfe17b800) || (p.z < 0xfe17b800) || (p.x >= 0x1e84800) || (p.z > 0x1e84800))
+		if((x < 0xfe17b800) || (z < 0xfe17b800) || (x >= 0x1e84800) || (z > 0x1e84800))
 			return false;
-		if(p.y < 0)
+		if(y < 0)
 			return false;
-		if(p.y >= 256)
+		if(y >= 256)
 			return false;
 
 		if (notify) {
-			world.setBlockMetadataWithNotify(p.getiX(), p.getiY(), p.getiZ(), metadata);
+			world.setBlockMetadataWithNotify(x,y,z, metadata,3);
 		} else {
-			world.setBlockMetadata(p.getiX(), p.getiY(), p.getiZ(), metadata);
+			world.setBlockMetadataWithNotify(x,y,z, metadata,2);
 		}
 
 		return true;
+	}
+
+	public static boolean setBlockMetadata(World world,Point p, int metadata, boolean notify)
+	{
+
+		return setBlockMetadata(world,p.getiX(),p.getiY(),p.getiZ(),metadata,notify);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

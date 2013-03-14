@@ -7,16 +7,15 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texturefx.TextureFX;
+import net.minecraft.client.renderer.texture.TextureStitched;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.world.World;
 
 import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
-import org.millenaire.common.forge.Mill;
 
-public class TextureVishnuAmulet extends TextureFX {
+public class TextureVishnuAmulet extends TextureStitched {
 
 	private int[] buffer;
 	private final Minecraft mc;
@@ -25,11 +24,10 @@ public class TextureVishnuAmulet extends TextureFX {
 	private final int[][] detect=new int[][]{{127,0,0}, {100,0,0}, {50,0,0}};
 
 	public TextureVishnuAmulet(Minecraft minecraft) {
-		super(Mill.vishnu_amulet.getIconFromDamage(0));
+		super("om_amulet");
 		this.mc=minecraft;
 
 
-		tileImage = 1;
 		try
 		{
 			final BufferedImage bufferedimage = ImageIO.read((net.minecraft.client.Minecraft.class).getResource("/graphics/item/ML_om_amulet.png"));
@@ -43,7 +41,7 @@ public class TextureVishnuAmulet extends TextureFX {
 		}
 	}
 	@Override
-	public void onTick() {
+	public void func_94219_l() {
 
 		double level=0;
 
@@ -90,15 +88,7 @@ public class TextureVishnuAmulet extends TextureFX {
 			int green = (buffer[i] >> 8) & 0xff;
 			int blue = (buffer[i] >> 0) & 0xff;
 
-			if(anaglyphEnabled)
-			{
-				final int j1 = ((red * 30) + (green * 59) + (blue * 11)) / 100;
-				final int k1 = ((red * 30) + (green * 70)) / 100;
-				final int l1 = ((red * 30) + (blue * 70)) / 100;
-				red = j1;
-				green = k1;
-				blue = l1;
-			}
+			
 
 			boolean handled=false;
 			for (int c=0;c<detect.length;c++) {
@@ -119,6 +109,8 @@ public class TextureVishnuAmulet extends TextureFX {
 			}
 		}
 
+		//TODO : handle texture properly
+		int[] imageData=new int[image.length];
 
 		final int zoomFactor=(int) Math.sqrt(imageData.length/image.length);
 		final int originalSize=(int) Math.sqrt(image.length/4);

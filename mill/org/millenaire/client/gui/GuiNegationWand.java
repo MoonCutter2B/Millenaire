@@ -45,8 +45,8 @@ public class GuiNegationWand extends GuiText {
 		final int xStart = (width - getXSize()) / 2;
 		final int yStart = (height - getYSize()) / 2;
 
-		controlList.add(new GuiButton(1, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, 95,20, MLN.string("negationwand.cancel")));
-		controlList.add(new GuiButton(0, xStart+(getXSize() / 2) + 5, (yStart+getYSize())-40, 95,20, MLN.string("negationwand.confirm")));
+		buttonList.add(new GuiButton(1, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, 95,20, MLN.string("negationwand.cancel")));
+		buttonList.add(new GuiButton(0, xStart+(getXSize() / 2) + 5, (yStart+getYSize())-40, 95,20, MLN.string("negationwand.confirm")));
 
 	}
 

@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 
 import org.millenaire.common.MillVillager.InvItem;
@@ -41,9 +42,9 @@ public class ContainerTrade extends Container {
 		}
 
 		@Override
-		public int getBackgroundIconIndex()
+		public Icon getBackgroundIconIndex()
 		{
-			return -1;
+			return null;
 		}
 
 		@Override
@@ -131,9 +132,9 @@ public class ContainerTrade extends Container {
 
 
 		@Override
-		public int getBackgroundIconIndex()
+		public Icon getBackgroundIconIndex()
 		{
-			return -1;
+			return null;
 		}
 
 		@Override

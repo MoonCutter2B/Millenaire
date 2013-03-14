@@ -59,7 +59,7 @@ public class SEClientTickHandler implements ITickHandler
 
 		@SuppressWarnings("rawtypes")
 		final
-		List entities=world.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(455, 36, -100, (455 + 1), (36 + 1), (-100 + 1)).expand(256D, 256D, 256D));
+		List entities=world.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getAABBPool().getAABB(455, 36, -100, (455 + 1), (36 + 1), (-100 + 1)).expand(256D, 256D, 256D));
 
 		for (final Object o : entities) {
 

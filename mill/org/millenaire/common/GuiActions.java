@@ -227,7 +227,7 @@ public class GuiActions {
 	}
 
 	private static void setSign(Building townhall,int i,int j,BuildingProject project) {
-		townhall.worldObj.setBlockWithNotify(i, MillCommonUtilities.findTopSoilBlock(townhall.worldObj, i, j), j, Block.signPost.blockID);
+		MillCommonUtilities.setBlockAndMetadata(townhall.worldObj, i, MillCommonUtilities.findTopSoilBlock(townhall.worldObj, i, j), j, Block.signPost.blockID,0,true,false);
 		final TileEntitySign sign=(TileEntitySign) townhall.worldObj.getBlockTileEntity(i, MillCommonUtilities.findTopSoilBlock(townhall.worldObj,i, j), j);
 		if (sign!=null) {
 			sign.signText=new String[]{project.getNativeName(),"",project.getGameName(),""};

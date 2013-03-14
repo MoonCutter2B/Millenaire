@@ -6,22 +6,20 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texturefx.TextureFX;
+import net.minecraft.client.renderer.texture.TextureStitched;
 
 import org.millenaire.common.Point;
-import org.millenaire.common.forge.Mill;
 
-public class TextureYddrasilAmulet extends TextureFX {
+public class TextureYddrasilAmulet extends TextureStitched {
 
 	private int[] buffer;
 	private final Minecraft mc;
 
 	public TextureYddrasilAmulet(Minecraft minecraft) {
-		super(Mill.yddrasil_amulet.getIconFromDamage(0));
+		super("yggdrasil_amulet");
 		this.mc=minecraft;
 
 
-		tileImage = 1;
 		try
 		{
 			final BufferedImage bufferedimage = ImageIO.read((net.minecraft.client.Minecraft.class).getResource("/graphics/gui/ML_yggdrasil_amulet.png"));
@@ -34,7 +32,7 @@ public class TextureYddrasilAmulet extends TextureFX {
 		}
 	}
 	@Override
-	public void onTick() {
+	public void func_94219_l() {
 
 		int level=0;
 
@@ -52,16 +50,6 @@ public class TextureYddrasilAmulet extends TextureFX {
 			int red = (buffer[i] >> 16) & 0xff;
 			int green = (buffer[i] >> 8) & 0xff;
 			int blue = (buffer[i] >> 0) & 0xff;
-
-			if(anaglyphEnabled)
-			{
-				final int j1 = ((red * 30) + (green * 59) + (blue * 11)) / 100;
-				final int k1 = ((red * 30) + (green * 70)) / 100;
-				final int l1 = ((red * 30) + (blue * 70)) / 100;
-				red = j1;
-				green = k1;
-				blue = l1;
-			}
 
 			boolean handled=false;
 			for (int j=0;j<16;j++) {
@@ -136,7 +124,9 @@ public class TextureYddrasilAmulet extends TextureFX {
 			}
 		}
 
-
+		//TODO : handle texture properly
+		int[] imageData=new int[image.length];
+				
 		final int zoomFactor=(int) Math.sqrt(imageData.length/image.length);
 		final int originalSize=(int) Math.sqrt(image.length/4);
 

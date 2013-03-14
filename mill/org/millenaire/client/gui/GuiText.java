@@ -256,7 +256,7 @@ public abstract class GuiText extends GuiScreen {
 		final int xStart = (width - getXSize()) / 2;
 		final int yStart = (height - getYSize()) / 2;
 
-		controlList.clear();
+		buttonList.clear();
 
 		int vpos=6;
 
@@ -299,7 +299,7 @@ public abstract class GuiText extends GuiScreen {
 						if (line.buttons[i]!=null) {
 							line.buttons[i].yPosition=yStart+vpos;
 							line.buttons[i].setHeight(20);
-							controlList.add(line.buttons[i]);
+							buttonList.add(line.buttons[i]);
 						}
 					}
 				}
@@ -382,9 +382,8 @@ public abstract class GuiText extends GuiScreen {
 	public void drawScreen(int i, int j, float f) {
 
 		drawDefaultBackground();
-		final int textId = mc.renderEngine.getTexture(getPNGPath());
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(textId);
+		mc.renderEngine.func_98187_b(getPNGPath());
 		final int xStart = (width - getXSize()) / 2;
 		final int yStart = (height - getYSize()) / 2;
 		drawTexturedModalRect(xStart, yStart, 0, 0, getXSize(), getYSize());

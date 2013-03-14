@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 import org.millenaire.common.Building;
@@ -137,9 +138,8 @@ public class GuiTrade extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		final int textId = mc.renderEngine.getTexture("/graphics/gui/ML_trade.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(textId);
+		mc.renderEngine.func_98187_b("/graphics/gui/ML_trade.png");
 		final int x = (width - xSize) / 2;
 		final int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
@@ -329,9 +329,9 @@ public class GuiTrade extends GuiContainer {
 
 	public void drawScreenGUIScreen(int i, int j, float f)
 	{
-		for(int k = 0; k < controlList.size(); k++)
+		for(int k = 0; k < buttonList.size(); k++)
 		{
-			final GuiButton guibutton = (GuiButton)controlList.get(k);
+			final GuiButton guibutton = (GuiButton)buttonList.get(k);
 			guibutton.drawButton(mc, i, j);
 		}
 
@@ -361,13 +361,13 @@ public class GuiTrade extends GuiContainer {
 
 			if (itemstack == null)
 			{
-				final int i1 = par1Slot.getBackgroundIconIndex();
+				final Icon icon = par1Slot.getBackgroundIconIndex();
 
-				if (i1 >= 0)
+				if (icon != null )
 				{
 					GL11.glDisable(GL11.GL_LIGHTING);
-					mc.renderEngine.bindTexture(mc.renderEngine.getTexture("/gui/items.png"));
-					drawTexturedModalRect(k, l, (i1 % 16) * 16, (i1 / 16) * 16, 16, 16);
+					mc.renderEngine.func_98187_b("/gui/items.png");
+					this.func_94065_a(i, j, icon, 16, 16);
 					GL11.glEnable(GL11.GL_LIGHTING);
 					flag = true;
 				}

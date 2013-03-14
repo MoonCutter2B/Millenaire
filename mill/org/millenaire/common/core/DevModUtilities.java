@@ -252,20 +252,20 @@ public class DevModUtilities {
 
 			for (final PathPoint p :villager.pathEntity.pointsCopy) {
 				if (villager.worldObj.getBlockId(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest.blockID) {
-					villager.worldObj.setBlockAndMetadataWithNotify(p.xCoord, p.yCoord-1, p.zCoord, Block.cloth.blockID, meta);
+					MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.cloth.blockID, meta);
 				}
 			}
 			PathPoint p = villager.pathEntity.getCurrentTargetPathPoint();
 			if ((p!=null) && (villager.worldObj.getBlockId(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest.blockID)) {
-				villager.worldObj.setBlockAndMetadataWithNotify(p.xCoord, p.yCoord-1, p.zCoord, Block.blockGold.blockID, 0);
+				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.blockGold.blockID, 0);
 			}
 			p = villager.pathEntity.getNextTargetPathPoint();
 			if ((p!=null) && (villager.worldObj.getBlockId(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest.blockID)) {
-				villager.worldObj.setBlockAndMetadataWithNotify(p.xCoord, p.yCoord-1, p.zCoord, Block.blockDiamond.blockID, 0);
+				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.blockDiamond.blockID, 0);
 			}
 			p = villager.pathEntity.getPreviousTargetPathPoint();
 			if ((p!=null) && (villager.worldObj.getBlockId(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest.blockID)) {
-				villager.worldObj.setBlockAndMetadataWithNotify(p.xCoord, p.yCoord-1, p.zCoord, Block.blockSteel.blockID, 0);
+				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.blockSteel.blockID, 0);
 			}
 		}
 

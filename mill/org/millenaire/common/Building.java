@@ -1790,7 +1790,7 @@ public class Building {
 		if (sources.size() > 0) {
 			String s = "Sources: ";
 			for (int i = 0; i < sources.size(); i++) {
-				s += Item.itemsList[sourceTypes.get(i)].getItemName() + ": "
+				s += Item.itemsList[sourceTypes.get(i)].getUnlocalizedName() + ": "
 						+ sources.get(i).size() + " ";
 			}
 			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
@@ -2212,9 +2212,9 @@ public class Building {
 							location.pos.getiX(), location.pos.getiZ());
 
 					for (int i = groundLevel + 1; i < location.pos.getiY(); i++) {
-						worldObj.setBlockWithNotify(location.pos.getiX(),
+						worldObj.setBlockAndMetadataWithNotify(location.pos.getiX(),
 								location.pos.getiY(), location.pos.getiZ(),
-								Block.dirt.blockID);
+								Block.dirt.blockID,0,2);
 					}
 					/**
 					worldObj.setBlockWithNotify(location.pos.getiX(),
@@ -3445,7 +3445,7 @@ public class Building {
 
 	public void growTree(World world, int i, int j, int k, Random random) {
 		final int meta = world.getBlockMetadata(i, j, k) & 3;
-		world.setBlock(i, j, k, 0);
+		world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
 		WorldGenerator obj = null;
 		if (meta == 1) {
 			obj = new WorldGenTaiga2(true);
@@ -4345,7 +4345,7 @@ public class Building {
 				if (MLN.Hybernation >= MLN.MAJOR) {
 					MLN.debug(this, "Loaded " + v.size()
 							+ " sources points for "
-							+ Item.itemsList[sourceTypes.get(i)].getItemName());
+							+ Item.itemsList[sourceTypes.get(i)].getUnlocalizedName());
 				}
 			}
 
@@ -6084,8 +6084,7 @@ public class Building {
 			final int meta = MillCommonUtilities.guessSignMetaData(worldObj, p);
 
 			if (meta > 0) {
-				worldObj.setBlockAndMetadataWithNotify(p.getiX(), p.getiY(),
-						p.getiZ(), Mill.panel.blockID, meta);
+				MillCommonUtilities.setBlockAndMetadata(worldObj, p, Mill.panel.blockID, meta);
 			}
 		}
 

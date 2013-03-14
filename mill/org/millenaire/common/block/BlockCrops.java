@@ -8,11 +8,12 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-import org.millenaire.common.MLN;
 import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
@@ -24,28 +25,43 @@ import org.millenaire.common.forge.Mill;
 public class BlockCrops extends BlockFlower
 {
 
-	int riceTexture0,riceTexture1,turmericTexture0,
+	String riceTexture0name,riceTexture1name,turmericTexture0name,
+	turmericTexture1name,maizeTexture0name,maizeTexture1name,vineTexture0name,vineTexture1name;
+	
+	Icon riceTexture0,riceTexture1,turmericTexture0,
 	turmericTexture1,maizeTexture0,maizeTexture1,vineTexture0,vineTexture1;
 
 	public BlockCrops(int i)
 	{
-		super(i, 16);
-		blockIndexInTexture = 16;
+		super(i);
 
-		riceTexture0=16;
-		riceTexture1=17;
-		turmericTexture0=18;
-		turmericTexture1=19;
-		maizeTexture0=20;
-		maizeTexture1=21;
-		vineTexture0=22;
-		vineTexture1=23;
+		riceTexture0name="rice0";
+		riceTexture1name="rice1";
+		turmericTexture0name="turmeric0";
+		turmericTexture1name="turmeric1";
+		maizeTexture0name="maize0";
+		maizeTexture1name="maize1";
+		vineTexture0name="vine0";
+		vineTexture1name="vine1";
 
 		setTickRandomly(true);
 		final float f = 0.5F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
 	}
 
+	@Override
+	public void func_94332_a(IconRegister iconRegister)
+	{
+		riceTexture0=MillCommonUtilities.getIcon(iconRegister, riceTexture0name);
+		riceTexture1=MillCommonUtilities.getIcon(iconRegister, riceTexture1name);
+		turmericTexture0=MillCommonUtilities.getIcon(iconRegister, turmericTexture0name);
+		turmericTexture1=MillCommonUtilities.getIcon(iconRegister, turmericTexture1name);
+		maizeTexture0=MillCommonUtilities.getIcon(iconRegister, maizeTexture0name);
+		maizeTexture0=MillCommonUtilities.getIcon(iconRegister, maizeTexture1name);
+		vineTexture0=MillCommonUtilities.getIcon(iconRegister, vineTexture0name);
+		vineTexture1=MillCommonUtilities.getIcon(iconRegister, vineTexture1name);
+	}
+	
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	 */
@@ -96,7 +112,7 @@ public class BlockCrops extends BlockFlower
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int meta)
+	public Icon getBlockTextureFromSideAndMetadata(int i, int meta)
 	{
 		if (meta==0)
 			return riceTexture0;
@@ -141,11 +157,6 @@ public class BlockCrops extends BlockFlower
 		return 6;
 	}
 
-	@Override
-	public String getTextureFile() {
-		return MLN.getSpritesPath();
-	}
-
 	public int idDropped(int i, Random random)
 	{
 		return -1;
@@ -174,10 +185,27 @@ public class BlockCrops extends BlockFlower
 		final int crop=world.getBlockMetadata(x, y, z);
 
 		if (crop==7) {
-
-			world.setBlockMetadataWithNotify(x, y, z, 6);
+			MillCommonUtilities.setBlockMetadata(world, x,y,z, 0,true);
 
 			MillCommonUtilities.spawnItem(world, new Point(x,y,z), new ItemStack(Mill.grapes,1), 0);
+
+			return true;
+		} else if (crop==1) {
+			MillCommonUtilities.setBlockMetadata(world, x,y,z, 0,true);
+
+			MillCommonUtilities.spawnItem(world, new Point(x,y,z), new ItemStack(Mill.rice,1), 0);
+
+			return true;
+		} else if (crop==3) {
+			MillCommonUtilities.setBlockMetadata(world, x,y,z, 0,true);
+
+			MillCommonUtilities.spawnItem(world, new Point(x,y,z), new ItemStack(Mill.turmeric,1), 0);
+
+			return true;
+		} else if (crop==5) {
+			MillCommonUtilities.setBlockMetadata(world, x,y,z, 0,true);
+
+			MillCommonUtilities.spawnItem(world, new Point(x,y,z), new ItemStack(Mill.maize,1), 0);
 
 			return true;
 
@@ -197,7 +225,7 @@ public class BlockCrops extends BlockFlower
 
 		//reverting field decay
 		if (soilId==Block.dirt.blockID) {
-			world.setBlock(i, j-1, k, Block.tilledField.blockID);
+			world.setBlockAndMetadataWithNotify(i, j-1, k, Block.tilledField.blockID,0,2);
 		}
 	}
 
@@ -215,7 +243,7 @@ public class BlockCrops extends BlockFlower
 				if (f>0) {
 					if(random.nextInt((int)(100F / f)) == 0)
 					{
-						world.setBlockMetadataWithNotify(i, j, k, 1);
+						MillCommonUtilities.setBlockMetadata(world, i,j,k, 1,true);
 					}
 				}
 			} else if(l == 2)//turmeric
@@ -224,7 +252,7 @@ public class BlockCrops extends BlockFlower
 				if (f>0) {
 					if(random.nextInt((int)(100F / f)) == 0)
 					{
-						world.setBlockMetadataWithNotify(i, j, k, 3);
+						MillCommonUtilities.setBlockMetadata(world, i,j,k, 3,true);
 					}
 				}
 			} else if(l == 4)//maize
@@ -233,7 +261,7 @@ public class BlockCrops extends BlockFlower
 				if (f>0) {
 					if(random.nextInt((int)(100F / f)) == 0)
 					{
-						world.setBlockMetadataWithNotify(i, j, k, 5);
+						MillCommonUtilities.setBlockMetadata(world, i,j,k, 5,true);
 					}
 				}
 			} else if(l == 6)//vine
@@ -242,7 +270,7 @@ public class BlockCrops extends BlockFlower
 				if (f>0) {
 					if(random.nextInt((int)(100F / f)) == 0)
 					{
-						world.setBlockMetadataWithNotify(i, j, k, 7);
+						MillCommonUtilities.setBlockMetadata(world, i,j,k, 7,true);
 					}
 				}
 			}

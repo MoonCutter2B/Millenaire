@@ -108,7 +108,7 @@ public class Mill
 			return Mill.denier_or.itemID;
 		}
 	}
-	public static final String versionNumber = "4.4.0";
+	public static final String versionNumber = "4.4.0b";
 	public static final String versionBound = "[4.4.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
@@ -366,27 +366,27 @@ public class Mill
 
 		parchmentVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.villagers).setUnlocalizedName("ml_parchmentVillagers");
 
-		parchmentBuildings = new ItemParchment(nextItemId(),"normanbuildings",ItemParchment.buildings).setUnlocalizedName("ml_parchmentBuildings");
+		parchmentBuildings = new ItemParchment(nextItemId(),"parchmentbuildings",ItemParchment.buildings).setUnlocalizedName("ml_parchmentBuildings");
 
-		parchmentItems = new ItemParchment(nextItemId(),"normanitems",ItemParchment.items).setUnlocalizedName("ml_parchmentItems");
+		parchmentItems = new ItemParchment(nextItemId(),"parchmentitems",ItemParchment.items).setUnlocalizedName("ml_parchmentItems");
 
 
-		parchmentComplete = new ItemParchment(nextItemId(),"normancomplete",new int[]{ItemParchment.villagers,ItemParchment.buildings,ItemParchment.items}).setUnlocalizedName("ml_marchmentComplete");
+		parchmentComplete = new ItemParchment(nextItemId(),"parchmentall",new int[]{ItemParchment.villagers,ItemParchment.buildings,ItemParchment.items}).setUnlocalizedName("ml_marchmentComplete");
 
 		boudin = (new ItemFoodMultiple(nextItemId(),"boudin",3,6,0.6f,2,false)).setUnlocalizedName("ml_boudin");
 
 		tapestry = (new ItemTapestry(nextItemId(),"normantapestry",EntityWallDecoration.NORMAN_TAPESTRY)).setUnlocalizedName("ml_tapestry");
 
 
-		vishnu_amulet = new Item(nextItemId()).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_raven_amulet").setMaxStackSize(1);
+		vishnu_amulet = new ItemText(nextItemId(),"amulet_vishnu").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_raven_amulet").setMaxStackSize(1);
 
 
-		alchemist_amulet = new Item(nextItemId()).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_dwarves_amulet").setMaxStackSize(1);
+		alchemist_amulet = new ItemText(nextItemId(),"amulet_alchemist").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_dwarves_amulet").setMaxStackSize(1);
 
 
-		yddrasil_amulet = new Item(nextItemId()).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_yddrasil_amulet").setMaxStackSize(1);
+		yddrasil_amulet = new ItemText(nextItemId(),"amulet_yggdrasil").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_yddrasil_amulet").setMaxStackSize(1);
 
-		skoll_hati_amulet = (new ItemAmuletSkollHati(nextItemId(),"amuletskollhati")).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_skoll_hati_amulet").setMaxStackSize(1).setMaxDamage(10);
+		skoll_hati_amulet = (new ItemAmuletSkollHati(nextItemId(),"amulet_skollhati")).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_skoll_hati_amulet").setMaxStackSize(1).setMaxDamage(10);
 		parchmentVillageScroll = new ItemParchment(nextItemId(),"parchmentvillage",new int[]{ItemParchment.villageBook}).setUnlocalizedName("ml_parchmentVillageScroll");
 
 		rice = (new ItemSeeds(nextItemId(),"rice", crops.blockID,0,Mill.CROP_RICE)).setUnlocalizedName("ml_rice");
@@ -480,7 +480,7 @@ public class Mill
 		
 		byzantine_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineBrickId,
 				"tilestopvert","tilestophor","tilestopvert","tilestophor","tilesfront","tilestophor").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick");
-		byzantine_tile_slab = (BlockOrientedSlab) new BlockOrientedSlab(MLN.blockByzantineSlabId).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick_slab");
+		byzantine_tile_slab = (BlockOrientedSlab) new BlockOrientedSlab(MLN.blockByzantineSlabId,"tilestophor","tilestopvert","tilesfront").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick_slab");
 		byzantine_stone_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineMixedId,
 				"tilestopvert","tilestophor","stone","stone","tileshalffront","tileshalfside").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_mixedbrick");
 

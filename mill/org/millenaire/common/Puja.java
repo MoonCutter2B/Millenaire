@@ -444,4 +444,14 @@ public class Puja implements IInventory {
 
 		par1NBTTagCompound.setTag("Items", nbttaglist);
 	}
+
+	@Override
+	public boolean func_94042_c() {
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack) {
+		return true;
+	}
 }

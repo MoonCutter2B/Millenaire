@@ -59,16 +59,16 @@ public class GuiHire extends GuiText {
 
 		if (villager.hiredBy!=null) {
 			if (MillCommonUtilities.countMoney(player.inventory)>=villager.getHireCost(player)) {
-				controlList.add(new GuiButton(BUTTON_EXTEND, (xStart+(getXSize() / 2)) -100, (yStart+getYSize())-40, 63,20, MLN.string("hire.extend")));
+				buttonList.add(new GuiButton(BUTTON_EXTEND, (xStart+(getXSize() / 2)) -100, (yStart+getYSize())-40, 63,20, MLN.string("hire.extend")));
 			}
-			controlList.add(new GuiButton(BUTTON_RELEASE, (xStart+(getXSize() / 2)) - 32, (yStart+getYSize())-40, 64,20, MLN.string("hire.release")));
-			controlList.add(new GuiButton(BUTTON_CLOSE, xStart+(getXSize() / 2) + 37, (yStart+getYSize())-40, 63,20, MLN.string("hire.close")));
+			buttonList.add(new GuiButton(BUTTON_RELEASE, (xStart+(getXSize() / 2)) - 32, (yStart+getYSize())-40, 64,20, MLN.string("hire.release")));
+			buttonList.add(new GuiButton(BUTTON_CLOSE, xStart+(getXSize() / 2) + 37, (yStart+getYSize())-40, 63,20, MLN.string("hire.close")));
 
 		} else {
 			if ((villager.getTownHall().getReputation(player.username)>=REPUTATION_NEEDED) && (MillCommonUtilities.countMoney(player.inventory)>=villager.getHireCost(player))) {
-				controlList.add(new GuiButton(BUTTON_HIRE, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, 95, 20, MLN.string("hire.hire")));
+				buttonList.add(new GuiButton(BUTTON_HIRE, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, 95, 20, MLN.string("hire.hire")));
 			}
-			controlList.add(new GuiButton(BUTTON_CLOSE, (xStart+(getXSize() / 2)) + 5, (yStart+getYSize())-40, 95, 20, MLN.string("hire.close")));
+			buttonList.add(new GuiButton(BUTTON_CLOSE, (xStart+(getXSize() / 2)) + 5, (yStart+getYSize())-40, 95, 20, MLN.string("hire.close")));
 		}
 
 	}

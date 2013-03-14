@@ -19,9 +19,6 @@ import org.millenaire.client.ModelFemaleAsymmetrical;
 import org.millenaire.client.ModelFemaleSymmetrical;
 import org.millenaire.client.RenderMillVillager;
 import org.millenaire.client.RenderWallDecoration;
-import org.millenaire.client.TextureAlchemistAmulet;
-import org.millenaire.client.TextureVishnuAmulet;
-import org.millenaire.client.TextureYddrasilAmulet;
 import org.millenaire.client.TileEntityMillChestRenderer;
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.EntityWallDecoration;
@@ -113,7 +110,7 @@ public class ClientProxy extends CommonProxy
 			return MLN.string("error.unknownitem");
 		}
 
-		return StringTranslate.getInstance().translateNamedKey(Item.itemsList[id].getItemNameIS(new ItemStack(id,1,meta)));
+		return StringTranslate.getInstance().translateNamedKey(Item.itemsList[id].getUnlocalizedName(new ItemStack(id,1,meta)));
 	}
 
 	@Override
@@ -211,9 +208,9 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericZombie.class, new RenderBiped(new ModelZombie(),0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWallDecoration.class, new RenderWallDecoration());
 
-		ModLoader.addAnimation(new TextureVishnuAmulet(ModLoader.getMinecraftInstance()));
-		ModLoader.addAnimation(new TextureAlchemistAmulet(ModLoader.getMinecraftInstance()));
-		ModLoader.addAnimation(new TextureYddrasilAmulet(ModLoader.getMinecraftInstance()));
+		//ModLoader.addAnimation(new TextureVishnuAmulet(ModLoader.getMinecraftInstance()));
+		//ModLoader.addAnimation(new TextureAlchemistAmulet(ModLoader.getMinecraftInstance()));
+		//ModLoader.addAnimation(new TextureYddrasilAmulet(ModLoader.getMinecraftInstance()));
 
 
 	}

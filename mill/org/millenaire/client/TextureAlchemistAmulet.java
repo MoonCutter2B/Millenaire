@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.texture.TextureStitched;
 import net.minecraft.world.World;
 
 import org.millenaire.common.Point;
-import org.millenaire.common.forge.Mill;
 
 public class TextureAlchemistAmulet extends TextureStitched {
 
@@ -24,11 +23,10 @@ public class TextureAlchemistAmulet extends TextureStitched {
 	private final int radius=5;
 
 	public TextureAlchemistAmulet(Minecraft minecraft) {
-		super(Mill.alchemist_amulet.getIconFromDamage(0));
+		super("alchimist_amulet");
 		this.mc=minecraft;
 
 
-		tileImage = 1;
 		try
 		{
 			final BufferedImage bufferedimage = ImageIO.read((net.minecraft.client.Minecraft.class).getResource("/graphics/item/ML_alchimist_amulet.png"));
@@ -41,7 +39,7 @@ public class TextureAlchemistAmulet extends TextureStitched {
 		}
 	}
 	@Override
-	public void onTick() {
+	public void func_94219_l() {
 
 		int score=0;
 
@@ -106,16 +104,6 @@ public class TextureAlchemistAmulet extends TextureStitched {
 			int green = (buffer[i] >> 8) & 0xff;
 			int blue = (buffer[i] >> 0) & 0xff;
 
-			if(anaglyphEnabled)
-			{
-				final int j1 = ((red * 30) + (green * 59) + (blue * 11)) / 100;
-				final int k1 = ((red * 30) + (green * 70)) / 100;
-				final int l1 = ((red * 30) + (blue * 70)) / 100;
-				red = j1;
-				green = k1;
-				blue = l1;
-			}
-
 			boolean handled=false;
 			for (int c=0;c<detect.length;c++) {
 				if ((red==detect[c][0]) && (green==detect[c][1]) && (blue==detect[c][2])) {
@@ -135,6 +123,8 @@ public class TextureAlchemistAmulet extends TextureStitched {
 			}
 		}
 
+		//TODO : handle texture properly
+		int[] imageData=new int[image.length];
 
 		final int zoomFactor=(int) Math.sqrt(imageData.length/image.length);
 		final int originalSize=(int) Math.sqrt(image.length/4);

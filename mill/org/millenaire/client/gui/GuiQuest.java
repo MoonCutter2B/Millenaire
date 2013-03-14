@@ -68,21 +68,21 @@ public class GuiQuest extends GuiText {
 		if (type==0) {
 			if (firstStep) {
 				if (showOk) {
-					controlList.add(new GuiButton(1, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, 95,20, MLN.string("quest.refuse")));
-					controlList.add(new GuiButton(0, xStart+(getXSize() / 2) + 5, (yStart+getYSize())-40, 95,20, MLN.string("quest.accept")));
+					buttonList.add(new GuiButton(1, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, 95,20, MLN.string("quest.refuse")));
+					buttonList.add(new GuiButton(0, xStart+(getXSize() / 2) + 5, (yStart+getYSize())-40, 95,20, MLN.string("quest.accept")));
 				} else {
-					controlList.add(new GuiButton(1, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, 95,20, MLN.string("quest.refuse")));
-					controlList.add(new GuiButton(2, xStart+(getXSize() / 2) + 5, (yStart+getYSize())-40, 95,20, MLN.string("quest.close")));
+					buttonList.add(new GuiButton(1, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, 95,20, MLN.string("quest.refuse")));
+					buttonList.add(new GuiButton(2, xStart+(getXSize() / 2) + 5, (yStart+getYSize())-40, 95,20, MLN.string("quest.close")));
 				}
 			} else {
 				if (showOk) {
-					controlList.add(new GuiButton(0, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, MLN.string("quest.continue")));
+					buttonList.add(new GuiButton(0, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, MLN.string("quest.continue")));
 				} else {
-					controlList.add(new GuiButton(2, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, MLN.string("quest.close")));
+					buttonList.add(new GuiButton(2, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, MLN.string("quest.close")));
 				}
 			}
 		} else {
-			controlList.add(new GuiButton(2, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, MLN.string("quest.close")));
+			buttonList.add(new GuiButton(2, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, MLN.string("quest.close")));
 		}
 
 

@@ -823,9 +823,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				if (MillCommonUtilities.randomInt(foodConceptionChanceOn[i])==0) {
 					createChild=true;
 					if (MLN.Children>=MLN.MINOR) {
-						MLN.minor(this, "Conceiving child with help from: "+foodConception[i].getItemName());
+						MLN.minor(this, "Conceiving child with help from: "+foodConception[i].getUnlocalizedName());
 					} else 	if (MLN.Children>=MLN.MINOR) {
-						MLN.minor(this, "Failed to conceive child even with help from: "+foodConception[i].getItemName());
+						MLN.minor(this, "Failed to conceive child even with help from: "+foodConception[i].getUnlocalizedName());
 					}
 				}
 			}
@@ -1026,38 +1026,12 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		shouldLieDown=false;
 	}
 
-	public void clearLeaves() {
-
-		final int x=MathHelper.floor_double(posX);
-		final int y=MathHelper.floor_double(posY);
-		final int z=MathHelper.floor_double(posZ);
-
-		for (int i=-1;i<2;i++) {
-			for (int j=0;j<4;j++) {
-				for (int k=-1;k<2;k++) {
-					final int bid=worldObj.getBlockId(i+x,j+y,k+z);
-					if (bid == Block.leaves.blockID) {
-						worldObj.setBlockWithNotify(i+x,j+y,k+z,0);
-
-						if (gathersApples() && MillCommonUtilities.chanceOn(16)) {
-							addToInv(Mill.ciderapple.itemID, 1);
-						}
-
-						if ((MLN.LogVillager>=MLN.DEBUG) && extraLog) {
-							MLN.debug(this, "Clearing leaves: "+(i+x)+"/"+ (j+y)+"/"+ (k+z));
-						}
-					}
-				}
-			}
-		}
-	}
-
 	private boolean closeFenceGate(int i, int j, int k)
 	{
 		final int l = worldObj.getBlockMetadata(i, j, k);
 		if(BlockFenceGate.isFenceGateOpen(l))
 		{
-			worldObj.setBlockMetadataWithNotify(i, j, k, l & -5);
+			MillCommonUtilities.setBlockMetadata(worldObj, i,j,k, l & -5,true);
 
 			return true;
 		}
@@ -1169,7 +1143,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 					if (!entity.isDead) {
 						for (final int id : itemIDs) {
-							if (id==entity.func_92014_d().itemID) {
+							if (id==entity.getEntityItem().itemID) {
 								count++;
 							}
 						}
@@ -2581,10 +2555,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 						final EntityItem item=getClosestItemVertical(goods,3,30);
 						if (item != null) {
 							item.setDead();
-							if (item.func_92014_d().itemID==Block.sapling.blockID) {
-								addToInv(item.func_92014_d().itemID,item.func_92014_d().getItemDamage() & 3,1);
+							if (item.getEntityItem().itemID==Block.sapling.blockID) {
+								addToInv(item.getEntityItem().itemID,item.getEntityItem().getItemDamage() & 3,1);
 							} else {
-								addToInv(item.func_92014_d().itemID,item.func_92014_d().getItemDamage(),1);
+								addToInv(item.getEntityItem().itemID,item.getEntityItem().getItemDamage(),1);
 							}
 						}
 					}
@@ -2773,7 +2747,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			{
 				l = i1;
 			}
-			worldObj.setBlockMetadataWithNotify(i, j, k, l | 4);
+			MillCommonUtilities.setBlockMetadata(worldObj, i,j,k, l | 4,true);
 
 		}
 
@@ -3562,7 +3536,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		final int l = worldObj.getBlockMetadata(i, j, k);
 
 
-		worldObj.setBlockMetadataWithNotify(i, j, k, l ^ 4);
+		MillCommonUtilities.setBlockMetadata(worldObj, i,j,k, l ^ 4,true);
 		worldObj.markBlockRangeForRenderUpdate(i, j - 1, k, i, j, k);
 
 	}

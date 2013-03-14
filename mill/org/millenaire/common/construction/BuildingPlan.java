@@ -263,23 +263,23 @@ public class BuildingPlan {
 			} else if (special==BuildingBlock.SPAWNERSKELETON) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.setMobID("Skeleton");
+				tileentitymobspawner.func_98049_a().func_98272_a("Skeleton");
 			} else if (special==BuildingBlock.SPAWNERZOMBIE) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.setMobID("Zombie");
+				tileentitymobspawner.func_98049_a().func_98272_a("Zombie");
 			} else if (special==BuildingBlock.SPAWNERSPIDER) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.setMobID("Spider");
+				tileentitymobspawner.func_98049_a().func_98272_a("Spider");
 			} else if (special==BuildingBlock.SPAWNERCAVESPIDER) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.setMobID("CaveSpider");
+				tileentitymobspawner.func_98049_a().func_98272_a("CaveSpider");
 			} else if (special==BuildingBlock.SPAWNERCREEPER) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.setMobID("Creeper");
+				tileentitymobspawner.func_98049_a().func_98272_a("Creeper");
 			} else if (special==BuildingBlock.DISPENDERUNKNOWNPOWDER) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.dispenser.blockID, 0);
 				final TileEntityDispenser dispenser=p.getDispenser(world);
@@ -310,12 +310,12 @@ public class BuildingPlan {
 					MillCommonUtilities.setBlockAndMetadata(world, p.getNorth(), bid, meta - 8, notifyBlocks, playSound);
 				}
 			} else if (bid==Block.stoneButton.blockID) {
-				final int newmeta=((BlockButton)Block.stoneButton).func_85104_a(world, p.getiX(),p.getiY(),p.getiZ(), 0, 0, 0, 0, 0);
+				final int newmeta=((BlockButton)Block.stoneButton).onBlockPlaced(world, p.getiX(),p.getiY(),p.getiZ(), 0, 0, 0, 0, 0);
 
 				MillCommonUtilities.setBlockMetadata(world, p, newmeta, notifyBlocks);
 			} else if (bid==Block.waterStill.blockID) {
 				MillCommonUtilities.notifyBlock(world, p);
-			} else if (bid==Block.stoneOvenIdle.blockID) {
+			} else if (bid==Block.furnaceIdle.blockID) {
 				setFurnaceMeta(world,p);
 			}
 		}
@@ -329,22 +329,22 @@ public class BuildingPlan {
 			final int var8 = p.getRelative(1, 0, 0).getId(world);
 			byte var9 = 3;
 
-			if (Block.opaqueCubeLookup[var5] && (var5!=Block.stoneOvenIdle.blockID) && (var5!=Block.stoneOvenActive.blockID) && !Block.opaqueCubeLookup[var6])
+			if (Block.opaqueCubeLookup[var5] && (var5!=Block.furnaceIdle.blockID) && (var5!=Block.furnaceBurning.blockID) && !Block.opaqueCubeLookup[var6])
 			{
 				var9 = 3;
 			}
 
-			if (Block.opaqueCubeLookup[var6] && (var6!=Block.stoneOvenIdle.blockID) && (var6!=Block.stoneOvenActive.blockID) && !Block.opaqueCubeLookup[var5])
+			if (Block.opaqueCubeLookup[var6] && (var6!=Block.furnaceIdle.blockID) && (var6!=Block.furnaceBurning.blockID) && !Block.opaqueCubeLookup[var5])
 			{
 				var9 = 2;
 			}
 
-			if (Block.opaqueCubeLookup[var7] && (var7!=Block.stoneOvenIdle.blockID) && (var7!=Block.stoneOvenActive.blockID) && !Block.opaqueCubeLookup[var8])
+			if (Block.opaqueCubeLookup[var7] && (var7!=Block.furnaceIdle.blockID) && (var7!=Block.furnaceBurning.blockID) && !Block.opaqueCubeLookup[var8])
 			{
 				var9 = 5;
 			}
 
-			if (Block.opaqueCubeLookup[var8] && (var8!=Block.stoneOvenIdle.blockID) && (var8!=Block.stoneOvenActive.blockID) && !Block.opaqueCubeLookup[var7])
+			if (Block.opaqueCubeLookup[var8] && (var8!=Block.furnaceIdle.blockID) && (var8!=Block.furnaceBurning.blockID) && !Block.opaqueCubeLookup[var7])
 			{
 				var9 = 4;
 			}
@@ -1200,7 +1200,7 @@ public class BuildingPlan {
 		charPoints.put('g', new PointType('g',Block.glass.blockID,0,false));
 		charPoints.put('c', new PointType('c',Block.cobblestone.blockID,0,false));
 		charPoints.put('C', new PointType('C',Block.workbench.blockID,0,false));
-		charPoints.put('F', new PointType('F',Block.stoneOvenIdle.blockID,0,false));
+		charPoints.put('F', new PointType('F',Block.furnaceIdle.blockID,0,false));
 		charPoints.put('W', new PointType('W',Block.cloth.blockID,0,false));
 		charPoints.put('o', new PointType('o',Block.stone.blockID,0,false));
 		charPoints.put('h', new PointType('h',Block.stairCompactCobblestone.blockID,0,false));
@@ -1553,8 +1553,8 @@ public class BuildingPlan {
 
 				}  else if (pt.name.equals(bfurnace)) {
 					for (int i=0;i<16;i++) {
-						reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stoneOvenIdle.blockID, i), pt);
-						reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stoneOvenActive.blockID, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.furnaceIdle.blockID, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.furnaceBurning.blockID, i), pt);
 					}
 				}  else if (pt.name.equals(bbrewingstand)) {
 					for (int i=0;i<16;i++) {
@@ -2053,7 +2053,7 @@ public class BuildingPlan {
 						plankCost+=4;
 					} else if (p.blockId==Block.chest.blockID) {
 						plankCost+=8;
-					} else if (p.blockId==Block.stoneOvenIdle.blockID) {
+					} else if (p.blockId==Block.furnaceIdle.blockID) {
 						addToCost(Block.cobblestone.blockID,8);
 					} else if (p.blockId==Block.torchWood.blockID) {
 						plankCost++;
@@ -2515,7 +2515,7 @@ public class BuildingPlan {
 					} else if (pt.isType(blockedchest)) {
 						b=Mill.lockedChest.blockID;
 					} else if (pt.isType(bfurnace)) {
-						b=Block.stoneOvenIdle.blockID;
+						b=Block.furnaceIdle.blockID;
 					} else if (pt.isType(bbrewingstand)) {
 						b=Block.brewingStand.blockID;
 

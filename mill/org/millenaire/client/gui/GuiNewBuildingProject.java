@@ -54,7 +54,7 @@ public class GuiNewBuildingProject extends GuiText {
 		int line=0;
 		for (int i=(pageNum*(NBBUTTONLINE));(i<((pageNum+1)*(NBBUTTONLINE))) && (i<possibleBuildings.size());i++) {
 
-			controlList.add(new GuiButton(i, (xStart+(getXSize() / 2)) - 100, yStart+40+(25*line), 200,20, possibleBuildings.get(i).getFullName(player)));
+			buttonList.add(new GuiButton(i, (xStart+(getXSize() / 2)) - 100, yStart+40+(25*line), 200,20, possibleBuildings.get(i).getFullName(player)));
 
 			line++;
 		}
