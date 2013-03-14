@@ -22,7 +22,7 @@ import org.millenaire.client.RenderWallDecoration;
 import org.millenaire.client.TextureAlchemistAmulet;
 import org.millenaire.client.TextureVishnuAmulet;
 import org.millenaire.client.TextureYddrasilAmulet;
-import org.millenaire.client.TileEntityLockedChestRenderer;
+import org.millenaire.client.TileEntityMillChestRenderer;
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.EntityWallDecoration;
 import org.millenaire.common.MLN;
@@ -220,7 +220,7 @@ public class ClientProxy extends CommonProxy
 
 	@Override
 	public void registerTileEntities() {
-		ModLoader.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding", new TileEntityLockedChestRenderer());
+		ModLoader.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding", new TileEntityMillChestRenderer());
 		ModLoader.registerTileEntity(TileEntityPanel.class, "ml_TileEntityPanel");
 	}
 

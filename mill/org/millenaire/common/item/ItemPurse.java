@@ -17,8 +17,8 @@ public class ItemPurse extends ItemText {
 	private static final String ML_PURSE_DENIEROR = "ml_Purse_denieror";
 	private static final String ML_PURSE_RAND = "ml_Purse_rand";
 
-	public ItemPurse(int par1) {
-		super(par1);
+	public ItemPurse(int par1,String iconName) {
+		super(par1,iconName);
 	}
 	
 	public void setDeniers(ItemStack purse,EntityPlayer player,int amount) {

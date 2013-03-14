@@ -18,7 +18,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -31,11 +30,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.Building;
@@ -155,39 +154,55 @@ public class Goods {
 		}
 	}
 
-	public static class ItemClothes extends ItemText {
-		public ItemClothes(int i,String iconName) {
-			super(i,iconName);
+	public static class ItemClothes extends Item {
+
+		public final String[] iconNames;
+		public Icon[] icons=null;
+
+		public ItemClothes(int i,String... iconNames) {
+			super(i);
 			this.setHasSubtypes(true);
 			this.setMaxDamage(0);
+			this.iconNames=iconNames;
 		}
-		
+
 		public String getClothName(int meta) {
 			if (meta==0)
 				return "clothes_byz_wool";
 			else
 				return "clothes_byz_silk";
 		}
-		
+
 		public int getClothPriority(int meta) {
 			if (meta==0)
 				return 1;
 			else
 				return 2;
 		}
-		
+
 		@Override
-		public int getIconFromDamage(int par1) {
+		public Icon getIconFromDamage(int meta) {
 
-			if (par1==0)
-				return 9+(15*16);
-			else
-				return 10+(15*16);
+			if (meta<iconNames.length)
+				return icons[meta];
 
+			return icons[0];
 		}
 
 		@Override
-		public String getItemNameIS(ItemStack par1ItemStack) {
+		public void func_94581_a(IconRegister iconRegister)
+		{
+			icons=new Icon[iconNames.length];
+
+			for (int i=0;i<iconNames.length;i++) {
+				icons[i]=MillCommonUtilities.getIcon(iconRegister, iconNames[i]);
+			}
+			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconNames[0]);
+		}
+
+
+		@Override
+		public String getUnlocalizedName(ItemStack par1ItemStack) {
 			final int meta = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
 
 			return "item."+getClothName(meta);
@@ -209,7 +224,7 @@ public class Goods {
 	public static class ItemMillenaireArmour extends ItemArmor {
 
 		int  enchantmentValue;
-		
+
 		public final String iconName;
 
 		public ItemMillenaireArmour(int id,String iconName, EnumArmorMaterial material, int armourId, double durationMultiplier, int enchantmentValue, int type) {
@@ -235,21 +250,21 @@ public class Goods {
 	public static class ItemMillenaireAxe extends ItemTool {
 
 		int enchantability;
-		
-		public static final String iconName;
 
-		public ItemMillenaireAxe(int i,EnumToolMaterial material,int strength) {
+		public final String iconName;
+
+		public ItemMillenaireAxe(int i,String iconName,EnumToolMaterial material,int strength) {
 			super(i, 3, material, new Block[] {
 					Block.planks, Block.bookShelf, Block.wood, Block.chest, Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin, Block.pumpkinLantern, Mill.wood_decoration
 			});
 
 			efficiencyOnProperMaterial=strength;
 			enchantability=-1;//use default value
-
+			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
-		public ItemMillenaireAxe(int i,EnumToolMaterial material,int strength,int durability,int enchantability) {
+		public ItemMillenaireAxe(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
 			super(i, 3, material, new Block[] {
 					Block.planks, Block.bookShelf, Block.wood, Block.chest, Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin, Block.pumpkinLantern, Mill.wood_decoration
 			});
@@ -257,7 +272,7 @@ public class Goods {
 			efficiencyOnProperMaterial=strength;
 			setMaxDamage(durability);
 			this.enchantability=enchantability;
-
+			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
@@ -286,20 +301,28 @@ public class Goods {
 
 		public float speedFactor=1;
 		public float damageBonus=0;
-		public int baseIconIndex;
+		public int iconPos;
+		public final String[] iconNames;
+		public Icon[] icons;
 
-		public ItemMillenaireBow(int itemId,float speedFactor,float damageBonus) {
+		public ItemMillenaireBow(int itemId,float speedFactor,float damageBonus,String... iconNames) {
 			super(itemId);
 			this.speedFactor=speedFactor;
 			this.damageBonus=damageBonus;
-
+			this.iconNames=iconNames;
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
 		@Override
 		public void func_94581_a(IconRegister iconRegister)
 		{
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
+			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconNames[0]);
+
+			icons=new Icon[iconNames.length];
+
+			for (int i=0;i<iconNames.length;i++) {
+				icons[i]=MillCommonUtilities.getIcon(iconRegister, iconNames[i]);
+			}
 		}
 
 		/**
@@ -395,56 +418,56 @@ public class Goods {
 		}
 
 		public void setBowIcon(int pos) {
-			iconIndex = baseIconIndex+pos;
+			iconPos = pos;
 		}
 
 		@Override
-		public Item setIconCoord(int par1, int par2)
-		{
-			iconIndex = par1 + (par2 * 16);
-
-			baseIconIndex = iconIndex;
-
-			return this;
-		}
+		public Icon getIconFromDamage(int par1)
+	    {
+	        return icons[iconPos];
+	    }
 	}
 
 
 	public static class ItemMillenaireHoe extends ItemHoe {
-		
-		public static final String iconName;
 
-		public ItemMillenaireHoe(int i,int durability) {
+		public final String iconName;
+
+		public ItemMillenaireHoe(int i,String iconName,int durability) {
 			super(i, EnumToolMaterial.IRON);//material has no effect except durability that is overridden
 			setMaxDamage(durability);
 			setCreativeTab(Mill.tabMillenaire);
+			this.iconName=iconName;
 		}
 
 		@Override
-		public String getTextureFile() {
-			return MLN.getSpritesPath();
+		public void func_94581_a(IconRegister iconRegister)
+		{
+			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 	}
 
 	public static class ItemMillenairePickaxe extends ItemPickaxe {
 
 		int enchantability;
-		public static final String iconName;
+		public final String iconName;
 
-		public ItemMillenairePickaxe(int i,EnumToolMaterial material,int strength) {
+		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material,int strength) {
 			super(i, material);
 
 			efficiencyOnProperMaterial=strength;
 			this.enchantability=-1;
+			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
-		public ItemMillenairePickaxe(int i,EnumToolMaterial material,int strength,int durability,int enchantability) {
+		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
 			super(i, material);
 
 			efficiencyOnProperMaterial=strength;
 			setMaxDamage(durability);
 			this.enchantability=enchantability;
+			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
@@ -457,31 +480,34 @@ public class Goods {
 		}
 
 		@Override
-		public String getTextureFile() {
-			return MLN.getSpritesPath();
+		public void func_94581_a(IconRegister iconRegister)
+		{
+			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 	}
 
 	public static class ItemMillenaireShovel extends ItemSpade {
 
 		int enchantability;
-		public static final String iconName;
+		public final String iconName;
 
-		public ItemMillenaireShovel(int i,EnumToolMaterial material,int strength) {
+		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material,int strength) {
 			super(i, material);
 
 			efficiencyOnProperMaterial=strength;
 			this.enchantability=-1;
+			this.iconName=iconName;
 
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
-		public ItemMillenaireShovel(int i,EnumToolMaterial material,int strength,int durability,int enchantability) {
+		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
 			super(i, material);
 			efficiencyOnProperMaterial=strength;
 			setMaxDamage(durability);
 			this.enchantability=enchantability;
 			setCreativeTab(Mill.tabMillenaire);
+			this.iconName=iconName;
 		}
 
 		@Override
@@ -493,8 +519,9 @@ public class Goods {
 		}
 
 		@Override
-		public String getTextureFile() {
-			return MLN.getSpritesPath();
+		public void func_94581_a(IconRegister iconRegister)
+		{
+			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 	}
 
@@ -504,11 +531,11 @@ public class Goods {
 		float criticalChance;
 		int criticalMultiple;
 		int enchantability;
-		
-		public static final String iconName;
+
+		public final String iconName;
 
 		boolean knockback;
-		public ItemMillenaireSword(int i,int maxUse,int damage, int enchantability,float criticalChance,int criticalMultiple,boolean knockback) {
+		public ItemMillenaireSword(int i,String iconName,int maxUse,int damage, int enchantability,float criticalChance,int criticalMultiple,boolean knockback) {
 			super(i, EnumToolMaterial.IRON);//material isn't really used (all uses are overridden)
 			setMaxDamage(maxUse);
 			this.damage=damage;
@@ -516,6 +543,7 @@ public class Goods {
 			this.criticalMultiple=criticalMultiple;
 			this.enchantability=enchantability;
 			this.knockback=knockback;
+			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
 		@Override
@@ -533,8 +561,9 @@ public class Goods {
 			return enchantability;
 		}
 		@Override
-		public String getTextureFile() {
-			return MLN.getSpritesPath();
+		public void func_94581_a(IconRegister iconRegister)
+		{
+			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 
 		@Override
@@ -615,8 +644,8 @@ public class Goods {
 
 	public static class ItemNegationWand extends ItemText {
 
-		public ItemNegationWand(int i) {
-			super(i);
+		public ItemNegationWand(int i,String iconName) {
+			super(i,iconName);
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
@@ -678,8 +707,8 @@ public class Goods {
 	}
 	public static class ItemSummoningWand extends ItemText {
 
-		public ItemSummoningWand(int i) {
-			super(i);
+		public ItemSummoningWand(int i,String iconName) {
+			super(i,iconName);
 			this.setCreativeTab(Mill.tabMillenaire);
 		}
 
@@ -712,9 +741,9 @@ public class Goods {
 
 		public int type;
 
-		public ItemTapestry(int i,int type)
+		public ItemTapestry(int i,String iconName,int type)
 		{
-			super(i);
+			super(i,iconName);
 			this.type=type;
 			this.setCreativeTab(Mill.tabMillenaire);
 		}

@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import org.lwjgl.opengl.GL11;
 import org.millenaire.common.MLN;
 
-public class TileEntityLockedChestRenderer extends TileEntitySpecialRenderer
+public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer
 {
 	public class ModelLargeLockedChest extends ModelLockedChest
 	{
@@ -72,7 +72,7 @@ public class TileEntityLockedChestRenderer extends TileEntitySpecialRenderer
 
 	private final ModelLockedChest field_35378_c;
 
-	public TileEntityLockedChestRenderer()
+	public TileEntityMillChestRenderer()
 	{
 		field_35377_b = new ModelLockedChest();
 		field_35378_c = new ModelLargeLockedChest();

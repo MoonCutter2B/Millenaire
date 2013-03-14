@@ -29,7 +29,7 @@ public class ItemSeeds extends ItemText
 	public final int cropMeta;
 	public final String cropKey;
 
-	public ItemSeeds(int i, int j, int k, String cropKey, String iconName)
+	public ItemSeeds(int i,String iconName, int j, int k, String cropKey)
 	{
 		super(i,iconName);
 		cropID = j;

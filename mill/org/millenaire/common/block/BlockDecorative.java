@@ -7,13 +7,14 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-import org.millenaire.common.MLN;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
@@ -32,26 +33,21 @@ public class BlockDecorative extends Block {
 		}
 
 		@Override
-		public int getIconFromDamage(int i)
+		public Icon getIconFromDamage(int i)
 		{
 			return block.getBlockTextureFromSideAndMetadata(2, i);
 		}
 
 		@Override
-		public String getItemNameIS(ItemStack itemstack)
+		public String getUnlocalizedName(ItemStack itemstack)
 		{
-			return (new StringBuilder()).append(super.getItemName()).append(".").append(itemstack.getItemDamage()).toString();
+			return (new StringBuilder()).append(super.getUnlocalizedName()).append(".").append(itemstack.getItemDamage()).toString();
 		}
 
 		@Override
 		public int getMetadata(int i)
 		{
 			return i;
-		}
-
-		@Override
-		public String getTextureFile() {
-			return MLN.getSpritesPath();
 		}
 	}
 
@@ -66,7 +62,8 @@ public class BlockDecorative extends Block {
 		return i;
 	}
 
-	HashMap<Integer,Integer> textures=new HashMap<Integer,Integer>();
+	HashMap<Integer,String> textureNames=new HashMap<Integer,String>();
+	HashMap<Integer,Icon> textures=new HashMap<Integer,Icon>();
 
 	HashMap<Integer,String> names=new HashMap<Integer,String>();
 
@@ -81,7 +78,7 @@ public class BlockDecorative extends Block {
 	public void addCreativeItems(@SuppressWarnings("rawtypes") ArrayList itemList) {
 		final ArrayList<ItemStack> list=itemList;
 
-		for (final int meta: textures.keySet()) {
+		for (final int meta: textureNames.keySet()) {
 			list.add(new ItemStack(blockID,1,meta));
 		}
 
@@ -92,55 +89,43 @@ public class BlockDecorative extends Block {
 	{
 		return i;
 	}
+	
+	
 
 
 	@Override
-	public void dropBlockAsItemWithChance(World world, int i, int j, int k,
-			int l, float f, int m) {
-
-		super.dropBlockAsItemWithChance(world, i, j, k, l, f, m);
-
-
-
-		if ((blockID==Mill.stone_decoration.blockID) && (l==3)) {//ALchimist's explosive
-
-			//Horrible hack to make sure the method was called from the explosion class
-			final StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-			if (stackTraceElements[2].getClassName().equals(Explosion.class.getName())) {
-
-
-				world.setBlockWithNotify(i, j, k, 0);
-
-
-				world.newExplosion(null, i, j, k, 30, false, true);
-
-				for (int y=EXPLOSION_RADIUS;y>=-EXPLOSION_RADIUS;y--) {
-					if (((y+j)>=0) && ((y+j)<128)) {
-						for (int x=-EXPLOSION_RADIUS;x<=EXPLOSION_RADIUS;x++) {
-							for (int z=-EXPLOSION_RADIUS;z<=EXPLOSION_RADIUS;z++) {
-								if (((x*x)+(y*y)+(z*z))<=(EXPLOSION_RADIUS*EXPLOSION_RADIUS)) {
-									final int bid=world.getBlockId(i+x, j+y, k+z);
-									if (bid>0) {
-										//if (bid!=Block.bedrock.blockID)
-										//	Block.blocksList[bid].dropBlockAsItemWithChance(world,  i,j,k, world.getBlockMetadata(i,j,k), 0.1F);
-										world.setBlockWithNotify(i+x, j+y, k+z, 0);
-										Block.blocksList[bid].onBlockDestroyedByExplosion(world, i,j,k);
-									}
-								}
+	public void onBlockDestroyedByExplosion(World world, int i,
+			int j, int k, Explosion par5Explosion) {
+		
+		world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+		
+		for (int y=EXPLOSION_RADIUS;y>=-EXPLOSION_RADIUS;y--) {
+			if (((y+j)>=0) && ((y+j)<128)) {
+				for (int x=-EXPLOSION_RADIUS;x<=EXPLOSION_RADIUS;x++) {
+					for (int z=-EXPLOSION_RADIUS;z<=EXPLOSION_RADIUS;z++) {
+						if (((x*x)+(y*y)+(z*z))<=(EXPLOSION_RADIUS*EXPLOSION_RADIUS)) {
+							final int bid=world.getBlockId(i+x, j+y, k+z);
+							if (bid>0) {
+								//if (bid!=Block.bedrock.blockID)
+								//	Block.blocksList[bid].dropBlockAsItemWithChance(world,  i,j,k, world.getBlockMetadata(i,j,k), 0.1F);
+								world.setBlockAndMetadataWithNotify(i+x, j+y, k+z, 0, 0, 2);
+								Block.blocksList[bid].onBlockDestroyedByExplosion(world, i,j,k, par5Explosion);
 							}
 						}
 					}
 				}
 			}
 		}
+		
+		super.onBlockDestroyedByExplosion(world, i, j, k, par5Explosion);
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int meta)  {
+	public Icon getBlockTextureFromSideAndMetadata(int i, int meta)  {
 		if (textures.containsKey(meta))
 			return textures.get(meta);
 		else
-			return 0;
+			return textures.get(0);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -153,17 +138,20 @@ public class BlockDecorative extends Block {
 		}
 	}
 
-	@Override
-	public String getTextureFile() {
-		return MLN.getSpritesPath();
-	}
-
 	public void registerName(int meta, String name) {
 		names.put(meta, name);
 	}
 
-	public void registerTexture(int meta, int tid) {
-		textures.put(meta, tid);
+	public void registerTexture(int meta, String name) {
+		textureNames.put(meta, name);
+	}
+	
+	@Override
+	public void func_94332_a(IconRegister iconRegister)
+	{
+		for (int meta : textureNames.keySet()) {
+			textures.put(meta, MillCommonUtilities.getIcon(iconRegister, textureNames.get(meta)));
+		}
 	}
 
 	@Override
@@ -177,7 +165,7 @@ public class BlockDecorative extends Block {
 			{
 				if(MillCommonUtilities.chanceOn(5))
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k,Mill.stone_decoration.blockID, 1);
+					world.setBlockAndMetadataWithNotify(i, j, k,Mill.stone_decoration.blockID, 1, 2);
 				}
 			}
 		} else if ((blockMaterial==Material.wood) && (meta==3)) {
@@ -185,7 +173,7 @@ public class BlockDecorative extends Block {
 			{
 				if(MillCommonUtilities.chanceOn(5))
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k,Mill.wood_decoration.blockID, 4);
+					world.setBlockAndMetadataWithNotify(i, j, k,Mill.wood_decoration.blockID, 4, 2);
 				}
 			}
 		}

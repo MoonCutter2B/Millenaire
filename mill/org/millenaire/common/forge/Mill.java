@@ -339,7 +339,7 @@ public class Mill
 
 		crops = new BlockCrops(MLN.blockCropsId);
 
-		paperWall = new BlockMLNPane(MLN.blockPanesId, 16*2, 16*2, Material.cloth, true).setHardness(0.3F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("ml_panes");
+		paperWall = new BlockMLNPane(MLN.blockPanesId, "paperwall", "paperwall", Material.cloth, true).setHardness(0.3F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("ml_panes");
 
 		proxy.setTextureIds();
 
@@ -351,160 +351,157 @@ public class Mill
 		calva = (new ItemFoodMultiple(nextItemId(),"calva",4,0,0,9,true)).setUnlocalizedName("ml_calva");
 		tripes = (new ItemFoodMultiple(nextItemId(),"tripes",5,8,0.8f,2,false)).setUnlocalizedName("ml_tripes");
 
-		normanPickaxe =  new ItemMillenairePickaxe(nextItemId(),EnumToolMaterial.IRON,12).setIconCoord(2,9).setUnlocalizedName("ml_normanPickaxe");
-		normanAxe =  new ItemMillenaireAxe(nextItemId(),EnumToolMaterial.IRON,12).setIconCoord(0,9).setUnlocalizedName("ml_normanAxe");
-		normanShovel =  new ItemMillenaireShovel(nextItemId(),EnumToolMaterial.IRON,12).setIconCoord(3,9).setUnlocalizedName("ml_normanShovel");
-		normanHoe =  new ItemMillenaireHoe(nextItemId(),1500).setIconCoord(1,9).setUnlocalizedName("ml_normanHoe");
+		normanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"normanpickaxe",EnumToolMaterial.IRON,12).setUnlocalizedName("ml_normanPickaxe");
+		normanAxe =  new ItemMillenaireAxe(nextItemId(),"normanaxe",EnumToolMaterial.IRON,12).setUnlocalizedName("ml_normanAxe");
+		normanShovel =  new ItemMillenaireShovel(nextItemId(),"normanshovel",EnumToolMaterial.IRON,12).setUnlocalizedName("ml_normanShovel");
+		normanHoe =  new ItemMillenaireHoe(nextItemId(),"normanhoe",1500).setUnlocalizedName("ml_normanHoe");
 
-		summoningWand = new ItemSummoningWand(nextItemId()).setIconCoord(0,8).setFull3D().setUnlocalizedName("ml_villageWand");
+		summoningWand = new ItemSummoningWand(nextItemId(),"summoningwand").setFull3D().setUnlocalizedName("ml_villageWand");
 
-		normanBroadsword = new ItemMillenaireSword(nextItemId(),1500,15,EnumToolMaterial.EMERALD.getEnchantability(),0,0,false).setIconCoord(4,9).setUnlocalizedName("ml_normanBroadsword");
-		normanHelmet = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),0).setIconCoord(7,9).setUnlocalizedName("ml_normanHelmet");
-		normanPlate = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),1).setIconCoord(6,9).setUnlocalizedName("ml_normanPlate");
-		normanLegs = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),2).setIconCoord(8,9).setUnlocalizedName("ml_normanLegs");
-		normanBoots = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),3).setIconCoord(5,9).setUnlocalizedName("ml_normanBoots");
+		normanBroadsword = new ItemMillenaireSword(nextItemId(),"normansword",1500,15,EnumToolMaterial.EMERALD.getEnchantability(),0,0,false).setUnlocalizedName("ml_normanBroadsword");
+		normanHelmet = new ItemMillenaireArmour(nextItemId(),"normanhelmet",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),0).setUnlocalizedName("ml_normanHelmet");
+		normanPlate = new ItemMillenaireArmour(nextItemId(),"normanplate",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),1).setUnlocalizedName("ml_normanPlate");
+		normanLegs = new ItemMillenaireArmour(nextItemId(),"normanlegs",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),2).setUnlocalizedName("ml_normanLegs");
+		normanBoots = new ItemMillenaireArmour(nextItemId(),"normanboots",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),3).setUnlocalizedName("ml_normanBoots");
 
-		parchmentVillagers = new ItemParchment(nextItemId(),ItemParchment.villagers).setIconCoord(3,10).setUnlocalizedName("ml_parchmentVillagers");
+		parchmentVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.villagers).setUnlocalizedName("ml_parchmentVillagers");
 
-		parchmentBuildings = new ItemParchment(nextItemId(),ItemParchment.buildings).setIconCoord(1,10).setUnlocalizedName("ml_parchmentBuildings");
+		parchmentBuildings = new ItemParchment(nextItemId(),"normanbuildings",ItemParchment.buildings).setUnlocalizedName("ml_parchmentBuildings");
 
-		parchmentItems = new ItemParchment(nextItemId(),ItemParchment.items).setIconCoord(2,10).setUnlocalizedName("ml_parchmentItems");
-
-
-		parchmentComplete = new ItemParchment(nextItemId(),new int[]{ItemParchment.villagers,ItemParchment.buildings,ItemParchment.items}).setIconCoord(4,10).setUnlocalizedName("ml_marchmentComplete");
-
-		boudin = (new ItemFoodMultiple(nextItemId(),3,6,0.6f,2,false)).setIconCoord(7,8).setUnlocalizedName("ml_boudin");
-
-		tapestry = (new ItemTapestry(nextItemId(),EntityWallDecoration.NORMAN_TAPESTRY)).setIconCoord(10,8).setUnlocalizedName("ml_tapestry");
+		parchmentItems = new ItemParchment(nextItemId(),"normanitems",ItemParchment.items).setUnlocalizedName("ml_parchmentItems");
 
 
-		vishnu_amulet = new Item(nextItemId()).setCreativeTab(Mill.tabMillenaire).setIconIndex(raven_amuletID).setUnlocalizedName("ml_raven_amulet").setMaxStackSize(1);
+		parchmentComplete = new ItemParchment(nextItemId(),"normancomplete",new int[]{ItemParchment.villagers,ItemParchment.buildings,ItemParchment.items}).setUnlocalizedName("ml_marchmentComplete");
+
+		boudin = (new ItemFoodMultiple(nextItemId(),"boudin",3,6,0.6f,2,false)).setUnlocalizedName("ml_boudin");
+
+		tapestry = (new ItemTapestry(nextItemId(),"normantapestry",EntityWallDecoration.NORMAN_TAPESTRY)).setUnlocalizedName("ml_tapestry");
 
 
-		alchemist_amulet = new Item(nextItemId()).setCreativeTab(Mill.tabMillenaire).setIconIndex(alchemist_amuletID).setUnlocalizedName("ml_dwarves_amulet").setMaxStackSize(1);
+		vishnu_amulet = new Item(nextItemId()).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_raven_amulet").setMaxStackSize(1);
 
 
-		yddrasil_amulet = new Item(nextItemId()).setCreativeTab(Mill.tabMillenaire).setIconIndex(yddrasil_amuletID).setUnlocalizedName("ml_yddrasil_amulet").setMaxStackSize(1);
-
-		skoll_hati_amulet = (new ItemAmuletSkollHati(nextItemId())).setCreativeTab(Mill.tabMillenaire).setIconCoord(9,8).setUnlocalizedName("ml_skoll_hati_amulet").setMaxStackSize(1).setMaxDamage(10);
-		parchmentVillageScroll = new ItemParchment(nextItemId(),new int[]{ItemParchment.villageBook}).setIconCoord(5,10).setUnlocalizedName("ml_parchmentVillageScroll");
-
-		rice = (new ItemSeeds(nextItemId(), crops.blockID,0,Mill.CROP_RICE)).setIconCoord(3,11).setUnlocalizedName("ml_rice");
-		turmeric = (new ItemSeeds(nextItemId(), crops.blockID,2,Mill.CROP_TURMERIC)).setIconCoord(4,11).setUnlocalizedName("ml_turmeric");
-		vegcurry = (new ItemFoodMultiple(nextItemId(),2,2,0.3f,0,false)).setIconCoord(5,11).setUnlocalizedName("ml_vegcurry");
-		chickencurry = (new ItemFoodMultiple(nextItemId(),4,6,0.6f,0,false)).setIconCoord(0,11).setUnlocalizedName("ml_chickencurry");
-		brickmould = (new ItemBrickMould(nextItemId())).setIconCoord(6,11).setUnlocalizedName("ml_brickmould").setMaxStackSize(1).setMaxDamage(128);
-		rasgulla = (new ItemFoodMultiple(nextItemId(),2,0,0,0,false)).setIconCoord(2,11).setUnlocalizedName("ml_rasgullaId").setMaxStackSize(8);
-		indianstatue = (new ItemTapestry(nextItemId(),EntityWallDecoration.INDIAN_STATUE)).setIconCoord(1,11).setUnlocalizedName("ml_indianstatue");
-
-		parchmentIndianVillagers = new ItemParchment(nextItemId(),ItemParchment.indianVillagers).setIconCoord(3,10).setUnlocalizedName("ml_parchmentIndianVillagers");
-		parchmentIndianBuildings = new ItemParchment(nextItemId(),ItemParchment.indianBuildings).setIconCoord(1,10).setUnlocalizedName("ml_parchmentIndianBuildings");
-		parchmentIndianItems = new ItemParchment(nextItemId(),ItemParchment.indianItems).setIconCoord(2,10).setUnlocalizedName("ml_parchmentIndianItems");
-		parchmentIndianComplete = new ItemParchment(nextItemId(),new int[]{ItemParchment.indianVillagers,ItemParchment.indianBuildings,ItemParchment.indianItems}).setIconCoord(4,10).setUnlocalizedName("ml_marchmentIndianComplete");
+		alchemist_amulet = new Item(nextItemId()).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_dwarves_amulet").setMaxStackSize(1);
 
 
-		mayanstatue = (new ItemTapestry(nextItemId(),EntityWallDecoration.MAYAN_STATUE)).setIconCoord(3,12).setUnlocalizedName("ml_mayanstatue");
-		maize = (new ItemSeeds(nextItemId(), crops.blockID,4,Mill.CROP_MAIZE)).setIconCoord(0,12).setUnlocalizedName("ml_maize");
-		wah = (new ItemFoodMultiple(nextItemId(),2,4,0.4f,0,false)).setIconCoord(2,12).setUnlocalizedName("ml_wah");
-		masa = (new ItemFoodMultiple(nextItemId(),4,6,0.6f,0,false)).setIconCoord(1,12).setUnlocalizedName("ml_masa");
+		yddrasil_amulet = new Item(nextItemId()).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_yddrasil_amulet").setMaxStackSize(1);
 
-		parchmentMayanVillagers = new ItemParchment(nextItemId(),ItemParchment.mayanVillagers).setIconCoord(3,10).setUnlocalizedName("ml_parchmentMayanVillagers");
-		parchmentMayanBuildings = new ItemParchment(nextItemId(),ItemParchment.mayanBuildings).setIconCoord(1,10).setUnlocalizedName("ml_parchmentMayanBuildings");
-		parchmentMayanItems = new ItemParchment(nextItemId(),ItemParchment.mayanItems).setIconCoord(2,10).setUnlocalizedName("ml_parchmentMayanItems");
-		parchmentMayanComplete = new ItemParchment(nextItemId(),new int[]{ItemParchment.mayanVillagers,ItemParchment.mayanBuildings,ItemParchment.mayanItems}).setIconCoord(4,10).setUnlocalizedName("ml_parchmentMayanComplete");
+		skoll_hati_amulet = (new ItemAmuletSkollHati(nextItemId(),"amuletskollhati")).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_skoll_hati_amulet").setMaxStackSize(1).setMaxDamage(10);
+		parchmentVillageScroll = new ItemParchment(nextItemId(),"parchmentvillage",new int[]{ItemParchment.villageBook}).setUnlocalizedName("ml_parchmentVillageScroll");
 
-		parchmentSadhu = new ItemParchment(nextItemId(),new int[]{ItemParchment.sadhu}).setIconCoord(4,10).setUnlocalizedName("ml_parchmentSadhu");
+		rice = (new ItemSeeds(nextItemId(),"rice", crops.blockID,0,Mill.CROP_RICE)).setUnlocalizedName("ml_rice");
+		turmeric = (new ItemSeeds(nextItemId(),"turmeric", crops.blockID,2,Mill.CROP_TURMERIC)).setUnlocalizedName("ml_turmeric");
+		vegcurry = (new ItemFoodMultiple(nextItemId(),"curry",2,2,0.3f,0,false)).setUnlocalizedName("ml_vegcurry");
+		chickencurry = (new ItemFoodMultiple(nextItemId(),"currychicken",4,6,0.6f,0,false)).setUnlocalizedName("ml_chickencurry");
+		brickmould = (new ItemBrickMould(nextItemId(),"brickmould")).setUnlocalizedName("ml_brickmould").setMaxStackSize(1).setMaxDamage(128);
+		rasgulla = (new ItemFoodMultiple(nextItemId(),"rasgulla",2,0,0,0,false)).setUnlocalizedName("ml_rasgullaId").setMaxStackSize(8);
+		indianstatue = (new ItemTapestry(nextItemId(),"indianstatue",EntityWallDecoration.INDIAN_STATUE)).setUnlocalizedName("ml_indianstatue");
 
-		unknownPowder =  new Item(nextItemId()).setIconCoord(9, 4).setUnlocalizedName("ml_unknownPowder").setCreativeTab(Mill.tabMillenaire);
-
-		udon = (new ItemFoodMultiple(nextItemId(),4,6,0.6f,0,false)).setIconCoord(0,13).setUnlocalizedName("ml_udon");
-
-		tachiSword = new ItemMillenaireSword(nextItemId(),250,6,EnumToolMaterial.IRON.getEnchantability(),(float) 0.2,3,false).setIconCoord(1,13).setUnlocalizedName("ml_taichiSword");
-
-		negationWand = new ItemNegationWand(nextItemId()).setIconCoord(11,8).setFull3D().setUnlocalizedName("ml_negationWand");
-
-		obsidianFlake = new ItemText(nextItemId()).setIconCoord(9,12).setUnlocalizedName("ml_obsidianFlake");
-		mayanMace =  new ItemMillenaireSword(nextItemId(),1500,6,25,0,0,false).setIconCoord(8,12).setUnlocalizedName("ml_mayanMace");
-		mayanPickaxe =  new ItemMillenairePickaxe(nextItemId(),EnumToolMaterial.EMERALD,6,1500,25).setIconCoord(6,12).setUnlocalizedName("ml_mayanPickaxe");
-		mayanAxe =  new ItemMillenaireAxe(nextItemId(),EnumToolMaterial.EMERALD,6,1500,25).setIconCoord(4,12).setUnlocalizedName("ml_mayanAxe");
-		mayanShovel =  new ItemMillenaireShovel(nextItemId(),EnumToolMaterial.EMERALD,6,1500,25).setIconCoord(7,12).setUnlocalizedName("ml_mayanShovel");
-		mayanHoe =  new ItemMillenaireHoe(nextItemId(),1500).setIconCoord(5,12).setUnlocalizedName("ml_mayanHoe");
-
-		yumiBow =  new ItemMillenaireBow(nextItemId(),2,(float) 0.5).setIconCoord(2,13).setUnlocalizedName("ml_yumiBow").setFull3D();
+		parchmentIndianVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.indianVillagers).setUnlocalizedName("ml_parchmentIndianVillagers");
+		parchmentIndianBuildings = new ItemParchment(nextItemId(),"parchmentbuildings",ItemParchment.indianBuildings).setUnlocalizedName("ml_parchmentIndianBuildings");
+		parchmentIndianItems = new ItemParchment(nextItemId(),"parchmentitems",ItemParchment.indianItems).setUnlocalizedName("ml_parchmentIndianItems");
+		parchmentIndianComplete = new ItemParchment(nextItemId(),"parchmentall",new int[]{ItemParchment.indianVillagers,ItemParchment.indianBuildings,ItemParchment.indianItems}).setUnlocalizedName("ml_marchmentIndianComplete");
 
 
-		japaneseWarriorBlueLegs = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,2).setIconCoord(6,13).setUnlocalizedName("ml_japaneseWarriorBlueLegs");
-		japaneseWarriorBlueHelmet = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,0).setIconCoord(7,13).setUnlocalizedName("ml_japaneseWarriorBlueHelmet");
-		japaneseWarriorBluePlate = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,1).setIconCoord(8,13).setUnlocalizedName("ml_japaneseWarriorBluePlate");
-		japaneseWarriorBlueBoots = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,3).setIconCoord(9,13).setUnlocalizedName("ml_japaneseWarriorBlueBoots");
+		mayanstatue = (new ItemTapestry(nextItemId(),"mayanstatue",EntityWallDecoration.MAYAN_STATUE)).setUnlocalizedName("ml_mayanstatue");
+		maize = (new ItemSeeds(nextItemId(),"maize", crops.blockID,4,Mill.CROP_MAIZE)).setUnlocalizedName("ml_maize");
+		wah = (new ItemFoodMultiple(nextItemId(),"wah",2,4,0.4f,0,false)).setUnlocalizedName("ml_wah");
+		masa = (new ItemFoodMultiple(nextItemId(),"masa",4,6,0.6f,0,false)).setUnlocalizedName("ml_masa");
 
-		japaneseWarriorRedLegs = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,2).setIconCoord(10,13).setUnlocalizedName("ml_japaneseWarriorRedLegs");
-		japaneseWarriorRedHelmet = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,0).setIconCoord(11,13).setUnlocalizedName("ml_japaneseWarriorRedHelmet");
-		japaneseWarriorRedPlate = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,1).setIconCoord(12,13).setUnlocalizedName("ml_japaneseWarriorRedPlate");
-		japaneseWarriorRedBoots = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,3).setIconCoord(13,13).setUnlocalizedName("ml_japaneseWarriorRedBoots");
+		parchmentMayanVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.mayanVillagers).setUnlocalizedName("ml_parchmentMayanVillagers");
+		parchmentMayanBuildings = new ItemParchment(nextItemId(),"parchmentbuildings",ItemParchment.mayanBuildings).setUnlocalizedName("ml_parchmentMayanBuildings");
+		parchmentMayanItems = new ItemParchment(nextItemId(),"parchmentitems",ItemParchment.mayanItems).setUnlocalizedName("ml_parchmentMayanItems");
+		parchmentMayanComplete = new ItemParchment(nextItemId(),"parchmentall",new int[]{ItemParchment.mayanVillagers,ItemParchment.mayanBuildings,ItemParchment.mayanItems}).setUnlocalizedName("ml_parchmentMayanComplete");
 
-		japaneseGuardLegs = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,2).setIconCoord(0,14).setUnlocalizedName("ml_japaneseGuardLegs");
-		japaneseGuardHelmet = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,0).setIconCoord(1,14).setUnlocalizedName("ml_japaneseGuardHelmet");
-		japaneseGuardPlate = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,1).setIconCoord(2,14).setUnlocalizedName("ml_japaneseGuardPlate");
-		japaneseGuardBoots = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,3).setIconCoord(3,14).setUnlocalizedName("ml_japaneseGuardBoots");
+		parchmentSadhu = new ItemParchment(nextItemId(),"parchmentall",new int[]{ItemParchment.sadhu}).setUnlocalizedName("ml_parchmentSadhu");
 
-		parchmentJapaneseVillagers = new ItemParchment(nextItemId(),ItemParchment.japaneseVillagers).setIconCoord(3,10).setUnlocalizedName("ml_parchmentJapaneseVillagers");
-		parchmentJapaneseBuildings = new ItemParchment(nextItemId(),ItemParchment.japaneseBuildings).setIconCoord(1,10).setUnlocalizedName("ml_parchmentJapaneseBuildings");
-		parchmentJapaneseItems = new ItemParchment(nextItemId(),ItemParchment.japaneseItems).setIconCoord(2,10).setUnlocalizedName("ml_parchmentJapaneseItems");
-		parchmentJapaneseComplete = new ItemParchment(nextItemId(),new int[]{ItemParchment.japaneseVillagers,ItemParchment.japaneseBuildings,ItemParchment.japaneseItems}).setIconCoord(4,10).setUnlocalizedName("ml_parchmentJapaneseComplete");
+		unknownPowder =  new ItemText(nextItemId(),"unknownpowder").setUnlocalizedName("ml_unknownPowder").setCreativeTab(Mill.tabMillenaire);
+
+		udon = (new ItemFoodMultiple(nextItemId(),"udon",4,6,0.6f,0,false)).setUnlocalizedName("ml_udon");
+
+		tachiSword = new ItemMillenaireSword(nextItemId(),"tachisword",250,6,EnumToolMaterial.IRON.getEnchantability(),(float) 0.2,3,false).setUnlocalizedName("ml_taichiSword");
+
+		negationWand = new ItemNegationWand(nextItemId(),"negationwand").setFull3D().setUnlocalizedName("ml_negationWand");
+
+		obsidianFlake = new ItemText(nextItemId(),"obsidianflake").setUnlocalizedName("ml_obsidianFlake");
+		mayanMace =  new ItemMillenaireSword(nextItemId(),"mayanmace",1500,6,25,0,0,false).setUnlocalizedName("ml_mayanMace");
+		mayanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"mayanpickaxe",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanPickaxe");
+		mayanAxe =  new ItemMillenaireAxe(nextItemId(),"mayanaxe",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanAxe");
+		mayanShovel =  new ItemMillenaireShovel(nextItemId(),"mayanshovel",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanShovel");
+		mayanHoe =  new ItemMillenaireHoe(nextItemId(),"mayanhoe",1500).setUnlocalizedName("ml_mayanHoe");
+
+		yumiBow =  new ItemMillenaireBow(nextItemId(),2,(float) 0.5,"yumibow0","yumibow1","yumibow2","yumibow3").setUnlocalizedName("ml_yumiBow").setFull3D();
 
 
-		grapes=(new ItemSeeds(nextItemId(), crops.blockID,6,Mill.CROP_VINE)).setIconCoord(0,15).setUnlocalizedName("ml_vine");
-		wineFancy = (new ItemFoodMultiple(nextItemId(),4,0,0,4,true)).setIconCoord(1,15).setUnlocalizedName("ml_wine");
-		silk=new ItemText(nextItemId()).setIconCoord(2,15).setUnlocalizedName("ml_silk");
-		byzantineiconsmall = (new ItemTapestry(nextItemId(),EntityWallDecoration.BYZANTINE_ICON_SMALL)).setIconCoord(3,15).setUnlocalizedName("ml_byzantineicon");
-		byzantineiconmedium = (new ItemTapestry(nextItemId(),EntityWallDecoration.BYZANTINE_ICON_MEDIUM)).setIconCoord(3,15).setUnlocalizedName("ml_byzantineiconmedium");
-		byzantineiconlarge = (new ItemTapestry(nextItemId(),EntityWallDecoration.BYZANTINE_ICON_LARGE)).setIconCoord(3,15).setUnlocalizedName("ml_byzantineiconlarge");
+		japaneseWarriorBlueLegs = new ItemMillenaireArmour(nextItemId(),"japanesebluelegs",EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,2).setUnlocalizedName("ml_japaneseWarriorBlueLegs");
+		japaneseWarriorBlueHelmet = new ItemMillenaireArmour(nextItemId(),"japanesebluehelmet",EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,0).setUnlocalizedName("ml_japaneseWarriorBlueHelmet");
+		japaneseWarriorBluePlate = new ItemMillenaireArmour(nextItemId(),"japaneseblueplate",EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,1).setUnlocalizedName("ml_japaneseWarriorBluePlate");
+		japaneseWarriorBlueBoots = new ItemMillenaireArmour(nextItemId(),"japaneseblueboots",EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,3).setUnlocalizedName("ml_japaneseWarriorBlueBoots");
+
+		japaneseWarriorRedLegs = new ItemMillenaireArmour(nextItemId(),"japaneseredlegs",EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,2).setUnlocalizedName("ml_japaneseWarriorRedLegs");
+		japaneseWarriorRedHelmet = new ItemMillenaireArmour(nextItemId(),"japaneseredhelmet",EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,0).setUnlocalizedName("ml_japaneseWarriorRedHelmet");
+		japaneseWarriorRedPlate = new ItemMillenaireArmour(nextItemId(),"japaneseredplate",EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,1).setUnlocalizedName("ml_japaneseWarriorRedPlate");
+		japaneseWarriorRedBoots = new ItemMillenaireArmour(nextItemId(),"japaneseredboots",EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,3).setUnlocalizedName("ml_japaneseWarriorRedBoots");
+
+		japaneseGuardLegs = new ItemMillenaireArmour(nextItemId(),"japaneseguardlegs",EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,2).setUnlocalizedName("ml_japaneseGuardLegs");
+		japaneseGuardHelmet = new ItemMillenaireArmour(nextItemId(),"japaneseguardhelmet",EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,0).setUnlocalizedName("ml_japaneseGuardHelmet");
+		japaneseGuardPlate = new ItemMillenaireArmour(nextItemId(),"japaneseguardplate",EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,1).setUnlocalizedName("ml_japaneseGuardPlate");
+		japaneseGuardBoots = new ItemMillenaireArmour(nextItemId(),"japaneseguardboots",EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,3).setUnlocalizedName("ml_japaneseGuardBoots");
+
+		parchmentJapaneseVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.japaneseVillagers).setUnlocalizedName("ml_parchmentJapaneseVillagers");
+		parchmentJapaneseBuildings = new ItemParchment(nextItemId(),"parchmentbuildings",ItemParchment.japaneseBuildings).setUnlocalizedName("ml_parchmentJapaneseBuildings");
+		parchmentJapaneseItems = new ItemParchment(nextItemId(),"parchmentitems",ItemParchment.japaneseItems).setUnlocalizedName("ml_parchmentJapaneseItems");
+		parchmentJapaneseComplete = new ItemParchment(nextItemId(),"parchmentall",new int[]{ItemParchment.japaneseVillagers,ItemParchment.japaneseBuildings,ItemParchment.japaneseItems}).setUnlocalizedName("ml_parchmentJapaneseComplete");
 
 
-		byzantineLegs = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,2).setIconCoord(5,15).setUnlocalizedName("ml_byzantineLegs");
-		byzantineHelmet = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,0).setIconCoord(6,15).setUnlocalizedName("ml_byzantineHelmet");
-		byzantinePlate = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,1).setIconCoord(7,15).setUnlocalizedName("ml_byzantinePlate");
-		byzantineBoots = new ItemMillenaireArmour(nextItemId(),EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,3).setIconCoord(8,15).setUnlocalizedName("ml_byzantineBoots");
+		grapes=(new ItemSeeds(nextItemId(),"grapes", crops.blockID,6,Mill.CROP_VINE)).setUnlocalizedName("ml_vine");
+		wineFancy = (new ItemFoodMultiple(nextItemId(),"winefancy",4,0,0,4,true)).setUnlocalizedName("ml_wine");
+		silk=new ItemText(nextItemId(),"silk").setUnlocalizedName("ml_silk");
+		byzantineiconsmall = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_SMALL)).setUnlocalizedName("ml_byzantineicon");
+		byzantineiconmedium = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_MEDIUM)).setUnlocalizedName("ml_byzantineiconmedium");
+		byzantineiconlarge = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_LARGE)).setUnlocalizedName("ml_byzantineiconlarge");
 
-		byzantineMace =  new ItemMillenaireSword(nextItemId(),120,25,10,0,0,true).setIconCoord(4,15).setUnlocalizedName("ml_byzantineMace");
 
-		clothes = (ItemClothes) new ItemClothes(nextItemId()).setUnlocalizedName("ml_clothes");
-		wineBasic = (new ItemFoodMultiple(nextItemId(),3,0,0,3,true)).setIconCoord(11,15).setUnlocalizedName("ml_wine_basic");
-		lambRaw = (new ItemFoodMultiple(nextItemId(),0,2,0.2f,0,false)).setIconCoord(12,15).setMaxStackSize(64).setUnlocalizedName("ml_lamb_raw");
-		lambCooked = (new ItemFoodMultiple(nextItemId(),0,6,0.6f,0,false)).setIconCoord(13,15).setMaxStackSize(64).setUnlocalizedName("ml_lamb_cooked");
-		feta = (new ItemFoodMultiple(nextItemId(),2,0,0,0,false)).setIconCoord(14,15).setMaxStackSize(8).setUnlocalizedName("ml_feta");
-		souvlaki = (new ItemFoodMultiple(nextItemId(),5,8,0.8f,2,false)).setIconCoord(15,15).setUnlocalizedName("ml_souvlaki");
+		byzantineLegs = new ItemMillenaireArmour(nextItemId(),"byzantinelegs",EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,2).setUnlocalizedName("ml_byzantineLegs");
+		byzantineHelmet = new ItemMillenaireArmour(nextItemId(),"byzantinehelmet",EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,0).setUnlocalizedName("ml_byzantineHelmet");
+		byzantinePlate = new ItemMillenaireArmour(nextItemId(),"byzantineplate",EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,1).setUnlocalizedName("ml_byzantinePlate");
+		byzantineBoots = new ItemMillenaireArmour(nextItemId(),"byzantineboots",EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,3).setUnlocalizedName("ml_byzantineBoots");
 
-		purse = (ItemPurse) new ItemPurse(nextItemId()).setMaxStackSize(1).setIconCoord(12,8).setUnlocalizedName("ml_purse");
+		byzantineMace =  new ItemMillenaireSword(nextItemId(),"byzantinemace",120,25,10,0,0,true).setUnlocalizedName("ml_byzantineMace");
+
+		clothes = (ItemClothes) new ItemClothes(nextItemId(),"byzantineclothwool","byzantineclothsilk").setUnlocalizedName("ml_clothes");
+		wineBasic = (new ItemFoodMultiple(nextItemId(),"winebasic",3,0,0,3,true)).setUnlocalizedName("ml_wine_basic");
+		lambRaw = (new ItemFoodMultiple(nextItemId(),"lambraw",0,2,0.2f,0,false)).setMaxStackSize(64).setUnlocalizedName("ml_lamb_raw");
+		lambCooked = (new ItemFoodMultiple(nextItemId(),"lambcooked",0,6,0.6f,0,false)).setMaxStackSize(64).setUnlocalizedName("ml_lamb_cooked");
+		feta = (new ItemFoodMultiple(nextItemId(),"feta",2,0,0,0,false)).setMaxStackSize(8).setUnlocalizedName("ml_feta");
+		souvlaki = (new ItemFoodMultiple(nextItemId(),"souvlaki",5,8,0.8f,2,false)).setUnlocalizedName("ml_souvlaki");
+
+		purse = (ItemPurse) new ItemPurse(nextItemId(),"purse").setMaxStackSize(1).setUnlocalizedName("ml_purse");
 		
 		byzantine_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineBrickId,
-				52,50,52,50,51,50).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setBlockName("byzantine_brick");
-		byzantine_tile_slab = (BlockOrientedSlab) new BlockOrientedSlab(MLN.blockByzantineSlabId).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setBlockName("byzantine_brick_slab");
+				"tilestopvert","tilestophor","tilestopvert","tilestophor","tilesfront","tilestophor").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick");
+		byzantine_tile_slab = (BlockOrientedSlab) new BlockOrientedSlab(MLN.blockByzantineSlabId).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick_slab");
 		byzantine_stone_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineMixedId,
-				52,50,55,55,53,54).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setBlockName("byzantine_mixedbrick");
+				"tilestopvert","tilestophor","stone","stone","tileshalffront","tileshalfside").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_mixedbrick");
 
-		wood_decoration.setBlockName("ml_wood_deco").setHardness(2.0F).setResistance(5F).setStepSound(Block.soundWoodFootstep);
-		wood_decoration.registerTexture(0, 0);
-		wood_decoration.registerTexture(1, 1);
-		wood_decoration.registerTexture(2, 2);
+		wood_decoration.setUnlocalizedName("ml_wood_deco").setHardness(2.0F).setResistance(5F).setStepSound(Block.soundWoodFootstep);
+		wood_decoration.registerTexture(0, "timberframeplain");
+		wood_decoration.registerTexture(1, "timberframecross");
+		wood_decoration.registerTexture(2, "thatch");
+		wood_decoration.registerTexture(3, "silkwormempty");
+		wood_decoration.registerTexture(4, "silkwormfull");
 
-		earth_decoration.setBlockName("ml_earth_deco").setHardness(1.0F).setResistance(2F).setStepSound(Block.soundGravelFootstep);
-		earth_decoration.registerTexture(0, 3);
-		earth_decoration.registerTexture(1, 8);
+		earth_decoration.setUnlocalizedName("ml_earth_deco").setHardness(1.0F).setResistance(2F).setStepSound(Block.soundGravelFootstep);
+		earth_decoration.registerTexture(0, "mudbrick");
+		earth_decoration.registerTexture(1, "dirtwall");
 
-		stone_decoration.setBlockName("ml_stone_deco").setHardness(1.0F).setResistance(8F).setStepSound(Block.soundStoneFootstep);
-		stone_decoration.registerTexture(0, 4);
-		stone_decoration.registerTexture(1, 5);
-		stone_decoration.registerTexture(2, 6);
-		stone_decoration.registerTexture(3, 7);
+		stone_decoration.setUnlocalizedName("ml_stone_deco").setHardness(1.0F).setResistance(8F).setStepSound(Block.soundStoneFootstep);
+		stone_decoration.registerTexture(0, "cookedbrick");
+		stone_decoration.registerTexture(1, "mudbrickdried");
+		stone_decoration.registerTexture(2, "mayangoldblock");
+		stone_decoration.registerTexture(3, "alchemistexplosive");
 
-
-
-		wood_decoration.registerTexture(3, 48);
-		wood_decoration.registerTexture(4, 49);
-
-		crops.setBlockName("ml_crops").setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
+		crops.setUnlocalizedName("ml_crops").setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
 
 		entityNames=new HashMap<Class,String>();
 
