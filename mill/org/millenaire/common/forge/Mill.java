@@ -8,7 +8,6 @@ import java.util.Vector;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.item.EnumArmorMaterial;
@@ -21,7 +20,6 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 
-import org.millenaire.client.TextureAlchemistAmulet;
 import org.millenaire.client.network.ClientReceiver;
 import org.millenaire.common.Culture;
 import org.millenaire.common.EntityWallDecoration;
@@ -654,7 +652,7 @@ public class Mill
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, new ChunkLoaderCallback());
 
-		new TextureAlchemistAmulet(Minecraft.getMinecraft());
+		
 		
 		proxy.loadLanguages();
 	}

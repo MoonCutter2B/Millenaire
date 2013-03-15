@@ -19,6 +19,7 @@ import org.millenaire.client.ModelFemaleAsymmetrical;
 import org.millenaire.client.ModelFemaleSymmetrical;
 import org.millenaire.client.RenderMillVillager;
 import org.millenaire.client.RenderWallDecoration;
+import org.millenaire.client.TextureAlchemistAmulet;
 import org.millenaire.client.TileEntityMillChestRenderer;
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.EntityWallDecoration;
@@ -178,6 +179,10 @@ public class ClientProxy extends CommonProxy
 		final Minecraft minecraft=ModLoader.getMinecraftInstance();
 
 		MLN.loadLanguages(minecraft.gameSettings.language);
+		
+		
+		new TextureAlchemistAmulet(Minecraft.getMinecraft());
+		
 	}
 
 	@Override

@@ -12,7 +12,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureStitched;
 import net.minecraft.world.World;
 
-import org.millenaire.common.MLN;
 import org.millenaire.common.Point;
 
 public class TextureAlchemistAmulet extends TextureStitched {
@@ -171,13 +170,9 @@ public class TextureAlchemistAmulet extends TextureStitched {
 
 	private void drawPict(BufferedImage pict,int score,int pos,int zoomFactor) {
 
-
-
 		final double mult=(score*1.0)/100;
 
 		final int[][] targetcol=new int[detect.length][3];
-
-
 
 		for (int i=0;i<detect.length;i++) {
 			for (int j=0;j<3;j++) {
@@ -198,8 +193,8 @@ public class TextureAlchemistAmulet extends TextureStitched {
 			boolean handled=false;
 			for (int c=0;c<detect.length;c++) {
 				if ((red==detect[c][0]) && (green==detect[c][1]) && (blue==detect[c][2])) {
-					image[i] = new Color(targetcol[c][1]/255f,targetcol[c][2]/255f,targetcol[c][3]/255f,1.0f);
-					MLN.temp(null, ""+image[i].getRed()+"/"+image[i].getGreen()+"/"+image[i].getBlue()+"/"+image[i].getAlpha());
+					image[i] = new Color(targetcol[c][0]/255f,targetcol[c][1]/255f,targetcol[c][2]/255f,1.0f);
+					
 					handled=true;
 				}
 			}
@@ -209,15 +204,14 @@ public class TextureAlchemistAmulet extends TextureStitched {
 			}
 		}
 
-		final int originalSize=(int) Math.sqrt(image.length/4);
+		final int originalSize=(int) Math.sqrt(image.length);
 
 
 		for (int i=0;i<originalSize;i++) {
 			for (int j=0;j<originalSize;j++) {
 				for (int x=0;x<zoomFactor;x++) {
-					for (int y=0;y<zoomFactor;y++) {
-						pict.getGraphics().setColor(image[(i*originalSize)+(j)]);
-						pict.getGraphics().drawRect(i*zoomFactor+x, j*zoomFactor+y+pos, 2, 2);
+					for (int y=0;y<zoomFactor;y++) {						
+						pict.setRGB(i*zoomFactor+x, j*zoomFactor+y+pos,image[(i)+j*originalSize].getRGB());
 					}
 				}
 			}
