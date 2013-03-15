@@ -28,6 +28,7 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.TileEntityMillChest;
 import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.UserProfile;
+import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.CommonProxy;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
@@ -42,6 +43,11 @@ public class ClientProxy extends CommonProxy
 {
 	@Override
 	public void checkTextureSize() {
+		MillClientUtilities.checkTextSize();
+	}
+
+	@Override
+	public void testTextureSize() {
 		MillClientUtilities.checkTextSize();
 	}
 

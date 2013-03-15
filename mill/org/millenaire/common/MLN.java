@@ -499,11 +499,6 @@ public class MLN {
 
 	public static final char WHITE = 'f';
 
-
-
-	public static final String SPRITES_BASE_PATH="/graphics/ML_sprites.png";
-	public static final String SPRITES_64_BASE_PATH="/graphics/ML_sprites_64.png";
-
 	public static int KeepActiveRadius=200;
 	public static int BackgroundRadius=2000;
 	public static int BanditRaidRadius=1500;
@@ -764,6 +759,8 @@ public class MLN {
 	}
 
 	public static String getTextSuffix() {
+		
+		Mill.proxy.testTextureSize();
 
 		if (customTexture!=null)
 			return "";

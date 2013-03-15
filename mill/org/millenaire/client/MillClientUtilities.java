@@ -40,13 +40,14 @@ public class MillClientUtilities {
 
 
 	public static void checkTextSize() {
-		final int texture=ModLoader.getMinecraftInstance().renderEngine.getTexture("/terrain.png");
+		final int texture=ModLoader.getMinecraftInstance().renderEngine.getTexture("/textures/blocks/blockGold.png");
 
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
-		final int textSize = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, 0, GL11.GL_TEXTURE_WIDTH)/16;
+		final int textSize = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, 0, GL11.GL_TEXTURE_WIDTH);
 
 		if (textSize!=MLN.textureSize) {
 			MLN.textureSize=textSize;
+			ModLoader.getMinecraftInstance().renderEngine.refreshTextures();
 		}
 	}
 

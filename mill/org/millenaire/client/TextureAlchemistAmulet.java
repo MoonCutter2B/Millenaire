@@ -1,6 +1,8 @@
 package org.millenaire.client;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -10,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureStitched;
 import net.minecraft.world.World;
 
+import org.millenaire.common.MLN;
 import org.millenaire.common.Point;
 
 public class TextureAlchemistAmulet extends TextureStitched {
@@ -32,6 +35,24 @@ public class TextureAlchemistAmulet extends TextureStitched {
 			final BufferedImage bufferedimage = ImageIO.read((net.minecraft.client.Minecraft.class).getResource("/graphics/item/ML_alchimist_amulet.png"));
 			buffer = new int[bufferedimage.getWidth()*bufferedimage.getHeight()];
 			bufferedimage.getRGB(0, 0, bufferedimage.getHeight(), bufferedimage.getWidth(), buffer, 0, bufferedimage.getHeight());
+
+
+			BufferedImage export = new BufferedImage(16, 16*16, BufferedImage.TYPE_4BYTE_ABGR);
+
+			for (int i=0;i<16;i++) {
+				drawPict(export,100*i/16,i*16,1);
+			}
+
+			ImageIO.write(export, "PNG", (new File("./amulet_alchimist.png")));
+
+			export = new BufferedImage(64, 64*16, BufferedImage.TYPE_4BYTE_ABGR);
+
+			for (int i=0;i<16;i++) {
+				drawPict(export,100*i/16,i*64,4);
+			}
+
+			ImageIO.write(export, "PNG", (new File("./amulet_alchimist_64.png")));
+
 		}
 		catch(final IOException ioexception)
 		{
@@ -147,4 +168,61 @@ public class TextureAlchemistAmulet extends TextureStitched {
 			}
 		}
 	}
+
+	private void drawPict(BufferedImage pict,int score,int pos,int zoomFactor) {
+
+
+
+		final double mult=(score*1.0)/100;
+
+		final int[][] targetcol=new int[detect.length][3];
+
+
+
+		for (int i=0;i<detect.length;i++) {
+			for (int j=0;j<3;j++) {
+
+				targetcol[i][j]=(int) ((1.0*neutral[i][j]*(1-mult))+(1.0*shining[i][j]*mult));
+			}
+		}
+
+		final Color[] image=new Color[buffer.length];
+
+		for(int i = 0; i < 256; i++) {
+
+			final int alpha = (buffer[i] >> 24) & 0xff;
+			int red = (buffer[i] >> 16) & 0xff;
+			int green = (buffer[i] >> 8) & 0xff;
+			int blue = (buffer[i] >> 0) & 0xff;
+
+			boolean handled=false;
+			for (int c=0;c<detect.length;c++) {
+				if ((red==detect[c][0]) && (green==detect[c][1]) && (blue==detect[c][2])) {
+					image[i] = new Color(targetcol[c][1]/255f,targetcol[c][2]/255f,targetcol[c][3]/255f,1.0f);
+					MLN.temp(null, ""+image[i].getRed()+"/"+image[i].getGreen()+"/"+image[i].getBlue()+"/"+image[i].getAlpha());
+					handled=true;
+				}
+			}
+
+			if (!handled) {
+				image[i] = new Color(red,green,blue,alpha);
+			}
+		}
+
+		final int originalSize=(int) Math.sqrt(image.length/4);
+
+
+		for (int i=0;i<originalSize;i++) {
+			for (int j=0;j<originalSize;j++) {
+				for (int x=0;x<zoomFactor;x++) {
+					for (int y=0;y<zoomFactor;y++) {
+						pict.getGraphics().setColor(image[(i*originalSize)+(j)]);
+						pict.getGraphics().drawRect(i*zoomFactor+x, j*zoomFactor+y+pos, 2, 2);
+					}
+				}
+			}
+		}
+
+	}
+
 }

@@ -22,6 +22,10 @@ public class CommonProxy {
 	public void checkTextureSize() {
 
 	}
+	
+	public void testTextureSize() {
+		
+	}
 
 	public IGuiHandler createGuiHandler() {
 		return new CommonGuiHandler();
