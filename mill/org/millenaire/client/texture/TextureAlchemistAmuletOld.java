@@ -1,4 +1,4 @@
-package org.millenaire.client;
+package org.millenaire.client.texture;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 import org.millenaire.common.Point;
 
-public class TextureAlchemistAmulet extends TextureStitched {
+public class TextureAlchemistAmuletOld extends TextureStitched {
 
 	private int[] buffer;
 	private final Minecraft mc;
@@ -24,7 +24,7 @@ public class TextureAlchemistAmulet extends TextureStitched {
 
 	private final int radius=5;
 
-	public TextureAlchemistAmulet(Minecraft minecraft) {
+	public TextureAlchemistAmuletOld(Minecraft minecraft) {
 		super("alchimist_amulet");
 		this.mc=minecraft;
 
@@ -194,9 +194,9 @@ public class TextureAlchemistAmulet extends TextureStitched {
 			for (int c=0;c<detect.length;c++) {
 				if ((red==detect[c][0]) && (green==detect[c][1]) && (blue==detect[c][2])) {
 					image[i] = new Color(targetcol[c][0]/255f,targetcol[c][1]/255f,targetcol[c][2]/255f,1.0f);
-					
+					//test
 					handled=true;
-				}
+				} 
 			}
 
 			if (!handled) {

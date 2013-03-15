@@ -19,9 +19,11 @@ import org.millenaire.client.ModelFemaleAsymmetrical;
 import org.millenaire.client.ModelFemaleSymmetrical;
 import org.millenaire.client.RenderMillVillager;
 import org.millenaire.client.RenderWallDecoration;
-import org.millenaire.client.TextureAlchemistAmulet;
 import org.millenaire.client.TileEntityMillChestRenderer;
 import org.millenaire.client.network.ClientSender;
+import org.millenaire.client.texture.TextureAlchemistAmuletOld;
+import org.millenaire.client.texture.TextureVishnuAmulet;
+import org.millenaire.client.texture.TextureYddrasilAmulet;
 import org.millenaire.common.EntityWallDecoration;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
@@ -29,7 +31,6 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.TileEntityMillChest;
 import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.UserProfile;
-import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.CommonProxy;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
@@ -181,8 +182,9 @@ public class ClientProxy extends CommonProxy
 		MLN.loadLanguages(minecraft.gameSettings.language);
 		
 		
-		new TextureAlchemistAmulet(Minecraft.getMinecraft());
-		
+		new TextureAlchemistAmuletOld(Minecraft.getMinecraft());
+		new TextureVishnuAmulet(Minecraft.getMinecraft());
+		new TextureYddrasilAmulet(Minecraft.getMinecraft());
 	}
 
 	@Override
@@ -219,6 +221,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericZombie.class, new RenderBiped(new ModelZombie(),0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWallDecoration.class, new RenderWallDecoration());
 
+		
 		//ModLoader.addAnimation(new TextureVishnuAmulet(ModLoader.getMinecraftInstance()));
 		//ModLoader.addAnimation(new TextureAlchemistAmulet(ModLoader.getMinecraftInstance()));
 		//ModLoader.addAnimation(new TextureYddrasilAmulet(ModLoader.getMinecraftInstance()));
@@ -251,10 +254,6 @@ public class ClientProxy extends CommonProxy
 		Mill.japaneseWarriorRedArmourId = ModLoader.addArmor("ML_japanese_warrior_red");
 		Mill.japaneseGuardArmourId = ModLoader.addArmor("ML_japanese_guard");
 		Mill.byzantineArmourId = ModLoader.addArmor("ML_byzantine");
-
-		Mill.raven_amuletID = ModLoader.getUniqueSpriteIndex("/gui/items.png");
-		Mill.alchemist_amuletID = ModLoader.getUniqueSpriteIndex("/gui/items.png");
-		Mill.yddrasil_amuletID = ModLoader.getUniqueSpriteIndex("/gui/items.png");
 	}
 
 	@Override

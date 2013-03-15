@@ -1,6 +1,8 @@
-package org.millenaire.client;
+package org.millenaire.client.texture;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -34,6 +36,24 @@ public class TextureVishnuAmulet extends TextureStitched {
 			//"/graphics/item/ML_om_amulet.png"
 			buffer = new int[bufferedimage.getWidth()*bufferedimage.getHeight()];
 			bufferedimage.getRGB(0, 0, bufferedimage.getHeight(), bufferedimage.getWidth(), buffer, 0, bufferedimage.getHeight());
+			
+			
+			BufferedImage export = new BufferedImage(16, 16*16, BufferedImage.TYPE_4BYTE_ABGR);
+
+			for (int i=0;i<16;i++) {
+				drawPict(export,i,i*16,1);
+			}
+
+			ImageIO.write(export, "PNG", (new File("./amulet_vishnu.png")));
+
+			export = new BufferedImage(64, 64*16, BufferedImage.TYPE_4BYTE_ABGR);
+
+			for (int i=0;i<16;i++) {
+				drawPict(export,i,i*64,4);
+			}
+
+			ImageIO.write(export, "PNG", (new File("./amulet_vishnu_64.png")));
+			
 		}
 		catch(final IOException ioexception)
 		{
@@ -128,6 +148,56 @@ public class TextureVishnuAmulet extends TextureStitched {
 								imageData[(((i*zoomFactor)+x)*4*originalSize*zoomFactor)+(((j*zoomFactor)+y)*4)+k]=image[(i*originalSize*4)+(j*4)+k];
 							}
 						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void drawPict(BufferedImage pict,int score,int pos,int zoomFactor) {
+		final int[][] targetcol=new int[detect.length][3];
+		
+		double level=score/15d;
+
+		for (int i=0;i<detect.length;i++) {
+			for (int j=0;j<3;j++) {
+				targetcol[i][j]=(int) ((safe[i][j]*(1-level))+(danger[i][j]*level));
+			}
+		}
+
+
+		final Color[] image=new Color[buffer.length];
+
+		for(int i = 0; i < 256; i++) {
+
+			final int alpha = (buffer[i] >> 24) & 0xff;
+			int red = (buffer[i] >> 16) & 0xff;
+			int green = (buffer[i] >> 8) & 0xff;
+			int blue = (buffer[i] >> 0) & 0xff;
+
+			
+
+			boolean handled=false;
+			for (int c=0;c<detect.length;c++) {
+				if ((red==detect[c][0]) && (green==detect[c][1]) && (blue==detect[c][2])) {
+					image[i] = new Color(targetcol[c][0]/255f,targetcol[c][1]/255f,targetcol[c][2]/255f,1.0f);
+					handled=true;
+				}
+			}
+
+			if (!handled) {
+				image[i] = new Color(red,green,blue,alpha);
+			}
+		}
+
+		final int originalSize=(int) Math.sqrt(image.length);
+
+
+		for (int i=0;i<originalSize;i++) {
+			for (int j=0;j<originalSize;j++) {
+				for (int x=0;x<zoomFactor;x++) {
+					for (int y=0;y<zoomFactor;y++) {						
+						pict.setRGB(i*zoomFactor+x, j*zoomFactor+y+pos,image[(i)+j*originalSize].getRGB());
 					}
 				}
 			}

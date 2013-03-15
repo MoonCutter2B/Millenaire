@@ -180,13 +180,10 @@ public class Mill
 	public static Item parchmentComplete;
 	public static Item boudin;
 	public static Item tapestry;
-	public static int raven_amuletID=0;
 	public static Item vishnu_amulet;
 
-	public static int alchemist_amuletID=0;
 	public static Item alchemist_amulet;
 
-	public static int yddrasil_amuletID=0;
 	public static Item yddrasil_amulet;
 
 	public static Item skoll_hati_amulet;

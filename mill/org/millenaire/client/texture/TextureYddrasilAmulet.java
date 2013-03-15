@@ -1,6 +1,8 @@
-package org.millenaire.client;
+package org.millenaire.client.texture;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -22,9 +24,27 @@ public class TextureYddrasilAmulet extends TextureStitched {
 
 		try
 		{
-			final BufferedImage bufferedimage = ImageIO.read((net.minecraft.client.Minecraft.class).getResource("/graphics/gui/ML_yggdrasil_amulet.png"));
+			final BufferedImage bufferedimage = ImageIO.read((net.minecraft.client.Minecraft.class).getResource("/graphics/item/ML_yggdrasil_amulet.png"));
 			buffer = new int[bufferedimage.getWidth()*bufferedimage.getHeight()];
 			bufferedimage.getRGB(0, 0, bufferedimage.getHeight(), bufferedimage.getWidth(), buffer, 0, bufferedimage.getHeight());
+			
+			BufferedImage export = new BufferedImage(16, 16*16, BufferedImage.TYPE_4BYTE_ABGR);
+
+			for (int i=0;i<16;i++) {
+				drawPict(export,i,i*16,1);
+			}
+
+			ImageIO.write(export, "PNG", (new File("./amulet_yddrasil.png")));
+
+			export = new BufferedImage(64, 64*16, BufferedImage.TYPE_4BYTE_ABGR);
+
+			for (int i=0;i<16;i++) {
+				drawPict(export,i,i*64,4);
+			}
+
+			ImageIO.write(export, "PNG", (new File("./amulet_yddrasil_64.png")));
+			
+			
 		}
 		catch(final IOException ioexception)
 		{
@@ -143,6 +163,74 @@ public class TextureYddrasilAmulet extends TextureStitched {
 								imageData[(((i*zoomFactor)+x)*4*originalSize*zoomFactor)+(((j*zoomFactor)+y)*4)+k]=image[(i*originalSize*4)+(j*4)+k];
 							}
 						}
+					}
+				}
+			}
+		}
+	}
+	
+	private void drawPict(BufferedImage pict,int level,int pos,int zoomFactor) {
+		
+		final Color[] image=new Color[buffer.length];
+
+		for(int i = 0; i < 256; i++) {
+
+			final int alpha = (buffer[i] >> 24) & 0xff;
+			int red = (buffer[i] >> 16) & 0xff;
+			int green = (buffer[i] >> 8) & 0xff;
+			int blue = (buffer[i] >> 0) & 0xff;
+
+			boolean handled=false;
+			for (int j=0;j<16;j++) {
+				if ((red==(j*10)) && (green==10) && (blue==10)) {
+					if (j==level) {
+						image[i] = new Color(74,237,209);
+					} else if (j==(level-1)) {
+						image[i] = new Color(44,205,177);
+					} else if (j==(level+1)) {
+						image[i] = new Color(140,244,226);
+					} else {
+						image[i] = new Color(10,10,10);
+					}
+					handled=true;
+				} else if ((red==(j*10)) && (green==10) && (blue==100)) {
+					if (j==level) {
+						image[i] = new Color(140,244,226);
+					} else if (j==(level-1)) {
+						image[i] = new Color(27,123,107);
+					} else if (j==(level+1)) {
+						image[i] = new Color(27,123,107);
+					} else {
+						image[i] = new Color(10,10,10);
+					}
+					handled=true;
+				}  else if ((red==(j*10)) && (green==100) && (blue==10)) {
+					if (j==level) {
+						image[i] = new Color(44,205,177);
+					} else if (j==(level-1)) {
+						image[i] = new Color(27,123,107);
+					} else if (j==(level+1)) {
+						image[i] = new Color(27,123,107);
+					} else {
+						image[i] = new Color(10,10,10);
+					}
+					handled=true;
+				}
+			}
+
+			if (!handled) {
+				image[i] = new Color(red,green,blue,alpha);
+			}
+		}
+
+		final int originalSize=(int) Math.sqrt(image.length);
+
+
+		for (int i=0;i<originalSize;i++) {
+			for (int j=0;j<originalSize;j++) {
+				for (int x=0;x<zoomFactor;x++) {
+					for (int y=0;y<zoomFactor;y++) {						
+						pict.setRGB(i*zoomFactor+x, j*zoomFactor+y+pos,image[(i)+j*originalSize].getRGB());
 					}
 				}
 			}
