@@ -4,17 +4,16 @@
 
 package org.millenaire.common.block;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
@@ -22,7 +21,7 @@ import org.millenaire.common.forge.Mill;
 //            BlockFlower, Block, World, EntityItem,
 //            ItemStack, Item
 
-public class BlockMillCrops extends BlockFlower
+public class BlockMillCrops extends BlockCrops
 {
 
 	String riceTexture0name,riceTexture1name,turmericTexture0name,
@@ -78,32 +77,6 @@ public class BlockMillCrops extends BlockFlower
 	{
 		return ((i == Block.tilledField.blockID) ||
 				(i == Block.dirt.blockID));
-	}
-
-	public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f)
-	{
-
-	}
-
-	@Override
-	public void dropBlockAsItemWithChance(World world, int i, int j, int k, int meta, float f, int i1)
-	{
-		if (world.isRemote)
-			return;
-
-		if ((meta==1) || (meta==3) || (meta==5)|| (meta==7)) {
-			final int quantity=1+MillCommonUtilities.randomInt(2);
-
-			for (int k1 = 0; k1 < quantity; k1++)
-			{
-
-				final int itemId = idDropped(meta, world.rand, i1);
-				if (itemId > 0)
-				{
-					dropBlockAsItem_do(world, i, j, k, new ItemStack(itemId, 1, damageDropped(meta)));
-				}
-			}
-		}
 	}
 
 	public void fertilize(World world, int i, int j, int k)
@@ -173,9 +146,15 @@ public class BlockMillCrops extends BlockFlower
 	{
 		return 6;
 	}
-
+	
 	@Override
-	public int idDropped(int meta, Random random, int j)
+	public int idDropped(int par1, Random par2Random, int par3)
+    {
+		return idDropped(par1);
+    }
+
+
+	public int idDropped(int meta)
 	{
 		if ((meta == 0) || (meta == 1))
 			return Mill.rice.itemID;
@@ -188,43 +167,36 @@ public class BlockMillCrops extends BlockFlower
 		else
 			return -1;
 	}
-
+	
+	/**
+     * Returns the quantity of items to drop on block destruction.
+     */
 	@Override
-	public boolean onBlockActivated(World world, int x, int y,
-			int z, EntityPlayer par5EntityPlayer, int par6, float par7,
-			float par8, float par9) {
+    public int quantityDropped(Random par1Random)
+    {		
+        return 1;
+    }
+	
+    @Override 
+    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+    {
+        ArrayList<ItemStack> ret =  new ArrayList<ItemStack>();
 
-		final int crop=world.getBlockMetadata(x, y, z);
+        ret.add(new ItemStack(idDropped(metadata), 1, 0));
+        
+        if (metadata %2 == 1)
+        {
+            for (int n = 0; n < 3 + fortune; n++)
+            {
+                if (world.rand.nextInt(15) <= metadata)
+                {
+                    ret.add(new ItemStack(idDropped(metadata), 1, 0));
+                }
+            }
+        }
 
-		if (crop==7) {
-			MillCommonUtilities.setBlockMetadata(world, x,y,z, 0,true);
-
-			MillCommonUtilities.spawnItem(world, new Point(x,y,z), new ItemStack(Mill.grapes,1), 0);
-
-			return true;
-		} else if (crop==1) {
-			MillCommonUtilities.setBlockMetadata(world, x,y,z, 0,true);
-
-			MillCommonUtilities.spawnItem(world, new Point(x,y,z), new ItemStack(Mill.rice,1), 0);
-
-			return true;
-		} else if (crop==3) {
-			MillCommonUtilities.setBlockMetadata(world, x,y,z, 0,true);
-
-			MillCommonUtilities.spawnItem(world, new Point(x,y,z), new ItemStack(Mill.turmeric,1), 0);
-
-			return true;
-		} else if (crop==5) {
-			MillCommonUtilities.setBlockMetadata(world, x,y,z, 0,true);
-
-			MillCommonUtilities.spawnItem(world, new Point(x,y,z), new ItemStack(Mill.maize,1), 0);
-
-			return true;
-
-		} else
-			return super.onBlockActivated(world, x, y, z, par5EntityPlayer,
-					par6, par7, par8, par9);
-	}
+        return ret;
+    }
 
 	/**
 	 * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
@@ -244,7 +216,8 @@ public class BlockMillCrops extends BlockFlower
 	@Override
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
-		super.updateTick(world, i, j, k, random);
+		
+		checkFlowerChange(world, i, j, k);
 
 		if(world.getBlockLightValue(i, j + 1, k) >= 9)
 		{
