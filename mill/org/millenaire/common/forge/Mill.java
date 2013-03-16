@@ -29,7 +29,7 @@ import org.millenaire.common.MillWorld;
 import org.millenaire.common.Quest;
 import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.WorldGenVillage;
-import org.millenaire.common.block.BlockCrops;
+import org.millenaire.common.block.BlockMillCrops;
 import org.millenaire.common.block.BlockDecorative;
 import org.millenaire.common.block.BlockDecorative.ItemDecorative;
 import org.millenaire.common.block.BlockMLNPane;
@@ -41,7 +41,10 @@ import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.forge.BuildingChunkLoader.ChunkLoaderCallback;
 import org.millenaire.common.goal.Goal;
 import org.millenaire.common.item.Goods;
+import org.millenaire.common.item.Goods.ItemAmuletAlchemist;
 import org.millenaire.common.item.Goods.ItemAmuletSkollHati;
+import org.millenaire.common.item.Goods.ItemAmuletVishnu;
+import org.millenaire.common.item.Goods.ItemAmuletYddrasil;
 import org.millenaire.common.item.Goods.ItemBrickMould;
 import org.millenaire.common.item.Goods.ItemClothes;
 import org.millenaire.common.item.Goods.ItemMillenaireArmour;
@@ -58,7 +61,7 @@ import org.millenaire.common.item.Goods.ItemText;
 import org.millenaire.common.item.ItemFoodMultiple;
 import org.millenaire.common.item.ItemParchment;
 import org.millenaire.common.item.ItemPurse;
-import org.millenaire.common.item.ItemSeeds;
+import org.millenaire.common.item.ItemMillSeeds;
 import org.millenaire.common.network.ConnectionHandler;
 import org.millenaire.common.network.ServerReceiver;
 
@@ -108,7 +111,7 @@ public class Mill
 			return Mill.denier_or.itemID;
 		}
 	}
-	public static final String versionNumber = "4.4.0b";
+	public static final String versionNumber = "4.4.0";
 	public static final String versionBound = "[4.4.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
@@ -141,7 +144,7 @@ public class Mill
 	public static BlockOrientedSlab byzantine_tile_slab;
 	public static BlockOrientedBrick byzantine_stone_tiles;
 
-	public static BlockCrops crops;
+	public static BlockMillCrops crops;
 
 	public static Block paperWall;
 	public static int normanArmourId=0;
@@ -334,7 +337,7 @@ public class Mill
 		earth_decoration = new BlockDecorative(MLN.blockEarthId,Material.ground);
 		stone_decoration = new BlockDecorative(MLN.blockStoneId,Material.rock);
 
-		crops = new BlockCrops(MLN.blockCropsId);
+		crops = new BlockMillCrops(MLN.blockCropsId);
 
 		paperWall = new BlockMLNPane(MLN.blockPanesId, "paperwall", "paperwall", Material.cloth, true).setHardness(0.3F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("ml_panes");
 
@@ -375,19 +378,19 @@ public class Mill
 		tapestry = (new ItemTapestry(nextItemId(),"normantapestry",EntityWallDecoration.NORMAN_TAPESTRY)).setUnlocalizedName("ml_tapestry");
 
 
-		vishnu_amulet = new ItemText(nextItemId(),"amulet_vishnu").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_raven_amulet").setMaxStackSize(1);
+		vishnu_amulet = new ItemAmuletVishnu(nextItemId(),"amulet_vishnu").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_raven_amulet").setMaxStackSize(1);
 
 
-		alchemist_amulet = new ItemText(nextItemId(),"amulet_alchemist").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_dwarves_amulet").setMaxStackSize(1);
+		alchemist_amulet = new ItemAmuletAlchemist(nextItemId(),"amulet_alchemist").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_dwarves_amulet").setMaxStackSize(1);
 
 
-		yddrasil_amulet = new ItemText(nextItemId(),"amulet_yggdrasil").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_yddrasil_amulet").setMaxStackSize(1);
+		yddrasil_amulet = new ItemAmuletYddrasil(nextItemId(),"amulet_yggdrasil").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_yddrasil_amulet").setMaxStackSize(1);
 
 		skoll_hati_amulet = (new ItemAmuletSkollHati(nextItemId(),"amulet_skollhati")).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_skoll_hati_amulet").setMaxStackSize(1).setMaxDamage(10);
 		parchmentVillageScroll = new ItemParchment(nextItemId(),"parchmentvillage",new int[]{ItemParchment.villageBook}).setUnlocalizedName("ml_parchmentVillageScroll");
 
-		rice = (new ItemSeeds(nextItemId(),"rice", crops.blockID,0,Mill.CROP_RICE)).setUnlocalizedName("ml_rice");
-		turmeric = (new ItemSeeds(nextItemId(),"turmeric", crops.blockID,2,Mill.CROP_TURMERIC)).setUnlocalizedName("ml_turmeric");
+		rice = (new ItemMillSeeds(nextItemId(),"rice", crops.blockID,0,Mill.CROP_RICE)).setUnlocalizedName("ml_rice");
+		turmeric = (new ItemMillSeeds(nextItemId(),"turmeric", crops.blockID,2,Mill.CROP_TURMERIC)).setUnlocalizedName("ml_turmeric");
 		vegcurry = (new ItemFoodMultiple(nextItemId(),"curry",2,2,0.3f,0,false)).setUnlocalizedName("ml_vegcurry");
 		chickencurry = (new ItemFoodMultiple(nextItemId(),"currychicken",4,6,0.6f,0,false)).setUnlocalizedName("ml_chickencurry");
 		brickmould = (new ItemBrickMould(nextItemId(),"brickmould")).setUnlocalizedName("ml_brickmould").setMaxStackSize(1).setMaxDamage(128);
@@ -401,7 +404,7 @@ public class Mill
 
 
 		mayanstatue = (new ItemTapestry(nextItemId(),"mayanstatue",EntityWallDecoration.MAYAN_STATUE)).setUnlocalizedName("ml_mayanstatue");
-		maize = (new ItemSeeds(nextItemId(),"maize", crops.blockID,4,Mill.CROP_MAIZE)).setUnlocalizedName("ml_maize");
+		maize = (new ItemMillSeeds(nextItemId(),"maize", crops.blockID,4,Mill.CROP_MAIZE)).setUnlocalizedName("ml_maize");
 		wah = (new ItemFoodMultiple(nextItemId(),"wah",2,4,0.4f,0,false)).setUnlocalizedName("ml_wah");
 		masa = (new ItemFoodMultiple(nextItemId(),"masa",4,6,0.6f,0,false)).setUnlocalizedName("ml_masa");
 
@@ -451,7 +454,7 @@ public class Mill
 		parchmentJapaneseComplete = new ItemParchment(nextItemId(),"parchmentall",new int[]{ItemParchment.japaneseVillagers,ItemParchment.japaneseBuildings,ItemParchment.japaneseItems}).setUnlocalizedName("ml_parchmentJapaneseComplete");
 
 
-		grapes=(new ItemSeeds(nextItemId(),"grapes", crops.blockID,6,Mill.CROP_VINE)).setUnlocalizedName("ml_vine");
+		grapes=(new ItemMillSeeds(nextItemId(),"grapes", crops.blockID,6,Mill.CROP_VINE)).setUnlocalizedName("ml_vine");
 		wineFancy = (new ItemFoodMultiple(nextItemId(),"winefancy",4,0,0,4,true)).setUnlocalizedName("ml_wine");
 		silk=new ItemText(nextItemId(),"silk").setUnlocalizedName("ml_silk");
 		byzantineiconsmall = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_SMALL)).setUnlocalizedName("ml_byzantineicon");

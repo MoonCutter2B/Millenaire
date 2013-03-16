@@ -602,7 +602,7 @@ public class MLN {
 	private static FileWriter writer;
 
 	private static String loadedLanguage=null;
-	public static int textureSize=1;
+	public static int textureSize=-1;
 	public static boolean dynamictextures = true;
 
 	public static String customTexture=null;
@@ -760,7 +760,8 @@ public class MLN {
 
 	public static String getTextSuffix() {
 		
-		Mill.proxy.testTextureSize();
+		if (textureSize==-1)
+			Mill.proxy.testTextureSize();
 
 		if (customTexture!=null)
 			return "";

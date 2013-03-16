@@ -1286,10 +1286,9 @@ public class Building {
 	}
 
 	private void checkExploreTag(EntityPlayer player) {
-		if (!mw.getProfile(player.username)
-				.isTagSet(location.getPlan().exploreTag)) {
+		if ((player != null) && !mw.getProfile(player.username).isTagSet(location.getPlan().exploreTag)) {
 
-			if ((player != null) && (pos.distanceToSquared(player) < 16)) {
+			if ((pos.distanceToSquared(player) < 16)) {
 
 				// Testing that there is a line of sight between the player and
 				// the chest
@@ -2212,9 +2211,7 @@ public class Building {
 							location.pos.getiX(), location.pos.getiZ());
 
 					for (int i = groundLevel + 1; i < location.pos.getiY(); i++) {
-						worldObj.setBlockAndMetadataWithNotify(location.pos.getiX(),
-								location.pos.getiY(), location.pos.getiZ(),
-								Block.dirt.blockID,0,2);
+						MillCommonUtilities.setBlockAndMetadata(worldObj, location.pos, Block.dirt.blockID, 0);
 					}
 					/**
 					worldObj.setBlockWithNotify(location.pos.getiX(),
@@ -3445,7 +3442,7 @@ public class Building {
 
 	public void growTree(World world, int i, int j, int k, Random random) {
 		final int meta = world.getBlockMetadata(i, j, k) & 3;
-		world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+		MillCommonUtilities.setBlockAndMetadata(worldObj, i,j,k, 0, 0, true, false);
 		WorldGenerator obj = null;
 		if (meta == 1) {
 			obj = new WorldGenTaiga2(true);
@@ -5974,7 +5971,7 @@ public class Building {
 				}
 			}
 
-			if ((location.getPlan()!=null) && (location.getPlan().exploreTag != null)) {
+			if (player!=null && (location.getPlan()!=null) && (location.getPlan().exploreTag != null)) {
 				checkExploreTag(player);
 			}
 

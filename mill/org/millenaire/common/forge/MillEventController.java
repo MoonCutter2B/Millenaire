@@ -59,6 +59,7 @@ public class MillEventController {
 
 		if (!(event.world instanceof WorldServer)) {
 			Mill.clientWorld=new MillWorld(event.world);
+			Mill.proxy.testTextureSize();
 		} else {
 			if (!(event.world instanceof WorldServerMulti)) {
 				final MillWorld newWorld=new MillWorld(event.world);
@@ -66,6 +67,9 @@ public class MillEventController {
 				newWorld.loadData();
 			}
 		}
+		
+		
+		
 	}
 
 	@ForgeSubscribe

@@ -87,39 +87,40 @@ public class BlockOrientedSlab extends BlockHalfSlab {
 	 * Called when the block is placed in the world.
 	 */
 	@Override
-	public void onBlockPlacedBy(World par1World, int x, int y, int z, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
 	{
 
-		if(par1World.getBlockId(x, y - 1, z) == blockID){
+		if(world.getBlockId(x, y - 1, z) == blockID){
 
-			final int meta = par1World.getBlockMetadata(x, y-1, z);
-			par1World.setBlockAndMetadataWithNotify(x, y-1, z, Mill.byzantine_tiles.blockID,meta & 1,2);
-			par1World.setBlockAndMetadataWithNotify(x, y, z, 0,0,2);
+			final int meta = world.getBlockMetadata(x, y-1, z);
+			
+			MillCommonUtilities.setBlockAndMetadata(world,x, y-1, z,Mill.byzantine_tiles.blockID,meta & 1, true, false);
+			MillCommonUtilities.setBlockAndMetadata(world,x, y, z,0, 0, true, false);
 
 		} else {
 
 			final int var6 = MathHelper.floor_double(((par5EntityLiving.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
 
-			final int meta = par1World.getBlockMetadata(x, y, z);
+			final int meta = world.getBlockMetadata(x, y, z);
 
 			if (var6 == 0)
 			{
-				par1World.setBlockMetadataWithNotify(x, y, z, 0 | meta,2);
+				MillCommonUtilities.setBlockMetadata(world, x, y, z, 0 | meta,true);
 			}
 
 			if (var6 == 1)
 			{
-				par1World.setBlockMetadataWithNotify(x, y, z, 1 | meta,2);
+				MillCommonUtilities.setBlockMetadata(world, x, y, z, 1 | meta,true);
 			}
 
 			if (var6 == 2)
 			{
-				par1World.setBlockMetadataWithNotify(x, y, z, 0 | meta,2);
+				MillCommonUtilities.setBlockMetadata(world, x, y, z, 0 | meta,true);
 			}
 
 			if (var6 == 3)
 			{
-				par1World.setBlockMetadataWithNotify(x, y, z, 1 | meta,2);
+				MillCommonUtilities.setBlockMetadata(world, x, y, z, 1 | meta,true);
 			}
 		}
 	}

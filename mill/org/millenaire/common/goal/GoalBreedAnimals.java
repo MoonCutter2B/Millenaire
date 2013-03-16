@@ -196,52 +196,25 @@ public class GoalBreedAnimals extends Goal {
 		return true;
 	}
 
-
-
-	@SuppressWarnings("rawtypes")
 	@Override
 	public ItemStack[] getHeldItemsTravelling(MillVillager villager)
 	throws Exception {
-
-		Vector<Class> validAnimals=getValidAnimalClasses(villager);
-
-		for (Class animalClass : validAnimals) {
-
-			final List<Entity> animals=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, animalClass, villager.getGoalDestPoint(), 4, 2);
-
-
-			for (final Entity ent : animals) {
-
-				if (!ent.isDead) {
-
-					final EntityAnimal animal=(EntityAnimal)ent;
-
-					int[] breedingItems=getBreedingItems(animal.getClass());
-
-					boolean available=false;
-					int foundBreedingItem=-1;
-
-					if (breedingItems==null) {
-						available=true;
-					} else {
-						for (int breedingItem : breedingItems) {
-							if (!available && villager.getHouse().countGoods(breedingItem)>0) {
-								available=true;
-								foundBreedingItem=breedingItem;
-							}
-						}
-					}
-
-					if (foundBreedingItem>0) {
-
-						if (!animal.isChild() && !animal.isInLove()) {
-
-							return new ItemStack[]{new ItemStack(Item.itemsList[foundBreedingItem],1)};
-						}
-					}
+		
+		if (villager.getGoalDestEntity()==null || !(villager.getGoalDestEntity() instanceof EntityAnimal))
+			return null;
+		
+		EntityAnimal animal=(EntityAnimal)villager.getGoalDestEntity();
+		
+		int[] breedingItems=getBreedingItems(animal.getClass());
+		
+		if (breedingItems!=null) {
+			for (int breedingItem : breedingItems) {
+				if (villager.getHouse().countGoods(breedingItem)>0) {
+					return new ItemStack[]{new ItemStack(Item.itemsList[breedingItem],1)};
 				}
 			}
 		}
+
 		return null;
 	}
 

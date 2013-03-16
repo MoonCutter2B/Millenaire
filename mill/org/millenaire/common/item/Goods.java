@@ -11,6 +11,7 @@ import java.util.Vector;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -37,6 +38,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
 import org.millenaire.client.network.ClientSender;
+import org.millenaire.client.texture.TextureAmuletAlchemist;
+import org.millenaire.client.texture.TextureAmuletVishnu;
+import org.millenaire.client.texture.TextureAmuletYddrasil;
 import org.millenaire.common.Building;
 import org.millenaire.common.EntityWallDecoration;
 import org.millenaire.common.MLN;
@@ -145,7 +149,8 @@ public class Goods {
 			MillCommonUtilities.getItemsFromChest(entityplayer.inventory, Block.dirt.blockID, 0, 1);
 			MillCommonUtilities.getItemsFromChest(entityplayer.inventory, Block.sand.blockID, 0, 1);
 
-			world.setBlockAndMetadataWithNotify(i, j, k, Mill.earth_decoration.blockID, 0,2);
+
+			MillCommonUtilities.setBlockAndMetadata(world,i,j,k,Mill.earth_decoration.blockID, 0, true, false);
 
 			itemstack.damageItem(1, entityplayer);
 
@@ -423,9 +428,9 @@ public class Goods {
 
 		@Override
 		public Icon getIconFromDamage(int par1)
-	    {
-	        return icons[iconPos];
-	    }
+		{
+			return icons[iconPos];
+		}
 	}
 
 
@@ -768,6 +773,72 @@ public class Goods {
 				itemstack.stackSize--;
 			}
 			return true;
+		}
+	}
+
+	public static class ItemAmuletAlchemist extends Item {
+
+		public final String baseIconName;
+
+		public ItemAmuletAlchemist(int i,String iconName) {
+			super(i);
+			this.setCreativeTab(Mill.tabMillenaire);
+			this.baseIconName=iconName;
+		}
+
+		@Override
+		public void func_94581_a(IconRegister iconRegister)
+		{
+
+			TextureMap textureMap=(TextureMap)iconRegister;
+
+			textureMap.setTextureEntry(Mill.modId+":"+baseIconName+MLN.getTextSuffix(), new TextureAmuletAlchemist(Mill.modId+":"+baseIconName+MLN.getTextSuffix()));
+
+			iconIndex = iconRegister.func_94245_a(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
+		}
+	}
+
+	public static class ItemAmuletVishnu extends Item {
+
+		public final String baseIconName;
+
+		public ItemAmuletVishnu(int i,String iconName) {
+			super(i);
+			this.setCreativeTab(Mill.tabMillenaire);
+			this.baseIconName=iconName;
+		}
+
+		@Override
+		public void func_94581_a(IconRegister iconRegister)
+		{
+
+			TextureMap textureMap=(TextureMap)iconRegister;
+
+			textureMap.setTextureEntry(Mill.modId+":"+baseIconName+MLN.getTextSuffix(), new TextureAmuletVishnu(Mill.modId+":"+baseIconName+MLN.getTextSuffix()));
+
+			iconIndex = iconRegister.func_94245_a(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
+		}
+	}
+	
+	public static class ItemAmuletYddrasil extends Item {
+
+		public final String baseIconName;
+
+		public ItemAmuletYddrasil(int i,String iconName) {
+			super(i);
+			this.setCreativeTab(Mill.tabMillenaire);
+			this.baseIconName=iconName;
+		}
+
+		@Override
+		public void func_94581_a(IconRegister iconRegister)
+		{
+
+			TextureMap textureMap=(TextureMap)iconRegister;
+
+			textureMap.setTextureEntry(Mill.modId+":"+baseIconName+MLN.getTextSuffix(), new TextureAmuletYddrasil(Mill.modId+":"+baseIconName+MLN.getTextSuffix()));
+
+			iconIndex = iconRegister.func_94245_a(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
 	}
 

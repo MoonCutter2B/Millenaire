@@ -21,9 +21,6 @@ import org.millenaire.client.RenderMillVillager;
 import org.millenaire.client.RenderWallDecoration;
 import org.millenaire.client.TileEntityMillChestRenderer;
 import org.millenaire.client.network.ClientSender;
-import org.millenaire.client.texture.TextureAlchemistAmuletOld;
-import org.millenaire.client.texture.TextureVishnuAmulet;
-import org.millenaire.client.texture.TextureYddrasilAmulet;
 import org.millenaire.common.EntityWallDecoration;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
@@ -180,11 +177,6 @@ public class ClientProxy extends CommonProxy
 		final Minecraft minecraft=ModLoader.getMinecraftInstance();
 
 		MLN.loadLanguages(minecraft.gameSettings.language);
-		
-		
-		new TextureAlchemistAmuletOld(Minecraft.getMinecraft());
-		new TextureVishnuAmulet(Minecraft.getMinecraft());
-		new TextureYddrasilAmulet(Minecraft.getMinecraft());
 	}
 
 	@Override

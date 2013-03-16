@@ -97,7 +97,7 @@ public class BlockDecorative extends Block {
 	public void onBlockDestroyedByExplosion(World world, int i,
 			int j, int k, Explosion par5Explosion) {
 		
-		world.setBlockAndMetadataWithNotify(i, j, k, 0, 0, 2);
+		MillCommonUtilities.setBlockAndMetadata(world, i, j, k, 0, 0, true, false);
 		
 		for (int y=EXPLOSION_RADIUS;y>=-EXPLOSION_RADIUS;y--) {
 			if (((y+j)>=0) && ((y+j)<128)) {
@@ -108,7 +108,8 @@ public class BlockDecorative extends Block {
 							if (bid>0) {
 								//if (bid!=Block.bedrock.blockID)
 								//	Block.blocksList[bid].dropBlockAsItemWithChance(world,  i,j,k, world.getBlockMetadata(i,j,k), 0.1F);
-								world.setBlockAndMetadataWithNotify(i+x, j+y, k+z, 0, 0, 2);
+								
+								MillCommonUtilities.setBlockAndMetadata(world,i+x, j+y, k+z, 0, 0, true, false);
 								Block.blocksList[bid].onBlockDestroyedByExplosion(world, i,j,k, par5Explosion);
 							}
 						}
@@ -165,7 +166,7 @@ public class BlockDecorative extends Block {
 			{
 				if(MillCommonUtilities.chanceOn(5))
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k,Mill.stone_decoration.blockID, 1, 2);
+					MillCommonUtilities.setBlockAndMetadata(world,i, j, k,Mill.stone_decoration.blockID, 1, true, false);
 				}
 			}
 		} else if ((blockMaterial==Material.wood) && (meta==3)) {
@@ -173,7 +174,7 @@ public class BlockDecorative extends Block {
 			{
 				if(MillCommonUtilities.chanceOn(5))
 				{
-					world.setBlockAndMetadataWithNotify(i, j, k,Mill.wood_decoration.blockID, 4, 2);
+					MillCommonUtilities.setBlockAndMetadata(world,i, j, k,Mill.wood_decoration.blockID, 4, true, false);
 				}
 			}
 		}
