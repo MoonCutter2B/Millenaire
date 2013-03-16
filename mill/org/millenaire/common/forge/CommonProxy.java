@@ -2,6 +2,7 @@ package org.millenaire.common.forge;
 
 import java.io.File;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.src.ModLoader;
 
@@ -140,6 +141,12 @@ public class CommonProxy {
 
 	public void updateBowIcon(ItemMillenaireBow bow, EntityPlayer entityplayer) {
 
+	}
+	
+	public void declareAmuletTextures(IconRegister iconRegister) {
+		
+		
+		
 	}
 
 }

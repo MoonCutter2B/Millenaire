@@ -11,7 +11,6 @@ import java.util.Vector;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -38,9 +37,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
 import org.millenaire.client.network.ClientSender;
-import org.millenaire.client.texture.TextureAmuletAlchemist;
-import org.millenaire.client.texture.TextureAmuletVishnu;
-import org.millenaire.client.texture.TextureAmuletYddrasil;
 import org.millenaire.common.Building;
 import org.millenaire.common.EntityWallDecoration;
 import org.millenaire.common.MLN;
@@ -789,11 +785,7 @@ public class Goods {
 		@Override
 		public void func_94581_a(IconRegister iconRegister)
 		{
-
-			TextureMap textureMap=(TextureMap)iconRegister;
-
-			textureMap.setTextureEntry(Mill.modId+":"+baseIconName+MLN.getTextSuffix(), new TextureAmuletAlchemist(Mill.modId+":"+baseIconName+MLN.getTextSuffix()));
-
+			Mill.proxy.declareAmuletTextures(iconRegister);
 			iconIndex = iconRegister.func_94245_a(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
 	}
@@ -812,14 +804,12 @@ public class Goods {
 		public void func_94581_a(IconRegister iconRegister)
 		{
 
-			TextureMap textureMap=(TextureMap)iconRegister;
-
-			textureMap.setTextureEntry(Mill.modId+":"+baseIconName+MLN.getTextSuffix(), new TextureAmuletVishnu(Mill.modId+":"+baseIconName+MLN.getTextSuffix()));
-
+			Mill.proxy.declareAmuletTextures(iconRegister);
 			iconIndex = iconRegister.func_94245_a(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
+
 	}
-	
+
 	public static class ItemAmuletYddrasil extends Item {
 
 		public final String baseIconName;
@@ -833,11 +823,7 @@ public class Goods {
 		@Override
 		public void func_94581_a(IconRegister iconRegister)
 		{
-
-			TextureMap textureMap=(TextureMap)iconRegister;
-
-			textureMap.setTextureEntry(Mill.modId+":"+baseIconName+MLN.getTextSuffix(), new TextureAmuletYddrasil(Mill.modId+":"+baseIconName+MLN.getTextSuffix()));
-
+			Mill.proxy.declareAmuletTextures(iconRegister);
 			iconIndex = iconRegister.func_94245_a(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
 	}

@@ -111,7 +111,7 @@ public class Mill
 			return Mill.denier_or.itemID;
 		}
 	}
-	public static final String versionNumber = "4.4.0";
+	public static final String versionNumber = "4.4.1";
 	public static final String versionBound = "[4.4.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
@@ -377,13 +377,10 @@ public class Mill
 
 		tapestry = (new ItemTapestry(nextItemId(),"normantapestry",EntityWallDecoration.NORMAN_TAPESTRY)).setUnlocalizedName("ml_tapestry");
 
+		
 
 		vishnu_amulet = new ItemAmuletVishnu(nextItemId(),"amulet_vishnu").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_raven_amulet").setMaxStackSize(1);
-
-
 		alchemist_amulet = new ItemAmuletAlchemist(nextItemId(),"amulet_alchemist").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_dwarves_amulet").setMaxStackSize(1);
-
-
 		yddrasil_amulet = new ItemAmuletYddrasil(nextItemId(),"amulet_yggdrasil").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_yddrasil_amulet").setMaxStackSize(1);
 
 		skoll_hati_amulet = (new ItemAmuletSkollHati(nextItemId(),"amulet_skollhati")).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_skoll_hati_amulet").setMaxStackSize(1).setMaxDamage(10);

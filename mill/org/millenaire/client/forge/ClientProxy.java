@@ -7,6 +7,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,6 +23,9 @@ import org.millenaire.client.RenderMillVillager;
 import org.millenaire.client.RenderWallDecoration;
 import org.millenaire.client.TileEntityMillChestRenderer;
 import org.millenaire.client.network.ClientSender;
+import org.millenaire.client.texture.TextureAmuletAlchemist;
+import org.millenaire.client.texture.TextureAmuletVishnu;
+import org.millenaire.client.texture.TextureAmuletYddrasil;
 import org.millenaire.common.EntityWallDecoration;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
@@ -252,5 +257,18 @@ public class ClientProxy extends CommonProxy
 	public void updateBowIcon(ItemMillenaireBow bow,EntityPlayer entityplayer) {
 		MillClientUtilities.updateBowIcon(bow, entityplayer);
 	}
+
+	@Override
+	public void declareAmuletTextures(IconRegister iconRegister) {
+		TextureMap textureMap=(TextureMap)iconRegister;
+		
+		textureMap.setTextureEntry(Mill.modId+":amulet_alchemist"+MLN.getTextSuffix(), new TextureAmuletAlchemist(Mill.modId+":amulet_alchemist"+MLN.getTextSuffix()));
+		textureMap.setTextureEntry(Mill.modId+":amulet_vishnu"+MLN.getTextSuffix(), new TextureAmuletVishnu(Mill.modId+":amulet_vishnu"+MLN.getTextSuffix()));
+		textureMap.setTextureEntry(Mill.modId+":amulet_yggdrasil"+MLN.getTextSuffix(), new TextureAmuletYddrasil(Mill.modId+":amulet_yggdrasil"+MLN.getTextSuffix()));
+		
+	}
+	
+	
+	
 
 }
