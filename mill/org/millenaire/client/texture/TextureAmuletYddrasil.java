@@ -16,6 +16,11 @@ public class TextureAmuletYddrasil extends TextureStitched {
 	{
 
 		int iconPos=getScore(Minecraft.getMinecraft());
+		
+		if (iconPos>15)
+			iconPos=15;
+		if (iconPos<0)
+			iconPos=0;
 
 		if (iconPos != this.field_94222_f)
 		{
