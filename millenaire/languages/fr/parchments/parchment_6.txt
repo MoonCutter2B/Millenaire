@@ -1,0 +1,42 @@
+version:1.1.4
+Millénaire: Bâtiments indiens
+
+Bâtiments centraux:
+
+Mukhiya ka Ghar : Demeure du chef. Cette maison de brique sert de demeure au chef et à sa femme et de centre au village. Ses nombreux coffres sont là pour recueillir les « contributions » de tous les villageois.
+
+Qila : Fort. Cette petite tour de brique sera peut à peut transformer en puissante forteresse par le général rajput qui l’habite, d’où contrôler les environs et centraliser les biens des paysans.
+NEW_PAGE
+Habitations:
+
+Kisan ka Ghar : Maison paysanne. Simple bâtiment en briques séchées au soleil, cette modeste demeure peut se développer pour accueillir un enclos à poulet et un toi en terrasse d’où admirer le paysage.
+
+Lakarhara ka Ghar : Maison de bûcheron. Construite en bois par le bûcheron, cette petite hutte sera graduellement étendue en briques cuites de meilleure allure.
+
+Sikaar : Carrière. Simple trou jusqu’aux roches plus basses. C’est d’ici que le mineur extrait la pierre et le grès nécessaire au village.
+
+Bhati : Forge. Cette simple hutte avec une enclume improvisée à l’entrée est le domicile du forgeron, qui y fabrique les outils simples mais efficaces des villageois.
+
+Sena ka Bhati : Forge militaire. Cette robuste forge de grès abrite un forgeron spécialisé dans les armes et les armures.
+
+Muurtikaar ka Ghar :  Maison du sculpteur. Cette petite maison comprend un atelier attaché dans lequel le sculpteur transforme de la pierre et du grès en statues de dieux hindous.
+
+Sainik ka Ghar : Maison de soldat. Faite en solide grès, cette petite maison abrite un féroce guerrier rajput et son épouse.
+
+Pandit ka Ghar : Maison du prêtre. Cette jolie maison, plus élaborée que celle des paysans, accueille un prêtre et sa femme, aussi oisifs l’un que l’autre.
+NEW_PAGE
+Bâtiments inhabités:
+
+Inta bhatta : Four à  briques. Cet endroit essentiel à tout village indien sert à préparer des briques en les laissant sécher au soleil, ou après l’ajout de four, en les cuisant.
+
+Kunja : Bosquet. Soigneusement entretenus par les bûcherons, ces bosquets servent de source de bois au village. La terre riche et les soins du bûcheron aident les arbres à y repousser beaucoup plus vite que normal.
+
+Puraalekhagar : Archive du temple. Les antécédents et les activités de tous les villageois sont enregistrés ici. C’est sûrement pour leur bien.
+
+Dhaan : Rizière. Rien n’est plus essentiel à l’alimentation des villageois indiens que le riz cultivé ici.
+
+Masaalaa udyaana : Jardin à épices. Sans épices, rien n’a de goût pour un vrai indien. Heureusement que le curcuma pousse bien ici !
+
+Gannaa baagaana : Plantation de sucre. Essentiel à la fabrication des délicieux rasgullas,  le sucre de canne est récolté ici.
+
+Gaanv ka Mandir :  Temple du village. Ce beau bâtiment témoigne de la piété des villageois, ou alternativement de l’influence du prêtre. Trois statues créés par le sculpteur orne un temple fini.

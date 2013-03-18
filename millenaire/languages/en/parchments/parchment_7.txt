@@ -1,0 +1,40 @@
+version:1.1.4
+Millénaire: Indian objects
+
+Denier. For reasons unexplained by historians, Indian villages use denier as their currency, just like Norman villages. Three types of denier exist: bronze, silver worth 64 bronze, and gold worth 64 silver.
+NEW_PAGE
+Food
+
+Rice. A staple food for the villagers, rice can be purchased from the village. By itself, it has no flavor, and cannot be eaten by the player. The village children grow faster if they have rice at home.
+
+Turmeric. This powdered spice is obtained by grinding the root of the turmeric plant. It is a necessary ingredient in curries. As with rice, its presence accelerates the growth of children. 
+
+Vegetarian curry. Prepared by combining a portion of rice with a portion of turmeric, this simple curry restores two hearts.
+
+Chicken meat. Obtained by farmers who own a poultry pen, chicken meat is used to prepare delicious murgh curries. Indian children who have it grow up more quickly. It can be eaten raw, but will only restore half a heart.
+
+Murgh curry. Murgh curry is prepared by combining rice, turmeric, and chicken. This delicacy restores a substantial four hearts.
+
+Rasgulla. This dessert made of fried cheese and sweet syrup is prepared by village women using sugar cane. Purchased by the player, it will restore one heart, and stacks to eight. Eaten by couples in the village, it increases the chances of conceiving a child. No, you can't have any more details.
+NEW_PAGE
+Construction & decoration
+
+Wet brick. The first stage in the manufacture of bricks, wet bricks are brought to the brick oven to dry in the sun.
+
+Mud bricks. Obtained by sun-drying wet bricks, mud bricks are the base material for Indian villages. 
+
+Cooked bricks. After baking in an oven, mud bricks become cooked bricks. They are stronger and more attractive, with a whitewashed look.
+
+Brick mold. This tool, which can be purchased from the village, enables the creation of wet bricks. Use it on a flat surface with both dirt and sand in your inventory.
+
+Hindu statue. These statues of Hindu gods are created by the sculptor to adorn the village temple, and are sold to players with refined artistic tastes.
+NEW_PAGE
+Scrolls
+
+Indian villagers. A scroll describing the different types of Indian villagers, both those who work, and those who watch others work.
+
+Indian buildings. A list of all buildings constructed by Indian villagers, from the lumberjack's hut to the mighty fortress of the Rajput general.
+
+Indian objects. Do you have to be told?
+
+Complete Indian scroll. The contents of the previous three scrolls, in a compact roll for easy transport.

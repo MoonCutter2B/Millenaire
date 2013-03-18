@@ -1,0 +1,1 @@
+max:1;priority:10;french:Fontaine;around:4;startLevel:-1;maxDistance:55;width:5;length:5

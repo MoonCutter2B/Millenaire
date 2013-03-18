@@ -1,0 +1,241 @@
+Translation comparison between cs and fr
+
+List of gaps found in strings.txt: 
+
+Mismatched number of parameters for actions.desert_continue: 1 in fr and 0 in cs
+Mismatched number of parameters for actions.desert_success: 0 in fr and 1 in cs
+Mismatched number of parameters for actions.forest_continue: 1 in fr and 0 in cs
+Mismatched number of parameters for actions.forest_success: 0 in fr and 1 in cs
+Mismatched number of parameters for actions.mountain_continue: 1 in fr and 0 in cs
+Mismatched number of parameters for actions.mountain_success: 0 in fr and 1 in cs
+Key missing in the strings.txt file: chunk.caption
+Key missing in the strings.txt file: chunk.captionblack
+Key missing in the strings.txt file: chunk.captionblue
+Key missing in the strings.txt file: chunk.captiongeneral
+Key missing in the strings.txt file: chunk.captiongreen
+Key missing in the strings.txt file: chunk.captionpurple
+Key missing in the strings.txt file: chunk.chunkcoords
+Key missing in the strings.txt file: chunk.chunkforced
+Key missing in the strings.txt file: chunk.chunkmap
+Key missing in the strings.txt file: chunk.explanations
+Key missing in the strings.txt file: chunk.playerposition
+Key missing in the strings.txt file: chunk.settings
+Key missing in the strings.txt file: chunk.village
+Mismatched number of parameters for command.villagelistkeylonebuilding: 3 in fr and 4 in cs
+Key missing in the strings.txt file: culture.byzantines
+Key missing in the strings.txt file: goal.breed
+Key missing in the strings.txt file: goal.cookchicken
+Key missing in the strings.txt file: goal.cooklamb
+Key missing in the strings.txt file: goal.cookpork
+Key missing in the strings.txt file: goal.cooksteak
+Key missing in the strings.txt file: goal.getitemtokeep
+Key missing in the strings.txt file: goal.harvestvines
+Key missing in the strings.txt file: goal.makearrow
+Key missing in the strings.txt file: goal.makebow
+Key missing in the strings.txt file: goal.makebyzantineboots
+Key missing in the strings.txt file: goal.makebyzantinechest
+Key missing in the strings.txt file: goal.makebyzantinehelmet
+Key missing in the strings.txt file: goal.makebyzantinelegs
+Key missing in the strings.txt file: goal.makebyzantinemace
+Key missing in the strings.txt file: goal.makeclothes_byz_silk
+Key missing in the strings.txt file: goal.makeclothes_byz_wool
+Key missing in the strings.txt file: goal.makecurry
+Key missing in the strings.txt file: goal.makeindianstatue
+Key missing in the strings.txt file: goal.makemasa
+Key missing in the strings.txt file: goal.makemayanaxe
+Key missing in the strings.txt file: goal.makemayangoldblock
+Key missing in the strings.txt file: goal.makemayanhoe
+Key missing in the strings.txt file: goal.makemayanmace
+Key missing in the strings.txt file: goal.makemayanpickaxe
+Key missing in the strings.txt file: goal.makemayanshovel
+Key missing in the strings.txt file: goal.makemayanstatue
+Key missing in the strings.txt file: goal.makemurgh
+Key missing in the strings.txt file: goal.makeobsidianflake
+Key missing in the strings.txt file: goal.makepaperrice
+Key missing in the strings.txt file: goal.makepaperwoodpulp
+Key missing in the strings.txt file: goal.makerottenflesh
+Key missing in the strings.txt file: goal.makesouvlaki
+Key missing in the strings.txt file: goal.makesteelaxe
+Key missing in the strings.txt file: goal.makesteelboots
+Key missing in the strings.txt file: goal.makesteelchest
+Key missing in the strings.txt file: goal.makesteelhelmet
+Key missing in the strings.txt file: goal.makesteelhoe
+Key missing in the strings.txt file: goal.makesteellegs
+Key missing in the strings.txt file: goal.makesteelpickaxe
+Key missing in the strings.txt file: goal.makesteelshovel
+Key missing in the strings.txt file: goal.makesteelsword
+Key missing in the strings.txt file: goal.makestoneaxe
+Key missing in the strings.txt file: goal.makestonehoe
+Key missing in the strings.txt file: goal.makestonepickaxe
+Key missing in the strings.txt file: goal.makestoneshovel
+Key missing in the strings.txt file: goal.makestonesword
+Key missing in the strings.txt file: goal.maketachi
+Key missing in the strings.txt file: goal.makewah
+Key missing in the strings.txt file: goal.shearsheep
+Key missing in the strings.txt file: goal.slaughtercow
+Key missing in the strings.txt file: goal.slaughterpig
+Key missing in the strings.txt file: goal.slaughtersheep
+Key missing in the strings.txt file: goal.sleep
+Key missing in the strings.txt file: goal.sleep_travelling
+Key missing in the strings.txt file: hof.variousimprovements1
+Key missing in the strings.txt file: hof.variousimprovements2
+Key missing in the strings.txt file: item.byzantineboots
+Key missing in the strings.txt file: item.byzantinehelmet
+Key missing in the strings.txt file: item.byzantineiconlarge
+Key missing in the strings.txt file: item.byzantineiconmedium
+Key missing in the strings.txt file: item.byzantineiconsmall
+Key missing in the strings.txt file: item.byzantinelegs
+Key missing in the strings.txt file: item.byzantinemace
+Key missing in the strings.txt file: item.byzantineplate
+Key missing in the strings.txt file: item.clothes_byz_silk
+Key missing in the strings.txt file: item.clothes_byz_wool
+Key missing in the strings.txt file: item.feta
+Key missing in the strings.txt file: item.lambcooked
+Key missing in the strings.txt file: item.lambraw
+Key missing in the strings.txt file: item.souvlaki
+Key missing in the strings.txt file: item.winebasic
+Key missing in the strings.txt file: other.localmerchantinteract
+Key missing in the strings.txt file: ui.chunkbutton
+Mismatched number of parameters for ui.housebought: 2 in fr and 1 in cs
+Mismatched number of parameters for ui.problemat: 2 in fr and 0 in cs
+Mismatched number of parameters for ui.scrollbought: 1 in fr and 0 in cs
+Mismatched number of parameters for ui.tradecomplete: 1 in fr and 0 in cs
+Key missing in the strings.txt file: ui.villagerelationsnobutton
+
+List of gaps found in quest files: 
+
+Key missing in the quests.txt file: architectwife_0_description
+Key missing in the quests.txt file: architectwife_0_description_refuse
+Key missing in the quests.txt file: architectwife_0_description_success
+Key missing in the quests.txt file: architectwife_0_label
+Key missing in the quests.txt file: architectwife_1_description
+Key missing in the quests.txt file: architectwife_1_description_refuse
+Key missing in the quests.txt file: architectwife_1_description_success
+Key missing in the quests.txt file: architectwife_1_description_timeup
+Key missing in the quests.txt file: architectwife_1_label
+Key missing in the quests.txt file: architectwife_1_listing
+Key missing in the quests.txt file: lumbermanwine_0_description
+Key missing in the quests.txt file: lumbermanwine_0_description_refuse
+Key missing in the quests.txt file: lumbermanwine_0_description_success
+Key missing in the quests.txt file: lumbermanwine_0_label
+
+List of gaps found between parchments: 
+
+Parchment 1 is missing.
+Parchment 2 is missing.
+Parchment 3 is missing.
+Parchment 9 is missing.
+Parchment 10 is missing.
+Parchment 11 is missing.
+Parchment 15 is missing.
+Parchment 17 is missing.
+Parchment 16 is missing.
+Parchment 18 is missing.
+Help 1 is missing.
+Help 2 is missing.
+Help 3 is missing.
+Help 4 is missing.
+Help 5 is missing.
+Help 6 is missing.
+Help 7 is missing.
+Help 8 is missing.
+Help 9 is missing.
+Help 10 is missing.
+Help 11 is missing.
+Help 12 is missing.
+Help 13 is missing.
+
+List of gaps found in culture strings for byzantines: 
+
+String missing for culture byzantines: shop.armyforge
+String missing for culture byzantines: shop.bakery
+String missing for culture byzantines: shop.clothing
+String missing for culture byzantines: shop.fishery
+String missing for culture byzantines: shop.forge
+String missing for culture byzantines: shop.lonesheep
+String missing for culture byzantines: shop.lonetower
+String missing for culture byzantines: shop.sheepfarm
+String missing for culture byzantines: shop.tavernbyz
+String missing for culture byzantines: shop.townhall
+String missing for culture byzantines: villager.architect_byzantine
+String missing for culture byzantines: villager.armysmith_byzantine
+String missing for culture byzantines: villager.artwife_byzantine
+String missing for culture byzantines: villager.keeper_byzantine
+String missing for culture byzantines: villager.loneshepherd_byzantine
+String missing for culture byzantines: villager.loneshepherdf_byzantine
+String missing for culture byzantines: villager.merchant_art
+String missing for culture byzantines: villager.merchant_food
+String missing for culture byzantines: villager.merchant_materials
+String missing for culture byzantines: villager.silkfarmer_byzantine
+String missing for culture byzantines: villager.silkfarmerwife_byzantine
+String missing for culture byzantines: villager.smuggler_silk
+
+List of gaps found in culture sentences for byzantines: 
+
+Sentences missing for culture byzantines: architect_byzantine.construction
+Sentences missing for culture byzantines: armysmith_byzantine.makebyzantinemace
+Sentences missing for culture byzantines: armysmith_byzantine.makeindiantools
+Sentences missing for culture byzantines: merchant_art.greeting
+Sentences missing for culture byzantines: pastor_byzantine.makebooks
+Sentences missing for culture byzantines: smith_byzantine.makeindiantools
+Different number of sentences for culture byzantines: villager.goplay
+
+List of gaps found in culture building names for byzantines: 
+
+Building name missing for culture byzantines: fortbyzantine_a_forge_a0
+Building name missing for culture byzantines: playerfortbyzantine_a_forge_a0
+Building name missing for culture byzantines: well_a0
+
+List of gaps found in culture strings for hindi: 
+
+String missing for culture hindi: shop.adivasifarm
+String missing for culture hindi: shop.deserttradeoutpost
+String missing for culture hindi: villager.indian_adivasipeasantwife
+
+List of gaps found in culture building names for hindi: 
+
+Building name missing for culture hindi: pandithouse_a0
+
+List of gaps found in culture strings for japanese: 
+
+String missing for culture japanese: shop.japaneseoutpost
+String missing for culture japanese: shop.lonemine
+String missing for culture japanese: villager.japanese_bandit
+
+List of gaps found in culture building names for japanese: 
+
+Shop name missing for culture japanese in both languages: shop.fishery
+Shop name missing for culture japanese in both languages: shop.fishery
+Shop name missing for culture japanese in both languages: shop.fishery
+
+List of gaps found in culture strings for mayan: 
+
+String missing for culture mayan: shop.lonemayanfarm
+String missing for culture mayan: villager.mayan_obsidiancrafter
+
+List of gaps found in culture building names for mayan: 
+
+Building name missing for culture mayan: lonemayanpyramid_a0
+Building name missing for culture mayan: mayanobsidiancrafter_a0
+
+List of gaps found in culture strings for norman: 
+
+String missing for culture norman: shop.alchemyworkshop
+String missing for culture norman: shop.loneabbey
+String missing for culture norman: shop.loneinn
+String missing for culture norman: shop.lonelumberman
+String missing for culture norman: shop.lonelumbermantaiga
+String missing for culture norman: shop.lonemill
+String missing for culture norman: shop.lonemine
+String missing for culture norman: villager.innkeeperfemale
+String missing for culture norman: villager.innkeepermale
+String missing for culture norman: villager.lonemiller
+String missing for culture norman: villager.merchant_weapons
+String missing for culture norman: villager.pigherd
+String missing for culture norman: villager.pigherdf
+String missing for culture norman: villager.robberbaron
+String missing for culture norman: villager.robberleader
+String missing for culture norman: villager.shepherd
+String missing for culture norman: villager.shepherdf
+
+Traduction completness: 81%

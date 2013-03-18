@@ -1,0 +1,21 @@
+name:Mono Paratiritio
+weight:5
+radius:10
+biome:desert
+biome:swampland
+biome:jungle
+
+//biome mods:
+biome:badlands
+biome:dunes
+biome:lush desert
+biome:mountain ridge
+biome:lush swamp
+biome:green swamp
+biome:mesa
+biome:oasis
+biome:tropical rainforest
+biome:tropics
+
+//starting buildings:
+centre:jungletower

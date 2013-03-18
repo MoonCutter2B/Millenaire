@@ -1,0 +1,27 @@
+native_name=K'as Kanan
+gender=male
+familyNameList=low_caste_family_names
+firstNameList=men_names
+baseHeight=1.0
+health=25
+tag=hostile
+tag=raider
+health=30
+
+texture=/graphics/mob/mayan/mayanbanditwarrior0.png
+texture=/graphics/mob/mayan/mayanbanditwarrior1.png
+texture=/graphics/mob/mayan/mayanbanditwarrior2.png
+
+goal=gorest
+goal=goDrink
+goal=patrol
+goal=huntmonster
+
+toolNeeded=stonesword
+toolNeeded=bow
+toolNeeded=mayanmace
+
+baseAttackStrength=8
+tag=helpInAttacks
+defaultweapon=woodsword
+experiencegiven=10

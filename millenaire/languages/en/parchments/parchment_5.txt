@@ -1,0 +1,42 @@
+version:1.1.4
+Millénaire: Indian Villagers
+
+Village Leaders:
+
+Gaanv ka Mukhiya: Village Chief. This rich man employs the majority of the village and owns most of the land, and so faces little difficulties in getting "chosen" as leader.
+
+Raja: King. Lives in a large Mahal with his wife surrounded by his loyal subjects. He thinks of himself as a god and must have the biggest and most stunning looking palace, much to the dismay of the peasants who have to build it.
+
+Rajput Senapati: Rajput General. From a distinguished Rajput family line, he oversees the defense of his village from the security of his fort. If he can get enough work out of the villagers, his fort will become a mighty fortress.
+NEW_PAGE
+Women:
+
+Mahilaa kisaana: Peasant. These lower-class women perform difficult and thankless tasks such as tending the fields, delivering food and tools, and interacting with the player. Without them, the village would grind to a halt.
+
+Malkin: Rich women. Their gold-embroidered saris are only matched by their reluctance to do any work.
+NEW_PAGE
+Men:
+
+Kisaan: Peasant. These poor men aspire to raising their own chickens one day, but for now are forced to construct buildings, produce bricks for the village, and tend the fields with their wives.
+
+Lakarhara: Lumberman. These dedicated men, with their imposing beards, tend the village groves.
+
+Khanik: Miner. These men spend their day in the quarry, performing back-breaking labour. Unlike their Norman brethren, they don't even have the comfort of a visit to a tavern at the end of the day.
+
+Rajput Sainik: Rajput soldier. These men were raised as military men and have been trained to fight since childhood. Their role is to defend the village - and be careful, because they take it seriously.
+
+Loohaar: Smith. Their profession might not be the most prestigious, but what would the villagers do without their tools?
+
+Sena ka Loohaar: Army Smith. These military blacksmiths are specialized in the smithing of weapons and armour; difficult work, but more rewarding than making farming implements.
+
+Muurtikaar: Sculptor. As both artists and craftsmen, they have the great honour of crafting the statues which adorn the temple.
+
+Pandit: Priests. Born to Brahmin families, these wise men serve as priests to their villages. Their endless knowledge of Sanskrit hymns is matched by their endless refusal to do actual work.
+
+Vyapari: Merchant. These men take goods from their village to another village to trade. They have to walk over the harsh deserts usually to get there, once they do get there they get told to go back carrying more resources as payment.
+NEW_PAGE
+Children:
+
+Larki / Larka: Girl / Boy. Live with their parents until they are old enough to be considered youth.
+
+Kishori / Kishor: Youth (F/M). Still young, but old enough to have their own profession and household once they move into their own home.

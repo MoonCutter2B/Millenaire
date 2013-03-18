@@ -1,0 +1,5 @@
+sells=dirtwall,wood,wood_pine,wood_birch,wood_jungle,cobblestone,stone,chickenmeat,rice,wheat,paperwall,iron,thatched,timberframe_plain,timberframe_cross,fishcooked,fishraw,udon,purse,villageWand,parchmentJapaneseVillagers,parchmentJapaneseBuildings,parchmentJapaneseItems,parchmentJapaneseComplete
+
+buys=wood,wood_pine,wood_birch,wood_jungle,stone,cobblestone,chickenmeat,rice,wheat,paperwall,iron,leather,thatched,fishcooked,fishraw,udon
+
+deliverto=wood,wood_pine,wood_birch,wood_jungle,cobblestone,stone,paperwall,thatched,paperwall,timberframe_plain,timberframe_cross

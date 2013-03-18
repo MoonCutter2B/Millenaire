@@ -1,0 +1,1 @@
+native:Daibutsu;around:4;startLevel:-1;orientation:2;width:22;length:20

@@ -1,0 +1,1 @@
+max:1;priority:10;native:Sa'at Muul;english:Lost Pyramid;around:4;startLevel:0;orientation:3;length:15;width:15;startingGood:maize,1,1,16;startingGood:denier,1,20,44;startingGood:denierargent,0.2,2,2;startingGood:mayangold,0.5,2,20;startingGood:mayanstatue,0.5,1,4;startingGood:gold,0.8,10,10

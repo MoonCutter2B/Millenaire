@@ -1,0 +1,11 @@
+name:Kouku
+
+
+weight:10
+radius:20
+biome:forest
+biome:foresthills
+
+
+//starting buildings:
+centre:lonemine

@@ -1,0 +1,46 @@
+version:4.2.1
+Millénaire: habitants normands
+
+Chefs de village:
+
+Chevalier: Vit dans le fort, du quel il sort pour patrouiller sur ses terres et aller à la taverne. Attention lorsque vous le rencontrez lors d'une bataille! Chef des villages militaires et des Gros Bourgs.
+
+Abbé: Vit à l'abbaye d'où il supervise le travail des moines. Chef des hameaux et des villages ecclésiastiques.
+
+Sénéchal: Supervise la production agricole de son village depuis son manoir. Chef des hameaux et des villages agricoles.
+
+Maître de la Guilde: Supervise la production des artisans depuis la maison de la Guilde. Chef des hameaux et des villages artisanaux.
+NEW_PAGE
+Femmes:
+
+Villageoise: Presque toutes les femmes adultes sont de ce type. Leurs rôles est d'apporter les ressources recueillies par leurs maris à la réserve du village, de construire de nouveaux bâtiments, d'améliorer les existants, et d'acheter ou de vendre au joueur à divers endroits.
+
+Dame: Vit au fort avec son mari, d'où elle fabrique des tapisseries à partir de la laine pour décorer le fort et pour en vendre au joueur.
+NEW_PAGE
+Hommes:
+
+Fermier: Vit dans une ferme, où il fait pousser et récolte les cultures.
+
+Bûcheron: Vit dans une cabane de bûcheron. Ramasse le bois et les pommes des arbres des bosquets et plante de nouvelles pousses pour les renouveller.
+
+Garde: Vit dans une maison de gardien. Ne fait rien mais boit du cidre et prie très occasionnellement, sauf si un villageois est attaqué. Il n'est pas bon de s'en faire un ennemi, surtout s'il est armé d'un redoutable sabre Normand.
+
+Prêtre: Vit seul dans un presbytère. Quand il ne va pas prier à l'église, il dort. La rumeur prétend qu'il cache le savoir d'un ancien rituel Viking derrière la façade d'une dévotion catholique.
+
+Forgeron: Vit dans une forge ou une armurerie. Si du fer est disponible, il forgera des outils s'il est dans une forge, et des armes et armures s'il est dans une armurerie.
+
+Éleveur / Éleveuse: Vit dans une ferme d'élevage, de porcs ou de poulets. Collecte des marchandises diverses à partir d'animaux de la ferme afin de faire des tripes normandes et de savoureux du boudins noir.
+
+Mineur: Vit et travail dans une carrière, et mine la pierre et le sable sans relâche. Lorsque la carrière est mise à niveau et possède un four, il en fait de la pierre de taille et du verre.
+
+Charpentier: Vit et travail dans une maison de charpentier, d'où il fait du bois de charpente pour la construction de bâtiments.
+
+Moine: Vit à l'abbaye dans lequel il copie soigneusement les livres anciens sur de nouveaux parchemins. Un art, selon lui.$
+
+Marchant: Va d'auberge en auberge, vendant des biens d'un village à un autre. C'est son destin d'errer pour le bien de tous les villageois.
+
+Marchant étranger: Des marchands de contrées lointaines se rendront au marché pour vendre des biens exotiques, avant de partir avec vos deniers durement gagné.
+NEW_PAGE
+Enfants:
+
+Garçon / fille: Vit avec ses parents, grandit la nuit jusqu'à ce qu'il soit assez grand pour emménager dans une maison inoccupée et ainsi devenir adulte.

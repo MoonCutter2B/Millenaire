@@ -1,0 +1,48 @@
+playerestate_A0=Mansion
+forge_A0=Forge
+armyforge_A0=Army Forge
+scultorhouse_A0=Stone Carver's House
+archives_A0=Temple Archives
+chiefhouse_A0=Chief's House
+chiefhouse_B0=Chief's House
+fort_A0=Fort
+fort_A_forge_A0=Fort's Forge
+fort_A_soldierhouse_A0=Barrack
+peasanthouse_A0=Peasant's House
+peasanthouse_B0=Peasant's House
+peasanthouse_C0=Peasant's House
+lumbermanhouse_A0=Lumberman's House
+quarry_A0=Quarry
+quarry_B0=Quarry
+soldierhouse_A0=Soldier's House
+brickkiln_A0=Brick Kiln
+grove_A0=Grove
+paddy_A0=Paddy
+spicegarden_A0=Spice garden
+sugarplantation_A0=Sugarcane Plantation
+villagetemple_A0=Village Temple
+palace_A0=Palace
+guesthouse_A0=Guest House
+inn_A0=Inn
+largepeasanthouse_A0=Large House
+largepeasanthouse_A_secondary_A0=Secondary House
+playerpalace_A0=Player's Palace
+playerhugefield_A0=Very Large Field
+playerlargefield_A0=Large Field
+playersmallfield_A0=Small Field
+playersmallhouse_A0=Small House
+bazaar_A0=
+tank_A0=Stepwell
+
+//extra buildings:
+well_A0=Well
+
+//lone buildings:
+adivasifarm_A0=Adivasi Farm
+adivasifarm_B0=Adivasi Farm
+deserttradeoutpost_A0=Desert Trading Post
+ruinedfort_A0=Ruined Fort
+sandblasted_A0=Deserted Trading Post
+indiandesertedfarm_A0=Destroyed Indian Farm
+loneshrine_A0=Lone Hindu Shrine
+sadhutree_A0=Sadhu's Tree

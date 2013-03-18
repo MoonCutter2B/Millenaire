@@ -1,0 +1,24 @@
+native_name=K'as Mijin
+gender=male
+tag=hostile
+familyNameList=low_caste_family_names
+firstNameList=men_names
+baseHeight=0.6
+health=12
+tag=raider
+
+texture=/graphics/mob/mayan/mayanbanditboy0.png
+texture=/graphics/mob/mayan/mayanbanditboy1.png
+
+goal=gorest
+goal=goDrink
+goal=patrol
+goal=huntmonster
+
+toolNeeded=stonesword
+toolNeeded=mayanmace
+
+baseAttackStrength=4
+tag=helpInAttacks
+defaultweapon=woodsword
+experiencegiven=5

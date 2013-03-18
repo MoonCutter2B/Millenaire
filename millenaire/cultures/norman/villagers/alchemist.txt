@@ -1,0 +1,13 @@
+native_name=Alchimiste
+gender=male
+familyNameList=alchemist_last
+firstNameList=alchemist_first
+
+texture=/graphics/mob/norman/ML_Alchemist0.png
+
+goal=gorest
+goal=gopray
+
+
+experiencegiven=2
+tag=helpInAttacks

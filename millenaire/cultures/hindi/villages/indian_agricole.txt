@@ -1,0 +1,56 @@
+name:Gaanv
+weight:10
+carriesraid:true
+
+
+biome:plains
+biome:desert
+
+//extraBiomes mod
+
+biome:mountain desert
+biome:Jungle
+biome:lush swamplands
+biome:shrubland
+biome:rainforest
+
+//starting buildings:
+centre:chiefhouse
+start:peasanthouse
+start:peasanthouse
+start:lumbermanhouse
+start:pandithouse
+start:grove
+start:brickkiln
+
+player:playersmallfield
+player:playersmallhouse
+player:playerlargefield
+player:playerhugefield
+player:playerestate
+
+//to be built in priority
+core:largepeasanthouse
+core:scultorhouse
+core:quarry
+core:paddy
+core:grove
+core:sugarplantation
+
+//to be built after the core ones
+secondary:spicegarden
+secondary:villagetemple
+secondary:archives
+secondary:well
+secondary:bazaar
+secondary:tank
+
+//never for this type of village
+never:forge
+never:armyforge
+
+//Selling prices:
+sellingprice:iron,0
+
+//Buying prices:
+buyingprice:iron,0

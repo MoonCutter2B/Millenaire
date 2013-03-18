@@ -1,0 +1,73 @@
+culture.norman=Norman
+
+//Norman:
+villager.abbot=Abbot
+villager.carpenter=Carpenter
+villager.cattleFarmerMale=Cowherd
+villager.cattleFarmerFemale=Cowherd
+villager.pigherd=Swineherd
+villager.pigherdF=Swineherd
+villager.shepherd=Shepherd
+villager.shepherdF=Shepherd
+villager.boy=Boy
+villager.girl=Girl
+villager.teenagerMale=Youth
+villager.teenagerFemale=Youth
+villager.farmer=Farmer
+villager.merchant_viking=Viking Merchant
+villager.merchant_weapon=Arms Merchant
+villager.merchant_plant=Plant Merchant
+villager.merchant_art=Art Merchant
+villager.merchant_wool=Textile Merchant
+villager.merchant_food=Food Merchant
+villager.guard=Guard
+villager.guildmaster=Guildmaster
+villager.knight=Knight
+villager.lady=Lady
+villager.lumberman=Lumberman
+villager.merchant=Merchant
+villager.miner=Miner
+villager.monk=Monk
+villager.priest=Priest
+villager.seneschal=Bailiff
+villager.smith=Smith
+villager.wife=Village Woman
+
+villager.innkeeperfemale=Inkeeper
+villager.innkeepermale=Inkeeper
+villager.lonemiller=Miller
+villager.merchant_weapons=Arms Merchant
+villager.robberbaron=Bandit Leader
+villager.robberleader=Bandit Leader
+
+villager.lonelumberman=Lumberman
+villager.lonelumbermantaiga=Lumberman
+villager.loneminer=Miner
+villager.lonemonk=Monk
+villager.loneabbot=Abbot
+villager.alchemist=Alchemist
+villager.alchemistassistant=Assistant Alchemist
+villager.alchemistapprentice=Apprentice Alchemist
+villager.bandit=Bandit
+villager.armoredbandit=Bandit
+villager.felonbaron=Bandit
+villager.felonsoldier=Bandit
+
+
+
+shop.townhall=Central Store
+shop.forge=Tools
+shop.armoury=Armours & weapons
+shop.bakery=Bread
+shop.cattlefarm=Bovine products
+shop.pigfarm=Porcine products
+shop.sheepchickenfarm=Poultry
+shop.tavern=Alcohol
+shop.lumberman=Cider Apples
+shop.lonemine=Stone
+shop.alchemyworkshop=Alchemical Products
+shop.lonelumberman=Wood and apples
+shop.lonemill=Bread
+shop.loneinn=Food and Drinks
+shop.lonelumbermantaiga=Wood
+shop.loneabbey=products of the Abbey

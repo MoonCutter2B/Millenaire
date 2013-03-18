@@ -1,0 +1,1 @@
+max:0;priority:50;native:Chota Saraay;around:4;startLevel:-1;orientation:3;width:6;length:8;tag:inn;signs:1,0

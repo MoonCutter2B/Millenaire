@@ -1,0 +1,54 @@
+version:3.1.7
+Millénaire: Japanese Inhabitants
+
+Village heads
+
+Shuken しゅくん: Lord. This man lives in a walled fort in which he rules his people from. He comes out to patrol and kill monsters. He will also defend his village to the death and kill anyone who endangers his village.
+
+Kokushi こくし: Overseer. The Kokushi will run a a village from the imperial office. He makes the village work hard and encourages them to pray. He also demands high taxes from the villagers but they are very religious and at peace with themselves so there are no complaints.
+
+Chōkan ちょうかん: Chief. This man is really a peasant but the Japanese need plenty of food so someone has to lead an agricultural village. He is one of the elders chosen to lead the village. He will give advice to the villagers on farming techniques and defend it from monsters.
+NEW_PAGE
+Women
+
+Jojoufu じょじょうふ: Brave woman. This is the wife of a guard or soldier. She will do normal tasks such as farming in the fields or making thatch. But when the men are out fighting she gets tasked with defending the village to her last breath. Be careful how you look at her as one wrong movement of the eyes and you've had it.
+
+Reifujin れいふじん: Lady. This women is the wife of a rich man usually the village leader. She tries to make herself look beautiful and doesn't do much else... at all.
+
+Tsuma つま: Wife. These women do the tasks that the men don't want to do like tend to the fields, make thatch and cook food. This is boring, backbreaking work but they can't complain without certain repercussions. However without these women the village will starve.
+NEW_PAGE
+Men
+
+Kikori きこり: Lumberman. This man knows his trees and knows which ones to cut down for building. He raises each tree from a sapling till they are tall enough to be chopped down for wood. He will also take part in raiding other villages.
+
+Saikushi さいくし: Craftsman. This man creates paper from rice and makes paper walls from that. he will also make timber frames for the village as well. Without him the village will look horribly dull and there will be nothing to distract people raiding the village as they pass through.
+
+Hyakushou ひゃくしょう: Wheat farmer. This man plants wheat on his farm to store for food. He has his own plot of land and looks after it well.
+
+Kaji かじ: Army smith. The Kaji is a soldier himself. Skilled in the art of crafting weapons and armour he has been given the position of blacksmith to make weapons that do not break on impact and armour that can stop the sharpest of weapons.
+
+Kajiya かじや: Smith. The Kajiya is a villager that knows his way around a furnace and how to make the tools for everyday jobs in the village. This man can get very wealthy if his tools are quality and have a high demand.
+
+Bushi ぶし: Warrior. The Bushi class are all the educated warriors in a Heian period army. They go to war with other villages and have a Yumi Bow or a Tachi Sword as their weapons. They show no mercy and accept any challenge. 
+
+Keibou けいぼう: Guard. The Keibou guards the village from invaders. They can also go to war with other villages if needs be. They have a Yumi Bow or a Tachi Sword as their weapons. I wouldn't mess with these guys.
+
+Chounin ちょうにん: Merchant. The Chounin trades goods (building materials, food etc) with other villages and gets much needed goods in return. After a long day traveling the Chounin likes to relax in the hospitable Inn.
+
+Ryoushi りょうし: Fisherman. Ryoushi are the fishermen in the village and go fishing in the lake outside his house. The Ryoushi sometimes has no luck fishing and can't reach his daily quota.
+
+Koufu こうふ: Miner. The Koufu slaves away mining stone and sand. He also makes glass from sand and stone from cobblestone with his furnace.
+
+Souryo そうりょ: Monk. The Souryo is a very respectable man and knows the way of Buddhism deeply. Villagers come to this man for advice on how to be at peace with themselves.
+
+Noufu のうふ: Peasant. Peasants build buildings in the village and farm on the rice paddy. He will also slaughter chickens for food. There is no rest for the peasants.
+NEW_PAGE
+Children
+
+Danshi だんし: Teen boy. Old enough to move in to a building and have their own profession. Every Danshi dreams of becoming a warrior but most of the time thier dream doesn't come true.
+
+Jou じょう: Teen girl. She is old enoungh to move away from home and get married where she will then use the skills she learnt from her mother in the real world.
+
+Otokonoko おとこのこ: Boy. Plays around the village and slower grows older.
+
+Onnanoko おんなのこ: Girl. Plays around the village and slower grows older.

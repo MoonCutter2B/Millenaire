@@ -1,0 +1,3 @@
+sells=udon,chickenmeatcooked
+buys=wheat,rice,chickenmeat
+deliverto=wheat,rice,chickenmeatcooked,udon

@@ -1,0 +1,17 @@
+name:Muul
+weight:4
+radius:15
+
+mindistancefromspawn:2000
+
+biome:forest
+biome:swampland
+biome:foresthills
+
+//extraBiomes mod
+biome:lush swamplands
+biome:rainforest
+biome:jungle
+
+//starting buildings:
+centre:lonemayanpyramid

@@ -1,0 +1,36 @@
+name:Archontia
+weight:0
+hillQualifier:stous lophous
+lavaQualifier:to hephaisto
+lakeQualifier:limne
+playerControlled:true
+
+//starting buildings:
+centre:playerfortbyzantine
+start:grovebyzantine
+start:lumberbyzantine
+start:architectbyzantine
+
+//buildings:
+core:architectbyzantine
+core:lumberbyzantine
+core:quarrybyzantine
+core:farmbyzantine
+core:tavernbyzantine
+core:sheepbyzantine
+core:fisherbyzantine
+core:grovebyzantine
+core:bakerybyzantine
+core:watchtowerbyzantine
+core:chapelbyzantine
+core:forgebyzantine
+core:villa urbana
+core:basilkabyzantine
+core:innbyzantine
+core:guesthousebyzantine
+core:barracksbyzantine
+core:presbyterybyzantine
+core:silkfarmbyzantine
+core:vineyardbyzantine
+core:workshopbyzantine
+core:well

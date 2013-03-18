@@ -1,0 +1,22 @@
+native_name=Plousia Gynaika
+gender=female
+familyNameList=greek_family_names
+firstNameList=greek_women_names
+baseheight=0.9
+health=20
+model=femalesymmetrical
+
+texture=/graphics/mob/byzanz/noblefemale/byz.rich.female.A.png
+texture=/graphics/mob/byzanz/noblefemale/byz.rich.female.B.png
+texture=/graphics/mob/byzanz/noblefemale/byz.rich.female.C.png
+
+clothes=free,/graphics/mob/byzanz/noblefemale/clothes/byz.richf.1.A.png
+clothes=free,/graphics/mob/byzanz/noblefemale/clothes/byz.richf.1.B.png
+
+toolNeeded=clothes_byz_silk
+
+goal=gorest
+goal=gopray
+goal=goDrink
+
+baseAttackStrength=3

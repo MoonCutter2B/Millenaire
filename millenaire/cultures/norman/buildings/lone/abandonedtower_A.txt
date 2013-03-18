@@ -1,0 +1,1 @@
+native:Tour détruite;around:4;startLevel:-12;orientation:3;width:10;length:8;startingGood:denier,1,20,44;startingGood:normanaxe,0.1,1,0;;startingGood:normanhelmet,0.1,1,0;startingGood:normanhelmet,0.1,1,0;startingGood:normanlegs,0.1,1,0;startingGood:normanboots,0.1,1,0

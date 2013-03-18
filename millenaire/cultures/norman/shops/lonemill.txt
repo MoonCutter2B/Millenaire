@@ -1,0 +1,4 @@
+sells=bread
+buys=cider,calva,normanHoe
+
+deliverto=wheat

@@ -1,0 +1,7 @@
+//Clé;id de l'objet;meta;nom (indificatif seulement)
+//Les id d'objets commencant par mln auront le numéro de la série d'objets Millénaire ajouté (ex: mln0 est en fait 25744+0 par défaut)
+
+//Item key;item id;item meta;label (indicative only)
+//Item ids starting with mln will have the item range value added to them; i.e. mln0 is actually 0+25744 (by default)
+
+//Vidé dans 4.1 car les ids statiques empêchent ID resolver de marcher

@@ -1,0 +1,2 @@
+type:subbuilding;priority:40;native:Ni'Nah;english:Top House;around:4;startLevel:-1;orientation:3;male:mayan_Peasant;female:mayan_PeasantWife;width:13;length:11
+priority:20

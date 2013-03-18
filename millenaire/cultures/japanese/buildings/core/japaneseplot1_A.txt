@@ -1,0 +1,1 @@
+native:Shakuchi;around:4;startLevel:-1;orientation:2;width:8;length:9;reputation:4*64;price:16*64;max:0;priority:100000

@@ -1,0 +1,106 @@
+//Game language
+//value has to be one of the directory name in languages/
+//Main game language, used when available. Leave empty to have Millénaire use Minecraft's language (when possible)
+language=
+
+//Secondary game language, used when the main is not available
+//It is recommended to pick either "en" (English) or "fr" (French) as those two are the ones I maintain myself
+//and are so guarrenteed to contain all the text
+fallback_language=en
+
+//Config
+//Keys to use for the village and quest listings
+village_list_key=V
+quest_list_key=M
+
+//automatically switch to the 64x texture pack if the Minecraft texture pack is 64x or above
+dynamic_textures=true
+
+
+//Whether to display the Millénaire start message:
+displayStart=true
+
+//IDs of the Millénaire blocks
+//New ids for 3.0
+block_building_id=1515
+block_panel_id=1516
+block_wood_id=1517
+block_earth_id=1518
+block_stone_id=1519
+block_crops_id=1520
+block_panes_id=1521
+block_byzantine_brick_id=1522
+block_byzantine_slab_id=1523
+block_byzantine_mixedbrick_id=1524
+
+//ID of the first Millénaire item (the others are in sequence after it)
+//New ids for 3.0
+item_range_start=25744
+
+
+//Enable the following lines and disable the ones above
+//Or move them to config-custom.txt to switch back to the old
+//items and blocks ids to continue playing an old world:
+//block_building_id=180
+//block_panel_id=181
+//block_wood_id=182
+//block_earth_id=183
+//block_stone_id=184
+//block_crops_id=185
+//block_panes_id=186
+//item_range_start=1515
+
+
+//comma-separated list of block IDs villagers will avoid building upon
+//on top of "regular" ones like lava or ice
+forbidden_blocks=
+
+//Gameplay
+min_village_distance=600
+//warning: increasing this will cause major lag on slower computers:
+village_radius=60
+
+min_distance_between_buildings=2
+
+//setting this to false will stop new villages from being generated, unless you toggle it back for a specific world by pressing ctrl-shift-G (left ctrl and shift)
+generate_villages=true
+
+//display names, occupations and current task above villagers' heads:
+display_names=true
+
+villagers_names_distance=20
+
+//distance from the player up to which Millénaire will attempt to keep villages' chunks loaded
+keep_active_radius=200
+
+//Whether languages need to be "learned" (translations will only appear after the player interacts enough with a culture)
+language_learning=true
+
+//Rate at which villages will start raid (0: never, 20: 20% of nights where there is a valid target, 100: every night where there is a valid target)
+raiding_rate=20
+
+//Set to true to prevent the regular Minecraft villages from spawning
+stop_default_villages=false
+
+//Protecting radius around the spawn point where Millénaire content won't spawn
+spawn_protection_radius=150
+
+//whether to load all available languages instead of just the main and backup ones
+//in order to provide translations to clients if needed
+load_all_languages=false
+
+
+//Lone buildings
+generate_lone_buildings=true
+//Min distance between a lone building and a village
+min_village_lonebuilding_distance=300
+//Min distance between two lone buildings
+min_lonebuilding_distance=600
+
+//Extra
+//whether to regenerate the colour sheet PNG at startup (useful if you are adding blocks to blocklist.txt)
+generate_colour_chart=false
+//whether to regenerate resources used.txt at start (useful if you want the info for custom buildings you are adding)
+generate_building_res=false
+//whether to generate a list of gaps found between your main language and your fallback language. Mainly intended for translators.
+generate_translation_gap=false

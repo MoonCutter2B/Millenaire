@@ -1,0 +1,56 @@
+version:1.1.4
+Millénaire: Objets normands
+
+Denier. Monnaie médiévale utilisée par les villageois. Trois types de pièces existes: bronze, argent valant 64 bronze, et or valant 64 argent.
+
+Pomme à cidre. Cette pomme acide est ramassée par les bûcherons et utilisée pour fabriquer du cidre et du calva.
+NEW_PAGE
+Aliments
+
+Cidre. Fabriqué par les villageois à partir de pommes à cidre, cette boisson rafraîchissante redonne deux coeurs et peut être utilisée trois fois.
+
+Calva. Plus correctement appelé calvados, cette eau-de-vie de pomme redonne deux coeurs et est utilisable dix fois. Il est distillé à partir de calva, et hors de Millénaire une consommation limitée est recommandée: son taux d’alcool va de 40 à 45°.
+
+Tripes. Ce célèbre plat normand est juste ce qu'il faut après avoir travaillé dehors l'hiver, ou après une méchante chute dans Minecraft. Il redonne cinq coeurs et est utilisable trois fois.
+
+Boudin noir. Presque aussi bon que des tripes, le boudin noir redonne trois coeurs et est utilisable trois fois. Les gens l'apprécient plus quand ils ignorent comment il est fabriqué.
+NEW_PAGE
+Outils & armes
+
+Pelle normande. Cet outil de première qualité est aussi solide qu'une pelle d'acier, mais aussi efficace qu'une pelle en or. L'outil recommandé par les tunneliers d'élite, disponible à la forge la plus proche.
+
+Pioche normande. Egalement aussi solide que celle d'acier et efficace que celle d'or, c'est l'outil parfait pour les expéditions minières. Attention, elle ne mine pas l'obsidienne.
+
+Hache normande. Solide comme le fer, efficace comme l'or, elle est redoutable entre les mains d'un bûcheron furieu.
+
+Houe normande. Aussi durable que celle en diamant, elle fait beaucoup plus chic.
+
+Armures normandes. 50% plus résistantes que celles en diamants, les armures normandes ont également l'avantage de ne pas vous donner l'air d'être déguisé en clown.
+
+Epée normande. Chère, très chère. Mais elle le vaut bien façe à un enemmi corriace.
+NEW_PAGE
+Construction & décoration
+
+Colombage. Ce bloc de construction consiste en un cadre de poutres entourant de la terre ou des briques crues. Il est fabriqué par le charpentier pour les besoins du village et pour commercer avec le joueur.
+
+Tapisserie normande. Faites main par la dame du fort, ces magnifiques tapisseries décoreront les plus somptueuses salles de banquets. Les motifs viennent de la tapisserie de Bayeux et culminent avec une représentation de quinze mètres sur trois de la flotte de Guillaume le Conquérant faisant voile vers l’Angleterre.
+NEW_PAGE
+Amulettes
+ 
+Amulette d'Yggrasil. Représentant Yggrasil, l’Arbre-Monde de la mythologie nordique dont les racines atteignent le fond du monde alors que ses branches touchent le sommet du ciel, cette amulette vous permettre de savoir à tout moment à quelle altitude vous êtes.
+
+Amulette du Corbeau. Cette amulette dédie à Odin vous préviendra en devenant rouge vif si une créature démonique s’approche. Utile pour les éviter – ou les pourchasser.
+
+Amulette des Nains. Prenant la forme du marteau de Thor, l’Amulette des Nains vous guidera aux richesses de la terre.
+
+Amulette de Sköll et Rati. Tirant son pouvoir de Sköll et Rati, les deux grands loups qui pourchassent le soleil et la lune, cette amulette permet de changer la nuit en jour et le jour en nuit. Mais attention, son pouvoir n’est pas infini.
+NEW_PAGE
+Parchemins
+
+Villageois normands. Un parchemin décrivant les différents types de villageois qui vous tueront si vous touchez à l’un d’entre eux.
+
+Bâtiments normands. Un descriptif de tous les bâtiments que les villageois peineront à faire.
+
+Objets normands.  Est-ce nécessaire ?
+
+Parchemin normand complet : Le contenu des trois précédents, en un rouleau compact pour un transport plus facile.

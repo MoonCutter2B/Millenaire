@@ -1,0 +1,12 @@
+name:Kofun
+weight:5
+radius:20
+
+mindistancefromspawn:2000
+
+biome:foresthills
+biome:forest
+
+
+//starting buildings:
+centre:kufun_tomb

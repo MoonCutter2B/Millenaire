@@ -1,0 +1,54 @@
+name:Qila
+weight:10
+carriesraid:true
+
+
+biome:plains
+biome:desert
+
+//extraBiomes mod
+biome:mountain desert
+biome:jungle
+biome:lush swampland
+biome:shrubland
+
+//starting buildings:
+centre:fort
+start:largepeasanthouse
+start:peasanthouse
+start:lumbermanhouse
+start:quarry
+start:grove
+start:brickkiln
+
+player:playersmallfield
+player:playersmallhouse
+player:playerlargefield
+player:playerhugefield
+player:playerestate
+
+//to be built in priority
+core:quarry
+core:paddy
+core:grove
+core:soldierhouse
+core:forge
+
+//to be built after the core ones
+secondary:spicegarden
+secondary:peasanthouse
+secondary:quarry
+secondary:soldierhouse
+secondary:brickkiln
+secondary:archives
+secondary:bazaar
+secondary:villagetemple
+
+//never for this type of village
+never:sugarplantation
+
+//Selling prices:
+sellingPrice:sugarcane,20
+
+//Buying prices:
+buyingPrice:sugarcane,18

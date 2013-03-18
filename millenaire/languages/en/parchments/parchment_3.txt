@@ -1,0 +1,55 @@
+version:1.1.4
+Millénaire: Norman Items
+
+Denier. Medieval currency used by the villagers. It comes in three values: Denier (bronze), Denier Argent (silver) worth 64 regular ones, and Denier Or (gold) worth 64 silver ones.
+
+Cider apple. This inedible apple is collected by lumberman and used to make cider and calva. It can be bought by the player, but the only use is to sell it to another village.
+NEW_PAGE
+Food items
+
+Cider. Made by villagers from cider apples, this refreshing drink heals two hearts and can be used three times.
+
+Calva. More properly known as calvados, this apple brandy from Normandy heals two hearts and can be used ten times. It is made from cider at the tavern, and outside of Millénaire consumption is recommended in small doses: it ranges from 40 to 45°.
+
+Tripes. This famous Norman dish is just the thing to have after a long time spent working outside in the cold, or after a nasty Minecraft fall. It heals five hearts and can be used three times. Non-Normans tend to enjoy it more before being told what it is. You have been warned.
+
+Boudin noir. Almost as good as tripes, boudin noir heals three hearts and can be used three times. Like its cousin the English black pudding, it tends to be enjoyed more by people who do not know how it is made.
+NEW_PAGE
+Tools & Weapons
+
+Norman Shovel. This high-quality Norman shovel is as durable as an iron one, but is as fast as a gold one. The tool of choice for serious diggers, available at a Forge close to you.
+
+Norman Pickaxe. This pickaxe mines as fast as a gold one and is as durable as an iron one. Perfect for those long mining expeditions! Careful though, it does not mine obsidian.
+
+Norman Axe. As fast as the gold one, as durable as the iron one, it packs a serious punch. Especially in the hands of an angry lumberman.
+
+Norman Hoe. Basically equivalent to a diamond one, but looks cooler.
+
+Norman Armour. The Norman Armour set gives you an extra 50% more protection than the Iron one and its as durable as the diamond one, and actually makes you look dangerous instead of dressed for a costume party.
+
+Norman Broadsword. Expensive, very expensive, and worth every denier of it when facing a tough enemy.
+NEW_PAGE
+Construction & Decoration
+Timber Frame. This building material consists of beams of dark wood surrounding a core of earth or uncooked bricks. Made by the carpenter for use in the village's buildings or for trading with the player.
+
+Norman Tapestry. Hand-made by the Fort's Lady in person, those epic tapestries will decorate the most sumptuous banking halls. Designs are taken from the Bayeux Tapestry, with the biggest a massive 15*3 depiction of William the Conqueror's fleet sailing for England.
+NEW_PAGE
+Amulets
+
+Amulet of Yggrasil. Engraved with Yggrasil, the World Tree of Norse mythology whose roots reach the bottom of the world and whose branches touch the tip of the sky, this amulet will ensure you always know how high or deep you are.
+
+Amulet of the Dwarves. Brought to the Norman shores by the Vikings and crafted in the shape of Thor's hammer, the Amulet of the Dwarves will guide you to the Earth's riches.
+
+Amulet of Sköll and Rati. Drawing its power from Sköll and Rati, the great wolves that chase the Sun and the Moon, this amulet enables its wearer to turn the day into night and the night into day. But be warned: its power is not infinite.
+
+Amulet of the Raven. Norman priests might be loyal to the Church and the Pope in far-away Rome, but they have not forgotten ancient Viking traditions... This amulet dedicated to Odin will warn you of incoming danger by turning blood red if an unatural creature is near. Useful to avoid them - or to seek them out.
+NEW_PAGE
+Parchments
+
+Norman Villagers. A parchment outlining the various kinds of villagers that will kill you if you touch one them.
+
+Norman Buildings. A description of the different buildings you can see the villagers get stuck making.
+
+Norman Items. You should know by now.
+
+Complete Normandy Scroll. The content of the previous three, in one easy scroll for easier carrying.

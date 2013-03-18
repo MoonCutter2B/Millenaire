@@ -1,0 +1,4 @@
+max:0;priority:3000;french:Relais;around:4;startLevel:-1;orientation:3;width:6;length:7;tag:inn;signs:1,0
+
+
+priority:10

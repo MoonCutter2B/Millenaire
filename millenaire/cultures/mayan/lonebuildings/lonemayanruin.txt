@@ -1,0 +1,17 @@
+name:Lost Mayan Home
+weight:10
+radius:15
+
+mindistancefromspawn:2000
+
+biome:forest
+biome:swampland
+biome:foresthills
+
+//extraBiomes mod
+biome:lush swamplands
+biome:rainforest
+biome:jungle
+
+//starting buildings:
+centre:lonemayanruin

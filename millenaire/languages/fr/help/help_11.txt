@@ -1,0 +1,11 @@
+version:3.4
+<darkblue>Les Japonais
+
+Ils vivent dans des villages religieux, militaires ou impériaux et se distinguent par leurs architectures élégantes. Ils parlent japonais, mais leurs dialogues seront traduits au fur et à mesure que le joueur « apprend » leur langue en parlant avec eux.
+
+<darkblue>Objets et blocs uniques
+
+-Ils cultivent du riz. Le joueur peut demander au chef de lui apprendre comment cultiver cette céréale
+-Comme les normands, ils produisent des colombages pour leurs bâtiments
+-Ils utilisent beaucoup de blocs de chaume, qu’ils fabriquent à partir de blé
+-Leurs forgerons fabriquent de redoutables épées tachis et des arcs yumis à longue portée, ainsi que trois types d’armures très efficaces

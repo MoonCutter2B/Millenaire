@@ -1,0 +1,40 @@
+version:1.1.4
+Millénaire: Objets indiens
+
+Denier. Pour des raisons que les historiens ne peuvent expliquer, les villageois indiens utilisent des deniers, comme les villages normands. Trois types de pièces existes: bronze, argent valant 64 bronze, et or valant 64 argent.
+NEW_PAGE
+Aliments
+
+Riz. Base de l’alimentation des villageois, le riz peut être acheté auprès du village. Seul, il n’a aucun goût et ne peut être mangé par le joueur. Les enfants du village grandissent plus vite s’ils en ont à la maison.
+
+Curcuma. Cette épice obtenue en réduisant en poudre la racine de la plante du même nom. Elle est nécessaire à la fabrication de carris. Comme le riz, sa présence accélère la croissance des enfants.
+
+Cari végétarien. Préparé en combinant une portion de riz et une de curcuma, ce carri (ou curry) simple redonne deux coeurs.
+
+Viande de poulet. Obtenus par les paysans qui possèdent un enclos à volailles, la viande de poulet permet la préparation de délicieux carris murgh. Les enfants indiens qui en ont grandissent également plus vite. Elle peut être consommée crue, mais c’est un vrai gâchi.
+
+Carri murgh. Ce carri préparé en combinant du riz, du curcuma et du poulet est un délice qui redonne un substantiel quatre coeurs.
+
+Rasgulla. Ce dessert à base de fromage frai et de sirop sucré est préparé par les femmes du village à partir de canne à sucre. Acheté par le joueur, il redonne un coeur et huit peuvent être portés ensemble. Consommé par les  couples du village, il augmente les chances de concevoir un enfant.  Non, vous n’aurez pas plus de détail.
+NEW_PAGE
+Construction & décoration
+
+Brique humide. Premier stade de la fabrication des briques, les briques humides sont déposées par les paysans près du four à brique pour sécher au soleil.
+
+Brique de terre. Obtenues en fessant sécher des briques humides au soleil, les briques de terre sont le matériau de base des villages indiens.
+
+Briques cuites. Après cuisson dans un four, les briques de terre deviennent des briques cuites, plus résistantes et plus esthétiques avec leur badigeon à la chaux.
+
+Moule à briques. Cet instrument à acheter auprès du village permet de créer des briques humides, en l’utilisant sur une surface plane tout en ayant de la terre et du sable dans l’inventaire.
+
+Statue hindoue. Ces statues de divinités hindoues sont fabriquées par le sculpteur pour orner le temple du village et être vendues aux joueurs aux meilleurs goûts artistiques.
+NEW_PAGE
+Parchemins
+
+Villageois indiens. Un parchemin décrivant les différents types de villageois indiens, ceux qui travaillent comme ceux qui regardent les autres travailler.
+
+Bâtiments indiens. Liste tous les bâtiments fabriqués par les villageois indiens, depuis la hutte du bûcheron jusqu’à la forteresse du généra rajput.
+
+Objets indiens.  Est-ce nécessaire ?
+
+Parchemin indien complet : Le contenu des trois précédents, en un rouleau compact pour un transport plus facile.

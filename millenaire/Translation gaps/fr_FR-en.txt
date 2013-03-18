@@ -1,0 +1,3 @@
+Translation comparison between fr_FR and en
+
+Traduction completness: 100%

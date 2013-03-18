@@ -1,0 +1,10 @@
+name:Yashiro
+weight:5
+radius:10
+biome:extreme hills
+biome:foresthills
+biome:forest
+
+
+//starting buildings:
+centre:woods_shrine

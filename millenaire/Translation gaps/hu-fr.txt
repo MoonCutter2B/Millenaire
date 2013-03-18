@@ -1,0 +1,1563 @@
+Translation comparison between hu and fr
+
+List of gaps found in strings.txt: 
+
+Key missing in the strings.txt file: actions.borehole_nblineok
+Key missing in the strings.txt file: actions.borehole_success
+Key missing in the strings.txt file: actions.boreholetnt_nbtnt
+Key missing in the strings.txt file: actions.boreholetnt_success
+Key missing in the strings.txt file: actions.boreholetntlit_success
+Key missing in the strings.txt file: actions.bottomoftheworld_success
+Key missing in the strings.txt file: actions.desert_continue
+Key missing in the strings.txt file: actions.desert_success
+Key missing in the strings.txt file: actions.enchantmenttable_success
+Key missing in the strings.txt file: actions.forest_continue
+Key missing in the strings.txt file: actions.forest_success
+Key missing in the strings.txt file: actions.mountain_continue
+Key missing in the strings.txt file: actions.mountain_success
+Key missing in the strings.txt file: actions.thevoid_success
+Key missing in the strings.txt file: actions.topoftheworld_success
+Key missing in the strings.txt file: actions.underwaterdive_success
+Key missing in the strings.txt file: actions.underwaterglass_notdeepenough
+Key missing in the strings.txt file: actions.underwaterglass_success
+Key missing in the strings.txt file: chunk.caption
+Key missing in the strings.txt file: chunk.captionblack
+Key missing in the strings.txt file: chunk.captionblue
+Key missing in the strings.txt file: chunk.captiongeneral
+Key missing in the strings.txt file: chunk.captiongreen
+Key missing in the strings.txt file: chunk.captionpurple
+Key missing in the strings.txt file: chunk.chunkcoords
+Key missing in the strings.txt file: chunk.chunkforced
+Key missing in the strings.txt file: chunk.chunkmap
+Key missing in the strings.txt file: chunk.explanations
+Key missing in the strings.txt file: chunk.playerposition
+Key missing in the strings.txt file: chunk.settings
+Key missing in the strings.txt file: chunk.village
+Key missing in the strings.txt file: command.active
+Key missing in the strings.txt file: command.astarpathing
+Key missing in the strings.txt file: command.binarypathing
+Key missing in the strings.txt file: command.frozen
+Key missing in the strings.txt file: command.inactive
+Key missing in the strings.txt file: command.minecraftpathing
+Key missing in the strings.txt file: command.newlonebuildingfound
+Key missing in the strings.txt file: command.newvillagefound
+Key missing in the strings.txt file: command.nogenerate
+Key missing in the strings.txt file: command.noknowvillage
+Key missing in the strings.txt file: command.pathrebuild
+Key missing in the strings.txt file: command.villagelist
+Key missing in the strings.txt file: command.villagelistkeylonebuilding
+Key missing in the strings.txt file: command.willgenerate
+Key missing in the strings.txt file: culture.byzantines
+Key missing in the strings.txt file: culture.hindi
+Key missing in the strings.txt file: culture.japanese
+Key missing in the strings.txt file: culture.mayan
+Key missing in the strings.txt file: culture.norman
+Key missing in the strings.txt file: culturelanguage.beginner
+Key missing in the strings.txt file: culturelanguage.fluent
+Key missing in the strings.txt file: culturelanguage.minimal
+Key missing in the strings.txt file: culturelanguage.moderate
+Key missing in the strings.txt file: culturereputation.bad
+Key missing in the strings.txt file: culturereputation.decent
+Key missing in the strings.txt file: culturereputation.dreadful
+Key missing in the strings.txt file: culturereputation.excellent
+Key missing in the strings.txt file: culturereputation.good
+Key missing in the strings.txt file: culturereputation.neutral
+Key missing in the strings.txt file: culturereputation.stellar
+Key missing in the strings.txt file: effect.healing
+Key missing in the strings.txt file: effect.irrigation
+Key missing in the strings.txt file: effect.pujalocation
+Key missing in the strings.txt file: effect.shop
+Key missing in the strings.txt file: effect.towncentre
+Key missing in the strings.txt file: error.unknownitem
+Key missing in the strings.txt file: export.buildingexported
+Key missing in the strings.txt file: export.defaultstartinglevel
+Key missing in the strings.txt file: export.errorlength
+Key missing in the strings.txt file: export.errornoendsigneast
+Key missing in the strings.txt file: export.errornoendsignsouth
+Key missing in the strings.txt file: export.errornoname
+Key missing in the strings.txt file: export.errorstartinglevel
+Key missing in the strings.txt file: export.errorunknownblockid
+Key missing in the strings.txt file: export.errorwidth
+Key missing in the strings.txt file: goal.becomeadult
+Key missing in the strings.txt file: goal.bepujaperformer
+Key missing in the strings.txt file: goal.beseller
+Key missing in the strings.txt file: goal.breed
+Key missing in the strings.txt file: goal.brewpotions
+Key missing in the strings.txt file: goal.bringbackresourceshome
+Key missing in the strings.txt file: goal.butcher
+Key missing in the strings.txt file: goal.choptrees
+Key missing in the strings.txt file: goal.collectcrop
+Key missing in the strings.txt file: goal.construction
+Key missing in the strings.txt file: goal.cookbrick
+Key missing in the strings.txt file: goal.cookchicken
+Key missing in the strings.txt file: goal.cookfish
+Key missing in the strings.txt file: goal.cooking
+Key missing in the strings.txt file: goal.cooklamb
+Key missing in the strings.txt file: goal.cookpork
+Key missing in the strings.txt file: goal.cooksteak
+Key missing in the strings.txt file: goal.defendvillage
+Key missing in the strings.txt file: goal.delivergoodshousehold
+Key missing in the strings.txt file: goal.deliverresourcesshop
+Key missing in the strings.txt file: goal.drybrick
+Key missing in the strings.txt file: goal.fish
+Key missing in the strings.txt file: goal.gatherbrick
+Key missing in the strings.txt file: goal.gathergoods
+Key missing in the strings.txt file: goal.gathersilk
+Key missing in the strings.txt file: goal.getgoodshousehold
+Key missing in the strings.txt file: goal.gethousethresources
+Key missing in the strings.txt file: goal.getitemtokeep
+Key missing in the strings.txt file: goal.getresourcesforbuild
+Key missing in the strings.txt file: goal.gettool
+Key missing in the strings.txt file: goal.godrink
+Key missing in the strings.txt file: goal.goplay
+Key missing in the strings.txt file: goal.gopray
+Key missing in the strings.txt file: goal.gorest
+Key missing in the strings.txt file: goal.harvestmaize
+Key missing in the strings.txt file: goal.harvestrice
+Key missing in the strings.txt file: goal.harvestsugarcane
+Key missing in the strings.txt file: goal.harvestturmeric
+Key missing in the strings.txt file: goal.harvestvines
+Key missing in the strings.txt file: goal.harvestwarts
+Key missing in the strings.txt file: goal.hide
+Key missing in the strings.txt file: goal.huntmonster
+Key missing in the strings.txt file: goal.keepstall
+Key missing in the strings.txt file: goal.makeamulet
+Key missing in the strings.txt file: goal.makearrow
+Key missing in the strings.txt file: goal.makebook
+Key missing in the strings.txt file: goal.makebooks
+Key missing in the strings.txt file: goal.makebookshelves
+Key missing in the strings.txt file: goal.makeboudin
+Key missing in the strings.txt file: goal.makebow
+Key missing in the strings.txt file: goal.makebread
+Key missing in the strings.txt file: goal.makebrick
+Key missing in the strings.txt file: goal.makebyzantineboots
+Key missing in the strings.txt file: goal.makebyzantinechest
+Key missing in the strings.txt file: goal.makebyzantinehelmet
+Key missing in the strings.txt file: goal.makebyzantinelegs
+Key missing in the strings.txt file: goal.makebyzantinemace
+Key missing in the strings.txt file: goal.makebyzantinetiles
+Key missing in the strings.txt file: goal.makecalva
+Key missing in the strings.txt file: goal.makecider
+Key missing in the strings.txt file: goal.makeclothes_byz_silk
+Key missing in the strings.txt file: goal.makeclothes_byz_wool
+Key missing in the strings.txt file: goal.makecurry
+Key missing in the strings.txt file: goal.makeglassbottles
+Key missing in the strings.txt file: goal.makeicon
+Key missing in the strings.txt file: goal.makeindianstatue
+Key missing in the strings.txt file: goal.makejapaneseweapons
+Key missing in the strings.txt file: goal.makemasa
+Key missing in the strings.txt file: goal.makemayanaxe
+Key missing in the strings.txt file: goal.makemayangoldblock
+Key missing in the strings.txt file: goal.makemayanhoe
+Key missing in the strings.txt file: goal.makemayanmace
+Key missing in the strings.txt file: goal.makemayanpickaxe
+Key missing in the strings.txt file: goal.makemayanshovel
+Key missing in the strings.txt file: goal.makemayanstatue
+Key missing in the strings.txt file: goal.makemurgh
+Key missing in the strings.txt file: goal.makenormantools
+Key missing in the strings.txt file: goal.makenormanweapons
+Key missing in the strings.txt file: goal.makeobsidianflake
+Key missing in the strings.txt file: goal.makepaper
+Key missing in the strings.txt file: goal.makepaperrice
+Key missing in the strings.txt file: goal.makepaperwall
+Key missing in the strings.txt file: goal.makepaperwoodpulp
+Key missing in the strings.txt file: goal.makerasgulla
+Key missing in the strings.txt file: goal.makerottenflesh
+Key missing in the strings.txt file: goal.makesouvlaki
+Key missing in the strings.txt file: goal.makesteelaxe
+Key missing in the strings.txt file: goal.makesteelboots
+Key missing in the strings.txt file: goal.makesteelchest
+Key missing in the strings.txt file: goal.makesteelhelmet
+Key missing in the strings.txt file: goal.makesteelhoe
+Key missing in the strings.txt file: goal.makesteellegs
+Key missing in the strings.txt file: goal.makesteelpickaxe
+Key missing in the strings.txt file: goal.makesteelshovel
+Key missing in the strings.txt file: goal.makesteelsword
+Key missing in the strings.txt file: goal.makestoneaxe
+Key missing in the strings.txt file: goal.makestonehoe
+Key missing in the strings.txt file: goal.makestonepickaxe
+Key missing in the strings.txt file: goal.makestoneshovel
+Key missing in the strings.txt file: goal.makestonesword
+Key missing in the strings.txt file: goal.maketachi
+Key missing in the strings.txt file: goal.maketapestry
+Key missing in the strings.txt file: goal.makethatch
+Key missing in the strings.txt file: goal.maketimberframe
+Key missing in the strings.txt file: goal.maketripes
+Key missing in the strings.txt file: goal.makeudon
+Key missing in the strings.txt file: goal.makewah
+Key missing in the strings.txt file: goal.makewine
+Key missing in the strings.txt file: goal.mining
+Key missing in the strings.txt file: goal.paintpainting
+Key missing in the strings.txt file: goal.patrol
+Key missing in the strings.txt file: goal.performpujas
+Key missing in the strings.txt file: goal.plantmaize
+Key missing in the strings.txt file: goal.plantrice
+Key missing in the strings.txt file: goal.plantsaplings
+Key missing in the strings.txt file: goal.plantseeds
+Key missing in the strings.txt file: goal.plantsugarcane
+Key missing in the strings.txt file: goal.plantturmeric
+Key missing in the strings.txt file: goal.plantvines
+Key missing in the strings.txt file: goal.plantwarts
+Key missing in the strings.txt file: goal.raidvillage
+Key missing in the strings.txt file: goal.shearsheep
+Key missing in the strings.txt file: goal.slaughterchicken
+Key missing in the strings.txt file: goal.slaughtercow
+Key missing in the strings.txt file: goal.slaughterpig
+Key missing in the strings.txt file: goal.slaughtersheep
+Key missing in the strings.txt file: goal.sleep
+Key missing in the strings.txt file: goal.sleep_travelling
+Key missing in the strings.txt file: goal.training
+Key missing in the strings.txt file: goal.visitbuilding
+Key missing in the strings.txt file: goal.visitinn
+Key missing in the strings.txt file: help.tab_1
+Key missing in the strings.txt file: help.tab_10
+Key missing in the strings.txt file: help.tab_11
+Key missing in the strings.txt file: help.tab_12
+Key missing in the strings.txt file: help.tab_13
+Key missing in the strings.txt file: help.tab_2
+Key missing in the strings.txt file: help.tab_3
+Key missing in the strings.txt file: help.tab_4
+Key missing in the strings.txt file: help.tab_5
+Key missing in the strings.txt file: help.tab_6
+Key missing in the strings.txt file: help.tab_7
+Key missing in the strings.txt file: help.tab_8
+Key missing in the strings.txt file: help.tab_9
+Key missing in the strings.txt file: hire.aggressive
+Key missing in the strings.txt file: hire.close
+Key missing in the strings.txt file: hire.cost
+Key missing in the strings.txt file: hire.extend
+Key missing in the strings.txt file: hire.health
+Key missing in the strings.txt file: hire.hire
+Key missing in the strings.txt file: hire.hireablevillager
+Key missing in the strings.txt file: hire.hireablevillagernoreputation
+Key missing in the strings.txt file: hire.hiredby
+Key missing in the strings.txt file: hire.hiredbyotherplayer
+Key missing in the strings.txt file: hire.hiredied
+Key missing in the strings.txt file: hire.hiredvillager
+Key missing in the strings.txt file: hire.hireover
+Key missing in the strings.txt file: hire.passive
+Key missing in the strings.txt file: hire.release
+Key missing in the strings.txt file: hire.strength
+Key missing in the strings.txt file: hire.timeleft
+Key missing in the strings.txt file: hof.armouricons
+Key missing in the strings.txt file: hof.btw
+Key missing in the strings.txt file: hof.buildingmaker
+Key missing in the strings.txt file: hof.creatorofbyzantine1
+Key missing in the strings.txt file: hof.creatorofbyzantine2
+Key missing in the strings.txt file: hof.creatorofindianskins1
+Key missing in the strings.txt file: hof.creatorofindianskins2
+Key missing in the strings.txt file: hof.creatorofjapanese1
+Key missing in the strings.txt file: hof.creatorofjapanese2
+Key missing in the strings.txt file: hof.creatorofmayan1
+Key missing in the strings.txt file: hof.creatorofmayan2
+Key missing in the strings.txt file: hof.donor
+Key missing in the strings.txt file: hof.forgecode1
+Key missing in the strings.txt file: hof.forgecode2
+Key missing in the strings.txt file: hof.forgehelp1
+Key missing in the strings.txt file: hof.forgehelp2
+Key missing in the strings.txt file: hof.frenchversion1
+Key missing in the strings.txt file: hof.frenchversion2
+Key missing in the strings.txt file: hof.hof
+Key missing in the strings.txt file: hof.hofidea1
+Key missing in the strings.txt file: hof.hofidea2
+Key missing in the strings.txt file: hof.improvementsjapanese1
+Key missing in the strings.txt file: hof.improvementsjapanese2
+Key missing in the strings.txt file: hof.lonebuildings
+Key missing in the strings.txt file: hof.modcreator
+Key missing in the strings.txt file: hof.normanarmour1
+Key missing in the strings.txt file: hof.normanarmour2
+Key missing in the strings.txt file: hof.obsidiantools1
+Key missing in the strings.txt file: hof.obsidiantools2
+Key missing in the strings.txt file: hof.skinmaker
+Key missing in the strings.txt file: hof.support1
+Key missing in the strings.txt file: hof.support2
+Key missing in the strings.txt file: hof.variousimprovements1
+Key missing in the strings.txt file: hof.variousimprovements2
+Key missing in the strings.txt file: hof.wikiadmin
+Key missing in the strings.txt file: hof.wikicontributions
+Key missing in the strings.txt file: import.buildinginitialphase
+Key missing in the strings.txt file: import.buildinglevel
+Key missing in the strings.txt file: import.buildingupto
+Key missing in the strings.txt file: import.doublevertical
+Key missing in the strings.txt file: import.errorinvalidupgradelevel
+Key missing in the strings.txt file: import.errornoname
+Key missing in the strings.txt file: import.errornotfound
+Key missing in the strings.txt file: import.errorupgradeleveltoohigh
+Key missing in the strings.txt file: import.notonserver
+Key missing in the strings.txt file: info.culture
+Key missing in the strings.txt file: info.culturelanguage
+Key missing in the strings.txt file: info.culturereputation
+Key missing in the strings.txt file: info.culturetitle
+Key missing in the strings.txt file: item.alchemist_amulet
+Key missing in the strings.txt file: item.alchimistexplosive
+Key missing in the strings.txt file: item.boudin
+Key missing in the strings.txt file: item.brickmould
+Key missing in the strings.txt file: item.building
+Key missing in the strings.txt file: item.byzantineboots
+Key missing in the strings.txt file: item.byzantinebrick
+Key missing in the strings.txt file: item.byzantinehelmet
+Key missing in the strings.txt file: item.byzantineiconlarge
+Key missing in the strings.txt file: item.byzantineiconmedium
+Key missing in the strings.txt file: item.byzantineiconsmall
+Key missing in the strings.txt file: item.byzantinelegs
+Key missing in the strings.txt file: item.byzantinemace
+Key missing in the strings.txt file: item.byzantinemixedbrick
+Key missing in the strings.txt file: item.byzantineplate
+Key missing in the strings.txt file: item.byzantineslab
+Key missing in the strings.txt file: item.calva
+Key missing in the strings.txt file: item.chickencurry
+Key missing in the strings.txt file: item.chickenmeat
+Key missing in the strings.txt file: item.cider
+Key missing in the strings.txt file: item.ciderapple
+Key missing in the strings.txt file: item.clothes_byz_silk
+Key missing in the strings.txt file: item.clothes_byz_wool
+Key missing in the strings.txt file: item.cookedbrick
+Key missing in the strings.txt file: item.crosstimber
+Key missing in the strings.txt file: item.denier
+Key missing in the strings.txt file: item.denierargent
+Key missing in the strings.txt file: item.denieror
+Key missing in the strings.txt file: item.dirtwall
+Key missing in the strings.txt file: item.emptysilkwormblock
+Key missing in the strings.txt file: item.feta
+Key missing in the strings.txt file: item.fullsilkwormblock
+Key missing in the strings.txt file: item.grapes
+Key missing in the strings.txt file: item.indianbuildings
+Key missing in the strings.txt file: item.indianfull
+Key missing in the strings.txt file: item.indianitems
+Key missing in the strings.txt file: item.indianstatue
+Key missing in the strings.txt file: item.indianvillagers
+Key missing in the strings.txt file: item.japanesebuildings
+Key missing in the strings.txt file: item.japanesefull
+Key missing in the strings.txt file: item.japaneseguardboots
+Key missing in the strings.txt file: item.japaneseguardhelmet
+Key missing in the strings.txt file: item.japaneseguardlegs
+Key missing in the strings.txt file: item.japaneseguardplate
+Key missing in the strings.txt file: item.japaneseitems
+Key missing in the strings.txt file: item.japanesevillagers
+Key missing in the strings.txt file: item.japanesewarriorblueboots
+Key missing in the strings.txt file: item.japanesewarriorbluehelmet
+Key missing in the strings.txt file: item.japanesewarriorbluelegs
+Key missing in the strings.txt file: item.japanesewarriorblueplate
+Key missing in the strings.txt file: item.japanesewarriorredboots
+Key missing in the strings.txt file: item.japanesewarriorredhelmet
+Key missing in the strings.txt file: item.japanesewarriorredlegs
+Key missing in the strings.txt file: item.japanesewarriorredplate
+Key missing in the strings.txt file: item.lambcooked
+Key missing in the strings.txt file: item.lambraw
+Key missing in the strings.txt file: item.maize
+Key missing in the strings.txt file: item.masa
+Key missing in the strings.txt file: item.mayanaxe
+Key missing in the strings.txt file: item.mayanbuildings
+Key missing in the strings.txt file: item.mayanfull
+Key missing in the strings.txt file: item.mayangold
+Key missing in the strings.txt file: item.mayanhoe
+Key missing in the strings.txt file: item.mayanitems
+Key missing in the strings.txt file: item.mayanmace
+Key missing in the strings.txt file: item.mayanpickaxe
+Key missing in the strings.txt file: item.mayanshovel
+Key missing in the strings.txt file: item.mayanstatue
+Key missing in the strings.txt file: item.mayanvillagers
+Key missing in the strings.txt file: item.mudbrick
+Key missing in the strings.txt file: item.negationwand
+Key missing in the strings.txt file: item.normanaxe
+Key missing in the strings.txt file: item.normanboots
+Key missing in the strings.txt file: item.normanbroadsword
+Key missing in the strings.txt file: item.normanbuildings
+Key missing in the strings.txt file: item.normanfull
+Key missing in the strings.txt file: item.normanhelmet
+Key missing in the strings.txt file: item.normanhoe
+Key missing in the strings.txt file: item.normanitems
+Key missing in the strings.txt file: item.normanlegs
+Key missing in the strings.txt file: item.normanpickaxe
+Key missing in the strings.txt file: item.normanplate
+Key missing in the strings.txt file: item.normanshovel
+Key missing in the strings.txt file: item.normanvillagers
+Key missing in the strings.txt file: item.obsidianflake
+Key missing in the strings.txt file: item.paperwall
+Key missing in the strings.txt file: item.parchmentsadhu
+Key missing in the strings.txt file: item.plaintimber
+Key missing in the strings.txt file: item.rasgulla
+Key missing in the strings.txt file: item.rice
+Key missing in the strings.txt file: item.silk
+Key missing in the strings.txt file: item.skoll_hati_amulet
+Key missing in the strings.txt file: item.souvlaki
+Key missing in the strings.txt file: item.tachisword
+Key missing in the strings.txt file: item.tapestry
+Key missing in the strings.txt file: item.thatched
+Key missing in the strings.txt file: item.tripes
+Key missing in the strings.txt file: item.turmeric
+Key missing in the strings.txt file: item.udon
+Key missing in the strings.txt file: item.unknownpowder
+Key missing in the strings.txt file: item.vegcurry
+Key missing in the strings.txt file: item.villagescroll
+Key missing in the strings.txt file: item.villagewand
+Key missing in the strings.txt file: item.vishnu_amulet
+Key missing in the strings.txt file: item.wah
+Key missing in the strings.txt file: item.wetbrick
+Key missing in the strings.txt file: item.wine
+Key missing in the strings.txt file: item.winebasic
+Key missing in the strings.txt file: item.yddrasil_amulet
+Key missing in the strings.txt file: item.yumibow
+Key missing in the strings.txt file: negationwand.cancel
+Key missing in the strings.txt file: negationwand.confirm
+Key missing in the strings.txt file: negationwand.confirmmessage
+Key missing in the strings.txt file: negationwand.destroyed
+Key missing in the strings.txt file: negationwand.villagelocked
+Key missing in the strings.txt file: other.andhalf
+Key missing in the strings.txt file: other.buildinghealing
+Key missing in the strings.txt file: other.directionshort
+Key missing in the strings.txt file: other.east
+Key missing in the strings.txt file: other.east_short
+Key missing in the strings.txt file: other.exploredbuilding
+Key missing in the strings.txt file: other.femalevillager
+Key missing in the strings.txt file: other.kilometre
+Key missing in the strings.txt file: other.localmerchantinteract
+Key missing in the strings.txt file: other.malevillager
+Key missing in the strings.txt file: other.metre
+Key missing in the strings.txt file: other.north
+Key missing in the strings.txt file: other.north-east
+Key missing in the strings.txt file: other.north-west
+Key missing in the strings.txt file: other.north_short
+Key missing in the strings.txt file: other.shortdistancedirection
+Key missing in the strings.txt file: other.south
+Key missing in the strings.txt file: other.south-east
+Key missing in the strings.txt file: other.south-west
+Key missing in the strings.txt file: other.south_short
+Key missing in the strings.txt file: other.totheeast
+Key missing in the strings.txt file: other.tothenorth
+Key missing in the strings.txt file: other.tothenorth-east
+Key missing in the strings.txt file: other.tothenorth-west
+Key missing in the strings.txt file: other.tothesouth
+Key missing in the strings.txt file: other.tothesouth-east
+Key missing in the strings.txt file: other.tothesouth-west
+Key missing in the strings.txt file: other.tothewest
+Key missing in the strings.txt file: other.west
+Key missing in the strings.txt file: other.west_short
+Key missing in the strings.txt file: panels.armour
+Key missing in the strings.txt file: panels.attackers
+Key missing in the strings.txt file: panels.awayhired
+Key missing in the strings.txt file: panels.awayraiding
+Key missing in the strings.txt file: panels.bachelor
+Key missing in the strings.txt file: panels.broughtimport
+Key missing in the strings.txt file: panels.buildingprojects
+Key missing in the strings.txt file: panels.capacity
+Key missing in the strings.txt file: panels.childarrived
+Key missing in the strings.txt file: panels.children
+Key missing in the strings.txt file: panels.constructions
+Key missing in the strings.txt file: panels.currentoccupation
+Key missing in the strings.txt file: panels.dead
+Key missing in the strings.txt file: panels.defender
+Key missing in the strings.txt file: panels.defense
+Key missing in the strings.txt file: panels.defenselong
+Key missing in the strings.txt file: panels.father
+Key missing in the strings.txt file: panels.finished
+Key missing in the strings.txt file: panels.goodsexported
+Key missing in the strings.txt file: panels.goodsimported
+Key missing in the strings.txt file: panels.goodstraded
+Key missing in the strings.txt file: panels.health
+Key missing in the strings.txt file: panels.houseunoccupied
+Key missing in the strings.txt file: panels.innvisitors
+Key missing in the strings.txt file: panels.invaderincoming
+Key missing in the strings.txt file: panels.invalidid
+Key missing in the strings.txt file: panels.man
+Key missing in the strings.txt file: panels.mapblue
+Key missing in the strings.txt file: panels.mapbrown
+Key missing in the strings.txt file: panels.mapgreen
+Key missing in the strings.txt file: panels.maplightblue
+Key missing in the strings.txt file: panels.maplightgreen
+Key missing in the strings.txt file: panels.maporange
+Key missing in the strings.txt file: panels.mappurple
+Key missing in the strings.txt file: panels.mapred
+Key missing in the strings.txt file: panels.mapyellow
+Key missing in the strings.txt file: panels.merchantarrived
+Key missing in the strings.txt file: panels.merchantlist
+Key missing in the strings.txt file: panels.merchantmovedout
+Key missing in the strings.txt file: panels.military
+Key missing in the strings.txt file: panels.militarystrength
+Key missing in the strings.txt file: panels.missing
+Key missing in the strings.txt file: panels.mother
+Key missing in the strings.txt file: panels.multiple
+Key missing in the strings.txt file: panels.nameand
+Key missing in the strings.txt file: panels.nbnightsin
+Key missing in the strings.txt file: panels.nbupgradesleft
+Key missing in the strings.txt file: panels.nofemaleresident
+Key missing in the strings.txt file: panels.nomaleresident
+Key missing in the strings.txt file: panels.notextfound
+Key missing in the strings.txt file: panels.notyetbuilt
+Key missing in the strings.txt file: panels.offense
+Key missing in the strings.txt file: panels.offenselong
+Key missing in the strings.txt file: panels.planningraid
+Key missing in the strings.txt file: panels.planningraidlong
+Key missing in the strings.txt file: panels.raider
+Key missing in the strings.txt file: panels.raidinprogress
+Key missing in the strings.txt file: panels.raidinprogresslong
+Key missing in the strings.txt file: panels.raidsperformed
+Key missing in the strings.txt file: panels.raidssuffered
+Key missing in the strings.txt file: panels.recordsnotloaded
+Key missing in the strings.txt file: panels.resources
+Key missing in the strings.txt file: panels.resourcesavailable
+Key missing in the strings.txt file: panels.resourcesneeded
+Key missing in the strings.txt file: panels.spinster
+Key missing in the strings.txt file: panels.spouse
+Key missing in the strings.txt file: panels.startedtrading
+Key missing in the strings.txt file: panels.storedexports
+Key missing in the strings.txt file: panels.toofar
+Key missing in the strings.txt file: panels.underattack
+Key missing in the strings.txt file: panels.underattacklong
+Key missing in the strings.txt file: panels.unknownattacker
+Key missing in the strings.txt file: panels.unreachablebuilding
+Key missing in the strings.txt file: panels.upgrade
+Key missing in the strings.txt file: panels.villageculture
+Key missing in the strings.txt file: panels.villagefighters
+Key missing in the strings.txt file: panels.villagescroll
+Key missing in the strings.txt file: panels.visitors
+Key missing in the strings.txt file: panels.weapons
+Key missing in the strings.txt file: panels.woman
+Key missing in the strings.txt file: pujas.god0
+Key missing in the strings.txt file: pujas.god1
+Key missing in the strings.txt file: pujas.god2
+Key missing in the strings.txt file: pujas.god3
+Key missing in the strings.txt file: pujas.invanme
+Key missing in the strings.txt file: pujas.moneyslot
+Key missing in the strings.txt file: pujas.offering
+Key missing in the strings.txt file: pujas.offeringslot
+Key missing in the strings.txt file: pujas.offeringslot2
+Key missing in the strings.txt file: pujas.panditfee
+Key missing in the strings.txt file: pujas.priestcoming
+Key missing in the strings.txt file: pujas.toolslot
+Key missing in the strings.txt file: quest.accept
+Key missing in the strings.txt file: quest.close
+Key missing in the strings.txt file: quest.conditionsnotmet
+Key missing in the strings.txt file: quest.continue
+Key missing in the strings.txt file: quest.cqalchemiststartexplanation
+Key missing in the strings.txt file: quest.cqallcompleted
+Key missing in the strings.txt file: quest.cqchapteralchemist
+Key missing in the strings.txt file: quest.cqchaptercompleted
+Key missing in the strings.txt file: quest.cqchaptercompletedshort
+Key missing in the strings.txt file: quest.cqchapterinprogress
+Key missing in the strings.txt file: quest.cqchapterinprogressshort
+Key missing in the strings.txt file: quest.cqchapternotstarted
+Key missing in the strings.txt file: quest.cqchapternotstartedshort
+Key missing in the strings.txt file: quest.cqchaptersadhu
+Key missing in the strings.txt file: quest.cqcheckforupdates
+Key missing in the strings.txt file: quest.cqcheckquestlistandhelp
+Key missing in the strings.txt file: quest.cqsadhustartexplanation
+Key missing in the strings.txt file: quest.creationqueststatus
+Key missing in the strings.txt file: quest.creationqueststatusshort
+Key missing in the strings.txt file: quest.hours
+Key missing in the strings.txt file: quest.lackingcondition
+Key missing in the strings.txt file: quest.lackinghiddengoods
+Key missing in the strings.txt file: quest.lessthananhourleft
+Key missing in the strings.txt file: quest.noquestsvisible
+Key missing in the strings.txt file: quest.obtained
+Key missing in the strings.txt file: quest.questlist
+Key missing in the strings.txt file: quest.refuse
+Key missing in the strings.txt file: quest.reputationlost
+Key missing in the strings.txt file: quest.timeremaining
+Key missing in the strings.txt file: raid.historydefended
+Key missing in the strings.txt file: raid.historyfailure
+Key missing in the strings.txt file: raid.historyraided
+Key missing in the strings.txt file: raid.historysuccess
+Key missing in the strings.txt file: raid.nothing
+Key missing in the strings.txt file: raid.planningstarted
+Key missing in the strings.txt file: raid.raidfailed
+Key missing in the strings.txt file: raid.raidsuccesfull
+Key missing in the strings.txt file: raid.started
+Key missing in the strings.txt file: relation.atrocious
+Key missing in the strings.txt file: relation.bad
+Key missing in the strings.txt file: relation.chilly
+Key missing in the strings.txt file: relation.decent
+Key missing in the strings.txt file: relation.excellent
+Key missing in the strings.txt file: relation.fair
+Key missing in the strings.txt file: relation.good
+Key missing in the strings.txt file: relation.neutral
+Key missing in the strings.txt file: relation.openconflict
+Key missing in the strings.txt file: relation.verybad
+Key missing in the strings.txt file: relation.verygood
+Key missing in the strings.txt file: startup.checkload
+Key missing in the strings.txt file: startup.loadproblem
+Key missing in the strings.txt file: startup.millenaireloaded
+Key missing in the strings.txt file: startup.radiuswarning
+Key missing in the strings.txt file: ui.adults
+Key missing in the strings.txt file: ui.allchestsunlocked
+Key missing in the strings.txt file: ui.allowupgrades
+Key missing in the strings.txt file: ui.alreadybuilt
+Key missing in the strings.txt file: ui.alreadyrequested
+Key missing in the strings.txt file: ui.anyenchanted
+Key missing in the strings.txt file: ui.available
+Key missing in the strings.txt file: ui.brickinstructions
+Key missing in the strings.txt file: ui.buildingscentre
+Key missing in the strings.txt file: ui.buildingsextra
+Key missing in the strings.txt file: ui.buildingskey
+Key missing in the strings.txt file: ui.buildingsplayer
+Key missing in the strings.txt file: ui.buildingssecondary
+Key missing in the strings.txt file: ui.buildingsstarting
+Key missing in the strings.txt file: ui.buybuilding
+Key missing in the strings.txt file: ui.buying
+Key missing in the strings.txt file: ui.buyscroll
+Key missing in the strings.txt file: ui.cancelbuilding
+Key missing in the strings.txt file: ui.children
+Key missing in the strings.txt file: ui.chunkbutton
+Key missing in the strings.txt file: ui.clicktorequest
+Key missing in the strings.txt file: ui.communicationexplanations
+Key missing in the strings.txt file: ui.construction
+Key missing in the strings.txt file: ui.constructionforbidden
+Key missing in the strings.txt file: ui.control_alreadydone
+Key missing in the strings.txt file: ui.control_get
+Key missing in the strings.txt file: ui.control_gotten
+Key missing in the strings.txt file: ui.control_noreputation
+Key missing in the strings.txt file: ui.control_ok
+Key missing in the strings.txt file: ui.controlbuildingprojects
+Key missing in the strings.txt file: ui.controlled
+Key missing in the strings.txt file: ui.cost
+Key missing in the strings.txt file: ui.cropinsufficientreputation
+Key missing in the strings.txt file: ui.cropknown
+Key missing in the strings.txt file: ui.croplearn
+Key missing in the strings.txt file: ui.croplearned
+Key missing in the strings.txt file: ui.cropnotenoughmoney
+Key missing in the strings.txt file: ui.cropoktolearn
+Key missing in the strings.txt file: ui.cropplantingknowledge
+Key missing in the strings.txt file: ui.cropsknown
+Key missing in the strings.txt file: ui.currentlyempty1
+Key missing in the strings.txt file: ui.currentlyempty2
+Key missing in the strings.txt file: ui.danger
+Key missing in the strings.txt file: ui.enchantedsword
+Key missing in the strings.txt file: ui.export_total
+Key missing in the strings.txt file: ui.exports
+Key missing in the strings.txt file: ui.extraresneeded1
+Key missing in the strings.txt file: ui.extraresneeded2
+Key missing in the strings.txt file: ui.forbidupgrades
+Key missing in the strings.txt file: ui.generatenotenoughspace
+Key missing in the strings.txt file: ui.generatenotenoughspacevillage
+Key missing in the strings.txt file: ui.goalscompleted1
+Key missing in the strings.txt file: ui.goalscompleted2
+Key missing in the strings.txt file: ui.goodstraded
+Key missing in the strings.txt file: ui.helpbutton
+Key missing in the strings.txt file: ui.housebought
+Key missing in the strings.txt file: ui.import_total
+Key missing in the strings.txt file: ui.imports
+Key missing in the strings.txt file: ui.inconstruction
+Key missing in the strings.txt file: ui.inhabitantof
+Key missing in the strings.txt file: ui.inventory
+Key missing in the strings.txt file: ui.isell
+Key missing in the strings.txt file: ui.lackingresources
+Key missing in the strings.txt file: ui.largelockedchest
+Key missing in the strings.txt file: ui.largeunlockedchest
+Key missing in the strings.txt file: ui.leaderin
+Key missing in the strings.txt file: ui.leaderinstruction
+Key missing in the strings.txt file: ui.leadershipstatus
+Key missing in the strings.txt file: ui.level
+Key missing in the strings.txt file: ui.locationclash
+Key missing in the strings.txt file: ui.lockedchest
+Key missing in the strings.txt file: ui.lockedchestwarning
+Key missing in the strings.txt file: ui.merchants
+Key missing in the strings.txt file: ui.missingdeniers
+Key missing in the strings.txt file: ui.missingequipment
+Key missing in the strings.txt file: ui.nbbuildings
+Key missing in the strings.txt file: ui.nbinhabitants
+Key missing in the strings.txt file: ui.noconstruction1
+Key missing in the strings.txt file: ui.noconstruction2
+Key missing in the strings.txt file: ui.noneininventory
+Key missing in the strings.txt file: ui.nospace
+Key missing in the strings.txt file: ui.notavailableyet
+Key missing in the strings.txt file: ui.notleaderin
+Key missing in the strings.txt file: ui.notreachable
+Key missing in the strings.txt file: ui.notyetbuilt
+Key missing in the strings.txt file: ui.outofstock
+Key missing in the strings.txt file: ui.outsideradius
+Key missing in the strings.txt file: ui.population
+Key missing in the strings.txt file: ui.populationnumber
+Key missing in the strings.txt file: ui.possiblehousing
+Key missing in the strings.txt file: ui.problemat
+Key missing in the strings.txt file: ui.project
+Key missing in the strings.txt file: ui.projectadded
+Key missing in the strings.txt file: ui.raider
+Key missing in the strings.txt file: ui.relationfriendly
+Key missing in the strings.txt file: ui.relationhelp
+Key missing in the strings.txt file: ui.relationlist
+Key missing in the strings.txt file: ui.relationpoints
+Key missing in the strings.txt file: ui.relationpraise
+Key missing in the strings.txt file: ui.relationslander
+Key missing in the strings.txt file: ui.relationunfriendly
+Key missing in the strings.txt file: ui.reputationneeded
+Key missing in the strings.txt file: ui.reservedforvillager1
+Key missing in the strings.txt file: ui.reservedforvillager2
+Key missing in the strings.txt file: ui.scrollbought
+Key missing in the strings.txt file: ui.scrollsnoreputation
+Key missing in the strings.txt file: ui.scrollsnotenoughmoney
+Key missing in the strings.txt file: ui.scrollsok
+Key missing in the strings.txt file: ui.selectabuildingproject
+Key missing in the strings.txt file: ui.selectavillage
+Key missing in the strings.txt file: ui.sellerboycott
+Key missing in the strings.txt file: ui.sellercoming
+Key missing in the strings.txt file: ui.sellernotcurrently possible
+Key missing in the strings.txt file: ui.selling
+Key missing in the strings.txt file: ui.teens
+Key missing in the strings.txt file: ui.tooclosetospawn
+Key missing in the strings.txt file: ui.tradecomplete
+Key missing in the strings.txt file: ui.unknownerror
+Key missing in the strings.txt file: ui.unlockedchest
+Key missing in the strings.txt file: ui.updateentity
+Key missing in the strings.txt file: ui.upgrading
+Key missing in the strings.txt file: ui.villagechief
+Key missing in the strings.txt file: ui.villagemap
+Key missing in the strings.txt file: ui.villagerelations
+Key missing in the strings.txt file: ui.villagerelationsnobutton
+Key missing in the strings.txt file: ui.visitorslist1
+Key missing in the strings.txt file: ui.visitorslist2
+Key missing in the strings.txt file: ui.wandblocklist
+Key missing in the strings.txt file: ui.wandblocklistcontrolled
+Key missing in the strings.txt file: ui.wandinstruction
+Key missing in the strings.txt file: ui.wandnocontrol
+Key missing in the strings.txt file: ui.wandwrongblock
+Key missing in the strings.txt file: ui.webuy
+Key missing in the strings.txt file: ui.wesell
+Key missing in the strings.txt file: ui.woodbirch
+Key missing in the strings.txt file: ui.woodforplanks
+Key missing in the strings.txt file: ui.woodjungle
+Key missing in the strings.txt file: ui.woodoak
+Key missing in the strings.txt file: ui.woodpine
+Key missing in the strings.txt file: ui.worldnotgenerated
+Key missing in the strings.txt file: ui.wrongelevation
+Key missing in the strings.txt file: ui.xoutofy
+Key missing in the strings.txt file: ui.youaremissing
+Key missing in the strings.txt file: ui.yourstatus
+Key missing in the strings.txt file: weapon.criticalstrike
+
+List of gaps found in quest files: 
+
+Key missing in the quests.txt file: abbotbooksdelivery_0_description
+Key missing in the quests.txt file: abbotbooksdelivery_0_description_refuse
+Key missing in the quests.txt file: abbotbooksdelivery_0_description_success
+Key missing in the quests.txt file: abbotbooksdelivery_0_label
+Key missing in the quests.txt file: abbotbooksdelivery_1_description
+Key missing in the quests.txt file: abbotbooksdelivery_1_description_refuse
+Key missing in the quests.txt file: abbotbooksdelivery_1_description_success
+Key missing in the quests.txt file: abbotbooksdelivery_1_description_timeup
+Key missing in the quests.txt file: abbotbooksdelivery_1_label
+Key missing in the quests.txt file: abbotbooksdelivery_1_listing
+Key missing in the quests.txt file: abbotbooksdelivery_2_description
+Key missing in the quests.txt file: abbotbooksdelivery_2_description_refuse
+Key missing in the quests.txt file: abbotbooksdelivery_2_description_success
+Key missing in the quests.txt file: abbotbooksdelivery_2_description_timeup
+Key missing in the quests.txt file: abbotbooksdelivery_2_label
+Key missing in the quests.txt file: abbotbooksdelivery_2_listing
+Key missing in the quests.txt file: adivasifarmdelivery_0_description
+Key missing in the quests.txt file: adivasifarmdelivery_0_description_refuse
+Key missing in the quests.txt file: adivasifarmdelivery_0_description_success
+Key missing in the quests.txt file: adivasifarmdelivery_0_label
+Key missing in the quests.txt file: adivasifarmdelivery_1_description
+Key missing in the quests.txt file: adivasifarmdelivery_1_description_refuse
+Key missing in the quests.txt file: adivasifarmdelivery_1_description_success
+Key missing in the quests.txt file: adivasifarmdelivery_1_description_timeup
+Key missing in the quests.txt file: adivasifarmdelivery_1_label
+Key missing in the quests.txt file: adivasifarmdelivery_1_listing
+Key missing in the quests.txt file: adivasifarmdelivery_2_description
+Key missing in the quests.txt file: adivasifarmdelivery_2_description_refuse
+Key missing in the quests.txt file: adivasifarmdelivery_2_description_success
+Key missing in the quests.txt file: adivasifarmdelivery_2_description_timeup
+Key missing in the quests.txt file: adivasifarmdelivery_2_label
+Key missing in the quests.txt file: adivasifarmdelivery_2_listing
+Key missing in the quests.txt file: alchemist_10_anomalythree_0_description
+Key missing in the quests.txt file: alchemist_10_anomalythree_0_description_refuse
+Key missing in the quests.txt file: alchemist_10_anomalythree_0_description_success
+Key missing in the quests.txt file: alchemist_10_anomalythree_0_label
+Key missing in the quests.txt file: alchemist_10_anomalythree_1_description
+Key missing in the quests.txt file: alchemist_10_anomalythree_1_description_refuse
+Key missing in the quests.txt file: alchemist_10_anomalythree_1_description_success
+Key missing in the quests.txt file: alchemist_10_anomalythree_1_label
+Key missing in the quests.txt file: alchemist_10_anomalythree_1_listing
+Key missing in the quests.txt file: alchemist_11_brewingstudents_0_description
+Key missing in the quests.txt file: alchemist_11_brewingstudents_0_description_refuse
+Key missing in the quests.txt file: alchemist_11_brewingstudents_0_description_success
+Key missing in the quests.txt file: alchemist_11_brewingstudents_0_label
+Key missing in the quests.txt file: alchemist_11_brewingstudents_1_description
+Key missing in the quests.txt file: alchemist_11_brewingstudents_1_description_refuse
+Key missing in the quests.txt file: alchemist_11_brewingstudents_1_description_success
+Key missing in the quests.txt file: alchemist_11_brewingstudents_1_label
+Key missing in the quests.txt file: alchemist_11_brewingstudents_1_listing
+Key missing in the quests.txt file: alchemist_11b_guildmaster_0_description
+Key missing in the quests.txt file: alchemist_11b_guildmaster_0_description_refuse
+Key missing in the quests.txt file: alchemist_11b_guildmaster_0_description_success
+Key missing in the quests.txt file: alchemist_11b_guildmaster_0_label
+Key missing in the quests.txt file: alchemist_11b_knightseneschal_0_description
+Key missing in the quests.txt file: alchemist_11b_knightseneschal_0_description_refuse
+Key missing in the quests.txt file: alchemist_11b_knightseneschal_0_description_success
+Key missing in the quests.txt file: alchemist_11b_knightseneschal_0_label
+Key missing in the quests.txt file: alchemist_12_theexperiment_0_description
+Key missing in the quests.txt file: alchemist_12_theexperiment_0_description_refuse
+Key missing in the quests.txt file: alchemist_12_theexperiment_0_description_success
+Key missing in the quests.txt file: alchemist_12_theexperiment_0_label
+Key missing in the quests.txt file: alchemist_12_theexperiment_1_description
+Key missing in the quests.txt file: alchemist_12_theexperiment_1_description_refuse
+Key missing in the quests.txt file: alchemist_12_theexperiment_1_description_success
+Key missing in the quests.txt file: alchemist_12_theexperiment_1_label
+Key missing in the quests.txt file: alchemist_12_theexperiment_1_listing
+Key missing in the quests.txt file: alchemist_12_theexperiment_2_description
+Key missing in the quests.txt file: alchemist_12_theexperiment_2_description_refuse
+Key missing in the quests.txt file: alchemist_12_theexperiment_2_description_success
+Key missing in the quests.txt file: alchemist_12_theexperiment_2_label
+Key missing in the quests.txt file: alchemist_12_theexperiment_2_listing
+Key missing in the quests.txt file: alchemist_13_conclusion_0_description
+Key missing in the quests.txt file: alchemist_13_conclusion_0_description_refuse
+Key missing in the quests.txt file: alchemist_13_conclusion_0_description_success
+Key missing in the quests.txt file: alchemist_13_conclusion_0_label
+Key missing in the quests.txt file: alchemist_1_introb_0_description
+Key missing in the quests.txt file: alchemist_1_introb_0_description_refuse
+Key missing in the quests.txt file: alchemist_1_introb_0_description_success
+Key missing in the quests.txt file: alchemist_1_introb_0_label
+Key missing in the quests.txt file: alchemist_1_introb_1_description
+Key missing in the quests.txt file: alchemist_1_introb_1_description_refuse
+Key missing in the quests.txt file: alchemist_1_introb_1_description_success
+Key missing in the quests.txt file: alchemist_1_introb_1_label
+Key missing in the quests.txt file: alchemist_1_introb_1_listing
+Key missing in the quests.txt file: alchemist_1_introguildmasterb_0_description
+Key missing in the quests.txt file: alchemist_1_introguildmasterb_0_description_refuse
+Key missing in the quests.txt file: alchemist_1_introguildmasterb_0_description_success
+Key missing in the quests.txt file: alchemist_1_introguildmasterb_0_label
+Key missing in the quests.txt file: alchemist_1_introguildmasterb_1_description
+Key missing in the quests.txt file: alchemist_1_introguildmasterb_1_description_refuse
+Key missing in the quests.txt file: alchemist_1_introguildmasterb_1_description_success
+Key missing in the quests.txt file: alchemist_1_introguildmasterb_1_label
+Key missing in the quests.txt file: alchemist_1_introguildmasterb_1_listing
+Key missing in the quests.txt file: alchemist_1_introknight_0_description
+Key missing in the quests.txt file: alchemist_1_introknight_0_description_refuse
+Key missing in the quests.txt file: alchemist_1_introknight_0_description_success
+Key missing in the quests.txt file: alchemist_1_introknight_0_label
+Key missing in the quests.txt file: alchemist_1_introknight_1_description
+Key missing in the quests.txt file: alchemist_1_introknight_1_description_refuse
+Key missing in the quests.txt file: alchemist_1_introknight_1_description_success
+Key missing in the quests.txt file: alchemist_1_introknight_1_label
+Key missing in the quests.txt file: alchemist_1_introknight_1_listing
+Key missing in the quests.txt file: alchemist_2_meeting_0_description
+Key missing in the quests.txt file: alchemist_2_meeting_0_description_refuse
+Key missing in the quests.txt file: alchemist_2_meeting_0_description_success
+Key missing in the quests.txt file: alchemist_2_meeting_0_label
+Key missing in the quests.txt file: alchemist_3_ores_0_description
+Key missing in the quests.txt file: alchemist_3_ores_0_description_refuse
+Key missing in the quests.txt file: alchemist_3_ores_0_description_success
+Key missing in the quests.txt file: alchemist_3_ores_0_label
+Key missing in the quests.txt file: alchemist_3_ores_1_description
+Key missing in the quests.txt file: alchemist_3_ores_1_description_refuse
+Key missing in the quests.txt file: alchemist_3_ores_1_description_success
+Key missing in the quests.txt file: alchemist_3_ores_1_label
+Key missing in the quests.txt file: alchemist_3_ores_1_listing
+Key missing in the quests.txt file: alchemist_3_ores_2_description
+Key missing in the quests.txt file: alchemist_3_ores_2_description_refuse
+Key missing in the quests.txt file: alchemist_3_ores_2_description_success
+Key missing in the quests.txt file: alchemist_3_ores_2_label
+Key missing in the quests.txt file: alchemist_3_ores_2_listing
+Key missing in the quests.txt file: alchemist_4_lavab_0_description
+Key missing in the quests.txt file: alchemist_4_lavab_0_description_refuse
+Key missing in the quests.txt file: alchemist_4_lavab_0_description_success
+Key missing in the quests.txt file: alchemist_4_lavab_0_label
+Key missing in the quests.txt file: alchemist_4_lavab_1_description
+Key missing in the quests.txt file: alchemist_4_lavab_1_description_refuse
+Key missing in the quests.txt file: alchemist_4_lavab_1_description_success
+Key missing in the quests.txt file: alchemist_4_lavab_1_label
+Key missing in the quests.txt file: alchemist_4_lavab_1_listing
+Key missing in the quests.txt file: alchemist_4_lavab_2_description
+Key missing in the quests.txt file: alchemist_4_lavab_2_description_refuse
+Key missing in the quests.txt file: alchemist_4_lavab_2_description_success
+Key missing in the quests.txt file: alchemist_4_lavab_2_label
+Key missing in the quests.txt file: alchemist_4_lavab_2_listing
+Key missing in the quests.txt file: alchemist_5_creeper_0_description
+Key missing in the quests.txt file: alchemist_5_creeper_0_description_refuse
+Key missing in the quests.txt file: alchemist_5_creeper_0_description_success
+Key missing in the quests.txt file: alchemist_5_creeper_0_label
+Key missing in the quests.txt file: alchemist_5_creeper_1_description
+Key missing in the quests.txt file: alchemist_5_creeper_1_description_refuse
+Key missing in the quests.txt file: alchemist_5_creeper_1_description_success
+Key missing in the quests.txt file: alchemist_5_creeper_1_label
+Key missing in the quests.txt file: alchemist_5_creeper_1_listing
+Key missing in the quests.txt file: alchemist_6_boreholec_0_description
+Key missing in the quests.txt file: alchemist_6_boreholec_0_description_refuse
+Key missing in the quests.txt file: alchemist_6_boreholec_0_description_success
+Key missing in the quests.txt file: alchemist_6_boreholec_0_label
+Key missing in the quests.txt file: alchemist_6_boreholec_1_description
+Key missing in the quests.txt file: alchemist_6_boreholec_1_description_refuse
+Key missing in the quests.txt file: alchemist_6_boreholec_1_description_success
+Key missing in the quests.txt file: alchemist_6_boreholec_1_label
+Key missing in the quests.txt file: alchemist_6_boreholec_1_listing
+Key missing in the quests.txt file: alchemist_6_boreholec_2_description
+Key missing in the quests.txt file: alchemist_6_boreholec_2_description_refuse
+Key missing in the quests.txt file: alchemist_6_boreholec_2_description_success
+Key missing in the quests.txt file: alchemist_6_boreholec_2_label
+Key missing in the quests.txt file: alchemist_6_boreholec_2_listing
+Key missing in the quests.txt file: alchemist_7_boreholetnt_0_description
+Key missing in the quests.txt file: alchemist_7_boreholetnt_0_description_refuse
+Key missing in the quests.txt file: alchemist_7_boreholetnt_0_description_success
+Key missing in the quests.txt file: alchemist_7_boreholetnt_0_label
+Key missing in the quests.txt file: alchemist_7_boreholetnt_1_description
+Key missing in the quests.txt file: alchemist_7_boreholetnt_1_description_refuse
+Key missing in the quests.txt file: alchemist_7_boreholetnt_1_description_success
+Key missing in the quests.txt file: alchemist_7_boreholetnt_1_label
+Key missing in the quests.txt file: alchemist_7_boreholetnt_1_listing
+Key missing in the quests.txt file: alchemist_7_boreholetnt_2_description
+Key missing in the quests.txt file: alchemist_7_boreholetnt_2_description_refuse
+Key missing in the quests.txt file: alchemist_7_boreholetnt_2_description_success
+Key missing in the quests.txt file: alchemist_7_boreholetnt_2_label
+Key missing in the quests.txt file: alchemist_7_boreholetnt_2_listing
+Key missing in the quests.txt file: alchemist_8_anomalyb_0_description
+Key missing in the quests.txt file: alchemist_8_anomalyb_0_description_refuse
+Key missing in the quests.txt file: alchemist_8_anomalyb_0_description_success
+Key missing in the quests.txt file: alchemist_8_anomalyb_0_label
+Key missing in the quests.txt file: alchemist_8_anomalyb_1_description
+Key missing in the quests.txt file: alchemist_8_anomalyb_1_description_refuse
+Key missing in the quests.txt file: alchemist_8_anomalyb_1_description_success
+Key missing in the quests.txt file: alchemist_8_anomalyb_1_label
+Key missing in the quests.txt file: alchemist_8_anomalyb_1_listing
+Key missing in the quests.txt file: alchemist_9_anomalytwob_0_description
+Key missing in the quests.txt file: alchemist_9_anomalytwob_0_description_refuse
+Key missing in the quests.txt file: alchemist_9_anomalytwob_0_description_success
+Key missing in the quests.txt file: alchemist_9_anomalytwob_0_label
+Key missing in the quests.txt file: alchemist_9_anomalytwob_1_description
+Key missing in the quests.txt file: alchemist_9_anomalytwob_1_description_refuse
+Key missing in the quests.txt file: alchemist_9_anomalytwob_1_description_success
+Key missing in the quests.txt file: alchemist_9_anomalytwob_1_label
+Key missing in the quests.txt file: alchemist_9_anomalytwob_1_listing
+Key missing in the quests.txt file: architectwife_0_description
+Key missing in the quests.txt file: architectwife_0_description_refuse
+Key missing in the quests.txt file: architectwife_0_description_success
+Key missing in the quests.txt file: architectwife_0_label
+Key missing in the quests.txt file: architectwife_1_description
+Key missing in the quests.txt file: architectwife_1_description_refuse
+Key missing in the quests.txt file: architectwife_1_description_success
+Key missing in the quests.txt file: architectwife_1_description_timeup
+Key missing in the quests.txt file: architectwife_1_label
+Key missing in the quests.txt file: architectwife_1_listing
+Key missing in the quests.txt file: feathercrafter_0_description
+Key missing in the quests.txt file: feathercrafter_0_description_refuse
+Key missing in the quests.txt file: feathercrafter_0_description_success
+Key missing in the quests.txt file: feathercrafter_0_label
+Key missing in the quests.txt file: findtheegg_0_description
+Key missing in the quests.txt file: findtheegg_0_description_refuse
+Key missing in the quests.txt file: findtheegg_0_description_success
+Key missing in the quests.txt file: findtheegg_0_label
+Key missing in the quests.txt file: fishingfrenzy_0_description
+Key missing in the quests.txt file: fishingfrenzy_0_description_refuse
+Key missing in the quests.txt file: fishingfrenzy_0_description_success
+Key missing in the quests.txt file: fishingfrenzy_0_label
+Key missing in the quests.txt file: fishingfrenzy_1_description
+Key missing in the quests.txt file: fishingfrenzy_1_description_refuse
+Key missing in the quests.txt file: fishingfrenzy_1_description_success
+Key missing in the quests.txt file: fishingfrenzy_1_description_timeup
+Key missing in the quests.txt file: fishingfrenzy_1_label
+Key missing in the quests.txt file: fishingfrenzy_1_listing
+Key missing in the quests.txt file: guardwife_0_description
+Key missing in the quests.txt file: guardwife_0_description_refuse
+Key missing in the quests.txt file: guardwife_0_description_success
+Key missing in the quests.txt file: guardwife_0_label
+Key missing in the quests.txt file: guardwife_1_description
+Key missing in the quests.txt file: guardwife_1_description_refuse
+Key missing in the quests.txt file: guardwife_1_description_success
+Key missing in the quests.txt file: guardwife_1_description_timeup
+Key missing in the quests.txt file: guardwife_1_label
+Key missing in the quests.txt file: guardwife_1_listing
+Key missing in the quests.txt file: knightstonedelivery_0_description
+Key missing in the quests.txt file: knightstonedelivery_0_description_refuse
+Key missing in the quests.txt file: knightstonedelivery_0_description_success
+Key missing in the quests.txt file: knightstonedelivery_0_label
+Key missing in the quests.txt file: knightstonedelivery_1_description
+Key missing in the quests.txt file: knightstonedelivery_1_description_refuse
+Key missing in the quests.txt file: knightstonedelivery_1_description_success
+Key missing in the quests.txt file: knightstonedelivery_1_description_timeup
+Key missing in the quests.txt file: knightstonedelivery_1_label
+Key missing in the quests.txt file: knightstonedelivery_1_listing
+Key missing in the quests.txt file: knightstonedelivery_2_description
+Key missing in the quests.txt file: knightstonedelivery_2_description_refuse
+Key missing in the quests.txt file: knightstonedelivery_2_description_success
+Key missing in the quests.txt file: knightstonedelivery_2_description_timeup
+Key missing in the quests.txt file: knightstonedelivery_2_label
+Key missing in the quests.txt file: knightstonedelivery_2_listing
+Key missing in the quests.txt file: lonelumbermancalva_0_description
+Key missing in the quests.txt file: lonelumbermancalva_0_description_refuse
+Key missing in the quests.txt file: lonelumbermancalva_0_description_success
+Key missing in the quests.txt file: lonelumbermancalva_0_label
+Key missing in the quests.txt file: loneminerfood_0_description
+Key missing in the quests.txt file: loneminerfood_0_description_refuse
+Key missing in the quests.txt file: loneminerfood_0_description_success
+Key missing in the quests.txt file: loneminerfood_0_label
+Key missing in the quests.txt file: lordssword_0_description
+Key missing in the quests.txt file: lordssword_0_description_refuse
+Key missing in the quests.txt file: lordssword_0_description_success
+Key missing in the quests.txt file: lordssword_0_label
+Key missing in the quests.txt file: lordssword_1_description
+Key missing in the quests.txt file: lordssword_1_description_refuse
+Key missing in the quests.txt file: lordssword_1_description_success
+Key missing in the quests.txt file: lordssword_1_description_timeup
+Key missing in the quests.txt file: lordssword_1_label
+Key missing in the quests.txt file: lordssword_1_listing
+Key missing in the quests.txt file: losttapestry_0_description
+Key missing in the quests.txt file: losttapestry_0_description_refuse
+Key missing in the quests.txt file: losttapestry_0_description_success
+Key missing in the quests.txt file: losttapestry_0_label
+Key missing in the quests.txt file: losttapestry_1_description
+Key missing in the quests.txt file: losttapestry_1_description_refuse
+Key missing in the quests.txt file: losttapestry_1_description_success
+Key missing in the quests.txt file: losttapestry_1_label
+Key missing in the quests.txt file: losttapestry_1_listing
+Key missing in the quests.txt file: lumbermancider_0_description
+Key missing in the quests.txt file: lumbermancider_0_description_refuse
+Key missing in the quests.txt file: lumbermancider_0_description_success
+Key missing in the quests.txt file: lumbermancider_0_label
+Key missing in the quests.txt file: lumbermanwine_0_description
+Key missing in the quests.txt file: lumbermanwine_0_description_refuse
+Key missing in the quests.txt file: lumbermanwine_0_description_success
+Key missing in the quests.txt file: lumbermanwine_0_label
+Key missing in the quests.txt file: mayanlumbermanaxe_0_description
+Key missing in the quests.txt file: mayanlumbermanaxe_0_description_refuse
+Key missing in the quests.txt file: mayanlumbermanaxe_0_description_success
+Key missing in the quests.txt file: mayanlumbermanaxe_0_label
+Key missing in the quests.txt file: normanrasgullas_0_description
+Key missing in the quests.txt file: normanrasgullas_0_description_refuse
+Key missing in the quests.txt file: normanrasgullas_0_description_success
+Key missing in the quests.txt file: normanrasgullas_0_label
+Key missing in the quests.txt file: rajadiamondsword_0_description
+Key missing in the quests.txt file: rajadiamondsword_0_description_refuse
+Key missing in the quests.txt file: rajadiamondsword_0_description_success
+Key missing in the quests.txt file: rajadiamondsword_0_label
+Key missing in the quests.txt file: rajadiamondsword_1_description
+Key missing in the quests.txt file: rajadiamondsword_1_description_refuse
+Key missing in the quests.txt file: rajadiamondsword_1_description_success
+Key missing in the quests.txt file: rajadiamondsword_1_description_timeup
+Key missing in the quests.txt file: rajadiamondsword_1_label
+Key missing in the quests.txt file: rajadiamondsword_1_listing
+Key missing in the quests.txt file: sadhu_10_underwaterglass_0_description
+Key missing in the quests.txt file: sadhu_10_underwaterglass_0_description_refuse
+Key missing in the quests.txt file: sadhu_10_underwaterglass_0_description_success
+Key missing in the quests.txt file: sadhu_10_underwaterglass_0_label
+Key missing in the quests.txt file: sadhu_10_underwaterglass_1_description
+Key missing in the quests.txt file: sadhu_10_underwaterglass_1_description_refuse
+Key missing in the quests.txt file: sadhu_10_underwaterglass_1_description_success
+Key missing in the quests.txt file: sadhu_10_underwaterglass_1_label
+Key missing in the quests.txt file: sadhu_10_underwaterglass_1_listing
+Key missing in the quests.txt file: sadhu_11_pujas_0_description
+Key missing in the quests.txt file: sadhu_11_pujas_0_description_refuse
+Key missing in the quests.txt file: sadhu_11_pujas_0_description_success
+Key missing in the quests.txt file: sadhu_11_pujas_0_label
+Key missing in the quests.txt file: sadhu_11_pujas_1_description
+Key missing in the quests.txt file: sadhu_11_pujas_1_description_refuse
+Key missing in the quests.txt file: sadhu_11_pujas_1_description_success
+Key missing in the quests.txt file: sadhu_11_pujas_1_label
+Key missing in the quests.txt file: sadhu_11_pujas_1_listing
+Key missing in the quests.txt file: sadhu_11b_pandit_0_description
+Key missing in the quests.txt file: sadhu_11b_pandit_0_description_refuse
+Key missing in the quests.txt file: sadhu_11b_pandit_0_description_success
+Key missing in the quests.txt file: sadhu_11b_pandit_0_label
+Key missing in the quests.txt file: sadhu_12_topandbottom_0_description
+Key missing in the quests.txt file: sadhu_12_topandbottom_0_description_refuse
+Key missing in the quests.txt file: sadhu_12_topandbottom_0_description_success
+Key missing in the quests.txt file: sadhu_12_topandbottom_0_label
+Key missing in the quests.txt file: sadhu_12_topandbottom_1_description
+Key missing in the quests.txt file: sadhu_12_topandbottom_1_description_refuse
+Key missing in the quests.txt file: sadhu_12_topandbottom_1_description_success
+Key missing in the quests.txt file: sadhu_12_topandbottom_1_label
+Key missing in the quests.txt file: sadhu_12_topandbottom_1_listing
+Key missing in the quests.txt file: sadhu_12_topandbottom_2_description
+Key missing in the quests.txt file: sadhu_12_topandbottom_2_description_refuse
+Key missing in the quests.txt file: sadhu_12_topandbottom_2_description_success
+Key missing in the quests.txt file: sadhu_12_topandbottom_2_label
+Key missing in the quests.txt file: sadhu_12_topandbottom_2_listing
+Key missing in the quests.txt file: sadhu_13_conclusion_0_description
+Key missing in the quests.txt file: sadhu_13_conclusion_0_description_refuse
+Key missing in the quests.txt file: sadhu_13_conclusion_0_description_success
+Key missing in the quests.txt file: sadhu_13_conclusion_0_label
+Key missing in the quests.txt file: sadhu_1_samples_0_description
+Key missing in the quests.txt file: sadhu_1_samples_0_description_refuse
+Key missing in the quests.txt file: sadhu_1_samples_0_description_success
+Key missing in the quests.txt file: sadhu_1_samples_0_label
+Key missing in the quests.txt file: sadhu_1_samples_1_description
+Key missing in the quests.txt file: sadhu_1_samples_1_description_refuse
+Key missing in the quests.txt file: sadhu_1_samples_1_description_success
+Key missing in the quests.txt file: sadhu_1_samples_1_label
+Key missing in the quests.txt file: sadhu_1_samples_1_listing
+Key missing in the quests.txt file: sadhu_2_forest_0_description
+Key missing in the quests.txt file: sadhu_2_forest_0_description_refuse
+Key missing in the quests.txt file: sadhu_2_forest_0_description_success
+Key missing in the quests.txt file: sadhu_2_forest_0_label
+Key missing in the quests.txt file: sadhu_2_forest_1_description
+Key missing in the quests.txt file: sadhu_2_forest_1_description_refuse
+Key missing in the quests.txt file: sadhu_2_forest_1_description_success
+Key missing in the quests.txt file: sadhu_2_forest_1_label
+Key missing in the quests.txt file: sadhu_2_forest_1_listing
+Key missing in the quests.txt file: sadhu_3_pandit_0_description
+Key missing in the quests.txt file: sadhu_3_pandit_0_description_refuse
+Key missing in the quests.txt file: sadhu_3_pandit_0_description_success
+Key missing in the quests.txt file: sadhu_3_pandit_0_label
+Key missing in the quests.txt file: sadhu_3_pandit_1_description
+Key missing in the quests.txt file: sadhu_3_pandit_1_description_refuse
+Key missing in the quests.txt file: sadhu_3_pandit_1_description_success
+Key missing in the quests.txt file: sadhu_3_pandit_1_label
+Key missing in the quests.txt file: sadhu_3_pandit_1_listing
+Key missing in the quests.txt file: sadhu_3b_pandit_0_description
+Key missing in the quests.txt file: sadhu_3b_pandit_0_description_refuse
+Key missing in the quests.txt file: sadhu_3b_pandit_0_description_success
+Key missing in the quests.txt file: sadhu_3b_pandit_0_label
+Key missing in the quests.txt file: sadhu_3b_wife_0_description
+Key missing in the quests.txt file: sadhu_3b_wife_0_description_refuse
+Key missing in the quests.txt file: sadhu_3b_wife_0_description_success
+Key missing in the quests.txt file: sadhu_3b_wife_0_label
+Key missing in the quests.txt file: sadhu_4_desertb_0_description
+Key missing in the quests.txt file: sadhu_4_desertb_0_description_refuse
+Key missing in the quests.txt file: sadhu_4_desertb_0_description_success
+Key missing in the quests.txt file: sadhu_4_desertb_0_label
+Key missing in the quests.txt file: sadhu_4_desertb_1_description
+Key missing in the quests.txt file: sadhu_4_desertb_1_description_refuse
+Key missing in the quests.txt file: sadhu_4_desertb_1_description_success
+Key missing in the quests.txt file: sadhu_4_desertb_1_label
+Key missing in the quests.txt file: sadhu_4_desertb_1_listing
+Key missing in the quests.txt file: sadhu_5_adivasi_0_description
+Key missing in the quests.txt file: sadhu_5_adivasi_0_description_refuse
+Key missing in the quests.txt file: sadhu_5_adivasi_0_description_success
+Key missing in the quests.txt file: sadhu_5_adivasi_0_label
+Key missing in the quests.txt file: sadhu_5_adivasi_1_description
+Key missing in the quests.txt file: sadhu_5_adivasi_1_description_refuse
+Key missing in the quests.txt file: sadhu_5_adivasi_1_description_success
+Key missing in the quests.txt file: sadhu_5_adivasi_1_label
+Key missing in the quests.txt file: sadhu_5_adivasi_1_listing
+Key missing in the quests.txt file: sadhu_5b_adivasib_0_description
+Key missing in the quests.txt file: sadhu_5b_adivasib_0_description_refuse
+Key missing in the quests.txt file: sadhu_5b_adivasib_0_description_success
+Key missing in the quests.txt file: sadhu_5b_adivasib_0_label
+Key missing in the quests.txt file: sadhu_6_enchantedsword_0_description
+Key missing in the quests.txt file: sadhu_6_enchantedsword_0_description_refuse
+Key missing in the quests.txt file: sadhu_6_enchantedsword_0_description_success
+Key missing in the quests.txt file: sadhu_6_enchantedsword_0_label
+Key missing in the quests.txt file: sadhu_6_enchantedsword_1_description
+Key missing in the quests.txt file: sadhu_6_enchantedsword_1_description_refuse
+Key missing in the quests.txt file: sadhu_6_enchantedsword_1_description_success
+Key missing in the quests.txt file: sadhu_6_enchantedsword_1_label
+Key missing in the quests.txt file: sadhu_6_enchantedsword_1_listing
+Key missing in the quests.txt file: sadhu_7_enchantmenttable_0_description
+Key missing in the quests.txt file: sadhu_7_enchantmenttable_0_description_refuse
+Key missing in the quests.txt file: sadhu_7_enchantmenttable_0_description_success
+Key missing in the quests.txt file: sadhu_7_enchantmenttable_0_label
+Key missing in the quests.txt file: sadhu_7_enchantmenttable_1_description
+Key missing in the quests.txt file: sadhu_7_enchantmenttable_1_description_refuse
+Key missing in the quests.txt file: sadhu_7_enchantmenttable_1_description_success
+Key missing in the quests.txt file: sadhu_7_enchantmenttable_1_label
+Key missing in the quests.txt file: sadhu_7_enchantmenttable_1_listing
+Key missing in the quests.txt file: sadhu_8_mountain_0_description
+Key missing in the quests.txt file: sadhu_8_mountain_0_description_refuse
+Key missing in the quests.txt file: sadhu_8_mountain_0_description_success
+Key missing in the quests.txt file: sadhu_8_mountain_0_label
+Key missing in the quests.txt file: sadhu_8_mountain_1_description
+Key missing in the quests.txt file: sadhu_8_mountain_1_description_refuse
+Key missing in the quests.txt file: sadhu_8_mountain_1_description_success
+Key missing in the quests.txt file: sadhu_8_mountain_1_label
+Key missing in the quests.txt file: sadhu_8_mountain_1_listing
+Key missing in the quests.txt file: sadhu_9_underwater_0_description
+Key missing in the quests.txt file: sadhu_9_underwater_0_description_refuse
+Key missing in the quests.txt file: sadhu_9_underwater_0_description_success
+Key missing in the quests.txt file: sadhu_9_underwater_0_label
+Key missing in the quests.txt file: sadhu_9_underwater_1_description
+Key missing in the quests.txt file: sadhu_9_underwater_1_description_refuse
+Key missing in the quests.txt file: sadhu_9_underwater_1_description_success
+Key missing in the quests.txt file: sadhu_9_underwater_1_label
+Key missing in the quests.txt file: sadhu_9_underwater_1_listing
+Key missing in the quests.txt file: sadhu_first_0_description
+Key missing in the quests.txt file: sadhu_first_0_description_refuse
+Key missing in the quests.txt file: sadhu_first_0_description_success
+Key missing in the quests.txt file: sadhu_first_0_label
+Key missing in the quests.txt file: sadhu_intro_0_description
+Key missing in the quests.txt file: sadhu_intro_0_description_refuse
+Key missing in the quests.txt file: sadhu_intro_0_description_success
+Key missing in the quests.txt file: sadhu_intro_0_label
+Key missing in the quests.txt file: sadhu_intro_1_description
+Key missing in the quests.txt file: sadhu_intro_1_description_refuse
+Key missing in the quests.txt file: sadhu_intro_1_description_success
+Key missing in the quests.txt file: sadhu_intro_1_label
+Key missing in the quests.txt file: sadhu_intro_1_listing
+Key missing in the quests.txt file: sadhu_introwife_0_description
+Key missing in the quests.txt file: sadhu_introwife_0_description_refuse
+Key missing in the quests.txt file: sadhu_introwife_0_description_success
+Key missing in the quests.txt file: sadhu_introwife_0_label
+Key missing in the quests.txt file: sadhu_introwife_1_description
+Key missing in the quests.txt file: sadhu_introwife_1_description_refuse
+Key missing in the quests.txt file: sadhu_introwife_1_description_success
+Key missing in the quests.txt file: sadhu_introwife_1_label
+Key missing in the quests.txt file: sadhu_introwife_1_listing
+Key missing in the quests.txt file: sadhu_leadership_0_description
+Key missing in the quests.txt file: sadhu_leadership_0_description_refuse
+Key missing in the quests.txt file: sadhu_leadership_0_description_success
+Key missing in the quests.txt file: sadhu_leadership_0_label
+Key missing in the quests.txt file: spiders_0_description
+Key missing in the quests.txt file: spiders_0_description_refuse
+Key missing in the quests.txt file: spiders_0_description_success
+Key missing in the quests.txt file: spiders_0_label
+Key missing in the quests.txt file: spiders_1_description
+Key missing in the quests.txt file: spiders_1_description_refuse
+Key missing in the quests.txt file: spiders_1_description_success
+Key missing in the quests.txt file: spiders_1_label
+Key missing in the quests.txt file: spiders_1_listing
+Key missing in the quests.txt file: spiders_2_description
+Key missing in the quests.txt file: spiders_2_description_refuse
+Key missing in the quests.txt file: spiders_2_description_success
+Key missing in the quests.txt file: spiders_2_label
+Key missing in the quests.txt file: spiders_2_listing
+Key missing in the quests.txt file: spiders_3_description
+Key missing in the quests.txt file: spiders_3_description_refuse
+Key missing in the quests.txt file: spiders_3_description_success
+Key missing in the quests.txt file: spiders_3_description_timeup
+Key missing in the quests.txt file: spiders_3_label
+Key missing in the quests.txt file: spiders_3_listing
+Key missing in the quests.txt file: sweettrader_0_description
+Key missing in the quests.txt file: sweettrader_0_description_refuse
+Key missing in the quests.txt file: sweettrader_0_description_success
+Key missing in the quests.txt file: sweettrader_0_label
+Key missing in the quests.txt file: sweettrader_1_description
+Key missing in the quests.txt file: sweettrader_1_description_refuse
+Key missing in the quests.txt file: sweettrader_1_description_success
+Key missing in the quests.txt file: sweettrader_1_label
+Key missing in the quests.txt file: sweettrader_1_listing
+Key missing in the quests.txt file: traderdiamonds_0_description
+Key missing in the quests.txt file: traderdiamonds_0_description_refuse
+Key missing in the quests.txt file: traderdiamonds_0_description_success
+Key missing in the quests.txt file: traderdiamonds_0_label
+Key missing in the quests.txt file: traderdiamonds_1_description
+Key missing in the quests.txt file: traderdiamonds_1_description_refuse
+Key missing in the quests.txt file: traderdiamonds_1_description_success
+Key missing in the quests.txt file: traderdiamonds_1_description_timeup
+Key missing in the quests.txt file: traderdiamonds_1_label
+Key missing in the quests.txt file: traderdiamonds_1_listing
+Key missing in the quests.txt file: watersample_0_description
+Key missing in the quests.txt file: watersample_0_description_refuse
+Key missing in the quests.txt file: watersample_0_description_success
+Key missing in the quests.txt file: watersample_0_label
+Key missing in the quests.txt file: watersample_1_description
+Key missing in the quests.txt file: watersample_1_description_refuse
+Key missing in the quests.txt file: watersample_1_description_success
+Key missing in the quests.txt file: watersample_1_description_timeup
+Key missing in the quests.txt file: watersample_1_label
+Key missing in the quests.txt file: watersample_1_listing
+
+List of gaps found between parchments: 
+
+Parchment 1 has a different version: it is at version 1.1.4 while fr parchment is at 4.2.1
+Parchment 2 is missing.
+Parchment 3 is missing.
+Parchment 5 is missing.
+Parchment 6 is missing.
+Parchment 7 is missing.
+Parchment 9 is missing.
+Parchment 10 is missing.
+Parchment 11 is missing.
+Parchment 15 is missing.
+Parchment 17 is missing.
+Parchment 16 is missing.
+Parchment 18 is missing.
+Help 1 is missing.
+Help 2 is missing.
+Help 3 is missing.
+Help 4 is missing.
+Help 5 is missing.
+Help 6 is missing.
+Help 7 is missing.
+Help 8 is missing.
+Help 9 is missing.
+Help 10 is missing.
+Help 11 is missing.
+Help 12 is missing.
+Help 13 is missing.
+
+List of gaps found in culture strings for byzantines: 
+
+String missing for culture byzantines: culture.byzantines
+String missing for culture byzantines: shop.armyforge
+String missing for culture byzantines: shop.bakery
+String missing for culture byzantines: shop.clothing
+String missing for culture byzantines: shop.fishery
+String missing for culture byzantines: shop.forge
+String missing for culture byzantines: shop.lonesheep
+String missing for culture byzantines: shop.lonetower
+String missing for culture byzantines: shop.sheepfarm
+String missing for culture byzantines: shop.tavernbyz
+String missing for culture byzantines: shop.townhall
+String missing for culture byzantines: villager.architect_byzantine
+String missing for culture byzantines: villager.armysmith_byzantine
+String missing for culture byzantines: villager.artisan_byzantine
+String missing for culture byzantines: villager.artwife_byzantine
+String missing for culture byzantines: villager.baron_byzantine
+String missing for culture byzantines: villager.boy_byzantine
+String missing for culture byzantines: villager.centurio_byzantine
+String missing for culture byzantines: villager.farmiller_byzantine
+String missing for culture byzantines: villager.farmiller_wife_byzantine
+String missing for culture byzantines: villager.fisherman_byzantine
+String missing for culture byzantines: villager.girl_byzantine
+String missing for culture byzantines: villager.keeper_byzantine
+String missing for culture byzantines: villager.keeperbirch_byzantine
+String missing for culture byzantines: villager.keeperoak_byzantine
+String missing for culture byzantines: villager.keeperpine_byzantine
+String missing for culture byzantines: villager.keepertropical_byzantine
+String missing for culture byzantines: villager.loneshepherd_byzantine
+String missing for culture byzantines: villager.loneshepherdf_byzantine
+String missing for culture byzantines: villager.lumberman_byzantine
+String missing for culture byzantines: villager.merchant_art
+String missing for culture byzantines: villager.merchant_byzantine
+String missing for culture byzantines: villager.merchant_food
+String missing for culture byzantines: villager.merchant_hindi
+String missing for culture byzantines: villager.merchant_japanese
+String missing for culture byzantines: villager.merchant_materials
+String missing for culture byzantines: villager.merchant_mayan
+String missing for culture byzantines: villager.merchant_norman
+String missing for culture byzantines: villager.miner_byzantine
+String missing for culture byzantines: villager.pastor_byzantine
+String missing for culture byzantines: villager.patriarch_byzantine
+String missing for culture byzantines: villager.playersoldier_byzantine
+String missing for culture byzantines: villager.richwife_byzantine
+String missing for culture byzantines: villager.shepherd_byzantine
+String missing for culture byzantines: villager.shepherd_female_byzantine
+String missing for culture byzantines: villager.silkfarmer_byzantine
+String missing for culture byzantines: villager.silkfarmerwife_byzantine
+String missing for culture byzantines: villager.smith_byzantine
+String missing for culture byzantines: villager.smuggler_silk
+String missing for culture byzantines: villager.soldier_byzantine
+String missing for culture byzantines: villager.teenagerfemale
+String missing for culture byzantines: villager.teenagermale
+String missing for culture byzantines: villager.wife_byzantine
+
+List of gaps found in culture sentences for byzantines: 
+
+Sentences missing for culture byzantines: architect_byzantine.construction
+Sentences missing for culture byzantines: armysmith_byzantine.makebyzantinemace
+Sentences missing for culture byzantines: armysmith_byzantine.makeindiantools
+Sentences missing for culture byzantines: artisan_byzantine.greeting
+Sentences missing for culture byzantines: artisan_byzantine.makepainting
+Sentences missing for culture byzantines: keeperbirch_byzantine.greeting
+Sentences missing for culture byzantines: keeperoak_byzantine.greeting
+Sentences missing for culture byzantines: keeperpine_byzantine.greeting
+Sentences missing for culture byzantines: keepertropical_byzantine.greeting
+Sentences missing for culture byzantines: lumberman_byzantine.bringbackresourceshome
+Sentences missing for culture byzantines: lumberman_byzantine.choptrees
+Sentences missing for culture byzantines: lumberman_byzantine.gathergoods
+Sentences missing for culture byzantines: lumberman_byzantine.plantsaplings
+Sentences missing for culture byzantines: merchant_art.greeting
+Sentences missing for culture byzantines: miner_byzantine.mining
+Sentences missing for culture byzantines: pastor_byzantine.makebooks
+Sentences missing for culture byzantines: patriarch_byzantine.makebooks
+Sentences missing for culture byzantines: smith_byzantine.makeindiantools
+Sentences missing for culture byzantines: villager.becomeadult
+Sentences missing for culture byzantines: villager.calltoarms
+Sentences missing for culture byzantines: villager.goplay
+Sentences missing for culture byzantines: villager.gorest
+Sentences missing for culture byzantines: villager.greeting
+Sentences missing for culture byzantines: villager.makebread
+Sentences missing for culture byzantines: wife_byzantine.cooking
+Sentences missing for culture byzantines: wife_byzantine.delivergoodshousehold
+Sentences missing for culture byzantines: wife_byzantine.getgoodshousehold
+Sentences missing for culture byzantines: wife_byzantine.gethousethresources
+Sentences missing for culture byzantines: wife_byzantine.greeting
+
+List of gaps found in culture building names for byzantines: 
+
+Building name missing for culture byzantines: ancienttemplebyzantine_a0
+Building name missing for culture byzantines: ancienttheatrebyzantine_a0
+Building name missing for culture byzantines: architectbyzantine_a0
+Building name missing for culture byzantines: artisanbyzantine_a0
+Building name missing for culture byzantines: bakerybyzantine_a0
+Building name missing for culture byzantines: barracksbyzantine_a0
+Building name missing for culture byzantines: barracksbyzantine_a_bed_a0
+Building name missing for culture byzantines: basilkabyzantine_a0
+Building name missing for culture byzantines: birchtower_a0
+Building name missing for culture byzantines: chapelbyzantine_a0
+Building name missing for culture byzantines: churchbyzantine_a0
+Building name missing for culture byzantines: churchbyzantine_a9
+Building name missing for culture byzantines: churchbyzantine_a_altar_a0
+Building name missing for culture byzantines: farmbyzantine_a0
+Building name missing for culture byzantines: fisherbyzantine_a0
+Building name missing for culture byzantines: forgebyzantine_a0
+Building name missing for culture byzantines: fortbyzantine_a0
+Building name missing for culture byzantines: fortbyzantine_a_bed1_a0
+Building name missing for culture byzantines: fortbyzantine_a_bed2_a0
+Building name missing for culture byzantines: fortbyzantine_a_bed3_a0
+Building name missing for culture byzantines: fortbyzantine_a_forge_a0
+Building name missing for culture byzantines: grovebirchbyzantine_a0
+Building name missing for culture byzantines: grovebyzantine_a0
+Building name missing for culture byzantines: groveoakbyzantine_a0
+Building name missing for culture byzantines: guesthousebyzantine_a0
+Building name missing for culture byzantines: innbyzantine_a0
+Building name missing for culture byzantines: jungletower_a0
+Building name missing for culture byzantines: lighthouse_a0
+Building name missing for culture byzantines: lonecastle_a0
+Building name missing for culture byzantines: lonecastle_a_living_a0
+Building name missing for culture byzantines: lonecastle_a_praying_a0
+Building name missing for culture byzantines: lonecastle_a_training_a0
+Building name missing for culture byzantines: lonesheepfarm_a0
+Building name missing for culture byzantines: lonesheepfarm_b0
+Building name missing for culture byzantines: lumberbyzantine_a0
+Building name missing for culture byzantines: oaktower_a0
+Building name missing for culture byzantines: pinetower_a0
+Building name missing for culture byzantines: placebyzantine_a0
+Building name missing for culture byzantines: placebyzantine_a_basilica_a0
+Building name missing for culture byzantines: playerfortbyzantine_a0
+Building name missing for culture byzantines: playerfortbyzantine_a_bed1_a0
+Building name missing for culture byzantines: playerfortbyzantine_a_bed2_a0
+Building name missing for culture byzantines: playerfortbyzantine_a_bed3_a0
+Building name missing for culture byzantines: playerfortbyzantine_a_forge_a0
+Building name missing for culture byzantines: presbyterybyzantine_a0
+Building name missing for culture byzantines: quarrybyzantine_a0
+Building name missing for culture byzantines: sheepbyzantine_a0
+Building name missing for culture byzantines: silkfarmbyzantine_a0
+Building name missing for culture byzantines: tavernbyzantine_a0
+Building name missing for culture byzantines: testfarm_a0
+Building name missing for culture byzantines: testfarm_a_backerei_a0
+Building name missing for culture byzantines: villa urbana_a0
+Building name missing for culture byzantines: vineyardbyzantine_a0
+Building name missing for culture byzantines: watchtowerbyzantine_a0
+Building name missing for culture byzantines: well_a0
+Building name missing for culture byzantines: workshopbyzantine_a0
+
+Different number of reputation levels for culture byzantines: 0 in hu, 10 in fr.
+
+List of gaps found in culture strings for hindi: 
+
+String missing for culture hindi: shop.adivasifarm
+String missing for culture hindi: shop.deserttradeoutpost
+String missing for culture hindi: villager.indian_adivasipeasantwife
+
+List of gaps found in culture building names for hindi: 
+
+Building name missing for culture hindi: pandithouse_a0
+
+Different number of reputation levels for culture hindi: 8 in hu, 10 in fr.
+
+List of gaps found in culture strings for japanese: 
+
+String missing for culture japanese: shop.japaneseoutpost
+String missing for culture japanese: shop.lonemine
+String missing for culture japanese: villager.japanese_bandit
+
+List of gaps found in culture building names for japanese: 
+
+Shop name missing for culture japanese in both languages: shop.fishery
+Shop name missing for culture japanese in both languages: shop.fishery
+Shop name missing for culture japanese in both languages: shop.fishery
+
+List of gaps found in culture strings for mayan: 
+
+String missing for culture mayan: shop.lonemayanfarm
+String missing for culture mayan: villager.mayan_obsidiancrafter
+
+List of gaps found in culture sentences for mayan: 
+
+Sentences missing for culture mayan: female.becomeadult
+Sentences missing for culture mayan: male.becomeadult
+Sentences missing for culture mayan: mayan_shaman.gopray.chosen
+Sentences missing for culture mayan: mayan_shaman.greeting
+Sentences missing for culture mayan: villager.becomeadult
+Sentences missing for culture mayan: villager.bringbackresourceshome
+Sentences missing for culture mayan: villager.calltoarms
+Sentences missing for culture mayan: villager.choptrees
+Sentences missing for culture mayan: villager.constructionstepbystep
+Sentences missing for culture mayan: villager.delivergoodshousold
+Sentences missing for culture mayan: villager.gathergoods
+Sentences missing for culture mayan: villager.getgoodshousold
+Sentences missing for culture mayan: villager.gethouseresources
+Sentences missing for culture mayan: villager.getresourcesforbuild
+Sentences missing for culture mayan: villager.goplay
+Sentences missing for culture mayan: villager.gopray
+Sentences missing for culture mayan: villager.gopray.chosen
+Sentences missing for culture mayan: villager.gorest
+Sentences missing for culture mayan: villager.greeting
+Sentences missing for culture mayan: villager.harvestmaize
+Sentences missing for culture mayan: villager.harvestturmeric
+Sentences missing for culture mayan: villager.makerasgulla
+Sentences missing for culture mayan: villager.maketools
+Sentences missing for culture mayan: villager.makeweapons
+Sentences missing for culture mayan: villager.plantmaize
+Sentences missing for culture mayan: villager.plantsaplings
+Sentences missing for culture mayan: villager.plantturmeric
+Sentences missing for culture mayan: villager.scultmayan
+Sentences missing for culture mayan: villager.slaughterchicken
+
+List of gaps found in culture building names for mayan: 
+
+Building name missing for culture mayan: lonemayanpyramid_a0
+Building name missing for culture mayan: mayanobsidiancrafter_a0
+
+Different number of reputation levels for culture mayan: 0 in hu, 10 in fr.
+
+List of gaps found in culture strings for norman: 
+
+String missing for culture norman: shop.alchemyworkshop
+String missing for culture norman: shop.loneabbey
+String missing for culture norman: shop.loneinn
+String missing for culture norman: shop.lonelumberman
+String missing for culture norman: shop.lonelumbermantaiga
+String missing for culture norman: shop.lonemill
+String missing for culture norman: shop.lonemine
+String missing for culture norman: villager.innkeeperfemale
+String missing for culture norman: villager.innkeepermale
+String missing for culture norman: villager.lonemiller
+String missing for culture norman: villager.merchant_weapons
+String missing for culture norman: villager.pigherd
+String missing for culture norman: villager.pigherdf
+String missing for culture norman: villager.robberbaron
+String missing for culture norman: villager.robberleader
+String missing for culture norman: villager.shepherd
+String missing for culture norman: villager.shepherdf
+
+List of gaps found in culture sentences for norman: 
+
+Sentences missing for culture norman: art_merchant.greeting
+Sentences missing for culture norman: art_merchant.keepstall
+Sentences missing for culture norman: boy.greeting
+Sentences missing for culture norman: farmer.bringbackresourceshome
+Sentences missing for culture norman: farmer.collectcrop
+Sentences missing for culture norman: farmer.plantseeds
+Sentences missing for culture norman: guard.greeting
+Sentences missing for culture norman: guildmaster.greeting
+Sentences missing for culture norman: knight.greeting
+Sentences missing for culture norman: knight.patrol
+Sentences missing for culture norman: lady.greeting
+Sentences missing for culture norman: lady.maketapestry
+Sentences missing for culture norman: lumberman.bringbackresourceshome
+Sentences missing for culture norman: lumberman.choptrees
+Sentences missing for culture norman: lumberman.gathergoods
+Sentences missing for culture norman: lumberman.plantsaplings
+Sentences missing for culture norman: miner.cooking
+Sentences missing for culture norman: miner.mining
+Sentences missing for culture norman: monk.greeting
+Sentences missing for culture norman: monk.makebooks
+Sentences missing for culture norman: oriental_merchant.greeting
+Sentences missing for culture norman: oriental_merchant.keepstall
+Sentences missing for culture norman: plant_merchant.greeting
+Sentences missing for culture norman: plant_merchant.keepstall
+Sentences missing for culture norman: priest.gopray.chosen
+Sentences missing for culture norman: priest.greeting
+Sentences missing for culture norman: priest.makeamulets
+Sentences missing for culture norman: seneschal.greeting
+Sentences missing for culture norman: smith.makenormantools
+Sentences missing for culture norman: smith.makenormanweapons
+Sentences missing for culture norman: viking_merchant.greeting
+Sentences missing for culture norman: viking_merchant.keepstall
+Sentences missing for culture norman: villager.becomeadult
+Sentences missing for culture norman: villager.brewpotions
+Sentences missing for culture norman: villager.calltoarms
+Sentences missing for culture norman: villager.godrink
+Sentences missing for culture norman: villager.goplay
+Sentences missing for culture norman: villager.gopray
+Sentences missing for culture norman: villager.gopray.chosen
+Sentences missing for culture norman: villager.gorest
+Sentences missing for culture norman: villager.greeting
+Sentences missing for culture norman: villager.harvestwarts
+Sentences missing for culture norman: villager.makeboudin
+Sentences missing for culture norman: villager.makeglassbottles
+Sentences missing for culture norman: villager.plantwarts
+Sentences missing for culture norman: weapon_merchant.greeting
+Sentences missing for culture norman: weapon_merchant.keepstall
+Sentences missing for culture norman: wife.construction
+Sentences missing for culture norman: wife.delivergoodshousehold
+Sentences missing for culture norman: wife.getgoodshousehold
+Sentences missing for culture norman: wife.gethousethresources
+Sentences missing for culture norman: wife.getresourcesforbuild
+Sentences missing for culture norman: wife.makebread
+Sentences missing for culture norman: wife.makecalva
+Sentences missing for culture norman: wife.makecider
+Sentences missing for culture norman: wool_merchant.greeting
+Sentences missing for culture norman: wool_merchant.keepstall
+
+Different number of reputation levels for culture norman: 0 in hu, 10 in fr.
+
+Traduction completness: 19%

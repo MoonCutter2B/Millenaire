@@ -1,0 +1,1 @@
+native:Sadhu ke Peer;width:20;length:20;around:4;startLevel:-2;orientation:2;male:indian_sadhu;tag:despawnallmobs

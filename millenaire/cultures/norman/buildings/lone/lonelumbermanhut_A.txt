@@ -1,0 +1,2 @@
+max:0;priority:5;french:Hutte de Bûcheron;around:4;startLevel:-1;orientation:3;male:lonelumberman;length:15;width:15;showtownhallsigns:false;tag:grove;shop:lonelumberman;tag:cider
+priority:10

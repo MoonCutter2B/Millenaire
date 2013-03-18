@@ -1,0 +1,5 @@
+sells=dirtwall,wood,wood_pine,wood_birch,wood_jungle,gold,mayangold,cobblestone,maize,stone,purse,villageWand,parchmentMayanVillagers,parchmentMayanBuildings,parchmentMayanItems,parchmentMayanComplete
+
+buys=wood,wood_pine,wood_birch,wood_jungle,stone,cobblestone,sandstone,obsidian,maize,gold,mayangold,wool_white
+
+deliverto=wood,wood_pine,wood_birch,wood_jungle,cobblestone,stone,maize,mayangold,mayanstatue

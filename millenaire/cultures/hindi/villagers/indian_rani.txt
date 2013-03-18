@@ -1,0 +1,15 @@
+native_name=Rani
+gender=female
+familyNameList=high_caste_family_names
+firstNameList=high_caste_women_names
+baseHeight=0.9
+model=femaleasymmetrical
+tag=seller
+
+texture=/graphics/mob/indian/ML_Rich_Woman0.png
+texture=/graphics/mob/indian/ML_Rich_Woman1.png
+texture=/graphics/mob/indian/ML_Rich_Woman2.png
+texture=/graphics/mob/indian/ML_Rich_Woman3.png
+
+goal=gorest
+goal=gopray

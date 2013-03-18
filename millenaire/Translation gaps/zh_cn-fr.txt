@@ -1,0 +1,105 @@
+Translation comparison between zh_cn and fr
+
+List of gaps found in strings.txt: 
+
+Key missing in the strings.txt file: chunk.caption
+Key missing in the strings.txt file: chunk.captionblack
+Key missing in the strings.txt file: chunk.captionblue
+Key missing in the strings.txt file: chunk.captiongeneral
+Key missing in the strings.txt file: chunk.captiongreen
+Key missing in the strings.txt file: chunk.captionpurple
+Key missing in the strings.txt file: chunk.chunkcoords
+Key missing in the strings.txt file: chunk.chunkforced
+Key missing in the strings.txt file: chunk.chunkmap
+Key missing in the strings.txt file: chunk.explanations
+Key missing in the strings.txt file: chunk.playerposition
+Key missing in the strings.txt file: chunk.settings
+Key missing in the strings.txt file: chunk.village
+Key missing in the strings.txt file: culture.byzantines
+Key missing in the strings.txt file: goal.breed
+Key missing in the strings.txt file: goal.cookchicken
+Key missing in the strings.txt file: goal.cooklamb
+Key missing in the strings.txt file: goal.cookpork
+Key missing in the strings.txt file: goal.cooksteak
+Key missing in the strings.txt file: goal.getitemtokeep
+Key missing in the strings.txt file: goal.harvestvines
+Key missing in the strings.txt file: goal.makeclothes_byz_silk
+Key missing in the strings.txt file: goal.makeclothes_byz_wool
+Key missing in the strings.txt file: goal.makecurry
+Key missing in the strings.txt file: goal.makemasa
+Key missing in the strings.txt file: goal.makemurgh
+Key missing in the strings.txt file: goal.makeobsidianflake
+Key missing in the strings.txt file: goal.makesouvlaki
+Key missing in the strings.txt file: goal.makewah
+Key missing in the strings.txt file: goal.shearsheep
+Key missing in the strings.txt file: goal.slaughtercow
+Key missing in the strings.txt file: goal.slaughterpig
+Key missing in the strings.txt file: goal.slaughtersheep
+Mismatched number of parameters for hire.hireablevillager: 0 in fr and 3 in zh_cn
+Mismatched number of parameters for hire.hireablevillagernoreputation: 0 in fr and 1 in zh_cn
+Mismatched number of parameters for hire.hiredvillager: 5 in fr and 8 in zh_cn
+Key missing in the strings.txt file: item.clothes_byz_silk
+Key missing in the strings.txt file: item.clothes_byz_wool
+Key missing in the strings.txt file: item.feta
+Key missing in the strings.txt file: item.lambcooked
+Key missing in the strings.txt file: item.lambraw
+Key missing in the strings.txt file: item.souvlaki
+Key missing in the strings.txt file: item.winebasic
+Mismatched number of parameters for negationwand.confirmmessage: 1 in fr and 3 in zh_cn
+Mismatched number of parameters for negationwand.destroyed: 1 in fr and 2 in zh_cn
+Mismatched number of parameters for panels.bachelor: 0 in fr and 1 in zh_cn
+Mismatched number of parameters for panels.houseunoccupied: 0 in fr and 1 in zh_cn
+Mismatched number of parameters for panels.maplightgreen: 0 in fr and 1 in zh_cn
+Mismatched number of parameters for panels.maporange: 0 in fr and 1 in zh_cn
+Mismatched number of parameters for panels.planningraidlong: 2 in fr and 3 in zh_cn
+Mismatched number of parameters for panels.raidinprogresslong: 2 in fr and 3 in zh_cn
+Mismatched number of parameters for panels.spinster: 0 in fr and 1 in zh_cn
+Mismatched number of parameters for panels.underattacklong: 3 in fr and 4 in zh_cn
+Mismatched number of parameters for quest.cqalchemiststartexplanation: 0 in fr and 1 in zh_cn
+Mismatched number of parameters for quest.cqchapterinprogress: 3 in fr and 4 in zh_cn
+Mismatched number of parameters for quest.cqchapternotstarted: 1 in fr and 2 in zh_cn
+Mismatched number of parameters for quest.cqcheckquestlistandhelp: 1 in fr and 2 in zh_cn
+Mismatched number of parameters for quest.cqsadhustartexplanation: 0 in fr and 2 in zh_cn
+Key missing in the strings.txt file: ui.chunkbutton
+Mismatched number of parameters for ui.communicationexplanations: 0 in fr and 3 in zh_cn
+Mismatched number of parameters for ui.control_gotten: 2 in fr and 6 in zh_cn
+Mismatched number of parameters for ui.control_noreputation: 1 in fr and 5 in zh_cn
+Mismatched number of parameters for ui.control_ok: 1 in fr and 4 in zh_cn
+Mismatched number of parameters for ui.leaderin: 1 in fr and 4 in zh_cn
+Mismatched number of parameters for ui.leaderinstruction: 0 in fr and 3 in zh_cn
+Mismatched number of parameters for ui.relationhelp: 12 in fr and 18 in zh_cn
+Mismatched number of parameters for ui.wandinstruction: 0 in fr and 1 in zh_cn
+
+List of gaps found between parchments: 
+
+Parchment 1 has a different version: it is at version unknown while fr parchment is at 4.2.1
+Parchment 2 has a different version: it is at version unknown while fr parchment is at 1.1.4
+Parchment 3 has a different version: it is at version unknown while fr parchment is at 1.1.4
+Parchment 5 has a different version: it is at version unknown while fr parchment is at 1.1.4
+Parchment 6 has a different version: it is at version unknown while fr parchment is at 1.1.4
+Parchment 7 has a different version: it is at version unknown while fr parchment is at 1.1.4
+Parchment 16 has a different version: it is at version unknown while fr parchment is at 3.1.7
+Help 3 has a different version: it is at version unknown while fr parchment is at 3.4
+Help 4 has a different version: it is at version unknown while fr parchment is at 3.4
+Help 12 has a different version: it is at version 4.0.1 while fr parchment is at 4.3.0
+Help 13 has a different version: it is at version unknown while fr parchment is at 3.4
+
+List of gaps found in culture strings for byzantines: 
+
+String missing for culture byzantines: shop.clothing
+String missing for culture byzantines: shop.sheepfarm
+
+List of gaps found in culture building names for japanese: 
+
+Shop name missing for culture japanese in both languages: shop.fishery
+Shop name missing for culture japanese in both languages: shop.fishery
+Shop name missing for culture japanese in both languages: shop.fishery
+
+List of gaps found in culture strings for norman: 
+
+String missing for culture norman: villager.pigherd
+String missing for culture norman: villager.pigherdf
+String missing for culture norman: villager.shepherd
+String missing for culture norman: villager.shepherdf
+
+Traduction completness: 94%

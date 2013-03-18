@@ -1,0 +1,1 @@
+native:Tour de l'Alchimiste;around:4;startLevel:-1;orientation:3;width:29;length:12;startLevel:-1;male:alchemist;male:alchemistassistant

@@ -1,0 +1,8 @@
+max:0;priority:2000;french:Fort;around:4;startLevel:-5;orientation:2;tag:Patrol;length:32;width:32;signs:2,1,3,5,7,8,6,4,0;shop:townhall
+
+
+
+
+startLevel:-5
+startLevel:-1
+startLevel:-5;subbuilding:fort_A_lefttower;subbuilding:fort_A_righttower

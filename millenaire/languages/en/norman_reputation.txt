@@ -1,0 +1,10 @@
+0;Stranger;We are wary of strangers around here, newcomer. But deal fairly with us and you will find people here hospitable.
+4*64;Known Face;We have seen you around before, and no chickens seem to have gone missing. Continue like this and we will get along.
+16*64;Regular visitor;Welcome, $name! It's good to see you again.
+64*64;Favourite Trader;Ah, $name! All the village was waiting for your return.
+2*64*64;Friend of the village;We Norman are not known for trusting people easily, but my good friend $name, you have really shown we can trust you!
+8*64*64;One of us;It's always a pleasure to see you $name. You may come from distant lands, but you are really one of us now.
+32*64*64;Natural leader;$name, you have gained the trust and respect of the Normans. They will follow you anywhere. 
+-64;Nuisance;We are watching you, $name. Be on your guard.
+-4*64;Unpleasant outsider;You have shown to be a real nuisance around here. Be happy we haven't kicked you out yet.
+-16*64;Public enemy;Your presence here is barely tolerated. One wrong move and you've had it.

@@ -1,0 +1,22 @@
+name:Tour des bandits
+weight:10
+radius:20
+carriesraid:true
+
+mindistancefromspawn:1000
+
+biome:forest
+biome:plains
+biome:taiga
+biome:extreme hills
+biome:foresthills
+
+//extraBiomes mod
+
+biome:forested island
+biome:autumn woods
+biome:green hills
+biome:forested hills
+
+//starting buildings:
+centre:bandittower

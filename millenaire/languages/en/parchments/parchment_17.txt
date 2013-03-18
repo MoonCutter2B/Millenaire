@@ -1,0 +1,50 @@
+version:3.1.7
+Millénaire: Japanese Buildings
+
+Village centres
+
+Shuudannoujou: Big Farm. The center of an Agricultural village where the farmer and his wife live. The Villagers bring crops, wood, and stone to the Shuudannoujou.
+
+Bousai: Fort. This building houses the Shuken and his wife and can be upgraded into a mighty stronghold with walls and watchtowers.
+
+Kumonjo: Imperial office.The Japanese would build huge Imperial Offices to center their villages. The Overseer and his Wife reside here, keeping watch over the village day and night. All building plans for the village are fabricated here, as well as additional plans and proposals.
+NEW_PAGE
+Housing
+
+Shoko: Archives. This building has all the information on the villagers in the village.
+
+Tansetsu: Army Forge. A Tansetsu can make All Japanese military weapons and Armour. They can make the Tachi Sword and the lethal Yumi Bow. They can also make a variety of Japanese Armour. They need a man to be the Smith to make the weapons and a wife to sell it.
+
+Tansetsu: Smith. This is the place where Iron tools are made and sold. The Kajiya makes the tools needed to do other jobs faster. The player can also buy tools here.
+
+Shugi Ie: Crafting House. Produces and sells Paper from rice, it also produces paper walls to be sold in the main building and Timber frames.
+
+Gyogyo and Tsuribori: Fishery. The Ryoushi, or Fisherman, spends his time at this building to catch fish for the village.
+
+Kodachi: Grove. The Japanese Kikori cuts down trees here.
+
+Shijin: Inn. This is where traders come and rest after they have travelled from another village carrying goods.
+
+Daidokoro: Kitchen. This is where the food is cooked and Udon is made. It also sells chicken and fish.
+
+Kikori Koya: Lumbermans Hut. This is the house in which the Lumberman and his wife reside. He chops wood, brings it home, and the wife delivers it to the village center.
+
+Bourou: Lookout Tower. The Lookout Tower is more a decorative building which is built mostly at the edges of the village. But its  main reason for being built is so the guards can see enemies approaching from afar.
+
+Suiden: Rice paddy. The villagers plant rice on this field. It is cultivated by peasants and women, . Women bring the rice to the centre, where it can be bought by the player.
+
+Buttou: Pagoda. This is where the villagers come to pray and its where the Souryo lives.
+
+Noufu Ie: Peasants House. This is the home where the Peasant and his wife lives.
+
+Saisekijou: Quarry. This is where the Koufu and his wife lives. Stone is mined from here and delivered back to the village center.
+
+Heisha: Guards House. In this house lives a warrior or guard with his wife.
+
+Noujou Nojo: Wheat Farm. This is where The farmer and his wife lives. He will gather and grow wheat here.
+NEW_PAGE
+Decorative Buildings
+
+Ike: Pond A decorative building that is nice to walk through.
+
+Torii: Torri Gate. A beautiful gate like structure where the villagers come to pray.

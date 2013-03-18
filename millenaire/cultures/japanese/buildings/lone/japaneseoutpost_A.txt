@@ -1,0 +1,1 @@
+native:Zenshou;around:4;startLevel:-4;orientation:3;width:53;length:51;male:japanese_samurai;male:japanese_peasant;male:japanese_armysmith;female:japanese_womanservant;tag:paddy;shop:japaneseoutpost;startingGood:iron,1,8,0

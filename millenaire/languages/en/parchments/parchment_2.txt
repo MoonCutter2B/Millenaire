@@ -1,0 +1,58 @@
+version:1.1.4
+Millénaire: Norman Buildings
+
+Village centres
+
+Fort. In military villages, this small wooden fort acts as the Town Hall. A knight and his lady lives there. With enough access to stone, the villagers will turn it in a mighty fortress.
+
+Abbaye : Abbey. Ecclesiastic villages are centered on this place of learning and devotion, where a monk tirelessly produces manuscripts, stored in neat bookshelves. It is there after all that local farmers go pay their due - in goods and free work for the Holy Church. It will all be paid back in the next world.
+
+Manoir : Manor. At the centre of agricultural villages, this manor houses a seneschal, in charge of making sure peasants pay their taxes to the king - and to him.
+
+Hall de la Guilde : Guild House. A testament to the skill of the workers that built it, this guild house serves as headquarters for the local artisans under the stern Guild Master.
+NEW_PAGE
+Housing
+
+Armurerie : Armoury. When inhabited by a smith, serves as a production centre for armour and swords.
+
+Elevage Bovin : Cattle farm. Cows are raised here, to collect leather and make filling Norman tripes.
+
+Elevage Porcin : Pig farm. Here pigs are turned into big piles of pork chops and superb boudin noir.
+
+Elevage Ovin : Sheep farm. Sheep raised here provide wool. A smaller fenced area hosts chickens, whose eggs and feathers are harvested.
+
+Ferme : Farm. A wheat farm, where a farmer produces wheat for the bakery.
+
+Forge :  Forge. When inhabited by a smith, serves as production centre for Norman tools, used by other villagers and purchasable by the player.
+
+Maison du garde : Guard House. Inhabited by a guard and his wife.
+
+Hutte du bûcheron : Lumberman’s Hut. Inhabited by a lumberman and his wife.
+
+Prestitère : Presbytery. Inhabited by a priest.
+
+Carrière : Quarry. Inhabited by a miner and his wife, and from where he will dig up seemingly infinite supplies of stones and sand.
+
+Maison du charpentier : Carpenter's house. Inhabited by a carpenter and his wife.
+
+Auberge : Inn. Visiting merchants will occupy it while collecting goods from the village. If it is empty, a male teenager can become a merchant there.
+
+Relais : Guest House. Smaller than an inn, this place can host a visiting merchant, but no teenager will move in.
+
+Marché : Market. Any decent village will eventually want a place where foreign merchants can come and sell exotic goods!
+NEW_PAGE
+Uninhabited Buildings
+
+Archives du village : Municipal Archives. Displays a sign for each villager, which provides information on what they are doing and their family histories.
+
+Boulangerie : Bakery. Used by village women to make bread from wheat collected by the farmers. Important building, as the availability of bread greatly increase the speed at which children grow.
+
+Chapelle / Eglise : Chapel / Church. The chapel, later upgraded to a church, is visited by villagers that feel a need to pray.
+
+Taverne : Tavern. Village women go there to produce cider, and later, when an alembic is installed, calva. Villagers also go there to have a drink.
+
+Tour de guet : Watchtower.  A lookout post visited by the guard when patrolling.
+NEW_PAGE
+Decorative Buildings
+
+Fontaine / Grande Fontaine / Puit. Fountain / Large Fountain /Well : purely decorative buildings.

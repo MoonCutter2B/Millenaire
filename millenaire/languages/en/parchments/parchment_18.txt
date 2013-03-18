@@ -1,0 +1,38 @@
+version:3.1.7
+Millénaire: Japanese Items
+
+Denier. When the Japanese come to this new land they changed their currency to the denier. It comes in three values: Denier (bronze), Denier Argent (silver) worth 64 regular ones, and Denier Or (gold) worth 64 silver ones.
+NEW_PAGE
+Food items
+
+Rice. Bland and tasteless but the Japanese harvest it like there's no tomorrow. If the japanese have rice in their chests they have more children. It is also used in the making of paper.
+
+Udon. This mysterious food item is made by the japanese in their kitchen.
+NEW_PAGE
+Tools & Weapons
+
+Tachi sword. This sword does the same damage as the iron sword but does critical hits with 3X damage. Its good at taking down tough enemies.
+
+Yumi Bow. Bigger than the English longbow this was and is still the largest bow in history with some being 2.2 metres long. This bow shoots further and faster this gives greater accuracy over a long distance. It also reloads faster and does more damage than a normal bow.
+
+Keiko Armour. This is the Soldier's armour similar to chain mail armour with leather in between. It's as strong as iron armour and more durable. it is made out of iron and leather.
+
+O-Yoroi Armour. This armour comes in two designs one being red and the other blue. This is stronger than iron armour and as durable as diamond. the village leaders wear this armour.
+NEW_PAGE
+Construction & Decoration
+
+Thatch. This is made out of wheat and is used for the roofs of buildings. Its also rather comfy to sleep on.
+
+Paper Wall. This is a thin sheet of paper stretched by four sticks. Light can shine through it but you can't see through it. It is for decorating buildings. It is made from paper and the paper is made fro rice.
+
+Timber Frames. The Japanese make Plain and cross timber frames for their buildings. It is made from dirt and dark wood.
+New_PAGE
+Parchments
+
+Japanese Villagers. A parchment outlining the various kinds of villagers that will probably kill you if you touch one them.
+
+Japanese Buildings. A description of the different buildings you can see the villagers get stuck making.
+
+Japanese Items. Your reading it right now.
+
+Complete Japanese Scroll. The content of the previous three, in one easy scroll for easier carrying.

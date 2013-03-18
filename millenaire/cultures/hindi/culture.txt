@@ -1,0 +1,3 @@
+qualifierSeparator= 
+knownCrop=rice
+knownCrop=turmeric

@@ -1,0 +1,50 @@
+version:3.1.7
+Millénaire: Bâtiments japonais
+
+Centres de village
+
+Shuudannoujou: Grosse ferme. C'est le centre d'un village agricole où vivent le fermier et sa femme. Les villageois y apportent des cultures, du bois et de la pierre.
+
+Bousai: Fort. Ce bâtiment abrite le Shuken et sa femme. Il peut évoluer en une forteresse puissante avec murailles et tours de guet.
+
+Kumonjo: Office impériale. Les Japonais construiraient d'énormes offices impériaux pour centrer leurs villages. le superviseur et sa femme résident ici, surveillant, jour et nuit, le village. Tous les plans de construction pour le village sont crées ici, ainsi que tous projets et propositions supplémentaires.
+NEW_PAGE
+Habitations
+
+Shoko: Archives. Ce bâtiment renferme toutes les informations sur les villageois dans le village.
+
+Tansetsu: Forge militaire. C'est ici que sont fabriquées toutes les armes et armures militaires japonaises. Le Tansetsu peut forger l'épée de Tachi et l'arc redoutable de Yumi. Il peut également forger diverses armures japonaises. Il a besoin d'un homme, qui aura le statut de forgeron et créera les armes, et d'une femme qui se chargera de vendre les articles crées à la forge.
+
+Tansetsu: Forge. C'est le lieu où sont forgés et vendus les outils en fer. Le Kajiya (forgeron) fabrique des outils qui sont nécessaires pour réaliser d'autres travaux plus efficacement. En tant que joueur, vous pouvez aussi acheter des outils ici.
+
+Shugi Ie: Maison des artisans. Elle produit et vend du papier de riz, elle produit aussi des murs en papier qui seront vendus dans le bâtiment principal et des structures en bois.
+
+Gyogyo and Tsuribori: Pêcherie. Le Ryoushi (pêcheur) passe son temps dans ce bâtiment  à pêcher des poissons pour le village.
+
+Kodachi: Verger. Le Kikori japonais abats les arbres ici.
+
+Shijin: Auberge. C'est là que les commerçants arrivent et se reposent après avoir voyagé, en transportant des marchandises provenant d'un autre village.
+
+Daidokoro: Cuisine. C'est là que sont cuits les aliments et que l'on prépare le udon (pâtes japonaises). On y vend aussi du poulet et du poisson.
+
+Kikori Koya: Cabane du bûcheron. C'est la maison dans laquelle vivent le bûcheron et sa femme. Le bûcheron coupe le bois et l'apporte chez lui, et sa femme livre le bois au centre du village.
+
+Bourou: Tour de guet. la tour de guet est plus un bâtiment décoratif qui est généralement construit aux bords du villages. Mais, la raison principale de sa construction est qu'elle permet aux gardes de voir, plus loin, les ennemis qui approchent.
+
+Suiden: Rizière. Les villageois plantent le riz sur ce terrain. La rizière est cultivée par les paysans. Les femmes apportent le riz au Centre où vous pourrez l'acheter.
+
+Buttou: Pagode. C'est là où les villageois viennent prier et où vit le Souryo (moine).
+
+Noufu Ie: Maison des paysans. C'est la maison où vivent le paysan et sa femme.
+
+Saisekijou: Carrière. C'est là où vivent le Koufu et sa femme. La pierre est extraite d'ici et est livrée au Centre du village.
+
+Heisha: Maison des gardes. Dans cette maison vivent un guerrier, ou un garde, avec sa femme.
+
+Noujou Nojo: Ferme à blé. C'est là où vivent l'agriculteur et sa femme. L'agriculteur y cultivera et ramassera le blé.
+NEW_PAGE
+Bâtiments décoratifs
+
+Ike: Bassin. Un bâtiment décoratif au sein duquel il est agréable de se promener.
+
+Torii: Torii (Portail traditionnel japonais). C'est une belle "porte" telle une construction où les villageois viennent prier.

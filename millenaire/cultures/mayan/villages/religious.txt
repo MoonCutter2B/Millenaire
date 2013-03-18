@@ -1,0 +1,49 @@
+name:Costumbre
+weight:10
+carriesraid:true
+
+
+biome:plains
+biome:swampland
+
+//extraBiomes mod
+biome:lush swampland
+biome:jungle
+biome:rainforest
+
+//starting buildings:
+centre:mayanobservatory
+start:mayanhouse
+start:mayanhouse
+start:mayanlumber
+start:mayangrove
+start:mayanmining
+start:mayanshamangrounds
+
+player:mayanplayersmallfield
+player:mayanplayersmallhouse
+player:mayanplayerlargefield
+player:mayanplayerhugefield
+player:mayanplayerestate
+player:mayanplayerlargehouse
+
+//to be built in priority
+core:mayanmining
+core:mayancornfarm
+core:mayangrove
+core:mayantemple
+
+//to be built after the core ones
+secondary:mayanlargepeasanthouse2
+secondary:mayanlibrary
+secondary:mayanalter
+secondary:mayansculptorhouse
+secondary:mayancalendar
+secondary:mayanmarket
+secondary:mayancrafter
+secondary:mayanobsidiancrafter
+
+//never for this type of village
+never:mayanarmyforge
+never:mayanwatchtower
+never:mayanguard

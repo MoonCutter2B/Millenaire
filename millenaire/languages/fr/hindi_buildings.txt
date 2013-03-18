@@ -1,0 +1,50 @@
+brickkiln_A0=Four à briques
+chiefhouse_A0=Demeure du chef
+chiefhouse_B0=Demeure du chef
+fort_A0=Fort
+fort_A_forge_A0=Forge du fort
+fort_A_soldierhouse_A0=Caserne
+grove_A0=Bosquet
+lumbermanhouse_A0=Maison de bûcheron
+paddy_A0=Rizière
+pandithouse_A0=Maison du prêtre
+peasanthouse_A0=Maison paysanne
+peasanthouse_B0=Maison paysanne
+peasanthouse_C0=Maison paysanne
+playerhugefield_A0=Très grand terrain
+playerlargefield_A0=Grand terrain
+playersmallfield_A0=Petit terrain
+playersmallhouse_A0=Petite maison
+quarry_A0=Carrière 
+quarry_B0=Carrière 
+soldierhouse_A0=Maison de soldat 
+sugarplantation_A0=Plantation de sucre
+villagetemple_A0=Temple du village
+playerestate_A0=Villa
+spicegarden_A0=Jardin à épices
+forge_A0=Forge
+armyforge_A0=Forge militaire
+scultorhouse_A0=Maison du sculpteur
+archives_A0=Archive du temple
+palace_A0=Palais
+guesthouse_A0=Petite auberge
+inn_A0=Auberge
+largepeasanthouse_A0=Grande maison
+largepeasanthouse_A_secondary_A0=Maison secondaire
+playerpalace_A0=Palais du joueur
+bazaar_A0=
+tank_A0=
+
+//extra buildings:
+well_A0=Puit
+
+//lone buildings:
+adivasifarm_A0=Ferme adivasi
+adivasifarm_B0=Ferme adivasi
+deserttradeoutpost_A0=Relais du désert
+ruinedfort_A0=Fort en ruine
+sandblasted_A0=Relais abandonné
+sadhutree_A0=Arbre du Sadhu
+indiandesertedfarm_A0=Ferme indienne détruite
+loneshrine_A0=Temple hindou isolé
+sadhutree_A0=Arbre du Sadhu

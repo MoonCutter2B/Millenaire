@@ -1,0 +1,8 @@
+name:Mine abandonnée
+weight:10
+radius:10
+biome:extreme hills
+biome:ice mountains
+
+//starting buildings:
+centre:abandonedmine

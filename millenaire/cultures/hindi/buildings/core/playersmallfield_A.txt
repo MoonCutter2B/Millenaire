@@ -1,0 +1,1 @@
+max:0;priority:100000;native:Choti saajisa;english:Small Plot;around:4;startLevel:-1;orientation:3;width:8;length:5;reputation:64*64;price:2*64

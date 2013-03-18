@@ -1,0 +1,1 @@
+native:Mine Abandonnée;around:4;startLevel:-10;orientation:3;width:15;length:9;startingGood:denier,1,20,44;startingGood:iron,1,8,16;startingGood:normanpickaxe,0.2,1,0;;startingGood:normanshovel,0.2,1,0;startingGood:cobblestone,1,16,64;startingGood:stone,1,16,32;startingGood:coal,1,16,32

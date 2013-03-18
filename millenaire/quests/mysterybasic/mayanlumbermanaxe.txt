@@ -1,0 +1,12 @@
+minreputation:0
+chanceperhour:0.5
+maxsimultaneous:1
+step:new
+duration:48
+definevillager:key=startvillager,type=mayan/mayan_lumberman,forbiddenplayertag=mayanlumbermanaxe_done
+villager:startvillager
+requiredgood:normanaxe,1
+rewardmoney:15*64
+rewardreputation:20*64
+showrequiredgoods:false
+settagsuccess:startvillager,mayanlumbermanaxe_done

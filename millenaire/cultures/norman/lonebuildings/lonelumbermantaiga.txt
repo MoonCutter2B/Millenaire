@@ -1,0 +1,11 @@
+name:Bûcheron solitaire
+weight:10
+radius:10
+biome:taiga
+biome:taigahills
+
+//extraBiomes mod
+biome:taiga mountain
+
+//starting buildings:
+centre:lonelumbermantaigahut

@@ -1,0 +1,9 @@
+name:Pharos
+weight:10
+radius:10
+biome:beach
+
+mindistancefromspawn:1000
+
+//starting buildings:
+centre:lighthouse

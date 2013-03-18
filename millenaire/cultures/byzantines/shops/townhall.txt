@@ -1,0 +1,5 @@
+sells=wood,wood_birch,clay,cobblestone,stone,bricks,byzantinetiles,glass,sandstone,wool_white,bookshelves,book,paper,painting,byzantineiconsmall,byzantineiconmedium,byzantineiconlarge,iron,leather,arrow,purse,villageWand
+
+buys=wood,wood_birch,clay,cobblestone,stone,bricks,byzantinetiles,glass,sandstone,wool_white,bookshelves,book,paper,painting,byzantineiconsmall,byzantineiconmedium,byzantineiconlarge,iron,leather,lambcooked,bread,fishcooked,wine,feta,silk,steelAxe,steelPickaxe,steelShovel,steelHoe,byzantineMace
+
+deliverto=wood,wood_pine,wood_birch,wood_jungle,cobblestone,stone,sandstone,clay,glass,bricks,byzantinetiles,glass,sandstone,wool_white,wool_gray,wool_black,wool_brown,painting,byzantineiconsmall,byzantineiconmedium,byzantineiconlarge,bookshelves,book,paper

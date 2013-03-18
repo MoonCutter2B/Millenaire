@@ -1,0 +1,21 @@
+name:Mono Paratiritio
+weight:5
+radius:10
+biome:taiga
+biome:tundra
+
+//biome mods:
+biome:wetland
+biome:ominous woods
+biome:mountain
+biome:glacier
+biome:crag
+biome:coniferous forest
+biome:boreal forest
+biome:arctic
+biome:alps
+biome:temperate rainforest
+
+
+//starting buildings:
+centre:pinetower

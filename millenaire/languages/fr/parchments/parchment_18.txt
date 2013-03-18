@@ -1,0 +1,38 @@
+version:3.1.7
+Millénaire: Objets japonais
+
+Denier. Lorsque les Japonais ont pris possession de cette nouvelle terre, ils ont changé leur monnaie en Denier. Celui-ci se décline en 3 valeurs : Denier (bronze), Denier Argent (argenté) qui vaut 64 Deniers, et Denier Or (doré) qui vaut 64 Deniers Argent.
+NEW_PAGE
+Nourriture japonaise
+
+Riz. Fade et insipide, mais les Japonais le récoltent comme s'il n'y avait pas de lendemain. Si les Japonais ont du riz dans leurs coffres, ils auront plus d'enfants. Le riz est aussi utilisé dans la fabrication du papier.
+
+Udon. Cette mystérieuse nourriture est préparée par les Japonais dans leur cuisine. 
+NEW_PAGE
+Outils et armes
+
+Epée de Tachi. Cette épée fait les mêmes dommages que l'épée de fer mais fait des coups critiques avec trois fois plus de dommages. Elle est bien pour venir à bout d'ennemis coriaces.
+
+L'arc de Yumi. Plus grand que l'arc anglais, il était et est toujours le plus grand arc de l'histoire, avec, pour certains, des tailles de 2,2 mètres de long. Cet arc tire plus loin et plus vite, ce qui donne une meilleure précision sur une grande distance. Il recharge aussi plus vite et fait plus de dégâts qu'un arc normal.
+
+Armure Keiko. C'est l'armure du soldat, elle est semblable à l'armure en cotte de maille intercalée de cuir. Elle protège aussi bien que l'armure en fer mais est plus résistante. Elle est constituée de fer et de cuir.
+
+Armure O-Yoroi. On trouve cette armure dans deux modèles : le rouge et le bleu. Elle protège plus efficacement que l'armure de fer et aussi résistante que l'armure en diamant. Les chefs de village la portent.
+NEW_PAGE
+Construction et décorations
+
+Chaume. Elle est fabriquée à partir du blé et sert à la construction des toits des bâtiments. Elle est également plutôt confortable pour y dormir dessus.
+
+Mur en papier. Il s'agit d'une mince feuille de papier tendue entre  quatre baguettes de bois. La lumière peut le pénétrer mais vous ne pouvez pas voir à travers. Il est utilisé pour décorer les bâtiments. Il est fabriqué à partir du papier qui, lui-même, est crée à partir du riz.
+
+Structure bois. Les Japonais font des pans de bois de façade simples ou en croix pour leur bâtiments. Ceux-ci sont fait de terre et de bois foncé.
+New_PAGE
+Parchemins
+
+Villageois japonais. Un parchemin qui résume les divers types de villageois qui vous tueront probablement si vous touchez à l'un d'entre eux.
+
+Bâtiments japonais. Une description des différents bâtiments que vous pouvez rencontrer dans le village et qui peuvent être construits par les villageois.
+
+Objets japonais. C'est le parchemin que vous êtes en train de lire.
+
+Parchemin japonais complet. Les contenus des trois parchemins précédents sont regroupés en un seul parchemin facile à transporter.

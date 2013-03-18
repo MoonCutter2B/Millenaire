@@ -1,0 +1,1 @@
+priority:3000;native:Maya Makan;english:Mayan Farm;around:4;startLevel:-1;orientation:0;male:lonemayanfarmer;female:lonemayanpeasantwife;width:20;length:20;shop:lonemayanfarm;showtownhallsigns:false;tag:maizefarm;tag:chicken

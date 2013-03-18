@@ -1,0 +1,865 @@
+
+startup.loadproblem=There was an error when trying to load <0>.
+startup.checkload=Check that the cultures directory is in the millenaire directory in the minecraft directory.
+startup.millenaireloaded=<0> is loaded. Explore and press '<1>' to locate villages.
+startup.radiuswarning=WARNING: Setting the village radius so high should not be needed and will cause much increased lag. Values above 70 are not recommended.
+
+command.nogenerate=<0> will no longer generate villages on new chunks in this world.
+command.willgenerate=<0>  will now generate villages on new chunks in this world.
+command.astarpathing=Using A* pathing
+command.binarypathing=Using binary pathing
+command.minecraftpathing=Using Minecraft pathing
+command.inactive=Inactive
+command.active=Active
+command.frozen=Frozen
+command.villagelist=<4>: <0> (<1>) is <2> metres <3>.
+command.villagelistkeylonebuilding=<0> is <1> metres <2>.
+command.noknowvillage=No known village closer than 2 km. Keep searching!
+command.newvillagefound=New village located: <0> of type <1> and culture <2> is <3> metres <4>.
+command.newlonebuildingfound=New building located: <0> is <1> metres <2>.
+command.pathrebuild=The map and the pathing of <0> have been rebuilt.
+
+//Text used in various UI parts, in no specific order:
+ui.lockedchest=Locked chest
+ui.largelockedchest=Large locked chest
+ui.unlockedchest=Unlocked chest
+ui.largeunlockedchest=Large unlocked chest
+ui.allchestsunlocked=All the chests of <0> are now unlocked.
+ui.outofstock=Out of stock!
+ui.reputationneeded=Reputation needed: <0>
+ui.missingdeniers=You are missing <0> deniers.
+ui.missingequipment=Missing equipment
+ui.noneininventory=You have none in your inventory.
+ui.selling=Selling
+ui.buying=Buying
+ui.buybuilding=Buy <0> (<1>)
+ui.sellercoming=<0>: I'll be right there, $name!
+ui.tradecomplete=<0>: I hope you liked trading with us! Have a good day.
+ui.sellerboycott=<0>: Never again will we trade with you, outlaw!
+ui.sellernotcurrently possible=<0>: How can you think of trading when our village is devastated?
+ui.wesell=We sell
+ui.webuy=We buy
+ui.isell=I sell
+ui.inventory=Inventory
+ui.villagechief=Head of the village of <0>
+ui.yourstatus=Your status
+ui.possiblehousing=Possible housing
+ui.alreadybuilt=already built
+ui.alreadyrequested=already requested
+ui.notavailableyet=not available yet
+ui.available=available
+ui.youaremissing=you are missing: <0>
+ui.scrollsnoreputation=Your reputation is not sufficient to purchase village scrolls.
+ui.scrollsnotenoughmoney=You are missing <0> denier(s) for a village scroll.
+ui.scrollsok=You can purchase village scrolls.
+ui.buyscroll=Buy the village scroll.
+ui.cost=Cost
+ui.clicktorequest=Click to request
+ui.scrollbought=<0>: You are now entrusted with our village's parchment!
+ui.housebought=<0>: The construction of your <1> will start shortly!
+ui.inhabitantof=Inhabitant of <0>
+ui.inconstruction=In Construction
+ui.nospace=Not enough space
+ui.reservedforvillager1=Reserved
+ui.reservedforvillager2=for villager
+ui.currentlyempty1=Currently
+ui.currentlyempty2=empty
+ui.visitorslist1=Visitors'
+ui.visitorslist2=List
+ui.goodstraded=Goods traded
+ui.imports=Imports
+ui.exports=Exports
+ui.import_total=Total Imports: <0>
+ui.export_total=Total Exports: <0>
+ui.merchants=Merchants:
+ui.goalscompleted1=All building
+ui.goalscompleted2=goals completed
+ui.project=Project
+ui.noconstruction1=No construction
+ui.noconstruction2=in progress
+ui.upgrading=Upgrading (<0>)
+ui.construction=Construction <0>:
+ui.population=Population:
+ui.populationnumber=Population: <0>
+ui.adults=Adults: <0> (<1>/<2>)
+ui.teens=Youth: <0> (<1>/<2>)
+ui.children=Children: <0> (<1>/<2>)
+ui.villagemap=Village Map
+ui.nbbuildings=<0> buildings
+ui.wandwrongblock=This wand only works on an obsidian block for a random village or on the following blocks:
+ui.wandblocklist=<0> for a <1>
+ui.wandblocklistcontrolled=<0> for a <1> (requires leadership in this culture)
+ui.brickinstructions=One dirt and one sand are needed to create bricks.
+ui.buildingscentre=Centre
+ui.buildingsstarting=Starting buildings
+ui.buildingsplayer=Player's buildings
+ui.buildingskey=Key buildings
+ui.buildingssecondary=Secondary buildings
+ui.buildingsextra=Extra buildings
+ui.worldnotgenerated=The area around is not fully generated. Walk around and come back.
+ui.tooclosetospawn=You are not allowed to generate a village so close to the spawn point.
+ui.generatenotenoughspace=Could not find space for the Town Hall.
+ui.generatenotenoughspacevillage=Could not find space for the village.
+ui.lackingresources=Lacking resources
+ui.lockedchestwarning=WARNING: destroying locked chests will prevent villages from working properly. Only do it if you want to destroy the village.
+ui.xoutofy=<0> of <1>
+ui.extraresneeded1=<0> other resources
+ui.extraresneeded2=required
+ui.woodforplanks=Wood (any)
+ui.woodoak=Oak Wood
+ui.woodpine=Spruce Wood
+ui.woodbirch=Birch Wood
+ui.woodjungle=Tropical Wood
+ui.anyenchanted=Enchanted object
+ui.enchantedsword=Enchanted sword
+ui.selectabuildingproject=Select a building project
+ui.projectadded=The project has been added to the list
+ui.problemat=Problem at <0>: <1>
+ui.constructionforbidden=construction forbidden
+ui.locationclash=clash with an other building
+ui.outsideradius=outside village radius 
+ui.wrongelevation=outside allowed altitude
+ui.danger=dangerous block
+ui.notreachable=unreachable area
+ui.unknownerror=unknown problem
+ui.controlbuildingprojects=Manage building projects
+ui.forbidupgrades=Stop upgrades
+ui.allowupgrades=Allow upgrades
+ui.cancelbuilding=Remove building
+ui.level=level
+ui.notyetbuilt=Not yet built
+ui.nbinhabitants=Number of inhabitants: <0>
+ui.wandnocontrol=You cannot create this village type as you are not recognised as a leader of the <0> culture.
+ui.control_ok=Your service to the village are such that the <0> people are ready to recognise you as a leader! I can make it official and allow you to start your own village.
+ui.control_noreputation=Your reputation is not yet sufficient for you to be recognised as a leader of the <0> people. Improve your reputation with us or perform exceptional tasks to reach this status.
+ui.control_alreadydone=You are already recognised as a leader of the <0> people.
+ui.control_get=Ask for recognition as a leader.
+ui.control_gotten=<0>: I officially recognise you as worthy of leading our <1> people! You can now start your own village.
+ui.selectavillage=Select the village type you want to create
+ui.leadershipstatus=Leadership status
+ui.leaderin=You are a leader in the <0> culture. You can create a village of this culture you can control.
+ui.notleaderin=You are not yet a leader in the <0> culture.
+ui.leaderinstruction=To become a leader in a culture, you need to either reach "Natural leader" level in a village and ask the village leader, or complete the Creation Quest chapter for that culture (if available).
+ui.wandinstruction=Use the wand on an obsidian block to generate a random village or on a gold block to select the village type you want
+ui.controlled=controlled
+ui.villagerelations=<0> (<1>, <2>): <3>
+ui.relationlist=Relations with other villages
+ui.relationpraise=Praise
+ui.relationslander=Slander
+ui.relationpoints=Diplomactic points available: <0>
+ui.villagerelationsnobutton=You must have points and a positive reputation to influence the village.
+ui.relationhelp=Relations help<ret><ret>Relations between villages determines whether those villages will cooperate or not.<ret><ret>Local trade (merchants carrying resources) will happen between villages with good relations of the same culture or excellent relations of different cultures.<ret><ret>Villages of different cultures with very good relations that both have markets will host merchants from the other culture.<ret><ret>Villages of the same culture with excellent relations will accept each others' teenagers if they have jobs available.<ret><ret>Relations between villages start at excellent for hamlets of a parent village, good for villages of the same culture, and neutral otherwise.<ret><ret>Each day, a player gets five diplomatic points with which to influence villages' relations. The effectiveness of the praise or slander depends on his reputation in that village.
+ui.relationfriendly=Recent developments between the villages of <0> and <1> have improved relations between them. They are now <2>.
+ui.relationunfriendly=Recent clashes between the villages of <0> and <1> have worsened relations between them. They are now <2>.
+ui.cropplantingknowledge=You do not know how to plant <0>. You need to ask a village leader.
+ui.cropsknown=Crops known to this culture
+ui.cropknown=You have learned how to plant <0>.
+ui.cropinsufficientreputation=Your reputation is too low for the village to teach you how to plant <0>.
+ui.cropnotenoughmoney=You need <1> more to be able to afford learning how to plant <0>.
+ui.cropoktolearn=The village can teach you to plant <0>.
+ui.croplearn=Learn (<0>)
+ui.croplearned=<0>: You have been revealed the mysteries of the cultivation of <1>!
+ui.raider=Raider
+
+ui.communicationexplanations=To communicate with the villagers, do a right-click. If an action is possible with the villager in question (trading, discussing with the head of the village, hiring him temporarily, starting a quest) a window will open.
+ui.helpbutton=Millénaire Help
+ui.chunkbutton=Map of chunks
+ui.serverimportforbidden=Only admin users can import buildings on a server.
+
+help.tab_1=Generalities on villages
+help.tab_2=Trading
+help.tab_3=Reputation & village chief
+help.tab_4=Village growth
+help.tab_5=Combats and raids
+help.tab_6=Creating or destroying a village
+help.tab_7=Quests
+help.tab_8=The Normans
+help.tab_9=The Indians
+help.tab_10=The Mayas
+help.tab_11=The Japanese
+help.tab_12=The Byzantines
+help.tab_13=FAQ
+
+
+quest.obtained=Obtained
+quest.lackingcondition=You are lacking:
+quest.lackinghiddengoods=You do not have the goods needed for this task.
+quest.close=Close
+quest.accept=Accept Quest
+quest.refuse=Refuse Quest
+quest.continue=Proceed with Quest
+quest.conditionsnotmet=You have not yet met all the conditions.
+quest.lessthananhourleft=Less than an hour left!
+quest.timeremaining=Time remaining
+quest.hours=hour(s)
+quest.noquestsvisible=No listable quests in process
+quest.questlist=Quests in progress
+quest.reputationlost=reputation lost
+
+quest.creationqueststatus=Creation Quest status
+quest.creationqueststatusshort=Creation Quest:
+
+quest.cqchaptersadhu=The Sadhu
+quest.cqsadhustartexplanation=Find a villager able to guide you in an Indian village where you have "Friend of the village" reputation for the first mission.
+
+quest.cqchapteralchemist=The Alchemist
+quest.cqalchemiststartexplanation=Find a villager able to guide you in a Norman village where you have at least "Friend of the village" as reputation.
+
+quest.cqallcompleted=Congratulations, you have completed all the Creation Quest missions currently available!
+quest.cqcheckforupdates=Check www.millenaire.org for future updates with more missions.
+quest.cqchapternotstarted=You have not started the chapter "<0>".
+quest.cqchapterinprogress=You have completed <1> mission(s) of <2> missions in the Creation Quest chapter "<0>".
+quest.cqchaptercompleted=You have completed the chapter "<0>".
+quest.cqchapternotstartedshort=Chapter "<0>": not started.
+quest.cqchapterinprogressshort=Chapter "<0>": <1>/<2>.
+quest.cqchaptercompletedshort=Chapter "<0>": completed.
+quest.cqcheckquestlistandhelp=Press '<0>' for more information or to access the Millénaire help.
+
+
+
+//Item names
+
+//The following items should not be translated
+//They are either proper names (the deniers)
+//or specific local specialities that aren't translated
+//in other languages
+//I'm putting them for non-Latin alphabet languages,
+//so they can be written in other alphabets
+item.denier=Denier
+item.denierOr=Denier Or
+item.denierArgent=Denier Argent
+item.calva=Calva
+item.tripes=Tripes
+item.boudin=Boudin Noir
+
+item.dirtwall=Dirt Wall
+
+item.building=Locked Chest
+item.normanPickaxe=Norman Pickaxe
+item.normanAxe=Norman Axe
+item.normanShovel=Norman Shovel
+item.normanHoe=Norman Hoe
+item.normanBroadsword=Norman Broadsword
+item.normanHelmet=Norman Helmet
+item.normanPlate=Norman Chestplate
+item.normanLegs=Norman Leggings
+item.normanBoots=Norman Boots
+item.rice=Rice
+item.turmeric=Turmeric
+item.vegcurry=Vegetarian Curry
+item.chickenmeat=Raw Chicken
+item.chickencurry=Murgh Curry
+item.brickmould=Brick Mould
+item.rasgulla=Rasgulla
+item.plaintimber=Plain Timber Frame
+item.crosstimber=Cross Timber Frame
+item.wetbrick=Wet Brick
+item.cookedbrick=Cooked Brick
+item.mudbrick=Mud Brick
+item.indianstatue=Hindu Statue
+item.ciderapple=Cider Apple
+item.cider=Cider
+item.villagewand=Wand of Summoning
+item.negationwand=Wand of Negation
+item.normanvillagers=Norman Villagers
+item.normanitems=Norman Objects
+item.normanbuildings=Norman Buildings
+item.normanfull=Complete Normandy Scroll
+item.tapestry=Norman Tapestry
+item.vishnu_amulet=Amulet of Vishnu
+item.alchemist_amulet=Amulet of the Alchemist
+item.yddrasil_amulet=Amulet of Yddrasil
+item.skoll_hati_amulet=Amulet of Sköll and Hati
+item.villagescroll=Village Scroll
+item.indianvillagers=Indian Villagers
+item.indianitems=Indian Objects
+item.indianbuildings=Indian Buildings
+item.indianfull=Complete Indian Scroll
+item.unknownpowder=Unknown Powder
+item.alchimistexplosive=Alchimist's Explosive
+
+item.wah=Wah
+item.masa=Masa
+item.maize=Maize
+item.mayangold=Gold Ornament
+item.mayanstatue=Mayan Carving
+item.mayanvillagers=Mayan Villagers
+item.mayanitems=Mayan Objects
+item.mayanbuildings=Mayan Buildings
+item.mayanfull=Complete Mayan Scroll
+item.mayanmace=Obsidian Mace
+item.mayanPickaxe=Obsidian Pickaxe
+item.mayanAxe=Obsidian Axe
+item.mayanShovel=Obsidian Shovel
+item.mayanHoe=Obsidian Hoe
+item.obsidianflake=Obsidian Flake
+
+item.paperwall=Paper Wall
+item.udon=Udon
+item.thatched=Thatch
+
+item.parchmentsadhu=Book of the Sadhu
+
+item.tachisword=Tachi
+item.yumibow=Yumi Bow
+
+item.japaneseWarriorBlueLegs=Blue ō-yoroi leggings
+item.japaneseWarriorBlueHelmet=Blue ō-yoroi helmet
+item.japaneseWarriorBluePlate=Blue ō-yoroi chestplate
+item.japaneseWarriorBlueBoots=Blue ō-yoroi boots
+
+item.japaneseWarriorRedLegs=Red ō-yoroi leggings
+item.japaneseWarriorRedHelmet=Red ō-yoroi helmet
+item.japaneseWarriorRedPlate=Red ō-yoroi chestplate
+item.japaneseWarriorRedBoots=Red ō-yoroi boots
+
+item.japaneseGuardLegs=Keiko leggings
+item.japaneseGuardHelmet=Keiko helmet
+item.japaneseGuardPlate=Keiko chestplate
+item.japaneseGuardBoots=Keiko boots
+
+item.japanesevillagers=Japanese Villagers
+item.japaneseitems=Japanese Objects
+item.japanesebuildings=Japanese Buildings
+item.japanesefull=Complete Japanese Scroll
+
+item.emptysilkwormblock=Empty Sericulture Block
+item.fullsilkwormblock=Sericulture Block
+item.byzantinebrick=Byzantine Tiles
+item.byzantineslab=Byzantine Tile Slab
+item.byzantinemixedbrick=Byzantine Stone Tile
+item.grapes=Grapes
+item.vine=Vines
+item.wine=Malvasia Wine
+item.silk=Silk
+item.byzantineiconsmall=Small Byzantine Icon
+item.byzantineiconmedium=Medium Byzantine Icon
+item.byzantineiconlarge=Large Byzantine Icon
+item.byzantineboots=Byzantine Boots
+item.byzantinelegs=Byzantine Leggings
+item.byzantinePlate=Byzantine Chestplate
+item.byzantineHelmet=Byzantine Helmet
+item.byzantinemace=Byzantine Mace
+item.lambraw=Raw lamb
+item.lambcooked=Grilled lambchops
+item.feta=Feta
+item.wineBasic=Vin
+item.clothes_byz_wool=Wool Byzantine clothes
+item.clothes_byz_silk=Silk Byzantine clothes
+
+item.souvlaki=Souvlaki
+item.purse=Bourse à deniers
+
+
+error.unknownitem=Unknown Item Name
+
+
+
+//Errors
+ui.updateEntity=Error in TileEntityBuilding.updateEntity(). Check millenaire.log.
+
+//Panels & parchments
+panels.notextfound=No text found for this book: <0>
+panels.invalidid=Invalid village ID.
+panels.toofar=The village is too far to load its records.
+panels.recordsnotloaded=The village records could not be loaded.
+panels.villagescroll=Village scroll
+panels.mother=Mother
+panels.father=Father
+panels.spouse=Spouse
+panels.dead=Temporarily Dead
+panels.awayraiding=Away Raiding
+panels.awayhired=Hired by a player
+panels.invaderincoming=Incoming
+panels.missing=MISSING!
+panels.multiple=PRESENT <0> TIMES!
+panels.currentoccupation=Current occupation
+panels.visitors=Visitors
+panels.constructions=Constructions
+panels.upgrade=upgrade
+panels.buildingprojects=Building Projects
+panels.notyetbuilt=not yet built
+panels.nbupgradesleft=<0> upgrades left to build.
+panels.finished=finished
+panels.houseunoccupied=This house is unoccupied. Children that have grown into youth will eventually move in and become adults.
+panels.man=Man
+panels.woman=Woman
+panels.children=Children
+panels.nofemaleresident=This house will never have a female resident.
+panels.bachelor=The man living here is still a bachelor. A girl that grows into a youth will eventually move in.
+panels.nomaleresident=This house will never have a male resident.
+panels.spinster=The woman living here is still unmarried. A boy that grows into a youth will eventually move in.
+panels.resources=Resources
+panels.goodstraded=Goods traded in this village
+panels.goodsimported=Imported from other villages
+panels.goodsexported=Exported to other villages
+panels.innvisitors=Visitors to this <0>
+panels.mappurple=Purple: construction in progress.
+panels.mapblue=Blue: other buildings.
+panels.mapgreen=Green: suitable building areas.
+panels.maplightgreen=Light Green: suitable building areas, but cannot contain the centre of a building.
+panels.mapred=Red: dangerous areas (lava, cactus, etc).
+panels.mapyellow=Yellow: construction forbidden (ice, artificial blocks).
+panels.maporange=Orange: construction forbidden (too close to a building), unreachable areas (due to a river or a canyon for example)
+panels.maplightblue=Light blue: water.
+panels.mapbrown=Brown: other areas (outside altitude range, etc).
+panels.unreachablebuilding=unreachable!
+panels.merchantlist=Merchant list
+panels.capacity=Capacity
+panels.nbnightsin=In the village since <0> night(s).
+panels.storedexports=<0> stored the following for exportation: <1>
+panels.broughtimport=<0> brought the following to the village: <1>
+panels.startedtrading=<0> (<1>) has embraced the trading career.
+panels.merchantmovedout=<0> (<1>) moved to <2> after <3> days in the village.
+panels.merchantarrived=<0> (<1>) arrived from <2>.
+panels.childarrived=<0> arrived from <1> looking for work.
+panels.resourcesneeded=Resources needed for the project
+panels.resourcesavailable=Resources in stock
+panels.villageculture=Villages of <0> culture
+panels.military=Military
+panels.planningraid=Planning raid
+panels.raidinprogress=Raid in progress
+panels.underattack=Under attack!
+panels.offense=Offense: <0>
+panels.defense=Defense: <0>
+panels.offenselong=Offensive strength: <0>
+panels.defenselong=Defensive strength: <0>
+panels.raidinprogresslong=Currently raiding <0>. The raid started <1> hour(s) ago.
+panels.planningraidlong=Planning a raid on <0>. The planning started <1> hour(s) ago.
+panels.underattacklong=Under attack by <0> enemies of strength <1> from <2>!
+panels.villagefighters=Village Fighters
+panels.attackers=Attackers
+panels.defender=Defender
+panels.raider=Raider
+panels.health=Health
+panels.weapons=Weapon(s)
+panels.armour=Armour
+panels.militarystrength=Military Strength
+panels.unknownattacker=an unknown location
+panels.raidsperformed=Raids Peformed
+panels.raidssuffered=Raids Suffered
+panels.nameand=<0> and
+
+//Goals (text displayed above the villager when he is doing it)
+goal.gorest=Resting
+goal.godrink=Off for a drink
+goal.gopray=Off to pray
+goal.GatherGoods=Gathering goods
+goal.BringBackResourcesHome=Bringing resources back
+goal.GetTool=Getting a tool
+goal.huntMonster=Fighting a creature
+goal.getGoodsHousehold=Getting goods for the household
+goal.DeliverGoodsHousehold=Delivering goods for the household
+goal.GetHouseTHResources=Taking resources from home
+goal.DeliverResourcesShop=Delivering resources
+goal.raidvillage=Raiding village
+goal.defendvillage=Defending the village
+goal.hide=Taking shelter
+
+goal.CollectCrop=Collecting crops
+goal.PlantSeeds=Planting seeds
+goal.ChopTrees=Chopping wood
+goal.PlantSaplings=Planting saplings
+goal.GetResourcesForBuild=Getting resources for a construction
+goal.MakeBread=Making bread
+goal.BeSeller=Selling to the player
+goal.MakeCider=Making cider
+goal.MakeCalva=Making calva
+goal.Construction=Building
+goal.GoPlay=Playing
+goal.BecomeAdult=Moving in
+goal.MakeNormanTools=Making tools
+goal.MakeNormanWeapons=Making weapons
+goal.Patrol=Patrolling
+goal.Butcher=Butchering
+goal.MakeBoudin=Making boudin
+goal.MakeTripes=Making tripes
+goal.Mining=Mining
+goal.Cooking=Cooking resources
+goal.MakeBooks=Making parchments
+goal.MakeTapestry=Making tapestries
+goal.VisitInn=Going to the inn
+goal.VisitBuilding=Going to a shop
+goal.MakeAmulet=Making an amulet
+goal.KeepStall=Holding his stall
+goal.MakeTimberFrame=Making timber frames
+
+goal.DryBrick=Setting bricks to dry
+goal.GatherBrick=Gathering dried bricks
+goal.CookBrick=Cooking bricks
+goal.PlantRice=Planting rice
+goal.HarvestRice=Harvesting rice
+goal.PlantTurmeric=Planting turmeric
+goal.HarvestTurmeric=Harvesting turmeric
+goal.SlaughterChicken=Slaughtering chicken
+goal.PlantSugarCane=Planting sugar cane
+goal.HarvestSugarCane=Harvesting sugar cane
+goal.MakeRasgulla=Making rasgullas
+goal.Makesteelaxe=Crafting a steel axe
+goal.Makesteelpickaxe=Crafting a steel pickaxe
+goal.Makesteelshovel=Crafting a steel shovel
+goal.Makesteelhoe=Crafting a steel hoe
+goal.Makesteelsword=Crafting a steel sword
+
+goal.makesteelchest=Crafting a steel chestplate
+goal.makesteelhelmet=Crafting a steel helmet
+goal.makesteellegs=Crafting steel leggings
+goal.makesteelboots=Crafting steel boots
+
+goal.makeindianstatue=Carving statue
+goal.performpujas=Performing a puja
+goal.bepujaperformer=Available for pujas
+
+goal.PlantMaize=Planting maize
+goal.HarvestMaize=Harvesting maize
+goal.makemayanGoldBlock=Making gold ornements
+goal.makemayanstatue=Carving statue
+goal.Makestoneaxe=Crafting a stone axe
+goal.Makestonepickaxe=Crafting a stone pickaxe
+goal.Makestoneshovel=Crafting a stone shovel
+goal.Makestonehoe=Crafting a stone hoe
+goal.Makestonesword=Crafting a stone sword
+goal.makemayanaxe=Crafting obsidian axe
+goal.makemayanpickaxe=Crafting obsidian pickaxe
+goal.makemayanshovel=Crafting obsidian shovel
+goal.makemayanhoe=Crafting obsidian hoe
+goal.makemayanmace=Crafting obsidian mace
+goal.makeobsidianflake=Breaking obsidian into flakes
+
+goal.fish=Fishing
+goal.makethatch=Making thatch
+goal.makepaper=Making paper
+goal.makepaperrice=Making paper
+goal.makepaperwoodpulp=Making paper
+goal.makepaperwall=Making paper walls
+goal.cookfish=Cooking fish
+goal.cooksteak=Cooking steaks
+goal.cooklamb=Cooking lamb
+goal.cookpork=Cooking porkchops
+goal.cookchicken=Cooking chicken
+goal.makeudon=Making udon
+goal.maketachi=Crafting a Tachi sword
+goal.makejapaneseweapons=Crafting Japanese armement
+
+goal.brewpotions=Brewing potions
+goal.harvestwarts=Harvesting warts
+goal.makeglassbottles=Making glass bottles
+goal.plantwarts=Planting warts
+
+goal.plantvines=Planting vines
+goal.harvestvines=Harvesting grapes
+goal.gathersilk=Gathering silk
+goal.makeicon=Painting icon
+goal.makewine=Producing wine
+goal.makebookshelves=Making bookshelves
+goal.makebyzantinetiles=Making tiles
+goal.makebrick=Making bricks
+goal.training=Training
+goal.paintpainting=Painting a frame
+goal.makebook=Writing a book
+goal.makebyzantinemace=Crafting Byzantine mace
+goal.makebyzantinechest=Crafting Byzantine chestplate
+goal.makebyzantinelegs=Crafting Byzantine leggings
+goal.makebyzantinehelmet=Crafting Byzantine helmet
+goal.makebyzantineboots=Crafting Byzantine boots
+
+goal.makebow=Crafting a bow
+goal.makerottenflesh=Making rotten flesh
+goal.makearrow=Crafting arrows
+
+goal.sleep=Sleeping
+goal.sleep_travelling=Off to sleep
+
+
+goal.makeclothes_byz_wool=Weaving clothes
+goal.makemasa=Preparing masa
+goal.slaughterpig=Slaughtering a pig
+goal.makesouvlaki=Preparing souvlaki
+goal.makewah=Preparing wah
+goal.makecurry=Preparing a vegetarian curry
+goal.makeclothes_byz_silk=Weaving silk clothes
+goal.slaughtersheep=Slaughtering a sheep
+goal.slaughtercow=Slaughtering a cow
+goal.breed=Breeding animals
+goal.shearsheep=Shearing a sheep
+goal.makemurgh=Preparing a chicken curry
+goal.getitemtokeep=Picking up an item
+
+//other
+other.west=West
+other.east=East
+other.north=North
+other.north-east=North-East
+other.north-west=North-West
+other.south=South
+other.south-east=South-East
+other.south-west=South-West
+
+other.tothewest=to the West
+other.totheeast=to the East
+other.tothenorth=to the North
+other.tothenorth-east=to the North-East
+other.tothenorth-west=to the North-West
+other.tothesouth=to the South
+other.tothesouth-east=to the South-East
+other.tothesouth-west=to the South-West
+
+other.west_short=W
+other.east_short=E
+other.north_short=N
+other.south_short=S
+other.shortdistancedirection=<0>m <1>
+
+other.metre=metres
+other.kilometre=kilometres
+other.andhalf=and a half
+
+other.directionshort=<1> <0>
+other.exploredbuilding=You have explored a building: <0>.
+
+other.malevillager=Millénaire villager
+other.femalevillager=Millénaire villager
+
+other.buildinghealing=<0> is healing you.
+
+
+other.localmerchantinteract=This merchant is a local merchant. He transports goods from villages to villages. You cannot interact with him.
+
+hire.health=Health
+hire.strength=Strength
+hire.cost=Cost (per day)
+hire.aggressive=Aggressive Stance
+hire.passive=Passive Stance
+hire.timeleft=Hired for <0> hour(s)
+hire.hiredvillager=This villager has been hired. He will stay at your service for <0> more hours or until he dies and respawn in his village.<ret><ret>Press '<1>' to put him in aggressive stance or left shift-'<1>' to put him in passive stance.
+hire.hireablevillager=You can hire this villager. He will follow you around until the hiring expires or he dies. He will attack creatures that attack you or pre-eventively attack nearby mobs and hostile villagers if in aggressive stance.
+hire.hireablevillagernoreputation=You need to be at least "favourite trader" in this village to hire this villager.
+hire.extend=Extend
+hire.release=Release
+hire.close=Close
+hire.hire=Hire
+hire.hireover=The hiring of <0> has ended. He is returning to his village.
+hire.hiredied=<0> has died. He will respawn in his village, his hiring cancelled.
+hire.hiredbyotherplayer=<0> has already been hired by <1>.
+hire.hiredby=Hired by <0>
+
+actions.forest_success=You have successfully explored the forest.
+actions.forest_continue=You have completed <0>% of your exploration of the forest.
+
+actions.desert_success=You have successfully explored the desert.
+actions.desert_continue=You have completed <0>% of your exploration of the desert.
+
+actions.mountain_success=You have successfully explored the mountains.
+actions.mountain_continue=You have completed <0>% of your exploration of the mountains.
+
+actions.underwaterglass_success=You have successfully built a deep-sea observation window.
+actions.underwaterglass_notdeepenough=The sea is not deep enough at this point.
+
+actions.underwaterdive_success=You have successfully dived deep in the ocean.
+
+actions.bottomoftheworld_success=It seems you can dig no further down. This must be the root of the world!
+
+actions.topoftheworld_success=It seems you cannot rise any further. Surely this is the top of the sky.
+
+actions.borehole_nblineok=<0> bedrock blocks are successfully exposed to the sky. You need 25 in a 5x5 square.
+actions.borehole_success=You have succeeded in digging the borehole!
+
+actions.boreholetnt_success=Enough TNT has been placed. You can detonate it.
+actions.boreholetnt_nbtnt=<0> TNT blocks have been placed and covered in obsidian. You need 20 in total.
+
+actions.boreholetntlit_success=You have lit the TNT. Observe the result and report it to the Alchemist.
+
+actions.thevoid_success=You have peered into the Void!
+
+actions.enchantmenttable_success=You have built an enchantment table close to the Sadhu.
+
+info.culturetitle=Cultures
+info.culture=<0> Culture
+info.culturereputation=Reputation: <0>
+info.culturelanguage=Language level: <0>
+
+culturereputation.scourgeofgod=Scourge of God
+culturereputation.dreadful=Dreadful
+culturereputation.bad=Bad
+culturereputation.stellar=Stellar
+culturereputation.excellent=Excellent
+culturereputation.good=Good
+culturereputation.decent=Decent
+culturereputation.neutral=Neutral
+
+culturelanguage.fluent=Fluent
+culturelanguage.moderate=Moderate
+culturelanguage.beginner=Beginner
+culturelanguage.minimal=Minimal
+
+
+weapon.criticalstrike=Critical strike! <0>x damage!
+
+negationwand.villagelocked=The <0> is still locked. You need to kill all its adult men before you can destroy it.
+negationwand.confirmmessage=Are you sure you want to destroy the <0>? If you do, the buildings will remain, but all villagers will be permanently gone.
+negationwand.confirm=Confirm
+negationwand.cancel=Cancel
+negationwand.destroyed=The <0> has been destroyed! Its buildings are now empty shells and no villager will come back to them.
+
+relation.excellent=Excellent
+relation.verygood=Very Good
+relation.good=Good
+relation.decent=Decent
+relation.fair=Fair
+
+relation.openconflict=Open Conflict
+relation.atrocious=Atrocious
+relation.verybad=Very Bad
+relation.bad=Bad
+relation.chilly=Chilly
+
+relation.neutral=Neutral
+
+raid.planningstarted=<0> is thought to have started planning a raid on <1>.
+raid.started=<0> has started its raid on <1>! <2> fighter(s) have joined in.
+raid.raidsuccesfull=<0> has successfully raided <1>, stealing <2> goods!
+raid.raidfailed=<1> has successfully stopped a raid by <0>.
+raid.nothing=Nothing
+raid.historysuccess=Successfully raided <0>. Bounty: <1>
+raid.historyraided=Raided by <0>. Bounty: <1>
+raid.historyfailure=A raid on <0> failed.
+raid.historydefended=Successfully defeated a raid by <0>.
+
+hof.hof=Hall of Fame
+hof.modcreator=Mod Creator
+hof.creatorofmayan1=Creator of the
+hof.creatorofmayan2=Mayan culture
+hof.creatorofjapanese1=Creator of the
+hof.creatorofjapanese2=Japanese culture
+hof.creatorofbyzantine1=Creator of the
+hof.creatorofbyzantine2=Byzantine culture
+hof.creatorofindianskins1=Creator of the
+hof.creatorofindianskins2=Indian skins
+
+hof.skinmaker=Skin maker
+hof.buildingmaker=Building maker
+hof.wikiadmin=Wiki admin
+hof.armouricons=Armour icons
+hof.normanarmour1=Norman armour
+hof.normanarmour2=graphics
+hof.support1=Support on
+hof.support2=the forum
+hof.frenchversion1=Help with the
+hof.frenchversion2=French version
+hof.wikicontributions=Wiki contributions
+hof.improvementsjapanese1=Improvements to
+hof.improvementsjapanese2=Japanese villages
+hof.lonebuildings=Lone buildings
+hof.obsidiantools1=Obsidian tools
+hof.obsidiantools2=icons
+hof.forgecode1=Original code for
+hof.forgecode2=Forge Sprite API
+hof.btw=(BTW creator)
+hof.forgehelp1=Help with
+hof.forgehelp2=Forge Sprite API
+hof.hofidea1=Hall of Fame
+hof.hofidea2=idea
+hof.donor=Donor
+hof.variousimprovements1=Various
+hof.variousimprovements2=Improvements
+
+pujas.invanme=Pujas
+pujas.panditfee=Pandit's fee
+pujas.offering=Offering
+pujas.god0=To Hanuman - for speed
+pujas.god1=To Shiva - for strength
+pujas.god2=To Lakshmi - for luck
+pujas.god3=To Ganesh - for skill
+pujas.priestcoming=<0>: You need a puja performed? Your devotion is admirable!
+pujas.offeringslot=Put an offering to the Gods.
+pujas.offeringslot2=They will not accept everything. Experiment.
+pujas.moneyslot=Put money for the pandit.
+pujas.toolslot=Put the tool to be enchanted.
+
+culture.norman=Norman
+culture.hindi=Hindi
+culture.japanese=Japanese
+culture.mayan=Mayan
+culture.byzantines=Byzantine
+
+export.errornoname=You must give the building plan's name on the first line.
+export.errornoendsigneast=Could not find the closure sign to the east. It must be in a straight line from the starting one within 256 blocks.
+export.errornoendsignsouth=Could not find the closure sign to the south. It must be in a straight line from the starting one within 256 blocks.
+export.errorlength=The detected length is <0> but there is an existing building plan in the export folder of length <1>.
+export.errorwidth=The detected width is <0> but there is an existing building plan in the export folder of width <1>.
+export.errorstartinglevel=Invalid starting level on line three of the sign.
+export.defaultstartinglevel=No starting level specified, defaulting to -1.
+export.errorunknownblockid=Unknown block type: <0>
+export.buildingexported=Exported building as <0>.
+
+import.notonserver=Importing buildings is not possible on a server.
+import.errornoname=You must give the building plan's name on the first line.
+import.errornotfound=The building requested is not present in millenaire-custom/exports.
+import.buildingupto=Building up to level <0>
+import.errorinvalidupgradelevel=Invalid upgrade level on line two of the sign.
+import.buildinginitialphase=No upgrade level specified, building only the initial stage.
+import.errorupgradeleveltoohigh=Requested upgrade level is higher than available.
+import.doublevertical=Doubled vertical height
+import.buildinglevel=Building level: <0>
+
+effect.towncentre=Village Centre
+effect.shop=Shop: <0>
+effect.irrigation=Irrigation: <0>% extra crops
+effect.pujalocation=Pujas held
+effect.healing=Heals Player
+
+chunk.chunkmap=Map of chunks
+chunk.caption=Caption
+chunk.captiongeneral=Each chunk is displayed as a 2x2 pixels square
+chunk.captiongreen=Green dots indicate a loaded chunk.
+chunk.captionblue=Blue dots indicate a chunk part of a village's area.
+chunk.captionpurple=Purple dots indicate a chunk part of a lone building's area.
+chunk.captionwhite=White dots indicate a chunk which is being kept loaded by a mod (Millénaire or another Forge mod)
+chunk.playerposition=Coordinates of the player: <0>
+chunk.settings=Village loading radius: <0> metres. Maximum number of chunks preserving allowed by Forge: <1>.
+chunk.explanations=Millénaire villages are only active if all their chunks are loaded. The inhabitants of other villages are frozen. Millénaire attempts to force Minecraft to keep the chunks of villages within 200 metres of a player loaded (that value can be changed). The Forge mechanism used for this is limited by default to 200 chunks. You can configure this value in minecraft/config/forgeChunkLoading.cfg. Warning: increasing the number of chunks kept loaded will decrease performance.
+chunk.chunkcoords=Chunk: <0>
+chunk.village=<0>
+chunk.chunkforced=Force-loaded
+
+achievementpage.name=Millénaire
+achievement.firstcontact.name=First contact
+achievement.firstcontact.desc=Meet a villager
+achievement.cresus.name=Croesus
+achievement.cresus.desc=Earn a denier or
+achievement.summoningwand.name=Summoning
+achievement.summoningwand.desc=Buy a Wand of Summoning and generate a village with it
+achievement.villageleader.name=Village leader
+achievement.villageleader.desc=Become leader in a culture and create a controlled village
+achievement.thequest.name=The Quest
+achievement.thequest.desc=Complete a quest given by a villager
+achievement.maitreapenser.name=Maître à penser
+achievement.maitreapenser.desc=Meet the Sadhu or the Alchemist
+achievement.forbiddenknwoledge.name=Forbidden knowledge
+achievement.forbiddenknwoledge.desc=Complete the two chapters of the Creation Quest
+achievement.puja.name=A little help from the Gods
+achievement.puja.desc=Pay a pandit to perform a puja
+achievement.explorer.name=Explorer
+achievement.explorer.desc=Explore a lone building
+achievement.marcopolo.name=Marco Polo
+achievement.marcopolo.desc=Visit villages of three cultures in the same world
+achievement.magellan.name=Fernand de Magellan
+achievement.magellan.desc=Visit villages of all cultures in the same world
+achievement.selfdefense.name=Self-defense
+achievement.selfdefense.desc=Kill a bandit
+achievement.pantheon.name=The Panthéon
+achievement.pantheon.desc=Visit the mysterious Panthéon
+
+achievement.darkside.name=The dark side
+achievement.darkside.desc=Kill a villager
+achievement.scipio.name=Carthago delenda est
+achievement.scipio.desc=Destroy a village with the Negation Wand
+achievement.attila.name=Attila
+achievement.attila.desc=Gain the "Scourge of God" reputation in three cultures
+
+achievement.cheers.name=Three cheers for Minecraft!
+achievement.cheers.desc=Drink a Millénaire alcohol
+achievement.hired.name=Hired hand
+achievement.hired.desc=Hire a villager
+achievement.masterfarmer.name=Expert farmer
+achievement.masterfarmer.desc=Plant a Millénaire crop

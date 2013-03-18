@@ -1,0 +1,264 @@
+//Item key;item id;item meta;label (indicative only)
+//This file is auto-generated and indicative only. Don't edit it.
+
+akwardpotion;373;16;Potion
+alchemistamulet;mln24;0;
+alchimistexplosive;1519;3;
+arrow;262;0;Flèche
+beefcooked;364;0;Steak
+beefraw;363;0;Bœuf cru
+bone;352;0;Os
+book;340;0;Livre
+bookandquill;386;0;Livre et plume
+bookshelves;47;0;Bibliothèque
+bottle;374;0;Fiole
+boudin;mln21;0;
+bow;261;0;Arc
+bowlempty;281;0;Bol
+bowlsoup;282;0;Soupe aux champignons
+bread;297;0;Pain
+brickmould;mln32;0;
+bricks;45;0;Briques
+bucketempty;325;0;Seau
+bucketlava;327;0;Seau de lave
+bucketmilk;335;0;Seau de lait
+bucketwater;326;0;Seau d’eau
+byzantineboots;mln84;0;
+byzantinehelmet;mln82;0;
+byzantineiconlarge;mln80;0;
+byzantineiconmedium;mln79;0;
+byzantineiconsmall;mln78;0;
+byzantinelegs;mln81;0;
+byzantinemace;mln85;0;
+byzantineplate;mln83;0;
+byzantinestonetiles;1524;0;
+byzantinetiles;1522;0;
+byzantinetileslab;1523;0;
+cactus;81;0;Cactus
+cake;92;0;Gâteau
+calva;mln5;0;
+carrot;391;0;Carotte
+chickencurry;mln31;0;
+chickenmeat;365;0;Poulet cru
+chickenmeatcooked;366;0;Poulet rôti
+cider;mln4;0;
+ciderapple;mln3;0;
+clay;337;0;Argile
+clock;347;0;Montre
+clothes_byz_silk;mln86;1;
+clothes_byz_wool;mln86;0;
+coal;263;0;Charbon
+cobblestone;4;0;Pierres
+compass;345;0;Boussole
+cookedbrick;1519;0;
+cookie;357;0;Cookie
+denier;mln0;0;
+denierargent;mln2;0;
+denieror;mln1;0;
+diamond;264;0;Diamant
+diamondaxe;279;0;Hache en diamant
+diamondboots;313;0;Bottes en diamant
+diamondchest;311;0;Plastron en diamant
+diamondhelmet;310;0;Casque en diamant
+diamondhoe;293;0;Houe en diamant
+diamondlegs;312;0;Jambières en diamant
+diamondpickaxe;278;0;Pioche en diamant
+diamondshovel;277;0;Pelle en diamant
+diamondsword;276;0;Épée en diamant
+dirt;3;0;Terre
+dirtwall;1518;1;
+dye_black;351;0;Poche d’encre
+dye_blue;351;4;Lapis-lazuli
+dye_brown;351;3;Fèves de cacao
+dye_cyan;351;6;Teinture cyan
+dye_gray;351;8;Teinture grise
+dye_green;351;2;Vert de cactus
+dye_lightblue;351;12;Teinture bleu clair
+dye_lightgray;351;7;Teinture gris clair
+dye_lime;351;10;Teinture vert clair
+dye_magenta;351;13;Teinture magenta
+dye_orange;351;14;Teinture orange
+dye_pink;351;9;Teinture rose
+dye_purple;351;5;Teinture violette
+dye_red;351;1;Rouge de rose
+dye_white;351;15;Poudre d'os
+dye_yellow;351;11;Jaune pissenlit
+egg;344;0;Œuf
+enderpearl;368;0;Perle du Néant
+feather;288;0;Plume
+feta;mln90;0;
+fishcooked;350;0;Poisson cuit
+fishraw;349;0;Poisson cru
+flint;318;0;Silex
+flintandsteel;259;0;Briquet
+glass;20;0;Verre
+gold;266;0;Lingot d'or
+goldore;14;0;Minerai d'or
+grapes;mln75;0;
+gunpowder;289;0;Poudre à canon
+indianstatue;mln34;0;
+iron;265;0;Lingot de fer
+ironore;15;0;Minerai de fer
+japaneseguardboots;mln70;0;
+japaneseguardhelmet;mln68;0;
+japaneseguardlegs;mln67;0;
+japaneseguardplate;mln69;0;
+japanesewarriorblueboots;mln62;0;
+japanesewarriorbluehelmet;mln60;0;
+japanesewarriorbluelegs;mln59;0;
+japanesewarriorblueplate;mln61;0;
+japanesewarriorredboots;mln66;0;
+japanesewarriorredhelmet;mln64;0;
+japanesewarriorredlegs;mln63;0;
+japanesewarriorredplate;mln65;0;
+lambcooked;mln89;0;
+lambraw;mln88;0;
+leather;334;0;Cuir
+leatherboots;301;0;Bottes en cuir
+leatherchest;299;0;Tunique en cuir
+leatherhelmet;298;0;Casque en cuir
+leatherlegs;300;0;Pantalon en cuir
+maize;mln40;0;
+masa;mln42;0;
+mayanaxe;mln55;0;
+mayangold;1519;2;
+mayanhoe;mln57;0;
+mayanmace;mln53;0;
+mayanpickaxe;mln54;0;
+mayanshovel;mln56;0;
+mayanstatue;mln39;0;
+melonseeds;362;0;Graines de pastèque
+melonslice;360;0;Pastèque
+mudbrick;1519;1;
+mushroombrown;39;0;Champignon
+mushroomred;40;0;Champignon
+netherwart;372;0;Verrue du Nether
+normanaxe;mln8;0;
+normanboots;mln16;0;
+normanbroadsword;mln12;0;
+normanchest;mln14;0;
+normanhelmet;mln13;0;
+normanhoe;mln10;0;
+normanlegs;mln15;0;
+normanpickaxe;mln7;0;
+normanshovel;mln9;0;
+obsidian;49;0;Obsidienne
+obsidianflake;mln52;0;
+painting;321;0;Tableau
+paper;339;0;Papier
+paperwall;1521;0;
+parchmentbuildings;mln18;0;
+parchmentcomplete;mln20;0;
+parchmentindianbuildings;mln36;0;
+parchmentindiancomplete;mln38;0;
+parchmentindianitems;mln37;0;
+parchmentindianvillagers;mln35;0;
+parchmentitems;mln19;0;
+parchmentjapanesebuildings;mln72;0;
+parchmentjapanesecomplete;mln74;0;
+parchmentjapaneseitems;mln73;0;
+parchmentjapanesevillagers;mln71;0;
+parchmentmayanbuildings;mln44;0;
+parchmentmayancomplete;mln46;0;
+parchmentmayanitems;mln45;0;
+parchmentmayanvillagers;mln43;0;
+parchmentsadhu;mln47;0;
+parchmentvillagers;mln17;0;
+planks_birch;5;2;Planches de bouleau
+planks_jungle;5;3;Planches d'acajou
+planks_oak;5;0;Planches de chêne
+planks_pine;5;1;Planches de sapin
+porkchops;319;0;Côtelette de porc crue
+porkchopscooked;320;0;Côtelette de porc cuite
+potato;392;0;Pomme de terre
+pumpkin;86;0;Citrouille
+pumpkinseeds;361;0;Graines de citrouille
+purse;mln92;0;
+rasgulla;mln33;0;
+redflower;38;0;Rose
+redstone;331;0;Redstone
+rice;mln28;0;
+rottenflesh;367;0;Chair putréfiée
+saddle;73;0;Minerai de Redstone
+sand;12;0;Sable
+sandstone;24;0;Grès
+sapling;6;0;Pousse de chêne
+sapling_birch;6;2;Pousse de bouleau
+sapling_jungle;6;3;Pousse d'acajou
+sapling_pine;6;1;Pousse de sapin
+seeds;295;0;Graines
+shears;359;0;Cisailles
+silk;mln77;0;
+silkwormblockempty;1517;3;
+silkwormblockfull;1517;4;
+skollhatiamulet;mln26;0;
+slimeball;341;0;Boule gluante
+snow;78;0;Neige
+souvlaki;mln91;0;
+spidereye;375;0;Œil d'araignée
+steelaxe;258;0;Hache en fer
+steelboots;309;0;Bottes en fer
+steelchest;307;0;Plastron en fer
+steelhelmet;306;0;Casque en fer
+steelhoe;292;0;Houe en fer
+steellegs;308;0;Jambières en fer
+steelpickaxe;257;0;Pioche en fer
+steelshovel;256;0;Pelle en fer
+steelsword;267;0;Épée en fer
+stone;1;0;Roche
+stoneaxe;275;0;Hache en pierre
+stonebrick;98;0;Pierres taillées
+stonehoe;291;0;Houe en pierre
+stonepickaxe;274;0;Pioche en pierre
+stoneshovel;273;0;Pelle en pierre
+stonesword;272;0;Épée en pierre
+string;287;0;Ficelle
+sugarcane;338;0;Canne à sucre
+tachisword;mln50;0;
+tapestry;mln22;0;
+thatched;1517;2;
+timberframe_cross;1517;1;
+timberframe_plain;1517;0;
+tnt;46;0;TNT
+tripes;mln6;0;
+turmeric;mln29;0;
+udon;mln49;0;
+unknownpowder;mln48;0;
+vegcurry;mln30;0;
+villagewand;mln11;0;
+vines;106;0;Lianes
+vishnuamulet;mln23;0;
+wah;mln41;0;
+wheat;296;0;Blé
+wine;mln76;0;
+winebasic;mln87;0;
+wood;17;0;
+wood_any;17;-1;
+wood_birch;17;2;
+wood_jungle;17;3;
+wood_oak;17;0;
+wood_pine;17;1;
+woodaxe;271;0;Hache en bois
+woodhoe;290;0;Houe en bois
+woodpickaxe;270;0;Pioche en bois
+woodshovel;269;0;Pelle en bois
+woodsword;268;0;Épée en bois
+wool_black;35;15;Laine noire
+wool_blue;35;11;Laine bleue
+wool_brown;35;12;Laine marron
+wool_cyan;35;9;Laine cyan
+wool_gray;35;7;Laine grise
+wool_green;35;13;Laine verte
+wool_lightblue;35;3;Laine bleu clair
+wool_lightgray;35;8;Laine gris clair
+wool_limegreen;35;5;Laine vert clair
+wool_magenta;35;2;Laine magenta
+wool_orange;35;1;Laine orange
+wool_pink;35;6;Laine rose
+wool_purple;35;10;Laine violette
+wool_red;35;14;Laine rouge
+wool_white;35;0;Laine blanche
+wool_yellow;35;4;Laine jaune
+yddrasilamulet;mln25;0;
+yellowflower;37;0;Fleur
+yumibow;mln58;0;

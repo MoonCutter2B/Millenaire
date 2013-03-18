@@ -1,0 +1,1 @@
+sells=normanHelmet,normanChest,normanLegs,normanBoots,normanBroadsword,bow

@@ -1,0 +1,56 @@
+
+villager.greeting=Ola, $name-ji! / Hello, $name-ji!
+villager.greeting=U- ka'an yam k'iinal behla'e'. / The sky is hot today.
+villager.greeting=Biix men u- pixan ts'aakik teech? / How do the spirits treat you?
+villager.greeting=Ba'ax tumben? / Whats new?
+villager.greeting=Biix yam teech pamilya? / How is your family?
+villager.greeting=Pixan tuuxtik gnat k'aaxal. / Spirits send us rain.
+villager.greeting=Tu'ux yam teech lu'um? / Where is your land?
+mayan_shaman.greeting=Ts'aakik tal teech. / Spirits protect you.
+
+villager.gorest=He'lel bisik na. / Rest takes over.
+villager.gorest=Ichil chuy ti wenel beora. / I have to sleep now.
+villager.gorest=Yaaawn. / 
+
+villager.gopray=Pixan taka gnat ichil k'a'am hoch. / Spirits send us a stong harvest.
+villager.gopray=Pixan an gnat. / Spirits help us.
+
+villager.BringBackResourcesHome=Ichil chuy ti yaab se'es ti kuch. / I have to much wood to carry.
+villager.ChopTrees=Ya'ul pak. / Tree cutting time.
+villager.GatherGoods=Ichil chuk u- se'es sut otoch. / I take the wood back home.
+villager.PlantSaplings=Ichil tz'ap tulakal he'-la -che'. / I plant all these trees. 
+
+//villager.DryBrick=To'on k'ab'eet tunich ti b'et ki- otoch. / We need stone to make our homes. 
+//villager.GatherBrick=Ichil kuch ti yaab tunich. / I carry to much stone. 
+//villager.CookBrick=A'-la yam k'a'am tunich. / This is strong stone.
+villager.PlantMaize=K'aaxal tuuxtik gnat ichil k'a'am hoch. / Rain sends us a strong harvest.
+villager.HarvestMaize=Ki' k'aaxal ki' hoch. / Good rain good harvest.
+villager.PlantTurmeric=Yooch men u- han-ha. / Spice makes the food.
+villager.HarvestTurmeric=A'-la yooch hoch si muk' ti han-ha. / This spice harvest gives strenght to food.
+villager.SlaughterChicken=Ah kax si gnat b'ak'. / Chickens give us meat.
+
+villager.GetHouseResources=Ichil chik nah yam ichil utz nah. / A clean house is a good house. 
+villager.GetGoodsHousold=Ichil k'ab'eet he'-la a-d'a'ax-tak k'am- otoch/ I need these things taken home.
+villager.DeliverGoodsHousold=Ti yaab han-ha ti kuch. / To much food to carry.
+villager.makeRasgulla=In-wah mo'nol pall yam k'oh. / My small child is sick.
+
+
+villager.GetResourcesForBuild=Yaab' ti- yaab' tunich. / Much to much stone.
+villager.ConstructionStepByStep=Meyah meyah meyah. / Work work work.
+villager.ConstructionStepByStep=Ichil k'ab'eet ichil k'a'am et-meyah. / I need a strong co-worker. 
+
+villager.GoPlay=Ichil kolom uk chun su'uk. / I play in the grass.
+villager.BecomeAdult=La la la la. / 
+male.BecomeAdult=Ichil k'a't ti tz'ak-b' ha ah tz'on. / I want to be a hunter.
+female.BecomeAdult=Ichil k'a't ha ichki. / I want a husband.
+
+villager.gopray.chosen=Ichil t'an u- orasion. / I speak the prayer.
+mayan_shaman.gopray.chosen=U- orasion tal teech / The prayer protects you.
+
+villager.calltoarms=U- k'in yam in-ti'a'al! / The day is mine!
+villager.calltoarms=Kin-s-ab u- k'as hun. / Kill the bad one!
+villager.calltoarms=Ti k'ab! / To arms!
+
+villager.MakeTools=Man in-wah a'-b'a'ax. / Buy my things.
+villager.MakeWeapons=U- k'ab wa'yeh nik k'a'am. / The arms here are strong.
+villager.ScultMayan=P'e k'in ichil k'am ti b'om. / One day I want to paint.

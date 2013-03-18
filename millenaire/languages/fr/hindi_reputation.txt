@@ -1,0 +1,10 @@
+0;Étranger;Nous ne sommes pas habitués aux étrangers dans notre village reculé.
+4*64;Personne connue;Jusqu'ici, vous n'avez pas commis d'imper impardonnable.
+16*64;Visiteur fréquent;Namaste, $name! Quelles nouvelles amenez vous?
+64*64;Marchant préféré;Bienvenue de nouveau, $name. Qu'avez vous amené à commercer avec nous?
+2*64*64;Ami du village;$name-ji, vous êtes un vrai ami pour nous tous ici.
+8*64*64;Un des nôtres;Je ne pensais pas voir de mes yeux un étranger accepté dans le village, mais $name-ji, vous êtes vraiment l'un des nôtres désormais!
+32*64*64;Chef reconnu;$name-ji, mon peuple vous respecte et vous admire. Ils vous suivraient n'importe où.
+-64;Nuisance;Nous n'aimons pas les étrangers ici, surtout de votre type.
+-4*64;Peste;Ceux qui vous ont élevé l'ont vraiment très mal fait. Nous espérons vous voir partir le plus vite possible.
+-16*64;Ennemi public;Tous les matins je pris la déesse de m'épargner votre vue.

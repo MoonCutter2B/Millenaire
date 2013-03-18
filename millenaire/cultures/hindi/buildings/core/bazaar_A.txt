@@ -1,0 +1,6 @@
+native:Bazaar;around:6;startLevel:-1;orientation:3;width:10;length:19;priority:500;tag:market
+
+
+
+
+startLevel:-2

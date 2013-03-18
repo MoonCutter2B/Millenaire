@@ -1,0 +1,1 @@
+priority:70000;native:Bomos;startLevel:-1;orientation:1;length:39;width:28;tag:Praying;type:subbuilding

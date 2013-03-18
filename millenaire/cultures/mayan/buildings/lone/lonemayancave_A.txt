@@ -1,0 +1,1 @@
+max:1;priority:3000;native:Ch'en;around:4;startLevel:-4;orientation:0;width:8;length:11;showtownhallsigns:false;startingGood:gold,0.8,10,10;startingGood:denierargent,0.5,2,6;startingGood:mayangold,0.5,2,6;startingGood:mayanstatue,0.8,2,4;

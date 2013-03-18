@@ -1,0 +1,2 @@
+type:subbuilding;priority:40;native:Hach Noh Nah;english:Very Big House;around:4;startLevel:0;orientation:3;male:mayan_Peasant;female:mayan_PeasantWife;length:15;width:15
+priority:10

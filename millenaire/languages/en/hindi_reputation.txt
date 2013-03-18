@@ -1,0 +1,10 @@
+0;Stranger;We are not used to foreigners in our remote village.
+4*64;Known Face;So far, you have not committed any major breach of custom.
+16*64;Regular visitor;Namaste, $name! What news do you bring?
+64*64;Favourite Trader;Welcome back, $name. What have you brought to trade with us?
+2*64*64;Friend of the village;$name-ji, we all consider you a true friend here.
+8*64*64;One of us;I would not thought I would live to see a foreign accepted in the village, but $name-ji, you are one of us now!
+32*64*64;Natural leader;$name-ji, you have gained the trust and respect of my people. They will follow you anywhere. 
+-64;Nuisance;We do not like foreigners here, especially of your kind.
+-4*64;Unpleasant outsider;Whoever raised you did a very poor job. We hope you will be gone soon.
+-16*64;Public enemy;Every morning I pray the Goddess I will never see your face again.

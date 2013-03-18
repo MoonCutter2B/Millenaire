@@ -1,0 +1,88 @@
+//name, selling price, buying price, reserved quantity, target quantity, foreign merchant price, auto-generated, needed equipment(deprecated), minimum reputation
+dirtwall,1,0,0,0,0,true
+wood,2,1,128,1024
+wood_pine,2,1,128,1024
+wood_birch,2,1,0,64
+wood_jungle,2,1,0,64
+cobblestone,2,1,128,1024
+stone,5,3,128,1024
+sandstone,5,3,0,64
+glass,5,3,0,0
+clay,16,0,0,0
+bricks,16,0,0,0
+
+iron,25,20,0,128
+gold,25,20,5,10
+diamond,0,0,0,0,6*64
+
+wool_white,10,8,0,64,12
+wool_gray,0,0,0,0,32
+wool_lightgray,0,0,0,0,16
+wool_black,0,0,0,0,24
+wool_brown,0,0,0,0,18
+wool_pink,0,0,0,0,18
+wool_orange,0,0,0,0,14
+wool_magenta,0,0,0,0,40
+wool_lightblue,0,0,0,0,70
+wool_yellow,0,0,0,0,14
+wool_green,0,0,0,0,32
+wool_cyan,0,0,0,0,74
+wool_purple,0,0,0,0,58
+wool_blue,0,64,0,0,74
+wool_red,0,14,0,0,14
+wool_limegreen,0,0,0,0,32
+
+seeds,2,1,0,0,2
+wheat,3,2,10,64,4
+carrot,5,4,0,0,16
+bread,10,8,0,0,32
+
+egg,4,2,16,80,6
+feather,2,1,16,64,4
+leather,20,15,16,64,25
+beefraw,20,12,0,0,32
+beefcooked,28,20,0,0,48
+porkchops,20,0,0,0,32
+porkchopscooked,28,20,0,0,48
+chickenmeat,20,0,4,64,32
+chickenmeatcooked,28,20,4,64,48
+fishraw,5,3,64,192
+fishcooked,7,5,64,192,10
+cake,0,0,0,0,128
+
+arrow,0,0,0,0,8
+steelPickaxe,2*64,2*64,1,1,5*25
+steelAxe,2*64,2*64,1,1,5*25
+steelShovel,2*64,2*64,1,1,2*25
+steelHoe,2*64,2*64,1,1,3*25
+paper,15,12,64,128
+book,70,53,0,0
+bookshelves,220,166,0,0
+
+purse,32*64,0,0,0,0,true
+villageWand,2*64*64,0,0,0,0,true,,8*64*64
+parchmentJapaneseVillagers,10,0,0,0,0,true
+parchmentJapaneseBuildings,10,0,0,0,0,true
+parchmentJapaneseItems,10,0,0,0,0,true
+parchmentJapaneseComplete,64,0,0,0,0,true
+
+timberframe_cross,32,26,128,1024
+timberframe_plain,48,40,128,1024
+rice,10,5,10,64,12
+paperwall,64,48,128,512,64,,,2*64*64
+thatched,16,12,128,512,,,,2*64*64
+udon,20,15,64,124,32
+yumibow,5*64,0,0,0,7*64
+tachisword,2*64,2*64,0,0, 4*25,,,8*64*64
+japaneseguardboots,1*64,1*64,0,0, 2*64
+japaneseguardHelmet,2*64,2*64,0,0, 4*64
+japaneseguardLegs,3*64,3*64,0,0, 6*64
+japaneseguardPlate,4*64,4*64,0,0, 8*64
+japanesewarriorblueboots,3*64,3*64,0,0, 6*64
+japanesewarriorblueHelmet,5*64,5*64,0,0, 10*64
+japanesewarriorblueLegs,10*64,10*64,0,0, 20*64
+japanesewarriorbluePlate,15*64,15*64,0,0, 32*64
+japanesewarriorredboots,3*64,3*64,0,0, 6*64
+japanesewarriorredHelmet,5*64,5*64,0,0, 10*64
+japanesewarriorredLegs,10*64,10*64,0,0, 20*64
+japanesewarriorredPlate,15*64,15*64,0,0, 32*64

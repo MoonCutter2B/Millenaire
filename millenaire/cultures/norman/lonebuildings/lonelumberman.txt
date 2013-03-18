@@ -1,0 +1,13 @@
+name:Bûcheron solitaire
+weight:10
+radius:10
+biome:forest
+biome:foresthills
+
+//extraBiomes mod
+biome:autumn woods
+biome:forested island
+biome:forested hills
+
+//starting buildings:
+centre:lonelumbermanhut

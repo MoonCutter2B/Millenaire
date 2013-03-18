@@ -1,0 +1,15 @@
+minreputation:0
+chanceperhour:0.1
+maxsimultaneous:3
+step:new
+definevillager:key=startvillager,type=norman/wife
+definevillager:key=guard,type=norman/guard,relatedto=startvillager,relation=samehouse
+villager:startvillager
+duration:3
+rewardgood:boudin,1
+step:new
+villager:guard
+duration:5
+requiredgood:boudin,1
+rewardreputation:128
+penaltyreputation:192

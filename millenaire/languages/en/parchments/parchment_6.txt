@@ -1,0 +1,44 @@
+version:1.1.4
+Millénaire: Indian buildings
+
+Village Centres
+
+Mukhiya ka Ghar : The chief's house. This brick house serves as a home for the chief and his wife, as well being the village center. The many chests are there to collect the generous "contributions" of the villagers.
+
+Qila : Fort. This small brick tower can be transformed into a powerful fortress by the Rajput general who lives there. It aids in controlling the surrounding area and centralizing the peasants' property.
+
+Mahal : Palace. This is the place where the mighty Raja resides and the peasants come to pay tribute to him. The Mahal is truly a great work of architecture.
+NEW_PAGE
+Homes
+
+Kisan ka Ghar : Peasant's house. A simple building made of sun-dried bricks, this modest house can be expanded to accommodate a chicken pen and a terrace for rest and relaxation.
+
+Lakarhara ka Ghar : Lumberjack's house. Crafted from wood by the woodcutter, and upgraded with cooked bricks, this home only grows more beautiful with time.
+
+Sikaar : Quarry. A simple hole dug down to the deeper rock. It's here that the miner extracts the rock and sandstone required for the village.
+
+Bhati : Forge. The day-to-day tools of the village are made here by the smith; his anvil is nearly as close to his heart as his wife.
+
+Sena ka Bhati : Military forge. The armoury, constructed of sandstone, houses both blades, armor, and the smith who crafted them.
+
+Muurtikaar ka Ghar :  Sculptor's house. This little house has an attached workshop in which the sculptor transforms rock and sandstone into statues of Hindu gods.
+
+Sainik ka Ghar : Soldier's house. Made of solid stone, this cottage houses a fierce Rajput warrior and his wife.
+
+Pandit ka Ghar : Priest's house. This beautiful house, more elaborate than those of the peasants, houses a priest and his wife, each as idle as the other.
+NEW_PAGE
+Uninhabited Buildings:
+
+Inta bhatta : Brick kiln. This building is essential to any Indian village. Here, bricks are prepared, either by leaving them to dry in the sun, or after the addition of an oven, baking them.
+
+Kunja : Grove. Carefully maintained by the lumberjacks, groves serve as the primary source of wood for the village. The rich soil and the careful ministrations of the lumberjacks help the trees to regrow much faster than normal.
+
+Puraalekhagar : Temple archives. It is here where the priest and his wife keep all of their gossip and secret information on all of the other villagers.
+
+Dhaan : Rice paddy. Rice, an essential staple - what good cuisine doesn't involve rice?
+
+Masaalaa udyaana : Spice garden. Turmeric grows here easily through the attention of the village wives - and it's just as well, because the village's food would be extremely bland without it!
+
+Gannaa baagaana : Sugar plantation. You can't make good rasgulla without sugar, and there's no better expression of affection amoung villagers.
+
+Gaanv ka Mandir :  Village temple. This beautiful building is a testament to the faith and piety of the villagers, or possibly to the influence the priest has over them. Three statues carved by the sculptor adorn a finished temple.

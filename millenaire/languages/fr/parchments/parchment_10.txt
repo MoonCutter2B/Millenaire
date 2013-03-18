@@ -1,0 +1,58 @@
+version:1.1.4
+Millénaire: Bâtiments Maya
+
+Centres de village
+
+Muul: Pyramide Maya. Les maya construisirent des centaines de variations différentes de pyramides, de la plus commune en escalier jusqu'à de véritable plateformes ou étaient construit temples et palais, ainsi que les autels pour les sacrifices.
+
+K'uhul Jalab: Jeu de pelote royale: Site d'un sport maya brutal. Le terrain, à peu près de la taille d'un stade de football américain, était bordé de deux murs d'environ 8 mètres de haut. Comprenant sept combattants pour chaque équipe, ceux ci devaient faire passer une balle de caoutchouc à travers un petit cerceau de pierre à près de 7 mètres de haut, vraisemblablement sans utiliser leurs pieds ou leurs mains pour toucher la balle.
+
+Kan Cha'an: Observatoire. Les anciens maya construisirent des observatoires et alignèrent leurs principaux bâtiments en direction des astres célestes comme le Soleil ou les Pléiades. Les astronomes maya avaient connaissance des positions du Soleil, des déclinaisons de la Lune et des passages de Venus. Se servant d'ombres laissés par le Soleil dans une salle, ils pouvaient déterminer le solstice par exemple.
+NEW_PAGE
+Maisons
+Maya Otoch: Maison maya. Ces bâtiments débutèrent en tant que simple hutte de terre, bois et pierre, mais alors que la civilisation Maya s'étendit elles furent remplacés par des structures en pierres. Le toit en pente de ces huttes donna aussi naissance au dôme de pierre pour lesquelles elles sont célèbres.
+
+B'aat Winik Nah: Maison du bûcheron. Ces maisons étaient celles des fournisseurs de bois de la civilisation Maya.
+
+Tunich In-ti'a'al: Carrière. Les villages maya utilisèrent d'impressionnantes quantités de pierre, majoritairement de calcaires. Ces pierres étaient amenés depuis une mine à ciel ouvert voisine du village.
+
+Kob Took: Maison de l'artisan. Souvent richement décorés, les hommes qui y vivaient avaient avec eux tout le matériel requis à l'élaboration de leur art et la fabrication d'outils pour le village.
+
+Ah Tz'on Si' Took: Forge du chasseur. C'est dans ce bâtiment que les armes et armures maya étaient entreposés et fabriqués, que ce soit pour la guerre ou la chasse.
+
+Uxul Otoch: Maison du sculpteur. Souvent les sculpteurs gardaient eux même leur matériel pour un accès rapide lors de leurs pulsions créatrices.
+
+Maize Makan: Ferme de maïs. Le maïs était à la base de la civilisation Maya et planté tout autour des villages. Certaines cités atteignaient les dizaines de millier d'habitants, aussi de grandes quantités de maïs étaient consommés.
+
+Ah Kax Makan: Elevage de volaille. Les Mayas élevaient les poulets principalement pour leur viande. Celle ci servait à compléter le tamales.
+
+Chanan Nah: Maison du gardien. Les guerriers maya, bien que souvent de simple villageois ayant leurs propres activités, étaient des fois totalement dans leur rôle, se concentrant sur l'art de la chasse et de la guerre. Souvent leurs maisons étaient ornés de leurs trophées d'aventure.
+
+Ah Waay Su'uk: Terres chamaniques. La maison des chamanes maya, où résidaient homme et femme, souvent dédié à leur foi.
+NEW_PAGE
+
+Bâtiment inhabités:
+
+Jabal: Jeu de pelote. Les matchs joués sur ces terrains l'étaient des fois jusqu'à la mort. Les grandes cités maya étaient avant tout des centres religieux, et pratiquement chaque cité maya avait son terrain pour jouer au Pok-A-Tok. Ce jeu était souvent lié aux cérémonies religieuses.
+
+K'aax: Bosquet. C'est ici que l'on trouvait les principales ressources de bois du village. Les mayas gardaient une zone centralisé réservé à la récolte de bois. Une fois entièrement vidé ils se déplaçaient vers un nouveau point de récolte, déménageant le village dans l'opération.
+
+Hu'um-Noh: Librairie. Il s'agit avant tout d'une simple structure pour abriter les écritures sur les évènements du village et les personnes importantes.
+
+K'u-Nah: Temple. Les temples mayas étaient souvent très élaborés. C'étaient les centres religieux et souvent le lieu de vie des prêtres royaux.
+
+K'eyem: Autel sacrificiel. Le sacrifice d'animaux ou d'humains faisait partie de la culture maya. Ces sacrifices avaient surtout lieu sur de spectaculaires autels qui finissaient couvert du sang des victimes.
+
+Chak: Cuisine. C'est ici que les mayas amenaient leur nourriture pour préparer leurs repas pour la tribu. Masa et wah y étaient les spécialités,ainsi que leur cuisine à base de cacao.
+
+K'in Pak: Calendrier solaire. Les mayas inventèrent un calendrier d'une précision et complexité redoutable. Celui ci comportait 3 systèmes de datations en parallèles, le Compte long, le Tzolkin (calendrier divin) et le Haab (calendrier civil). Des trois, seul le Haab était directement lié à la durée de l'année.
+
+Ch'en: Cave maya. Une mystérieuse grotte maya.
+
+Pwes: Citerne. Une citerne est une sorte de puits maya qui récoltait l'eau de pluie et la stockait pour un usage ultérieur. Les mayas fermaient souvent les ouvertures avec des blocs ne laissant qu'un simple trou au centre pour la récolte de l'eau.
+
+Laak' Otoch / Laak'Noh: Maison d'hôtes et auberge. Il s'agissait de structures conçu surtout pour l'accueil des équipes de Pok-A-Tok de passage.
+
+Cha'an Ka'nal: Tour de guet. Ces tours étaient utilisés pour surveiller la jungle d'au dessus de la canopée. L'on s'en servait pour repérer le gibier ou pour repérer la fumée des groupes en approche.
+
+Hach Noh Otoch / Hach Noh Nah / Yalam Otoch / Ni'Nah: Très grande maison / Grande maison / Maison inférieure / Maison supérieure. Ces structures apparaissaient quand la place se faisait rare près du centre du village. Les mayas combinaient leurs maisons et partageaient la place. Cela donnait d'impressionnantes structures.

@@ -1,0 +1,5 @@
+sells=cider,calva
+
+buys=ciderapple
+
+deliverto=ciderapple

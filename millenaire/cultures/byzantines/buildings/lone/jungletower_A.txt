@@ -1,0 +1,1 @@
+native:Mono Paratiritio;around:4;startLevel:-1;orientation:3;width:7;length:7;male:keepertropical_byzantine;shop:lonetower

@@ -1,0 +1,3 @@
+max:1;priority:10;french:Chapelle;around:4;startLevel:-1;orientation:3;tag:Praying;width:17;length:13
+
+french:Eglise

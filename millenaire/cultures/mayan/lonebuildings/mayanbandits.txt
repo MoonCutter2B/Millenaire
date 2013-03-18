@@ -1,0 +1,19 @@
+name:K'as Maya
+weight:10
+radius:15
+carriesraid:true
+
+mindistancefromspawn:1000
+
+biome:forest
+biome:swampland
+biome:foresthills
+
+//extraBiomes mod
+biome:lush swamplands
+biome:rainforest
+biome:jungle
+
+
+//starting buildings:
+centre:mayanbandits

@@ -1,0 +1,11 @@
+name:Chota Mandir
+weight:5
+radius:12
+biome:extreme hills
+biome:forest
+biome:foresthills
+biome:deserthills
+biome:desert
+
+//starting buildings:
+centre:loneshrine

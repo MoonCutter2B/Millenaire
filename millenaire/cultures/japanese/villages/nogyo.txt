@@ -1,0 +1,54 @@
+name:Nouji Mura
+weight:10
+carriesraid:true
+
+
+biome:plains
+biome:extreme hills
+
+
+
+//extraBiomes mod
+
+biome:green hills
+biome:ice mountains
+biome:birch forest
+biome:autumn woods
+
+//starting buildings:
+centre:japanesefarmbig
+start:japaneselmh
+start:japanesefarm
+start:japanesegrove
+start:japanesepaddy
+start:japanesepeasanth
+
+player:japaneseplot1
+player:japaneseplot2
+player:japaneseplot3
+player:japanesehut
+player:japanesehouse
+player:japanesehousemedium
+player:japanesehouselarge
+
+//to be built in priority
+core:japanesefishery
+core:japaneselookout
+core:japanesecrafter
+core:japanesesamuraih
+core:japanesequarry
+core:japaneseforge
+core:japanesekitchen
+core:japanesemarket
+core:well
+
+//to be built after the core ones
+secondary:japanesearchive
+secondary:japaneseshintoshrine
+secondary:japaneseinn
+
+//not to be built
+never:japanesepalace
+never:japanesefort
+never:japanesepagoda
+never:japanesearmyforge

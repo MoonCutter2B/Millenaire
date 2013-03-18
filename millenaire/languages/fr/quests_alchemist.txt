@@ -1,0 +1,193 @@
+alchemist_1_introb_0_label=L'alchimiste
+alchemist_1_introb_0_description=Mon fils, j'ai entendu dire que vous cherchiez à percer les mystères de ce monde, au delà de la connaissance que Notre Seigneur a vu bon de nous donner. Ne succombez pas à l'hérésie! Si vous avez besoin de méditer, faites le donc dans un monastère. Dieu bénit ceux qui sont assez sages pour comprendre quels sont leurs limites dans leur sagesse. Mais mous êtes jeune et fou et je sais que mes conseils tomberons dans les oreilles d'un sourd à moins d'en faire l'expérience vous même. Ainsi sont les jeunes, encore et toujours!<ret><ret>Il y à un autre homme que vous pourriez voir qui pourrait vous aider ou au moins montrer la futilité de votre quête. Bien qu'il expérimente sur des choses qu'il ne comprend pas toujours, il est savant et rusé. Souhaitez vous que je vous guide à lui?
+alchemist_1_introb_0_description_success=Son nom est Guillaume Vif-argent, et il se dit 'alchimiste'. Je ne sais pas où exactement vous pourrez le trouver, mais son laboratoire est situé dans les montagnes pour mieux observer les étoiles.
+alchemist_1_introb_0_description_refuse=Vous êtes plus sage qu'il n'y parait.
+alchemist_1_introb_1_label=Faire un rapport au $startvillager_villagerrole$$
+alchemist_1_introb_1_description=Avez vous trouvé l'homme en question? Qu'en avez vous pensez?
+alchemist_1_introb_1_description_success=Je vois que ses connaissances vous impressionne. Soyez prudent, $name.
+alchemist_1_introb_1_description_refuse=Je prie pour que vous changiez d'avis, $name.
+alchemist_1_introb_1_listing=Je dois trouver la tour de l'alchimiste dans une région montagneuse puis faire mon rapport au $startvillager_villagerrole$ de $startvillager_villagename$.
+
+alchemist_1_introguildmasterb_0_label=L'alchimiste
+alchemist_1_introguildmasterb_0_description=$name, j'ai cru comprendre que vous avez parcouru ce monde pour y trouver la connaissance. Vous auriez dû venir me voir! J'ai l'honneur de connaître le plus grand penseur de notre époque, l'alchimiste Guillaume Vif-argent, dont la réputation est sans pareil parmi les penseurs et philosophes. C'est lui que vous devriez voir.
+alchemist_1_introguildmasterb_0_description_success=Son laboratoire est installé dans une zone montagneuse, où il étudie roches et étoiles avec la même passion.
+alchemist_1_introguildmasterb_0_description_refuse=Alors vous n'écouterez pas le plus grand homme depuis Platon lui-même? Quel déception, $name.
+alchemist_1_introguildmasterb_1_label=Faire son rapport au maître de guilde
+alchemist_1_introguildmasterb_1_description=Quels nouvelles me rapportez vous du grand alchimiste?
+alchemist_1_introguildmasterb_1_description_success=Son esprit est toujours aussi affuté. Ecoutez et apprenez de cet homme.
+alchemist_1_introguildmasterb_1_description_refuse=Je n'ai plus qu'à espérer que vous changiez d'avis, $name.
+alchemist_1_introguildmasterb_1_listing=Je dois trouver la tour de l'alchimiste dans une région montagneuse puis faire mon rapport au $startvillager_villagerrole$ de $startvillager_villagename$.
+
+alchemist_1_introknight_0_label=L'alchimiste
+alchemist_1_introknight_0_description=Alors vous voudriez savoir qui dans nos royaumes auraient de vaste connaissances sur le monde? Pas les prêtres, ça c'est certain. Et méfiez vous des maîtres de guilde, ils disent toujours en connaître plus que ce qu'ils savent. Il y à un homme qui pourrait vous aider, peut être - il se disait savant et prétendait pouvoir changer le plomb en or pour notre roi par le passé. Je l'ai toujours trouvé suspect mais il y à probablement du vrai dans ses dires.
+alchemist_1_introknight_0_description_success=Il s'est retiré dans la nature, dans les montagnes. Il disait avoir besoin de place pour s'installer, mais je suis sûr qu'il s'agit en réalité d'une cachette. Dans tout les cas, il s'appelle Guillaume Vif-argent.
+alchemist_1_introknight_0_description_refuse=C'est probablement plus sage.
+alchemist_1_introknight_1_label=Faire son rapport au $startvillager_villagerrole$
+alchemist_1_introknight_1_description=Avez vous rencontré cet homme?
+alchemist_1_introknight_1_description_success=Alors ce serait un génie? Enfin, tant qu'il ne se mêle pas des affaires du seigneur...
+alchemist_1_introknight_1_description_refuse=N'hésitez pas à revenir si vous changez d'avis, $name.
+alchemist_1_introknight_1_listing=Je dois trouver la tour de l'alchimiste dans une région montagneuse puis faire mon rapport au $startvillager_villagerrole$ de $startvillager_villagename$.
+
+alchemist_2_meeting_0_label=L'acceuil
+alchemist_2_meeting_0_description=Alors vous avez été envoyé ici pour que je partage mes connaissances avec vous, $name? Vous avez été bien conseillé. Je suis le seul vrai alchimiste que vous trouverez dans ce monde perdu, mon ami. Si vous souhaitez apprendre de moi, il vous faudra m'aider en retour. J'ai toujours besoin d'individus plein de ressources. De plus, en guise de motivation, sachez que si je ne peut changer le plomb en or, je sais transformer l'alchimie en pièces d'ors à la cour.
+alchemist_2_meeting_0_description_success=Vous pouvez vous installer dans la cabane à l'extérieur au passage, mon assistant et moi même ne nous en servons pas.
+alchemist_2_meeting_0_description_refuse=Alors du balai, j'ai du travail.
+
+alchemist_3_ores_0_label=Collecte de pierres
+alchemist_3_ores_0_description=Je suis en train d'analyser les roches de ce monde. Celles ci sont clairement similiaires à celles de notre monde, mais leur distribution est tout autre. Il m'en faut des échantillons et urgemment! Ou pensiez vous que j'étais un de ces philosophes gâteux planqué derrière mes livres ?
+alchemist_3_ores_0_description_refuse=Alors pourquoi vous m'ennuyez?
+alchemist_3_ores_0_description_success=Bien. Mon assistant s'occupera de vous fournir le matériel adéquat. Et soyez sans crainte, je n'ai que faire des diamants. En ce qui les concerne, je sais déjà tout ce qu'il y à a sevoir sur eux.
+alchemist_3_ores_1_label=Piocher dans les outils
+alchemist_3_ores_1_description=Mes salutations $name, je suis l'assistant de Maître Vif-argent. Ne faites pas attention à ses manières, c'est un vrai homme de science, pas de relationnel! Mais ses connaissances sont vastes, cela j'en suis sûr. Quoi qu'il en soit, voiçi vos outils.
+alchemist_3_ores_1_description_success=Bonne chance, $name!
+alchemist_3_ores_1_description_refuse=Je vais devoir en informer le maître.
+alchemist_3_ores_1_listing=Je dois récupérer des outils avec l'assistant.
+alchemist_3_ores_2_label=Ramener les échantillons
+alchemist_3_ores_2_description=Qu'avez vous trouvé?
+alchemist_3_ores_2_description_success=Bien, très bien! Quel efficacité, j'aime ça, $name.
+alchemist_3_ores_2_description_refuse=Si vous changez d'avis, vous savez où me trouver, $name.
+alchemist_3_ores_2_listing=Je dois ramener les échantillons de pierres à l'alchimiste.
+
+alchemist_4_lavab_0_label=Un besoin brûlant
+alchemist_4_lavab_0_description=J'ai une grande expérience que je souhaiterais mettre en place maintenant, $name. Comme vous l'avez peut être remarqué durant vos voyages ce monde n'a pas de volcans comme dans notre ancienne Europe, mais les sous sols sont pleins de lave et il n'est pas rare d'en voir des trainées en surface. J'ai besoin de savoir de quoi la lave est constitué, et si elle peut être utilisé pour transmuter les métaux. Mon cher Robert est trop vieux pour cela mais vous semblez plein de ressources capable de m'en ramener.
+alchemist_4_lavab_0_description_refuse=Alors pourquoi me déranger?
+alchemist_4_lavab_0_description_success=Allez donc voir Robert, il vous donnera l'équipement nécessaire.
+alchemist_4_lavab_1_label=Prendre l'équipement
+alchemist_4_lavab_1_description=Il lui faut de la lave cette fois? Je suis sûr qu'il trouvera quoi en faire! Prenez ces seaux et bonne chance.
+alchemist_4_lavab_1_description_success=A la prochaine, $name!
+alchemist_4_lavab_1_description_refuse=Je vais devoir en informer mon maître.
+alchemist_4_lavab_1_listing=Je dois récupérer l'équipement aupres de l'assistant.
+alchemist_4_lavab_2_label=Ramener la lave
+alchemist_4_lavab_2_description=Vous m'en avez ramené?
+alchemist_4_lavab_2_description_success=Excellent, cela sera très utile pour mes expériences.
+alchemist_4_lavab_2_description_refuse=Si vous changez d'avis vous savez où me trouver, $name.
+alchemist_4_lavab_2_listing=Je dois revenir avec la lave chez l'alchimiste.
+
+alchemist_5_creeper_0_label=Besoins explosifs
+alchemist_5_creeper_0_description=Ah, $name! Le maître vous a t il donné une tâche urgente? Non? Bien, bien... J'ai un souci, $name. Le maître m'a demandé de lui rapporté de grande quantité de cette substance explosive que les villageois trouvent parfois près de chez eux, mais j'ai été incapable de répondre à sa demande. Il sera grandement désappointé! Pourriez vous m'aider? Je vous fournirai tout outil qui pourrait vous aider.
+alchemist_5_creeper_0_description_refuse=Comment vais je faire, alors?
+alchemist_5_creeper_0_description_success=Merci! Bien sûr je peux vous fournir un arc et des flèches en cas de besoin.
+alchemist_5_creeper_1_label=Ramener la poudre
+alchemist_5_creeper_1_description=Avez vous pu en trouver?
+alchemist_5_creeper_1_description_success=Comment avez vous pu être si rapide? Vous êtes vraiment extraordinaire, $name. Je ne sais comment vous remercier!
+alchemist_5_creeper_1_description_refuse=Le maître va encore devoir attendre.
+alchemist_5_creeper_1_listing=Je dois collecter de la poudre pour l'assistant.
+
+alchemist_6_boreholec_0_label=Le grand trou
+alchemist_6_boreholec_0_description=J'ai étudié la géologie de ce monde, avec toute la rigueur de l'achimie. Elle est très étrange, et le plus mystérieux est certainement cette couche de roche si dure que mon assistant n'a pas réussit à la briser. Peut être est il simplement paraisseux, ou peut être il y a quelque chose de si fantastique en dessous que nous ne sommes pas censé pouvoir l'atteindre! Dans un cas comme dans l'autre, je compte bien changer ça.<ret><ret>Prêt pour un travail des plus sérieux, $name?
+alchemist_6_boreholec_0_description_refuse=Que voulez vous donc, alors?
+alchemist_6_boreholec_0_description_success=Avant que nous puissions sérieusement envisager le fait de briser cette barrière, il nous faut un moyen de l'atteindre aisément. $name, il va falloir creuser un trou vers le tréfond du monde. Creusez où vous le voulez, mais il me faut un trou de 5 mètres sur 5 exposant les fondations du monde au soleil.<ret><ret>Ne vous inquietez pas vous n'aurez pas à creuser à la main. Allez donc voir mon assistant, il vous fournira le meilleur outil que l'alchimie puisse offrir.
+alchemist_6_boreholec_1_label=Prendre les explosifs
+alchemist_6_boreholec_1_description=Alors ca y est, il va vraiment creuser son trou? Quel grand homme et quelle ambition! Oh, bien sûr nous n'oublions pas que vous êtes notre main d'oeuvre. Eh bien, c'est à vous de jouer maintenant.<ret><ret>Enfin... Grâce à la poudre que vous avez récolté, j'ai pu préparer ces explosifs en suivant ses instructions. Cela devrait vous aider à creuser plus vite.
+alchemist_6_boreholec_1_description_success=Faites attention, et bonne chance!
+alchemist_6_boreholec_1_description_refuse=Cela va décevoir le maître.
+alchemist_6_boreholec_1_listing=Je dois récupérer des explosifs auprès de l'assistant.
+alchemist_6_boreholec_2_label=Faire un rapport à l'alchimiste
+alchemist_6_boreholec_2_description=Mes explosifs ont dû vous aider à mener cette tâche à bien.
+alchemist_6_boreholec_2_description_success=Excellent travail! Vous avez tout ce qu'il faut pour devenir un grand alchimiste, $name. Réussir ce tour de force sans vous faire sauter vous même démontre une grande maîtrise.<ret><ret>Je vous dois beaucoup, $name. En remerciement, acceptez cette amulette alchimique de mon invention - ce sont vos échantillons qui m'ont permis de la mettre au point. Elle luiera quand vous serais proche de minerais précieux.<ret><ret>Je suis en train de finaliser le plan permettant de venir à bout de cette roche. Reposez vous un peu en attendant que je prépare le tout.
+alchemist_6_boreholec_2_description_refuse=Si vous changez d'avis vous savez où me trouver, $name.
+alchemist_6_boreholec_2_listing=Je dois creuser un trou de 5 par 5 jusqu'aux fondements, puis retourner voir l'achimiste.
+
+
+alchemist_7_boreholetnt_0_label=L'explosion
+alchemist_7_boreholetnt_0_description=C'est le grand jour, $name! J'ai étudié au mieux comment concentrer l'explosion au mieux pour avoir la puissance requise pour venir à bout de la roche et je pense avoir trouvé comment. Une bonne couche d'obsidienne devrait suffire à réfléchir le souffle vers le sol et nous apporter le succes. Vous êtes prêt?
+alchemist_7_boreholetnt_0_description_refuse=Alors pourquoi me déranger?
+alchemist_7_boreholetnt_0_description_success=Robert vous donnera les explosifs. Soyez sur de les installer au fond du trou que vous avez creusé et placez l'obsidienne juste au dessus. D'après mes calcus, il faudra au moins ça pour en venir à bout.
+alchemist_7_boreholetnt_1_label=Prendre les explosifs
+alchemist_7_boreholetnt_1_description=Tout est prêt pour votre mission! Explosifs, obsidienne et assez de cablage pour être à distance de sécurité quand tout sautera.
+alchemist_7_boreholetnt_1_description_success=Je vous envie mon jeune ami - vous serz le premie à découvrir les richesses des profondeurs!
+alchemist_7_boreholetnt_1_description_refuse=Je dois en informer le maître.
+alchemist_7_boreholetnt_1_listing=Je dois récupérer les explosifs auprès de l'assistant.
+alchemist_7_boreholetnt_2_label=Faire votre rapport
+alchemist_7_boreholetnt_2_description=Alors, $name! Ca à marché? Qu'avez vous donc découvert?
+alchemist_7_boreholetnt_2_description_success=Rien? Comment ca, rien? Comment ce peut il? Comment quoi que ce soit puisse résister à une telle puissance? C'est impossible, vous devez vous y être mal pris! Inepte!<ret><ret>Bien, bien, excusez mon emportement, $name. Votre travail à toujours été parfait. J'ai été naïf de croire que de simple explosifs pourraient suffire pour cette tâche. Laissez moi étudier le problème une nouvelle fois. Il doit y avoir une autre solution - et pensez aux richesses qui nous attendent en dessous, pour être si bien protégé!
+alchemist_7_boreholetnt_2_description_refuse=Je n'ai plus qu'à espérer que vous changiez d'avis, $name.
+alchemist_7_boreholetnt_2_listing=Je dois placer vingt blocs de TNT au fond du trou et les recouvrir d'obsidienne avant de les allumer.
+
+
+
+alchemist_8_anomalyb_0_label=L'anomalie
+alchemist_8_anomalyb_0_description=Notre échec me pèse, $name. J'y ai grandement réfléchi depuis et je pense que mon erreur viens du fait que je n'ai pas assez étudié cette étrange roche avant de m'y attaquer. Avant d'être un simple obstacle c'est un mystère en elle même. J'ai d'ailleurs fait de grands progrès en ce sens, $name! J'ai réussi a concevoir une poudre qui réagit en présence de cet roche et j'ai envoyé mon assistant l'utiliser de part le monde pour la tester et repérer celle ci dans le même temps. Dans l'ensemble, les résultats sont proches de mes premières études - une couche uniforme, situé à 60 mètres de profondeur .<ret><ret>Cependant... Il a localisé au moins un endroit où e n'est pas le cas. Le manteau est en ce lieu plus proche de la surface et présent en plus grande quantité! Pouvez vous enquéter sur ce point pour moi?
+alchemist_8_anomalyb_0_description_refuse=Pourquoi donc me déranger, alors?
+alchemist_8_anomalyb_0_description_success=Faîtes attention à vous, $name! Je ne sais ce que cela signifie exactement, cela peut être dangereux.
+alchemist_8_anomalyb_1_label=Faire un rapport
+alchemist_8_anomalyb_1_description=Vous voici de retour? Qu'avez vous donc trouvé?
+alchemist_8_anomalyb_1_description_success=Une pièce? Artificiel et faite de ce manteau rocheux? C'est la plus grande découverte depuis notre arrivé en ce monde... la première preuve indiscutable d'une présence antérieure à la notre en cet endroit avec une puissance bien supérieure à la notre qui plus est. Cela n'a rien à voir avec ces donjons et mines abandonnées dont j'ai entendu parler jusqu'à présent, impressionnantes mais que nous pourrions reproduire nous même. Nous touchons à quelque chose de completement différent. Et vous dites que d'étranges mécanismes créaient des créatrures monstrueuses en ce lieu?<ret><ret>$name, je vais avoir besoin d'y réflechir pour quelques temps encore, ceci est au delà de mes connaissances actuelles. Je vais aussi me mettre à chercher d'autres moyens de poursuivre vos recherches car ce lieu était vide.
+alchemist_8_anomalyb_1_description_refuse=
+alchemist_8_anomalyb_1_listing=Je dois explorer l'anomalie et faire un rapport à l'alchimiste
+
+
+alchemist_9_anomalytwob_0_label=Un deuxième écho
+alchemist_9_anomalytwob_0_description=$name, j'ai des nouvelles fantastiques pour vous! Robert a trouvé une nouvelle anomalie non loin. Qui sait ce que nous y trouverons? Peut être quelque chose qui nous mettra sur la piste de ces bâtisseurs ou un moyen de passer outre cette barrière une fois pour toute?<ret><ret>Mais je m'emporte... La première chose à faire est de s'assurer que l'endroit est sûr. Au vu des difficultés encontrées dans la première anomalie, j'ai peur que cela soit un problème ici aussi, $name. Prenez cette nourriture... Et aussi, voici aussi mon épée. Vous en aurez probablement plus besoin que moi.
+alchemist_9_anomalytwob_0_description_refuse=Que voulez vous, alors?
+alchemist_9_anomalytwob_0_description_success=Bonne chance et faites preuve de précautions.
+alchemist_9_anomalytwob_1_label=Faire un rapport
+alchemist_9_anomalytwob_1_description=$name, je suis heureux de vous voir sain et sauf! Vous semblez épuisé. Je vais vous servir un verre, vous le méritez bien. Puis discutons un peu de vos découvertes.
+alchemist_9_anomalytwob_1_description_success=Des équipements alchimiques? C'est fascinant! Ainsi ces mystérieux batisseurs sont presques des confrères! Bien sûr, un peu plus avançés que moi... pour le moment! En donc vous avez ramenez un échantillon de cette plante étrange qu'ils cultivent. Elle a certainement des vertues alchimiques puissantes.
+alchemist_9_anomalytwob_1_description_refuse=
+alchemist_9_anomalytwob_1_listing=Je dois exlorer la deuxième anomalie et rapporter mes découvertes à l'alchimiste
+
+
+
+alchemist_10_anomalythree_0_label=Jamais deux sans trois
+alchemist_10_anomalythree_0_description=Pendant que j'étudiais votre dernière décourverte, Robert a continué à rechercher des anomalies. Il pense en avoir localisé une autre, de taille nettement plus importante. Pensez à ce qu'elle doit cacher! Et moi qui n'ai même pas fini de percer les secrets de la dernière!
+alchemist_10_anomalythree_0_description_refuse=Que voulez vous, alors?
+alchemist_10_anomalythree_0_description_success=Je vois que vous avez tout autant hâte que moi de voir ce qu'elle contient. Vous me plaisez, mon garçon!
+alchemist_10_anomalythree_1_label=Faire un rapport
+alchemist_10_anomalythree_1_description=Mon brave $name, intrépide explorateur! Je vois que ça n'a pas été facile. Un verre de calva et un bon boudin normand pour vous remettre?
+alchemist_10_anomalythree_1_description_success=Incroyable... Vous pensez donc que la dernière pièce serait un fourneau volcanique? Les connaissances alchimiques des ces individus dépassent l'entendement! Et ces générateurs, et une pièce pour des échantillons... Je ne serais pas alchimiste, je dirais que vous veniez de trouver l'atelier de Dieu en personne, mon bon ami.<ret><ret>Je vais étudier cette poudre que vous avez rapporté. Cela devait être d'une extrême importance pour eux s'ils ont construit un tel mécanisme pour la protéger. J'espère seulement que mes maigres connaissances suffiront à en faire quelque chose même si je ne parviens pas à comprendre cette substance.
+alchemist_10_anomalythree_1_description_refuse=
+alchemist_10_anomalythree_1_listing=Je dois explorer la troisième anomalie et rapporter mes découvertes à l'alchimiste
+
+
+
+
+
+
+alchemist_11_brewingstudents_0_label=Partage de connaissance
+alchemist_11_brewingstudents_0_description=$name, j'ai une grande nouvelle! J'ai réussit à faire pousser ces plantes. Elles n'ont pas l'air d'être natives de cette terre, mais avec des engrais de ma fabrication elles arrivent à pousser. Et elles ont l'air d'avoir des propriétés alchimiques très puissantes. Je n'ai pas le temps de pousser ces recherches plus loin, mais j'ai préparé un livre avec les bases de mes recherches sur ce sujet. Il faudrait que vous le portiez à un village normand, où j'espère qu'un jeune ambitieux s'en servira pour produire des potions utiles.
+alchemist_11_brewingstudents_0_description_success=Allez voir un maître de guilde, ou sinon un chevalier ou sénéchal. Je ne pense pas qu'un abbé voit de telles découvertes d'un bon oeuil. Ils sont assez étroits d'esprit.
+alchemist_11_brewingstudents_0_description_refuse=Que voulez vous, alors?
+alchemist_11_brewingstudents_1_label=Parler à l'alchimiste
+alchemist_11_brewingstudents_1_description=Avez-vous pû transmettre ce savoir?
+alchemist_11_brewingstudents_1_description_success=Très bien. J'espère qu'un des jeunes du village fera preuve de talent. Il faut que je me concentre sur votre poudre - je suis convaincu que c'est le plus important.
+alchemist_11_brewingstudents_1_description_refuse=Que voulez vous, alors?
+alchemist_11_brewingstudents_1_listing=Retournez voir l'alchimiste après avoir parlé avec un chef de village.
+
+alchemist_11b_guildmaster_0_label=Parler au Maître de Guilde
+alchemist_11b_guildmaster_0_description=Guillaume Vif-Argent aurait réussit à recréer l'achimie ici? C'est vraiment un homme extraordinaire! Je serais honoré d'étudié son traité et de transmettre cette connaissance à un jeune suffisament brillant!
+alchemist_11b_guildmaster_0_description_success=Transmettez mon admiration au maître.
+alchemist_11b_guildmaster_0_description_refuse=Que voulez vous, alors?
+
+
+alchemist_11b_knightseneschal_0_label=Parler au chef du village
+alchemist_11b_knightseneschal_0_description=Ainsi, ce vieux alchemiste aurait de nouveau fait des découvertes stupéfiantes? Ce qui est étrange, c'est qu'il n'essaye pas de les vendre... Ecoutez, mon brave $name, je n'ai ni le temps ni le goût pour ces choses, mais si un jeune du village montre un intérêt pour ces recherches, je lui transmetrais.
+alchemist_11b_knightseneschal_0_description_success=Revenez me voir si jamais il arrive enfin à transmuter du plomb en or. Depuis le temps qu'il en parle!
+alchemist_11b_knightseneschal_0_description_refuse=Que voulez vous, alors?
+
+
+
+
+
+alchemist_12_theexperiment_0_label=L'expérience
+alchemist_12_theexperiment_0_description=Je n'ai jamais rien vu de comparable à cette poudre... Je n'arrive ni à comprendre ce dont il s'agit vraiment ou comment la fabriquer. Cela est bien au delà de mes connaissances alchimiques, $name. Encore plus que ce dont je m'attendais, en fait. Tout ce que j'ai pu déterminer, c'est que l'on peut en faire un explosif d'une grande puissance. Des doses, même minimes, suffisent pour pratiquement faire sauter tout le bâtiment si l'on y prenais pas garde. Il n'y a bien sûr pas besoin que je vous dise ce que je souhaite tenter maintenant, Mon ami. Mais laissez moi vous rappeller d'abord que ce produit est très volatil.<ret><ret>J'ai réussi à le stabiliser en le mélangeant à d'autres produits, en faisant la forme d'un cube. Ce n'est que de cette manière que ce produit semble stable, aussi vous pouvez le manipuler sans trop de risque - enfin j'espère. Cependant, faire sauter un autre explosif à proximité aura pour effet de le faire réagir. L'explosion qui s'ensuivra sera probablement des plus violente. A quel point, je ne saurais le dire avec certitude mais je préconise que vous soyez à une distance de sécurité raisonnable si cela devait arriver.<ret><ret>Faites attention en manipulant ceci près de la croûte rocheuse, je ne suis pas sûr de pouvoir en fabriquer d'autres si vous échouez.
+alchemist_12_theexperiment_0_description_refuse=Pourquoi venir me déranger, alors?
+alchemist_12_theexperiment_0_description_success=Robert vous fournira les explosifs classiques qu'il vous faudra. Faites pruve de précaution et à votre retour, nous boirons à notre victoire contre cette soi disant roche indestructible!
+alchemist_12_theexperiment_1_label=Prendre le materiel
+alchemist_12_theexperiment_1_description=Ah, $name... Voici le materiel convenu avec le maître. Et ça me déplait de l'admettre mais je ne l'ai jamais vu si hésitant. C'est assez diffiile à imaginer en ce qui me concerne, le voir douter ainsi.
+alchemist_12_theexperiment_1_description_success=Si tout se déroule comme prévu, vous deviendre une légende, le premier individu à pénétrer dans le royaume souterrain. Sinon, eh bien...
+alchemist_12_theexperiment_1_description_refuse=Je suppose que je peux vous comprendre.
+alchemist_12_theexperiment_1_listing=Je dois récupérer du materiel chez l'assistant.
+alchemist_12_theexperiment_2_label=Faire votre rapport
+alchemist_12_theexperiment_2_description=Vous faites une drôle de tête, $name...
+alchemist_12_theexperiment_2_description_success=Vide... Alors ce monde repose sur rien d'autre que du vide... N'y a t il donc pas de réalité en ce bas monde? Rien de solide et mesurable? $name, ceci n'est plus du ressort de mon alchimie... C'est un monde d'ombres et d'illusions!
+alchemist_12_theexperiment_2_description_refuse=Nerveux façe a l'ampleur de la tâche, $name?
+alchemist_12_theexperiment_2_listing=Je dois faire sauter l'explosif spécial de l'alchimiste pour tenter de révéler les mystères des profondeurs.
+
+
+
+
+alchemist_13_conclusion_0_label=Esprit et matière
+alchemist_13_conclusion_0_description=j'ai grandement réflechi à propos des récents évenements, $name... Vous avez raison, j'ai encore un rôle à jouer. Je ne comprends peut être pas tout les tenants et aboutissements de cet pâle copie du monde ou ce que nous y faisons, mais mes potions et formules vous aiderons là je ne pourrais. Merci encore, $name. Pas simplement pour votre travail remarquable mais aussi pour votre soutien. Soyez sûr de repasser me voir si vous avez besoin de mon aide.<ret><ret>Vous devriez aussi savoir que j'ai usé de mon influence auprès des normands et leurs maîtres de guildes pour répandre le mot à propos de vos exploits. Si ce n'était pas le cas avant, sachez que de nombreux normands n'hésiterons pas à vous suivre où que vous alliez et sont prêt à vous reconnaître en tant que dirigeant.
+alchemist_13_conclusion_0_description_refuse=Pensez vous que j'en ai trop fait, peut être?
+alchemist_13_conclusion_0_description_success=Comme cadeau d'adieu, durant mes expérimentations, j'ai crée un petit lot de gemmes. Celles ci me sont devenues inutiles mais pour vous je pense que cela vous sera d'une grande aide.<ret><ret>J'espère vous revoir un jour $name, en espérant que vous parveniez à percer le mystère de ce monde incroyable.

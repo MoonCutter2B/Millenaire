@@ -1,0 +1,2 @@
+type:subbuilding;priority:100;native:Qila ka Bhati;around:5;orientation:3;startLevel:-1;width:36;length:26;shop:armyforge;male:indian_armysmith;female:ml_IndianPeasantWife;moveinpriority:15
+priority:10

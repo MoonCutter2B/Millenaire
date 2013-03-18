@@ -1,0 +1,14 @@
+name:Ch'en
+weight:10
+radius:15
+biome:forest
+biome:swampland
+biome:foresthills
+
+//extraBiomes mod
+biome:lush swamplands
+biome:rainforest
+biome:jungle
+
+//starting buildings:
+centre:lonemayancave

@@ -1,0 +1,2 @@
+max:1;priority:10;french:Puit;english:Well;around:4;startLevel:-11;maxDistance:55;width:4;length:4;irrigation:5
+irrigation:15

@@ -1,0 +1,16 @@
+native_name=Aubergiste
+gender=female
+familyNameList=family_names
+firstNameList=women_names
+baseheight=0.8
+tag=seller
+
+texture=/graphics/mob/norman/ML_Wife0.png
+texture=/graphics/mob/norman/ML_Wife1.png
+
+goal=gorest
+goal=goDrink
+goal=makeCider
+goal=makeCalva
+goal=getGoodsHousehold
+goal=deliverGoodsHousehold

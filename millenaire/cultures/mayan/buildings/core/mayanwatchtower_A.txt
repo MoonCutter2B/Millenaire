@@ -1,0 +1,1 @@
+max:2;priority:40;french:Cha'an Ka'nal;english:Watch Tower;around:4;startLevel:-1;orientation:0;width:9;length:9;tag:Patrol;minDistance:80

@@ -1,0 +1,3 @@
+sells=bread,beefraw,tripes,bookshelves
+
+buys=stone

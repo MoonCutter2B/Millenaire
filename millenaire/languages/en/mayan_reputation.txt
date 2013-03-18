@@ -1,0 +1,10 @@
+0;Stranger;We have not seen those of your skin color, we must be wary.
+4*64;Known Face;Be warned, our warriors keep their eyes on you.
+16*64;Regular visitor;$name! Have the times brought change?
+64*64;Favourite Trader;Hello, $name. As always your goods are welcome.
+2*64*64;Friend of the village;$name, you have truely helped bring us to a brighter age.
+8*64*64;One of us;$name Our shamans have now annointed you as one of our own.
+32*64*64;Natural leader;You have gained the trust and respect of all the Mayans. They will follow you anywhere. 
+-64;Nuisance;Leave our lands. Your kind will not desecrate our culture.
+-4*64;Unpleasant outsider;You have brought stench and disorder to our village.
+-16*64;Public enemy;You have ruined our way of life, this will not be tolerated.

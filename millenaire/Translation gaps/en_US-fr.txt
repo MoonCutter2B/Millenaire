@@ -1,0 +1,12 @@
+Translation comparison between en_US and fr
+
+List of gaps found in culture building names for mayan: 
+
+Building name missing for culture mayan: lonemayanpyramid_a0
+Building name missing for culture mayan: mayanobsidiancrafter_a0
+
+List of gaps found in culture building names for hindi: 
+
+Building name missing for culture hindi: pandithouse_a0
+
+Traduction completness: 99%

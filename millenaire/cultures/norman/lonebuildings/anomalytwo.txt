@@ -1,0 +1,8 @@
+name:Anomalie Deux
+weight:1000
+radius:20
+max:0
+keyLoneBuilding:true
+
+//starting buildings:
+centre:anomalytwo

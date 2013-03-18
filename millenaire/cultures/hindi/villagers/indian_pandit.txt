@@ -1,0 +1,16 @@
+native_name=Pandit
+gender=male
+familyNameList=high_caste_family_names
+firstNameList=men_names
+tag=religious
+tag=meditates
+
+texture=/graphics/mob/indian/ML_priest0.png
+texture=/graphics/mob/indian/ML_priest1.png
+
+goal=gorest
+goal=gopray
+goal=performpujas
+goal=bepujaperformer
+
+experiencegiven=2

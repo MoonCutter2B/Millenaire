@@ -1,0 +1,58 @@
+version:1.1.4
+Millénaire: Bâtiments normands
+
+Bâtiments centraux
+
+Fort. Dans les villages militaires, ce petit fort en bois est le centre du village. Un chevalier et sa dame y habitent. Avec assez de pierre, les villageois le transformeront en une puissante forteresse. 
+
+Abbaye. Les villages religieux sont centrés sur ce lieu de dévotions et d'études, où un moine travaille dur à produire des manuscrits et à les ranger dans des rayonnages. C'est ici que les fermiers des environs vont payer leur dû - en biens et en travail pour la Sainte Eglise. Ils seront certainement récompensés dans un autre monde.
+
+Manoir. Au centre des villages agricoles, ce manoir est le domicile d'un sénéchal, charger de lever l'impôt pour le roi - et de s'en garder une juste part.
+
+Hall de la Guilde. Démonstration du talent des ouvriers qui l'ont construit, ce hall de la guilde sert de quartier général pour les artisans des environs, sous la supervision attentive de l'exigeant maître.
+NEW_PAGE
+Habitations
+
+Armurerie. Une fois occupée par un forgeron, sert de centre de production pour les célèbres armures et épées normandes.
+
+Elevage bovin. Les vaches élevées ici fournissent du cuir et surtout la viande nécessaire aux fameuses tripes normandes.
+
+Elevage porcin. Les porcs sont transformés ici en côtelettes et goûteux boudins noirs. Tout est bon dans le cochon!
+
+Elevage ovin. Des moutons sont élevés ici pour leur laine. Un enclos séparé contient des poulets, dont les oeux et les plumes sont récoltés.
+
+Ferme. C'est ici que les fermiers cultivent le blé nécessaire à la boulangerie.
+
+Forge. C'est là que le forgeron produit des outils, utilisés par les autres villageois et achetables par le joueur.
+
+Maison du garde. Domicile d'un garde et de sa femme.
+
+Hutte du bûcheron. Domicile d'un bûcheron et de sa femme.
+
+Presbytère. Domicile du prêtre du village.
+
+Carrière. Domicile du mineur et de sa femme, c'est de là qu'il tire des quantités infinies de pierres et de sable.
+
+Maison du charpentier : C'est là que le charpentier fabrique des colombages à partir de bois amené par sa femme.
+
+Auberge. Les marchants en visitent y logent pendant qu'ils récoltent des ressources du village. Si elle est vide, un adolescent peut s'y installer pour commencer une carrière commerciale.
+
+Relais. Plus petit qu'une taverne, ce bâtiment peut accueillir des marchants d'autres villages, mais n'attirera pas d'adolescent. Présent uniquement dans les hameaux.
+
+Marché. Tout village respectable finira par construire ce bâtiment pour pouvoir accueillir des marchants porteurs de biens exotiques!
+NEW_PAGE
+Bâtiments inhabités
+
+Archives du village. Chaque habitant du village a un panneau à son nom ici, qui donne des informations sur ce qu'il fait et sur sa famille.
+
+Boulangerie. Les femmes du village vont y préparer du pain grâce au blé ramené par les fermiers. Ce bâtiment est très important, puisque les enfants grandissent plus vites s'ils ont accès à du pain.
+
+Chapelle / église. La chapelle, plus tard améliorée en église, est visitée par les villageois qui souhaitent prier.
+
+Taverne. Les femmes du village y produisent du cidre, et une fois un alambic installé, du calva. Les villageois s'y retrouvent pour prendre un verre et échanger des rumeurs.
+
+Tour de guet. Ce poste de surveillance est visité par les gardes durant leur patrouilles.
+
+Bâtiments décoratifs
+
+Fontaine / grande fontaine / puit. Ces éléments décoratifs embellissent les villages.

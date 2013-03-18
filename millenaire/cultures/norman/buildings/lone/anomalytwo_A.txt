@@ -1,0 +1,1 @@
+native:Anomalie Deux;around:4;startLevel:0;orientation:3;width:25;length:13;startingGood:netherwart,1,16,0

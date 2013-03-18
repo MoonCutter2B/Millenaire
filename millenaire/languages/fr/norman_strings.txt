@@ -1,0 +1,77 @@
+
+culture.norman=Normande
+
+//Name of the villager types
+//Left empty when no translation is needed
+//Norman:
+villager.abbot=
+villager.carpenter=
+villager.cattleFarmerMale=
+villager.cattleFarmerFemale=
+villager.boy=
+villager.girl=
+villager.teenagerMale=
+villager.teenagerFemale=
+villager.farmer=
+villager.merchant_viking=
+villager.merchant_weapon=
+villager.merchant_plant=
+villager.merchant_art=
+villager.merchant_wool=
+villager.merchant_food=
+villager.guard=
+villager.guildmaster=
+villager.knight=
+villager.lady=
+villager.lumberman=
+villager.merchant=
+villager.miner=
+villager.monk=
+villager.priest=
+villager.seneschal=
+villager.smith=
+villager.wife=
+
+villager.innkeeperfemale=
+villager.innkeepermale=
+villager.lonemiller=
+villager.merchant_weapons=
+villager.robberbaron=
+villager.robberleader=
+
+villager.lonelumberman=
+villager.lonelumbermantaiga=
+villager.loneminer=
+villager.lonemonk=
+villager.loneabbot=
+villager.alchemist=
+villager.alchemistassistant=
+villager.alchemistapprentice=
+villager.bandit=
+villager.armoredbandit=
+villager.felonbaron=
+villager.felonsoldier=
+
+villager.pigherd=
+villager.pigherdf=
+villager.shepherd=
+villager.shepherdf=
+
+
+shop.townhall=Magasin central
+shop.forge=Outils
+shop.armoury=Armes & armures
+shop.bakery=Pain
+shop.cattlefarm=Produits ovins
+shop.pigfarm=Produits porcins
+shop.sheepchickenfarm=Volaille
+shop.tavern=Alcool
+shop.lumberman=Pommes à cidre
+shop.lonemine=Minerais
+shop.alchemyworkshop=Produits alchimiques
+shop.lonelumberman=Bois et pommes
+shop.lonemill=Pain
+shop.loneinn=Nourriture et boissons
+shop.lonelumbermantaiga=Bois
+shop.loneabbey=Produits de l'abbaye
+

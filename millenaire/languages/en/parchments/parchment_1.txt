@@ -1,0 +1,46 @@
+version:4.2.1
+Millénaire: Norman Inhabitants
+
+Village heads
+
+Chevalier: Knight. Lives in the fort, from which he goes out to patrol his land and visit the tavern. Beware meeting him in battle! Head of the Military and Gros Bourg villages.
+
+Abbé: Abbot. Lives in the abbey, supervising the work of the monks. Head of the ecclesiastic hamlets and villages.
+
+Sénéchal : Seneschal. Oversees the agricultural production of his village from his manor house. Head of the agricultural hamlets and villages.
+
+Maître de la Guilde : Guild Master. Supervises the production of the artisans from a Guild House. Head of the artisanal hamlets and villages.
+NEW_PAGE
+Women
+
+Villageoise: Female villager. Almost all adult women are of this type. Their roles include bringing resources gathered by their husbands to the Town Hall, construction work on new buildings and upgrades on old ones, and selling and buying goods from the player at various locations.
+
+Dame: Lady. Lives in the fort with her husband, where she makes tapestries from wool to decorate the fort and to sell to the player.
+NEW_PAGE
+Men
+
+Fermier: Male farmer. Lives in a farm, where he grows and harvests crops.
+
+Bûcheron: Lumberman. Lives in a lumberman's hut. Gathers wood and cider apples from trees in groves he maintains and plant saplings to produce more trees.
+
+Garde: Guard. Lives in a guard's house. Does nothing but drink cider and very occasionaly prays, unless a fellow villager is attacked. Not a good enemy to have, especially if he is armed with a fearsome Norman Broadsword.
+
+Prêtre: Priest. Lives alone in a presbytery. When he is not praying in the church, he sleeps.
+
+Forgeron: Smith. Lives in a forge or an armoury.  If iron is available he will make tools if he's in a forge or armour and swords if he's in an armoury.
+
+Eleveur : Animal farmer. Lives in a cattle farm, a pig farm, or a chicken farm. Collects various goods from farm animals and makes steamy Norman tripes and tasty boudin noir.
+
+Mineur : Miner. Lives and works in a quarry, tirelessly mining stone and sand. When his quarry gets upgraded with furnaces, he smelts them into smooth stone and glass as well.
+
+Charpentier : Carpenter. Lives and works in a carpenter's house, where he makes timberframes to use in building construction.
+
+Moine : Monk. Lives in the abbey, in which he painstakingly copies ancient books on new parchments. An art, according to him.
+
+Marchant : Merchant. Goes from inn to inn, trading goods from one village to an other. It is his job to roam for the good of all the villagers.
+
+Marchant étranger : Foreign Merchant. Merchants from far-away places will visit markets to sell their exotic goods, before leaving with your hard-earned deniers.
+NEW_PAGE
+Children
+
+Garçon / fille : boy and girl. Live with their parents, growing at night, until they are big enough to move into a free house and become adult.

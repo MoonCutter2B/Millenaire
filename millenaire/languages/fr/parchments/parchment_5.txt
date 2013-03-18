@@ -1,0 +1,38 @@
+version:1.1.4
+Millénaire: Habitants indiens
+
+Chefs de villages:
+
+Gaanv ka Mukhiya : Chef du village. Ce riche propriétaire possède une majorité des terres du village et n'a aucun problème pour se faire nommer chef du village par les habitants. Après tout, la plupart d'entre eux travaillent pour lui.
+
+Rajput Senapati : Général Rajput. Ce chef militaire, né dans une illustre famille de guerriers rajputs, assure la défense des environs depuis son fort. S'il peut tirer suffisamment de briques et de pierres des paysans du village, il le transformera en puissante forteresse.
+NEW_PAGE
+Femmes:
+
+Mahilaa kisaana : Paysanne. Ces femmes du village, épouses des hommes de modeste condition, travaillent aux champs, s'occupent de commercer avec le joueur, et assurent le transport de marchandises dans le village. Sans elles, le village s’arrêterait.
+
+Malkin : Femme riche. Avec leurs saris brodés d'or, elles ont fières allures. Dommage qu'elles soient incapables du moindre effort.
+NEW_PAGE
+Hommes:
+
+Kisaana : Paysan. Ces fermiers pauvres sont les hommes à tout faire du village. Ils cultivent les champs avec les paysannes, construisent les nouveaux bâtiments, fabriquent les briques, etc. S'ils réussissent à améliorer suffisamment leur maison, ils pourront y élever quelques poulets pour améliorer leur ordinaire.
+
+Lakarhara : Bûcheron. Ces solides gaillards à la barbe imposante alimentent le village en bois qu'ils vont couper dans les bosquets dédiés.
+
+Khanik : Mineur. Durs à la tâche, ils passent leur journée dans la carrière à extraire de la pierre et du grès. Et contrairement à leurs homologues normands, ils n'ont même pas de taverne où finir la journée.
+
+Rajput Sainik : Soldat rajput. Nés comme leur chef dans des familles militaires, ces hommes sont entraînés depuis l'enfance à combattre. Leur rôle est de défendre le village, et attention, ils le prennent au sérieux.
+
+Loohaar : Forgeron. Leur métier est mal vu, mais que ferait les villageois sans leurs outils?
+
+Sena ka Loohaar : Forgeron militaire. Ces forgerons sont spécialisés dans la fabrication d'armes et d'armures, un travail difficile mais plus valorisant que de fabriquer des houes.
+
+Muurtikaar : Sculpteur. Mi artisans mi artistes, ils ont le grand honneur de produire les statues qui ornent le temple.
+
+Pandit : Prêtre. Nés dans des familles brahmanes, les pandits servent de prêtres au village. Leur connaissance des hymnes sanscrits n'a d'égale que leur refus de tout travail manuel.
+NEW_PAGE
+Enfants :
+
+Larki / Larka : Fille / Garçon. Vivent avec leur parents jusqu’à ce qu’ils aient suffisamment grandit pour accéder au statut de jeune.
+
+Kishori / Kishor : Jeune (F / M). Encore enfants mais arrivés au terme de leurs croissances, les jeunes attendent qu’une maison est une place de libre pour emménager et commencer à travailler dans le métier en question.

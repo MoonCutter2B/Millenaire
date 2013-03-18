@@ -1,0 +1,14 @@
+native_name=Abbé
+gender=male
+familyNameList=noble_family_names
+firstNameList=men_names
+tag=chief
+tag=religious
+
+texture=/graphics/mob/norman/ML_Abbot0.png
+
+goal=gorest
+goal=gopray
+goal=goDrink
+
+

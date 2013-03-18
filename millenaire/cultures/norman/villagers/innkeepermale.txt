@@ -1,0 +1,14 @@
+native_name=Aubergiste
+gender=male
+familyNameList=family_names
+firstNameList=men_names
+
+texture=/graphics/mob/norman/ML_Carpenter0.png
+
+goal=gorest
+goal=goDrink
+
+toolNeeded=normanBroadsword
+
+
+tag=helpInAttacks

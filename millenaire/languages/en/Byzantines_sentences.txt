@@ -1,0 +1,64 @@
+villager.greeting=Xaire, $name! / Hello, $name!
+villager.greeting=Omorfi mera, etsi den einai? / Beautiful day, isn't it?
+villager.greeting=Tha brochi. Syntoma.  / It will rain. Soon.
+villager.greeting=Kamia poli ston kosmo boroun na synkrithoun me tin Konstantinoupoli/ No city in the world can compare with Constantinople.
+villager.greeting=Den eimaste Ellines , eimaste Romaioi. / We are not Greeks, we are Romans.
+villager.greeting=Eimaste Byzantinoi einai to teleutaio alaethino Romaious. Bask stae doxa tou politismou mas. / We Byzantines are the last true Romans. Bask in the glory of our civilization.
+villager.GoPlay=Nomizo oti tha pao na paixoun exo. / I think I'll go play outside.
+villager.gorest=Eimai kourasmenos. Tha pao spiti na koimitho. / I'm tired. I'll go home to sleep.
+villager.makeBread=To psomi einai aedae myrodia kalo. / The bread already smells good...
+villager.gorest=Nomizo oti tha pao gia Hypno. / I think I'll go to sleep.
+villager.BecomeAdult=Telos tha ginei mia romaiki politi! / Finally I have become a roman citizen!
+villager.calltoarms=Ae Romaikae Autokratoria dexetai epithesi ! Gia ta opla ! / The Roman Empire is attacked! To arms!
+villager.GoPlay=Nomizo oti tha pao na paixoun exo. / I think I'll go play outside.
+
+architect_byzantine.construction=Staen pragmatikotita eimai enas kallitechnis otan ylopoisi ton en logo epexergasia domes. / I build such elaborate structures. I'm really an artist.
+architect_byzantine.construction=Ae architektonikae aemas den borei na synkrithei me kamia alli. / Our architecture can't be compared with any other.
+artisan_byzantine.greeting=Ae zoae mou einai poly kalyteri apo tae zoae ton allon anthropon edo. / My life is much better than the life of other people here.
+artisan_byzantine.makePainting=Romanikaes technaes aemas einai ae kalyterae ston kosmo. / Roman art is the most advanced in the world.
+
+merchant_art.greeting=Kamia poli ston kosmo boroun na synkrithoun me tin Konstantinoupoli/ No city in the world can compare with Constantinople.
+merchant_art.greeting=Eimaste Byzantinoi einai to teleutaio alaethino Romaious. Bask stae doxa tou politismou mas. / We Byzantines are the last true Romans.
+
+smith_byzantine.MakeIndianTools=Vyzantini̱ ergaleia einai ta kalytera ston kosmo. / Les outils byzantins sont les meilleurs du monde.
+armysmith_byzantine.MakeIndianTools=Vyzantini̱ ergaleia einai ta kalytera ston kosmo. / Les outils byzantins sont les meilleurs du monde.
+armysmith_byzantine.MakeByzantineMace=Mi̱n prospathi̱sete katapolemi̱si̱ enan andra oplismeno me mena. / N'essayez pas de combattre quelqu'un que j'ai armé.
+
+wife_byzantine.greeting=To kathikon mas einai na elenchei tous andreous aemas. / Our task is to control our men.
+wife_byzantine.greeting=Os gynaika sas , den yparchoun polla pou sas epitrepete na edo... / As a women you aren't allowed to do much here...
+wife_byzantine.getGoodsHousehold=Ora na noiazontai gia to noikokyrio. / Time to take care of the household.
+wife_byzantine.DeliverGoodsHousehold=Tetoia pragmata opos afto einai ta mona pragmata pou boro na kano edo. / Things like this are the only things I can do here.
+wife_byzantine.GetHouseTHResources=Telos o syzygos mou echei paradothei porous tou, opos tou eipa. / My husband has finally delivered his resources like I told him.
+wife_byzantine.cooking=Ae kouzina tou einai pragmatika diaskedastiko. / Cooking is really fun.
+
+miner_byzantine.Mining=Se afti tin dynami kai tin antochi douleia einai aparaititi. Omos, kaneis edo den echei syneiditopoiaesei pote... / In this job strength and endurance is needed. But nobody here notices...
+miner_byzantine.Mining=Eimai perifanos pou Romaiki kai ergazontai gia afto to Empire doxa , akoma kai se afto to dyskolo ergo. / I'm proud to be a Roman Citizen working for the glorious Empire, even in this hard job.
+
+patriarch_byzantine.makebooks=Ta biblia mou einai merika apo ta kalytera cheirografa ekei exo. / My books are some of the best manuscripts out there.
+pastor_byzantine.makebooks=Ta biblia mou einai merika apo ta kalytera cheirografa ekei exo. / My books are some of the best manuscripts out there.
+
+lumberman_byzantine.BringBackResourcesHome=Ae gynaikos mou prepei na einai perifanoi giati ola ta xyla pou echo pira . / My wife must be proud with all the wood I have brought.
+lumberman_byzantine.ChopTrees=Kathe domi tou xylou mas anankes , kai na parei afti einai ae douleia mou! / Every structure here needs wood, and getting it is my job!
+lumberman_byzantine.GatherGoods=Nikaia dendryllio ekei. / Nice sapling over there.
+lumberman_byzantine.PlantSaplings=Syntoma auto tha einai ana megalo, epivlitiko dentro ! Kai tha to meiosoun.  / Soon this will be a big, majestic tree! And I'll cut it down.
+
+keeperBirch_byzantine.greeting=Pos tha borouse na irthe me tin idea tis ergasias edo... / How could anyone think someone should be posted here...
+keeperBirch_byzantine.greeting=Einai toso vareti edo, tipota den symvainei pote... / It's so dull here, nothing ever happens...
+keeperBirch_byzantine.greeting=Geia sou, anarotiemai pos tha vrethei afto to mikro meros makrino. / Greetings traveller, I wonder how you ended up in this faraway place.
+
+
+keeperOak_byzantine.greeting=Pos tha borouse na irthe me tin idea tis ergasias edo... / How could anyone think someone should be posted here...
+keeperOak_byzantine.greeting=Einai toso vareti edo, tipota den symvainei pote... / It's so dull here, nothing ever happens...
+keeperOak_byzantine.greeting=Geia sou, anarotiemai pos tha vrethei afto to mikro meros makrino. / Greetings traveller, I wonder how you ended up in this faraway place.
+keeperOak_byzantine.greeting=Aftoi oi anthropoi edo, lene eafto tou 'Normans', mou thymizoun ti doxa tis aftokratorias mas. / These people here, that call themselves Normans, remind me of our glorious empire.
+
+keeperPine_byzantine.greeting=Pos tha borouse na irthe me tin idea tis ergasias edo... / How could anyone think someone should be posted here...
+keeperPine_byzantine.greeting=Einai toso vareti edo, tipota den symvainei pote... / It's so dull here, nothing ever happens...
+keeperPine_byzantine.greeting=Geia sou, anarotiemai pos tha vrethei afto to mikro meros makrino. / Greetings traveller, I wonder how you ended up in this faraway place.
+keeperPine_byzantine.greeting=Afto to kryo einai fovero. Den yparchei amfivolia den boro na vro tous anthropous edo... / This cold is awful. No wonder there is nobody around.
+
+keeperTropical_byzantine.greeting=Pos tha borouse na irthe me tin idea tis ergasias edo... / How could anyone think someone should be posted here...
+keeperTropical_byzantine.greeting=Einai toso vareti edo, tipota den symvainei pote... / It's so dull here, nothing ever happens...
+keeperTropical_byzantine.greeting=Geia sou, anarotiemai pos tha vrethei afto to mikro meros makrino. / Greetings traveller, I wonder how you ended up in this faraway place.
+keeperTropical_byzantine.greeting=Einai toso zesta edo. Den boro na katalavo giati aftoi 'Hindi' zoun se afti ti gi. / It's so hot here. I can't understand why those Hindis live in these lands.
+keeperTropical_byzantine.greeting=Echete dei pote aftes tis perierges 'Maya' ? Ktirion tous moiazoun san na borouse na katarrefsei kathe defterolepto. / Have you ever seen those strange Mayas? Their buildings look like they could collapse any second.

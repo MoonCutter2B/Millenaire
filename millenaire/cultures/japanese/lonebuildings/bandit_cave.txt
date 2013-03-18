@@ -1,0 +1,13 @@
+name:Iwamuro no Hito
+carriesraid:true
+
+mindistancefromspawn:1000
+
+weight:10
+radius:20
+biome:extreme hills
+biome:foresthills
+
+
+//starting buildings:
+centre:bandit_cave

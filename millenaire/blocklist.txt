@@ -1,0 +1,356 @@
+//special tags:
+//hard-coded behaviour based on the name
+//then -1, then no value counts until the colour one
+empty;-1;0;;255/255/255
+preserveground;-1;0;;0/200/0
+allbuttrees;-1;0;;150/255/150
+grass;-1;0;;0/128/0
+mainchest;-1;0;;0/0/255
+sleepingPos;-1;0;;0/128/255
+sellingPos;-1;0;;200/0/0
+craftingPos;-1;0;;200/125/0
+defendingPos;-1;0;;200/150/0
+shelterPos;-1;0;;200/175/0
+pathStartPos;-1;0;;200/250/0
+soil;-1;0;;64/128/0
+ricesoil;-1;0;;64/128/10
+turmericsoil;-1;0;;64/128/20
+sugarcanesoil;-1;0;;64/128/30
+lockedchest;-1;0;;135/30/0
+
+
+//note: base woods are simple tags
+logoak;17;0;false;130/64/0
+logoakvert;-1;0;;130/64/10
+logoakhor;-1;0;;130/64/20
+logpine;17;1;false;78/44/13
+logpinevert;-1;0;;78/44/20
+logpinehor;-1;0;;78/44/30
+logbirch;17;2;false;130/118/106
+logbirchvert;-1;0;;130/118/110
+logbirchhor;-1;0;;130/118/120
+logjungle;17;3;false;54/43/20
+logjunglevert;-1;0;;54/43/30
+logjunglehor;-1;0;;54/43/40
+
+
+
+woodstairsOakTop;-1;0;;100/0/0
+woodstairsOakBottom;-1;0;;101/0/0
+woodstairsOakLeft;-1;0;;102/0/0
+woodstairsOakRight;-1;0;;103/0/0
+
+woodstairsPineTop;-1;0;;100/0/50
+woodstairsPineBottom;-1;0;;101/0/50
+woodstairsPineLeft;-1;0;;102/0/50
+woodstairsPineRight;-1;0;;103/0/50
+
+woodstairsBirchTop;-1;0;;100/0/60
+woodstairsBirchBottom;-1;0;;101/0/60
+woodstairsBirchLeft;-1;0;;102/0/60
+woodstairsBirchRight;-1;0;;103/0/60
+
+woodstairsJungleTop;-1;0;;100/0/70
+woodstairsJungleBottom;-1;0;;101/0/70
+woodstairsJungleLeft;-1;0;;102/0/70
+woodstairsJungleRight;-1;0;;103/0/70
+
+stonestairsTop;-1;0;;120/0/0
+stonestairsBottom;-1;0;;121/0/0
+stonestairsLeft;-1;0;;122/0/0
+stonestairsRight;-1;0;;123/0/0
+stonebrickstairsTop;-1;0;;130/0/0
+stonebrickstairsBottom;-1;0;;131/0/0
+stonebrickstairsLeft;-1;0;;132/0/0
+stonebrickstairsRight;-1;0;;133/0/0
+brickstairsTop;-1;0;;140/0/0
+brickstairsBottom;-1;0;;141/0/0
+brickstairsLeft;-1;0;;142/0/0
+brickstairsRight;-1;0;;143/0/0
+sandstonestairsTop;-1;0;;150/5/0
+sandstonestairsBottom;-1;0;;151/5/0
+sandstonestairsLeft;-1;0;;152/5/0
+sandstonestairsRight;-1;0;;153/5/0
+
+woodstairsOakInvTop;-1;0;;100/0/102
+woodstairsOakInvBottom;-1;0;;101/0/202
+woodstairsOakInvLeft;-1;0;;102/0/102
+woodstairsOakInvRight;-1;0;;103/0/202
+
+
+woodstairsPineInvTop;-1;0;;100/0/112
+woodstairsPineInvBottom;-1;0;;101/0/112
+woodstairsPineInvLeft;-1;0;;102/0/112
+woodstairsPineInvRight;-1;0;;103/0/112
+
+woodstairsBirchInvTop;-1;0;;100/0/122
+woodstairsBirchInvBottom;-1;0;;101/0/122
+woodstairsBirchInvLeft;-1;0;;102/0/122
+woodstairsBirchInvRight;-1;0;;103/0/122
+
+woodstairsJungleInvTop;-1;0;;100/0/132
+woodstairsJungleInvBottom;-1;0;;101/0/132
+woodstairsJungleInvLeft;-1;0;;102/0/132
+woodstairsJungleInvRight;-1;0;;103/0/132
+
+stonestairsInvTop;-1;0;;120/0/102
+stonestairsInvBottom;-1;0;;121/0/202
+stonestairsInvLeft;-1;0;;122/0/102
+stonestairsInvRight;-1;0;;123/0/202
+stonebrickstairsInvTop;-1;0;;130/0/102
+stonebrickstairsInvBottom;-1;0;;131/0/202
+stonebrickstairsInvLeft;-1;0;;132/0/102
+stonebrickstairsInvRight;-1;0;;133/0/202
+brickstairsInvTop;-1;0;;140/0/102
+brickstairsInvBottom;-1;0;;141/0/202
+brickstairsInvLeft;-1;0;;142/0/102
+brickstairsInvRight;-1;0;;143/0/202
+sandstonestairsInvTop;-1;0;;150/5/102
+sandstonestairsInvBottom;-1;0;;151/5/202
+sandstonestairsInvLeft;-1;0;;152/5/102
+sandstonestairsInvRight;-1;0;;153/5/202
+
+signpostTop;-1;0;;0/0/200
+signpostBottom;-1;0;;0/0/201
+signpostLeft;-1;0;;0/0/202
+signpostRight;-1;0;;0/0/203
+signwallGuess;-1;0;;0/0/219
+signwallTop;-1;0;;0/0/220
+signwallBottom;-1;0;;0/0/221
+signwallLeft;-1;0;;0/0/222
+signwallRight;-1;0;;0/0/223
+ladderGuess;-1;0;;89/64/0
+ladderTop;-1;0;;90/64/0
+ladderBottom;-1;0;;91/64/0
+ladderLeft;-1;0;;92/64/0
+ladderRight;-1;0;;93/64/0
+stonesource;-1;0;;180/20/20
+freestone;-1;0;;155/155/155
+sandsource;-1;0;;200/20/20
+freesand;-1;0;;240/240/140
+freegravel;-1;0;;70/70/70
+sandstonesource;-1;0;;150/20/20
+freesandstone;-1;0;;201/206/86
+claysource;-1;0;;102/204/205
+gravelsource;-1;0;;60/60/60
+
+furnace;-1;0;;25/25/25
+tapestry;-1;0;;220/196/172
+stall;-1;0;;150/150/0
+freewool;-1;0;;241/241/241
+doorTop;-1;0;;70/0/128
+doorBottom;-1;0;;71/0/128
+doorLeft;-1;0;;72/0/128
+doorRight;-1;0;;73/0/128
+irondoorTop;-1;0;;70/200/200
+irondoorBottom;-1;0;;71/200/200
+irondoorLeft;-1;0;;72/200/200
+irondoorRight;-1;0;;73/200/200
+trapdoorTop;-1;0;;70/0/150
+trapdoorBottom;-1;0;;71/0/150
+trapdoorLeft;-1;0;;72/0/150
+trapdoorRight;-1;0;;73/0/150
+fencegateHorizontal;-1;0;;70/0/160
+fencegateVertical;-1;0;;71/0/170
+bedTop;-1;0;;160/0/0
+bedBottom;-1;0;;160/0/1
+bedLeft;-1;0;;160/0/2
+bedRight;-1;0;;160/0/3
+cowspawn;-1;0;;100/10/10
+pigspawn;-1;0;;120/10/10
+sheepspawn;-1;0;;140/10/10
+chickenspawn;-1;0;;160/10/10
+oakspawn;-1;0;;0/100/0
+pinespawn;-1;0;;34/53/34
+birchspawn;-1;0;;162/201/101
+junglespawn;-1;0;;40/51/62
+brickspot;-1;0;;135/0/0
+indianstatue;-1;0;;179/154/117
+spawnerskeleton;-1;0;;80/0/120
+spawnerzombie;-1;0;;80/0/121
+spawnerspider;-1;0;;80/0/122
+spawnercavespider;-1;0;;80/0/123
+spawnercreeper;-1;0;;80/0/124
+dispenserunknownpowder;-1;0;;200/200/0
+netherwartsoil;-1;0;;100/10/62
+plainSignGuess;-1;0;;0/0/225
+brewingstand;-1;0;;220/220/12
+healingspot;-1;0;;0/210/0
+
+//simple tags:
+//name is only indicative
+//first value after is the blockId, second the damage value
+//third whether it should be placed after the other blocks
+clear;0;0;;255/0/0
+stone;1;0;false;102/102/102
+dirt;3;0;false;128/64/0
+dirt wall;block_earth_id;1;false;150/80/40
+cobblestone;4;0;false;76/76/76
+stonebricks;98;0;false;90/90/90
+crackedstonebricks;98;2;false;82/82/82
+mossystonebricks;98;1;false;90/150/90
+planks;5;0;false;109/71/35
+planks pine;5;1;false;66/47/27
+planks birch;5;2;false;200/183/22
+planks jungle;5;3;false;177/128/92
+saplings;6;0;false;0/50/0
+water;9;0;true;0/255/255
+sand;12;0;false;228/231/113
+gravel;13;0;false;50/50/50
+glass;20;0;false;102/204/255
+glass pane;102;0;true;180/255/255
+lapis;22;0;false;0/40/255
+sandstone;24;0;false;185/188/41
+yellowflower;37;0;false;255/255/65
+redflower;38;0;false;255/50/50
+steelblock;42;0;false;204/204/204
+doubleslab;43;0;false;150/150/150
+
+stoneslab;44;0;false;160/160/160
+sandstoneslab;44;1;false;195/200/50
+woodenslabold;44;2;false;120/80/45
+cobblestoneslab;44;3;false;85/85/85
+bricksslab;44;4;false;150/0/0
+stonebricksslab;44;5;false;110/110/110
+
+woodenslaboak;126;0;false;120/80/40
+woodenslabpine;126;1;false;120/80/50
+woodenslabbirch;126;2;false;120/80/60
+woodenslabjungle;126;3;false;120/80/70
+
+
+stoneslabInv;44;8;false;160/160/161
+sandstoneslabInv;44;9;false;195/200/51
+woodenslaboldInv;44;10;false;120/80/46
+cobblestoneslabInv;44;11;false;85/85/86
+bricksslabInv;44;12;false;150/0/1
+stonebricksslabInv;44;13;false;110/110/111
+
+woodenslaboakInv;126;8;false;120/80/41
+woodenslabpineInv;126;9;false;120/80/51
+woodenslabbirchInv;126;10;false;120/80/61
+woodenslabjungleInv;126;11;false;120/80/71
+
+brick;45;0;false;128/0/0
+bookshelf;47;0;false;128/64/35
+mossycobblestone;48;0;false;128/128/0
+obsidian;49;0;false;16/0/64
+torch;50;0;true;255/255/0
+chest;54;0;false;128/32/0
+workbench;58;0;false;167/133/99
+diamondblock;57;0;false;102/255/255
+goldblock;41;0;false;255/213/0
+clayblock;82;0;false;88/66/94
+pumpkin;86;0;false;255/128/0
+pumpkinlantern;91;0;false;255/180/0
+fence;85;0;true;170/130/0
+white wool;35;0;false;240/240/240
+orange wool;35;1;false;233/122/47
+magenta wool;35;2;false;192/77/203
+light blue wool;35;3;false;97/133/209
+yellow wool;35;4;false;196/183/28
+lime green wool;35;5;false;56/183/45
+pink wool;35;6;false;218/134/157
+gray wool;35;7;false;68/68/68
+light gray wool;35;8;false;156/164/164
+cyan wool;35;9;false;38/114/140
+purple wool;35;10;false;135/60/201
+blue wool;35;11;false;36/48/144
+brown wool;35;12;false;87/52/28
+green wool;35;13;false;54/75/24
+red wool;35;14;false;158/43/39
+black wool;35;15;false;31/27/27
+colombages plain;block_wood_id;0;false;55/32/10
+colombages cross;block_wood_id;1;false;36/21/6
+mud brick;block_stone_id;1;false;166/156/136
+cooked brick;block_stone_id;0;false;219/216/207
+
+maizesoil;-1;0;;64/128/40
+carrotsoil;-1;0;;64/128/50
+mayanstatue;-1;0;;179/154/118
+fishingspot;-1;0;;0/0/120
+
+unripe maize;block_crops_id;4;true;65/129/41
+ripe maize;block_crops_id;5;true;66/130/42
+mayan gold;block_stone_id;2;false;255/213/1
+
+ice;79;0;false;150/255/255
+snowblock;80;0;false;230/255/255
+lava;10;0;true;232/57/16
+netherrack;87;0;false;253/56/11
+tnt;46;0;false;253/52/6
+oak leaves;18;0;false;40/107/14
+pine leaves;18;1;false;42/111/15
+birch leaves;18;2;false;44/119/15
+jungle leaves;18;3;false;46/119/15
+melon;103;0;false;75/243/10
+pine sappling;6;1;true;21/147/21
+bedrock;7;0;false;40/42/40
+gold ore;14;0;false;215/217/20
+iron ore;15;0;false;231/232/177
+coal ore;16;0;false;8/8/5
+sponge;19;0;true;242/244/63
+dispenser;23;0;false;59/88/213
+lapis lazuli ore;21;0;false;59/87/207
+note block;25;0;true;154/124/65
+dead bush;31;0;true;83/57/6
+long grass;31;1;true;29/71/12
+cone grass;31;2;true;26/65/11
+diamond ore;56;0;false;34/166/152
+stone preasure plate;70;0;true;61/66/59
+wood pressure plate;72;0;true;104/78/28
+redstonewire;55;0;true;255/19/19
+redstone ore;73;0;false;193/19/19
+redstone torch;76;0;true;174/18/18
+redstone torch lit;76;5;true;255/18/18
+stone button;77;0;true;111/111/111
+snow;78;0;true;58/177/188
+jukebox;84;0;true;201/153/49
+soul sand;88;0;false;179/136/43
+glowstone;89;0;false;227/207/35
+cake;92;0;true;244/228/91
+mushroom;99;0;false;219/204/78
+mushroom;100;0;false;224/82/49
+iron bars;101;0;true;58/46/44
+fence gate;107;0;true;157/129/75
+thatched;block_wood_id;2;false;200/200/120
+paperwall;block_panes_id;0;false;220/251/243
+bedrock;7;0;false;10/10/10
+
+mooshroom red;40;0;true;217/20/74
+mooshroom brown;39;0;true;248/143/55
+lily pad;111;0;true;24/96/30
+rail;66;0;true;53/61/68
+vinesTop;106;8;true;18/170/12
+vinesBottom;106;2;true;18/170/13
+vinesLeft;106;4;true;18/170/14
+vinesRight;106;1;true;18/170/15
+
+redstonelampoff;123;0;false;121/12/12
+redstonelampon;124;0;false;222/12/12
+
+
+cauldronempty;118;0;false;120/120/120
+cauldronfull;118;3;false;120/120/125
+netherwart;115;3;true;150/10/62
+
+
+byzantineiconsmall;-1;0;;232/203/99
+byzantineiconmedium;-1;0;;232/203/110
+byzantineiconlarge;-1;0;;232/203/120
+silkwormblock;-1;0;;15/12/13
+
+byzantinetiles_bottomtop;-1;0;;189/176/145
+byzantinetiles_leftright;-1;0;;190/176/145
+byzantinestonetiles_bottomtop;-1;0;;189/180/175
+byzantinestonetiles_leftright;-1;0;;190/180/175
+byzantinetileslab_bottomtop;-1;0;;210/180/175
+byzantinetileslab_leftright;-1;0;;211/180/175
+byzantinetileslab_bottomtop_inv;-1;0;;220/180/175
+byzantinetileslab_leftright_inv;-1;0;;221/180/175
+vinesoil;-1;0;;0/256/256
+
+
+chiseled stone brick;98;3;false;88/88/88
+smooth sandstone;24;2;false;195/178/51
+cobblestone wall;139;0;false;74/74/74

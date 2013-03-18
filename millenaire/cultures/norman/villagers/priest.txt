@@ -1,0 +1,15 @@
+native_name=Prêtre
+gender=male
+familyNameList=family_names
+firstNameList=men_names
+tag=religious
+
+texture=/graphics/mob/norman/ML_Priest0.png
+texture=/graphics/mob/norman/ML_Priest1.png
+
+goal=gorest
+goal=gopray
+goal=goDrink
+
+
+experiencegiven=2

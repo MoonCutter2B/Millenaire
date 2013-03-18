@@ -1,0 +1,9 @@
+name:Ferme en ruine
+weight:10
+radius:10
+biome:forest
+biome:taiga
+
+
+//starting buildings:
+centre:ruinedfarm

@@ -1,0 +1,56 @@
+name:Chorio orthodoxo
+weight:0
+hillQualifier:goal=stous lofous
+lavaQualifier:to hefaisto
+lakeQualifier:limne
+biome:plains
+biome:river
+carriesraid:true
+
+//with extrabiomesxl
+biome:green hills
+biome:meadow
+biome:savanna
+biome:shrubland
+
+//biomes o'plenty
+biome:chaparral
+biome:heathland
+biome:orchard
+biome:scrubland
+biome:shrubland
+biome:steppe
+
+//starting buildings:
+centre:churchbyzantine
+start:lumberbyzantine
+start:architectbyzantine
+start:farmbyzantine
+start:grovebyzantine
+
+player:villa urbana
+
+//to be built in priority
+
+core:sheepbyzantine
+core:innbyzantine
+core:bakerybyzantine
+core:fisherbyzantine
+core:workshopbyzantine
+core:quarrybyzantine
+core:silkfarmbyzantine
+core:well
+
+//to be built after the core ones
+secondary:farmbyzantine
+
+secondary:quarrybyzantine
+secondary:basilkabyzantine
+
+never:vineyardbyzantine
+never:tavernbyzantine
+never:watchtowerbyzantine
+never:barracksbyzantine
+never:presbyterybyzantine
+never:forgebyzantine
+never:chapelbyzantine

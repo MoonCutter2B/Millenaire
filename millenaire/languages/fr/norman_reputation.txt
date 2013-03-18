@@ -1,0 +1,10 @@
+0;Étranger;Nous nous méfions des étrangers ici, nouveau-venu. Mais soyez honnête avec nous et vous nous trouverez hospitaliers.
+4*64;Personne connue;Vous avez déjà été aperçu dans les parages, et nos poulets sont toujours là. Continuez comme ça et nous nous entendrons.
+16*64;Visiteur fréquent;Bonjour, $name! C'est bon de vous revoir.
+64*64;Marchant préféré;Ah, $name! Le village entier attendait votre retour.
+2*64*64;Ami du village;Nous autres normands ne faisons pas confiance facilement, mais mon cher $name, vous vous êtes vraiment montré digne de confiance!
+8*64*64;Un des nôtres;C'est toujours un plaisir de vous voir, $name. Vous venez peut-être de pays lointains, mais vous êtes vraiment devenu l'un des nôtres.
+32*64*64;Chef reconnu;$name, mon peuple vous respecte et vous admire. Ils vous suivraient n'importe où.
+-64;Nuisance;On vous surveille, $name. Soyez sur vos gardes.
+-4*64;Peste;Vous êtes une nuisance démontrée. Soyez heureux que nous ne vous ayons pas déjà chassé d'ici.
+-16*64;Ennemi public;Votre présence ici est intolérable. Un geste de trop et ce sera votre dernier.

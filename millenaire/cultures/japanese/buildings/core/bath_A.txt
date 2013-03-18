@@ -1,0 +1,1 @@
+native:Sentou;around:4;startLevel:-2;orientation:1;width:27;length:27

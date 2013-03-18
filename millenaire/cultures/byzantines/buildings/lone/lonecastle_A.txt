@@ -1,0 +1,1 @@
+native:Monachikos Kastro;around:4;startLevel:-2;orientation:3;width:34;length:34;subbuilding:loneCastle_A_living;subbuilding:loneCastle_A_praying;subbuilding:loneCastle_A_training;male:keeperoak_byzantine;shop:lonetower

@@ -1,0 +1,9 @@
+name:Sunsan Ghar
+weight:10
+radius:10
+biome:extreme hills
+biome:forest
+biome:foresthills
+
+//starting buildings:
+centre:indiandesertedfarm

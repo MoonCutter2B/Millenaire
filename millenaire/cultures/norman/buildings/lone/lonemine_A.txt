@@ -1,0 +1,1 @@
+max:1;priority:3000;french:Mine;around:4;startLevel:-4;orientation:0;male:loneminer;width:8;length:11;shop:lonemine;showtownhallsigns:false

@@ -1,0 +1,43 @@
+culture.mayan=Mayan
+
+villager.mayan_boy=Boy
+villager.mayan_girl=Girl
+villager.mayan_teenagerMale=Youth
+villager.mayan_teenagerFemale=Youth
+villager.mayan_lumberman=Lumberman
+villager.mayan_miner=Miner
+villager.mayan_shaman=Shaman
+villager.mayan_peasant=Peasant
+villager.mayan_peasantwife=Female Peasant
+villager.mayan_leader=Leader
+villager.mayan_richwoman=Queen
+villager.mayan_warrior=Warrior
+villager.mayan_chieftain=Chieftain
+villager.mayan_crafter=Crafter
+villager.mayan_armysmith=Army Smith
+villager.mayan_sculptor=Carver
+villager.mayan_shamanwife=Shamans Wife
+villager.mayan_king=King
+villager.mayan_merchant=Merchant
+villager.mayan_chickenfarmer=Chicken Farmer
+villager.mayan_farmer=Corn Farmer
+villager.mayan_obsidiancrafter=Obsidian Crafter
+
+villager.lonemayanfarmer=Solitary Farmer
+villager.lonemayanpeasantwife=Farmer's Wife
+villager.lonemayanshaman=Shaman
+villager.lonemayanshamanwife=Shaman's Wife
+villager.mayanbanditboy=Bandit Boy
+villager.mayanbanditwarrior=Bandit Warrior
+villager.mayanfemalebandit=Bandit Girl
+
+villager.merchant_mayanfarmer=Farmer Trader
+villager.merchant_mayanhunter=Hunter Trader
+villager.merchant_mayanshaman=Shaman Trader
+
+shop.mayantownhall=Central Store
+shop.mayancrafter=Tools
+shop.mayanarmyforge=Armours & weapons
+shop.mayansheepchickenfarm=Chicken products
+shop.mayanobsidiancrafter=Obsidian objets
+shop.lonemayanfarm=Farm Products

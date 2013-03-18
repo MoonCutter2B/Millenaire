@@ -1,0 +1,12 @@
+name:Tour de l'Achimiste
+weight:10
+radius:15
+biome:extreme hills
+biome:ice mountains
+max:1
+keyLoneBuildingGenerateTag:alchemist_tower_generate
+
+mindistancefromspawn:2000
+
+//starting buildings:
+centre:alchemisttower
