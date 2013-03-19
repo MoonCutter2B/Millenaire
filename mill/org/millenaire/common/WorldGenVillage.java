@@ -95,7 +95,7 @@ public class WorldGenVillage implements IWorldGenerator {
 				townHallEntity.registerBuildingLocation(lbp.location);
 			}
 		}
-		townHallEntity.initialiseTownHallChestLocking();
+		townHallEntity.initialiseVillage();
 
 		Mill.getMillWorld(world).registerLoneBuildingsLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true);
 
@@ -324,7 +324,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			}
 		}
 
-		townHallEntity.initialiseTownHallChestLocking();
+		townHallEntity.initialiseVillage();
 
 
 		if (loneBuildings) {

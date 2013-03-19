@@ -512,6 +512,7 @@ public class MLN {
 	public static int blockByzantineBrickId = 1522;
 	public static int blockByzantineSlabId = 1523;
 	public static int blockByzantineMixedId = 1524;
+	public static int blockPathId = 1525;
 	public static int itemRangeStart = 25744;
 
 
@@ -1009,7 +1010,9 @@ public class MLN {
 		ModLoader.addName(new ItemStack(Mill.stone_decoration, 1, 2), MLN.string("item.mayangold"));
 		ModLoader.addName(new ItemStack(Mill.stone_decoration, 1, 3), MLN.string("item.alchimistexplosive"));
 
-
+		ModLoader.addName(new ItemStack(Mill.path, 1, 0), MLN.string("item.pathdirt"));
+		ModLoader.addName(new ItemStack(Mill.path, 1, 1), MLN.string("item.pathgravel"));
+		ModLoader.addName(new ItemStack(Mill.path, 1, 2), MLN.string("item.pathslabs"));
 
 		ModLoader.addName(Mill.mayanstatue, MLN.string("item.mayanstatue"));
 		ModLoader.addName(Mill.maize, MLN.string("item.maize"));
@@ -1322,6 +1325,8 @@ public class MLN {
 							blockByzantineSlabId=Integer.parseInt(value);
 						} else if (key.equalsIgnoreCase("block_byzantine_mixedbrick_id")) {
 							blockByzantineMixedId=Integer.parseInt(value);
+						} else if (key.equalsIgnoreCase("block_path_id")) {
+							blockPathId=Integer.parseInt(value);
 						} else if (key.equalsIgnoreCase("item_range_start")) {
 							itemRangeStart=Integer.parseInt(value);
 						} else if (key.equalsIgnoreCase("keep_active_radius")) {

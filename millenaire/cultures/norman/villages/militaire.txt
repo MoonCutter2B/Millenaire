@@ -17,6 +17,10 @@ biome:autumn woods
 biome:green hills
 biome:forested hills
 
+pathmaterial:pathdirt
+pathmaterial:pathgravel
+pathmaterial:pathslabs
+
 //starting buildings:
 centre:fort
 start:lumbermanhut

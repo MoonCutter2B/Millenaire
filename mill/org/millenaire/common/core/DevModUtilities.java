@@ -168,11 +168,11 @@ public class DevModUtilities {
 			AStarConfig jpsConfig;
 
 			if (toleranceMode==1) {
-				jpsConfig = new AStarConfig(true,false,false,2,2);
+				jpsConfig = new AStarConfig(true,false,false,true,2,2);
 			} else if (toleranceMode==2) {
-				jpsConfig = new AStarConfig(true,false,false,2,20);
+				jpsConfig = new AStarConfig(true,false,false,true,2,20);
 			} else {
-				jpsConfig = new AStarConfig(true,false,false);
+				jpsConfig = new AStarConfig(true,false,false,true);
 			}
 
 			ServerSender.sendChat(player,MLN.DARKGREEN,"Calculating path. Tolerance H: "+jpsConfig.toleranceHorizontal);

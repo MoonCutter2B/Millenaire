@@ -14,6 +14,10 @@ start:lumbermanhut
 start:lumbermanhut
 start:grove
 
+pathmaterial:pathdirt
+pathmaterial:pathgravel
+pathmaterial:pathslabs
+
 //just a list for the new building screen
 core:lumbermanhut
 core:grove

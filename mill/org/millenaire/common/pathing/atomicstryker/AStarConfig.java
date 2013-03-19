@@ -15,6 +15,8 @@ public class AStarConfig {
 	public boolean canTakeDiagonals = false;
 	//whether the path can includes "drops" (beyond the normal one block)
 	public boolean allowDropping = false;
+	//whether the path can cross water
+	public boolean canSwim = false;
 	//whether there is any tolerance when it comes to reaching the goal
 	public boolean tolerance = false;
 	//if above is set to true, the acceptable tolerances:
@@ -25,13 +27,13 @@ public class AStarConfig {
 
 
 
-	public AStarConfig(boolean canUseDoors, boolean makePathDiagonals, boolean allowDropping) {
+	public AStarConfig(boolean canUseDoors, boolean makePathDiagonals, boolean allowDropping, boolean canSwim) {
 		this.canUseDoors=canUseDoors;
 		this.canTakeDiagonals=makePathDiagonals;
 		this.allowDropping=allowDropping;
 	}
 
-	public AStarConfig(boolean canUseDoors, boolean makePathDiagonals, boolean allowDropping,int toleranceHorizontal, int toleranceVertical) {
+	public AStarConfig(boolean canUseDoors, boolean makePathDiagonals, boolean allowDropping, boolean canSwim,int toleranceHorizontal, int toleranceVertical) {
 		this.canUseDoors=canUseDoors;
 		this.canTakeDiagonals=makePathDiagonals;
 		this.allowDropping=allowDropping;

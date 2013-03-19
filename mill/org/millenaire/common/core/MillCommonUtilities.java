@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -45,8 +46,10 @@ import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
 import org.millenaire.common.UserProfile;
+import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
+import org.millenaire.common.pathing.atomicstryker.AStarNode;
 import org.millenaire.common.pathing.atomicstryker.AStarStatic;
 
 
@@ -247,7 +250,7 @@ public class MillCommonUtilities {
 				}
 			}
 		} else {
-			
+
 			final int total = toChange+countMoney(chest);
 
 			final int denier = total % 64;
@@ -257,7 +260,7 @@ public class MillCommonUtilities {
 			if (player!=null && denier_or>0) {
 				player.addStat(MillAchievements.cresus, 1);
 			}
-			
+
 			final int current_denier = countChestItems(chest,Mill.denier.itemID,0);
 			final int current_denier_argent = countChestItems(chest,Mill.denier_argent.itemID,0);
 			final int current_denier_or = countChestItems(chest,Mill.denier_or.itemID,0);
@@ -283,7 +286,7 @@ public class MillCommonUtilities {
 			} else if (denier_or > current_denier_or) {
 				putItemsInChest(chest,Mill.denier_or.itemID,0,denier_or-current_denier_or);
 			}
-			
+
 		}
 	}
 
@@ -991,24 +994,24 @@ public class MillCommonUtilities {
 		return false;
 	}
 
-	public static boolean isBlockIdValidGround(int b) {
+	public static int getBlockIdValidGround(int b) {
 
 		if (b == Block.bedrock.blockID)
-			return true;
+			return Block.dirt.blockID;
 		else if (b == Block.stone.blockID)
-			return true;
+			return Block.dirt.blockID;
 		else if (b == Block.dirt.blockID)
-			return true;
+			return Block.dirt.blockID;
 		else if (b == Block.grass.blockID)
-			return true;
+			return Block.dirt.blockID;
 		else if (b == Block.gravel.blockID)
-			return true;
+			return Block.gravel.blockID;
 		else if (b == Block.sand.blockID)
-			return true;
+			return Block.sand.blockID;
 		else if (b == Block.sandStone.blockID)
-			return true;
+			return Block.sand.blockID;
 
-		return false;
+		return -1;
 	}
 
 	public static boolean isBlockOpaqueCube(int blockId)
@@ -1450,6 +1453,8 @@ public class MillCommonUtilities {
 			s=""+Mill.byzantine_tile_slab.blockID;
 		} else if (s.equals("block_byzantine_stone_tiles_id")) {
 			s=""+Mill.byzantine_stone_tiles.blockID;
+		} else if (s.equals("block_path_id")) {
+			s=""+Mill.path.blockID;
 		}
 		return s;
 	}
@@ -1469,5 +1474,95 @@ public class MillCommonUtilities {
 			ent.worldObj.spawnParticle("heart", ent.posX + (double)(random.nextFloat() * ent.width * 2.0F) - (double)ent.width, ent.posY + 0.5D + (double)(random.nextFloat() * ent.height), ent.posZ + (double)(random.nextFloat() * ent.width * 2.0F) - (double)ent.width, var4, var6, var8);
 		}
 	}
-	//in master
+
+	private static boolean attemptPathBuild(World world,Vector<BuildingBlock> pathPoints,Point p,int pathBid,int pathMeta) {
+		int bid=p.getId(world);
+		int bidAbove=p.getAbove().getId(world);
+		int bidBelow=p.getBelow().getId(world);
+		
+		if (p.getAbove().isBlockPassable(world) && (bid==Block.dirt.blockID || bid==Block.grass.blockID || bid==Block.sand.blockID)) {
+			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
+			return true;
+		} if (p.getRelative(0,2,0).isBlockPassable(world) && (bidAbove==Block.dirt.blockID || bidAbove==Block.grass.blockID || bidAbove==Block.sand.blockID)) {
+			pathPoints.add(new BuildingBlock(p.getAbove(),pathBid,pathMeta));
+			return true;
+		} if (p.isBlockPassable(world) && (bidBelow==Block.dirt.blockID || bidBelow==Block.grass.blockID || bidBelow==Block.sand.blockID)) {
+			pathPoints.add(new BuildingBlock(p.getBelow(),pathBid,pathMeta));
+			return true;
+		} 
+		return false;
+	}
+	
+	
+	
+	public static Vector<BuildingBlock> buildPath(Building th,ArrayList<AStarNode> path,int pathBid,int pathMeta,int pathWidth) {
+
+		Vector<BuildingBlock> pathPoints=new Vector<BuildingBlock>();
+
+		Point lastPoint=null;
+
+		for (AStarNode node : path) {
+
+			Point p=(new Point(node)).getBelow();
+
+			//pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
+			
+			attemptPathBuild(th.worldObj,pathPoints,p,pathBid,pathMeta);
+			
+			if (pathWidth>1) {
+				if (lastPoint!=null) {
+					int dx=p.getiX()-lastPoint.getiX();
+					int dz=p.getiZ()-lastPoint.getiZ();
+					
+					MLN.temp(null, "Path diff: "+dx+"/"+dz);
+					
+					Point secondPoint=null,secondPointAlternate=null;
+					
+					if (dx==0) {
+						secondPoint=p.getRelative(1, 0, 0);
+						secondPointAlternate=p.getRelative(-1, 0, 0);
+					} else if (dz==0) {
+						secondPoint=p.getRelative(0, 0, 1);
+						secondPointAlternate=p.getRelative(0, 0, -1);
+					} else {
+						secondPoint=p.getRelative(dx, 0, 0);
+						secondPointAlternate=p.getRelative(0, 0, dz);
+					}
+					
+					if (secondPoint!=null) {
+						boolean success=attemptPathBuild(th.worldObj,pathPoints,secondPoint,pathBid,pathMeta);
+						
+						if (!success)
+							attemptPathBuild(th.worldObj,pathPoints,secondPointAlternate,pathBid,pathMeta);
+					}
+				}
+			}			
+
+			if (lastPoint!=null && lastPoint.x!=p.x && lastPoint.z!=p.z) {
+				boolean diagonalAdded=false;
+
+				for (int cx=0;cx<2;cx++) {
+					for (int cy=0;cy<2;cy++) {
+						for (int cz=0;cz<2;cz++) {
+							if (!diagonalAdded && cx!=cz) {
+								Point diag=new Point(cx==0?p.x:lastPoint.x,cy==0?p.y:lastPoint.y,cz==0?p.z:lastPoint.z);
+								int bid=diag.getId(th.worldObj);
+
+								if (diag.getAbove().isBlockPassable(th.worldObj) && (bid==Block.dirt.blockID || bid==Block.grass.blockID || bid==Block.sand.blockID)) {
+									pathPoints.add(new BuildingBlock(diag,pathBid,pathMeta));
+									diagonalAdded=true;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			lastPoint=p;
+		}
+		
+		return pathPoints;
+
+	}
+
 }

@@ -32,6 +32,7 @@ block_panes_id=1521
 block_byzantine_brick_id=1522
 block_byzantine_slab_id=1523
 block_byzantine_mixedbrick_id=1524
+block_path_id=1525
 
 //ID of the first Millénaire item (the others are in sequence after it)
 //New ids for 3.0

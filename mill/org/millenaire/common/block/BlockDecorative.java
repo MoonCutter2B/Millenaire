@@ -161,7 +161,7 @@ public class BlockDecorative extends Block {
 
 		final int meta=world.getBlockMetadata(i, j, k);
 
-		if ((blockMaterial==Material.ground) && (meta==0)) {
+		if ((blockID==Mill.earth_decoration.blockID) && (meta==0)) {
 			if(world.getBlockLightValue(i, j + 1, k) >= 15)
 			{
 				if(MillCommonUtilities.chanceOn(5))
@@ -169,7 +169,7 @@ public class BlockDecorative extends Block {
 					MillCommonUtilities.setBlockAndMetadata(world,i, j, k,Mill.stone_decoration.blockID, 1, true, false);
 				}
 			}
-		} else if ((blockMaterial==Material.wood) && (meta==3)) {
+		} else if ((blockID==Mill.wood_decoration.blockID) && (meta==3)) {
 			if(world.getBlockLightValue(i, j + 1, k) <7)
 			{
 				if(MillCommonUtilities.chanceOn(5))

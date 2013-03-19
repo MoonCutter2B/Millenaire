@@ -519,7 +519,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public boolean isRaider = false;
 	private PathingWorker pathingWorker;
 	public AStarPathPlanner jpsPathPlanner;
-	public static final AStarConfig DEFAULT_JPS_CONFIG=new AStarConfig(true,false,false);
+	public static final AStarConfig DEFAULT_JPS_CONFIG=new AStarConfig(true,false,false,true);
 
 	public AS_PathEntity pathEntity;
 

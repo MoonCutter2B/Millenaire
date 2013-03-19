@@ -111,7 +111,7 @@ public class Mill
 			return Mill.denier_or.itemID;
 		}
 	}
-	public static final String versionNumber = "4.4.1";
+	public static final String versionNumber = "4.5.0";
 	public static final String versionBound = "[4.4.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
@@ -139,6 +139,7 @@ public class Mill
 	public static BlockDecorative wood_decoration;
 	public static BlockDecorative earth_decoration;
 	public static BlockDecorative stone_decoration;
+	public static BlockDecorative path;
 
 	public static BlockOrientedBrick byzantine_tiles;
 	public static BlockOrientedSlab byzantine_tile_slab;
@@ -336,6 +337,7 @@ public class Mill
 		wood_decoration = new BlockDecorative(MLN.blockWoodId,Material.wood);
 		earth_decoration = new BlockDecorative(MLN.blockEarthId,Material.ground);
 		stone_decoration = new BlockDecorative(MLN.blockStoneId,Material.rock);
+		path = new BlockDecorative(MLN.blockPathId,Material.ground);
 
 		crops = new BlockMillCrops(MLN.blockCropsId);
 
@@ -497,6 +499,11 @@ public class Mill
 		stone_decoration.registerTexture(1, "mudbrickdried");
 		stone_decoration.registerTexture(2, "mayangoldblock");
 		stone_decoration.registerTexture(3, "alchemistexplosive");
+		
+		path.setUnlocalizedName("ml_path").setHardness(1.0F).setResistance(2F).setStepSound(Block.soundGravelFootstep);
+		path.registerTexture(0, "pathdirt");
+		path.registerTexture(1, "pathgravel");
+		path.registerTexture(2, "pathslabs");
 
 		crops.setUnlocalizedName("ml_crops").setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
 
@@ -561,6 +568,7 @@ public class Mill
 			ModLoader.registerBlock(wood_decoration,ItemDecorative.class);
 			ModLoader.registerBlock(earth_decoration,ItemDecorative.class);
 			ModLoader.registerBlock(stone_decoration,ItemDecorative.class);
+			ModLoader.registerBlock(path,ItemDecorative.class);
 
 			ModLoader.registerBlock(byzantine_tiles);
 			ModLoader.registerBlock(byzantine_tile_slab);

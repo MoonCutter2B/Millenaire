@@ -32,6 +32,7 @@ public class MillWorldInfo implements Cloneable {
 		public static final byte UNBUILDABLE=7;
 		public static final byte OUTOFRANGE=8;
 		public static final byte OTHER=9;
+		public static final byte PATH=10;
 
 		public static void readPacket(DataInputStream ds) {
 			Point pos=null;
@@ -124,6 +125,8 @@ public class MillWorldInfo implements Cloneable {
 						data[x][y]=BUILDING_LOC;
 					} else if (winfo.tree[x][y]) {
 						data[x][y]=TREE;
+					} else if (winfo.path[x][y]) {
+						data[x][y]=PATH;
 					} else if ((townHall.pathing!=null) && (townHall.pathing.regions[x][y]!=thRegionId)) {
 						data[x][y]=UNREACHABLE;
 					} else if (!winfo.canBuild[x][y]){
@@ -251,6 +254,8 @@ public class MillWorldInfo implements Cloneable {
 	public boolean[][] buildTested=null;
 
 	public boolean[][] topAdjusted;
+	
+	public boolean[][] path;
 
 	public int frequency=10;
 
@@ -282,6 +287,7 @@ public class MillWorldInfo implements Cloneable {
 		o.buildingForbidden=booleanArrayDeepClone(buildingForbidden);
 		o.water=booleanArrayDeepClone(water);
 		o.tree=booleanArrayDeepClone(tree);
+		o.path=booleanArrayDeepClone(path);
 		o.buildingLocations=(Vector<BuildingLocation>) buildingLocations.clone();
 		return o;
 	}
@@ -322,6 +328,7 @@ public class MillWorldInfo implements Cloneable {
 		buildTested=new boolean[length][width];
 		water=new boolean[length][width];
 		tree=new boolean[length][width];
+		path=new boolean[length][width];
 		topAdjusted=new boolean[length][width];
 
 		buildingLocations=new Vector<BuildingLocation>();
@@ -667,6 +674,12 @@ public class MillWorldInfo implements Cloneable {
 					tree[mx][mz]=false;
 				}
 
+				if ((soilbid==Mill.path.blockID)) {
+					path[mx][mz]=true;
+				} else {
+					path[mx][mz]=false;
+				}
+				
 				boolean blocked=false;
 
 				if (!(bid==Block.fence.blockID) && !MillCommonUtilities.isBlockIdSolid(bid) && (bid != Block.waterMoving.blockID) &&

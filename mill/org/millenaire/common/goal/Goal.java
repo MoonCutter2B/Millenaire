@@ -30,9 +30,9 @@ public abstract class Goal {
 	public static Goal sleep;
 	public static Goal gettool;
 
-	public static final AStarConfig JPS_CONFIG_TIGHT=new AStarConfig(true,false,false);
-	public static final AStarConfig JPS_CONFIG_WIDE=new AStarConfig(true,false,false,2,10);
-	public static final AStarConfig JPS_CONFIG_BUILDING=new AStarConfig(true,false,false,2,20);
+	public static final AStarConfig JPS_CONFIG_TIGHT=new AStarConfig(true,false,false,true);
+	public static final AStarConfig JPS_CONFIG_WIDE=new AStarConfig(true,false,false,true,2,10);
+	public static final AStarConfig JPS_CONFIG_BUILDING=new AStarConfig(true,false,false,true,2,20);
 
 	protected static final Point[] EMPTY_DEST=new Point[]{null,null};
 

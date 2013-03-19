@@ -199,6 +199,7 @@ public class VillageType implements WeightedChoice {
 	public HashMap<InvItem,Integer> sellingPrices=new HashMap<InvItem,Integer>();
 
 	public HashMap<InvItem,Integer> buyingPrices=new HashMap<InvItem,Integer>();
+	public Vector<InvItem> pathMaterial=new Vector<InvItem>();
 	public Culture culture;
 
 	public Vector<String> biomes=new Vector<String>();
@@ -300,6 +301,12 @@ public class VillageType implements WeightedChoice {
 						lakeQualifier=value;
 					} else if (paramkey.equalsIgnoreCase("oceanQualifier")) {
 						oceanQualifier=value;
+					} else if (paramkey.equalsIgnoreCase("pathMaterial")) {
+						if (Goods.goodsName.containsKey(value.toLowerCase())) {
+							pathMaterial.add(Goods.goodsName.get(value.toLowerCase()));
+						} else {
+							MLN.error(this,"When loading village type "+key+" could not recognise path material: "+value);
+						}
 					} else if (paramkey.equalsIgnoreCase("centre")) {
 						if (culture.getBuildingPlanSet(value)!=null) {
 							centreBuilding=culture.getBuildingPlanSet(value);
@@ -455,6 +462,10 @@ public class VillageType implements WeightedChoice {
 				}
 			}
 		}
+		
+		if (pathMaterial.size()==0)
+			pathMaterial.add(Goods.goodsName.get("pathgravel"));
+		
 
 		if (MLN.LogVillage>=MLN.MAJOR) {
 			MLN.major(this, "Loaded village type "+name+". NameList: "+nameList);

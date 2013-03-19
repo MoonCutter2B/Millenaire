@@ -1216,8 +1216,13 @@ public class Goods {
 		goodsName.put("yellowflower", new InvItem(Block.plantYellow,0));
 		goodsName.put("bricks", new InvItem(Block.brick,0));
 		goodsName.put("stonebrick", new InvItem(Block.stoneBrick,0));
+		goodsName.put("gravel", new InvItem(Block.gravel,0));
 		goodsName.put("bookandquill", new InvItem(Item.writableBook,0));
 		goodsName.put("purse", new InvItem(Mill.purse,0));
+		
+		goodsName.put("pathdirt", new InvItem(Mill.path,0));
+		goodsName.put("pathgravel", new InvItem(Mill.path,1));
+		goodsName.put("pathslabs", new InvItem(Mill.path,2));
 	}
 
 	public InvItem item;

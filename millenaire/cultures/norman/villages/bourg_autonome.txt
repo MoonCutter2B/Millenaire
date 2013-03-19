@@ -9,6 +9,11 @@ forestQualifier:la-fôret
 lavaQualifier:le-volcan
 lakeQualifier:le-lac
 oceanQualifier:l'océan
+
+pathmaterial:pathdirt
+pathmaterial:pathgravel
+pathmaterial:pathslabs
+
 //starting buildings:
 centre:fort
 start:lumbermanhut
@@ -16,6 +21,8 @@ start:farm
 start:pigfarm
 start:grove
 start:grove
+
+
 
 player:playersmallfield
 player:playersmallhouse

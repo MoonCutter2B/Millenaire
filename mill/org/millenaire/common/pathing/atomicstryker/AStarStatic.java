@@ -245,6 +245,10 @@ public class AStarStatic
 				|| !isPassableBlock(worldObj, x, y+1, z,config)
 				|| (isPassableBlock(worldObj, x, y-1, z,config) && ((id != Block.waterStill.blockID) || (id != Block.waterMoving.blockID))))
 			return false;
+		
+		if (!config.canSwim && (id == Block.waterStill.blockID || id == Block.waterMoving.blockID)) {
+			return false;
+		}
 
 		if (yoffset < 0) {
 			yoffset *= -1;

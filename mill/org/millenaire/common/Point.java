@@ -14,6 +14,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.pathing.AStarPathing.Point2D;
 import org.millenaire.common.pathing.atomicstryker.AStarNode;
 import org.millenaire.common.pathing.atomicstryker.AStarStatic;
@@ -305,6 +306,10 @@ public class Point {
 
 	public int getId(World world) {
 		return world.getBlockId(getiX(), getiY(), getiZ());
+	}
+	
+	public void setBlock(World world,int bid,int meta,boolean notify,boolean sound) {
+		MillCommonUtilities.setBlockAndMetadata(world, this, bid, meta, notify, sound);
 	}
 
 	public String getIntString() {

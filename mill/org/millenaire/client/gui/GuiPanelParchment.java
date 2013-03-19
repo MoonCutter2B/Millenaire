@@ -188,6 +188,8 @@ public class GuiPanelParchment extends GuiText {
 					colour=0x40FF8040;
 				} else if (groundType==MillMapInfo.TREE) {
 					colour=0x1000ff00;
+				} else if (groundType==MillMapInfo.PATH) {
+					colour=0x2000ff00;
 				} else if (groundType==MillMapInfo.UNREACHABLE) {
 					colour=0x40ff5050;
 				} else if (groundType==MillMapInfo.UNBUILDABLE){

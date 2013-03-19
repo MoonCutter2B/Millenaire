@@ -15,6 +15,10 @@ start:grove
 player:playersmallfield
 player:playersmallhouse
 
+pathmaterial:pathdirt
+pathmaterial:pathgravel
+pathmaterial:pathslabs
+
 //to be built in priority
 core:sheepchickenfarm
 core:sheepchickenfarm

@@ -18,6 +18,10 @@ biome:autumn woods
 biome:green hills
 biome:forested hills
 
+pathmaterial:pathdirt
+pathmaterial:pathgravel
+pathmaterial:pathslabs
+
 //hamlets to be generated around:
 hameau:hameau_agricole
 hameau:hameau_artisans

@@ -90,7 +90,7 @@ public class BuildingPlan {
 			this(p,bid,0);
 		}
 
-		BuildingBlock(Point p,int bid,int meta) {
+		public BuildingBlock(Point p,int bid,int meta) {
 			this.p=p;
 			this.bid=(short) bid;
 			this.meta=(byte) meta;
@@ -138,13 +138,15 @@ public class BuildingPlan {
 			if (special==BuildingBlock.PRESERVEGROUND) {
 				int bid=MillCommonUtilities.getBlock(world, p);
 
-				if (!MillCommonUtilities.isBlockIdValidGround(bid)) {
+				int validGroundId=MillCommonUtilities.getBlockIdValidGround(bid);
+
+				if (validGroundId==-1) {
 					Point below=p.getBelow();
 					int targetbid=0;
 					while ((targetbid==0) && (below.getiY()>0)) {
 						bid=MillCommonUtilities.getBlock(world, below);
-						if (MillCommonUtilities.isBlockIdValidGround(bid)) {
-							targetbid=bid;
+						if (MillCommonUtilities.getBlockIdValidGround(bid)>0) {
+							targetbid=MillCommonUtilities.getBlockIdValidGround(bid);
 						}
 						below=below.getBelow();
 					}
@@ -164,8 +166,10 @@ public class BuildingPlan {
 					}
 
 					MillCommonUtilities.setBlockAndMetadata(world, p, targetbid, 0, notifyBlocks, playSound);
-				} else if (worldGeneration && (bid==Block.dirt.blockID) && (MillCommonUtilities.getBlock(world, p.getAbove())==0)) {
+				} else if (worldGeneration && (validGroundId==Block.dirt.blockID) && (MillCommonUtilities.getBlock(world, p.getAbove())==0)) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.grass.blockID, 0, notifyBlocks, playSound);
+				} else if (validGroundId!=bid && !(validGroundId==Block.dirt.blockID && bid==Block.grass.blockID)) {
+					MillCommonUtilities.setBlockAndMetadata(world, p, validGroundId, 0, notifyBlocks, playSound);
 				}
 				//MLHelper.setBlockAndMetadata(world, p, Block.brick.blockID, 0);
 			} else if (special==BuildingBlock.CLEARTREE) {
@@ -174,12 +178,14 @@ public class BuildingPlan {
 				if ((bid==Block.wood.blockID) || (bid==Block.leaves.blockID)) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, 0, 0, notifyBlocks, playSound);
 
-					if (worldGeneration) {
-						final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
+					final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
 
-						if ((bidBelow==Block.dirt.blockID)) {
-							MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
-						}
+					int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow);
+
+					if (worldGeneration && targetBid==Block.dirt.blockID) {
+						MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
+					} else if (targetBid>0) {
+						MillCommonUtilities.setBlock(world, p.getBelow(), targetBid, notifyBlocks, playSound);
 					}
 				}
 
@@ -191,11 +197,14 @@ public class BuildingPlan {
 					MillCommonUtilities.setBlockAndMetadata(world, p, 0, 0, notifyBlocks, playSound);
 				}
 
-				if (worldGeneration) {
-					final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
-					if ((bidBelow==Block.dirt.blockID)) {
-						MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
-					}
+				final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
+
+				int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow);
+
+				if (worldGeneration && targetBid==Block.dirt.blockID) {
+					MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
+				} else if (targetBid>0) {
+					MillCommonUtilities.setBlock(world, p.getBelow(), targetBid, notifyBlocks, playSound);
 				}
 
 			} else if (special==BuildingBlock.TAPESTRY) {
@@ -488,7 +497,7 @@ public class BuildingPlan {
 		}
 
 		public boolean isType(String type) {
-			return type.equals(name);
+			return type.equalsIgnoreCase(name);
 		}
 
 		@Override
@@ -515,7 +524,7 @@ public class BuildingPlan {
 			bvinesoil="vinesoil",bsilkwormblock="silkwormblock",
 			blockedchest="lockedchest",bmainchest="mainchest",
 			bsleepingPos="sleepingPos",bsellingPos="sellingPos",bcraftingPos="craftingPos",
-			bdefendingPos="defendingPos",bshelterPos="shelterPos",
+			bdefendingPos="defendingPos",bshelterPos="shelterPos",bpathStartPos="pathStartPos",
 
 			blogoakvert="logoakvert",blogoakhor="logoakhor",blogpinevert="logpinevert",blogpinehor="logpinehor",
 			blogbirchvert="logbirchvert",blogbirchhor="logbirchhor",blogjunglevert="logjunglevert",blogjunglehor="logjunglehor",
@@ -523,7 +532,7 @@ public class BuildingPlan {
 			bstonestairGuess="stonestairGuess",bladderGuess="ladderGuess",bsignwallGuess="signwallGuess",
 
 			bwoodstairsOakGuess="woodstairsOakGuess",
-			
+
 			bwoodstairsOakTop="woodstairsOakTop",bwoodstairsOakBottom="woodstairsOakBottom",bwoodstairsOakLeft="woodstairsOakLeft",bwoodstairsOakRight="woodstairsOakRight",
 			bwoodstairsPineTop="woodstairsPineTop",bwoodstairsPineBottom="woodstairsPineBottom",bwoodstairsPineLeft="woodstairsPineLeft",bwoodstairsPineRight="woodstairsPineRight",
 			bwoodstairsBirchTop="woodstairsBirchTop",bwoodstairsBirchBottom="woodstairsBirchBottom",bwoodstairsBirchLeft="woodstairsBirchLeft",bwoodstairsBirchRight="woodstairsBirchRight",
@@ -540,9 +549,9 @@ public class BuildingPlan {
 			bwoodstairsPineInvTop="woodstairsPineInvTop",bwoodstairsPineInvBottom="woodstairsPineInvBottom",bwoodstairsPineInvLeft="woodstairsPineInvLeft",bwoodstairsPineInvRight="woodstairsPineInvRight",
 			bwoodstairsBirchInvTop="woodstairsBirchInvTop",bwoodstairsBirchInvBottom="woodstairsBirchInvBottom",bwoodstairsBirchInvLeft="woodstairsBirchInvLeft",bwoodstairsBirchInvRight="woodstairsBirchInvRight",
 			bwoodstairsJungleInvTop="woodstairsJungleInvTop",bwoodstairsJungleInvBottom="woodstairsJungleInvBottom",bwoodstairsJungleInvLeft="woodstairsJungleInvLeft",bwoodstairsJungleInvRight="woodstairsJungleInvRight",
-									
-			
-			
+
+
+
 			bstonestairsInvTop="stonestairsInvTop",bstonestairsInvBottom="stonestairsInvBottom",bstonestairsInvLeft="stonestairsInvLeft",bstonestairsInvRight="stonestairsInvRight",
 			bstonebrickstairsInvTop="stonebrickstairsInvTop",bstonebrickstairsInvBottom="stonebrickstairsInvBottom",bstonebrickstairsInvLeft="stonebrickstairsInvLeft",bstonebrickstairsInvRight="stonebrickstairsInvRight",
 			bbrickstairsInvTop="brickstairsInvTop",bbrickstairsInvBottom="brickstairsInvBottom",bbrickstairsInvLeft="brickstairsInvLeft",bbrickstairsInvRight="brickstairsInvRight",
@@ -1367,7 +1376,7 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 2), pt);
 				}  else if (pt.name.equals(bwoodstairsOakRight)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 3), pt);
-					
+
 				}  else if (pt.name.equals(bwoodstairsPineTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 1), pt);
 				}  else if (pt.name.equals(bwoodstairsPineBottom)) {
@@ -1376,7 +1385,7 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 2), pt);
 				}  else if (pt.name.equals(bwoodstairsPineRight)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 3), pt);
-					
+
 				}  else if (pt.name.equals(bwoodstairsBirchTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 1), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchBottom)) {
@@ -1385,7 +1394,7 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 2), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchRight)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 3), pt);
-					
+
 				}  else if (pt.name.equals(bwoodstairsJungleTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 1), pt);
 				}  else if (pt.name.equals(bwoodstairsJungleBottom)) {
@@ -1440,7 +1449,7 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 6), pt);
 				}  else if (pt.name.equals(bwoodstairsOakInvRight)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 7), pt);
-					
+
 				}  else if (pt.name.equals(bwoodstairsPineInvTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 5), pt);
 				}  else if (pt.name.equals(bwoodstairsPineInvBottom)) {
@@ -1449,7 +1458,7 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 6), pt);
 				}  else if (pt.name.equals(bwoodstairsPineInvRight)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 7), pt);
-					
+
 				}  else if (pt.name.equals(bwoodstairsBirchInvTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 5), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchInvBottom)) {
@@ -1458,7 +1467,7 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 6), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchInvRight)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 7), pt);
-					
+
 				}  else if (pt.name.equals(bwoodstairsJungleInvTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 5), pt);
 				}  else if (pt.name.equals(bwoodstairsJungleInvBottom)) {
@@ -1652,6 +1661,9 @@ public class BuildingPlan {
 	public String exploreTag=null;
 	public int irrigation=0;
 	public Culture culture;
+
+	public int pathLevel=0,pathWidth=2;
+	public boolean rebuildPath=false;
 
 	public BuildingPlan parent;
 
@@ -2561,7 +2573,7 @@ public class BuildingPlan {
 					} else if (pt.isType(bwoodstairsOakLeft)) {
 						b=Block.stairCompactPlanks.blockID;
 						m=getStairMeta(3,orientation);
-						
+
 					} else if (pt.isType(bwoodstairsPineTop)) {
 						b=Block.stairsWoodSpruce.blockID;
 						m=getStairMeta(0,orientation);
@@ -2574,7 +2586,7 @@ public class BuildingPlan {
 					} else if (pt.isType(bwoodstairsPineLeft)) {
 						b=Block.stairsWoodSpruce.blockID;
 						m=getStairMeta(3,orientation);
-						
+
 					} else if (pt.isType(bwoodstairsBirchTop)) {
 						b=Block.stairsWoodBirch.blockID;
 						m=getStairMeta(0,orientation);
@@ -2587,7 +2599,7 @@ public class BuildingPlan {
 					} else if (pt.isType(bwoodstairsBirchLeft)) {
 						b=Block.stairsWoodBirch.blockID;
 						m=getStairMeta(3,orientation);
-						
+
 					} else if (pt.isType(bwoodstairsJungleTop)) {
 						b=Block.stairsWoodJungle.blockID;
 						m=getStairMeta(0,orientation);
@@ -2600,11 +2612,11 @@ public class BuildingPlan {
 					} else if (pt.isType(bwoodstairsJungleLeft)) {
 						b=Block.stairsWoodJungle.blockID;
 						m=getStairMeta(3,orientation);
-						
-						
-						
-						
-						
+
+
+
+
+
 					}  else if (pt.isType(bstonestairsTop)) {
 						b=Block.stairCompactCobblestone.blockID;
 						m=getStairMeta(0,orientation);
@@ -2668,7 +2680,7 @@ public class BuildingPlan {
 					} else if (pt.isType(bwoodstairsOakInvLeft)) {
 						b=Block.stairCompactPlanks.blockID;
 						m=getStairMeta(3,orientation)+4;
-						
+
 					} else if (pt.isType(bwoodstairsPineInvTop)) {
 						b=Block.stairsWoodSpruce.blockID;
 						m=getStairMeta(0,orientation)+4;
@@ -2681,7 +2693,7 @@ public class BuildingPlan {
 					} else if (pt.isType(bwoodstairsPineInvLeft)) {
 						b=Block.stairsWoodSpruce.blockID;
 						m=getStairMeta(3,orientation)+4;
-						
+
 					} else if (pt.isType(bwoodstairsBirchInvTop)) {
 						b=Block.stairsWoodBirch.blockID;
 						m=getStairMeta(0,orientation)+4;
@@ -2694,7 +2706,7 @@ public class BuildingPlan {
 					} else if (pt.isType(bwoodstairsBirchInvLeft)) {
 						b=Block.stairsWoodBirch.blockID;
 						m=getStairMeta(3,orientation)+4;
-						
+
 					} else if (pt.isType(bwoodstairsJungleInvTop)) {
 						b=Block.stairsWoodJungle.blockID;
 						m=getStairMeta(0,orientation)+4;
@@ -2707,10 +2719,10 @@ public class BuildingPlan {
 					} else if (pt.isType(bwoodstairsJungleInvLeft)) {
 						b=Block.stairsWoodJungle.blockID;
 						m=getStairMeta(3,orientation)+4;
-						
-						
-						
-						
+
+
+
+
 					}  else if (pt.isType(bstonestairsInvTop)) {
 						b=Block.stairCompactCobblestone.blockID;
 						m=getStairMeta(0,orientation)+4;
@@ -3091,7 +3103,7 @@ public class BuildingPlan {
 				toDelete[i]=true;
 			} else if ((bb.special==BuildingBlock.CLEARGROUND) && (bid==0)) {
 				toDelete[i]=true;
-			} else if ((bb.special==BuildingBlock.PRESERVEGROUND) && MillCommonUtilities.isBlockIdValidGround(bid)) {
+			} else if ((bb.special==BuildingBlock.PRESERVEGROUND) && MillCommonUtilities.getBlockIdValidGround(bid)==bid) {
 				toDelete[i]=true;
 			} else {
 				bbmap.put(bb.p, bb);
@@ -3306,6 +3318,7 @@ public class BuildingPlan {
 			startingSubBuildings=new Vector<String>();
 			startingGoods=new Vector<StartingGood>();
 			showTownHallSigns=true;
+			rebuildPath=true;
 		} else {
 			max=parent.max;
 			priority=parent.priority;
@@ -3325,6 +3338,8 @@ public class BuildingPlan {
 			maxDistance=parent.maxDistance;
 			reputation=parent.reputation;
 			price=parent.price;
+			pathLevel=parent.pathLevel;
+			pathWidth=parent.pathWidth;
 			subBuildings=new Vector<String>(parent.subBuildings);
 			startingSubBuildings=new Vector<String>();
 			startingGoods=new Vector<StartingGood>();
@@ -3392,6 +3407,13 @@ public class BuildingPlan {
 					firstLevel=Integer.parseInt(value);
 				} else if (key.equalsIgnoreCase("orientation")) {
 					buildingOrientation=Integer.parseInt(value);
+				} else if (key.equalsIgnoreCase("pathlevel")) {
+					pathLevel=Integer.parseInt(value);
+					rebuildPath=true;
+				} else if (key.equalsIgnoreCase("rebuildpath")) {
+					rebuildPath=Boolean.parseBoolean(value);
+				} else if (key.equalsIgnoreCase("pathwidth")) {
+					pathWidth=Integer.parseInt(value);
 				} else if (key.equalsIgnoreCase("reputation")) {
 					try {
 						reputation=MillCommonUtilities.readInteger(value);
@@ -3634,6 +3656,8 @@ public class BuildingPlan {
 						building.setDefendingPos(p);
 					} else if (pt.isType(bshelterPos)) {
 						building.setShelterPos(p);
+					} else if (pt.isType(bpathStartPos)) {
+						building.setPathStartPos(p);
 					} else if (pt.isType(bsignwallGuess) || pt.isType(bsignwallTop) || pt.isType(bsignwallBottom)
 							|| pt.isType(bsignwallLeft) || pt.isType(bsignwallRight)) {
 						building.signs.set(signOrder[signNb], p);

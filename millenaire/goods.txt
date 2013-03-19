@@ -95,6 +95,7 @@ glass;20;0;Verre
 gold;266;0;Lingot d'or
 goldore;14;0;Minerai d'or
 grapes;mln75;0;
+gravel;13;0;Gravier
 gunpowder;289;0;Poudre à canon
 indianstatue;mln34;0;
 iron;265;0;Lingot de fer
@@ -164,6 +165,9 @@ parchmentmayanitems;mln45;0;
 parchmentmayanvillagers;mln43;0;
 parchmentsadhu;mln47;0;
 parchmentvillagers;mln17;0;
+pathdirt;1525;0;
+pathgravel;1525;1;
+pathslabs;1525;2;
 planks_birch;5;2;Planches de bouleau
 planks_jungle;5;3;Planches d'acajou
 planks_oak;5;0;Planches de chêne
