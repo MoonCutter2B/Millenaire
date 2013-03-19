@@ -409,7 +409,7 @@ public class Building {
 
 	public int bblocksPos = 0;
 
-	private boolean bblocksChanged=false;
+	private boolean bblocksChanged=false,pathsChanged=false;	
 
 	private PathingBinary binaryPathing = null;
 
@@ -526,7 +526,7 @@ public class Building {
 
 	public Vector<Vector<BuildingBlock>> pathsToBuild=null;
 
-	Vector<Point> oldPathPointsToClear=null;
+	public Vector<Point> oldPathPointsToClear=null;
 
 	private Building(MillWorld mw) {
 		this.mw = mw;
@@ -4029,6 +4029,70 @@ public class Building {
 		}
 	}
 
+	private void readPaths() {
+		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
+		File file1 = new File(buildingsDir, getPos().getPathString()
+				+ "_paths.bin");
+
+		if (file1.exists()) {
+			try {
+				final FileInputStream fis = new FileInputStream(file1);
+				final DataInputStream ds = new DataInputStream(fis);
+
+				final int size=ds.readInt();
+
+				pathsToBuild=new Vector<Vector<BuildingBlock>>();
+
+				for (int i=0;i<size;i++) {
+
+					Vector<BuildingBlock> path=new Vector<BuildingBlock>();
+
+					int sizePath=ds.readInt();
+
+					for (int j=0;j<sizePath;j++) {
+						final Point p=new Point(ds.readInt(),ds.readShort(),ds.readInt());
+						final BuildingBlock b=new BuildingBlock(p,ds.readShort(),ds.readByte(),ds.readByte());
+						path.add(b);
+					}
+					pathsToBuild.add(path);
+				}
+
+				ds.close();
+
+			} catch (final Exception e) {
+				MLN.printException("Error when reading pathsToBuild: ",e);
+				bblocks=null;
+			}
+		}
+
+		file1 = new File(buildingsDir, getPos().getPathString()
+				+ "_pathstoclear.bin");
+
+		if (file1.exists()) {
+			try {
+				final FileInputStream fis = new FileInputStream(file1);
+				final DataInputStream ds = new DataInputStream(fis);
+
+				final int size=ds.readInt();
+
+				oldPathPointsToClear=new Vector<Point>();
+
+				for (int i=0;i<size;i++) {
+					final Point p=new Point(ds.readInt(),ds.readShort(),ds.readInt());
+					oldPathPointsToClear.add(p);
+				}
+
+				ds.close();
+
+			} catch (final Exception e) {
+				MLN.printException("Error when reading oldPathPointsToClear: ",e);
+				bblocks=null;
+			}
+		}
+
+
+	}
+
 	//for old pre-4.3 soil handling
 	private void readLegacySoilsFromNBT(NBTTagCompound nbttagcompound) {
 		NBTTagList nbttaglist = nbttagcompound.getTagList("soils");
@@ -4698,6 +4762,8 @@ public class Building {
 					.tagAt(i);
 			raidsSuffered.add(nbttagcompound1.getString("raid"));
 		}
+		
+		readPaths();
 
 	}
 
@@ -6644,6 +6710,7 @@ public class Building {
 					p.setBlock(worldObj, Block.dirt.blockID, 0, true, false);
 			}
 		}
+		pathsChanged=true;
 	}
 
 	private void constructCalculatedPaths() {
@@ -6695,6 +6762,7 @@ public class Building {
 				}
 			}
 			pathsToBuild=null;
+			pathsChanged=true;
 		}
 	}
 
@@ -7173,7 +7241,7 @@ public class Building {
 
 		@Override
 		public void onFoundPath(ArrayList<AStarNode> result) {
-		//	pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,Block.cloth.blockID,MillCommonUtilities.randomInt(16),pathWidth));
+			//	pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,Block.cloth.blockID,MillCommonUtilities.randomInt(16),pathWidth));
 			pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,pathConstructionGood.id(),pathConstructionGood.meta,pathWidth));
 			nbPathsReceived++;
 
@@ -7192,6 +7260,8 @@ public class Building {
 
 				Building.this.pathsToBuild=pathsReceived;
 				calculatePathsToClear();
+				
+				pathsChanged=true;
 
 				nbPathsExpected=0;
 				nbPathsReceived=0;
@@ -7237,6 +7307,75 @@ public class Building {
 			file1.delete();
 		}
 		bblocksChanged=false;
+	}
+
+	private void writePaths() {
+		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
+
+		File file1 = new File(buildingsDir, getPos().getPathString()
+				+ "_paths.bin");
+
+		if (pathsToBuild!=null) {
+			try {
+
+
+				final FileOutputStream fos = new FileOutputStream(
+						file1);
+
+				final DataOutputStream ds = new DataOutputStream(fos);
+
+				ds.writeInt(pathsToBuild.size());
+
+				for (Vector<BuildingBlock> path : pathsToBuild) {
+					ds.writeInt(path.size());
+
+					for (BuildingBlock b:path) {
+						ds.writeInt(b.p.getiX());
+						ds.writeShort(b.p.getiY());
+						ds.writeInt(b.p.getiZ());
+						ds.writeShort(b.bid);
+						ds.writeByte(b.meta);
+						ds.writeByte(b.special);
+					}
+				}
+				ds.close();
+				fos.close();
+
+			} catch (final IOException e) {
+				MLN.printException("Error when writing pathsToBuild: ",e);
+			}
+		} else {
+			file1.delete();
+		}
+
+		file1 = new File(buildingsDir, getPos().getPathString()
+				+ "_pathstoclear.bin");
+
+		if (oldPathPointsToClear!=null) {
+			try {
+				final FileOutputStream fos = new FileOutputStream(
+						file1);
+
+				final DataOutputStream ds = new DataOutputStream(fos);
+
+				ds.writeInt(oldPathPointsToClear.size());
+
+				for (Point p : oldPathPointsToClear) {
+					ds.writeInt(p.getiX());
+					ds.writeShort(p.getiY());
+					ds.writeInt(p.getiZ());
+				}
+				ds.close();
+				fos.close();
+
+			} catch (final IOException e) {
+				MLN.printException("Error when writing oldPathPointsToClear: ",e);
+			}
+		} else {
+			file1.delete();
+		}
+		
+		pathsChanged=false;
 	}
 
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
@@ -7656,6 +7795,12 @@ public class Building {
 			}
 
 			nbttagcompound.setLong("lastGoodsRefresh", lastGoodsRefresh);
+			
+			if (pathsChanged) {
+				writePaths();
+			}
+			
+			
 		} catch (final Exception e) {
 			Mill.proxy.sendChatAdmin("Error when trying to save building. Check millenaire.log.");
 			MLN.error(this, "Exception in Villager.onUpdate(): ");
