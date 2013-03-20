@@ -1457,7 +1457,7 @@ public class Building {
 			builder = null;
 			buildingLocationIP = null;
 
-
+			recalculatePaths(false);
 		}
 	}
 
@@ -3627,7 +3627,7 @@ public class Building {
 		}
 
 
-		recalculatePaths();
+		recalculatePaths(true);
 
 	}
 
@@ -4762,7 +4762,7 @@ public class Building {
 					.tagAt(i);
 			raidsSuffered.add(nbttagcompound1.getString("raid"));
 		}
-		
+
 		readPaths();
 
 	}
@@ -5295,7 +5295,7 @@ public class Building {
 
 			if (plan.rebuildPath) {
 				MLN.temp(plan, "Triggering path rebuild.");
-				recalculatePaths();
+				recalculatePaths(true);
 			}
 		}
 		completeConstruction();
@@ -6658,8 +6658,10 @@ public class Building {
 			updateAchievements();
 		}
 
-		clearOldPaths();
-		constructCalculatedPaths();
+		if (autobuildPaths) {
+			clearOldPaths();
+			constructCalculatedPaths();
+		}
 	}
 
 	private void calculatePathsToClear() {
@@ -7191,7 +7193,7 @@ public class Building {
 		}
 	}
 
-	private void recalculatePaths() {
+	private void recalculatePaths(boolean autobuild) {
 
 		int nbPaths=0;
 
@@ -7215,7 +7217,7 @@ public class Building {
 				if (b.location!=null && b.location.getPlan()!=null && b.location.getPlan().pathLevel<villageType.pathMaterial.size())
 					pathMaterial=villageType.pathMaterial.get(b.location.getPlan().pathLevel);
 
-				PathCreator pathCreator=new PathCreator(pathMaterial,b.location.getPlan().pathWidth);
+				PathCreator pathCreator=new PathCreator(pathMaterial,b.location.getPlan().pathWidth,autobuild);
 
 				AStarPathPlanner jpsPathPlanner=new AStarPathPlanner(worldObj,pathCreator);
 
@@ -7225,18 +7227,20 @@ public class Building {
 		}
 	}
 
-	int nbPathsExpected;
-	int nbPathsReceived;
-	Vector<Vector<BuildingBlock>> pathsReceived=null;
+	private int nbPathsExpected;
+	private int nbPathsReceived;
+	private Vector<Vector<BuildingBlock>> pathsReceived=null;
+	private boolean autobuildPaths=false;
 
 	private class PathCreator implements IAStarPathedEntity {
 
 		final InvItem pathConstructionGood;
 		final int pathWidth;
 
-		PathCreator(InvItem pathConstructionGood,int pathWidth) {
+		PathCreator(InvItem pathConstructionGood,int pathWidth,boolean autobuild) {
 			this.pathConstructionGood=pathConstructionGood;
 			this.pathWidth=pathWidth;
+			Building.this.autobuildPaths=autobuild;
 		}
 
 		@Override
@@ -7260,7 +7264,7 @@ public class Building {
 
 				Building.this.pathsToBuild=pathsReceived;
 				calculatePathsToClear();
-				
+
 				pathsChanged=true;
 
 				nbPathsExpected=0;
@@ -7374,7 +7378,7 @@ public class Building {
 		} else {
 			file1.delete();
 		}
-		
+
 		pathsChanged=false;
 	}
 
@@ -7795,12 +7799,12 @@ public class Building {
 			}
 
 			nbttagcompound.setLong("lastGoodsRefresh", lastGoodsRefresh);
-			
+
 			if (pathsChanged) {
 				writePaths();
 			}
-			
-			
+
+
 		} catch (final Exception e) {
 			Mill.proxy.sendChatAdmin("Error when trying to save building. Check millenaire.log.");
 			MLN.error(this, "Exception in Villager.onUpdate(): ");
