@@ -122,6 +122,39 @@ public class BuildingPlan {
 			return true;
 		}
 
+		
+		public void pathBuild(Building th) {
+			
+			int targetPathLevel=0;
+			
+			for (int i=0;i<th.villageType.pathMaterial.size();i++) {
+				if (th.villageType.pathMaterial.get(i).id()==bid
+						&& th.villageType.pathMaterial.get(i).meta==meta)
+					targetPathLevel=i;
+			}
+			
+			int bid=p.getId(th.worldObj);
+
+			if (bid!=Mill.path.blockID && MillCommonUtilities.canPathBeBuiltHere(bid)) {
+				build(th.worldObj, false, false);
+			} else {
+				int meta=p.getMeta(th.worldObj);
+
+				int currentPathLevel=Integer.MAX_VALUE;
+
+				for (int i=0;i<th.villageType.pathMaterial.size();i++) {
+					if (th.villageType.pathMaterial.get(i).id()==bid
+							&& th.villageType.pathMaterial.get(i).meta==meta)
+						currentPathLevel=i;
+				}
+
+				if (currentPathLevel<targetPathLevel) {
+					build(th.worldObj, false, false);
+				}
+			}
+		}
+		
+		
 		public void build(World world, boolean worldGeneration, boolean wandimport) {
 
 			final boolean notifyBlocks=true;
@@ -1929,6 +1962,7 @@ public class BuildingPlan {
 			resCost.put(key, nb);
 		}
 	}
+
 
 	public Vector<LocationBuildingPair> build(MillWorld mw,VillageType villageType, BuildingLocation location, boolean villageGeneration, boolean townHall, Point townHallPos, boolean wandimport,EntityPlayer owner,boolean rushBuilding) {
 

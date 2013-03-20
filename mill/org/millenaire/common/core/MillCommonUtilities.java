@@ -1483,22 +1483,27 @@ public class MillCommonUtilities {
 		int bid=p.getId(world);
 		int bidAbove=p.getAbove().getId(world);
 		int bidBelow=p.getBelow().getId(world);
-		
-		if (p.getAbove().isBlockPassable(world) && (bid==Block.dirt.blockID || bid==Block.grass.blockID || bid==Block.sand.blockID)) {
+
+		if (p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid))) {
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
-		} if (p.getRelative(0,2,0).isBlockPassable(world) && (bidAbove==Block.dirt.blockID || bidAbove==Block.grass.blockID || bidAbove==Block.sand.blockID)) {
-			pathPoints.add(new BuildingBlock(p.getAbove(),pathBid,pathMeta));
+		} if (p.getRelative(0,2,0).isBlockPassable(world) && canPathBeBuiltHere(bidAbove) && canPathBeBuiltHere(bid)) {
+			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
+			pathPoints.add(new BuildingBlock(p.getAbove(),0,0));
 			return true;
-		} if (p.isBlockPassable(world) && (bidBelow==Block.dirt.blockID || bidBelow==Block.grass.blockID || bidBelow==Block.sand.blockID)) {
-			pathPoints.add(new BuildingBlock(p.getBelow(),pathBid,pathMeta));
+		} if (p.isBlockPassable(world) && p.getAbove().isBlockPassable(world) && canPathBeBuiltHere(bidBelow) ) {
+			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
+			MLN.temp(null, "raising path at: "+p);
 			return true;
 		} 
 		return false;
 	}
-	
-	
-	
+
+	public static boolean canPathBeBuiltHere(int bid) {
+		return (bid==Block.dirt.blockID || bid==Block.grass.blockID || bid==Block.sand.blockID || bid==Block.gravel.blockID || bid==Mill.path.blockID);
+	}
+
+
 	public static Vector<BuildingBlock> buildPath(Building th,ArrayList<AStarNode> path,int pathBid,int pathMeta,int pathWidth) {
 
 		Vector<BuildingBlock> pathPoints=new Vector<BuildingBlock>();
@@ -1508,63 +1513,54 @@ public class MillCommonUtilities {
 		for (AStarNode node : path) {
 
 			Point p=(new Point(node)).getBelow();
-
-			//pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			
 			attemptPathBuild(th.worldObj,pathPoints,p,pathBid,pathMeta);
-			
-			if (pathWidth>1) {
-				if (lastPoint!=null) {
-					int dx=p.getiX()-lastPoint.getiX();
-					int dz=p.getiZ()-lastPoint.getiZ();
-					
-					MLN.temp(null, "Path diff: "+dx+"/"+dz);
-					
-					Point secondPoint=null,secondPointAlternate=null;
-					
-					if (dx==0) {
-						secondPoint=p.getRelative(1, 0, 0);
-						secondPointAlternate=p.getRelative(-1, 0, 0);
-					} else if (dz==0) {
-						secondPoint=p.getRelative(0, 0, 1);
-						secondPointAlternate=p.getRelative(0, 0, -1);
-					} else {
-						secondPoint=p.getRelative(dx, 0, 0);
-						secondPointAlternate=p.getRelative(0, 0, dz);
-					}
-					
-					if (secondPoint!=null) {
-						boolean success=attemptPathBuild(th.worldObj,pathPoints,secondPoint,pathBid,pathMeta);
-						
-						if (!success)
-							attemptPathBuild(th.worldObj,pathPoints,secondPointAlternate,pathBid,pathMeta);
-					}
-				}
-			}			
 
-			if (lastPoint!=null && lastPoint.x!=p.x && lastPoint.z!=p.z) {
-				boolean diagonalAdded=false;
+			if (lastPoint!=null) {
+				int dx=p.getiX()-lastPoint.getiX();
+				int dz=p.getiZ()-lastPoint.getiZ();
 
-				for (int cx=0;cx<2;cx++) {
-					for (int cy=0;cy<2;cy++) {
-						for (int cz=0;cz<2;cz++) {
-							if (!diagonalAdded && cx!=cz) {
-								Point diag=new Point(cx==0?p.x:lastPoint.x,cy==0?p.y:lastPoint.y,cz==0?p.z:lastPoint.z);
-								int bid=diag.getId(th.worldObj);
+				for (int i=0;i<2;i++) {
+					
+					//backward then forward (diagonals only)
+					int direction=(i==0)?1:-1;
+					
+					Point secondPoint=null,secondPointAlternate=null,thirdPoint=null;
 
-								if (diag.getAbove().isBlockPassable(th.worldObj) && (bid==Block.dirt.blockID || bid==Block.grass.blockID || bid==Block.sand.blockID)) {
-									pathPoints.add(new BuildingBlock(diag,pathBid,pathMeta));
-									diagonalAdded=true;
-								}
-							}
+					//if path has width of 2, double-it when straight and attempt to triple it in diagonals
+					if (pathWidth>1) {
+						if (dx==0 && direction==1) {
+							secondPoint=p.getRelative(direction, 0, 0);
+							secondPointAlternate=p.getRelative(-direction, 0, 0);
+						} else if (dz==0 && direction==1) {
+							secondPoint=p.getRelative(0, 0, direction);
+							secondPointAlternate=p.getRelative(0, 0, -direction);
+						} else {
+							secondPoint=p.getRelative(dx*direction, 0, 0);
+							thirdPoint=p.getRelative(0, 0, dz*direction);
+						}
+					} else {//if path has width of one, double it in diagonals only
+						if (dx!=0 && dz!=0) {
+							secondPoint=p.getRelative(dx*direction, 0, 0);
+							secondPointAlternate=p.getRelative(0, 0, dz*direction);
 						}
 					}
+
+					if (secondPoint!=null) {
+						boolean success=attemptPathBuild(th.worldObj,pathPoints,secondPoint,pathBid,pathMeta);
+
+						if (!success && secondPointAlternate!=null)
+							attemptPathBuild(th.worldObj,pathPoints,secondPointAlternate,pathBid,pathMeta);
+					}
+
+					if (thirdPoint!=null)
+						attemptPathBuild(th.worldObj,pathPoints,thirdPoint,pathBid,pathMeta);
 				}
-			}
+			}	
 
 			lastPoint=p;
 		}
-		
+
 		return pathPoints;
 
 	}

@@ -66,8 +66,12 @@ public abstract class Goal {
 		goals.put("getresourcesforbuild", getResourcesForBuild);
 		beSeller = new GoalBeSeller();
 		goals.put("beseller", beSeller);
+		
 		construction = new GoalConstructionStepByStep();
 		goals.put("construction", construction);
+		goals.put("buildpath", new GoalBuildPath());
+		goals.put("clearoldpath", new GoalClearOldPath());
+		
 		raidVillage = new GoalRaidVillage();
 		goals.put("raidvillage", raidVillage);
 		defendVillage = new GoalDefendVillage();

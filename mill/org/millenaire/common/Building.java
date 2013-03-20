@@ -526,7 +526,11 @@ public class Building {
 
 	public Vector<Vector<BuildingBlock>> pathsToBuild=null;
 
+	public int pathsToBuildIndex=0,pathsToBuildPathIndex=0;
+
 	public Vector<Point> oldPathPointsToClear=null;
+
+	public int oldPathPointsToClearIndex=0;
 
 	private Building(MillWorld mw) {
 		this.mw = mw;
@@ -1444,6 +1448,9 @@ public class Building {
 
 	private void completeConstruction() throws MillenaireException {
 		if ((buildingLocationIP != null) && (getBblocks() == null)) {
+			
+			BuildingPlan plan=this.getCurrentBuildingPlan();
+			
 			registerBuildingLocation(buildingLocationIP);
 			updateWorldInfo();
 
@@ -1457,7 +1464,8 @@ public class Building {
 			builder = null;
 			buildingLocationIP = null;
 
-			recalculatePaths(false);
+			if (plan.rebuildPath)
+				recalculatePaths(false);
 		}
 	}
 
@@ -1836,19 +1844,19 @@ public class Building {
 		if (!s.equals("")) {
 			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
 		}
-		
+
 		if (pathsToBuild!=null || oldPathPointsToClear!=null) {
-			
+
 			if (pathsToBuild!=null)
-				s="pathsToBuild: "+pathsToBuild.size();
+				s="pathsToBuild: "+pathsToBuild.size()+" "+pathsToBuildIndex+"/"+pathsToBuildPathIndex;
 			else
 				s="pathsToBuild:null";
-			
+
 			if (oldPathPointsToClear!=null)
-				s=s+" oldPathPointsToClear: "+oldPathPointsToClear.size();
+				s=s+" oldPathPointsToClear: "+oldPathPointsToClear.size()+" "+oldPathPointsToClearIndex;
 			else
 				s=s+" oldPathPointsToClear:null";
-			
+
 			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
 		}
 
@@ -4778,6 +4786,11 @@ public class Building {
 			raidsSuffered.add(nbttagcompound1.getString("raid"));
 		}
 
+
+		pathsToBuildIndex = nbttagcompound.getInteger("pathsToBuildIndex");
+		pathsToBuildPathIndex = nbttagcompound.getInteger("pathsToBuildPathIndex");
+		oldPathPointsToClearIndex = nbttagcompound.getInteger("oldPathPointsToClearIndex");	
+
 		readPaths();
 
 	}
@@ -5307,11 +5320,6 @@ public class Building {
 			}
 
 			setBblocks(null);
-
-			if (plan.rebuildPath) {
-				MLN.temp(plan, "Triggering path rebuild.");
-				recalculatePaths(false);
-			}
 		}
 		completeConstruction();
 	}
@@ -6695,6 +6703,8 @@ public class Building {
 				}
 			}
 
+			MLN.temp(this, "New path points found: "+newPathPoints.size());
+
 			for (int x=winfo.mapStartX;x<winfo.mapStartX+winfo.length;x++) {
 				for (int z=winfo.mapStartZ;z<winfo.mapStartZ+winfo.width;z++) {
 					int basey=winfo.topGround[x-winfo.mapStartX][z-winfo.mapStartZ];
@@ -6713,7 +6723,10 @@ public class Building {
 					}
 				}
 			}
-			MLN.temp(this, "Finished looking for paths to clear. Duration: "+(System.currentTimeMillis()-startTime+" ms."));
+
+			oldPathPointsToClearIndex=0;
+
+			MLN.temp(this, "Finished looking for paths to clear. Found: "+oldPathPointsToClear.size()+". Duration: "+(System.currentTimeMillis()-startTime+" ms."));
 		}
 	}
 
@@ -6728,6 +6741,7 @@ public class Building {
 			}
 			oldPathPointsToClear=null;
 			pathsChanged=true;
+			requestSave("paths clearing rushed");
 		}
 	}
 
@@ -6737,50 +6751,16 @@ public class Building {
 
 			MLN.temp(this, "Rebuilding calculated paths.");
 
-
-			Vector<Vector<BuildingBlock>> pathsPointBuilt=new Vector<Vector<BuildingBlock>>();
-
 			for (Vector<BuildingBlock> path : pathsToBuild) {
-
-				int targetPathLevel=0;
-
-				if (!path.isEmpty()) {
-					for (int i=0;i<villageType.pathMaterial.size();i++) {
-						if (villageType.pathMaterial.get(i).id()==path.firstElement().bid
-								&& villageType.pathMaterial.get(i).meta==path.firstElement().meta)
-							targetPathLevel=i;
-					}
-
-					Vector<BuildingBlock> pathPointBuilt=new Vector<BuildingBlock>();
+				if (!path.isEmpty()) {					
 					for (BuildingBlock bp : path) {
-						int bid=bp.p.getId(worldObj);
-
-						if (bid==Block.grass.blockID || bid==Block.dirt.blockID || bid==Block.sand.blockID || bid==Block.gravel.blockID) {
-							bp.build(worldObj, false, false);
-							pathPointBuilt.add(bp);
-						} else {
-							int meta=bp.p.getMeta(worldObj);
-
-							int currentPathLevel=Integer.MAX_VALUE;
-
-							for (int i=0;i<villageType.pathMaterial.size();i++) {
-								if (villageType.pathMaterial.get(i).id()==bid
-										&& villageType.pathMaterial.get(i).meta==meta)
-									currentPathLevel=i;
-							}
-
-							if (currentPathLevel<targetPathLevel) {
-								bp.build(worldObj, false, false);
-								pathPointBuilt.add(bp);
-								MLN.temp(null, "Upgrading path from "+currentPathLevel+" to "+targetPathLevel);
-							}
-						}
+						bp.pathBuild(this);
 					}
-					pathsPointBuilt.add(pathPointBuilt);
 				}
 			}
 			pathsToBuild=null;
 			pathsChanged=true;
+			requestSave("paths rushed");
 		}
 	}
 
@@ -7220,9 +7200,10 @@ public class Building {
 		}
 
 		PathCreatorInfo info=new PathCreatorInfo(nbPaths);
+		this.autobuildPaths=autobuild;
 
 		Point start=getPathStartPos();
-		
+
 		MLN.temp(this, "Launching path rebuild, expected paths number: "+nbPaths);
 
 		for (Building b : getBuildings()) {
@@ -7233,7 +7214,7 @@ public class Building {
 				if (b.location!=null && b.location.getPlan()!=null && b.location.getPlan().pathLevel<villageType.pathMaterial.size())
 					pathMaterial=villageType.pathMaterial.get(b.location.getPlan().pathLevel);
 
-				PathCreator pathCreator=new PathCreator(info,pathMaterial,b.location.getPlan().pathWidth,b,autobuild);
+				PathCreator pathCreator=new PathCreator(info,pathMaterial,b.location.getPlan().pathWidth,b);
 
 				AStarPathPlanner jpsPathPlanner=new AStarPathPlanner(worldObj,pathCreator);
 
@@ -7243,19 +7224,59 @@ public class Building {
 		}
 	}
 
+	public BuildingBlock getCurrentPathBuildingBlock() {
+
+		if (pathsToBuild==null)
+			return null;
+
+		while (true) {
+			if (pathsToBuildIndex>=pathsToBuild.size()) {
+				pathsToBuild=null;
+				return null;
+			} else if (pathsToBuildPathIndex>=pathsToBuild.get(pathsToBuildIndex).size()) {
+				pathsToBuildIndex++;
+				pathsToBuildPathIndex=0;
+			} else {
+				BuildingBlock b=pathsToBuild.get(pathsToBuildIndex).get(pathsToBuildPathIndex);
+
+				int bid=b.p.getId(worldObj);
+				int meta=b.p.getMeta(worldObj);
+
+				if (MillCommonUtilities.canPathBeBuiltHere(bid) && (bid!=b.bid || meta!=b.meta)) {
+					return b;
+				}
+
+				pathsToBuildPathIndex++;
+			}
+		}
+	}
+
+	public Point getCurrentClearPathPoint() {
+
+		if (oldPathPointsToClear==null)
+			return null;
+
+		if (oldPathPointsToClearIndex>=oldPathPointsToClear.size()) {
+			oldPathPointsToClear=null;
+			return null;
+		}
+
+		return oldPathPointsToClear.get(oldPathPointsToClearIndex);
+	}
+
 	private boolean autobuildPaths=false;
-	
+
 	private class PathCreatorInfo {
 		private int nbPathsExpected;
 		private int nbPathsReceived=0;
 		private Vector<Vector<BuildingBlock>> pathsReceived=new Vector<Vector<BuildingBlock>>();
-		
+
 		private boolean creationComplete=false;
-		
+
 		PathCreatorInfo(int nbPathsExpected) {
 			this.nbPathsExpected=nbPathsExpected;
 		}
-		
+
 	}
 
 	private class PathCreator implements IAStarPathedEntity {
@@ -7265,7 +7286,7 @@ public class Building {
 		final int pathWidth;
 		final Building destination;
 
-		PathCreator(PathCreatorInfo info,InvItem pathConstructionGood,int pathWidth,Building destination,boolean autobuild) {
+		PathCreator(PathCreatorInfo info,InvItem pathConstructionGood,int pathWidth,Building destination) {
 			this.pathConstructionGood=pathConstructionGood;
 			this.pathWidth=pathWidth;
 			this.destination=destination;
@@ -7274,12 +7295,12 @@ public class Building {
 
 		@Override
 		public void onFoundPath(ArrayList<AStarNode> result) {
-			
+
 			if (info.creationComplete) {
 				MLN.error(Building.this, "onFoundPath triggered on completed info object.");
 				return;
 			}
-			
+
 			//	pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,Block.cloth.blockID,MillCommonUtilities.randomInt(16),pathWidth));
 			info.pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,pathConstructionGood.id(),pathConstructionGood.meta,pathWidth));
 			info.nbPathsReceived++;
@@ -7289,14 +7310,14 @@ public class Building {
 
 		@Override
 		public void onNoPathAvailable() {
-			
+
 			if (info.creationComplete) {
 				MLN.error(Building.this, "onNoPathAvailable triggered on completed info object.");
 				return;
 			}
-			
+
 			info.nbPathsReceived++;
-			
+
 			MLN.temp(Building.this, "Path calculation failed. Target: "+destination);
 
 			checkForRebuild();
@@ -7305,12 +7326,15 @@ public class Building {
 		private void checkForRebuild() {
 			if (info.nbPathsReceived==info.nbPathsExpected) {
 
-				Building.this.pathsToBuild=info.pathsReceived;
+				pathsToBuild=info.pathsReceived;
+				pathsToBuildIndex=0;
+				pathsToBuildPathIndex=0;
+
 				calculatePathsToClear();
 
 				pathsChanged=true;
 				info.pathsReceived=null;
-				
+
 				info.creationComplete=true;
 			}
 		}
@@ -7841,6 +7865,10 @@ public class Building {
 			}
 
 			nbttagcompound.setLong("lastGoodsRefresh", lastGoodsRefresh);
+
+			nbttagcompound.setInteger("pathsToBuildIndex", pathsToBuildIndex);
+			nbttagcompound.setInteger("pathsToBuildPathIndex", pathsToBuildPathIndex);
+			nbttagcompound.setInteger("oldPathPointsToClearIndex", oldPathPointsToClearIndex);			
 
 			if (pathsChanged) {
 				writePaths();

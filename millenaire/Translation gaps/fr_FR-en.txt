@@ -1,3 +1,8 @@
 Translation comparison between fr_FR and en
 
+List of goals without labels: 
+
+Could not find label for goal.clearoldpath (class: GoalClearOldPath) in either language.
+Could not find label for goal.buildpath (class: GoalBuildPath) in either language.
+
 Traduction completness: 100%

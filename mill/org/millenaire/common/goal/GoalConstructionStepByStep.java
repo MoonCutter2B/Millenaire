@@ -21,13 +21,10 @@ public class GoalConstructionStepByStep extends Goal {
 
 		final BuildingBlock bblock=villager.getTownHall().getCurrentBlock();
 
-
 		if (bblock==null)
 			return 0;
 
 		final int toolEfficiency=(int)villager.getBestShovel().efficiencyOnProperMaterial;
-
-
 
 		if ((bblock.bid==0) || (bblock.bid==Block.dirt.blockID))
 			return 100-(toolEfficiency*5);
