@@ -43,6 +43,17 @@ public class GuiActions {
 					ent.testModeGoods();
 					return;
 				}
+				
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.path.blockID)) {
+					ent.clearOldPaths();
+					ent.constructCalculatedPaths();
+					return;
+				}
+				
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.denier_or.itemID)) {
+					ent.displayInfos(player);
+					return;
+				}
 
 				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.summoningWand.itemID)) {
 

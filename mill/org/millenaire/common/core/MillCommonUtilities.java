@@ -994,12 +994,14 @@ public class MillCommonUtilities {
 		return false;
 	}
 
-	public static int getBlockIdValidGround(int b) {
+	public static int getBlockIdValidGround(int b,boolean surface) {
 
 		if (b == Block.bedrock.blockID)
 			return Block.dirt.blockID;
-		else if (b == Block.stone.blockID)
+		else if (b == Block.stone.blockID && surface)
 			return Block.dirt.blockID;
+		else if (b == Block.stone.blockID && !surface)
+			return Block.stone.blockID;
 		else if (b == Block.dirt.blockID)
 			return Block.dirt.blockID;
 		else if (b == Block.grass.blockID)
@@ -1008,8 +1010,10 @@ public class MillCommonUtilities {
 			return Block.gravel.blockID;
 		else if (b == Block.sand.blockID)
 			return Block.sand.blockID;
-		else if (b == Block.sandStone.blockID)
+		else if (b == Block.sandStone.blockID && surface)
 			return Block.sand.blockID;
+		else if (b == Block.sandStone.blockID && !surface)
+			return Block.sandStone.blockID;
 
 		return -1;
 	}

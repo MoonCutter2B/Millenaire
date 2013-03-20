@@ -58,7 +58,7 @@ public class BuildingPlan {
 		public static byte PINESPAWN = 3;
 		public static byte BIRCHSPAWN = 4;
 		public static byte INDIANSTATUE = 5;
-		public static byte PRESERVEGROUND = 6;
+		public static byte PRESERVEGROUNDDEPTH = 6;
 		public static byte CLEARTREE = 7;
 		public static byte MAYANSTATUE = 8;
 		public static byte SPAWNERSKELETON = 9;
@@ -73,6 +73,7 @@ public class BuildingPlan {
 		public static byte BYZANTINEICONSMALL = 18;
 		public static byte BYZANTINEICONMEDIUM = 19;
 		public static byte BYZANTINEICONLARGE = 20;
+		public static byte PRESERVEGROUNDSURFACE = 21;
 
 		public static BuildingBlock read(NBTTagCompound nbttagcompound,String label) {
 			final Point p=Point.read(nbttagcompound, label+"pos");
@@ -127,7 +128,7 @@ public class BuildingPlan {
 
 			final boolean playSound=!worldGeneration && !wandimport;
 
-			if ((special!=BuildingBlock.PRESERVEGROUND) && (special!=BuildingBlock.CLEARTREE)) {
+			if ((special!=BuildingBlock.PRESERVEGROUNDDEPTH) && (special!=BuildingBlock.PRESERVEGROUNDSURFACE) && (special!=BuildingBlock.CLEARTREE)) {
 				//preserve sign posts when importing
 				if (!wandimport || (bid!=0) || (MillCommonUtilities.getBlock(world, p)!=Block.signPost.blockID)) {
 
@@ -135,18 +136,20 @@ public class BuildingPlan {
 				}
 			}
 
-			if (special==BuildingBlock.PRESERVEGROUND) {
+			if (special==BuildingBlock.PRESERVEGROUNDDEPTH || special==BuildingBlock.PRESERVEGROUNDSURFACE) {
 				int bid=MillCommonUtilities.getBlock(world, p);
+				
+				boolean surface=(special==BuildingBlock.PRESERVEGROUNDSURFACE);
 
-				int validGroundId=MillCommonUtilities.getBlockIdValidGround(bid);
+				int validGroundId=MillCommonUtilities.getBlockIdValidGround(bid,surface);
 
 				if (validGroundId==-1) {
 					Point below=p.getBelow();
 					int targetbid=0;
 					while ((targetbid==0) && (below.getiY()>0)) {
 						bid=MillCommonUtilities.getBlock(world, below);
-						if (MillCommonUtilities.getBlockIdValidGround(bid)>0) {
-							targetbid=MillCommonUtilities.getBlockIdValidGround(bid);
+						if (MillCommonUtilities.getBlockIdValidGround(bid,surface)>0) {
+							targetbid=MillCommonUtilities.getBlockIdValidGround(bid,surface);
 						}
 						below=below.getBelow();
 					}
@@ -180,7 +183,7 @@ public class BuildingPlan {
 
 					final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
 
-					int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow);
+					int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow,true);
 
 					if (worldGeneration && targetBid==Block.dirt.blockID) {
 						MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
@@ -199,7 +202,7 @@ public class BuildingPlan {
 
 				final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
 
-				int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow);
+				int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow,true);
 
 				if (worldGeneration && targetBid==Block.dirt.blockID) {
 					MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
@@ -2417,9 +2420,13 @@ public class BuildingPlan {
 
 						offset--;
 
-						if (-i>=offset) {
+						if (-i>offset) {
 							final Point p=adjustForOrientation(x, y+i, z,j-lengthOffset,k-widthOffset,orientation);
-							bblocks.add(new BuildingBlock(p,0,0,BuildingBlock.PRESERVEGROUND));
+							bblocks.add(new BuildingBlock(p,0,0,BuildingBlock.PRESERVEGROUNDDEPTH));
+							nbBlocksToPut++;
+						} else if (-i==offset) {
+							final Point p=adjustForOrientation(x, y+i, z,j-lengthOffset,k-widthOffset,orientation);
+							bblocks.add(new BuildingBlock(p,0,0,BuildingBlock.PRESERVEGROUNDSURFACE));
 							nbBlocksToPut++;
 						} else {
 							final Point p=adjustForOrientation(x, y+i, z,j-lengthOffset,k-widthOffset,orientation);
@@ -2436,7 +2443,7 @@ public class BuildingPlan {
 					final PointType pt=plan[i][j][k];
 					if (pt.isType(bpreserveground)) {
 						final Point p=adjustForOrientation(x, y+i+firstLevel, z,j-lengthOffset,k-widthOffset,orientation);
-						bblocks.add(new BuildingBlock(p,0,0,BuildingBlock.PRESERVEGROUND));
+						bblocks.add(new BuildingBlock(p,0,0,BuildingBlock.PRESERVEGROUNDSURFACE));
 						nbBlocksToPut++;
 					} else if (pt.isType(ballbuttrees)) {
 						final Point p=adjustForOrientation(x, y+i+firstLevel, z,j-lengthOffset,k-widthOffset,orientation);
@@ -3103,7 +3110,9 @@ public class BuildingPlan {
 				toDelete[i]=true;
 			} else if ((bb.special==BuildingBlock.CLEARGROUND) && (bid==0)) {
 				toDelete[i]=true;
-			} else if ((bb.special==BuildingBlock.PRESERVEGROUND) && MillCommonUtilities.getBlockIdValidGround(bid)==bid) {
+			} else if ((bb.special==BuildingBlock.PRESERVEGROUNDDEPTH) && MillCommonUtilities.getBlockIdValidGround(bid,false)==bid) {
+				toDelete[i]=true;
+			} else if ((bb.special==BuildingBlock.PRESERVEGROUNDSURFACE) && MillCommonUtilities.getBlockIdValidGround(bid,true)==bid) {
 				toDelete[i]=true;
 			} else {
 				bbmap.put(bb.p, bb);
