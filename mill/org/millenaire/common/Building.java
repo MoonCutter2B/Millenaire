@@ -7219,13 +7219,11 @@ public class Building {
 			}
 		}
 
-		nbPathsExpected=nbPaths;
-		nbPathsReceived=0;
-		pathsReceived=new Vector<Vector<BuildingBlock>>();
+		PathCreatorInfo info=new PathCreatorInfo(nbPaths);
 
 		Point start=getPathStartPos();
 		
-		MLN.temp(this, "Launching path rebuild, expected paths number: "+nbPathsExpected);
+		MLN.temp(this, "Launching path rebuild, expected paths number: "+nbPaths);
 
 		for (Building b : getBuildings()) {
 			if (b!=this) {
@@ -7235,7 +7233,7 @@ public class Building {
 				if (b.location!=null && b.location.getPlan()!=null && b.location.getPlan().pathLevel<villageType.pathMaterial.size())
 					pathMaterial=villageType.pathMaterial.get(b.location.getPlan().pathLevel);
 
-				PathCreator pathCreator=new PathCreator(pathMaterial,b.location.getPlan().pathWidth,b,autobuild);
+				PathCreator pathCreator=new PathCreator(info,pathMaterial,b.location.getPlan().pathWidth,b,autobuild);
 
 				AStarPathPlanner jpsPathPlanner=new AStarPathPlanner(worldObj,pathCreator);
 
@@ -7245,36 +7243,59 @@ public class Building {
 		}
 	}
 
-	private int nbPathsExpected;
-	private int nbPathsReceived;
-	private Vector<Vector<BuildingBlock>> pathsReceived=null;
 	private boolean autobuildPaths=false;
+	
+	private class PathCreatorInfo {
+		private int nbPathsExpected;
+		private int nbPathsReceived=0;
+		private Vector<Vector<BuildingBlock>> pathsReceived=new Vector<Vector<BuildingBlock>>();
+		
+		private boolean creationComplete=false;
+		
+		PathCreatorInfo(int nbPathsExpected) {
+			this.nbPathsExpected=nbPathsExpected;
+		}
+		
+	}
 
 	private class PathCreator implements IAStarPathedEntity {
 
+		final PathCreatorInfo info;
 		final InvItem pathConstructionGood;
 		final int pathWidth;
 		final Building destination;
 
-		PathCreator(InvItem pathConstructionGood,int pathWidth,Building destination,boolean autobuild) {
+		PathCreator(PathCreatorInfo info,InvItem pathConstructionGood,int pathWidth,Building destination,boolean autobuild) {
 			this.pathConstructionGood=pathConstructionGood;
 			this.pathWidth=pathWidth;
-			Building.this.autobuildPaths=autobuild;
 			this.destination=destination;
+			this.info=info;
 		}
 
 		@Override
 		public void onFoundPath(ArrayList<AStarNode> result) {
+			
+			if (info.creationComplete) {
+				MLN.error(Building.this, "onFoundPath triggered on completed info object.");
+				return;
+			}
+			
 			//	pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,Block.cloth.blockID,MillCommonUtilities.randomInt(16),pathWidth));
-			pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,pathConstructionGood.id(),pathConstructionGood.meta,pathWidth));
-			nbPathsReceived++;
+			info.pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,pathConstructionGood.id(),pathConstructionGood.meta,pathWidth));
+			info.nbPathsReceived++;
 
 			checkForRebuild();
 		}
 
 		@Override
 		public void onNoPathAvailable() {
-			nbPathsReceived++;
+			
+			if (info.creationComplete) {
+				MLN.error(Building.this, "onNoPathAvailable triggered on completed info object.");
+				return;
+			}
+			
+			info.nbPathsReceived++;
 			
 			MLN.temp(Building.this, "Path calculation failed. Target: "+destination);
 
@@ -7282,16 +7303,15 @@ public class Building {
 		}
 
 		private void checkForRebuild() {
-			if (nbPathsReceived==nbPathsExpected) {
+			if (info.nbPathsReceived==info.nbPathsExpected) {
 
-				Building.this.pathsToBuild=pathsReceived;
+				Building.this.pathsToBuild=info.pathsReceived;
 				calculatePathsToClear();
 
 				pathsChanged=true;
-
-				nbPathsExpected=0;
-				nbPathsReceived=0;
-				pathsReceived=null;				
+				info.pathsReceived=null;
+				
+				info.creationComplete=true;
 			}
 		}
 
