@@ -263,23 +263,23 @@ public class BuildingPlan {
 			} else if (special==BuildingBlock.SPAWNERSKELETON) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().func_98272_a("Skeleton");
+				tileentitymobspawner.func_98049_a().setMobID("Skeleton");
 			} else if (special==BuildingBlock.SPAWNERZOMBIE) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().func_98272_a("Zombie");
+				tileentitymobspawner.func_98049_a().setMobID("Zombie");
 			} else if (special==BuildingBlock.SPAWNERSPIDER) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().func_98272_a("Spider");
+				tileentitymobspawner.func_98049_a().setMobID("Spider");
 			} else if (special==BuildingBlock.SPAWNERCAVESPIDER) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().func_98272_a("CaveSpider");
+				tileentitymobspawner.func_98049_a().setMobID("CaveSpider");
 			} else if (special==BuildingBlock.SPAWNERCREEPER) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().func_98272_a("Creeper");
+				tileentitymobspawner.func_98049_a().setMobID("Creeper");
 			} else if (special==BuildingBlock.DISPENDERUNKNOWNPOWDER) {
 				MillCommonUtilities.setBlockAndMetadata(world, p, Block.dispenser.blockID, 0);
 				final TileEntityDispenser dispenser=p.getDispenser(world);
@@ -1203,7 +1203,7 @@ public class BuildingPlan {
 		charPoints.put('F', new PointType('F',Block.furnaceIdle.blockID,0,false));
 		charPoints.put('W', new PointType('W',Block.cloth.blockID,0,false));
 		charPoints.put('o', new PointType('o',Block.stone.blockID,0,false));
-		charPoints.put('h', new PointType('h',Block.stairCompactCobblestone.blockID,0,false));
+		charPoints.put('h', new PointType('h',Block.stairsCobblestone.blockID,0,false));
 		charPoints.put('I', new PointType('I',Block.blockSteel.blockID,0,false));
 		charPoints.put('l', new PointType('h',Block.stoneSingleSlab.blockID,0,false));
 		charPoints.put('T', new PointType('T',Block.torchWood.blockID,0,true));
@@ -1360,13 +1360,13 @@ public class BuildingPlan {
 
 					//Regular stairs:
 				}  else if (pt.name.equals(bwoodstairsOakTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 1), pt);
 				}  else if (pt.name.equals(bwoodstairsOakBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 0), pt);
 				}  else if (pt.name.equals(bwoodstairsOakLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 2), pt);
 				}  else if (pt.name.equals(bwoodstairsOakRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 3), pt);
 					
 				}  else if (pt.name.equals(bwoodstairsPineTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 1), pt);
@@ -1396,22 +1396,22 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 3), pt);
 
 				}  else if (pt.name.equals(bstonestairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactCobblestone.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 1), pt);
 				}  else if (pt.name.equals(bstonestairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactCobblestone.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 0), pt);
 				}  else if (pt.name.equals(bstonestairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactCobblestone.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 2), pt);
 				}  else if (pt.name.equals(bstonestairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactCobblestone.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 3), pt);
 
 				}  else if (pt.name.equals(bstonebrickstairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrickSmooth.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 1), pt);
 				}  else if (pt.name.equals(bstonebrickstairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrickSmooth.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 0), pt);
 				}  else if (pt.name.equals(bstonebrickstairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrickSmooth.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 2), pt);
 				}  else if (pt.name.equals(bstonebrickstairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrickSmooth.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 3), pt);
 
 				}  else if (pt.name.equals(bbrickstairsTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 1), pt);
@@ -1433,13 +1433,13 @@ public class BuildingPlan {
 
 					//Inversed stairs:
 				}  else if (pt.name.equals(bwoodstairsOakInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 5), pt);
 				}  else if (pt.name.equals(bwoodstairsOakInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 4), pt);
 				}  else if (pt.name.equals(bwoodstairsOakInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 6), pt);
 				}  else if (pt.name.equals(bwoodstairsOakInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactPlanks.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 7), pt);
 					
 				}  else if (pt.name.equals(bwoodstairsPineInvTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 5), pt);
@@ -1469,22 +1469,22 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 7), pt);
 
 				}  else if (pt.name.equals(bstonestairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactCobblestone.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 5), pt);
 				}  else if (pt.name.equals(bstonestairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactCobblestone.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 4), pt);
 				}  else if (pt.name.equals(bstonestairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactCobblestone.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 6), pt);
 				}  else if (pt.name.equals(bstonestairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairCompactCobblestone.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 7), pt);
 
 				}  else if (pt.name.equals(bstonebrickstairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrickSmooth.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 5), pt);
 				}  else if (pt.name.equals(bstonebrickstairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrickSmooth.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 4), pt);
 				}  else if (pt.name.equals(bstonebrickstairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrickSmooth.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 6), pt);
 				}  else if (pt.name.equals(bstonebrickstairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrickSmooth.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 7), pt);
 
 				}  else if (pt.name.equals(bbrickstairsInvTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 5), pt);
@@ -2550,16 +2550,16 @@ public class BuildingPlan {
 
 
 					} else if (pt.isType(bwoodstairsOakTop)) {
-						b=Block.stairCompactPlanks.blockID;
+						b=Block.stairsWoodOak.blockID;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bwoodstairsOakRight)) {
-						b=Block.stairCompactPlanks.blockID;
+						b=Block.stairsWoodOak.blockID;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bwoodstairsOakBottom)) {
-						b=Block.stairCompactPlanks.blockID;
+						b=Block.stairsWoodOak.blockID;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bwoodstairsOakLeft)) {
-						b=Block.stairCompactPlanks.blockID;
+						b=Block.stairsWoodOak.blockID;
 						m=getStairMeta(3,orientation);
 						
 					} else if (pt.isType(bwoodstairsPineTop)) {
@@ -2606,28 +2606,28 @@ public class BuildingPlan {
 						
 						
 					}  else if (pt.isType(bstonestairsTop)) {
-						b=Block.stairCompactCobblestone.blockID;
+						b=Block.stairsCobblestone.blockID;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bstonestairsRight)) {
-						b=Block.stairCompactCobblestone.blockID;
+						b=Block.stairsCobblestone.blockID;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bstonestairsBottom)) {
-						b=Block.stairCompactCobblestone.blockID;
+						b=Block.stairsCobblestone.blockID;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bstonestairsLeft)) {
-						b=Block.stairCompactCobblestone.blockID;
+						b=Block.stairsCobblestone.blockID;
 						m=getStairMeta(3,orientation);
 					}  else if (pt.isType(bstonebrickstairsTop)) {
-						b=Block.stairsStoneBrickSmooth.blockID;
+						b=Block.stairsStoneBrick.blockID;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bstonebrickstairsRight)) {
-						b=Block.stairsStoneBrickSmooth.blockID;
+						b=Block.stairsStoneBrick.blockID;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bstonebrickstairsBottom)) {
-						b=Block.stairsStoneBrickSmooth.blockID;
+						b=Block.stairsStoneBrick.blockID;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bstonebrickstairsLeft)) {
-						b=Block.stairsStoneBrickSmooth.blockID;
+						b=Block.stairsStoneBrick.blockID;
 						m=getStairMeta(3,orientation);
 					}  else if (pt.isType(bbrickstairsTop)) {
 						b=Block.stairsBrick.blockID;
@@ -2657,16 +2657,16 @@ public class BuildingPlan {
 
 
 					} else if (pt.isType(bwoodstairsOakInvTop)) {
-						b=Block.stairCompactPlanks.blockID;
+						b=Block.stairsWoodOak.blockID;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bwoodstairsOakInvRight)) {
-						b=Block.stairCompactPlanks.blockID;
+						b=Block.stairsWoodOak.blockID;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bwoodstairsOakInvBottom)) {
-						b=Block.stairCompactPlanks.blockID;
+						b=Block.stairsWoodOak.blockID;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bwoodstairsOakInvLeft)) {
-						b=Block.stairCompactPlanks.blockID;
+						b=Block.stairsWoodOak.blockID;
 						m=getStairMeta(3,orientation)+4;
 						
 					} else if (pt.isType(bwoodstairsPineInvTop)) {
@@ -2712,28 +2712,28 @@ public class BuildingPlan {
 						
 						
 					}  else if (pt.isType(bstonestairsInvTop)) {
-						b=Block.stairCompactCobblestone.blockID;
+						b=Block.stairsCobblestone.blockID;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bstonestairsInvRight)) {
-						b=Block.stairCompactCobblestone.blockID;
+						b=Block.stairsCobblestone.blockID;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bstonestairsInvBottom)) {
-						b=Block.stairCompactCobblestone.blockID;
+						b=Block.stairsCobblestone.blockID;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bstonestairsInvLeft)) {
-						b=Block.stairCompactCobblestone.blockID;
+						b=Block.stairsCobblestone.blockID;
 						m=getStairMeta(3,orientation)+4;
 					}  else if (pt.isType(bstonebrickstairsInvTop)) {
-						b=Block.stairsStoneBrickSmooth.blockID;
+						b=Block.stairsStoneBrick.blockID;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bstonebrickstairsInvRight)) {
-						b=Block.stairsStoneBrickSmooth.blockID;
+						b=Block.stairsStoneBrick.blockID;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bstonebrickstairsInvBottom)) {
-						b=Block.stairsStoneBrickSmooth.blockID;
+						b=Block.stairsStoneBrick.blockID;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bstonebrickstairsInvLeft)) {
-						b=Block.stairsStoneBrickSmooth.blockID;
+						b=Block.stairsStoneBrick.blockID;
 						m=getStairMeta(3,orientation)+4;
 					}  else if (pt.isType(bbrickstairsInvTop)) {
 						b=Block.stairsBrick.blockID;
@@ -2862,10 +2862,10 @@ public class BuildingPlan {
 						b=pt.blockId;
 						m=pt.meta;
 					} else if (pt.isType(bwoodstairsOakGuess)) {
-						b=Block.stairCompactPlanks.blockID;
+						b=Block.stairsWoodOak.blockID;
 						m=-1;
 					} else if (pt.isType(bstonestairGuess)) {
-						b=Block.stairCompactCobblestone.blockID;
+						b=Block.stairsCobblestone.blockID;
 						m=-1;
 					} else if (pt.isType(bladderGuess)) {
 						b=Block.ladder.blockID;
@@ -3364,7 +3364,7 @@ public class BuildingPlan {
 
 		final int bid=map.get(p).bid;
 
-		return ((bid == Block.stairCompactCobblestone.blockID) || (bid == Block.stairCompactPlanks.blockID));
+		return ((bid == Block.stairsCobblestone.blockID) || (bid == Block.stairsWoodOak.blockID));
 	}
 
 	private void readConfigLine(File file, String line, boolean importPlan) {
@@ -3657,8 +3657,8 @@ public class BuildingPlan {
 				ladders.add(block);
 			} else if (block.bid == Block.doorWood.blockID) {
 				doors.add(block);
-			} else if (((block.bid == Block.stairCompactCobblestone.blockID)
-					|| (block.bid == Block.stairCompactPlanks.blockID))  && (block.meta==-1)) {
+			} else if (((block.bid == Block.stairsCobblestone.blockID)
+					|| (block.bid == Block.stairsWoodOak.blockID))  && (block.meta==-1)) {
 				block.meta=-1;
 				stairs.add(block);
 			}

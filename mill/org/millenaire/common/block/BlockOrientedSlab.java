@@ -29,7 +29,7 @@ public class BlockOrientedSlab extends BlockHalfSlab {
 	}
 
 	@Override
-	public void func_94332_a(IconRegister iconRegister)
+	public void registerIcons(IconRegister iconRegister)
 	{
 		textureTopVert=MillCommonUtilities.getIcon(iconRegister, textureTopVertName);
 		textureTopHor=MillCommonUtilities.getIcon(iconRegister, textureTopHorName);

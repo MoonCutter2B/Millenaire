@@ -42,7 +42,7 @@ public class BlockOrientedBrick extends Block {
 	}
 	
 	@Override
-	public void func_94332_a(IconRegister iconRegister)
+	public void registerIcons(IconRegister iconRegister)
 	{
 		topTexture=MillCommonUtilities.getIcon(iconRegister, topTextureId);
 		topTextureRotate=MillCommonUtilities.getIcon(iconRegister, topTextureRotateId);

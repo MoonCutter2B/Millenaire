@@ -16,7 +16,8 @@ public class TextureAmuletAlchemist extends TextureStitched {
 		super(iconName);
 	}
 
-	public void func_94219_l()
+	@Override
+	public void updateAnimation()
 	{
 
 		int iconPos=getScore(Minecraft.getMinecraft());
@@ -27,11 +28,11 @@ public class TextureAmuletAlchemist extends TextureStitched {
 		if (iconPos<0)
 			iconPos=0;
 
-		if (iconPos != this.field_94222_f)
-		{
-			this.field_94222_f = iconPos;
-			this.field_94228_a.func_94281_a(this.field_94224_d, this.field_94225_e, (Texture)this.field_94226_b.get(this.field_94222_f), this.field_94227_c);
-		}
+		if (iconPos != this.frameCounter)
+        {
+            this.frameCounter = iconPos;
+            this.textureSheet.copyFrom(this.originX, this.originY, (Texture)this.textureList.get(this.frameCounter), this.rotated);
+        }
 	}
 	
 	private int getScore(Minecraft mc) {

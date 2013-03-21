@@ -148,7 +148,7 @@ public class BlockDecorative extends Block {
 	}
 	
 	@Override
-	public void func_94332_a(IconRegister iconRegister)
+	public void registerIcons(IconRegister iconRegister)
 	{
 		for (int meta : textureNames.keySet()) {
 			textures.put(meta, MillCommonUtilities.getIcon(iconRegister, textureNames.get(meta)));

@@ -184,7 +184,7 @@ public class MillCommonUtilities {
 	static public Random random=new Random();
 
 	public static Icon getIcon(IconRegister register,String iconName) {
-		return register.func_94245_a(Mill.modId+":"+iconName+MLN.getTextSuffix());
+		return register.registerIcon(Mill.modId+":"+iconName+MLN.getTextSuffix());
 	}
 
 	public static boolean canStandInBlock(World world, Point p) {
@@ -982,9 +982,9 @@ public class MillCommonUtilities {
 
 		if ((Block.blocksList[b] != null) && Block.blocksList[b].isOpaqueCube())
 			return true;
-		if ((b==Block.glass.blockID) || (b==Block.thinGlass.blockID) || (b==Block.stoneSingleSlab.blockID)  || (b==Block.woodSingleSlab.blockID) || (b==Block.stairCompactCobblestone.blockID)
-				|| (b==Block.stairCompactPlanks.blockID) ||  (b==Block.stairsBrick.blockID)
-				|| (b==Block.stairsNetherBrick.blockID) || (b==Block.stairsStoneBrickSmooth.blockID)
+		if ((b==Block.glass.blockID) || (b==Block.thinGlass.blockID) || (b==Block.stoneSingleSlab.blockID)  || (b==Block.woodSingleSlab.blockID) || (b==Block.stairsCobblestone.blockID)
+				|| (b==Block.stairsWoodOak.blockID) ||  (b==Block.stairsBrick.blockID)
+				|| (b==Block.stairsNetherBrick.blockID) || (b==Block.stairsStoneBrick.blockID)
 				|| (b==Block.fenceIron.blockID) || (b==Mill.paperWall.blockID))
 			return true;
 
@@ -1251,9 +1251,9 @@ public class MillCommonUtilities {
 		}
 
 		if (notify) {
-			world.setBlockAndMetadataWithNotify(p.getiX(), p.getiY(), p.getiZ(), bid,0,3);
+			world.setBlock(p.getiX(), p.getiY(), p.getiZ(), bid,0,3);
 		} else {
-			world.setBlockAndMetadataWithNotify(p.getiX(), p.getiY(), p.getiZ(), bid,0,2);
+			world.setBlock(p.getiX(), p.getiY(), p.getiZ(), bid,0,2);
 		}
 
 		if (playSound && (bid>0)) {
@@ -1293,9 +1293,9 @@ public class MillCommonUtilities {
 		}
 
 		if (notify) {
-			world.setBlockAndMetadataWithNotify(x,y,z, bid, metadata,3);
+			world.setBlock(x,y,z, bid, metadata,3);
 		} else {
-			world.setBlockAndMetadataWithNotify(x,y,z, bid, metadata,2);
+			world.setBlock(x,y,z, bid, metadata,2);
 		}
 
 		if (playSound && (bid>0)) {

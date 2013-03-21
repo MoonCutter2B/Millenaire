@@ -111,7 +111,7 @@ public class Mill
 			return Mill.denier_or.itemID;
 		}
 	}
-	public static final String versionNumber = "4.4.1";
+	public static final String versionNumber = "4.4.2";
 	public static final String versionBound = "[4.4.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";

@@ -191,7 +191,7 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			icons=new Icon[iconNames.length];
 
@@ -242,7 +242,7 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
@@ -292,7 +292,7 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
@@ -315,7 +315,7 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconNames[0]);
 
@@ -442,7 +442,7 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
@@ -481,7 +481,7 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
@@ -520,7 +520,7 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
@@ -562,7 +562,7 @@ public class Goods {
 			return enchantability;
 		}
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
@@ -783,10 +783,10 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			Mill.proxy.declareAmuletTextures(iconRegister);
-			iconIndex = iconRegister.func_94245_a(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
+			iconIndex = iconRegister.registerIcon(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
 	}
 
@@ -801,11 +801,11 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 
 			Mill.proxy.declareAmuletTextures(iconRegister);
-			iconIndex = iconRegister.func_94245_a(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
+			iconIndex = iconRegister.registerIcon(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
 
 	}
@@ -821,10 +821,10 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			Mill.proxy.declareAmuletTextures(iconRegister);
-			iconIndex = iconRegister.func_94245_a(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
+			iconIndex = iconRegister.registerIcon(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
 	}
 
@@ -839,7 +839,7 @@ public class Goods {
 		}
 
 		@Override
-		public void func_94581_a(IconRegister iconRegister)
+		public void updateIcons(IconRegister iconRegister)
 		{
 			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
