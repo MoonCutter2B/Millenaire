@@ -19,9 +19,9 @@ public class BlockMLNPane extends BlockPane {
 	}
 	
 	@Override
-	public void func_94332_a(IconRegister iconRegister)
+	public void registerIcons(IconRegister iconRegister)
 	{
-		this.field_94336_cN = MillCommonUtilities.getIcon(iconRegister, textureName);
+		this.blockIcon = MillCommonUtilities.getIcon(iconRegister, textureName);
         this.sideTexture = MillCommonUtilities.getIcon(iconRegister, sideTextureName);
 	}
 	

@@ -12,6 +12,9 @@ biome:lush swampland
 biome:shrubland
 biome:rainforest
 
+pathmaterial:pathdirt
+pathmaterial:pathsandstone
+
 //hamlets to be generated around:
 hameau:indian_agricole_hamlet
 hameau:indian_fort_hamlet

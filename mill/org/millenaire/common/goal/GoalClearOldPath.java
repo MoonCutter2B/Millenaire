@@ -38,7 +38,7 @@ public class GoalClearOldPath extends Goal {
 	@Override
 	public boolean performAction(MillVillager villager) throws Exception {
 
-		final Point p=villager.getTownHall().getCurrentClearPathPoint();
+		Point p=villager.getTownHall().getCurrentClearPathPoint();
 
 		if (p==null)
 			return true;
@@ -52,8 +52,15 @@ public class GoalClearOldPath extends Goal {
 			p.setBlock(villager.worldObj, Block.dirt.blockID, 0, true, false);		
 
 		villager.getTownHall().oldPathPointsToClearIndex++;
-
-		return (villager.getTownHall().getCurrentClearPathPoint()!=null);
+		
+		p=villager.getTownHall().getCurrentClearPathPoint();
+		
+		if (p!=null) {
+			villager.setGoalDestPoint(p);
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	@Override

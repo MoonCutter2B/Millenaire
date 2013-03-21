@@ -52,7 +52,7 @@ public class TextureYddrasilAmuletOld extends TextureStitched {
 		}
 	}
 	@Override
-	public void func_94219_l() {
+	public void updateAnimation() {
 
 		int level=0;
 

@@ -1013,6 +1013,7 @@ public class MLN {
 		ModLoader.addName(new ItemStack(Mill.path, 1, 0), MLN.string("item.pathdirt"));
 		ModLoader.addName(new ItemStack(Mill.path, 1, 1), MLN.string("item.pathgravel"));
 		ModLoader.addName(new ItemStack(Mill.path, 1, 2), MLN.string("item.pathslabs"));
+		ModLoader.addName(new ItemStack(Mill.path, 1, 3), MLN.string("item.pathsandstone"));
 
 		ModLoader.addName(Mill.mayanstatue, MLN.string("item.mayanstatue"));
 		ModLoader.addName(Mill.maize, MLN.string("item.maize"));

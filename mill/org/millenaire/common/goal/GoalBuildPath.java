@@ -48,17 +48,19 @@ public class GoalBuildPath extends Goal {
 		
 		villager.getTownHall().pathsToBuildPathIndex++;
 		
-		return (villager.getTownHall().getCurrentPathBuildingBlock()!=null);
+		BuildingBlock b=villager.getTownHall().getCurrentPathBuildingBlock();
+
+		if (b!=null) {
+			villager.setGoalDestPoint(b.p);
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	@Override
 	public int priority(MillVillager villager) throws Exception {
 		return 50;
-	}
-
-	@Override
-	public int range(MillVillager villager) {
-		return ACTIVATION_RANGE+2;
 	}
 
 	@Override
@@ -87,6 +89,11 @@ public class GoalBuildPath extends Goal {
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
 		return villager.getTownHall().getCurrentPathBuildingBlock()!=null;
+	}
+	
+	@Override
+	public int range(MillVillager villager) {
+		return ACTIVATION_RANGE+2;
 	}
 	
 	@Override

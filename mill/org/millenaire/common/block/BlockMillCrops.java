@@ -49,7 +49,7 @@ public class BlockMillCrops extends BlockCrops
 	}
 
 	@Override
-	public void func_94332_a(IconRegister iconRegister)
+	public void registerIcons(IconRegister iconRegister)
 	{
 		riceTexture0=MillCommonUtilities.getIcon(iconRegister, riceTexture0name);
 		riceTexture1=MillCommonUtilities.getIcon(iconRegister, riceTexture1name);

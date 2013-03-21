@@ -111,6 +111,7 @@ public class Mill
 			return Mill.denier_or.itemID;
 		}
 	}
+	
 	public static final String versionNumber = "4.5.0";
 	public static final String versionBound = "[4.4.0,5.0)";
 	public static final String modId="Millenaire";
@@ -504,6 +505,7 @@ public class Mill
 		path.registerTexture(0, "pathdirt");
 		path.registerTexture(1, "pathgravel");
 		path.registerTexture(2, "pathslabs");
+		path.registerTexture(3, "pathsandstone");
 
 		crops.setUnlocalizedName("ml_crops").setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
 

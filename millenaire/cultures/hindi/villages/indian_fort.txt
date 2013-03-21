@@ -12,6 +12,9 @@ biome:jungle
 biome:lush swampland
 biome:shrubland
 
+pathmaterial:pathdirt
+pathmaterial:pathsandstone
+
 //starting buildings:
 centre:fort
 start:largepeasanthouse

@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -6726,7 +6727,8 @@ public class Building {
 
 			oldPathPointsToClearIndex=0;
 
-			MLN.temp(this, "Finished looking for paths to clear. Found: "+oldPathPointsToClear.size()+". Duration: "+(System.currentTimeMillis()-startTime+" ms."));
+			if (oldPathPointsToClear!=null)
+				MLN.temp(this, "Finished looking for paths to clear. Found: "+oldPathPointsToClear.size()+". Duration: "+(System.currentTimeMillis()-startTime+" ms."));
 		}
 	}
 
@@ -7325,6 +7327,9 @@ public class Building {
 
 		private void checkForRebuild() {
 			if (info.nbPathsReceived==info.nbPathsExpected) {
+				
+				//so brand-new paths get built first
+				Collections.reverse(info.pathsReceived);
 
 				pathsToBuild=info.pathsReceived;
 				pathsToBuildIndex=0;

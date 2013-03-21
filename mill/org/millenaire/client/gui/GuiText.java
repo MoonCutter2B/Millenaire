@@ -383,7 +383,7 @@ public abstract class GuiText extends GuiScreen {
 
 		drawDefaultBackground();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.func_98187_b(getPNGPath());
+		mc.renderEngine.bindTexture(getPNGPath());
 		final int xStart = (width - getXSize()) / 2;
 		final int yStart = (height - getYSize()) / 2;
 		drawTexturedModalRect(xStart, yStart, 0, 0, getXSize(), getYSize());

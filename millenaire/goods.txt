@@ -167,6 +167,7 @@ parchmentsadhu;mln47;0;
 parchmentvillagers;mln17;0;
 pathdirt;1525;0;
 pathgravel;1525;1;
+pathsandstone;1525;3;
 pathslabs;1525;2;
 planks_birch;5;2;Planches de bouleau
 planks_jungle;5;3;Planches d'acajou

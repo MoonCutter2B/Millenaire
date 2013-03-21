@@ -3,6 +3,9 @@ weight:0
 qualifier:Gaanv
 spawnable:false
 
+pathmaterial:pathdirt
+pathmaterial:pathsandstone
+
 //starting buildings:
 centre:chiefhouse
 start:peasanthouse

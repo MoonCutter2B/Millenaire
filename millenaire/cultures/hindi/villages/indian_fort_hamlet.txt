@@ -5,6 +5,9 @@ type:hameau
 spawnable:false
 carriesraid:true
 
+pathmaterial:pathdirt
+pathmaterial:pathsandstone
+
 //starting buildings:
 centre:fort
 start:peasanthouse

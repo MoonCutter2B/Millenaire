@@ -53,7 +53,7 @@ public class GuiPujas extends GuiContainer
 	{
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.func_98187_b("/graphics/gui/ML_pujas.png");
+		mc.renderEngine.bindTexture("/graphics/gui/ML_pujas.png");
 		final int j = (width - xSize) / 2;
 		final int k = (height - ySize) / 2;
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
@@ -284,8 +284,8 @@ public class GuiPujas extends GuiContainer
 			if (icon != null)
 			{
 				GL11.glDisable(GL11.GL_LIGHTING);
-				mc.renderEngine.func_98187_b("/gui/items.png");
-				this.func_94065_a(i, j, icon, 16, 16);
+				mc.renderEngine.bindTexture("/gui/items.png");
+				this.drawTexturedModelRectFromIcon(i, j, icon, 16, 16);
 				GL11.glEnable(GL11.GL_LIGHTING);
 				flag = true;
 			}

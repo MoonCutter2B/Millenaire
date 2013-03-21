@@ -14,6 +14,9 @@ biome:lush swamplands
 biome:shrubland
 biome:rainforest
 
+pathmaterial:pathdirt
+pathmaterial:pathsandstone
+
 //starting buildings:
 centre:chiefhouse
 start:peasanthouse

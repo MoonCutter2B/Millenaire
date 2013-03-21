@@ -3,6 +3,9 @@ playerControlled:true
 weight:0
 qualifier:Jaagiir
 
+pathmaterial:pathdirt
+pathmaterial:pathsandstone
+
 //starting buildings:
 centre:playerpalace
 start:peasanthouse

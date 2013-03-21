@@ -433,6 +433,8 @@ public class WorldGenVillage implements IWorldGenerator {
 			startTime = System.nanoTime();
 
 			coordsTried.add(x+(z << 16));
+			
+			MLN.temp(null, "coordsTried size: "+coordsTried.size());
 
 			if (MLN.generateVillages || alwaysGenerate) {
 				boolean canAttemptVillage=true;
