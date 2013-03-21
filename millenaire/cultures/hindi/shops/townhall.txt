@@ -1,4 +1,4 @@
-sells=wood,wood_pine,wood_birch,wood_jungle,cobblestone,stone,sandstone,mudbrick,cookedbrick,brickmould,indianstatue,iron,rice,turmeric,chickenmeat,sugarcane,rasgulla,purse,villageWand,parchmentIndianVillagers,parchmentIndianBuildings,parchmentIndianItems,parchmentIndianComplete
+sells=pathdirt,pathsandstone,wood,wood_pine,wood_birch,wood_jungle,cobblestone,stone,sandstone,mudbrick,cookedbrick,brickmould,indianstatue,iron,rice,turmeric,chickenmeat,sugarcane,rasgulla,purse,villageWand,parchmentIndianVillagers,parchmentIndianBuildings,parchmentIndianItems,parchmentIndianComplete
 
 buys=wood,wood_pine,wood_birch,wood_jungle,cobblestone,stone,sandstone,iron,mudbrick,cookedbrick,indianstatue,wool_white
 

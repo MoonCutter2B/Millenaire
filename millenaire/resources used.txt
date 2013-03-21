@@ -363,7 +363,7 @@ Bois tropical: 224
 Grès: 13
 Bibliothèque: 48
 Décoration en or: 147
-Bois (tous): 958
+Bois (tous): 962
 
 mayan_controlled resource use: 
 Bois de chêne: 73
@@ -373,17 +373,6 @@ Pierres: 4563
 Bois tropical: 82
 Décoration en or: 91
 Bois (tous): 239
-
-mayanldogtest resource use: 
-Bois de chêne: 407
-Laine blanche: 6
-Sculpture Maya: 7
-Roche: 8347
-Pierres: 12763
-Bois tropical: 82
-Grès: 136
-Décoration en or: 141
-Bois (tous): 767
 
 military resource use: 
 Bois de chêne: 502
@@ -395,7 +384,7 @@ Bois tropical: 82
 Grès: 5
 Bibliothèque: 48
 Décoration en or: 144
-Bois (tous): 1016
+Bois (tous): 1018
 
 religious resource use: 
 Bois de chêne: 471
@@ -404,10 +393,10 @@ Sculpture Maya: 6
 Roche: 10506
 Pierres: 14259
 Bois tropical: 124
-Grès: 136
+Grès: 135
 Bibliothèque: 48
 Décoration en or: 157
-Bois (tous): 916
+Bois (tous): 922
 
 
 lonemayancave resource use: 
@@ -10624,13 +10613,13 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|920
+| style="text-align: center; "|919
 |-
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|416
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|2
+| style="text-align: center; "|4
 |}
 
 
@@ -11221,7 +11210,7 @@ Initial Construction
 | style="text-align: center; "|390
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|3
+| style="text-align: center; "|5
 |}
 
 
@@ -11291,10 +11280,10 @@ Initial Construction
 | style="text-align: center; "|8
 |-
 | style="text-align: center; "|Grès
-| style="text-align: center; "|123
+| style="text-align: center; "|122
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|1
+| style="text-align: center; "|3
 |}
 
 
@@ -11309,7 +11298,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|5
+| style="text-align: center; "|7
 |}
 
 

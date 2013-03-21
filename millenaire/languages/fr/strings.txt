@@ -348,6 +348,11 @@ item.wineBasic=Vin
 item.souvlaki=Souvláki
 item.purse=Bourse à deniers
 
+item.pathdirt=Chemin de terre
+item.pathgravel=Chemin de graviers
+item.pathslabs=Chemin de dalles
+item.pathsandstone=Chemin de dalles de grès
+
 error.unknownitem=Nom d'object inconnu
 
 //Errors
@@ -580,7 +585,8 @@ goal.shearsheep=Tond un mouton
 goal.makemurgh=Prépare un cari de poulet
 goal.getitemtokeep=Va chercher un objet
 
-
+goal.buildpath=Trace un chemin
+goal.clearoldpath=Efface un vieux chemin
 
 
 //other

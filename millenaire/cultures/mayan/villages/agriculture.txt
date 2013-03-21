@@ -2,6 +2,8 @@ name:Milpa
 weight:10
 carriesraid:true
 
+pathmaterial:pathdirt
+pathmaterial:pathslabs
 
 biome:plains
 biome:swampland

@@ -350,6 +350,11 @@ item.clothes_byz_silk=Silk Byzantine clothes
 item.souvlaki=Souvlaki
 item.purse=Bourse à deniers
 
+item.pathdirt=Dirt path
+item.pathgravel=Gravel path
+item.pathslabs=Slabs path
+item.pathsandstone=Sandstone slabs path
+
 
 error.unknownitem=Unknown Item Name
 
@@ -584,6 +589,9 @@ goal.breed=Breeding animals
 goal.shearsheep=Shearing a sheep
 goal.makemurgh=Preparing a chicken curry
 goal.getitemtokeep=Picking up an item
+
+goal.buildpath=Marking a path
+goal.clearoldpath=clearing an old path
 
 //other
 other.west=West

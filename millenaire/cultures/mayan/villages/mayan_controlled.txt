@@ -2,6 +2,9 @@ name:Player's Jub'uy
 weight:0
 playerControlled:true
 
+pathmaterial:pathdirt
+pathmaterial:pathslabs
+
 //starting buildings:
 centre:mayanplayerpyramid
 start:mayanhouse

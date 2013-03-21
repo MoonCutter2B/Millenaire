@@ -2375,6 +2375,9 @@ public class BuildingPlan {
 		return MillCommonUtilities.getBlock(worldObj, p);
 	}
 
+	public boolean isSubBuilding() {
+		return TYPE_SUBBUILDING.equals(type);
+	}
 
 
 	public BuildingBlock[] getBuildingPoints(World world,BuildingLocation location,boolean villageGeneration) {
@@ -2395,7 +2398,7 @@ public class BuildingPlan {
 			MLN.minor(this, "Getting blocks for "+planName+" at "+x+"/"+y+"/"+z+"/"+orientation);
 		}
 
-		if (!isUpdate && !TYPE_SUBBUILDING.equals(type) && !location.bedrocklevel) {
+		if (!isUpdate && !isSubBuilding() && !location.bedrocklevel) {
 			//filling above ground area with air
 
 			for (int j =  -areaToClear;j<(length+areaToClear);j++) {

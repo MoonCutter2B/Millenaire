@@ -11,6 +11,9 @@ biome:lush swampland
 biome:jungle
 biome:rainforest
 
+pathmaterial:pathdirt
+pathmaterial:pathslabs
+
 //starting buildings:
 centre:mayanobservatory
 start:mayanhouse

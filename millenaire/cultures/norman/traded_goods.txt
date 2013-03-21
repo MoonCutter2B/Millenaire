@@ -1,5 +1,8 @@
 //name, selling price, buying price, reserved quantity, target quantity, foreign merchant price, auto-generated, needed equipment(deprecated), minimum reputation
 dirtwall,1,0,0,0,0,true
+pathdirt,1,0,0,0,0,true
+pathgravel,2,0,0,0,0,true
+pathslabs,16,0,0,0,0,true
 wood,2,1,128,1024
 wood_pine,2,1,64,256
 wood_birch,2,1,64,256

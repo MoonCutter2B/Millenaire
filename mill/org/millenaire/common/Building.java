@@ -7209,11 +7209,11 @@ public class Building {
 		MLN.temp(this, "Launching path rebuild, expected paths number: "+nbPaths);
 
 		for (Building b : getBuildings()) {
-			if (b!=this) {
+			if (b!=this && b.location!=null && b.location.getPlan()!=null && !b.location.getPlan().isSubBuilding()) {
 
 				InvItem pathMaterial=villageType.pathMaterial.firstElement();
 
-				if (b.location!=null && b.location.getPlan()!=null && b.location.getPlan().pathLevel<villageType.pathMaterial.size())
+				if (b.location.getPlan().pathLevel<villageType.pathMaterial.size())
 					pathMaterial=villageType.pathMaterial.get(b.location.getPlan().pathLevel);
 
 				PathCreator pathCreator=new PathCreator(info,pathMaterial,b.location.getPlan().pathWidth,b);

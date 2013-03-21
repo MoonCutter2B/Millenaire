@@ -1,5 +1,6 @@
 package org.millenaire.common;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Vector;
 
@@ -26,7 +27,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 	private static final double MINIMUM_USABLE_BLOCK_PERC = 0.7;
 
-	static public Vector<Integer> coordsTried=new Vector<Integer>();
+	static public HashSet<Integer> coordsTried=new HashSet<Integer>();
 
 	public static boolean generateBedrockLoneBuilding(Point p,World world,VillageType village,Random random,int minDistance,int maxDistance) throws MillenaireException {
 

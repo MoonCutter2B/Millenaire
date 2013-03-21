@@ -13,6 +13,8 @@ goal=gopray
 goal=bringBackResourcesHome
 goal=getResourcesForBuild
 goal=construction
+goal=buildpath
+goal=clearoldpath
 
 goal=slaughterChicken
 goal=harvestMaize
