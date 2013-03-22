@@ -93,7 +93,7 @@ clientPacketHandlerSpec = @SidedPacketHandler(channels = {ServerReceiver.PACKET_
 serverPacketHandlerSpec = @SidedPacketHandler(channels = {ServerReceiver.PACKET_CHANNEL}, packetHandler = ServerReceiver.class),
 connectionHandler = ConnectionHandler.class,
 versionBounds = Mill.versionBound)
-public class Mill
+public class Mill 
 {
 	static class CreativeTabMill extends CreativeTabs {
 
