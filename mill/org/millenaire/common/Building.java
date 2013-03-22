@@ -1449,9 +1449,9 @@ public class Building {
 
 	private void completeConstruction() throws MillenaireException {
 		if ((buildingLocationIP != null) && (getBblocks() == null)) {
-			
+
 			BuildingPlan plan=this.getCurrentBuildingPlan();
-			
+
 			registerBuildingLocation(buildingLocationIP);
 			updateWorldInfo();
 
@@ -6691,14 +6691,16 @@ public class Building {
 	public void calculatePathsToClear() {
 		if (pathsToBuild!=null) {
 
+			Vector<Vector<BuildingBlock>> pathsToBuildLocal=pathsToBuild;
+			
 			MLN.temp(this, "Looking for paths to clear.");
 			long startTime=System.currentTimeMillis();
 
-			oldPathPointsToClear=new Vector<Point>();
+			Vector<Point> oldPathPointsToClearNew=new Vector<Point>();
 
 			HashSet<Point> newPathPoints=new HashSet<Point>();
 
-			for (Vector<BuildingBlock> path : pathsToBuild) {
+			for (Vector<BuildingBlock> path : pathsToBuildLocal) {
 				for (BuildingBlock bp : path) {
 					newPathPoints.add(bp.p);
 				}
@@ -6718,7 +6720,7 @@ public class Building {
 						if (bid==Mill.path.blockID) {
 							Point p=new Point(x,y,z);
 							if (!newPathPoints.contains(p)) {
-								oldPathPointsToClear.add(p);
+								oldPathPointsToClearNew.add(p);
 							}
 						}
 					}
@@ -6726,9 +6728,8 @@ public class Building {
 			}
 
 			oldPathPointsToClearIndex=0;
-
-			if (oldPathPointsToClear!=null)
-				MLN.temp(this, "Finished looking for paths to clear. Found: "+oldPathPointsToClear.size()+". Duration: "+(System.currentTimeMillis()-startTime+" ms."));
+			oldPathPointsToClear=oldPathPointsToClearNew;
+			MLN.temp(this, "Finished looking for paths to clear. Found: "+oldPathPointsToClear.size()+". Duration: "+(System.currentTimeMillis()-startTime+" ms."));
 		}
 	}
 
@@ -7250,6 +7251,8 @@ public class Building {
 
 				pathsToBuildPathIndex++;
 			}
+			
+			MLN.temp(this, "getCurrentPathBuildingBlock: "+pathsToBuildIndex+"/"+pathsToBuildPathIndex);
 		}
 	}
 
@@ -7327,7 +7330,7 @@ public class Building {
 
 		private void checkForRebuild() {
 			if (info.nbPathsReceived==info.nbPathsExpected) {
-				
+
 				//so brand-new paths get built first
 				Collections.reverse(info.pathsReceived);
 

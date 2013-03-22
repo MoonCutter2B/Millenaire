@@ -2,5 +2,5 @@ max:1;native:Sirotrofia;around:4;startLevel:-1;orientation:0;width:15;length:20;
 startLevel:-1
 startLevel:-1
 startLevel:-1;priority:10
-startLevel:-1
+startLevel:-1;pathlevel:1
 

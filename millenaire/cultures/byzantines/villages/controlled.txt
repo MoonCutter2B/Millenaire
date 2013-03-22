@@ -5,6 +5,10 @@ lavaQualifier:to hephaisto
 lakeQualifier:limne
 playerControlled:true
 
+pathmaterial:pathdirt
+pathmaterial:pathgravel
+pathmaterial:pathslabs
+
 //starting buildings:
 centre:playerfortbyzantine
 start:grovebyzantine

@@ -1,7 +1,8 @@
 package org.millenaire.common.pathing.atomicstryker;
 
-import java.lang.Thread.State;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import net.minecraft.world.World;
 
@@ -15,6 +16,9 @@ import org.millenaire.common.MLN;
 
 public class AStarPathPlanner
 {
+	
+	private static ExecutorService executorService=Executors.newCachedThreadPool();
+	
 	private AStarWorker worker;
 	private final World worldObj;
 	private final IAStarPathedEntity pathedEntity;
@@ -60,7 +64,7 @@ public class AStarPathPlanner
 		worker.setup(worldObj, start, end, config.allowDropping);
 		try {
 			worker.isRunning=true;
-			worker.start();
+			executorService.submit(worker);
 		} catch (final Exception e) {
 			MLN.printException(e);
 			//DO nothing - pathing occasionaly has threading errors we don't care about
@@ -92,14 +96,9 @@ public class AStarPathPlanner
 	}
 
 	//Kinniken
-	//Rewrote isBusy to use the thread's state directly
 	public boolean isBusy()
 	{
-		final State state = worker.getState();
-
-		final boolean busy=!(state.equals(State.NEW) || state.equals(State.TERMINATED));
-
-		return busy;
+		return worker.isBusy();
 	}
 
 	public void onFoundPath(ArrayList<AStarNode> result)

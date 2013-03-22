@@ -7,4 +7,4 @@ startLevel:-1
 startLevel:-1
 startLevel:-1;priority:10
 startLevel:-1
-startLevel:-1
+startLevel:-1;rebuildpath:true

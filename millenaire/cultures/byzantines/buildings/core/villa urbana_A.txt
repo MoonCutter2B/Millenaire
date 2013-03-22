@@ -1,1 +1,1 @@
-max:0;native:Exochike Katiokia;around:4;startLevel:-2;orientation:2;width:13;length:21;reputation:8*64*64;price:5*64*64
+max:0;native:Exochike Katiokia;around:4;startLevel:-2;orientation:2;width:13;length:21;reputation:8*64*64;price:5*64*64;pathlevel:2

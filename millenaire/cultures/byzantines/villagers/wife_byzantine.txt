@@ -49,6 +49,9 @@ goal=harvestvines
 goal=makewine
 goal=makesouvlaki
 
+goal=buildpath
+goal=clearoldpath
+
 requiredGood=lambcooked,1
 requiredGood=feta,1
 
