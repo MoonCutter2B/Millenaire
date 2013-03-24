@@ -128,7 +128,7 @@ public class EntityWallDecoration extends Entity  implements IEntityAdditionalSp
 	public int yPosition;
 
 	public int zPosition;
-	
+
 	public double clientX,clientY,clientZ;
 
 	public EnumWallDecoration art;
@@ -366,7 +366,7 @@ public class EntityWallDecoration extends Entity  implements IEntityAdditionalSp
 				}
 			}
 		}
-		
+
 		if (worldObj.isRemote) {
 			posX=clientX;
 			posY=clientY;
@@ -485,7 +485,7 @@ public class EntityWallDecoration extends Entity  implements IEntityAdditionalSp
 				art = enumart;
 			}
 		}
-		
+
 		clientX=data.readDouble();
 		clientY=data.readDouble();
 		clientZ=data.readDouble();

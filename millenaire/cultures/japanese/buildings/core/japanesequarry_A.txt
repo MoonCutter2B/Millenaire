@@ -2,4 +2,4 @@ max:1;priority:90;native:Saisekijou;around:4;startLevel:-6;orientation:3;male:ja
 priority:63;tag:Oven
 priority:43
 priority:25
-priority:19
+priority:19;pathlevel:1

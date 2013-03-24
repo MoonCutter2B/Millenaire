@@ -7,7 +7,7 @@ playerControlled:true
 
 pathmaterial:pathdirt
 pathmaterial:pathgravel
-pathmaterial:pathslabs
+pathmaterial:pathochretiles
 
 //starting buildings:
 centre:playerfortbyzantine

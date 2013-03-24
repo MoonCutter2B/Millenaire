@@ -65,8 +65,6 @@ public class ItemMillSeeds extends ItemText
 			MillCommonUtilities.setBlockAndMetadata(world,i,j+1,k,cropID, cropMeta, true, false);
 			itemstack.stackSize--;
 			
-			MLN.temp(null, "Set crop meta: "+cropMeta);
-			
 			if (!world.isRemote) {
 				entityplayer.addStat(MillAchievements.masterfarmer, 1);
 			}

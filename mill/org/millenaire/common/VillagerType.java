@@ -201,29 +201,30 @@ public class VillagerType implements WeightedChoice {
 			v.noleafclearing=v.tags.contains(TAG_NOLEAFCLEARING);
 			v.isArcher=v.tags.contains(TAG_ARCHER);
 			v.isRaider=v.tags.contains(TAG_RAIDER);
-			
+
 			v.textures=textures.toArray(new String[0]);
 			v.toolsNeeded=toolsNeeded.toArray(new InvItem[0]);
 			v.bringBackHomeGoods=bringBackHomeGoods.toArray(new InvItem[0]);
 			v.collectGoods=collectGoods.toArray(new InvItem[0]);
 
 			goals.add(Goal.sleep);
-			
+
 			if (v.toolsNeeded.length>0) {
 				boolean foundToolFetchingGoal=false;
-				
-				for (Goal g : goals) {
-					if (g==Goal.gettool)
+
+				for (final Goal g : goals) {
+					if (g==Goal.gettool) {
 						foundToolFetchingGoal=true;
+					}
 				}
-				
+
 				if (!foundToolFetchingGoal) {
 					goals.add(Goal.gettool);
 				}
 			}
 
 			v.goals=goals.toArray(new Goal[0]);
-			
+
 
 			if (v.health==-1) {
 				if (v.helpInAttacks) {
@@ -251,8 +252,8 @@ public class VillagerType implements WeightedChoice {
 				}
 
 			}
-			
-			
+
+
 
 			if (MLN.LogVillager>=MLN.MAJOR) {
 				MLN.major(v, "Loaded villager type: "+v.key+" "+v.helpInAttacks);

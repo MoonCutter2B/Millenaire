@@ -87,26 +87,12 @@ public class ItemPurse extends ItemText {
 	@Override
 	public ItemStack onItemRightClick(ItemStack purse, World world,
 			EntityPlayer player) {
-		
-		String randstr="";
-		
-		if (purse.stackTagCompound!= null && purse.stackTagCompound.hasKey(ML_PURSE_RAND))
-			randstr=" "+purse.stackTagCompound.getInteger(ML_PURSE_RAND);
-
-		MLN.temp(world, "Before: "+totalDeniers(purse)+randstr);
 
 		if (totalDeniers(purse)>0) {
 			removeDeniersFromPurse(purse,player);
 		} else {
 			storeDeniersInPurse(purse,player);
 		}
-		
-		randstr="";
-		
-		if (purse.stackTagCompound!= null && purse.stackTagCompound.hasKey(ML_PURSE_RAND))
-			randstr=" "+purse.stackTagCompound.getInteger(ML_PURSE_RAND);
-
-		MLN.temp(world, "Result: "+totalDeniers(purse)+randstr);
 
 		return super.onItemRightClick(purse, world, player);
 	}

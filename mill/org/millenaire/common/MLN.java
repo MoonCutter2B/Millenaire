@@ -29,10 +29,10 @@ import org.millenaire.common.core.MillCommonUtilities.PrefixExtFileFilter;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.goal.Goal;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class MLN {
-
 	public static class FileFiler implements FilenameFilter {
 
 		String end;
@@ -543,6 +543,7 @@ public class MLN {
 	public static int WorldInfo=0;
 	public static int Pujas=0;
 	public static int VillagerSpawn=0;
+	public static int VillagePaths=0;
 
 	public static String questBiomeForest = "forest";
 	public static String questBiomeDesert = "desert";
@@ -760,9 +761,10 @@ public class MLN {
 	}
 
 	public static String getTextSuffix() {
-		
-		if (textureSize==-1)
+
+		if (textureSize==-1) {
 			Mill.proxy.testTextureSize();
+		}
 
 		if (customTexture!=null)
 			return "";
@@ -1014,6 +1016,8 @@ public class MLN {
 		ModLoader.addName(new ItemStack(Mill.path, 1, 1), MLN.string("item.pathgravel"));
 		ModLoader.addName(new ItemStack(Mill.path, 1, 2), MLN.string("item.pathslabs"));
 		ModLoader.addName(new ItemStack(Mill.path, 1, 3), MLN.string("item.pathsandstone"));
+		ModLoader.addName(new ItemStack(Mill.path, 1, 4), MLN.string("item.pathochretiles"));
+		ModLoader.addName(new ItemStack(Mill.path, 1, 5), MLN.string("item.pathgravelslabs"));
 
 		ModLoader.addName(Mill.mayanstatue, MLN.string("item.mayanstatue"));
 		ModLoader.addName(Mill.maize, MLN.string("item.maize"));
@@ -1284,6 +1288,8 @@ public class MLN {
 							Pujas=readLogLevel(value);
 						} else if (key.equalsIgnoreCase("log.villagerspawn")) {
 							VillagerSpawn=readLogLevel(value);
+						} else if (key.equalsIgnoreCase("log.villagepaths")) {
+							VillagePaths=readLogLevel(value);
 						} else if (key.equalsIgnoreCase("log.Network")) {
 							Network=readLogLevel(value);
 						} else if (key.equalsIgnoreCase("log.Merchant")) {
@@ -1490,7 +1496,7 @@ public class MLN {
 
 	private static void writeText(String s) {
 		if (console) {
-			System.out.println(Mill.proxy.logPrefix()+removeAccent(s));
+			FMLLog.info(Mill.proxy.logPrefix()+removeAccent(s));
 		}
 
 		if (writer != null) {

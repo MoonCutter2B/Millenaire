@@ -62,8 +62,12 @@ public class BlockDecorative extends Block {
 		return i;
 	}
 
-	HashMap<Integer,String> textureNames=new HashMap<Integer,String>();
-	HashMap<Integer,Icon> textures=new HashMap<Integer,Icon>();
+	HashMap<Integer,String> textureSideNames=new HashMap<Integer,String>();
+	HashMap<Integer,String> textureTopNames=new HashMap<Integer,String>();
+	HashMap<Integer,String> textureBottomNames=new HashMap<Integer,String>();
+	HashMap<Integer,Icon> texturesSide=new HashMap<Integer,Icon>();
+	HashMap<Integer,Icon> texturesTop=new HashMap<Integer,Icon>();
+	HashMap<Integer,Icon> texturesBottom=new HashMap<Integer,Icon>();
 
 	HashMap<Integer,String> names=new HashMap<Integer,String>();
 
@@ -78,7 +82,7 @@ public class BlockDecorative extends Block {
 	public void addCreativeItems(@SuppressWarnings("rawtypes") ArrayList itemList) {
 		final ArrayList<ItemStack> list=itemList;
 
-		for (final int meta: textureNames.keySet()) {
+		for (final int meta: textureSideNames.keySet()) {
 			list.add(new ItemStack(blockID,1,meta));
 		}
 
@@ -122,11 +126,24 @@ public class BlockDecorative extends Block {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int meta)  {
-		if (textures.containsKey(meta))
-			return textures.get(meta);
-		else
-			return textures.get(0);
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)  {
+		
+		if (side==1) {
+			if (texturesTop.containsKey(meta))
+				return texturesTop.get(meta);
+			else
+				return texturesTop.get(0);
+		} else if (side==0) {
+			if (texturesBottom.containsKey(meta))
+				return texturesBottom.get(meta);
+			else
+				return texturesBottom.get(0);
+		} else {
+			if (texturesSide.containsKey(meta))
+				return texturesSide.get(meta);
+			else
+				return texturesSide.get(0);
+		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -134,7 +151,7 @@ public class BlockDecorative extends Block {
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
 
-		for (final int meta : textures.keySet()) {
+		for (final int meta : texturesSide.keySet()) {
 			par3List.add(new ItemStack(par1, 1, meta));
 		}
 	}
@@ -144,14 +161,28 @@ public class BlockDecorative extends Block {
 	}
 
 	public void registerTexture(int meta, String name) {
-		textureNames.put(meta, name);
+		textureTopNames.put(meta, name);
+		textureBottomNames.put(meta, name);
+		textureSideNames.put(meta, name);
+	}
+	
+	public void registerTexture(int meta, String top,String bottom,String side) {
+		textureTopNames.put(meta, top);
+		textureBottomNames.put(meta, bottom);
+		textureSideNames.put(meta, side);
 	}
 	
 	@Override
 	public void registerIcons(IconRegister iconRegister)
 	{
-		for (int meta : textureNames.keySet()) {
-			textures.put(meta, MillCommonUtilities.getIcon(iconRegister, textureNames.get(meta)));
+		for (int meta : textureTopNames.keySet()) {
+			texturesTop.put(meta, MillCommonUtilities.getIcon(iconRegister, textureTopNames.get(meta)));
+		}
+		for (int meta : textureBottomNames.keySet()) {
+			texturesBottom.put(meta, MillCommonUtilities.getIcon(iconRegister, textureBottomNames.get(meta)));
+		}
+		for (int meta : textureSideNames.keySet()) {
+			texturesSide.put(meta, MillCommonUtilities.getIcon(iconRegister, textureSideNames.get(meta)));
 		}
 	}
 

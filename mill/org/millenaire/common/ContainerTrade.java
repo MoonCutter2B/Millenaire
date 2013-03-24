@@ -200,7 +200,7 @@ public class ContainerTrade extends Container {
 
 	private Building building;
 	private MillVillager merchant;
-	
+
 	public int nbRowSelling=0,nbRowBuying=0;
 
 	public ContainerTrade(EntityPlayer player, Building building) {
@@ -214,15 +214,15 @@ public class ContainerTrade extends Container {
 		if (sellingGoods!=null) {
 			for (final Goods g : sellingGoods) {
 				if (g.getSellingPrice(building.getTownHall()) > 0) {
-					int slotrow=slotnb/13;
-					addSlotToContainer(new TradeSlot(building,player,true, g, 8+(18*(slotnb-13*slotrow)), 32+slotrow*18));
+					final int slotrow=slotnb/13;
+					addSlotToContainer(new TradeSlot(building,player,true, g, 8+(18*(slotnb-(13*slotrow))), 32+(slotrow*18)));
 
 					slotnb++;
 				}
 			}
 		}
-		
-		nbRowSelling=(slotnb)/13+1;
+
+		nbRowSelling=((slotnb)/13)+1;
 
 		final Vector<Goods> buyingGoods=building.getBuyingGoods();
 
@@ -232,10 +232,10 @@ public class ContainerTrade extends Container {
 			for (final Goods g : buyingGoods) {
 
 				if (g.getBuyingPrice(building.getTownHall()) > 0) {
-					
-					int slotrow=slotnb/13;
-					addSlotToContainer(new TradeSlot(building,player, false, g, 8+(18*(slotnb-13*slotrow)), 86+slotrow*18));
-					
+
+					final int slotrow=slotnb/13;
+					addSlotToContainer(new TradeSlot(building,player, false, g, 8+(18*(slotnb-(13*slotrow))), 86+(slotrow*18)));
+
 					slotnb++;
 				} else {
 					if (MLN.Selling>=MLN.MAJOR) {
@@ -245,7 +245,7 @@ public class ContainerTrade extends Container {
 			}
 		}
 
-		nbRowBuying=(slotnb)/13+1;
+		nbRowBuying=((slotnb)/13)+1;
 
 		for(int l = 0; l < 3; l++)
 		{

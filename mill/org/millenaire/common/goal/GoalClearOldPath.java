@@ -43,7 +43,8 @@ public class GoalClearOldPath extends Goal {
 		if (p==null)
 			return true;
 
-		MLN.temp(villager, "Clearing old path block: "+p);
+		if (MLN.VillagePaths>=MLN.DEBUG)
+			MLN.debug(villager, "Clearing old path block: "+p);
 
 		int bid=p.getBelow().getId(villager.worldObj);
 		if (MillCommonUtilities.getBlockIdValidGround(bid,true)>0)
@@ -52,9 +53,9 @@ public class GoalClearOldPath extends Goal {
 			p.setBlock(villager.worldObj, Block.dirt.blockID, 0, true, false);		
 
 		villager.getTownHall().oldPathPointsToClearIndex++;
-		
+
 		p=villager.getTownHall().getCurrentClearPathPoint();
-		
+
 		if (p!=null) {
 			villager.setGoalDestPoint(p);
 			return false;

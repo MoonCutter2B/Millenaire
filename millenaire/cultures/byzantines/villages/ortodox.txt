@@ -9,7 +9,7 @@ carriesraid:true
 
 pathmaterial:pathdirt
 pathmaterial:pathgravel
-pathmaterial:pathslabs
+pathmaterial:pathochretiles
 
 //with extrabiomesxl
 biome:green hills

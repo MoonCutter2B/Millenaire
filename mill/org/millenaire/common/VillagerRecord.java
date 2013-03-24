@@ -85,7 +85,7 @@ public class VillagerRecord implements Cloneable {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			vr.inventory.put(new InvItem(nbttagcompound1.getInteger("item"),nbttagcompound1.getInteger("meta")), nbttagcompound1.getInteger("amount"));
 		}
-		
+
 		if (vr.getType()==null) {
 			MLN.error(vr, "Could not find type "+vr.type+" for VR. Skipping.");
 			return null;

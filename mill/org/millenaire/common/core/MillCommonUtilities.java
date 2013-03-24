@@ -1479,10 +1479,13 @@ public class MillCommonUtilities {
 		}
 	}
 
-	private static boolean attemptPathBuild(World world,Vector<BuildingBlock> pathPoints,Point p,int pathBid,int pathMeta) {
+	private static boolean attemptPathBuild(Building th,World world,Vector<BuildingBlock> pathPoints,Point p,int pathBid,int pathMeta) {
 		int bid=p.getId(world);
 		int bidAbove=p.getAbove().getId(world);
 		int bidBelow=p.getBelow().getId(world);
+		
+		if (th.isPointProtectedFromPathBuilding(p))
+			return false;
 
 		if (p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid))) {
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
@@ -1514,7 +1517,7 @@ public class MillCommonUtilities {
 
 			Point p=(new Point(node)).getBelow();
 			
-			attemptPathBuild(th.worldObj,pathPoints,p,pathBid,pathMeta);
+			attemptPathBuild(th,th.worldObj,pathPoints,p,pathBid,pathMeta);
 
 			if (lastPoint!=null) {
 				int dx=p.getiX()-lastPoint.getiX();
@@ -1547,14 +1550,14 @@ public class MillCommonUtilities {
 					}
 
 					if (secondPoint!=null) {
-						boolean success=attemptPathBuild(th.worldObj,pathPoints,secondPoint,pathBid,pathMeta);
+						boolean success=attemptPathBuild(th,th.worldObj,pathPoints,secondPoint,pathBid,pathMeta);
 
 						if (!success && secondPointAlternate!=null)
-							attemptPathBuild(th.worldObj,pathPoints,secondPointAlternate,pathBid,pathMeta);
+							attemptPathBuild(th,th.worldObj,pathPoints,secondPointAlternate,pathBid,pathMeta);
 					}
 
 					if (thirdPoint!=null)
-						attemptPathBuild(th.worldObj,pathPoints,thirdPoint,pathBid,pathMeta);
+						attemptPathBuild(th,th.worldObj,pathPoints,thirdPoint,pathBid,pathMeta);
 				}
 			}	
 

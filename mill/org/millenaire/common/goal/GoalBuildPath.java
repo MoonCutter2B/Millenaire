@@ -36,18 +36,19 @@ public class GoalBuildPath extends Goal {
 
 	@Override
 	public boolean performAction(MillVillager villager) throws Exception {
-		
+
 		final BuildingBlock bblock=villager.getTownHall().getCurrentPathBuildingBlock();
 
 		if (bblock==null)
 			return true;
-		
-		MLN.temp(villager, "Building path block: "+bblock);
-		
+
+		if (MLN.VillagePaths>=MLN.DEBUG)
+			MLN.debug(villager, "Building path block: "+bblock);
+
 		bblock.pathBuild(villager.getTownHall());
-		
+
 		villager.getTownHall().pathsToBuildPathIndex++;
-		
+
 		BuildingBlock b=villager.getTownHall().getCurrentPathBuildingBlock();
 
 		if (b!=null) {
@@ -67,7 +68,7 @@ public class GoalBuildPath extends Goal {
 	public boolean stopMovingWhileWorking() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean unreachableDestination(MillVillager villager) throws Exception {
 
@@ -75,32 +76,32 @@ public class GoalBuildPath extends Goal {
 
 		return true;
 	}
-	
+
 	@Override
 	public boolean lookAtGoal() {
 		return true;
 	}
-	
+
 	@Override
 	public AStarConfig getPathingConfig() {
 		return JPS_CONFIG_BUILDING;
 	}
-	
+
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
 		return villager.getTownHall().getCurrentPathBuildingBlock()!=null;
 	}
-	
+
 	@Override
 	public int range(MillVillager villager) {
 		return ACTIVATION_RANGE+2;
 	}
-	
+
 	@Override
 	public boolean isStillValidSpecific(MillVillager villager) throws Exception {
 		return villager.getTownHall().getCurrentPathBuildingBlock()!=null;
 	}
-	
+
 	@Override
 	public ItemStack[] getHeldItemsTravelling(MillVillager villager) {
 

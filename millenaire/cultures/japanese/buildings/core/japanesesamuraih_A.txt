@@ -2,5 +2,5 @@ max:3;priority:80;native:Heisha;around:4;startLevel:-1;orientation:1;male:japane
 startLevel:-1
 startLevel:-1
 startLevel:-1
-startLevel:-1
+startLevel:-1;pathlevel:1
 

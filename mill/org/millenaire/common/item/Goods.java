@@ -24,8 +24,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemPickaxe;
-import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
@@ -448,13 +446,20 @@ public class Goods {
 		}
 	}
 
-	public static class ItemMillenairePickaxe extends ItemPickaxe {
+	public static class ItemMillenairePickaxe extends ItemTool {
 
 		int enchantability;
 		public final String iconName;
+		
+		 public static final Block[] blocksEffectiveAgainst = new Block[] {Block.cobblestone, Block.stoneDoubleSlab,
+			 Block.stoneSingleSlab, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.blockSteel, 
+			 Block.oreCoal, Block.blockGold, Block.oreGold, Block.oreDiamond, Block.blockDiamond, 
+			 Block.ice, Block.netherrack, Block.oreLapis, Block.blockLapis, Block.oreRedstone, 
+			 Block.oreRedstoneGlowing, Block.rail, Block.railDetector, Block.railPowered, Block.railActivator, Mill.stone_decoration};
+
 
 		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material,int strength) {
-			super(i, material);
+			super(i, 2, material, blocksEffectiveAgainst);
 
 			efficiencyOnProperMaterial=strength;
 			this.enchantability=-1;
@@ -462,8 +467,18 @@ public class Goods {
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
+		public boolean canHarvestBlock(Block par1Block)
+	    {
+	        return par1Block == Block.obsidian ? this.toolMaterial.getHarvestLevel() == 3 : (par1Block != Block.blockDiamond && par1Block != Block.oreDiamond ? (par1Block != Block.oreEmerald && par1Block != Block.blockEmerald ? (par1Block != Block.blockGold && par1Block != Block.oreGold ? (par1Block != Block.blockSteel && par1Block != Block.oreIron ? (par1Block != Block.blockLapis && par1Block != Block.oreLapis ? (par1Block != Block.oreRedstone && par1Block != Block.oreRedstoneGlowing ? (par1Block.blockMaterial == Material.rock ? true : (par1Block.blockMaterial == Material.iron ? true : par1Block.blockMaterial == Material.anvil)) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2);
+	    }
+		
+		public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
+	    {
+	        return par2Block != null && (par2Block.blockMaterial == Material.iron || par2Block.blockMaterial == Material.anvil || par2Block.blockMaterial == Material.rock) ? this.efficiencyOnProperMaterial : super.getStrVsBlock(par1ItemStack, par2Block);
+	    }
+		
 		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
-			super(i, material);
+			super(i,2, material,blocksEffectiveAgainst);
 
 			efficiencyOnProperMaterial=strength;
 			setMaxDamage(durability);
@@ -487,13 +502,17 @@ public class Goods {
 		}
 	}
 
-	public static class ItemMillenaireShovel extends ItemSpade {
+	public static class ItemMillenaireShovel extends ItemTool {
 
 		int enchantability;
 		public final String iconName;
+		
+		public static final Block[] blocksEffectiveAgainst = new Block[] {Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, 
+			Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium, Mill.earth_decoration, Mill.path};
+
 
 		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material,int strength) {
-			super(i, material);
+			super(i, 1, material, blocksEffectiveAgainst);
 
 			efficiencyOnProperMaterial=strength;
 			this.enchantability=-1;
@@ -503,13 +522,19 @@ public class Goods {
 		}
 
 		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
-			super(i, material);
+			super(i, 1,  material, blocksEffectiveAgainst);
 			efficiencyOnProperMaterial=strength;
 			setMaxDamage(durability);
 			this.enchantability=enchantability;
 			setCreativeTab(Mill.tabMillenaire);
 			this.iconName=iconName;
 		}
+		
+		@Override
+		public boolean canHarvestBlock(Block par1Block)
+	    {
+	        return par1Block == Block.snow ? true : par1Block == Block.blockSnow;
+	    }
 
 		@Override
 		public int getItemEnchantability() {
@@ -1224,6 +1249,8 @@ public class Goods {
 		goodsName.put("pathgravel", new InvItem(Mill.path,1));
 		goodsName.put("pathslabs", new InvItem(Mill.path,2));
 		goodsName.put("pathsandstone", new InvItem(Mill.path,3));
+		goodsName.put("pathochretiles", new InvItem(Mill.path,4));
+		goodsName.put("pathgravelslabs", new InvItem(Mill.path,5));
 	}
 
 	public InvItem item;

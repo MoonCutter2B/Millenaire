@@ -51,16 +51,49 @@ public class MillClientUtilities {
 		}
 	}
 
+	public static void displayChunkPanel(World world,EntityPlayer player) {
+
+		final Vector<Vector<String>> pages=new Vector<Vector<String>>();
+
+		Vector<String> page= new Vector<String>();
+
+		page.add(MLN.string("chunk.chunkmap"));
+
+		pages.add(page);
+
+		page= new Vector<String>();
+
+		page.add(MLN.string("chunk.caption"));
+
+		page.add(MLN.string(""));
+		page.add(MLN.string("chunk.captiongeneral"));
+		page.add(MLN.string("chunk.captiongreen"));
+		page.add(MLN.string("chunk.captionblue"));
+		page.add(MLN.string("chunk.captionpurple"));
+		page.add(MLN.string("chunk.captionwhite"));
+		page.add(MLN.string(""));
+		page.add(MLN.string("chunk.playerposition",(int)player.posX+"/"+(int)player.posZ));
+		page.add(MLN.string(""));
+		page.add(MLN.string("chunk.settings",""+MLN.KeepActiveRadius,""+ForgeChunkManager.getMaxTicketLengthFor(Mill.modId)));
+		page.add(MLN.string(""));
+		page.add(MLN.string("chunk.explanations"));
+
+		pages.add(page);
+
+		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,pages, null,GuiPanelParchment.CHUNK_MAP, true));
+	}
+
+
 	public static void displayInfoPanel(World world,EntityPlayer player) {
 
 		final Vector<Vector<String>> pages=new Vector<Vector<String>>();
 		Vector<String> page= new Vector<String>();
 
-		
+
 		page.add(GuiText.LINE_HELP_GUI_BUTTON);
 		page.add("");
 		page.add("");
-		
+
 		if (!Mill.serverWorlds.isEmpty()) {
 			page.add(GuiText.LINE_CHUNK_GUI_BUTTON);
 			page.add("");
@@ -124,39 +157,6 @@ public class MillClientUtilities {
 		pages.add(page);
 
 		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,pages, null,0, true));
-	}
-	
-	
-	public static void displayChunkPanel(World world,EntityPlayer player) {
-
-		final Vector<Vector<String>> pages=new Vector<Vector<String>>();
-		
-		Vector<String> page= new Vector<String>();
-		
-		page.add(MLN.string("chunk.chunkmap"));
-		
-		pages.add(page);
-		
-		page= new Vector<String>();
-		
-		page.add(MLN.string("chunk.caption"));
-		
-		page.add(MLN.string(""));
-		page.add(MLN.string("chunk.captiongeneral"));
-		page.add(MLN.string("chunk.captiongreen"));
-		page.add(MLN.string("chunk.captionblue"));
-		page.add(MLN.string("chunk.captionpurple"));
-		page.add(MLN.string("chunk.captionwhite"));
-		page.add(MLN.string(""));
-		page.add(MLN.string("chunk.playerposition",(int)player.posX+"/"+(int)player.posZ));
-		page.add(MLN.string(""));
-		page.add(MLN.string("chunk.settings",""+MLN.KeepActiveRadius,""+ForgeChunkManager.getMaxTicketLengthFor(Mill.modId)));
-		page.add(MLN.string(""));
-		page.add(MLN.string("chunk.explanations"));
-		
-		pages.add(page);
-
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,pages, null,GuiPanelParchment.CHUNK_MAP, true));
 	}
 
 	public static void displayPanel(World world,EntityPlayer player,Point p) {

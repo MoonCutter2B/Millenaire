@@ -134,11 +134,6 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			return ((other.item==item) && (other.meta==meta));
 		}
 
-		public boolean matches(InvItem ii) {
-
-			return ((ii.item==item) && (ii.meta==meta || ii.meta==-1 || meta==-1));
-		}
-
 		public Item getItem() {
 			return item;
 		}
@@ -187,6 +182,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				return -special;
 
 			return 0;
+		}
+
+		public boolean matches(InvItem ii) {
+
+			return ((ii.item==item) && ((ii.meta==meta) || (ii.meta==-1) || (meta==-1)));
 		}
 
 		@Override
@@ -724,7 +724,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 						}
 					}
 
-					if (lastAttackByPlayer && health<=0) {
+					if (lastAttackByPlayer && (health<=0)) {
 						if (vtype.hostile) {
 							player.addStat(MillAchievements.selfdefense, 1);
 						} else {
@@ -877,7 +877,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				setGoalDestEntity(null);
 				setPathDestPoint(null);
 			} else {
-				if (worldObj.getWorldTime()%100==25) {
+				if ((worldObj.getWorldTime()%100)==25) {
 					setPathDestPoint(new Point(getGoalDestEntity()));
 				}
 			}
@@ -895,7 +895,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 		speakSentence(goal.sentenceKey());
 
-		if (getGoalDestPoint()==null && getGoalDestEntity()==null) {
+		if ((getGoalDestPoint()==null) && (getGoalDestEntity()==null)) {
 			goal.setVillagerDest(this);
 			if ((MLN.GeneralAI>=MLN.MINOR) && extraLog) {
 				MLN.minor(this,"Goal destination: "+getGoalDestPoint()+"/"+getGoalDestEntity());
@@ -1659,10 +1659,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			return "female";
 	}
 
-	public Point getGoalDestPoint() {
-		if (goalInformation==null)
-			return null;
-		return goalInformation.getDest();
+	public Building getGoalBuildingDest() {
+		return mw.getBuilding(getGoalBuildingDestPoint());
 	}
 
 	public Point getGoalBuildingDestPoint() {
@@ -1677,8 +1675,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		return goalInformation.getTargetEnt();
 	}
 
-	public Building getGoalBuildingDest() {
-		return mw.getBuilding(getGoalBuildingDestPoint());
+	public Point getGoalDestPoint() {
+		if (goalInformation==null)
+			return null;
+		return goalInformation.getDest();
 	}
 
 	public String getGoalLabel(String goal) {
@@ -2109,9 +2109,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		entityplayer.addStat(MillAchievements.firstContact, 1);
 
-		if (vtype!=null && (vtype.key.equals("indian_sadhu") || vtype.key.equals("alchemist"))) {
+		if ((vtype!=null) && (vtype.key.equals("indian_sadhu") || vtype.key.equals("alchemist"))) {
 			entityplayer.addStat(MillAchievements.maitreapenser, 1);
-		}		
+		}
 
 		if (profile.villagersInQuests.containsKey(villager_id)) {
 			final QuestInstance qi=profile.villagersInQuests.get(villager_id);
@@ -3110,7 +3110,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			return;
 		}
 
-		if ((goalKey!=null) && (getGoalDestPoint()!=null || getGoalDestEntity()!=null)) {
+		if ((goalKey!=null) && ((getGoalDestPoint()!=null) || (getGoalDestEntity()!=null))) {
 			final Goal goal=Goal.goals.get(goalKey);
 
 			Point facingPoint;
@@ -3136,31 +3136,6 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 	}
 
-	public void setGoalInformation(GoalInformation info) {
-		goalInformation=info;
-		if (info!=null) {
-			if (info.getTargetEnt()!=null) {
-				setPathDestPoint(new Point(info.getTargetEnt()));
-			} else if (info.getDest()!=null) {
-				setPathDestPoint(info.getDest());
-			} else {
-				setPathDestPoint(null);
-			}
-		} else {
-			setPathDestPoint(null);
-		}
-	}
-
-	public void setGoalDestPoint(Point newDest) {
-
-		if (goalInformation==null) {
-			goalInformation=new GoalInformation(null,null,null);
-		}
-
-		goalInformation.setDest(newDest);
-		setPathDestPoint(newDest);
-	}
-
 	public void setGoalBuildingDestPoint(Point newDest) {
 		if (goalInformation==null) {
 			goalInformation=new GoalInformation(null,null,null);
@@ -3177,6 +3152,31 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		goalInformation.setTargetEnt(ent);
 		if (ent!=null) {
 			setPathDestPoint(new Point(ent));
+		}
+	}
+
+	public void setGoalDestPoint(Point newDest) {
+
+		if (goalInformation==null) {
+			goalInformation=new GoalInformation(null,null,null);
+		}
+
+		goalInformation.setDest(newDest);
+		setPathDestPoint(newDest);
+	}
+
+	public void setGoalInformation(GoalInformation info) {
+		goalInformation=info;
+		if (info!=null) {
+			if (info.getTargetEnt()!=null) {
+				setPathDestPoint(new Point(info.getTargetEnt()));
+			} else if (info.getDest()!=null) {
+				setPathDestPoint(info.getDest());
+			} else {
+				setPathDestPoint(null);
+			}
+		} else {
+			setPathDestPoint(null);
 		}
 	}
 
@@ -3846,7 +3846,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				nbttagcompound.setString("clothName", clothName);
 				nbttagcompound.setString("clothTexture", clothTexture);
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			MLN.printException("Exception when attempting to save villager "+this, e);
 		}
 	}

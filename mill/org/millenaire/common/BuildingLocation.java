@@ -113,8 +113,6 @@ public class BuildingLocation implements Cloneable {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			final String value=nbttagcompound1.getString("value");
 
-			MLN.temp(bl, "Reading tag "+debug+": "+value);
-
 			//Conversion for backward compatibility
 			if (value.equals("market1") || value.equals("market2") || value.equals("market3")) {
 				tags.add("market");
@@ -130,15 +128,13 @@ public class BuildingLocation implements Cloneable {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
 			final String value=nbttagcompound1.getString("value");
 
-			MLN.temp(bl, "Reading tag "+debug+": "+value);
-
 			tags.add(value);
 		}
 
 		bl.tags=tags;
 
 		final Vector<String> subb=new Vector<String>();
-		
+
 		//pre 4.3 bugged tag
 		nbttaglist = nbttagcompound.getTagList("subBuildings");
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
@@ -146,7 +142,7 @@ public class BuildingLocation implements Cloneable {
 			subb.add(nbttagcompound1.getString("value"));
 
 		}
-		
+
 		nbttaglist = nbttagcompound.getTagList(label+"_subBuildings");
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
@@ -179,7 +175,7 @@ public class BuildingLocation implements Cloneable {
 	public int minxMargin,maxxMargin,minzMargin,maxzMargin;
 	public int orientation,length,width,areaToClear,level,reputation,price;
 	private int variation;
-	
+
 	public Point pos,chestPos=null,sleepingPos=null;
 	public Point sellingPos=null,craftingPos=null,shelterPos=null,defendingPos=null;
 	public Culture culture;
@@ -191,14 +187,6 @@ public class BuildingLocation implements Cloneable {
 	public boolean bedrocklevel=false;
 
 
-	public void setVariation(int var) {
-		variation=var;
-	}
-
-	public int getVariation() {
-		return variation;
-	}
-	
 	public BuildingLocation() {
 
 	}
@@ -353,6 +341,10 @@ public class BuildingLocation implements Cloneable {
 		return sleepingPos;
 	}
 
+	public int getVariation() {
+		return variation;
+	}
+
 	@Override
 	public int hashCode() {
 		return toString().hashCode();
@@ -401,7 +393,6 @@ public class BuildingLocation implements Cloneable {
 		return false;
 	}
 
-
 	public boolean isInsideZone(Point p) {
 
 
@@ -410,6 +401,7 @@ public class BuildingLocation implements Cloneable {
 		//Log.debug(this, Log.WorldGeneration, "Outside!");
 		return false;
 	}
+
 
 	public boolean isLocationSamePlace(BuildingLocation l) {
 		if (l==null)
@@ -425,13 +417,17 @@ public class BuildingLocation implements Cloneable {
 		return (pos.equals(l.pos) && key.equals(l.key) && (orientation==l.orientation) && (getVariation()==l.getVariation()));
 	}
 
+	public int oldHashCode() {
+		return super.hashCode();
+	}
+
+	public void setVariation(int var) {
+		variation=var;
+	}
+
 	@Override
 	public String toString() {
 		return key+"_"+level+" at "+pos+"/"+orientation+"/"+getVariation();
-	}
-
-	public int oldHashCode() {
-		return super.hashCode();
 	}
 
 	public void write(NBTTagCompound nbttagcompound,String label,String debug) {

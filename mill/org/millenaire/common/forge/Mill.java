@@ -111,9 +111,9 @@ public class Mill
 			return Mill.denier_or.itemID;
 		}
 	}
-	
+
 	public static final String versionNumber = "4.5.0";
-	public static final String versionBound = "[4.4.0,5.0)";
+	public static final String versionBound = "[4.5.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
 
@@ -269,7 +269,7 @@ public class Mill
 	public static ItemClothes clothes;
 
 	public static Item wineBasic,lambRaw,lambCooked,feta,souvlaki;
-	
+
 	public static ItemPurse purse;
 
 	public static boolean loadingComplete=false;
@@ -380,7 +380,7 @@ public class Mill
 
 		tapestry = (new ItemTapestry(nextItemId(),"normantapestry",EntityWallDecoration.NORMAN_TAPESTRY)).setUnlocalizedName("ml_tapestry");
 
-		
+
 
 		vishnu_amulet = new ItemAmuletVishnu(nextItemId(),"amulet_vishnu").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_raven_amulet").setMaxStackSize(1);
 		alchemist_amulet = new ItemAmuletAlchemist(nextItemId(),"amulet_alchemist").setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_dwarves_amulet").setMaxStackSize(1);
@@ -477,7 +477,7 @@ public class Mill
 		souvlaki = (new ItemFoodMultiple(nextItemId(),"souvlaki",5,8,0.8f,2,false)).setUnlocalizedName("ml_souvlaki");
 
 		purse = (ItemPurse) new ItemPurse(nextItemId(),"purse").setMaxStackSize(1).setUnlocalizedName("ml_purse");
-		
+
 		byzantine_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineBrickId,
 				"tilestopvert","tilestophor","tilestopvert","tilestophor","tilesfront","tilestophor").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick");
 		byzantine_tile_slab = (BlockOrientedSlab) new BlockOrientedSlab(MLN.blockByzantineSlabId,"tilestophor","tilestopvert","tilesfront").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick_slab");
@@ -500,12 +500,14 @@ public class Mill
 		stone_decoration.registerTexture(1, "mudbrickdried");
 		stone_decoration.registerTexture(2, "mayangoldblock");
 		stone_decoration.registerTexture(3, "alchemistexplosive");
-		
+
 		path.setUnlocalizedName("ml_path").setHardness(1.0F).setResistance(2F).setStepSound(Block.soundGravelFootstep);
-		path.registerTexture(0, "pathdirt");
-		path.registerTexture(1, "pathgravel");
-		path.registerTexture(2, "pathslabs");
-		path.registerTexture(3, "pathsandstone");
+		path.registerTexture(0, "pathdirt","pathbottom","pathdirt_side");
+		path.registerTexture(1, "pathgravel","pathbottom","pathgravel_side");
+		path.registerTexture(2, "pathslabs","pathbottom","pathslabs_side");
+		path.registerTexture(3, "pathsandstone","pathbottom","pathsandstone_side");
+		path.registerTexture(4, "pathochretiles","pathbottom","pathochretiles_side");
+		path.registerTexture(5, "pathgravelslabs","pathbottom","pathgravel_side");
 
 		crops.setUnlocalizedName("ml_crops").setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
 
@@ -542,7 +544,7 @@ public class Mill
 		if (startupError)
 			return;
 
-		
+
 
 		LanguageRegistry.instance().addStringLocalization("itemGroup.Millenaire", "en_US", name);
 
@@ -659,8 +661,8 @@ public class Mill
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, new ChunkLoaderCallback());
 
-		
-		
+
+
 		proxy.loadLanguages();
 	}
 
@@ -674,9 +676,9 @@ public class Mill
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		MLN.loadConfig();
-		
+
 		initBlockItems();
-		
+
 		AchievementPage.registerAchievementPage(MillAchievements.millAchievements);
 	}
 

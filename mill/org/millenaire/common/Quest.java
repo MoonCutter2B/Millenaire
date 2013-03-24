@@ -256,11 +256,11 @@ public class Quest {
 			currentStep++;
 			if (currentStep>=quest.steps.size()) {
 				player.addStat(MillAchievements.thequest, 1);
-				
+
 				if (mw.getProfile(player.username).isWorldQuestFinished()) {
 					player.addStat(MillAchievements.forbiddenknwoledge, 1);
 				}
-				
+
 				destroySelf();
 			} else {
 				currentStepStart=villager.worldObj.getWorldTime();

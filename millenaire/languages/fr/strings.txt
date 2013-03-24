@@ -352,6 +352,8 @@ item.pathdirt=Chemin de terre
 item.pathgravel=Chemin de graviers
 item.pathslabs=Chemin de dalles
 item.pathsandstone=Chemin de dalles de grès
+item.pathochretiles=Chemin de dalles ochres
+item.pathgravelslabs=Chemin de dalles et graviers
 
 error.unknownitem=Nom d'object inconnu
 

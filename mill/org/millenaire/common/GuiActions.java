@@ -2,6 +2,7 @@ package org.millenaire.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.world.World;
 
@@ -43,15 +44,21 @@ public class GuiActions {
 					ent.testModeGoods();
 					return;
 				}
-				
+
 				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.path.blockID)) {
 					ent.clearOldPaths();
 					ent.constructCalculatedPaths();
 					return;
 				}
-				
+
 				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.denier_or.itemID)) {
 					ent.displayInfos(player);
+					return;
+				}
+
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Item.glassBottle.itemID)) {
+					mw.setGlobalTag("alchemy");
+					MLN.major(mw, "Set alchemy tag.");
 					return;
 				}
 
@@ -117,9 +124,9 @@ public class GuiActions {
 		if (vr!=null) {
 			vr.awayhired=true;
 		}
-		
+
 		player.addStat(MillAchievements.hired, 1);
-		
+
 		MillCommonUtilities.changeMoney(player.inventory, -villager.getHireCost(player),player);
 	}
 
@@ -198,15 +205,16 @@ public class GuiActions {
 			return;
 
 		final WorldGenVillage genVillage=new WorldGenVillage();
-		boolean result=genVillage.generateVillageAtPoint(player.worldObj, MillCommonUtilities.random, pos.getiX(), pos.getiY(), pos.getiZ(), player,false,true, 0,villageType,null,null);
+		final boolean result=genVillage.generateVillageAtPoint(player.worldObj, MillCommonUtilities.random, pos.getiX(), pos.getiY(), pos.getiZ(), player,false,true, 0,villageType,null,null);
 
 		if (result) {
 			player.addStat(MillAchievements.summoningwand, 1);
-			if (villageType.playerControlled)
+			if (villageType.playerControlled) {
 				player.addStat(MillAchievements.villageleader, 1);
-			
+			}
+
 		}
-		
+
 	}
 
 	public static void pujasChangeEnchantment(EntityPlayer player, Building temple,int enchantmentId) {
@@ -247,11 +255,11 @@ public class GuiActions {
 
 	public static void useNegationWand(EntityPlayer player, Building townHall) {
 		ServerSender.sendTranslatedSentence(player, MLN.DARKRED,"negationwand.destroyed",townHall.villageType.name);
-		
+
 		if (!townHall.villageType.lonebuilding) {
 			player.addStat(MillAchievements.scipio, 1);
 		}
-		
+
 		townHall.destroyVillage();
 	}
 

@@ -2,6 +2,9 @@ name:Nouji Mura
 weight:10
 carriesraid:true
 
+pathmaterial:pathdirt
+pathmaterial:pathgravel
+pathmaterial:pathgravelslabs
 
 biome:plains
 biome:extreme hills

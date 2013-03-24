@@ -1,6 +1,10 @@
 name:Shiyuuchi
 playerControlled:true
 
+pathmaterial:pathdirt
+pathmaterial:pathgravel
+pathmaterial:pathgravelslabs
+
 //starting buildings:
 centre:japaneseplayerpalace
 start:japaneselmh

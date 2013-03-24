@@ -1,4 +1,4 @@
-sells=wood,wood_birch,clay,cobblestone,stone,bricks,byzantinetiles,glass,sandstone,wool_white,bookshelves,book,paper,painting,byzantineiconsmall,byzantineiconmedium,byzantineiconlarge,iron,leather,arrow,purse,villageWand
+sells=dirtwall,pathdirt,pathgravel,pathochretiles,wood,wood_birch,clay,cobblestone,stone,bricks,byzantinetiles,glass,sandstone,wool_white,bookshelves,book,paper,painting,byzantineiconsmall,byzantineiconmedium,byzantineiconlarge,iron,leather,arrow,purse,villageWand
 
 buys=wood,wood_birch,clay,cobblestone,stone,bricks,byzantinetiles,glass,sandstone,wool_white,bookshelves,book,paper,painting,byzantineiconsmall,byzantineiconmedium,byzantineiconlarge,iron,leather,lambcooked,bread,fishcooked,wine,feta,silk,steelAxe,steelPickaxe,steelShovel,steelHoe,byzantineMace
 

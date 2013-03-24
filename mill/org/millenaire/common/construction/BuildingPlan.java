@@ -976,7 +976,6 @@ public class BuildingPlan {
 									for (PointType pt : row) {
 										if (pt!=null && pt.name!=null && pt.name.startsWith(bplainSignGuess)) {
 											writer.write("Sign in "+plan.toString()+EOL);
-											MLN.temp(null, "Sign in "+plan.toString());
 										}
 									}
 								}

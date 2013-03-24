@@ -254,7 +254,7 @@ public class MillWorldInfo implements Cloneable {
 	public boolean[][] buildTested=null;
 
 	public boolean[][] topAdjusted;
-	
+
 	public boolean[][] path;
 
 	public int frequency=10;
@@ -679,7 +679,7 @@ public class MillWorldInfo implements Cloneable {
 				} else {
 					path[mx][mz]=false;
 				}
-				
+
 				boolean blocked=false;
 
 				if (!(bid==Block.fence.blockID) && !MillCommonUtilities.isBlockIdSolid(bid) && (bid != Block.waterMoving.blockID) &&

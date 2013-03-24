@@ -29,12 +29,13 @@ public class UserProfile {
 	private static final int CULTURE_MAX_REPUTATION=64*64;
 	private static final int CULTURE_MIN_REPUTATION=-10*64;
 
-	private static final int UPDATE_ALL=1;
-	private static final int UPDATE_REPUTATION=2;
-	private static final int UPDATE_DIPLOMACY=3;
-	private static final int UPDATE_ACTIONDATA=4;
-	private static final int UPDATE_TAGS=5;
-	private static final int UPDATE_LANGUAGE=6;
+	public static final int UPDATE_ALL=1;
+	public static final int UPDATE_REPUTATION=2;
+	public static final int UPDATE_DIPLOMACY=3;
+	public static final int UPDATE_ACTIONDATA=4;
+	public static final int UPDATE_TAGS=5;
+	public static final int UPDATE_LANGUAGE=6;
+	public static final int UPDATE_GLOBAL_TAGS=7;
 
 	public static UserProfile readProfile(MillWorld world, File dir) {
 
@@ -139,23 +140,23 @@ public class UserProfile {
 		rep=Math.min(CULTURE_MAX_REPUTATION, rep);
 
 		cultureReputations.put(b.culture.key,rep);
-		
+
 		if (rep<=CULTURE_MIN_REPUTATION) {
-			
+
 			int nbAwfulRep=0;
-			
-			for (int cultureRep : cultureReputations.values()) {
+
+			for (final int cultureRep : cultureReputations.values()) {
 				if (cultureRep<=CULTURE_MIN_REPUTATION) {
 					nbAwfulRep++;
 				}
 			}
-						
+
 			if (nbAwfulRep>=3) {
 				getPlayer().addStat(MillAchievements.attila, 1);
 			}
-			
+
 		}
-		
+
 
 		saveProfileConfig();
 
@@ -331,28 +332,6 @@ public class UserProfile {
 
 		return res;
 	}
-	
-	public boolean isWorldQuestFinished() {
-		boolean remaining=false;
-
-		for (int i=0;i<Quest.WORLD_MISSION_NB.length;i++) {
-			final String status=getActionData(Quest.WORLD_MISSION_KEYS[i]+"queststatus");
-			if (status==null) {
-				remaining=true;
-			} else {
-				final int mission=Integer.parseInt(status);
-
-				final int nbMission=Quest.WORLD_MISSION_NB[i];
-
-				if (mission>=nbMission) {
-				} else {
-					remaining=true;
-				}
-			}
-		}
-		
-		return !remaining;
-	}
 
 	private String getWorldQuestStatusShort() {
 		String res=MLN.string("quest.creationqueststatusshort")+" ";
@@ -380,6 +359,28 @@ public class UserProfile {
 
 	public boolean isTagSet(String tag) {
 		return profileTags.contains(tag);
+	}
+
+	public boolean isWorldQuestFinished() {
+		boolean remaining=false;
+
+		for (int i=0;i<Quest.WORLD_MISSION_NB.length;i++) {
+			final String status=getActionData(Quest.WORLD_MISSION_KEYS[i]+"queststatus");
+			if (status==null) {
+				remaining=true;
+			} else {
+				final int mission=Integer.parseInt(status);
+
+				final int nbMission=Quest.WORLD_MISSION_NB[i];
+
+				if (mission>=nbMission) {
+				} else {
+					remaining=true;
+				}
+			}
+		}
+
+		return !remaining;
 	}
 
 	private void loadActionData(File dataFile) {
@@ -639,6 +640,14 @@ public class UserProfile {
 				}
 			}
 
+			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_GLOBAL_TAGS)) {
+				nb=ds.readInt();
+				mw.globalTags.clear();
+				for (int i=0;i<nb;i++) {
+					mw.globalTags.add(ds.readUTF());
+				}
+			}
+
 			showNewWorldMessage();
 
 
@@ -851,6 +860,13 @@ public class UserProfile {
 			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_TAGS)) {
 				data.writeInt(profileTags.size());
 				for (final String tag : profileTags) {
+					data.writeUTF(tag);
+				}
+			}
+
+			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_GLOBAL_TAGS)) {
+				data.writeInt(mw.globalTags.size());
+				for (final String tag : mw.globalTags) {
 					data.writeUTF(tag);
 				}
 			}

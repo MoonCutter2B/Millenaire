@@ -285,6 +285,16 @@ public class Puja implements IInventory {
 	}
 
 	@Override
+	public boolean isInvNameLocalized() {
+		return false;
+	}
+
+	@Override
+	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+		return true;
+	}
+
+	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
 		return false;
 	}
@@ -443,15 +453,5 @@ public class Puja implements IInventory {
 		}
 
 		par1NBTTagCompound.setTag("Items", nbttaglist);
-	}
-
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
-
-	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-		return true;
 	}
 }

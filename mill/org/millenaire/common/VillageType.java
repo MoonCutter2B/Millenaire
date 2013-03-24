@@ -225,7 +225,7 @@ public class VillageType implements WeightedChoice {
 	public boolean playerControlled=false;
 
 	public boolean generateOnServer=true;
-	
+
 	public int minDistanceFromSpawn=0;
 
 	public VillageType(Culture c,File file,boolean lone) throws Exception {
@@ -462,10 +462,11 @@ public class VillageType implements WeightedChoice {
 				}
 			}
 		}
-		
-		if (pathMaterial.size()==0)
+
+		if (pathMaterial.size()==0) {
 			pathMaterial.add(Goods.goodsName.get("pathgravel"));
-		
+		}
+
 
 		if (MLN.LogVillage>=MLN.MAJOR) {
 			MLN.major(this, "Loaded village type "+name+". NameList: "+nameList);
@@ -560,10 +561,8 @@ public class VillageType implements WeightedChoice {
 		if (player!=null) {
 			final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.username);
 
-			if ((keyLoneBuildingGenerateTag !=null) && profile.isTagSet(keyLoneBuildingGenerateTag)) {
-				MLN.temp(this, "Key lone building for player "+player);
+			if ((keyLoneBuildingGenerateTag !=null) && profile.isTagSet(keyLoneBuildingGenerateTag))
 				return true;
-			}
 		}
 
 		return false;
@@ -574,10 +573,9 @@ public class VillageType implements WeightedChoice {
 		if (!generateOnServer && Mill.proxy.isTrueServer())
 			return false;
 
-		if (minDistanceFromSpawn>0 && pos.horizontalDistanceTo(mw.world.getSpawnPoint())<=minDistanceFromSpawn) {
+		if ((minDistanceFromSpawn>0) && (pos.horizontalDistanceTo(mw.world.getSpawnPoint())<=minDistanceFromSpawn))
 			return false;
-		}
-		
+
 		for (final String tag : requiredTags) {
 			if (!mw.isGlobalTagSet(tag))
 				return false;

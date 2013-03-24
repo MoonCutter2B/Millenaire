@@ -434,8 +434,6 @@ public class WorldGenVillage implements IWorldGenerator {
 			startTime = System.nanoTime();
 
 			coordsTried.add(x+(z << 16));
-			
-			MLN.temp(null, "coordsTried size: "+coordsTried.size());
 
 			if (MLN.generateVillages || alwaysGenerate) {
 				boolean canAttemptVillage=true;
@@ -551,8 +549,8 @@ public class WorldGenVillage implements IWorldGenerator {
 			if (MLN.WorldGeneration>=MLN.DEBUG) {
 				MLN.debug(this,"Time taken for finding near villages (not found): "+(System.nanoTime()-startTime));
 			}
-			
-			
+
+
 
 			final String biomeName=world.getWorldChunkManager().getBiomeGenAt(x, z).biomeName.toLowerCase();
 
@@ -595,7 +593,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			}
 
 			final boolean success= generateVillage(p,world,loneBuilding,generatingPlayer,random,minDistance,name,true,null);
-			
+
 			if (success && (closestPlayer!=null) &&
 					loneBuilding.isKeyLoneBuildingForGeneration(closestPlayer) && (loneBuilding.keyLoneBuildingGenerateTag!=null)) {
 

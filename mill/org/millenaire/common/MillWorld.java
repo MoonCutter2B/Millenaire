@@ -112,6 +112,14 @@ public class MillWorld {
 		if (globalTags.contains(tag)) {
 			globalTags.remove(tag);
 			saveGlobalTags();
+
+			if (!world.isRemote) {
+				for (final UserProfile up : profiles.values()) {
+					if (up.connected) {
+						up.sendProfilePacket(UserProfile.UPDATE_GLOBAL_TAGS);
+					}
+				}
+			}
 		}
 	}
 
@@ -149,18 +157,6 @@ public class MillWorld {
 		ServerSender.sendChat(player,MLN.LIGHTGREEN, "ActionData: "+s);
 		final String biomeName=world.getWorldChunkManager().getBiomeGenAt((int)player.posX, (int)player.posZ).biomeName.toLowerCase();
 		ServerSender.sendChat(player,MLN.LIGHTGREEN, "Biome: "+biomeName+", time: "+(world.getWorldTime()%24000)+" / "+world.getWorldTime());
-	}
-	
-	public int nbCultureInGeneratedVillages() {
-		
-		Vector<String> cultures=new Vector<String>();
-		
-		for (int i=0;i<villagesList.names.size();i++) {
-			if (!cultures.contains(villagesList.cultures.get(i)))
-				cultures.add(villagesList.cultures.get(i));
-		}
-		
-		return cultures.size();
 	}
 
 	public void displayVillageList(EntityPlayer player,boolean loneBuildings) {
@@ -307,8 +303,6 @@ public class MillWorld {
 
 	}
 
-
-
 	public Building getBuilding(Point p) {
 		if (buildings.containsKey(p)) {
 
@@ -327,6 +321,8 @@ public class MillWorld {
 
 		return null;
 	}
+
+
 
 	public Building getClosestVillage(Point p) {
 
@@ -371,11 +367,11 @@ public class MillWorld {
 		return profile;
 	}
 
-
-
 	public boolean isGlobalTagSet(String tag) {
 		return globalTags.contains(tag);
 	}
+
+
 
 	private void loadBuildings() {
 
@@ -454,9 +450,8 @@ public class MillWorld {
 				MLN.printException(e);
 			}
 		}
+
 	}
-
-
 
 	private void loadProfiles() {
 		final File profilesDir=new File(millenaireDir,"profiles");
@@ -475,6 +470,8 @@ public class MillWorld {
 			}
 		}
 	}
+
+
 
 	private void loadVillageList() {
 		File villageLog=new File(millenaireDir,"villages.txt");
@@ -600,6 +597,19 @@ public class MillWorld {
 		if (MLN.WorldGeneration>=MLN.MAJOR) {
 			MLN.major(null,"Config loaded. generateVillages: "+MLN.generateVillages);
 		}
+	}
+
+	public int nbCultureInGeneratedVillages() {
+
+		final Vector<String> cultures=new Vector<String>();
+
+		for (int i=0;i<villagesList.names.size();i++) {
+			if (!cultures.contains(villagesList.cultures.get(i))) {
+				cultures.add(villagesList.cultures.get(i));
+			}
+		}
+
+		return cultures.size();
 	}
 
 	public void receiveVillageListPacket(DataInputStream ds) {
@@ -896,9 +906,75 @@ public class MillWorld {
 		if (!globalTags.contains(tag)) {
 			globalTags.add(tag);
 			saveGlobalTags();
+
+			if (!world.isRemote) {
+				for (final UserProfile up : profiles.values()) {
+					if (up.connected) {
+						up.sendProfilePacket(UserProfile.UPDATE_GLOBAL_TAGS);
+					}
+				}
+			}
 		}
 	}
 
+	public void testLocations(String label) {
+
+		if (!MLN.DEV)
+			return;
+
+		for (final Building b : allBuildings()) {
+
+
+
+			try {
+
+				if (b.location!=null) {
+
+					String tags="";
+
+					for (final String s : b.location.tags) {
+						tags+=s+";";
+					}
+
+					if (!buildingsTags.containsKey(b.getPos())) {
+						MLN.minor(null, "Detected new building: "+b+" with tags: "+tags);
+						buildingsTags.put(b.getPos(), tags);
+					} else {
+						if (!tags.equals(buildingsTags.get(b.getPos()))) {
+							MLN.warning(null, "Testing locations due to: "+label);
+							MLN.warning(null, "Tags changed for building: "+b+". Was: "+buildingsTags.get(b.getPos())+" now: "+tags);
+							buildingsTags.put(b.getPos(), tags);
+						}
+					}
+
+					if (!buildingsVariation.containsKey(b.getPos())) {
+						MLN.minor(null, "Detected new building: "+b+" with variation: "+b.location.getVariation());
+						buildingsVariation.put(b.getPos(), b.location.getVariation());
+					} else {
+						if (!buildingsVariation.get(b.getPos()).equals(b.location.getVariation())) {
+							MLN.warning(null, "Testing locations due to: "+label);
+							MLN.warning(null, "Variation changed for building: "+b+". Was: "+buildingsVariation.get(b.getPos())+" now: "+b.location.getVariation());
+							buildingsVariation.put(b.getPos(), b.location.getVariation());
+						}
+					}
+
+					if (!buildingsLocation.containsKey(b.getPos())) {
+						MLN.minor(null, "Detected new building: "+b+" with location key: "+b.location.key);
+						buildingsLocation.put(b.getPos(), b.location.key);
+					} else {
+						if (!b.location.key.equals(buildingsLocation.get(b.getPos()))) {
+							MLN.warning(null, "Testing locations due to: "+label);
+							MLN.warning(null, "Location key changed for building: "+b+". Was: "+buildingsLocation.get(b.getPos())+" now: "+b.location.key);
+							buildingsLocation.put(b.getPos(), b.location.key);
+						}
+					}
+				}
+			} catch (final Exception e) {
+				MLN.printException("Error in dev monitoring of a building building: ", e);
+			}
+		}
+
+	}
 	private void testLog() {
 		if (!MLN.logPerformed) {
 			if (Mill.proxy.isTrueServer()) {
@@ -908,6 +984,7 @@ public class MillWorld {
 			}
 		}
 	}
+
 	@Override
 	public String toString() {
 		return "World("+world.getWorldInfo().getSeed()+")";
@@ -944,6 +1021,8 @@ public class MillWorld {
 
 	}
 
+
+
 	public void updateWorldServer(boolean surfaceLoaded) {
 
 		for (final NBTTagCompound tag : buildingsToLoad) {
@@ -973,7 +1052,7 @@ public class MillWorld {
 
 			if (MLN.DEV) {
 
-				testLocations("worldupdate");
+				//testLocations("worldupdate");
 
 				DevModUtilities.runAutoMove(world);
 			}
@@ -984,67 +1063,6 @@ public class MillWorld {
 			testLog();
 
 		}
-	}
-	
-	
-	
-	public void testLocations(String label) {
-		
-		if (!MLN.DEV)
-			return;
-		
-		for (final Building b : allBuildings()) {
-
-			
-			
-			try {
-
-				if (b.location!=null) {
-
-					String tags="";
-
-					for (final String s : b.location.tags) {
-						tags+=s+";";
-					}
-
-					if (!buildingsTags.containsKey(b.getPos())) {
-						MLN.temp(null, "Detected new building: "+b+" with tags: "+tags);
-						buildingsTags.put(b.getPos(), tags);
-					} else {
-						if (!tags.equals(buildingsTags.get(b.getPos()))) {
-							MLN.warning(null, "Testing locations due to: "+label);
-							MLN.warning(null, "Tags changed for building: "+b+". Was: "+buildingsTags.get(b.getPos())+" now: "+tags);
-							buildingsTags.put(b.getPos(), tags);
-						}
-					}
-					
-					if (!buildingsVariation.containsKey(b.getPos())) {
-						MLN.temp(null, "Detected new building: "+b+" with variation: "+b.location.getVariation());
-						buildingsVariation.put(b.getPos(), b.location.getVariation());
-					} else {
-						if (!buildingsVariation.get(b.getPos()).equals(b.location.getVariation())) {
-							MLN.warning(null, "Testing locations due to: "+label);
-							MLN.warning(null, "Variation changed for building: "+b+". Was: "+buildingsVariation.get(b.getPos())+" now: "+b.location.getVariation());
-							buildingsVariation.put(b.getPos(), b.location.getVariation());
-						}
-					}
-					
-					if (!buildingsLocation.containsKey(b.getPos())) {
-						MLN.temp(null, "Detected new building: "+b+" with location key: "+b.location.key);
-						buildingsLocation.put(b.getPos(), b.location.key);
-					} else {
-						if (!b.location.key.equals(buildingsLocation.get(b.getPos()))) {
-							MLN.warning(null, "Testing locations due to: "+label);
-							MLN.warning(null, "Location key changed for building: "+b+". Was: "+buildingsLocation.get(b.getPos())+" now: "+b.location.key);
-							buildingsLocation.put(b.getPos(), b.location.key);
-						}
-					}
-				}
-			} catch (Exception e) {
-				MLN.printException("Error in dev monitoring of a building building: ", e);
-			}
-		}
-		
 	}
 
 }

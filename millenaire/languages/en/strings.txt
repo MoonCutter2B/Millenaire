@@ -354,7 +354,8 @@ item.pathdirt=Dirt path
 item.pathgravel=Gravel path
 item.pathslabs=Slabs path
 item.pathsandstone=Sandstone slabs path
-
+item.pathochretiles=Ochre slabs path
+item.pathgravelslabs=Slabs and gravel path
 
 error.unknownitem=Unknown Item Name
 

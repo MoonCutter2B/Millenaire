@@ -307,10 +307,6 @@ public class Point {
 	public int getId(World world) {
 		return world.getBlockId(getiX(), getiY(), getiZ());
 	}
-	
-	public void setBlock(World world,int bid,int meta,boolean notify,boolean sound) {
-		MillCommonUtilities.setBlockAndMetadata(world, this, bid, meta, notify, sound);
-	}
 
 	public String getIntString() {
 		return getiX()+"/"+getiY()+"/"+getiZ();
@@ -358,10 +354,10 @@ public class Point {
 		return null;
 	}
 
-
 	public short[] getPathingCoord(int xoffset,int yoffset,int zoffset) {
 		return new short[]{(short) (x-xoffset),(short) (y-yoffset),(short) (z-zoffset)};
 	}
+
 
 	public PathPoint getPathPoint() {
 		return new PathPoint((int)x,(int)y,(int)z);
@@ -482,6 +478,10 @@ public class Point {
 			return false;
 
 		return ((getiX()==p.getiX()) && (getiZ()==p.getiZ()));
+	}
+
+	public void setBlock(World world,int bid,int meta,boolean notify,boolean sound) {
+		MillCommonUtilities.setBlockAndMetadata(world, this, bid, meta, notify, sound);
 	}
 
 	public int squareRadiusDistance(Point p) {

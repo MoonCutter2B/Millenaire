@@ -171,7 +171,7 @@ public class RenderMillVillager extends RenderBiped {
 
 					if (pe!=null) {
 						if (pe.getCurrentPathLength()>0) {
-							
+
 							displayText("Path: "+pe.getCurrentPathLength()+" end: "+pe.getCurrentTargetPathPoint()+" dist: "+(Math.round(villager.getPos().horizontalDistanceTo(pe.getFinalPathPoint())*10)/10)+" index: "+pe.getCurrentPathIndex()
 									+" "+dv.hasPath()+" PF: "+dv.pathfailure+", stuck: "+dv.longDistanceStuck,SCALE,0xa0ffffff,(float)x,(float)y + villagerSize+height, (float)z
 									);
@@ -185,13 +185,14 @@ public class RenderMillVillager extends RenderBiped {
 					displayText("Null path entity, PF: "+dv.pathfailure+", stuck: "+dv.longDistanceStuck,SCALE,0xa0ffffff,(float)x,(float)y + villagerSize+height, (float)z);
 					height+=LINE_HEIGHT;
 				}
-				if (dv.getEntityToAttack()==null)
+				if (dv.getEntityToAttack()==null) {
 					displayText("Pos: "+dv.getPos()+" Path dest: "+dv.getPathDestPoint()+" Goal dest: "+dv.getGoalDestPoint()+" dist: "+(Math.round(dv.getPos().horizontalDistanceTo(dv.getPathDestPoint())*10)/10)+
-						" sm: "+dv.stopMoving+" jps busy: "+dv.jpsPathPlanner.isBusy(),SCALE,0xa0ffffff,(float)x,(float)y + villagerSize+height, (float)z);
-				else
+							" sm: "+dv.stopMoving+" jps busy: "+dv.jpsPathPlanner.isBusy(),SCALE,0xa0ffffff,(float)x,(float)y + villagerSize+height, (float)z);
+				} else {
 					displayText("Pos: "+dv.getPos()+" Entity: "+dv.getEntityToAttack()+" dest: "+(new Point(dv.getEntityToAttack()))+" dist: "+(Math.round(dv.getPos().horizontalDistanceTo((new Point(dv.getEntityToAttack())))*10)/10)+
 							" sm: "+dv.stopMoving+" jps busy: "+dv.jpsPathPlanner.isBusy(),SCALE,0xa0ffffff,(float)x,(float)y + villagerSize+height, (float)z);
-				
+				}
+
 				height+=LINE_HEIGHT;
 			}
 

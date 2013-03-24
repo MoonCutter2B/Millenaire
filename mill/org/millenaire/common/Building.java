@@ -75,6 +75,87 @@ import org.millenaire.common.pathing.atomicstryker.IAStarPathedEntity;
 
 public class Building {
 
+	private class PathCreator implements IAStarPathedEntity {
+
+		final PathCreatorInfo info;
+		final InvItem pathConstructionGood;
+		final int pathWidth;
+		final Building destination;
+
+		PathCreator(PathCreatorInfo info,InvItem pathConstructionGood,int pathWidth,Building destination) {
+			this.pathConstructionGood=pathConstructionGood;
+			this.pathWidth=pathWidth;
+			this.destination=destination;
+			this.info=info;
+		}
+
+		private void checkForRebuild() {
+			if (info.nbPathsReceived==info.nbPathsExpected) {
+
+				//so brand-new paths get built first
+				Collections.reverse(info.pathsReceived);
+
+				pathsToBuild=info.pathsReceived;
+				pathsToBuildIndex=0;
+				pathsToBuildPathIndex=0;
+
+				calculatePathsToClear();
+
+				pathsChanged=true;
+				info.pathsReceived=null;
+
+				info.creationComplete=true;
+			}
+		}
+
+		@Override
+		public void onFoundPath(ArrayList<AStarNode> result) {
+
+			if (info.creationComplete) {
+				MLN.error(Building.this, "onFoundPath triggered on completed info object.");
+				return;
+			}
+
+			//	pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,Block.cloth.blockID,MillCommonUtilities.randomInt(16),pathWidth));
+			info.pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,pathConstructionGood.id(),pathConstructionGood.meta,pathWidth));
+			info.nbPathsReceived++;
+
+			checkForRebuild();
+		}
+
+		@Override
+		public void onNoPathAvailable() {
+
+			if (info.creationComplete) {
+				MLN.error(Building.this, "onNoPathAvailable triggered on completed info object.");
+				return;
+			}
+
+			info.nbPathsReceived++;
+			if (MLN.VillagePaths>=MLN.MINOR) {
+				MLN.minor(Building.this, "Path calculation failed. Target: "+destination);
+			}
+
+			checkForRebuild();
+		}
+
+	}
+
+	private class PathCreatorInfo {
+		private final int nbPathsExpected;
+		private int nbPathsReceived=0;
+		private Vector<Vector<BuildingBlock>> pathsReceived=new Vector<Vector<BuildingBlock>>();
+
+		private boolean creationComplete=false;
+
+		PathCreatorInfo(int nbPathsExpected) {
+			this.nbPathsExpected=nbPathsExpected;
+		}
+
+	}
+
+
+
 	public class PathingThread extends Thread {
 
 		MillWorldInfo winfo;
@@ -180,8 +261,6 @@ public class Building {
 		}
 	}
 
-
-
 	private class SaveWorker extends Thread {
 
 		private final String reason;
@@ -252,24 +331,22 @@ public class Building {
 		}
 
 	}
-
 	public static final AStarConfig PATH_BUILDER_JPS_CONFIG=new AStarConfig(true,false,false,false);
-
 	public static final int INVADER_SPAWNING_DELAY = 500;
 	public static final int RELATION_FAIR = 10;
 	public static final int RELATION_DECENT = 30;
+
 	public static final int RELATION_GOOD = 50;
 	public static final int RELATION_VERYGOOD = 70;
-
 	public static final int RELATION_EXCELLENT = 90;
 	public static final int RELATION_CHILLY = -10;
 	public static final int RELATION_BAD = -30;
+
 	public static final int RELATION_VERYBAD = -50;
 	public static final int RELATION_ATROCIOUS = -70;
 
 	public static final int RELATION_OPENCONFLICT = -90;
 	public static final int RELATION_MAX = 100;
-
 	public static final int RELATION_MIN = -100;
 	public static final String blArmoury = "armoury";
 	public static final String blBakery = "bakery";
@@ -281,9 +358,9 @@ public class Building {
 	public static final String blMarket = "market";
 	public static final String blPigFarm = "pigfarm";
 	public static final String blPresbytery = "presbytery";
+
 	public static final String blSheepChickenFarm = "sheepchickenfarm";
 	public static final String blTavern = "tavern";
-
 	public static final String blTownhall = "townhall";
 	public static final String blWatchtower = "watchtower";
 	private static final int LOCATION_SEARCH_DELAY = 80000;
@@ -315,7 +392,10 @@ public class Building {
 	public static final String tagPujas = "pujas";
 	public static final String tagVineyard = "vineyard";
 	public static final String tagSilkwormFarm = "silkwormfarm";
+
 	public static final String tagDespawnAllMobs = "despawnallmobs";
+
+
 	public static final String versionCompatibility = "1.0";
 
 	public static void readBuildingPacket(MillWorld mw,DataInputStream ds) {
@@ -405,15 +485,12 @@ public class Building {
 		//MLN.temp(building, "Read building update");
 	}
 
-
 	private BuildingBlock[] bblocks = null;
 
 	public int bblocksPos = 0;
 
-	private boolean bblocksChanged=false,pathsChanged=false;	
-
+	private boolean bblocksChanged=false,pathsChanged=false;
 	private PathingBinary binaryPathing = null;
-
 	public Vector<Point> brickspot = new Vector<Point>();
 	public MillVillager builder = null;
 	public String buildingGoal, buildingGoalIssue;
@@ -442,10 +519,10 @@ public class Building {
 	public long lastPing;
 	private long lastSaved = 0;
 	public long lastVillagerRecordsRepair = 0;
+
 	public long lastWoodLocations = 0, lastPlantingLocations = 0,
 			lastSignUpdate = 0;
 	public BuildingLocation location;
-
 	public VillagerRecord merchantRecord = null;
 	public boolean metadataMismatch = false;
 	public PerformanceMonitor monitor;
@@ -462,9 +539,9 @@ public class Building {
 	private boolean saveNeeded = false;
 	private String saveReason = null;
 	public MillVillager seller = null;
+
 	public Point sellingPlace = null;
 	public Vector<Point> signs = new Vector<Point>();
-
 	public Vector<Vector<Point>> sources = new Vector<Vector<Point>>();
 	public Vector<Integer> sourceTypes = new Vector<Integer>();
 	public Vector<Vector<Point>> spawns = new Vector<Vector<Point>>();
@@ -474,42 +551,43 @@ public class Building {
 	public Vector<Vector<Point>> soils = new Vector<Vector<Point>>();
 	public Vector<String> soilTypes = new Vector<String>();
 	public Vector<Point> stalls = new Vector<Point>();
-	public Vector<Point> woodspawn = new Vector<Point>();
-	public Vector<Point> subBuildings = new Vector<Point>();
 
+	public Vector<Point> woodspawn = new Vector<Point>();
+
+	public Vector<Point> subBuildings = new Vector<Point>();
 	public Vector<Point> netherwartsoils = new Vector<Point>();
 
 	public Vector<Point> silkwormblock = new Vector<Point>();
-	public Vector<Point> dispenderUnknownPowder = new Vector<Point>();
 
+	public Vector<Point> dispenderUnknownPowder = new Vector<Point>();
 	private Point sleepingPos = null, sellingPos = null, craftingPos = null,
 			defendingPos = null, shelterPos = null, pathStartPos=null;
 
 	private Point townHallPos = null;
 	public Vector<MillVillager> villagers = new Vector<MillVillager>();
-
 	public Vector<String> visitorsList = new Vector<String>();
-	public Vector<VillagerRecord> vrecords = new Vector<VillagerRecord>();
-	public VillageType villageType = null;
 
+	public Vector<VillagerRecord> vrecords = new Vector<VillagerRecord>();
+
+	public VillageType villageType = null;
 	private HashMap<Point,Integer> relations = new HashMap<Point,Integer>();
 
 	public Point parentVillage = null;
 	public MillWorldInfo winfo = new MillWorldInfo();
-
 	public MillMapInfo mapInfo = null;
 	public MillWorld mw;
 	public World worldObj;
 	private boolean nightBackgroundActionPerformed;
+
 	private boolean updateRaidPerformed;
 	public Vector<String> raidsPerformed = new Vector<String>();
 
+
 	public Vector<String> raidsSuffered = new Vector<String>();
 	public Point raidTarget;
-
-
 	public long  raidStart=0;
 	public long  raidPlanningStart;
+
 	public boolean underAttack=false;
 	private int nbAnimalsRespawned;
 
@@ -519,9 +597,10 @@ public class Building {
 	public String controlledByName=null;
 	private SaveWorker saveWorker=null;
 
-	private long lastGoodsRefresh=0;
-	private boolean refreshGoodsNightActionPerformed;
 
+	private long lastGoodsRefresh=0;
+
+	private boolean refreshGoodsNightActionPerformed;
 
 	private BuildingChunkLoader chunkLoader=null;
 
@@ -532,6 +611,8 @@ public class Building {
 	public Vector<Point> oldPathPointsToClear=null;
 
 	public int oldPathPointsToClearIndex=0;
+
+	private boolean autobuildPaths=false;
 
 	private Building(MillWorld mw) {
 		this.mw = mw;
@@ -744,6 +825,24 @@ public class Building {
 		}
 	}
 
+
+	public void addMobSpawnerPoint(String type, Point p) {
+		if (!mobSpawnerTypes.contains(type)) {
+			final Vector<Point> spawnsPoint=new Vector<Point>();
+			spawnsPoint.add(p);
+			mobSpawners.add(spawnsPoint);
+			mobSpawnerTypes.add(type);
+		} else {
+			for (int i=0;i<mobSpawnerTypes.size();i++) {
+				if (mobSpawnerTypes.get(i).equals(type)) {
+					if (!mobSpawners.get(i).contains(p)) {
+						mobSpawners.get(i).add(p);
+					}
+				}
+			}
+		}
+	}
+
 	public void addOrReplaceRecord(VillagerRecord vr)
 			throws MillenaireException {
 		if (vr == null)
@@ -787,6 +886,57 @@ public class Building {
 		villagers.add(villager);
 	}
 
+	public void addSoilPoint(String type, Point p) {
+		if (!soilTypes.contains(type)) {
+			final Vector<Point> spawnsPoint=new Vector<Point>();
+			spawnsPoint.add(p);
+			soils.add(spawnsPoint);
+			soilTypes.add(type);
+		} else {
+			for (int i=0;i<soilTypes.size();i++) {
+				if (soilTypes.get(i).equals(type)) {
+					if (!soils.get(i).contains(p)) {
+						soils.get(i).add(p);
+					}
+				}
+			}
+		}
+	}
+
+	public void addSourcePoint(int blockId, Point p) {
+		if (!sourceTypes.contains(blockId)) {
+			final Vector<Point> spawnsPoint=new Vector<Point>();
+			spawnsPoint.add(p);
+			sources.add(spawnsPoint);
+			sourceTypes.add(blockId);
+		} else {
+			for (int i=0;i<sourceTypes.size();i++) {
+				if (sourceTypes.get(i).equals(blockId)) {
+					if (!sources.get(i).contains(p)) {
+						sources.get(i).add(p);
+					}
+				}
+			}
+		}
+	}
+
+	public void addSpawnPoint(String type, Point p) {
+		if (!spawnTypes.contains(type)) {
+			final Vector<Point> spawnsPoint=new Vector<Point>();
+			spawnsPoint.add(p);
+			spawns.add(spawnsPoint);
+			spawnTypes.add(type);
+		} else {
+			for (int i=0;i<spawnTypes.size();i++) {
+				if (spawnTypes.get(i).equals(type)) {
+					if (!spawns.get(i).contains(p)) {
+						spawns.get(i).add(p);
+					}
+				}
+			}
+		}
+	}
+
 	public void addToExports(InvItem good, int quantity) {
 		if (exported.containsKey(good)) {
 			exported.put(good, exported.get(good) + quantity);
@@ -794,7 +944,6 @@ public class Building {
 			exported.put(good, quantity);
 		}
 	}
-
 
 	public void addToImports(InvItem good, int quantity) {
 		if (imported.containsKey(good)) {
@@ -1061,6 +1210,51 @@ public class Building {
 
 		} else
 			return null;
+	}
+
+	public void calculatePathsToClear() {
+		if (pathsToBuild!=null) {
+
+			final Vector<Vector<BuildingBlock>> pathsToBuildLocal=pathsToBuild;
+
+			final long startTime=System.currentTimeMillis();
+
+			final Vector<Point> oldPathPointsToClearNew=new Vector<Point>();
+
+			final HashSet<Point> newPathPoints=new HashSet<Point>();
+
+			for (final Vector<BuildingBlock> path : pathsToBuildLocal) {
+				for (final BuildingBlock bp : path) {
+					newPathPoints.add(bp.p);
+				}
+			}
+
+			for (int x=winfo.mapStartX;x<(winfo.mapStartX+winfo.length);x++) {
+				for (int z=winfo.mapStartZ;z<(winfo.mapStartZ+winfo.width);z++) {
+					final int basey=winfo.topGround[x-winfo.mapStartX][z-winfo.mapStartZ];
+
+					for (int dy=-2;dy<3;dy++) {
+						final int y=dy+basey;
+
+						final int bid=worldObj.getBlockId(x, y, z);
+
+						if (bid==Mill.path.blockID) {
+							final Point p=new Point(x,y,z);
+							if (!newPathPoints.contains(p)) {
+								oldPathPointsToClearNew.add(p);
+							}
+						}
+					}
+				}
+			}
+
+			oldPathPointsToClearIndex=0;
+			oldPathPointsToClear=oldPathPointsToClearNew;
+
+			if (MLN.VillagePaths>=MLN.MINOR) {
+				MLN.minor(this, "Finished looking for paths to clear. Found: "+oldPathPointsToClear.size()+". Duration: "+((System.currentTimeMillis()-startTime)+" ms."));
+			}
+		}
 	}
 
 	public void callForHelp(Entity attacker) {
@@ -1447,10 +1641,26 @@ public class Building {
 		}
 	}
 
+	public void clearOldPaths() {
+		if (oldPathPointsToClear!=null) {
+			for (final Point p : oldPathPointsToClear) {
+				final int bid=p.getBelow().getId(worldObj);
+				if (MillCommonUtilities.getBlockIdValidGround(bid,true)>0) {
+					p.setBlock(worldObj, MillCommonUtilities.getBlockIdValidGround(bid,true), 0, true, false);
+				} else {
+					p.setBlock(worldObj, Block.dirt.blockID, 0, true, false);
+				}
+			}
+			oldPathPointsToClear=null;
+			pathsChanged=true;
+			requestSave("paths clearing rushed");
+		}
+	}
+
 	private void completeConstruction() throws MillenaireException {
 		if ((buildingLocationIP != null) && (getBblocks() == null)) {
 
-			BuildingPlan plan=this.getCurrentBuildingPlan();
+			final BuildingPlan plan=this.getCurrentBuildingPlan();
 
 			registerBuildingLocation(buildingLocationIP);
 			updateWorldInfo();
@@ -1465,10 +1675,33 @@ public class Building {
 			builder = null;
 			buildingLocationIP = null;
 
-			if (plan.rebuildPath)
+			if (plan.rebuildPath) {
 				recalculatePaths(false);
+			}
 		}
 	}
+
+	public void constructCalculatedPaths() {
+
+		if (pathsToBuild!=null) {
+
+			if (MLN.VillagePaths>=MLN.MINOR) {
+				MLN.minor(this, "Rebuilding calculated paths.");
+			}
+
+			for (final Vector<BuildingBlock> path : pathsToBuild) {
+				if (!path.isEmpty()) {
+					for (final BuildingBlock bp : path) {
+						bp.pathBuild(this);
+					}
+				}
+			}
+			pathsToBuild=null;
+			pathsChanged=true;
+			requestSave("paths rushed");
+		}
+	}
+
 
 	public boolean controlledBy(String playerName) {
 		if (!this.isTownhall && (getTownHall()!=null))
@@ -1476,6 +1709,7 @@ public class Building {
 
 		return ((controlledBy!=null) && controlledBy.equals(mw.getProfile(playerName).key));
 	}
+
 
 	public int countChildren() {
 		int nb = 0;
@@ -1715,7 +1949,6 @@ public class Building {
 		}
 	}
 
-
 	public void displayInfos(EntityPlayer player) {
 
 		if (location == null)
@@ -1846,24 +2079,25 @@ public class Building {
 			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
 		}
 
-		if (pathsToBuild!=null || oldPathPointsToClear!=null) {
+		if ((pathsToBuild!=null) || (oldPathPointsToClear!=null)) {
 
-			if (pathsToBuild!=null)
+			if (pathsToBuild!=null) {
 				s="pathsToBuild: "+pathsToBuild.size()+" "+pathsToBuildIndex+"/"+pathsToBuildPathIndex;
-			else
+			} else {
 				s="pathsToBuild:null";
+			}
 
-			if (oldPathPointsToClear!=null)
+			if (oldPathPointsToClear!=null) {
 				s=s+" oldPathPointsToClear: "+oldPathPointsToClear.size()+" "+oldPathPointsToClearIndex;
-			else
+			} else {
 				s=s+" oldPathPointsToClear:null";
+			}
 
 			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
 		}
 
 		validateVillagerList();
 	}
-
 
 	//return false if the raid couldn't be ended cleanly
 	private boolean endRaid() {
@@ -2565,6 +2799,16 @@ public class Building {
 		return bblocks;
 	}
 
+	public Building getBuildingAtCoord(Point p) {
+
+		for (final Building b : getBuildings()) {
+			if (b.location.isInside(p))
+				return b;
+		}
+
+		return null;
+	}
+
 	public Vector<Building> getBuildings() {
 		final Vector<Building> vbuildings = new Vector<Building>();
 
@@ -2746,15 +2990,6 @@ public class Building {
 		return sleepingPos;
 	}
 
-	public Point getPathStartPos() {
-
-		if (pathStartPos!=null)
-			return pathStartPos;
-
-		return getSellingPos();
-
-	}
-
 	public BuildingBlock getCurrentBlock() {
 		if (bblocks==null)
 			return null;
@@ -2808,6 +3043,19 @@ public class Building {
 		return null;
 	}
 
+	public Point getCurrentClearPathPoint() {
+
+		if (oldPathPointsToClear==null)
+			return null;
+
+		if (oldPathPointsToClearIndex>=oldPathPointsToClear.size()) {
+			oldPathPointsToClear=null;
+			return null;
+		}
+
+		return oldPathPointsToClear.get(oldPathPointsToClearIndex);
+	}
+
 	public BuildingPlan getCurrentGoalBuildingPlan() {
 		if (buildingGoal == null)
 			return null;
@@ -2824,6 +3072,33 @@ public class Building {
 			}
 		}
 		return null;
+	}
+
+
+	public BuildingBlock getCurrentPathBuildingBlock() {
+
+		if (pathsToBuild==null)
+			return null;
+
+		while (true) {
+			if (pathsToBuildIndex>=pathsToBuild.size()) {
+				pathsToBuild=null;
+				return null;
+			} else if (pathsToBuildPathIndex>=pathsToBuild.get(pathsToBuildIndex).size()) {
+				pathsToBuildIndex++;
+				pathsToBuildPathIndex=0;
+			} else {
+				final BuildingBlock b=pathsToBuild.get(pathsToBuildIndex).get(pathsToBuildPathIndex);
+
+				final int bid=b.p.getId(worldObj);
+				final int meta=b.p.getMeta(worldObj);
+
+				if (MillCommonUtilities.canPathBeBuiltHere(bid) && ((bid!=b.bid) || (meta!=b.meta)))
+					return b;
+
+				pathsToBuildPathIndex++;
+			}
+		}
 	}
 
 	//Where to regroup to defend the village
@@ -2902,6 +3177,7 @@ public class Building {
 		return null;
 	}
 
+
 	public String getGameBuildingName() {
 		return location.getPlan().getGameName();
 	}
@@ -2938,6 +3214,7 @@ public class Building {
 		return relations.keySet();
 	}
 
+
 	public BuildingLocation getLocationAtCoord(Point p) {
 		if ((buildingLocationIP!=null) && buildingLocationIP.isInside(p))
 			return buildingLocationIP;
@@ -2945,16 +3222,6 @@ public class Building {
 		for (final BuildingLocation bl : getLocations()) {
 			if (bl.isInside(p))
 				return bl;
-		}
-
-		return null;
-	}
-
-	public Building getBuildingAtCoord(Point p) {
-
-		for (final Building b : getBuildings()) {
-			if (b.location.isInside(p))
-				return b;
 		}
 
 		return null;
@@ -2976,13 +3243,13 @@ public class Building {
 
 	}
 
-
 	public String getNativeBuildingName() {
 		if (location.getPlan()==null)
 			return "";
 
 		return location.getPlan().nativeName;
 	}
+
 
 	public int getNbEmptyBrickLocation() {
 		if (brickspot.size() == 0)
@@ -3105,7 +3372,6 @@ public class Building {
 		return nb;
 	}
 
-
 	public void getNeededImportGoods(HashMap<Goods, Integer> neededGoods) {
 
 		for (final Goods good : culture.goodsVector) {
@@ -3167,7 +3433,6 @@ public class Building {
 		return null;
 	}
 
-
 	public int getNewGender() {
 
 		int nbmales = 0, nbfemales = 0;
@@ -3184,6 +3449,15 @@ public class Building {
 
 		return (MillCommonUtilities.randomInt(6) < maleChance) ? MillVillager.MALE
 				: MillVillager.FEMALE;
+	}
+
+	public Point getPathStartPos() {
+
+		if (pathStartPos!=null)
+			return pathStartPos;
+
+		return getSellingPos();
+
 	}
 
 	public Point getPlantingLocation() {
@@ -3220,7 +3494,6 @@ public class Building {
 			return relations.get(p);
 		return 0;
 	}
-
 
 	public int getReputation(String playerName) {
 		return mw.getProfile(playerName).getReputation(this);
@@ -3304,8 +3577,19 @@ public class Building {
 		return null;
 	}
 
+
 	public Point getSleepingPos() {
 		return sleepingPos;
+	}
+
+	public Vector<Point> getSoilPoints(String type) {
+
+		for (int i=0;i<soilTypes.size();i++) {
+			if (soilTypes.get(i).equals(type))
+				return soils.get(i);
+		}
+
+		return null;
 	}
 
 	public Point getSugarCaneHarvestLocation() {
@@ -3450,7 +3734,6 @@ public class Building {
 		return null;
 	}
 
-
 	public int getWoodCount() {
 		if (!location.tags.contains(tagGrove))
 			return 0;
@@ -3560,7 +3843,7 @@ public class Building {
 
 		final BuildingPlan plan=getCurrentBuildingPlan();
 
-		plan.referenceBuildingPoints(worldObj, building, buildingLocationIP);		
+		plan.referenceBuildingPoints(worldObj, building, buildingLocationIP);
 
 		if (buildingLocationIP.level == 0) {
 			building.initialise(null,false);
@@ -3656,15 +3939,40 @@ public class Building {
 	}
 
 	public boolean isDisplayableProject(BuildingProject project) {
-		if ((project.getPlan(0, 0).requiredTag!=null) && !mw.isGlobalTagSet(project.getPlan(0, 0).requiredTag))
-			return false;
-
+		if ((project.getPlan(0, 0).requiredTag!=null)) {
+			if (!mw.isGlobalTagSet(project.getPlan(0, 0).requiredTag))
+				return false;
+		}
 		return true;
 	}
 
 	public boolean isHouse() {
 		return ((location != null) && ((location.maleResident.size() > 0) || (location.femaleResident
 				.size() > 0)));
+	}
+
+	public boolean isPointProtectedFromPathBuilding(Point p) {
+		final Point above=p.getAbove(),below=p.getBelow();
+
+		for (final Building b : getBuildings()) {
+			if ((b.location!=null) && b.location.isInside(p)) {
+				if (b.soils!=null) {
+					for (final Vector<Point> vpoints : b.soils) {
+						if (vpoints.contains(p) || vpoints.contains(above) || vpoints.contains(below))
+							return true;
+					}
+				}
+
+				if (b.sources!=null) {
+					for (final Vector<Point> vpoints : b.sources) {
+						if (vpoints.contains(p) || vpoints.contains(above) || vpoints.contains(below))
+							return true;
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 
 	public boolean isReachableFromRegion(byte regionId) {
@@ -3699,25 +4007,10 @@ public class Building {
 		return true;
 	}
 
-	private void loadChunks() {
-		if (winfo!=null && winfo.width>0) {
-			if (chunkLoader==null) {
-				chunkLoader=new BuildingChunkLoader(this);				
-			}
-			if (!chunkLoader.chunksLoaded)
-				chunkLoader.loadChunks();
-		}
-	}
-
-	private void unloadChunks() {
-		if (chunkLoader!=null && chunkLoader.chunksLoaded)
-			chunkLoader.unloadChunks();
-	}
-
 	private boolean isVillageChunksLoaded() {
-		for (int x=winfo.mapStartX;x<winfo.mapStartX+winfo.width;x+=16) {
-			for (int z=winfo.mapStartZ;z<winfo.mapStartZ+winfo.length;z+=16) {
-				if (!worldObj.getChunkProvider().chunkExists(x/16, 
+		for (int x=winfo.mapStartX;x<(winfo.mapStartX+winfo.width);x+=16) {
+			for (int z=winfo.mapStartZ;z<(winfo.mapStartZ+winfo.length);z+=16) {
+				if (!worldObj.getChunkProvider().chunkExists(x/16,
 						z/16))
 					return false;
 
@@ -3789,6 +4082,17 @@ public class Building {
 			}
 		}
 
+	}
+
+	private void loadChunks() {
+		if ((winfo!=null) && (winfo.width>0)) {
+			if (chunkLoader==null) {
+				chunkLoader=new BuildingChunkLoader(this);
+			}
+			if (!chunkLoader.chunksLoaded) {
+				chunkLoader.loadChunks();
+			}
+		}
 	}
 
 	public void lockAllBuildingsChests() {
@@ -3883,9 +4187,9 @@ public class Building {
 
 		boolean tradedHere=false;
 
-		if (location.shop!=null && culture.shopSells.containsKey(location.shop)) {
+		if ((location.shop!=null) && culture.shopSells.containsKey(location.shop)) {
 
-			for (Goods g : culture.shopSells.get(location.shop)) {
+			for (final Goods g : culture.shopSells.get(location.shop)) {
 				if (g.item.matches(item)) {
 					tradedHere=true;
 				}
@@ -3923,10 +4227,10 @@ public class Building {
 			}
 		}
 
-		for (VillagerRecord vr : vrecords) {
+		for (final VillagerRecord vr : vrecords) {
 
-			if (vr.housePos!=null && vr.housePos.equals(getPos()) && vr.getType()!=null) {
-				for (InvItem requiredItem : vr.getType().requiredFoodAndGoods.keySet()) {
+			if ((vr.housePos!=null) && vr.housePos.equals(getPos()) && (vr.getType()!=null)) {
+				for (final InvItem requiredItem : vr.getType().requiredFoodAndGoods.keySet()) {
 					if (item.matches(requiredItem)) {
 						reserveAmount+=vr.getType().requiredFoodAndGoods.get(requiredItem);
 					}
@@ -4018,6 +4322,8 @@ public class Building {
 		return Math.max((neededForProject + targetAmount) - nb, 0);
 	}
 
+
+
 	private void readBblocks() {
 		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
 		final File file1 = new File(buildingsDir, getPos().getPathString()
@@ -4049,123 +4355,6 @@ public class Building {
 			} catch (final Exception e) {
 				MLN.printException("Error when reading bblocks: ",e);
 				bblocks=null;
-			}
-		}
-	}
-
-	private void readPaths() {
-		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
-		File file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_paths.bin");
-
-		if (file1.exists()) {
-			try {
-				final FileInputStream fis = new FileInputStream(file1);
-				final DataInputStream ds = new DataInputStream(fis);
-
-				final int size=ds.readInt();
-
-				pathsToBuild=new Vector<Vector<BuildingBlock>>();
-
-				for (int i=0;i<size;i++) {
-
-					Vector<BuildingBlock> path=new Vector<BuildingBlock>();
-
-					int sizePath=ds.readInt();
-
-					for (int j=0;j<sizePath;j++) {
-						final Point p=new Point(ds.readInt(),ds.readShort(),ds.readInt());
-						final BuildingBlock b=new BuildingBlock(p,ds.readShort(),ds.readByte(),ds.readByte());
-						path.add(b);
-					}
-					pathsToBuild.add(path);
-				}
-
-				ds.close();
-
-			} catch (final Exception e) {
-				MLN.printException("Error when reading pathsToBuild: ",e);
-				bblocks=null;
-			}
-		}
-
-		file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_pathstoclear.bin");
-
-		if (file1.exists()) {
-			try {
-				final FileInputStream fis = new FileInputStream(file1);
-				final DataInputStream ds = new DataInputStream(fis);
-
-				final int size=ds.readInt();
-
-				oldPathPointsToClear=new Vector<Point>();
-
-				for (int i=0;i<size;i++) {
-					final Point p=new Point(ds.readInt(),ds.readShort(),ds.readInt());
-					oldPathPointsToClear.add(p);
-				}
-
-				ds.close();
-
-			} catch (final Exception e) {
-				MLN.printException("Error when reading oldPathPointsToClear: ",e);
-				bblocks=null;
-			}
-		}
-
-
-	}
-
-	//for old pre-4.3 soil handling
-	private void readLegacySoilsFromNBT(NBTTagCompound nbttagcompound) {
-		NBTTagList nbttaglist = nbttagcompound.getTagList("soils");
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
-			final Point p = Point.read(nbttagcompound1, "pos");
-			if (p != null) {
-				addSoilPoint(Mill.CROP_WHEAT,p);
-			}
-		}
-
-		nbttaglist = nbttagcompound.getTagList("ricesoils");
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
-			final Point p = Point.read(nbttagcompound1, "pos");
-			if (p != null) {
-				addSoilPoint(Mill.CROP_RICE,p);
-			}
-		}
-
-		nbttaglist = nbttagcompound.getTagList("turmericsoils");
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
-			final Point p = Point.read(nbttagcompound1, "pos");
-			if (p != null) {
-				addSoilPoint(Mill.CROP_TURMERIC,p);
-			}
-		}
-
-		nbttaglist = nbttagcompound.getTagList("maizesoils");
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
-			final Point p = Point.read(nbttagcompound1, "pos");
-			if (p != null) {
-				addSoilPoint(Mill.CROP_MAIZE,p);
-			}
-		}
-
-		nbttaglist = nbttagcompound.getTagList("vinesoils");
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
-			final Point p = Point.read(nbttagcompound1, "pos");
-			if (p != null) {
-				addSoilPoint(Mill.CROP_VINE,p);
 			}
 		}
 	}
@@ -4369,14 +4558,15 @@ public class Building {
 				String spawnType=nbttagcompound1.getString("type");
 
 				//convertion for pre-4.3 tags
-				if (spawnType.equals("ml_FarmPig"))
+				if (spawnType.equals("ml_FarmPig")) {
 					spawnType="Pig";
-				else if (spawnType.equals("ml_FarmCow"))
+				} else if (spawnType.equals("ml_FarmCow")) {
 					spawnType="Cow";
-				else if (spawnType.equals("ml_FarmChicken"))
+				} else if (spawnType.equals("ml_FarmChicken")) {
 					spawnType="Chicken";
-				else if (spawnType.equals("ml_FarmSheep"))
+				} else if (spawnType.equals("ml_FarmSheep")) {
 					spawnType="Sheep";
+				}
 
 				spawnTypes.add(spawnType);
 				final Vector<Point> v = new Vector<Point>();
@@ -4501,7 +4691,7 @@ public class Building {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
 						.tagAt(i);
 
-				String type=nbttagcompound1.getString("type");
+				final String type=nbttagcompound1.getString("type");
 
 				final NBTTagList nbttaglist2 = nbttagcompound1
 						.getTagList("points");
@@ -4568,6 +4758,7 @@ public class Building {
 		}
 	}
 
+
 	public void readInn(NBTTagCompound nbttagcompound)
 			throws MillenaireException {
 
@@ -4587,6 +4778,124 @@ public class Building {
 			exported.put(good, tag.getInteger("quantity"));
 		}
 	}
+
+	//for old pre-4.3 soil handling
+	private void readLegacySoilsFromNBT(NBTTagCompound nbttagcompound) {
+		NBTTagList nbttaglist = nbttagcompound.getTagList("soils");
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+					.tagAt(i);
+			final Point p = Point.read(nbttagcompound1, "pos");
+			if (p != null) {
+				addSoilPoint(Mill.CROP_WHEAT,p);
+			}
+		}
+
+		nbttaglist = nbttagcompound.getTagList("ricesoils");
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+					.tagAt(i);
+			final Point p = Point.read(nbttagcompound1, "pos");
+			if (p != null) {
+				addSoilPoint(Mill.CROP_RICE,p);
+			}
+		}
+
+		nbttaglist = nbttagcompound.getTagList("turmericsoils");
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+					.tagAt(i);
+			final Point p = Point.read(nbttagcompound1, "pos");
+			if (p != null) {
+				addSoilPoint(Mill.CROP_TURMERIC,p);
+			}
+		}
+
+		nbttaglist = nbttagcompound.getTagList("maizesoils");
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+					.tagAt(i);
+			final Point p = Point.read(nbttagcompound1, "pos");
+			if (p != null) {
+				addSoilPoint(Mill.CROP_MAIZE,p);
+			}
+		}
+
+		nbttaglist = nbttagcompound.getTagList("vinesoils");
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+					.tagAt(i);
+			final Point p = Point.read(nbttagcompound1, "pos");
+			if (p != null) {
+				addSoilPoint(Mill.CROP_VINE,p);
+			}
+		}
+	}
+
+	private void readPaths() {
+		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
+		File file1 = new File(buildingsDir, getPos().getPathString()
+				+ "_paths.bin");
+
+		if (file1.exists()) {
+			try {
+				final FileInputStream fis = new FileInputStream(file1);
+				final DataInputStream ds = new DataInputStream(fis);
+
+				final int size=ds.readInt();
+
+				pathsToBuild=new Vector<Vector<BuildingBlock>>();
+
+				for (int i=0;i<size;i++) {
+
+					final Vector<BuildingBlock> path=new Vector<BuildingBlock>();
+
+					final int sizePath=ds.readInt();
+
+					for (int j=0;j<sizePath;j++) {
+						final Point p=new Point(ds.readInt(),ds.readShort(),ds.readInt());
+						final BuildingBlock b=new BuildingBlock(p,ds.readShort(),ds.readByte(),ds.readByte());
+						path.add(b);
+					}
+					pathsToBuild.add(path);
+				}
+
+				ds.close();
+
+			} catch (final Exception e) {
+				MLN.printException("Error when reading pathsToBuild: ",e);
+				bblocks=null;
+			}
+		}
+
+		file1 = new File(buildingsDir, getPos().getPathString()
+				+ "_pathstoclear.bin");
+
+		if (file1.exists()) {
+			try {
+				final FileInputStream fis = new FileInputStream(file1);
+				final DataInputStream ds = new DataInputStream(fis);
+
+				final int size=ds.readInt();
+
+				oldPathPointsToClear=new Vector<Point>();
+
+				for (int i=0;i<size;i++) {
+					final Point p=new Point(ds.readInt(),ds.readShort(),ds.readInt());
+					oldPathPointsToClear.add(p);
+				}
+
+				ds.close();
+
+			} catch (final Exception e) {
+				MLN.printException("Error when reading oldPathPointsToClear: ",e);
+				bblocks=null;
+			}
+		}
+
+
+	}
+
 
 	public void readTownHall(NBTTagCompound nbttagcompound) {
 
@@ -4645,9 +4954,10 @@ public class Building {
 		for (int i=buildings.size()-1;i>=0;i--) {
 			boolean foundLocation=false;
 
-			for (BuildingLocation l : this.getLocations()) {
-				if (buildings.get(i).equals(l.chestPos))
+			for (final BuildingLocation l : this.getLocations()) {
+				if (buildings.get(i).equals(l.chestPos)) {
 					foundLocation=true;
+				}
 			}
 			if (!foundLocation) {
 				MLN.error(this, "Deleting building as could not find the location for it at: "+buildings.get(i));
@@ -4790,7 +5100,7 @@ public class Building {
 
 		pathsToBuildIndex = nbttagcompound.getInteger("pathsToBuildIndex");
 		pathsToBuildPathIndex = nbttagcompound.getInteger("pathsToBuildPathIndex");
-		oldPathPointsToClearIndex = nbttagcompound.getInteger("oldPathPointsToClearIndex");	
+		oldPathPointsToClearIndex = nbttagcompound.getInteger("oldPathPointsToClearIndex");
 
 		readPaths();
 
@@ -4834,6 +5144,7 @@ public class Building {
 		return true;
 	}
 
+
 	public void rebuildSurfacePathing() {
 		if (binaryPathing == null) {
 			binaryPathing = new PathingBinary(worldObj);
@@ -4842,6 +5153,44 @@ public class Building {
 		binaryPathing.updatePathing(getPos(), villageType.radius + 20, 20);
 
 		lastPathingUpdate = System.currentTimeMillis();
+	}
+
+	private void recalculatePaths(boolean autobuild) {
+
+		int nbPaths=0;
+
+		for (final Building b : getBuildings()) {
+			if (b!=this) {
+				nbPaths++;
+			}
+		}
+
+		final PathCreatorInfo info=new PathCreatorInfo(nbPaths);
+		this.autobuildPaths=autobuild;
+
+		final Point start=getPathStartPos();
+
+		if (MLN.VillagePaths>=MLN.MINOR) {
+			MLN.minor(this, "Launching path rebuild, expected paths number: "+nbPaths);
+		}
+
+		for (final Building b : getBuildings()) {
+			if ((b!=this) && (b.location!=null) && (b.location.getPlan()!=null) && !b.location.getPlan().isSubBuilding() && (b.getPathStartPos()!=null)) {
+
+				InvItem pathMaterial=villageType.pathMaterial.firstElement();
+
+				if (b.location.getPlan().pathLevel<villageType.pathMaterial.size()) {
+					pathMaterial=villageType.pathMaterial.get(b.location.getPlan().pathLevel);
+				}
+
+				final PathCreator pathCreator=new PathCreator(info,pathMaterial,b.location.getPlan().pathWidth,b);
+
+				final AStarPathPlanner jpsPathPlanner=new AStarPathPlanner(worldObj,pathCreator);
+
+				jpsPathPlanner.getPath(start.getiX(), start.getiY(), start.getiZ(),
+						b.getPathStartPos().getiX(), b.getPathStartPos().getiY(), b.getPathStartPos().getiZ(), PATH_BUILDER_JPS_CONFIG);
+			}
+		}
 	}
 
 	private void refreshGoods() {
@@ -4873,6 +5222,7 @@ public class Building {
 			}
 		}
 	}
+
 
 	public void registerBuildingEntity(Building buildingEntity)
 			throws MillenaireException {
@@ -5055,8 +5405,6 @@ public class Building {
 
 	}
 
-
-
 	public boolean removeVillagerRecord(long vid) {
 
 		for (final VillagerRecord vr : vrecords) {
@@ -5078,7 +5426,7 @@ public class Building {
 			final MillVillager v=(MillVillager)o;
 
 			if (v.getTownHall()==this) {
-				if (!villagers.contains(v) && v.vtype!=null) {
+				if (!villagers.contains(v) && (v.vtype!=null)) {
 					villagers.add(v);
 				}
 			}
@@ -5238,7 +5586,6 @@ public class Building {
 		}
 	}
 
-
 	private void repairVillagerListClient() {
 		for (int i = villagers.size() - 1; i > -1; i--) {
 			if (villagers.get(i).isDead) {
@@ -5325,7 +5672,6 @@ public class Building {
 		completeConstruction();
 	}
 
-
 	public void saveTownHall(String reason) {
 
 		if (!worldObj.isRemote) {
@@ -5335,6 +5681,7 @@ public class Building {
 			}
 		}
 	}
+
 
 	public void sendBuildingPacket(EntityPlayer player,boolean sendChest) {
 
@@ -5414,7 +5761,6 @@ public class Building {
 		ServerSender.sendPacketToPlayer(packet,player.username);
 	}
 
-
 	private void sendInitialBuildingPackets() {
 		for (final EntityPlayer player : MillCommonUtilities.getServerPlayers(mw.world)) {
 			if (pos.distanceToSquared(player)<(16*16)) {
@@ -5440,10 +5786,11 @@ public class Building {
 		bblocksChanged=true;
 	}
 
-
 	public void setCraftingPos(Point p) {
 		craftingPos = p;
 	}
+
+
 
 	public void setDefendingPos(Point p) {
 		defendingPos = p;
@@ -5463,16 +5810,16 @@ public class Building {
 		}
 	}
 
+	public void setPathStartPos(Point p) {
+		pathStartPos = p;
+	}
+
 	public void setSellingPos(Point p) {
 		sellingPos = p;
 	}
 
 	public void setShelterPos(Point p) {
 		shelterPos = p;
-	}
-
-	public void setPathStartPos(Point p) {
-		pathStartPos = p;
 	}
 
 	public void setSleepingPos(Point p) {
@@ -5515,7 +5862,6 @@ public class Building {
 			cancelRaid();
 		}
 	}
-
 
 	public int storeGoods(int item, int toPut) {
 		return storeGoods(item, 0, toPut);
@@ -5606,8 +5952,6 @@ public class Building {
 	public int takeGoods(int item, int toTake) {
 		return takeGoods(item, 0, toTake);
 	}
-
-
 
 	public int takeGoods(int item, int meta, int toTake) {
 		int taken = 0;
@@ -5801,6 +6145,12 @@ public class Building {
 		dest.getTownHall().saveTownHall("incoming villager");
 	}
 
+	private void unloadChunks() {
+		if ((chunkLoader!=null) && chunkLoader.chunksLoaded) {
+			chunkLoader.unloadChunks();
+		}
+	}
+
 	public void unlockAllChests() {
 		chestLocked = false;
 		for (final Point p : buildings) {
@@ -5826,6 +6176,39 @@ public class Building {
 				}
 			}
 		}
+	}
+
+	private void updateAchievements() {
+
+		if (villageType==null)
+			return;
+
+		final List<Entity> players = MillCommonUtilities.getEntitiesWithinAABB(
+				worldObj, EntityPlayer.class, getPos(), villageType.radius, 20);
+
+		for (final Entity ent : players) {
+
+			final EntityPlayer player=(EntityPlayer)ent;
+
+			if (villageType.lonebuilding) {
+				player.addStat(MillAchievements.explorer, 1);
+			}
+
+			if (location.tags.contains(tagHoF)) {
+				player.addStat(MillAchievements.pantheon, 1);
+			}
+
+			final int nbcultures=mw.nbCultureInGeneratedVillages();
+
+			if (nbcultures>=3) {
+				player.addStat(MillAchievements.marcopolo, 1);
+			}
+			if (nbcultures>=Culture.vectorCultures.size()) {
+				player.addStat(MillAchievements.magellan, 1);
+			}
+
+		}
+
 	}
 
 	private void updateArchiveSigns() {
@@ -5934,7 +6317,7 @@ public class Building {
 			return;
 
 
-		if ((villageType==null) || !isTownhall || location==null)
+		if ((villageType==null) || !isTownhall || (location==null))
 			return;
 
 		final EntityPlayer player = worldObj.getClosestPlayer(pos.getiX(), pos.getiY(),
@@ -6002,9 +6385,9 @@ public class Building {
 				pos.getiZ(), MLN.KeepActiveRadius);
 
 		if (isTownhall) {
-			if ((player != null) && getPos().distanceTo(player) < MLN.KeepActiveRadius) {
+			if ((player != null) && (getPos().distanceTo(player) < MLN.KeepActiveRadius)) {
 				loadChunks();
-			} else if ((player == null) || getPos().distanceTo(player) > MLN.KeepActiveRadius+32) {
+			} else if ((player == null) || (getPos().distanceTo(player) > (MLN.KeepActiveRadius+32))) {
 				unloadChunks();
 			}
 			isAreaLoaded=isVillageChunksLoaded();
@@ -6013,16 +6396,16 @@ public class Building {
 			if (isActive && (!isAreaLoaded)) {
 				isActive = false;
 
-				for (Object o : worldObj.playerEntities) {
-					EntityPlayer p=(EntityPlayer) o;
+				for (final Object o : worldObj.playerEntities) {
+					final EntityPlayer p=(EntityPlayer) o;
 					this.sendBuildingPacket(p, false);
 				}
 
 				saveTownHall("becoming inactive");
 			} else if (!isActive && isAreaLoaded) {
 
-				for (Object o : worldObj.playerEntities) {
-					EntityPlayer p=(EntityPlayer) o;
+				for (final Object o : worldObj.playerEntities) {
+					final EntityPlayer p=(EntityPlayer) o;
 					this.sendBuildingPacket(p, false);
 				}
 
@@ -6097,7 +6480,7 @@ public class Building {
 				}
 			}
 
-			if (player!=null && (location.getPlan()!=null) && (location.getPlan().exploreTag != null)) {
+			if ((player!=null) && (location.getPlan()!=null) && (location.getPlan().exploreTag != null)) {
 				checkExploreTag(player);
 			}
 
@@ -6468,7 +6851,7 @@ public class Building {
 		if (!worldObj.isDaytime() && (vrecords.size() > 0) && !worldObj.isRemote) {
 
 			int nbMaxRespawn=0;
-			for (Vector<Point> spawnPoints : spawns) {
+			for (final Vector<Point> spawnPoints : spawns) {
 				nbMaxRespawn+=spawnPoints.size();
 			}
 
@@ -6678,7 +7061,7 @@ public class Building {
 			controlledByName=profile.playerName;
 		}
 
-		if (worldObj.getWorldTime() % 200==0) {
+		if ((worldObj.getWorldTime() % 200)==0) {
 			updateAchievements();
 		}
 
@@ -6686,118 +7069,6 @@ public class Building {
 			clearOldPaths();
 			constructCalculatedPaths();
 		}
-	}
-
-	public void calculatePathsToClear() {
-		if (pathsToBuild!=null) {
-
-			Vector<Vector<BuildingBlock>> pathsToBuildLocal=pathsToBuild;
-			
-			MLN.temp(this, "Looking for paths to clear.");
-			long startTime=System.currentTimeMillis();
-
-			Vector<Point> oldPathPointsToClearNew=new Vector<Point>();
-
-			HashSet<Point> newPathPoints=new HashSet<Point>();
-
-			for (Vector<BuildingBlock> path : pathsToBuildLocal) {
-				for (BuildingBlock bp : path) {
-					newPathPoints.add(bp.p);
-				}
-			}
-
-			MLN.temp(this, "New path points found: "+newPathPoints.size());
-
-			for (int x=winfo.mapStartX;x<winfo.mapStartX+winfo.length;x++) {
-				for (int z=winfo.mapStartZ;z<winfo.mapStartZ+winfo.width;z++) {
-					int basey=winfo.topGround[x-winfo.mapStartX][z-winfo.mapStartZ];
-
-					for (int dy=-2;dy<3;dy++) {
-						int y=dy+basey;
-
-						int bid=worldObj.getBlockId(x, y, z);
-
-						if (bid==Mill.path.blockID) {
-							Point p=new Point(x,y,z);
-							if (!newPathPoints.contains(p)) {
-								oldPathPointsToClearNew.add(p);
-							}
-						}
-					}
-				}
-			}
-
-			oldPathPointsToClearIndex=0;
-			oldPathPointsToClear=oldPathPointsToClearNew;
-			MLN.temp(this, "Finished looking for paths to clear. Found: "+oldPathPointsToClear.size()+". Duration: "+(System.currentTimeMillis()-startTime+" ms."));
-		}
-	}
-
-	public void clearOldPaths() {
-		if (oldPathPointsToClear!=null) {
-			for (Point p : oldPathPointsToClear) {
-				int bid=p.getBelow().getId(worldObj);
-				if (MillCommonUtilities.getBlockIdValidGround(bid,true)>0)
-					p.setBlock(worldObj, MillCommonUtilities.getBlockIdValidGround(bid,true), 0, true, false);
-				else
-					p.setBlock(worldObj, Block.dirt.blockID, 0, true, false);
-			}
-			oldPathPointsToClear=null;
-			pathsChanged=true;
-			requestSave("paths clearing rushed");
-		}
-	}
-
-	public void constructCalculatedPaths() {
-
-		if (pathsToBuild!=null) {
-
-			MLN.temp(this, "Rebuilding calculated paths.");
-
-			for (Vector<BuildingBlock> path : pathsToBuild) {
-				if (!path.isEmpty()) {					
-					for (BuildingBlock bp : path) {
-						bp.pathBuild(this);
-					}
-				}
-			}
-			pathsToBuild=null;
-			pathsChanged=true;
-			requestSave("paths rushed");
-		}
-	}
-
-	private void updateAchievements() {
-
-		if (villageType==null)
-			return;
-
-		final List<Entity> players = MillCommonUtilities.getEntitiesWithinAABB(
-				worldObj, EntityPlayer.class, getPos(), villageType.radius, 20);
-
-		for (Entity ent : players) {
-
-			EntityPlayer player=(EntityPlayer)ent;
-
-			if (villageType.lonebuilding) {
-				player.addStat(MillAchievements.explorer, 1);
-			}
-
-			if (location.tags.contains(tagHoF)) {
-				player.addStat(MillAchievements.pantheon, 1);
-			}
-
-			int nbcultures=mw.nbCultureInGeneratedVillages();
-
-			if (nbcultures>=3) {
-				player.addStat(MillAchievements.marcopolo, 1);
-			}
-			if (nbcultures>=Culture.vectorCultures.size()) {
-				player.addStat(MillAchievements.magellan, 1);
-			}
-
-		}
-
 	}
 
 	private void updateTownHallSigns(boolean forced) {
@@ -7192,163 +7463,6 @@ public class Building {
 		}
 	}
 
-	private void recalculatePaths(boolean autobuild) {
-
-		int nbPaths=0;
-
-		for (Building b : getBuildings()) {
-			if (b!=this) {
-				nbPaths++;
-			}
-		}
-
-		PathCreatorInfo info=new PathCreatorInfo(nbPaths);
-		this.autobuildPaths=autobuild;
-
-		Point start=getPathStartPos();
-
-		MLN.temp(this, "Launching path rebuild, expected paths number: "+nbPaths);
-
-		for (Building b : getBuildings()) {
-			if (b!=this && b.location!=null && b.location.getPlan()!=null && !b.location.getPlan().isSubBuilding()) {
-
-				InvItem pathMaterial=villageType.pathMaterial.firstElement();
-
-				if (b.location.getPlan().pathLevel<villageType.pathMaterial.size())
-					pathMaterial=villageType.pathMaterial.get(b.location.getPlan().pathLevel);
-
-				PathCreator pathCreator=new PathCreator(info,pathMaterial,b.location.getPlan().pathWidth,b);
-
-				AStarPathPlanner jpsPathPlanner=new AStarPathPlanner(worldObj,pathCreator);
-
-				jpsPathPlanner.getPath(start.getiX(), start.getiY(), start.getiZ(), 
-						b.getPathStartPos().getiX(), b.getPathStartPos().getiY(), b.getPathStartPos().getiZ(), PATH_BUILDER_JPS_CONFIG);
-			}
-		}
-	}
-
-	public BuildingBlock getCurrentPathBuildingBlock() {
-
-		if (pathsToBuild==null)
-			return null;
-
-		while (true) {
-			if (pathsToBuildIndex>=pathsToBuild.size()) {
-				pathsToBuild=null;
-				return null;
-			} else if (pathsToBuildPathIndex>=pathsToBuild.get(pathsToBuildIndex).size()) {
-				pathsToBuildIndex++;
-				pathsToBuildPathIndex=0;
-			} else {
-				BuildingBlock b=pathsToBuild.get(pathsToBuildIndex).get(pathsToBuildPathIndex);
-
-				int bid=b.p.getId(worldObj);
-				int meta=b.p.getMeta(worldObj);
-
-				if (MillCommonUtilities.canPathBeBuiltHere(bid) && (bid!=b.bid || meta!=b.meta)) {
-					return b;
-				}
-
-				pathsToBuildPathIndex++;
-			}
-			
-			MLN.temp(this, "getCurrentPathBuildingBlock: "+pathsToBuildIndex+"/"+pathsToBuildPathIndex);
-		}
-	}
-
-	public Point getCurrentClearPathPoint() {
-
-		if (oldPathPointsToClear==null)
-			return null;
-
-		if (oldPathPointsToClearIndex>=oldPathPointsToClear.size()) {
-			oldPathPointsToClear=null;
-			return null;
-		}
-
-		return oldPathPointsToClear.get(oldPathPointsToClearIndex);
-	}
-
-	private boolean autobuildPaths=false;
-
-	private class PathCreatorInfo {
-		private int nbPathsExpected;
-		private int nbPathsReceived=0;
-		private Vector<Vector<BuildingBlock>> pathsReceived=new Vector<Vector<BuildingBlock>>();
-
-		private boolean creationComplete=false;
-
-		PathCreatorInfo(int nbPathsExpected) {
-			this.nbPathsExpected=nbPathsExpected;
-		}
-
-	}
-
-	private class PathCreator implements IAStarPathedEntity {
-
-		final PathCreatorInfo info;
-		final InvItem pathConstructionGood;
-		final int pathWidth;
-		final Building destination;
-
-		PathCreator(PathCreatorInfo info,InvItem pathConstructionGood,int pathWidth,Building destination) {
-			this.pathConstructionGood=pathConstructionGood;
-			this.pathWidth=pathWidth;
-			this.destination=destination;
-			this.info=info;
-		}
-
-		@Override
-		public void onFoundPath(ArrayList<AStarNode> result) {
-
-			if (info.creationComplete) {
-				MLN.error(Building.this, "onFoundPath triggered on completed info object.");
-				return;
-			}
-
-			//	pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,Block.cloth.blockID,MillCommonUtilities.randomInt(16),pathWidth));
-			info.pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,pathConstructionGood.id(),pathConstructionGood.meta,pathWidth));
-			info.nbPathsReceived++;
-
-			checkForRebuild();
-		}
-
-		@Override
-		public void onNoPathAvailable() {
-
-			if (info.creationComplete) {
-				MLN.error(Building.this, "onNoPathAvailable triggered on completed info object.");
-				return;
-			}
-
-			info.nbPathsReceived++;
-
-			MLN.temp(Building.this, "Path calculation failed. Target: "+destination);
-
-			checkForRebuild();
-		}
-
-		private void checkForRebuild() {
-			if (info.nbPathsReceived==info.nbPathsExpected) {
-
-				//so brand-new paths get built first
-				Collections.reverse(info.pathsReceived);
-
-				pathsToBuild=info.pathsReceived;
-				pathsToBuildIndex=0;
-				pathsToBuildPathIndex=0;
-
-				calculatePathsToClear();
-
-				pathsChanged=true;
-				info.pathsReceived=null;
-
-				info.creationComplete=true;
-			}
-		}
-
-	}
-
 	private void writeBblocks() {
 
 		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
@@ -7404,10 +7518,10 @@ public class Building {
 
 				ds.writeInt(pathsToBuild.size());
 
-				for (Vector<BuildingBlock> path : pathsToBuild) {
+				for (final Vector<BuildingBlock> path : pathsToBuild) {
 					ds.writeInt(path.size());
 
-					for (BuildingBlock b:path) {
+					for (final BuildingBlock b:path) {
 						ds.writeInt(b.p.getiX());
 						ds.writeShort(b.p.getiY());
 						ds.writeInt(b.p.getiZ());
@@ -7438,7 +7552,7 @@ public class Building {
 
 				ds.writeInt(oldPathPointsToClear.size());
 
-				for (Point p : oldPathPointsToClear) {
+				for (final Point p : oldPathPointsToClear) {
 					ds.writeInt(p.getiX());
 					ds.writeShort(p.getiY());
 					ds.writeInt(p.getiZ());
@@ -7455,6 +7569,7 @@ public class Building {
 
 		pathsChanged=false;
 	}
+
 
 	public void writeToNBT(NBTTagCompound nbttagcompound) {
 
@@ -7876,7 +7991,7 @@ public class Building {
 
 			nbttagcompound.setInteger("pathsToBuildIndex", pathsToBuildIndex);
 			nbttagcompound.setInteger("pathsToBuildPathIndex", pathsToBuildPathIndex);
-			nbttagcompound.setInteger("oldPathPointsToClearIndex", oldPathPointsToClearIndex);			
+			nbttagcompound.setInteger("oldPathPointsToClearIndex", oldPathPointsToClearIndex);
 
 			if (pathsChanged) {
 				writePaths();
@@ -7887,85 +8002,6 @@ public class Building {
 			Mill.proxy.sendChatAdmin("Error when trying to save building. Check millenaire.log.");
 			MLN.error(this, "Exception in Villager.onUpdate(): ");
 			MLN.printException(e);
-		}
-	}
-
-	public void addSpawnPoint(String type, Point p) {
-		if (!spawnTypes.contains(type)) {
-			Vector<Point> spawnsPoint=new Vector<Point>();
-			spawnsPoint.add(p);
-			spawns.add(spawnsPoint);
-			spawnTypes.add(type);
-		} else {
-			for (int i=0;i<spawnTypes.size();i++) {
-				if (spawnTypes.get(i).equals(type)) {
-					if (!spawns.get(i).contains(p)) {
-						spawns.get(i).add(p);
-					}
-				}
-			}
-		}
-	}
-
-	public void addMobSpawnerPoint(String type, Point p) {
-		if (!mobSpawnerTypes.contains(type)) {
-			Vector<Point> spawnsPoint=new Vector<Point>();
-			spawnsPoint.add(p);
-			mobSpawners.add(spawnsPoint);
-			mobSpawnerTypes.add(type);
-		} else {
-			for (int i=0;i<mobSpawnerTypes.size();i++) {
-				if (mobSpawnerTypes.get(i).equals(type)) {
-					if (!mobSpawners.get(i).contains(p)) {
-						mobSpawners.get(i).add(p);
-					}
-				}
-			}
-		}
-	}
-
-	public Vector<Point> getSoilPoints(String type) {
-
-		for (int i=0;i<soilTypes.size();i++) {
-			if (soilTypes.get(i).equals(type))
-				return soils.get(i);
-		}
-
-		return null;
-	}
-
-	public void addSoilPoint(String type, Point p) {
-		if (!soilTypes.contains(type)) {
-			Vector<Point> spawnsPoint=new Vector<Point>();
-			spawnsPoint.add(p);
-			soils.add(spawnsPoint);
-			soilTypes.add(type);
-		} else {
-			for (int i=0;i<soilTypes.size();i++) {
-				if (soilTypes.get(i).equals(type)) {
-					if (!soils.get(i).contains(p)) {
-						soils.get(i).add(p);
-					}
-				}
-			}
-		}
-	}
-
-
-	public void addSourcePoint(int blockId, Point p) {
-		if (!sourceTypes.contains(blockId)) {
-			Vector<Point> spawnsPoint=new Vector<Point>();
-			spawnsPoint.add(p);
-			sources.add(spawnsPoint);
-			sourceTypes.add(blockId);
-		} else {
-			for (int i=0;i<sourceTypes.size();i++) {
-				if (sourceTypes.get(i).equals(blockId)) {
-					if (!sources.get(i).contains(p)) {
-						sources.get(i).add(p);
-					}
-				}
-			}
 		}
 	}
 }

@@ -4,5 +4,5 @@ startLevel:-3
 
 
 
-
+rebuildpath:true
 priority:2
