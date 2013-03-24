@@ -116,7 +116,7 @@ public class Mill
 	public static final String versionBound = "[4.5.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
-
+ 
 	public static final String version = name+" "+versionNumber;
 
 	public static final CreativeTabs tabMillenaire = new CreativeTabMill("Millenaire");
