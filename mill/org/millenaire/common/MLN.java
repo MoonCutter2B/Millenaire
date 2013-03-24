@@ -513,6 +513,7 @@ public class MLN {
 	public static int blockByzantineSlabId = 1523;
 	public static int blockByzantineMixedId = 1524;
 	public static int blockPathId = 1525;
+	public static int blockPathSlabId = 1526;
 	public static int itemRangeStart = 25744;
 
 

@@ -29,11 +29,13 @@ import org.millenaire.common.MillWorld;
 import org.millenaire.common.Quest;
 import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.WorldGenVillage;
-import org.millenaire.common.block.BlockMillCrops;
 import org.millenaire.common.block.BlockDecorative;
 import org.millenaire.common.block.BlockDecorative.ItemDecorative;
+import org.millenaire.common.block.BlockDecorativeSlab;
+import org.millenaire.common.block.BlockDecorativeSlab.ItemDecorativeSlab;
 import org.millenaire.common.block.BlockMLNPane;
 import org.millenaire.common.block.BlockMillChest;
+import org.millenaire.common.block.BlockMillCrops;
 import org.millenaire.common.block.BlockOrientedBrick;
 import org.millenaire.common.block.BlockOrientedSlab;
 import org.millenaire.common.block.BlockPanel;
@@ -59,9 +61,9 @@ import org.millenaire.common.item.Goods.ItemSummoningWand;
 import org.millenaire.common.item.Goods.ItemTapestry;
 import org.millenaire.common.item.Goods.ItemText;
 import org.millenaire.common.item.ItemFoodMultiple;
+import org.millenaire.common.item.ItemMillSeeds;
 import org.millenaire.common.item.ItemParchment;
 import org.millenaire.common.item.ItemPurse;
-import org.millenaire.common.item.ItemMillSeeds;
 import org.millenaire.common.network.ConnectionHandler;
 import org.millenaire.common.network.ServerReceiver;
 
@@ -116,7 +118,7 @@ public class Mill
 	public static final String versionBound = "[4.5.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
- 
+  
 	public static final String version = name+" "+versionNumber;
 
 	public static final CreativeTabs tabMillenaire = new CreativeTabMill("Millenaire");
@@ -140,7 +142,8 @@ public class Mill
 	public static BlockDecorative wood_decoration;
 	public static BlockDecorative earth_decoration;
 	public static BlockDecorative stone_decoration;
-	public static BlockDecorative path;
+	public static BlockDecorativeSlab path;
+	public static BlockDecorativeSlab pathSlab;
 
 	public static BlockOrientedBrick byzantine_tiles;
 	public static BlockOrientedSlab byzantine_tile_slab;
@@ -338,7 +341,8 @@ public class Mill
 		wood_decoration = new BlockDecorative(MLN.blockWoodId,Material.wood);
 		earth_decoration = new BlockDecorative(MLN.blockEarthId,Material.ground);
 		stone_decoration = new BlockDecorative(MLN.blockStoneId,Material.rock);
-		path = new BlockDecorative(MLN.blockPathId,Material.ground);
+		path = new BlockDecorativeSlab(MLN.blockPathId,Material.ground,true);
+		pathSlab = new BlockDecorativeSlab(MLN.blockPathSlabId,Material.ground,false);
 
 		crops = new BlockMillCrops(MLN.blockCropsId);
 
@@ -508,6 +512,15 @@ public class Mill
 		path.registerTexture(3, "pathsandstone","pathbottom","pathsandstone_side");
 		path.registerTexture(4, "pathochretiles","pathbottom","pathochretiles_side");
 		path.registerTexture(5, "pathgravelslabs","pathbottom","pathgravel_side");
+		
+		pathSlab.setUnlocalizedName("ml_path_slab").setHardness(1.0F).setResistance(2F).setStepSound(Block.soundGravelFootstep);
+		pathSlab.registerTexture(0, "pathdirt","pathbottom","pathdirt_halfside");
+		pathSlab.registerTexture(1, "pathgravel","pathbottom","pathgravel_halfside");
+		pathSlab.registerTexture(2, "pathslabs","pathbottom","pathslabs_halfside");
+		pathSlab.registerTexture(3, "pathsandstone","pathbottom","pathsandstone_halfside");
+		pathSlab.registerTexture(4, "pathochretiles","pathbottom","pathochretiles_halfside");
+		pathSlab.registerTexture(5, "pathgravelslabs","pathbottom","pathgravel_halfside");
+		
 
 		crops.setUnlocalizedName("ml_crops").setHardness(0.0F).setStepSound(Block.soundGrassFootstep);
 
@@ -572,7 +585,11 @@ public class Mill
 			ModLoader.registerBlock(wood_decoration,ItemDecorative.class);
 			ModLoader.registerBlock(earth_decoration,ItemDecorative.class);
 			ModLoader.registerBlock(stone_decoration,ItemDecorative.class);
-			ModLoader.registerBlock(path,ItemDecorative.class);
+			ModLoader.registerBlock(path);
+			ModLoader.registerBlock(pathSlab);
+			
+	        Item.itemsList[path.blockID] = (new ItemDecorativeSlab(path.blockID - 256, pathSlab, path, true)).setUnlocalizedName("ml_path");
+	        Item.itemsList[pathSlab.blockID] = (new ItemDecorativeSlab(pathSlab.blockID - 256, pathSlab, path, false)).setUnlocalizedName("ml_path_slab");
 
 			ModLoader.registerBlock(byzantine_tiles);
 			ModLoader.registerBlock(byzantine_tile_slab);
