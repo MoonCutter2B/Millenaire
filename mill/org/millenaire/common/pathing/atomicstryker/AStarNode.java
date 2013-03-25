@@ -45,6 +45,16 @@ public class AStarNode implements Comparable
 		parent = p;
 		target = null;
 	}
+	
+	public AStarNode(int ix, int iy, int iz)
+	{
+		x = ix;
+		y = iy;
+		z = iz;
+		g = 0;
+		parent = null;
+		target = null;
+	}
 
 	public AStarNode(int ix, int iy, int iz, int dist, AStarNode p, AStarNode t)
 	{

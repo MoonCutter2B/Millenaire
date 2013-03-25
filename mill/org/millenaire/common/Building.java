@@ -1238,7 +1238,7 @@ public class Building {
 
 						final int bid=worldObj.getBlockId(x, y, z);
 
-						if (bid==Mill.path.blockID) {
+						if (bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) {
 							final Point p=new Point(x,y,z);
 							if (!newPathPoints.contains(p)) {
 								oldPathPointsToClearNew.add(p);

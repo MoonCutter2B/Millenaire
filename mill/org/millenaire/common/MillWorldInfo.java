@@ -674,7 +674,7 @@ public class MillWorldInfo implements Cloneable {
 					tree[mx][mz]=false;
 				}
 
-				if ((soilbid==Mill.path.blockID)) {
+				if (soilbid==Mill.path.blockID || soilbid==Mill.pathSlab.blockID) {
 					path[mx][mz]=true;
 				} else {
 					path[mx][mz]=false;

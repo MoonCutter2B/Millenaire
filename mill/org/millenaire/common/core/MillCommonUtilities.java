@@ -1459,6 +1459,8 @@ public class MillCommonUtilities {
 			s=""+Mill.byzantine_stone_tiles.blockID;
 		} else if (s.equals("block_path_id")) {
 			s=""+Mill.path.blockID;
+		} else if (s.equals("block_path_slab_id")) {
+			s=""+Mill.pathSlab.blockID;
 		}
 		return s;
 	}
@@ -1490,40 +1492,86 @@ public class MillCommonUtilities {
 		if (p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid))) {
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
-		} if (p.getRelative(0,2,0).isBlockPassable(world) && canPathBeBuiltHere(bidAbove) && canPathBeBuiltHere(bid)) {
+		} if (p.getAbove().isBlockPassable(world) && p.isBlockPassable(world) && (canPathBeBuiltHere(bidBelow))) {//path on raised ground
+			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
+			return true;
+		} if (canPathBeBuiltHere(bidAbove) && canPathBeBuiltHere(bid) && p.getRelative(0, 2, 0).isBlockPassable(world) ) {//path in sunk ground
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			pathPoints.add(new BuildingBlock(p.getAbove(),0,0));
-			return true;
-		} if (p.isBlockPassable(world) && p.getAbove().isBlockPassable(world) && canPathBeBuiltHere(bidBelow) ) {
-			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
-			MLN.temp(null, "raising path at: "+p);
 			return true;
 		} 
 		return false;
 	}
 
 	public static boolean canPathBeBuiltHere(int bid) {
-		return (bid==Block.dirt.blockID || bid==Block.grass.blockID || bid==Block.sand.blockID || bid==Block.gravel.blockID || bid==Mill.path.blockID);
+		return (bid==Block.dirt.blockID || bid==Block.grass.blockID ||
+				bid==Block.sand.blockID || bid==Block.gravel.blockID 
+				|| bid==Mill.path.blockID || bid==Mill.pathSlab.blockID || bid==0 || bid==Block.plantYellow.blockID
+				 || bid==Block.plantRed.blockID || bid==Block.mushroomBrown.blockID || bid==Block.mushroomRed.blockID
+				 || bid==Block.tallGrass.blockID || bid==Block.deadBush.blockID);
 	}
 
 
 	public static Vector<BuildingBlock> buildPath(Building th,ArrayList<AStarNode> path,int pathBid,int pathMeta,int pathWidth) {
 
 		Vector<BuildingBlock> pathPoints=new Vector<BuildingBlock>();
+		
+		boolean lastNodeHalfSlab=false;
 
-		Point lastPoint=null;
+		for (int ip=0;ip<path.size();ip++) {
+			
+			AStarNode node = path.get(ip);
+			
+			AStarNode lastNode=null,nextNode=null;
+			
+			if (ip>0)
+				lastNode=path.get(ip-1);
+			
+			if (ip+1<path.size())
+				nextNode=path.get(ip+1);
 
-		for (AStarNode node : path) {
-
+			boolean halfSlab=false;
+			
+			if (lastNode!=null && nextNode!=null) {				
+				if (lastNode.y==nextNode.y && node.y!=lastNode.y) {
+					node=new AStarNode(node.x,lastNode.y,node.z);
+					path.set(ip, node);
+				} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y) {
+					node=new AStarNode(node.x,node.y+1,node.z);
+					path.set(ip, node);
+					halfSlab=true;
+				} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y>nextNode.y) {
+					halfSlab=true;
+				} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y) {
+					node=new AStarNode(node.x,node.y+1,node.z);
+					path.set(ip, node);
+					halfSlab=true;
+				} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y>lastNode.y) {
+					halfSlab=true;
+				}				
+			}
+			
+			
 			Point p=(new Point(node)).getBelow();
 			
-			attemptPathBuild(th,th.worldObj,pathPoints,p,pathBid,pathMeta);
+			int nodePathBid=pathBid;
+			
+			if (nodePathBid==Mill.path.blockID && halfSlab)
+				nodePathBid=Mill.pathSlab.blockID;
+			
+			
+			attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,pathMeta);
 
-			if (lastPoint!=null) {
-				int dx=p.getiX()-lastPoint.getiX();
-				int dz=p.getiZ()-lastPoint.getiZ();
+			if (lastNode!=null) {
+				int dx=p.getiX()-lastNode.x-1;
+				int dz=p.getiZ()-lastNode.z-1;
+				
+				int nbPass=1;
+				
+				if (dx!=0 && dz!=0)//two paths needed for diags
+					nbPass=2;
 
-				for (int i=0;i<2;i++) {
+				for (int i=0;i<nbPass;i++) {
 					
 					//backward then forward (diagonals only)
 					int direction=(i==0)?1:-1;
@@ -1550,18 +1598,18 @@ public class MillCommonUtilities {
 					}
 
 					if (secondPoint!=null) {
-						boolean success=attemptPathBuild(th,th.worldObj,pathPoints,secondPoint,pathBid,pathMeta);
+						boolean success=attemptPathBuild(th,th.worldObj,pathPoints,secondPoint,nodePathBid,pathMeta);
 
 						if (!success && secondPointAlternate!=null)
-							attemptPathBuild(th,th.worldObj,pathPoints,secondPointAlternate,pathBid,pathMeta);
+							attemptPathBuild(th,th.worldObj,pathPoints,secondPointAlternate,nodePathBid,pathMeta);
 					}
 
 					if (thirdPoint!=null)
-						attemptPathBuild(th,th.worldObj,pathPoints,thirdPoint,pathBid,pathMeta);
+						attemptPathBuild(th,th.worldObj,pathPoints,thirdPoint,nodePathBid,pathMeta);
 				}
-			}	
-
-			lastPoint=p;
+			}
+			
+			lastNodeHalfSlab=halfSlab;
 		}
 
 		return pathPoints;

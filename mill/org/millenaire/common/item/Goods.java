@@ -508,7 +508,7 @@ public class Goods {
 		public final String iconName;
 		
 		public static final Block[] blocksEffectiveAgainst = new Block[] {Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, 
-			Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium, Mill.earth_decoration, Mill.path};
+			Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium, Mill.earth_decoration, Mill.path, Mill.pathSlab};
 
 
 		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material,int strength) {
@@ -1251,6 +1251,13 @@ public class Goods {
 		goodsName.put("pathsandstone", new InvItem(Mill.path,3));
 		goodsName.put("pathochretiles", new InvItem(Mill.path,4));
 		goodsName.put("pathgravelslabs", new InvItem(Mill.path,5));
+		
+		goodsName.put("pathdirt_slab", new InvItem(Mill.pathSlab,0));
+		goodsName.put("pathgravel_slab", new InvItem(Mill.pathSlab,1));
+		goodsName.put("pathslabs_slab", new InvItem(Mill.pathSlab,2));
+		goodsName.put("pathsandstone_slab", new InvItem(Mill.pathSlab,3));
+		goodsName.put("pathochretiles_slab", new InvItem(Mill.pathSlab,4));
+		goodsName.put("pathgravelslabs_slab", new InvItem(Mill.pathSlab,5));
 	}
 
 	public InvItem item;

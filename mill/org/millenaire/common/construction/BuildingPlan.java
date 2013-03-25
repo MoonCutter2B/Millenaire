@@ -134,8 +134,11 @@ public class BuildingPlan {
 			}
 			
 			int bid=p.getId(th.worldObj);
+			
+			build(th.worldObj, false, false);
 
-			if (bid!=Mill.path.blockID && MillCommonUtilities.canPathBeBuiltHere(bid)) {
+			
+			if (bid!=Mill.path.blockID && bid!=Mill.pathSlab.blockID && MillCommonUtilities.canPathBeBuiltHere(bid)) {
 				build(th.worldObj, false, false);
 			} else {
 				int meta=p.getMeta(th.worldObj);
