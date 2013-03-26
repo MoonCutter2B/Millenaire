@@ -166,11 +166,17 @@ parchmentmayanvillagers;mln43;0;
 parchmentsadhu;mln47;0;
 parchmentvillagers;mln17;0;
 pathdirt;1525;0;
+pathdirt_slab;1526;0;
 pathgravel;1525;1;
+pathgravel_slab;1526;1;
 pathgravelslabs;1525;5;
+pathgravelslabs_slab;1526;5;
 pathochretiles;1525;4;
+pathochretiles_slab;1526;4;
 pathsandstone;1525;3;
+pathsandstone_slab;1526;3;
 pathslabs;1525;2;
+pathslabs_slab;1526;2;
 planks_birch;5;2;Planches de bouleau
 planks_jungle;5;3;Planches d'acajou
 planks_oak;5;0;Planches de chêne

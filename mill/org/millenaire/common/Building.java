@@ -5160,7 +5160,7 @@ public class Building {
 		int nbPaths=0;
 
 		for (final Building b : getBuildings()) {
-			if (b!=this) {
+			if (b!=this && (b.location!=null) && (b.location.getPlan()!=null) && !b.location.getPlan().isSubBuilding() && (b.getPathStartPos()!=null)) {
 				nbPaths++;
 			}
 		}

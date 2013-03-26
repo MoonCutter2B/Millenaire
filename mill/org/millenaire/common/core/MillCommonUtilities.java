@@ -1489,13 +1489,13 @@ public class MillCommonUtilities {
 		if (th.isPointProtectedFromPathBuilding(p))
 			return false;
 
-		if (p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid))) {
+		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid)) && (canPathBeBuiltOnTopOfThis(bidBelow))) {
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
-		} if (p.getAbove().isBlockPassable(world) && p.isBlockPassable(world) && (canPathBeBuiltHere(bidBelow))) {//path on raised ground
+		} if (p.getAbove().isBlockPassable(world) && p.isBlockPassable(world) && (canPathBeBuiltOnTopOfThis(bidBelow))) {//path on raised ground
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
-		} if (canPathBeBuiltHere(bidAbove) && canPathBeBuiltHere(bid) && p.getRelative(0, 2, 0).isBlockPassable(world) ) {//path in sunk ground
+		} if (canPathBeBuiltHere(bidAbove) && canPathBeBuiltHere(bid) && p.getRelative(0, 3, 0).isBlockPassable(world) && p.getRelative(0, 2, 0).isBlockPassable(world)  && (canPathBeBuiltOnTopOfThis(bidBelow))) {//path in sunk ground
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			pathPoints.add(new BuildingBlock(p.getAbove(),0,0));
 			return true;
@@ -1509,6 +1509,13 @@ public class MillCommonUtilities {
 				|| bid==Mill.path.blockID || bid==Mill.pathSlab.blockID || bid==0 || bid==Block.plantYellow.blockID
 				 || bid==Block.plantRed.blockID || bid==Block.mushroomBrown.blockID || bid==Block.mushroomRed.blockID
 				 || bid==Block.tallGrass.blockID || bid==Block.deadBush.blockID);
+	}
+	
+	public static boolean canPathBeBuiltOnTopOfThis(int bid) {
+		return (bid==Block.dirt.blockID || bid==Block.grass.blockID ||
+				bid==Block.sand.blockID || bid==Block.gravel.blockID 
+				|| bid==Mill.path.blockID || bid==Mill.pathSlab.blockID || bid==Block.stone.blockID
+				 || bid==Block.sandStone.blockID);
 	}
 
 
@@ -1563,8 +1570,8 @@ public class MillCommonUtilities {
 			attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,pathMeta);
 
 			if (lastNode!=null) {
-				int dx=p.getiX()-lastNode.x-1;
-				int dz=p.getiZ()-lastNode.z-1;
+				int dx=p.getiX()-lastNode.x;
+				int dz=p.getiZ()-lastNode.z;
 				
 				int nbPass=1;
 				
