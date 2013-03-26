@@ -7469,18 +7469,20 @@ public class Building {
 
 		final File file1 = new File(buildingsDir, getPos().getPathString()
 				+ "_bblocks.bin");
+		
+		BuildingBlock[] blocks=getBblocks();
 
-		if (getBblocks()!=null) {
+		if (blocks!=null) {
 			try {
 				final FileOutputStream fos = new FileOutputStream(
 						file1);
 
 				final DataOutputStream ds = new DataOutputStream(fos);
 
-				ds.writeInt(getBblocks().length);
+				ds.writeInt(blocks.length);
 
-				for (int i=0;i<getBblocks().length;i++ ) {
-					final BuildingBlock b=getBblocks()[i];
+				for (int i=0;i<blocks.length;i++ ) {
+					final BuildingBlock b=blocks[i];
 					ds.writeInt(b.p.getiX());
 					ds.writeShort(b.p.getiY());
 					ds.writeInt(b.p.getiZ());

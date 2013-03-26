@@ -205,9 +205,6 @@ public class TileEntityPanel extends TileEntitySign {
 		visitorsPage.add("");
 
 		for (final VillagerRecord vr : townHall.vrecords) {
-
-
-
 			int nbFound=0;
 
 			boolean belongsToVillage=true;
@@ -234,6 +231,24 @@ public class TileEntityPanel extends TileEntitySign {
 				} else {
 					error=" ("+MLN.string("panels.missing").toLowerCase()+")";
 				}
+				
+				if (MLN.DEV && Mill.serverWorlds.size()>0) {
+					
+					Building thServer=Mill.serverWorlds.get(0).getBuilding(townHall.getPos());
+					
+					if (thServer!=null) {
+						int nbOnServer=0;
+						for (final MillVillager villager : thServer.villagers) {
+							if (villager.villager_id==vr.id) {
+								nbOnServer++;
+							}
+						}
+						
+						error+=" nbOnServer:"+nbOnServer;
+					}
+				}
+				
+				
 			} else if (nbFound>1) {
 				error=" ("+MLN.string("panels.multiple",""+nbFound).toLowerCase()+")";
 			}
