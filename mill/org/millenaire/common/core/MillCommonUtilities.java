@@ -19,6 +19,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -1485,7 +1486,7 @@ public class MillCommonUtilities {
 		int bid=p.getId(world);
 		int bidAbove=p.getAbove().getId(world);
 		int bidBelow=p.getBelow().getId(world);
-		
+
 		if (th.isPointProtectedFromPathBuilding(p))
 			return false;
 
@@ -1507,82 +1508,92 @@ public class MillCommonUtilities {
 		return (bid==Block.dirt.blockID || bid==Block.grass.blockID ||
 				bid==Block.sand.blockID || bid==Block.gravel.blockID 
 				|| bid==Mill.path.blockID || bid==Mill.pathSlab.blockID || bid==0 || bid==Block.plantYellow.blockID
-				 || bid==Block.plantRed.blockID || bid==Block.mushroomBrown.blockID || bid==Block.mushroomRed.blockID
-				 || bid==Block.tallGrass.blockID || bid==Block.deadBush.blockID);
+				|| bid==Block.plantRed.blockID || bid==Block.mushroomBrown.blockID || bid==Block.mushroomRed.blockID
+				|| bid==Block.tallGrass.blockID || bid==Block.deadBush.blockID);
 	}
-	
+
 	public static boolean canPathBeBuiltOnTopOfThis(int bid) {
 		return (bid==Block.dirt.blockID || bid==Block.grass.blockID ||
 				bid==Block.sand.blockID || bid==Block.gravel.blockID 
 				|| bid==Mill.path.blockID || bid==Mill.pathSlab.blockID || bid==Block.stone.blockID
-				 || bid==Block.sandStone.blockID);
+				|| bid==Block.sandStone.blockID);
 	}
 
 
 	public static Vector<BuildingBlock> buildPath(Building th,ArrayList<AStarNode> path,int pathBid,int pathMeta,int pathWidth) {
 
 		Vector<BuildingBlock> pathPoints=new Vector<BuildingBlock>();
-		
+
 		boolean lastNodeHalfSlab=false;
 
 		for (int ip=0;ip<path.size();ip++) {
-			
+
 			AStarNode node = path.get(ip);
-			
+
 			AStarNode lastNode=null,nextNode=null;
-			
+
 			if (ip>0)
 				lastNode=path.get(ip-1);
-			
+
 			if (ip+1<path.size())
 				nextNode=path.get(ip+1);
 
 			boolean halfSlab=false;
-			
-			if (lastNode!=null && nextNode!=null) {				
-				if (lastNode.y==nextNode.y && node.y!=lastNode.y) {
-					node=new AStarNode(node.x,lastNode.y,node.z);
-					path.set(ip, node);
-				} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y) {
-					node=new AStarNode(node.x,node.y+1,node.z);
-					path.set(ip, node);
-					halfSlab=true;
-				} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y>nextNode.y) {
-					halfSlab=true;
-				} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y) {
-					node=new AStarNode(node.x,node.y+1,node.z);
-					path.set(ip, node);
-					halfSlab=true;
-				} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y>lastNode.y) {
-					halfSlab=true;
-				}				
+
+			if (lastNode!=null && nextNode!=null) {
+
+				Point p=new Point(node);
+				Point nextp=new Point(nextNode);
+				Point lastp=new Point(lastNode);				
+
+				if (!isStairs(th.worldObj,nextp.getBelow()) && !isStairs(th.worldObj,lastp.getBelow())) {				
+					if (lastNode.y==nextNode.y && node.y!=lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
+							&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
+						node=new AStarNode(node.x,lastNode.y,node.z);
+						path.set(ip, node);
+					} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
+							&& lastp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
+						node=new AStarNode(node.x,node.y+1,node.z);
+						path.set(ip, node);
+						halfSlab=true;
+					} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y>nextNode.y) {
+						halfSlab=true;
+					} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
+							&& nextp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
+						node=new AStarNode(node.x,node.y+1,node.z);
+						path.set(ip, node);
+						halfSlab=true;
+					} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y>lastNode.y) {
+						halfSlab=true;
+					}	
+				}
 			}
-			
-			
+
+
 			Point p=(new Point(node)).getBelow();
-			
+
 			int nodePathBid=pathBid;
-			
+
 			if (nodePathBid==Mill.path.blockID && halfSlab)
 				nodePathBid=Mill.pathSlab.blockID;
-			
-			
+
+
 			attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,pathMeta);
 
 			if (lastNode!=null) {
 				int dx=p.getiX()-lastNode.x;
 				int dz=p.getiZ()-lastNode.z;
-				
+
 				int nbPass=1;
-				
+
 				if (dx!=0 && dz!=0)//two paths needed for diags
 					nbPass=2;
 
 				for (int i=0;i<nbPass;i++) {
-					
+
 					//backward then forward (diagonals only)
 					int direction=(i==0)?1:-1;
-					
+
 					Point secondPoint=null,secondPointAlternate=null,thirdPoint=null;
 
 					//if path has width of 2, double-it when straight and attempt to triple it in diagonals
@@ -1615,12 +1626,21 @@ public class MillCommonUtilities {
 						attemptPathBuild(th,th.worldObj,pathPoints,thirdPoint,nodePathBid,pathMeta);
 				}
 			}
-			
+
 			lastNodeHalfSlab=halfSlab;
 		}
 
 		return pathPoints;
 
+	}
+
+	private static boolean isStairs(World world,Point p) {
+		int bid=p.getId(world);
+
+		if (bid==0)
+			return false;
+
+		return (Block.blocksList[bid] instanceof BlockStairs);
 	}
 
 }

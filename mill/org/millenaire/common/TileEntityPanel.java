@@ -14,6 +14,7 @@ import org.millenaire.client.MillClientUtilities;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.goal.Goal;
 import org.millenaire.common.network.StreamReadWrite;
@@ -260,6 +261,16 @@ public class TileEntityPanel extends TileEntitySign {
 			}
 
 		}
+		
+		if (MLN.DEV && Mill.serverWorlds.size()>0) {
+			int nbClient=MillCommonUtilities.getEntitiesWithinAABB(townHall.worldObj, MillVillager.class, townHall.getPos(), 64, 16).size();
+			Building thServer=Mill.serverWorlds.get(0).getBuilding(townHall.getPos());
+			int nbServer=MillCommonUtilities.getEntitiesWithinAABB(thServer.worldObj, MillVillager.class, townHall.getPos(), 64, 16).size();
+			
+			page.add("Client: "+nbClient+", server: "+nbServer);
+			
+		}
+		
 
 		text.add(page);
 		text.add(visitorsPage);

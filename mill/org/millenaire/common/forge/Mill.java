@@ -114,7 +114,7 @@ public class Mill
 		}
 	}
 
-	public static final String versionNumber = "4.5.1";
+	public static final String versionNumber = "4.5.2";
 	public static final String versionBound = "[4.5.1,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
@@ -567,13 +567,13 @@ public class Mill
 
 		try {
 			EntityRegistry.registerGlobalEntityID(MillVillager.MLEntityGenericAsymmFemale.class, MillVillager.GENERIC_ASYMM_FEMALE, EntityRegistry.findGlobalUniqueEntityId());
-			EntityRegistry.registerModEntity(MillVillager.MLEntityGenericAsymmFemale.class,MillVillager.GENERIC_ASYMM_FEMALE, VILLAGER_ENT_ID+1,instance, 80, 3, true);
+			EntityRegistry.registerModEntity(MillVillager.MLEntityGenericAsymmFemale.class,MillVillager.GENERIC_ASYMM_FEMALE, VILLAGER_ENT_ID+1,instance, 64, 3, true);
 
 			EntityRegistry.registerGlobalEntityID(MillVillager.MLEntityGenericSymmFemale.class, MillVillager.GENERIC_SYMM_FEMALE, EntityRegistry.findGlobalUniqueEntityId());
-			EntityRegistry.registerModEntity(MillVillager.MLEntityGenericSymmFemale.class,MillVillager.GENERIC_SYMM_FEMALE, VILLAGER_ENT_ID+2,instance, 80, 3, true);
+			EntityRegistry.registerModEntity(MillVillager.MLEntityGenericSymmFemale.class,MillVillager.GENERIC_SYMM_FEMALE, VILLAGER_ENT_ID+2,instance, 64, 3, true);
 
 			EntityRegistry.registerGlobalEntityID(MillVillager.MLEntityGenericMale.class, MillVillager.GENERIC_VILLAGER, EntityRegistry.findGlobalUniqueEntityId());
-			EntityRegistry.registerModEntity(MillVillager.MLEntityGenericMale.class,MillVillager.GENERIC_VILLAGER, VILLAGER_ENT_ID,instance, 80, 3, true);
+			EntityRegistry.registerModEntity(MillVillager.MLEntityGenericMale.class,MillVillager.GENERIC_VILLAGER, VILLAGER_ENT_ID,instance, 64, 3, true);
 
 
 

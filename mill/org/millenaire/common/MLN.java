@@ -1342,6 +1342,8 @@ public class MLN {
 							blockByzantineMixedId=Integer.parseInt(value);
 						} else if (key.equalsIgnoreCase("block_path_id")) {
 							blockPathId=Integer.parseInt(value);
+						} else if (key.equalsIgnoreCase("block_path_slab_id")) {
+							blockPathSlabId=Integer.parseInt(value);
 						} else if (key.equalsIgnoreCase("item_range_start")) {
 							itemRangeStart=Integer.parseInt(value);
 						} else if (key.equalsIgnoreCase("keep_active_radius")) {
