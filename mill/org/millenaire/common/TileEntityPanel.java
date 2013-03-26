@@ -14,6 +14,7 @@ import org.millenaire.client.MillClientUtilities;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.goal.Goal;
 import org.millenaire.common.network.StreamReadWrite;
@@ -205,9 +206,6 @@ public class TileEntityPanel extends TileEntitySign {
 		visitorsPage.add("");
 
 		for (final VillagerRecord vr : townHall.vrecords) {
-
-
-
 			int nbFound=0;
 
 			boolean belongsToVillage=true;
@@ -234,6 +232,24 @@ public class TileEntityPanel extends TileEntitySign {
 				} else {
 					error=" ("+MLN.string("panels.missing").toLowerCase()+")";
 				}
+				
+				if (MLN.DEV && Mill.serverWorlds.size()>0) {
+					
+					Building thServer=Mill.serverWorlds.get(0).getBuilding(townHall.getPos());
+					
+					if (thServer!=null) {
+						int nbOnServer=0;
+						for (final MillVillager villager : thServer.villagers) {
+							if (villager.villager_id==vr.id) {
+								nbOnServer++;
+							}
+						}
+						
+						error+=" nbOnServer:"+nbOnServer;
+					}
+				}
+				
+				
 			} else if (nbFound>1) {
 				error=" ("+MLN.string("panels.multiple",""+nbFound).toLowerCase()+")";
 			}
@@ -245,6 +261,16 @@ public class TileEntityPanel extends TileEntitySign {
 			}
 
 		}
+		
+		if (MLN.DEV && Mill.serverWorlds.size()>0) {
+			int nbClient=MillCommonUtilities.getEntitiesWithinAABB(townHall.worldObj, MillVillager.class, townHall.getPos(), 64, 16).size();
+			Building thServer=Mill.serverWorlds.get(0).getBuilding(townHall.getPos());
+			int nbServer=MillCommonUtilities.getEntitiesWithinAABB(thServer.worldObj, MillVillager.class, townHall.getPos(), 64, 16).size();
+			
+			page.add("Client: "+nbClient+", server: "+nbServer);
+			
+		}
+		
 
 		text.add(page);
 		text.add(visitorsPage);

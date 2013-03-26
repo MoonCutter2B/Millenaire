@@ -134,9 +134,21 @@ public class BuildingPlan {
 			}
 			
 			int bid=p.getId(th.worldObj);
+			int bidAbove=p.getAbove().getId(th.worldObj);
+			int bidBelow=p.getBelow().getId(th.worldObj);
 			
-			build(th.worldObj, false, false);
-
+			//if there's a path above, clear it
+			if (bidAbove==Mill.path.blockID || bidAbove==Mill.pathSlab.blockID) {
+				p.getAbove().setBlock(th.worldObj, 0, 0, true, false);
+			}
+			
+			//if there's a path below, fill it
+			if (bidBelow==Mill.path.blockID || bidBelow==Mill.pathSlab.blockID) {
+				if (MillCommonUtilities.getBlockIdValidGround(p.getRelative(0, -2, 0).getId(th.worldObj),true)>0)
+					p.getBelow().setBlock(th.worldObj,MillCommonUtilities.getBlockIdValidGround(p.getRelative(0, -2, 0).getId(th.worldObj),true), 0, true, false);
+				else
+					p.getBelow().setBlock(th.worldObj, Block.dirt.blockID, 0, true, false);
+			}
 			
 			if (bid!=Mill.path.blockID && bid!=Mill.pathSlab.blockID && MillCommonUtilities.canPathBeBuiltHere(bid)) {
 				build(th.worldObj, false, false);
