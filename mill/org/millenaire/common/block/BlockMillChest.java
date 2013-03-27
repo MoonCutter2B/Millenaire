@@ -3,7 +3,6 @@ package org.millenaire.common.block;
 import java.util.Random;
 
 import net.minecraft.block.BlockChest;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
@@ -58,7 +57,7 @@ public class BlockMillChest extends BlockChest {
 
 	public BlockMillChest(int blockID) {
 		super(blockID,0);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(Mill.tabMillenaire);
 	}
 
 	@Override
