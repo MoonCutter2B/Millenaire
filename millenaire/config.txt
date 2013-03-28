@@ -91,6 +91,9 @@ spawn_protection_radius=150
 //in order to provide translations to clients if needed
 load_all_languages=false
 
+//Whether villages should have paths
+village_paths=true
+
 
 //Lone buildings
 generate_lone_buildings=true

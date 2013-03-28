@@ -5156,6 +5156,9 @@ public class Building {
 	}
 
 	private void recalculatePaths(boolean autobuild) {
+		
+		if (!MLN.BuildVillagePaths)
+			return;
 
 		int nbPaths=0;
 
