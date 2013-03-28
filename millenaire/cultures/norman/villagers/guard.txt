@@ -13,6 +13,8 @@ texture=/graphics/mob/norman/ML_Guard0.png
 texture=/graphics/mob/norman/ML_Guard1.png
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=goDrink
 

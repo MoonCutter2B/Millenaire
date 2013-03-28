@@ -12,6 +12,7 @@ craftingPos;-1;0;;200/125/0
 defendingPos;-1;0;;200/150/0
 shelterPos;-1;0;;200/175/0
 pathStartPos;-1;0;;200/250/0
+leasurePos;-1;0;;50/50/250
 soil;-1;0;;64/128/0
 ricesoil;-1;0;;64/128/10
 turmericsoil;-1;0;;64/128/20

@@ -593,6 +593,8 @@ public class MLN {
 	public static int spawnProtectionRadius = 250;
 	public static int VillageRadius=60;
 	public static int VillagersNamesDistance=6;
+	public static int VillagersSentenceInChatDistanceClient=0;
+	public static int VillagersSentenceInChatDistanceSP=6;
 
 
 	public static int RaidingRate=20;
@@ -1354,6 +1356,11 @@ public class MLN {
 							maxChildrenNumber=Integer.parseInt(value);
 						} else if (key.equalsIgnoreCase("villagers_names_distance")) {
 							VillagersNamesDistance=Integer.parseInt(value);
+						} else if (key.equalsIgnoreCase("villagers_sentence_in_chat_distance_client")) {
+							VillagersSentenceInChatDistanceClient=Integer.parseInt(value);
+						} else if (key.equalsIgnoreCase("villagers_sentence_in_chat_distance_sp")) {
+							VillagersSentenceInChatDistanceSP=Integer.parseInt(value);
+							
 						} else if (key.equalsIgnoreCase("raiding_rate")) {
 							RaidingRate=Integer.parseInt(value);
 						} else if (key.equalsIgnoreCase("sprites_path")) {

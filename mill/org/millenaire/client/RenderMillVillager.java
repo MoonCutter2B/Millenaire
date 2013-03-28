@@ -148,7 +148,7 @@ public class RenderMillVillager extends RenderBiped {
 
 			float height=LINE_HEIGHT;
 
-			if (MLN.DEV && (Mill.serverWorlds.size()>0) && Mill.serverWorlds.firstElement().villagers.containsKey(villager.villager_id)) {
+			if (MLN.DEV && (Mill.serverWorlds.size()>0) && Mill.serverWorlds.firstElement().villagers.containsKey(villager.villager_id) && !MLN.DEV) {
 
 				final MillVillager dv=Mill.serverWorlds.firstElement().villagers.get(villager.villager_id);
 

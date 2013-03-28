@@ -67,6 +67,8 @@ public class ClientReceiver implements IPacketHandler
 				MillVillager.readVillagerPacket(data);
 			} else if (packettype==ServerReceiver.PACKET_TRANSLATED_CHAT) {
 				readTranslatedChatPackage(data);
+			} else if (packettype==ServerReceiver.PACKET_VILLAGER_SENTENCE) {
+				readVillagerSentencePackage(data);
 			} else if (packettype==ServerReceiver.PACKET_MILLCHEST) {
 				TileEntityMillChest.readUpdatePacket(data, Mill.clientWorld.world);
 			} else if (packettype==ServerReceiver.PACKET_PROFILE) {
@@ -269,6 +271,21 @@ public class ClientReceiver implements IPacketHandler
 			s=MLN.string(s,values);
 
 			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),colour, s);
+		} catch (final IOException e) {
+			MLN.printException(e);
+		}
+	}
+	
+	private void readVillagerSentencePackage(DataInputStream data) {
+		try {
+			Point p=StreamReadWrite.readNullablePoint(data);
+			String cultureKey=data.readUTF();
+			String villagerName=data.readUTF();
+			String destName=data.readUTF();
+			String sentenceKey=data.readUTF();
+			int sentenceVariant=data.readInt();
+			
+			MillClientUtilities.putVillagerSentenceInChat(p,cultureKey, villagerName, destName, sentenceKey, sentenceVariant);
 		} catch (final IOException e) {
 			MLN.printException(e);
 		}

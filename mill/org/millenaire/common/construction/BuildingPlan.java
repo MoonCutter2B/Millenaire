@@ -575,7 +575,7 @@ public class BuildingPlan {
 			bvinesoil="vinesoil",bsilkwormblock="silkwormblock",
 			blockedchest="lockedchest",bmainchest="mainchest",
 			bsleepingPos="sleepingPos",bsellingPos="sellingPos",bcraftingPos="craftingPos",
-			bdefendingPos="defendingPos",bshelterPos="shelterPos",bpathStartPos="pathStartPos",
+			bdefendingPos="defendingPos",bshelterPos="shelterPos",bpathStartPos="pathStartPos",bleasurePos="leasurePos",
 
 			blogoakvert="logoakvert",blogoakhor="logoakhor",blogpinevert="logpinevert",blogpinehor="logpinehor",
 			blogbirchvert="logbirchvert",blogbirchhor="logbirchhor",blogjunglevert="logjunglevert",blogjunglehor="logjunglehor",
@@ -3717,6 +3717,8 @@ public class BuildingPlan {
 						building.setShelterPos(p);
 					} else if (pt.isType(bpathStartPos)) {
 						building.setPathStartPos(p);
+					} else if (pt.isType(bleasurePos)) {
+						building.setLeasurePos(p);
 					} else if (pt.isType(bsignwallGuess) || pt.isType(bsignwallTop) || pt.isType(bsignwallBottom)
 							|| pt.isType(bsignwallLeft) || pt.isType(bsignwallRight)) {
 						building.signs.set(signOrder[signNb], p);

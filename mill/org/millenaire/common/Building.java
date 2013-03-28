@@ -392,9 +392,9 @@ public class Building {
 	public static final String tagPujas = "pujas";
 	public static final String tagVineyard = "vineyard";
 	public static final String tagSilkwormFarm = "silkwormfarm";
-
 	public static final String tagDespawnAllMobs = "despawnallmobs";
-
+	
+	public static final String tagLeasure = "leasure";
 
 	public static final String versionCompatibility = "1.0";
 
@@ -561,7 +561,7 @@ public class Building {
 
 	public Vector<Point> dispenderUnknownPowder = new Vector<Point>();
 	private Point sleepingPos = null, sellingPos = null, craftingPos = null,
-			defendingPos = null, shelterPos = null, pathStartPos=null;
+			defendingPos = null, shelterPos = null, pathStartPos=null, leasurePos=null;
 
 	private Point townHallPos = null;
 	public Vector<MillVillager> villagers = new Vector<MillVillager>();
@@ -3457,7 +3457,14 @@ public class Building {
 			return pathStartPos;
 
 		return getSellingPos();
+	}
+	
+	public Point getLeasurePos() {
 
+		if (leasurePos!=null)
+			return leasurePos;
+
+		return getSellingPos();
 	}
 
 	public Point getPlantingLocation() {
@@ -4408,6 +4415,7 @@ public class Building {
 			defendingPos = Point.read(nbttagcompound, "defendingPos");
 			shelterPos = Point.read(nbttagcompound, "shelterPos");
 			pathStartPos = Point.read(nbttagcompound, "pathStartPos");
+			leasurePos = Point.read(nbttagcompound, "leasurePos");
 			townHallPos = Point.read(nbttagcompound, "townHallPos");
 
 			thNightActionPerformed=nbttagcompound.getBoolean("nightActionPerformed");
@@ -5812,6 +5820,10 @@ public class Building {
 
 	public void setPathStartPos(Point p) {
 		pathStartPos = p;
+	}
+	
+	public void setLeasurePos(Point p) {
+		leasurePos = p;
 	}
 
 	public void setSellingPos(Point p) {
@@ -7623,6 +7635,9 @@ public class Building {
 			}
 			if (pathStartPos != null) {
 				pathStartPos.write(nbttagcompound, "pathStartPos");
+			}
+			if (leasurePos != null) {
+				leasurePos.write(nbttagcompound, "leasurePos");
 			}
 			if (townHallPos != null) {
 				townHallPos.write(nbttagcompound, "townHallPos");

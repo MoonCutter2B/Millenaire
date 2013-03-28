@@ -40,6 +40,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
+import org.millenaire.common.Culture.CultureLanguage.Dialog;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.Quest.QuestInstance;
 import org.millenaire.common.core.DevModUtilities;
@@ -500,6 +501,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public static final int max_child_size = 20;
 	public String speech_key=null;
 	public int speech_variant=0;
+	
+	public String dialogKey=null;
+	public int dialogRole=0;
+	public long dialogStart=0;
+	
 	private Point doorToClose=null;
 
 	public int foreignMerchantNbNights=0;
@@ -2405,6 +2411,39 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			MLN.minor(this, "No path found between "+getPos()+" and "+getPathDestPoint()+" in "+(System.currentTimeMillis()-this.pathCalculationStartTime));
 		}
 	}
+	
+	private void updateDialog() {
+		
+		if (dialogKey==null)
+			return;
+		
+		Dialog d=getCulture().getDialog(dialogKey);
+		
+		if (d==null) {
+			dialogKey=null;
+			return;
+		}
+		
+		long timePassed=worldObj.getWorldTime()-dialogStart;
+		
+		if (d.timeDelays.get(d.timeDelays.size()-1)+2000<timePassed) {
+			dialogKey=null;
+			return;
+		}
+		
+		String toSpeakKey=null;
+		
+		
+		for (int i=0;i<d.speechBy.size();i++) {
+			if (dialogRole==d.speechBy.get(i) && timePassed>=d.timeDelays.get(i)) {
+				toSpeakKey="chat_"+d.key+"_"+i;
+			}
+		}
+		
+		if (toSpeakKey!=null && (speech_key==null || !speech_key.contains(toSpeakKey))) {
+			speakSentence(toSpeakKey,0,10,1);
+		}
+	}
 
 	@Override
 	public void onUpdate() {
@@ -2715,6 +2754,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 
 		triggerMobAttacks();
+		
+		updateDialog();
 
 		isUsingBow=false;//will be set to true if the NPC is attacking with a bow in attackEntity()
 		isUsingHandToHand=false;
@@ -2848,6 +2889,15 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		if ((goalKey!=null) && !Goal.goals.containsKey(goalKey)) {
 			goalKey=null;
+		}
+		
+		
+		dialogKey=nbttagcompound.getString("dialogKey");
+		dialogStart=nbttagcompound.getLong("dialogStart");
+		dialogRole=nbttagcompound.getInteger("dialogRole");
+		
+		if (dialogKey.trim().length()==0) {
+			dialogKey=null;
 		}
 
 		familyName=nbttagcompound.getString("familyName");
@@ -3293,6 +3343,19 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		if (speech_key!=null) {
 			speech_variant=MillCommonUtilities.randomInt(getCulture().getSentences(speech_key).size());
 			speech_started=worldObj.getWorldTime();
+			
+			String destName="";
+			
+			if (dialogKey!=null && goalInformation!=null && goalInformation.getTargetEnt()!=null 
+					&& goalInformation.getTargetEnt() instanceof MillVillager) {
+				
+				MillVillager v=(MillVillager)goalInformation.getTargetEnt();
+				
+				destName=v.getName();
+			}
+			
+			ServerSender.sendVillageSentenceInRange(worldObj, getPos(), 30,getCulture().key,getName(),destName, speech_key, speech_variant);
+			
 		}
 	}
 
@@ -3816,6 +3879,12 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			nbttagcompound.setLong("lastSpeechLong", speech_started);
 			nbttagcompound.setLong("villager_lid", villager_id);
 
+			if (dialogKey!=null) {
+				nbttagcompound.setString("dialogKey", dialogKey);
+				nbttagcompound.setLong("dialogStart", dialogStart);
+				nbttagcompound.setInteger("dialogRole", dialogRole);
+			}
+			
 			final NBTTagList nbttaglist = new NBTTagList();
 			for (final InvItem key : inventory.keySet()) {
 

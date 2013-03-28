@@ -10,17 +10,23 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Vector;
 
+import net.minecraft.entity.player.EntityPlayer;
+
+import org.millenaire.common.Culture.CultureLanguage.Dialog;
 import org.millenaire.common.Culture.CultureLanguage.ReputationLevel;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingPlanSet;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.ExtFileFilter;
+import org.millenaire.common.core.MillCommonUtilities.WeightedChoice;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods;
 import org.millenaire.common.network.StreamReadWrite;
 
 public class Culture {
+
+
 
 	public static class CultureLanguage {
 
@@ -45,6 +51,71 @@ public class Culture {
 				return level - o.level;
 			}
 		}
+
+		public static class Dialog implements WeightedChoice {
+
+			private static String adult="adult",child="child",male="male",female="female";
+
+			public String key=null;
+			public int weight=10;
+			public final Vector<String> villager1=new Vector<String>();
+			public final Vector<String> villager2=new Vector<String>();
+			public final Vector<Integer> timeDelays=new Vector<Integer>();
+			public final Vector<Integer> speechBy=new Vector<Integer>();
+
+			Dialog(String config) {
+				
+				this.key=null;
+
+				for (String s : config.split(",")) {
+					if (s.split(":").length==2) {
+						String key=s.split(":")[0];
+						String val=s.split(":")[1];
+
+						if (key.equals("key"))
+							this.key=val;
+						else if (key.equals("weight"))
+							weight=Integer.parseInt(val);
+						else if (key.equals("v1"))
+							villager1.add(val);
+						else if (key.equals("v2"))
+							villager2.add(val);
+					}
+				}
+
+			}
+
+			public boolean isValidFor(MillVillager v1,MillVillager v2) {				
+				return isCompatible(villager1,v1) && isCompatible(villager2,v2);				
+			}
+
+			private boolean isCompatible(Vector<String> req,MillVillager v) {
+
+				for (String s : req) {
+					if (s.equals(adult)) {
+						if (v.vtype.isChild)
+							return false;
+					} else if (s.equals(child)) {
+						if (!v.vtype.isChild)
+							return false;
+					} else if (s.equals(male)) {
+						if (v.vtype.gender!=MillVillager.MALE)
+							return false;
+					} else if (s.equals(female)) {
+						if (v.vtype.gender!=MillVillager.FEMALE)
+							return false;
+					}
+				}
+				return true;
+			}
+
+			@Override
+			public int getChoiceWeight(EntityPlayer player) {
+				return weight;
+			}
+
+		}
+
 		public Culture culture;
 		public String language;
 
@@ -52,6 +123,7 @@ public class Culture {
 		public HashMap<String,Vector<String>> sentences=new HashMap<String,Vector<String>>();
 		public HashMap<String,String> buildingNames=new HashMap<String,String>();
 		public HashMap<String,String> strings=new HashMap<String,String>();
+		public HashMap<String,Dialog> dialogs=new HashMap<String,Dialog>();
 
 		public Vector<ReputationLevel> reputationLevels = new Vector<ReputationLevel>();
 
@@ -240,6 +312,7 @@ public class Culture {
 			loadBuildingNames(languageDirs);
 			loadCultureStrings(languageDirs);
 			loadSentences(languageDirs);
+			loadChats(languageDirs);
 			loadReputations(languageDirs);
 
 			if (!culture.loadedLanguages.containsKey(language)) {
@@ -292,6 +365,22 @@ public class Culture {
 
 				if (file.exists()) {
 					readSentenceFile(file);
+				}
+			}
+		}
+
+		private void loadChats(Vector<File> languageDirs) {
+
+			for (final File languageDir : languageDirs) {
+
+				File file = new File( new File(languageDir,language),culture.key+"_chats.txt");
+
+				if (!file.exists()) {
+					file = new File(new File(languageDir,language.split("_")[0]),culture.key+"_chats.txt");
+				}
+
+				if (file.exists()) {
+					readChatsFile(file);
 				}
 			}
 		}
@@ -392,6 +481,96 @@ public class Culture {
 						}
 					}
 				}
+				reader.close();
+			} catch (final Exception e) {
+				MLN.printException(e);
+				return false;
+			}
+
+			return true;
+		}
+
+		public Dialog getDialog(MillVillager v1,MillVillager v2) {
+
+			Vector<Dialog> possibleDialogs=new Vector<Dialog>();
+
+			for (Dialog d : dialogs.values()) {
+				if (d.isValidFor(v1, v2))
+					possibleDialogs.add(d);
+			}
+
+			if (possibleDialogs.isEmpty())
+				return null;
+			
+			WeightedChoice wc=MillCommonUtilities.getWeightedChoice(possibleDialogs, null);
+
+			return (Dialog)wc;
+		}
+
+		private boolean readChatsFile(File file) {
+
+			try {
+				final BufferedReader reader = MillCommonUtilities.getReader(file);
+
+				String line;
+
+				Dialog dialog=null;				
+
+				while ((line=reader.readLine()) != null) {
+					if ((line.trim().length() > 0) && !line.startsWith("//")) {
+
+						line=line.trim();
+
+						if (line.startsWith("newchat;") && line.split(";").length==2) {
+							
+							if (dialog!=null) {
+								if (dialog.speechBy.size()>0) {
+									if (dialogs.containsKey(dialog.key)) {
+										MLN.error(culture, language+": Trying to register two chats with the same key: "+dialog.key);
+									} else {
+										dialogs.put(dialog.key,dialog);
+									}
+									
+								} else
+									MLN.error(culture, "In dialog file "+file.getAbsolutePath()+" dialog "+dialog.key+" has no sentences.");
+							}
+							
+							String s=line.split(";")[1];
+
+							dialog=new Dialog(s);
+							
+							if (dialog.key==null) {
+								MLN.error(culture,  language+": Could not read chat line: "+line);
+								dialog=null;
+							}
+
+						} else if (dialog!=null && line.split(";").length==3) {
+							final String[] temp=line.split(";");
+
+							dialog.speechBy.add(temp[0].equals("v2")?2:1);
+							dialog.timeDelays.add(Integer.parseInt(temp[1]));
+
+							Vector<String> sentence=new Vector<String>();
+							sentence.add(temp[2]);
+
+							sentences.put("villager.chat_"+dialog.key+"_"+(dialog.speechBy.size()-1), sentence);
+
+						} else if (line.trim().length()>0) {
+							MLN.error(culture, language+": In dialog file "+file.getAbsolutePath()+" the following line is invalid: "+line);
+						}
+					}
+				}
+
+				if (dialog.speechBy.size()>0) {
+					if (dialogs.containsKey(dialog.key)) {
+						MLN.error(culture, language+": Trying to register two chats with the same key: "+dialog.key);
+					} else {
+						dialogs.put(dialog.key,dialog);
+					}
+					
+				} else
+					MLN.error(culture, language+": In dialog file "+file.getAbsolutePath()+" dialog "+dialog.key+" has no sentences.");
+
 				reader.close();
 			} catch (final Exception e) {
 				MLN.printException(e);
@@ -896,6 +1075,53 @@ public class Culture {
 		}
 
 		return MLN.string("culturereputation.neutral");
+	}
+
+
+	public Dialog getDialog(MillVillager v1,MillVillager v2) {
+
+		Dialog d=mainLanguage.getDialog(v1, v2);
+
+		if (d!=null)
+			return d;
+
+		if (mainLanguageServer!=null)
+			d=mainLanguageServer.getDialog(v1, v2);
+
+		if (d!=null)
+			return d;
+
+		if (fallbackLanguage!=null)
+			d=fallbackLanguage.getDialog(v1, v2);
+
+		if (d!=null)
+			return d;
+
+		if (fallbackLanguageServer!=null)
+			d=fallbackLanguageServer.getDialog(v1, v2);
+
+		if (d!=null)
+			return d;
+
+		return null;
+	}
+
+
+	public Dialog getDialog(String key) {
+
+		if (mainLanguage.dialogs.containsKey(key))
+			return mainLanguage.dialogs.get(key);
+
+		if (mainLanguageServer.dialogs.containsKey(key))
+			return mainLanguageServer.dialogs.get(key);
+
+		if (fallbackLanguage.dialogs.containsKey(key))
+			return fallbackLanguage.dialogs.get(key);
+
+		if (fallbackLanguageServer.dialogs.containsKey(key))
+			return fallbackLanguageServer.dialogs.get(key);
+
+		return null;
 	}
 
 	public Vector<String> getSentences(String key) {

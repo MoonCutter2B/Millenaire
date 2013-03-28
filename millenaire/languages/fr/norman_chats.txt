@@ -1,0 +1,74 @@
+newchat;key:rain,weigth:10
+v1;0;Je sens qu'il va pleuvoir.
+v2;30;Il pleut toujours en Normandie.
+
+newchat;key:beautifulvillage,weigth:10
+v1;0;Il est beau notre village, tu ne trouve pas?
+v2;30;Magnifique! Et on y travaille dur!
+
+newchat;key:sunset,weigth:10
+v1;0;Le soleil se lève où, déjà? J'oublie toujours.
+v2;30;Au nord, bien sûr!
+
+newchat;key:harvest,weigth:10
+v1;0;Tu penses que la récolte sera bonne cette année?
+v2;30;Qui sait, avec le temps qu'il a fait.
+v1;60;Il n'y a plus de saisons.
+
+newchat;key:indianfood,weigth:5
+v1;0;Tu as entendu parler des Indiens?
+v2;30;Il paraît qu'ils sont très bizarres.
+v1;60;J'ai même entendu dire que leur nourriture brûle!
+v2;100;Comme du calva?
+v1;120;Non, pire!
+
+newchat;key:tripes,v1:adult,v2:adult,v1:male,v2:female,weigth:10
+v1;0;Les tripes, ça c'est un plat d'homme.
+v2;30;Préparé par les femmes...
+v1;60;Mais avec des vaches abattues par des hommes!
+v2;100;Et nourries par des femmes...
+
+newchat;key:countingcows,weigth:10
+v1;0;Ca manque de distraction par ici.
+v2;30;C'est bien, c'est calme.
+v1;60;Et ennuyeux...
+v2;75;Tu n'as compter les vaches pour te distraire.
+v1;110;Déjà fait hier. Et les poulets aussi.
+
+newchat;key:paris,v1:adult,v2:adult,weigth:2
+v1;0;Quel coin paumé ici, quand même. J'aimerai voir autre chose un jour...
+v2;30;Les autres villages sont tous pareils.
+v1;60;Pas un village! Un bourg. Ou même une ville!
+v2;90;Quoi, comme Rouen? Tu es fou, c'est à des jours d'ici.
+v1;120;Rouen... ou même... Pourquoi pas Paris?
+v1;150;Tu te rend compte, on dit qu'il y aurait 25 000 personnes là-bas!
+v2;180;Tu divague, mon pauvre. 25 000 personnes au même endroit? Et où on les mettrait?
+
+newchat;key:calva,v1:adult,v2:adult,v1:male,v2:male,weigth:10
+v1;0;Par ce temps, un petit calva s'impose!
+v2;30;Par tous les temps!
+v1;50;A la Normandie et son climat à calva!
+v2;70;Santé!
+
+newchat;key:boyvillagechief,v1:child,v1:male,v2:adult,weigth:5
+v1;0;Quand je serais grand, je serais le chef du village!
+v2;30;Il va falloir que tu mange beaucoup de soupe avant d'en arriver là.
+v1;60;Et je te ferais punir!
+v2;70;C'est ça. En attendant, va travailler ou tu vas prendre une claque.
+
+newchat;key:kids1,v1:child,v2:child,weigth:10
+v1;0;Mon papa est bien plus fort que le tien.
+v2;30;N'importe quoi. Mon papa est le plus fort du village.
+v1;60;Tu rêves. Mon père met le tien par terre en deux minutes.
+v2;70;Et la Terre est ronde, c'est ça?
+
+newchat;key:kids2,v1:child,v1:male,v2:child,v2:female,weigth:10
+v1;0;Les filles, ça ne sert à rien.
+
+newchat;key:kids3,v2:child,v2:male,v1:child,v1:female,weigth:10
+v1;0;T'es peut être un garçon, mais je te fait pleurer quand je veux.
+v2;30;Même pas vrai! Peste!
+
+newchat;key:enderman,v1:adult,v2:child,weigth:10
+v1;0;Sois sage, ou l'homme des limbes t'emportera cette nuit!
+v2;40;Pfff, j'ai passé l'âge de croire à ces bêtises.

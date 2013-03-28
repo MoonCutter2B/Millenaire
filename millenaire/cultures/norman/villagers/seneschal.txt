@@ -8,6 +8,8 @@ texture=/graphics/mob/norman/ML_Seneschal0.png
 texture=/graphics/mob/norman/ML_Seneschal1.png
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=goDrink
 goal=patrol

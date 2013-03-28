@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
@@ -424,7 +425,84 @@ public class MillClientUtilities {
 		}
 	}
 
+	public static void putVillagerSentenceInChat(Point p,String cultureKey,String villagerName,String destName,String sentenceKey,int variant) {
 
+		int radius=0;
+		
+		if (Mill.serverWorlds.isEmpty()) {
+			radius=MLN.VillagersSentenceInChatDistanceClient;
+		} else {
+			radius=MLN.VillagersSentenceInChatDistanceSP;
+		}
+		
+		Entity player=Mill.proxy.getTheSinglePlayer();
+		
+		if (p.distanceTo(player)>radius) {
+			return;
+		}
+		
+		
+		Culture c=Culture.getCultureByName(cultureKey);
+
+		if (c==null)
+			return;
+
+		String gameSpeech=null,nativeSpeech=null;
+
+		if (c.canReadDialogs(Mill.proxy.getTheSinglePlayer().username)) {
+
+			final Vector<String> variants=c.getSentences(sentenceKey);
+
+			if ((variants!=null) && (variants.size()>variant)) {
+				String s=variants.get(variant).replaceAll("\\$name", Mill.proxy.getTheSinglePlayer().username);
+
+				if (s.split("/").length>1) {
+					s=s.split("/")[1].trim();
+
+					gameSpeech=s;
+				}
+			}
+		}
+		
+		final Vector<String> variants=c.getSentences(sentenceKey);
+
+		if ((variants!=null) && (variants.size()>variant)) {
+			String s=variants.get(variant).replaceAll("\\$name", Mill.proxy.getTheSinglePlayer().username);
+
+			if (s.split("/").length>1) {
+				s=s.split("/")[0].trim();
+			}
+
+			nativeSpeech=s;
+		}
+		
+		if (nativeSpeech!=null || gameSpeech!=null) {
+			
+			String s;
+			if (destName.length()>0) {
+				s=MLN.string("other.chattosomeone",villagerName,destName)+": ";
+			} else {
+				s=villagerName+": ";
+			}
+			
+			
+			if (nativeSpeech!=null) {
+				s+="\247"+MLN.BLUE+nativeSpeech;
+			}
+			
+			if (nativeSpeech!=null && gameSpeech!=null) {
+				s+=" ";
+			}
+			
+			if (gameSpeech!=null) {
+				s+="\247"+MLN.DARKRED+gameSpeech;
+			}
+			
+			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.WHITE, s);
+		}
+
+		
+	}
 
 
 }
