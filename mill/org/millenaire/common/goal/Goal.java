@@ -12,6 +12,10 @@ import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.goal.generic.GoalGeneric;
+import org.millenaire.common.goal.leasure.GoalChildGoPlay;
+import org.millenaire.common.goal.leasure.GoalGoDrink;
+import org.millenaire.common.goal.leasure.GoalGoPray;
+import org.millenaire.common.goal.leasure.GoalGoRest;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
 public abstract class Goal {

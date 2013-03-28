@@ -1,15 +1,16 @@
-package org.millenaire.common.goal;
+package org.millenaire.common.goal.leasure;
 
 import org.millenaire.common.Building;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
+import org.millenaire.common.goal.Goal;
 
 
 
 public class GoalGoDrink extends Goal {
 
-	GoalGoDrink() {
+	public GoalGoDrink() {
 		super();
 	}
 

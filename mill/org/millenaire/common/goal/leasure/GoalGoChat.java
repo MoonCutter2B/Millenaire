@@ -1,6 +1,7 @@
-package org.millenaire.common.goal;
+package org.millenaire.common.goal.leasure;
 
 import org.millenaire.common.MillVillager;
+import org.millenaire.common.goal.Goal;
 
 public class GoalGoChat extends Goal {
 

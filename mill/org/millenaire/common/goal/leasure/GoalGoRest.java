@@ -1,13 +1,13 @@
-package org.millenaire.common.goal;
+package org.millenaire.common.goal.leasure;
 
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.core.MillCommonUtilities;
+import org.millenaire.common.goal.Goal;
 
 
 
-public class GoalChildGoPlay extends Goal {
+public class GoalGoRest extends Goal {
 
-	GoalChildGoPlay() {
+	public GoalGoRest() {
 		super();
 		leasure=true;
 	}
@@ -24,14 +24,13 @@ public class GoalChildGoPlay extends Goal {
 
 	@Override
 	public GoalInformation getDestination(MillVillager villager) {
-		return null;
+		return packDest(villager.getHouse().getSleepingPos());
 	}
 
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
-		return true;
+		return (villager.getHouse().getPos().distanceTo(villager) > 5);
 	}
-
 
 	@Override
 	public boolean performAction(MillVillager villager) {
@@ -40,7 +39,12 @@ public class GoalChildGoPlay extends Goal {
 
 	@Override
 	public int priority(MillVillager villager) {
-		return MillCommonUtilities.randomInt(5);
+		return 0;
+	}
+
+	@Override
+	public int range(MillVillager villager) {
+		return 10;
 	}
 
 }
