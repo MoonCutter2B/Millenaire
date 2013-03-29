@@ -28,6 +28,7 @@ import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.TileEntityPanel.PanelPacketInfo;
 import org.millenaire.common.UserProfile;
 import org.millenaire.common.core.DevModUtilities;
+import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
 import org.millenaire.common.network.ServerReceiver;
@@ -425,7 +426,7 @@ public class MillClientUtilities {
 		}
 	}
 
-	public static void putVillagerSentenceInChat(Point p,String cultureKey,String villagerName,String destName,String sentenceKey,int variant) {
+	public static void putVillagerSentenceInChat(Point p,MillVillager v) {
 
 		int radius=0;
 		
@@ -441,40 +442,11 @@ public class MillClientUtilities {
 			return;
 		}
 		
-		
-		Culture c=Culture.getCultureByName(cultureKey);
+		String gameSpeech=MillCommonUtilities.getVillagerSentence(v, sentenceKey, variant, playerName, nativeSpeech)
+				
+				
+				nativeSpeech=null;
 
-		if (c==null)
-			return;
-
-		String gameSpeech=null,nativeSpeech=null;
-
-		if (c.canReadDialogs(Mill.proxy.getTheSinglePlayer().username)) {
-
-			final Vector<String> variants=c.getSentences(sentenceKey);
-
-			if ((variants!=null) && (variants.size()>variant)) {
-				String s=variants.get(variant).replaceAll("\\$name", Mill.proxy.getTheSinglePlayer().username);
-
-				if (s.split("/").length>1) {
-					s=s.split("/")[1].trim();
-
-					gameSpeech=s;
-				}
-			}
-		}
-		
-		final Vector<String> variants=c.getSentences(sentenceKey);
-
-		if ((variants!=null) && (variants.size()>variant)) {
-			String s=variants.get(variant).replaceAll("\\$name", Mill.proxy.getTheSinglePlayer().username);
-
-			if (s.split("/").length>1) {
-				s=s.split("/")[0].trim();
-			}
-
-			nativeSpeech=s;
-		}
 		
 		if (nativeSpeech!=null || gameSpeech!=null) {
 			

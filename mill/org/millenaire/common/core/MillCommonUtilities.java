@@ -1643,4 +1643,40 @@ public class MillCommonUtilities {
 		return (Block.blocksList[bid] instanceof BlockStairs);
 	}
 
+	public static String getVillagerSentence(MillVillager v, String playerName, boolean nativeSpeech) {
+
+		if (v.speech_key==null)
+			return null;
+		
+		if (!nativeSpeech && !v.getCulture().canReadDialogues(playerName))
+			return null;
+
+		final Vector<String> variants=v.getCulture().getSentences(v.speech_key);
+
+		if ((variants!=null) && (variants.size()>v.speech_variant)) {
+			String s=variants.get(v.speech_variant).replaceAll("\\$name", playerName);
+			
+			if (v.getGoalDestEntity()!=null && v.getGoalDestEntity() instanceof MillVillager) {
+				s=s.replaceAll("\\$targetfirstname", v.dialogueTargetFirstName);
+				s=s.replaceAll("\\$targetlastname", v.dialogueTargetLastName);
+			}
+
+			if (nativeSpeech) {
+				if (s.split("/").length>1) {
+					s=s.split("/")[1].trim();
+
+					return s;
+				}
+			} else {
+				if (s.split("/").length>1) {
+					s=s.split("/")[0].trim();
+				}
+
+				return s;
+			}
+		} 
+
+		return v.speech_key;		
+	}
+
 }

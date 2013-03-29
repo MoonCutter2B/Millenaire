@@ -72,3 +72,17 @@ v2;30;Même pas vrai! Peste!
 newchat;key:enderman,v1:adult,v2:child,weigth:10
 v1;0;Sois sage, ou l'homme des limbes t'emportera cette nuit!
 v2;40;Pfff, j'ai passé l'âge de croire à ces bêtises.
+
+newchat;key:badflirt,v1:adult,v2:adult,v1:nospouse,v2:nospouse,v1:male,v2:female,norel:sibling,v1:novtype:monk-priest-abbot,weigth:20
+v1;0;Alors beauté, qu'est ce que tu fais ce soir?
+v2;40;$targetfirstname, je t'ai déjà dit non!
+v1;60;Quel caractère!
+v2;80;Quel nigaud!
+
+newchat;key:badflirt2,v1:vtype:guard-lumberman,v2:adult,v1:spouse,v2:female,norel:sibling,norel:parent,norel:child,weigth:20
+v2;0;$targetfirstname, quels beaux muscles!
+v1;30;Tais-toi, malheureuse! Si ma femme t'endend...
+v2;60;Et bien quoi, bel homme?
+v1;90;Tu sais bien comme elle est jalouse!
+v2;120;Et? Elle te fait peur?
+v1;140;Peur? Elle? Quelle blague! Je ne veux pas la blesser, c'est tout.

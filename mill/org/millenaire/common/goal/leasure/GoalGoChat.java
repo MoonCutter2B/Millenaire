@@ -1,6 +1,6 @@
 package org.millenaire.common.goal.leasure;
 
-import org.millenaire.common.Culture.CultureLanguage.Dialog;
+import org.millenaire.common.Culture.CultureLanguage.Dialogue;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.goal.Goal;
 
@@ -29,7 +29,7 @@ public class GoalGoChat extends Goal {
 
 	@Override
 	public boolean performAction(MillVillager villager) throws Exception {		
-		return (villager.dialogKey==null);
+		return (villager.dialogueKey==null);
 	}
 
 	@Override
@@ -49,24 +49,21 @@ public class GoalGoChat extends Goal {
 			target.goalKey=key;
 			target.setGoalInformation(packDest(null,null,villager));
 			
-			int role=1;
-			Dialog dialog=villager.getCulture().getDialog(villager, target);
 			
-			if (dialog==null) {
-				dialog=villager.getCulture().getDialog(villager, target);
-				role=2;
-			}
+			Dialogue dialog=villager.getCulture().getDialog(villager, target);
+			
+			int role=dialog.validRoleFor(villager);
 			
 			villager.setGoalInformation(packDest(null,null,target));
 			
 			if (dialog!=null) {
-				villager.dialogKey=dialog.key;
-				villager.dialogRole=role;
-				villager.dialogStart=villager.worldObj.getWorldTime();
+				villager.dialogueKey=dialog.key;
+				villager.dialogueRole=role;
+				villager.dialogueStart=villager.worldObj.getWorldTime();
 				
-				target.dialogKey=dialog.key;
-				target.dialogRole=3-role;
-				target.dialogStart=villager.worldObj.getWorldTime();
+				target.dialogueKey=dialog.key;
+				target.dialogueRole=3-role;
+				target.dialogueStart=villager.worldObj.getWorldTime();
 			}
 		}
 		
