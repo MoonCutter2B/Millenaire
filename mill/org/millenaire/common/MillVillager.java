@@ -505,6 +505,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public String dialogueKey=null;
 	public int dialogueRole=0;
 	public long dialogueStart=0;
+	public char dialogueColour=MLN.WHITE;
 
 	//for use client-side ONLY
 	public String dialogueTargetFirstName=null;
@@ -888,9 +889,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				setGoalDestEntity(null);
 				setPathDestPoint(null);
 			} else {
-				if ((worldObj.getWorldTime()%100)==25) {
-					setPathDestPoint(new Point(getGoalDestEntity()));
-				}
+				setPathDestPoint(new Point(getGoalDestEntity()));
 			}
 		}
 
@@ -2413,7 +2412,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		long timePassed=worldObj.getWorldTime()-dialogueStart;
 
-		if (d.timeDelays.get(d.timeDelays.size()-1)+2000<timePassed) {
+		if (d.timeDelays.get(d.timeDelays.size()-1)+100<timePassed) {
 			dialogueKey=null;
 			return;
 		}
@@ -2882,6 +2881,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		dialogueKey=nbttagcompound.getString("dialogueKey");
 		dialogueStart=nbttagcompound.getLong("dialogueStart");
 		dialogueRole=nbttagcompound.getInteger("dialogueRole");
+		dialogueColour=(char) nbttagcompound.getInteger("dialogueColour");
 
 		if (dialogueKey.trim().length()==0) {
 			dialogueKey=null;
@@ -2992,7 +2992,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		dialogueTargetFirstName=StreamReadWrite.readNullableString(data);
 		dialogueTargetLastName=StreamReadWrite.readNullableString(data);
-
+		dialogueColour=data.readChar();
+		
 		client_lastupdated=worldObj.getWorldTime();
 
 
@@ -3193,6 +3194,15 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		if (ent!=null) {
 			setPathDestPoint(new Point(ent));
 		}
+
+		if (ent instanceof MillVillager) {
+
+			MillVillager v=(MillVillager)ent;
+
+			dialogueTargetFirstName=v.firstName;
+			dialogueTargetLastName=v.familyName;			
+		}
+
 	}
 
 	public void setGoalDestPoint(Point newDest) {
@@ -3334,17 +3344,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			speech_variant=MillCommonUtilities.randomInt(getCulture().getSentences(speech_key).size());
 			speech_started=worldObj.getWorldTime();
 
-			String destName="";
+			sendVillagerPacket();
 
-			if (dialogueKey!=null && goalInformation!=null && goalInformation.getTargetEnt()!=null 
-					&& goalInformation.getTargetEnt() instanceof MillVillager) {
-
-				MillVillager v=(MillVillager)goalInformation.getTargetEnt();
-
-				destName=v.getName();
-			}
-
-			ServerSender.sendVillageSentenceInRange(worldObj, getPos(), 30,getCulture().key,getName(),destName, speech_key, speech_variant);
+			ServerSender.sendVillageSentenceInRange(worldObj, getPos(), 30,this);
 
 		}
 	}
@@ -3873,6 +3875,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				nbttagcompound.setString("dialogueKey", dialogueKey);
 				nbttagcompound.setLong("dialogueStart", dialogueStart);
 				nbttagcompound.setInteger("dialogueRole", dialogueRole);
+				nbttagcompound.setInteger("dialogueColour", dialogueColour);
 			}
 
 			final NBTTagList nbttaglist = new NBTTagList();
@@ -3955,6 +3958,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		data.writeBoolean(shouldLieDown);
 		StreamReadWrite.writeNullableString(dialogueTargetFirstName,data);
 		StreamReadWrite.writeNullableString(dialogueTargetLastName,data);
+		data.writeChar(dialogueColour);
 
 	}
 

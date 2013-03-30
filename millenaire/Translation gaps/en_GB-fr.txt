@@ -1,5 +1,15 @@
 Translation comparison between en_GB and fr
 
+List of gaps found in culture dialogues for norman: 
+
+Dialogue missing for culture norman: alchemyworkshop
+Dialogue missing for culture norman: archives
+Dialogue missing for culture norman: bakery
+Dialogue missing for culture norman: church
+Dialogue missing for culture norman: inn
+Dialogue missing for culture norman: market
+Dialogue missing for culture norman: tavern
+
 List of gaps found in culture building names for mayan: 
 
 Building name missing for culture mayan: lonemayanpyramid_a0

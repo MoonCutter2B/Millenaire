@@ -1,0 +1,55 @@
+Explications sur les dialogues:
+
+"key" doit être unique pour cette culture
+"weight" indique la probabilité que ce dialogue soit choisi (s'il est valide)
+"v1" indique une restriction sur le premier villageois, "v2" sur le deuxième. Ces restrictions peuvent être:
+adult: doit être un adult
+child: doit être un enfant
+male: doit être un homme ou garçon
+female: doit être une femme ou fille
+hasspouse: doit être marié
+nospouse: non marié
+vtype: doit être de ce type de villageois. Possible d'en mettre plusieurs séparés par des tirets. Ex: vtype:guard-lumberman
+novtype: ne peut pas être de ce type. Ex: novtype:monk-priest-abbot
+
+"rel" indique une relation nécessaire entre les deux villageois. Les valeurs peuvent être:
+"spouse": les deux villageois sont mariés
+"parent": v1 est le père ou la mère de v2
+"child": v1 est l'enfant de v2
+"sibling": v1 et v2 sont frères et sœurs
+
+"notrel" accepte les mêmes noms de relations mais la relation est interdite
+
+"building" indique un bâtiment qui doit exister dans le village
+"notbuilding" un bâtiment qui n'existe pas dans le village
+
+"villager" indique un type de villageois qui doit exister dans le village
+"notvillager" un type de villageois qui n'existe pas dans le village
+
+tous ces critères sont cumulatifs: ils doivent tous être valides pour qu'un dialogue marche.
+
+Exemples:
+
+Dialogues entre un homme et une femme, tous les deux non mariés, qui ne sont pas frères et sœurs, et où l'homme n'est ni prêtre, ni moine:
+
+newchat;key:badflirt,v1:adult,v2:adult,v1:nospouse,v2:nospouse,v1:male,v2:female,notrel:sibling,v1:novtype:monk-priest-abbot,weigth:20
+
+Dialogue entre un bûcheron et un chevalier dans un village sans taverne:
+
+newchat;key:letsbuildatavern,v1:vtype:lumberman,v2:knight,notbuilding:tavern,weigth:20
+
+
+Dialogue dans un village avec un apprenti alchimiste, entre deux adultes qui ne sont ni apprenti alchimistes ni maître de guilde:
+
+newchat;key:alchemyworkshop,villager:alchemistapprentice,v1:notvtype:alchemistapprentice-guildmaster,v2:notvtype:alchemistapprentice-guildmaster,v1:adult,v2:adult,weigth:10
+
+Les phrases suivent ces conditions, avec trois valeurs:
+- la personne qui la dit (v1 ou v2)
+- le moment où la dire après le début du dialogue (délai en "tick" - une seconde vaut 20 ticks)
+- la phrase elle-même, avec un "/" pour séparer la phrase dans la langue du village (affichée en bleue dans la jeu) et celle dans la langue du joueur (en rouge).
+- la phrase peut include le nom du joueur ("$name"), le prénom de l'autre personne ("$targetfirstname") et son nom de famille ("$targetlastname")
+
+
+Exemple pour une phrase d'un dialogue Hindi prononcée au tick 30 par le deuxième villageois:
+
+v2;30;Sab kuch thik hai, $targetfirstname! / Tout va bien, $targetfirstname!

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
@@ -426,7 +425,7 @@ public class MillClientUtilities {
 		}
 	}
 
-	public static void putVillagerSentenceInChat(Point p,MillVillager v) {
+	public static void putVillagerSentenceInChat(MillVillager v) {
 
 		int radius=0;
 		
@@ -436,25 +435,22 @@ public class MillClientUtilities {
 			radius=MLN.VillagersSentenceInChatDistanceSP;
 		}
 		
-		Entity player=Mill.proxy.getTheSinglePlayer();
+		EntityPlayer player=Mill.proxy.getTheSinglePlayer();
 		
-		if (p.distanceTo(player)>radius) {
+		if (v.getPos().distanceTo(player)>radius) {
 			return;
 		}
 		
-		String gameSpeech=MillCommonUtilities.getVillagerSentence(v, sentenceKey, variant, playerName, nativeSpeech)
-				
-				
-				nativeSpeech=null;
-
+		String gameSpeech=MillCommonUtilities.getVillagerSentence(v,player.username,false);
+		String nativeSpeech=MillCommonUtilities.getVillagerSentence(v,player.username,true);				
 		
 		if (nativeSpeech!=null || gameSpeech!=null) {
 			
 			String s;
-			if (destName.length()>0) {
-				s=MLN.string("other.chattosomeone",villagerName,destName)+": ";
+			if (v.dialogueTargetFirstName!=null) {
+				s=MLN.string("other.chattosomeone",v.getName(),v.dialogueTargetFirstName+" "+v.dialogueTargetLastName)+": ";
 			} else {
-				s=villagerName+": ";
+				s=v.getName()+": ";
 			}
 			
 			
@@ -470,7 +466,7 @@ public class MillClientUtilities {
 				s+="\247"+MLN.DARKRED+gameSpeech;
 			}
 			
-			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.WHITE, s);
+			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),v.dialogueColour, s);
 		}
 
 		

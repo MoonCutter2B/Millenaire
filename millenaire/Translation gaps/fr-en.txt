@@ -1,3 +1,65 @@
 Translation comparison between fr and en
 
-Traduction completness: 100%
+List of gaps found in culture dialogues for byzantines: 
+
+Dialogue missing for culture byzantines: boyvillagechief
+Dialogue missing for culture byzantines: brothersister
+Dialogue missing for culture byzantines: brothertalk1
+Dialogue missing for culture byzantines: chatter1
+Dialogue missing for culture byzantines: chatter10
+Dialogue missing for culture byzantines: chatter11
+Dialogue missing for culture byzantines: chatter2
+Dialogue missing for culture byzantines: chatter3
+Dialogue missing for culture byzantines: chatter4
+Dialogue missing for culture byzantines: chatter5
+Dialogue missing for culture byzantines: chatter6
+Dialogue missing for culture byzantines: chatter7
+Dialogue missing for culture byzantines: chatter8
+Dialogue missing for culture byzantines: chatter9
+Dialogue missing for culture byzantines: city
+Dialogue missing for culture byzantines: clothes1
+Dialogue missing for culture byzantines: clothes2
+Dialogue missing for culture byzantines: clothes3
+Dialogue missing for culture byzantines: clothes4
+Dialogue missing for culture byzantines: doll
+Dialogue missing for culture byzantines: flirt1
+Dialogue missing for culture byzantines: flirt2
+Dialogue missing for culture byzantines: flirt3
+Dialogue missing for culture byzantines: flirt4
+Dialogue missing for culture byzantines: flirt5
+Dialogue missing for culture byzantines: flirt6
+Dialogue missing for culture byzantines: girl
+Dialogue missing for culture byzantines: harvest
+Dialogue missing for culture byzantines: householdTry
+Dialogue missing for culture byzantines: kids1
+Dialogue missing for culture byzantines: kids2
+Dialogue missing for culture byzantines: kids3
+Dialogue missing for culture byzantines: lightning
+Dialogue missing for culture byzantines: lightningPig
+Dialogue missing for culture byzantines: loneVillage
+Dialogue missing for culture byzantines: nicevillage
+Dialogue missing for culture byzantines: pride1
+Dialogue missing for culture byzantines: pride2
+Dialogue missing for culture byzantines: pride3
+Dialogue missing for culture byzantines: rain
+Dialogue missing for culture byzantines: religious1
+Dialogue missing for culture byzantines: religious2
+Dialogue missing for culture byzantines: sistertalk1
+Dialogue missing for culture byzantines: souvlaki
+Dialogue missing for culture byzantines: sun
+Dialogue missing for culture byzantines: talking1
+Dialogue missing for culture byzantines: talking2
+Dialogue missing for culture byzantines: talking3
+Dialogue missing for culture byzantines: talking4
+Dialogue missing for culture byzantines: talking5
+Dialogue missing for culture byzantines: talking6
+Dialogue missing for culture byzantines: talking7
+Dialogue missing for culture byzantines: talking8
+Dialogue missing for culture byzantines: talking9
+Dialogue missing for culture byzantines: weird1
+Dialogue missing for culture byzantines: weird2
+Dialogue missing for culture byzantines: weird3
+Dialogue missing for culture byzantines: wine
+Dialogue missing for culture byzantines: woodSword
+
+Traduction completness: 97%

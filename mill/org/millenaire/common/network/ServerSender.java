@@ -500,8 +500,7 @@ public class ServerSender {
 		sendPacketToPlayer(packet, player.username);
 	}
 	
-	public static void sendVillagerSentence(EntityPlayer player,Point p,String cultureKey,
-			String villagerName,String destName,String sentenceKey,int variant) {
+	public static void sendVillagerSentence(EntityPlayer player,MillVillager v) {
 
 		if (player==null)
 			return;
@@ -514,12 +513,7 @@ public class ServerSender {
 
 		try {
 			data.write(ServerReceiver.PACKET_VILLAGER_SENTENCE);
-			StreamReadWrite.writeNullablePoint(p, data);
-			data.writeUTF(cultureKey);
-			data.writeUTF(villagerName);
-			data.writeUTF(destName);
-			data.writeUTF(sentenceKey);
-			data.writeInt(variant);
+			data.writeLong(v.villager_id);
 
 		} catch (final IOException e) {
 			MLN.printException(ServerSender.class+": Error in sendVillagerSentence", e);
@@ -542,11 +536,11 @@ public class ServerSender {
 		}
 	}
 	
-	public static void sendVillageSentenceInRange(World world,Point p,int range,String cultureKey,String villagerName,String destName,String sentenceKey,int variant) {
+	public static void sendVillageSentenceInRange(World world,Point p,int range,MillVillager v) {
 		for (final Object oplayer : world.playerEntities) {
 			final EntityPlayer player=(EntityPlayer)oplayer;
 			if (p.distanceTo(player)<range) {
-				sendVillagerSentence(player,p,cultureKey,villagerName,destName,sentenceKey,variant);
+				sendVillagerSentence(player,v);
 			}
 		}
 	}

@@ -278,14 +278,11 @@ public class ClientReceiver implements IPacketHandler
 	
 	private void readVillagerSentencePackage(DataInputStream data) {
 		try {
-			Point p=StreamReadWrite.readNullablePoint(data);
-			String cultureKey=data.readUTF();
-			String villagerName=data.readUTF();
-			String destName=data.readUTF();
-			String sentenceKey=data.readUTF();
-			int sentenceVariant=data.readInt();
 			
-			MillClientUtilities.putVillagerSentenceInChat(p,cultureKey, villagerName, destName, sentenceKey, sentenceVariant);
+			final MillVillager v=Mill.clientWorld.villagers.get(data.readLong());
+			
+			if (v!=null)
+				MillClientUtilities.putVillagerSentenceInChat(v);
 		} catch (final IOException e) {
 			MLN.printException(e);
 		}
