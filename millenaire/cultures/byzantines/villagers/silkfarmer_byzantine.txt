@@ -26,6 +26,8 @@ clothes=clothes_byz_wool,/graphics/mob/byzanz/male/clothes/byz.miner.2.B.png
 toolNeeded=clothes_byz_wool
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=godrink
 goal=paintpainting

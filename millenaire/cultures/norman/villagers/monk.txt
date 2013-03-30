@@ -8,6 +8,8 @@ tag=seller
 texture=/graphics/mob/norman/ML_Monk0.png
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=goDrink
 goal=makeBooks

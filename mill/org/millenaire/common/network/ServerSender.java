@@ -499,12 +499,48 @@ public class ServerSender {
 
 		sendPacketToPlayer(packet, player.username);
 	}
+	
+	public static void sendVillagerSentence(EntityPlayer player,MillVillager v) {
+
+		if (player==null)
+			return;
+
+		if (!(player instanceof EntityPlayerMP))
+			return;
+
+		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		final DataOutputStream data = new DataOutputStream(bytes);
+
+		try {
+			data.write(ServerReceiver.PACKET_VILLAGER_SENTENCE);
+			data.writeLong(v.villager_id);
+
+		} catch (final IOException e) {
+			MLN.printException(ServerSender.class+": Error in sendVillagerSentence", e);
+		}
+
+		final Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = ServerReceiver.PACKET_CHANNEL;
+		packet.data = bytes.toByteArray();
+		packet.length = packet.data.length;
+
+		sendPacketToPlayer(packet, player.username);
+	}
 
 	public static void sendTranslatedSentenceInRange(World world,Point p,int range,char colour,String key,String... values) {
 		for (final Object oplayer : world.playerEntities) {
 			final EntityPlayer player=(EntityPlayer)oplayer;
 			if (p.distanceTo(player)<range) {
 				sendTranslatedSentence(player, colour,key, values);
+			}
+		}
+	}
+	
+	public static void sendVillageSentenceInRange(World world,Point p,int range,MillVillager v) {
+		for (final Object oplayer : world.playerEntities) {
+			final EntityPlayer player=(EntityPlayer)oplayer;
+			if (p.distanceTo(player)<range) {
+				sendVillagerSentence(player,v);
 			}
 		}
 	}

@@ -12,6 +12,12 @@ import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.goal.generic.GoalGeneric;
+import org.millenaire.common.goal.leasure.GoalChildGoPlay;
+import org.millenaire.common.goal.leasure.GoalGoChat;
+import org.millenaire.common.goal.leasure.GoalGoDrink;
+import org.millenaire.common.goal.leasure.GoalGoPray;
+import org.millenaire.common.goal.leasure.GoalGoRest;
+import org.millenaire.common.goal.leasure.GoalGoSocialise;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
 public abstract class Goal {
@@ -29,6 +35,7 @@ public abstract class Goal {
 	public static Goal hide;
 	public static Goal sleep;
 	public static Goal gettool;
+	public static Goal gosocialise;
 
 	public static final AStarConfig JPS_CONFIG_TIGHT=new AStarConfig(true,false,false,true);
 	public static final AStarConfig JPS_CONFIG_WIDE=new AStarConfig(true,false,false,true,2,10);
@@ -42,6 +49,10 @@ public abstract class Goal {
 		goals.put("gorest", new GoalGoRest());
 		goals.put("godrink", new GoalGoDrink());
 		goals.put("gopray", new GoalGoPray());
+		
+		gosocialise=new GoalGoSocialise();
+		goals.put("gosocialise", gosocialise);
+		goals.put("chat", new GoalGoChat());
 
 		goals.put("gathergoods", new GoalGatherGoods());
 		goals.put("bringbackresourceshome", new GoalBringBackResourcesHome());

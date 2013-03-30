@@ -10,17 +10,23 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Vector;
 
+import net.minecraft.entity.player.EntityPlayer;
+
+import org.millenaire.common.Culture.CultureLanguage.Dialogue;
 import org.millenaire.common.Culture.CultureLanguage.ReputationLevel;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingPlanSet;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.ExtFileFilter;
+import org.millenaire.common.core.MillCommonUtilities.WeightedChoice;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods;
 import org.millenaire.common.network.StreamReadWrite;
 
 public class Culture {
+
+
 
 	public static class CultureLanguage {
 
@@ -45,6 +51,345 @@ public class Culture {
 				return level - o.level;
 			}
 		}
+
+		public static class Dialogue implements WeightedChoice {
+
+			private static String adult="adult",child="child",male="male",female="female",hasspouse="hasspouse",nospouse="nospouse",vtype="vtype",notvtype="notvtype";
+
+			private static String rel_spouse="spouse",rel_parent="parent",rel_child="child",rel_sibling="sibling";
+
+			public String key=null;
+			private int weight=10;
+			private final Vector<String> villager1=new Vector<String>();
+			private final Vector<String> villager2=new Vector<String>();
+			private final Vector<String> relations=new Vector<String>();
+			private final Vector<String> not_relations=new Vector<String>();
+			private final Vector<String> buildings=new Vector<String>();
+			private final Vector<String> not_buildings=new Vector<String>();
+			private final Vector<String> villagers=new Vector<String>();
+			private final Vector<String> not_villagers=new Vector<String>();
+
+			public final Vector<Integer> timeDelays=new Vector<Integer>();
+			public final Vector<Integer> speechBy=new Vector<Integer>();
+
+			Dialogue(String config) {
+				this.key=null;
+				for (String s : config.split(",")) {
+					if (s.split(":").length>1) {
+						String key=s.split(":")[0];
+						String val=s.split(":")[1];
+
+						if (s.split(":").length>2)
+							val+=":"+s.split(":")[2];
+
+						if (key.equals("key"))
+							this.key=val;
+						else if (key.equals("weigth"))
+							weight=Integer.parseInt(val);
+						else if (key.equals("v1"))
+							villager1.add(val);
+						else if (key.equals("v2"))
+							villager2.add(val);
+						else if (key.equals("rel"))
+							relations.add(val);
+						else if (key.equals("notrel"))
+							not_relations.add(val);
+						else if (key.equals("building"))
+							buildings.add(val);
+						else if (key.equals("notbuilding"))
+							not_buildings.add(val);
+						else if (key.equals("villager"))
+							villagers.add(val);
+						else if (key.equals("notvillager"))
+							not_villagers.add(val);
+						else {
+							MLN.error(this, "Could not recognise key "+key+" in dialogue declaration "+config);
+						}
+
+					}
+				}
+			}
+
+			public boolean compareWith(Dialogue d,Vector<String> errors) throws IOException {
+
+				boolean differentConfig=false;
+
+				if (weight!=d.weight)
+					differentConfig=true;
+
+				if (!sameVectors(villager1,d.villager1))
+					differentConfig=true;
+				if (!sameVectors(villager2,d.villager2))
+					differentConfig=true;
+				if (!sameVectors(relations,d.relations))
+					differentConfig=true;
+				if (!sameVectors(not_relations,d.not_relations))
+					differentConfig=true;
+				if (!sameVectors(buildings,d.buildings))
+					differentConfig=true;
+				if (!sameVectors(not_buildings,d.not_buildings))
+					differentConfig=true;
+				if (!sameVectors(villagers,d.villagers))
+					differentConfig=true;
+				if (!sameVectors(not_villagers,d.not_villagers))
+					differentConfig=true;
+
+				if (differentConfig) {
+					errors.add("Dialogue has different configurations: "+key);
+				}
+				
+				
+
+				boolean differentSentences;
+				
+				if (timeDelays.size()!=d.timeDelays.size()) {
+					differentSentences=true;
+					errors.add("Dialogue has different sentence numbers: "+key);
+				} else {
+					differentSentences=(!sameVectors(timeDelays,d.timeDelays) || !sameVectors(speechBy,d.speechBy));
+					
+					if (differentSentences)
+						errors.add("Dialogue has different sentence settings: "+key);
+				}
+				
+				return !differentSentences && !differentConfig;
+
+			}
+
+			private boolean sameVectors(Vector<?> v, Vector<?> v2) {
+
+				if (v.size()!=v2.size())
+					return false;
+
+				for (int i=0;i<v.size();i++) {
+					if (!v.get(i).equals(v2.get(i)))
+						return false;
+				}
+
+				return true;				
+			}
+
+
+			public boolean isValidFor(MillVillager v1,MillVillager v2) {				
+				return isCompatible(villager1,v1) && isCompatible(villager2,v2) && 
+						isRelCompatible(v1,v2) && isBuildingCompatible(v1.getTownHall()) && isVillagersCompatible(v1.getTownHall());				
+			}
+
+			private boolean isVillagersCompatible(Building townHall) {
+				
+				for (String s : villagers) {
+					boolean found=false;
+
+					for (VillagerRecord vr : townHall.vrecords) {
+						if (vr.type.equals(s))
+							found=true;
+					}
+
+					if (!found)
+						return false;					
+				}
+				
+				for (String s : not_villagers) {					
+					for (VillagerRecord vr : townHall.vrecords) {
+						if (vr.type.equals(s))
+							return false;
+					}
+				}
+				
+				return true;
+			}
+
+			private boolean isBuildingCompatible(Building townHall) {
+
+				for (String s : buildings) {
+					boolean found=false;
+
+					for (BuildingLocation bl : townHall.getLocations()) {
+						if (bl.key.equals(s))
+							found=true;
+					}
+
+					if (!found)
+						return false;					
+				}			
+
+				for (String s : not_buildings) {					
+					for (BuildingLocation bl : townHall.getLocations()) {
+						if (bl.key.equals(s))
+							return false;
+					}
+				}	
+
+				return true;
+			}
+
+			private boolean isRelCompatible(MillVillager v1, MillVillager v2) {
+
+				for (String s : relations) {
+
+					String key=s.split(":")[0];
+
+					if (key.equals(rel_spouse)) {
+						if (v1.getSpouse()!=v2)
+							return false;
+					} else if (key.equals(rel_parent)) {
+						if (!v1.getRecord().fathersName.equals(v2.getName()) && !v1.getRecord().mothersName.equals(v2.getName()))
+							return false;
+					} else if (key.equals(rel_child)) {
+						if (!v2.getRecord().fathersName.equals(v1.getName()) && !v2.getRecord().mothersName.equals(v1.getName()))
+							return false;
+					} else if (key.equals(rel_sibling)) {
+						if (!v2.getRecord().mothersName.equals(v1.getRecord().mothersName))
+							return false;
+					}
+				}
+
+				for (String s : not_relations) {
+
+					String key=s.split(":")[0];
+
+					if (key.equals(rel_spouse)) {
+						if (v1.getSpouse()==v2)
+							return false;
+					} else if (key.equals(rel_parent)) {
+						if (v1.getRecord().fathersName.equals(v2.getName()) || v1.getRecord().mothersName.equals(v2.getName()))
+							return false;
+					} else if (key.equals(rel_child)) {
+						if (v2.getRecord().fathersName.equals(v1.getName()) || v2.getRecord().mothersName.equals(v1.getName()))
+							return false;
+					} else if (key.equals(rel_sibling)) {
+						if (v2.getRecord().mothersName.equals(v1.getRecord().mothersName))
+							return false;
+					}
+				}
+
+				return true;
+			}
+
+			public int validRoleFor(MillVillager v) {
+
+				if (isCompatible(villager1,v))
+					return 1;
+				if (isCompatible(villager2,v))
+					return 2;
+
+				return 0;
+			}
+
+			private boolean isCompatible(Vector<String> req,MillVillager v) {
+
+				for (String s : req) {
+
+					String key=s.split(":")[0];
+					String val=null;
+
+					if (s.split(":").length>1)
+						val=s.split(":")[1];
+
+					if (key.equals(adult)) {
+						if (v.vtype.isChild)
+							return false;
+					} else if (key.equals(child)) {
+						if (!v.vtype.isChild)
+							return false;
+					} else if (key.equals(male)) {
+						if (v.vtype.gender!=MillVillager.MALE)
+							return false;
+					} else if (key.equals(female)) {
+						if (v.vtype.gender!=MillVillager.FEMALE)
+							return false;
+					} else if (key.equals(vtype)) {
+						boolean found=false;
+						for (String type : val.split("-")) {
+							if (type.equals(v.vtype.key))
+								found=true;
+						}
+						if (!found)
+							return false;
+					} else if (key.equals(notvtype)) {
+						for (String type : val.split("-")) {
+							if (type.equals(v.vtype.key))
+								return false;
+						}
+					} else if (key.equals(hasspouse)) {
+						if (v.getRecord().spousesName.equals(""))
+							return false;
+					} else if (key.equals(nospouse)) {
+						if (!v.getRecord().spousesName.equals(""))
+							return false;
+					} else if (key.equals(female)) {
+						if (v.vtype.gender!=MillVillager.FEMALE)
+							return false;
+					}
+				}
+				return true;
+			}
+
+			@Override
+			public int getChoiceWeight(EntityPlayer player) {
+				return weight;
+			}
+
+			public void checkData(Culture culture, String language) {
+				
+				for (String s : villager1) {
+					if (!s.equals(adult) && !s.equals(child) && !s.equals(male) && !s.equals(female) 
+							&& !s.equals(hasspouse) && !s.equals(nospouse) && !s.startsWith(vtype+":") && !s.startsWith(notvtype+":")) {
+						MLN.error(culture, language+": Unknown v1 setting in dialogue "+key+": "+s);
+					}
+					
+					if (s.startsWith(vtype+":") || s.startsWith(notvtype+":")) {
+						String s2=s.split(":")[1];
+						
+						for (String vtype : s2.split("-")) {
+							if (!culture.villagerTypes.containsKey(vtype)) {
+								MLN.error(culture, language+": Unknown villager type in dialogue "+key+": "+s);
+							}
+						}						
+					}
+					
+				}
+				for (String s : villager2) {
+					if (!s.equals(adult) && !s.equals(child) && !s.equals(male) && !s.equals(female) 
+							&& !s.equals(hasspouse) && !s.equals(nospouse) && !s.startsWith(vtype+":") && !s.startsWith(notvtype+":")) {
+						MLN.error(culture, language+": Unknown v2 setting in dialogue "+key+": "+s);
+					}
+				}
+				for (String s : relations) {
+					if (!s.equals(rel_spouse) && !s.equals(rel_parent) && !s.equals(rel_child) && !s.equals(rel_sibling)) {
+						MLN.error(culture, language+": Unknown rel setting in dialogue "+key+": "+s);
+					}
+				}
+				for (String s : not_relations) {
+					if (!s.equals(rel_spouse) && !s.equals(rel_parent) && !s.equals(rel_child) && !s.equals(rel_sibling)) {
+						MLN.error(culture, language+": Unknown notrel setting in dialogue "+key+": "+s);
+					}
+				}
+				for (String s : buildings) {
+					if (!culture.planSet.containsKey(s)) {
+						MLN.error(culture, language+": Unknown building in dialogue "+key+": "+s);
+					}
+				}
+				for (String s : not_buildings) {
+					if (!culture.planSet.containsKey(s)) {
+						MLN.error(culture, language+": Unknown notbuilding in dialogue "+key+": "+s);
+					}
+				}
+				for (String s : villagers) {
+					if (!culture.villagerTypes.containsKey(s)) {
+						MLN.error(culture, language+": Unknown villager in dialogue "+key+": "+s);
+					}
+				}
+				for (String s : not_villagers) {
+					if (!culture.villagerTypes.containsKey(s)) {
+						MLN.error(culture, language+": Unknown notvillager in dialogue "+key+": "+s);
+					}
+				}
+			}
+			
+			
+		}
+
 		public Culture culture;
 		public String language;
 
@@ -52,6 +397,7 @@ public class Culture {
 		public HashMap<String,Vector<String>> sentences=new HashMap<String,Vector<String>>();
 		public HashMap<String,String> buildingNames=new HashMap<String,String>();
 		public HashMap<String,String> strings=new HashMap<String,String>();
+		public HashMap<String,Dialogue> dialogues=new HashMap<String,Dialogue>();
 
 		public Vector<ReputationLevel> reputationLevels = new Vector<ReputationLevel>();
 
@@ -92,19 +438,50 @@ public class Culture {
 			Collections.sort(keys);
 
 			for (final String key : keys) {
-				if (!sentences.containsKey(key)) {
-					errors.add("Sentences missing for culture "+culture.key+": "+key);
-					translationsMissing++;
-				} else if (sentences.get(key).size()!=ref.sentences.get(key).size()) {
-					errors.add("Different number of sentences for culture "+culture.key+": "+key);
-					translationsMissing++;
-				} else {
-					translationsDone++;
+				if (!key.startsWith("villager.chat_")) {//dialogue sentences are handled seperately
+					if (!sentences.containsKey(key)) {
+						errors.add("Sentences missing for culture "+culture.key+": "+key);
+						translationsMissing++;
+					} else if (sentences.get(key).size()!=ref.sentences.get(key).size()) {
+						errors.add("Different number of sentences for culture "+culture.key+": "+key);
+						translationsMissing++;
+					} else {
+						translationsDone++;
+					}
 				}
 			}
 
 			if (errors.size()>0) {
 				writer.write("List of gaps found in culture sentences for "+culture.key+": "+MLN.EOL+MLN.EOL);
+
+				for (final String s : errors) {
+					writer.write(s+MLN.EOL);
+				}
+				writer.write(MLN.EOL);
+			}
+
+			keys=new Vector<String>(ref.dialogues.keySet());
+			Collections.sort(keys);
+
+			errors.clear();
+
+			for (final String key : keys) {
+
+				if (!dialogues.containsKey(key)) {
+					errors.add("Dialogue missing for culture "+culture.key+": "+key);
+					translationsMissing++;
+				} else {
+					boolean matches=dialogues.get(key).compareWith(ref.dialogues.get(key), errors);
+					
+					if (matches)
+						translationsDone++;
+					else
+						translationsMissing++;					
+				}
+			}
+			
+			if (errors.size()>0) {
+				writer.write("List of gaps found in culture dialogues for "+culture.key+": "+MLN.EOL+MLN.EOL);
 
 				for (final String s : errors) {
 					writer.write(s+MLN.EOL);
@@ -240,6 +617,7 @@ public class Culture {
 			loadBuildingNames(languageDirs);
 			loadCultureStrings(languageDirs);
 			loadSentences(languageDirs);
+			loadDialogues(languageDirs);
 			loadReputations(languageDirs);
 
 			if (!culture.loadedLanguages.containsKey(language)) {
@@ -292,6 +670,22 @@ public class Culture {
 
 				if (file.exists()) {
 					readSentenceFile(file);
+				}
+			}
+		}
+
+		private void loadDialogues(Vector<File> languageDirs) {
+
+			for (final File languageDir : languageDirs) {
+
+				File file = new File( new File(languageDir,language),culture.key+"_dialogues.txt");
+
+				if (!file.exists()) {
+					file = new File(new File(languageDir,language.split("_")[0]),culture.key+"_dialogues.txt");
+				}
+
+				if (file.exists()) {
+					readDialoguesFile(file);
 				}
 			}
 		}
@@ -392,6 +786,100 @@ public class Culture {
 						}
 					}
 				}
+				reader.close();
+			} catch (final Exception e) {
+				MLN.printException(e);
+				return false;
+			}
+
+			return true;
+		}
+
+		public Dialogue getDialogue(MillVillager v1,MillVillager v2) {
+
+			Vector<Dialogue> possibleDialogues=new Vector<Dialogue>();
+
+			for (Dialogue d : dialogues.values()) {
+				if (d.isValidFor(v1, v2))
+					possibleDialogues.add(d);
+				else if (d.isValidFor(v2, v1))
+					possibleDialogues.add(d);
+			}
+
+			if (possibleDialogues.isEmpty())
+				return null;
+
+			WeightedChoice wc=MillCommonUtilities.getWeightedChoice(possibleDialogues, null);
+
+			return (Dialogue)wc;
+		}
+
+		private boolean readDialoguesFile(File file) {
+
+			try {
+				final BufferedReader reader = MillCommonUtilities.getReader(file);
+
+				String line;
+
+				Dialogue dialogue=null;				
+
+				while ((line=reader.readLine()) != null) {
+					if ((line.trim().length() > 0) && !line.startsWith("//")) {
+
+						line=line.trim();
+
+						if (line.startsWith("newchat;") && line.split(";").length==2) {
+
+							if (dialogue!=null) {
+								if (dialogue.speechBy.size()>0) {
+									if (dialogues.containsKey(dialogue.key)) {
+										MLN.error(culture, language+": Trying to register two dialogues with the same key: "+dialogue.key);
+									} else {
+										dialogue.checkData(culture,language);
+										dialogues.put(dialogue.key,dialogue);
+									}
+
+								} else
+									MLN.error(culture, "In dialogue file "+file.getAbsolutePath()+" dialogue "+dialogue.key+" has no sentences.");
+							}
+
+							String s=line.split(";")[1];
+
+							dialogue=new Dialogue(s);
+
+							if (dialogue.key==null) {
+								MLN.error(culture,  language+": Could not read dialogue line: "+line);
+								dialogue=null;
+							}
+
+						} else if (dialogue!=null && line.split(";").length==3) {
+							final String[] temp=line.split(";");
+
+							dialogue.speechBy.add(temp[0].equals("v2")?2:1);
+							dialogue.timeDelays.add(Integer.parseInt(temp[1]));
+
+							Vector<String> sentence=new Vector<String>();
+							sentence.add(temp[2]);
+
+							sentences.put("villager.chat_"+dialogue.key+"_"+(dialogue.speechBy.size()-1), sentence);
+
+						} else if (line.trim().length()>0) {
+							MLN.error(culture, language+": In dialogue file "+file.getAbsolutePath()+" the following line is invalid: "+line);
+						}
+					}
+				}
+
+				if (dialogue.speechBy.size()>0) {
+					if (dialogues.containsKey(dialogue.key)) {
+						MLN.error(culture, language+": Trying to register two dialogues with the same key: "+dialogue.key);
+					} else {
+						dialogue.checkData(culture,language);
+						dialogues.put(dialogue.key,dialogue);
+					}
+
+				} else
+					MLN.error(culture, language+": In dialogue file "+file.getAbsolutePath()+" dialogue "+dialogue.key+" has no sentences.");
+
 				reader.close();
 			} catch (final Exception e) {
 				MLN.printException(e);
@@ -680,7 +1168,7 @@ public class Culture {
 
 
 
-	public boolean canReadDialogs(String username) {
+	public boolean canReadDialogues(String username) {
 		if (Mill.proxy.getClientProfile()==null)//server-side
 			return true;
 
@@ -896,6 +1384,53 @@ public class Culture {
 		}
 
 		return MLN.string("culturereputation.neutral");
+	}
+
+
+	public Dialogue getDialog(MillVillager v1,MillVillager v2) {
+
+		Dialogue d=mainLanguage.getDialogue(v1, v2);
+
+		if (d!=null)
+			return d;
+
+		if (mainLanguageServer!=null)
+			d=mainLanguageServer.getDialogue(v1, v2);
+
+		if (d!=null)
+			return d;
+
+		if (fallbackLanguage!=null)
+			d=fallbackLanguage.getDialogue(v1, v2);
+
+		if (d!=null)
+			return d;
+
+		if (fallbackLanguageServer!=null)
+			d=fallbackLanguageServer.getDialogue(v1, v2);
+
+		if (d!=null)
+			return d;
+
+		return null;
+	}
+
+
+	public Dialogue getDialogue(String key) {
+
+		if (mainLanguage.dialogues.containsKey(key))
+			return mainLanguage.dialogues.get(key);
+
+		if (mainLanguageServer!=null && mainLanguageServer.dialogues.containsKey(key))
+			return mainLanguageServer.dialogues.get(key);
+
+		if (fallbackLanguage!=null && fallbackLanguage.dialogues.containsKey(key))
+			return fallbackLanguage.dialogues.get(key);
+
+		if (fallbackLanguageServer!=null && fallbackLanguageServer.dialogues.containsKey(key))
+			return fallbackLanguageServer.dialogues.get(key);
+
+		return null;
 	}
 
 	public Vector<String> getSentences(String key) {

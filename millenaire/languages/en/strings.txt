@@ -594,6 +594,9 @@ goal.getitemtokeep=Picking up an item
 goal.buildpath=Marking a path
 goal.clearoldpath=clearing an old path
 
+goal.gosocialise=Off to chat
+goal.chat=Chatting
+
 //other
 other.west=West
 other.east=East
@@ -633,6 +636,8 @@ other.buildinghealing=<0> is healing you.
 
 
 other.localmerchantinteract=This merchant is a local merchant. He transports goods from villages to villages. You cannot interact with him.
+
+other.chattosomeone=<0> to <1>
 
 hire.health=Health
 hire.strength=Strength

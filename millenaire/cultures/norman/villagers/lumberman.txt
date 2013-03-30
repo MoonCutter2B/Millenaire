@@ -13,6 +13,8 @@ texture=/graphics/mob/norman/ML_Lumberman2.png
 texture=/graphics/mob/norman/ML_Lumberman3.png
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=goDrink
 

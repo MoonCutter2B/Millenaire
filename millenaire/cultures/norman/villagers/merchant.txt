@@ -11,6 +11,8 @@ texture=/graphics/mob/norman/ML_Merchant1.png
 texture=/graphics/mob/norman/ML_Merchant2.png
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=godrink
 goal=visitInn
