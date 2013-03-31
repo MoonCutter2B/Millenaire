@@ -72,6 +72,10 @@ display_names=true
 
 villagers_names_distance=20
 
+villagers_sentence_in_chat_distance_client=0
+
+villagers_sentence_in_chat_distance_sp=3
+
 //distance from the player up to which Millénaire will attempt to keep villages' chunks loaded
 keep_active_radius=200
 

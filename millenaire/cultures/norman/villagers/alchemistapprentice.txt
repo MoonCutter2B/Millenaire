@@ -6,6 +6,8 @@ firstNameList=men_names
 texture=/graphics/mob/norman/ML_AlchemistApprentice0.png
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=godrink
 goal=makeglassbottles
 goal=harvestwarts

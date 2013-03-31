@@ -25,6 +25,8 @@ toolNeeded=clothes_byz_wool
 toolNeeded=steelAxe
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=goDrink
 goal=bringBackResourcesHome

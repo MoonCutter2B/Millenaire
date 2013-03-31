@@ -19,6 +19,8 @@ clothes=clothes_byz_silk,/graphics/mob/byzanz/noblemale/clothes/byz.patriarch.2.
 toolNeeded=clothes_byz_silk
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=goDrink
 goal=makebook

@@ -47,6 +47,7 @@ public class ServerReceiver implements IPacketHandler
 	public static final int PACKET_OPENGUI = 104;
 	public static final int PACKET_PANELUPDATE = 106;
 	public static final int PACKET_ANIMALBREED = 107;
+	public static final int PACKET_VILLAGER_SENTENCE = 108;
 
 	public static final int PACKET_GUIACTION = 200;
 	public static final int PACKET_VILLAGELIST_REQUEST = 201;

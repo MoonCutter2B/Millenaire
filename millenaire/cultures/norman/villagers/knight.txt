@@ -9,6 +9,8 @@ health=60
 texture=/graphics/mob/norman/ML_Knight0.png
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=goDrink
 goal=patrol

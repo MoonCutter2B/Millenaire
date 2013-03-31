@@ -27,6 +27,7 @@ import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.TileEntityPanel.PanelPacketInfo;
 import org.millenaire.common.UserProfile;
 import org.millenaire.common.core.DevModUtilities;
+import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
 import org.millenaire.common.network.ServerReceiver;
@@ -424,7 +425,52 @@ public class MillClientUtilities {
 		}
 	}
 
+	public static void putVillagerSentenceInChat(MillVillager v) {
 
+		int radius=0;
+		
+		if (Mill.serverWorlds.isEmpty()) {
+			radius=MLN.VillagersSentenceInChatDistanceClient;
+		} else {
+			radius=MLN.VillagersSentenceInChatDistanceSP;
+		}
+		
+		EntityPlayer player=Mill.proxy.getTheSinglePlayer();
+		
+		if (v.getPos().distanceTo(player)>radius) {
+			return;
+		}
+		
+		String gameSpeech=MillCommonUtilities.getVillagerSentence(v,player.username,false);
+		String nativeSpeech=MillCommonUtilities.getVillagerSentence(v,player.username,true);				
+		
+		if (nativeSpeech!=null || gameSpeech!=null) {
+			
+			String s;
+			if (v.dialogueTargetFirstName!=null) {
+				s=MLN.string("other.chattosomeone",v.getName(),v.dialogueTargetFirstName+" "+v.dialogueTargetLastName)+": ";
+			} else {
+				s=v.getName()+": ";
+			}
+			
+			
+			if (nativeSpeech!=null) {
+				s+="\247"+MLN.BLUE+nativeSpeech;
+			}
+			
+			if (nativeSpeech!=null && gameSpeech!=null) {
+				s+=" ";
+			}
+			
+			if (gameSpeech!=null) {
+				s+="\247"+MLN.DARKRED+gameSpeech;
+			}
+			
+			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),v.dialogueColour, s);
+		}
+
+		
+	}
 
 
 }

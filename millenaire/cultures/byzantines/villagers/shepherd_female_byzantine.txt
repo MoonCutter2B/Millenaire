@@ -33,6 +33,8 @@ clothes=clothes_byz_wool,/graphics/mob/byzanz/female/clothes/byz.sheepf.2.C.png
 toolNeeded=clothes_byz_wool
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=goDrink
 goal=deliverResourcesShop

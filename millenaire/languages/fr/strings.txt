@@ -590,6 +590,9 @@ goal.getitemtokeep=Va chercher un objet
 goal.buildpath=Trace un chemin
 goal.clearoldpath=Efface un vieux chemin
 
+goal.gosocialise=Part discuter
+goal.chat=Discute
+
 
 //other
 other.west=ouest
@@ -629,6 +632,8 @@ other.femalevillager=villageoise Millénaire
 other.buildinghealing=<0> restaure votre santé.
 
 other.localmerchantinteract=Ce marchand est un marchand local. Il transporte des marchandises de village en village. Vous ne pouvez pas interagir avec lui.
+
+other.chattosomeone=<0> à <1>
 
 hire.health=Vie
 hire.strength=Force
