@@ -1,3 +1,27 @@
 Translation comparison between fr_FR and en
 
-Traduction completness: 100%
+List of gaps found in strings.txt: 
+
+Key missing in the strings.txt file: config.display_names.desc
+Key missing in the strings.txt file: config.display_names.label
+Key missing in the strings.txt file: config.display_start.desc
+Key missing in the strings.txt file: config.display_start.label
+Key missing in the strings.txt file: config.dynamic_textures.desc
+Key missing in the strings.txt file: config.dynamic_textures.label
+Key missing in the strings.txt file: config.fallback_language.desc
+Key missing in the strings.txt file: config.fallback_language.label
+Key missing in the strings.txt file: config.language_learning.desc
+Key missing in the strings.txt file: config.language_learning.label
+Key missing in the strings.txt file: config.load_all_languages.desc
+Key missing in the strings.txt file: config.load_all_languages.label
+Key missing in the strings.txt file: config.page.uisettings
+Key missing in the strings.txt file: config.page.villagebehaviour
+Key missing in the strings.txt file: config.page.worldgeneration
+Key missing in the strings.txt file: config.pagetitle
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_client.desc
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_client.label
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_sp.desc
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_sp.label
+Key missing in the strings.txt file: ui.configbutton
+
+Traduction completness: 99%

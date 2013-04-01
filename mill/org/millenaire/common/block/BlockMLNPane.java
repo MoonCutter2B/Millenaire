@@ -1,6 +1,7 @@
 package org.millenaire.common.block;
 
 import org.millenaire.common.core.MillCommonUtilities;
+import org.millenaire.common.forge.Mill;
 
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
@@ -16,6 +17,7 @@ public class BlockMLNPane extends BlockPane {
 		super(i, textureName, sideTexture, material, flag);
 		this.textureName=textureName;
 		this.sideTextureName=sideTexture;
+		this.setCreativeTab(Mill.tabMillenaire);
 	}
 	
 	@Override

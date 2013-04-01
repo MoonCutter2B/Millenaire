@@ -2,7 +2,6 @@ package org.millenaire.common.item;
 
 import java.util.Vector;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -42,7 +41,7 @@ public class ItemParchment extends ItemText {
 
 	public ItemParchment(int i, String iconName,int t) {
 		this(i,iconName,new int[]{t});
-		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.setCreativeTab(Mill.tabMillenaire);
 	}
 
 	public ItemParchment(int i, String iconName,int[] tIds) {

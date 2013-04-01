@@ -56,6 +56,8 @@ public class GuiPanelParchment extends GuiText {
 				DisplayActions.displayHelpGUI();
 			} else if (gb.id==MillGuiButton.CHUNKBUTTON) {
 				DisplayActions.displayChunkGUI(player,player.worldObj);
+			} else if (gb.id==MillGuiButton.CONFIGBUTTON) {
+				DisplayActions.displayConfigGUI();
 			}
 		}
 

@@ -25,6 +25,10 @@ public class DisplayActions {
 		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiHelp());
 	}
 	
+	public static void displayConfigGUI() {
+		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiConfig());
+	}
+	
 	public static void displayChunkGUI(EntityPlayer player,World world) {
 		MillClientUtilities.displayChunkPanel(world,player);
 	}

@@ -18,6 +18,9 @@ dynamic_textures=true
 stop_default_villages=true
 byzantine_dev_content=true
 
+
+villagers_names_distance=20
+
 //Rate at which villages will start raid (0: never, 20: 20% of nights where there is a valid target, 100: every night where there is a valid target)
 raiding_rate=100
 
@@ -59,3 +62,9 @@ enable_clothes=true
 //log.Diplomacy=minor
 //log.Pujas=minor
 //log.network=minor
+village_paths=true
+display_start=true
+max_children_number=10
+background_radius=2000
+display_names=true
+villagers_sentence_in_chat_distance_sp=3

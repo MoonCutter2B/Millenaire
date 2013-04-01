@@ -94,6 +94,10 @@ public class MillClientUtilities {
 		page.add(GuiText.LINE_HELP_GUI_BUTTON);
 		page.add("");
 		page.add("");
+		
+		page.add(GuiText.LINE_CONFIG_GUI_BUTTON);
+		page.add("");
+		page.add("");
 
 		if (!Mill.serverWorlds.isEmpty()) {
 			page.add(GuiText.LINE_CHUNK_GUI_BUTTON);

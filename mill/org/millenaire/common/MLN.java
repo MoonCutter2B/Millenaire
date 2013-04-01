@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Vector;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -469,6 +470,11 @@ public class MLN {
 			}
 		}
 
+		@Override
+		public String toString() {
+			return language;
+		}
+
 	}
 	public static class MillenaireException extends Exception {
 		private static final long serialVersionUID = 1L;
@@ -617,6 +623,68 @@ public class MLN {
 	public static Language serverMainLanguage=null;
 	public static Language serverFallbackLanguage=null;
 	public static HashMap<String,Language> loadedLanguages=new HashMap<String,Language>();
+
+	public static HashMap<String,MillConfig> configs=new HashMap<String,MillConfig>();
+	
+	public static Vector<String> configPageTitles=new Vector<String>();
+	public static Vector<Vector<MillConfig>> configPages=new Vector<Vector<MillConfig>>();
+
+	private static void initConfigItems() {
+		try {
+			
+			
+			Vector<MillConfig> configPage=new Vector<MillConfig>();
+			configPage.add(new MillConfig(MLN.class.getField("fallbackLanguage"),"fallback_language",MillConfig.LANGUAGE));
+			configPage.add(new MillConfig(MLN.class.getField("dynamictextures"),"dynamic_textures"));
+			configPage.add(new MillConfig(MLN.class.getField("languageLearning"),"language_learning"));
+			configPage.add(new MillConfig(MLN.class.getField("loadAllLanguages"),"load_all_languages"));
+			configPage.add(new MillConfig(MLN.class.getField("displayStart"),"display_start"));
+			configPage.add(new MillConfig(MLN.class.getField("displayNames"),"display_names"));
+			configPage.add(new MillConfig(MLN.class.getField("VillagersSentenceInChatDistanceSP"),"villagers_sentence_in_chat_distance_sp",0,1,2,3,4,6,10));
+			configPage.add(new MillConfig(MLN.class.getField("VillagersSentenceInChatDistanceClient"),"villagers_sentence_in_chat_distance_client",0,1,2,3,4,6,10));
+			
+			
+			configPages.add(configPage);
+			configPageTitles.add("config.page.uisettings");
+			
+			configPage=new Vector<MillConfig>();
+			
+			configPage=new Vector<MillConfig>();			
+			configPage.add(new MillConfig(MLN.class.getField("generateVillagesDefault"),"generate_villages"));
+			configPage.add(new MillConfig(MLN.class.getField("generateLoneBuildings"),"generate_lone_buildings"));
+			configPage.add(new MillConfig(MLN.class.getField("minDistanceBetweenVillages"),"min_village_distance",300,450,600,800,1000));
+			configPage.add(new MillConfig(MLN.class.getField("minDistanceBetweenVillagesAndLoneBuildings"),"min_village_lonebuilding_distance",100,200,300,500,800));
+			configPage.add(new MillConfig(MLN.class.getField("minDistanceBetweenLoneBuildings"),"min_lonebuilding_distance",300,450,600,800,1000));
+			configPage.add(new MillConfig(MLN.class.getField("spawnProtectionRadius"),"spawn_protection_radius",0,50,100,150,250,500));
+			
+			configPages.add(configPage);
+			configPageTitles.add("config.page.worldgeneration");
+			
+			configPage=new Vector<MillConfig>();
+			
+			configPage.add(new MillConfig(MLN.class.getField("VillageRadius"),"village_radius",40,50,60,70,80));
+			configPage.add(new MillConfig(MLN.class.getField("minDistanceBetweenBuildings"),"min_distance_between_buildings",0,1,2,3,4));
+			configPage.add(new MillConfig(MLN.class.getField("BuildVillagePaths"),"village_paths"));
+			configPage.add(new MillConfig(MLN.class.getField("maxChildrenNumber"),"max_children_number",2,5,10,15,20));
+			configPage.add(new MillConfig(MLN.class.getField("BackgroundRadius"),"background_radius",1000,1500,2000,2500,3000));
+			configPage.add(new MillConfig(MLN.class.getField("RaidingRate"),"raiding_rate",0,10,20,50,100));
+			
+			
+			configPages.add(configPage);
+			configPageTitles.add("config.page.villagebehaviour");
+
+
+			for (Vector<MillConfig> aConfigPage : configPages) {
+				for (MillConfig config : aConfigPage) {
+					configs.put(config.key, config);
+				}
+			}
+			
+			
+		} catch (Exception e) {
+			MLN.error(null, "Exception when initialising config items: "+e);
+		}
+	}
 
 
 	private static void applyLanguage() {
@@ -786,7 +854,9 @@ public class MLN {
 
 		Mill.proxy.loadKeyDefaultSettings();
 
-		final boolean mainConfig=readConfigFile(Mill.proxy.getConfigFile());
+		initConfigItems();
+
+		final boolean mainConfig=readConfigFile(Mill.proxy.getConfigFile(),true);
 
 		if (mainConfig==false) {
 			System.err.println("ERREUR: Impossible de trouver le fichier de configuration "+Mill.proxy.getConfigFile().getAbsolutePath()+". V\u00e9rifiez que le dossier millenaire est bien dans minecraft/mods/");
@@ -800,7 +870,7 @@ public class MLN {
 			return;
 		}
 
-		readConfigFile(Mill.proxy.getCustomConfigFile());
+		readConfigFile(Mill.proxy.getCustomConfigFile(),true);
 
 		if (logfile) {
 			try {
@@ -835,6 +905,20 @@ public class MLN {
 			writeText("Starting new session. Mods: "+mods);
 		}
 	}
+	
+	public static Vector<File> getLanguageDirs() {
+		final Vector<File> languageDirs=new Vector<File>();
+
+		for (final File dir : Mill.loadingDirs) {
+			final File languageDir=new File(dir,"languages");
+
+			if (languageDir.exists()) {
+				languageDirs.add(languageDir);
+			}
+		}
+		
+		return languageDirs;
+	}
 
 	public static void loadLanguages(String minecraftLanguage) {
 
@@ -853,15 +937,7 @@ public class MLN {
 
 		loadedLanguage=effective_language;
 
-		final Vector<File> languageDirs=new Vector<File>();
-
-		for (final File dir : Mill.loadingDirs) {
-			final File languageDir=new File(dir,"languages");
-
-			if (languageDir.exists()) {
-				languageDirs.add(languageDir);
-			}
-		}
+		final Vector<File> languageDirs=getLanguageDirs();
 
 		mainLanguage=new Language(MLN.effective_language,false);
 		mainLanguage.loadFromDisk(languageDirs);
@@ -885,6 +961,15 @@ public class MLN {
 					}
 				}
 			}
+		}
+		
+		if (!loadedLanguages.containsKey("fr")) {
+			final Language l=new Language("fr",false);
+			l.loadFromDisk(languageDirs);
+		}
+		if (!loadedLanguages.containsKey("en")) {
+			final Language l=new Language("en",false);
+			l.loadFromDisk(languageDirs);
 		}
 
 		for (final Culture c : Culture.vectorCultures) {
@@ -1021,7 +1106,7 @@ public class MLN {
 		ModLoader.addName(new ItemStack(Mill.path, 1, 3), MLN.string("item.pathsandstone"));
 		ModLoader.addName(new ItemStack(Mill.path, 1, 4), MLN.string("item.pathochretiles"));
 		ModLoader.addName(new ItemStack(Mill.path, 1, 5), MLN.string("item.pathgravelslabs"));
-		
+
 		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 0), MLN.string("item.pathdirt"));
 		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 1), MLN.string("item.pathgravel"));
 		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 2), MLN.string("item.pathslabs"));
@@ -1172,7 +1257,73 @@ public class MLN {
 		return questString(key,true,false,required);
 	}
 
-	private static boolean readConfigFile(File file) {
+	public static void writeConfigFile() {
+
+		File file=Mill.proxy.getCustomConfigFile();
+
+		try {
+
+			final BufferedReader reader = MillCommonUtilities.getReader(file);
+
+			String line;
+
+			Vector<String> toWrite=new Vector<String>();
+
+			HashSet<MillConfig> configsWritten=new HashSet<MillConfig>();
+
+			while ((line=reader.readLine()) != null) {
+
+				boolean handled=false;
+
+				if ((line.trim().length() > 0) && !line.startsWith("//")) {
+					final String[] temp=line.split("=");
+					if (temp.length==2) {
+						final String key=temp[0].trim().toLowerCase();
+						final String value=temp[1];
+
+						if (configs.containsKey(key)) {
+
+							if (configs.get(key).compareValuesFromString(value)) {//no change in setting, nothing to do
+								configsWritten.add(configs.get(key));
+							} else {
+								toWrite.add(key+"="+configs.get(key).getValue());
+								configsWritten.add(configs.get(key));
+								handled=true;
+							}
+						}
+					}
+				}
+
+				if (!handled)
+					toWrite.add(line);
+			}
+
+			reader.close();
+
+			BufferedWriter writer=MillCommonUtilities.getWriter(file);
+
+			for (String s : toWrite) {
+				writer.write(s+EOL);
+			}
+
+			for (MillConfig config : configs.values()) {
+
+				if (!configsWritten.contains(config)) {
+
+					if (!config.hasDefaultValue()) {
+						writer.write(config.key+"="+config.getValue()+EOL);
+					}					
+				}				
+			}
+
+			writer.close();
+
+		} catch (Exception e) {
+			MLN.printException("Exception in writeConfigFile:", e);
+		}
+	}
+
+	private static boolean readConfigFile(File file,boolean defaultFile) {
 
 		if (!file.exists())
 			return false;
@@ -1187,193 +1338,205 @@ public class MLN {
 					final String[] temp=line.split("=");
 					if (temp.length==2) {
 
-						final String key=temp[0];
+						final String key=temp[0].trim().toLowerCase();
 						final String value=temp[1];
-						if (key.equalsIgnoreCase("devmode")) {
-							DEV=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("console")) {
-							console=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("logfile")) {
-							logfile=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("village_list_key")) {
-							final int keyCode=Mill.proxy.loadKeySetting(value.toUpperCase());
-							if (keyCode>0) {
-								MLN.keyVillageList=keyCode;
-							} else {
-								MLN.error(null, "Invalid key setting on line: "+line);
-							}
-						} else if (key.equalsIgnoreCase("quest_list_key")) {
-							final int keyCode=Mill.proxy.loadKeySetting(value.toUpperCase());
-							if (keyCode>0) {
-								MLN.keyInfoPanelList=keyCode;
-							} else {
-								MLN.error(null, "Invalid key setting on line: "+line);
-							}
-						} else if (key.equalsIgnoreCase("logfile")) {
-							logfile=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("infinite_amulet")) {
-							infiniteAmulet=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("language_learning")) {
-							languageLearning=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("stop_default_villages")) {
-							stopDefaultVillages=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("load_all_languages")) {
-							loadAllLanguages=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("se_indicators")) {
-							seIndicators=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("generate_colour_chart")) {
-							generateColourSheet=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("generate_building_res")) {
-							generateBuildingRes=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("generate_translation_gap")) {
-							generateTranslationGap=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("generate_goods_list")) {
-							generateGoodsList=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("generate_villages")) {
-							generateVillagesDefault=Boolean.parseBoolean(value);
-							generateVillages=generateVillagesDefault;
-						} else if (key.equalsIgnoreCase("generate_lone_buildings")) {
-							generateLoneBuildings=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("display_start")) {
-							displayStart=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("display_names")) {
-							displayNames=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("language")) {
-							main_language=value.toLowerCase();
-						} else if (key.equalsIgnoreCase("fallback_language")) {
-							fallback_language=value.toLowerCase();
-						} else if (key.equalsIgnoreCase("forbidden_blocks")) {
-							for (final String id : value.split(",")) {
-								if (Integer.parseInt(id)>0) {
-									forbiddenBlocks.add(Integer.parseInt(id));
+
+						boolean configHandled=false;
+
+						if (configs.containsKey(key)) {
+							configs.get(key).setValueFromString(value, defaultFile);
+							configHandled=true;
+						}
+
+						if (!configHandled) {
+							if (key.equalsIgnoreCase("devmode")) {
+								DEV=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("console")) {
+								console=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("logfile")) {
+								logfile=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("village_list_key")) {
+								final int keyCode=Mill.proxy.loadKeySetting(value.toUpperCase());
+								if (keyCode>0) {
+									MLN.keyVillageList=keyCode;
 								} else {
-									System.out.println("Could not read forbidden ID: "+id);
+									MLN.error(null, "Invalid key setting on line: "+line);
 								}
+							} else if (key.equalsIgnoreCase("quest_list_key")) {
+								final int keyCode=Mill.proxy.loadKeySetting(value.toUpperCase());
+								if (keyCode>0) {
+									MLN.keyInfoPanelList=keyCode;
+								} else {
+									MLN.error(null, "Invalid key setting on line: "+line);
+								}
+							} else if (key.equalsIgnoreCase("logfile")) {
+								logfile=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("infinite_amulet")) {
+								infiniteAmulet=Boolean.parseBoolean(value);
+								//} else if (key.equalsIgnoreCase("language_learning")) {
+								//	languageLearning=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("stop_default_villages")) {
+								stopDefaultVillages=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("load_all_languages")) {
+								loadAllLanguages=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("se_indicators")) {
+								seIndicators=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("generate_colour_chart")) {
+								generateColourSheet=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("generate_building_res")) {
+								generateBuildingRes=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("generate_translation_gap")) {
+								generateTranslationGap=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("generate_goods_list")) {
+								generateGoodsList=Boolean.parseBoolean(value);
+								//} else if (key.equalsIgnoreCase("generate_villages")) {
+								//	generateVillagesDefault=Boolean.parseBoolean(value);
+								//	generateVillages=generateVillagesDefault;
+								//} else if (key.equalsIgnoreCase("generate_lone_buildings")) {
+								//	generateLoneBuildings=Boolean.parseBoolean(value);
+								//} else if (key.equalsIgnoreCase("display_start")) {
+								//	displayStart=Boolean.parseBoolean(value);
+								//} else if (key.equalsIgnoreCase("display_names")) {
+								//	displayNames=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("language")) {
+								main_language=value.toLowerCase();
+							} else if (key.equalsIgnoreCase("fallback_language")) {
+								fallback_language=value.toLowerCase();
+							} else if (key.equalsIgnoreCase("forbidden_blocks")) {
+								for (final String id : value.split(",")) {
+									if (Integer.parseInt(id)>0) {
+										forbiddenBlocks.add(Integer.parseInt(id));
+									} else {
+										System.out.println("Could not read forbidden ID: "+id);
+									}
+								}
+							} else if (key.equalsIgnoreCase("log.TileEntityBuilding")) {
+								TileEntityBuilding=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.WorldGeneration")) {
+								WorldGeneration=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.FarmerAI")) {
+								FarmerAI=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Diplomacy")) {
+								Diplomacy=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.WifeAI")) {
+								WifeAI=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Villager")) {
+								LogVillager=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Quest")) {
+								LogQuest=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Pathing")) {
+								Pathing=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Connections")) {
+								Connections=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.getPath")) {
+								getPath=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Lumberman")) {
+								Lumberman=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.BuildingPlan")) {
+								LogBuildingPlan=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.GeneralAI")) {
+								GeneralAI=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Selling")) {
+								Selling=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Hybernation")) {
+								Hybernation=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Other")) {
+								Other=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Children")) {
+								Children=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Performance")) {
+								Performance=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.CattleFarmer")) {
+								CattleFarmer=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Miner")) {
+								Miner=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Village")) {
+								LogVillage=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.WorldInfo")) {
+								WorldInfo=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Pujas")) {
+								Pujas=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.villagerspawn")) {
+								VillagerSpawn=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.villagepaths")) {
+								VillagePaths=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Network")) {
+								Network=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Merchant")) {
+								Merchant=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Culture")) {
+								LogCulture=readLogLevel(value);
+							} else if (key.equalsIgnoreCase("log.Translation")) {
+								Translation=readLogLevel(value);
+								//} else if (key.equalsIgnoreCase("min_village_distance")) {
+								//	minDistanceBetweenVillages=Integer.parseInt(value);
+								//} else if (key.equalsIgnoreCase("min_village_lonebuilding_distance")) {
+								//	minDistanceBetweenVillagesAndLoneBuildings=Integer.parseInt(value);
+								//} else if (key.equalsIgnoreCase("min_lonebuilding_distance")) {
+								//	minDistanceBetweenLoneBuildings=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("force_preload_radius")) {
+								forcePreload=Integer.parseInt(value)/16;//set in blocks but converted to chunks
+								//} else if (key.equalsIgnoreCase("village_radius")) {
+								//	VillageRadius=Integer.parseInt(value);
+								//} else if (key.equalsIgnoreCase("spawn_protection_radius")) {
+								//	spawnProtectionRadius=Integer.parseInt(value);
+								//} else if (key.equalsIgnoreCase("min_distance_between_buildings")) {
+								//	minDistanceBetweenBuildings=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_building_id")) {
+								blockBuildingId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_panel_id")) {
+								blockPanelId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_wood_id")) {
+								blockWoodId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_earth_id")) {
+								blockEarthId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_stone_id")) {
+								blockStoneId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_crops_id")) {
+								blockCropsId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_panes_id")) {
+								blockPanesId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_byzantine_brick_id")) {
+								blockByzantineBrickId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_byzantine_slab_id")) {
+								blockByzantineSlabId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_byzantine_mixedbrick_id")) {
+								blockByzantineMixedId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_path_id")) {
+								blockPathId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("block_path_slab_id")) {
+								blockPathSlabId=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("item_range_start")) {
+								itemRangeStart=Integer.parseInt(value);
+								//} else if (key.equalsIgnoreCase("keep_active_radius")) {
+								//	KeepActiveRadius=Integer.parseInt(value);
+								//} else if (key.equalsIgnoreCase("background_radius")) {
+								//	BackgroundRadius=Integer.parseInt(value);
+								//} else if (key.equalsIgnoreCase("max_children_number")) {
+								//	maxChildrenNumber=Integer.parseInt(value);
+								//	} else if (key.equalsIgnoreCase("villagers_names_distance")) {
+								//		VillagersNamesDistance=Integer.parseInt(value);
+								//	} else if (key.equalsIgnoreCase("village_paths")) {
+								//		BuildVillagePaths=Boolean.parseBoolean(value);
+								//} else if (key.equalsIgnoreCase("villagers_sentence_in_chat_distance_client")) {
+								//	VillagersSentenceInChatDistanceClient=Integer.parseInt(value);
+								//} else if (key.equalsIgnoreCase("villagers_sentence_in_chat_distance_sp")) {
+								//	VillagersSentenceInChatDistanceSP=Integer.parseInt(value);
+								//} else if (key.equalsIgnoreCase("raiding_rate")) {
+								//	RaidingRate=Integer.parseInt(value);
+							} else if (key.equalsIgnoreCase("sprites_path")) {
+								customTexture=value.trim();
+							} else if (key.equalsIgnoreCase("dynamic_textures")) {
+								dynamictextures=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("quest_biome_forest")) {
+								questBiomeForest=value.trim().toLowerCase();
+							} else if (key.equalsIgnoreCase("quest_biome_desert")) {
+								questBiomeDesert=value.trim().toLowerCase();
+							} else if (key.equalsIgnoreCase("quest_biome_mountain")) {
+								questBiomeMountain=value.trim().toLowerCase();
+							} else {
+								MLN.error(null, "Unknown config on line: "+line);
 							}
-						} else if (key.equalsIgnoreCase("log.TileEntityBuilding")) {
-							TileEntityBuilding=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.WorldGeneration")) {
-							WorldGeneration=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.FarmerAI")) {
-							FarmerAI=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Diplomacy")) {
-							Diplomacy=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.WifeAI")) {
-							WifeAI=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Villager")) {
-							LogVillager=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Quest")) {
-							LogQuest=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Pathing")) {
-							Pathing=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Connections")) {
-							Connections=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.getPath")) {
-							getPath=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Lumberman")) {
-							Lumberman=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.BuildingPlan")) {
-							LogBuildingPlan=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.GeneralAI")) {
-							GeneralAI=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Selling")) {
-							Selling=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Hybernation")) {
-							Hybernation=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Other")) {
-							Other=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Children")) {
-							Children=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Performance")) {
-							Performance=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.CattleFarmer")) {
-							CattleFarmer=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Miner")) {
-							Miner=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Village")) {
-							LogVillage=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.WorldInfo")) {
-							WorldInfo=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Pujas")) {
-							Pujas=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.villagerspawn")) {
-							VillagerSpawn=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.villagepaths")) {
-							VillagePaths=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Network")) {
-							Network=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Merchant")) {
-							Merchant=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Culture")) {
-							LogCulture=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("log.Translation")) {
-							Translation=readLogLevel(value);
-						} else if (key.equalsIgnoreCase("min_village_distance")) {
-							minDistanceBetweenVillages=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("min_village_lonebuilding_distance")) {
-							minDistanceBetweenVillagesAndLoneBuildings=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("min_lonebuilding_distance")) {
-							minDistanceBetweenLoneBuildings=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("force_preload_radius")) {
-							forcePreload=Integer.parseInt(value)/16;//set in blocks but converted to chunks
-						} else if (key.equalsIgnoreCase("village_radius")) {
-							VillageRadius=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("spawn_protection_radius")) {
-							spawnProtectionRadius=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("min_distance_between_buildings")) {
-							minDistanceBetweenBuildings=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_building_id")) {
-							blockBuildingId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_panel_id")) {
-							blockPanelId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_wood_id")) {
-							blockWoodId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_earth_id")) {
-							blockEarthId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_stone_id")) {
-							blockStoneId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_crops_id")) {
-							blockCropsId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_panes_id")) {
-							blockPanesId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_byzantine_brick_id")) {
-							blockByzantineBrickId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_byzantine_slab_id")) {
-							blockByzantineSlabId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_byzantine_mixedbrick_id")) {
-							blockByzantineMixedId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_path_id")) {
-							blockPathId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("block_path_slab_id")) {
-							blockPathSlabId=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("item_range_start")) {
-							itemRangeStart=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("keep_active_radius")) {
-							KeepActiveRadius=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("background_radius")) {
-							BackgroundRadius=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("max_children_number")) {
-							maxChildrenNumber=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("villagers_names_distance")) {
-							VillagersNamesDistance=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("village_paths")) {
-							BuildVillagePaths=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("villagers_sentence_in_chat_distance_client")) {
-							VillagersSentenceInChatDistanceClient=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("villagers_sentence_in_chat_distance_sp")) {
-							VillagersSentenceInChatDistanceSP=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("raiding_rate")) {
-							RaidingRate=Integer.parseInt(value);
-						} else if (key.equalsIgnoreCase("sprites_path")) {
-							customTexture=value.trim();
-						} else if (key.equalsIgnoreCase("dynamic_textures")) {
-							dynamictextures=Boolean.parseBoolean(value);
-						} else if (key.equalsIgnoreCase("quest_biome_forest")) {
-							questBiomeForest=value.trim().toLowerCase();
-						} else if (key.equalsIgnoreCase("quest_biome_desert")) {
-							questBiomeDesert=value.trim().toLowerCase();
-						} else if (key.equalsIgnoreCase("quest_biome_mountain")) {
-							questBiomeMountain=value.trim().toLowerCase();
 						}
 					}
 				}
@@ -1405,7 +1568,6 @@ public class MLN {
 	}
 
 	public static String string(String key) {
-
 		if (!isTranslationLoaded())//can happen if called before languages are loaded
 			return "";
 

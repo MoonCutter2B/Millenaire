@@ -113,3 +113,9 @@ generate_colour_chart=false
 generate_building_res=false
 //whether to generate a list of gaps found between your main language and your fallback language. Mainly intended for translators.
 generate_translation_gap=false
+
+
+
+language_learning=true
+
+load_all_languages=false

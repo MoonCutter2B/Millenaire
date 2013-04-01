@@ -2,8 +2,10 @@ package org.millenaire.client.gui;
 
 import java.util.Vector;
 
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.RenderHelper;
 
 import org.lwjgl.opengl.GL11;
@@ -16,6 +18,7 @@ public abstract class GuiText extends GuiScreen {
 
 		String text="";
 		MillGuiButton[] buttons=null;
+		MillGuiTextField textField=null;
 		boolean canCutAfter=true;
 		boolean shadow=false;
 
@@ -28,6 +31,11 @@ public abstract class GuiText extends GuiScreen {
 
 		public Line (MillGuiButton b) {
 			buttons=new MillGuiButton[]{b};
+			canCutAfter=false;
+		}
+		
+		public Line (MillGuiTextField tf) {
+			textField=tf;
 			canCutAfter=false;
 		}
 
@@ -72,7 +80,7 @@ public abstract class GuiText extends GuiScreen {
 		}
 
 		public boolean empty() {
-			return (text=="") && (buttons==null);
+			return (text=="") && (buttons==null) && (textField==null);
 		}
 
 		private void interpretTags() {
@@ -99,11 +107,24 @@ public abstract class GuiText extends GuiScreen {
 
 		}
 	}
+	
+	public static class MillGuiTextField extends GuiTextField {
+		
+		public final int millId;
+
+		public MillGuiTextField(FontRenderer par1FontRenderer, int par2,
+				int par3, int par4, int par5,int millId) {
+			super(par1FontRenderer, par2, par3, par4, par5);
+			this.millId=millId;
+		}
+	}
+	
 	public static class MillGuiButton extends GuiButton {
 
 
 		public static final int HELPBUTTON = 2000;
 		public static final int CHUNKBUTTON = 3000;
+		public static final int CONFIGBUTTON = 4000;
 
 		public MillGuiButton(int par1, int par2, int par3, int par4, int par5,
 				String par6Str) {
@@ -152,6 +173,7 @@ public abstract class GuiText extends GuiScreen {
 
 	public static final String LINE_HELP_GUI_BUTTON = "<help_gui_button>";
 	public static final String LINE_CHUNK_GUI_BUTTON = "<chunk_gui_button>";
+	public static final String LINE_CONFIG_GUI_BUTTON = "<config_gui_button>";
 	protected int pageNum=0;
 
 	protected Vector<Vector<Line>> descText=null;
@@ -171,7 +193,7 @@ public abstract class GuiText extends GuiScreen {
 			Vector<Line> newPage=new Vector<Line>();
 
 			for (final Line line : page) {
-				if (line.buttons!=null) {
+				if (line.buttons!=null || line.textField!=null) {
 					newPage.add(line);
 				} else {
 					for (String l : line.text.split("<ret>")) {
@@ -302,6 +324,10 @@ public abstract class GuiText extends GuiScreen {
 							buttonList.add(line.buttons[i]);
 						}
 					}
+				} else if (line.textField!=null) {
+					MillGuiTextField textField=new MillGuiTextField(fontRenderer,xStart+(getXSize() / 2) +40,yStart+vpos,95,20,line.textField.millId);
+					textField.setText(line.textField.getText());
+					line.textField=textField;
 				}
 				vpos+=10;
 			}
@@ -347,6 +373,8 @@ public abstract class GuiText extends GuiScreen {
 					newPage.add(new Line(new MillGuiButton(MillGuiButton.HELPBUTTON, 0, 0, 0, 0, MLN.string("ui.helpbutton"))));
 				} else if (s.equals(LINE_CHUNK_GUI_BUTTON)) {
 					newPage.add(new Line(new MillGuiButton(MillGuiButton.CHUNKBUTTON, 0, 0, 0, 0, MLN.string("ui.chunkbutton"))));
+				} else if (s.equals(LINE_CONFIG_GUI_BUTTON)) {
+					newPage.add(new Line(new MillGuiButton(MillGuiButton.CONFIGBUTTON, 0, 0, 0, 0, MLN.string("ui.configbutton"))));
 				} else {
 					newPage.add(new Line(s,true));
 				}
