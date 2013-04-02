@@ -673,34 +673,18 @@ public class MLN {
 			configPage.add(new MillConfig(MLN.class.getField("BuildVillagePaths"),"village_paths"));
 			configPage.add(new MillConfig(MLN.class.getField("maxChildrenNumber"),"max_children_number",2,5,10,15,20));
 			configPage.add(new MillConfig(MLN.class.getField("BackgroundRadius"),"background_radius",0,200,500,1000,1500,2000,2500,3000));
-
 			configPage.add(new MillConfig(MLN.class.getField("BanditRaidRadius"),"bandit_raid_radius",0,200,500,1000,1500,2000));
 			configPage.add(new MillConfig(MLN.class.getField("RaidingRate"),"raiding_rate",0,10,20,50,100));
 
-			configPage.add(new MillConfig(MLN.class.getField("blockBuildingId"),"block_building_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockPanelId"),"block_panel_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockWoodId"),"block_wood_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockEarthId"),"block_earth_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockStoneId"),"block_stone_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockCropsId"),"block_crops_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockPanesId"),"block_panes_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockByzantineBrickId"),"block_byzantine_brick_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockByzantineSlabId"),"block_byzantine_slab_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockByzantineMixedId"),"block_byzantine_mixedbrick_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockPathId"),"block_path_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockPathSlabId"),"block_path_slab_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("itemRangeStart"),"item_range_start",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			
-			
 			configPages.add(configPage);
 			configPageTitles.add("config.page.villagebehaviour");
 			configPageDesc.add(null);
 			
 			configPage=new Vector<MillConfig>();
 			
+			configPage.add(new MillConfig(MLN.class.getField("generateTranslationGap"),"generate_translation_gap"));
 			configPage.add(new MillConfig(MLN.class.getField("generateColourSheet"),"generate_colour_chart"));
 			configPage.add(new MillConfig(MLN.class.getField("generateBuildingRes"),"generate_building_res"));
-			configPage.add(new MillConfig(MLN.class.getField("generateTranslationGap"),"generate_translation_gap"));
 			configPage.add(new MillConfig(MLN.class.getField("generateGoodsList"),"generate_goods_list"));
 			
 			
@@ -733,6 +717,20 @@ public class MLN {
 			configPage.add(new MillConfig(MLN.class.getField("LogMerchant"),"LogMerchant",MillConfig.LOG).setDisplayDev(true));
 			configPage.add(new MillConfig(MLN.class.getField("LogCulture"),"LogCulture",MillConfig.LOG).setDisplayDev(true));
 			configPage.add(new MillConfig(MLN.class.getField("LogTranslation"),"LogTranslation",MillConfig.LOG).setDisplayDev(true));
+			
+			configPage.add(new MillConfig(MLN.class.getField("blockBuildingId"),"block_building_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockPanelId"),"block_panel_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockWoodId"),"block_wood_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockEarthId"),"block_earth_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockStoneId"),"block_stone_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockCropsId"),"block_crops_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockPanesId"),"block_panes_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockByzantineBrickId"),"block_byzantine_brick_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockByzantineSlabId"),"block_byzantine_slab_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockByzantineMixedId"),"block_byzantine_mixedbrick_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockPathId"),"block_path_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockPathSlabId"),"block_path_slab_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("itemRangeStart"),"item_range_start",MillConfig.EDITABLE_INTEGER).setDisplay(false));
 			
 			
 			configPages.add(configPage);
@@ -1334,10 +1332,23 @@ public class MLN {
 
 			BufferedWriter writer=MillCommonUtilities.getWriter(file);
 
+			Language main=mainLanguage;
+			
 			Language fr=MLN.loadedLanguages.get("fr");
 			Language en=MLN.loadedLanguages.get("en");
 
 			for (int i=0;i<MLN.configPages.size();i++) {
+								
+				mainLanguage=fr;
+				String frTitle=MLN.string(MLN.configPageTitles.get(i));
+				mainLanguage=en;
+				String enTitle=MLN.string(MLN.configPageTitles.get(i));
+				
+				
+				writer.write("//--------------------------------------------------------------------------------------------"+EOL);
+				writer.write("//       "+frTitle+"    -    "+enTitle+EOL);
+				writer.write("//--------------------------------------------------------------------------------------------"+EOL+EOL);
+				
 				for (int j=0;j<MLN.configPages.get(i).size();j++) {
 
 					MillConfig config=MLN.configPages.get(i).get(j);
@@ -1350,6 +1361,8 @@ public class MLN {
 
 				}
 			}
+			
+			mainLanguage=main;
 		
 			writer.close();
 		} catch (Exception e) {
@@ -1378,21 +1391,22 @@ public class MLN {
 
 				if ((line.trim().length() > 0) && !line.startsWith("//")) {
 					final String[] temp=line.split("=");
-					if (temp.length==2) {
 						final String key=temp[0].trim().toLowerCase();
-						final String value=temp[1];
+						String value="";
+						
+						if (temp.length>1)
+							value=temp[1];
 
 						if (configs.containsKey(key)) {
 
 							if (configs.get(key).compareValuesFromString(value)) {//no change in setting, nothing to do
 								configsWritten.add(configs.get(key));
 							} else {
-								toWrite.add(key+"="+configs.get(key).getValue());
+								toWrite.add(key+"="+configs.get(key).getSaveValue());
 								configsWritten.add(configs.get(key));
 								handled=true;
 							}
 						}
-					}
 				}
 
 				if (!handled)
@@ -1413,8 +1427,8 @@ public class MLN {
 
 					if (!config.hasDefaultValue()) {
 						writer.write("//"+config.getLabel()+"; "+config.getDesc()+EOL);
-						writer.write(config.key+"="+config.getValue()+EOL+EOL);
-					}					
+						writer.write(config.key+"="+config.getSaveValue()+EOL+EOL);
+					}
 				}				
 			}
 

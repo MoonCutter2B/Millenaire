@@ -1,70 +1,47 @@
-
-fallback_language=en
-
-
 //Dev
 devmode=true
 console=true
 logfile=true
 infinite_amulet=true
-generate_colour_chart=true
+//Générer les resources nécessaires; Générer une liste des resources nécessaires pour chaque bâtiment.
 generate_building_res=true
+
+//Générer l'analyse des traductions; Générer pour chaque langue chargée un rapport sur le contenu manquant.
 generate_translation_gap=true
-//generate_goods_list=true
-generate_villages=true
-enable_raids=true
-dynamic_textures=true
-//sprites_path=/ML_sprites_64.png
-stop_default_villages=true
-byzantine_dev_content=true
 
+//Générer l'échantillon des couleurs; Générer l'échantillon des couleurs utilisables dans les plans de bâtiments.
+generate_colour_chart=true
 
-villagers_names_distance=20
+//Touche liste des villages; Touche pour afficher la liste des villages environants. Défaut: V.
+village_list_key=V
 
-//Rate at which villages will start raid (0: never, 20: 20% of nights where there is a valid target, 100: every night where there is a valid target)
-raiding_rate=100
+//Générer la liste des objets; Générer la liste des objets connus par Millénaire.
+generate_goods_list=true
 
-//min_lonebuilding_distance=300
-village_radius=80
+//logtileentitybuilding; 
+logtileentitybuilding=
 
-//villagers_names_distance=2
+//Langue de recours; Langue de recours, pour les textes non disponibles dans la principale.
+fallback_language=fr
 
+//Apprentissage des langues; Les langues doivent être "apprises" (les traductions n'apparaissent qu'après assez d'interaction avec une culture).
 language_learning=false
 
+//Charger toutes les langues; Charger toutes les langues, pour fournir des traductions aux clients si nécessaire.
 load_all_languages=true
 
-enable_clothes=true
+//Distance d'affichage des noms; Distance à laquelle les noms apparaissent. Défaut: 20.
+villagers_names_distance=30
 
-//log.TileEntityBuilding=minor
-//log.WorldGeneration=minor
-//log.FarmerAI=minor
-//log.WifeAI=minor
-//log.Villager=minor
-//log.Pathing=minor
-//log.Connections=minor
-//log.getPath=minor
-//log.Lumberman=minor
-//log.BuildingPlan=major
-//log.GeneralAI=minor
-//log.Selling=minor
-//log.Hybernation=minor
-//log.Other=minor
-//log.Children=minor
-//log.Performance=minor
-//log.CattleFarmer=minor
-//log.Miner=minor
-//log.Village=minor
-//log.WorldInfo=minor
-//log.Merchant=minor
-//log.Culture=minor
-//log.Translation=minor
-//log.Quest=minor
-//log.Diplomacy=minor
-//log.Pujas=minor
-//log.network=minor
-village_paths=true
-display_start=true
-max_children_number=10
-background_radius=2000
+//Afficher le nom des villageois; Afficher le nom, le métier et la tâche en cours au dessus des villageois.
 display_names=true
+
+//Textures dynamiques; Utiliser automatiquement les textures 64x si le pack de texture est 64x ou plus.
+dynamic_textures=true
+
+//Phrases dans le chat (solo); Distance maximale où afficher les phrases des villageois dans le chat en solo. Défaut: 3.
 villagers_sentence_in_chat_distance_sp=3
+
+//Phrases dans le chat (MJ); Distance maximale où afficher les phrases des villageois dans le chat en multi-joueur. Défaut: 0.
+villagers_sentence_in_chat_distance_client=1
+

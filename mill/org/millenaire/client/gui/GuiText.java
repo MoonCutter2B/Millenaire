@@ -33,10 +33,19 @@ public abstract class GuiText extends GuiScreen {
 			buttons=new MillGuiButton[]{b};
 			canCutAfter=false;
 		}
-		
+
 		public Line (MillGuiTextField tf) {
 			textField=tf;
-			canCutAfter=false;
+		}
+		
+		public Line (String s,MillGuiTextField tf) {
+			textField=tf;
+			if (s==null) {
+				text="";
+			} else {
+				text=s;
+				interpretTags();
+			}
 		}
 
 		public Line (MillGuiButton b,MillGuiButton b2) {
@@ -107,18 +116,18 @@ public abstract class GuiText extends GuiScreen {
 
 		}
 	}
-	
+
 	public static class MillGuiTextField extends GuiTextField {
-		
-		public final int millId;
+
+		public final String fieldKey;
 
 		public MillGuiTextField(FontRenderer par1FontRenderer, int par2,
-				int par3, int par4, int par5,int millId) {
+				int par3, int par4, int par5,String fieldKey) {
 			super(par1FontRenderer, par2, par3, par4, par5);
-			this.millId=millId;
+			this.fieldKey=fieldKey;
 		}
 	}
-	
+
 	public static class MillGuiButton extends GuiButton {
 
 
@@ -177,6 +186,8 @@ public abstract class GuiText extends GuiScreen {
 	protected int pageNum=0;
 
 	protected Vector<Vector<Line>> descText=null;
+
+	Vector<MillGuiTextField> textFields=new Vector<MillGuiTextField>();
 
 	private int lineWidthInChars;
 
@@ -279,6 +290,7 @@ public abstract class GuiText extends GuiScreen {
 		final int yStart = (height - getYSize()) / 2;
 
 		buttonList.clear();
+		textFields.clear();
 
 		int vpos=6;
 
@@ -325,10 +337,15 @@ public abstract class GuiText extends GuiScreen {
 						}
 					}
 				} else if (line.textField!=null) {
-					MillGuiTextField textField=new MillGuiTextField(fontRenderer,xStart+(getXSize() / 2) +40,yStart+vpos,95,20,line.textField.millId);
+					MillGuiTextField textField=new MillGuiTextField(fontRenderer,xStart+(getXSize() / 2) +40,yStart+vpos,95,20,line.textField.fieldKey);
 					textField.setText(line.textField.getText());
 					textField.setMaxStringLength(line.textField.getMaxStringLength());
 					line.textField=textField;
+					line.textField.setTextColor(-1);
+					line.textField.func_82266_h(-1);
+					line.textField.setEnableBackgroundDrawing(false);
+
+					textFields.add(textField);
 				}
 				vpos+=10;
 			}
@@ -455,6 +472,12 @@ public abstract class GuiText extends GuiScreen {
 		super.drawScreen(i, j, f);
 		GL11.glEnable(2896 /*GL_LIGHTING*/);
 		GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
+
+		GL11.glDisable(GL11.GL_LIGHTING);
+
+		for (MillGuiTextField textField : textFields) {
+			textField.drawTextBox();
+		}
 	}
 
 	public abstract int getLineSizeInPx();
@@ -508,12 +531,26 @@ public abstract class GuiText extends GuiScreen {
 	@Override
 	protected void keyTyped(char c, int i)
 	{
-		if(i == 1) {
+
+		boolean keyTyped=false;
+		for (MillGuiTextField textField : textFields) {
+			if (textField.textboxKeyTyped(c, i))
+			{
+				keyTyped=true;
+				handleTextFieldPress(textField);
+			}
+		}
+
+		if(!keyTyped && i == 1) {
 			mc.displayGuiScreen(null);
 			mc.setIngameFocus();
 		}
 	}
-
+	
+	protected void handleTextFieldPress(MillGuiTextField textField) {
+		
+	}
+	
 	@Override
 	protected void mouseClicked(int i, int j, int k) {
 
@@ -529,6 +566,10 @@ public abstract class GuiText extends GuiScreen {
 			} else if ((ai>(getXSize()-33)) && (ai<getXSize())) {
 				incrementPage();
 			}
+		}
+
+		for (MillGuiTextField textField : textFields) {
+			textField.mouseClicked(i, j, k);
 		}
 
 		super.mouseClicked(i, j, k);

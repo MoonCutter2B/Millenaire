@@ -283,6 +283,15 @@ Chaume: 8378
 Bois (tous): 1837
 
 
+bandit_cave resource use: 
+Bois de chêne: 16
+Roche: 9
+Bois de sapin: 23
+Pierres: 25
+Hautes herbes: 139
+Gravier: 51
+Bois (tous): 7
+
 banditfort resource use: 
 Pierre taillées craquelées: 25
 Bois de chêne: 315
@@ -293,15 +302,6 @@ Lingot de fer: 127
 Chaume: 498
 Gravier: 228
 Bois (tous): 129
-
-bandit_cave resource use: 
-Bois de chêne: 16
-Roche: 9
-Bois de sapin: 23
-Pierres: 25
-Hautes herbes: 139
-Gravier: 51
-Bois (tous): 7
 
 japaneseoutpost resource use: 
 Bois de chêne: 300

@@ -163,6 +163,7 @@ ui.raider=Raider
 ui.communicationexplanations=Pour communiquer avec les villageois, faites un clic-droit. Si une action est possible avec le villageois en question (commercer, discuter avec le chef du village, l'embaucher temporairement, commencer une mission) une fenêtre s'ouvrira.
 ui.helpbutton=Aide Millénaire
 ui.chunkbutton=Carte des tronçons
+ui.configbutton=Réglages Millénaire
 ui.serverimportforbidden=Il faut être administrateur pour pouvoir importer des bâtiments sur un serveur.
 
 
@@ -882,8 +883,8 @@ config.pagetitle=Réglages Millénaire
 config.page.uisettings=Réglages UI
 config.page.worldgeneration=Réglages génération
 config.page.villagebehaviour=Réglages villages
-config.page.blockitemids=IDs des blocks & objets
-config.page.blockitemids.desc=Changements appliqués au redémarrage. ATTENTION: Millénaire ne vérifie pas que les ids sont libres. C'est à vous de le faire.
+config.page.devtools=Outils développeurs
+
 
 config.village_list_key.label=Touche liste des villages
 config.village_list_key.desc=Touche pour afficher la liste des villages environants. Défaut: <0>.
@@ -898,7 +899,7 @@ config.fallback_language.label=Langue de recours
 config.fallback_language.desc=Langue de recours, pour les textes non disponibles dans la principale.
 
 config.dynamic_textures.label=Textures dynamiques
-config.dynamic_textures.desc=Utiliser automatiquement les textures 64x si le pack de texture est 64x ou plus. Défaut: <0>.
+config.dynamic_textures.desc=Utiliser automatiquement les textures 64x si le pack de texture est 64x ou plus.
 
 config.language_learning.label=Apprentissage des langues
 config.language_learning.desc=Les langues doivent être "apprises" (les traductions n'apparaissent qu'après assez d'interaction avec une culture).
@@ -962,4 +963,19 @@ config.bandit_raid_radius.desc=Rayon dans lequel les bandits attaquent les villa
 
 config.raiding_rate.label=Chance de raid en %
 config.raiding_rate.desc=Chance sur 100 qu'un village ou bâtiment de bandits tente un raid chaque nuit. Défaut: <0>.
+
+config.generate_colour_chart.label=Générer l'échantillon des couleurs
+config.generate_colour_chart.desc=Générer l'échantillon des couleurs utilisables dans les plans de bâtiments.
+
+config.generate_building_res.label=Générer les resources nécessaires
+config.generate_building_res.desc=Générer une liste des resources nécessaires pour chaque bâtiment.
+
+config.generate_translation_gap.label=Générer l'analyse des traductions
+config.generate_translation_gap.desc=Générer pour chaque langue chargée un rapport sur le contenu manquant.
+
+config.generate_goods_list.label=Générer la liste des objets
+config.generate_goods_list.desc=Générer la liste des objets connus par Millénaire.
+
+config.valuetrue=Oui
+config.valuefalse=Non
 

@@ -22,9 +22,20 @@ public class GuiConfig extends GuiText {
 		}
 
 		public void refreshLabel() {
-			this.displayString=config.getLabel()+": "+config.getValue();
+			this.displayString=config.getLabel()+": "+config.getStringValue();
 		}
 	}
+
+	public static class ConfigPageButton extends MillGuiButton {
+		public int pageId;
+
+		public ConfigPageButton(int pageId) {
+			super(0, 0,0,0,0, MLN.string(MLN.configPageTitles.get(pageId)));
+			this.pageId=pageId;
+		}
+	}
+
+	int pageId=-1;
 
 	@Override
 	protected void customDrawBackground(int i, int j, float f) {
@@ -48,7 +59,7 @@ public class GuiConfig extends GuiText {
 
 	@Override
 	public String getPNGPath() {
-		return "/graphics/gui/ML_parchment.png";
+		return "/graphics/gui/ML_config.png";
 	}
 
 	@Override
@@ -64,11 +75,10 @@ public class GuiConfig extends GuiText {
 	@Override
 	public void initData() {
 		descText=getData();
-
 	}
 
+	private Vector<Vector<Line>> getHomepageData() {
 
-	private Vector<Vector<Line>> getData() {
 		final Vector<Vector<Line>> pages = new Vector<Vector<Line>>();
 
 		Vector<Line> text=new Vector<Line>();
@@ -76,54 +86,75 @@ public class GuiConfig extends GuiText {
 		text.add(new Line(DARKBLUE+MLN.string("config.pagetitle"),false));
 		text.add(new Line("",false));
 
-		boolean firstPage=true;
-
 		for (int i=0;i<MLN.configPages.size();i++) {
-
-			if (!firstPage) {
-				pages.add(text);
-				text=new Vector<Line>();
-				firstPage=false;
-			}
-
-			text.add(new Line(DARKBLUE+MLN.string(MLN.configPageTitles.get(i)),false));
+			text.add(new Line(new ConfigPageButton(i)));
+			text.add(new Line(false));
 			text.add(new Line());
-
-			if (MLN.configPageDesc.get(i)!=null) {
-				text.add(new Line(MLN.string(MLN.configPageDesc.get(i)),false));
-				text.add(new Line());
-			}
-
-
-			for (int j=0;j<MLN.configPages.get(i).size();j++) {
-
-				MillConfig config=MLN.configPages.get(i).get(j);
-
-				if (config.displayConfig || (config.displayConfigDev && MLN.DEV)) {
-
-					if (config.getDesc().length()>0)
-						text.add(new Line(config.getDesc(),false));
-
-					if (config.hasTextField()) {
-						MillGuiTextField textField=new MillGuiTextField(fontRenderer, 0, 0, 0, 0, 0);
-						textField.setText(config.getValue().toString());
-						textField.setMaxStringLength(config.strLimit);
-						text.add(new Line(textField));
-						text.add(new Line(false));
-						text.add(new Line());
-					} else {
-						text.add(new Line(new ConfigButton(config)));
-						text.add(new Line(false));
-						text.add(new Line());
-					}
-				}
-			}
 		}
-
 
 		pages.add(text);
 
 		return adjustText(pages);
+	}
+
+	private Vector<Vector<Line>> getData() {		
+		if (pageId==-1) {
+			return getHomepageData();
+		} else {
+			return getPageData();
+		}
+	}
+
+
+	private Vector<Vector<Line>> getPageData() {
+		final Vector<Vector<Line>> pages = new Vector<Vector<Line>>();
+
+		Vector<Line> text=new Vector<Line>();
+
+		text.add(new Line(DARKBLUE+MLN.string(MLN.configPageTitles.get(pageId)),false));
+		text.add(new Line());
+
+		if (MLN.configPageDesc.get(pageId)!=null) {
+			text.add(new Line(MLN.string(MLN.configPageDesc.get(pageId)),false));
+			text.add(new Line());
+		}
+
+		for (int j=0;j<MLN.configPages.get(pageId).size();j++) {
+
+			MillConfig config=MLN.configPages.get(pageId).get(j);
+
+			if (config.displayConfig || (config.displayConfigDev && MLN.DEV)) {
+
+				if (config.getDesc().length()>0)
+					text.add(new Line(config.getDesc(),false));
+
+				if (config.hasTextField()) {
+					MillGuiTextField textField=new MillGuiTextField(fontRenderer, 0, 0, 0, 0, config.key);
+					textField.setText(config.getStringValue());
+					textField.setMaxStringLength(config.strLimit);
+					text.add(new Line(config.getLabel()+":",textField));
+					text.add(new Line(false));
+					text.add(new Line());
+				} else {
+					text.add(new Line(new ConfigButton(config)));
+					text.add(new Line(false));
+					text.add(new Line());
+				}
+			}
+		}
+
+		pages.add(text);
+
+		return adjustText(pages);
+	}
+
+	@Override
+	protected void handleTextFieldPress(MillGuiTextField textField) {
+		if (MLN.configs.containsKey(textField.fieldKey)) {
+			MillConfig config=MLN.configs.get(textField.fieldKey);
+			config.setValueFromString(textField.getText(), false);
+			MLN.writeConfigFile();
+		}
 	}
 
 	@Override
@@ -168,7 +199,35 @@ public class GuiConfig extends GuiText {
 			configButton.refreshLabel();
 
 			MLN.writeConfigFile();
+		} else if (guibutton instanceof ConfigPageButton) {
+			ConfigPageButton configPageButton=(ConfigPageButton)guibutton;
+
+			pageId=configPageButton.pageId;
+
+			pageNum=0;
+
+			descText=getData();
+			buttonPagination();
 		}
 	}
 
+	@Override
+	protected void keyTyped(char c, int i)
+	{
+
+		if(i == 1) {
+			if (pageId==-1) {
+				mc.displayGuiScreen(null);
+				mc.setIngameFocus();
+			} else {
+				pageId=-1;
+				pageNum=0;
+
+				descText=getData();
+				buttonPagination();
+			}
+		} else {
+			super.keyTyped(c, i);
+		}
+	}
 }

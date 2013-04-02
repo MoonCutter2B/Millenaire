@@ -22,7 +22,7 @@ public class MillConfig {
 	public MillConfig(Field field,String key,Object... possibleVals) {
 		this.field=field;
 		this.possibleVals=possibleVals;
-		this.key=key;
+		this.key=key.toLowerCase();
 
 		if (isBoolean()) {
 			this.possibleVals=BOOLEAN_VALS;
@@ -34,7 +34,11 @@ public class MillConfig {
 	public MillConfig(Field field,String key,int special) {
 		this.field=field;
 		this.special=special;
-		this.key=key;
+		this.key=key.toLowerCase();
+
+		if (special==LOG)
+			defaultVal="";
+
 	}
 
 	public Object[] getPossibleVals() {
@@ -42,7 +46,7 @@ public class MillConfig {
 		if (special==LANGUAGE) {
 			return new Object[]{MLN.loadedLanguages.get("fr"),MLN.loadedLanguages.get("en")};
 		} else if (special==LOG) {
-			return new Object[]{"","debug","minor","major"};
+			return new Object[]{0,1,2,3};
 		}
 
 		return possibleVals;
@@ -92,7 +96,7 @@ public class MillConfig {
 		if (special==LOG)
 			return "";
 
-		return MLN.string("config."+key+".desc",""+defaultVal);
+		return MLN.string("config."+key+".desc",getStringFromValue(defaultVal));
 	}
 
 	public boolean compareValuesFromString(String newValStr) {
@@ -110,11 +114,15 @@ public class MillConfig {
 	}
 
 	public void setValue(Object val) {
-		
+
 		if (special==LOG && val instanceof String) {
 			val=MLN.readLogLevel((String) val);
 		}
 		
+		if (special==KEY && val.equals(0)) {
+			return;
+		}
+
 		try {
 			field.set(null, val);
 		} catch (Exception e) {
@@ -148,18 +156,65 @@ public class MillConfig {
 			setDefaultValue(getValueFromString(val));
 	}
 
+	private static String getBooleanString(boolean b) {
+		if (b)
+			return MLN.string("config.valuetrue");
+		return MLN.string("config.valuefalse");
+	}
+
+	public String getStringFromValue(Object o) {
+
+		if (special==KEY && o!=null) {
+			return Mill.proxy.getKeyString((Integer) o);
+		} else if (special==LOG) {
+			return MLN.getLogLevel((Integer) o);
+		} else if (isBoolean() && o!=null) {
+			return getBooleanString((Boolean) o);
+		}
+
+		if (o==null)
+			return "";
+		else
+			return o.toString();
+	}
+	
+	public String getSaveValue(Object o) {
+
+		if (special==KEY && o!=null) {
+			return Mill.proxy.getKeyString((Integer) o);
+		} else if (special==LOG) {
+			return MLN.getLogLevel((Integer) o);
+		}
+
+		if (o==null)
+			return "";
+		else
+			return o.toString();
+	}
+
+	public String getStringValue() {
+		try {
+			return getStringFromValue(field.get(null));
+		} catch (Exception e) {
+			MLN.printException(this+": Exception when getting the field.",e);
+		}
+		return null;
+	}
+	
+	public String getSaveValue() {
+		try {
+			return getSaveValue(field.get(null));
+		} catch (Exception e) {
+			MLN.printException(this+": Exception when getting the field.",e);
+		}
+		return null;
+	}
+
 	public Object getValue() {
 		try {
-			if (special==KEY) {
-				int key=(Integer)field.get(null);
-				return Mill.proxy.getKeyString(key);
-			} else if (special==LOG) {
-				return MLN.getLogLevel((Integer)field.get(null));
-			}			
-
 			return field.get(null);
 		} catch (Exception e) {
-			MLN.error(this, "Exception when getting the field.");
+			MLN.printException(this+": Exception when getting the field.",e);
 		}
 		return null;
 	}
@@ -177,9 +232,9 @@ public class MillConfig {
 
 		if (defaultVal==null)
 			return false;
-		
+
 		if (special==LOG) {
-			if (getValue().equals(""))
+			if ((Integer)getValue()==0)
 				return true;			
 		}
 

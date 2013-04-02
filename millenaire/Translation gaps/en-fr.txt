@@ -1,10 +1,3 @@
 Translation comparison between en and fr
 
-List of gaps found in strings.txt: 
-
-Mismatched number of parameters for config.dynamic_textures.desc: 1 in fr and 0 in en
-Mismatched number of parameters for config.escort_key.desc: 1 in fr and 0 in en
-Mismatched number of parameters for config.quest_list_key.desc: 1 in fr and 0 in en
-Mismatched number of parameters for config.village_list_key.desc: 1 in fr and 0 in en
-
-Traduction completness: 99%
+Traduction completness: 100%

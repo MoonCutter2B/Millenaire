@@ -884,17 +884,16 @@ config.pagetitle=Millénaire Settings
 config.page.uisettings=UI Settings
 config.page.worldgeneration=World Generation
 config.page.villagebehaviour=Village Behaviour
-config.page.blockitemids=Block & Item IDs
-config.page.blockitemids.desc=Changes effective on restart. WARNING: Millénaire does not check whether they are free. You need to.
+config.page.devtools=Dev Tools
 
 config.village_list_key.label=Village List Key
-config.village_list_key.desc=Key to display the list of surrounding villages.
+config.village_list_key.desc=Key to display the list of surrounding villages. Default: <0>.
 
 config.quest_list_key.label=Info Panel Key
-config.quest_list_key.desc=Key to display the Millénaire info pannel.
+config.quest_list_key.desc=Key to display the Millénaire info pannel. Default: <0>.
 
 config.escort_key.label=Agressive Escorts Key
-config.escort_key.desc=Key to toggle hired villagers between agressive and defensive stances.
+config.escort_key.desc=Key to toggle hired villagers between agressive and defensive stances. Default: <0>.
 
 
 config.fallback_language.label=Fallback Language
@@ -965,4 +964,21 @@ config.bandit_raid_radius.desc=Radius within which bandits will raid villages. D
 
 config.raiding_rate.label=Raiding % Chance
 config.raiding_rate.desc=Chance on 100 that a village/bandit building will attempt a raid each night. Default: <0>.
+
+
+
+config.generate_colour_chart.label=Generate colour chart
+config.generate_colour_chart.desc=Generate the chart of colours usable in building plans.
+
+config.generate_building_res.label=Generate resource list
+config.generate_building_res.desc=Generate the list of resources required for every building.
+
+config.generate_translation_gap.label=Generate translation gap
+config.generate_translation_gap.desc=Generate for each loaded languages a report with the list of lacking text.
+
+config.generate_goods_list.label=Generate goods list
+config.generate_goods_list.desc=Generate the list of items know to Millénaire.
+
+config.valuetrue=Oui
+config.valuefalse=Non
 
