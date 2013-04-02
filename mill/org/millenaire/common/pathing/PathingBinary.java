@@ -109,7 +109,7 @@ public class PathingBinary {
 
 		startCoord=validatePoint(startCoord);
 		if (startCoord==null) {
-			if (MLN.Connections>=MLN.MAJOR) {
+			if (MLN.LogConnections>=MLN.MAJOR) {
 				MLN.major(this, "No valid start found from "+start+" to "+dest+" for "+villager+": "+(((double)(System.nanoTime()-startTime))/1000000));
 			}
 			cache.put(key, null);
@@ -118,14 +118,14 @@ public class PathingBinary {
 
 		endCoord=validatePoint(endCoord);
 		if (endCoord==null) {
-			if (MLN.Connections>=MLN.MAJOR) {
+			if (MLN.LogConnections>=MLN.MAJOR) {
 				MLN.major(this, "No valid dest found from "+start+" to "+dest+" for "+villager+": "+(((double)(System.nanoTime()-startTime))/1000000));
 			}
 			cache.put(key, null);
 			return null;
 		}
 
-		if (MLN.Connections>=MLN.MAJOR) {
+		if (MLN.LogConnections>=MLN.MAJOR) {
 			MLN.major(this,"Time to find start and end: "+(((double)(System.nanoTime()-startTime))/1000000));
 		}
 		startTime=System.nanoTime();
@@ -148,7 +148,7 @@ public class PathingBinary {
 			writer.close();
 		}
 
-		if (MLN.Connections>=MLN.MAJOR) {
+		if (MLN.LogConnections>=MLN.MAJOR) {
 			MLN.major(this,"Time to calculate path from "+start+" to "+dest+" for "+villager+" with binary pathing (result: "+(binaryPath==null?"null":binaryPath.size())+"): "+(((double)(System.nanoTime()-startTime))/1000000));
 		}
 
@@ -203,7 +203,7 @@ public class PathingBinary {
 			}
 		}
 
-		if (MLN.Connections>=MLN.MAJOR) {
+		if (MLN.LogConnections>=MLN.MAJOR) {
 			MLN.major(this,"Time to generate region: "+(((double)(System.nanoTime()-startTime))/1000000));
 		}
 
@@ -211,7 +211,7 @@ public class PathingBinary {
 
 		surface=new PathingSurface(region, region[hradius][vradius][hradius]);
 
-		if (MLN.Connections>=MLN.MAJOR) {
+		if (MLN.LogConnections>=MLN.MAJOR) {
 			MLN.major(this,"Time taken to compute surface: "+(((double)(System.nanoTime()-startTime))/1000000));
 		}
 
@@ -253,7 +253,7 @@ public class PathingBinary {
 
 	private short[] validatePoint(short[] p) {
 
-		if (MLN.Connections>=MLN.MAJOR) {
+		if (MLN.LogConnections>=MLN.MAJOR) {
 			MLN.major(this, "Validating point: "+p[0]+"/"+p[1]+"/"+p[2]);
 		}
 
@@ -276,7 +276,7 @@ public class PathingBinary {
 			writeLine("//result of surface.contains: "+res);
 
 			if (res) {
-				if (MLN.Connections>=MLN.MAJOR) {
+				if (MLN.LogConnections>=MLN.MAJOR) {
 					MLN.major(this, "Found valid point. offset: "+i);
 				}
 				return newP;
@@ -301,7 +301,7 @@ public class PathingBinary {
 							}
 
 							if (res) {
-								if (MLN.Connections>=MLN.MAJOR) {
+								if (MLN.LogConnections>=MLN.MAJOR) {
 									MLN.major(this, "Found valid point. offset: "+i+"/"+k+"/"+j);
 								}
 								return newP;

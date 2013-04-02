@@ -60,7 +60,7 @@ public class GoalMerchantVisitInn extends Goal {
 
 		for (final Goods good : villager.getTownHall().culture.goodsVector) {
 			if ((villager.getHouse().countGoods(good.item.id(),good.item.meta)>0) && (villager.countInv(good.item.id(),good.item.meta)<villager.getTownHall().nbGoodNeeded(good.item.id(), good.item.meta))) {
-				if (MLN.Merchant>=MLN.MAJOR) {
+				if (MLN.LogMerchant>=MLN.MAJOR) {
 					MLN.major(this, "Visiting the Inn to take imports");
 				}
 				return true;

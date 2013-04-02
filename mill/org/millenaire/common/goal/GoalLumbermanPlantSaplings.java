@@ -115,10 +115,10 @@ public class GoalLumbermanPlantSaplings extends Goal {
 
 			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Block.sapling.blockID,chosenMeta);
 
-			if ((MLN.Lumberman>=MLN.DEBUG) && villager.extraLog) {
+			if ((MLN.LogLumberman>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Planted at: "+villager.getGoalDestPoint());
 			}
-		} else if ((MLN.Lumberman>=MLN.DEBUG) && villager.extraLog) {
+		} else if ((MLN.LogLumberman>=MLN.DEBUG) && villager.extraLog) {
 			MLN.debug(this, "Failed to plant at: "+villager.getGoalDestPoint());
 		}
 

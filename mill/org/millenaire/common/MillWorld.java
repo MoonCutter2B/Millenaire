@@ -315,7 +315,7 @@ public class MillWorld {
 			return buildings.get(p);
 		}
 
-		if (MLN.WorldInfo>=MLN.MINOR) {
+		if (MLN.LogWorldInfo>=MLN.MINOR) {
 			MLN.minor(this, "Could not find a building at location "+p+" amoung "+buildings.size()+" records.");
 		}
 
@@ -399,7 +399,7 @@ public class MillWorld {
 			}
 		}
 
-		if (MLN.Hybernation>=MLN.MAJOR) {
+		if (MLN.LogHybernation>=MLN.MAJOR) {
 			for (final Building b : buildings.values()) {
 				MLN.major(null, b+" - "+b.culture);
 			}
@@ -442,7 +442,7 @@ public class MillWorld {
 					line=reader.readLine();
 				}
 
-				if (MLN.WorldGeneration>=MLN.MAJOR) {
+				if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 					MLN.major(null, "Loaded "+globalTags.size()+" tags.");
 				}
 
@@ -507,7 +507,7 @@ public class MillWorld {
 					line=reader.readLine();
 				}
 
-				if (MLN.WorldGeneration>=MLN.MAJOR) {
+				if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 					MLN.major(null, "Loaded "+villagesList.names.size()+" village positions.");
 				}
 
@@ -549,7 +549,7 @@ public class MillWorld {
 					line=reader.readLine();
 				}
 
-				if (MLN.WorldGeneration>=MLN.MAJOR) {
+				if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 					MLN.major(null, "Loaded "+loneBuildingsList.names.size()+" lone buildings positions.");
 				}
 
@@ -594,7 +594,7 @@ public class MillWorld {
 			}
 		}
 
-		if (MLN.WorldGeneration>=MLN.MAJOR) {
+		if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 			MLN.major(null,"Config loaded. generateVillages: "+MLN.generateVillages);
 		}
 	}
@@ -614,7 +614,7 @@ public class MillWorld {
 
 	public void receiveVillageListPacket(DataInputStream ds) {
 
-		if (MLN.Network>=MLN.MINOR) {
+		if (MLN.LogNetwork>=MLN.MINOR) {
 			MLN.minor(this, "Received village list packet.");
 		}
 
@@ -658,7 +658,7 @@ public class MillWorld {
 
 		loneBuildingsList.addVillage(pos,name,type.key,culture.key);
 
-		if (MLN.WorldGeneration >= MLN.MAJOR) {
+		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(null, "Registering lone buildings: "+name+" / "+type+" / "+culture+" / "+pos);
 		}
 		for (final Object o : world.playerEntities) {
@@ -703,7 +703,7 @@ public class MillWorld {
 
 		villagesList.addVillage(pos, name, type.key, culture.key);
 
-		if (MLN.WorldGeneration >= MLN.MAJOR) {
+		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(null, "Registering village: "+name+" / "+type+" / "+culture+" / "+pos);
 		}
 
@@ -804,7 +804,7 @@ public class MillWorld {
 				writer.write(loneBuildingsList.names.get(i)+";"+p.getiX()+"/"+p.getiY()+"/"+p.getiZ()+";"+loneBuildingsList.types.get(i)+";"+loneBuildingsList.cultures.get(i)+System.getProperty("line.separator"));
 			}
 			writer.flush();
-			if (MLN.WorldGeneration>=MLN.MAJOR) {
+			if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 				MLN.major(null,"Saved "+loneBuildingsList.names.size()+" lone buildings.txt positions.");
 			}
 
@@ -837,7 +837,7 @@ public class MillWorld {
 				writer.write(villagesList.names.get(i)+";"+p.getiX()+"/"+p.getiY()+"/"+p.getiZ()+";"+villagesList.types.get(i)+";"+villagesList.cultures.get(i)+System.getProperty("line.separator"));
 			}
 			writer.flush();
-			if (MLN.WorldGeneration>=MLN.MAJOR) {
+			if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 				MLN.major(null,"Saved "+villagesList.names.size()+" village positions.");
 			}
 

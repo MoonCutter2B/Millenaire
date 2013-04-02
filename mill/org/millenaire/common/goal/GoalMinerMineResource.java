@@ -93,7 +93,7 @@ public class GoalMinerMineResource extends Goal {
 
 			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.sand,4.0f);
 
-			if ((MLN.Miner>=MLN.DEBUG) && villager.extraLog) {
+			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gathered sand at: "+villager.getGoalDestPoint());
 			}
 		} else if (blockId==Block.stone.blockID) {
@@ -101,7 +101,7 @@ public class GoalMinerMineResource extends Goal {
 
 			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.stone,4.0f);
 
-			if ((MLN.Miner>=MLN.DEBUG) && villager.extraLog) {
+			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gather cobblestone at: "+villager.getGoalDestPoint());
 			}
 		} else if (blockId==Block.sandStone.blockID) {
@@ -109,7 +109,7 @@ public class GoalMinerMineResource extends Goal {
 
 			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.sandStone,4.0f);
 
-			if ((MLN.Miner>=MLN.DEBUG) && villager.extraLog) {
+			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gather sand stone at: "+villager.getGoalDestPoint());
 			}
 		} else if (blockId==Block.blockClay.blockID) {
@@ -117,7 +117,7 @@ public class GoalMinerMineResource extends Goal {
 
 			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.blockClay,4.0f);
 
-			if ((MLN.Miner>=MLN.DEBUG) && villager.extraLog) {
+			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gather clay at: "+villager.getGoalDestPoint());
 			}
 		} else if (blockId==Block.gravel.blockID) {
@@ -125,7 +125,7 @@ public class GoalMinerMineResource extends Goal {
 
 			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.gravel,4.0f);
 
-			if ((MLN.Miner>=MLN.DEBUG) && villager.extraLog) {
+			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gather gravel at: "+villager.getGoalDestPoint());
 			}
 		}

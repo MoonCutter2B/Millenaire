@@ -68,7 +68,7 @@ public class MillWorldInfo implements Cloneable {
 
 				building.mapInfo=minfo;
 
-				if (MLN.Network>=MLN.DEBUG) {
+				if (MLN.LogNetwork>=MLN.DEBUG) {
 					MLN.debug(null, "Receiving map info packet.");
 				}
 
@@ -294,7 +294,7 @@ public class MillWorldInfo implements Cloneable {
 
 	private void createWorldInfo(Vector<BuildingLocation> locations,BuildingLocation blIP,int pstartX,int pstartZ,int endX,int endZ) throws MillenaireException {
 
-		if (MLN.WorldInfo>=MLN.MINOR) {
+		if (MLN.LogWorldInfo>=MLN.MINOR) {
 			MLN.minor(this, "Creating world info: "+pstartX+"/"+pstartZ+"/"+endX+"/"+endZ);
 		}
 
@@ -313,7 +313,7 @@ public class MillWorldInfo implements Cloneable {
 			throw new MillenaireException("Null frequency in createWorldInfo.");
 
 
-		if (MLN.WorldInfo>=MLN.MAJOR) {
+		if (MLN.LogWorldInfo>=MLN.MAJOR) {
 			MLN.major(this, "Creating world info: "+mapStartX+"/"+mapStartZ+"/"+length+"/"+width);
 		}
 
@@ -382,7 +382,7 @@ public class MillWorldInfo implements Cloneable {
 
 	private void registerBuildingLocation(BuildingLocation bl) {
 
-		if (MLN.WorldInfo>=MLN.MAJOR) {
+		if (MLN.LogWorldInfo>=MLN.MAJOR) {
 			MLN.major(this,"Registering building location: "+bl);
 		}
 
@@ -476,7 +476,7 @@ public class MillWorldInfo implements Cloneable {
 			}
 		}
 
-		if (MLN.WorldInfo>=MLN.MAJOR) {
+		if (MLN.LogWorldInfo>=MLN.MAJOR) {
 
 			MLN.major(this, "WorldInfo Centre: "+centre);
 
@@ -511,7 +511,7 @@ public class MillWorldInfo implements Cloneable {
 		endX=Math.max(endX+BUILDING_MARGIN, centre.getiX()+radius+MAP_MARGIN);
 		endZ=Math.max(endZ+BUILDING_MARGIN, centre.getiZ()+radius+MAP_MARGIN);
 
-		if (MLN.WorldInfo>=MLN.MAJOR) {
+		if (MLN.LogWorldInfo>=MLN.MAJOR) {
 			MLN.major(this, "Values: "+startX+"/"+startZ+"/"+endX+"/"+endZ);
 		}
 
@@ -522,7 +522,7 @@ public class MillWorldInfo implements Cloneable {
 		final int lengthTemp=(((endX >> 4)+1) << 4)-mapStartXTemp;
 		final int widthTemp=(((endZ >> 4)+1) << 4)-mapStartZTemp;
 
-		if (MLN.WorldInfo>=MLN.MAJOR) {
+		if (MLN.LogWorldInfo>=MLN.MAJOR) {
 			MLN.major(this, "Values after chunks: "+mapStartXTemp+"/"+mapStartZTemp+"/"+(mapStartXTemp+lengthTemp)+"/"+(mapStartZTemp+widthTemp));
 		}
 
@@ -548,7 +548,7 @@ public class MillWorldInfo implements Cloneable {
 		for (int i=-1;i<2;i++) {
 			for (int j=-1;j<2;j++) {
 				if (!world.getChunkProvider().chunkExists(((startX+mapStartX) >> 4) + i, ((startZ+mapStartZ) >>4) + j)) {
-					if (MLN.WorldInfo>=MLN.DEBUG) {
+					if (MLN.LogWorldInfo>=MLN.DEBUG) {
 						MLN.debug(this, "Chunk is not loaded.");
 					}
 					return;
@@ -559,7 +559,7 @@ public class MillWorldInfo implements Cloneable {
 
 		final Chunk chunk=world.getChunkFromBlockCoords(startX+mapStartX, startZ+mapStartZ);
 
-		if (MLN.WorldInfo>=MLN.DEBUG) {
+		if (MLN.LogWorldInfo>=MLN.DEBUG) {
 			MLN.debug(this, "Updating chunk: "+startX+"/"+startZ+"/"+yBaseline+"/"+chunk.xPosition+"/"+chunk.zPosition);
 		}
 
@@ -690,7 +690,7 @@ public class MillWorldInfo implements Cloneable {
 				}
 
 				if ((bid == Block.lavaMoving.blockID) || (bid == Block.lavaStill.blockID)) {
-					if (MLN.WorldInfo>=MLN.DEBUG) {
+					if (MLN.LogWorldInfo>=MLN.DEBUG) {
 						MLN.debug(this, "Found danger: "+bid);
 					}
 					danger[mx][mz]=true;

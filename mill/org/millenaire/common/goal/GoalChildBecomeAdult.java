@@ -75,7 +75,7 @@ public class GoalChildBecomeAdult extends Goal {
 
 		if (house != null) {
 			if (house.canChildMoveIn(villager.gender,villager.familyName)) {
-				if (MLN.Children>=MLN.MAJOR) {
+				if (MLN.LogChildren>=MLN.MAJOR) {
 					MLN.major(this, "Adding new adult to house of type "+house.location+". Gender: "+villager.gender);
 				}
 				house.addAdult(villager);

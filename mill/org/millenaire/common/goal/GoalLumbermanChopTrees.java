@@ -89,7 +89,7 @@ public class GoalLumbermanChopTrees extends Goal {
 
 		boolean woodFound=false;
 
-		if ((MLN.Lumberman>=MLN.DEBUG) && villager.extraLog) {
+		if ((MLN.LogLumberman>=MLN.DEBUG) && villager.extraLog) {
 			MLN.debug(this, "Attempting to gather wood at: "+villager.getGoalDestPoint());
 		}
 
@@ -112,7 +112,7 @@ public class GoalLumbermanChopTrees extends Goal {
 									villager.addToInv(Block.wood.blockID, meta, 1);
 									woodFound=true;
 
-									if ((MLN.Lumberman>=MLN.DEBUG) && villager.extraLog) {
+									if ((MLN.LogLumberman>=MLN.DEBUG) && villager.extraLog) {
 										MLN.debug(this, "Gathered wood at: "+villager.getGoalDestPoint());
 									}
 								} else {
@@ -127,12 +127,12 @@ public class GoalLumbermanChopTrees extends Goal {
 									}
 
 
-									if ((MLN.Lumberman>=MLN.DEBUG) && villager.extraLog) {
+									if ((MLN.LogLumberman>=MLN.DEBUG) && villager.extraLog) {
 										MLN.debug(this,"Destroyed leaves at: "+villager.getGoalDestPoint());
 									}
 								}
 							} else {
-								if ((MLN.Lumberman>=MLN.DEBUG) && villager.extraLog) {
+								if ((MLN.LogLumberman>=MLN.DEBUG) && villager.extraLog) {
 									MLN.debug(this,"More wood found.");
 								}
 								return false;//still more wood to cut

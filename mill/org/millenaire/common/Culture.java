@@ -706,7 +706,7 @@ public class Culture {
 
 							buildingNames.put(key, value);
 
-							if (MLN.Translation>=MLN.MINOR) {
+							if (MLN.LogTranslation>=MLN.MINOR) {
 								MLN.minor(this, "Loading name: "+value+" for "+key);
 							}
 						} else if (temp.length==1) {
@@ -714,7 +714,7 @@ public class Culture {
 
 							buildingNames.put(key, "");
 
-							if (MLN.Translation>=MLN.MINOR) {
+							if (MLN.LogTranslation>=MLN.MINOR) {
 								MLN.minor(this, "Loading empty name for "+key);
 							}
 						}
@@ -742,14 +742,14 @@ public class Culture {
 							final String value=temp[1].trim();
 
 							strings.put(key, value);
-							if (MLN.Translation>=MLN.MINOR) {
+							if (MLN.LogTranslation>=MLN.MINOR) {
 								MLN.minor(this, "Loading name: "+value+" for "+key);
 							}
 						} else if (temp.length==1) {
 							final String key=temp[0].toLowerCase();
 
 							strings.put(key, "");
-							if (MLN.Translation>=MLN.MINOR) {
+							if (MLN.LogTranslation>=MLN.MINOR) {
 								MLN.minor(this, "Loading empty name for "+key);
 							}
 						}
@@ -1220,7 +1220,7 @@ public class Culture {
 		if (plan.parent!=null)
 			return getBuildingGameName(plan.parent);
 
-		if ((MLN.Translation>=MLN.MAJOR) || MLN.generateTranslationGap) {
+		if ((MLN.LogTranslation>=MLN.MAJOR) || MLN.generateTranslationGap) {
 			MLN.major(this,
 					"Could not find the building name for :"+plan.planName);
 		}
@@ -1735,7 +1735,7 @@ public class Culture {
 							for (final String name : value.split(",")) {
 								if (goods.containsKey(name)) {
 									buys.add(goods.get(name));
-									if (MLN.Selling>=MLN.MINOR) {
+									if (MLN.LogSelling>=MLN.MINOR) {
 										MLN.minor(this, "Loaded buying good "+name+" for shop "+file.getName());
 									}
 								} else {

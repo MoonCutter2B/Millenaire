@@ -38,7 +38,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			return false;
 
 
-		if (MLN.WorldGeneration>=MLN.MAJOR) {
+		if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 			MLN.major(null,"Generating bedrockbuilding: "+village);
 		}
 
@@ -81,7 +81,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 		final Building townHallEntity=lbps.firstElement().building;
 
-		if (MLN.WorldGeneration>=MLN.MAJOR) {
+		if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 			MLN.major(null,"Registering building: "+townHallEntity);
 		}
 		townHallEntity.villageType=village;
@@ -145,7 +145,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 				final int dz=(int) (Math.sin(angle)*radius);
 
-				if (MLN.WorldGeneration>=MLN.MAJOR) {
+				if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 					MLN.major(this,"Trying to generate a hamlet "+hamlet+" around: "+(centralVillage.getiX()+dx)+"/"+(centralVillage.getiZ()+dz));
 				}
 				generated=generateVillageAtPoint(world,random,centralVillage.getiX()+dx,0,centralVillage.getiZ()+dz,null,false,true,100,hamlet,name,centralVillage);
@@ -155,7 +155,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			minRadius+=50;
 		}
 
-		if (!generated && (MLN.WorldGeneration>=MLN.MAJOR)) {
+		if (!generated && (MLN.LogWorldGeneration>=MLN.MAJOR)) {
 			MLN.major(this, "Could not generate hamlet "+hamlet);
 		}
 	}
@@ -191,7 +191,7 @@ public class WorldGenVillage implements IWorldGenerator {
 		BuildingLocation location=village.centreBuilding.getRandomStartingPlan().findBuildingLocation(winfo, null,p, village.radius, random, BuildingPlan.EAST_FACING);
 
 		if (location==null) {
-			if (MLN.WorldGeneration>=MLN.MINOR) {
+			if (MLN.LogWorldGeneration>=MLN.MINOR) {
 				MLN.minor(this, "Could not find place for central building: "+village.centreBuilding);
 			}
 
@@ -201,7 +201,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			return false;
 		}
 
-		if (MLN.WorldGeneration>=MLN.MINOR) {
+		if (MLN.LogWorldGeneration>=MLN.MINOR) {
 			MLN.minor(this, "Place found for TownHall (village type: "+village.key+"). Checking for the rest.");
 		}
 
@@ -223,13 +223,13 @@ public class WorldGenVillage implements IWorldGenerator {
 				winfo.update(world, plannedBuildings, null, p,village.radius);
 			} else {
 				couldBuildKeyBuildings=false;
-				if (MLN.WorldGeneration>=MLN.MINOR) {
+				if (MLN.LogWorldGeneration>=MLN.MINOR) {
 					MLN.minor(this, "Couldn't build "+planSet.key+".");
 				}
 			}
 		}
 
-		if (MLN.WorldGeneration>=MLN.DEBUG) {
+		if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 			MLN.debug(this,"Time taken for finding if building possible: "+(System.nanoTime()-startTime));
 		}
 
@@ -261,7 +261,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 			for (final Point thp : mw.villagesList.pos) {
 				if (p.distanceTo(thp) < minDistanceWithVillages) {
-					if (MLN.WorldGeneration>=MLN.MAJOR) {
+					if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 						MLN.major(this,"Found a nearby village on second attempt.");
 					}
 					return false;
@@ -270,7 +270,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 			for (final Point thp : mw.loneBuildingsList.pos) {
 				if (p.distanceTo(thp) < minDistanceWithLoneBuildings) {
-					if (MLN.WorldGeneration>=MLN.MAJOR) {
+					if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 						MLN.major(this,"Found a nearby lone building on second attempt.");
 					}
 					return false;
@@ -278,11 +278,11 @@ public class WorldGenVillage implements IWorldGenerator {
 			}
 		}
 
-		if (MLN.WorldGeneration>=MLN.MAJOR) {
+		if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 			MLN.major(this,p+": Generating village");
 		}
 
-		if (MLN.WorldGeneration>=MLN.MAJOR) {
+		if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 			for (final BuildingLocation bl : plannedBuildings) {
 				MLN.major(this,  "Building "+bl.key+": "+bl.minx+"/"+bl.minz+" to "+bl.maxx+"/"+bl.maxz);
 			}
@@ -293,7 +293,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 		final Building townHallEntity=lbps.firstElement().building;
 
-		if (MLN.WorldGeneration>=MLN.MAJOR) {
+		if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 			MLN.major(this,"Registering building: "+townHallEntity);
 		}
 		townHallEntity.villageType=village;
@@ -315,7 +315,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			final BuildingLocation bl=plannedBuildings.get(i);
 
 			lbps=village.culture.getBuildingPlanSet(bl.key).buildLocation(mw,village,bl,true, false, townHallEntity.getPos(), false, player);
-			if (MLN.WorldGeneration>=MLN.MAJOR) {
+			if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 				MLN.major(this,"Registering building: "+bl.key);
 			}
 			for (final LocationBuildingPair lbp : lbps) {
@@ -339,7 +339,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			}
 		}
 
-		if (MLN.WorldGeneration>=MLN.MAJOR) {
+		if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 			MLN.major(this,"New village generated at "+p+", took: "+(System.nanoTime()-startTime));
 		}
 
@@ -348,7 +348,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			final VillageType hamlet=village.culture.getVillageType(key);
 
 			if (hamlet != null) {
-				if (MLN.WorldGeneration>=MLN.MAJOR) {
+				if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 					MLN.major(this,"Trying to generate a hamlet: "+hamlet);
 				}
 				generateHamlet(world,hamlet,townHallEntity.getPos(),townHallEntity.getVillageNameWithoutQualifier(),random);
@@ -382,7 +382,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 		try {
 
-			if (MLN.WorldGeneration>=MLN.DEBUG) {
+			if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 				MLN.debug(this, "Called for point: "+x+"/"+y+"/"+z);
 			}
 
@@ -449,7 +449,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 					for (final Point thp : mw.villagesList.pos) {
 						if (p.distanceTo(thp) < minDistanceVillages) {
-							if (MLN.WorldGeneration>=MLN.DEBUG) {
+							if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 								MLN.debug(this,"Time taken for finding near villages: "+(System.nanoTime()-startTime));
 							}
 							canAttemptVillage=false;
@@ -458,14 +458,14 @@ public class WorldGenVillage implements IWorldGenerator {
 
 					for (final Point thp : mw.loneBuildingsList.pos) {
 						if (p.distanceTo(thp) < minDistanceLoneBuildings) {
-							if (MLN.WorldGeneration>=MLN.DEBUG) {
+							if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 								MLN.debug(this,"Time taken for finding near lone buildings: "+(System.nanoTime()-startTime));
 							}
 							canAttemptVillage=false;
 						}
 					}
 				}
-				if (MLN.WorldGeneration>=MLN.DEBUG) {
+				if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 					MLN.debug(this,"Time taken for finding near villages (not found): "+(System.nanoTime()-startTime));
 				}
 
@@ -526,7 +526,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 			for (final Point thp : mw.villagesList.pos) {
 				if (p.distanceTo(thp) < (minDistanceWithVillages/2)) {
-					if (MLN.WorldGeneration>=MLN.DEBUG) {
+					if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 						MLN.debug(this,"Time taken for finding near villages: "+(System.nanoTime()-startTime));
 					}
 					return false;
@@ -537,7 +537,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 			for (final Point thp : mw.loneBuildingsList.pos) {
 				if (p.distanceTo(thp) < (minDistanceWithLoneBuildings/2)) {
-					if (MLN.WorldGeneration>=MLN.DEBUG) {
+					if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 						MLN.debug(this,"Time taken for finding near villages: "+(System.nanoTime()-startTime));
 					}
 					return false;
@@ -546,7 +546,7 @@ public class WorldGenVillage implements IWorldGenerator {
 				}
 			}
 
-			if (MLN.WorldGeneration>=MLN.DEBUG) {
+			if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 				MLN.debug(this,"Time taken for finding near villages (not found): "+(System.nanoTime()-startTime));
 			}
 
@@ -579,7 +579,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 			final VillageType loneBuilding=(VillageType)MillCommonUtilities.getWeightedChoice(acceptableLoneBuildingsType,closestPlayer);
 
-			if (MLN.WorldGeneration>=MLN.MINOR) {
+			if (MLN.LogWorldGeneration>=MLN.MINOR) {
 				MLN.minor(null, "Attempting to find lone building: "+loneBuilding);
 			}
 
@@ -587,7 +587,7 @@ public class WorldGenVillage implements IWorldGenerator {
 				return false;
 
 			if (loneBuilding.isKeyLoneBuildingForGeneration(closestPlayer)) {
-				if (MLN.WorldGeneration>=MLN.MAJOR) {
+				if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 					MLN.major(null, "Attempting to generate key lone building: "+loneBuilding.key);
 				}
 			}

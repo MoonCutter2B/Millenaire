@@ -238,7 +238,7 @@ public class ContainerTrade extends Container {
 
 					slotnb++;
 				} else {
-					if (MLN.Selling>=MLN.MAJOR) {
+					if (MLN.LogSelling>=MLN.MAJOR) {
 						MLN.major(this, "Removing trade good "+g.name+" for having price "+g.getBuyingPrice(building.getTownHall()));
 					}
 				}

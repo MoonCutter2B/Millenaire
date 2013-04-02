@@ -118,7 +118,7 @@ public class ServerReceiver implements IPacketHandler
 		try {
 			final int packettype=dataStream.read();
 
-			if (MLN.Network>=MLN.DEBUG) {
+			if (MLN.LogNetwork>=MLN.DEBUG) {
 				MLN.debug(this, "Receiving packet type "+packettype);
 			}
 

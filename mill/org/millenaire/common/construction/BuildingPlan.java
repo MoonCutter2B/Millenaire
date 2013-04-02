@@ -2030,7 +2030,7 @@ public class BuildingPlan {
 
 			final Building building=new Building(mw, culture, villageType, location, townHall, villageGeneration, bblocks[bblocks.length-1].p, townHallPos);
 
-			if (MLN.WorldGeneration>=MLN.MINOR) {
+			if (MLN.LogWorldGeneration>=MLN.MINOR) {
 				MLN.minor(this, "Building "+planName+" at "+location);
 			}
 
@@ -2292,7 +2292,7 @@ public class BuildingPlan {
 		int radius=(int) (maxRadius*minDistance);
 		maxRadius=(int) (maxRadius*maxDistance);
 
-		if (MLN.WorldGeneration>=MLN.MAJOR) {
+		if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 			MLN.major(this, "testBuildWorldInfo: Called to test for building "+planName+" around "+centre+"("+ci+"/"+cj+"), start radius: "+radius+", max radius: "+maxRadius);
 		}
 
@@ -2309,7 +2309,7 @@ public class BuildingPlan {
 			final int minj=Math.max(0, cj-radius);
 			final int maxj=Math.min(winfo.width-1, cj+radius);
 
-			if (MLN.WorldGeneration>=MLN.DEBUG) {
+			if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 				MLN.debug(this, "Testing square: "+mini+"/"+minj+" to "+maxi+"/"+maxj);
 			}
 
@@ -2360,7 +2360,7 @@ public class BuildingPlan {
 			radius++;
 		}
 
-		if (MLN.WorldGeneration>=MLN.MAJOR) {
+		if (MLN.LogWorldGeneration>=MLN.MAJOR) {
 			MLN.major(this, "Could not find acceptable location (radius: "+radius+")");
 		}
 
@@ -2408,7 +2408,7 @@ public class BuildingPlan {
 
 		final Vector<BuildingBlock> bblocks=new Vector<BuildingBlock>(approximateBlocks,100);
 
-		if (MLN.WorldGeneration>=MLN.MINOR) {
+		if (MLN.LogWorldGeneration>=MLN.MINOR) {
 			MLN.minor(this, "Getting blocks for "+planName+" at "+x+"/"+y+"/"+z+"/"+orientation);
 		}
 
@@ -3923,7 +3923,7 @@ public class BuildingPlan {
 
 		winfo.buildTested[x][z]=true;
 
-		if (MLN.WorldGeneration>=MLN.DEBUG) {
+		if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 			MLN.debug(this, "Testing: "+x+"/"+z);
 		}
 

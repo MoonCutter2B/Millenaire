@@ -106,7 +106,7 @@ public class Puja implements IInventory {
 
 		cost=cost*(nbother+1);
 
-		if (MLN.Pujas>=MLN.MINOR) {
+		if (MLN.LogPujas>=MLN.MINOR) {
 			MLN.minor(this, "Offering needed: "+cost);
 		}
 
@@ -357,7 +357,7 @@ public class Puja implements IInventory {
 			enchantmentTarget = Enchantment.enchantmentsList[enchId];
 		}
 
-		if (MLN.Pujas>=MLN.MINOR) {
+		if (MLN.LogPujas>=MLN.MINOR) {
 			MLN.minor(this, "Reading enchantmentTarget: "+enchId+", "+enchantmentTarget);
 		}
 
@@ -433,7 +433,7 @@ public class Puja implements IInventory {
 			par1NBTTagCompound.setShort("enchantmentTarget", (short)enchantmentTarget.effectId);
 		}
 
-		if (MLN.Pujas>=MLN.MINOR) {
+		if (MLN.LogPujas>=MLN.MINOR) {
 			MLN.minor(this, "Writing enchantmentTarget: "+enchantmentTarget.effectId+", "+enchantmentTarget);
 		}
 

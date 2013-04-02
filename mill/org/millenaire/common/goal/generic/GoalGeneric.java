@@ -227,7 +227,7 @@ public abstract class GoalGeneric extends Goal {
 			try {
 				final GoalGenericCrafting goal=GoalGenericCrafting.loadGenericCraftingGoal(file);
 				if (goal!=null) {
-					if (MLN.GeneralAI>=MLN.MAJOR) {
+					if (MLN.LogGeneralAI>=MLN.MAJOR) {
 						MLN.major(goal, "loaded crafting goal");
 					}
 					goals.put(goal.key, goal);
@@ -241,7 +241,7 @@ public abstract class GoalGeneric extends Goal {
 			try {
 				final GoalGenericCooking goal=GoalGenericCooking.loadGenericCookingGoal(file);
 				if (goal!=null) {
-					if (MLN.GeneralAI>=MLN.MAJOR) {
+					if (MLN.LogGeneralAI>=MLN.MAJOR) {
 						MLN.major(goal, "loaded cooking goal");
 					}
 					goals.put(goal.key, goal);
@@ -256,7 +256,7 @@ public abstract class GoalGeneric extends Goal {
 			try {
 				final GoalGenericSlaughterAnimal goal=GoalGenericSlaughterAnimal.loadGenericSlaughterAnimalGoal(file);
 				if (goal!=null) {
-					if (MLN.GeneralAI>=MLN.MAJOR) {
+					if (MLN.LogGeneralAI>=MLN.MAJOR) {
 						MLN.major(goal, "loaded slaughtering goal");
 					}
 					goals.put(goal.key, goal);
@@ -270,7 +270,7 @@ public abstract class GoalGeneric extends Goal {
 			try {
 				final GoalGenericPlantCrop goal=GoalGenericPlantCrop.loadGenericPlantCropGoal(file);
 				if (goal!=null) {
-					if (MLN.GeneralAI>=MLN.MAJOR) {
+					if (MLN.LogGeneralAI>=MLN.MAJOR) {
 						MLN.major(goal, "loaded planting goal");
 					}
 					goals.put(goal.key, goal);
@@ -284,7 +284,7 @@ public abstract class GoalGeneric extends Goal {
 			try {
 				final GoalGenericHarvestCrop goal=GoalGenericHarvestCrop.loadGenericHarvestCropGoal(file);
 				if (goal!=null) {
-					if (MLN.GeneralAI>=MLN.MAJOR) {
+					if (MLN.LogGeneralAI>=MLN.MAJOR) {
 						MLN.major(goal, "loaded harvesting goal");
 					}
 					goals.put(goal.key, goal);

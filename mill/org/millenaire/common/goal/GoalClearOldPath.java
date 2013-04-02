@@ -44,7 +44,7 @@ public class GoalClearOldPath extends Goal {
 		if (p==null)
 			return true;
 
-		if (MLN.VillagePaths>=MLN.DEBUG)
+		if (MLN.LogVillagePaths>=MLN.DEBUG)
 			MLN.debug(villager, "Clearing old path block: "+p);
 
 		int bid=p.getId(villager.worldObj);
@@ -107,7 +107,7 @@ public class GoalClearOldPath extends Goal {
 
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
-		return villager.getTownHall().getCurrentClearPathPoint()!=null;
+		return MLN.BuildVillagePaths && villager.getTownHall().getCurrentClearPathPoint()!=null;
 	}
 
 	@Override

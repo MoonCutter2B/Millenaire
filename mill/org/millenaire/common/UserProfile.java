@@ -232,7 +232,7 @@ public class UserProfile {
 		panelsSent.clear();
 		buildingsSent.clear();
 
-		if (MLN.Network>=MLN.MAJOR) {
+		if (MLN.LogNetwork>=MLN.MAJOR) {
 			MLN.major(this, "Disconnected user.");
 		}
 	}
@@ -400,7 +400,7 @@ public class UserProfile {
 					line = reader.readLine();
 				}
 
-				if (MLN.WorldGeneration >= MLN.MAJOR) {
+				if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 					MLN.major(null, "Loaded " + actionData.size()
 							+ " action data.");
 				}
@@ -499,7 +499,7 @@ public class UserProfile {
 			}
 		}
 
-		if (MLN.WorldGeneration >= MLN.MAJOR) {
+		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(null, "Config loaded. generateVillages: "
 					+ MLN.generateVillages);
 		}
@@ -524,7 +524,7 @@ public class UserProfile {
 					line = reader.readLine();
 				}
 
-				if (MLN.WorldGeneration >= MLN.MAJOR) {
+				if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 					MLN.major(this, "Loaded " + profileTags.size() + " tags.");
 				}
 
@@ -571,7 +571,7 @@ public class UserProfile {
 		try {
 			releaseNumber=ds.readUTF();
 
-			if (MLN.Network>=MLN.MAJOR) {
+			if (MLN.LogNetwork>=MLN.MAJOR) {
 				MLN.major(this, "Declared release number: "+releaseNumber);
 			}
 
@@ -582,7 +582,7 @@ public class UserProfile {
 
 	public void receiveProfilePacket(DataInputStream ds) {
 
-		if (MLN.Network>=MLN.MINOR) {
+		if (MLN.LogNetwork>=MLN.MINOR) {
 			MLN.minor(null, "Receiving profile packet");
 		}
 
@@ -793,7 +793,7 @@ public class UserProfile {
 
 	public void sendInitialPackets() {
 
-		if (MLN.Network>=MLN.MAJOR) {
+		if (MLN.LogNetwork>=MLN.MAJOR) {
 			MLN.major(this, "Sending initial packets.");
 		}
 
@@ -940,7 +940,7 @@ public class UserProfile {
 		packet.data = bytes.toByteArray();
 		packet.length = packet.data.length;
 
-		if (MLN.Network>=MLN.MINOR) {
+		if (MLN.LogNetwork>=MLN.MINOR) {
 			MLN.minor(null, "Sending quest instance packet");
 		}
 

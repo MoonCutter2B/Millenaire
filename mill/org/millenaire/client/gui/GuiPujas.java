@@ -40,7 +40,7 @@ public class GuiPujas extends GuiContainer
 		this.temple = temple;
 		this.player=player;
 
-		if (MLN.Pujas>=MLN.DEBUG) {
+		if (MLN.LogPujas>=MLN.DEBUG) {
 			MLN.debug(this, "Opening shrine GUI");
 		}
 	}

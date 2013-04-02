@@ -101,7 +101,7 @@ public class GoalShearSheep extends Goal {
 					if (!animal.getSheared()) {
 						villager.addToInv(Block.cloth.blockID,((EntitySheep)ent).getFleeceColor(), 3);
 						((EntitySheep)ent).setSheared(true);
-						if ((MLN.CattleFarmer>=MLN.MAJOR) && villager.extraLog) {
+						if ((MLN.LogCattleFarmer>=MLN.MAJOR) && villager.extraLog) {
 							MLN.major(this, "Shearing: "+ent);
 						}
 					}

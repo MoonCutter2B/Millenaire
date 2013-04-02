@@ -524,40 +524,40 @@ public class MLN {
 
 
 	public static int LogBuildingPlan = 0;
-	public static int CattleFarmer=0;
-	public static int Children = 0;
-	public static int Translation = 0;
-	public static int Connections = 0;
+	public static int LogCattleFarmer=0;
+	public static int LogChildren = 0;
+	public static int LogTranslation = 0;
+	public static int LogConnections = 0;
 	public static int LogCulture=0;
-	public static int Diplomacy=0;
-	public static int FarmerAI = 0;
-	public static int GeneralAI = 0;
-	public static int getPath = 0;
-	public static int Hybernation = 0;
-	public static int Lumberman = 0;
-	public static int Merchant=0;
-	public static int Miner = 0;
-	public static int Other = 0;
-	public static int Pathing = 0;
-	public static int Performance = 0;
-	public static int Selling = 0;
-	public static int TileEntityBuilding = 0;
+	public static int LogDiplomacy=0;
+	public static int LogFarmerAI = 0;
+	public static int LogGeneralAI = 0;
+	public static int LogGetPath = 0;
+	public static int LogHybernation = 0;
+	public static int LogLumberman = 0;
+	public static int LogMerchant=0;
+	public static int LogMiner = 0;
+	public static int LogOther = 0;
+	public static int LogPathing = 0;
+	public static int LogPerformance = 0;
+	public static int LogSelling = 0;
+	public static int LogTileEntityBuilding = 0;
 	public static int LogVillage=0;
 	public static int LogVillager = 0;
 	public static int LogQuest = 0;
-	public static int WifeAI = 0;
-	public static int WorldGeneration = 0;
-	public static int WorldInfo=0;
-	public static int Pujas=0;
-	public static int VillagerSpawn=0;
-	public static int VillagePaths=0;
+	public static int LogWifeAI = 0;
+	public static int LogWorldGeneration = 0;
+	public static int LogWorldInfo=0;
+	public static int LogPujas=0;
+	public static int LogVillagerSpawn=0;
+	public static int LogVillagePaths=0;
 
 	public static String questBiomeForest = "forest";
 	public static String questBiomeDesert = "desert";
 	public static String questBiomeMountain = "mountain";
 
 
-	public static int Network=0;
+	public static int LogNetwork=0;
 	public static final int MAJOR=1;
 	public static final int MINOR=2;
 
@@ -606,8 +606,6 @@ public class MLN {
 	public static int RaidingRate=20;
 	public static int keyVillageList;
 	public static int keyInfoPanelList;
-
-
 	public static int keyAggressiveEscorts;
 
 	private static FileWriter writer;
@@ -625,30 +623,36 @@ public class MLN {
 	public static HashMap<String,Language> loadedLanguages=new HashMap<String,Language>();
 
 	public static HashMap<String,MillConfig> configs=new HashMap<String,MillConfig>();
-	
+
 	public static Vector<String> configPageTitles=new Vector<String>();
+	public static Vector<String> configPageDesc=new Vector<String>();
 	public static Vector<Vector<MillConfig>> configPages=new Vector<Vector<MillConfig>>();
 
 	private static void initConfigItems() {
 		try {
-			
-			
+
 			Vector<MillConfig> configPage=new Vector<MillConfig>();
-			configPage.add(new MillConfig(MLN.class.getField("fallbackLanguage"),"fallback_language",MillConfig.LANGUAGE));
+			configPage.add(new MillConfig(MLN.class.getField("keyVillageList"),"village_list_key",MillConfig.KEY).setMaxStringLength(1));
+			configPage.add(new MillConfig(MLN.class.getField("keyInfoPanelList"),"quest_list_key",MillConfig.KEY).setMaxStringLength(1));
+			configPage.add(new MillConfig(MLN.class.getField("keyAggressiveEscorts"),"escort_key",MillConfig.KEY).setMaxStringLength(1));
+
+			configPage.add(new MillConfig(MLN.class.getField("fallback_language"),"fallback_language","en","fr"));
 			configPage.add(new MillConfig(MLN.class.getField("dynamictextures"),"dynamic_textures"));
 			configPage.add(new MillConfig(MLN.class.getField("languageLearning"),"language_learning"));
 			configPage.add(new MillConfig(MLN.class.getField("loadAllLanguages"),"load_all_languages"));
 			configPage.add(new MillConfig(MLN.class.getField("displayStart"),"display_start"));
 			configPage.add(new MillConfig(MLN.class.getField("displayNames"),"display_names"));
+			configPage.add(new MillConfig(MLN.class.getField("VillagersNamesDistance"),"villagers_names_distance",5,10,20,30,50));
 			configPage.add(new MillConfig(MLN.class.getField("VillagersSentenceInChatDistanceSP"),"villagers_sentence_in_chat_distance_sp",0,1,2,3,4,6,10));
 			configPage.add(new MillConfig(MLN.class.getField("VillagersSentenceInChatDistanceClient"),"villagers_sentence_in_chat_distance_client",0,1,2,3,4,6,10));
-			
-			
+
+
 			configPages.add(configPage);
 			configPageTitles.add("config.page.uisettings");
-			
+			configPageDesc.add(null);
+
 			configPage=new Vector<MillConfig>();
-			
+
 			configPage=new Vector<MillConfig>();			
 			configPage.add(new MillConfig(MLN.class.getField("generateVillagesDefault"),"generate_villages"));
 			configPage.add(new MillConfig(MLN.class.getField("generateLoneBuildings"),"generate_lone_buildings"));
@@ -656,22 +660,84 @@ public class MLN {
 			configPage.add(new MillConfig(MLN.class.getField("minDistanceBetweenVillagesAndLoneBuildings"),"min_village_lonebuilding_distance",100,200,300,500,800));
 			configPage.add(new MillConfig(MLN.class.getField("minDistanceBetweenLoneBuildings"),"min_lonebuilding_distance",300,450,600,800,1000));
 			configPage.add(new MillConfig(MLN.class.getField("spawnProtectionRadius"),"spawn_protection_radius",0,50,100,150,250,500));
-			
+
 			configPages.add(configPage);
 			configPageTitles.add("config.page.worldgeneration");
-			
+			configPageDesc.add(null);
+
 			configPage=new Vector<MillConfig>();
-			
+
+			configPage.add(new MillConfig(MLN.class.getField("KeepActiveRadius"),"keep_active_radius",0,100,150,200,250,300,400,500));
 			configPage.add(new MillConfig(MLN.class.getField("VillageRadius"),"village_radius",40,50,60,70,80));
 			configPage.add(new MillConfig(MLN.class.getField("minDistanceBetweenBuildings"),"min_distance_between_buildings",0,1,2,3,4));
 			configPage.add(new MillConfig(MLN.class.getField("BuildVillagePaths"),"village_paths"));
 			configPage.add(new MillConfig(MLN.class.getField("maxChildrenNumber"),"max_children_number",2,5,10,15,20));
-			configPage.add(new MillConfig(MLN.class.getField("BackgroundRadius"),"background_radius",1000,1500,2000,2500,3000));
+			configPage.add(new MillConfig(MLN.class.getField("BackgroundRadius"),"background_radius",0,200,500,1000,1500,2000,2500,3000));
+
+			configPage.add(new MillConfig(MLN.class.getField("BanditRaidRadius"),"bandit_raid_radius",0,200,500,1000,1500,2000));
 			configPage.add(new MillConfig(MLN.class.getField("RaidingRate"),"raiding_rate",0,10,20,50,100));
+
+			configPage.add(new MillConfig(MLN.class.getField("blockBuildingId"),"block_building_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockPanelId"),"block_panel_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockWoodId"),"block_wood_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockEarthId"),"block_earth_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockStoneId"),"block_stone_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockCropsId"),"block_crops_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockPanesId"),"block_panes_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockByzantineBrickId"),"block_byzantine_brick_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockByzantineSlabId"),"block_byzantine_slab_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockByzantineMixedId"),"block_byzantine_mixedbrick_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockPathId"),"block_path_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("blockPathSlabId"),"block_path_slab_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
+			configPage.add(new MillConfig(MLN.class.getField("itemRangeStart"),"item_range_start",MillConfig.EDITABLE_INTEGER).setDisplay(false));
 			
 			
 			configPages.add(configPage);
 			configPageTitles.add("config.page.villagebehaviour");
+			configPageDesc.add(null);
+			
+			configPage=new Vector<MillConfig>();
+			
+			configPage.add(new MillConfig(MLN.class.getField("generateColourSheet"),"generate_colour_chart"));
+			configPage.add(new MillConfig(MLN.class.getField("generateBuildingRes"),"generate_building_res"));
+			configPage.add(new MillConfig(MLN.class.getField("generateTranslationGap"),"generate_translation_gap"));
+			configPage.add(new MillConfig(MLN.class.getField("generateGoodsList"),"generate_goods_list"));
+			
+			
+			configPage.add(new MillConfig(MLN.class.getField("LogTileEntityBuilding"),"LogTileEntityBuilding",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogWorldGeneration"),"LogWorldGeneration",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogFarmerAI"),"LogFarmerAI",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogDiplomacy"),"LogDiplomacy",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogWifeAI"),"LogWifeAI",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogVillager"),"LogVillager",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogQuest"),"LogQuest",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogPathing"),"LogPathing",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogConnections"),"LogConnections",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogGetPath"),"LogGetPath",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogLumberman"),"LogLumberman",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogBuildingPlan"),"LogBuildingPlan",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogGeneralAI"),"LogGeneralAI",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogSelling"),"LogSelling",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogHybernation"),"LogHybernation",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogOther"),"LogOther",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogChildren"),"LogChildren",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogPerformance"),"LogPerformance",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogCattleFarmer"),"LogCattleFarmer",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogMiner"),"LogMiner",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogVillage"),"LogVillage",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogWorldInfo"),"LogWorldInfo",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogPujas"),"LogPujas",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogVillagerSpawn"),"LogVillagerSpawn",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogVillagePaths"),"LogVillagePaths",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogNetwork"),"LogNetwork",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogMerchant"),"LogMerchant",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogCulture"),"LogCulture",MillConfig.LOG).setDisplayDev(true));
+			configPage.add(new MillConfig(MLN.class.getField("LogTranslation"),"LogTranslation",MillConfig.LOG).setDisplayDev(true));
+			
+			
+			configPages.add(configPage);
+			configPageTitles.add("config.page.devtools");
+			configPageDesc.add(null);
 
 
 			for (Vector<MillConfig> aConfigPage : configPages) {
@@ -679,8 +745,8 @@ public class MLN {
 					configs.put(config.key, config);
 				}
 			}
-			
-			
+
+
 		} catch (Exception e) {
 			MLN.error(null, "Exception when initialising config items: "+e);
 		}
@@ -813,7 +879,7 @@ public class MLN {
 		if (fallback && (serverFallbackLanguage!=null) && serverFallbackLanguage.strings.containsKey(key))
 			return serverFallbackLanguage.strings.get(key);
 
-		if (mustFind && (MLN.Translation>=MLN.MAJOR)) {
+		if (mustFind && (MLN.LogTranslation>=MLN.MAJOR)) {
 			MLN.error(null, "String not found: "+key);
 		}
 
@@ -870,7 +936,7 @@ public class MLN {
 			return;
 		}
 
-		readConfigFile(Mill.proxy.getCustomConfigFile(),true);
+		readConfigFile(Mill.proxy.getCustomConfigFile(),false);
 
 		if (logfile) {
 			try {
@@ -905,7 +971,7 @@ public class MLN {
 			writeText("Starting new session. Mods: "+mods);
 		}
 	}
-	
+
 	public static Vector<File> getLanguageDirs() {
 		final Vector<File> languageDirs=new Vector<File>();
 
@@ -916,7 +982,7 @@ public class MLN {
 				languageDirs.add(languageDir);
 			}
 		}
-		
+
 		return languageDirs;
 	}
 
@@ -962,7 +1028,7 @@ public class MLN {
 				}
 			}
 		}
-		
+
 		if (!loadedLanguages.containsKey("fr")) {
 			final Language l=new Language("fr",false);
 			l.loadFromDisk(languageDirs);
@@ -1032,6 +1098,9 @@ public class MLN {
 				MLN.printException(e);
 			}
 		}
+		
+		if (MLN.DEV)
+			writeBaseConfigFile();
 	}
 
 	public static void major(Object obj, String s) {
@@ -1257,6 +1326,38 @@ public class MLN {
 		return questString(key,true,false,required);
 	}
 
+	public static void writeBaseConfigFile() {
+
+		File file=new File(Mill.proxy.getBaseDir(), "config-base.txt");
+
+		try {
+
+			BufferedWriter writer=MillCommonUtilities.getWriter(file);
+
+			Language fr=MLN.loadedLanguages.get("fr");
+			Language en=MLN.loadedLanguages.get("en");
+
+			for (int i=0;i<MLN.configPages.size();i++) {
+				for (int j=0;j<MLN.configPages.get(i).size();j++) {
+
+					MillConfig config=MLN.configPages.get(i).get(j);
+
+					mainLanguage=fr;
+					writer.write("//"+config.getLabel()+"; "+config.getDesc()+EOL);
+					mainLanguage=en;
+					writer.write("//"+config.getLabel()+"; "+config.getDesc()+EOL);
+					writer.write(config.key+"="+config.getDefaultValue()+EOL+EOL);
+
+				}
+			}
+		
+			writer.close();
+		} catch (Exception e) {
+			MLN.printException("Exception in writeBaseConfigFile:", e);
+		}
+
+	}
+
 	public static void writeConfigFile() {
 
 		File file=Mill.proxy.getCustomConfigFile();
@@ -1311,7 +1412,8 @@ public class MLN {
 				if (!configsWritten.contains(config)) {
 
 					if (!config.hasDefaultValue()) {
-						writer.write(config.key+"="+config.getValue()+EOL);
+						writer.write("//"+config.getLabel()+"; "+config.getDesc()+EOL);
+						writer.write(config.key+"="+config.getValue()+EOL+EOL);
 					}					
 				}				
 			}
@@ -1330,7 +1432,7 @@ public class MLN {
 
 		try {
 			final BufferedReader reader = MillCommonUtilities.getReader(file);
-
+			
 			String line;
 
 			while ((line=reader.readLine()) != null) {
@@ -1355,6 +1457,7 @@ public class MLN {
 								console=Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("logfile")) {
 								logfile=Boolean.parseBoolean(value);
+							/**
 							} else if (key.equalsIgnoreCase("village_list_key")) {
 								final int keyCode=Mill.proxy.loadKeySetting(value.toUpperCase());
 								if (keyCode>0) {
@@ -1368,7 +1471,7 @@ public class MLN {
 									MLN.keyInfoPanelList=keyCode;
 								} else {
 									MLN.error(null, "Invalid key setting on line: "+line);
-								}
+								} **/
 							} else if (key.equalsIgnoreCase("logfile")) {
 								logfile=Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("infinite_amulet")) {
@@ -1377,18 +1480,18 @@ public class MLN {
 								//	languageLearning=Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("stop_default_villages")) {
 								stopDefaultVillages=Boolean.parseBoolean(value);
-							} else if (key.equalsIgnoreCase("load_all_languages")) {
-								loadAllLanguages=Boolean.parseBoolean(value);
+						//	} else if (key.equalsIgnoreCase("load_all_languages")) {
+						//		loadAllLanguages=Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("se_indicators")) {
 								seIndicators=Boolean.parseBoolean(value);
-							} else if (key.equalsIgnoreCase("generate_colour_chart")) {
-								generateColourSheet=Boolean.parseBoolean(value);
-							} else if (key.equalsIgnoreCase("generate_building_res")) {
-								generateBuildingRes=Boolean.parseBoolean(value);
-							} else if (key.equalsIgnoreCase("generate_translation_gap")) {
-								generateTranslationGap=Boolean.parseBoolean(value);
-							} else if (key.equalsIgnoreCase("generate_goods_list")) {
-								generateGoodsList=Boolean.parseBoolean(value);
+						//	} else if (key.equalsIgnoreCase("generate_colour_chart")) {
+						//		generateColourSheet=Boolean.parseBoolean(value);
+						//	} else if (key.equalsIgnoreCase("generate_building_res")) {
+						//		generateBuildingRes=Boolean.parseBoolean(value);
+						//	} else if (key.equalsIgnoreCase("generate_translation_gap")) {
+						//		generateTranslationGap=Boolean.parseBoolean(value);
+						//	} else if (key.equalsIgnoreCase("generate_goods_list")) {
+						//		generateGoodsList=Boolean.parseBoolean(value);
 								//} else if (key.equalsIgnoreCase("generate_villages")) {
 								//	generateVillagesDefault=Boolean.parseBoolean(value);
 								//	generateVillages=generateVillagesDefault;
@@ -1400,8 +1503,8 @@ public class MLN {
 								//	displayNames=Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("language")) {
 								main_language=value.toLowerCase();
-							} else if (key.equalsIgnoreCase("fallback_language")) {
-								fallback_language=value.toLowerCase();
+							//} else if (key.equalsIgnoreCase("fallback_language")) {
+							//	fallback_language=value.toLowerCase();
 							} else if (key.equalsIgnoreCase("forbidden_blocks")) {
 								for (final String id : value.split(",")) {
 									if (Integer.parseInt(id)>0) {
@@ -1411,63 +1514,63 @@ public class MLN {
 									}
 								}
 							} else if (key.equalsIgnoreCase("log.TileEntityBuilding")) {
-								TileEntityBuilding=readLogLevel(value);
+								LogTileEntityBuilding=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.WorldGeneration")) {
-								WorldGeneration=readLogLevel(value);
+								LogWorldGeneration=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.FarmerAI")) {
-								FarmerAI=readLogLevel(value);
+								LogFarmerAI=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Diplomacy")) {
-								Diplomacy=readLogLevel(value);
+								LogDiplomacy=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.WifeAI")) {
-								WifeAI=readLogLevel(value);
+								LogWifeAI=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Villager")) {
 								LogVillager=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Quest")) {
 								LogQuest=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Pathing")) {
-								Pathing=readLogLevel(value);
+								LogPathing=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Connections")) {
-								Connections=readLogLevel(value);
+								LogConnections=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.getPath")) {
-								getPath=readLogLevel(value);
+								LogGetPath=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Lumberman")) {
-								Lumberman=readLogLevel(value);
+								LogLumberman=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.BuildingPlan")) {
 								LogBuildingPlan=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.GeneralAI")) {
-								GeneralAI=readLogLevel(value);
+								LogGeneralAI=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Selling")) {
-								Selling=readLogLevel(value);
+								LogSelling=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Hybernation")) {
-								Hybernation=readLogLevel(value);
+								LogHybernation=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Other")) {
-								Other=readLogLevel(value);
+								LogOther=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Children")) {
-								Children=readLogLevel(value);
+								LogChildren=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Performance")) {
-								Performance=readLogLevel(value);
+								LogPerformance=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.CattleFarmer")) {
-								CattleFarmer=readLogLevel(value);
+								LogCattleFarmer=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Miner")) {
-								Miner=readLogLevel(value);
+								LogMiner=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Village")) {
 								LogVillage=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.WorldInfo")) {
-								WorldInfo=readLogLevel(value);
+								LogWorldInfo=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Pujas")) {
-								Pujas=readLogLevel(value);
+								LogPujas=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.villagerspawn")) {
-								VillagerSpawn=readLogLevel(value);
+								LogVillagerSpawn=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.villagepaths")) {
-								VillagePaths=readLogLevel(value);
+								LogVillagePaths=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Network")) {
-								Network=readLogLevel(value);
+								LogNetwork=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Merchant")) {
-								Merchant=readLogLevel(value);
+								LogMerchant=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Culture")) {
 								LogCulture=readLogLevel(value);
 							} else if (key.equalsIgnoreCase("log.Translation")) {
-								Translation=readLogLevel(value);
+								LogTranslation=readLogLevel(value);
 								//} else if (key.equalsIgnoreCase("min_village_distance")) {
 								//	minDistanceBetweenVillages=Integer.parseInt(value);
 								//} else if (key.equalsIgnoreCase("min_village_lonebuilding_distance")) {
@@ -1482,6 +1585,7 @@ public class MLN {
 								//	spawnProtectionRadius=Integer.parseInt(value);
 								//} else if (key.equalsIgnoreCase("min_distance_between_buildings")) {
 								//	minDistanceBetweenBuildings=Integer.parseInt(value);
+								/**
 							} else if (key.equalsIgnoreCase("block_building_id")) {
 								blockBuildingId=Integer.parseInt(value);
 							} else if (key.equalsIgnoreCase("block_panel_id")) {
@@ -1507,7 +1611,7 @@ public class MLN {
 							} else if (key.equalsIgnoreCase("block_path_slab_id")) {
 								blockPathSlabId=Integer.parseInt(value);
 							} else if (key.equalsIgnoreCase("item_range_start")) {
-								itemRangeStart=Integer.parseInt(value);
+								itemRangeStart=Integer.parseInt(value);**/
 								//} else if (key.equalsIgnoreCase("keep_active_radius")) {
 								//	KeepActiveRadius=Integer.parseInt(value);
 								//} else if (key.equalsIgnoreCase("background_radius")) {
@@ -1553,7 +1657,7 @@ public class MLN {
 		}
 	}
 
-	protected static int readLogLevel(String s) {
+	public static int readLogLevel(String s) {
 		if (s.equalsIgnoreCase("major"))
 			return 1;
 		if (s.equalsIgnoreCase("minor"))
@@ -1561,6 +1665,16 @@ public class MLN {
 		if (s.equalsIgnoreCase("debug"))
 			return 3;
 		return 0;
+	}
+	
+	public static String getLogLevel(int level) {
+		if (level==1)
+			return "major";
+		if (level==2)
+			return "minor";
+		if (level==3)
+			return "debug";
+		return "";
 	}
 
 	public static String removeAccent(String source) {

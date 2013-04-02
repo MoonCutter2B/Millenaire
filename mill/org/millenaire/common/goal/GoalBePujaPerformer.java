@@ -20,7 +20,7 @@ public class GoalBePujaPerformer extends Goal {
 
 		if ((temple!=null) && ((temple.pujas!=null) && ((temple.pujas.priest==null) || (temple.pujas.priest==villager)))) {
 
-			if (MLN.Pujas>=MLN.DEBUG) {
+			if (MLN.LogPujas>=MLN.DEBUG) {
 				MLN.debug(villager, "Destination for bepujaperformer: "+temple);
 			}
 
@@ -65,7 +65,7 @@ public class GoalBePujaPerformer extends Goal {
 
 		final boolean valid=((player != null) && (temple.getCraftingPos().distanceTo(player) < sellingRadius));
 
-		if (!valid && (MLN.Pujas>=MLN.MAJOR)) {
+		if (!valid && (MLN.LogPujas>=MLN.MAJOR)) {
 			MLN.major(this, "Be Puja Performer no longer valid.");
 		}
 

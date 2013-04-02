@@ -35,7 +35,7 @@ public class GoalBeSeller extends Goal {
 
 		final boolean valid=((player != null) && (villager.getTownHall().sellingPlace.distanceTo(player) < sellingRadius));
 
-		if (!valid && (MLN.WifeAI>=MLN.MAJOR)) {
+		if (!valid && (MLN.LogWifeAI>=MLN.MAJOR)) {
 			MLN.major(this, "Selling goal no longer valid.");
 		}
 

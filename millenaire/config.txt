@@ -12,13 +12,14 @@ fallback_language=en
 //Keys to use for the village and quest listings
 village_list_key=V
 quest_list_key=M
+escort_key=G
 
 //automatically switch to the 64x texture pack if the Minecraft texture pack is 64x or above
 dynamic_textures=true
 
 
 //Whether to display the Millénaire start message:
-displayStart=true
+display_start=true
 
 //IDs of the Millénaire blocks
 //New ids for 3.0
@@ -119,3 +120,10 @@ generate_translation_gap=false
 language_learning=true
 
 load_all_languages=false
+
+max_children_number=10
+
+background_radius=2000
+
+bandit_raid_radius=1500
+

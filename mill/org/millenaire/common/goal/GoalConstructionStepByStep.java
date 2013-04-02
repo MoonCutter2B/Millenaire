@@ -106,7 +106,7 @@ public class GoalConstructionStepByStep extends Goal {
 		if (bblock==null)
 			return true;
 
-		if ((MLN.WifeAI>=MLN.MINOR)) {
+		if ((MLN.LogWifeAI>=MLN.MINOR)) {
 			MLN.minor(villager, "Setting block at "+bblock.p+" type: "+bblock.bid+" replacing: "+villager.getBlock(bblock.p)+" distance: "+bblock.p.distanceTo(villager));
 		}
 
@@ -137,7 +137,7 @@ public class GoalConstructionStepByStep extends Goal {
 				villager.setPosition(villager.getPos().getiX(),villager.getPos().getiY()+1,villager.getPos().getiZ()-1);
 				jumped=true;
 			}
-			if (!jumped && (MLN.WifeAI>=MLN.MAJOR)) {
+			if (!jumped && (MLN.LogWifeAI>=MLN.MAJOR)) {
 				MLN.major(villager, "Tried jumping in construction but couldn't");
 			}
 		}
@@ -176,7 +176,7 @@ public class GoalConstructionStepByStep extends Goal {
 			}
 		}
 
-		if ((MLN.WifeAI>=MLN.MINOR) && villager.extraLog) {
+		if ((MLN.LogWifeAI>=MLN.MINOR) && villager.extraLog) {
 			MLN.minor(villager, "Reseting actionStart after "+(System.currentTimeMillis()-villager.actionStart));
 		}
 
@@ -203,7 +203,7 @@ public class GoalConstructionStepByStep extends Goal {
 	@Override
 	public boolean stuckAction(MillVillager villager) throws MillenaireException {
 		if (villager.getGoalDestPoint().distanceTo(villager) < 30) {
-			if (MLN.WifeAI>=MLN.MINOR) {
+			if (MLN.LogWifeAI>=MLN.MINOR) {
 				MLN.major(villager, "Putting block at a distance: "+villager.getGoalDestPoint().distanceTo(villager));
 			}
 			performAction(villager);

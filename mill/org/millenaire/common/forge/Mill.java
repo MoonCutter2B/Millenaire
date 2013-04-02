@@ -659,7 +659,7 @@ public class Mill
 
 		loadingComplete=true;
 
-		if (MLN.Other>=MLN.MAJOR) {
+		if (MLN.LogOther>=MLN.MAJOR) {
 			if (startupError) {
 				MLN.major(this, "Mill\u00e9naire "+versionNumber+" loaded unsuccessfully.");
 			} else {

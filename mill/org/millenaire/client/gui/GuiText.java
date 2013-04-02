@@ -327,6 +327,7 @@ public abstract class GuiText extends GuiScreen {
 				} else if (line.textField!=null) {
 					MillGuiTextField textField=new MillGuiTextField(fontRenderer,xStart+(getXSize() / 2) +40,yStart+vpos,95,20,line.textField.millId);
 					textField.setText(line.textField.getText());
+					textField.setMaxStringLength(line.textField.getMaxStringLength());
 					line.textField=textField;
 				}
 				vpos+=10;

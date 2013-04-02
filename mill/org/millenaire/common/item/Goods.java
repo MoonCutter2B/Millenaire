@@ -63,7 +63,7 @@ public class Goods {
 		public ItemStack onItemRightClick(ItemStack itemstack, World world,
 				EntityPlayer entityplayer) {
 
-			if (MLN.Other>=MLN.DEBUG) {
+			if (MLN.LogOther>=MLN.DEBUG) {
 				MLN.debug(this, "Using skoll amulet.");
 			}
 

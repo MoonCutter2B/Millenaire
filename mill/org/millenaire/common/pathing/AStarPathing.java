@@ -352,7 +352,7 @@ public class AStarPathing {
 			}
 
 			if (start.region != end.region) {
-				if ((MLN.getPath>=MLN.MAJOR) && villager.extraLog) {
+				if ((MLN.LogGetPath>=MLN.MAJOR) && villager.extraLog) {
 					MLN.major(villager, "Start and end nodes in different groups: "+start+"/"+end);
 				}
 				end.neighbours.removeAllElements();
@@ -382,7 +382,7 @@ public class AStarPathing {
 									}
 									if (start.neighbours.size()>0) {
 										foundStartNode=true;
-										if ((MLN.getPath>=MLN.MINOR) && villager.extraLog) {
+										if ((MLN.LogGetPath>=MLN.MINOR) && villager.extraLog) {
 											MLN.minor(this, "Found alternative start: "+start);
 										}
 									}
@@ -395,7 +395,7 @@ public class AStarPathing {
 				}
 
 				if (!foundStartNode) {
-					if ((MLN.getPath>=MLN.MINOR) && villager.extraLog) {
+					if ((MLN.LogGetPath>=MLN.MINOR) && villager.extraLog) {
 						MLN.minor(villager, "Start node "+start+" unreachable.");
 					}
 
@@ -417,7 +417,7 @@ public class AStarPathing {
 			}
 			if (end.neighbours.size()==0)
 			{
-				if ((MLN.getPath>=MLN.MINOR) && villager.extraLog) {
+				if ((MLN.LogGetPath>=MLN.MINOR) && villager.extraLog) {
 					MLN.minor(this, "End node "+end+" unreachable.");
 				}
 
@@ -463,7 +463,7 @@ public class AStarPathing {
 									}
 									if ((end.neighbours.size()>0) && (end.neighbours.get(0).region==start.region)) {
 										foundEndNode=true;
-										if ((MLN.getPath>=MLN.MINOR) && villager.extraLog) {
+										if ((MLN.LogGetPath>=MLN.MINOR) && villager.extraLog) {
 											MLN.minor(villager, "Found alternative end: "+end);
 										}
 									} else if (end.neighbours.size()>0) {
@@ -531,11 +531,11 @@ public class AStarPathing {
 				nbNodesVisited++;
 
 				if (nbNodesVisited > MAX_NODE_VISIT) {
-					if ((MLN.getPath>=MLN.MINOR) && villager.extraLog) {
+					if ((MLN.LogGetPath>=MLN.MINOR) && villager.extraLog) {
 						MLN.minor(villager,"Aborting after :"+ nbNodesVisited+", "+startX+"/"+startZ+" - "+destX+"/"+destZ+". Stopping at: "+closest);
 					}
 
-					if ((MLN.getPath>=MLN.DEBUG) && villager.extraLog) {
+					if ((MLN.LogGetPath>=MLN.DEBUG) && villager.extraLog) {
 						MLN.debug(villager,"closest.equals(end): "+closest.equals(end));
 						MLN.debug(villager,"start.toDist: "+start.toDist);
 					}
@@ -552,7 +552,7 @@ public class AStarPathing {
 						villager.nbPathsCalculated++;
 						villager.nbPathAborted++;
 						villager.abortedKeys.add(new PathKey(start.pos,end.pos));
-						if (MLN.getPath>=MLN.MAJOR) {
+						if (MLN.LogGetPath>=MLN.MAJOR) {
 							MLN.major(villager,"Caching aborted path: "+cpath.getKey()+" and "+(new PathKey(cpath.getStart(),originalDest))+", failing took "+timeInMl+" ms. "+
 									"Regions: "+regions[start.pos.x][start.pos.z]+" - "+regions[end.pos.x][end.pos.z]);
 						}
@@ -575,7 +575,7 @@ public class AStarPathing {
 						n.toDist = n.pos.distanceTo(end.pos);
 					}
 					final int distance=n.fromDist+n.toDist;
-					if ((MLN.getPath>=MLN.DEBUG) && villager.extraLog) {
+					if ((MLN.LogGetPath>=MLN.DEBUG) && villager.extraLog) {
 						MLN.debug(this,"Testing "+n+")");
 					}
 					if (n.equals(end)) {
@@ -591,9 +591,9 @@ public class AStarPathing {
 
 							final double timeInMl=((double)(System.nanoTime()-startTime))/1000000;
 
-							if ((nbNodesVisited > NODE_WARNING_LEVEL) && (MLN.getPath>=MLN.MAJOR)) {
+							if ((nbNodesVisited > NODE_WARNING_LEVEL) && (MLN.LogGetPath>=MLN.MAJOR)) {
 								MLN.major(villager,"Success after: "+ nbNodesVisited+" time: "+timeInMl+" ms between "+start.pos+" and "+end.pos+" goal: "+villager.goalKey);
-							} else if ((MLN.getPath>=MLN.DEBUG) && villager.extraLog) {
+							} else if ((MLN.LogGetPath>=MLN.DEBUG) && villager.extraLog) {
 								MLN.debug(villager,"Success after: "+ nbNodesVisited+" time: "+timeInMl+" ms between "+start.pos+" and "+end.pos+" goal: "+villager.goalKey);
 							}
 
@@ -605,7 +605,7 @@ public class AStarPathing {
 							firstDemandOutcome.add("Success");
 						}
 
-						if (MLN.getPath>=MLN.MINOR) {
+						if (MLN.LogGetPath>=MLN.MINOR) {
 							MLN.minor(villager, "Path calculation took "+(villager.updateCounter-updateCounterStart)+" update cycles. Start pos: "+villagerPosStart+" and pos: "+villager.getPos());
 						}
 
@@ -622,13 +622,13 @@ public class AStarPathing {
 					}
 				}
 
-				if ((closest.toDist == 0) && (MLN.getPath>=MLN.MAJOR) && villager.extraLog) {
+				if ((closest.toDist == 0) && (MLN.LogGetPath>=MLN.MAJOR) && villager.extraLog) {
 					MLN.major(this,"Picked: "+cn+" "+"cn.equals(end): "+cn.equals(end));
 					MLN.major(this,"Should have reached: "+closest+" "+"closest.equals(end): "+closest.equals(end));
 
 				}
 
-				if ((MLN.getPath>=MLN.DEBUG) && villager.extraLog) {
+				if ((MLN.LogGetPath>=MLN.DEBUG) && villager.extraLog) {
 					MLN.debug(this,"Selected: "+cn);
 				}
 
@@ -656,7 +656,7 @@ public class AStarPathing {
 
 			}
 
-			if ((MLN.getPath>=MLN.MAJOR) && villager.extraLog) {
+			if ((MLN.LogGetPath>=MLN.MAJOR) && villager.extraLog) {
 				MLN.major(villager,"Failure after :"+ nbNodesVisited+", "+startX+"/"+startZ+" - "+destX+"/"+destZ );
 			}
 
@@ -851,7 +851,7 @@ public class AStarPathing {
 
 		}
 
-		if (villager.extraLog && (MLN.Pathing>=MLN.MAJOR) && (path.points.length > 1) && (ppoints.size() < 2)) {
+		if (villager.extraLog && (MLN.LogPathing>=MLN.MAJOR) && (path.points.length > 1) && (ppoints.size() < 2)) {
 			MLN.major(this, "buildFinalPath returned a path of size "+ppoints.size()+" from "+path.points.length);
 		}
 
@@ -1137,14 +1137,14 @@ public class AStarPathing {
 			}
 		}
 
-		if (MLN.Connections>=MLN.MINOR) {
+		if (MLN.LogConnections>=MLN.MINOR) {
 			MLN.minor(this,"Time taken for connection building: "+(((double)(System.nanoTime()-startTime))/1000000));
 		}
 
 		startTime = System.nanoTime();
 
 		buildNodes();
-		if (MLN.Connections>=MLN.MINOR) {
+		if (MLN.LogConnections>=MLN.MINOR) {
 			MLN.minor(this,"Time taken for nodes finding: "+(((double)(System.nanoTime()-startTime))/1000000));
 		}
 
@@ -1164,22 +1164,22 @@ public class AStarPathing {
 			}
 		}
 
-		if (MLN.Connections>=MLN.MINOR) {
+		if (MLN.LogConnections>=MLN.MINOR) {
 			MLN.minor(this,"Time taken for nodes linking: "+(((double)(System.nanoTime()-startTime))/1000000));
 		}
 
 		startTime = System.nanoTime();
 
 		findRegions(thStanding);
-		if (MLN.Connections>=MLN.MINOR) {
+		if (MLN.LogConnections>=MLN.MINOR) {
 			MLN.minor(this,"Time taken for group finding: "+(((double)(System.nanoTime()-startTime))/1000000));
 		}
 
-		if (MLN.Connections>=MLN.MAJOR) {
+		if (MLN.LogConnections>=MLN.MAJOR) {
 			MLN.major(this,"Node graph complete. Size: "+nodes.size()+" Time taken: "+(((double)(System.nanoTime()-totalStartTime))/1000000));
 		}
 
-		if ((MLN.Connections>= MLN.DEBUG) && MLN.DEV) {
+		if ((MLN.LogConnections>= MLN.DEBUG) && MLN.DEV) {
 			MLN.major(this, "Calling displayConnectionsLog");
 			displayConnectionsLog();
 		}
@@ -1460,7 +1460,7 @@ public class AStarPathing {
 		thRegion=regions[thStanding.getiX()-winfo.mapStartX][thStanding.getiZ()-winfo.mapStartZ];
 
 
-		if (MLN.Connections>=MLN.MINOR) {
+		if (MLN.LogConnections>=MLN.MINOR) {
 			MLN.minor(this,nodeGroup+" node groups found.");
 		}
 

@@ -876,3 +876,90 @@ achievement.hired.name=Main d'œuvre
 achievement.hired.desc=Embauchez un villageois
 achievement.masterfarmer.name=Maître fermier
 achievement.masterfarmer.desc=Cultivez une plante Millénaire
+
+
+config.pagetitle=Réglages Millénaire
+config.page.uisettings=Réglages UI
+config.page.worldgeneration=Réglages génération
+config.page.villagebehaviour=Réglages villages
+config.page.blockitemids=IDs des blocks & objets
+config.page.blockitemids.desc=Changements appliqués au redémarrage. ATTENTION: Millénaire ne vérifie pas que les ids sont libres. C'est à vous de le faire.
+
+config.village_list_key.label=Touche liste des villages
+config.village_list_key.desc=Touche pour afficher la liste des villages environants. Défaut: <0>.
+
+config.quest_list_key.label=Touche panneau d'information
+config.quest_list_key.desc=Touche pour afficher le panneau d'information Millénaire. Défaut: <0>.
+
+config.escort_key.label=Touche mode escortes
+config.escort_key.desc=Touche pour change le mode des escortes (agressif ou non). Défaut: <0>.
+
+config.fallback_language.label=Langue de recours
+config.fallback_language.desc=Langue de recours, pour les textes non disponibles dans la principale.
+
+config.dynamic_textures.label=Textures dynamiques
+config.dynamic_textures.desc=Utiliser automatiquement les textures 64x si le pack de texture est 64x ou plus. Défaut: <0>.
+
+config.language_learning.label=Apprentissage des langues
+config.language_learning.desc=Les langues doivent être "apprises" (les traductions n'apparaissent qu'après assez d'interaction avec une culture).
+
+config.load_all_languages.label=Charger toutes les langues
+config.load_all_languages.desc=Charger toutes les langues, pour fournir des traductions aux clients si nécessaire.
+
+config.display_start.label=Afficher le texte au démarrage
+config.display_start.desc=Afficher la version de Millénaire et le statut de la Quête de la Création au démarrage.
+
+config.display_names.label=Afficher le nom des villageois
+config.display_names.desc=Afficher le nom, le métier et la tâche en cours au dessus des villageois.
+
+config.villagers_names_distance.label=Distance d'affichage des noms
+config.villagers_names_distance.desc=Distance à laquelle les noms apparaissent. Défaut: <0>.
+
+config.villagers_sentence_in_chat_distance_client.label=Phrases dans le chat (MJ)
+config.villagers_sentence_in_chat_distance_client.desc=Distance maximale où afficher les phrases des villageois dans le chat en multi-joueur. Défaut: <0>.
+
+config.villagers_sentence_in_chat_distance_sp.label=Phrases dans le chat (solo)
+config.villagers_sentence_in_chat_distance_sp.desc=Distance maximale où afficher les phrases des villageois dans le chat en solo. Défaut: <0>.
+
+config.generate_villages.label=Générer des villages
+config.generate_villages.desc=Générer des villages Millénaire dans les nouveaux tronçons.
+
+config.generate_lone_buildings.label=Générer des bâtiments
+config.generate_lone_buildings.desc=Générer des bâtiments isolés dans les nouveaux tronçons.
+
+config.keep_active_radius.label=Rayon de chargement des tronçons
+config.keep_active_radius.desc=Rayon autour du joueur dans lequel Millénaire essayera de garder les tronçons chargés. Défaut: <0>.
+
+config.min_village_distance.label=Distance min entre villages
+config.min_village_distance.desc=Distance minimale entre deux villages générés. Défaut: <0>.
+
+config.min_village_lonebuilding_distance.label=Distance min villages/bâtiments
+config.min_village_lonebuilding_distance.desc=Distance minimale entre villages et bâtiments isolés générés. Défaut: <0>.
+
+config.min_lonebuilding_distance.label=Distance min entre bâtiments
+config.min_lonebuilding_distance.desc=Distance minimale entre deux bâtiments isolés générés. Défaut: <0>.
+
+config.spawn_protection_radius.label=Rayon de protection spawn
+config.spawn_protection_radius.desc=Rayon autour du point d'apparition dans lequel Millénaire ne génère rien. Défaut: <0>.
+
+config.village_radius.label=Rayon des villages
+config.village_radius.desc=Rayon des villages normaux (pas des hameaux). Défaut: <0>.
+
+config.min_distance_between_buildings.label=Distance min entre bâtiments
+config.min_distance_between_buildings.desc=Distance minimale entre deux bâtiments d'un village. Défaut: <0>.
+
+config.village_paths.label=Construire des chemins de village
+config.village_paths.desc=Générer les chemins dans les nouveaux villages et les faire mettre à jour par les villageois.
+
+config.max_children_number.label=Nombre max d'enfants
+config.max_children_number.desc=Nombre maximal d'enfants dans un village. Défaut: <0>.
+
+config.background_radius.label=Rayon relations des villages
+config.background_radius.desc=Rayon dans lequel les villages ont des relations (diplomacie, commerce, raids). Défaut: <0>. 
+
+config.bandit_raid_radius.label=Rayon raid de bandits
+config.bandit_raid_radius.desc=Rayon dans lequel les bandits attaquent les villages. Défaut: <0>.
+
+config.raiding_rate.label=Chance de raid en %
+config.raiding_rate.desc=Chance sur 100 qu'un village ou bâtiment de bandits tente un raid chaque nuit. Défaut: <0>.
+

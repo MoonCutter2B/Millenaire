@@ -20,7 +20,7 @@ public class GoalMerchantVisitBuilding extends Goal {
 		for (final Goods good :  villager.getTownHall().culture.goodsVector) {
 			if ((villager.countInv(good.item.id(),good.item.meta)>0) && (villager.getTownHall().nbGoodNeeded(good.item.id(), good.item.meta)>0)) {
 
-				if (MLN.Merchant>=MLN.DEBUG) {
+				if (MLN.LogMerchant>=MLN.DEBUG) {
 					MLN.debug(villager,"TH needs "+villager.getTownHall().nbGoodNeeded(good.item.id(), good.item.meta)+" good "+good.item.getName()+", merchant has "+villager.countInv(good.item.id(),good.item.meta));
 				}
 				return packDest(villager.getTownHall().getSellingPos(),villager.getTownHall());
@@ -33,7 +33,7 @@ public class GoalMerchantVisitBuilding extends Goal {
 			for (final Goods good :  villager.getTownHall().culture.goodsVector) {
 				if (!shop.isInn && (shop.nbGoodAvailable(good.item.id(),good.item.meta,true)>0) && neededGoods.containsKey(good) && (neededGoods.get(good)>(villager.getHouse().countGoods(good.item.id(),good.item.meta)+villager.countInv(good.item.id(),good.item.meta)))) {
 
-					if (MLN.Merchant>=MLN.DEBUG) {
+					if (MLN.LogMerchant>=MLN.DEBUG) {
 						MLN.debug(villager,"Shop "+shop+" has "+shop.nbGoodAvailable(good.item.id(),good.item.meta,true)+" good to pick up.");
 					}
 
@@ -79,7 +79,7 @@ public class GoalMerchantVisitBuilding extends Goal {
 				final int nbNeeded=shop.nbGoodNeeded(good.item.id(), good.item.meta);
 				if (nbNeeded>0) {
 					final int nb=villager.putInBuilding(shop, good.item.id(),good.item.meta, nbNeeded);
-					if ((nb>0) && (MLN.Merchant>=MLN.MINOR)) {
+					if ((nb>0) && (MLN.LogMerchant>=MLN.MINOR)) {
 						MLN.minor(shop, villager+" delivered "+nb+" "+good.getName()+".");
 					}
 				}
@@ -92,7 +92,7 @@ public class GoalMerchantVisitBuilding extends Goal {
 
 					int nb=Math.min(shop.nbGoodAvailable(good.item.id(),good.item.meta,true), neededGoods.get(good)-villager.getHouse().countGoods(good.item.id(),good.item.meta)-villager.countInv(good.item.id(),good.item.meta));
 					nb=villager.takeFromBuilding(shop, good.item.id(),good.item.meta, nb);
-					if (MLN.Merchant>=MLN.MINOR) {
+					if (MLN.LogMerchant>=MLN.MINOR) {
 						MLN.minor(shop,villager+" took "+nb+" "+good.getName()+" for trading.");
 					}
 				}

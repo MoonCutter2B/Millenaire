@@ -40,7 +40,7 @@ public class ClientReceiver implements IPacketHandler
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
 	{
 
-		if (FMLCommonHandler.instance().getSide().isServer() && (MLN.Network>=MLN.MAJOR)) {
+		if (FMLCommonHandler.instance().getSide().isServer() && (MLN.LogNetwork>=MLN.MAJOR)) {
 			MLN.major(this, "Received a packet despite being server.");
 			return;
 		}
@@ -55,7 +55,7 @@ public class ClientReceiver implements IPacketHandler
 
 			Mill.clientWorld.millenaireEnabled=true;
 
-			if (MLN.Network>=MLN.DEBUG) {
+			if (MLN.LogNetwork>=MLN.DEBUG) {
 				MLN.debug(this, "Received client packet type: "+packettype);
 			}
 

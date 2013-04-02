@@ -453,7 +453,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (Mill.clientWorld.villagers.containsKey(villager_id)) {
 				Mill.clientWorld.villagers.get(villager_id).readVillagerStreamdata(data);
 			} else {
-				if (MLN.Network>=MLN.MINOR) {
+				if (MLN.LogNetwork>=MLN.MINOR) {
 					MLN.minor(null, "readVillagerPacket for unknown villager: "+villager_id);
 				}
 			}
@@ -571,7 +571,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		jpsPathPlanner=new AStarPathPlanner(world, this);
 
-		if (MLN.VillagerSpawn>=MLN.DEBUG) {
+		if (MLN.LogVillagerSpawn>=MLN.DEBUG) {
 			final Exception e = new Exception();
 
 			MLN.printException("Creating villager "+this+" in world: "+world, e);
@@ -770,7 +770,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 
 		if (nbChildren > 1) {
-			if (MLN.Children>=MLN.DEBUG) {
+			if (MLN.LogChildren>=MLN.DEBUG) {
 				MLN.debug(this,  "Wife already has "+nbChildren+" children, no need for more.");
 			}
 			return true;
@@ -779,7 +779,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		final int nbChildVillage=getTownHall().countChildren();
 
 		if (nbChildVillage>MLN.maxChildrenNumber) {
-			if (MLN.Children>=MLN.DEBUG) {
+			if (MLN.LogChildren>=MLN.DEBUG) {
 				MLN.debug(this, "Village already has "+nbChildVillage+", no need for more.");
 			}
 			return true;
@@ -799,7 +799,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 
 		if ((nbChildVillage>5) && !couldMoveIn) {
-			if (MLN.Children>=MLN.DEBUG) {
+			if (MLN.LogChildren>=MLN.DEBUG) {
 				MLN.debug(this, "Village already has "+nbChildVillage+" and no slot is available for the new child.");
 			}
 			return true;
@@ -820,7 +820,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		if (!manFound)
 			return false;
 
-		if (MLN.Children>=MLN.DEBUG) {
+		if (MLN.LogChildren>=MLN.DEBUG) {
 			MLN.debug(this, "Less than two kids and man present, trying for new child.");
 		}
 
@@ -834,9 +834,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				foundConceptionFood=true;
 				if (MillCommonUtilities.randomInt(foodConceptionChanceOn[i])==0) {
 					createChild=true;
-					if (MLN.Children>=MLN.MINOR) {
+					if (MLN.LogChildren>=MLN.MINOR) {
 						MLN.minor(this, "Conceiving child with help from: "+foodConception[i].getUnlocalizedName());
-					} else 	if (MLN.Children>=MLN.MINOR) {
+					} else 	if (MLN.LogChildren>=MLN.MINOR) {
 						MLN.minor(this, "Failed to conceive child even with help from: "+foodConception[i].getUnlocalizedName());
 					}
 				}
@@ -846,10 +846,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		if (!foundConceptionFood) {
 			if (MillCommonUtilities.randomInt(CONCEPTION_CHANCE)==0) {
 				createChild=true;
-				if (MLN.Children>=MLN.MINOR) {
+				if (MLN.LogChildren>=MLN.MINOR) {
 					MLN.minor(this, "Conceiving child without help.");
 				}
-			} else	if (MLN.Children>=MLN.MINOR) {
+			} else	if (MLN.LogChildren>=MLN.MINOR) {
 				MLN.minor(this, "Failed to conceive child without help.");
 			}
 		}
@@ -907,7 +907,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		if ((getGoalDestPoint()==null) && (getGoalDestEntity()==null)) {
 			goal.setVillagerDest(this);
-			if ((MLN.GeneralAI>=MLN.MINOR) && extraLog) {
+			if ((MLN.LogGeneralAI>=MLN.MINOR) && extraLog) {
 				MLN.minor(this,"Goal destination: "+getGoalDestPoint()+"/"+getGoalDestEntity());
 			}
 		} else if ((target!=null) && (target.horizontalDistanceTo(this) < goal.range(this))) {
@@ -916,7 +916,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				actionStart=System.currentTimeMillis();
 				shouldLieDown=goal.shouldVillagerLieDown();
 
-				if ((MLN.GeneralAI>=MLN.MINOR) && extraLog) {
+				if ((MLN.LogGeneralAI>=MLN.MINOR) && extraLog) {
 					MLN.minor(this,"Starting action: "+actionStart);
 				}
 			}
@@ -929,7 +929,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 					shouldLieDown=false;
 					heldItem=null;
 					continuingGoal=false;
-					if ((MLN.GeneralAI>=MLN.MINOR) && extraLog) {
+					if ((MLN.LogGeneralAI>=MLN.MINOR) && extraLog) {
 						MLN.minor(this,"Goal performed. Now doing: "+goalKey);
 					}
 				} else {
@@ -1010,7 +1010,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (getHouse() != null) {
 				if (!getHouse().villagers.contains(this)) {
 					getHouse().registerVillager(this);
-					if (MLN.Other>=MLN.DEBUG) {
+					if (MLN.LogOther>=MLN.DEBUG) {
 						MLN.debug(this,"Registering in house vector.");
 					}
 				}
@@ -1018,7 +1018,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (getTownHall() != null) {
 				if (!getTownHall().villagers.contains(this)) {
 					getTownHall().registerVillager(this);
-					if (MLN.Other>=MLN.DEBUG) {
+					if (MLN.LogOther>=MLN.DEBUG) {
 						MLN.debug(this,"Registering in TH vector.");
 					}
 				}
@@ -1182,7 +1182,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public void despawnVillagerSilent() {
 
-		if (MLN.VillagerSpawn>=MLN.DEBUG) {
+		if (MLN.LogVillagerSpawn>=MLN.DEBUG) {
 			final Exception e=new Exception();
 
 			MLN.printException("Despawning villager: "+this, e);
@@ -1489,7 +1489,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public float getBlockPathWeight(int i, int j, int k) {
 
 		if (!allowRandomMoves) {
-			if ((MLN.Pathing>=MLN.DEBUG) && extraLog) {
+			if ((MLN.LogPathing>=MLN.DEBUG) && extraLog) {
 				MLN.debug(this,  "Forbiding random moves. Current goal: "+Goal.goals.get(goalKey)+" Returning: "+(-99999F));
 			}
 			return Float.NEGATIVE_INFINITY;
@@ -1980,7 +1980,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		getRecord().villagerSize=size;
 
 		adjustSize();
-		if (MLN.Children>=MLN.MINOR) {
+		if (MLN.LogChildren>=MLN.MINOR) {
 			MLN.minor(this, "Child growing by "+growth+", new size: "+size);
 		}
 	}
@@ -2137,7 +2137,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		if (canMeditate() && mw.isGlobalTagSet(MillWorld.PUJAS)) {
 
-			if (MLN.Pujas>=MLN.DEBUG) {
+			if (MLN.LogPujas>=MLN.DEBUG) {
 				MLN.debug(this, "canMeditate");
 			}
 
@@ -2147,7 +2147,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 						final Building b=l.getBuilding(worldObj);
 						if (b.pujas!=null) {
 
-							if (MLN.Pujas>=MLN.DEBUG) {
+							if (MLN.LogPujas>=MLN.DEBUG) {
 								MLN.debug(this, "Found shrine: "+b);
 							}
 
@@ -2275,7 +2275,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		final Point jumpTo=MillCommonUtilities.findVerticalStandingPos(worldObj, getPathDestPoint());
 
 		if ((jumpTo != null) && (jumpTo.distanceTo(getPathDestPoint())<4)) {
-			if ((MLN.Pathing>=MLN.MAJOR) && extraLog) {
+			if ((MLN.LogPathing>=MLN.MAJOR) && extraLog) {
 				MLN.major(this, "Jumping from "+getPos()+" to "+jumpTo);
 			}
 
@@ -2319,7 +2319,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			final VillagerRecord vr=getTownHall().getVillagerRecordById(villager_id);
 
 			if (vr!=null) {
-				if (MLN.GeneralAI>=MLN.MAJOR) {
+				if (MLN.LogGeneralAI>=MLN.MAJOR) {
 					MLN.major(this, getTownHall()+": Villager has been killed!");
 				}
 				vr.killed=true;
@@ -2393,7 +2393,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	@Override
 	public void onNoPathAvailable() {
 		pathFailedSincelastTick=true;
-		if (MLN.Pathing>=MLN.MINOR) {
+		if (MLN.LogPathing>=MLN.MINOR) {
 			MLN.minor(this, "No path found between "+getPos()+" and "+getPathDestPoint()+" in "+(System.currentTimeMillis()-this.pathCalculationStartTime));
 		}
 	}
@@ -2515,7 +2515,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (Goal.beSeller.key.equals(goalKey)) {
 				townHall.seller=this;
 			} else if (Goal.getResourcesForBuild.key.equals(goalKey) || Goal.construction.key.equals(goalKey)) {
-				if (MLN.TileEntityBuilding>=MLN.DEBUG) {
+				if (MLN.LogTileEntityBuilding>=MLN.DEBUG) {
 					MLN.debug(this,"Registering as builder for: "+townHall);
 				}
 				townHall.builder=this;
@@ -2633,7 +2633,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 					longDistanceStuck=0;
 				}
 				if ((pathEntity != null) && (pathEntity.getCurrentPathLength() > 1)) {
-					if ((MLN.Pathing>=MLN.MINOR) && extraLog) {
+					if ((MLN.LogPathing>=MLN.MINOR) && extraLog) {
 						MLN.minor(this, "Stuck: "+longDistanceStuck+" pos "+getPos()+" node: "+pathEntity.getCurrentTargetPathPoint()+" next node: "+pathEntity.getNextTargetPathPoint()+" dest: "+ getPathDestPoint());
 					}
 				}
@@ -3076,7 +3076,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public void registerNewPathException(Exception e) {
 		if ((e instanceof PathingException) && (((PathingException)e).errorCode==PathingException.UNREACHABLE_START)) {
-			if ((MLN.Pathing>=MLN.MAJOR) && extraLog) {
+			if ((MLN.LogPathing>=MLN.MAJOR) && extraLog) {
 				MLN.major(this,"Unreachable start. Jumping back home.");
 			}
 			setPosition(getHouse().getSleepingPos().x+0.5,getHouse().getSleepingPos().y+1,getHouse().getSleepingPos().z+0.5);
@@ -3258,7 +3258,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		for (final Goal goal : getGoals()) {
 			if (goal.isPossible(this)) {
-				if ((MLN.GeneralAI>=MLN.MINOR) && extraLog) {
+				if ((MLN.LogGeneralAI>=MLN.MINOR) && extraLog) {
 					MLN.minor(this,"Priority for goal "+goal.gameName(this)+": "+goal.priority(this));
 				}
 				if ((nextGoal == null) || (nextGoal.priority(this) < goal.priority(this))) {
@@ -3267,7 +3267,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 		}
 
-		if ((MLN.GeneralAI>=MLN.MINOR) && extraLog) {
+		if ((MLN.LogGeneralAI>=MLN.MINOR) && extraLog) {
 			MLN.minor(this,"Selected this: "+nextGoal);
 		}
 
@@ -3496,7 +3496,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				if ((distantVillage!=null) && (distantVillage.culture==getCulture()) && (distantVillage != getTownHall())) {
 					boolean canMoveIn=false;
 
-					if (MLN.Children>=MLN.MAJOR) {
+					if (MLN.LogChildren>=MLN.MAJOR) {
 						MLN.major(this, "Attempting to move to village: "+distantVillage.getVillageQualifiedName());
 					}
 
@@ -3516,7 +3516,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 					if (canMoveIn && (distantInn!=null)) {
 
-						if (MLN.Children>=MLN.MAJOR) {
+						if (MLN.LogChildren>=MLN.MAJOR) {
 							MLN.major(this, "Moving to village: "+distantVillage.getVillageQualifiedName());
 						}
 

@@ -95,6 +95,10 @@ public class CommonProxy {
 	public int loadKeySetting(String value) {
 		return 0;
 	}
+	
+	public String getKeyString(int value) {
+		return "";
+	}
 
 	public void loadLanguages() {
 		MLN.loadLanguages(null);

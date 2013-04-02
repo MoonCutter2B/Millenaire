@@ -884,30 +884,85 @@ config.pagetitle=Millénaire Settings
 config.page.uisettings=UI Settings
 config.page.worldgeneration=World Generation
 config.page.villagebehaviour=Village Behaviour
+config.page.blockitemids=Block & Item IDs
+config.page.blockitemids.desc=Changes effective on restart. WARNING: Millénaire does not check whether they are free. You need to.
+
+config.village_list_key.label=Village List Key
+config.village_list_key.desc=Key to display the list of surrounding villages.
+
+config.quest_list_key.label=Info Panel Key
+config.quest_list_key.desc=Key to display the Millénaire info pannel.
+
+config.escort_key.label=Agressive Escorts Key
+config.escort_key.desc=Key to toggle hired villagers between agressive and defensive stances.
+
 
 config.fallback_language.label=Fallback Language
-config.fallback_language.desc=Secondary game language, used when the main is not available.
+config.fallback_language.desc=Secondary game language, used when the main one is not available.
 
 config.dynamic_textures.label=Dynamic Textures
-config.dynamic_textures.desc=Automatically switch to the 64x texture pack if the Minecraft texture pack is 64x or above. Default: <0>.
+config.dynamic_textures.desc=Automatically switch to the 64x texture pack if the Minecraft texture pack is 64x or above.
 
 config.language_learning.label=Language Learning
-config.language_learning.desc=Whether languages need to be "learned" (translations will only appear after the player interacts enough with a culture). Default: <0>.
+config.language_learning.desc=Whether languages need to be "learned" (translations will only appear after the player interacts enough with a culture).
 
 config.load_all_languages.label=Load All Languages
-config.load_all_languages.desc=Whether to load all available languages instead of just the main and backup ones, in order to provide translations to clients if needed. Default: <0>.
-
-config.language_learning.label=Language Learning
-config.language_learning.desc=Whether languages need to be "learned" (translations will only appear after the player interacts enough with a culture). Default: <0>.
+config.load_all_languages.desc=Whether to load all available languages, in order to provide translations to clients if needed.
 
 config.display_start.label=Display Starting Text
-config.display_start.desc=Display the Millénaire starting text. Default: <0>.
+config.display_start.desc=Display the Millénaire version and Creation Quest status at startup.
 
 config.display_names.label=Display Villager Names
-config.display_names.desc=Display names, occupations and current task above villagers' heads: Default: <0>.
+config.display_names.desc=Display names, occupations and current task above villagers' heads.
+
+config.villagers_names_distance.label=Name Display Distance
+config.villagers_names_distance.desc=Distance from which names are visible. Default: <0>.
 
 config.villagers_sentence_in_chat_distance_client.label=Sentences In Chat (MP)
-config.villagers_sentence_in_chat_distance_client.desc=Whether to display villagers' speech in the chat box in multi player. Default: <0>.
+config.villagers_sentence_in_chat_distance_client.desc=How far villagers must be to display their sentences in the chat box in multi player. Default: <0>.
 
 config.villagers_sentence_in_chat_distance_sp.label=Sentences In Chat (SP)
-config.villagers_sentence_in_chat_distance_sp.desc=Whether to display villagers' speech in the chat box in single player. Default: <0>.
+config.villagers_sentence_in_chat_distance_sp.desc=How far villagers must be to display their sentences in the chat box in single player. Default: <0>.
+
+config.generate_villages.label=Generate villages
+config.generate_villages.desc=Whether to generate Millénaire villages in new chunks.
+
+config.generate_lone_buildings.label=Generate lone buildings
+config.generate_lone_buildings.desc=Whether to generate Millénaire lone buildings in new chunks.
+
+config.keep_active_radius.label=Chunk Loaded Radius
+config.keep_active_radius.desc=Radius around the player in which Millénaire will attempt to keep villages' chunks loaded. Default: <0>.
+
+config.min_village_distance.label=Min Village Distance
+config.min_village_distance.desc=Minimum distance between two generated villages. Default: <0>.
+
+config.min_village_lonebuilding_distance.label=Min Village-Lone Building Distance
+config.min_village_lonebuilding_distance.desc=Minimum distance between generated villages and lone buildings. Default: <0>.
+
+config.min_lonebuilding_distance.label=Min Lone Building Distance
+config.min_lonebuilding_distance.desc=Minimum distance between lone buildings. Default: <0>.
+
+config.spawn_protection_radius.label=Spawn Protection Radius
+config.spawn_protection_radius.desc=Area around the Spawn Point where Millénaire will not generate buildings. Default: <0>.
+
+config.village_radius.label=Radius of Villages
+config.village_radius.desc=Radius of normal villages (not hamlets). Default: <0>.
+
+config.min_distance_between_buildings.label=Min Distance Between Buildings
+config.min_distance_between_buildings.desc=Minimal distance between two buildings in a village. Default: <0>.
+
+config.village_paths.label=Build Village Paths
+config.village_paths.desc=Generate paths in new villages and have the villagers upgrade them.
+
+config.max_children_number.label=Max Children Number
+config.max_children_number.desc=Maximum number of children a village can have. Default: <0>.
+
+config.background_radius.label=Village Relation Radius
+config.background_radius.desc=Radius within which villages will have relations with each others (diplomacy, trade, raids). Default: <0>. 
+
+config.bandit_raid_radius.label=Bandit Raid Radius
+config.bandit_raid_radius.desc=Radius within which bandits will raid villages. Default: <0>.
+
+config.raiding_rate.label=Raiding % Chance
+config.raiding_rate.desc=Chance on 100 that a village/bandit building will attempt a raid each night. Default: <0>.
+

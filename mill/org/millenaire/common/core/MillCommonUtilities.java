@@ -266,7 +266,7 @@ public class MillCommonUtilities {
 			final int current_denier_argent = countChestItems(chest,Mill.denier_argent.itemID,0);
 			final int current_denier_or = countChestItems(chest,Mill.denier_or.itemID,0);
 
-			if (MLN.WifeAI>=MLN.MAJOR) {
+			if (MLN.LogWifeAI>=MLN.MAJOR) {
 				MLN.major(null, "Putting: "+denier+"/"+denier_argent+"/"+denier_or+" replacing "+current_denier+"/"+current_denier_argent+"/"+current_denier_or);
 			}
 
@@ -329,7 +329,7 @@ public class MillCommonUtilities {
 			final int current_denier_argent = countChestItems(chest,Mill.denier_argent.itemID,0);
 			final int current_denier_or = countChestItems(chest,Mill.denier_or.itemID,0);
 
-			if (MLN.WifeAI>=MLN.MAJOR) {
+			if (MLN.LogWifeAI>=MLN.MAJOR) {
 				MLN.major(null, "Putting: "+denier+"/"+denier_argent+"/"+denier_or+" replacing "+current_denier+"/"+current_denier_argent+"/"+current_denier_or);
 			}
 

@@ -175,7 +175,9 @@ public class ClientProxy extends CommonProxy
 		return Keyboard.getKeyIndex(value.toUpperCase());
 	}
 
-
+	public String getKeyString(int value) {
+		return Keyboard.getKeyName(value);
+	}
 
 	@Override
 	public void loadLanguages() {

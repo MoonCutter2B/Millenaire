@@ -132,7 +132,7 @@ public class Building {
 			}
 
 			info.nbPathsReceived++;
-			if (MLN.VillagePaths>=MLN.MINOR) {
+			if (MLN.LogVillagePaths>=MLN.MINOR) {
 				MLN.minor(Building.this, "Path calculation failed. Target: "+destination);
 			}
 
@@ -167,7 +167,7 @@ public class Building {
 		@Override
 		public void run() {
 			final AStarPathing temp = new AStarPathing();
-			if (MLN.Pathing >= MLN.MAJOR) {
+			if (MLN.LogPathing >= MLN.MAJOR) {
 				MLN.major(this, "Start");
 			}
 			final long tm = System.currentTimeMillis();
@@ -182,7 +182,7 @@ public class Building {
 			} catch (final MillenaireException e) {
 				MLN.printException(e);
 			}
-			if (MLN.Pathing >= MLN.MAJOR) {
+			if (MLN.LogPathing >= MLN.MAJOR) {
 				MLN.major(this, "Done: "
 						+ (((System.currentTimeMillis() - tm) * 1.0) / 1000));
 			}
@@ -317,7 +317,7 @@ public class Building {
 				MLN.printException(e);
 			}
 
-			if (MLN.Hybernation >= MLN.MAJOR) {
+			if (MLN.LogHybernation >= MLN.MAJOR) {
 				MLN.major(Building.this, "Saved " + buildings.size() + " buildings in "
 						+ (System.currentTimeMillis() - startTime) + " ms due to "
 						+ reason + " (" + saveReason + ").");
@@ -765,7 +765,7 @@ public class Building {
 
 		child.getHouse().removeVillagerRecord(child.villager_id);
 
-		if (MLN.WorldGeneration >= MLN.MAJOR) {
+		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(this,
 					"Creating " + type + " with child " + child.getName() + "/"
 							+ child.villager_id);
@@ -873,7 +873,7 @@ public class Building {
 					villagers.remove(i);
 				} else {
 					if (villager.client_lastupdated > villagers.get(i).client_lastupdated) {
-						if (MLN.VillagerSpawn>=MLN.MINOR) {
+						if (MLN.LogVillagerSpawn>=MLN.MINOR) {
 							final Exception e=new Exception();
 							MLN.printException("addOrReplaceVillager in "+this+": Found an other copy of " + villager+" in village "+villagers.get(i).getTownHall()+": "+villagers.get(i),e);
 						}
@@ -1012,7 +1012,7 @@ public class Building {
 					&& ((getTownHall().relations.get(vp)>=RELATION_EXCELLENT) || ((getTownHall().relations.get(vp)>=RELATION_GOOD) && (townHall.culture==culture)))
 					&& (getPos().distanceTo(townHall.getPos()) < 2000)) {
 
-				if (MLN.Merchant >= MLN.DEBUG) {
+				if (MLN.LogMerchant >= MLN.DEBUG) {
 					MLN.debug(this, "Considering village "+townHall.getVillageQualifiedName()+" for merchant : "
 							+ merchantRecord);
 				}
@@ -1042,7 +1042,7 @@ public class Building {
 							targets.add(inn);
 						}
 
-						if (MLN.Merchant >= MLN.DEBUG) {
+						if (MLN.LogMerchant >= MLN.DEBUG) {
 							MLN.debug(this, "Found good move in "+townHall.getVillageQualifiedName()+" for merchant : "
 									+ merchantRecord);
 						}
@@ -1050,7 +1050,7 @@ public class Building {
 					} else if (nbNightsMerchant > 3) {
 						backupTargets.add(inn);
 
-						if (MLN.Merchant >= MLN.DEBUG) {
+						if (MLN.LogMerchant >= MLN.DEBUG) {
 							MLN.debug(this, "Found backup move in "+townHall.getVillageQualifiedName()+" for merchant : "
 									+ merchantRecord);
 						}
@@ -1060,7 +1060,7 @@ public class Building {
 		}
 
 		if ((targets.size() == 0) && (backupTargets.size() == 0)) {
-			if (MLN.Merchant >= MLN.MINOR) {
+			if (MLN.LogMerchant >= MLN.MINOR) {
 				MLN.minor(this, "Failed to find a destination for merchant: "
 						+ merchantRecord);
 			}
@@ -1094,7 +1094,7 @@ public class Building {
 		//100% margin (to attack villages with close ratings)
 		final int raidingStrength=(int) ((float)getVillageRaidingStrength()*2);
 
-		if (MLN.Diplomacy>=MLN.DEBUG) {
+		if (MLN.LogDiplomacy>=MLN.DEBUG) {
 			MLN.debug(this, "Checking out for new raid, strength: "+raidingStrength);
 		}
 
@@ -1107,7 +1107,7 @@ public class Building {
 							(getPos().distanceTo(distantVillage.getPos())<MLN.BanditRaidRadius) &&
 							(distantVillage.getVillageDefendingStrength()<raidingStrength)) {
 
-						if (MLN.Diplomacy>=MLN.DEBUG) {
+						if (MLN.LogDiplomacy>=MLN.DEBUG) {
 							MLN.debug(this, "Lone building valid target: "+distantVillage);
 						}
 
@@ -1123,12 +1123,12 @@ public class Building {
 
 						if (distantVillage!=null) {
 
-							if (MLN.Diplomacy>=MLN.DEBUG) {
+							if (MLN.LogDiplomacy>=MLN.DEBUG) {
 								MLN.debug(this, "Testing village valid target: "+distantVillage+"/"+distantVillage.getVillageDefendingStrength());
 							}
 
 							if (distantVillage.getVillageDefendingStrength()<raidingStrength) {
-								if (MLN.Diplomacy>=MLN.DEBUG) {
+								if (MLN.LogDiplomacy>=MLN.DEBUG) {
 									MLN.debug(this, "Village valid target: "+distantVillage);
 								}
 
@@ -1149,7 +1149,7 @@ public class Building {
 					raidStart=0;
 					raidTarget=target.getPos();
 
-					if (MLN.Diplomacy>=MLN.MAJOR) {
+					if (MLN.LogDiplomacy>=MLN.MAJOR) {
 						MLN.major(this, "raidTarget set: "+raidTarget+" name: "+target.name);
 					}
 
@@ -1176,7 +1176,7 @@ public class Building {
 			}
 
 			if (pathing == null) {
-				if ((MLN.Pathing >= MLN.MAJOR) && extraLog) {
+				if ((MLN.LogPathing >= MLN.MAJOR) && extraLog) {
 					MLN.major(this,
 							"Can't do pathing as can't generate connections.");
 				}
@@ -1184,7 +1184,7 @@ public class Building {
 			}
 
 			if (!pathing.isInArea(start)) {
-				if ((MLN.Pathing >= MLN.MAJOR) && extraLog) {
+				if ((MLN.LogPathing >= MLN.MAJOR) && extraLog) {
 					MLN.major(this, "Start outside of TH area.");
 				}
 				return null;
@@ -1192,13 +1192,13 @@ public class Building {
 			}
 
 			if (!pathing.isInArea(dest)) {
-				if ((MLN.Pathing >= MLN.MAJOR) && extraLog) {
+				if ((MLN.LogPathing >= MLN.MAJOR) && extraLog) {
 					MLN.major(this, "Dest outside of TH area.");
 				}
 				return null;
 			}
 
-			if ((MLN.Connections >= MLN.MAJOR) && extraLog) {
+			if ((MLN.LogConnections >= MLN.MAJOR) && extraLog) {
 				MLN.major(this,
 						"calling getPath: " + (start.getiX() - winfo.mapStartX)
 						+ "/" + (start.getiZ() - winfo.mapStartZ)
@@ -1251,19 +1251,19 @@ public class Building {
 			oldPathPointsToClearIndex=0;
 			oldPathPointsToClear=oldPathPointsToClearNew;
 
-			if (MLN.VillagePaths>=MLN.MINOR) {
+			if (MLN.LogVillagePaths>=MLN.MINOR) {
 				MLN.minor(this, "Finished looking for paths to clear. Found: "+oldPathPointsToClear.size()+". Duration: "+((System.currentTimeMillis()-startTime)+" ms."));
 			}
 		}
 	}
 
 	public void callForHelp(Entity attacker) {
-		if (MLN.GeneralAI >= MLN.DEBUG) {
+		if (MLN.LogGeneralAI >= MLN.DEBUG) {
 			MLN.debug(this, "Calling for help among: " + villagers.size()
 					+ " villagers.");
 		}
 		for (final MillVillager villager : villagers) {
-			if (MLN.GeneralAI >= MLN.DEBUG) {
+			if (MLN.LogGeneralAI >= MLN.DEBUG) {
 				MLN.debug(
 						villager,
 						"Testing villager. Will fight? "
@@ -1276,7 +1276,7 @@ public class Building {
 			if ((villager.getEntityToAttack() == null) && villager.helpsInAttacks() && !villager.isRaider) {
 
 				if (villager.getPos().distanceTo(attacker) < MillVillager.ATTACK_RANGE) {
-					if (MLN.GeneralAI >= MLN.MAJOR) {
+					if (MLN.LogGeneralAI >= MLN.MAJOR) {
 						MLN.major(villager,
 								"Off to help a friend attacked by attacking: "
 										+ attacker);
@@ -1346,7 +1346,7 @@ public class Building {
 
 	private void cancelRaid() {
 
-		if (MLN.Diplomacy>=MLN.MAJOR) {
+		if (MLN.LogDiplomacy>=MLN.MAJOR) {
 			MLN.major(this, "Cancelling raid");
 		}
 
@@ -1394,7 +1394,7 @@ public class Building {
 		if ((x1 < winfo.mapStartX) || (x1 >= (winfo.mapStartX + winfo.length))
 				|| (z1 < winfo.mapStartZ)
 				|| (z1 >= (winfo.mapStartZ + winfo.width))) {
-			if (MLN.Pathing >= MLN.DEBUG) {
+			if (MLN.LogPathing >= MLN.DEBUG) {
 				MLN.debug(this, "Start outside of TH area.");
 			}
 			return false;
@@ -1403,7 +1403,7 @@ public class Building {
 		if ((x2 < winfo.mapStartX) || (x2 >= (winfo.mapStartX + winfo.length))
 				|| (z1 < winfo.mapStartZ)
 				|| (z2 >= (winfo.mapStartZ + winfo.width))) {
-			if (MLN.Pathing >= MLN.DEBUG) {
+			if (MLN.LogPathing >= MLN.DEBUG) {
 				MLN.debug(this, "Dest outside of TH area.");
 			}
 			return false;
@@ -1577,7 +1577,7 @@ public class Building {
 					seller.clearGoal();
 					seller.goalKey = Goal.beSeller.key;
 					Goal.beSeller.onAccept(seller);
-					if (MLN.Selling >= MLN.DEBUG) {
+					if (MLN.LogSelling >= MLN.DEBUG) {
 						MLN.debug(this, "Sending seller: " + seller);
 					}
 				}
@@ -1612,7 +1612,7 @@ public class Building {
 				vrecords.remove(i);
 
 				if (vr.getHouse().getTownHall()!=this) {
-					if (MLN.Diplomacy>=MLN.MAJOR) {
+					if (MLN.LogDiplomacy>=MLN.MAJOR) {
 						MLN.error(this, "Tried clearing attacker record but its house is set to "+vr.getHouse()+" from village "+vr.getHouse().getTownHall()+". TH is: "+vr.getTownHall());
 					}
 				} else {
@@ -1624,7 +1624,7 @@ public class Building {
 			}
 		}
 
-		if (MLN.Diplomacy>=MLN.MAJOR) {
+		if (MLN.LogDiplomacy>=MLN.MAJOR) {
 			MLN.major(this, "Cleared "+nbCleared+" attackers.");
 		}
 
@@ -1634,7 +1634,7 @@ public class Building {
 				villagers.remove(i);
 				v.getHouse().villagers.remove(v);
 				v.despawnVillagerSilent();
-				if (MLN.Diplomacy>=MLN.MAJOR) {
+				if (MLN.LogDiplomacy>=MLN.MAJOR) {
 					MLN.major(this, "Despawning invader: "+v);
 				}
 			}
@@ -1685,7 +1685,7 @@ public class Building {
 
 		if (pathsToBuild!=null) {
 
-			if (MLN.VillagePaths>=MLN.MINOR) {
+			if (MLN.LogVillagePaths>=MLN.MINOR) {
 				MLN.minor(this, "Rebuilding calculated paths.");
 			}
 
@@ -1748,7 +1748,7 @@ public class Building {
 	public MillVillager createChild(MillVillager mother, Building townHall,
 			String fathersName) {
 		try {
-			if (MLN.WorldGeneration >= MLN.MINOR) {
+			if (MLN.LogWorldGeneration >= MLN.MINOR) {
 				MLN.minor(this, "Creating child: " + mother.familyName);
 			}
 
@@ -1800,7 +1800,7 @@ public class Building {
 			wifeType = location.femaleResident.get(0);
 		}
 
-		if (MLN.Merchant >= MLN.MINOR) {
+		if (MLN.LogMerchant >= MLN.MINOR) {
 			MLN.minor(this, "Creating " + husbandType + " and " + wifeType
 					+ ": " + familyName);
 		}
@@ -1834,7 +1834,7 @@ public class Building {
 			addOrReplaceRecord(wifeRecord);
 			worldObj.spawnEntityInWorld(wife);
 		}
-		if (MLN.WorldGeneration >= MLN.MAJOR) {
+		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(this, "Records: " + wifeRecord + "/" + husbandRecord);
 		}
 
@@ -2108,7 +2108,7 @@ public class Building {
 			MLN.error(this, "endRaid() called but couldn't find raidTarget at: "+raidTarget);
 			return false;
 		} else {
-			if (MLN.Diplomacy>=MLN.MAJOR) {
+			if (MLN.LogDiplomacy>=MLN.MAJOR) {
 				MLN.major(this, "Called to end raid on "+targetVillage);
 			}
 		}
@@ -2127,7 +2127,7 @@ public class Building {
 			attackersWon=(ratio>1.2);
 		}
 
-		if (MLN.Diplomacy>=MLN.MAJOR) {
+		if (MLN.LogDiplomacy>=MLN.MAJOR) {
 			MLN.major(this, "Result of raid: "+attackersWon+" ("+attackingForce+"/"+attackingForce+")");
 		}
 
@@ -2174,7 +2174,7 @@ public class Building {
 
 						if (nbToTake>0) {
 
-							if (MLN.Diplomacy>=MLN.DEBUG) {
+							if (MLN.LogDiplomacy>=MLN.DEBUG) {
 								MLN.debug(this, "Able to take: "+nbToTake+" "+Mill.proxy.getItemName(good.item.id(), good.item.meta));
 							}
 
@@ -2191,7 +2191,7 @@ public class Building {
 			raidsPerformed.add("success;"+targetVillage.getVillageQualifiedName()+taken);
 			targetVillage.raidsSuffered.add("success;"+getVillageQualifiedName()+taken);
 
-			if (MLN.Diplomacy>=MLN.MAJOR) {
+			if (MLN.LogDiplomacy>=MLN.MAJOR) {
 				MLN.major(this, "Raid on "+targetVillage+" successfull ("+attackingForce+"/"+defendingForce+")");
 			}
 
@@ -2200,7 +2200,7 @@ public class Building {
 			raidsPerformed.add("failure;"+targetVillage.getVillageQualifiedName());
 			targetVillage.raidsSuffered.add("failure;"+getVillageQualifiedName());
 
-			if (MLN.Diplomacy>=MLN.MAJOR) {
+			if (MLN.LogDiplomacy>=MLN.MAJOR) {
 				MLN.major(this, "Raid on "+targetVillage+" failed ("+attackingForce+"/"+defendingForce+")");
 			}
 
@@ -3377,7 +3377,7 @@ public class Building {
 		for (final Goods good : culture.goodsVector) {
 			final int nbneeded = nbGoodNeeded(good.item.id(), good.item.meta);
 			if (nbneeded > 0) {
-				if (MLN.Merchant >= MLN.DEBUG) {
+				if (MLN.LogMerchant >= MLN.DEBUG) {
 					MLN.debug(this, "Import needed: " + good.getName() + " - "
 							+ nbneeded);
 				}
@@ -3801,7 +3801,7 @@ public class Building {
 	}
 
 	public void initialise(EntityPlayer owner,boolean villageCreation) {
-		if (MLN.WorldGeneration >= MLN.MAJOR) {
+		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(this, "Initialising building at " + getPos()+", TH pos: "+townHallPos+", TH: "+getTownHall());
 		}
 
@@ -3904,7 +3904,7 @@ public class Building {
 			findName(null);
 		}
 
-		if (MLN.WorldGeneration >= MLN.MAJOR) {
+		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(this, "Initialising town hall: " + getVillageQualifiedName());
 		}
 
@@ -4052,7 +4052,7 @@ public class Building {
 
 					for (final Entity ent : mobs) {
 						if (!ent.isDead) {
-							if (MLN.TileEntityBuilding >= MLN.DEBUG) {
+							if (MLN.LogTileEntityBuilding >= MLN.DEBUG) {
 								MLN.debug(this, "Killing mob " + ent + " at "
 										+ ent.posX + "/" + ent.posY + "/" + ent.posZ);
 							}
@@ -4065,7 +4065,7 @@ public class Building {
 
 					for (final Entity ent : creepers) {
 						if (!ent.isDead) {
-							if (MLN.TileEntityBuilding >= MLN.DEBUG) {
+							if (MLN.LogTileEntityBuilding >= MLN.DEBUG) {
 								MLN.debug(this, "Killing creeper " + ent + " at "
 										+ ent.posX + "/" + ent.posY + "/" + ent.posZ);
 							}
@@ -4078,7 +4078,7 @@ public class Building {
 
 					for (final Entity ent : endermen) {
 						if (!ent.isDead) {
-							if (MLN.TileEntityBuilding >= MLN.DEBUG) {
+							if (MLN.LogTileEntityBuilding >= MLN.DEBUG) {
 								MLN.debug(this, "Killing enderman " + ent + " at "
 										+ ent.posX + "/" + ent.posY + "/" + ent.posZ);
 							}
@@ -4135,7 +4135,7 @@ public class Building {
 
 	private void merchantCreated() {
 
-		if (MLN.Merchant >= MLN.MINOR) {
+		if (MLN.LogMerchant >= MLN.MINOR) {
 			MLN.minor(this, "Creating a new merchant");
 		}
 
@@ -4163,7 +4163,7 @@ public class Building {
 		destInn.visitorsList.add("panels.merchantarrived;"+merchantRecord.getName()+";"+merchantRecord.getNativeOccupationName()
 				+";"+getTownHall().getVillageQualifiedName());
 
-		if (MLN.Merchant >= MLN.MAJOR) {
+		if (MLN.LogMerchant >= MLN.MAJOR) {
 			MLN.major(
 					this,
 					"Moved merchant " + merchantRecord + " to "
@@ -4248,7 +4248,7 @@ public class Building {
 
 
 
-		if (MLN.Merchant>=MLN.DEBUG) {
+		if (MLN.LogMerchant>=MLN.DEBUG) {
 			MLN.debug(this, "Reserved amount: "+item.getName()+": "+reserveAmount+"/"+nb);
 		}
 
@@ -4258,7 +4258,7 @@ public class Building {
 			for (final InvItem key : project.resCost.keySet()) {
 				if ((key.id() == goodId) && ((key.meta == meta) || (meta==-1) || (key.meta==-1))) {
 
-					if (MLN.Merchant>=MLN.DEBUG) {
+					if (MLN.LogMerchant>=MLN.DEBUG) {
 						MLN.debug(this, "Needed for project: "+project.resCost.get(key));
 					}
 
@@ -4322,7 +4322,7 @@ public class Building {
 			}
 		}
 
-		if (MLN.Merchant>=MLN.DEBUG) {
+		if (MLN.LogMerchant>=MLN.DEBUG) {
 			MLN.debug(this, "Goods needed: "+item.getName()+": "+targetAmount+"/"+neededForProject+"/"+nb);
 		}
 
@@ -4587,13 +4587,13 @@ public class Building {
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
 						v.add(p);
-						if (MLN.Hybernation >= MLN.MINOR) {
+						if (MLN.LogHybernation >= MLN.MINOR) {
 							MLN.minor(this, "Loaded spawn point: " + p);
 						}
 					}
 				}
 				spawns.add(v);
-				if (MLN.Hybernation >= MLN.MINOR) {
+				if (MLN.LogHybernation >= MLN.MINOR) {
 					MLN.minor(this, "Loaded " + v.size() + " spawn points for "
 							+ spawnTypes.get(i));
 				}
@@ -4617,13 +4617,13 @@ public class Building {
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
 						v.add(p);
-						if (MLN.Hybernation >= MLN.MINOR) {
+						if (MLN.LogHybernation >= MLN.MINOR) {
 							MLN.minor(this, "Loaded spawn point: " + p);
 						}
 					}
 				}
 				mobSpawners.add(v);
-				if (MLN.Hybernation >= MLN.MINOR) {
+				if (MLN.LogHybernation >= MLN.MINOR) {
 					MLN.minor(this, "Loaded " + v.size()
 							+ " mob spawn points for " + spawnTypes.get(i));
 				}
@@ -4645,13 +4645,13 @@ public class Building {
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
 						v.add(p);
-						if (MLN.Hybernation >= MLN.DEBUG) {
+						if (MLN.LogHybernation >= MLN.DEBUG) {
 							MLN.debug(this, "Loaded source point: " + p);
 						}
 					}
 				}
 				sources.add(v);
-				if (MLN.Hybernation >= MLN.MAJOR) {
+				if (MLN.LogHybernation >= MLN.MAJOR) {
 					MLN.debug(this, "Loaded " + v.size()
 							+ " sources points for "
 							+ Item.itemsList[sourceTypes.get(i)].getUnlocalizedName());
@@ -4669,7 +4669,7 @@ public class Building {
 					MLN.error(this, "Couldn't load VR record.");
 				} else {
 					addOrReplaceRecord(vr);
-					if (MLN.Hybernation >= MLN.MINOR) {
+					if (MLN.LogHybernation >= MLN.MINOR) {
 						MLN.minor(this, "Loaded VR: " + vr);
 					}
 				}
@@ -4716,7 +4716,7 @@ public class Building {
 
 			if (location.tags.contains(tagPujas)) {
 				pujas=new Puja(this,nbttagcompound.getCompoundTag("pujas"));
-				if (MLN.Pujas>=MLN.MINOR) {
+				if (MLN.LogPujas>=MLN.MINOR) {
 					MLN.minor(this, "read pujas object");
 				}
 			}
@@ -4737,7 +4737,7 @@ public class Building {
 			}
 
 			if (isTownhall) {
-				if (MLN.Hybernation >= MLN.MAJOR) {
+				if (MLN.LogHybernation >= MLN.MAJOR) {
 					MLN.major(this, "Loading Townhall data.");
 				}
 				readTownHall(nbttagcompound);
@@ -4749,7 +4749,7 @@ public class Building {
 				}
 			}
 
-			if (MLN.TileEntityBuilding >= MLN.DEBUG) {
+			if (MLN.LogTileEntityBuilding >= MLN.DEBUG) {
 				MLN.debug(this, "Loading building. Type: " + location
 						+ ", pos: " + getPos());
 			}
@@ -4999,14 +4999,14 @@ public class Building {
 			buildingGoal = null;
 			buildingGoalLevel = 0;
 			buildingGoalVariation = 0;
-			if (MLN.Hybernation >= MLN.MAJOR) {
+			if (MLN.LogHybernation >= MLN.MAJOR) {
 				MLN.major(this, "No goal found: " + buildingGoal);
 			}
 		} else {
 			buildingGoalLevel = nbttagcompound.getInteger("buildingGoalLevel");
 			buildingGoalVariation = nbttagcompound
 					.getInteger("buildingGoalVariation");
-			if (MLN.Hybernation >= MLN.MAJOR) {
+			if (MLN.LogHybernation >= MLN.MAJOR) {
 				MLN.major(this, "Reading building goal: " + buildingGoal);
 			}
 		}
@@ -5014,7 +5014,7 @@ public class Building {
 		buildingGoalLocation = BuildingLocation.read(nbttagcompound,
 				"buildingGoalLocation","buildingGoalLocation");
 		if (buildingGoalLocation != null) {
-			if (MLN.Hybernation >= MLN.MAJOR) {
+			if (MLN.LogHybernation >= MLN.MAJOR) {
 				MLN.major(this, "Loaded buildingGoalLocation: "
 						+ buildingGoalLocation);
 			}
@@ -5050,7 +5050,7 @@ public class Building {
 
 				setBblocks(bblocks);
 
-				if (MLN.Hybernation >= MLN.MAJOR) {
+				if (MLN.LogHybernation >= MLN.MAJOR) {
 					MLN.major(this,
 							"Loaded buildingLocationIP: " + buildingLocationIP
 							+ " bblocks size: " + bblocks.length
@@ -5137,11 +5137,11 @@ public class Building {
 				rebuildingPathing = true;
 				thread = new PathingThread(winfo.clone());
 				thread.setPriority(Thread.MIN_PRIORITY);
-				if (MLN.Pathing >= MLN.MAJOR) {
+				if (MLN.LogPathing >= MLN.MAJOR) {
 					MLN.major(this, "Thread starting.");
 				}
 				thread.start();
-				if (MLN.Pathing >= MLN.MAJOR) {
+				if (MLN.LogPathing >= MLN.MAJOR) {
 					MLN.major(this, "Thread started.");
 				}
 			} catch (final CloneNotSupportedException e) {
@@ -5181,7 +5181,7 @@ public class Building {
 
 		final Point start=getPathStartPos();
 
-		if (MLN.VillagePaths>=MLN.MINOR) {
+		if (MLN.LogVillagePaths>=MLN.MINOR) {
 			MLN.minor(this, "Launching path rebuild, expected paths number: "+nbPaths);
 		}
 
@@ -5373,7 +5373,7 @@ public class Building {
 	public void registerVillager(MillVillager villager)
 			throws MillenaireException {
 
-		if (MLN.GeneralAI >= MLN.DEBUG) {
+		if (MLN.LogGeneralAI >= MLN.DEBUG) {
 			MLN.debug(this, "Registering villager " + villager);
 		}
 
@@ -5399,12 +5399,12 @@ public class Building {
 			// building has it
 
 			if (vr != null) {
-				if (MLN.GeneralAI >= MLN.MAJOR) {
+				if (MLN.LogGeneralAI >= MLN.MAJOR) {
 					MLN.major(this, "Adding record " + vr);
 				}
 				addOrReplaceRecord(vr);
 			} else {
-				if (MLN.GeneralAI >= MLN.MAJOR) {
+				if (MLN.LogGeneralAI >= MLN.MAJOR) {
 					MLN.major(this, "Adding new record "
 							+ new VillagerRecord(mw,villager));
 				}
@@ -5488,7 +5488,7 @@ public class Building {
 				}
 
 				if (respawn) {
-					if (MLN.GeneralAI >= MLN.MAJOR) {
+					if (MLN.LogGeneralAI >= MLN.MAJOR) {
 						MLN.major(this, "Recreating missing villager from record " + vr+". Killed: "+vr.killed);
 					}
 					if (mw.getBuilding(vr.housePos) == null) {
@@ -5535,7 +5535,7 @@ public class Building {
 
 							if (!vr.killed) {//despawn, so gets inventory back
 
-								if (MLN.GeneralAI >= MLN.MAJOR) {
+								if (MLN.LogGeneralAI >= MLN.MAJOR) {
 									MLN.major(this, "Giving the villager back " + vr.inventory.size()+" item types.");
 								}
 
@@ -5575,7 +5575,7 @@ public class Building {
 					}
 				}
 			} else if (found.size() > 1) {
-				if (MLN.GeneralAI >= MLN.MAJOR) {
+				if (MLN.LogGeneralAI >= MLN.MAJOR) {
 					MLN.major(this, "Found " + found.size() + " villagers for record " + vr + ", killing the extras.");
 				}
 
@@ -5600,7 +5600,7 @@ public class Building {
 	private void repairVillagerListClient() {
 		for (int i = villagers.size() - 1; i > -1; i--) {
 			if (villagers.get(i).isDead) {
-				if (MLN.GeneralAI >= MLN.MAJOR) {
+				if (MLN.LogGeneralAI >= MLN.MAJOR) {
 					MLN.major(this,
 							"Client detected a dead villager in the list, removing it: " + villagers.get(i));
 				}
@@ -5617,7 +5617,7 @@ public class Building {
 			}
 
 			if (found.size() > 1) {
-				if (MLN.GeneralAI >= MLN.MAJOR) {
+				if (MLN.LogGeneralAI >= MLN.MAJOR) {
 					MLN.major(this, "Client found " + found.size() + " villagers for record " + vr + ", killing the extras.");
 				}
 
@@ -5857,7 +5857,7 @@ public class Building {
 			for (final VillagerRecord vr : vrecords) {
 				if (vr.getType().isRaider && !vr.killed && !vr.raidingVillage && !vr.awayraiding  && !vr.awayhired) {
 
-					if (MLN.Diplomacy>=MLN.MINOR) {
+					if (MLN.LogDiplomacy>=MLN.MINOR) {
 						MLN.minor(this, "Need to transfer raider; "+vr);
 					}
 
@@ -5948,7 +5948,7 @@ public class Building {
 		destInn.visitorsList.add("panels.merchantarrived;"+oldMerchant.getName()+";"+oldMerchant.getNativeOccupationName()
 				+";"+getTownHall().getVillageQualifiedName());
 
-		if (MLN.Merchant >= MLN.MAJOR) {
+		if (MLN.LogMerchant >= MLN.MAJOR) {
 			MLN.major(this, "Swaped merchant " + oldMerchant + " and "
 					+ newMerchant + " with " + destInn.getTownHall());
 		}
@@ -6096,7 +6096,7 @@ public class Building {
 
 	public void transferVillager(VillagerRecord vr, Building dest, boolean raid) {
 
-		if (MLN.Diplomacy>=MLN.MINOR) {
+		if (MLN.LogDiplomacy>=MLN.MINOR) {
 			MLN.minor(this, "Transfering villager "+vr+" to "+dest+". Raid: "+raid);
 		}
 
@@ -6107,7 +6107,7 @@ public class Building {
 			vr.awayraiding=true;
 			getTownHall().getVillagerRecordById(vr.id).awayraiding=true;
 
-			if (MLN.Diplomacy>=MLN.DEBUG) {
+			if (MLN.LogDiplomacy>=MLN.DEBUG) {
 				MLN.debug(this, "Set record to away raiding");
 			}
 		}
@@ -6144,13 +6144,13 @@ public class Building {
 				dest.villagers.add(v);
 				dest.getTownHall().villagers.add(v);
 
-				if (MLN.Diplomacy>=MLN.DEBUG) {
+				if (MLN.LogDiplomacy>=MLN.DEBUG) {
 					MLN.debug(this, "Villager entity moved.");
 				}
 			} else {
 				v.despawnVillager();
 
-				if (MLN.Diplomacy>=MLN.DEBUG) {
+				if (MLN.LogDiplomacy>=MLN.DEBUG) {
 					MLN.debug(this, "Villager entity despawned.");
 				}
 			}
@@ -6344,7 +6344,7 @@ public class Building {
 				nightBackgroundActionPerformed = false;
 			} else if (!nightBackgroundActionPerformed) {
 				if (villageType.carriesRaid && (raidTarget==null) && (MillCommonUtilities.randomInt(100)<MLN.RaidingRate)) {
-					if (MLN.Diplomacy>=MLN.DEBUG) {
+					if (MLN.LogDiplomacy>=MLN.DEBUG) {
 						MLN.debug(this, "Calling attemptPlanNewRaid");
 					}
 					attemptPlanNewRaid();
@@ -6357,7 +6357,7 @@ public class Building {
 		if (((worldObj.getWorldTime()%24000) > 23500) && (raidTarget!=null)) {
 			if (!updateRaidPerformed) {
 
-				if (MLN.Diplomacy>=MLN.DEBUG) {
+				if (MLN.LogDiplomacy>=MLN.DEBUG) {
 					MLN.debug(this, "Calling updateRaid for raid: "+raidPlanningStart+"/"+raidStart+"/"+worldObj.getWorldTime());
 				}
 
@@ -6723,7 +6723,7 @@ public class Building {
 			final int maxMerchants=stalls.size();
 
 			if ((vrecords.size() < maxMerchants) && MillCommonUtilities.chanceOn(2)) {
-				if (MLN.Merchant >= MLN.MAJOR) {
+				if (MLN.LogMerchant >= MLN.MAJOR) {
 					MLN.major(this, "Attempting to create a foreign merchant.");
 				}
 
@@ -6768,7 +6768,7 @@ public class Building {
 					storeGoods(iv.id(),iv.meta,merchant.vtype.foreignMerchantStock.get(iv));
 				}
 
-				if (MLN.Merchant >= MLN.MAJOR) {
+				if (MLN.LogMerchant >= MLN.MAJOR) {
 					MLN.major(this, "Created foreign merchant: "
 							+ merchantRecord);
 				}
@@ -6925,7 +6925,7 @@ public class Building {
 		//raid has been planned long enough, time for action
 		if ((worldObj.getWorldTime()>(raidPlanningStart+24000)) && (raidStart==0)) {
 
-			if (MLN.Diplomacy>=MLN.MINOR) {
+			if (MLN.LogDiplomacy>=MLN.MINOR) {
 				MLN.minor(this, "Starting raid on "+mw.getBuilding(raidTarget));
 			}
 
@@ -7432,7 +7432,7 @@ public class Building {
 			if (v == null) {
 				MLN.error(this, "Null value in villager list");
 			}
-			if (v.isDead && (MLN.TileEntityBuilding >= MLN.MINOR)) {
+			if (v.isDead && (MLN.LogTileEntityBuilding >= MLN.MINOR)) {
 				MLN.minor(this, "Villager " + v + " is dead.");
 			}
 
@@ -7836,7 +7836,7 @@ public class Building {
 
 			if (bblocksChanged) {
 				writeBblocks();
-				if (MLN.Hybernation >= MLN.MAJOR) {
+				if (MLN.LogHybernation >= MLN.MAJOR) {
 					MLN.major(this, "Saved bblocks.");
 				}
 			}
@@ -7848,7 +7848,7 @@ public class Building {
 						final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 						project.location.write(nbttagcompound1, "location","buildingProjects");
 						nbttaglist.appendTag(nbttagcompound1);
-						if (MLN.Hybernation >= MLN.MAJOR) {
+						if (MLN.LogHybernation >= MLN.MAJOR) {
 							MLN.major(this, "Writing building location: "
 									+ project.location + " (level: "
 									+ project.location.level + ", variation: "
@@ -7861,7 +7861,7 @@ public class Building {
 
 			if (buildingGoal != null) {
 				nbttagcompound.setString("buildingGoal", buildingGoal);
-				if (MLN.Hybernation >= MLN.MAJOR) {
+				if (MLN.LogHybernation >= MLN.MAJOR) {
 					MLN.major(this, "Writing building goal: " + buildingGoal);
 				}
 			}
@@ -7876,7 +7876,7 @@ public class Building {
 			if (buildingGoalLocation != null) {
 				buildingGoalLocation.write(nbttagcompound,
 						"buildingGoalLocation","buildingGoalLocation");
-				if (MLN.Hybernation >= MLN.MAJOR) {
+				if (MLN.LogHybernation >= MLN.MAJOR) {
 					MLN.major(this, "Writing buildingGoalLocation: "
 							+ buildingGoalLocation);
 				}
@@ -7885,7 +7885,7 @@ public class Building {
 			if (buildingLocationIP != null) {
 				buildingLocationIP.write(nbttagcompound, "buildingLocationIP","buildingLocationIP");
 
-				if (MLN.Hybernation >= MLN.MAJOR) {
+				if (MLN.LogHybernation >= MLN.MAJOR) {
 					MLN.major(this, "Writing buildingLocationIP: "
 							+ buildingLocationIP);
 				}
@@ -7896,7 +7896,7 @@ public class Building {
 				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				vr.write(nbttagcompound1, "vr");
 				nbttaglist.appendTag(nbttagcompound1);
-				if (MLN.Hybernation >= MLN.DEBUG) {
+				if (MLN.LogHybernation >= MLN.DEBUG) {
 					MLN.debug(this, "Writing VR: " + vr);
 				}
 			}
@@ -7987,7 +7987,7 @@ public class Building {
 			}
 			nbttagcompound.setTag("exportedGoods", nbttaglist);
 
-			if (MLN.TileEntityBuilding >= MLN.DEBUG) {
+			if (MLN.LogTileEntityBuilding >= MLN.DEBUG) {
 				MLN.debug(this, "Saving building. Location: " + location
 						+ ", pos: " + getPos());
 			}

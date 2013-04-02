@@ -870,7 +870,7 @@ public class TileEntityPanel extends TileEntitySign {
 
 			MillClientUtilities.updatePanel(pos, lines, panelType, buildingPos, villager_id);
 
-			if (MLN.Network>=MLN.DEBUG) {
+			if (MLN.LogNetwork>=MLN.DEBUG) {
 				MLN.debug(null, "Receiving panel packet.");
 			}
 

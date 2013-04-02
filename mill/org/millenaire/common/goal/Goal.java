@@ -352,14 +352,14 @@ public abstract class Goal {
 				villager.getPathDestPoint().getiX(), villager.getTownHall().getAltitude(villager.getPathDestPoint().getiX(),villager.getPathDestPoint().getiZ()), villager.getPathDestPoint().getiZ());
 
 		if (jumpTo != null) {
-			if ((MLN.Pathing>=MLN.MINOR) && villager.extraLog) {
+			if ((MLN.LogPathing>=MLN.MINOR) && villager.extraLog) {
 				MLN.minor(this, "Dest unreachable. Jumping "+villager+" from "+villager.getPos()+" to "+jumpTo[0]+"/"+jumpTo[1]+"/"+jumpTo[2]);
 			}
 			villager.setPosition(jumpTo[0]+0.5,jumpTo[1]+0.5,jumpTo[2]+0.5);
 			return true;
 
 		} else {
-			if ((MLN.Pathing>=MLN.MINOR) && villager.extraLog) {
+			if ((MLN.LogPathing>=MLN.MINOR) && villager.extraLog) {
 				MLN.minor(this,"Dest unreachable. Couldn't jump "+villager+" from "+villager.getPos()+" to "+villager.getPathDestPoint());
 			}
 			return false;

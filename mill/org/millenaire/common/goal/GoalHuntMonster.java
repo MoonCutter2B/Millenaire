@@ -71,7 +71,7 @@ public class GoalHuntMonster extends Goal {
 		for (final Entity ent : mobs) {
 			if (!ent.isDead && (ent instanceof EntityMob) && villager.canEntityBeSeen(ent)) {
 				villager.setEntityToAttack(ent);
-				if (MLN.GeneralAI>=MLN.MAJOR) {
+				if (MLN.LogGeneralAI>=MLN.MAJOR) {
 					MLN.major(this,"Attacking entity: "+ent);
 				}
 			}

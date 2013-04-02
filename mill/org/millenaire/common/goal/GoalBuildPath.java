@@ -42,7 +42,7 @@ public class GoalBuildPath extends Goal {
 		if (bblock==null)
 			return true;
 
-		if (MLN.VillagePaths>=MLN.DEBUG)
+		if (MLN.LogVillagePaths>=MLN.DEBUG)
 			MLN.debug(villager, "Building path block: "+bblock);
 
 		bblock.pathBuild(villager.getTownHall());
@@ -89,7 +89,8 @@ public class GoalBuildPath extends Goal {
 
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
-		return villager.getTownHall().getCurrentPathBuildingBlock()!=null;
+		return MLN.BuildVillagePaths && 
+				villager.getTownHall().getCurrentPathBuildingBlock()!=null;
 	}
 
 	@Override
