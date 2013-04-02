@@ -96,7 +96,7 @@ serverPacketHandlerSpec = @SidedPacketHandler(channels = {ServerReceiver.PACKET_
 connectionHandler = ConnectionHandler.class,
 versionBounds = Mill.versionBound)
 public class Mill
-{
+{ 
 	static class CreativeTabMill extends CreativeTabs {
 
 		public CreativeTabMill(String par2Str) {
