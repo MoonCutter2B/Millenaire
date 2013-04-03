@@ -33,6 +33,7 @@ ui.noneininventory=Vous n'en avez pas dans votre inventaire
 ui.selling=Vente
 ui.buying=Achat
 ui.buybuilding=Acheter <0> (<1>)
+ui.buybonusbuilding=Demander le bonus: <0>
 ui.sellercoming=<0>: J'arrive tout de suite, $name!
 ui.tradecomplete=<0>: J'espère que vous êtes content de vos achats. Bonne journée!
 ui.sellerboycott=<0>: Jamais plus nous ne commercerons avec vous, bandit!
@@ -48,6 +49,7 @@ ui.alreadybuilt=déjà construit
 ui.alreadyrequested=déjà commandé
 ui.notavailableyet=par encore disponible
 ui.available=disponible
+ui.bonusavailable=disponible (cadeau)
 ui.youaremissing=il vous manque: <0>
 ui.scrollsnoreputation=Votre réputation n'est pas suffisant pour l'achat du parchemin du village.
 ui.scrollsnotenoughmoney=Il vous manque <0> deniers pour l'achat du parchemin du village.
@@ -978,4 +980,11 @@ config.generate_goods_list.desc=Générer la liste des objets connus par Millén
 
 config.valuetrue=Oui
 config.valuefalse=Non
+
+config.page.bonus=Bonus contributeurs
+config.page.bonus.desc=Bonus pour les joueurs ayant contribués à Millénaire (traductions, bâtiments, dialogues, textures, wiki contributions ect.) ou fait une donation: une petite maison gratuite disponible auprès du chef du village.
+
+config.bonus_code.label=Code bonus
+config.bonus_code.desc=Code pour activer le bonus. Récupéré automatiquement sur internet si connexion possible.
+
 
