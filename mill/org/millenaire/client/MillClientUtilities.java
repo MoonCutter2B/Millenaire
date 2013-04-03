@@ -439,7 +439,7 @@ public class MillClientUtilities {
 
 		int radius=0;
 		
-		if (Mill.serverWorlds.isEmpty()) {
+		if (Mill.proxy.isTrueClient()) {
 			radius=MLN.VillagersSentenceInChatDistanceClient;
 		} else {
 			radius=MLN.VillagersSentenceInChatDistanceSP;

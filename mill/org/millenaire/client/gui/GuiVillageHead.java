@@ -205,7 +205,7 @@ public class GuiVillageHead extends GuiText {
 						text.add(new Line(false));
 						text.add(new Line());
 					}
-				} else if (plan.isgift) {
+				} else if (plan.isgift && MLN.bonusEnabled && !Mill.proxy.isTrueClient()) {
 					String status="";
 
 					boolean buyButton=false;
