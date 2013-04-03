@@ -8,6 +8,9 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ import org.millenaire.common.Quest.QuestStep;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingPlanSet;
 import org.millenaire.common.core.MillCommonUtilities;
+import org.millenaire.common.core.MillCommonUtilities.BonusThread;
 import org.millenaire.common.core.MillCommonUtilities.PrefixExtFileFilter;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.goal.Goal;
@@ -486,6 +490,7 @@ public class MLN {
 
 	public static boolean logPerformed=false;
 
+	public static final char COLOUR = '\247';
 	public static final char BLACK = '0';
 	public static final char DARKBLUE = '1';
 	public static final char DARKGREEN = '2';
@@ -622,6 +627,9 @@ public class MLN {
 	public static Language serverFallbackLanguage=null;
 	public static HashMap<String,Language> loadedLanguages=new HashMap<String,Language>();
 
+	public static String bonusCode=null;
+	public static boolean bonusEnabled=false;
+
 	public static HashMap<String,MillConfig> configs=new HashMap<String,MillConfig>();
 
 	public static Vector<String> configPageTitles=new Vector<String>();
@@ -679,15 +687,15 @@ public class MLN {
 			configPages.add(configPage);
 			configPageTitles.add("config.page.villagebehaviour");
 			configPageDesc.add(null);
-			
+
 			configPage=new Vector<MillConfig>();
-			
+
 			configPage.add(new MillConfig(MLN.class.getField("generateTranslationGap"),"generate_translation_gap"));
 			configPage.add(new MillConfig(MLN.class.getField("generateColourSheet"),"generate_colour_chart"));
 			configPage.add(new MillConfig(MLN.class.getField("generateBuildingRes"),"generate_building_res"));
 			configPage.add(new MillConfig(MLN.class.getField("generateGoodsList"),"generate_goods_list"));
-			
-			
+
+
 			configPage.add(new MillConfig(MLN.class.getField("LogTileEntityBuilding"),"LogTileEntityBuilding",MillConfig.LOG).setDisplayDev(true));
 			configPage.add(new MillConfig(MLN.class.getField("LogWorldGeneration"),"LogWorldGeneration",MillConfig.LOG).setDisplayDev(true));
 			configPage.add(new MillConfig(MLN.class.getField("LogFarmerAI"),"LogFarmerAI",MillConfig.LOG).setDisplayDev(true));
@@ -717,7 +725,7 @@ public class MLN {
 			configPage.add(new MillConfig(MLN.class.getField("LogMerchant"),"LogMerchant",MillConfig.LOG).setDisplayDev(true));
 			configPage.add(new MillConfig(MLN.class.getField("LogCulture"),"LogCulture",MillConfig.LOG).setDisplayDev(true));
 			configPage.add(new MillConfig(MLN.class.getField("LogTranslation"),"LogTranslation",MillConfig.LOG).setDisplayDev(true));
-			
+
 			configPage.add(new MillConfig(MLN.class.getField("blockBuildingId"),"block_building_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
 			configPage.add(new MillConfig(MLN.class.getField("blockPanelId"),"block_panel_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
 			configPage.add(new MillConfig(MLN.class.getField("blockWoodId"),"block_wood_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
@@ -731,11 +739,19 @@ public class MLN {
 			configPage.add(new MillConfig(MLN.class.getField("blockPathId"),"block_path_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
 			configPage.add(new MillConfig(MLN.class.getField("blockPathSlabId"),"block_path_slab_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
 			configPage.add(new MillConfig(MLN.class.getField("itemRangeStart"),"item_range_start",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			
-			
+
+
 			configPages.add(configPage);
 			configPageTitles.add("config.page.devtools");
 			configPageDesc.add(null);
+
+			configPage=new Vector<MillConfig>();
+
+			configPage.add(new MillConfig(MLN.class.getField("bonusCode"),"bonus_code",MillConfig.BONUS_KEY).setMaxStringLength(4));
+
+			configPages.add(configPage);
+			configPageTitles.add("config.page.bonus");
+			configPageDesc.add("config.page.bonus.desc");
 
 
 			for (Vector<MillConfig> aConfigPage : configPages) {
@@ -750,6 +766,58 @@ public class MLN {
 		}
 	}
 
+	private static String md5(String input) {
+		String result = input;
+		if(input != null) {
+			MessageDigest md;
+			try {
+				md = MessageDigest.getInstance("MD5");
+				md.update(input.getBytes());
+				BigInteger hash = new BigInteger(1, md.digest());
+				result = hash.toString(16);
+				while(result.length() < 32) { //40 for SHA-1
+					result = "0" + result;
+				}
+			} catch (NoSuchAlgorithmException e) {
+				MLN.printException("Exception in md5():", e);
+			} //or "SHA-1"
+		}
+		return result;
+	}
+
+	public static String calculateLoginMD5(String login) {
+		return md5(login+login.substring(1)).substring(0, 4);
+	}
+
+	public static void checkBonusCode(boolean manual) {
+		
+		
+		if (Mill.proxy.getSinglePlayerName()==null) {
+			bonusEnabled=false;
+			return;
+		}
+
+		String login=Mill.proxy.getSinglePlayerName();
+
+		if (bonusCode!=null) {
+			String calculatedCode=calculateLoginMD5(login);
+
+			bonusEnabled=(calculatedCode.equals(bonusCode));
+		}
+
+		if (!bonusEnabled && !manual) {
+			(new BonusThread(login)).start();
+		}
+		
+		if (manual && bonusCode!=null && bonusCode.length()==4) {
+			if (bonusEnabled) {
+				Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKGREEN,MLN.string("config.validbonuscode"));
+			} else {
+				Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKRED,MLN.string("config.invalidbonuscode"));
+			}
+		}
+
+	}
 
 	private static void applyLanguage() {
 		nameItems();
@@ -968,6 +1036,8 @@ public class MLN {
 		} else {
 			writeText("Starting new session. Mods: "+mods);
 		}
+
+		checkBonusCode(false);
 	}
 
 	public static Vector<File> getLanguageDirs() {
@@ -1096,7 +1166,7 @@ public class MLN {
 				MLN.printException(e);
 			}
 		}
-		
+
 		if (MLN.DEV)
 			writeBaseConfigFile();
 	}
@@ -1333,22 +1403,22 @@ public class MLN {
 			BufferedWriter writer=MillCommonUtilities.getWriter(file);
 
 			Language main=mainLanguage;
-			
+
 			Language fr=MLN.loadedLanguages.get("fr");
 			Language en=MLN.loadedLanguages.get("en");
 
 			for (int i=0;i<MLN.configPages.size();i++) {
-								
+
 				mainLanguage=fr;
 				String frTitle=MLN.string(MLN.configPageTitles.get(i));
 				mainLanguage=en;
 				String enTitle=MLN.string(MLN.configPageTitles.get(i));
-				
-				
+
+
 				writer.write("//--------------------------------------------------------------------------------------------"+EOL);
 				writer.write("//       "+frTitle+"    -    "+enTitle+EOL);
 				writer.write("//--------------------------------------------------------------------------------------------"+EOL+EOL);
-				
+
 				for (int j=0;j<MLN.configPages.get(i).size();j++) {
 
 					MillConfig config=MLN.configPages.get(i).get(j);
@@ -1361,9 +1431,9 @@ public class MLN {
 
 				}
 			}
-			
+
 			mainLanguage=main;
-		
+
 			writer.close();
 		} catch (Exception e) {
 			MLN.printException("Exception in writeBaseConfigFile:", e);
@@ -1391,22 +1461,22 @@ public class MLN {
 
 				if ((line.trim().length() > 0) && !line.startsWith("//")) {
 					final String[] temp=line.split("=");
-						final String key=temp[0].trim().toLowerCase();
-						String value="";
-						
-						if (temp.length>1)
-							value=temp[1];
+					final String key=temp[0].trim().toLowerCase();
+					String value="";
 
-						if (configs.containsKey(key)) {
+					if (temp.length>1)
+						value=temp[1];
 
-							if (configs.get(key).compareValuesFromString(value)) {//no change in setting, nothing to do
-								configsWritten.add(configs.get(key));
-							} else {
-								toWrite.add(key+"="+configs.get(key).getSaveValue());
-								configsWritten.add(configs.get(key));
-								handled=true;
-							}
+					if (configs.containsKey(key)) {
+
+						if (configs.get(key).compareValuesFromString(value)) {//no change in setting, nothing to do
+							configsWritten.add(configs.get(key));
+						} else {
+							toWrite.add(key+"="+configs.get(key).getSaveValue());
+							configsWritten.add(configs.get(key));
+							handled=true;
 						}
+					}
 				}
 
 				if (!handled)
@@ -1446,7 +1516,7 @@ public class MLN {
 
 		try {
 			final BufferedReader reader = MillCommonUtilities.getReader(file);
-			
+
 			String line;
 
 			while ((line=reader.readLine()) != null) {
@@ -1471,7 +1541,7 @@ public class MLN {
 								console=Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("logfile")) {
 								logfile=Boolean.parseBoolean(value);
-							/**
+								/**
 							} else if (key.equalsIgnoreCase("village_list_key")) {
 								final int keyCode=Mill.proxy.loadKeySetting(value.toUpperCase());
 								if (keyCode>0) {
@@ -1494,18 +1564,18 @@ public class MLN {
 								//	languageLearning=Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("stop_default_villages")) {
 								stopDefaultVillages=Boolean.parseBoolean(value);
-						//	} else if (key.equalsIgnoreCase("load_all_languages")) {
-						//		loadAllLanguages=Boolean.parseBoolean(value);
+								//	} else if (key.equalsIgnoreCase("load_all_languages")) {
+								//		loadAllLanguages=Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("se_indicators")) {
 								seIndicators=Boolean.parseBoolean(value);
-						//	} else if (key.equalsIgnoreCase("generate_colour_chart")) {
-						//		generateColourSheet=Boolean.parseBoolean(value);
-						//	} else if (key.equalsIgnoreCase("generate_building_res")) {
-						//		generateBuildingRes=Boolean.parseBoolean(value);
-						//	} else if (key.equalsIgnoreCase("generate_translation_gap")) {
-						//		generateTranslationGap=Boolean.parseBoolean(value);
-						//	} else if (key.equalsIgnoreCase("generate_goods_list")) {
-						//		generateGoodsList=Boolean.parseBoolean(value);
+								//	} else if (key.equalsIgnoreCase("generate_colour_chart")) {
+								//		generateColourSheet=Boolean.parseBoolean(value);
+								//	} else if (key.equalsIgnoreCase("generate_building_res")) {
+								//		generateBuildingRes=Boolean.parseBoolean(value);
+								//	} else if (key.equalsIgnoreCase("generate_translation_gap")) {
+								//		generateTranslationGap=Boolean.parseBoolean(value);
+								//	} else if (key.equalsIgnoreCase("generate_goods_list")) {
+								//		generateGoodsList=Boolean.parseBoolean(value);
 								//} else if (key.equalsIgnoreCase("generate_villages")) {
 								//	generateVillagesDefault=Boolean.parseBoolean(value);
 								//	generateVillages=generateVillagesDefault;
@@ -1517,8 +1587,8 @@ public class MLN {
 								//	displayNames=Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("language")) {
 								main_language=value.toLowerCase();
-							//} else if (key.equalsIgnoreCase("fallback_language")) {
-							//	fallback_language=value.toLowerCase();
+								//} else if (key.equalsIgnoreCase("fallback_language")) {
+								//	fallback_language=value.toLowerCase();
 							} else if (key.equalsIgnoreCase("forbidden_blocks")) {
 								for (final String id : value.split(",")) {
 									if (Integer.parseInt(id)>0) {
@@ -1680,7 +1750,7 @@ public class MLN {
 			return 3;
 		return 0;
 	}
-	
+
 	public static String getLogLevel(int level) {
 		if (level==1)
 			return "major";

@@ -60,3 +60,5 @@ woods_shrine_A0=Sanctuaire des bois
 lonemine_A0=Mine japonaise isolée
 banditfort_A0=Fort de bandits
 
+gifthouse_a0=Maison bonus
+

@@ -58,3 +58,5 @@ groveoakbyzantine_a0=Bosquet de chênes
 
 lonecastle_a_training_a0=Terrain d'entrainement
 lonecastle_a_praying_a0=Salle de prières
+
+gifthouse_a0=Maison bonus

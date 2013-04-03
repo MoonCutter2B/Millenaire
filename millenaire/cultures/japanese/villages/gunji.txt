@@ -31,6 +31,7 @@ player:japanesehut
 player:japanesehouse
 player:japanesehousemedium
 player:japanesehouselarge
+player:gifthouse
 
 //to be built in priority
 core:japanesepaddy

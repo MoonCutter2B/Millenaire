@@ -3,6 +3,7 @@ startup.loadproblem=Une erreur est survenue lors du chargement de <0>.
 startup.checkload=Vérifiez que le dossier cultures est bien dans le dossier millenaire dans le dossier minecraft.
 startup.millenaireloaded=<0> est chargé. Explorez et appuyez sur '<1>' pour trouver les villages.
 startup.radiuswarning=ATTENTION: Un rayon aussi important pour les villages n'est pas recommandé. Cela risque de diminuer les performances.
+startup.bonus=Contenu bonus activé.
 
 command.nogenerate=<0> ne générera plus de nouveaux villages dans ce monde.
 command.willgenerate=<0> génère à nouveau des nouveaux villages pour ce monde.
@@ -33,6 +34,7 @@ ui.noneininventory=Vous n'en avez pas dans votre inventaire
 ui.selling=Vente
 ui.buying=Achat
 ui.buybuilding=Acheter <0> (<1>)
+ui.buybonusbuilding=Demander le bonus: <0>
 ui.sellercoming=<0>: J'arrive tout de suite, $name!
 ui.tradecomplete=<0>: J'espère que vous êtes content de vos achats. Bonne journée!
 ui.sellerboycott=<0>: Jamais plus nous ne commercerons avec vous, bandit!
@@ -48,6 +50,7 @@ ui.alreadybuilt=déjà construit
 ui.alreadyrequested=déjà commandé
 ui.notavailableyet=par encore disponible
 ui.available=disponible
+ui.bonusavailable=disponible (cadeau)
 ui.youaremissing=il vous manque: <0>
 ui.scrollsnoreputation=Votre réputation n'est pas suffisant pour l'achat du parchemin du village.
 ui.scrollsnotenoughmoney=Il vous manque <0> deniers pour l'achat du parchemin du village.
@@ -978,4 +981,15 @@ config.generate_goods_list.desc=Générer la liste des objets connus par Millén
 
 config.valuetrue=Oui
 config.valuefalse=Non
+
+config.page.bonus=Bonus contributeurs
+config.page.bonus.desc=Bonus pour les joueurs ayant contribués à Millénaire (traductions, bâtiments, dialogues, textures, wiki contributions ect.) ou fait une donation: une petite maison gratuite disponible auprès du chef du village.
+
+config.bonus_code.label=Code bonus
+config.bonus_code.desc=Code pour activer le bonus. Récupéré automatiquement sur internet si connexion possible.
+
+config.validbonuscode=Code valide! Le bonus est activé.
+config.invalidbonuscode=Code non valide. Veuillez le vérifier.
+
+
 

@@ -1,3 +1,8 @@
 Translation comparison between en and fr
 
-Traduction completness: 100%
+List of gaps found in strings.txt: 
+
+Key missing in the strings.txt file: config.invalidbonuscode
+Key missing in the strings.txt file: config.validbonuscode
+
+Traduction completness: 99%

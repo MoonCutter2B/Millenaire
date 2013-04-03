@@ -3,6 +3,7 @@ startup.loadproblem=There was an error when trying to load <0>.
 startup.checkload=Check that the cultures directory is in the millenaire directory in the minecraft directory.
 startup.millenaireloaded=<0> is loaded. Explore and press '<1>' to locate villages.
 startup.radiuswarning=WARNING: Setting the village radius so high should not be needed and will cause much increased lag. Values above 70 are not recommended.
+startup.bonus=Bonus content enabled.
 
 command.nogenerate=<0> will no longer generate villages on new chunks in this world.
 command.willgenerate=<0>  will now generate villages on new chunks in this world.
@@ -33,6 +34,7 @@ ui.noneininventory=You have none in your inventory.
 ui.selling=Selling
 ui.buying=Buying
 ui.buybuilding=Buy <0> (<1>)
+ui.buybonusbuilding=Request bonus: <0>
 ui.sellercoming=<0>: I'll be right there, $name!
 ui.tradecomplete=<0>: I hope you liked trading with us! Have a good day.
 ui.sellerboycott=<0>: Never again will we trade with you, outlaw!
@@ -48,6 +50,7 @@ ui.alreadybuilt=already built
 ui.alreadyrequested=already requested
 ui.notavailableyet=not available yet
 ui.available=available
+ui.bonusavailable=available (gift)
 ui.youaremissing=you are missing: <0>
 ui.scrollsnoreputation=Your reputation is not sufficient to purchase village scrolls.
 ui.scrollsnotenoughmoney=You are missing <0> denier(s) for a village scroll.
@@ -981,4 +984,13 @@ config.generate_goods_list.desc=Generate the list of items know to Millénaire.
 
 config.valuetrue=Oui
 config.valuefalse=Non
+
+config.page.bonus=Contributor Bonus
+config.page.bonus.desc=Bonus for people who worked on Millénaire (translations, building plans, dialogues, textures, contributions to the wiki ect.) or donated: a free small house available from the Village Chief.
+
+config.bonus_code.label=Bonus Code
+config.bonus_code.desc=Code to enable the bonus. Fetched from internet automatically if a connection is possible.
+
+config.validbonuscode=Valid code! Bonus activated.
+config.invalidbonuscode=Invalid code. Please check.
 

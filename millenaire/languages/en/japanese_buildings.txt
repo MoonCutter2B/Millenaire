@@ -59,3 +59,5 @@ kufun_tomb_B0=Kufun Tomb
 woods_shrine_A0=Wood Shrine
 lonemine_A0=Lone Japanese Mine
 banditfort_A0=Bandit Fort
+
+gifthouse_a0=Gift House

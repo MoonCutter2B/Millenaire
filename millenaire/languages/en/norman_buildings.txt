@@ -66,3 +66,5 @@ loneinn_A0=Lone Inn
 lonemill_A0=Lone Watermill
 feloncastle_A0=
 pantheon_A0=
+
+gifthouse_a0=Gift House

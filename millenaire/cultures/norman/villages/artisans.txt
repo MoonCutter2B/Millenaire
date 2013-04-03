@@ -37,6 +37,7 @@ player:playerlargefield
 player:playerlargehouse
 player:playerhugefield
 player:playerestate
+player:gifthouse
 
 //to be built in priority
 core:forge

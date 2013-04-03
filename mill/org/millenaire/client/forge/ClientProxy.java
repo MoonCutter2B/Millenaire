@@ -137,6 +137,11 @@ public class ClientProxy extends CommonProxy
 	public EntityPlayer getTheSinglePlayer() {
 		return ModLoader.getMinecraftInstance().thePlayer;
 	}
+	
+	@Override
+	public String getSinglePlayerName() {
+		return Minecraft.getMinecraft().session.username;
+	}
 
 	@Override
 	public void handleClientGameUpdate() {

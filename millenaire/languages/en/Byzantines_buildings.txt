@@ -58,3 +58,5 @@ groveoakbyzantine_a0=Oak Grove
 
 lonecastle_a_training_a0=Training Area
 lonecastle_a_praying_a0=Chapel
+
+gifthouse_a0=Gift House

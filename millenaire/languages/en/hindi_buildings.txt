@@ -46,3 +46,5 @@ sandblasted_A0=Deserted Trading Post
 indiandesertedfarm_A0=Destroyed Indian Farm
 loneshrine_A0=Lone Hindu Shrine
 sadhutree_A0=Sadhu's Tree
+
+gifthouse_a0=Gift House

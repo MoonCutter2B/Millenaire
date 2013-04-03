@@ -34,6 +34,7 @@ start:architectbyzantine
 start:fisherbyzantine
 
 player:villa urbana
+player:gifthouse
 
 //to be built in priority
 core:sheepbyzantine

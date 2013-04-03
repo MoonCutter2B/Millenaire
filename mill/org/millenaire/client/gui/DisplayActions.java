@@ -80,7 +80,7 @@ public class DisplayActions {
 
 
 	public static void displayStartupOrError(EntityPlayer player,boolean error) {
-		MillClientUtilities.displayStartupError(error);
+		MillClientUtilities.displayStartupText(error);
 	}
 
 

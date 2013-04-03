@@ -21,41 +21,41 @@ Bois (tous): 254
 Briques: 120
 
 emporikos resource use: 
-Bois de chêne: 920
-Laine blanche: 81
+Bois de chêne: 949
+Laine blanche: 84
 Roche: 3833
-Pierres: 308
-Bois de bouleau: 511
+Pierres: 324
+Bois de bouleau: 529
 Tuiles byzantines: 672
 Grès: 1843
 Verre: 58
 Gravier: 22
-Bois (tous): 886
+Bois (tous): 909
 Briques: 439
 
 military resource use: 
-Bois de chêne: 1284
+Bois de chêne: 1313
 Roche: 6280
-Laine blanche: 105
+Laine blanche: 108
 Tuiles byzantines: 501
-Pierres: 2850
-Bois de bouleau: 438
+Pierres: 2866
+Bois de bouleau: 456
 Grès: 1579
 Verre: 53
-Bois (tous): 905
+Bois (tous): 928
 Briques: 465
 
 ortodox resource use: 
-Bois de chêne: 777
+Bois de chêne: 806
 Roche: 5173
-Laine blanche: 123
+Laine blanche: 126
 Tuiles byzantines: 434
-Pierres: 552
-Bois de bouleau: 470
+Pierres: 568
+Bois de bouleau: 488
 Grès: 1769
 Verre: 55
 Bibliothèque: 12
-Bois (tous): 829
+Bois (tous): 852
 Briques: 855
 
 
@@ -103,15 +103,15 @@ Bois (tous): 31
 
 hindi: 
 indian_agricole resource use: 
-Bois de chêne: 534
+Bois de chêne: 539
 Laine blanche: 85
 Roche: 682
 Statue Hindoue: 3
-Pierres: 190
+Pierres: 206
 Grès: 1881
 Brique cuite: 5798
-Brique de terre: 5337
-Bois (tous): 754
+Brique de terre: 5628
+Bois (tous): 775
 
 indian_agricole_hamlet resource use: 
 Bois de chêne: 534
@@ -135,15 +135,15 @@ Brique de terre: 804
 Bois (tous): 269
 
 indian_fort resource use: 
-Bois de chêne: 581
+Bois de chêne: 586
 Laine blanche: 85
 Roche: 1031
 Statue Hindoue: 3
-Pierres: 196
+Pierres: 212
 Grès: 3190
 Brique cuite: 4874
-Brique de terre: 6255
-Bois (tous): 849
+Brique de terre: 6546
+Bois (tous): 870
 
 indian_fort_hamlet resource use: 
 Bois de chêne: 512
@@ -155,14 +155,14 @@ Brique de terre: 5168
 Bois (tous): 753
 
 indian_palace resource use: 
-Bois de chêne: 254
+Bois de chêne: 259
 Roche: 648
 Statue Hindoue: 2
-Pierres: 202
+Pierres: 218
 Grès: 5352
 Brique cuite: 3977
-Brique de terre: 2407
-Bois (tous): 669
+Brique de terre: 2698
+Bois (tous): 690
 
 
 adivasifarm resource use: 
@@ -215,21 +215,21 @@ gunji resource use:
 Pierre taillées craquelées: 26
 Laine blanche: 279
 Roche: 9740
-Bois de sapin: 2873
-Pierres: 1362
+Bois de sapin: 2916
+Pierres: 1378
 Paroi de papier: 682
 Sable: 232
 Hautes herbes: 168
 Bibliothèque: 12
 Gravier: 2724
 Colombages à croix: 63
-Bois de chêne: 4700
+Bois de chêne: 4709
 Colombages: 3102
 Lingot d'or: 54
 Fougère: 117
 Lingot de fer: 36
-Chaume: 6962
-Bois (tous): 1421
+Chaume: 7125
+Bois (tous): 1435
 
 japanese_controlled resource use: 
 Bois de chêne: 992
@@ -247,40 +247,40 @@ Bois (tous): 271
 nogyo resource use: 
 Laine blanche: 248
 Roche: 9411
-Bois de sapin: 3299
-Pierres: 1597
+Bois de sapin: 3342
+Pierres: 1613
 Paroi de papier: 687
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
 Gravier: 2949
 Colombages à croix: 63
-Bois de chêne: 5088
+Bois de chêne: 5097
 Colombages: 3274
 Fougère: 117
 Lingot de fer: 18
-Chaume: 8556
-Bois (tous): 1619
+Chaume: 8719
+Bois (tous): 1633
 
 seiji resource use: 
 Pierre taillées craquelées: 26
 Laine blanche: 303
 Roche: 11500
-Bois de sapin: 3964
-Pierres: 1749
+Bois de sapin: 4007
+Pierres: 1765
 Paroi de papier: 849
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
 Gravier: 3451
 Colombages à croix: 63
-Bois de chêne: 6318
+Bois de chêne: 6327
 Lingot d'or: 54
 Colombages: 3870
 Fougère: 117
 Lingot de fer: 108
-Chaume: 8378
-Bois (tous): 1837
+Chaume: 8541
+Bois (tous): 1851
 
 
 bandit_cave resource use: 
@@ -357,13 +357,13 @@ agriculture resource use:
 Bois de chêne: 562
 Laine blanche: 27
 Sculpture Maya: 8
-Roche: 10417
-Pierres: 14727
+Roche: 10574
+Pierres: 14924
 Bois tropical: 224
 Grès: 13
 Bibliothèque: 48
 Décoration en or: 147
-Bois (tous): 962
+Bois (tous): 979
 
 mayan_controlled resource use: 
 Bois de chêne: 73
@@ -378,25 +378,25 @@ military resource use:
 Bois de chêne: 502
 Laine blanche: 21
 Sculpture Maya: 3
-Roche: 10316
-Pierres: 15550
+Roche: 10473
+Pierres: 15747
 Bois tropical: 82
 Grès: 5
 Bibliothèque: 48
 Décoration en or: 144
-Bois (tous): 1018
+Bois (tous): 1035
 
 religious resource use: 
 Bois de chêne: 471
 Laine blanche: 21
 Sculpture Maya: 6
-Roche: 10506
-Pierres: 14259
+Roche: 10663
+Pierres: 14456
 Bois tropical: 124
 Grès: 135
 Bibliothèque: 48
 Décoration en or: 157
-Bois (tous): 922
+Bois (tous): 939
 
 
 lonemayancave resource use: 
@@ -474,44 +474,44 @@ Bois (tous): 11
 
 norman: 
 agricole resource use: 
-Bois de chêne: 2837
-Laine blanche: 178
+Bois de chêne: 2905
+Laine blanche: 181
 Roche: 4589
-Pierres: 5206
+Pierres: 5253
 Verre: 2
 Colombages: 1608
 Lingot de fer: 25
 Verre: 297
 Bibliothèque: 6
 Colombages à croix: 655
-Bois (tous): 1201
+Bois (tous): 1215
 
 artisans resource use: 
-Bois de chêne: 2163
-Laine blanche: 152
+Bois de chêne: 2231
+Laine blanche: 155
 Roche: 5464
-Pierres: 5462
+Pierres: 5509
 Verre: 2
 Colombages: 1102
 Lingot de fer: 61
 Verre: 301
 Bibliothèque: 6
 Colombages à croix: 429
-Bois (tous): 1008
+Bois (tous): 1022
 
 bourg_autonome resource use: 
-Bois de chêne: 2457
+Bois de chêne: 2525
 Tapisserie normande: 5
 Roche: 4881
-Laine blanche: 193
-Pierres: 8425
+Laine blanche: 196
+Pierres: 8472
 Verre: 2
 Colombages: 1304
 Lingot de fer: 61
 Verre: 315
 Bibliothèque: 6
 Colombages à croix: 518
-Bois (tous): 1130
+Bois (tous): 1144
 
 controlled resource use: 
 Bois de chêne: 472
@@ -525,29 +525,29 @@ Colombages à croix: 76
 Bois (tous): 192
 
 ecclesiastique resource use: 
-Bois de chêne: 2373
-Laine blanche: 163
+Bois de chêne: 2441
+Laine blanche: 166
 Roche: 4782
-Pierres: 5334
+Pierres: 5381
 Colombages: 1271
 Verre: 268
 Bibliothèque: 6
 Colombages à croix: 537
-Bois (tous): 1075
+Bois (tous): 1089
 
 grosbourg resource use: 
-Bois de chêne: 1306
+Bois de chêne: 1374
 Tapisserie normande: 5
 Roche: 4586
-Laine blanche: 113
-Pierres: 7218
+Laine blanche: 116
+Pierres: 7265
 Verre: 2
 Colombages: 611
 Lingot de fer: 61
 Verre: 240
 Bibliothèque: 6
 Colombages à croix: 212
-Bois (tous): 717
+Bois (tous): 731
 
 hameau_abbatiale resource use: 
 Bois de chêne: 1175
@@ -580,18 +580,18 @@ Colombages à croix: 162
 Bois (tous): 352
 
 militaire resource use: 
-Bois de chêne: 2025
+Bois de chêne: 2093
 Tapisserie normande: 5
 Roche: 4180
-Laine blanche: 140
-Pierres: 7038
+Laine blanche: 143
+Pierres: 7085
 Verre: 2
 Colombages: 1054
 Lingot de fer: 43
 Verre: 207
 Bibliothèque: 6
 Colombages à croix: 389
-Bois (tous): 907
+Bois (tous): 921
 
 
 abandonedmine resource use: 
@@ -2167,6 +2167,33 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|31
+|}
+
+
+Doro spiti
+gifthouse
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|29
+|-
+| style="text-align: center; "|Laine blanche
+| style="text-align: center; "|3
+|-
+| style="text-align: center; "|Bois de bouleau
+| style="text-align: center; "|18
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|16
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|23
 |}
 
 
@@ -5345,6 +5372,30 @@ Upgrade 2
 |-
 | style="text-align: center; "|Brique cuite
 | style="text-align: center; "|38
+|}
+
+
+Upahar ghar
+gifthouse
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|5
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|16
+|-
+| style="text-align: center; "|Brique de terre
+| style="text-align: center; "|291
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|21
 |}
 
 
@@ -8991,6 +9042,33 @@ Upgrade 6
 |}
 
 
+Okurimono hausu
+gifthouse
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|9
+|-
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|43
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|16
+|-
+| style="text-align: center; "|Chaume
+| style="text-align: center; "|163
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|14
+|}
+
+
 Noufu Ie
 japanesepeasanth
 
@@ -9241,45 +9319,6 @@ Upgrade 4
 |}
 
 
-Reinousha Ie
-japanesehousemedium
-
-==Requirements==
-Initial Construction
-
-{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
-! scope="col"|Resource
-! scope="col"|Quantity
-|-
-| style="text-align: center; "|Bois de chêne
-| style="text-align: center; "|53
-|-
-| style="text-align: center; "|Roche
-| style="text-align: center; "|555
-|-
-| style="text-align: center; "|Laine blanche
-| style="text-align: center; "|4
-|-
-| style="text-align: center; "|Bois de sapin
-| style="text-align: center; "|115
-|-
-| style="text-align: center; "|Pierres
-| style="text-align: center; "|180
-|-
-| style="text-align: center; "|Paroi de papier
-| style="text-align: center; "|28
-|-
-| style="text-align: center; "|Colombages
-| style="text-align: center; "|230
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|28
-|-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|18
-|}
-
-
 Densha
 japaneseplayerpalace
 
@@ -9470,6 +9509,45 @@ Upgrade 8
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|1
+|}
+
+
+Reinousha Ie
+japanesehousemedium
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|53
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|555
+|-
+| style="text-align: center; "|Laine blanche
+| style="text-align: center; "|4
+|-
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|115
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|180
+|-
+| style="text-align: center; "|Paroi de papier
+| style="text-align: center; "|28
+|-
+| style="text-align: center; "|Colombages
+| style="text-align: center; "|230
+|-
+| style="text-align: center; "|Gravier
+| style="text-align: center; "|28
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|18
 |}
 
 
@@ -10288,6 +10366,27 @@ Initial Construction
 |}
 
 
+Jalab
+mayanballcourt
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|919
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|416
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|4
+|}
+
+
 Maya Otoch
 mayanhouse
 
@@ -10599,27 +10698,6 @@ Upgrade 3
 |-
 | style="text-align: center; "|Roche
 | style="text-align: center; "|102
-|}
-
-
-Jalab
-mayanballcourt
-
-==Requirements==
-Initial Construction
-
-{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
-! scope="col"|Resource
-! scope="col"|Quantity
-|-
-| style="text-align: center; "|Roche
-| style="text-align: center; "|919
-|-
-| style="text-align: center; "|Pierres
-| style="text-align: center; "|416
-|-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|4
 |}
 
 
@@ -12567,6 +12645,27 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|89
+|}
+
+
+Zil Otoch
+gifthouse
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|157
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|197
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|17
 |}
 
 
@@ -14584,6 +14683,30 @@ Upgrade 7
 |}
 
 
+Maison bonus
+gifthouse
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|68
+|-
+| style="text-align: center; "|Laine blanche
+| style="text-align: center; "|3
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|47
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|14
+|}
+
+
 Tour de garde
 fort_A_righttower
 
@@ -15148,6 +15271,33 @@ Initial Construction
 |}
 
 
+Auberge isolée
+loneinn
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|54
+|-
+| style="text-align: center; "|Laine blanche
+| style="text-align: center; "|3
+|-
+| style="text-align: center; "|Colombages
+| style="text-align: center; "|116
+|-
+| style="text-align: center; "|Verre
+| style="text-align: center; "|8
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|19
+|}
+
+
 Ferme
 farm
 
@@ -15301,33 +15451,6 @@ Upgrade 5
 |-
 | style="text-align: center; "|Colombages à croix
 | style="text-align: center; "|21
-|}
-
-
-Auberge isolée
-loneinn
-
-==Requirements==
-Initial Construction
-
-{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
-! scope="col"|Resource
-! scope="col"|Quantity
-|-
-| style="text-align: center; "|Bois de chêne
-| style="text-align: center; "|54
-|-
-| style="text-align: center; "|Laine blanche
-| style="text-align: center; "|3
-|-
-| style="text-align: center; "|Colombages
-| style="text-align: center; "|116
-|-
-| style="text-align: center; "|Verre
-| style="text-align: center; "|8
-|-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|19
 |}
 
 

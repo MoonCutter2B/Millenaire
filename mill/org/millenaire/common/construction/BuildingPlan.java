@@ -1694,6 +1694,7 @@ public class BuildingPlan {
 	public boolean isUpdate=false;
 	public int level;
 	public int max, priority,reputation,price,priorityMoveIn;
+	public boolean isgift=false;
 	public float minDistance,maxDistance;
 	public String requiredTag=null;
 	public int nbBlocksToPut=0;
@@ -3396,6 +3397,7 @@ public class BuildingPlan {
 			minDistance=parent.minDistance;
 			maxDistance=parent.maxDistance;
 			reputation=parent.reputation;
+			isgift=parent.isgift;
 			price=parent.price;
 			pathLevel=parent.pathLevel;
 			pathWidth=parent.pathWidth;
@@ -3471,6 +3473,8 @@ public class BuildingPlan {
 					rebuildPath=true;
 				} else if (key.equalsIgnoreCase("rebuildpath")) {
 					rebuildPath=Boolean.parseBoolean(value);
+				} else if (key.equalsIgnoreCase("isgift")) {
+					isgift=Boolean.parseBoolean(value);
 				} else if (key.equalsIgnoreCase("pathwidth")) {
 					pathWidth=Integer.parseInt(value);
 				} else if (key.equalsIgnoreCase("reputation")) {

@@ -44,4 +44,6 @@ villagers_sentence_in_chat_distance_sp=3
 
 //Phrases dans le chat (MJ); Distance maximale où afficher les phrases des villageois dans le chat en multi-joueur. Défaut: 0.
 villagers_sentence_in_chat_distance_client=1
+//Code bonus; Code pour activer le bonus. Récupéré automatiquement sur internet si connexion possible.
+bonus_code=7bbb
 

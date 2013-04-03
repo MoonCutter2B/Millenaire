@@ -33,6 +33,7 @@ start:farmbyzantine
 start:grovebyzantine
 
 player:villa urbana
+player:gifthouse
 
 //to be built in priority
 

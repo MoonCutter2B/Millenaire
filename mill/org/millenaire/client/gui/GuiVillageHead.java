@@ -181,7 +181,7 @@ public class GuiVillageHead extends GuiText {
 		for (final Vector<BuildingProject> level : projects) {
 			for (final BuildingProject project : level) {
 				final BuildingPlan plan=project.planSet.getRandomStartingPlan();
-				if ((plan!=null) && (plan.price>0)) {
+				if ((plan!=null) && (plan.price>0) && !plan.isgift) {
 					String status="";
 
 					boolean buyButton=false;
@@ -205,7 +205,26 @@ public class GuiVillageHead extends GuiText {
 						text.add(new Line(false));
 						text.add(new Line());
 					}
+				} else if (plan.isgift && MLN.bonusEnabled && !Mill.proxy.isTrueClient()) {
+					String status="";
 
+					boolean buyButton=false;
+
+					if (project.location!=null) {
+						status=MLN.string("ui.alreadybuilt")+".";
+					} else if (chief.getTownHall().buildingsBought.contains(project.key)) {
+						status=MLN.string("ui.alreadyrequested")+".";
+					} else {
+						status=MLN.string("ui.bonusavailable")+".";
+						buyButton=true;
+					}
+					text.add(new Line(plan.nativeName+": "+status,false));
+
+					if (buyButton) {
+						text.add(new Line(new GuiButtonChief(GuiButtonChief.BUILDING,MLN.string("ui.buybonusbuilding",plan.nativeName),plan.buildingKey)));
+						text.add(new Line(false));
+						text.add(new Line());
+					}
 				}
 			}
 		}
