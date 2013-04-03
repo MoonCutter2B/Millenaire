@@ -3949,6 +3949,8 @@ public class Building {
 		if ((project.getPlan(0, 0).requiredTag!=null)) {
 			if (!mw.isGlobalTagSet(project.getPlan(0, 0).requiredTag))
 				return false;
+		} else if (project.getPlan(0, 0).isgift && !MLN.bonusEnabled) {
+			return false;
 		}
 		return true;
 	}

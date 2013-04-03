@@ -56,7 +56,7 @@ public class MillEventController {
 			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKRED, "ERROR: Could not find the config file at "+Mill.proxy.getConfigFile().getAbsolutePath()+". Check that the millenaire directory is in minecraft/mods/");
 			return;
 		}
-
+		
 		if (!(event.world instanceof WorldServer)) {
 			Mill.clientWorld=new MillWorld(event.world);
 			Mill.proxy.testTextureSize();

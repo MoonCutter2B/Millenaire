@@ -153,4 +153,8 @@ public class CommonProxy {
 		
 	}
 
+	public String getSinglePlayerName() {
+		return null;
+	}
+
 }
