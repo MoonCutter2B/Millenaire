@@ -490,6 +490,7 @@ public class MLN {
 
 	public static boolean logPerformed=false;
 
+	public static final char COLOUR = '\247';
 	public static final char BLACK = '0';
 	public static final char DARKBLUE = '1';
 	public static final char DARKGREEN = '2';
@@ -746,7 +747,7 @@ public class MLN {
 
 			configPage=new Vector<MillConfig>();
 
-			configPage.add(new MillConfig(MLN.class.getField("bonusCode"),"bonus_code",MillConfig.EDITABLE_STRING).setMaxStringLength(4));
+			configPage.add(new MillConfig(MLN.class.getField("bonusCode"),"bonus_code",MillConfig.BONUS_KEY).setMaxStringLength(4));
 
 			configPages.add(configPage);
 			configPageTitles.add("config.page.bonus");
@@ -788,7 +789,9 @@ public class MLN {
 		return md5(login+login.substring(1)).substring(0, 4);
 	}
 
-	public static void checkBonusCode() {
+	public static void checkBonusCode(boolean manual) {
+		
+		
 		if (Mill.proxy.getSinglePlayerName()==null) {
 			bonusEnabled=false;
 			return;
@@ -802,8 +805,16 @@ public class MLN {
 			bonusEnabled=(calculatedCode.equals(bonusCode));
 		}
 
-		if (!bonusEnabled) {
+		if (!bonusEnabled && !manual) {
 			(new BonusThread(login)).start();
+		}
+		
+		if (manual && bonusCode!=null && bonusCode.length()==4) {
+			if (bonusEnabled) {
+				Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKGREEN,MLN.string("config.validbonuscode"));
+			} else {
+				Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKRED,MLN.string("config.invalidbonuscode"));
+			}
 		}
 
 	}
@@ -1026,7 +1037,7 @@ public class MLN {
 			writeText("Starting new session. Mods: "+mods);
 		}
 
-		checkBonusCode();
+		checkBonusCode(false);
 	}
 
 	public static Vector<File> getLanguageDirs() {

@@ -893,6 +893,7 @@ public class Goods {
 		freeGoods.add(new InvItem(Block.blockClay.blockID,0));
 		freeGoods.add(new InvItem(Block.brewingStand.blockID,0));
 		freeGoods.add(new InvItem(Block.leaves.blockID,-1));
+		freeGoods.add(new InvItem(Block.cake.blockID,0));
 	}
 	public static void generateGoodsList() {
 

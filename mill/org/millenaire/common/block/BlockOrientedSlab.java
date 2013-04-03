@@ -3,7 +3,6 @@ package org.millenaire.common.block;
 import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -21,7 +20,7 @@ public class BlockOrientedSlab extends BlockHalfSlab {
 	public BlockOrientedSlab(int par1,String textureTopVertName,String textureTopHorName,String textureSideName)
 	{
 		super(par1, false, Material.rock);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(Mill.tabMillenaire);
 		setLightOpacity(0);
 		this.textureTopVertName=textureTopVertName;
 		this.textureTopHorName=textureTopHorName;

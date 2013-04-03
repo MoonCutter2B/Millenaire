@@ -27,6 +27,7 @@ player:mayanplayerlargefield
 player:mayanplayerhugefield
 player:mayanplayerestate
 player:mayanplayerlargehouse
+player:gifthouse
 
 //to be built in priority
 core:mayansheepchickenfarm

@@ -8,7 +8,7 @@ public class MillConfig {
 
 	private static final Object[] BOOLEAN_VALS=new Object[]{Boolean.TRUE,Boolean.FALSE};
 
-	public static final int LANGUAGE=1,EDITABLE_STRING=2,KEY=3,EDITABLE_INTEGER=4,LOG=5;
+	public static final int LANGUAGE=1,EDITABLE_STRING=2,KEY=3,EDITABLE_INTEGER=4,LOG=5, BONUS_KEY=6;
 
 	final Field field;
 	final public String key;
@@ -68,7 +68,7 @@ public class MillConfig {
 	}
 
 	public boolean hasTextField() {
-		return special==EDITABLE_STRING || special==KEY || special==EDITABLE_INTEGER;
+		return special==EDITABLE_STRING || special==KEY || special==EDITABLE_INTEGER || special==BONUS_KEY;
 	}
 
 	public boolean isBoolean() {
@@ -128,6 +128,11 @@ public class MillConfig {
 		} catch (Exception e) {
 			MLN.printException(this+": Exception when setting the field.",e);
 		}
+		
+		if (special==BONUS_KEY && Mill.proxy.getTheSinglePlayer()!=null) {//to avoid triggering before world is loaded
+			MLN.checkBonusCode(true);
+		}
+		
 	}
 
 	public Object getValueFromString(String val) {
@@ -246,8 +251,6 @@ public class MillConfig {
 	public String toString() {
 		return "MillConfig:"+key;
 	}
-
-
 
 
 }

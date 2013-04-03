@@ -4007,7 +4007,7 @@ public class Building {
 	public boolean isValidProject(BuildingProject project) {
 
 		if ((!villageType.playerControlled
-				&& (project.getPlan(0, 0).price > 0) && !buildingsBought.contains(project.key)))
+				&& (project.getPlan(0, 0).price > 0 || project.getPlan(0, 0).isgift) && !buildingsBought.contains(project.key)))
 			return false;
 
 		if ((project.getPlan(0, 0).requiredTag!=null) && !mw.isGlobalTagSet(project.getPlan(0, 0).requiredTag))

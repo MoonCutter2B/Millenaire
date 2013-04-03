@@ -195,7 +195,7 @@ public class MillClientUtilities {
 				String bonus="";
 				
 				if (MLN.bonusEnabled)
-					bonus=" "+MLN.string("startup.bonus");
+					bonus=" "+MLN.COLOUR+MLN.BLUE+MLN.string("startup.bonus");
 				
 				Mill.proxy.sendChatAdmin(MLN.string("startup.millenaireloaded",Mill.version,Keyboard.getKeyName(MLN.keyVillageList))+bonus);
 			}
