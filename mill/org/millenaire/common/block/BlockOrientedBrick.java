@@ -3,7 +3,6 @@ package org.millenaire.common.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -11,6 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import org.millenaire.common.core.MillCommonUtilities;
+import org.millenaire.common.forge.Mill;
 
 public class BlockOrientedBrick extends Block {
 
@@ -31,7 +31,7 @@ public class BlockOrientedBrick extends Block {
 			String frontbackTextureId,String sideTextureId)
 	{
 		super(blockId, Material.rock);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(Mill.tabMillenaire);
 
 		this.topTextureId=topTextureId;
 		this.topTextureRotateId=topTextureRotateId;

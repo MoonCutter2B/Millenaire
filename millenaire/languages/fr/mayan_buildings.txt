@@ -56,3 +56,5 @@ lonemayancornfarm_A0=Ferme maya abandonée
 lonemayanmining_A0=Mine maya abandonée
 lonemayanpyramid_A0=Pyramide maya abandonée
 mayanpyramid_A0=Pyramide
+
+gifthouse_a0=Maison bonus

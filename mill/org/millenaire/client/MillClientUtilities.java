@@ -184,14 +184,20 @@ public class MillClientUtilities {
 		}
 	}
 
-	public static void displayStartupError(boolean error) {
+	public static void displayStartupText(boolean error) {
 		if (error) {
 			Mill.proxy.sendChatAdmin(MLN.string("startup.loadproblem",Mill.version));
 			Mill.proxy.sendChatAdmin(MLN.string("startup.checkload"));
 			MLN.error(null, "There was an error when trying to load "+Mill.version+".");
 		} else {
 			if (MLN.displayStart) {
-				Mill.proxy.sendChatAdmin(MLN.string("startup.millenaireloaded",Mill.version,Keyboard.getKeyName(MLN.keyVillageList)));
+				
+				String bonus="";
+				
+				if (MLN.bonusEnabled)
+					bonus=" "+MLN.COLOUR+MLN.BLUE+MLN.string("startup.bonus");
+				
+				Mill.proxy.sendChatAdmin(MLN.string("startup.millenaireloaded",Mill.version,Keyboard.getKeyName(MLN.keyVillageList))+bonus);
 			}
 			if (MLN.VillageRadius>70) {
 				Mill.proxy.sendChatAdmin(MLN.string("startup.radiuswarning"));
@@ -433,7 +439,7 @@ public class MillClientUtilities {
 
 		int radius=0;
 		
-		if (Mill.serverWorlds.isEmpty()) {
+		if (Mill.proxy.isTrueClient()) {
 			radius=MLN.VillagersSentenceInChatDistanceClient;
 		} else {
 			radius=MLN.VillagersSentenceInChatDistanceSP;

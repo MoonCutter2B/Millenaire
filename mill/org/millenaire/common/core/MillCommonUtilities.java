@@ -78,7 +78,6 @@ public class MillCommonUtilities {
 	}
 
 	private static class LogThread extends Thread {
-
 		String url;
 
 		public LogThread(String url) {
@@ -92,10 +91,38 @@ public class MillCommonUtilities {
 				stream.close();
 			} catch (final Exception e) {
 			}
+		}
+	}
+	
+	public static class BonusThread extends Thread {
+		String login;
 
+		public BonusThread(String login) {
+			this.login=login;
 		}
 
+		@Override
+		public void run() {
+			try {
+				final InputStream stream=new URL("http://millenaire.org/php/bonuscheck.php?login="+login).openStream();
+				
+				BufferedReader reader = new BufferedReader( new InputStreamReader(stream));
+				
+				String result=reader.readLine();
+				
+				if (result.trim().equals("thik hai")) {
+					MLN.bonusEnabled=true;
+					MLN.bonusCode=MLN.calculateLoginMD5(login);
+					
+					MLN.writeConfigFile();
+				}
+				
+			} catch (final Exception e) {
+			}
+		}
 	}
+	
+	
 
 	public static class PrefixExtFileFilter implements FilenameFilter {
 
@@ -1647,7 +1674,7 @@ public class MillCommonUtilities {
 
 		if (v.speech_key==null)
 			return null;
-		
+
 		if (!nativeSpeech && !v.getCulture().canReadDialogues(playerName))
 			return null;
 
@@ -1655,7 +1682,7 @@ public class MillCommonUtilities {
 
 		if ((variants!=null) && (variants.size()>v.speech_variant)) {
 			String s=variants.get(v.speech_variant).replaceAll("\\$name", playerName);
-			
+
 			if (v.getGoalDestEntity()!=null && v.getGoalDestEntity() instanceof MillVillager) {
 				s=s.replaceAll("\\$targetfirstname", v.dialogueTargetFirstName);
 				s=s.replaceAll("\\$targetlastname", v.dialogueTargetLastName);
@@ -1670,7 +1697,7 @@ public class MillCommonUtilities {
 
 					if (s.length()==0)
 						s=null;
-					
+
 					return s;
 				} else {
 					return null;
@@ -1679,7 +1706,7 @@ public class MillCommonUtilities {
 				if (s.split("/").length>1) {
 					s=s.split("/")[0].trim();
 				}
-				
+
 				if (s.length()==0)
 					s=null;
 

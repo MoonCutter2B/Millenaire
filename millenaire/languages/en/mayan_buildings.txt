@@ -53,3 +53,5 @@ lonemayanruin_A0=Lost Mayan Home
 lonemayancornfarm_A0=Lost Mayan Corn Farm
 lonemayanmining_A0=Lost Stone Mine
 mayanpyramid_A0=Pyramid
+
+gifthouse_a0=Gift House

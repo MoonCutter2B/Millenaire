@@ -29,6 +29,7 @@ player:playersmallhouse
 player:playerlargefield
 player:playerhugefield
 player:playerestate
+player:gifthouse
 
 //to be built in priority
 core:quarry

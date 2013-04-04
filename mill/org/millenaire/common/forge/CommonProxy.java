@@ -27,6 +27,10 @@ public class CommonProxy {
 	public void testTextureSize() {
 		
 	}
+	
+	public boolean isTrueClient() {
+		return Mill.serverWorlds.isEmpty();
+	}
 
 	public IGuiHandler createGuiHandler() {
 		return new CommonGuiHandler();
@@ -151,6 +155,10 @@ public class CommonProxy {
 		
 		
 		
+	}
+
+	public String getSinglePlayerName() {
+		return null;
 	}
 
 }

@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
-
+ 
 import org.millenaire.client.network.ClientReceiver;
 import org.millenaire.common.Culture;
 import org.millenaire.common.EntityWallDecoration;
@@ -114,7 +114,7 @@ public class Mill
 		}
 	}
 
-	public static final String versionNumber = "4.6.1";
+	public static final String versionNumber = "4.6.2";
 	public static final String versionBound = "[4.5.1,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";

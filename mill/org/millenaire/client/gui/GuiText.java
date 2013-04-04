@@ -37,7 +37,7 @@ public abstract class GuiText extends GuiScreen {
 		public Line (MillGuiTextField tf) {
 			textField=tf;
 		}
-		
+
 		public Line (String s,MillGuiTextField tf) {
 			textField=tf;
 			if (s==null) {
@@ -340,8 +340,8 @@ public abstract class GuiText extends GuiScreen {
 					MillGuiTextField textField=new MillGuiTextField(fontRenderer,xStart+(getXSize() / 2) +40,yStart+vpos,95,20,line.textField.fieldKey);
 					textField.setText(line.textField.getText());
 					textField.setMaxStringLength(line.textField.getMaxStringLength());
+					textField.setTextColor(-1);
 					line.textField=textField;
-					line.textField.setTextColor(-1);
 					line.textField.func_82266_h(-1);
 					line.textField.setEnableBackgroundDrawing(false);
 
@@ -546,11 +546,11 @@ public abstract class GuiText extends GuiScreen {
 			mc.setIngameFocus();
 		}
 	}
-	
+
 	protected void handleTextFieldPress(MillGuiTextField textField) {
-		
+
 	}
-	
+
 	@Override
 	protected void mouseClicked(int i, int j, int k) {
 

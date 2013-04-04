@@ -1,1 +1,0 @@
-max:0;priority:100000;native:Bangla;around:5;startLevel:-1;orientation:2;width:23;length:24;reputation:8*64*64;price:4*64*64;pathlevel:1

@@ -48,3 +48,5 @@ sadhutree_A0=Arbre du Sadhu
 indiandesertedfarm_A0=Ferme indienne détruite
 loneshrine_A0=Temple hindou isolé
 sadhutree_A0=Arbre du Sadhu
+
+gifthouse_a0=Maison bonus
