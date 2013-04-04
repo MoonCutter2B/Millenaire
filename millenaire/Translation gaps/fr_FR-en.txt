@@ -1,3 +1,7 @@
 Translation comparison between fr_FR and en
 
+List of gaps found in culture building names for japanese: 
+
+Building name missing for culture japanese in both languages: chickenfarm_a0
+
 Traduction completness: 100%

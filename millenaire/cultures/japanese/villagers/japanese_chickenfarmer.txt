@@ -17,14 +17,16 @@ goal=GetHouseTHResources
 collectGood=egg
 collectGood=feather
 collectGood=leather
-collectGood=wool_white
+collectGood=chickenraw
 
 bringBackHomeGood=egg
 bringBackHomeGood=feather
 bringBackHomeGood=leather
-bringBackHomeGood=wool_white
+bringBackHomeGood=chickenraw
+
 
 requiredGood=seeds,10
+requiredGood=rice,10
 
 toolNeeded=tachiSword
 

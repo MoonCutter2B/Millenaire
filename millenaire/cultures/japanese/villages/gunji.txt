@@ -46,6 +46,7 @@ core:japanesearmyforge
 secondary:japanesearchive
 secondary:japaneseinn
 secondary:japanesemarket
+secondary:chickenfarm
 
 //not to be built
 never:japanesepagoda

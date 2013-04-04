@@ -93,41 +93,59 @@ public class BlockDecorative extends Block {
 	{
 		return i;
 	}
-	
-	
 
 
-	@Override
-	public void onBlockDestroyedByExplosion(World world, int i,
-			int j, int k, Explosion par5Explosion) {
-		
+	public void alchemistExplosion(World world, int i,
+			int j, int k) {
+
 		MillCommonUtilities.setBlockAndMetadata(world, i, j, k, 0, 0, true, false);
-		
+
 		for (int y=EXPLOSION_RADIUS;y>=-EXPLOSION_RADIUS;y--) {
 			if (((y+j)>=0) && ((y+j)<128)) {
 				for (int x=-EXPLOSION_RADIUS;x<=EXPLOSION_RADIUS;x++) {
 					for (int z=-EXPLOSION_RADIUS;z<=EXPLOSION_RADIUS;z++) {
 						if (((x*x)+(y*y)+(z*z))<=(EXPLOSION_RADIUS*EXPLOSION_RADIUS)) {
-							final int bid=world.getBlockId(i+x, j+y, k+z);
-							if (bid>0) {
-								//if (bid!=Block.bedrock.blockID)
-								//	Block.blocksList[bid].dropBlockAsItemWithChance(world,  i,j,k, world.getBlockMetadata(i,j,k), 0.1F);
-								
+							int bid=world.getBlockId(i+x, j+y, k+z);
+							if (bid>0) {								
 								MillCommonUtilities.setBlockAndMetadata(world,i+x, j+y, k+z, 0, 0, true, false);
-								Block.blocksList[bid].onBlockDestroyedByExplosion(world, i,j,k, par5Explosion);
 							}
 						}
 					}
 				}
 			}
 		}
-		
-		super.onBlockDestroyedByExplosion(world, i, j, k, par5Explosion);
 	}
 
+
+
+	@Override
+	public void dropBlockAsItemWithChance(World par1World, int i, int j,
+			int k, int meta, float par6, int par7) {
+
+		if (blockID==Mill.stone_decoration.blockID && meta==3) {
+			boolean isExplosion=false;
+
+			//Hack to check whether the drop is due to an explosion
+			final StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+
+			for (int id=2;id<trace.length;id++) {
+				if (trace[id].getClass().getName().equals(Explosion.class.getName()))
+					isExplosion=true;
+			}
+			
+			if (isExplosion) {
+				alchemistExplosion(par1World,i,j,k);
+				return;
+			}
+
+		}
+
+
+		super.dropBlockAsItemWithChance(par1World, i, j, k, meta, par6, par7);
+	}
 	@Override
 	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)  {
-		
+
 		if (side==1) {
 			if (texturesTop.containsKey(meta))
 				return texturesTop.get(meta);
@@ -165,13 +183,13 @@ public class BlockDecorative extends Block {
 		textureBottomNames.put(meta, name);
 		textureSideNames.put(meta, name);
 	}
-	
+
 	public void registerTexture(int meta, String top,String bottom,String side) {
 		textureTopNames.put(meta, top);
 		textureBottomNames.put(meta, bottom);
 		textureSideNames.put(meta, side);
 	}
-	
+
 	@Override
 	public void registerIcons(IconRegister iconRegister)
 	{

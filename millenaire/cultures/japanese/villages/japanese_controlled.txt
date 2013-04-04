@@ -16,6 +16,7 @@ start:japanesepeasanth
 core:japaneselmh
 core:japanesepeasanth
 core:japanesefarm
+core:chickenfarm
 core:japanesefishery
 core:japanesequarry
 core:japanesecrafter

@@ -51,6 +51,8 @@ secondary:japaneseinn
 secondary:japanesemarket
 secondary:japanesearmyforge
 secondary:well
+secondary:chickenfarm
+
 
 //not to be built
 never:japanesefort

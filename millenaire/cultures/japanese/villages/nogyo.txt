@@ -44,6 +44,7 @@ core:japanesequarry
 core:japaneseforge
 core:japanesekitchen
 core:japanesemarket
+core:chickenfarm
 core:well
 
 //to be built after the core ones

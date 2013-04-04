@@ -214,22 +214,22 @@ japanese:
 gunji resource use: 
 Pierre taillées craquelées: 26
 Laine blanche: 279
-Roche: 9740
-Bois de sapin: 2916
-Pierres: 1378
+Roche: 9940
+Bois de sapin: 2978
+Pierres: 1415
 Paroi de papier: 682
 Sable: 232
 Hautes herbes: 168
 Bibliothèque: 12
-Gravier: 2724
+Gravier: 2748
 Colombages à croix: 63
-Bois de chêne: 4709
-Colombages: 3102
+Bois de chêne: 4784
+Colombages: 3147
 Lingot d'or: 54
 Fougère: 117
 Lingot de fer: 36
-Chaume: 7125
-Bois (tous): 1435
+Chaume: 7255
+Bois (tous): 1455
 
 japanese_controlled resource use: 
 Bois de chêne: 992
@@ -246,41 +246,41 @@ Bois (tous): 271
 
 nogyo resource use: 
 Laine blanche: 248
-Roche: 9411
-Bois de sapin: 3342
-Pierres: 1613
+Roche: 9611
+Bois de sapin: 3404
+Pierres: 1650
 Paroi de papier: 687
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
-Gravier: 2949
+Gravier: 2973
 Colombages à croix: 63
-Bois de chêne: 5097
-Colombages: 3274
+Bois de chêne: 5172
+Colombages: 3319
 Fougère: 117
 Lingot de fer: 18
-Chaume: 8719
-Bois (tous): 1633
+Chaume: 8849
+Bois (tous): 1653
 
 seiji resource use: 
 Pierre taillées craquelées: 26
 Laine blanche: 303
-Roche: 11500
-Bois de sapin: 4007
-Pierres: 1765
+Roche: 11700
+Bois de sapin: 4069
+Pierres: 1802
 Paroi de papier: 849
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
-Gravier: 3451
+Gravier: 3475
 Colombages à croix: 63
-Bois de chêne: 6327
+Bois de chêne: 6402
 Lingot d'or: 54
-Colombages: 3870
+Colombages: 3915
 Fougère: 117
 Lingot de fer: 108
-Chaume: 8541
-Bois (tous): 1851
+Chaume: 8671
+Bois (tous): 1871
 
 
 bandit_cave resource use: 
@@ -8166,6 +8166,92 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|40
+|}
+
+
+Youkeijou
+chickenfarm
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|20
+|-
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|50
+|-
+| style="text-align: center; "|Chaume
+| style="text-align: center; "|130
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|16
+|}
+
+
+Upgrade 1
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|29
+|-
+| style="text-align: center; "|Gravier
+| style="text-align: center; "|24
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|1
+|}
+
+
+Upgrade 2
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|55
+|-
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|12
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|3
+|}
+
+
+Upgrade 3
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|8
+|-
+| style="text-align: center; "|Colombages
+| style="text-align: center; "|41
+|}
+
+
+Upgrade 4
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|200
+|-
+| style="text-align: center; "|Colombages
+| style="text-align: center; "|4
 |}
 
 

@@ -1,8 +1,7 @@
 Translation comparison between en and fr
 
-List of gaps found in strings.txt: 
+List of gaps found in culture building names for japanese: 
 
-Key missing in the strings.txt file: config.invalidbonuscode
-Key missing in the strings.txt file: config.validbonuscode
+Building name missing for culture japanese in both languages: chickenfarm_a0
 
-Traduction completness: 99%
+Traduction completness: 100%
