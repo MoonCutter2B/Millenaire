@@ -26,6 +26,10 @@ novtype: cannot be of this type. Ex: novtype:monk-priest-abbot
 "villager" means a villager type that must exist in the village
 "notvillager" means a villager type that does not exist in the village
 
+"tag" means a special condition that has to be true. Those conditions can currently be:
+"raining": it's raining (or snowing) in the world (even if it's not over the villagers, like in deserts)
+"notraining": the opposite
+
 These criteria are cumulative: they must all be valid for a dialogue to be valid.
 
 Examples:

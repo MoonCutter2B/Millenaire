@@ -26,6 +26,10 @@ novtype: ne peut pas être de ce type. Ex: novtype:monk-priest-abbot
 "villager" indique un type de villageois qui doit exister dans le village
 "notvillager" un type de villageois qui n'existe pas dans le village
 
+"tag" indique une condition spéciale qui doit être vrai. Elle peut être:
+"raining": il pleut (ou neige) dans le monde (mais pas forcément dans le village, s'il est dans un désert)
+"notraining": le contraire
+
 tous ces critères sont cumulatifs: ils doivent tous être valides pour qu'un dialogue marche.
 
 Exemples:

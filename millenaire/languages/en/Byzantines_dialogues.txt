@@ -1,4 +1,4 @@
-newchat;key:sun,weigth:10
+newchat;key:sun,tag:notraining,weigth:10
 v1;0;Agapo ilióloustes méres! / I love sunny days!
 v2;30;Poios den échei? / Who doesn't?
 
@@ -163,7 +163,7 @@ v2;90;Nai! / Yeah!
 v1;100;Cheers gia tin aftokratoría! / Cheers for the empire!
 v2;110;Cheers! / Cheers!
 
-newchat;key:rain,weigth:10
+newchat;key:rain,tag:notraining,weigth:10
 v1;0;Tha vréxei. Sýntoma. / It will rain. Soon.
 v2;30;Boro na aisthánomai, pára polý. / I can feel it, too.
 v1;60;Períergo. Eínai pánta i ídia posotita iméres méchri vréchei. / Weird. It is always the same amount of days until it rains.

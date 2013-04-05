@@ -1,4 +1,4 @@
-newchat;key:rain,weigth:10
+newchat;key:rain,tag:notraining,weigth:10
 v1;0;Je sens qu'il va pleuvoir. / I can feel it's going to rain.
 v2;30;Il pleut toujours en Normandie. / It always rain in Normandy...
 
@@ -64,7 +64,7 @@ v1;60;En Normandie, elle tombait... / In Normandy, it used to fall...
 v2;90;En Normandie, Dieu voulait qu'elle tombe. Ici, il veut qu'elle flotte. / In Normandy, God wanted it to fall. Here, he wants it to float.
 v2;150;Pourquoi critique-tu Dieu? / Why are you criticizing Goa?
 
-newchat;key:likingrain,weigth:10
+newchat;key:likingrain,tag:raining,weigth:10
 v1;0;J'aime bien la pluie. / I like rain.
 v2;30;C'est une bonne chose pour un normand! / Good thing for a Norman!
 

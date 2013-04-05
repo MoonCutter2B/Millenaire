@@ -1,4 +1,4 @@
-newchat;key:rain,weigth:10
+newchat;key:rain,tag:notraining,weigth:10
 v1;0;Je sens qu'il va pleuvoir.
 v2;30;Il pleut toujours en Normandie.
 
@@ -61,7 +61,7 @@ v1;60;En Normandie, elle tombait...
 v2;90;En Normandie, Dieu voulait qu'elle tombe. Ici, il veut qu'elle flotte.
 v2;150;Pourquoi critique-tu Dieu?
 
-newchat;key:likingrain,weigth:10
+newchat;key:likingrain,tag:raining,weigth:10
 v1;0;J'aime bien la pluie.
 v2;30;C'est une bonne chose pour un normand!
 
