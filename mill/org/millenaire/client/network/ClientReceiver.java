@@ -44,6 +44,16 @@ public class ClientReceiver implements IPacketHandler
 			MLN.major(this, "Received a packet despite being server.");
 			return;
 		}
+		
+		if (packet==null) {
+			MLN.error(this, "Received a null packet!");
+			return;
+		}
+		
+		if (packet.data==null) {
+			MLN.error(this, "Received a packet with null data on channel: "+packet.channel);
+			return;
+		}
 
 
 		final DataInputStream data = new DataInputStream(new ByteArrayInputStream(packet.data));
