@@ -47,6 +47,7 @@ japaneseplayerpalace_A0=Player's Palace
 japaneseinn_A0=Inn
 japanesemarket_A0=Market
 japanesearcheryrange_A0=Archery Range
+chickenfarm_a0=Chicken Farm
 bath_A0=Bath House
 well_A0=Well
 

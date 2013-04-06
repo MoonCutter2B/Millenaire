@@ -2027,8 +2027,8 @@ public class BuildingPlan {
 			}
 		}
 
-		if ((bblocks.length>0) && (bblocks[bblocks.length-1].bid == Mill.lockedChest.blockID) && !wandimport) {
-
+		if ((bblocks.length>0) && !wandimport && location.level==0) {
+			
 			final Building building=new Building(mw, culture, villageType, location, townHall, villageGeneration, bblocks[bblocks.length-1].p, townHallPos);
 
 			if (MLN.LogWorldGeneration>=MLN.MINOR) {
@@ -3125,6 +3125,10 @@ public class BuildingPlan {
 					}
 				}
 			}
+		}
+		
+		if (location.chestPos==null) {
+			location.chestPos=bblocks.lastElement().p;
 		}
 
 		setMetadata(bblocks);

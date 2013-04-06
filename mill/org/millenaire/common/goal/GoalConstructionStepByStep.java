@@ -11,7 +11,6 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
-import org.millenaire.common.forge.Mill;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
 public class GoalConstructionStepByStep extends Goal {
@@ -144,10 +143,6 @@ public class GoalConstructionStepByStep extends Goal {
 
 		bblock.build(villager.worldObj,false,false);
 
-		if ((bblock.bid == Mill.lockedChest.blockID) && (bblock.meta > 0)) {
-			villager.getTownHall().initialiseCurrentConstruction(bblock.p);
-		}
-
 		boolean foundNextBlock=false;
 
 		while (!foundNextBlock && villager.getTownHall().areBlocksLeft()) {
@@ -159,11 +154,7 @@ public class GoalConstructionStepByStep extends Goal {
 				foundNextBlock=true;
 			}
 		}
-
-		if (!foundNextBlock) {
-			villager.setGoalDestPoint(null);
-		}
-
+		
 		if (!villager.getTownHall().areBlocksLeft()) {
 			if (MLN.LogBuildingPlan>=MLN.MAJOR) {
 				MLN.major(this, "Villager "+villager+" laid last block in "+villager.getTownHall().buildingLocationIP.key+" at "+bblock.p);
@@ -174,7 +165,19 @@ public class GoalConstructionStepByStep extends Goal {
 			for (final InvItem key : plan.resCost.keySet()) {
 				villager.takeFromInv(key.id(),key.meta, plan.resCost.get(key));
 			}
+			
+			if (villager.getTownHall().buildingLocationIP!=null && villager.getTownHall().buildingLocationIP.level==0) {
+				villager.getTownHall().initialiseCurrentConstruction(bblock.p);
+			}
 		}
+		
+		
+
+		if (!foundNextBlock) {
+			villager.setGoalDestPoint(null);
+		}
+
+		
 
 		if ((MLN.LogWifeAI>=MLN.MINOR) && villager.extraLog) {
 			MLN.minor(villager, "Reseting actionStart after "+(System.currentTimeMillis()-villager.actionStart));

@@ -4425,7 +4425,7 @@ public class Building {
 
 			if (sleepingPos == null) {
 				sleepingPos=pos.getAbove();
-				MLN.warning(this, "No sleeping pos found, using the chest pos instead.");
+				//MLN.warning(this, "No sleeping pos found, using the chest pos instead.");
 			}
 
 			NBTTagList nbttaglist = nbttagcompound.getTagList("chests");

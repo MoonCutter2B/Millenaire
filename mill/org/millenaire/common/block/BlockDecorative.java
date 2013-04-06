@@ -128,8 +128,9 @@ public class BlockDecorative extends Block {
 			//Hack to check whether the drop is due to an explosion
 			final StackTraceElement[] trace = Thread.currentThread().getStackTrace();
 
-			for (int id=2;id<trace.length;id++) {
-				if (trace[id].getClass().getName().equals(Explosion.class.getName()))
+			for (int id=0;id<trace.length;id++) {
+				String className=trace[id].getClassName();
+				if (className.equals(Explosion.class.getName()))
 					isExplosion=true;
 			}
 			

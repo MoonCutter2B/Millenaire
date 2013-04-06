@@ -47,6 +47,7 @@ japaneseplayerpalace_A0=Palais du joueur
 japaneseinn_A0=Auberge
 japanesemarket_A0=Marché
 japanesearcheryrange_A0=Stand de tir
+chickenfarm_a0=Elevage de poulets
 bath_A0=Bain public
 well_A0=Puit
 

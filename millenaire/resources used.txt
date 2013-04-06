@@ -5375,7 +5375,7 @@ Upgrade 2
 |}
 
 
-Upahar ghar
+Uphar ghar
 gifthouse
 
 ==Requirements==

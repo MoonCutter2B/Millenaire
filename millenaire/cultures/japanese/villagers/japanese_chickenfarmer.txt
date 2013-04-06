@@ -17,12 +17,12 @@ goal=GetHouseTHResources
 collectGood=egg
 collectGood=feather
 collectGood=leather
-collectGood=chickenraw
+collectGood=chickenmeat
 
 bringBackHomeGood=egg
 bringBackHomeGood=feather
 bringBackHomeGood=leather
-bringBackHomeGood=chickenraw
+bringBackHomeGood=chickenmeat
 
 
 requiredGood=seeds,10
