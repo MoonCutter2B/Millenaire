@@ -111,7 +111,7 @@ public class Mill
 		public int getTabIconItemIndex()
 		{
 			return Mill.denier_or.itemID;
-		}
+		} 
 	}
 
 	public static final String versionNumber = "4.6.3";
