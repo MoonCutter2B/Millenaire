@@ -397,7 +397,7 @@ public class RenderMillVillager extends RenderBiped {
 				modelCloth.bipedRightLeg.showModel = false;
 				modelCloth.bipedLeftLeg.showModel = false;
 				return -1;
-			}
+			} 
 
 			this.loadTexture(clothTexture);
 
