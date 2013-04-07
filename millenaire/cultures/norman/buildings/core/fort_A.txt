@@ -3,7 +3,7 @@ priority:200;rebuildpath:true
 
 
 
-startLevel:-5;rebuildpath:true
+startLevel:-5;rebuildpath:true;tag:nopaths
 startLevel:-1;rebuildpath:true
 startLevel:-5;subbuilding:fort_A_lefttower;subbuilding:fort_A_righttower;rebuildpath:true
 priority:50

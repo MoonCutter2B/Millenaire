@@ -108,10 +108,10 @@ Laine blanche: 85
 Roche: 682
 Statue Hindoue: 3
 Pierres: 206
-Grès: 1881
+Grès: 1882
 Brique cuite: 5798
 Brique de terre: 5628
-Bois (tous): 775
+Bois (tous): 773
 
 indian_agricole_hamlet resource use: 
 Bois de chêne: 534
@@ -119,10 +119,10 @@ Laine blanche: 85
 Roche: 682
 Statue Hindoue: 3
 Pierres: 190
-Grès: 1881
+Grès: 1882
 Brique cuite: 5568
 Brique de terre: 5141
-Bois (tous): 724
+Bois (tous): 722
 
 indian_controlled resource use: 
 Bois de chêne: 172
@@ -135,34 +135,34 @@ Brique de terre: 804
 Bois (tous): 269
 
 indian_fort resource use: 
-Bois de chêne: 586
+Bois de chêne: 590
 Laine blanche: 85
 Roche: 1031
 Statue Hindoue: 3
 Pierres: 212
-Grès: 3190
+Grès: 3191
 Brique cuite: 4874
 Brique de terre: 6546
-Bois (tous): 870
+Bois (tous): 868
 
 indian_fort_hamlet resource use: 
-Bois de chêne: 512
+Bois de chêne: 516
 Roche: 349
 Pierres: 188
-Grès: 2989
+Grès: 2990
 Brique cuite: 4160
 Brique de terre: 5168
-Bois (tous): 753
+Bois (tous): 751
 
 indian_palace resource use: 
 Bois de chêne: 259
 Roche: 648
 Statue Hindoue: 2
 Pierres: 218
-Grès: 5352
+Grès: 5353
 Brique cuite: 3977
 Brique de terre: 2698
-Bois (tous): 690
+Bois (tous): 688
 
 
 adivasifarm resource use: 
@@ -3789,13 +3789,13 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Grès
-| style="text-align: center; "|511
+| style="text-align: center; "|512
 |-
 | style="text-align: center; "|Brique de terre
 | style="text-align: center; "|76
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|50
+| style="text-align: center; "|48
 |}
 
 
@@ -5098,7 +5098,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois de chêne
-| style="text-align: center; "|17
+| style="text-align: center; "|21
 |-
 | style="text-align: center; "|Brique de terre
 | style="text-align: center; "|266

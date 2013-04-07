@@ -9,10 +9,14 @@ import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
+import org.millenaire.common.MLN;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
@@ -21,6 +25,14 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	public static class ItemDecorativeSlab extends ItemSlab {
 
 		BlockDecorativeSlab block;
+		
+		private final boolean isFullBlockDec;
+
+	    /** Instance of BlockHalfSlab. */
+	    private final BlockHalfSlab theHalfSlabDec;
+
+	    /** The double-slab block corresponding to this item. */
+	    private final BlockHalfSlab doubleSlabDec;
 
 		public ItemDecorativeSlab(int i,BlockDecorativeSlab halfSlab,BlockDecorativeSlab fullBlock, boolean full)
 		{
@@ -28,6 +40,9 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 			setMaxDamage(0);
 			setHasSubtypes(true);
 			this.block=(BlockDecorativeSlab)Block.blocksList[i+256];
+			this.theHalfSlabDec = halfSlab;
+	        this.doubleSlabDec = fullBlock;
+	        this.isFullBlockDec = full;
 		}
 
 		@Override
@@ -47,6 +62,95 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 		{
 			return i;
 		}
+		
+		@Override
+	    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+	    {
+	        if (this.isFullBlockDec)
+	        {
+	            return super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
+	        }
+	        else if (par1ItemStack.stackSize == 0)
+	        {
+	            return false;
+	        }
+	        else if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
+	        {
+	            return false;
+	        }
+	        else
+	        {
+	            int i1 = par3World.getBlockId(par4, par5, par6);
+	            int j1 = par3World.getBlockMetadata(par4, par5, par6);
+
+	            if ((par7 == 1) && i1 == this.theHalfSlabDec.blockID && j1 == par1ItemStack.getItemDamage())
+	            {
+	                if (par3World.checkIfAABBIsClear(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec.blockID, j1, 3))
+	                {
+	                    par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.doubleSlabDec.stepSound.getPlaceSound(), (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F, this.doubleSlabDec.stepSound.getPitch() * 0.8F);
+	                    --par1ItemStack.stackSize;
+	                }
+
+	                return true;
+	            }
+	            else
+	            {
+	                return this.func_77888_a(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7) ? true : super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
+	            }
+	        }
+	    }
+		
+		private boolean func_77888_a(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7)
+	    {
+	        if (par7 == 0)
+	        {
+	            --par5;
+	        }
+
+	        if (par7 == 1)
+	        {
+	            ++par5;
+	        }
+
+	        if (par7 == 2)
+	        {
+	            --par6;
+	        }
+
+	        if (par7 == 3)
+	        {
+	            ++par6;
+	        }
+
+	        if (par7 == 4)
+	        {
+	            --par4;
+	        }
+
+	        if (par7 == 5)
+	        {
+	            ++par4;
+	        }
+
+	        int i1 = par3World.getBlockId(par4, par5, par6);
+	        int j1 = par3World.getBlockMetadata(par4, par5, par6);
+	        int k1 = j1 & 7;
+
+	        if (i1 == this.theHalfSlabDec.blockID && k1 == par1ItemStack.getItemDamage())
+	        {
+	            if (par3World.checkIfAABBIsClear(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec.blockID, k1, 3))
+	            {
+	                par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.doubleSlabDec.stepSound.getPlaceSound(), (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F, this.doubleSlabDec.stepSound.getPitch() * 0.8F);
+	                --par1ItemStack.stackSize;
+	            }
+
+	            return true;
+	        }
+	        else
+	        {
+	            return false;
+	        }
+	    }
 	}
 
 	public static int getBlockFromDye(int i)
@@ -103,7 +207,7 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 			if (texturesSide.containsKey(meta))
 				return texturesSide.get(meta);
 			else
-				return texturesSide.get(0);
+				return texturesTop.get(0);
 		}
 	}
 
@@ -159,5 +263,50 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	@Override
 	public String getFullSlabName(int meta) {
 		return names.get(meta);
+	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	{
+		if (this.isDoubleSlab)
+		{
+			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		}
+		else
+		{
+			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
+		}
+	}
+	
+	@Override
+	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int meta)
+    {
+        return meta;
+    }
+	
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+    {
+        if (this.isDoubleSlab)
+        {
+            return super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
+        }
+        else if (par5 != 1 && par5 != 0 && !super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5))
+        {
+            return false;
+        }
+        else
+        {
+        	return true;
+        }
+    }
+	
+	@Override
+	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
+	{
+		if (!world.isRemote && MLN.DEV) {
+			Mill.proxy.sendLocalChat(entityplayer, MLN.WHITE, "Meta: "+world.getBlockMetadata(i, j, k));
+		}
+		return super.onBlockActivated(world, i, j, k, entityplayer, par6, par7, par8, par9);
 	}
 }

@@ -385,9 +385,7 @@ public class BuildingLocation implements Cloneable {
 	}
 
 	public boolean isInside(Point p) {
-
-
-		if ((minx <= p.getiX()) && (p.getiX() <= maxx) && (minz <= p.getiZ()) && (p.getiZ() <= maxz))
+		if ((minx < p.getiX()) && (p.getiX() <= maxx) && (minz < p.getiZ()) && (p.getiZ() <= maxz))
 			return true;
 		//Log.debug(this, Log.WorldGeneration, "Outside!");
 		return false;
