@@ -1,7 +1,3 @@
 Translation comparison between fr and en
 
-List of gaps found in culture dialogues for byzantines: 
-
-Dialogue has different sentence numbers: rain
-
-Traduction completness: 99%
+Traduction completness: 100%

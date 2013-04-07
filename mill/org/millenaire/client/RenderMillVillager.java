@@ -324,7 +324,7 @@ public class RenderMillVillager extends RenderBiped {
 				if (var5 instanceof ItemArmor)
 				{
 					final ItemArmor var6 = (ItemArmor)var5;
-					this.loadTexture(ForgeHooksClient.getArmorTexture(itemstack, "/armor/" + armorPrefixes[var6.renderIndex] + "_" + (armourPartId == 2 ? 2 : 1) + ".png"));
+					this.loadTexture(ForgeHooksClient.getArmorTexture(villager,itemstack, "/armor/" + armorPrefixes[var6.renderIndex] + "_" + (armourPartId == 2 ? 2 : 1) + ".png",armourPartId,1));
 					final ModelBiped var7 = armourPartId == 2 ? this.modelArmor : this.modelArmorChestplate;
 					var7.bipedHead.showModel = armourPartId == 0;
 					var7.bipedHeadwear.showModel = armourPartId == 0;
