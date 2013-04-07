@@ -163,6 +163,7 @@ public class Goods {
 			this.setHasSubtypes(true);
 			this.setMaxDamage(0);
 			this.iconNames=iconNames;
+			this.setCreativeTab(Mill.tabMillenaire);
 		}
 
 		public String getClothName(int meta) {
