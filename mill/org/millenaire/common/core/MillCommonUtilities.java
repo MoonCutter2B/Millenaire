@@ -19,6 +19,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -1689,23 +1690,33 @@ public class MillCommonUtilities {
 					Point nextp=new Point(nextNode);
 					Point lastp=new Point(lastNode);				
 
-					if (!isStairs(th.worldObj,nextp.getBelow()) && !isStairs(th.worldObj,lastp.getBelow())) {				
+					if (!isStairsOrSlab(th.worldObj,nextp.getBelow()) && !isStairsOrSlab(th.worldObj,lastp.getBelow())) {
+						
+						//straightening path:   1?1 to 111
 						if (lastNode.y==nextNode.y && node.y!=lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
 								&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,lastNode.y,node.z);
 							path.set(ip, node);
+							
+						//slab a block above:    1 1 2 to 1 1.5 2
 						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
 								&& lastp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,node.y+1,node.z);
 							path.set(ip, node);
 							halfSlab=true;
+							
+						//slab replacing block: 2 2 1 to 2 1.5 1	
 						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y>nextNode.y) {
 							halfSlab=true;
+							
+						//slab a block above: 2 1 1 to 2 1.5 1
 						} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
 								&& nextp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,node.y+1,node.z);
 							path.set(ip, node);
 							halfSlab=true;
+							
+						//slab replacing block: 1 2 2 to 1 1.5 2	
 						} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y>lastNode.y) {
 							halfSlab=true;
 						}	
@@ -1778,13 +1789,23 @@ public class MillCommonUtilities {
 
 	}
 
-	private static boolean isStairs(World world,Point p) {
+	private static boolean isStairsOrSlab(World world,Point p) {
 		int bid=p.getId(world);
 
 		if (bid==0)
 			return false;
 
-		return (Block.blocksList[bid] instanceof BlockStairs);
+		if (Block.blocksList[bid] instanceof BlockStairs)
+			return false;
+		
+		if (Block.blocksList[bid] instanceof BlockHalfSlab) {
+			BlockHalfSlab b=(BlockHalfSlab)Block.blocksList[bid];
+			
+			if (!b.isOpaqueCube())
+				return false;
+		}
+		
+		return true;
 	}
 
 	public static String getVillagerSentence(MillVillager v, String playerName, boolean nativeSpeech) {
