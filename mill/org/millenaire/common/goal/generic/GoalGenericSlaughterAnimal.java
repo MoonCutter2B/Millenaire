@@ -122,18 +122,11 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 								}
 							}
 						}
-
-						//if ((MLN.CattleFarmer>=MLN.MAJOR) && villager.extraLog) {
-							MLN.major(this, "Attacking: "+ent);
-						//}
 						return true;
 					}
 				}
 			}
 		}
-
-		
-		MLN.major(this, "No valid target among: "+animals.size());
 		
 		animals=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, (Class)EntityList.stringToClassMapping.get(animalKey), villager.getPos(), 2, 5);
 
@@ -153,9 +146,6 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 							}
 						}
 
-						//if ((MLN.CattleFarmer>=MLN.MAJOR) && villager.extraLog) {
-							MLN.major(this, "Attacking: "+ent);
-						//}
 						return true;
 					}
 				}
