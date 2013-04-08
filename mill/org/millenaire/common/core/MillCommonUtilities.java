@@ -1522,6 +1522,10 @@ public class MillCommonUtilities {
 		if (th.isPointProtectedFromPathBuilding(p))
 			return false;
 
+		if (pathBid==Mill.path.blockID && bid==Mill.pathSlab.blockID) {
+			MLN.temp(null, "Attempting to replace slab by path! at: "+p);
+		}
+
 		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid,meta)) && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
@@ -1557,13 +1561,13 @@ public class MillCommonUtilities {
 
 		if ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta>7)
 			return true;
-		
+
 		bid=p.getBelow().getId(world);
 		meta=p.getBelow().getMeta(world);
 
 		if ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta>7)
 			return true;
-		
+
 		return false;
 	}
 
@@ -1642,7 +1646,7 @@ public class MillCommonUtilities {
 		for (int ip=0;ip<path.size();ip++) {
 			pathShouldBuild[ip]=true;
 		}
-		
+
 
 		for (int ip=0;ip<path.size();ip++) {
 
@@ -1690,36 +1694,55 @@ public class MillCommonUtilities {
 					Point nextp=new Point(nextNode);
 					Point lastp=new Point(lastNode);				
 
-					if (!isStairsOrSlab(th.worldObj,nextp.getBelow()) && !isStairsOrSlab(th.worldObj,lastp.getBelow())) {
-						
+					//no level adjustement in diagonals
+					if (!isStairsOrSlabOrChest(th.worldObj,nextp.getBelow()) && !isStairsOrSlabOrChest(th.worldObj,lastp.getBelow())
+							&& ((p.x==lastp.x && p.x==nextp.x) || (p.z==lastp.z && p.z==nextp.z) || true)) {
+
 						//straightening path:   1?1 to 111
 						if (lastNode.y==nextNode.y && node.y!=lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
 								&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,lastNode.y,node.z);
 							path.set(ip, node);
-							
-						//slab a block above:    1 1 2 to 1 1.5 2
+
+							MLN.temp(null, "1?1 to 111 at: "+p);
+
+							//slab a block above:    1 1 2 to 1 1.5 2
 						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
 								&& lastp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,node.y+1,node.z);
 							path.set(ip, node);
 							halfSlab=true;
-							
-						//slab replacing block: 2 2 1 to 2 1.5 1	
+
+							MLN.temp(null, " 1 1 2 to 1 1.5 2 at: "+p);
+
+							//slab replacing block: 2 2 1 to 2 1.5 1	
 						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y>nextNode.y) {
 							halfSlab=true;
-							
-						//slab a block above: 2 1 1 to 2 1.5 1
+
+							MLN.temp(null, " 2 2 1 to 2 1.5 1 at: "+p);
+
+							//slab a block above: 2 1 1 to 2 1.5 1
 						} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
 								&& nextp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,node.y+1,node.z);
 							path.set(ip, node);
 							halfSlab=true;
-							
-						//slab replacing block: 1 2 2 to 1 1.5 2	
+
+							MLN.temp(null, " 2 1 1 to 2 1.5 1 at: "+p);
+
+							//slab replacing block: 1 2 2 to 1 1.5 2	
 						} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y>lastNode.y) {
 							halfSlab=true;
-						}	
+
+							MLN.temp(null, " 1 2 2 to 1 1.5 2 at: "+p);
+						} else {
+							MLN.temp(null, " no change at: "+p);
+						}
+					} else {
+						int bid=p.getBelow().getId(th.worldObj);
+
+						if (bid==Mill.pathSlab.blockID)
+							halfSlab=true;
 					}
 				}
 
@@ -1730,7 +1753,7 @@ public class MillCommonUtilities {
 				if (nodePathBid==Mill.path.blockID && halfSlab)
 					nodePathBid=Mill.pathSlab.blockID;
 
-				attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,pathMeta);
+				attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,5);
 
 				if (lastNode!=null) {
 					int dx=p.getiX()-lastNode.x;
@@ -1789,23 +1812,26 @@ public class MillCommonUtilities {
 
 	}
 
-	private static boolean isStairsOrSlab(World world,Point p) {
+	private static boolean isStairsOrSlabOrChest(World world,Point p) {
 		int bid=p.getId(world);
 
 		if (bid==0)
 			return false;
+		
+		if (bid==Block.chest.blockID || bid==Mill.lockedChest.blockID || bid==Block.workbench.blockID || bid==Block.furnaceIdle.blockID || bid==Block.furnaceBurning.blockID)
+			return true;
 
 		if (Block.blocksList[bid] instanceof BlockStairs)
-			return false;
-		
+			return true;
+
 		if (Block.blocksList[bid] instanceof BlockHalfSlab) {
 			BlockHalfSlab b=(BlockHalfSlab)Block.blocksList[bid];
-			
+
 			if (!b.isOpaqueCube())
-				return false;
+				return true;
 		}
-		
-		return true;
+
+		return false;
 	}
 
 	public static String getVillagerSentence(MillVillager v, String playerName, boolean nativeSpeech) {

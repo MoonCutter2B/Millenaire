@@ -1645,11 +1645,17 @@ public class Building {
 	public void clearOldPaths() {
 		if (oldPathPointsToClear!=null) {
 			for (final Point p : oldPathPointsToClear) {
-				final int bid=p.getBelow().getId(worldObj);
-				if (MillCommonUtilities.getBlockIdValidGround(bid,true)>0) {
-					p.setBlock(worldObj, MillCommonUtilities.getBlockIdValidGround(bid,true), 0, true, false);
-				} else {
-					p.setBlock(worldObj, Block.dirt.blockID, 0, true, false);
+				final int bid=p.getId(worldObj);
+				final int bidBelow=p.getBelow().getId(worldObj);
+
+				if (bid==Mill.pathSlab.blockID) {
+					p.setBlock(worldObj, 0, 0, true, false);
+				} else if (bid==Mill.path.blockID) {
+					if (MillCommonUtilities.getBlockIdValidGround(bidBelow,true)>0) {
+						p.setBlock(worldObj, MillCommonUtilities.getBlockIdValidGround(bidBelow,true), 0, true, false);
+					} else {
+						p.setBlock(worldObj, Block.dirt.blockID, 0, true, false);
+					}
 				}
 			}
 			oldPathPointsToClear=null;
@@ -3459,7 +3465,7 @@ public class Building {
 
 		return getSellingPos();
 	}
-	
+
 	public Point getLeasurePos() {
 
 		if (leasurePos!=null)
@@ -3966,10 +3972,10 @@ public class Building {
 
 		for (final Building b : getBuildings()) {
 			if ((b.location!=null) && b.location.isInside(p)) {
-				
+
 				if (b.location.tags.contains(tagNoPaths))
 					return true;
-				
+
 				if (b.soils!=null) {
 					for (final Vector<Point> vpoints : b.soils) {
 						if (vpoints.contains(p) || vpoints.contains(above) || vpoints.contains(below))
@@ -5170,8 +5176,8 @@ public class Building {
 		lastPathingUpdate = System.currentTimeMillis();
 	}
 
-	private void recalculatePaths(boolean autobuild) {
-		
+	public void recalculatePaths(boolean autobuild) {
+
 		if (!MLN.BuildVillagePaths)
 			return;
 
@@ -5831,7 +5837,7 @@ public class Building {
 	public void setPathStartPos(Point p) {
 		pathStartPos = p;
 	}
-	
+
 	public void setLeasurePos(Point p) {
 		leasurePos = p;
 	}
@@ -7491,7 +7497,7 @@ public class Building {
 
 		final File file1 = new File(buildingsDir, getPos().getPathString()
 				+ "_bblocks.bin");
-		
+
 		BuildingBlock[] blocks=getBblocks();
 
 		if (blocks!=null) {

@@ -50,6 +50,11 @@ public class GuiActions {
 					ent.constructCalculatedPaths();
 					return;
 				}
+				
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.pathSlab.blockID)) {
+					ent.recalculatePaths(true);
+					return;
+				}
 
 				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.denier_or.itemID)) {
 					ent.displayInfos(player);

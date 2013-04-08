@@ -1911,10 +1911,6 @@ public class BuildingPlan {
 			MLN.error(this, "Has residents but the sleeping pos is missing!");
 		}
 
-		if (!mainChest && (level==0) && ((maleResident.size()>0) || (femaleResident.size()>0) || (tags.size()>0))) {
-			MLN.error(this, "Has residents or tags but the mainchest is missing!");
-		}
-
 		int pigs=0,sheep=0,chicken=0,cow=0;
 
 		for (int i=0;i<nbfloors;i++) {
