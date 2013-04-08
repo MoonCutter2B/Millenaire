@@ -266,6 +266,20 @@ colombages cross;block_wood_id;1;false;36/21/6
 mud brick;block_stone_id;1;false;166/156/136
 cooked brick;block_stone_id;0;false;219/216/207
 
+pathdirt;block_path_id;8;false;200/200/200
+pathgravel;block_path_id;9;false;205/205/205
+pathslabs;block_path_id;10;false;210/210/210
+pathsandstone;block_path_id;11;false;215/215/215
+pathochretiles;block_path_id;12;false;220/220/220
+pathgravelslabs;block_path_id;13;false;225/225/225
+
+pathdirt_half;block_path_slab_id;8;false;150/150/100
+pathgravel_half;block_path_slab_id;9;false;155/155/100
+pathslabs_half;block_path_slab_id;10;false;160/160/100
+pathsandstone_half;block_path_slab_id;11;false;165/165/100
+pathochretiles_half;block_path_slab_id;12;false;170/170/100
+pathgravelslabs_half;block_path_slab_id;13;false;175/175/100
+
 maizesoil;-1;0;;64/128/40
 carrotsoil;-1;0;;64/128/50
 mayanstatue;-1;0;;179/154/118

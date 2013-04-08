@@ -1,5 +1,0 @@
-max:2;priority:5;native:Xylokopos Spiti;around:4;startLevel:-1;orientation:2;male:lumberman_byzantine;female:wife_byzantine;length:8;width:5
-
-priority:10
-
-;pathlevel:1

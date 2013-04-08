@@ -48,16 +48,19 @@ public class GoalClearOldPath extends Goal {
 			MLN.debug(villager, "Clearing old path block: "+p);
 
 		int bid=p.getId(villager.worldObj);
+		int meta=p.getMeta(villager.worldObj);
 
-		if (bid==Mill.pathSlab.blockID) {
-			p.setBlock(villager.worldObj, 0, 0, true, false);		
-		} else if (bid==Mill.path.blockID) {
+		if (meta<8) {//8 and above are stable paths
+			if (bid==Mill.pathSlab.blockID) {
+				p.setBlock(villager.worldObj, 0, 0, true, false);		
+			} else if (bid==Mill.path.blockID) {
 
-			int bidBelow=p.getBelow().getId(villager.worldObj);
-			if (MillCommonUtilities.getBlockIdValidGround(bidBelow,true)>0)
-				p.setBlock(villager.worldObj, MillCommonUtilities.getBlockIdValidGround(bidBelow,true), 0, true, false);
-			else
-				p.setBlock(villager.worldObj, Block.dirt.blockID, 0, true, false);		
+				int bidBelow=p.getBelow().getId(villager.worldObj);
+				if (MillCommonUtilities.getBlockIdValidGround(bidBelow,true)>0)
+					p.setBlock(villager.worldObj, MillCommonUtilities.getBlockIdValidGround(bidBelow,true), 0, true, false);
+				else
+					p.setBlock(villager.worldObj, Block.dirt.blockID, 0, true, false);		
+			}
 		}
 
 		villager.getTownHall().oldPathPointsToClearIndex++;

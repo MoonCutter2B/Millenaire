@@ -3,6 +3,6 @@ max:0;priority:2000;french:Fort;around:4;startLevel:-5;orientation:2;tag:Patrol;
 
 
 
-startLevel:-5;rebuildpath:true
+startLevel:-5;rebuildpath:true;tag:nopaths
 startLevel:-1
 startLevel:-5;subbuilding:fort_A_lefttower;subbuilding:fort_A_righttower

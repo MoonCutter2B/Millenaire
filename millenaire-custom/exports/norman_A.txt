@@ -1,1 +1,0 @@
-max:0;priority:100000;french:Petite maison;around:4;startLevel:-1;orientation:3;width:8;length:5;reputation:64*64;price:10*64

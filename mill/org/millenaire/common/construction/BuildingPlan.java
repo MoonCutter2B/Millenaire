@@ -134,6 +134,7 @@ public class BuildingPlan {
 			}
 			
 			int bid=p.getId(th.worldObj);
+			int meta=p.getMeta(th.worldObj);
 			int bidAbove=p.getAbove().getId(th.worldObj);
 			int bidBelow=p.getBelow().getId(th.worldObj);
 			
@@ -150,10 +151,9 @@ public class BuildingPlan {
 					p.getBelow().setBlock(th.worldObj, Block.dirt.blockID, 0, true, false);
 			}
 			
-			if (bid!=Mill.path.blockID && bid!=Mill.pathSlab.blockID && MillCommonUtilities.canPathBeBuiltHere(bid)) {
+			if (bid!=Mill.path.blockID && bid!=Mill.pathSlab.blockID && MillCommonUtilities.canPathBeBuiltHere(bid,meta)) {
 				build(th.worldObj, false, false);
 			} else {
-				int meta=p.getMeta(th.worldObj);
 
 				int currentPathLevel=Integer.MAX_VALUE;
 
@@ -1368,6 +1368,7 @@ public class BuildingPlan {
 		//First all the "normal" blocks:
 		for (final PointType pt : colourPoints.values()) {
 			if (pt.name==null) {
+				
 				reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.blockId, pt.meta), pt);
 
 				if ((pt.blockId==Block.torchWood.blockID) ||
@@ -1375,6 +1376,8 @@ public class BuildingPlan {
 					for (int i=0;i<16;i++) {
 						reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.blockId, i), pt);
 					}
+				} else if (pt.blockId==Mill.path.blockID || pt.blockId==Mill.pathSlab.blockID) {
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.blockId, pt.meta & 7), pt);
 				}
 
 			}

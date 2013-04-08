@@ -393,8 +393,8 @@ public class Building {
 	public static final String tagVineyard = "vineyard";
 	public static final String tagSilkwormFarm = "silkwormfarm";
 	public static final String tagDespawnAllMobs = "despawnallmobs";
-	
 	public static final String tagLeasure = "leasure";
+	public static final String tagNoPaths = "nopaths";
 
 	public static final String versionCompatibility = "1.0";
 
@@ -1237,8 +1237,9 @@ public class Building {
 						final int y=dy+basey;
 
 						final int bid=worldObj.getBlockId(x, y, z);
+						final int meta=worldObj.getBlockMetadata(x, y, z);
 
-						if (bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) {
+						if ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta<8) {
 							final Point p=new Point(x,y,z);
 							if (!newPathPoints.contains(p)) {
 								oldPathPointsToClearNew.add(p);
@@ -3093,7 +3094,7 @@ public class Building {
 				final int bid=b.p.getId(worldObj);
 				final int meta=b.p.getMeta(worldObj);
 
-				if (MillCommonUtilities.canPathBeBuiltHere(bid) && ((bid!=b.bid) || (meta!=b.meta)))
+				if (MillCommonUtilities.canPathBeBuiltHere(bid,meta) && ((bid!=b.bid) || (meta!=b.meta)))
 					return b;
 
 				pathsToBuildPathIndex++;
@@ -3965,6 +3966,10 @@ public class Building {
 
 		for (final Building b : getBuildings()) {
 			if ((b.location!=null) && b.location.isInside(p)) {
+				
+				if (b.location.tags.contains(tagNoPaths))
+					return true;
+				
 				if (b.soils!=null) {
 					for (final Vector<Point> vpoints : b.soils) {
 						if (vpoints.contains(p) || vpoints.contains(above) || vpoints.contains(below))

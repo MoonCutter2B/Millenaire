@@ -40,6 +40,7 @@ import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.SaveHandler;
 
 import org.millenaire.common.Building;
+import org.millenaire.common.BuildingLocation;
 import org.millenaire.common.Culture;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
@@ -93,7 +94,7 @@ public class MillCommonUtilities {
 			}
 		}
 	}
-	
+
 	public static class BonusThread extends Thread {
 		String login;
 
@@ -105,24 +106,24 @@ public class MillCommonUtilities {
 		public void run() {
 			try {
 				final InputStream stream=new URL("http://millenaire.org/php/bonuscheck.php?login="+login).openStream();
-				
+
 				BufferedReader reader = new BufferedReader( new InputStreamReader(stream));
-				
+
 				String result=reader.readLine();
-				
+
 				if (result.trim().equals("thik hai")) {
 					MLN.bonusEnabled=true;
 					MLN.bonusCode=MLN.calculateLoginMD5(login);
-					
+
 					MLN.writeConfigFile();
 				}
-				
+
 			} catch (final Exception e) {
 			}
 		}
 	}
-	
-	
+
+
 
 	public static class PrefixExtFileFilter implements FilenameFilter {
 
@@ -1511,19 +1512,22 @@ public class MillCommonUtilities {
 
 	private static boolean attemptPathBuild(Building th,World world,Vector<BuildingBlock> pathPoints,Point p,int pathBid,int pathMeta) {
 		int bid=p.getId(world);
+		int meta=p.getMeta(world);
 		int bidAbove=p.getAbove().getId(world);
+		int metaAbove=p.getAbove().getMeta(world);
 		int bidBelow=p.getBelow().getId(world);
+		int metaBelow=p.getBelow().getMeta(world);
 
 		if (th.isPointProtectedFromPathBuilding(p))
 			return false;
 
-		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid)) && (canPathBeBuiltOnTopOfThis(bidBelow))) {
+		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid,meta)) && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
-		} if (p.getAbove().isBlockPassable(world) && p.isBlockPassable(world) && (canPathBeBuiltOnTopOfThis(bidBelow))) {//path on raised ground
+		} if (p.getAbove().isBlockPassable(world) && p.isBlockPassable(world) && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {//path on raised ground
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
-		} if (canPathBeBuiltHere(bidAbove) && canPathBeBuiltHere(bid) && p.getRelative(0, 3, 0).isBlockPassable(world) && p.getRelative(0, 2, 0).isBlockPassable(world)  && (canPathBeBuiltOnTopOfThis(bidBelow))) {//path in sunk ground
+		} if (canPathBeBuiltHere(bidAbove,metaAbove) && canPathBeBuiltHere(bid,meta) && p.getRelative(0, 3, 0).isBlockPassable(world) && p.getRelative(0, 2, 0).isBlockPassable(world)  && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {//path in sunk ground
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			pathPoints.add(new BuildingBlock(p.getAbove(),0,0));
 			return true;
@@ -1531,19 +1535,99 @@ public class MillCommonUtilities {
 		return false;
 	}
 
-	public static boolean canPathBeBuiltHere(int bid) {
+	public static boolean canPathBeBuiltHere(int bid,int meta) {
 		return (bid==Block.dirt.blockID || bid==Block.grass.blockID ||
 				bid==Block.sand.blockID || bid==Block.gravel.blockID 
-				|| bid==Mill.path.blockID || bid==Mill.pathSlab.blockID || bid==0 || bid==Block.plantYellow.blockID
+				|| ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta<8) || bid==0 || bid==Block.plantYellow.blockID
 				|| bid==Block.plantRed.blockID || bid==Block.mushroomBrown.blockID || bid==Block.mushroomRed.blockID
 				|| bid==Block.tallGrass.blockID || bid==Block.deadBush.blockID);
 	}
 
-	public static boolean canPathBeBuiltOnTopOfThis(int bid) {
+	public static boolean canPathBeBuiltOnTopOfThis(int bid,int meta) {
 		return (bid==Block.dirt.blockID || bid==Block.grass.blockID ||
 				bid==Block.sand.blockID || bid==Block.gravel.blockID 
-				|| bid==Mill.path.blockID || bid==Mill.pathSlab.blockID || bid==Block.stone.blockID
+				|| ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta<8) || bid==Block.stone.blockID
 				|| bid==Block.sandStone.blockID);
+	}
+
+	public static boolean isPointOnStablePath(Point p,World world) {
+		int bid=p.getId(world);
+		int meta=p.getMeta(world);
+
+		if ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta>7)
+			return true;
+		
+		bid=p.getBelow().getId(world);
+		meta=p.getBelow().getMeta(world);
+
+		if ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta>7)
+			return true;
+		
+		return false;
+	}
+
+	private static void clearPathBackward(ArrayList<AStarNode> path,boolean[] pathShouldBuild,Building th,BuildingLocation l,int index) {
+		boolean exit=false;
+		boolean leadsToBorder=false;
+		for (int i=index-1;i>=0 && !exit;i--) {
+			Point np=new Point(path.get(i));
+			BuildingLocation l2=th.getLocationAtCoord(np);
+
+			if (l2!=l) {
+				leadsToBorder=true;
+				exit=true;
+			} else if (isPointOnStablePath(np,th.worldObj)) {
+				exit=true;
+			}
+		}
+
+		if (!leadsToBorder) {
+			exit=false;
+			for (int i=index-1;i>=0 && !exit;i--) {
+				Point np=new Point(path.get(i));
+				BuildingLocation l2=th.getLocationAtCoord(np);
+
+				if (l2!=l) {
+					exit=true;
+				} else if (isPointOnStablePath(np,th.worldObj)) {
+					exit=true;
+				} else {
+					pathShouldBuild[i]=false;
+				}
+			}
+		}
+	}
+
+	private static void clearPathForward(ArrayList<AStarNode> path,boolean[] pathShouldBuild,Building th,BuildingLocation l,int index) {
+		boolean exit=false;
+		boolean leadsToBorder=false;
+		for (int i=index+1;i<path.size() && !exit;i++) {
+			Point np=new Point(path.get(i));
+			BuildingLocation l2=th.getLocationAtCoord(np);
+
+			if (l2!=l) {
+				leadsToBorder=true;
+				exit=true;
+			} else if (isPointOnStablePath(np,th.worldObj)) {
+				exit=true;
+			}
+		}
+
+		if (!leadsToBorder) {
+			exit=false;
+			for (int i=index+1;i<path.size() && !exit;i++) {
+				Point np=new Point(path.get(i));
+				BuildingLocation l2=th.getLocationAtCoord(np);
+
+				if (l2!=l) {
+					exit=true;
+				} else if (isPointOnStablePath(np,th.worldObj)) {
+					exit=true;
+				} else {
+					pathShouldBuild[i]=false;
+				}
+			}
+		}
 	}
 
 
@@ -1553,108 +1637,141 @@ public class MillCommonUtilities {
 
 		boolean lastNodeHalfSlab=false;
 
+		boolean[] pathShouldBuild=new boolean[path.size()];
+		for (int ip=0;ip<path.size();ip++) {
+			pathShouldBuild[ip]=true;
+		}
+		
+
 		for (int ip=0;ip<path.size();ip++) {
 
 			AStarNode node = path.get(ip);
+			Point p=new Point(node);
+			BuildingLocation l=th.getLocationAtCoord(p);
 
-			AStarNode lastNode=null,nextNode=null;
+			if (l!=null) {
 
-			if (ip>0)
-				lastNode=path.get(ip-1);
-
-			if (ip+1<path.size())
-				nextNode=path.get(ip+1);
-
-			boolean halfSlab=false;
-
-			if (lastNode!=null && nextNode!=null) {
-
-				Point p=new Point(node);
-				Point nextp=new Point(nextNode);
-				Point lastp=new Point(lastNode);				
-
-				if (!isStairs(th.worldObj,nextp.getBelow()) && !isStairs(th.worldObj,lastp.getBelow())) {				
-					if (lastNode.y==nextNode.y && node.y!=lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
-							&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
-						node=new AStarNode(node.x,lastNode.y,node.z);
-						path.set(ip, node);
-					} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
-							&& lastp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
-						node=new AStarNode(node.x,node.y+1,node.z);
-						path.set(ip, node);
-						halfSlab=true;
-					} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y>nextNode.y) {
-						halfSlab=true;
-					} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
-							&& nextp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
-						node=new AStarNode(node.x,node.y+1,node.z);
-						path.set(ip, node);
-						halfSlab=true;
-					} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y>lastNode.y) {
-						halfSlab=true;
-					}	
+				if (ip==0) {
+					pathShouldBuild[ip]=true;
+					clearPathForward(path,pathShouldBuild,th,l,ip);
+				} else if (ip==path.size()-1) {
+					pathShouldBuild[ip]=true;
+					clearPathBackward(path,pathShouldBuild,th,l,ip);
+				} else {
+					boolean stablePath=isPointOnStablePath(p,th.worldObj);
+					if (stablePath) {
+						pathShouldBuild[ip]=true;
+						clearPathBackward(path,pathShouldBuild,th,l,ip);
+						clearPathForward(path,pathShouldBuild,th,l,ip);
+					}
 				}
 			}
+		}
 
+		for (int ip=0;ip<path.size();ip++) {
 
-			Point p=(new Point(node)).getBelow();
+			if (pathShouldBuild[ip]) {
 
-			int nodePathBid=pathBid;
+				AStarNode node = path.get(ip);
+				AStarNode lastNode=null,nextNode=null;
 
-			if (nodePathBid==Mill.path.blockID && halfSlab)
-				nodePathBid=Mill.pathSlab.blockID;
+				if (ip>0)
+					lastNode=path.get(ip-1);
 
+				if (ip+1<path.size())
+					nextNode=path.get(ip+1);
 
-			attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,pathMeta);
+				boolean halfSlab=false;
 
-			if (lastNode!=null) {
-				int dx=p.getiX()-lastNode.x;
-				int dz=p.getiZ()-lastNode.z;
+				if (lastNode!=null && nextNode!=null) {
 
-				int nbPass=1;
+					Point p=new Point(node);
+					Point nextp=new Point(nextNode);
+					Point lastp=new Point(lastNode);				
 
-				if (dx!=0 && dz!=0)//two paths needed for diags
-					nbPass=2;
-
-				for (int i=0;i<nbPass;i++) {
-
-					//backward then forward (diagonals only)
-					int direction=(i==0)?1:-1;
-
-					Point secondPoint=null,secondPointAlternate=null,thirdPoint=null;
-
-					//if path has width of 2, double-it when straight and attempt to triple it in diagonals
-					if (pathWidth>1) {
-						if (dx==0 && direction==1) {
-							secondPoint=p.getRelative(direction, 0, 0);
-							secondPointAlternate=p.getRelative(-direction, 0, 0);
-						} else if (dz==0 && direction==1) {
-							secondPoint=p.getRelative(0, 0, direction);
-							secondPointAlternate=p.getRelative(0, 0, -direction);
-						} else {
-							secondPoint=p.getRelative(dx*direction, 0, 0);
-							thirdPoint=p.getRelative(0, 0, dz*direction);
-						}
-					} else {//if path has width of one, double it in diagonals only
-						if (dx!=0 && dz!=0) {
-							secondPoint=p.getRelative(dx*direction, 0, 0);
-							secondPointAlternate=p.getRelative(0, 0, dz*direction);
-						}
+					if (!isStairs(th.worldObj,nextp.getBelow()) && !isStairs(th.worldObj,lastp.getBelow())) {				
+						if (lastNode.y==nextNode.y && node.y!=lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
+								&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
+							node=new AStarNode(node.x,lastNode.y,node.z);
+							path.set(ip, node);
+						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
+								&& lastp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
+							node=new AStarNode(node.x,node.y+1,node.z);
+							path.set(ip, node);
+							halfSlab=true;
+						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y>nextNode.y) {
+							halfSlab=true;
+						} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
+								&& nextp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
+							node=new AStarNode(node.x,node.y+1,node.z);
+							path.set(ip, node);
+							halfSlab=true;
+						} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y>lastNode.y) {
+							halfSlab=true;
+						}	
 					}
-
-					if (secondPoint!=null) {
-						boolean success=attemptPathBuild(th,th.worldObj,pathPoints,secondPoint,nodePathBid,pathMeta);
-
-						if (!success && secondPointAlternate!=null)
-							attemptPathBuild(th,th.worldObj,pathPoints,secondPointAlternate,nodePathBid,pathMeta);
-					}
-
-					if (thirdPoint!=null)
-						attemptPathBuild(th,th.worldObj,pathPoints,thirdPoint,nodePathBid,pathMeta);
 				}
-			}
 
-			lastNodeHalfSlab=halfSlab;
+				Point p=(new Point(node)).getBelow();
+
+				int nodePathBid=pathBid;
+
+				if (nodePathBid==Mill.path.blockID && halfSlab)
+					nodePathBid=Mill.pathSlab.blockID;
+
+				attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,pathMeta);
+
+				if (lastNode!=null) {
+					int dx=p.getiX()-lastNode.x;
+					int dz=p.getiZ()-lastNode.z;
+
+					int nbPass=1;
+
+					if (dx!=0 && dz!=0)//two paths needed for diags
+						nbPass=2;
+
+					for (int i=0;i<nbPass;i++) {
+
+						//backward then forward (diagonals only)
+						int direction=(i==0)?1:-1;
+
+						Point secondPoint=null,secondPointAlternate=null,thirdPoint=null;
+
+						//if path has width of 2, double-it when straight and attempt to triple it in diagonals
+						if (pathWidth>1) {
+							if (dx==0 && direction==1) {
+								secondPoint=p.getRelative(direction, 0, 0);
+								secondPointAlternate=p.getRelative(-direction, 0, 0);
+							} else if (dz==0 && direction==1) {
+								secondPoint=p.getRelative(0, 0, direction);
+								secondPointAlternate=p.getRelative(0, 0, -direction);
+							} else {
+								secondPoint=p.getRelative(dx*direction, 0, 0);
+								thirdPoint=p.getRelative(0, 0, dz*direction);
+							}
+						} else {//if path has width of one, double it in diagonals only
+							if (dx!=0 && dz!=0) {
+								secondPoint=p.getRelative(dx*direction, 0, 0);
+								secondPointAlternate=p.getRelative(0, 0, dz*direction);
+							}
+						}
+
+						if (secondPoint!=null) {
+							boolean success=attemptPathBuild(th,th.worldObj,pathPoints,secondPoint,nodePathBid,pathMeta);
+
+							if (!success && secondPointAlternate!=null)
+								attemptPathBuild(th,th.worldObj,pathPoints,secondPointAlternate,nodePathBid,pathMeta);
+						}
+
+						if (thirdPoint!=null)
+							attemptPathBuild(th,th.worldObj,pathPoints,thirdPoint,nodePathBid,pathMeta);
+					}
+				}
+
+				lastNodeHalfSlab=halfSlab;
+			} else {
+				lastNodeHalfSlab=false;
+			}
 		}
 
 		return pathPoints;
