@@ -67,9 +67,9 @@ spawn_protection_radius=150
 //Chunk Loaded Radius; Radius around the player in which Millénaire will attempt to keep villages' chunks loaded. Default: 200.
 keep_active_radius=200
 
-//Rayon des villages; Rayon des villages normaux (pas des hameaux). Défaut: 60.
-//Radius of Villages; Radius of normal villages (not hamlets). Default: 60.
-village_radius=60
+//Rayon des villages; Rayon des villages normaux (pas des hameaux). Défaut: 65.
+//Radius of Villages; Radius of normal villages (not hamlets). Default: 65.
+village_radius=65
 
 //Distance min entre bâtiments; Distance minimale entre deux bâtiments d'un village. Défaut: 2.
 //Min Distance Between Buildings; Minimal distance between two buildings in a village. Default: 2.
