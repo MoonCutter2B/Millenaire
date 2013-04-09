@@ -1514,17 +1514,13 @@ public class MillCommonUtilities {
 	private static boolean attemptPathBuild(Building th,World world,Vector<BuildingBlock> pathPoints,Point p,int pathBid,int pathMeta) {
 		int bid=p.getId(world);
 		int meta=p.getMeta(world);
-		int bidAbove=p.getAbove().getId(world);
-		int metaAbove=p.getAbove().getMeta(world);
+		//int bidAbove=p.getAbove().getId(world);
+		//int metaAbove=p.getAbove().getMeta(world);
 		int bidBelow=p.getBelow().getId(world);
 		int metaBelow=p.getBelow().getMeta(world);
 
 		if (th.isPointProtectedFromPathBuilding(p))
 			return false;
-
-		if (pathBid==Mill.path.blockID && bid==Mill.pathSlab.blockID) {
-			MLN.temp(null, "Attempting to replace slab by path! at: "+p);
-		}
 		
 		if (bid==Mill.pathSlab.blockID && pathBid==Mill.path.blockID)
 			pathBid=Mill.pathSlab.blockID;
@@ -1532,14 +1528,15 @@ public class MillCommonUtilities {
 		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid,meta)) && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
-		} if (p.getAbove().isBlockPassable(world) && p.isBlockPassable(world) && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {//path on raised ground
-			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
-			return true;
-		} if (canPathBeBuiltHere(bidAbove,metaAbove) && canPathBeBuiltHere(bid,meta) && p.getRelative(0, 3, 0).isBlockPassable(world) && p.getRelative(0, 2, 0).isBlockPassable(world)  && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {//path in sunk ground
-			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
-			pathPoints.add(new BuildingBlock(p.getAbove(),0,0));
-			return true;
-		} 
+		}
+		//if (p.getAbove().isBlockPassable(world) && p.isBlockPassable(world) && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {//path on raised ground
+		//	pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
+		//	return true;
+		//} if (canPathBeBuiltHere(bidAbove,metaAbove) && canPathBeBuiltHere(bid,meta) && p.getRelative(0, 3, 0).isBlockPassable(world) && p.getRelative(0, 2, 0).isBlockPassable(world)  && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {//path in sunk ground
+		//	pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
+		//	pathPoints.add(new BuildingBlock(p.getAbove(),0,0));
+		//	return true;
+		//} 
 		return false;
 	}
 
@@ -1701,13 +1698,21 @@ public class MillCommonUtilities {
 					if (!isStairsOrSlabOrChest(th.worldObj,nextp.getBelow()) && !isStairsOrSlabOrChest(th.worldObj,lastp.getBelow())
 							&& ((p.x==lastp.x && p.x==nextp.x) || (p.z==lastp.z && p.z==nextp.z) || true)) {
 
-						//straightening path:   1?1 to 111
-						if (lastNode.y==nextNode.y && node.y!=lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
+						//straightening path:   1 0 1 to 1 0.5 1
+						if (lastNode.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
 								&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,lastNode.y,node.z);
 							path.set(ip, node);
+							halfSlab=true;
 
-							MLN.temp(null, "1?1 to 111 at: "+p);
+							MLN.temp(null, "1 0 1 to 1 0.5 1 at: "+p);
+						
+							//straightening path:   1 2 1 to 1 1.5 1
+						} else if (lastNode.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
+								&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
+							halfSlab=true;
+
+							MLN.temp(null, "1 0 1 to 1 0.5 1 at: "+p);
 
 							//slab a block above:    1 1 2 to 1 1.5 2
 						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)

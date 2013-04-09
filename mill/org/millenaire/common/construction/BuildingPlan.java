@@ -154,12 +154,15 @@ public class BuildingPlan {
 			if (bid!=Mill.path.blockID && bid!=Mill.pathSlab.blockID && MillCommonUtilities.canPathBeBuiltHere(bid,meta)) {
 				build(th.worldObj, false, false);
 			} else {
+				
+				if (this.bid==Mill.path.blockID && bid==Mill.pathSlab.blockID) {
+					this.bid=(short) Mill.pathSlab.blockID;
+				}
 
 				int currentPathLevel=Integer.MAX_VALUE;
 
 				for (int i=0;i<th.villageType.pathMaterial.size();i++) {
-					if (th.villageType.pathMaterial.get(i).id()==bid
-							&& th.villageType.pathMaterial.get(i).meta==meta)
+					if (th.villageType.pathMaterial.get(i).meta==meta)
 						currentPathLevel=i;
 				}
 
@@ -1856,7 +1859,7 @@ public class BuildingPlan {
 			alphaLayer=true;
 		}
 
-		boolean sleepingPos=false,mainChest=false;;
+		boolean sleepingPos=false;
 
 		for (int i=0;i<nbfloors;i++) {
 			for (int j=0;j<length;j++) {
@@ -1886,10 +1889,6 @@ public class BuildingPlan {
 
 					if (bsleepingPos.equals(plan[i][j][k].name)) {
 						sleepingPos=true;
-					}
-
-					if (bmainchest.equals(plan[i][j][k].name)) {
-						mainChest=true;
 					}
 
 					if ((plan[i][j][k].name!=null) && plan[i][j][k].name.equals(bmainchest) && (level>0)) {

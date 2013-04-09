@@ -108,9 +108,9 @@ Roche: 682
 Statue Hindoue: 3
 Pierres: 206
 Grès: 1882
-Brique cuite: 5798
-Brique de terre: 5628
-Bois (tous): 771
+Brique cuite: 5804
+Brique de terre: 5710
+Bois (tous): 774
 
 indian_agricole_hamlet resource use: 
 Bois de chêne: 534
@@ -119,9 +119,9 @@ Roche: 682
 Statue Hindoue: 3
 Pierres: 190
 Grès: 1882
-Brique cuite: 5568
-Brique de terre: 5141
-Bois (tous): 720
+Brique cuite: 5574
+Brique de terre: 5223
+Bois (tous): 723
 
 indian_controlled resource use: 
 Bois de chêne: 172
@@ -129,9 +129,9 @@ Roche: 648
 Statue Hindoue: 2
 Pierres: 100
 Grès: 4329
-Brique cuite: 1045
-Brique de terre: 804
-Bois (tous): 269
+Brique cuite: 1047
+Brique de terre: 805
+Bois (tous): 270
 
 indian_fort resource use: 
 Bois de chêne: 590
@@ -140,18 +140,18 @@ Roche: 1031
 Statue Hindoue: 3
 Pierres: 212
 Grès: 3191
-Brique cuite: 4874
-Brique de terre: 6546
-Bois (tous): 868
+Brique cuite: 4880
+Brique de terre: 6628
+Bois (tous): 873
 
 indian_fort_hamlet resource use: 
 Bois de chêne: 516
 Roche: 349
 Pierres: 188
 Grès: 2990
-Brique cuite: 4160
-Brique de terre: 5168
-Bois (tous): 751
+Brique cuite: 4164
+Brique de terre: 5209
+Bois (tous): 755
 
 indian_palace resource use: 
 Bois de chêne: 259
@@ -159,22 +159,22 @@ Roche: 648
 Statue Hindoue: 2
 Pierres: 218
 Grès: 5353
-Brique cuite: 3977
-Brique de terre: 2698
-Bois (tous): 688
+Brique cuite: 3979
+Brique de terre: 2738
+Bois (tous): 691
 
 
 adivasifarm resource use: 
 Bois de chêne: 145
-Brique cuite: 79
-Brique de terre: 79
-Bois (tous): 40
+Brique cuite: 81
+Brique de terre: 120
+Bois (tous): 41
 
 adivasifarmquest resource use: 
 Bois de chêne: 145
-Brique cuite: 79
-Brique de terre: 79
-Bois (tous): 40
+Brique cuite: 81
+Brique de terre: 120
+Bois (tous): 41
 
 deserttradeoutpost resource use: 
 Brique cuite: 295
@@ -214,34 +214,34 @@ gunji resource use:
 Pierre taillées craquelées: 26
 Laine blanche: 279
 Roche: 9940
-Bois de sapin: 2978
+Bois de sapin: 2975
 Pierres: 1415
 Paroi de papier: 682
 Sable: 232
 Hautes herbes: 168
 Bibliothèque: 12
-Gravier: 2622
+Gravier: 564
 Colombages à croix: 63
-Bois de chêne: 4784
-Colombages: 3147
+Bois de chêne: 4783
+Colombages: 3145
 Lingot d'or: 54
 Fougère: 117
 Lingot de fer: 36
 Chaume: 7255
-Bois (tous): 1455
+Bois (tous): 1474
 
 japanese_controlled resource use: 
 Bois de chêne: 992
 Roche: 1785
 Laine blanche: 55
-Bois de sapin: 578
+Bois de sapin: 577
 Pierres: 129
 Paroi de papier: 95
 Colombages: 483
 Chaume: 1733
-Gravier: 364
+Gravier: 2
 Colombages à croix: 25
-Bois (tous): 271
+Bois (tous): 294
 
 nogyo resource use: 
 Laine blanche: 248
@@ -252,14 +252,14 @@ Paroi de papier: 687
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
-Gravier: 2081
+Gravier: 547
 Colombages à croix: 63
-Bois de chêne: 5172
+Bois de chêne: 5171
 Colombages: 3319
 Fougère: 117
 Lingot de fer: 18
 Chaume: 8849
-Bois (tous): 1653
+Bois (tous): 1668
 
 seiji resource use: 
 Pierre taillées craquelées: 26
@@ -271,15 +271,15 @@ Paroi de papier: 849
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
-Gravier: 3349
+Gravier: 649
 Colombages à croix: 63
-Bois de chêne: 6402
+Bois de chêne: 6401
 Lingot d'or: 54
 Colombages: 3915
 Fougère: 117
 Lingot de fer: 108
 Chaume: 8671
-Bois (tous): 1871
+Bois (tous): 1888
 
 
 bandit_cave resource use: 
@@ -356,46 +356,46 @@ agriculture resource use:
 Bois de chêne: 562
 Laine blanche: 27
 Sculpture Maya: 8
-Roche: 10574
-Pierres: 14924
+Roche: 10858
+Pierres: 15162
 Bois tropical: 224
 Grès: 13
 Bibliothèque: 48
 Décoration en or: 147
-Bois (tous): 979
+Bois (tous): 965
 
 mayan_controlled resource use: 
 Bois de chêne: 73
 Sculpture Maya: 3
-Roche: 2293
-Pierres: 4563
+Roche: 2365
+Pierres: 4612
 Bois tropical: 82
 Décoration en or: 91
-Bois (tous): 239
+Bois (tous): 237
 
 military resource use: 
 Bois de chêne: 502
 Laine blanche: 21
 Sculpture Maya: 3
-Roche: 10473
-Pierres: 15747
+Roche: 10615
+Pierres: 15879
 Bois tropical: 82
 Grès: 5
 Bibliothèque: 48
 Décoration en or: 144
-Bois (tous): 1035
+Bois (tous): 1028
 
 religious resource use: 
 Bois de chêne: 471
 Laine blanche: 21
 Sculpture Maya: 6
-Roche: 10663
-Pierres: 14456
+Roche: 10877
+Pierres: 14624
 Bois tropical: 124
-Grès: 135
+Grès: 136
 Bibliothèque: 48
 Décoration en or: 157
-Bois (tous): 939
+Bois (tous): 924
 
 
 lonemayancave resource use: 
@@ -483,7 +483,7 @@ Lingot de fer: 25
 Verre: 297
 Bibliothèque: 6
 Colombages à croix: 655
-Bois (tous): 1215
+Bois (tous): 1214
 
 artisans resource use: 
 Bois de chêne: 2231
@@ -496,7 +496,7 @@ Lingot de fer: 61
 Verre: 301
 Bibliothèque: 6
 Colombages à croix: 429
-Bois (tous): 1022
+Bois (tous): 1021
 
 bourg_autonome resource use: 
 Bois de chêne: 2525
@@ -510,7 +510,7 @@ Lingot de fer: 61
 Verre: 315
 Bibliothèque: 6
 Colombages à croix: 518
-Bois (tous): 1144
+Bois (tous): 1143
 
 controlled resource use: 
 Bois de chêne: 472
@@ -532,7 +532,7 @@ Colombages: 1271
 Verre: 268
 Bibliothèque: 6
 Colombages à croix: 537
-Bois (tous): 1089
+Bois (tous): 1088
 
 grosbourg resource use: 
 Bois de chêne: 1374
@@ -546,7 +546,7 @@ Lingot de fer: 61
 Verre: 240
 Bibliothèque: 6
 Colombages à croix: 212
-Bois (tous): 731
+Bois (tous): 730
 
 hameau_abbatiale resource use: 
 Bois de chêne: 1175
@@ -590,7 +590,7 @@ Lingot de fer: 43
 Verre: 207
 Bibliothèque: 6
 Colombages à croix: 389
-Bois (tous): 921
+Bois (tous): 920
 
 
 abandonedmine resource use: 
@@ -4607,10 +4607,10 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Brique de terre
-| style="text-align: center; "|35
+| style="text-align: center; "|70
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|3
+| style="text-align: center; "|4
 |}
 
 
@@ -4620,19 +4620,8 @@ Upgrade 1
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
-| style="text-align: center; "|Brique de terre
-| style="text-align: center; "|34
-|}
-
-
-Upgrade 2
-
-{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
-! scope="col"|Resource
-! scope="col"|Quantity
-|-
 | style="text-align: center; "|Brique cuite
-| style="text-align: center; "|68
+| style="text-align: center; "|70
 |}
 
 
@@ -4983,10 +4972,10 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Brique de terre
-| style="text-align: center; "|39
+| style="text-align: center; "|78
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|2
+| style="text-align: center; "|4
 |}
 
 
@@ -5051,10 +5040,10 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Brique de terre
-| style="text-align: center; "|20
+| style="text-align: center; "|42
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|2
+| style="text-align: center; "|1
 |}
 
 
@@ -5064,19 +5053,8 @@ Upgrade 1
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
-| style="text-align: center; "|Brique de terre
-| style="text-align: center; "|20
-|}
-
-
-Upgrade 2
-
-{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
-! scope="col"|Resource
-! scope="col"|Quantity
-|-
 | style="text-align: center; "|Brique cuite
-| style="text-align: center; "|40
+| style="text-align: center; "|42
 |}
 
 
@@ -5339,25 +5317,14 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Brique de terre
-| style="text-align: center; "|19
+| style="text-align: center; "|38
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|3
+| style="text-align: center; "|1
 |}
 
 
 Upgrade 1
-
-{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
-! scope="col"|Resource
-! scope="col"|Quantity
-|-
-| style="text-align: center; "|Brique de terre
-| style="text-align: center; "|19
-|}
-
-
-Upgrade 2
 
 {| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
 ! scope="col"|Resource
@@ -6253,7 +6220,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|3
+| style="text-align: center; "|10
 |}
 
 
@@ -6276,7 +6243,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|3
+| style="text-align: center; "|11
 |}
 
 
@@ -6299,7 +6266,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|3
+| style="text-align: center; "|11
 |}
 
 
@@ -6346,9 +6313,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Bois de chêne
 | style="text-align: center; "|11
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|10
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|1
@@ -6414,7 +6378,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|4
+| style="text-align: center; "|2
 |}
 
 
@@ -6426,9 +6390,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|3
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|344
 |}
 
 
@@ -6630,7 +6591,7 @@ Initial Construction
 | style="text-align: center; "|153
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|14
+| style="text-align: center; "|12
 |}
 
 
@@ -6657,7 +6618,7 @@ Initial Construction
 | style="text-align: center; "|33
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|4
+| style="text-align: center; "|2
 |}
 
 
@@ -6672,9 +6633,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|4
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|40
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|2
@@ -6741,9 +6699,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Chaume
 | style="text-align: center; "|117
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|24
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|15
@@ -7210,9 +7165,6 @@ Upgrade 1
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|51
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|12
 |}
@@ -7226,9 +7178,6 @@ Upgrade 2
 |-
 | style="text-align: center; "|Bois de chêne
 | style="text-align: center; "|22
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|108
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|16
@@ -7269,9 +7218,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Bois de chêne
 | style="text-align: center; "|10
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|88
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|2
@@ -7325,9 +7271,6 @@ Initial Construction
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|68
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|213
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|32
 |}
@@ -7347,9 +7290,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|20
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|81
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|14
@@ -7379,9 +7319,6 @@ Upgrade 2
 |-
 | style="text-align: center; "|Colombages
 | style="text-align: center; "|57
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|10
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|27
@@ -7814,9 +7751,6 @@ Initial Construction
 | style="text-align: center; "|Chaume
 | style="text-align: center; "|139
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|17
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|27
 |}
@@ -7870,6 +7804,9 @@ Upgrade 3
 |-
 | style="text-align: center; "|Paroi de papier
 | style="text-align: center; "|6
+|-
+| style="text-align: center; "|Gravier
+| style="text-align: center; "|9
 |}
 
 
@@ -7909,9 +7846,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|14
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|12
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|3
@@ -7987,9 +7921,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Chaume
 | style="text-align: center; "|303
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|104
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|9
@@ -8394,7 +8325,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois de chêne
-| style="text-align: center; "|5
+| style="text-align: center; "|4
 |-
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|33
@@ -8750,9 +8681,6 @@ Upgrade 1
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|27
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|226
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|2
 |}
@@ -8800,9 +8728,6 @@ Upgrade 4
 |-
 | style="text-align: center; "|Roche
 | style="text-align: center; "|472
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|63
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|36
@@ -8871,9 +8796,6 @@ Upgrade 1
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|27
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|226
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|2
 |}
@@ -8921,9 +8843,6 @@ Upgrade 4
 |-
 | style="text-align: center; "|Roche
 | style="text-align: center; "|472
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|63
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|36
@@ -8994,9 +8913,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|72
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|588
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|90
@@ -9169,9 +9085,6 @@ Upgrade 2
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|12
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|10
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|6
 |}
@@ -9248,9 +9161,6 @@ Upgrade 2
 |-
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|16
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|10
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|2
@@ -9335,9 +9245,6 @@ Upgrade 2
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|9
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|10
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|7
 |}
@@ -9382,7 +9289,7 @@ Initial Construction
 | style="text-align: center; "|50
 |-
 | style="text-align: center; "|Bois de sapin
-| style="text-align: center; "|154
+| style="text-align: center; "|153
 |-
 | style="text-align: center; "|Chaume
 | style="text-align: center; "|491
@@ -9406,9 +9313,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Chaume
 | style="text-align: center; "|114
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|212
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|15
@@ -9473,9 +9377,6 @@ Upgrade 4
 | style="text-align: center; "|Paroi de papier
 | style="text-align: center; "|18
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|61
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|14
 |}
@@ -9495,9 +9396,6 @@ Upgrade 5
 |-
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|12
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|49
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|20
@@ -9592,9 +9490,6 @@ Initial Construction
 | style="text-align: center; "|Colombages
 | style="text-align: center; "|230
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|28
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|18
 |}
@@ -9683,9 +9578,6 @@ Initial Construction
 | style="text-align: center; "|Chaume
 | style="text-align: center; "|359
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|42
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|58
 |}
@@ -9705,9 +9597,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|39
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|145
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|8
@@ -9761,9 +9650,6 @@ Upgrade 3
 | style="text-align: center; "|Chaume
 | style="text-align: center; "|81
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|229
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|10
 |}
@@ -9807,9 +9693,6 @@ Upgrade 5
 | style="text-align: center; "|Paroi de papier
 | style="text-align: center; "|36
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|99
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|10
 |}
@@ -9839,9 +9722,6 @@ Upgrade 6
 | style="text-align: center; "|Colombages
 | style="text-align: center; "|142
 |-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|38
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|23
 |}
@@ -9860,7 +9740,7 @@ Upgrade 7
 | style="text-align: center; "|1169
 |-
 | style="text-align: center; "|Bois de sapin
-| style="text-align: center; "|11
+| style="text-align: center; "|8
 |-
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|25
@@ -9869,10 +9749,10 @@ Upgrade 7
 | style="text-align: center; "|54
 |-
 | style="text-align: center; "|Colombages
-| style="text-align: center; "|240
+| style="text-align: center; "|238
 |-
 | style="text-align: center; "|Gravier
-| style="text-align: center; "|21
+| style="text-align: center; "|2
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|28
@@ -9897,9 +9777,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Chaume
 | style="text-align: center; "|281
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|9
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|13
@@ -10127,9 +10004,6 @@ Upgrade 3
 |-
 | style="text-align: center; "|Colombages
 | style="text-align: center; "|28
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|8
 |}
 
 
@@ -10197,7 +10071,7 @@ Initial Construction
 | style="text-align: center; "|9
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|21
+| style="text-align: center; "|19
 |}
 
 
@@ -10231,9 +10105,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Colombages
 | style="text-align: center; "|424
-|-
-| style="text-align: center; "|Gravier
-| style="text-align: center; "|64
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|21
@@ -10351,7 +10222,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|3
+| style="text-align: center; "|1
 |}
 
 
@@ -10362,7 +10233,7 @@ Upgrade 1
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Pierres
-| style="text-align: center; "|34
+| style="text-align: center; "|70
 |}
 
 
@@ -10373,7 +10244,7 @@ Upgrade 2
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|34
+| style="text-align: center; "|70
 |}
 
 
@@ -10384,7 +10255,7 @@ Upgrade 3
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|34
+| style="text-align: center; "|70
 |}
 
 
@@ -10426,13 +10297,13 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|919
+| style="text-align: center; "|920
 |-
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|416
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|4
+| style="text-align: center; "|2
 |}
 
 
@@ -10637,7 +10508,7 @@ Upgrade 1
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Pierres
-| style="text-align: center; "|59
+| style="text-align: center; "|72
 |}
 
 
@@ -11153,7 +11024,7 @@ Upgrade 1
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Pierres
-| style="text-align: center; "|66
+| style="text-align: center; "|102
 |}
 
 
@@ -11175,7 +11046,7 @@ Upgrade 3
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|46
+| style="text-align: center; "|82
 |-
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|180
@@ -11280,7 +11151,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|3
+| style="text-align: center; "|2
 |}
 
 
@@ -11291,7 +11162,7 @@ Upgrade 1
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Pierres
-| style="text-align: center; "|34
+| style="text-align: center; "|68
 |}
 
 
@@ -11302,7 +11173,7 @@ Upgrade 2
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|34
+| style="text-align: center; "|68
 |}
 
 
@@ -11337,7 +11208,7 @@ Initial Construction
 | style="text-align: center; "|390
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|5
+| style="text-align: center; "|3
 |}
 
 
@@ -11407,10 +11278,10 @@ Initial Construction
 | style="text-align: center; "|8
 |-
 | style="text-align: center; "|Grès
-| style="text-align: center; "|122
+| style="text-align: center; "|123
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|3
+| style="text-align: center; "|1
 |}
 
 
@@ -11425,7 +11296,7 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|7
+| style="text-align: center; "|5
 |}
 
 
@@ -12428,7 +12299,7 @@ Initial Construction
 | style="text-align: center; "|824
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|5
+| style="text-align: center; "|3
 |}
 
 
@@ -12693,7 +12564,7 @@ Initial Construction
 | style="text-align: center; "|209
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|89
+| style="text-align: center; "|87
 |}
 
 
@@ -15298,7 +15169,7 @@ Upgrade 1
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|5
+| style="text-align: center; "|4
 |}
 
 
