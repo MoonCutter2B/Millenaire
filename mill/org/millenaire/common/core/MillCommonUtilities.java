@@ -1525,6 +1525,9 @@ public class MillCommonUtilities {
 		if (pathBid==Mill.path.blockID && bid==Mill.pathSlab.blockID) {
 			MLN.temp(null, "Attempting to replace slab by path! at: "+p);
 		}
+		
+		if (bid==Mill.pathSlab.blockID && pathBid==Mill.path.blockID)
+			pathBid=Mill.pathSlab.blockID;
 
 		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid,meta)) && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
@@ -1753,7 +1756,7 @@ public class MillCommonUtilities {
 				if (nodePathBid==Mill.path.blockID && halfSlab)
 					nodePathBid=Mill.pathSlab.blockID;
 
-				attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,5);
+				attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,pathMeta);
 
 				if (lastNode!=null) {
 					int dx=p.getiX()-lastNode.x;
