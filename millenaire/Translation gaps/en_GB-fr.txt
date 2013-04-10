@@ -1,22 +1,12 @@
 Translation comparison between en_GB and fr
 
-List of gaps found in culture dialogues for norman: 
+List of gaps found in culture building names for hindi: 
 
-Dialogue missing for culture norman: alchemyworkshop
-Dialogue missing for culture norman: archives
-Dialogue missing for culture norman: bakery
-Dialogue missing for culture norman: church
-Dialogue missing for culture norman: inn
-Dialogue missing for culture norman: market
-Dialogue missing for culture norman: tavern
+Building name missing for culture hindi: pandithouse_a0
 
 List of gaps found in culture building names for mayan: 
 
 Building name missing for culture mayan: lonemayanpyramid_a0
 Building name missing for culture mayan: mayanobsidiancrafter_a0
-
-List of gaps found in culture building names for hindi: 
-
-Building name missing for culture hindi: pandithouse_a0
 
 Traduction completness: 99%

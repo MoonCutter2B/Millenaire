@@ -71,7 +71,7 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public abstract class MillVillager extends EntityCreature  implements IEntityAdditionalSpawnData, IAStarPathedEntity {
 
-	public static class InvItem {
+	public static class InvItem implements Comparable<InvItem> {
 
 		public static final int ANYENCHANTED=1;
 		public static final int ENCHANTEDSWORD=2;
@@ -193,6 +193,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		@Override
 		public String toString() {
 			return getName()+"/"+meta;
+		}
+
+		@Override
+		public int compareTo(InvItem ii) {
+			return id()*20+meta-ii.id()*20-ii.meta;
 		}
 	}
 

@@ -1,0 +1,479 @@
+{| class="wikitable"
+|-
+! Requirements Template Building Name
+|-
+! Basilike~placebyzantine_A_basilica
+|-
+! null~loneCastle_A_training
+|-
+! Ampelonas
+|-
+! Latomeio
+|-
+! Archiao Nao
+|-
+! Demarcheio
+|-
+! Stratones
+|-
+! Prebyterio
+|-
+! Chalkeio~forgebyzantine
+|-
+! Krebati~fortbyzantine_A_bed3
+|-
+! Krebati~fortbyzantine_A_bed1
+|-
+! Krebati~fortbyzantine_A_bed2
+|-
+! Frourio~fortbyzantine
+|-
+! Parekklesi
+|-
+! Exochike Katiokia
+|-
+! Archaio theatro
+|-
+! Synergio
+|-
+! Frourio~playerfortbyzantine
+|-
+! Pandocheio
+|-
+! Boske Probaton
+|-
+! Mono Paratiritio~oaktower
+|-
+! Doro spiti
+|-
+! Alsos
+|-
+! Apomonomeno Boske Probaton
+|-
+! Psaras Spiti
+|-
+! Krebati~barracksbyzantine_A_bed
+|-
+! Agrotema
+|-
+! Freatio
+|-
+! Sirotrofia
+|-
+! Krebati~playerfortbyzantine_A_bed3
+|-
+! Krebati~playerfortbyzantine_A_bed2
+|-
+! Krebati~playerfortbyzantine_A_bed1
+|-
+! Paratereteio
+|-
+! Technites Spiti
+|-
+! Basilike~basilkabyzantine
+|-
+! Pharos
+|-
+! Orthodoxe Ekklesia
+|-
+!  
+|-
+! Chani
+|-
+! Mono Paratiritio~birchtower
+|-
+! Mono Paratiritio~pinetower
+|-
+! Mono Paratiritio~jungletower
+|-
+! Monachikos Kastro
+|-
+! null~loneCastle_A_praying
+|-
+! Bomos
+|-
+! Chalkeio~fortbyzantine_A_forge
+|-
+! Taverna
+|-
+! Fournos
+|-
+! Xylokopos Spiti
+|-
+! Chalkeio~playerfortbyzantine_A_forge
+|-
+! Qila ka Bhati
+|-
+! Purana Qila
+|-
+! Puraalekhagar
+|-
+! Dusra Ghar
+|-
+! Sunsan har
+|-
+! Inta bhatta
+|-
+! Tandurust
+|-
+! Adivasi ka Ghar
+|-
+! Sunsan Saray
+|-
+! Visaala saajisa
+|-
+! Pandit ka Ghar
+|-
+! Chota Saraay
+|-
+! Chota ghar
+|-
+! Kisaan ka Ghar
+|-
+! Bari saajisa
+|-
+! Baoli
+|-
+! Chota Mandir
+|-
+! Sena-Nivaas
+|-
+! Bangla
+|-
+! Gaanv ka Mandir
+|-
+! Kunja
+|-
+! Mahal~playerpalace
+|-
+! Saraay
+|-
+! Sainik ka Ghar
+|-
+! Bhare Ghar
+|-
+! Lakarhara ka Ghar
+|-
+! Dhaan
+|-
+! Choti saajisa
+|-
+! Saray
+|-
+! Masaalaa udyaana
+|-
+! Qila
+|-
+! Bhati
+|-
+! Sena ka Bhati
+|-
+! Sadhu ke Peer
+|-
+! Gannaa baagaana
+|-
+! Uphar ghar
+|-
+! Mukhiya ka Ghar
+|-
+! Sikaar
+|-
+! Muurtikaar ka Ghar
+|-
+! Bazaar
+|-
+! Mahal~palace
+|-
+! Zokuto no Bakusha
+|-
+! Noujou Nojo
+|-
+! Koya
+|-
+! Kodachi
+|-
+! Kikori Koya
+|-
+! Suiden
+|-
+! Tansetsu~japanesearmyforge
+|-
+! Ike
+|-
+! Ido
+|-
+! Yashiro
+|-
+! Chiisai Ie
+|-
+! Tansetsu~japaneseforge
+|-
+! Chuugata Chisho
+|-
+! Eki Tochi
+|-
+! Kouku
+|-
+! Sentou
+|-
+! Shoko
+|-
+! Bourou
+|-
+! Ichiba
+|-
+! Shuudannoujou
+|-
+! Iwamuro no Hito
+|-
+! Saisekijou
+|-
+! Heisha
+|-
+! Shakuchi
+|-
+! Daibutsu
+|-
+! Youkeijou
+|-
+! Tsuribori
+|-
+! Yaba
+|-
+! Shugi ie
+|-
+! Buttou
+|-
+! Kumonjo
+|-
+! Okurimono hausu
+|-
+! Noufu Ie
+|-
+! Densha
+|-
+! Reinousha Ie
+|-
+! Kofun
+|-
+! Bousai
+|-
+! Shijin
+|-
+! Daidokoro
+|-
+! Zenshou
+|-
+! Torii
+|-
+! Kai Ie
+|-
+! Ah Waay Su'uk~mayanshamangrounds
+|-
+! Uxul Otoch
+|-
+! K'aax
+|-
+! Muul~lonemayanpyramid
+|-
+! Jalab
+|-
+! Maya Otoch
+|-
+! Sa'at Maya Maize Makan
+|-
+! K'as Otoch
+|-
+! Sa'at Maya Otoch
+|-
+! Muul~mayanpyramid
+|-
+! Chak Muul
+|-
+! Chanan Nah
+|-
+! Maize Makan
+|-
+! K'eyem
+|-
+! Ix La' Nah
+|-
+! K'in Pak
+|-
+! Pwes
+|-
+! Mehen Kuuch
+|-
+! Muul~mayanplayerpyramid
+|-
+! Ah Kax Makan
+|-
+! Cha'an Ka'nal
+|-
+! Sa'at Tunich In-ti'a'al
+|-
+! Noh Kuuch
+|-
+! Noh Muul
+|-
+! Ch'en~lonemayancave
+|-
+! Maya Makan
+|-
+! Ah Tz'on Si' Took
+|-
+! Laak'Noh Nah
+|-
+! Ah Waay Su'uk~lonemayanshaman
+|-
+! Yalam Otoch
+|-
+! Chak
+|-
+! Ciwic
+|-
+! Kob Took
+|-
+! Hach Noh Nah
+|-
+! K'u-nah
+|-
+! Kan Cha'an
+|-
+! Hu'um-Noh
+|-
+! Zil Otoch
+|-
+! Chumuk Kuuch
+|-
+! Ta'as Kob Took
+|-
+! K'uhul Jalab
+|-
+! B'aat Winik Nah
+|-
+! Tunich In-ti'a'al
+|-
+! Ni'Nah
+|-
+! Ch'en~mayancave
+|-
+! Hach Noh Otoch
+|-
+! Sa'at Muul
+|-
+! K'as Koloh-che'
+|-
+! Tour de l'Alchimiste
+|-
+! Maison du guarde
+|-
+! Hutte de Bûcheron~lumbermanhut
+|-
+! Elevage Porcin
+|-
+! Tour des bandits
+|-
+! Tour d�truite
+|-
+! Boulangerie
+|-
+! Mine
+|-
+! Petite maison
+|-
+! Grand terrain
+|-
+! Panthéon
+|-
+! Hôtel particulier
+|-
+! Bosquet
+|-
+! Abbaye~abbey
+|-
+! Auberge
+|-
+! Anomalie Deux
+|-
+! Chapelle
+|-
+! Petit terrain
+|-
+! Tour de guet
+|-
+! Taverne
+|-
+! Ferme en ruine
+|-
+! Fort~fort
+|-
+! Manoir
+|-
+! Maison bonus
+|-
+! Tour de garde~fort_A_righttower
+|-
+! Marché
+|-
+! Presbytère
+|-
+! Fontaine
+|-
+! Maison bourgeoise
+|-
+! Atelier d'Alchimie
+|-
+! Hutte de Bûcheron~lonelumbermanhut
+|-
+! Moulin à eau isolé
+|-
+! Archives du village
+|-
+! Grande Fontaine
+|-
+! Elevage Ovin
+|-
+! Château Félon
+|-
+! Puit
+|-
+! Très grand terrain
+|-
+! Auberge isolée
+|-
+! Ferme
+|-
+! Fort~playerfort
+|-
+! Elevage Bovin
+|-
+! Armurerie
+|-
+! Relais
+|-
+! Mine Abandonnée
+|-
+! Hutte de Bûcheron~lonelumbermantaigahut
+|-
+! Anomalie Une
+|-
+! Abbaye~loneabbey
+|-
+! Forge
+|-
+! Carrière
+|-
+! Tour de garde~fort_A_lefttower
+|-
+! Hall de la Guilde
+|-
+! Anomalie Trois
+|-
+! Repère de bandits
+|-
+! Maison du charpentier
+|-
+! Moulin Abandonné
+|-
+|}

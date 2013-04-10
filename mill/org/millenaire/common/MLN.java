@@ -839,6 +839,7 @@ public class MLN {
 			if (MLN.generateBuildingRes) {//Doing it now because it requires item names
 				MLN.major(null, "Generating building res file.");
 				BuildingPlan.generateBuildingRes();
+				BuildingPlan.generateWikiTable();
 				MLN.major(null, "Generated building res file.");
 			}
 		}

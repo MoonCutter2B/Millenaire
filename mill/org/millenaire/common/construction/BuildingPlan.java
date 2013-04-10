@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -122,27 +123,27 @@ public class BuildingPlan {
 			return true;
 		}
 
-		
+
 		public void pathBuild(Building th) {
-			
+
 			int targetPathLevel=0;
-			
+
 			for (int i=0;i<th.villageType.pathMaterial.size();i++) {
 				if (th.villageType.pathMaterial.get(i).id()==bid
 						&& th.villageType.pathMaterial.get(i).meta==meta)
 					targetPathLevel=i;
 			}
-			
+
 			int bid=p.getId(th.worldObj);
 			int meta=p.getMeta(th.worldObj);
 			int bidAbove=p.getAbove().getId(th.worldObj);
 			int bidBelow=p.getBelow().getId(th.worldObj);
-			
+
 			//if there's a path above, clear it
 			if (bidAbove==Mill.path.blockID || bidAbove==Mill.pathSlab.blockID) {
 				p.getAbove().setBlock(th.worldObj, 0, 0, true, false);
 			}
-			
+
 			//if there's a path below, fill it
 			if (bidBelow==Mill.path.blockID || bidBelow==Mill.pathSlab.blockID) {
 				if (MillCommonUtilities.getBlockIdValidGround(p.getRelative(0, -2, 0).getId(th.worldObj),true)>0)
@@ -150,11 +151,11 @@ public class BuildingPlan {
 				else
 					p.getBelow().setBlock(th.worldObj, Block.dirt.blockID, 0, true, false);
 			}
-			
+
 			if (bid!=Mill.path.blockID && bid!=Mill.pathSlab.blockID && MillCommonUtilities.canPathBeBuiltHere(bid,meta)) {
 				build(th.worldObj, false, false);
 			} else {
-				
+
 				if (this.bid==Mill.path.blockID && bid==Mill.pathSlab.blockID) {
 					this.bid=(short) Mill.pathSlab.blockID;
 				}
@@ -171,8 +172,8 @@ public class BuildingPlan {
 				}
 			}
 		}
-		
-		
+
+
 		public void build(World world, boolean worldGeneration, boolean wandimport) {
 
 			final boolean notifyBlocks=true;
@@ -189,7 +190,7 @@ public class BuildingPlan {
 
 			if (special==BuildingBlock.PRESERVEGROUNDDEPTH || special==BuildingBlock.PRESERVEGROUNDSURFACE) {
 				int bid=MillCommonUtilities.getBlock(world, p);
-				
+
 				boolean surface=(special==BuildingBlock.PRESERVEGROUNDSURFACE);
 
 				int validGroundId=MillCommonUtilities.getBlockIdValidGround(bid,surface);
@@ -975,8 +976,226 @@ public class BuildingPlan {
 		if (MLN.LogBuildingPlan>=MLN.MAJOR) {
 			MLN.major(null, "Wrote resources used.txt");
 		}
-
 	}
+
+
+
+	static public void generateWikiTable() {
+		
+		HashMap<InvItem,String> picts=new HashMap<InvItem,String>();
+		HashMap<InvItem,String> links=new HashMap<InvItem,String>();
+		
+		picts.put(new InvItem(Block.wood,-1), "Wood_Any.gif");
+		picts.put(new InvItem(Block.wood,0), "Wood.png");
+		picts.put(new InvItem(Block.wood,1), "Wood_Pine.png");
+		picts.put(new InvItem(Block.wood,2), "Wood_Birch.png");
+		picts.put(new InvItem(Block.wood,3), "Wood_Jungle.png");
+		
+		picts.put(new InvItem(Block.stone,0), "Stone.png");
+		picts.put(new InvItem(Block.glass,0), "Glass.png");
+		picts.put(new InvItem(Block.cloth,0), "White_Wool.png");
+		picts.put(new InvItem(Block.sandStone,0), "Sandstone.png");
+		picts.put(new InvItem(Block.cobblestone,0), "Cobblestone.png");
+		picts.put(new InvItem(Block.brick,0), "Brick.png");
+		picts.put(new InvItem(Block.sand,0), "Sand.png");
+		picts.put(new InvItem(Block.glowStone,0), "Glowstone_(Block).png");
+		picts.put(new InvItem(Block.bookShelf,0), "Bookshelf.png");
+		picts.put(new InvItem(Block.gravel,0), "Gravel.png");
+		picts.put(new InvItem(Block.sandStone,2), "SmoothSandstone.png");
+		picts.put(new InvItem(Block.stoneBrick,3), "ChiselledStoneBricks.png");
+		picts.put(new InvItem(Block.stoneBrick,2), "CrackedStoneBricks.png");
+		picts.put(new InvItem(Block.tallGrass,1), "TallGrass.png");
+		picts.put(new InvItem(Block.tallGrass,2), "Fern.png");
+		picts.put(new InvItem(Block.cobblestoneMossy,0), "MossyCobblestone.png");
+		picts.put(new InvItem(Block.stoneBrick,1), "MossyStoneBricks.png");
+		picts.put(new InvItem(Block.oreIron,0), "Ore_Iron.png");
+		picts.put(new InvItem(Block.oreCoal,0), "Ore_Coal.png");
+		picts.put(new InvItem(Block.oreGold,0), "Ore_Gold.png");
+		picts.put(new InvItem(Block.oreRedstone,0), "Ore_Redstone.png");
+		picts.put(new InvItem(Block.oreLapis,0), "Ore_Lapis_Lazuli.png");
+		picts.put(new InvItem(Block.oreDiamond,0), "Ore_Diamond.png");
+		picts.put(new InvItem(Block.pumpkinLantern,0), "Jack-O-Lantern.png");
+		picts.put(new InvItem(Block.melon,0), "Melon (Block).png");
+		picts.put(new InvItem(Block.blockLapis,0), "Lapis_Lazuli_(Block).png");
+		picts.put(new InvItem(Block.torchRedstoneIdle,0), "Redstone_Torch.png");
+		picts.put(new InvItem(Block.bedrock,0), "Bedrock.png");
+		picts.put(new InvItem(Block.netherStalk,0), "Nether_Wart.png");
+		picts.put(new InvItem(Block.lavaStill,0), "Lava.png");
+		picts.put(new InvItem(Block.lavaMoving,0), "Lava.png");
+		picts.put(new InvItem(Block.stoneButton,0), "Stone_Button.png");
+		picts.put(new InvItem(Block.redstoneWire,0), "Redstone_Dust.png");
+		picts.put(new InvItem(Block.stone,0), "Stone.png");
+		picts.put(new InvItem(Block.stone,0), "Stone.png");
+		picts.put(new InvItem(Block.stone,0), "Stone.png");
+		
+		picts.put(new InvItem(Item.ingotIron,0), "Ironitm.png");
+		picts.put(new InvItem(Item.ingotGold,0), "Golditm.png");
+		picts.put(new InvItem(Item.ingotIron,0), "Ironitm.png");
+		picts.put(new InvItem(Item.ingotIron,0), "Ironitm.png");
+		
+		picts.put(new InvItem(Mill.wood_decoration,0), "ML_colombages_plain.png");
+		links.put(new InvItem(Mill.wood_decoration,0), "|link=Norman:Colombages");
+		picts.put(new InvItem(Mill.wood_decoration,1), "ML_colombages_cross.png");
+		links.put(new InvItem(Mill.wood_decoration,1), "|link=Norman:Colombages");
+		picts.put(new InvItem(Mill.wood_decoration,2), "ML_Thatch.png");
+		links.put(new InvItem(Mill.wood_decoration,2), "|link=Japanese:Thatch");
+		
+		picts.put(new InvItem(Mill.stone_decoration,0), "ML_whitewashedbricks.png");
+		links.put(new InvItem(Mill.stone_decoration,0), "|link=Hindi:Cooked brick");
+		picts.put(new InvItem(Mill.stone_decoration,1), "ML_mudbrick.png");
+		links.put(new InvItem(Mill.stone_decoration,1), "|link=Hindi:Mud brick");
+		picts.put(new InvItem(Mill.stone_decoration,2), "ML_Mayan_Gold.png");
+		links.put(new InvItem(Mill.stone_decoration,2), "|link=Mayan:Gold Ornament");
+		
+		picts.put(new InvItem(Mill.paperWall,0), "ML_paperwall.png");
+		links.put(new InvItem(Mill.paperWall,0), "|link=Japanese:Paper Wall");
+		
+		picts.put(new InvItem(Mill.tapestry,0), "ML_tapestry.png");
+		links.put(new InvItem(Mill.tapestry,0), "|link=Norman:Tapisserie");
+		
+		picts.put(new InvItem(Mill.indianstatue,0), "ML_IndianStatue.png");
+		links.put(new InvItem(Mill.indianstatue,0), "|link=Hindi:Statue");
+		
+		picts.put(new InvItem(Mill.mayanstatue,0), "ML_MayanStatue.png");
+		links.put(new InvItem(Mill.mayanstatue,0), "|link=Mayan:Carving");
+		
+		picts.put(new InvItem(Mill.byzantineiconsmall,0), "ML_ByzantineIconSmall.png");
+		links.put(new InvItem(Mill.byzantineiconsmall,0), "|link=Byzantine:Icon");
+		picts.put(new InvItem(Mill.byzantineiconmedium,0), "ML_ByzantineIconMedium.png");
+		links.put(new InvItem(Mill.byzantineiconmedium,0), "|link=Byzantine:Icon");
+		picts.put(new InvItem(Mill.byzantineiconlarge,0), "ML_ByzantineIconLarge.png");
+		links.put(new InvItem(Mill.byzantineiconlarge,0), "|link=Byzantine:Icon");
+		
+		picts.put(new InvItem(Mill.byzantine_tiles,0), "ML_byzSlab.png");
+		links.put(new InvItem(Mill.byzantine_tiles,0), "|link=Blocks#Byzantine");
+
+		
+
+		try {
+			
+			HashMap<String,Integer> nameCount=new HashMap<String,Integer>();
+			HashMap<BuildingPlanSet,String> uniqueNames=new HashMap<BuildingPlanSet,String>();
+			
+			for (final Culture culture : Culture.vectorCultures) {
+				for (final BuildingPlanSet set: culture.vectorPlanSets) {
+					String name=set.plans.get(0)[0].nativeName;
+					if (!nameCount.containsKey(name))
+						nameCount.put(name, 1);
+					else
+						nameCount.put(name,nameCount.get(name)+1);
+				}
+			}
+			
+			for (final Culture culture : Culture.vectorCultures) {
+				for (final BuildingPlanSet set: culture.vectorPlanSets) {
+					if (nameCount.get(set.plans.get(0)[0].nativeName)>1) {
+						uniqueNames.put(set, set.plans.get(0)[0].nativeName+"~"+set.key);
+					} else {
+						uniqueNames.put(set, set.plans.get(0)[0].nativeName);
+					}
+				}
+			}
+			
+			File file = new File(Mill.proxy.getBaseDir(),"resources used wiki building list.txt");
+			BufferedWriter writer=MillCommonUtilities.getWriter(file);
+			
+			writer.write("{| class=\"wikitable\""+EOL);
+			writer.write("|-"+EOL);
+			writer.write("! Requirements Template Building Name"+EOL);
+			writer.write("|-"+EOL);
+			
+			for (final Culture culture : Culture.vectorCultures) {
+				for (final BuildingPlanSet set: culture.vectorPlanSets) {
+					writer.write("! "+uniqueNames.get(set)+EOL);
+					writer.write("|-"+EOL);
+				}
+			}
+			
+			writer.write("|}");
+			
+			writer.close();
+			
+			file = new File(Mill.proxy.getBaseDir(),"resources used wiki.txt");
+			writer=MillCommonUtilities.getWriter(file);
+
+			writer.write("{{#switch: {{{1|{{BASEPAGENAME}}}}}"+EOL);
+			
+			
+
+			for (final Culture culture : Culture.vectorCultures) {
+				for (final BuildingPlanSet set: culture.vectorPlanSets) {
+
+					writer.write("|"+uniqueNames.get(set)+" = <table><tr><td style=\"vertical-align:top;\">"+EOL);
+
+					for (final BuildingPlan[] plans : set.plans) {
+						if (set.plans.size()>1) {
+							writer.write("<table class=\"reqirements\"><tr><th scope=\"col\" style=\"text-align:center;\">Variation "+(char)('A'+plans[0].variation)+"</th>");							
+						} else {
+							writer.write("<table class=\"reqirements\"><tr><th scope=\"col\" style=\"text-align:center;\"></th>");		
+						}
+
+						Vector<InvItem> items=new Vector<InvItem>();
+
+						for (final BuildingPlan plan : plans) {
+							for (final InvItem key : plan.resCost.keySet()) {
+								if (!items.contains(key))
+									items.add(key);
+							}
+						}
+
+						Collections.sort(items);
+
+						for (final InvItem key : items) {
+							String pict="Unknown Pict:"+key.id()+"/"+key.meta;
+							String link="";
+							
+							if (picts.containsKey(key))
+								pict=picts.get(key);
+							
+							if (links.containsKey(key))
+								link=links.get(key);
+							
+							
+							writer.write("<td>[[File:"+pict+"|32px"+link+"|"+key.getName()+"]]</td>");
+						}
+
+						writer.write("</tr>"+EOL);
+
+						for (final BuildingPlan plan : plans) {
+							if (plan.level==0) {
+								writer.write("<tr><th scope=\"row\">Construction</th>");
+							} else {
+								writer.write("<tr><th scope=\"row\">Upgrade "+plan.level+"</th>");
+							}
+							for (final InvItem key : items) {
+								if (plan.resCost.containsKey(key))
+									writer.write("<td>"+plan.resCost.get(key)+"</td>");
+								else
+									writer.write("<td></td>");
+							}
+							writer.write("</tr>"+EOL);
+						}
+						writer.write("</table>"+EOL);
+					}
+					writer.write("</table>"+EOL+EOL);
+				}
+			}
+
+			writer.write("| #default = {{msgbox | title = Requirements not found| text = The requirements template couldn't find the upgrade table of the building you were looking for."
+					+"Please consult the building list at [[Template:Requirements|this page]] to find the correct name.}}"
+					+"}}<noinclude>[[Category:Templates formatting|{{PAGENAME}}]]{{documentation}}</noinclude>");
+
+			writer.close();
+
+		} catch (final Exception e) {
+			MLN.printException(e);
+		}
+
+		if (MLN.LogBuildingPlan>=MLN.MAJOR) {
+			MLN.major(null, "Wrote resources used wiki.txt");
+		}
+	}
+
 
 
 	private static void generateSignBuildings(BufferedWriter writer) throws Exception {
@@ -1371,7 +1590,7 @@ public class BuildingPlan {
 		//First all the "normal" blocks:
 		for (final PointType pt : colourPoints.values()) {
 			if (pt.name==null) {
-				
+
 				reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.blockId, pt.meta), pt);
 
 				if ((pt.blockId==Block.torchWood.blockID) ||
@@ -1504,7 +1723,7 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 6), pt);
 				}  else if (pt.name.equals(bwoodstairsOakInvRight)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 7), pt);
-					
+
 				}  else if (pt.name.equals(bwoodstairsPineInvTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 5), pt);
 				}  else if (pt.name.equals(bwoodstairsPineInvBottom)) {
@@ -2026,7 +2245,7 @@ public class BuildingPlan {
 		}
 
 		if ((bblocks.length>0) && !wandimport && location.level==0) {
-			
+
 			final Building building=new Building(mw, culture, villageType, location, townHall, villageGeneration, bblocks[bblocks.length-1].p, townHallPos);
 
 			if (MLN.LogWorldGeneration>=MLN.MINOR) {
@@ -2266,12 +2485,12 @@ public class BuildingPlan {
 		}
 
 		if (glassPaneCost > 0) {
-			addToCost(Block.glass.blockID,-1,(int)Math.max(Math.ceil((glassPaneCost*6.0)/16),1));
+			addToCost(Block.glass.blockID,0,(int)Math.max(Math.ceil((glassPaneCost*6.0)/16),1));
 		}
 
 
 		if (byzBricksHalf > 0) {
-			addToCost(Mill.byzantine_tiles.blockID,-1,(int)Math.max(Math.ceil(byzBricksHalf/2),1));
+			addToCost(Mill.byzantine_tiles.blockID,0,(int)Math.max(Math.ceil(byzBricksHalf/2),1));
 		}
 
 		if (MLN.LogBuildingPlan>=MLN.MAJOR) {
@@ -3124,7 +3343,7 @@ public class BuildingPlan {
 				}
 			}
 		}
-		
+
 		if (location.chestPos==null) {
 			location.chestPos=bblocks.lastElement().p;
 		}
