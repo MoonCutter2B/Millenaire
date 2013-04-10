@@ -1,5 +1,5 @@
 villager.greeting=Bonjour, $name!
-villager.greeting=Belle journée, n'est pas?
+villager.greeting=Belle journée, n'est-ce pas?
 villager.greeting=Il va pleuvoir, je le sens
 villager.greeting=Je ne me souvenais pas de la Normandie comme ça.
 guard.greeting=Vous avez l'air un peu faible, $name. Je vous protègerais si vous avez des ennuis.
@@ -19,7 +19,7 @@ oriental_merchant.greeting=Ce pays est riche, mais fallait il vraiment qu'il soi
 oriental_merchant.greeting=Etes vous allez à Cordoue? Ca, c'est une ville civilisée.
 art_merchant.greeting=Les gens ici sont des barbares.
 art_merchant.greeting=Aucune ville dans le monde n'est comparable à Constantinople.
-art_merchant.greeting=Nous les byzantins sont les derniers vrais romans. Admirez notre civilisation!
+art_merchant.greeting=Nous les byzantins sommes les derniers vrais Romains. Admirez notre civilisation!
 wool_merchant.greeting=Les textiles hollandais sont les meilleurs à l'ouest de Cathay.
 seneschal.greeting=Je gère ces terres pour mon roi
 seneschal.greeting=J'ai hâte de retourner à la cours du roi.
@@ -46,20 +46,20 @@ farmer.PlantSeeds=Je plante, et je récolterai.
 lumberman.BringBackResourcesHome=Même ma femme devra admettre que c’est beaucoup de bois.
 lumberman.ChopTrees=Regardez-moi couper cet arbre !
 lumberman.GatherGoods=Bel arbrisseau là-bas.
-lumberman.PlantSaplings=Bientôt ce sera un arbre magnifique ! Et je le couperai.
+lumberman.PlantSaplings=Bientôt ce sera un arbre magnifique ! Et je le couperais.
 
-wife.GetHouseTHResources=On dirai que mon mari a travaillé pour une fois.
-wife.GetResourcesForBuild=Je part chercher une tonne ou deux de matérieaux. Je suis plus forte que j’en ai l’air !
+wife.GetHouseTHResources=On dirait que mon mari a travaillé pour une fois.
+wife.GetResourcesForBuild=Je part chercher une tonne ou deux de matériaux. Je suis plus forte que j’en ai l’air !
 //villager.DeliverResourcesShop=
-wife.MakeBread=Mon pain est le meilleure du village.
+wife.MakeBread=Mon pain est le meilleur du village.
 //villager.BeSeller=Coming, coming!
 wife.MakeCider=Préparer le cidre n’est pas le pire travail par ici.
 wife.MakeCalva=Une boisson d'homme, faite par une femme.
-wife.construction=Je construit, je construit, comme seule une femme le peu !
+wife.construction=Je construis, je construis, comme seule une femme le peu !
 wife.construction=Les hommes n’ont pas la finesse nécessaire au travail de précision.
 wife.construction=Ca va être un bâtiment superbe.
 wife.GetGoodsHousehold=Pourquoi est ce toujours moi qui doit tout aller chercher ?
-wife.DeliverGoodsHousehold="Vas chercher ça, vas chercher ça", ils me disent. Un jour je refuserais !
+wife.DeliverGoodsHousehold="Vas chercher ci, vas chercher ça", ils me disent. Un jour je refuserais !
 
 villager.GoPlay=Je vais aller jouer dehors.
 villager.BecomeAdult=Il est l’heure de devenir quelqu’un !
@@ -67,7 +67,7 @@ villager.BecomeAdult=Il est l’heure de devenir quelqu’un !
 villager.MakeBoudin=Vous ne le mangeriez pas si vous saviez comment c’est fait.
 
 smith.MakeNormanTools=Les outils normands sont les meilleurs du monde.
-smith.MakeNormanWeapons=N'essayez pas d'affronter un homme armé par moi.
+smith.MakeNormanWeapons=N'essayez pas d'affronter un homme armé par mes soins.
 
 miner.Mining=Miner est un art, vous savez.
 miner.Mining=Personne d’autre dans le village n’a la force et l’endurance nécessaire à ce travail. Et vous pensez qu’ils sont reconnaissants ?

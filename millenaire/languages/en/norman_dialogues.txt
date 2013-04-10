@@ -91,7 +91,7 @@ newchat;key:countingcows,weigth:10
 v1;0;Ca manque de distraction par ici. / There isn't much to do around here.
 v2;30;C'est bien, c'est calme. / It's good, peaceful.
 v1;60;Et ennuyeux... / And boring...
-v2;75;Tu n'as compter les vaches pour te distraire. / Why don't you count cows?
+v2;75;Tu n'as qu'à compter les vaches pour te distraire. / Why don't you count cows?
 v1;110;Déjà fait hier. Et les poulets aussi. / Already done, yesterday. And chicken too.
 
 newchat;key:paris,v1:adult,v2:adult,weigth:2
@@ -206,7 +206,7 @@ v1;130;Ne sois pas insolent! Tu feras dix Pater Noster en pénitence! / Enough i
 
 
 newchat;key:confession2,v1:vtype:abbot-monk-priest,v2:female,v2:adult,weigth:10
-v1;0;Mon fille, il y a longtemps que tu ne t'es pas confessée. / My daughter, you last confessed a long time ago.
+v1;0;Ma fille, il y a longtemps que tu ne t'es pas confessée. / My daughter, you last confessed a long time ago.
 v2;30;C'est vrai mon père, et j'ai péché! / It is the truth, Father, and I have sinned!
 v1;60;Si c'est un péché de chair, nous en parlerons ailleurs. / If it was a sin of the flesh, we shall discuss it elsewhere.
 v2;100;Merci, mon père. / Thank you, Father.
@@ -360,5 +360,5 @@ v2;80;Mais pas plus riches... / But no richer...
 
 
 newchat;key:tavern,building:tavern,v1:adult,v2:adult,weigth:10
-v1;0;La taverne est certainement la meilleure chose qu'on est construite. / The tavern is surely the best thing we've build in the village.
+v1;0;La taverne est certainement la meilleure chose qu'on ait construite. / The tavern is surely the best thing we've build in the village.
 v2;40;Personne ici ne dira le contraire! / Nobody here will challenge that!

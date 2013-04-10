@@ -87,7 +87,7 @@ newchat;key:countingcows,weigth:10
 v1;0;Ca manque de distraction par ici.
 v2;30;C'est bien, c'est calme.
 v1;60;Et ennuyeux...
-v2;75;Tu n'as compter les vaches pour te distraire.
+v2;75;Tu n'as qu'à compter les vaches pour te distraire.
 v1;110;Déjà fait hier. Et les poulets aussi.
 
 newchat;key:paris,v1:adult,v2:adult,weigth:2
@@ -202,7 +202,7 @@ v1;130;Ne sois pas insolent! Tu feras dix Pater Noster en pénitence!
 
 
 newchat;key:confession2,v1:vtype:abbot-monk-priest,v2:female,v2:adult,weigth:10
-v1;0;Mon fille, il y a longtemps que tu ne t'es pas confessée.
+v1;0;Ma fille, il y a longtemps que tu ne t'es pas confessée.
 v2;30;C'est vrai mon père, et j'ai péché!
 v1;60;Si c'est un péché de chair, nous en parlerons ailleurs.
 v2;100;Merci, mon père.
@@ -356,5 +356,5 @@ v2;80;Mais pas plus riches...
 
 
 newchat;key:tavern,building:tavern,v1:adult,v2:adult,weigth:10
-v1;0;La taverne est certainement la meilleure chose qu'on est construite.
+v1;0;La taverne est certainement la meilleure chose qu'on ait construite.
 v2;40;Personne ici ne dira le contraire!

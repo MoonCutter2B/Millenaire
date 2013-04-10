@@ -19,7 +19,7 @@ oriental_merchant.greeting=Ce pays est riche, mais fallait il vraiment qu'il soi
 oriental_merchant.greeting=Etes vous allez à Cordoue? Ca, c'est une ville civilisée. / Have you been to Cordoba? Now that is a civilised place.
 art_merchant.greeting=Les gens ici sont des barbares. / People here are barbarians.
 art_merchant.greeting=Aucune ville dans le monde n'est comparable à Constantinople. / No city in the world can compare with Constantinople.
-art_merchant.greeting=Nous les byzantins sont les derniers vrais romans. Admirez notre civilisation! / We Byzantines are the last true Romans. Bask in the glory of our civilisation.
+art_merchant.greeting=Nous les byzantins sommes les derniers vrais romans. Admirez notre civilisation! / We Byzantines are the last true Romans. Bask in the glory of our civilisation.
 wool_merchant.greeting=Les textiles hollandais sont les meilleurs à l'ouest de Cathay. / Dutch textiles are the finest west of Cathay.
 seneschal.greeting=Je gère ces terres pour mon roi. / I manage those lands for my king.
 seneschal.greeting=J'ai hâte de retourner à la cours du roi. / I am impatient to go back to the royal court.
@@ -46,20 +46,20 @@ farmer.PlantSeeds=Je plante, et je récolterai. / I sow, and then I will harvest
 lumberman.BringBackResourcesHome=Même ma femme devra admettre que c’est beaucoup de bois. / Even the wife will have to admit that's a lot of wood.
 lumberman.ChopTrees=Regardez-moi couper cet arbre ! / Watch me cut down that tree!
 lumberman.GatherGoods=Bel arbrisseau là-bas. / Nice sapling over there.
-lumberman.PlantSaplings=Bientôt ce sera un arbre magnifique ! Et je le couperai. / Soon this will be a big, majestic tree! And I'll cut it down.
+lumberman.PlantSaplings=Bientôt ce sera un arbre magnifique ! Et je le couperais. / Soon this will be a big, majestic tree! And I'll cut it down.
 
-wife.GetHouseTHResources=On dirai que mon mari a travaillé pour une fois. / Looks like my lazy husband produced something for once.
-wife.GetResourcesForBuild=Je part chercher une tonne ou deux de matérieaux. Je suis plus forte que j’en ai l’air ! / Off to pick up a ton or two of building materials. I'm stronger than I look.
+wife.GetHouseTHResources=On dirait que mon mari a travaillé pour une fois. / Looks like my lazy husband produced something for once.
+wife.GetResourcesForBuild=Je part chercher une tonne ou deux de matériaux. Je suis plus forte que j’en ai l’air ! / Off to pick up a ton or two of building materials. I'm stronger than I look.
 //villager.DeliverResourcesShop=
-wife.MakeBread=Mon pain est le meilleure du village. / My bread is the best in the village.
+wife.MakeBread=Mon pain est le meilleur du village. / My bread is the best in the village.
 //villager.BeSeller=Coming, coming!
 wife.MakeCider=Préparer le cidre n’est pas le pire travail par ici. / Preparing cider is not the worse job around here.
 wife.MakeCalva=Une boisson d'homme, faite par une femme. / A man's drink, made by women.
-wife.construction=Je construit, je construit, comme seule une femme le peu ! / Building, building, like only a woman could!
+wife.construction=Je construis, je construis, comme seule une femme le peu ! / Building, building, like only a woman could!
 wife.construction=Les hommes n’ont pas la finesse nécessaire au travail de précision. / Men don't have the neatness needed for precision work.
 wife.construction=Ca va être un bâtiment superbe. / This is going to be one fancy building.
 wife.getGoodsHousehold=Pourquoi est ce toujours moi qui doit tout aller chercher ? / Why am I always the one sent to pick stuff up?
-wife.DeliverGoodsHousehold="Vas chercher ça, vas chercher ça", ils me disent. Un jour je refuserais ! /  "Get this, get that", they say. One day I won't! I won't!
+wife.DeliverGoodsHousehold="Vas chercher ci, vas chercher ça", ils me disent. Un jour je refuserais ! /  "Get this, get that", they say. One day I won't! I won't!
 
 villager.GoPlay=Je vais aller jouer dehors. / I think i'll go play outside.
 villager.BecomeAdult=Il est l’heure de devenir quelqu’un ! / Time to become something in the world!
@@ -67,7 +67,7 @@ villager.BecomeAdult=Il est l’heure de devenir quelqu’un ! / Time to become 
 villager.MakeBoudin=Vous ne le mangeriez pas si vous saviez comment c’est fait. / You wouldn't eat it if you knew how it was made.
 
 smith.MakeNormanTools=Les outils normands sont les meilleurs du monde. / Norman tools are the finest in the world.
-smith.MakeNormanWeapons=N'essayez pas d'affronter un homme armé par moi. / Don't try fighting a man armed by me.
+smith.MakeNormanWeapons=N'essayez pas d'affronter un homme armé par mes soins. / Don't try fighting a man armed by me.
 
 
 miner.Mining=Miner est un art, vous savez. / Mining is an art, you know.
