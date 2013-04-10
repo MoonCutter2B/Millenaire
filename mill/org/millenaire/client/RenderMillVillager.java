@@ -246,6 +246,11 @@ public class RenderMillVillager extends RenderBiped {
 					displayText(MLN.string("ui.raider"),SCALE,0xa0FF6E7B,(float)x,(float)y + villagerSize+height, (float)z);
 					height+=LINE_HEIGHT;
 				}
+				
+				if (villager.vtype.showHealth) {
+					displayText(MLN.string("hire.health")+": "+(villager.getHealth()*0.5)+"/"+(villager.getMaxHealth()*0.5),SCALE,0xa0dddddd,(float)x,(float)y + villagerSize+height, (float)z);
+					height+=LINE_HEIGHT;
+				}
 
 			} else if (villager.hiredBy.equals(profile.playerName)) {
 				String s;
@@ -271,7 +276,7 @@ public class RenderMillVillager extends RenderBiped {
 				height+=LINE_HEIGHT;
 			}
 
-			if (MLN.displayNames) {
+			if (MLN.displayNames && !villager.vtype.hideName) {
 				displayText(villager.getName()+", "+villager.getNativeOccupationName(),SCALE,0xa0ffffff,(float)x,(float)y + villagerSize+height, (float)z);
 			}
 

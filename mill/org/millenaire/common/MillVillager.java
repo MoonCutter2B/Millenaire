@@ -2643,7 +2643,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 					}
 				}
 
-				if (longDistanceStuck > 3000) {//pathing has failed, using long-range teleport
+				if (longDistanceStuck > 3000 && !vtype.noTeleport) {//pathing has failed, using long-range teleport
 					jumpToDest();
 				}
 
@@ -2998,6 +2998,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		dialogueTargetFirstName=StreamReadWrite.readNullableString(data);
 		dialogueTargetLastName=StreamReadWrite.readNullableString(data);
 		dialogueColour=data.readChar();
+		health=data.readInt();
 		
 		client_lastupdated=worldObj.getWorldTime();
 
@@ -3964,6 +3965,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		StreamReadWrite.writeNullableString(dialogueTargetFirstName,data);
 		StreamReadWrite.writeNullableString(dialogueTargetLastName,data);
 		data.writeChar(dialogueColour);
+		data.writeInt(health);
 
 	}
 

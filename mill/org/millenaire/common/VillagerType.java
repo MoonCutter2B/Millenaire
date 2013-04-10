@@ -35,6 +35,10 @@ public class VillagerType implements WeightedChoice {
 	private static final String TAG_NOLEAFCLEARING="noleafclearing";
 	private static final String TAG_ARCHER="archer";
 	private static final String TAG_RAIDER="raider";
+	private static final String TAG_NOTELEPORT="noteleport";
+	private static final String TAG_HIDENAME="hidename";
+	private static final String TAG_SHOWHEALTH="showhealth";
+	
 
 	public static VillagerType loadVillagerType(File file, Culture c) {
 
@@ -201,6 +205,9 @@ public class VillagerType implements WeightedChoice {
 			v.noleafclearing=v.tags.contains(TAG_NOLEAFCLEARING);
 			v.isArcher=v.tags.contains(TAG_ARCHER);
 			v.isRaider=v.tags.contains(TAG_RAIDER);
+			v.noTeleport=v.tags.contains(TAG_NOTELEPORT);
+			v.hideName=v.tags.contains(TAG_HIDENAME);
+			v.showHealth=v.tags.contains(TAG_SHOWHEALTH);
 
 			v.textures=textures.toArray(new String[0]);
 			v.toolsNeeded=toolsNeeded.toArray(new InvItem[0]);
@@ -290,6 +297,9 @@ public class VillagerType implements WeightedChoice {
 	public boolean noleafclearing = false;
 	public boolean isArcher = false;
 	public boolean isRaider = false;
+	public boolean noTeleport = false;
+	public boolean hideName = false;
+	public boolean showHealth = false;
 	public float baseScale = 1;
 	public String familyNameList;
 	public String firstNameList;
