@@ -1,3 +1,27 @@
 Translation comparison between en and fr
 
-Traduction completness: 100%
+List of gaps found in culture dialogues for hindi: 
+
+Dialogue missing for culture hindi: alcohol
+Dialogue missing for culture hindi: beef
+Dialogue missing for culture hindi: debt
+Dialogue missing for culture hindi: gold
+Dialogue missing for culture hindi: indian_lumberman
+Dialogue missing for culture hindi: indian_merchant
+Dialogue missing for culture hindi: indian_raja
+Dialogue missing for culture hindi: indian_rajputgeneral
+Dialogue missing for culture hindi: indian_rani
+Dialogue missing for culture hindi: indian_richwoman
+Dialogue missing for culture hindi: indian_sculptor
+Dialogue missing for culture hindi: indian_smith
+Dialogue missing for culture hindi: indian_soldier
+Dialogue missing for culture hindi: indian_villagechief
+Dialogue missing for culture hindi: lakshmi
+Dialogue missing for culture hindi: monsoon
+Dialogue missing for culture hindi: newhouse
+Dialogue missing for culture hindi: rain
+Dialogue missing for culture hindi: rice
+Dialogue missing for culture hindi: sandstone
+Dialogue missing for culture hindi: sun
+
+Traduction completness: 99%

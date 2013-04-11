@@ -6,6 +6,8 @@ firstNameList=men_names
 texture=/graphics/mob/indian/ML_Smith0.png
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=makesteelpickaxe
 goal=makesteelaxe

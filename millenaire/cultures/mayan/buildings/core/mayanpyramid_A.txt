@@ -1,4 +1,4 @@
-max:0;priority:500;native:Muul;english:Pyramid;around:4;orientation:3;startLevel:0;width:36;length:35;signs:4,2,1,3,5,7,8,6,0;shop:mayantownhall;male:mayan_Leader;female:mayan_RichWoman
+max:0;priority:500;native:Muul;english:Pyramid;around:4;orientation:3;startLevel:0;width:36;length:35;signs:4,2,1,3,5,7,8,6,0;shop:mayantownhall;male:mayan_Leader;female:mayan_RichWoman;tag:leasure
 priority:80
 
 priority:50

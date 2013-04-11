@@ -1,5 +1,9 @@
 package org.millenaire.common.goal.leasure;
 
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+
 import org.millenaire.common.Culture.CultureLanguage.Dialogue;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
@@ -66,17 +70,37 @@ public class GoalGoChat extends Goal {
 				villager.setGoalDestEntity(target);
 				
 				char col=chatColours[MillCommonUtilities.randomInt(chatColours.length)];
+				
+				col=MLN.WHITE;
 
 				if (dialog!=null) {
+					
+					List<Entity> entities=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, MillVillager.class, villager.getPos(), 10, 5);
+					
+					boolean dialogueChat=true;
+					
+					//Only one dialogue can have subtitles at a time
+					for (Entity ent : entities) {
+						if (ent!=villager && ent!=target) {
+							MillVillager v = (MillVillager)ent;
+							
+							if (key.equals(v.goalKey) && v.dialogueChat)
+								dialogueChat=false;
+						}
+					}
+					
+					
 					villager.dialogueKey=dialog.key;
 					villager.dialogueRole=role;
 					villager.dialogueStart=villager.worldObj.getWorldTime();
 					villager.dialogueColour=col;
+					villager.dialogueChat=dialogueChat;
 
 					target.dialogueKey=dialog.key;
 					target.dialogueRole=3-role;
 					target.dialogueStart=villager.worldObj.getWorldTime();
 					target.dialogueColour=col;
+					target.dialogueChat=dialogueChat;
 				}
 			}
 		}

@@ -6,7 +6,6 @@ baseheight=0.9
 malechild=boy
 femalechild=girl
 tag=seller
-
 texture=/graphics/mob/norman/ML_Wife0.png
 texture=/graphics/mob/norman/ML_Wife1.png
 

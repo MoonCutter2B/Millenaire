@@ -436,6 +436,10 @@ public class MillClientUtilities {
 	}
 
 	public static void putVillagerSentenceInChat(MillVillager v) {
+		
+		if (v.dialogueTargetFirstName!=null && !v.dialogueChat) {
+			return;
+		}
 
 		int radius=0;
 		

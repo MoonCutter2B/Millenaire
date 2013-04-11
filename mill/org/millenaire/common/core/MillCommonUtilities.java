@@ -1704,15 +1704,11 @@ public class MillCommonUtilities {
 							node=new AStarNode(node.x,lastNode.y,node.z);
 							path.set(ip, node);
 							halfSlab=true;
-
-							MLN.temp(null, "1 0 1 to 1 0.5 1 at: "+p);
 						
 							//straightening path:   1 2 1 to 1 1.5 1
 						} else if (lastNode.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
 								&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
 							halfSlab=true;
-
-							MLN.temp(null, "1 0 1 to 1 0.5 1 at: "+p);
 
 							//slab a block above:    1 1 2 to 1 1.5 2
 						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
@@ -1721,13 +1717,9 @@ public class MillCommonUtilities {
 							path.set(ip, node);
 							halfSlab=true;
 
-							MLN.temp(null, " 1 1 2 to 1 1.5 2 at: "+p);
-
 							//slab replacing block: 2 2 1 to 2 1.5 1	
 						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y>nextNode.y) {
 							halfSlab=true;
-
-							MLN.temp(null, " 2 2 1 to 2 1.5 1 at: "+p);
 
 							//slab a block above: 2 1 1 to 2 1.5 1
 						} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
@@ -1736,15 +1728,10 @@ public class MillCommonUtilities {
 							path.set(ip, node);
 							halfSlab=true;
 
-							MLN.temp(null, " 2 1 1 to 2 1.5 1 at: "+p);
-
 							//slab replacing block: 1 2 2 to 1 1.5 2	
 						} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y>lastNode.y) {
 							halfSlab=true;
 
-							MLN.temp(null, " 1 2 2 to 1 1.5 2 at: "+p);
-						} else {
-							MLN.temp(null, " no change at: "+p);
 						}
 					} else {
 						int bid=p.getBelow().getId(th.worldObj);

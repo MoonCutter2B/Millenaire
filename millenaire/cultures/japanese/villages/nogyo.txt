@@ -57,3 +57,4 @@ never:japanesepalace
 never:japanesefort
 never:japanesepagoda
 never:japanesearmyforge
+never:bath

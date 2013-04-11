@@ -511,6 +511,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public int dialogueRole=0;
 	public long dialogueStart=0;
 	public char dialogueColour=MLN.WHITE;
+	public boolean dialogueChat=false;
 
 	//for use client-side ONLY
 	public String dialogueTargetFirstName=null;
@@ -2887,6 +2888,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		dialogueStart=nbttagcompound.getLong("dialogueStart");
 		dialogueRole=nbttagcompound.getInteger("dialogueRole");
 		dialogueColour=(char) nbttagcompound.getInteger("dialogueColour");
+		dialogueChat=nbttagcompound.getBoolean("dialogueChat");
 
 		if (dialogueKey.trim().length()==0) {
 			dialogueKey=null;
@@ -2998,8 +3000,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		dialogueTargetFirstName=StreamReadWrite.readNullableString(data);
 		dialogueTargetLastName=StreamReadWrite.readNullableString(data);
 		dialogueColour=data.readChar();
+		dialogueChat=data.readBoolean();
 		health=data.readInt();
-		
+				
 		client_lastupdated=worldObj.getWorldTime();
 
 
@@ -3882,6 +3885,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				nbttagcompound.setLong("dialogueStart", dialogueStart);
 				nbttagcompound.setInteger("dialogueRole", dialogueRole);
 				nbttagcompound.setInteger("dialogueColour", dialogueColour);
+				nbttagcompound.setBoolean("dialogueChat", dialogueChat);
 			}
 
 			final NBTTagList nbttaglist = new NBTTagList();
@@ -3965,6 +3969,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		StreamReadWrite.writeNullableString(dialogueTargetFirstName,data);
 		StreamReadWrite.writeNullableString(dialogueTargetLastName,data);
 		data.writeChar(dialogueColour);
+		data.writeBoolean(dialogueChat);
 		data.writeInt(health);
 
 	}

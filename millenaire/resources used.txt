@@ -110,7 +110,7 @@ Pierres: 206
 Grès: 1882
 Brique cuite: 5804
 Brique de terre: 5710
-Bois (tous): 774
+Bois (tous): 772
 
 indian_agricole_hamlet resource use: 
 Bois de chêne: 534
@@ -121,7 +121,7 @@ Pierres: 190
 Grès: 1882
 Brique cuite: 5574
 Brique de terre: 5223
-Bois (tous): 723
+Bois (tous): 721
 
 indian_controlled resource use: 
 Bois de chêne: 172
@@ -142,7 +142,7 @@ Pierres: 212
 Grès: 3191
 Brique cuite: 4880
 Brique de terre: 6628
-Bois (tous): 873
+Bois (tous): 871
 
 indian_fort_hamlet resource use: 
 Bois de chêne: 516
@@ -244,22 +244,22 @@ Colombages à croix: 25
 Bois (tous): 294
 
 nogyo resource use: 
-Laine blanche: 248
-Roche: 9611
-Bois de sapin: 3404
-Pierres: 1658
-Paroi de papier: 687
+Laine blanche: 181
+Roche: 8563
+Bois de sapin: 3092
+Pierres: 1214
+Paroi de papier: 595
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
-Gravier: 547
+Gravier: 523
 Colombages à croix: 63
-Bois de chêne: 5171
-Colombages: 3319
+Bois de chêne: 4597
+Colombages: 2997
 Fougère: 117
 Lingot de fer: 18
-Chaume: 8849
-Bois (tous): 1668
+Chaume: 8324
+Bois (tous): 1590
 
 seiji resource use: 
 Pierre taillées craquelées: 26
@@ -279,7 +279,7 @@ Colombages: 3915
 Fougère: 117
 Lingot de fer: 108
 Chaume: 8671
-Bois (tous): 1888
+Bois (tous): 1886
 
 
 bandit_cave resource use: 
@@ -4554,7 +4554,7 @@ Initial Construction
 | style="text-align: center; "|312
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|5
+| style="text-align: center; "|3
 |}
 
 
@@ -6960,7 +6960,7 @@ Initial Construction
 | style="text-align: center; "|525
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|42
+| style="text-align: center; "|40
 |}
 
 

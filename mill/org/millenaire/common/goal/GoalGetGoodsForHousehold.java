@@ -3,10 +3,7 @@ package org.millenaire.common.goal;
 import java.util.HashMap;
 import java.util.Vector;
 
-import net.minecraft.item.Item;
-
 import org.millenaire.common.Building;
-import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 
@@ -117,11 +114,6 @@ public class GoalGetGoodsForHousehold extends Goal {
 
 			for (final InvItem key : goods.keySet()) {
 				if (villager.getHouse().countGoods(key.id(),key.meta)<(goods.get(key)/2)) {
-					
-					if (key.item==Item.fishCooked) {
-						MLN.temp(villager, "needs fish");
-					}
-
 					for (final Building shop : shops) {
 						final int nbav=shop.nbGoodAvailable(key.id(),key.meta,false);
 						if ((nbav>0) &&  (shop!=villager.getHouse())) {

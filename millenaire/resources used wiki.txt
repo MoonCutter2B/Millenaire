@@ -559,7 +559,7 @@
 
 |Gaanv ka Mandir = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Sandstone.png|32px|Grès]]</td><td>[[File:ML_IndianStatue.png|32px|link=Hindi:Statue|Statue Hindoue]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td>8</td><td>5</td><td>312</td><td>1</td></tr>
+<tr><th scope="row">Construction</th><td></td><td>8</td><td>3</td><td>312</td><td>1</td></tr>
 <tr><th scope="row">Upgrade 1</th><td>386</td><td></td><td>3</td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 2</th><td>292</td><td></td><td>4</td><td></td><td>2</td></tr>
 </table>
@@ -893,7 +893,7 @@
 
 |Sentou = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Gravel.png|32px|Gravier]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:White_Wool.png|32px|Laine blanche]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|Colombages]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|Chaume]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|Paroi de papier]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td>48</td><td></td><td>42</td><td>328</td><td>300</td><td>11</td><td></td><td>525</td><td></td></tr>
+<tr><th scope="row">Construction</th><td></td><td>48</td><td></td><td>40</td><td>328</td><td>300</td><td>11</td><td></td><td>525</td><td></td></tr>
 <tr><th scope="row">Upgrade 1</th><td></td><td>122</td><td>24</td><td>9</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 2</th><td></td><td>197</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 3</th><td></td><td></td><td></td><td>9</td><td>240</td><td></td><td></td><td></td><td></td><td></td></tr>

@@ -7,6 +7,8 @@ tag=raider
 texture=/graphics/mob/indian/ML_ArmySmith0.png
 
 goal=gorest
+goal=gosocialise
+goal=chat
 goal=gopray
 goal=makesteelsword
 goal=makesteelchest
