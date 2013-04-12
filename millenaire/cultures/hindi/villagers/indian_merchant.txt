@@ -10,8 +10,6 @@ texture=/graphics/mob/indian/ML_merchant0.png
 texture=/graphics/mob/indian/ML_merchant1.png
 
 goal=gorest
-goal=gosocialise
-goal=chat
 goal=gopray
 goal=visitInn
 goal=VisitBuilding

@@ -75,7 +75,7 @@ public class GoalGoChat extends Goal {
 
 				if (dialog!=null) {
 					
-					List<Entity> entities=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, MillVillager.class, villager.getPos(), 10, 5);
+					List<Entity> entities=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, MillVillager.class, villager.getPos(), 5, 5);
 					
 					boolean dialogueChat=true;
 					

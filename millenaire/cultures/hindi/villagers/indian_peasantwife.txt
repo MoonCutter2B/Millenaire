@@ -16,8 +16,6 @@ texture=/graphics/mob/indian/ML_Peasant_Wife5.png
 texture=/graphics/mob/indian/ML_Peasant_Wife6.png
 
 goal=gorest
-goal=gosocialise
-goal=chat
 goal=gopray
 goal=getHouseTHResources
 goal=deliverResourcesShop

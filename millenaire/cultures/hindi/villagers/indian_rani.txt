@@ -12,6 +12,4 @@ texture=/graphics/mob/indian/ML_Rich_Woman2.png
 texture=/graphics/mob/indian/ML_Rich_Woman3.png
 
 goal=gorest
-goal=gosocialise
-goal=chat
 goal=gopray

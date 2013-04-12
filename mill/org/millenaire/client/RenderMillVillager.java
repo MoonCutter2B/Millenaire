@@ -315,6 +315,7 @@ public class RenderMillVillager extends RenderBiped {
 
 	protected int setArmorModel(MillVillager villager, int armourPartId, float f)
 	{
+		
 		final ItemStack itemstack = villager.getArmourPiece(armourPartId);
 		final Field field_armorList = (net.minecraft.client.renderer.entity.RenderPlayer.class).getDeclaredFields()[3];
 		field_armorList.setAccessible(true);
@@ -381,6 +382,8 @@ public class RenderMillVillager extends RenderBiped {
 			}
 		} catch (final Exception e) {
 			MLN.printException("Error when loading armour: ",e);
+		} catch (Error e) {
+			//to handle change in ForgeHooksClient.getArmorTexture's signature 
 		}
 
 
