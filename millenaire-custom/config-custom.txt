@@ -40,7 +40,7 @@ display_names=true
 dynamic_textures=true
 
 //Phrases dans le chat (solo); Distance maximale où afficher les phrases des villageois dans le chat en solo. Défaut: 3.
-villagers_sentence_in_chat_distance_sp=3
+villagers_sentence_in_chat_distance_sp=6
 
 //Phrases dans le chat (MJ); Distance maximale où afficher les phrases des villageois dans le chat en multi-joueur. Défaut: 0.
 villagers_sentence_in_chat_distance_client=1
