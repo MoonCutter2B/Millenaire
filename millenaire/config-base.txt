@@ -42,9 +42,9 @@ display_names=true
 //Name Display Distance; Distance from which names are visible. Default: 20.
 villagers_names_distance=20
 
-//Phrases dans le chat (solo); Distance maximale où afficher les phrases des villageois dans le chat en solo. Défaut: 3.
-//Sentences In Chat (SP); How far villagers must be to display their sentences in the chat box in single player. Default: 3.
-villagers_sentence_in_chat_distance_sp=3
+//Phrases dans le chat (solo); Distance maximale où afficher les phrases des villageois dans le chat en solo. Défaut: 5.
+//Sentences In Chat (SP); How far villagers must be to display their sentences in the chat box in single player. Default: 5.
+villagers_sentence_in_chat_distance_sp=5
 
 //Phrases dans le chat (MJ); Distance maximale où afficher les phrases des villageois dans le chat en multi-joueur. Défaut: 0.
 //Sentences In Chat (MP); How far villagers must be to display their sentences in the chat box in multi player. Default: 0.
