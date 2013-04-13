@@ -1,24 +1,12 @@
 Translation comparison between ru and fr
 
-List of goals without labels: 
+List of gaps found in strings.txt: 
 
-Could not find label for goal.clearoldpath (class: GoalClearOldPath) in either language.
-Could not find label for goal.buildpath (class: GoalBuildPath) in either language.
+Key missing in the strings.txt file: config.escort_key.desc
+Key missing in the strings.txt file: config.escort_key.label
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_client.desc
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_client.label
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_sp.desc
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_sp.label
 
-List of gaps found between parchments: 
-
-Parchment 1 is missing.
-Parchment 2 is missing.
-Parchment 3 is missing.
-Parchment 5 is missing.
-Parchment 6 is missing.
-Parchment 7 is missing.
-Parchment 9 is missing.
-Parchment 10 is missing.
-Parchment 11 is missing.
-Parchment 15 is missing.
-Parchment 17 is missing.
-Parchment 16 is missing.
-Parchment 18 is missing.
-
-Traduction completness: 94%
+Traduction completness: 99%
