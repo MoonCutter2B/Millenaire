@@ -2424,6 +2424,11 @@ public class Building {
 
 				if (getBblocks().length == 0) {
 					MLN.error(this, "No bblocks for  " + buildingLocationIP);
+					try {
+						rushBuilding();
+					} catch (Exception e) {
+						MLN.printException("Exception when trying to rush building:", e);
+					}
 				}
 
 			} else {
@@ -4365,9 +4370,12 @@ public class Building {
 				}
 
 				if (bblocks.length==0) {
-					MLN.error(this, "Saved bblocks had zero elements. Cancelling construction.");
-					bblocks=null;
-					buildingLocationIP=null;
+					MLN.error(this, "Saved bblocks had zero elements. Rushing construction.");
+					try {
+						rushBuilding();
+					} catch (Exception e) {
+						MLN.printException("Exception when trying to rush building:", e);
+					}
 				}
 
 				ds.close();
@@ -5050,30 +5058,9 @@ public class Building {
 			}
 
 
-			if (nbttagcompound.hasKey("bblocks")) {//old method of saving (pre-2.4.8)
-				nbttaglist = nbttagcompound.getTagList("bblocks");
-				final BuildingBlock[] bblocks = new BuildingBlock[nbttaglist.tagCount()];
-				for (int i = 0; i < nbttaglist.tagCount(); i++) {
-					final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-							.tagAt(i);
-					final BuildingBlock block = BuildingBlock.read(nbttagcompound1,
-							"block");
-					bblocks[i]=block;
-				}
 
-				setBblocks(bblocks);
-
-				if (MLN.LogHybernation >= MLN.MAJOR) {
-					MLN.major(this,
-							"Loaded buildingLocationIP: " + buildingLocationIP
-							+ " bblocks size: " + bblocks.length
-							+ " plan: " + getCurrentBuildingPlan());
-				}
-
-			} else {
-				readBblocks();
-				bblocksPos=nbttagcompound.getInteger("bblocksPos");
-			}
+			readBblocks();
+			bblocksPos=nbttagcompound.getInteger("bblocksPos");
 		}
 
 		nbttaglist = nbttagcompound.getTagList("buildingsBought");

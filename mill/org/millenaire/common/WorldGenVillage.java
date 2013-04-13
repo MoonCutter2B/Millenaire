@@ -108,8 +108,8 @@ public class WorldGenVillage implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-
-		if (world.getWorldInfo().getDimension()!=0)
+		
+		if (world.provider.dimensionId!=0)
 			return;
 
 

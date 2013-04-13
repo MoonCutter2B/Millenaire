@@ -255,7 +255,8 @@ public class Goods {
 
 		public ItemMillenaireAxe(int i,String iconName,EnumToolMaterial material,int strength) {
 			super(i, 3, material, new Block[] {
-					Block.planks, Block.bookShelf, Block.wood, Block.chest, Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin, Block.pumpkinLantern, Mill.wood_decoration
+					Block.planks, Block.bookShelf, Block.wood, Block.chest, 
+					Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin, Block.pumpkinLantern, Mill.wood_decoration, Block.leaves
 			});
 
 			efficiencyOnProperMaterial=strength;
