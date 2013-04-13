@@ -112,7 +112,7 @@ public class Mill
 		{
 			return Mill.denier_or.itemID;
 		} 
-	}
+	} 
 
 	public static final String versionNumber = "4.6.7";
 	public static final String versionBound = "[4.5.1,5.0)";
