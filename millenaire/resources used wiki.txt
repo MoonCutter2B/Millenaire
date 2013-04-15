@@ -1463,7 +1463,7 @@
 
 |Ch'en~lonemayancave = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
-<tr><th scope="row">Construction</th><td>413</td><td>24</td><td>20</td></tr>
+<tr><th scope="row">Construction</th><td>423</td><td>24</td><td>18</td></tr>
 </table>
 </table>
 

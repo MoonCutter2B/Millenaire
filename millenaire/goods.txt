@@ -194,7 +194,7 @@ redflower;38;0;Rose
 redstone;331;0;Redstone
 rice;mln28;0;
 rottenflesh;367;0;Chair putréfiée
-saddle;73;0;Minerai de Redstone
+saddle;329;0;Selle
 sand;12;0;Sable
 sandstone;24;0;Grès
 sapling;6;0;Pousse de chêne
