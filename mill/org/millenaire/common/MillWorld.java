@@ -1038,18 +1038,20 @@ public class MillWorld {
 				b.updateBuildingServer();
 				b.updateBackgroundVillage();
 			}
+			
+			for (UserProfile profile : this.profiles.values()) {
+				if (profile.connected)
+					profile.updateProfile();
+			}
 
 			for (final Object o : world.playerEntities) {
-
 				final EntityPlayer player=(EntityPlayer)o;
 
-				//MillCommonUtilities.getServerProfile(player.worldObj,player.username).showNewWorldMessage();
-
-				MillCommonUtilities.getServerProfile(player.worldObj,player.username).updateProfile();
+				//MillCommonUtilities.getServerProfile(player.worldObj,player.username).updateProfile();
 
 				SpecialQuestActions.onTick(this,player);
 			}
-
+			
 			if (MLN.DEV) {
 
 				//testLocations("worldupdate");

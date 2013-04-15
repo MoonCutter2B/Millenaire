@@ -47,3 +47,6 @@ villagers_sentence_in_chat_distance_client=1
 //Code bonus; Code pour activer le bonus. Récupéré automatiquement sur internet si connexion possible.
 bonus_code=7bbb
 
+//Distance min entre bâtiments; Distance minimale entre deux bâtiments isolés générés. Défaut: 600.
+min_lonebuilding_distance=300
+

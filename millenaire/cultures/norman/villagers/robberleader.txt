@@ -5,6 +5,7 @@ firstNameList=men_names
 tag=heavydrinker
 tag=hostile
 tag=raider
+tag=noteleport
 health=40
 
 texture=/graphics/mob/norman/ML_Armoredbandit0.png

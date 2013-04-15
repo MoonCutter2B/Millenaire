@@ -2644,7 +2644,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 					}
 				}
 
-				if (longDistanceStuck > 3000 && !vtype.noTeleport) {//pathing has failed, using long-range teleport
+				if (longDistanceStuck > 3000 && (!vtype.noTeleport || getRecord().raidingVillage)) {//pathing has failed, using long-range teleport
 					jumpToDest();
 				}
 
@@ -2788,7 +2788,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	private void pathFailedSinceLastTick() {
-		if (pathfailure>=20) {
+		if (pathfailure>=20 && (!vtype.noTeleport || getRecord().raidingVillage)) {
 			jumpToDest();
 			pathfailure=0;
 		} else {
@@ -2798,7 +2798,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (p!=null) {
 				computeNewPath(p);
 			} else {
-				jumpToDest();
+				if (!vtype.noTeleport || getRecord().raidingVillage)
+					jumpToDest();
 				pathfailure=0;
 			}
 		}

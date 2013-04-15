@@ -290,25 +290,7 @@ public class MillClientUtilities {
 					}
 					lastPing=System.currentTimeMillis();
 				}
-
-				//TODO: make it work in SP
-				//				if (!world.isRemote && Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) && Keyboard.isKeyDown(Keyboard.KEY_P)) {
-				//
-				//					for (final Point p : Mill.staticWorld.villagesList.pos) {
-				//
-				//						final Building b=Mill.staticWorld.getBuilding(p);
-				//
-				//						if ((b!=null) && b.isActive) {
-				//							Mill.proxy.sendChatAdmin(MLN.string("command.pathrebuild",b.getVillageQualifiedName()));
-				//							b.winfo=new MillWorldInfo();
-				//						}
-				//
-				//					}
-				//
-				//
-				//					lastPing=System.currentTimeMillis();
-				//				}
-
+				
 				if (Keyboard.isKeyDown(MLN.keyAggressiveEscorts)) {
 					final boolean stance=!(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT));
 

@@ -6,6 +6,7 @@ firstNameList=men_names
 baseHeight=0.6
 health=12
 tag=raider
+tag=noteleport
 
 texture=/graphics/mob/mayan/mayanbanditboy0.png
 texture=/graphics/mob/mayan/mayanbanditboy1.png

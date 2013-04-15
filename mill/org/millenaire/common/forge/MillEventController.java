@@ -57,10 +57,12 @@ public class MillEventController {
 		}
 		
 		if (!(event.world instanceof WorldServer)) {
+			MLN.temp(event.world, "Loading new client world");
 			Mill.clientWorld=new MillWorld(event.world);
 			Mill.proxy.testTextureSize();
 		} else {
 			if (!(event.world instanceof WorldServerMulti)) {
+				MLN.temp(event.world, "Loading new world");
 				final MillWorld newWorld=new MillWorld(event.world);
 				Mill.serverWorlds.add(newWorld);
 				newWorld.loadData();

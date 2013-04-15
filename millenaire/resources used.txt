@@ -399,9 +399,9 @@ Bois (tous): 924
 
 
 lonemayancave resource use: 
-Roche: 413
+Roche: 423
 Pierres: 24
-Bois (tous): 20
+Bois (tous): 18
 
 lonemayancornfarm resource use: 
 Pierre taillées craquelées: 4
@@ -11783,13 +11783,13 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|413
+| style="text-align: center; "|423
 |-
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|24
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|20
+| style="text-align: center; "|18
 |}
 
 
