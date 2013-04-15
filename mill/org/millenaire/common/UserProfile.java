@@ -1004,10 +1004,18 @@ public class UserProfile {
 		if (connected) {
 			clearFarAwayPanels();
 
-			if (!connectionActionDone && !mw.world.isRemote) {
-				sendInitialPackets();
-				connectionActionDone=true;
+			EntityPlayer player=getPlayer();
+
+			if (player!=null && player.dimension==0) {
+				if (!connectionActionDone && !mw.world.isRemote) {
+					sendInitialPackets();
+					connectionActionDone=true;
+				}
+			} else {
+				connectionActionDone=false;//so that it gets resent if the player travels back to the overworld
 			}
+
+
 			if (((mw.world.getWorldTime()%1000)==0) && mw.world.isDaytime()) {
 				testQuests();
 			}
