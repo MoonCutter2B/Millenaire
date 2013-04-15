@@ -8,6 +8,7 @@ tag=heavydrinker
 tag=hostile
 tag=archer
 tag=raider
+tag=noteleport
 health=25
 
 texture=/graphics/mob/japanese/japanese_bandit.png

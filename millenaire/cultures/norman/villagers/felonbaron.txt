@@ -4,6 +4,7 @@ familyNameList=noble_family_names
 firstNameList=men_names
 tag=heavydrinker
 tag=hostile
+tag=noteleport
 health=40
 
 texture=/graphics/mob/norman/ML_Armoredbandit0.png

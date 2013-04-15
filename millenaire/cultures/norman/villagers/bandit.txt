@@ -6,6 +6,7 @@ tag=heavydrinker
 tag=hostile
 tag=archer
 tag=raider
+tag=noteleport
 health=60
 
 texture=/graphics/mob/norman/ML_Bandit0.png

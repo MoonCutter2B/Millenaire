@@ -8,6 +8,7 @@ health=15
 model=femaleasymmetrical
 tag=archer
 tag=raider
+tag=noteleport
 
 texture=/graphics/mob/mayan/mayanfemalebandit0.png
 texture=/graphics/mob/mayan/mayanfemalebandit1.png

@@ -6,6 +6,7 @@ baseHeight=1.0
 health=25
 tag=hostile
 tag=raider
+tag=noteleport
 health=30
 
 texture=/graphics/mob/mayan/mayanbanditwarrior0.png

@@ -3,6 +3,7 @@ package org.millenaire.common.block;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHalfSlab;
@@ -299,6 +300,12 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
         {
         	return true;
         }
+    }
+	
+	@Override
+    public int quantityDropped(Random par1Random)
+    {
+        return 1;
     }
 	
 	@Override

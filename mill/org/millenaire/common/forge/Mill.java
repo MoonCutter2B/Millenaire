@@ -353,7 +353,7 @@ public class Mill
 		denier = (new ItemText(nextItemId(),"denier")).setUnlocalizedName("ml_denier");
 		denier_or = (new ItemText(nextItemId(),"denier_or")).setUnlocalizedName("ml_denier_or");
 		denier_argent = (new ItemText(nextItemId(),"denier_argent")).setUnlocalizedName("ml_denier_argent");
-		ciderapple = (new ItemText(nextItemId(),"ciderapple")).setUnlocalizedName("ml_ciderapple");
+		ciderapple = (new ItemFoodMultiple(nextItemId(),"ciderapple",0,1,0.05f,0,false)).setUnlocalizedName("ml_ciderapple").setMaxStackSize(64);;
 		cider = (new ItemFoodMultiple(nextItemId(),"cider",4,0,0,2,true)).setUnlocalizedName("ml_cider");
 		calva = (new ItemFoodMultiple(nextItemId(),"calva",4,0,0,9,true)).setUnlocalizedName("ml_calva");
 		tripes = (new ItemFoodMultiple(nextItemId(),"tripes",5,8,0.8f,2,false)).setUnlocalizedName("ml_tripes");
