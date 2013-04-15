@@ -1102,7 +1102,7 @@ public class Goods {
 		goodsName.put("sugarcane", new InvItem(Item.reed,0));
 		goodsName.put("carrot", new InvItem(Item.carrot,0));
 		goodsName.put("potato", new InvItem(Item.potato,0));
-
+ 
 
 		goodsName.put("alchemistamulet", new InvItem(Mill.alchemist_amulet,0));
 		goodsName.put("alchimistexplosive", new InvItem(Mill.stone_decoration,3));
