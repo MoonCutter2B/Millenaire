@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 import org.millenaire.client.gui.DisplayActions;
 import org.millenaire.client.gui.GuiPanelParchment;
 import org.millenaire.client.gui.GuiText;
+import org.millenaire.client.gui.GuiText.Line;
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.Building;
 import org.millenaire.common.Culture;
@@ -29,6 +30,7 @@ import org.millenaire.common.UserProfile;
 import org.millenaire.common.core.DevModUtilities;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
+import org.millenaire.common.item.Goods;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
 import org.millenaire.common.network.ServerReceiver;
 
@@ -82,6 +84,67 @@ public class MillClientUtilities {
 		pages.add(page);
 
 		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,pages, null,GuiPanelParchment.CHUNK_MAP, true));
+	}
+	
+	public static void displayTradeHelp(Building shop,EntityPlayer player) {
+		
+		final Vector<Vector<Line>> pages=new Vector<Vector<Line>>();
+		Vector<Line> page= new Vector<Line>();
+		
+		page.add(new Line(MLN.DARKBLUE+MLN.string("tradehelp.title",shop.getNativeBuildingName())));
+		page.add(new Line(""));
+		
+		page.add(new Line(MLN.DARKBLUE+MLN.string("tradehelp.goodssold")));
+		page.add(new Line(""));
+		
+		Vector<Goods> goods=shop.getSellingGoods();
+
+		if (goods!=null) {
+			String lastDesc=null;
+			Vector<ItemStack> stacks=new Vector<ItemStack>();
+			for (final Goods g : goods) {
+				if (g.getSellingPrice(shop.getTownHall()) > 0) {
+					if (lastDesc!=null && !lastDesc.equals(g.desc)) {
+						page.add(new Line(stacks,MLN.string(lastDesc)));
+						stacks.clear();
+					}
+					stacks.add(new ItemStack(g.item.item,1));
+					lastDesc=g.desc;
+				}
+			}
+			if (lastDesc!=null) {
+				page.add(new Line(stacks,MLN.string(lastDesc)));
+				stacks.clear();
+			}
+		}
+		
+		page.add(new Line(MLN.DARKBLUE+MLN.string("tradehelp.goodsbought")));
+		page.add(new Line(""));
+		
+		goods=shop.getBuyingGoods();
+
+		if (goods!=null) {
+			String lastDesc=null;
+			Vector<ItemStack> stacks=new Vector<ItemStack>();
+			for (final Goods g : goods) {
+				if (g.getBuyingPrice(shop.getTownHall()) > 0) {
+					if (lastDesc!=null && !lastDesc.equals(g.desc)) {
+						page.add(new Line(stacks,MLN.string(lastDesc)));
+						stacks.clear();
+					}
+					stacks.add(new ItemStack(g.item.item,1));
+					lastDesc=g.desc;
+				}
+			}
+			if (lastDesc!=null) {
+				page.add(new Line(stacks,MLN.string(lastDesc)));
+				stacks.clear();
+			}
+		}
+		
+		pages.add(page);
+		
+		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,null,pages, 0, true));
 	}
 
 

@@ -1624,8 +1624,11 @@ public class Culture {
 							final boolean autoGenerate=((values.length>6) && !values[6].isEmpty())?Boolean.parseBoolean(values[6]):false;
 							final String tag=((values.length>7) && !values[7].isEmpty())?values[7]:null;
 							final int minReputation=((values.length>8) && !values[8].isEmpty())?MillCommonUtilities.readInteger(values[8]):Integer.MIN_VALUE;
-
-							final Goods good=new Goods(name,item,sellingPrice,buyingPrice,reservedQuantity,targetQuantity,foreignMerchantPrice,autoGenerate,tag,minReputation);
+							final boolean hideIfNotValid=((values.length>9) && !values[9].isEmpty())?Boolean.parseBoolean(values[9]):false;
+							final String desc=((values.length>10) && !values[10].isEmpty())?values[10]:null;
+							
+							final Goods good=new Goods(name,item,sellingPrice,buyingPrice,reservedQuantity,targetQuantity,
+									foreignMerchantPrice,autoGenerate,tag,minReputation,hideIfNotValid,desc);
 
 							goods.put(name, good);
 							goodsByItem.put(good.item, good);

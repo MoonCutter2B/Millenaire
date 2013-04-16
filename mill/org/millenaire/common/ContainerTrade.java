@@ -213,7 +213,7 @@ public class ContainerTrade extends Container {
 
 		if (sellingGoods!=null) {
 			for (final Goods g : sellingGoods) {
-				if (g.getSellingPrice(building.getTownHall()) > 0) {
+				if (g.getSellingPrice(building.getTownHall()) > 0 && (!g.hideIfNotValid || building.countGoods(g.item)>0)) {
 					final int slotrow=slotnb/13;
 					addSlotToContainer(new TradeSlot(building,player,true, g, 8+(18*(slotnb-(13*slotrow))), 32+(slotrow*18)));
 
@@ -231,8 +231,8 @@ public class ContainerTrade extends Container {
 		if (buyingGoods!=null) {
 			for (final Goods g : buyingGoods) {
 
-				if (g.getBuyingPrice(building.getTownHall()) > 0) {
-
+				if (g.getBuyingPrice(building.getTownHall()) > 0 && 
+						(!g.hideIfNotValid || MillCommonUtilities.countChestItems(player.inventory, g.item.id(), g.item.meta)>0)) {
 					final int slotrow=slotnb/13;
 					addSlotToContainer(new TradeSlot(building,player, false, g, 8+(18*(slotnb-(13*slotrow))), 86+(slotrow*18)));
 
