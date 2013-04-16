@@ -61,12 +61,12 @@ public abstract class GuiText extends GuiScreen {
 			buttons=new MillGuiButton[]{b,b2,b3};
 			canCutAfter=false;
 		}
-		
+
 		public Line (Vector<ItemStack> icons,String s) {
 			this.icons=icons;
 			text=s;
 			canCutAfter=false;
-			
+
 			if (icons!=null)
 				margin=icons.size()*18;
 		}
@@ -91,10 +91,10 @@ public abstract class GuiText extends GuiScreen {
 		}
 
 		public Line (String s,Line model,boolean first) {
-			
+
 			if (first)
 				icons=model.icons;
-			
+
 			if (s==null) {
 				text="";
 			} else {
@@ -207,9 +207,9 @@ public abstract class GuiText extends GuiScreen {
 
 	Vector<MillGuiTextField> textFields=new Vector<MillGuiTextField>();
 
-	
-	 /** Stacks renderer. Icons, stack size, health, etc... */
-    protected static RenderItem itemRenderer = new RenderItem();
+
+	/** Stacks renderer. Icons, stack size, health, etc... */
+	protected static RenderItem itemRenderer = new RenderItem();
 
 	public GuiText() {
 
@@ -228,12 +228,12 @@ public abstract class GuiText extends GuiScreen {
 					newPage.add(line);
 				} else {
 					for (String l : line.text.split("<ret>")) {
-					
+
 						int lineSize=getLineSizeInPx()-line.margin;
 						int lineSizeInChar=getLineWidthInChars(lineSize);
-						
+
 						boolean first=true;
-						
+
 						while (fontRenderer.getStringWidth(l)>lineSize) {
 							int end = l.lastIndexOf(' ', lineSizeInChar);
 							if (end<1) {
@@ -252,7 +252,7 @@ public abstract class GuiText extends GuiScreen {
 							}
 
 							newPage.add(new Line(subLine,line,first));
-							
+
 							first=false;
 						}
 						newPage.add(new Line(l,line,first));
@@ -481,38 +481,46 @@ public abstract class GuiText extends GuiScreen {
 
 			if (pageNum<descText.size()) {
 				for (int cp=0;(cp<getPageSize()) && (cp<descText.get(pageNum).size());cp++) {
-					
-					
-					
+
+
+
 					if (descText.get(pageNum).get(cp).shadow) {
 						fontRenderer.drawStringWithShadow(descText.get(pageNum).get(cp).text, getTextXStart()+
 								descText.get(pageNum).get(cp).margin,vpos, 0x101010);
 					} else {
 						fontRenderer.drawString(descText.get(pageNum).get(cp).text, getTextXStart()+descText.get(pageNum).get(cp).margin,vpos, 0x101010);
 					}
-					
-					vpos+=10;
-				}
-			}
-			
-			vpos=6;
 
-			if (pageNum<descText.size()) {
-				for (int cp=0;(cp<getPageSize()) && (cp<descText.get(pageNum).size());cp++) {
-					if (descText.get(pageNum).get(cp).icons!=null) {
-						for (int ic=0;ic<descText.get(pageNum).get(cp).icons.size();ic++) {
-							ItemStack icon=descText.get(pageNum).get(cp).icons.get(ic);
-							
-							drawItemStack(icon,getTextXStart()+ic*18,vpos,null);
-						}
-					}
-					
 					vpos+=10;
 				}
 			}
 
 			fontRenderer.drawString((pageNum+1)+"/"+getNbPage(), (getXSize()/2)-10,getYSize()-10, 0x101010);
 
+			vpos=6;
+
+			this.zLevel = 100.0F;
+			itemRenderer.zLevel = 100.0F;
+
+			if (pageNum<descText.size()) {
+				for (int cp=0;(cp<getPageSize()) && (cp<descText.get(pageNum).size());cp++) {
+					if (descText.get(pageNum).get(cp).icons!=null) {
+						for (int ic=0;ic<descText.get(pageNum).get(cp).icons.size();ic++) {
+							ItemStack icon=descText.get(pageNum).get(cp).icons.get(ic);
+
+							GL11.glEnable(GL11.GL_DEPTH_TEST);
+							itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, icon, getTextXStart()+18*ic, vpos);
+							itemRenderer.renderItemStack(this.fontRenderer, this.mc.renderEngine, icon, getTextXStart()+18*ic, vpos, null);
+						}
+					}
+
+					vpos+=10;
+				}
+			}
+
+			itemRenderer.zLevel = 0.0F;
+			this.zLevel = 0.0F;
+			
 			customDrawScreen(i,j,f);
 		}
 
@@ -528,19 +536,6 @@ public abstract class GuiText extends GuiScreen {
 			textField.drawTextBox();
 		}
 	}
-	
-	private void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str)
-    {
-        GL11.glTranslatef(0.0F, 0.0F, 32.0F);
-        this.zLevel = 200.0F;
-        itemRenderer.zLevel = 200.0F;
-        FontRenderer font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
-        if (font == null) font = fontRenderer;
-        itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.renderEngine, par1ItemStack, par2, par3);
-        itemRenderer.renderItemStack(font, this.mc.renderEngine, par1ItemStack, par2, par3, par4Str);
-        this.zLevel = 0.0F;
-        itemRenderer.zLevel = 0.0F;
-    }
 
 	public abstract int getLineSizeInPx();
 
@@ -572,7 +567,7 @@ public abstract class GuiText extends GuiScreen {
 	}
 
 	public abstract void initData();
-	
+
 	private int getLineWidthInChars(int lineWidthInPx) {
 		String testLine="a";
 

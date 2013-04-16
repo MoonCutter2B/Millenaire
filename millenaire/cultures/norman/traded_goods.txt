@@ -1,28 +1,28 @@
 //name, selling price, buying price, reserved quantity, target quantity, foreign merchant price, auto-generated, needed equipment(deprecated), minimum reputation
-dirtwall,1,0,0,0,0,true,,0,false,desc1
-pathdirt,1,0,0,0,0,true,,0,false,desc1
-pathgravel,2,0,0,0,0,true,,0,false,desc2
-pathslabs,16,0,0,0,0,true,,0,false,desc2
-wood,2,1,128,1024,0,false,,0,false,desc2
-wood_pine,2,1,64,256,0,false,,0,false,desc3
-wood_birch,2,1,64,256,0,false,,0,false,desc3
-wood_jungle,2,1,0,64
-cobblestone,2,1,128,1024
-stone,5,3,128,1024
-sandstone,6,4,0,0,8
-glass,5,3,64,512
-clay,16,0,0,0
-bricks,16,0,0,0
+dirtwall,1,0,0,0,0,true,,0,false,tradehelp.freeblock
+pathdirt,1,0,0,0,0,true,,0,false,tradehelp.freeblock
+pathgravel,2,0,0,0,0,true,,0,false,tradehelp.freeblock
+pathslabs,16,0,0,0,0,true,,0,false,tradehelp.freeblock
+wood,2,1,128,1024,0,false,,0,false,tradehelp.wood
+wood_pine,2,1,64,256,0,false,,0,false,tradehelp.wood
+wood_birch,2,1,64,256,0,false,,0,false,tradehelp.wood
+wood_jungle,2,1,0,64,0,false,,0,false,tradehelp.wood
+cobblestone,2,1,128,1024,0,false,,0,false,tradehelp.stone
+stone,5,3,128,1024,0,false,,0,false,tradehelp.stone
+sandstone,6,4,0,0,8,0,false,,0,false,tradehelp.stone
+glass,5,3,64,512,0,false,,0,false,tradehelp.stone
+clay,16,0,0,0,0
+bricks,16,0,0,0,0
 
-iron,25,20,0,10
+iron,25,20,0,10,0,false,,0,false,tradehelp.ironnorman
 gold,0,0,0,0,64
 diamond,0,0,0,0,6*64
 
-wool_white,10,8,0,64,12
-wool_gray,12,0,0,64,32
-wool_lightgray,12,0,0,64,16
-wool_black,12,0,0,64,24
-wool_brown,16,0,0,64,18
+wool_white,10,8,0,64,12,false,,0,false,tradehelp.normanwhitewool
+wool_gray,12,0,0,64,32,false,,0,false,tradehelp.normantapestrywool
+wool_lightgray,12,0,0,64,16,false,,0,false,tradehelp.normantapestrywool
+wool_black,12,0,0,64,24,false,,0,false,tradehelp.normantapestrywool
+wool_brown,16,0,0,64,18,false,,0,false,tradehelp.normantapestrywool
 wool_pink,16,0,0,0,18
 wool_orange,0,0,0,0,14
 wool_magenta,0,0,0,0,40
@@ -35,29 +35,30 @@ wool_blue,0,64,0,0,74
 wool_red,0,14,0,0,14
 wool_limegreen,0,0,0,0,32
 
-seeds,2,1,10,128,2
-wheat,3,2,10,128,4
-carrot,5,4,10,64,16
-bread,10,8,5,10,15
+seeds,2,1,10,128,2,false,,0,false,tradehelp.seeds
+wheat,3,2,10,128,4,false,,0,false,tradehelp.wheat
+carrot,5,4,10,64,16,false,,0,false,tradehelp.carrot
+bread,10,8,5,10,15,false,,0,false,tradehelp.genericfood
 
-egg,4,2,16,80,6
+egg,4,2,16,80,6,false,,0,false,tradehelp.genericfood
 feather,2,1,16,64,4
-leather,20,15,16,64,25
-beefraw,20,0,4,64,32
-beefcooked,28,20,4,64,48
-porkchops,20,0,4,64,32
-porkchopscooked,28,20,4,64,48
-chickenmeat,20,0,4,64,32
-chickenmeatcooked,28,20,4,64,48
-fishraw,5,3,0,0
-fishcooked,7,5,0,0,16
-cake,0,0,0,0,128
+leather,20,0,16,64,25,false,,0,false,tradehelp.normanleather
+beefraw,20,0,4,64,32,false,,0,false,tradehelp.genericfoodraw
+beefcooked,28,20,4,64,48,false,,0,false,tradehelp.genericfood
+porkchops,20,0,4,64,32,false,,0,false,tradehelp.genericfoodraw
+porkchopscooked,28,20,4,64,48,false,,0,false,tradehelp.genericfood
+chickenmeat,20,0,4,64,32,false,,0,false,tradehelp.genericfoodraw
+chickenmeatcooked,28,20,4,64,48,false,,0,false,tradehelp.genericfood
+fishraw,5,3,0,0,0,false,,0,false,tradehelp.genericfoodraw
+fishcooked,7,5,0,0,16,false,,0,false,tradehelp.genericfood
+cake,0,64,0,0,128,0,false,,0,false,tradehelp.genericfoodsweet
+cookie,0,4,0,0,8,0,false,,0,false,tradehelp.genericfoodsweet
 
-steelSword,0,0,0,0,3*25
-steelHelmet,0,0,0,0,8*25
-steelChest,0,0,0,0,10*25
-steelLegs,0,0,0,0,9*25
-steelBoots,0,0,0,0,6*25
+steelSword,0,20*2,0,0,3*25,false,,0,true,tradehelp.genericweapon
+steelHelmet,0,20*5,0,0,8*25,false,,0,true,tradehelp.genericweapon
+steelChest,0,20*8,0,0,10*25,false,,0,true,tradehelp.genericweapon
+steelLegs,0,20*7,0,0,9*25,false,,0,true,tradehelp.genericweapon
+steelBoots,0,20*4,0,0,6*25,false,,0,true,tradehelp.genericweapon
 bow,2*20,0,0,0,2*25
 arrow,0,0,0,0,8
 paper,15,12,32,128
@@ -133,6 +134,3 @@ dye_brown,0,0,0,0,16*64
 dye_red,0,0,0,0,4
 dye_black,0,0,0,0,8
 
-
-saddle,10,10,0,0,0,false,,0,true,item.saddle
-bone,10,10,0,0,0,false,,0,true,item.bone

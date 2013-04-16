@@ -1,3 +1,27 @@
 Translation comparison between en and fr
 
-Traduction completness: 100%
+List of gaps found in strings.txt: 
+
+Key missing in the strings.txt file: tradehelp.carrot
+Key missing in the strings.txt file: tradehelp.freeblock
+Key missing in the strings.txt file: tradehelp.genericfood
+Key missing in the strings.txt file: tradehelp.genericfoodraw
+Key missing in the strings.txt file: tradehelp.genericfoodsweet
+Key missing in the strings.txt file: tradehelp.generictools
+Key missing in the strings.txt file: tradehelp.genericweapon
+Key missing in the strings.txt file: tradehelp.goodsbought
+Key missing in the strings.txt file: tradehelp.goodssold
+Key missing in the strings.txt file: tradehelp.helptext
+Key missing in the strings.txt file: tradehelp.helptitle
+Key missing in the strings.txt file: tradehelp.ironnorman
+Key missing in the strings.txt file: tradehelp.normanleather
+Key missing in the strings.txt file: tradehelp.normantapestrywool
+Key missing in the strings.txt file: tradehelp.normanwhitewool
+Key missing in the strings.txt file: tradehelp.price
+Key missing in the strings.txt file: tradehelp.seeds
+Key missing in the strings.txt file: tradehelp.stone
+Key missing in the strings.txt file: tradehelp.title
+Key missing in the strings.txt file: tradehelp.wheat
+Key missing in the strings.txt file: tradehelp.wood
+
+Traduction completness: 99%

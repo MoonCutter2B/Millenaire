@@ -1610,37 +1610,42 @@ public class Culture {
 				while ((line=reader.readLine()) != null) {
 					if ((line.trim().length() > 0) && !line.startsWith("//")) {
 
-						final String[] values=line.split(",");
+						try {
 
-						final String name=values[0].toLowerCase();
+							final String[] values=line.split(",");
 
-						if (Goods.goodsName.containsKey(name)) {
-							final InvItem item=Goods.goodsName.get(name);
-							final int sellingPrice=((values.length>1) && !values[1].isEmpty())?MillCommonUtilities.readInteger(values[1]):0;
-							final int buyingPrice=((values.length>2) && !values[2].isEmpty())?MillCommonUtilities.readInteger(values[2]):0;
-							final int reservedQuantity=((values.length>3) && !values[3].isEmpty())?MillCommonUtilities.readInteger(values[3]):0;
-							final int targetQuantity=((values.length>4) && !values[4].isEmpty())?MillCommonUtilities.readInteger(values[4]):0;
-							final int foreignMerchantPrice=((values.length>5) && !values[5].isEmpty())?MillCommonUtilities.readInteger(values[5]):0;
-							final boolean autoGenerate=((values.length>6) && !values[6].isEmpty())?Boolean.parseBoolean(values[6]):false;
-							final String tag=((values.length>7) && !values[7].isEmpty())?values[7]:null;
-							final int minReputation=((values.length>8) && !values[8].isEmpty())?MillCommonUtilities.readInteger(values[8]):Integer.MIN_VALUE;
-							final boolean hideIfNotValid=((values.length>9) && !values[9].isEmpty())?Boolean.parseBoolean(values[9]):false;
-							final String desc=((values.length>10) && !values[10].isEmpty())?values[10]:null;
-							
-							final Goods good=new Goods(name,item,sellingPrice,buyingPrice,reservedQuantity,targetQuantity,
-									foreignMerchantPrice,autoGenerate,tag,minReputation,hideIfNotValid,desc);
+							final String name=values[0].toLowerCase();
 
-							goods.put(name, good);
-							goodsByItem.put(good.item, good);
-							goodsVector.remove(good);
-							goodsVector.add(good);
+							if (Goods.goodsName.containsKey(name)) {
+								final InvItem item=Goods.goodsName.get(name);
+								final int sellingPrice=((values.length>1) && !values[1].isEmpty())?MillCommonUtilities.readInteger(values[1]):0;
+								final int buyingPrice=((values.length>2) && !values[2].isEmpty())?MillCommonUtilities.readInteger(values[2]):0;
+								final int reservedQuantity=((values.length>3) && !values[3].isEmpty())?MillCommonUtilities.readInteger(values[3]):0;
+								final int targetQuantity=((values.length>4) && !values[4].isEmpty())?MillCommonUtilities.readInteger(values[4]):0;
+								final int foreignMerchantPrice=((values.length>5) && !values[5].isEmpty())?MillCommonUtilities.readInteger(values[5]):0;
+								final boolean autoGenerate=((values.length>6) && !values[6].isEmpty())?Boolean.parseBoolean(values[6]):false;
+								final String tag=((values.length>7) && !values[7].isEmpty())?values[7]:null;
+								final int minReputation=((values.length>8) && !values[8].isEmpty())?MillCommonUtilities.readInteger(values[8]):Integer.MIN_VALUE;
+								final boolean hideIfNotValid=((values.length>9) && !values[9].isEmpty())?Boolean.parseBoolean(values[9]):false;
+								final String desc=((values.length>10) && !values[10].isEmpty())?values[10]:null;
 
-							if (MLN.LogCulture>=MLN.MINOR) {
-								MLN.minor(this, "Loaded traded good: "+name+" prices: "+sellingPrice+"/"+buyingPrice);
+								final Goods good=new Goods(name,item,sellingPrice,buyingPrice,reservedQuantity,targetQuantity,
+										foreignMerchantPrice,autoGenerate,tag,minReputation,hideIfNotValid,desc);
+
+								goods.put(name, good);
+								goodsByItem.put(good.item, good);
+								goodsVector.remove(good);
+								goodsVector.add(good);
+
+								if (MLN.LogCulture>=MLN.MINOR) {
+									MLN.minor(this, "Loaded traded good: "+name+" prices: "+sellingPrice+"/"+buyingPrice);
+								}
+
+							} else {
+								MLN.error(this, "Unknown good on line: "+line);
 							}
-
-						} else {
-							MLN.error(this, "Unknown good on line: "+line);
+						} catch (Exception e) {
+							MLN.printException("Exception when trying to read trade good on line: "+line, e);
 						}
 					}
 				}

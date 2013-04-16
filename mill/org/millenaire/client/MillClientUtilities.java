@@ -85,65 +85,123 @@ public class MillClientUtilities {
 
 		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,pages, null,GuiPanelParchment.CHUNK_MAP, true));
 	}
-	
+
 	public static void displayTradeHelp(Building shop,EntityPlayer player) {
-		
+
 		final Vector<Vector<Line>> pages=new Vector<Vector<Line>>();
 		Vector<Line> page= new Vector<Line>();
-		
-		page.add(new Line(MLN.DARKBLUE+MLN.string("tradehelp.title",shop.getNativeBuildingName())));
+
+		page.add(new Line(GuiText.DARKBLUE+MLN.string("tradehelp.title",shop.getNativeBuildingName())));
 		page.add(new Line(""));
-		
-		page.add(new Line(MLN.DARKBLUE+MLN.string("tradehelp.goodssold")));
+
+		page.add(new Line(GuiText.DARKBLUE+MLN.string("tradehelp.goodssold")));
 		page.add(new Line(""));
-		
+
 		Vector<Goods> goods=shop.getSellingGoods();
+
 
 		if (goods!=null) {
 			String lastDesc=null;
 			Vector<ItemStack> stacks=new Vector<ItemStack>();
+			Vector<Integer> prices=new Vector<Integer>();
 			for (final Goods g : goods) {
-				if (g.getSellingPrice(shop.getTownHall()) > 0) {
-					if (lastDesc!=null && !lastDesc.equals(g.desc)) {
-						page.add(new Line(stacks,MLN.string(lastDesc)));
-						stacks.clear();
+				if (g.getSellingPrice(shop.getTownHall()) > 0 && g.desc!=null) {
+					if (lastDesc!=null && (!lastDesc.equals(g.desc) || stacks.size()>3)) {
+						String s=null;
+
+						for (int p : prices) {
+							String price=MillCommonUtilities.getShortPrice(p);
+							if (s!=null)
+								s+=", "+price;
+							else
+								s=" "+price;
+						}						
+
+						page.add(new Line(stacks,MLN.string(lastDesc)+" "+MLN.string("tradehelp.price")+" "+s));
+						page.add(new Line());
+						stacks=new Vector<ItemStack>();
+						prices=new Vector<Integer>();
 					}
-					stacks.add(new ItemStack(g.item.item,1));
+
+					stacks.add(new ItemStack(g.item.item,1,g.item.meta));
+					prices.add(g.getSellingPrice(shop.getTownHall()));
 					lastDesc=g.desc;
 				}
 			}
 			if (lastDesc!=null) {
-				page.add(new Line(stacks,MLN.string(lastDesc)));
-				stacks.clear();
+				String s=null;
+
+				for (int p : prices) {
+					String price=MillCommonUtilities.getShortPrice(p);
+					if (s!=null)
+						s+=", "+price;
+					else
+						s=" "+price;
+				}						
+
+				page.add(new Line(stacks,MLN.string(lastDesc)+" "+MLN.string("tradehelp.price")+" "+s));
+				page.add(new Line());
 			}
 		}
-		
-		page.add(new Line(MLN.DARKBLUE+MLN.string("tradehelp.goodsbought")));
+
+		page.add(new Line(GuiText.DARKBLUE+MLN.string("tradehelp.goodsbought")));
 		page.add(new Line(""));
-		
+
 		goods=shop.getBuyingGoods();
 
 		if (goods!=null) {
 			String lastDesc=null;
 			Vector<ItemStack> stacks=new Vector<ItemStack>();
+			Vector<Integer> prices=new Vector<Integer>();
 			for (final Goods g : goods) {
-				if (g.getBuyingPrice(shop.getTownHall()) > 0) {
-					if (lastDesc!=null && !lastDesc.equals(g.desc)) {
-						page.add(new Line(stacks,MLN.string(lastDesc)));
-						stacks.clear();
+				if (g.getBuyingPrice(shop.getTownHall()) > 0  && g.desc!=null) {
+					if (lastDesc!=null && (!lastDesc.equals(g.desc) || stacks.size()>3)) {
+						String s=null;
+
+						for (int p : prices) {
+							String price=MillCommonUtilities.getShortPrice(p);
+							if (s!=null)
+								s+=", "+price;
+							else
+								s=price;
+						}						
+
+						page.add(new Line(stacks,MLN.string(lastDesc)+" "+MLN.string("tradehelp.price")+" "+s));
+						page.add(new Line());
+						stacks=new Vector<ItemStack>();
+						prices=new Vector<Integer>();
 					}
-					stacks.add(new ItemStack(g.item.item,1));
+					stacks.add(new ItemStack(g.item.item,1,g.item.meta));
+					prices.add(g.getBuyingPrice(shop.getTownHall()));
 					lastDesc=g.desc;
 				}
 			}
 			if (lastDesc!=null) {
-				page.add(new Line(stacks,MLN.string(lastDesc)));
-				stacks.clear();
+				String s=null;
+
+				for (int p : prices) {
+					String price=MillCommonUtilities.getShortPrice(p);
+					if (s!=null)
+						s+=", "+price;
+					else
+						s=" "+price;
+				}								
+
+				page.add(new Line(stacks,MLN.string(lastDesc)+" "+MLN.string("tradehelp.price")+" "+s));
+				page.add(new Line());
 			}
 		}
-		
+
 		pages.add(page);
-		
+
+		page= new Vector<Line>();
+
+		page.add(new Line(GuiText.DARKBLUE+MLN.string("tradehelp.helptitle")));
+		page.add(new Line());		
+		page.add(new Line(MLN.string("tradehelp.helptext")));
+
+		pages.add(page);
+
 		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,null,pages, 0, true));
 	}
 
@@ -157,7 +215,7 @@ public class MillClientUtilities {
 		page.add(GuiText.LINE_HELP_GUI_BUTTON);
 		page.add("");
 		page.add("");
-		
+
 		page.add(GuiText.LINE_CONFIG_GUI_BUTTON);
 		page.add("");
 		page.add("");
@@ -254,12 +312,12 @@ public class MillClientUtilities {
 			MLN.error(null, "There was an error when trying to load "+Mill.version+".");
 		} else {
 			if (MLN.displayStart) {
-				
+
 				String bonus="";
-				
+
 				if (MLN.bonusEnabled)
 					bonus=" "+MLN.COLOUR+MLN.BLUE+MLN.string("startup.bonus");
-				
+
 				Mill.proxy.sendChatAdmin(MLN.string("startup.millenaireloaded",Mill.version,Keyboard.getKeyName(MLN.keyVillageList))+bonus);
 			}
 			if (MLN.VillageRadius>70) {
@@ -353,7 +411,7 @@ public class MillClientUtilities {
 					}
 					lastPing=System.currentTimeMillis();
 				}
-				
+
 				if (Keyboard.isKeyDown(MLN.keyAggressiveEscorts)) {
 					final boolean stance=!(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT));
 
@@ -481,54 +539,54 @@ public class MillClientUtilities {
 	}
 
 	public static void putVillagerSentenceInChat(MillVillager v) {
-		
+
 		if (v.dialogueTargetFirstName!=null && !v.dialogueChat) {
 			return;
 		}
 
 		int radius=0;
-		
+
 		if (Mill.proxy.isTrueClient()) {
 			radius=MLN.VillagersSentenceInChatDistanceClient;
 		} else {
 			radius=MLN.VillagersSentenceInChatDistanceSP;
 		}
-		
+
 		EntityPlayer player=Mill.proxy.getTheSinglePlayer();
-		
+
 		if (v.getPos().distanceTo(player)>radius) {
 			return;
 		}
-		
+
 		String gameSpeech=MillCommonUtilities.getVillagerSentence(v,player.username,false);
 		String nativeSpeech=MillCommonUtilities.getVillagerSentence(v,player.username,true);				
-		
+
 		if (nativeSpeech!=null || gameSpeech!=null) {
-			
+
 			String s;
 			if (v.dialogueTargetFirstName!=null) {
 				s=MLN.string("other.chattosomeone",v.getName(),v.dialogueTargetFirstName+" "+v.dialogueTargetLastName)+": ";
 			} else {
 				s=v.getName()+": ";
 			}
-			
-			
+
+
 			if (nativeSpeech!=null) {
 				s+="\247"+MLN.BLUE+nativeSpeech;
 			}
-			
+
 			if (nativeSpeech!=null && gameSpeech!=null) {
 				s+=" ";
 			}
-			
+
 			if (gameSpeech!=null) {
 				s+="\247"+MLN.DARKRED+gameSpeech;
 			}
-			
+
 			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),v.dialogueColour, s);
 		}
 
-		
+
 	}
 
 

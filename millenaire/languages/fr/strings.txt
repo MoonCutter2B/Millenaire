@@ -994,4 +994,28 @@ config.validbonuscode=Code valide! Le bonus est activé.
 config.invalidbonuscode=Code non valide. Veuillez le vérifier.
 
 
+tradehelp.title=<0> - Commerce
+tradehelp.goodssold=Marchandises vendues
+tradehelp.goodsbought=Marchandises achetées
+tradehelp.price=Prix:
+tradehelp.helptitle=Généralités sur le commerce
+tradehelp.helptext=Vous pouvez acheter dans chaque magasin les marchandises que le village a en stock. A part quelques blocs "gratuits" (comme les chemins) ou objets spéciaux (les baguettes), les marchandises proposées ont été produites par le village et le village les "perdra" si vous les achetez, contrairement au commerce avec les villages Minecraft.<ret><ret>Les villageois produisent la pluspart des biens dont ils ont besoin, mais leur vendre permet souvent d'accélérer le développement du village.
+
+tradehelp.freeblock=Ces types de blocs sont produits "gratuitement" par le village et donc disponibles en quantités illimités.
+tradehelp.wood=Les villageois produisent du bois grâce aux bosquets. Ils s'en servent pour construire.
+tradehelp.stone=Les villageois produisent de la pierre et du verre grâce aux carrières. Si le village n'en a pas, ils dépendent entièrement de vous pour leurs besoins.
+tradehelp.genericfood=Les aliments de base aident les enfants à grandir plus vite.
+tradehelp.genericfoodraw=Les villageois font cuire la viande avant de la consommer.
+tradehelp.genericfoodsweet=Les gâteaux et les cookies augmentent les chances de conception d'enfants.
+tradehelp.seeds=Les graines aux villageois servent à planter du blé et nourrir les poules.
+tradehelp.wheat=Les villageois fabriquent du pain et nourrissent leur bétail avec du blé.
+tradehelp.carrot=Les villageois utilisent les carrotes pour nourrir leurs cochons.
+tradehelp.generictools=Les outils de différents niveaux rendent les villageois plus efficaces.
+tradehelp.genericweapon=Les armes et armures de différents niveaux rendent les villageois plus puissants.
+
+
+tradehelp.normanwhitewool=La laine blanche sert dans certains bâtiments et est nécéssaire à la confection de tapisseries dans les forts normands.
+tradehelp.normantapestrywool=Les laines grises, gris clair, noires et brunes servent à la dame à fabriquer des tapisseries.
+tradehelp.normanleather=Les moines normands utilisent du cuir pour fabriquer des livres.
+tradehelp.ironnorman=Les forgerons normands utilisent du fer pour produire des armes et des outils normands aux qualités exceptionelles.
 

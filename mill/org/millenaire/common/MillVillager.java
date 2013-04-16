@@ -26,6 +26,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
@@ -50,7 +54,11 @@ import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
 import org.millenaire.common.goal.Goal;
 import org.millenaire.common.goal.Goal.GoalInformation;
+import org.millenaire.common.item.Goods.ItemMillenaireAxe;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
+import org.millenaire.common.item.Goods.ItemMillenaireHoe;
+import org.millenaire.common.item.Goods.ItemMillenairePickaxe;
+import org.millenaire.common.item.Goods.ItemMillenaireShovel;
 import org.millenaire.common.network.ServerReceiver;
 import org.millenaire.common.network.ServerSender;
 import org.millenaire.common.network.StreamReadWrite;
@@ -77,16 +85,22 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		public static final int ENCHANTEDSWORD=2;
 
 		public Item item=null;
+		public final ItemStack staticStack;
+		public final ItemStack[] staticStackArray;
 		public int meta=0;
 		public int special=0;
 
 		public InvItem(Block block,int meta) {
 			this.item=Item.itemsList[block.blockID];
 			this.meta=meta;
+			staticStack=new ItemStack(item,1,meta);
+			staticStackArray=new ItemStack[]{staticStack};
 		}
 
 		public InvItem(int special) {
 			this.special=special;
+			staticStack=null;
+			staticStackArray=new ItemStack[]{staticStack};
 		}
 
 		public InvItem(int id,int meta) {
@@ -96,11 +110,15 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				item=Item.itemsList[id];
 			}
 			this.meta=meta;
+			staticStack=new ItemStack(item,1,meta);
+			staticStackArray=new ItemStack[]{staticStack};
 		}
 
 		public InvItem(Item item,int meta) {
 			this.item=item;
 			this.meta=meta;
+			staticStack=new ItemStack(item,1,meta);
+			staticStackArray=new ItemStack[]{staticStack};
 		}
 
 		public InvItem(ItemStack is) {
@@ -108,6 +126,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (is.getItemDamage()>0) {
 				meta=is.getItemDamage();
 			}
+			staticStack=new ItemStack(item,1,meta);
+			staticStackArray=new ItemStack[]{staticStack};
 		}
 
 		public InvItem(String s) {
@@ -121,7 +141,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				}
 
 				meta=Integer.parseInt(s.split("/")[1]);
-			}
+				staticStack=new ItemStack(item,1,meta);
+			} else
+				staticStack=null;
+			
+			staticStackArray=new ItemStack[]{staticStack};
 		}
 
 		@Override
@@ -271,7 +295,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public static final HashMap<String,String[]> oldVillagers=new HashMap<String,String[]>();
 	//In descending order of priority:
 	private static final Item[] weapons=new Item[]{
-		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Mill.mayanMace,Item.swordSteel,Item.swordStone,
+		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordSteel,Item.swordStone,
 		Mill.yumiBow,Item.bow,
 		Mill.normanAxe,Mill.mayanAxe,Item.axeSteel,Item.axeStone,
 		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeSteel,Item.pickaxeStone,
@@ -280,7 +304,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	};
 
 	private static final Item[] weaponsHandToHand=new Item[]{
-		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Mill.mayanMace,Item.swordSteel,Item.swordStone,
+		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordSteel,Item.swordStone,
 		Mill.normanAxe,Mill.mayanAxe,Item.axeSteel,Item.axeStone,
 		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeSteel,Item.pickaxeStone,
 		Mill.normanHoe,Mill.mayanHoe,Item.hoeSteel,Item.hoeStone,
@@ -292,7 +316,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	};
 
 	public static final Item[] helmets=new Item[]{
-		Mill.normanHelmet,Mill.byzantineHelmet,Mill.japaneseWarriorBlueHelmet,Mill.japaneseWarriorRedHelmet,Mill.japaneseGuardHelmet,Item.helmetDiamond,Item.helmetSteel,Item.helmetGold,
+		Mill.normanHelmet,Mill.byzantineHelmet,Mill.japaneseWarriorBlueHelmet,Mill.japaneseWarriorRedHelmet,Mill.japaneseGuardHelmet,Item.helmetDiamond,
+		Item.helmetSteel,Item.helmetGold,
 		Item.helmetLeather
 	};
 
@@ -334,11 +359,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	//Careful: unlike growth food must be in order from best to worse
 	//As villagers will use only the first available
 	private static final Item[] foodConception=new Item[]{
-		Mill.wineFancy,Mill.calva,Mill.wineBasic,Mill.cider,Mill.rasgulla,Mill.feta
+		Mill.wineFancy,Item.cake,Mill.calva,Mill.wineBasic,Mill.cider,Mill.rasgulla,Mill.feta,Item.cookie
 	};
 
 	private static final int[] foodConceptionChanceOn=new int[]{
-		2,2,3,3,3,3
+		2,2,2,3,3,3,3,4
 	};
 
 	static {
@@ -1383,102 +1408,160 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemTool getBestAxe() {
-		if (countInv(Mill.normanAxe.itemID)>0)
-			return (ItemTool) Mill.normanAxe;
-		if (countInv(Mill.mayanAxe.itemID)>0)
-			return (ItemTool) Mill.mayanAxe;
-		if (countInv(Item.axeSteel.itemID)>0)
-			return (ItemTool) Item.axeSteel;
-		if (countInv(Item.axeStone.itemID)>0)
-			return (ItemTool) Item.axeStone;
-		return (ItemTool) Item.axeWood;
+		ItemTool bestTool=null;
+		float bestRating=0;
+		
+		for (InvItem item : inventory.keySet()) {
+			if (inventory.get(item)>0) {
+				if (item.staticStack!=null && (item.item instanceof ItemAxe || item.item instanceof ItemMillenaireAxe)) {
+					ItemTool tool=(ItemTool)item.item;
+					if (tool.getStrVsBlock(item.staticStack, Block.wood)>bestRating) {
+						bestTool=tool;
+						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+					}
+				}
+			}
+		}
+		
+		return bestTool;
 	}
 
 	public ItemStack[] getBestAxeStack() {
-		if (countInv(Mill.normanAxe.itemID)>0)
-			return axeNorman;
-		if (countInv(Mill.mayanAxe.itemID)>0)
-			return axeMayan;
-		if (countInv(Item.axeSteel.itemID)>0)
-			return axeSteel;
-		if (countInv(Item.axeStone.itemID)>0)
-			return axeStone;
-		return axeWood;
+
+		ItemStack[] bestTool=null;
+		float bestRating=0;
+		
+		for (InvItem item : inventory.keySet()) {
+			if (inventory.get(item)>0) {
+				if (item.staticStack!=null && (item.item instanceof ItemAxe || item.item instanceof ItemMillenaireAxe)) {
+					ItemTool tool=(ItemTool)item.item;
+					if (tool.getStrVsBlock(item.staticStack, Block.wood)>bestRating) {
+						bestTool=item.staticStackArray;
+						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+					}
+				}
+			}
+		}
+		
+		return bestTool;
 	}
 
 	public ItemTool getBestHoe() {
-		if (countInv(Mill.normanHoe.itemID)>0)
-			return (ItemTool) Mill.normanHoe;
-		if (countInv(Mill.mayanHoe.itemID)>0)
-			return (ItemTool) Mill.mayanHoe;
-		if (countInv(Item.hoeSteel.itemID)>0)
-			return (ItemTool) Item.hoeSteel;
-		if (countInv(Item.hoeStone.itemID)>0)
-			return (ItemTool) Item.hoeStone;
-		return (ItemTool) Item.hoeWood;
+		ItemTool bestTool=null;
+		float bestRating=0;
+		
+		for (InvItem item : inventory.keySet()) {
+			if (inventory.get(item)>0) {
+				if (item.staticStack!=null && (item.item instanceof ItemHoe || item.item instanceof ItemMillenaireHoe)) {
+					ItemTool tool=(ItemTool)item.item;
+					if (tool.getMaxDamage()>bestRating) {
+						bestTool=tool;
+						bestRating=tool.getMaxDamage();
+					}
+				}
+			}
+		}
+		
+		return bestTool;
 	}
 
 	public ItemStack[] getBestHoeStack() {
-		if (countInv(Mill.normanHoe.itemID)>0)
-			return hoeNorman;
-		if (countInv(Mill.mayanHoe.itemID)>0)
-			return hoeMayan;
-		if (countInv(Item.hoeSteel.itemID)>0)
-			return hoeSteel;
-		if (countInv(Item.hoeStone.itemID)>0)
-			return hoeStone;
-		return hoeWood;
+		ItemStack[] bestTool=null;
+		float bestRating=0;
+		
+		for (InvItem item : inventory.keySet()) {
+			if (inventory.get(item)>0) {
+				if (item.staticStack!=null && (item.item instanceof ItemHoe || item.item instanceof ItemMillenaireHoe)) {
+					ItemTool tool=(ItemTool)item.item;
+					if (tool.getMaxDamage()>bestRating) {
+						bestTool=item.staticStackArray;
+						bestRating=tool.getMaxDamage();
+					}
+				}
+			}
+		}
+		
+		return bestTool;
 	}
 
 	public ItemTool getBestPickaxe() {
-		if (countInv(Mill.normanPickaxe.itemID)>0)
-			return (ItemTool) Mill.normanPickaxe;
-		if (countInv(Mill.mayanPickaxe.itemID)>0)
-			return (ItemTool) Mill.mayanPickaxe;
-		if (countInv(Item.pickaxeSteel.itemID)>0)
-			return (ItemTool) Item.pickaxeSteel;
-		if (countInv(Item.pickaxeStone.itemID)>0)
-			return (ItemTool) Item.pickaxeStone;
-		return (ItemTool) Item.pickaxeWood;
+		ItemTool bestTool=null;
+		float bestRating=0;
+		
+		for (InvItem item : inventory.keySet()) {
+			if (inventory.get(item)>0) {
+				if (item.staticStack!=null && (item.item instanceof ItemPickaxe || item.item instanceof ItemMillenairePickaxe)) {
+					ItemTool tool=(ItemTool)item.item;
+					if (tool.getStrVsBlock(item.staticStack, Block.stone)>bestRating) {
+						bestTool=tool;
+						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+					}
+				}
+			}
+		}
+		
+		return bestTool;
 	}
 
 
 
 
 	public ItemStack[] getBestPickaxeStack() {
-		if (countInv(Mill.normanPickaxe.itemID)>0)
-			return pickaxeNorman;
-		if (countInv(Mill.mayanPickaxe.itemID)>0)
-			return pickaxeMayan;
-		if (countInv(Item.pickaxeSteel.itemID)>0)
-			return pickaxeSteel;
-		if (countInv(Item.pickaxeStone.itemID)>0)
-			return pickaxeStone;
-		return pickaxeWood;
+		
+		ItemStack[] bestTool=null;
+		float bestRating=0;
+		
+		for (InvItem item : inventory.keySet()) {
+			if (inventory.get(item)>0) {
+				if (item.staticStack!=null && (item.item instanceof ItemPickaxe || item.item instanceof ItemMillenairePickaxe)) {
+					ItemTool tool=(ItemTool)item.item;
+					if (tool.getStrVsBlock(item.staticStack, Block.stone)>bestRating) {
+						bestTool=item.staticStackArray;
+						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+					}
+				}
+			}
+		}
+		
+		return bestTool;
 	}
 
 	public ItemTool getBestShovel() {
-		if (countInv(Mill.normanShovel.itemID)>0)
-			return (ItemTool) Mill.normanShovel;
-		if (countInv(Mill.mayanShovel.itemID)>0)
-			return (ItemTool) Mill.mayanShovel;
-		if (countInv(Item.shovelSteel.itemID)>0)
-			return (ItemTool) Item.shovelSteel;
-		if (countInv(Item.shovelStone.itemID)>0)
-			return (ItemTool) Item.shovelStone;
-		return (ItemTool) Item.shovelWood;
+		ItemTool bestTool=null;
+		float bestRating=0;
+		
+		for (InvItem item : inventory.keySet()) {
+			if (inventory.get(item)>0) {
+				if (item.staticStack!=null && (item.item instanceof ItemSpade || item.item instanceof ItemMillenaireShovel)) {
+					ItemTool tool=(ItemTool)item.item;
+					if (tool.getStrVsBlock(item.staticStack, Block.dirt)>bestRating) {
+						bestTool=tool;
+						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+					}
+				}
+			}
+		}
+		
+		return bestTool;
 	}
 
 	public ItemStack[] getBestShovelStack() {
-		if (countInv(Mill.normanShovel.itemID)>0)
-			return shovelNorman;
-		if (countInv(Mill.mayanShovel.itemID)>0)
-			return shovelMayan;
-		if (countInv(Item.shovelSteel.itemID)>0)
-			return shovelSteel;
-		if (countInv(Item.shovelStone.itemID)>0)
-			return shovelStone;
-		return shovelWood;
+		ItemStack[] bestTool=null;
+		float bestRating=0;
+		
+		for (InvItem item : inventory.keySet()) {
+			if (inventory.get(item)>0) {
+				if (item.staticStack!=null && (item.item instanceof ItemSpade || item.item instanceof ItemMillenaireShovel)) {
+					ItemTool tool=(ItemTool)item.item;
+					if (tool.getStrVsBlock(item.staticStack, Block.dirt)>bestRating) {
+						bestTool=item.staticStackArray;
+						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+					}
+				}
+			}
+		}
+		
+		return bestTool;
 	}
 
 	public int getBlock(Point p)

@@ -73,6 +73,7 @@ sellingPrice:parchmentComplete,32
 //Buying prices:
 buyingPrice:bookshelves,12
 buyingPrice:wool_white,8
+buyingPrice:leather,15
 buyingPrice:normanBroadsword,1/0/10
 buyingPrice:normanPickaxe,10/10
 buyingPrice:normanAxe,10/10
