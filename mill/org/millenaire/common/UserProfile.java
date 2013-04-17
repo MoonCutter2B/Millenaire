@@ -1001,23 +1001,25 @@ public class UserProfile {
 	}
 
 	public void updateProfile() {
+		EntityPlayer player=getPlayer();
+
 		if (connected) {
-			clearFarAwayPanels();
+			if (player!=null) {
+				clearFarAwayPanels();
 
-			EntityPlayer player=getPlayer();
+				if (player.dimension==0) {
+					if (!connectionActionDone && !mw.world.isRemote) {
+						sendInitialPackets();
+						connectionActionDone=true;
+					}
+				}
 
-			if (player!=null && player.dimension==0) {
-				if (!connectionActionDone && !mw.world.isRemote) {
-					sendInitialPackets();
-					connectionActionDone=true;
+
+				if (player!=null && ((mw.world.getWorldTime()%1000)==0) && mw.world.isDaytime()) {
+					testQuests();
 				}
 			} else {
 				connectionActionDone=false;//so that it gets resent if the player travels back to the overworld
-			}
-
-
-			if (((mw.world.getWorldTime()%1000)==0) && mw.world.isDaytime()) {
-				testQuests();
 			}
 		}
 	}
