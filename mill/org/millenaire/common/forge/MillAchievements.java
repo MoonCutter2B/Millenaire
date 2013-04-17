@@ -82,7 +82,7 @@ public class MillAchievements extends Achievement {
 	public static final Achievement darkside = new MillAchievements(7483, "darkside", 0, 3, Item.swordStone, 
 			firstContact).registerAchievement();
 	
-	public static final Achievement scipio = new MillAchievements(7484, "scipio", -1, 6, Item.swordSteel, 
+	public static final Achievement scipio = new MillAchievements(7484, "scipio", -1, 6, Item.swordIron, 
 			darkside).registerAchievement();
 	
 	public static final Achievement attila = new MillAchievements(7485, "attila", 2, 9, Mill.normanBroadsword, 

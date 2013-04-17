@@ -102,7 +102,7 @@ public class BlockMillCrops extends BlockCrops
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int i, int meta)
+	public Icon getIcon(int i, int meta)
 	{
 		if (meta==0)
 			return riceTexture0;

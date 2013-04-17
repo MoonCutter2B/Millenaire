@@ -17,9 +17,9 @@ goal=mining
 
 bringBackHomeGood=cobblestone
 
-toolNeeded=normanShovel
-toolNeeded=normanPickaxe
-toolNeeded=normanBroadsword
+toolneededclass=shovels
+toolneededclass=pickaxes
+toolneededclass=meleeweapons
 
 baseAttackStrength=5
 tag=helpInAttacks

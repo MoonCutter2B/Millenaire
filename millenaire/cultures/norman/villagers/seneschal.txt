@@ -16,7 +16,7 @@ goal=patrol
 goal=huntmonster
 
 
-toolNeeded=normanBroadsword
+toolneededclass=meleeweapons
 
 baseAttackStrength=3
 tag=helpInAttacks

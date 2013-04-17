@@ -54,14 +54,13 @@ goal=makesouvlaki
 goal=buildpath
 goal=clearoldpath
 
-requiredGood=lambcooked,1
-requiredGood=feta,1
-
-requiredFood=wine,5
-requiredFood=feta,5
-requiredFood=cider,1
-requiredFood=calva,1
+requiredFood=cider,5
+requiredFood=calva,2
 requiredFood=rasgulla,1
+requiredFood=wine,1
+requiredFood=feta,1
+requiredFood=cake,1
+requiredFood=cookie,5
 
 baseAttackStrength=2
 defaultweapon=woodaxe

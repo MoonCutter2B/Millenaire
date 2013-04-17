@@ -997,25 +997,49 @@ config.invalidbonuscode=Code non valide. Veuillez le vérifier.
 tradehelp.title=<0> - Commerce
 tradehelp.goodssold=Marchandises vendues
 tradehelp.goodsbought=Marchandises achetées
-tradehelp.price=Prix:
+tradehelp.buyingprice=Achat:
+tradehelp.sellingprice=Vente:
 tradehelp.helptitle=Généralités sur le commerce
 tradehelp.helptext=Vous pouvez acheter dans chaque magasin les marchandises que le village a en stock. A part quelques blocs "gratuits" (comme les chemins) ou objets spéciaux (les baguettes), les marchandises proposées ont été produites par le village et le village les "perdra" si vous les achetez, contrairement au commerce avec les villages Minecraft.<ret><ret>Les villageois produisent la pluspart des biens dont ils ont besoin, mais leur vendre permet souvent d'accélérer le développement du village.
 
 tradehelp.freeblock=Ces types de blocs sont produits "gratuitement" par le village et donc disponibles en quantités illimités.
 tradehelp.wood=Les villageois produisent du bois grâce aux bosquets. Ils s'en servent pour construire.
 tradehelp.stone=Les villageois produisent de la pierre et du verre grâce aux carrières. Si le village n'en a pas, ils dépendent entièrement de vous pour leurs besoins.
-tradehelp.genericfood=Les aliments de base aident les enfants à grandir plus vite.
+tradehelp.whitewool=La laine blanche sert dans certaines constructions. Les villageois la teignent automatiquement si nécessaire.
+tradehelp.clay=Les villageois produisent des briques grâce à l'argile des carrières.
+tradehelp.genericfood=L'accès à différents types de nourriture aide les enfants à grandir plus vite.
 tradehelp.genericfoodraw=Les villageois font cuire la viande avant de la consommer.
-tradehelp.genericfoodsweet=Les gâteaux et les cookies augmentent les chances de conception d'enfants.
+tradehelp.genericfoodsweet=L'alcool et les desserts augmentent aident les villageois à concevoir des enfants.
 tradehelp.seeds=Les graines aux villageois servent à planter du blé et nourrir les poules.
 tradehelp.wheat=Les villageois fabriquent du pain et nourrissent leur bétail avec du blé.
 tradehelp.carrot=Les villageois utilisent les carrotes pour nourrir leurs cochons.
+tradehelp.feathers=Les plumes servent à faire des flêches.
 tradehelp.generictools=Les outils de différents niveaux rendent les villageois plus efficaces.
 tradehelp.genericweapon=Les armes et armures de différents niveaux rendent les villageois plus puissants.
-
+tradehelp.purse=Les bourses permettent de stoquer des deniers. Elles sont toujours disponibles.
+tradehelp.wand=Les baguettes d'invocation parmettent de créer de nouveaux villages. Elles sont toujours disponibles.
+tradehelp.parchments=Les parchemins donnent des informations sur Millénaire. Ils sont toujours disponibles.
 
 tradehelp.normanwhitewool=La laine blanche sert dans certains bâtiments et est nécéssaire à la confection de tapisseries dans les forts normands.
 tradehelp.normantapestrywool=Les laines grises, gris clair, noires et brunes servent à la dame à fabriquer des tapisseries.
 tradehelp.normanleather=Les moines normands utilisent du cuir pour fabriquer des livres.
-tradehelp.ironnorman=Les forgerons normands utilisent du fer pour produire des armes et des outils normands aux qualités exceptionelles.
+tradehelp.normantools=Les forgerons normands utilisent du fer pour produire des armes et des outils normands aux qualités exceptionelles.
+tradehelp.normanbooks=Les moines normands fabriquent des bibliothèques avec du papier et des livres. Elles servent dans certains bâtiments.
+tradehelp.normanalchemy=Les alchimistes produisent des potions basiques.
+tradehelp.normancider=Les normands produisent du cidre et du calva dans les tavernes à partir de pommes à cidre récoltées par les bûcherons. Ces boissons guérissent le joueur et aident les villageois à avoir des enfants.
+tradehelp.normantripesboudin=Les normands produisent des tripes et du boudins à partir de vaches et de cochons. Ces aliments nourrissent et guérissent le joueur et aident les enfants à grandir.
+tradehelp.normantapestry=Les dames des forts produisent ces tapisseries décoratives à partir de laines blanches, grises, gris clair, brunes et noires.
+tradehelp.normantimberframes=Les charpentiers normands produisent ces colombages à partir de bois.
+
+tradehelp.byzantinetools=Les forgerons byzantins utilisent du fer et du cuir pour produire des outils en fer et des armures byzantines.
+tradehelp.byzantinefeta=Les byzantins produisent de la feta dans les élevages de moutons. Ces fromages guérissent le joueur et aident les villageois à avoir des enfants. 
+tradehelp.byzantinebooks=Les byzantines produisent des livres à partir de bois et de cuir.
+tradehelp.byzantinewine=Les byzantins produisent du vin à partir de raisin dans les tavernes. Le vin guérit le joueur et aide les villageois à avoir des enfants. 
+tradehelp.byzantinesilk=Les byzantins produisent de la soie et s'en servent pour fabriquer des peintures, des icônes et des vêtements luxueux pour les byzantins riches.
+tradehelp.byzantineclothes=Les byzantins produisent des vêtements à partir de laine et de soie. Ils améliorent l'apparence des villageois qui les portent.
+tradehelp.byzantinetiles=Les byzantins produisent des tuiles à partir de pierre et d'argile.
+tradehelp.byzantinefood=Les byzantins cuisinent des côtelettes d'agneau et, en les associant à de la feta, de délicieux souvlakis.  Ces aliments nourrissent et guérissent le joueur et aident les enfants à grandir.
+tradehelp.byzantineweapons=Les forgerons byzantins produisent de solides armures et des masses redoutables à partir de fer et de cuir.
+
+
 

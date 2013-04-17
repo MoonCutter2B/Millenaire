@@ -213,7 +213,7 @@ public class ContainerTrade extends Container {
 
 		if (sellingGoods!=null) {
 			for (final Goods g : sellingGoods) {
-				if (g.getSellingPrice(building.getTownHall()) > 0 && (!g.hideIfNotValid || building.countGoods(g.item)>0)) {
+				if (g.getSellingPrice(building.getTownHall()) > 0) {
 					final int slotrow=slotnb/13;
 					addSlotToContainer(new TradeSlot(building,player,true, g, 8+(18*(slotnb-(13*slotrow))), 32+(slotrow*18)));
 

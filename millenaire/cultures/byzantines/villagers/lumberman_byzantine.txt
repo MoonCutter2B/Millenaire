@@ -52,7 +52,7 @@ bringBackHomeGood=wood_jungle
 startingInv=sapling,10
 startingInv=sapling_birch,10
 
-toolNeeded=steelAxe
+toolneededclass=axes
 
 baseAttackStrength=5
 tag=helpInAttacks

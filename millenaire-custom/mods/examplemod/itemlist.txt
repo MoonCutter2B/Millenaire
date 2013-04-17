@@ -10,4 +10,3 @@
 //Item key;item id;item meta;label (indicative only)
 //Item ids starting with mln will have the item range value added to them; i.e. mln0 is actually 0+1515 (by default)
 
-saddle;73;0;Selle

@@ -28,9 +28,9 @@ requiredGood=wood_pine,64
 requiredGood=wood_birch,64
 requiredGood=wood_jungle,64
 
-toolNeeded=normanShovel
-toolNeeded=normanPickaxe
-toolNeeded=normanBroadsword
+toolneededclass=shovels
+toolneededclass=pickaxes
+toolneededclass=meleeweapons
 
 baseAttackStrength=5
 tag=helpInAttacks

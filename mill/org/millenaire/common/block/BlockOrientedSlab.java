@@ -49,7 +49,7 @@ public class BlockOrientedSlab extends BlockHalfSlab {
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+	public Icon getIcon(int side, int meta)
 	{
 		meta = meta & 1;
 

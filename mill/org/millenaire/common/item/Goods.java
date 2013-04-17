@@ -190,14 +190,14 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
 			icons=new Icon[iconNames.length];
 
 			for (int i=0;i<iconNames.length;i++) {
 				icons[i]=MillCommonUtilities.getIcon(iconRegister, iconNames[i]);
 			}
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconNames[0]);
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconNames[0]);
 		}
 
 
@@ -241,9 +241,9 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 	}
 
@@ -292,9 +292,9 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 	}
 
@@ -315,9 +315,9 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconNames[0]);
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconNames[0]);
 
 			icons=new Icon[iconNames.length];
 
@@ -442,9 +442,9 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 	}
 
@@ -454,7 +454,7 @@ public class Goods {
 		public final String iconName;
 		
 		 public static final Block[] blocksEffectiveAgainst = new Block[] {Block.cobblestone, Block.stoneDoubleSlab,
-			 Block.stoneSingleSlab, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.blockSteel, 
+			 Block.stoneSingleSlab, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.oreLapis, 
 			 Block.oreCoal, Block.blockGold, Block.oreGold, Block.oreDiamond, Block.blockDiamond, 
 			 Block.ice, Block.netherrack, Block.oreLapis, Block.blockLapis, Block.oreRedstone, 
 			 Block.oreRedstoneGlowing, Block.rail, Block.railDetector, Block.railPowered, Block.railActivator, Mill.stone_decoration};
@@ -471,7 +471,7 @@ public class Goods {
 
 		public boolean canHarvestBlock(Block par1Block)
 	    {
-	        return par1Block == Block.obsidian ? this.toolMaterial.getHarvestLevel() == 3 : (par1Block != Block.blockDiamond && par1Block != Block.oreDiamond ? (par1Block != Block.oreEmerald && par1Block != Block.blockEmerald ? (par1Block != Block.blockGold && par1Block != Block.oreGold ? (par1Block != Block.blockSteel && par1Block != Block.oreIron ? (par1Block != Block.blockLapis && par1Block != Block.oreLapis ? (par1Block != Block.oreRedstone && par1Block != Block.oreRedstoneGlowing ? (par1Block.blockMaterial == Material.rock ? true : (par1Block.blockMaterial == Material.iron ? true : par1Block.blockMaterial == Material.anvil)) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2);
+	        return par1Block == Block.obsidian ? this.toolMaterial.getHarvestLevel() == 3 : (par1Block != Block.blockDiamond && par1Block != Block.oreDiamond ? (par1Block != Block.oreEmerald && par1Block != Block.blockEmerald ? (par1Block != Block.blockGold && par1Block != Block.oreGold ? (par1Block != Block.oreLapis && par1Block != Block.oreIron ? (par1Block != Block.blockLapis && par1Block != Block.oreLapis ? (par1Block != Block.oreRedstone && par1Block != Block.oreRedstoneGlowing ? (par1Block.blockMaterial == Material.rock ? true : (par1Block.blockMaterial == Material.iron ? true : par1Block.blockMaterial == Material.anvil)) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2);
 	    }
 		
 		public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
@@ -498,9 +498,9 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 	}
 
@@ -547,9 +547,9 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 	}
 
@@ -589,9 +589,9 @@ public class Goods {
 			return enchantability;
 		}
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 
 		@Override
@@ -784,7 +784,7 @@ public class Goods {
 			if(side == 1)
 				return false;
 
-			int orientation = Direction.vineGrowth[side];
+			int orientation = Direction.facingToDirection[side];
 
 			final EntityWallDecoration entitypainting = new EntityWallDecoration(world, i, j, k, orientation, type, false);
 			if(entitypainting.onValidSurface())
@@ -810,10 +810,10 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
 			Mill.proxy.declareAmuletTextures(iconRegister);
-			iconIndex = iconRegister.registerIcon(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
+			itemIcon = iconRegister.registerIcon(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
 	}
 
@@ -828,11 +828,11 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
 
 			Mill.proxy.declareAmuletTextures(iconRegister);
-			iconIndex = iconRegister.registerIcon(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
+			itemIcon = iconRegister.registerIcon(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
 
 	}
@@ -848,10 +848,10 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
 			Mill.proxy.declareAmuletTextures(iconRegister);
-			iconIndex = iconRegister.registerIcon(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
+			itemIcon = iconRegister.registerIcon(Mill.modId+":"+baseIconName+MLN.getTextSuffix());
 		}
 	}
 
@@ -866,9 +866,9 @@ public class Goods {
 		}
 
 		@Override
-		public void updateIcons(IconRegister iconRegister)
+		public void registerIcons(IconRegister iconRegister)
 		{
-			iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
 
 
@@ -1083,15 +1083,15 @@ public class Goods {
 		goodsName.put("slimeball", new InvItem(Item.slimeBall,0));
 		goodsName.put("snow", new InvItem(Block.snow,0));
 		goodsName.put("spidereye", new InvItem(Item.spiderEye,0));
-		goodsName.put("steelaxe", new InvItem(Item.axeSteel,0));
-		goodsName.put("steelboots", new InvItem(Item.bootsSteel,0));
-		goodsName.put("steelchest", new InvItem(Item.plateSteel,0));
-		goodsName.put("steelhelmet", new InvItem(Item.helmetSteel,0));
-		goodsName.put("steelhoe", new InvItem(Item.hoeSteel,0));
-		goodsName.put("steellegs", new InvItem(Item.legsSteel,0));
-		goodsName.put("steelpickaxe", new InvItem(Item.pickaxeSteel,0));
-		goodsName.put("steelshovel", new InvItem(Item.shovelSteel,0));
-		goodsName.put("steelsword", new InvItem(Item.swordSteel,0));
+		goodsName.put("steelaxe", new InvItem(Item.axeIron,0));
+		goodsName.put("steelboots", new InvItem(Item.bootsIron,0));
+		goodsName.put("steelchest", new InvItem(Item.plateIron,0));
+		goodsName.put("steelhelmet", new InvItem(Item.helmetIron,0));
+		goodsName.put("steelhoe", new InvItem(Item.hoeIron,0));
+		goodsName.put("steellegs", new InvItem(Item.legsIron,0));
+		goodsName.put("steelpickaxe", new InvItem(Item.pickaxeIron,0));
+		goodsName.put("steelshovel", new InvItem(Item.shovelIron,0));
+		goodsName.put("steelsword", new InvItem(Item.swordIron,0));
 		goodsName.put("stone", new InvItem(Block.stone,0));
 		goodsName.put("stoneaxe", new InvItem(Item.axeStone,0));
 		goodsName.put("stonehoe", new InvItem(Item.hoeStone,0));
@@ -1102,7 +1102,7 @@ public class Goods {
 		goodsName.put("sugarcane", new InvItem(Item.reed,0));
 		goodsName.put("carrot", new InvItem(Item.carrot,0));
 		goodsName.put("potato", new InvItem(Item.potato,0));
-
+ 
 
 		goodsName.put("alchemistamulet", new InvItem(Mill.alchemist_amulet,0));
 		goodsName.put("alchimistexplosive", new InvItem(Mill.stone_decoration,3));

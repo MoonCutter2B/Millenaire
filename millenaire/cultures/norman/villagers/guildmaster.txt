@@ -12,7 +12,7 @@ goal=chat
 goal=gopray
 goal=goDrink
 
-toolNeeded=normanBroadsword
+toolneededclass=meleeweapons
 
 baseAttackStrength=5
 tag=helpInAttacks

@@ -21,12 +21,9 @@ goal=goDrink
 goal=patrol
 goal=huntmonster
 
-toolNeeded=normanBroadsword
-toolNeeded=normanchest
-toolNeeded=normanhelmet
-toolNeeded=normanlegs
-toolNeeded=normanboots
-toolneeded=bow
+toolneededclass=armour
+toolneededclass=meleeweapons
+toolneededclass=rangedweapons
 
 baseAttackStrength=4
 tag=helpInAttacks

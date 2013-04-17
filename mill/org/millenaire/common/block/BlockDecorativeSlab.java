@@ -49,7 +49,7 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 		@Override
 		public Icon getIconFromDamage(int i)
 		{
-			return block.getBlockTextureFromSideAndMetadata(2, i);
+			return block.getIcon(2, i);
 		}
 
 		@Override
@@ -86,7 +86,7 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 
 	            if ((par7 == 1) && i1 == this.theHalfSlabDec.blockID && j1 == par1ItemStack.getItemDamage())
 	            {
-	                if (par3World.checkIfAABBIsClear(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec.blockID, j1, 3))
+	                if (par3World.checkBlockCollision(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec.blockID, j1, 3))
 	                {
 	                    par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.doubleSlabDec.stepSound.getPlaceSound(), (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F, this.doubleSlabDec.stepSound.getPitch() * 0.8F);
 	                    --par1ItemStack.stackSize;
@@ -139,7 +139,7 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 
 	        if (i1 == this.theHalfSlabDec.blockID && k1 == par1ItemStack.getItemDamage())
 	        {
-	            if (par3World.checkIfAABBIsClear(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec.blockID, k1, 3))
+	            if (par3World.checkBlockCollision(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec.blockID, k1, 3))
 	            {
 	                par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.doubleSlabDec.stepSound.getPlaceSound(), (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F, this.doubleSlabDec.stepSound.getPitch() * 0.8F);
 	                --par1ItemStack.stackSize;
@@ -192,7 +192,7 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	}
 
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)  {
+	public Icon getIcon(int side, int meta)  {
 
 		if (side==1) {
 			if (texturesTop.containsKey(meta))

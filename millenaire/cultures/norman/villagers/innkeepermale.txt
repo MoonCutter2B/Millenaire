@@ -8,7 +8,7 @@ texture=/graphics/mob/norman/ML_Carpenter0.png
 goal=gorest
 goal=goDrink
 
-toolNeeded=normanBroadsword
+toolneededclass=meleeweapons
 
 
 tag=helpInAttacks

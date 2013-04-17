@@ -1,24 +1,24 @@
 //name, selling price, buying price, reserved quantity, target quantity, foreign merchant price, auto-generated, needed equipment(deprecated), minimum reputation
-dirtwall,1,0,0,0,0,true
-pathdirt,1,0,0,0,0,true
-pathgravel,2,0,0,0,0,true
-pathochretiles,16,0,0,0,0,true
-wood,2,1,128,1024
-wood_birch,2,1,128,512
-wood_pine,2,1,0,64
-wood_jungle,2,1,0,64
-cobblestone,2,1,128,1024
-stone,5,3,128,1024,6
-sandstone,6,4,128,1024,8
-glass,5,3,64,512
-clay,8,8,0,1024
-bricks,16,0,0,512
+dirtwall,1,0,0,0,0,true,,0,false,tradehelp.freeblock
+pathdirt,1,0,0,0,0,true,,0,false,tradehelp.freeblock
+pathgravel,2,0,0,0,0,true,,0,false,tradehelp.freeblock
+pathochretiles,16,0,0,0,0,true,,0,false,tradehelp.freeblock
+wood,2,1,128,1024,0,false,,0,false,tradehelp.wood
+wood_birch,2,1,128,512,0,false,,0,false,tradehelp.wood
+wood_pine,2,1,0,64,0,false,,0,false,tradehelp.wood
+wood_jungle,2,1,0,64,0,false,,0,false,tradehelp.wood
+cobblestone,2,1,128,1024,3,false,,0,false,tradehelp.stone
+stone,5,3,128,1024,6,false,,0,false,tradehelp.stone
+sandstone,6,4,128,1024,8,false,,0,false,tradehelp.stone
+glass,5,3,64,512,0,false,,0,false,tradehelp.stone
+clay,8,8,0,1024,12,false,,0,false,tradehelp.clay
+bricks,16,0,0,512,20,false,,0,false,tradehelp.clay
 
-iron,25,20,0,20
+iron,25,20,0,20,0,false,,0,false,tradehelp.byzantinetools
 gold,0,0,0,0,64
 diamond,0,0,0,0,6*64
 
-wool_white,10,8,0,128,12
+wool_white,10,8,0,128,12,false,,0,false,tradehelp.whitewool
 wool_gray,0,0,0,0,32
 wool_lightgray,0,0,0,0,16
 wool_black,0,0,0,0,24
@@ -35,64 +35,142 @@ wool_blue,0,64,0,0,74
 wool_red,0,14,0,0,14
 wool_limegreen,0,0,0,0,32
 
-seeds,2,1,0,0,2
-wheat,3,2,10,128,4
-carrot,5,4,0,0,16
-bread,10,8,5,10,32
+seeds,2,1,0,0,2,false,,0,false,,0,false,tradehelp.seeds
+wheat,3,2,10,128,4,false,,0,false,,0,false,tradehelp.wheat
+carrot,5,4,0,0,16,false,,0,false,,0,false,tradehelp.carrot
 
-egg,4,2,0,0,6
-feather,2,1,0,0,4
-leather,20,15,16,64,25
-beefraw,20,12,0,0,32
-beefcooked,28,20,0,0,48
-porkchops,20,0,0,0,32
-porkchopscooked,28,20,0,0,48
-chickenmeat,20,0,0,0,32
-chickenmeatcooked,28,20,0,0,48
-fishraw,5,3,0,192
-fishcooked,7,5,0,192,16
-cake,0,0,0,0,128
+bread,10,8,5,10,32,false,,0,true,tradehelp.genericfood
+egg,4,2,0,0,6,false,,0,true,tradehelp.genericfood
+feather,2,1,0,0,4,false,,0,false,tradehelp.feathers
+leather,20,15,16,64,25,false,,0,false,tradehelp.byzantinetools
+beefraw,20,12,0,0,32,false,,0,true,tradehelp.genericfoodraw
+beefcooked,28,20,0,0,48,false,,0,true,tradehelp.genericfood
+porkchops,20,0,0,0,32,false,,0,true,tradehelp.genericfoodraw
+porkchopscooked,28,20,0,0,48,false,,0,true,tradehelp.genericfood
+chickenmeat,20,0,0,0,32,false,,0,true,tradehelp.genericfoodraw
+chickenmeatcooked,28,20,0,0,48,false,,0,true,tradehelp.genericfood
+fishraw,5,3,0,192,0,false,,0,true,tradehelp.genericfoodraw
+fishcooked,7,5,0,192,16,false,,0,true,tradehelp.genericfood
+cake,0,64,0,0,128,false,,0,true,tradehelp.genericfoodsweet
 
-steelPickaxe,2*64,2*64,1,1,5*25
-steelAxe,2*64,2*64,1,1
-steelShovel,2*64,2*64,1,1
-steelHoe,2*64,2*64,1,1
+tripes,0,3*64,0,0,0,false,0,0,true,tradehelp.genericfood
+boudin,0,96,0,0,0,false,0,0,true,tradehelp.genericfood
+wah,0,3*64,0,0,0,false,,0,true,tradehelp.genericfood
+masa,0,10,0,0,0,false,,0,true,tradehelp.genericfood
+chickencurry,0,4*64,0,0,0,false,,0,true,tradehelp.genericfood
+vegcurry,0,3*64,0,0,0,false,,0,true,tradehelp.genericfood
+udon,0,30,0,0,32,false,,0,true,tradehelp.genericfood
+
+lambraw,20,0,0,64,32,false,,0,true,tradehelp.genericfoodraw
+lambcooked,1*64,1*64,0,64,80,false,,0,true,tradehelp.byzantinefood
+souvlaki,2*64,2*64,0,64,0,false,,0,true,tradehelp.byzantinefood
+
+cake,0,64,0,0,128,false,,0,true,tradehelp.genericfoodsweet
+cookie,0,4,0,0,8,false,,0,true,tradehelp.genericfoodsweet
+cider,0,96,0,0,2*64,false,,0,true,tradehelp.genericfoodsweet
+calva,0,5*64,0,0,0,false,0,0,true,tradehelp.genericfoodsweet
+rasgulla,0,30,0,0,0,false,,0,true,tradehelp.genericfoodsweet
+wine,2*64,2*64,2,5,3*64,false,,0,true,tradehelp.byzantinewine
+winebasic,0,64,0,0,0,false,,0,true,tradehelp.byzantinewine
+feta,1*64,1*64,0,64,80,false,,0,true,tradehelp.byzantinefeta
+
+paper,15,12,32,128, 0,false,,0,false,tradehelp.byzantinebooks
+book,70,53,16,64, 0,false,,0,false,tradehelp.byzantinebooks
+bookshelves,220,166,8,16, 0,false,,0,true,tradehelp.byzantinebooks
+
+normanPickaxe,0,15*64,0,0,,,,0,true,tradehelp.generictools
+normanAxe,0,15*64,0,0,,,,0,true,tradehelp.generictools
+normanShovel,0,15*64,0,0,,,,0,true,tradehelp.generictools
+normanHoe,0,15*64,0,0,,,,0,true,tradehelp.generictools
+stonePickaxe,0,3,0,0, 0,false,,0,true,tradehelp.generictools
+stoneAxe,0,3,0,0, 0,false,,0,true,tradehelp.generictools
+stoneShovel,0,1,0,0, 0,false,,0,true,tradehelp.generictools
+stoneHoe,0,2,0,0, 0,false,,0,true,tradehelp.generictools
+steelPickaxe,2*64,2*64,1,1,0,false,,0,true,tradehelp.byzantinetools
+steelAxe,2*64,2*64,1,1,0,false,,0,true,tradehelp.byzantinetools
+steelShovel,2*64,2*64,1,1,0,false,,0,true,tradehelp.byzantinetools
+steelHoe,2*64,2*64,1,1,0,false,,0,true,tradehelp.byzantinetools
+diamondPickaxe,0,3*64*3,0,0, 0,false,,0,true,tradehelp.generictools
+diamondAxe,0,3*64*3,0,0, 0,false,,0,true,tradehelp.generictools
+diamondShovel,0,3*64*1,0,0, 0,false,,0,true,tradehelp.generictools
+diamondHoe,0,3*64*2,0,0, 0,false,,0,true,tradehelp.generictools
+mayanpickaxe,0,7*64,0,0, 0,false,,0,true,tradehelp.generictools
+mayanaxe,0,7*64,0,0, 0,false,,0,true,tradehelp.generictools
+mayanshovel,0,7*64,0,0, 0,false,,0,true,tradehelp.generictools
+mayanhoe,0,7*64,0,0, 0,false,,0,true,tradehelp.generictools
+
+
+
 steelHelmet,0,0,0,0,8*25
 steelSword,0,0,0,0,3*25
 steelChest,0,0,0,0,10*25
 steelLegs,0,0,0,0,9*25
 steelBoots,0,0,0,0,6*25
-bow,2*20,0,1,1,2*25
-arrow,2,1,0,64,8
-paper,15,12,32,128
-book,70,53,16,64
-bookshelves,220,166,8,16
-bottle,5,0,16,64
-netherwart,32,0,16,64
-akwardpotion,48,0,16,64
 
-purse,32*64,0,0,0,0,true
-villageWand,2*64*64,0,0,0,0,true,,8*64*64
+
+bow,2*20,64,0,0,2*25,false,,0,true,tradehelp.genericweapon
+arrow,0,4,0,0,8,false,,0,true,tradehelp.genericweapon
+stoneSword,0,2,0,0, 0,false,,0,true,tradehelp.genericweapon
+leatherHelmet,0,15*5,0,0, 0,false,,0,true,tradehelp.genericweapon
+leatherChest,0,15*8,0,0, 0,false,,0,true,tradehelp.genericweapon
+leatherLegs,0,15*7,0,0, 0,false,,0,true,tradehelp.genericweapon
+leatherBoots,0,15*4,0,0, 0,false,,0,true,tradehelp.genericweapon
+steelSword,0,20*2,0,0,3*25,false,,0,true,tradehelp.genericweapon
+steelHelmet,0,20*5,0,0,8*25,false,,0,true,tradehelp.genericweapon
+steelChest,0,20*8,0,0,10*25,false,,0,true,tradehelp.genericweapon
+steelLegs,0,20*7,0,0,9*25,false,,0,true,tradehelp.genericweapon
+steelBoots,0,20*4,0,0,6*25,false,,0,true,tradehelp.genericweapon
+diamondHelmet,0,3*64*5,0,0, 5*20*64,false,,0,true,tradehelp.genericweapon
+diamondSword,0,3*64*2,0,0, 2*20*64,false,,0,true,tradehelp.genericweapon
+diamondChest,0,3*64*8,0,0, 8*20*64,false,,0,true,tradehelp.genericweapon
+diamondLegs,0,3*64*7,0,0, 7*20*64,false,,0,true,tradehelp.genericweapon
+diamondBoots,0,3*64*4,0,0, 4*20*64,false,,0,true,tradehelp.genericweapon
+yumibow,0,7*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+tachisword,0,3*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japaneseguardboots,0,96,0,0, 0,false,,0,true,tradehelp.genericweapon
+japaneseguardHelmet,0,3*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japaneseguardLegs,0,4*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japaneseguardPlate,0,6*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japanesewarriorblueboots,0,4*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japanesewarriorblueHelmet,0,6*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japanesewarriorblueLegs,0,12*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japanesewarriorbluePlate,0,18*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japanesewarriorredboots,0,4*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japanesewarriorredHelmet,0,6*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japanesewarriorredLegs,0,12*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+japanesewarriorredPlate,0,18*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+mayanmace,0,7*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+normanBroadsword,0,2*64*64,0,0, 2*64*64,false,,0,true,tradehelp.genericweapon
+normanHelmet,0,15*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+normanChest,0,30*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+normanLegs,0,12*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+normanBoots,0,7*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+
+byzantineMace,48*64,40*64,1,1,64*64,false,,8*64*64,true,tradehelp.byzantineweapons
+byzantineHelmet,8*64,6*64,1,1,12*64,false,,8*64*64,true,tradehelp.byzantineweapons
+byzantinePlate,16*64,12*64,1,1,24*64,false,,8*64*64,true,tradehelp.byzantineweapons
+byzantineLegs,6*64,5*64,1,1,9*64,false,,8*64*64,true,tradehelp.byzantineweapons
+byzantineBoots,4*64,3*64,1,1,6*64,false,,8*64*64,true,tradehelp.byzantineweapons
+
+
+purse,32*64,0,0,0,0,true,,0,false,tradehelp.purse
+villageWand,2*64*64,0,0,0,0,true,,8*64*64,false,tradehelp.wand
 
 //Byzantine goods
-grapes,1,1,0,512,2
-wine,2*64,2*64,2,5,3*64,false
-silk,0,20,0,20,30,false
-byzantineiconsmall,3*64,3*64,0,16,5*64
-byzantineiconmedium,5*64,5*64,0,8,7*64
-byzantineiconlarge,8*64,8*64,0,4,10*64
-byzantinetiles,32,30,0,1024,36
-lambraw,20,0,0,64,32
-lambcooked,1*64,1*64,0,64,80
-feta,1*64,1*64,0,64,80
-souvlaki,2*64,2*64,0,64,0
-clothes_byz_silk,4*64,0,0,2,6*64*64
-clothes_byz_wool,1*64,0,0,4,6*64*64
-byzantineMace,48*64,0,1,1,64*64,false,,8*64*64
-byzantineHelmet,8*64,0,1,1,12*64,false,,8*64*64
-byzantinePlate,16*64,0,1,1,24*64,false,,8*64*64
-byzantineLegs,6*64,0,1,1,9*64,false,,8*64*64
-byzantineBoots,4*64,0,1,1,6*64,false,,8*64*64
+grapes,1,1,0,512,2,false,,0,true,tradehelp.byzantinewine
+
+silk,0,20,0,20,30,false,,0,true,tradehelp.byzantinesilk
+painting,32,0,0,0,48,false,,0,true,tradehelp.byzantinesilk
+byzantineiconsmall,3*64,3*64,0,16,5*64,false,,0,true,tradehelp.byzantinesilk
+byzantineiconmedium,5*64,5*64,0,8,7*64,false,,0,true,tradehelp.byzantinesilk
+byzantineiconlarge,8*64,8*64,0,4,10*64,false,,0,true,tradehelp.byzantinesilk
+clothes_byz_silk,4*64,0,0,2,6*64*64,false,,0,true,tradehelp.byzantineclothes
+clothes_byz_wool,1*64,0,0,4,6*64*64,false,,0,true,tradehelp.byzantineclothes
+
+byzantinetiles,32,30,0,1024,36,false,,0,true,tradehelp.byzantinetiles
+
+
+
 
 //for plant seller
 sapling,0,0,0,0,2
@@ -107,7 +185,7 @@ sugarcane,0,0,0,0,48
 cactus,0,0,0,0,16
 
 //for art seller
-painting,32,0,0,0,48
+
 dye_white,0,0,0,0,32
 dye_orange,0,0,0,0,4
 dye_magenta,0,0,0,0,32
@@ -125,9 +203,6 @@ dye_red,0,0,0,0,4
 dye_black,0,0,0,0,8
 dye_lime,0,0,0,0,20
 
-//for food seller
-cake,0,0,0,0,128
-
 //for mayan seller
 maize,0,0,0,0,30
 mayangold,0,0,0,0,64*64
@@ -135,7 +210,6 @@ mayangold,0,0,0,0,64*64
 //for japanese seller
 paperwall,0,0,0,0,2*64
 thatched,0,0,0,0,1*64
-udon,0,0,0,0,32
 
 //for indian seller
 brickmould,0,0,0,0,2*64
@@ -144,6 +218,4 @@ rice,0,0,0,0,30
 //for norman seller
 timberframe_plain,0,0,0,0,64
 timberframe_cross,0,0,0,0,96
-cider,0,0,0,0,2*64
-normanBroadsword,0,0,0,0,2*64*64
 tapestry,0,0,0,0,5*64

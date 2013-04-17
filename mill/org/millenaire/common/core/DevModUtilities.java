@@ -145,7 +145,7 @@ public class DevModUtilities {
 							start=p;
 						}
 
-						if ((end==null) && (bid==Block.blockSteel.blockID)) {
+						if ((end==null) && (bid==Block.blockIron.blockID)) {
 							end=p.getAbove();
 							toleranceMode=0;
 						} else if ((end==null) && (bid==Block.blockDiamond.blockID)) {
@@ -265,7 +265,7 @@ public class DevModUtilities {
 			}
 			p = villager.pathEntity.getPreviousTargetPathPoint();
 			if ((p!=null) && (villager.worldObj.getBlockId(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest.blockID)) {
-				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.blockSteel.blockID, 0);
+				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.blockIron.blockID, 0);
 			}
 		}
 

@@ -35,7 +35,7 @@ public class BlockDecorative extends Block {
 		@Override
 		public Icon getIconFromDamage(int i)
 		{
-			return block.getBlockTextureFromSideAndMetadata(2, i);
+			return block.getIcon(2, i);
 		}
 
 		@Override
@@ -145,7 +145,7 @@ public class BlockDecorative extends Block {
 		super.dropBlockAsItemWithChance(par1World, i, j, k, meta, par6, par7);
 	}
 	@Override
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)  {
+	public Icon getIcon(int side, int meta)  {
 
 		if (side==1) {
 			if (texturesTop.containsKey(meta))

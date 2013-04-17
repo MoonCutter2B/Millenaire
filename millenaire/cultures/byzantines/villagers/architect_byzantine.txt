@@ -32,7 +32,7 @@ goal=goDrink
 goal=getResourcesForBuild
 goal=construction
 
-toolNeeded=steelaxe
+toolneededclass=axes
 
 baseAttackStrength=8
 tag=helpInAttacks

@@ -262,31 +262,31 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public static ItemStack[] hoeWood=new ItemStack[]{new ItemStack(Item.hoeWood, 1)};
 	public static ItemStack[] hoeStone=new ItemStack[]{new ItemStack(Item.hoeStone, 1)};
-	public static ItemStack[] hoeSteel=new ItemStack[]{new ItemStack(Item.hoeSteel, 1)};
+	public static ItemStack[] hoeSteel=new ItemStack[]{new ItemStack(Item.hoeIron, 1)};
 	public static ItemStack[] hoeNorman=new ItemStack[]{new ItemStack(Mill.normanHoe, 1)};
 	public static ItemStack[] hoeMayan=new ItemStack[]{new ItemStack(Mill.mayanHoe, 1)};
 
 	public static ItemStack[] shovelWood=new ItemStack[]{new ItemStack(Item.shovelWood, 1)};
 	public static ItemStack[] shovelStone=new ItemStack[]{new ItemStack(Item.shovelStone, 1)};
-	public static ItemStack[] shovelSteel=new ItemStack[]{new ItemStack(Item.shovelSteel, 1)};
+	public static ItemStack[] shovelSteel=new ItemStack[]{new ItemStack(Item.shovelIron, 1)};
 	public static ItemStack[] shovelNorman=new ItemStack[]{new ItemStack(Mill.normanShovel, 1)};
 	public static ItemStack[] shovelMayan=new ItemStack[]{new ItemStack(Mill.mayanShovel, 1)};
 
 	public static ItemStack[] pickaxeWood=new ItemStack[]{new ItemStack(Item.pickaxeWood, 1)};
 	public static ItemStack[] pickaxeStone=new ItemStack[]{new ItemStack(Item.pickaxeStone, 1)};
-	public static ItemStack[] pickaxeSteel=new ItemStack[]{new ItemStack(Item.pickaxeSteel, 1)};
+	public static ItemStack[] pickaxeSteel=new ItemStack[]{new ItemStack(Item.pickaxeIron, 1)};
 	public static ItemStack[] pickaxeNorman=new ItemStack[]{new ItemStack(Mill.normanPickaxe, 1)};
 	public static ItemStack[] pickaxeMayan=new ItemStack[]{new ItemStack(Mill.mayanPickaxe, 1)};
 
 	public static ItemStack[] axeWood=new ItemStack[]{new ItemStack(Item.axeWood, 1)};
 	public static ItemStack[] axeStone=new ItemStack[]{new ItemStack(Item.axeStone, 1)};
-	public static ItemStack[] axeSteel=new ItemStack[]{new ItemStack(Item.axeSteel, 1)};
+	public static ItemStack[] axeSteel=new ItemStack[]{new ItemStack(Item.axeIron, 1)};
 	public static ItemStack[] axeNorman=new ItemStack[]{new ItemStack(Mill.normanAxe, 1)};
 	public static ItemStack[] axeMayan=new ItemStack[]{new ItemStack(Mill.mayanAxe, 1)};
 
 	public static ItemStack[] swordWood=new ItemStack[]{new ItemStack(Item.swordWood, 1)};
 	public static ItemStack[] swordStone=new ItemStack[]{new ItemStack(Item.swordStone, 1)};
-	public static ItemStack[] swordSteel=new ItemStack[]{new ItemStack(Item.swordSteel, 1)};
+	public static ItemStack[] swordSteel=new ItemStack[]{new ItemStack(Item.swordIron, 1)};
 	public static ItemStack[] swordNorman=new ItemStack[]{new ItemStack(Mill.normanBroadsword, 1)};
 	public static ItemStack[] swordMayan=new ItemStack[]{new ItemStack(Mill.mayanMace, 1)};
 	public static ItemStack[] swordByzantine=new ItemStack[]{new ItemStack(Mill.byzantineMace, 1)};
@@ -294,21 +294,25 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public static final HashMap<String,String[]> oldVillagers=new HashMap<String,String[]>();
 	//In descending order of priority:
-	private static final Item[] weapons=new Item[]{
-		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordSteel,Item.swordStone,
+	public static final Item[] weapons=new Item[]{
+		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordIron,Item.swordStone,
 		Mill.yumiBow,Item.bow,
-		Mill.normanAxe,Mill.mayanAxe,Item.axeSteel,Item.axeStone,
-		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeSteel,Item.pickaxeStone,
-		Mill.normanHoe,Mill.mayanHoe,Item.hoeSteel,Item.hoeStone,
+		Mill.normanAxe,Mill.mayanAxe,Item.axeIron,Item.axeStone,
+		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeIron,Item.pickaxeStone,
+		Mill.normanHoe,Mill.mayanHoe,Item.hoeIron,Item.hoeStone,
 		Mill.normanShovel,Mill.mayanShovel,Item.shovelWood,Item.shovelStone
 	};
 
-	private static final Item[] weaponsHandToHand=new Item[]{
-		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordSteel,Item.swordStone,
-		Mill.normanAxe,Mill.mayanAxe,Item.axeSteel,Item.axeStone,
-		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeSteel,Item.pickaxeStone,
-		Mill.normanHoe,Mill.mayanHoe,Item.hoeSteel,Item.hoeStone,
+	public static final Item[] weaponsHandToHand=new Item[]{
+		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordIron,Item.swordStone,
+		Mill.normanAxe,Mill.mayanAxe,Item.axeIron,Item.axeStone,
+		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeIron,Item.pickaxeStone,
+		Mill.normanHoe,Mill.mayanHoe,Item.hoeIron,Item.hoeStone,
 		Mill.normanShovel,Mill.mayanShovel,Item.shovelWood,Item.shovelStone
+	};
+	
+	public static final Item[] weaponsRanged=new Item[]{
+		Mill.yumiBow,Item.bow
 	};
 
 	private static final Item[] weaponsBow=new Item[]{
@@ -316,26 +320,44 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	};
 
 	public static final Item[] helmets=new Item[]{
+
 		Mill.normanHelmet,Mill.byzantineHelmet,Mill.japaneseWarriorBlueHelmet,Mill.japaneseWarriorRedHelmet,Mill.japaneseGuardHelmet,Item.helmetDiamond,
-		Item.helmetSteel,Item.helmetGold,
+		Item.helmetIron,Item.helmetGold,
+
 		Item.helmetLeather
 	};
 
 	public static final Item[] chestplates=new Item[]{
 		Mill.normanPlate,Mill.byzantinePlate,Mill.japaneseWarriorBluePlate,Mill.japaneseWarriorRedPlate,Mill.japaneseGuardPlate
-		,Item.plateDiamond,Item.plateSteel,Item.plateGold,
+		,Item.plateDiamond,Item.plateIron,Item.plateGold,
 		Item.plateLeather
 	};
 
 	public static final Item[] legs=new Item[]{
 		Mill.normanLegs,Mill.byzantineLegs,Mill.japaneseWarriorBlueLegs,Mill.japaneseWarriorRedLegs,Mill.japaneseGuardLegs,
-		Item.legsDiamond,Item.legsSteel,Item.legsGold,
+		Item.legsDiamond,Item.legsIron,Item.legsGold,
 		Item.legsLeather
 	};
 
 	public static final Item[] boots=new Item[]{
-		Mill.normanBoots,Mill.byzantineBoots,Mill.japaneseWarriorBlueBoots,Mill.japaneseWarriorRedBoots,Mill.japaneseGuardBoots,Item.bootsDiamond,Item.bootsSteel,Item.bootsGold,
+		Mill.normanBoots,Mill.byzantineBoots,Mill.japaneseWarriorBlueBoots,Mill.japaneseWarriorRedBoots,Mill.japaneseGuardBoots,Item.bootsDiamond,Item.bootsIron,Item.bootsGold,
 		Item.bootsLeather
+	};
+	
+	public static final Item[] pickaxes=new Item[]{
+		Mill.normanPickaxe,Item.pickaxeDiamond,Item.pickaxeIron,Item.pickaxeStone
+	};
+	
+	public static final Item[] axes=new Item[]{
+		Mill.normanAxe,Item.axeDiamond,Item.axeIron,Item.axeStone
+	};
+	
+	public static final Item[] shovels=new Item[]{
+		Mill.normanShovel,Item.shovelDiamond,Item.shovelIron,Item.shovelStone
+	};
+	
+	public static final Item[] hoes=new Item[]{
+		Mill.normanHoe,Item.hoeDiamond,Item.hoeIron,Item.hoeStone
 	};
 
 	private static final Item[] foodGrowth=new Item[]{
@@ -1408,7 +1430,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemTool getBestAxe() {
-		ItemTool bestTool=null;
+		ItemTool bestTool=(ItemTool) Item.axeWood;
 		float bestRating=0;
 		
 		for (InvItem item : inventory.keySet()) {
@@ -1428,7 +1450,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public ItemStack[] getBestAxeStack() {
 
-		ItemStack[] bestTool=null;
+		ItemStack[] bestTool=axeWood;
 		float bestRating=0;
 		
 		for (InvItem item : inventory.keySet()) {
@@ -1447,7 +1469,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemTool getBestHoe() {
-		ItemTool bestTool=null;
+		ItemTool bestTool=(ItemTool)Item.hoeWood;
 		float bestRating=0;
 		
 		for (InvItem item : inventory.keySet()) {
@@ -1466,7 +1488,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemStack[] getBestHoeStack() {
-		ItemStack[] bestTool=null;
+		ItemStack[] bestTool=hoeWood;
 		float bestRating=0;
 		
 		for (InvItem item : inventory.keySet()) {
@@ -1485,7 +1507,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemTool getBestPickaxe() {
-		ItemTool bestTool=null;
+		ItemTool bestTool=(ItemTool)Item.pickaxeWood;
 		float bestRating=0;
 		
 		for (InvItem item : inventory.keySet()) {
@@ -1508,7 +1530,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public ItemStack[] getBestPickaxeStack() {
 		
-		ItemStack[] bestTool=null;
+		ItemStack[] bestTool=pickaxeWood;
 		float bestRating=0;
 		
 		for (InvItem item : inventory.keySet()) {
@@ -1527,7 +1549,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemTool getBestShovel() {
-		ItemTool bestTool=null;
+		ItemTool bestTool=(ItemTool)Item.shovelWood;
 		float bestRating=0;
 		
 		for (InvItem item : inventory.keySet()) {
@@ -1546,7 +1568,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemStack[] getBestShovelStack() {
-		ItemStack[] bestTool=null;
+		ItemStack[] bestTool=shovelWood;
 		float bestRating=0;
 		
 		for (InvItem item : inventory.keySet()) {
