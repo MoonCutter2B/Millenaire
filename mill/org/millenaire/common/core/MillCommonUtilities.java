@@ -925,7 +925,7 @@ public class MillCommonUtilities {
 		final ISaveHandler isavehandler = world.getSaveHandler();
 
 		if (isavehandler instanceof SaveHandler)
-			return ((SaveHandler)isavehandler).getSaveDirectory();
+			return ((SaveHandler)isavehandler).getWorldDirectory();
 		else
 			return null;
 	}
@@ -1176,7 +1176,7 @@ public class MillCommonUtilities {
 
 	public static void playSoundByMillName(World world,Point p,String soundMill,float volume) {
 		if (soundMill.equals("metal")) {
-			playSoundBlockPlaced(world,p,Block.blockSteel,volume);
+			playSoundBlockPlaced(world,p,Block.blockIron,volume);
 		} else if (soundMill.equals("wood")) {
 			playSoundBlockPlaced(world,p,Block.wood,volume);
 		} else if (soundMill.equals("wool")) {

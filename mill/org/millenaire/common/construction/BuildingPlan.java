@@ -354,7 +354,7 @@ public class BuildingPlan {
 				} else {
 					MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 8, notifyBlocks, playSound);
 				}
-			} else if (bid==Block.doorSteel.blockID) {
+			} else if (bid==Block.doorIron.blockID) {
 				if (special==BuildingBlock.INVERTEDDOOR) {
 					MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 9, notifyBlocks, playSound);
 				} else {
@@ -1485,7 +1485,7 @@ public class BuildingPlan {
 		charPoints.put('W', new PointType('W',Block.cloth.blockID,0,false));
 		charPoints.put('o', new PointType('o',Block.stone.blockID,0,false));
 		charPoints.put('h', new PointType('h',Block.stairsCobblestone.blockID,0,false));
-		charPoints.put('I', new PointType('I',Block.blockSteel.blockID,0,false));
+		charPoints.put('I', new PointType('I',Block.blockIron.blockID,0,false));
 		charPoints.put('l', new PointType('h',Block.stoneSingleSlab.blockID,0,false));
 		charPoints.put('T', new PointType('T',Block.torchWood.blockID,0,true));
 		charPoints.put('f', new PointType('f',Block.fence.blockID,0,true));
@@ -1857,17 +1857,17 @@ public class BuildingPlan {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorWood.blockID, 4), pt);
 
 				}  else if (pt.name.equals(birondoorTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorSteel.blockID, 0), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorSteel.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 7), pt);
 				}  else if (pt.name.equals(birondoorBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorSteel.blockID, 2), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorSteel.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 5), pt);
 				}  else if (pt.name.equals(birondoorLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorSteel.blockID, 3), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorSteel.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 6), pt);
 				}  else if (pt.name.equals(birondoorRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorSteel.blockID, 1), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorSteel.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 4), pt);
 
 				}  else if (pt.name.equals(btrapdoorTop)) {
 					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.trapdoor.blockID, 1), pt);
@@ -2375,7 +2375,7 @@ public class BuildingPlan {
 
 					} else if (p.blockId==Block.stoneDoubleSlab.blockID) {
 						addToCost(Block.stone.blockID,1);
-					} else if (p.blockId==Block.blockSteel.blockID) {
+					} else if (p.blockId==Block.blockIron.blockID) {
 						addToCost(Item.ingotIron.itemID,9);
 					} else if (p.blockId==Block.fenceIron.blockID) {
 						addToCost(Item.ingotIron.itemID,1);
@@ -3201,16 +3201,16 @@ public class BuildingPlan {
 						m=getDoorMeta(3,orientation);
 
 					} else if (pt.isType(birondoorTop)) {
-						b=Block.doorSteel.blockID;
+						b=Block.doorIron.blockID;
 						m=getDoorMeta(0,orientation);
 					} else if (pt.isType(birondoorRight)) {
-						b=Block.doorSteel.blockID;
+						b=Block.doorIron.blockID;
 						m=getDoorMeta(1,orientation);
 					} else if (pt.isType(birondoorBottom)) {
-						b=Block.doorSteel.blockID;
+						b=Block.doorIron.blockID;
 						m=getDoorMeta(2,orientation);
 					} else if (pt.isType(birondoorLeft)) {
-						b=Block.doorSteel.blockID;
+						b=Block.doorIron.blockID;
 						m=getDoorMeta(3,orientation);
 
 					} else if (pt.isType(btrapdoorTop)) {

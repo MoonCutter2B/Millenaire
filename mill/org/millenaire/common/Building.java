@@ -6078,7 +6078,7 @@ public class Building {
 					if (!winfo.topAdjusted[i][j]) {
 						MillCommonUtilities.setBlockAndMetadata(worldObj, p, Block.cloth.blockID,pathing.regions[i][j]%16);
 					} else {
-						MillCommonUtilities.setBlockAndMetadata(worldObj, p, Block.blockSteel.blockID,0);
+						MillCommonUtilities.setBlockAndMetadata(worldObj, p, Block.blockIron.blockID,0);
 					}
 				}
 

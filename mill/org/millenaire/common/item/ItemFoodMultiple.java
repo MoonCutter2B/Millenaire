@@ -40,9 +40,9 @@ public class ItemFoodMultiple extends ItemFood {
 	}
 	
 	@Override
-	public void updateIcons(IconRegister iconRegister)
+	public void registerIcons(IconRegister iconRegister)
 	{
-		iconIndex = MillCommonUtilities.getIcon(iconRegister, iconName);
+		itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 	}
 
 	@Override
