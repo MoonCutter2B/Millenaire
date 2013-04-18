@@ -10,6 +10,7 @@ Key missing in the strings.txt file: tradehelp.byzantinefood
 Key missing in the strings.txt file: tradehelp.byzantinesilk
 Key missing in the strings.txt file: tradehelp.byzantinetiles
 Key missing in the strings.txt file: tradehelp.byzantinetools
+Key missing in the strings.txt file: tradehelp.byzantineweapons
 Key missing in the strings.txt file: tradehelp.byzantinewine
 Key missing in the strings.txt file: tradehelp.carrot
 Key missing in the strings.txt file: tradehelp.clay

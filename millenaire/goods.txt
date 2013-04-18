@@ -4,7 +4,6 @@
 akwardpotion;373;16;Potion
 alchemistamulet;mln24;0;
 alchimistexplosive;1519;3;
-anyenchanted;-1;0;
 arrow;262;0;Flèche
 beefcooked;364;0;Steak
 beefraw;363;0;Bœuf cru
@@ -85,7 +84,6 @@ dye_red;351;1;Rouge de rose
 dye_white;351;15;Poudre d'os
 dye_yellow;351;11;Jaune pissenlit
 egg;344;0;Œuf
-enchantedsword;-2;0;
 enderpearl;368;0;Perle du Néant
 feather;288;0;Plume
 feta;mln90;0;
