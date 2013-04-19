@@ -21,9 +21,9 @@ bringBackHomeGood=sandStone
 bringBackHomeGood=stone
 bringBackHomeGood=sand
 
-toolNeeded=steelPickaxe
-toolNeeded=steelShovel
-toolNeeded=steelSword
+toolneededclass=axes
+toolneededclass=pickaxes
+toolneededclass=meleeweapons
 
 requiredGood=wood,64
 requiredGood=wood_pine,64

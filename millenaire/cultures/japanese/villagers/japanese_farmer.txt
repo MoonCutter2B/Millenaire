@@ -21,8 +21,8 @@ bringBackHomeGood=seeds
 
 startingInv=seeds,100
 
-toolNeeded=steelHoe
-toolNeeded=tachiSword
+toolneededclass=hoes
+toolneededclass=meleeweapons
 
 tag=helpInAttacks
 defaultweapon=woodhoe

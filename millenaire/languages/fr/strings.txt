@@ -1011,7 +1011,6 @@ tradehelp.genericfood=L'accès à différents types de nourriture aide les enfan
 tradehelp.genericfoodraw=Les villageois font cuire la viande avant de la consommer.
 tradehelp.genericfoodsweet=L'alcool et les desserts augmentent aident les villageois à concevoir des enfants.
 tradehelp.seeds=Les graines aux villageois servent à planter du blé et nourrir les poules.
-tradehelp.wheat=Les villageois fabriquent du pain et nourrissent leur bétail avec du blé.
 tradehelp.carrot=Les villageois utilisent les carrotes pour nourrir leurs cochons.
 tradehelp.feathers=Les plumes servent à faire des flêches.
 tradehelp.generictools=Les outils de différents niveaux rendent les villageois plus efficaces.
@@ -1030,6 +1029,7 @@ tradehelp.normancider=Les normands produisent du cidre et du calva dans les tave
 tradehelp.normantripesboudin=Les normands produisent des tripes et du boudins à partir de vaches et de cochons. Ces aliments nourrissent et guérissent le joueur et aident les enfants à grandir.
 tradehelp.normantapestry=Les dames des forts produisent ces tapisseries décoratives à partir de laines blanches, grises, gris clair, brunes et noires.
 tradehelp.normantimberframes=Les charpentiers normands produisent ces colombages à partir de bois.
+tradehelp.normanwheat=Les villageois normands fabriquent du pain et nourrissent leur bétail avec du blé.
 
 tradehelp.byzantinetools=Les forgerons byzantins utilisent du fer et du cuir pour produire des outils en fer et des armures byzantines.
 tradehelp.byzantinefeta=Les byzantins produisent de la feta dans les élevages de moutons. Ces fromages guérissent le joueur et aident les villageois à avoir des enfants. 
@@ -1040,6 +1040,26 @@ tradehelp.byzantineclothes=Les byzantins produisent des vêtements à partir de 
 tradehelp.byzantinetiles=Les byzantins produisent des tuiles à partir de pierre et d'argile.
 tradehelp.byzantinefood=Les byzantins cuisinent des côtelettes d'agneau et, en les associant à de la feta, de délicieux souvlakis.  Ces aliments nourrissent et guérissent le joueur et aident les enfants à grandir.
 tradehelp.byzantineweapons=Les forgerons byzantins produisent de solides armures et des masses redoutables à partir de fer et de cuir.
+tradehelp.byzantinewheat=Les villageois byzantins fabriquent du pain et nourrissent leur bétail avec du blé.
+
+
+tradehelp.hinditools=Les forgerons indiens utilisent du fer pour produire des outils et des armures en fer.
+tradehelp.hindigenericfood=L'accès à différents types de nourriture aide les enfants à grandir plus vite. Attention, les indiens ne mangent ni boeuf ni porc.
+tradehelp.hindigenericfoodsweet=Les desserts augmentent aident les villageois à concevoir des enfants. Les villageois indiens ne boivent pas d'alcool.
+tradehelp.hindirasgulla=Les indiens produisent de délicieuses rasgullas à partir de sucre. Elles guerissent le joueur et aident les villageois à avoir des enfants.
+tradehelp.hindicurry=Les indiens cuisinent des caris végétariens à base de riz et curcuma et des caris de poulet en ajoutant un poulet. Ces aliments nourrissent et guérissent le joueur et aident les enfants à grandir.
+tradehelp.hindibricks=Les indiens produisent des briques de terre cuitent au soleil qu'ils cuisent pour fabriquer des briques cuites. Vous pouvez en fabriquez vous-même en achetant un moule.
+tradehelp.hindistatue=Les sculpteurs indiens produisent ces bas-relief de dieux hindous qui ornent les temples indiens.
+
+tradehelp.japanesegold=Les japonais utilisent de l'or pour décorer certains bâtiments
+tradehelp.japaneseudon=Les japonais cuisinent des udons à partir de blé et de poulet. Ils nourrissent et guérissent le joueur et aident les enfants à grandir.
+tradehelp.japanesetools=Les forgerons japonais utilisent du fer et du cuir pour produire des outils en fer et des armures japonaises.
+tradehelp.japaneseweapons=Les forgerons japonais produisent des armures magnifiques, des épées redoutables et des arcs puissants à partir de fer, cuir et laine.
+tradehelp.japanesepaper=Les artisans japonais produisent du papier à partir de riz et s'en servent pour fabriquer des parois translucides.
+tradehelp.japaneseframes=Les artisans japonais produisent des colombages à partir de bois pour construire des bâtiments éléguants.
+tradehelp.japaneserice=Les japonais cultivent du riz pour nourir leur enfants et produire du papier.
+tradehelp.japanesewheat=Les japonais byzantins cuisinent des udons avec du blé.
+
 
 
 

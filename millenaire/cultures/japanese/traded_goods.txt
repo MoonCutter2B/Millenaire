@@ -1,24 +1,25 @@
 //name, selling price, buying price, reserved quantity, target quantity, foreign merchant price, auto-generated, needed equipment(deprecated), minimum reputation
-dirtwall,1,0,0,0,0,true
-pathdirt,1,0,0,0,0,true
-pathgravel,2,0,0,0,0,true
-pathgravelslabs,32,0,0,0,0,true
-wood,2,1,128,1024
-wood_pine,2,1,128,1024
-wood_birch,2,1,0,64
-wood_jungle,2,1,0,64
-cobblestone,2,1,128,1024
-stone,5,3,128,1024
-sandstone,5,3,0,64
-glass,5,3,0,0
+dirtwall,1,0,0,0,0,true,,0,false,tradehelp.freeblock
+pathdirt,1,0,0,0,0,true,,0,false,tradehelp.freeblock
+pathgravel,2,0,0,0,0,true,,0,false,tradehelp.freeblock
+pathgravelslabs,32,0,0,0,0,true,,0,false,tradehelp.freeblock
+wood,2,1,128,1024,0,false,,0,false,tradehelp.wood
+wood_pine,2,1,128,1024,0,false,,0,false,tradehelp.wood
+wood_birch,2,1,0,64,0,false,,0,false,tradehelp.wood
+wood_jungle,2,1,0,64,0,false,,0,false,tradehelp.wood
+cobblestone,2,1,128,1024,0,false,,0,false,tradehelp.stone
+stone,5,3,128,1024,0,false,,0,false,tradehelp.stone
+sandstone,5,3,0,64,0,false,,0,false,tradehelp.stone
+glass,5,3,0,0,0,false,,0,false,tradehelp.stone
 clay,16,0,0,0
 bricks,16,0,0,0
+gold,25,20,5,10,0,false,,0,false,tradehelp.japanesegold
 
-iron,25,20,0,128
-gold,25,20,5,10
+
+
 diamond,0,0,0,0,6*64
 
-wool_white,10,8,0,64,12
+wool_white,10,8,0,64,12,false,,0,false,tradehelp.whitewool
 wool_gray,0,0,0,0,32
 wool_lightgray,0,0,0,0,16
 wool_black,0,0,0,0,24
@@ -35,57 +36,124 @@ wool_blue,0,64,0,0,74
 wool_red,0,14,0,0,14
 wool_limegreen,0,0,0,0,32
 
-seeds,2,1,0,0,2
-wheat,3,2,10,64,4
-carrot,5,4,0,0,16
-bread,10,8,0,0,32
+seeds,2,1,0,0,2,false,,0,false,,0,false,tradehelp.seeds
+wheat,3,2,10,128,4,false,,0,false,,0,false,tradehelp.japanesewheat
+carrot,5,4,0,0,16,false,,0,false,,0,false,tradehelp.carrot
 
-egg,4,2,16,80,6
-feather,2,1,16,64,4
-leather,20,15,16,64,25
-beefraw,20,12,0,0,32
-beefcooked,28,20,0,0,48
-porkchops,20,0,0,0,32
-porkchopscooked,28,20,0,0,48
-chickenmeat,20,0,4,64,32
-chickenmeatcooked,28,20,4,64,48
-fishraw,5,3,64,192
-fishcooked,7,5,64,192,10
-cake,0,0,0,0,128
 
-arrow,0,0,0,0,8
-steelPickaxe,2*64,2*64,1,1,5*25
-steelAxe,2*64,2*64,1,1,5*25
-steelShovel,2*64,2*64,1,1,2*25
-steelHoe,2*64,2*64,1,1,3*25
-paper,15,12,64,128
+bread,10,8,5,10,32,false,,0,true,tradehelp.genericfood
+egg,4,2,6,6,6,false,,0,true,tradehelp.genericfood
+beefraw,20,12,0,0,32,false,,0,true,tradehelp.genericfoodraw
+beefcooked,28,20,0,0,48,false,,0,true,tradehelp.genericfood
+porkchops,20,0,0,0,32,false,,0,true,tradehelp.genericfoodraw
+porkchopscooked,28,20,0,0,48,false,,0,true,tradehelp.genericfood
+chickenmeat,20,0,0,0,32,false,,0,true,tradehelp.genericfoodraw
+chickenmeatcooked,28,20,0,0,48,false,,0,true,tradehelp.genericfood
+fishraw,5,3,0,192,0,false,,0,true,tradehelp.genericfoodraw
+fishcooked,7,5,64,192,16,false,,0,true,tradehelp.genericfood
+
+tripes,0,3*64,0,0,0,false,0,0,true,tradehelp.genericfood
+boudin,0,96,0,0,0,false,0,0,true,tradehelp.genericfood
+wah,0,3*64,0,0,0,false,,0,true,tradehelp.genericfood
+masa,0,10,0,0,0,false,,0,true,tradehelp.genericfood
+chickencurry,0,4*64,0,0,0,false,,0,true,tradehelp.genericfood
+vegcurry,0,3*64,0,0,0,false,,0,true,tradehelp.genericfood
+lambcooked,0,3*64,0,0,0,false,,0,true,tradehelp.genericfood
+souvlaki,0,4*64,0,0,0,false,,0,true,tradehelp.genericfood
+udon,20,15,64,124,32,false,,0,true,tradehelp.japaneseudon
+
+cake,0,64,0,0,128,false,,0,true,tradehelp.genericfoodsweet
+cookie,0,4,0,0,8,false,,0,true,tradehelp.genericfoodsweet
+cider,0,96,0,0,2*64,false,,0,true,tradehelp.genericfoodsweet
+calva,0,5*64,0,0,0,false,0,0,true,tradehelp.genericfoodsweet
+rasgulla,0,30,0,0,0,false,,0,true,tradehelp.genericfoodsweet
+wine,0,3*64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
+winebasic,0,64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
+feta,0,96,0,0,0,false,,0,true,tradehelp.genericfoodsweet
+
+iron,25,20,0,128,0,false,,0,false,tradehelp.japanesetools
+normanPickaxe,0,15*64,0,0,,,,0,true,tradehelp.generictools
+normanAxe,0,15*64,0,0,,,,0,true,tradehelp.generictools
+normanShovel,0,15*64,0,0,,,,0,true,tradehelp.generictools
+normanHoe,0,15*64,0,0,,,,0,true,tradehelp.generictools
+stonePickaxe,0,3,0,0, 0,false,,0,true,tradehelp.generictools
+stoneAxe,0,3,0,0, 0,false,,0,true,tradehelp.generictools
+stoneShovel,0,1,0,0, 0,false,,0,true,tradehelp.generictools
+stoneHoe,0,2,0,0, 0,false,,0,true,tradehelp.generictools
+steelPickaxe,2*64,2*64,1,1,0,false,,0,true,tradehelp.japanesetools
+steelAxe,2*64,2*64,1,1,0,false,,0,true,tradehelp.japanesetools
+steelShovel,2*64,2*64,1,1,0,false,,0,true,tradehelp.japanesetools
+steelHoe,2*64,2*64,1,1,0,false,,0,true,tradehelp.japanesetools
+diamondPickaxe,0,3*64*3,0,0, 0,false,,0,true,tradehelp.generictools
+diamondAxe,0,3*64*3,0,0, 0,false,,0,true,tradehelp.generictools
+diamondShovel,0,3*64*1,0,0, 0,false,,0,true,tradehelp.generictools
+diamondHoe,0,3*64*2,0,0, 0,false,,0,true,tradehelp.generictools
+mayanpickaxe,0,7*64,0,0, 0,false,,0,true,tradehelp.generictools
+mayanaxe,0,7*64,0,0, 0,false,,0,true,tradehelp.generictools
+mayanshovel,0,7*64,0,0, 0,false,,0,true,tradehelp.generictools
+mayanhoe,0,7*64,0,0, 0,false,,0,true,tradehelp.generictools
+ 
+leather,20,15,16,64,25,false,,0,false,tradehelp.japaneseweapons
+feather,2,1,16,64,4,false,,0,false,tradehelp.feathers
+arrow,4,0,0,0,8,false,,0,true,tradehelp.genericweapon
+yumibow,5*64,4*64,0,0,7*64,false,,0,false,tradehelp.japaneseweapons
+tachisword,2*64,2*64,0,0, 4*25,,,8*64*64,false,tradehelp.japaneseweapons
+japaneseguardboots,1*64,1*64,0,0, 2*64,false,tradehelp.japaneseweapons
+japaneseguardHelmet,2*64,2*64,0,0, 4*64,false,tradehelp.japaneseweapons
+japaneseguardLegs,3*64,3*64,0,0, 6*64,false,tradehelp.japaneseweapons
+japaneseguardPlate,4*64,4*64,0,0, 8*64,false,tradehelp.japaneseweapons
+japanesewarriorblueboots,3*64,3*64,0,0, 6*64,false,tradehelp.japaneseweapons
+japanesewarriorblueHelmet,5*64,5*64,0,0, 10*64,false,tradehelp.japaneseweapons
+japanesewarriorblueLegs,10*64,10*64,0,0, 20*64,false,tradehelp.japaneseweapons
+japanesewarriorbluePlate,15*64,15*64,0,0, 32*64,false,tradehelp.japaneseweapons
+japanesewarriorredboots,3*64,3*64,0,0, 6*64,false,tradehelp.japaneseweapons
+japanesewarriorredHelmet,5*64,5*64,0,0, 10*64,false,tradehelp.japaneseweapons
+japanesewarriorredLegs,10*64,10*64,0,0, 20*64,false,tradehelp.japaneseweapons
+japanesewarriorredPlate,15*64,15*64,0,0, 32*64,false,tradehelp.japaneseweapons
+
+bow,2*20,64,0,0,2*25,false,,0,true,tradehelp.genericweapon
+stoneSword,0,2,0,0, 0,false,,0,true,tradehelp.genericweapon
+leatherHelmet,0,15*5,0,0, 0,false,,0,true,tradehelp.genericweapon
+leatherChest,0,15*8,0,0, 0,false,,0,true,tradehelp.genericweapon
+leatherLegs,0,15*7,0,0, 0,false,,0,true,tradehelp.genericweapon
+leatherBoots,0,15*4,0,0, 0,false,,0,true,tradehelp.genericweapon
+steelSword,0,20*2,0,0,3*25,false,,0,true,tradehelp.genericweapon
+steelHelmet,0,20*5,0,0,8*25,false,,0,true,tradehelp.genericweapon
+steelChest,0,20*8,0,0,10*25,false,,0,true,tradehelp.genericweapon
+steelLegs,0,20*7,0,0,9*25,false,,0,true,tradehelp.genericweapon
+steelBoots,0,20*4,0,0,6*25,false,,0,true,tradehelp.genericweapon
+diamondHelmet,0,3*64*5,0,0, 5*20*64,false,,0,true,tradehelp.genericweapon
+diamondSword,0,3*64*2,0,0, 2*20*64,false,,0,true,tradehelp.genericweapon
+diamondChest,0,3*64*8,0,0, 8*20*64,false,,0,true,tradehelp.genericweapon
+diamondLegs,0,3*64*7,0,0, 7*20*64,false,,0,true,tradehelp.genericweapon
+diamondBoots,0,3*64*4,0,0, 4*20*64,false,,0,true,tradehelp.genericweapon
+mayanmace,0,7*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+normanBroadsword,0,2*64*64,0,0, 2*64*64,false,,0,true,tradehelp.genericweapon
+normanHelmet,0,15*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+normanChest,0,30*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+normanLegs,0,12*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+normanBoots,0,7*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+byzantineMace,0,64*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+byzantineHelmet,0,12*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+byzantinePlate,0,20*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+byzantineLegs,0,8*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+byzantineBoots,0,6*64,0,0, 0,false,,0,true,tradehelp.genericweapon
+
+paper,15,12,64,128,0,false,,0,false,tradehelp.japanesepaper
 book,70,53,0,0
-bookshelves,220,166,0,0
+bookshelves,220,166,0,0,0,false,,0,false,tradehelp.genericbookshelves
 
-purse,32*64,0,0,0,0,true
-villageWand,2*64*64,0,0,0,0,true,,8*64*64
-parchmentJapaneseVillagers,10,0,0,0,0,true
-parchmentJapaneseBuildings,10,0,0,0,0,true
-parchmentJapaneseItems,10,0,0,0,0,true
-parchmentJapaneseComplete,64,0,0,0,0,true
+purse,32*64,0,0,0,0,true,,0,false,tradehelp.purse
+villageWand,2*64*64,0,0,0,0,true,,8*64*64,false,tradehelp.wand
+parchmentJapaneseVillagers,10,0,0,0,0,true,,0,false,tradehelp.parchments
+parchmentJapaneseBuildings,10,0,0,0,0,true,,0,false,tradehelp.parchments
+parchmentJapaneseItems,10,0,0,0,0,true,,0,false,tradehelp.parchments
+parchmentJapaneseComplete,64,0,0,0,0,true,,0,false,tradehelp.parchments
 
-timberframe_cross,32,26,128,1024
-timberframe_plain,48,40,128,1024
-rice,10,5,10,64,12
-paperwall,64,48,128,512,64,,,2*64*64
-thatched,16,12,128,512,,,,2*64*64
-udon,20,15,64,124,32
-yumibow,5*64,0,0,0,7*64
-tachisword,2*64,2*64,0,0, 4*25,,,8*64*64
-japaneseguardboots,1*64,1*64,0,0, 2*64
-japaneseguardHelmet,2*64,2*64,0,0, 4*64
-japaneseguardLegs,3*64,3*64,0,0, 6*64
-japaneseguardPlate,4*64,4*64,0,0, 8*64
-japanesewarriorblueboots,3*64,3*64,0,0, 6*64
-japanesewarriorblueHelmet,5*64,5*64,0,0, 10*64
-japanesewarriorblueLegs,10*64,10*64,0,0, 20*64
-japanesewarriorbluePlate,15*64,15*64,0,0, 32*64
-japanesewarriorredboots,3*64,3*64,0,0, 6*64
-japanesewarriorredHelmet,5*64,5*64,0,0, 10*64
-japanesewarriorredLegs,10*64,10*64,0,0, 20*64
-japanesewarriorredPlate,15*64,15*64,0,0, 32*64
+timberframe_cross,32,26,128,1024,0,false,,0,false,tradehelp.japaneseframes
+timberframe_plain,48,40,128,1024,0,false,,0,false,tradehelp.japaneseframes
+rice,10,5,10,64,12,false,,0,false,tradehelp.japaneserice
+paperwall,64,48,128,512,64,,,2*64*64,false,tradehelp.japanesepaper
+thatched,16,12,128,512,,,,2*64*64,false,tradehelp.japanesethatch
+
+

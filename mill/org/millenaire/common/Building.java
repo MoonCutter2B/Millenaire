@@ -3518,8 +3518,12 @@ public class Building {
 		return mw.getProfile(playerName).getReputation(this);
 	}
 
-	public ReputationLevel getReputationLevel(String playerName) {
-		return culture.getReputationLevel(getReputation(playerName));
+	public String getReputationLevelLabel(String playerName) {
+		return culture.getReputationLevelLabel(getReputation(playerName));
+	}
+	
+	public String getReputationLevelDesc(String playerName) {
+		return culture.getReputationLevelDesc(getReputation(playerName));
 	}
 
 	public Vector<Goods> getSellingGoods() {

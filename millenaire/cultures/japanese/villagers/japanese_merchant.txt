@@ -14,6 +14,6 @@ goal=gopray
 goal=visitInn
 goal=VisitBuilding
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
 tag=helpInAttacks

@@ -311,6 +311,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		Mill.normanShovel,Mill.mayanShovel,Item.shovelWood,Item.shovelStone
 	};
 	
+	public static final Item[] weaponsSwords=new Item[]{
+		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordIron,Item.swordStone
+	};
+	
 	public static final Item[] weaponsRanged=new Item[]{
 		Mill.yumiBow,Item.bow
 	};

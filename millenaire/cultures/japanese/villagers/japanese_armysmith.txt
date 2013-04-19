@@ -24,7 +24,7 @@ goal=makejwlegsr
 goal=makejwbootsr
 goal=makejwhelmetr
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
 requiredGood=wool_white,10
 requiredGood=iron,10

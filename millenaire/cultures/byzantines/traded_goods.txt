@@ -36,13 +36,14 @@ wool_red,0,14,0,0,14
 wool_limegreen,0,0,0,0,32
 
 seeds,2,1,0,0,2,false,,0,false,,0,false,tradehelp.seeds
-wheat,3,2,10,128,4,false,,0,false,,0,false,tradehelp.wheat
+wheat,3,2,10,128,4,false,,0,false,,0,false,tradehelp.byzantinewheat
 carrot,5,4,0,0,16,false,,0,false,,0,false,tradehelp.carrot
+
+feather,2,1,0,0,4,false,,0,false,tradehelp.feathers
+leather,20,15,16,64,25,false,,0,false,tradehelp.byzantinetools
 
 bread,10,8,5,10,32,false,,0,true,tradehelp.genericfood
 egg,4,2,0,0,6,false,,0,true,tradehelp.genericfood
-feather,2,1,0,0,4,false,,0,false,tradehelp.feathers
-leather,20,15,16,64,25,false,,0,false,tradehelp.byzantinetools
 beefraw,20,12,0,0,32,false,,0,true,tradehelp.genericfoodraw
 beefcooked,28,20,0,0,48,false,,0,true,tradehelp.genericfood
 porkchops,20,0,0,0,32,false,,0,true,tradehelp.genericfoodraw
@@ -51,7 +52,6 @@ chickenmeat,20,0,0,0,32,false,,0,true,tradehelp.genericfoodraw
 chickenmeatcooked,28,20,0,0,48,false,,0,true,tradehelp.genericfood
 fishraw,5,3,0,192,0,false,,0,true,tradehelp.genericfoodraw
 fishcooked,7,5,0,192,16,false,,0,true,tradehelp.genericfood
-cake,0,64,0,0,128,false,,0,true,tradehelp.genericfoodsweet
 
 tripes,0,3*64,0,0,0,false,0,0,true,tradehelp.genericfood
 boudin,0,96,0,0,0,false,0,0,true,tradehelp.genericfood
@@ -101,15 +101,9 @@ mayanhoe,0,7*64,0,0, 0,false,,0,true,tradehelp.generictools
 
 
 
-steelHelmet,0,0,0,0,8*25
-steelSword,0,0,0,0,3*25
-steelChest,0,0,0,0,10*25
-steelLegs,0,0,0,0,9*25
-steelBoots,0,0,0,0,6*25
-
 
 bow,2*20,64,0,0,2*25,false,,0,true,tradehelp.genericweapon
-arrow,0,4,0,0,8,false,,0,true,tradehelp.genericweapon
+arrow,4,0,0,0,8,false,,0,true,tradehelp.genericweapon
 stoneSword,0,2,0,0, 0,false,,0,true,tradehelp.genericweapon
 leatherHelmet,0,15*5,0,0, 0,false,,0,true,tradehelp.genericweapon
 leatherChest,0,15*8,0,0, 0,false,,0,true,tradehelp.genericweapon

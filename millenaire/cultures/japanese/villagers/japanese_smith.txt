@@ -13,7 +13,7 @@ goal=makesteelpickaxe
 goal=makesteelshovel
 goal=makesteelhoe
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
 requiredGood=iron,10
 

@@ -36,7 +36,7 @@ wool_red,0,14,0,0,14
 wool_limegreen,0,0,0,0,32
 
 seeds,2,1,10,128,2,false,,0,false,tradehelp.seeds
-wheat,3,2,10,128,4,false,,0,false,tradehelp.wheat
+wheat,3,2,10,128,4,false,,0,false,tradehelp.normanwheat
 carrot,5,4,10,64,16,false,,0,false,tradehelp.carrot
 bread,10,8,5,10,15,false,,0,true,tradehelp.genericfood
 

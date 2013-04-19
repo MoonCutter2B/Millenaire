@@ -120,7 +120,7 @@ public class VillagerType implements WeightedChoice {
 							}
 						} else if (key.equals("toolneededclass")) {
 							if (value.equalsIgnoreCase("meleeweapons")) {
-								for (Item item : MillVillager.weaponsHandToHand) {
+								for (Item item : MillVillager.weaponsSwords) {
 									toolsNeeded.add(new InvItem(item,0));	
 								}
 							} else if (value.equalsIgnoreCase("rangedweapons")) {

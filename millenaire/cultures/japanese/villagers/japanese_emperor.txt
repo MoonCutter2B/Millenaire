@@ -11,13 +11,9 @@ goal=gorest
 goal=gopray
 
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
-toolNeeded=japanesewarriorredplate
-toolNeeded=japanesewarriorredlegs
-toolNeeded=japanesewarriorredboots
-toolNeeded=japanesewarriorredhelmet
-
+toolneededclass=armour
 baseAttackStrength=5
 tag=helpInAttacks
 defaultweapon=woodsword

@@ -31,7 +31,7 @@ public class Culture {
 	public static class CultureLanguage {
 
 		public static class ReputationLevel implements Comparable<ReputationLevel> {
-			public String label, desc;
+			private String label, desc;
 			public int level;
 
 			public ReputationLevel(File file,String line) {
@@ -459,6 +459,13 @@ public class Culture {
 				}
 				writer.write(MLN.EOL);
 			}
+			
+			for (Goods g : culture.goodsVector) {
+				if (g.desc!=null && !strings.containsKey(g.desc) && !ref.strings.containsKey(g.desc)) {
+					errors.add("Trading good desc missing in both languages for item: "+g.name+", desc key: "+g.desc);
+				}
+			}
+			
 
 			errors.clear();
 			keys=new Vector<String>(ref.sentences.keySet());
@@ -1367,6 +1374,24 @@ public class Culture {
 	public VillageType getRandomVillage() {
 		return (VillageType) MillCommonUtilities.getWeightedChoice(vectorVillageTypes,null);
 	}
+	
+	public String getReputationLevelLabel(int reputation) {
+		ReputationLevel rlevel=getReputationLevel(reputation);
+		
+		if (rlevel!=null)
+			return rlevel.label;
+		
+		return "";
+	}
+	
+	public String getReputationLevelDesc(int reputation) {
+		ReputationLevel rlevel=getReputationLevel(reputation);
+		
+		if (rlevel!=null)
+			return rlevel.desc;
+		
+		return "";
+	}
 
 	public ReputationLevel getReputationLevel(int reputation) {
 
@@ -1632,6 +1657,11 @@ public class Culture {
 								final Goods good=new Goods(name,item,sellingPrice,buyingPrice,reservedQuantity,targetQuantity,
 										foreignMerchantPrice,autoGenerate,tag,minReputation,hideIfNotValid,desc);
 
+								if (goods.containsKey(name) || goodsByItem.containsKey(good.item)) {
+									MLN.error(this, "Good "+name+" is present twice in the goods list.");
+								}
+								
+								
 								goods.put(name, good);
 								goodsByItem.put(good.item, good);
 								goodsVector.remove(good);

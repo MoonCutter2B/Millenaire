@@ -171,7 +171,7 @@ public class ContainerTrade extends Container {
 				if ((building.countGoods(good.item.id(),good.item.meta) < 1) && !good.autoGenerate)
 					return MLN.string("ui.outofstock");
 				if ((building.getTownHall().getReputation(player.username) < good.minReputation))
-					return MLN.string("ui.reputationneeded",building.culture.getReputationLevel(good.minReputation).label);
+					return MLN.string("ui.reputationneeded",building.culture.getReputationLevelLabel(good.minReputation));
 				final int playerMoney=MillCommonUtilities.countMoney(player.inventory);
 				if (playerMoney < good.getSellingPrice(building.getTownHall()))
 					return MLN.string("ui.missingdeniers").replace("<0>", ""+(good.getSellingPrice(building.getTownHall())-playerMoney));

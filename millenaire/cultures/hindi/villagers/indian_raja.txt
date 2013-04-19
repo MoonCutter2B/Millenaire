@@ -11,7 +11,7 @@ goal=gorest
 goal=gopray
 
 
-toolNeeded=steelSword
+toolneededclass=meleeweapons
 
 baseAttackStrength=3
 tag=helpInAttacks

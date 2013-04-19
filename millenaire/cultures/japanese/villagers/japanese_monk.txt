@@ -10,7 +10,7 @@ texture=/graphics/mob/japanese/japanese_Monk0.png
 goal=gorest
 goal=gopray
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
 
 tag=helpInAttacks
