@@ -41,6 +41,8 @@ public class MillWorld {
 	public static final String PUJAS="pujas";
 
 	private final HashMap<Point,Building> buildings=new HashMap<Point,Building>();
+	private final HashMap<Point,String> renameNames=new HashMap<Point,String>();
+	private final HashMap<Point,String> renameQualifiers=new HashMap<Point,String>();
 	public final HashMap<Long,MillVillager> villagers=new HashMap<Long,MillVillager>();
 	public final Vector<String> globalTags=new Vector<String>();
 	public VillageList loneBuildingsList=new VillageList();
@@ -563,6 +565,9 @@ public class MillWorld {
 
 
 		MLN.generateVillages=MLN.generateVillagesDefault;
+		
+		renameNames.clear();
+		renameQualifiers.clear();
 
 		final File configFile=new File(millenaireDir,"config.txt");
 
@@ -583,6 +588,12 @@ public class MillWorld {
 
 							if (key.equalsIgnoreCase("generate_villages")) {
 								MLN.generateVillages=Boolean.parseBoolean(value);
+							} else if (key.equalsIgnoreCase("rename_name")) {
+								Point p=new Point(value.split(",")[0]);
+								renameNames.put(p, value.split(",")[1]);
+							} else if (key.equalsIgnoreCase("rename_qualifier")) {
+								Point p=new Point(value.split(",")[0]);
+								renameQualifiers.put(p, value.split(",")[1]);
 							}
 						}
 					}
@@ -1058,7 +1069,37 @@ public class MillWorld {
 
 				DevModUtilities.runAutoMove(world);
 			}
-
+			
+			for (Point p : renameNames.keySet()) {
+				if (buildings.containsKey(p)) {
+					Building b=buildings.get(p);
+					b.changeVillageName(renameNames.get(p));
+					for (int i=0;i<villagesList.pos.size();i++) {
+						if (villagesList.pos.get(i).equals(p))
+							villagesList.names.setElementAt(renameNames.get(p), i);
+					}
+					for (int i=0;i<loneBuildingsList.pos.size();i++) {
+						if (loneBuildingsList.pos.get(i).equals(p))
+							loneBuildingsList.names.setElementAt(renameNames.get(p), i);
+					}
+				}
+			}
+			for (Point p : renameQualifiers.keySet()) {
+				if (buildings.containsKey(p)) {
+					Building b=buildings.get(p);
+					b.changeVillageQualifier(renameQualifiers.get(p));
+					for (int i=0;i<villagesList.pos.size();i++) {
+						if (villagesList.pos.get(i).equals(p))
+							villagesList.names.setElementAt(b.getVillageQualifiedName(), i);
+					}
+					for (int i=0;i<loneBuildingsList.pos.size();i++) {
+						if (loneBuildingsList.pos.get(i).equals(p))
+							loneBuildingsList.names.setElementAt(b.getVillageQualifiedName(), i);
+					}
+				}
+			}
+			renameNames.clear();
+			renameQualifiers.clear();
 
 			forcePreload();
 

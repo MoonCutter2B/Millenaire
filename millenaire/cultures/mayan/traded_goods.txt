@@ -65,7 +65,7 @@ wine,0,3*64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 winebasic,0,64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 feta,0,96,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 
-obsidian,0,5*64,0,0,0,false,,0,false,tradehelp.mayanobsidian
+obsidian,0,64,0,0,0,false,,0,false,tradehelp.mayanobsidian
 mayanpickaxe,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayanobsidian
 mayanaxe,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayanobsidian
 mayanshovel,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayanobsidian

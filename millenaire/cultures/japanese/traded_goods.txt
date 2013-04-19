@@ -105,7 +105,7 @@ japaneseguardPlate,4*64,4*64,0,0, 8*64,false,,0,true,tradehelp.japaneseweapons
 japanesewarriorblueboots,3*64,3*64,0,0, 6*64,false,,0,true,tradehelp.japaneseweapons
 japanesewarriorblueHelmet,5*64,5*64,0,0, 10*64,false,,0,true,tradehelp.japaneseweapons
 japanesewarriorblueLegs,10*64,10*64,0,0, 20*64,false,,0,true,tradehelp.japaneseweapons
-japanesewarriorbluePlate,15*64,15*64,0,0, 32*64,false,0,true,tradehelp.japaneseweapons
+japanesewarriorbluePlate,15*64,15*64,0,0, 32*64,false,,0,true,tradehelp.japaneseweapons
 japanesewarriorredboots,3*64,3*64,0,0, 6*64,false,,0,true,tradehelp.japaneseweapons
 japanesewarriorredHelmet,5*64,5*64,0,0, 10*64,false,,0,true,tradehelp.japaneseweapons
 japanesewarriorredLegs,10*64,10*64,0,0, 20*64,false,,0,true,tradehelp.japaneseweapons

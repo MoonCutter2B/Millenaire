@@ -312,7 +312,7 @@ public class Building {
 						file1);
 				CompressedStreamTools.writeCompressed(mainTag,
 						fileoutputstream);
-				
+
 				file1.renameTo(new File(buildingsDir, getPos().getPathString()
 						+ ".gz"));
 			} catch (final IOException e) {
@@ -3523,7 +3523,7 @@ public class Building {
 	public String getReputationLevelLabel(String playerName) {
 		return culture.getReputationLevelLabel(getReputation(playerName));
 	}
-	
+
 	public String getReputationLevelDesc(String playerName) {
 		return culture.getReputationLevelDesc(getReputation(playerName));
 	}
@@ -3699,6 +3699,15 @@ public class Building {
 		}
 
 		return irrigation;
+	}
+
+	public void changeVillageName(String s) {
+		name=s;
+	}
+	public void changeVillageQualifier(String s) {
+		if (s!=null && s.equals(""))
+			qualifier=null;
+		qualifier=s;
 	}
 
 	public String getVillageNameWithoutQualifier() {
@@ -7514,7 +7523,7 @@ public class Building {
 
 				ds.close();
 				fos.close();
-				
+
 				file1.renameTo(new File(buildingsDir, getPos().getPathString()
 						+ "_bblocks.bin"));
 
@@ -7558,9 +7567,9 @@ public class Building {
 				}
 				ds.close();
 				fos.close();
-				
+
 				file1.renameTo(new File(buildingsDir, getPos().getPathString()
-				+ "_paths.bin"));
+						+ "_paths.bin"));
 
 			} catch (final IOException e) {
 				MLN.printException("Error when writing pathsToBuild: ",e);
@@ -7588,7 +7597,7 @@ public class Building {
 				}
 				ds.close();
 				fos.close();
-				
+
 				file1.renameTo(new File(buildingsDir, getPos().getPathString()
 						+ "_pathstoclear.bin"));
 
