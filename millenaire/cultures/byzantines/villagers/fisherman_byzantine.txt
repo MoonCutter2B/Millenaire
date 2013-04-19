@@ -41,7 +41,8 @@ bringBackHomeGood=fishcooked
 
 requiredGood=wood_any,20
 
-toolNeeded=steelsword
+toolneededclass=meleeweapons
+
 baseAttackStrength=3
 tag=helpInAttacks
 experiencegiven=2

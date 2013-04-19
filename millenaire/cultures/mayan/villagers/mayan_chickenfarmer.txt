@@ -29,10 +29,7 @@ bringBackHomeGood=chickenmeat
 bringBackHomeGood=chickenmeatcooked
 bringBackHomeGood=maize
 
-toolNeeded=stoneaxe
-toolNeeded=stonesword
-toolNeeded=mayanaxe
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
 
 requiredGood=maize,10
 requiredGood=wood_any,10

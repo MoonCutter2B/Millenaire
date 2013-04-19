@@ -1285,6 +1285,10 @@ public class Goods {
 	public boolean autoGenerate=false;
 
 	public int minReputation;
+	
+	public boolean hideIfNotValid=false;
+	
+	public String desc=null;
 
 	public Goods(InvItem iv) {
 		//Constructor for automated good creation
@@ -1295,7 +1299,9 @@ public class Goods {
 		requiredTag=null;
 	}
 
-	public Goods(String name,InvItem item,int sellingPrice,int buyingPrice,int reservedQuantity,int targetQuantity,int foreignMerchantPrice,boolean autoGenerate,String tag,int minReputation) {
+	public Goods(String name,InvItem item,int sellingPrice,int buyingPrice,int reservedQuantity,
+			int targetQuantity,int foreignMerchantPrice,boolean autoGenerate,String tag,
+			int minReputation, boolean hideIfNotValid, String desc) {
 		this.name=name;
 		this.item=item;
 		this.sellingPrice=sellingPrice;
@@ -1306,6 +1312,8 @@ public class Goods {
 		this.targetQuantity=targetQuantity;
 		this.foreignMerchantPrice=foreignMerchantPrice;
 		this.minReputation=minReputation;
+		this.hideIfNotValid=hideIfNotValid;
+		this.desc=desc;
 	}
 
 	@Override

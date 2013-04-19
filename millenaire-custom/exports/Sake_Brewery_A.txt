@@ -1,0 +1,6 @@
+native:Tsukurizakaya;name_en:Sake Brewery;name_fr:enfrancais;around:4;startLevel:-1;orientation:3;width:30;length:26
+startLevel:-1
+startLevel:-1
+startLevel:-1
+startLevel:-1
+

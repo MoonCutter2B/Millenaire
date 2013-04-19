@@ -166,8 +166,8 @@ public class GuiVillageHead extends GuiText {
 			col=LIGHTRED;
 		}
 
-		text.add(new Line(col+MLN.string("ui.yourstatus")+": "+chief.getTownHall().getReputationLevel(player.username).label,false));
-		text.add(new Line(col+chief.getTownHall().getReputationLevel(player.username).desc.replaceAll("\\$name", player.username)));
+		text.add(new Line(col+MLN.string("ui.yourstatus")+": "+chief.getTownHall().getReputationLevelLabel(player.username),false));
+		text.add(new Line(col+chief.getTownHall().getReputationLevelDesc(player.username).replaceAll("\\$name", player.username)));
 		text.add(new Line());
 		text.add(new Line(MLN.string("ui.possiblehousing")+":"));
 		text.add(new Line());

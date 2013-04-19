@@ -29,7 +29,8 @@ goal=plantSugarCane
 goal=harvestSugarCane
 goal=cookchicken
 
-toolNeeded=steelHoe
+toolneededclass=hoes
+toolneededclass=meleeweapons
 
 bringBackHomeGood=mudbrick
 bringBackHomeGood=rice

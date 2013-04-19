@@ -24,9 +24,9 @@ bringBackHomeGood=wheat
 
 startingInv=seeds,100
 
-toolNeeded=steelHoe
+toolneededclass=hoes
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
 baseAttackStrength=7
 tag=helpInAttacks

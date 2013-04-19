@@ -40,7 +40,7 @@ bringBackHomeGood=ciderapple
 
 startingInv=sapling,10
 
-toolNeeded=normanAxe
+toolneededclass=axes
 
 baseAttackStrength=5
 tag=helpinattacks

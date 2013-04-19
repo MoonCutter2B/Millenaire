@@ -14,7 +14,7 @@ goal=godrink
 goal=visitInn
 goal=VisitBuilding
 
-toolNeeded=steelSword
+toolneededclass=meleeweapons
 
 
 tag=helpInAttacks

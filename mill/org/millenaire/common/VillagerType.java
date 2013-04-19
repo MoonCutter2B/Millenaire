@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.core.MillCommonUtilities;
@@ -116,6 +117,47 @@ public class VillagerType implements WeightedChoice {
 								toolsNeeded.add(iv);
 							} else {
 								MLN.error(null, "Unknown tool needed found when loading villager type "+file.getName()+": "+value);
+							}
+						} else if (key.equals("toolneededclass")) {
+							if (value.equalsIgnoreCase("meleeweapons")) {
+								for (Item item : MillVillager.weaponsSwords) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+							} else if (value.equalsIgnoreCase("rangedweapons")) {
+								for (Item item : MillVillager.weaponsRanged) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+							} else if (value.equalsIgnoreCase("armour")) {
+								for (Item item : MillVillager.helmets) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+								for (Item item : MillVillager.chestplates) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+								for (Item item : MillVillager.legs) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+								for (Item item : MillVillager.boots) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+							} else if (value.equalsIgnoreCase("pickaxes")) {
+								for (Item item : MillVillager.pickaxes) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+							} else if (value.equalsIgnoreCase("axes")) {
+								for (Item item : MillVillager.axes) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+							} else if (value.equalsIgnoreCase("shovels")) {
+								for (Item item : MillVillager.shovels) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+							} else if (value.equalsIgnoreCase("hoes")) {
+								for (Item item : MillVillager.hoes) {
+									toolsNeeded.add(new InvItem(item,0));	
+								}
+							} else {
+								MLN.error(null, "Unknown tool class found when loading villager type "+file.getName()+": "+value);
 							}
 						} else if (key.equals("defaultweapon")) {
 							if (Goods.goodsName.containsKey(value.toLowerCase())) {

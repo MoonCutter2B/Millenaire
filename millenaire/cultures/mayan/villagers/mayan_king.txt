@@ -11,8 +11,8 @@ goal=gorest
 goal=gopray
 
 
-toolNeeded=stonesword
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
+toolneededclass=armour
 
 baseAttackStrength=5
 tag=helpInAttacks

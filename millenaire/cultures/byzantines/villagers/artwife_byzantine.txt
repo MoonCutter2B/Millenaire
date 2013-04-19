@@ -47,11 +47,13 @@ goal=deliverGoodsHousehold
 goal=makeclothes_byz_wool
 goal=makeclothes_byz_silk
 
-requiredFood=wine,5
-requiredFood=feta,5
-requiredFood=cider,1
-requiredFood=calva,1
+requiredFood=cider,5
+requiredFood=calva,2
 requiredFood=rasgulla,1
+requiredFood=wine,1
+requiredFood=feta,1
+requiredFood=cake,1
+requiredFood=cookie,5
 
 requiredGood=wool_white,10
 requiredGood=silk,10

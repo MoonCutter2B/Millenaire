@@ -17,7 +17,7 @@ goal=goDrink
 goal=patrol
 goal=huntmonster
 
-toolNeeded=normanBroadsword
+toolneededclass=meleeweapons
 
 baseAttackStrength=4
 health=25

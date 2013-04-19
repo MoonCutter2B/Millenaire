@@ -1,5 +1,7 @@
 package org.millenaire.client.gui;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -7,8 +9,12 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 import org.millenaire.common.MLN;
 
 public abstract class GuiText extends GuiScreen {
@@ -19,8 +25,11 @@ public abstract class GuiText extends GuiScreen {
 		String text="";
 		MillGuiButton[] buttons=null;
 		MillGuiTextField textField=null;
+		Vector<ItemStack> icons=null;
+		Vector<String> iconExtraLegends=null;
 		boolean canCutAfter=true;
 		boolean shadow=false;
+		int margin=0;
 
 		public Line () {
 		}
@@ -58,6 +67,23 @@ public abstract class GuiText extends GuiScreen {
 			canCutAfter=false;
 		}
 
+		public Line (Vector<ItemStack> icons,Vector<String> iconExtraLegends,String s,int margin) {
+			this.icons=icons;
+			this.iconExtraLegends=iconExtraLegends;
+			
+			if (icons!=null && iconExtraLegends==null) {
+				MLN.printException("iconExtraLegends is null but icons isn't.", new Exception());
+			} else if (icons!=null && iconExtraLegends!=null && icons.size()!=iconExtraLegends.size()) {
+				MLN.printException("iconExtraLegends has a size of "+iconExtraLegends.size()+" but icons has a size of "+icons.size(), new Exception());
+			}
+			
+			
+			text=s;
+			canCutAfter=false;
+
+			this.margin=margin;
+		}
+
 		public Line (String s) {
 			if (s==null) {
 				text="";
@@ -77,7 +103,21 @@ public abstract class GuiText extends GuiScreen {
 			this.canCutAfter=canCutAfter;
 		}
 
-		public Line (String s,Line model) {
+		public Line (String s,Line model,int lnpos) {
+
+			if (model.icons!=null && lnpos%2==0) {
+				
+				int lnicon=lnpos/2;
+				
+				icons=new Vector<ItemStack>();
+				iconExtraLegends=new Vector<String>();
+				
+				for (int i=lnicon*4;i<model.icons.size() && i<(lnicon+1)*4;i++) {
+					icons.add(model.icons.get(i));
+					iconExtraLegends.add(model.iconExtraLegends.get(i));
+				}
+			}
+
 			if (s==null) {
 				text="";
 			} else {
@@ -86,6 +126,7 @@ public abstract class GuiText extends GuiScreen {
 			}
 			canCutAfter=model.canCutAfter;
 			shadow=model.shadow;
+			margin=model.margin;
 		}
 
 		public boolean empty() {
@@ -189,7 +230,9 @@ public abstract class GuiText extends GuiScreen {
 
 	Vector<MillGuiTextField> textFields=new Vector<MillGuiTextField>();
 
-	private int lineWidthInChars;
+
+	/** Stacks renderer. Icons, stack size, health, etc... */
+	protected static RenderItem itemRenderer = new RenderItem();
 
 	public GuiText() {
 
@@ -208,10 +251,16 @@ public abstract class GuiText extends GuiScreen {
 					newPage.add(line);
 				} else {
 					for (String l : line.text.split("<ret>")) {
-						while (fontRenderer.getStringWidth(l)>getLineSizeInPx()) {
-							int end = l.lastIndexOf(' ', lineWidthInChars);
+
+						int lineSize=getLineSizeInPx()-line.margin;
+						int lineSizeInChar=getLineWidthInChars(lineSize);
+
+						int lnpos=0;
+
+						while (fontRenderer.getStringWidth(l)>lineSize) {
+							int end = l.lastIndexOf(' ', lineSizeInChar);
 							if (end<1) {
-								end=lineWidthInChars;
+								end=lineSizeInChar;
 							}
 							if (end>=l.length()) {
 								end=l.length()/2;
@@ -225,9 +274,20 @@ public abstract class GuiText extends GuiScreen {
 								l=subLine.substring(colPos,colPos+2)+l;
 							}
 
-							newPage.add(new Line(subLine,line));
+							newPage.add(new Line(subLine,line,lnpos));
+
+							lnpos++;
 						}
-						newPage.add(new Line(l,line));
+						newPage.add(new Line(l,line,lnpos));
+						
+						lnpos++;
+						
+						if (line.icons!=null) {
+							for (int i=lnpos;i<line.icons.size()/2;i++) {
+								newPage.add(new Line("",line,i));
+							}
+						} 
+						
 					}
 				}
 			}
@@ -451,19 +511,65 @@ public abstract class GuiText extends GuiScreen {
 		if (descText!=null) {
 			int vpos=6;
 
-			if ( pageNum<descText.size()) {
+			if (pageNum<descText.size()) {
 				for (int cp=0;(cp<getPageSize()) && (cp<descText.get(pageNum).size());cp++) {
+
+
+
 					if (descText.get(pageNum).get(cp).shadow) {
-						fontRenderer.drawStringWithShadow(descText.get(pageNum).get(cp).text, getTextXStart(),vpos, 0x101010);
+						fontRenderer.drawStringWithShadow(descText.get(pageNum).get(cp).text, getTextXStart()+
+								descText.get(pageNum).get(cp).margin,vpos, 0x101010);
 					} else {
-						fontRenderer.drawString(descText.get(pageNum).get(cp).text, getTextXStart(),vpos, 0x101010);
+						fontRenderer.drawString(descText.get(pageNum).get(cp).text, getTextXStart()+descText.get(pageNum).get(cp).margin,vpos, 0x101010);
 					}
+
 					vpos+=10;
 				}
 			}
 
 			fontRenderer.drawString((pageNum+1)+"/"+getNbPage(), (getXSize()/2)-10,getYSize()-10, 0x101010);
 
+			vpos=6;
+
+			this.zLevel = 100.0F;
+			itemRenderer.zLevel = 100.0F;
+			
+			ItemStack hoverIcon=null;
+			String extraLegend=null;
+
+			if (pageNum<descText.size()) {
+				for (int cp=0;(cp<getPageSize()) && (cp<descText.get(pageNum).size());cp++) {
+					if (descText.get(pageNum).get(cp).icons!=null) {
+						for (int ic=0;ic<descText.get(pageNum).get(cp).icons.size();ic++) {
+							ItemStack icon=descText.get(pageNum).get(cp).icons.get(ic);
+							
+							if (descText.get(pageNum).get(cp).iconExtraLegends==null) {
+								MLN.error(null, "Null legends!");
+							}
+							
+							String legend=descText.get(pageNum).get(cp).iconExtraLegends.get(ic);
+							
+							GL11.glEnable(GL11.GL_DEPTH_TEST);
+							itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, icon, getTextXStart()+18*ic, vpos);
+							itemRenderer.renderItemOverlayIntoGUI(this.fontRenderer, this.mc.renderEngine, icon, getTextXStart()+18*ic, vpos, null);
+							
+							if (((xStart+getTextXStart()+18*ic) < i) && (yStart+vpos < j) && ((xStart+getTextXStart()+18*ic)+16 > i) && (yStart+vpos+16 > j)) {
+								hoverIcon=icon;
+								extraLegend=legend;
+							}
+						}
+					}
+					vpos+=10;
+				}
+			}
+			
+			if (hoverIcon!=null) {
+				drawItemStackTooltip(hoverIcon, i-xStart, j-yStart, extraLegend);
+			}
+
+			itemRenderer.zLevel = 0.0F;
+			this.zLevel = 0.0F;
+			
 			customDrawScreen(i,j,f);
 		}
 
@@ -479,6 +585,109 @@ public abstract class GuiText extends GuiScreen {
 			textField.drawTextBox();
 		}
 	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected void drawItemStackTooltip(ItemStack par1ItemStack, int par2, int par3, String extraLegend)
+    {
+        List list = par1ItemStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
+        
+        if (extraLegend!=null)
+        	list.add(extraLegend);
+
+        for (int k = 0; k < list.size(); ++k)
+        {
+            if (k == 0)
+            {
+                list.set(k, "\u00a7" + Integer.toHexString(par1ItemStack.getRarity().rarityColor) + (String)list.get(k));
+            }
+            else
+            {
+                list.set(k, EnumChatFormatting.GRAY + (String)list.get(k));
+            }
+        }
+
+        FontRenderer font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
+        drawHoveringText(list, par2, par3, (font == null ? fontRenderer : font));
+    }
+	
+	@SuppressWarnings({ "rawtypes" })
+	protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font)
+    {
+        if (!par1List.isEmpty())
+        {
+            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+            RenderHelper.disableStandardItemLighting();
+            GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glDisable(GL11.GL_DEPTH_TEST);
+            int k = 0;
+            Iterator iterator = par1List.iterator();
+
+            while (iterator.hasNext())
+            {
+                String s = (String)iterator.next();
+                int l = font.getStringWidth(s);
+
+                if (l > k)
+                {
+                    k = l;
+                }
+            }
+
+            int i1 = par2 + 12;
+            int j1 = par3 - 12;
+            int k1 = 8;
+
+            if (par1List.size() > 1)
+            {
+                k1 += 2 + (par1List.size() - 1) * 10;
+            }
+
+            if (i1 + k > this.width)
+            {
+                i1 -= 28 + k;
+            }
+
+            if (j1 + k1 + 6 > this.height)
+            {
+                j1 = this.height - k1 - 6;
+            }
+
+            this.zLevel = 300.0F;
+            itemRenderer.zLevel = 300.0F;
+            int l1 = -267386864;
+            this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
+            this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
+            this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
+            this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
+            this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
+            int i2 = 1347420415;
+            int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
+            this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3 - 1, i2, j2);
+            this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1 + 3 - 1, i2, j2);
+            this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
+            this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
+
+            for (int k2 = 0; k2 < par1List.size(); ++k2)
+            {
+                String s1 = (String)par1List.get(k2);
+                font.drawStringWithShadow(s1, i1, j1, -1);
+
+                if (k2 == 0)
+                {
+                    j1 += 2;
+                }
+
+                j1 += 10;
+            }
+
+            this.zLevel = 0.0F;
+            itemRenderer.zLevel = 0.0F;
+            GL11.glEnable(GL11.GL_LIGHTING);
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            RenderHelper.enableStandardItemLighting();
+            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        }
+    }
 
 	public abstract int getLineSizeInPx();
 
@@ -511,17 +720,19 @@ public abstract class GuiText extends GuiScreen {
 
 	public abstract void initData();
 
-	@Override
-	public void initGui() {
-		super.initGui();
-
+	private int getLineWidthInChars(int lineWidthInPx) {
 		String testLine="a";
 
-		while (fontRenderer.getStringWidth(testLine)<getLineSizeInPx()) {
+		while (fontRenderer.getStringWidth(testLine)<lineWidthInPx) {
 			testLine+="a";
 		}
 
-		lineWidthInChars=testLine.length()-1;
+		return testLine.length()-1;
+	}
+
+	@Override
+	public void initGui() {
+		super.initGui();
 
 		initData();
 

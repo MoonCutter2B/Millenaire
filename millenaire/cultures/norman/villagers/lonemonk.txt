@@ -28,7 +28,7 @@ bringBackHomeGood=beefraw
 bringBackHomeGood=leather
 bringBackHomeGood=wheat
 
-toolNeeded=normanBroadsword
+toolneededclass=meleeweapons
 
 baseAttackStrength=5
 tag=helpInAttacks

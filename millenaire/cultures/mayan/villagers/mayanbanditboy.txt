@@ -16,8 +16,7 @@ goal=goDrink
 goal=patrol
 goal=huntmonster
 
-toolNeeded=stonesword
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
 
 baseAttackStrength=4
 tag=helpInAttacks

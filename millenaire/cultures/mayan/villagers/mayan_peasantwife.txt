@@ -28,8 +28,7 @@ goal=plantMaize
 goal=makewah
 goal=makemasa
 
-toolNeeded=stonehoe
-toolNeeded=mayanhoe
+toolneededclass=hoes
 
 defaultweapon=woodhoe
 
@@ -41,3 +40,5 @@ requiredFood=calva,1
 requiredFood=rasgulla,1
 requiredFood=wine,1
 requiredFood=feta,1
+requiredFood=cake,1
+requiredFood=cookie,5

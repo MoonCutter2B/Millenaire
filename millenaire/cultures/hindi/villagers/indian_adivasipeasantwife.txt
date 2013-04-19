@@ -31,8 +31,12 @@ goal=plantSugarCane
 goal=harvestSugarCane
 goal=makeRasgulla
 
-toolNeeded=steelHoe
+toolneededclass=hoes
 
 requiredFood=rasgulla,5
+requiredFood=wine,1
+requiredFood=feta,1
+requiredFood=cake,1
+requiredFood=cookie,5
 
 defaultweapon=woodhoe

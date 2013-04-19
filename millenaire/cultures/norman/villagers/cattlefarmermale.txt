@@ -52,7 +52,7 @@ bringBackHomeGood=wool_pink
 bringBackHomeGood=tripes
 bringBackHomeGood=boudin
 
-toolNeeded=normanBroadsword
+toolneededclass=meleeweapons
 
 
 tag=helpInAttacks

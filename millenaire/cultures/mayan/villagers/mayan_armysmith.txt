@@ -8,17 +8,17 @@ texture=/graphics/mob/mayan/mayan_ArmySmith0.png
 goal=gorest
 goal=gopray
 goal=makestonesword
-goal=makestoneaxe
-goal=makestonepickaxe
-goal=makestoneshovel
-goal=makestonehoe
+goal=makeleatherhelmet
+goal=makeleatherchest
+goal=makeleatherlegs
+goal=makeleatherboots
 goal=makebow
 
 requiredGood=cobblestone,10
+requiredGood=leather,10
 requiredGood=wool_white,2
 
-toolNeeded=stonesword
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
 
 baseAttackStrength=5
 tag=helpInAttacks

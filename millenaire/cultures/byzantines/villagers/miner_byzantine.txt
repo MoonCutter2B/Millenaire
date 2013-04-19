@@ -46,8 +46,8 @@ requiredGood=wood,64
 requiredGood=wood_pine,64
 requiredGood=wood_jungle,64
 
-toolNeeded=steelShovel
-toolNeeded=steelPickaxe
+toolneededclass=pickaxes
+toolneededclass=shovels
 
 baseAttackStrength=5
 tag=helpInAttacks

@@ -14,8 +14,7 @@ requiredGood=stone,20
 requiredGood=sandstone,20
 requiredGood=gold,20
 
-toolNeeded=stonesword
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
 
 baseAttackStrength=5
 tag=helpInAttacks

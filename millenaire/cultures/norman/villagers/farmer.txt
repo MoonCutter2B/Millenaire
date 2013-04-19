@@ -28,8 +28,8 @@ bringBackHomeGood=seeds
 
 startingInv=seeds,100
 
-toolNeeded=normanHoe
-toolNeeded=normanBroadsword
+toolneededclass=hoes
+toolneededclass=meleeweapons
 
 requiredGood=seeds,100
 

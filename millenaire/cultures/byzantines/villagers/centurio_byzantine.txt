@@ -31,20 +31,10 @@ goal=goDrink
 
 goal=huntmonster
 
-toolNeeded=steelSword
-toolNeeded=steelchest
-toolNeeded=steellegs
-toolNeeded=steelboots
-toolNeeded=steelsword
-toolNeeded=steelhelmet
+toolneededclass=armour
+toolneededclass=meleeweapons
+toolneededclass=rangedweapons
 
-toolNeeded=bow
-
-toolNeeded=byzantineMace
-toolNeeded=byzantinelegs
-toolNeeded=byzantineboots
-toolNeeded=byzantineplate
-toolNeeded=byzantinehelmet
 
 baseAttackStrength=17
 tag=helpInAttacks

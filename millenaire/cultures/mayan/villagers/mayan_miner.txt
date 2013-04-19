@@ -20,12 +20,9 @@ bringBackHomeGood=sandStone
 bringBackHomeGood=stone
 bringBackHomeGood=sand
 
-toolNeeded=stonepickaxe
-toolNeeded=stoneshovel
-toolNeeded=stonesword
-toolNeeded=mayanpickaxe
-toolNeeded=mayanshovel
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
+toolneededclass=pickaxes
+toolneededclass=shovels
 
 requiredGood=wood_any,64
 

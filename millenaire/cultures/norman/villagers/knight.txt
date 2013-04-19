@@ -17,11 +17,8 @@ goal=patrol
 goal=huntmonster
 
 
-toolNeeded=normanBroadsword
-toolNeeded=normanchest
-toolNeeded=normanhelmet
-toolNeeded=normanlegs
-toolNeeded=normanboots
+toolneededclass=armour
+toolneededclass=meleeweapons
 
 
 baseAttackStrength=4

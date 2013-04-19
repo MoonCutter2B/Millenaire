@@ -36,12 +36,14 @@ startingInv=rice,50
 startingInv=bow,1
 tag=helpInAttacks
 
-requiredFood=cider,1
-requiredFood=calva,1
+requiredFood=cider,5
+requiredFood=calva,2
 requiredFood=rasgulla,1
 requiredFood=wine,1
 requiredFood=feta,1
+requiredFood=cake,1
+requiredFood=cookie,5
 
-toolNeeded=yumibow
-toolNeeded=steelHoe
+toolneededclass=rangedweapons
+toolneededclass=hoes
 

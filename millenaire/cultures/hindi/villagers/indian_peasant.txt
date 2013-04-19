@@ -30,8 +30,8 @@ goal=slaughterchicken
 goal=breed
 goal=cookchicken
 
-toolNeeded=steelHoe
-toolNeeded=steelSword
+toolneededclass=hoes
+toolneededclass=meleeweapons
 
 bringBackHomeGood=mudbrick
 bringBackHomeGood=rice

@@ -14,13 +14,10 @@ goal=patrol
 goal=huntmonster
 
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
-toolNeeded=japanesewarriorredplate
-toolNeeded=japanesewarriorredlegs
-toolNeeded=japanesewarriorredboots
-toolNeeded=japanesewarriorredhelmet
-toolNeeded=yumibow
+toolneededclass=armour
+toolneededclass=rangedweapons
 
 baseAttackStrength=4
 tag=helpInAttacks

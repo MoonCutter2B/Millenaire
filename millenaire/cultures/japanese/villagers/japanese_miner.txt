@@ -17,9 +17,9 @@ bringBackHomeGood=sandStone
 bringBackHomeGood=stone
 bringBackHomeGood=sand
 
-toolNeeded=steelPickaxe
-toolNeeded=steelShovel
-toolNeeded=tachiSword
+toolneededclass=pickaxes
+toolneededclass=shovels
+toolneededclass=meleeweapons
 
 requiredGood=wood_any,64
 

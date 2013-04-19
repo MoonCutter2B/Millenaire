@@ -23,8 +23,8 @@ bringBackHomeGood=wheat
 
 startingInv=seeds,100
 
-toolNeeded=normanHoe
-toolNeeded=normanBroadsword
+toolneededclass=hoes
+toolneededclass=meleeweapons
 
 
 tag=helpInAttacks

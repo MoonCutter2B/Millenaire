@@ -18,12 +18,10 @@ goal=goDrink
 goal=patrol
 goal=huntmonster
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
-toolNeeded=steelchest
-toolNeeded=steellegs
-toolNeeded=steelboots
-toolNeeded=yumibow
+toolneededclass=armour
+toolneededclass=rangedweapons
 startingInv=bow,1
 
 baseAttackStrength=4

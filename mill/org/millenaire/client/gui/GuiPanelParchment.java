@@ -32,6 +32,7 @@ public class GuiPanelParchment extends GuiText {
 
 	private final EntityPlayer player;
 	private final Vector<Vector<String>> fullText;
+	private final Vector<Vector<Line>> fullTextLines;
 
 	public GuiPanelParchment(EntityPlayer player,Vector<Vector<String>> fullText,Building townHall,int mapType, boolean isParchment) {
 		super();
@@ -42,6 +43,19 @@ public class GuiPanelParchment extends GuiText {
 		this.isParchment=isParchment;
 		this.player=player;
 		this.fullText=fullText;
+		fullTextLines=null;
+	}
+
+	public GuiPanelParchment(EntityPlayer player,Building townHall,Vector<Vector<Line>> fullTextLines,int mapType, boolean isParchment) {
+		super();
+
+		this.mapType=mapType;
+
+		this.townHall=townHall;
+		this.isParchment=isParchment;
+		this.player=player;
+		this.fullTextLines=fullTextLines;
+		fullText=null;
 	}
 
 	@Override
@@ -115,7 +129,12 @@ public class GuiPanelParchment extends GuiText {
 
 	@Override
 	public void initData() {
-		descText=convertAdjustText(fullText);
+		if (fullText!=null)
+			descText=convertAdjustText(fullText);
+
+		if (fullTextLines!=null)
+			descText=adjustText(fullTextLines);
+
 		if ((mapType==VILLAGE_MAP) && (townHall!=null)) {
 			ClientSender.requestMapInfo(townHall);
 		}
@@ -365,7 +384,7 @@ public class GuiPanelParchment extends GuiText {
 
 			}
 		}
-		
+
 		//copy to avoid ConcurrentModificationException
 		Vector<Building> buildings=new Vector<Building>(mw.allBuildings());
 
@@ -391,7 +410,7 @@ public class GuiPanelParchment extends GuiText {
 				}
 			}
 		}
-		
+
 		boolean labelForced=false;
 
 		for (ChunkCoordIntPair cc : ForgeChunkManager.getPersistentChunksFor(world).keys()) {
@@ -408,20 +427,20 @@ public class GuiPanelParchment extends GuiText {
 
 		if (!labels.isEmpty()) {
 			int stringlength=0;
-			
+
 			for (String s : labels) {
 				int w=fontRenderer.getStringWidth(s);
 				if (w>stringlength)
 					stringlength=w;
 			}
-			
-					
+
+
 			drawGradientRect(i - 3 - windowXstart + 10, j - 3 - windowYstart, (i + stringlength + 3) - windowXstart + 10 , (j + 11*labels.size()) - windowYstart, 0xc0000000, 0xc0000000);
-			
+
 			for (int si=0;si<labels.size();si++) {
 				fontRenderer.drawString(labels.get(si), i- windowXstart + 10, j- windowYstart + 11*(si), 0x909090);
 			}
-			
+
 		}
 
 		GL11.glEnable(2896 /*GL_LIGHTING*/);

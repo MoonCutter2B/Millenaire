@@ -13,7 +13,7 @@ goal=patrol
 goal=huntmonster
 
 
-toolNeeded=steelSword
+toolneededclass=meleeweapons
 
 baseAttackStrength=3
 tag=helpInAttacks
