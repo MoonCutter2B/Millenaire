@@ -109,11 +109,11 @@ japanesewarriorredHelmet,0,6*64,0,0, 0,false,,0,true,tradehelp.genericweapon
 japanesewarriorredLegs,0,12*64,0,0, 0,false,,0,true,tradehelp.genericweapon
 japanesewarriorredPlate,0,18*64,0,0, 0,false,,0,true,tradehelp.genericweapon
 mayanmace,0,7*64,0,0, 0,false,,0,true,tradehelp.genericweapon
-normanBroadsword,64*64,0,1,1,,,,8*64*64,false,,0,true,tradehelp.normantools
-normanHelmet,10*64,0,0,0,,,,8*64*64,false,,0,true,tradehelp.normantools
-normanChest,20*64,0,0,0,,,,8*64*64,false,,0,true,tradehelp.normantools
-normanLegs,8*64,0,0,0,,,,8*64*64,false,,0,true,tradehelp.normantools
-normanBoots,5*64,0,0,0,,,,8*64*64,false,,0,true,tradehelp.normantools
+normanBroadsword,64*64,60*64,1,1,,,,8*64*64,true,tradehelp.normantools
+normanHelmet,10*64,10*60,0,0,,,,8*64*64,true,tradehelp.normantools
+normanChest,20*64,20*60,0,0,,,,8*64*64,true,tradehelp.normantools
+normanLegs,8*64,8*60,0,0,,,,8*64*64,true,tradehelp.normantools
+normanBoots,5*64,5*60,0,0,,,,8*64*64,true,tradehelp.normantools
 
 normanPickaxe,10*64,10*64,1,1,,,,2*64*64,true,tradehelp.normantools
 normanAxe,10*64,10*64,1,1,,,,2*64*64,true,tradehelp.normantools

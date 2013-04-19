@@ -16,7 +16,7 @@ bricks,16,0,0,0
 gold,25,20,5,10,0,false,,0,false,tradehelp.mayangold
 diamond,0,0,0,0,6*64
 
-wool_white,10,8,0,64,12,false,,0,false,tradehelp.woolwhite
+wool_white,10,8,0,64,12,false,,0,false,tradehelp.whitewool
 wool_gray,0,0,0,0,32
 wool_lightgray,0,0,0,0,16
 wool_black,0,0,0,0,24
@@ -65,20 +65,20 @@ wine,0,3*64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 winebasic,0,64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 feta,0,96,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 
-obsidian,0,5*64,0,0,0,false,,0,true,tradehelp.mayantools
-mayanpickaxe,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayantools
-mayanaxe,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayantools
-mayanshovel,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayantools
-mayanhoe,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayantools
+obsidian,0,5*64,0,0,0,false,,0,false,tradehelp.mayanobsidian
+mayanpickaxe,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayanobsidian
+mayanaxe,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayanobsidian
+mayanshovel,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayanobsidian
+mayanhoe,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayanobsidian
+stonePickaxe,4,3,0,0, 0,false,,0,true,tradehelp.mayanstonetools
+stoneAxe,4,3,0,0, 0,false,,0,true,tradehelp.mayanstonetools
+stoneShovel,2,1,0,0, 0,false,,0,true,tradehelp.mayanstonetools
+stoneHoe,3,2,0,0, 0,false,,0,true,tradehelp.mayanstonetools
 
 normanPickaxe,0,15*64,0,0,,,,0,true,tradehelp.generictools
 normanAxe,0,15*64,0,0,,,,0,true,tradehelp.generictools
 normanShovel,0,15*64,0,0,,,,0,true,tradehelp.generictools
 normanHoe,0,15*64,0,0,,,,0,true,tradehelp.generictools
-stonePickaxe,0,3,0,0, 0,false,,0,true,tradehelp.generictools
-stoneAxe,0,3,0,0, 0,false,,0,true,tradehelp.generictools
-stoneShovel,0,1,0,0, 0,false,,0,true,tradehelp.generictools
-stoneHoe,0,2,0,0, 0,false,,0,true,tradehelp.generictools
 steelPickaxe,0,20*3,0,0, 0,false,,0,true,tradehelp.generictools
 steelAxe,0,20*3,0,0, 0,false,,0,true,tradehelp.generictools
 steelShovel,0,20*1,0,0, 0,false,,0,true,tradehelp.generictools
@@ -92,13 +92,14 @@ feather,2,1,16,64,4,false,,0,true,tradehelp.feathers
 bow,50,40,0,0,2*254,false,,0,true,tradehelp.mayanweapons
 arrow,7,5,0,0,8,false,,0,true,tradehelp.genericweapons
 mayanmace,5*64,5*64,1,1,0,false,,0,true,tradehelp.mayanweapons
+stoneSword,3,2,0,0, 0,false,,0,true,tradehelp.mayanweapons
 leather,20,15,0,0,25,false,,0,true,tradehelp.mayanweapons
-leatherHelmet,0,15*5,0,0, 0,false,,0,true,tradehelp.mayanweapons
-leatherChest,0,15*8,0,0, 0,false,,0,true,tradehelp.mayanweapons
-leatherLegs,0,15*7,0,0, 0,false,,0,true,tradehelp.mayanweapons
-leatherBoots,0,15*4,0,0, 0,false,,0,true,tradehelp.mayanweapons
+leatherHelmet,20*5,15*5,0,0, 0,false,,0,true,tradehelp.mayanweapons
+leatherChest,20*8,15*8,0,0, 0,false,,0,true,tradehelp.mayanweapons
+leatherLegs,20*7,15*7,0,0, 0,false,,0,true,tradehelp.mayanweapons
+leatherBoots,20*4,15*4,0,0, 0,false,,0,true,tradehelp.mayanweapons
 
-stoneSword,0,2,0,0, 0,false,,0,true,tradehelp.genericweapon
+
 steelSword,0,20*2,0,0,3*25,false,,0,true,tradehelp.genericweapon
 steelHelmet,0,20*5,0,0,8*25,false,,0,true,tradehelp.genericweapon
 steelChest,0,20*8,0,0,10*25,false,,0,true,tradehelp.genericweapon
@@ -154,7 +155,7 @@ parchmentMayanBuildings,10,0,0,0,0,true,,0,false,tradehelp.parchments
 parchmentMayanItems,10,0,0,0,0,true,,0,false,tradehelp.parchments
 parchmentMayanComplete,64,0,0,0,0,true,,0,false,tradehelp.parchments
 
-maize,3,2,16,32,3,0,false,,0,false,tradehelp.mayanfood
+maize,3,2,16,32,3,false,,0,false,tradehelp.mayanfood
 mayangold,5*64,4*64,0,512,,,,2*64*64,false,tradehelp.mayangold
 
 

@@ -2,6 +2,10 @@ Translation comparison between en and fr
 
 List of gaps found in strings.txt: 
 
+Key missing in the strings.txt file: goal.makeleatherboots
+Key missing in the strings.txt file: goal.makeleatherchest
+Key missing in the strings.txt file: goal.makeleatherhelmet
+Key missing in the strings.txt file: goal.makeleatherlegs
 Key missing in the strings.txt file: tradehelp.buyingprice
 Key missing in the strings.txt file: tradehelp.byzantinebooks
 Key missing in the strings.txt file: tradehelp.byzantineclothes
@@ -11,6 +15,7 @@ Key missing in the strings.txt file: tradehelp.byzantinesilk
 Key missing in the strings.txt file: tradehelp.byzantinetiles
 Key missing in the strings.txt file: tradehelp.byzantinetools
 Key missing in the strings.txt file: tradehelp.byzantineweapons
+Key missing in the strings.txt file: tradehelp.byzantinewheat
 Key missing in the strings.txt file: tradehelp.byzantinewine
 Key missing in the strings.txt file: tradehelp.carrot
 Key missing in the strings.txt file: tradehelp.clay
@@ -25,6 +30,27 @@ Key missing in the strings.txt file: tradehelp.goodsbought
 Key missing in the strings.txt file: tradehelp.goodssold
 Key missing in the strings.txt file: tradehelp.helptext
 Key missing in the strings.txt file: tradehelp.helptitle
+Key missing in the strings.txt file: tradehelp.hindibricks
+Key missing in the strings.txt file: tradehelp.hindicurry
+Key missing in the strings.txt file: tradehelp.hindigenericfood
+Key missing in the strings.txt file: tradehelp.hindigenericfoodsweet
+Key missing in the strings.txt file: tradehelp.hindirasgulla
+Key missing in the strings.txt file: tradehelp.hindistatue
+Key missing in the strings.txt file: tradehelp.hinditools
+Key missing in the strings.txt file: tradehelp.japaneseframes
+Key missing in the strings.txt file: tradehelp.japanesegold
+Key missing in the strings.txt file: tradehelp.japanesepaper
+Key missing in the strings.txt file: tradehelp.japaneserice
+Key missing in the strings.txt file: tradehelp.japanesethatch
+Key missing in the strings.txt file: tradehelp.japanesetools
+Key missing in the strings.txt file: tradehelp.japaneseudon
+Key missing in the strings.txt file: tradehelp.japaneseweapons
+Key missing in the strings.txt file: tradehelp.japanesewheat
+Key missing in the strings.txt file: tradehelp.mayanfood
+Key missing in the strings.txt file: tradehelp.mayangold
+Key missing in the strings.txt file: tradehelp.mayanobsidian
+Key missing in the strings.txt file: tradehelp.mayanstonetools
+Key missing in the strings.txt file: tradehelp.mayanweapons
 Key missing in the strings.txt file: tradehelp.normanalchemy
 Key missing in the strings.txt file: tradehelp.normanbooks
 Key missing in the strings.txt file: tradehelp.normancider
@@ -34,6 +60,7 @@ Key missing in the strings.txt file: tradehelp.normantapestrywool
 Key missing in the strings.txt file: tradehelp.normantimberframes
 Key missing in the strings.txt file: tradehelp.normantools
 Key missing in the strings.txt file: tradehelp.normantripesboudin
+Key missing in the strings.txt file: tradehelp.normanwheat
 Key missing in the strings.txt file: tradehelp.normanwhitewool
 Key missing in the strings.txt file: tradehelp.parchments
 Key missing in the strings.txt file: tradehelp.purse
@@ -42,8 +69,7 @@ Key missing in the strings.txt file: tradehelp.sellingprice
 Key missing in the strings.txt file: tradehelp.stone
 Key missing in the strings.txt file: tradehelp.title
 Key missing in the strings.txt file: tradehelp.wand
-Key missing in the strings.txt file: tradehelp.wheat
 Key missing in the strings.txt file: tradehelp.whitewool
 Key missing in the strings.txt file: tradehelp.wood
 
-Traduction completness: 98%
+Traduction completness: 97%

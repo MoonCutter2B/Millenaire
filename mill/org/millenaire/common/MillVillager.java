@@ -1472,17 +1472,17 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		return bestTool;
 	}
 
-	public ItemTool getBestHoe() {
-		ItemTool bestTool=(ItemTool)Item.hoeWood;
+	public Item getBestHoe() {
+		Item bestTool=(ItemTool)Item.hoeWood;
 		float bestRating=0;
 		
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemHoe || item.item instanceof ItemMillenaireHoe)) {
-					ItemTool tool=(ItemTool)item.item;
-					if (tool.getMaxDamage()>bestRating) {
-						bestTool=tool;
-						bestRating=tool.getMaxDamage();
+					
+					if (item.item.getMaxDamage()>bestRating) {
+						bestTool=item.item;
+						bestRating=item.item.getMaxDamage();
 					}
 				}
 			}
@@ -1498,10 +1498,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemHoe || item.item instanceof ItemMillenaireHoe)) {
-					ItemTool tool=(ItemTool)item.item;
-					if (tool.getMaxDamage()>bestRating) {
+				
+					if (item.item.getMaxDamage()>bestRating) {
 						bestTool=item.staticStackArray;
-						bestRating=tool.getMaxDamage();
+						bestRating=item.item.getMaxDamage();
 					}
 				}
 			}

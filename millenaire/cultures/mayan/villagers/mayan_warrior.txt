@@ -18,9 +18,9 @@ goal=patrol
 goal=huntmonster
 
 
-toolNeeded=stonesword
-toolNeeded=bow
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
+toolneededclass=rangedweapons
+toolneededclass=armour
 
 baseAttackStrength=4
 tag=helpInAttacks

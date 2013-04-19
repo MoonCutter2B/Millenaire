@@ -23,8 +23,7 @@ goal=plantMaize
 
 bringBackHomeGood=maize
 
-toolNeeded=stonehoe
-toolNeeded=mayanhoe
+toolneededclass=hoes
 
 tag=helpInAttacks
 defaultweapon=woodhoe

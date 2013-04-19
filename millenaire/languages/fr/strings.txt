@@ -568,6 +568,12 @@ goal.makestonehoe=Fabrique une houe de pierre
 goal.makestonepickaxe=Fabrique une pioche de pierre
 goal.makestoneshovel=Fabrique une pelle de pierre
 goal.makestonesword=Fabrique une épée de pierre
+
+goal.makeleatherboots=Fabrique des bottes de cuir
+goal.makeleatherchest=Fabrique un plastron de cuir
+goal.makeleatherhelmet=Fabrique un casque de cuir
+goal.makeleatherlegs=Fabrique des jambières de cuir
+
 goal.maketachi=Fabrique une épée tachi
 goal.makejapaneseweapons=Fabrique de l'armement japonais
 
@@ -1059,7 +1065,13 @@ tradehelp.japanesepaper=Les artisans japonais produisent du papier à partir de 
 tradehelp.japaneseframes=Les artisans japonais produisent des colombages à partir de bois pour construire des bâtiments éléguants.
 tradehelp.japaneserice=Les japonais cultivent du riz pour nourir leur enfants et produire du papier.
 tradehelp.japanesewheat=Les japonais byzantins cuisinent des udons avec du blé.
+tradehelp.japanesethatch=Les japonais produisent des blocs de chaume à partir de blé.
 
 
 
+tradehelp.mayangold=Les artisans mayas ont besoin d'or pour produire des blocs décoratifs. Ils ont besoin du joueur pour leur en fournir.
+tradehelp.mayanfood=Les mayas cultivent du maïs et en font des masa (galettes de maïs) et des masa (en ajoutant du poulet). Elles nourrissent et guérissent le joueur et aident les enfants à grandir.
+tradehelp.mayanobsidian=Les artisans d'obsidienne fabrique des outils et des masses avec de l'obsidienne vendue par le joueur. Ces outils ne sont pas très efficaces, mais peuvent être enchantés facilement.
+tradehelp.mayanstonetools=Les artisans mayas fabriquent des outils et des épées à partir de pierre comme outils de base en l'absence d'obsidienne.
+tradehelp.mayanweapons=Les artisans mayas fabriquent des épées en pierre et des armures de cuir. Les artisans d'obsidienne peuvent eux fabriquer des masses plus puissantes et très enchantables.
 

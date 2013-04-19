@@ -21,10 +21,8 @@ goal=harvestMaize
 goal=plantMaize
 goal=cookchicken
 
-toolNeeded=stonehoe
-toolNeeded=stonesword
-toolNeeded=mayanhoe
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
+toolneededclass=hoes
 
 bringBackHomeGood=chickenmeat
 bringBackHomeGood=maize

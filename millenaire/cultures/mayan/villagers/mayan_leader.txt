@@ -14,9 +14,8 @@ goal=gopray
 goal=patrol
 goal=huntmonster
 
-
-toolNeeded=stonesword
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
+toolneededclass=armour
 
 baseAttackStrength=4
 tag=helpInAttacks

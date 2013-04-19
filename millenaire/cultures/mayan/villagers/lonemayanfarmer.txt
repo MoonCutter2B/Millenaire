@@ -16,10 +16,9 @@ goal=plantMaize
 bringBackHomeGood=chickenmeat
 bringBackHomeGood=maize
 
-toolNeeded=stoneaxe
-toolNeeded=stonesword
-toolNeeded=mayanaxe
-toolNeeded=mayanmace
+toolneededclass=meleeweapons
+toolneededclass=axes
+toolneededclass=hoes
 
 
 tag=helpInAttacks

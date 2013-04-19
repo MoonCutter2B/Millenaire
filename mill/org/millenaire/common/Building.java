@@ -45,7 +45,6 @@ import net.minecraft.world.gen.feature.WorldGenTaiga2;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
-import org.millenaire.common.Culture.CultureLanguage.ReputationLevel;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorldInfo.MillMapInfo;
@@ -307,12 +306,15 @@ public class Building {
 			}
 
 			final File file1 = new File(buildingsDir, getPos().getPathString()
-					+ ".gz");
+					+ "_temp.gz");
 			try {
 				final FileOutputStream fileoutputstream = new FileOutputStream(
 						file1);
 				CompressedStreamTools.writeCompressed(mainTag,
 						fileoutputstream);
+				
+				file1.renameTo(new File(buildingsDir, getPos().getPathString()
+						+ ".gz"));
 			} catch (final IOException e) {
 				MLN.printException(e);
 			}
@@ -7487,7 +7489,7 @@ public class Building {
 		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
 
 		final File file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_bblocks.bin");
+				+ "_bblocks_temp.bin");
 
 		BuildingBlock[] blocks=getBblocks();
 
@@ -7512,6 +7514,9 @@ public class Building {
 
 				ds.close();
 				fos.close();
+				
+				file1.renameTo(new File(buildingsDir, getPos().getPathString()
+						+ "_bblocks.bin"));
 
 			} catch (final IOException e) {
 				MLN.printException("Error when writing bblocks: ",e);
@@ -7526,7 +7531,7 @@ public class Building {
 		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
 
 		File file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_paths.bin");
+				+ "_paths_temp.bin");
 
 		if (pathsToBuild!=null) {
 			try {
@@ -7553,6 +7558,9 @@ public class Building {
 				}
 				ds.close();
 				fos.close();
+				
+				file1.renameTo(new File(buildingsDir, getPos().getPathString()
+				+ "_paths.bin"));
 
 			} catch (final IOException e) {
 				MLN.printException("Error when writing pathsToBuild: ",e);
@@ -7562,7 +7570,7 @@ public class Building {
 		}
 
 		file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_pathstoclear.bin");
+				+ "_pathstoclear_temp.bin");
 
 		if (oldPathPointsToClear!=null) {
 			try {
@@ -7580,6 +7588,9 @@ public class Building {
 				}
 				ds.close();
 				fos.close();
+				
+				file1.renameTo(new File(buildingsDir, getPos().getPathString()
+						+ "_pathstoclear.bin"));
 
 			} catch (final IOException e) {
 				MLN.printException("Error when writing oldPathPointsToClear: ",e);
