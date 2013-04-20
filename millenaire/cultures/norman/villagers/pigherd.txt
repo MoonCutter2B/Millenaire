@@ -31,7 +31,7 @@ bringBackHomeGood=porkchops
 bringBackHomeGood=porkchopscooked
 bringBackHomeGood=leather
 
-toolNeeded=normanBroadsword
+toolneededclass=meleeweapons
 
 tag=helpInAttacks
 defaultweapon=woodaxe

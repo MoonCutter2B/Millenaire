@@ -19,8 +19,8 @@ goal=breed
 goal=slaughterChicken
 goal=harvestRice
 
-toolNeeded=steelHoe
-toolNeeded=tachiSword
+toolneededclass=hoes
+toolneededclass=meleeweapons
 
 bringBackHomeGood=chickenmeat
 bringBackHomeGood=Rice

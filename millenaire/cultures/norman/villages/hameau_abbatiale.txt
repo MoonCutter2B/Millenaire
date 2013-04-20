@@ -39,6 +39,7 @@ sellingPrice:timberframe_cross,56
 //Buying prices:
 buyingPrice:bookshelves,12
 buyingPrice:wool_white,5
+buyingPrice:leather,15
 buyingPrice:normanAxe,10/10
 buyingPrice:normanHoe,10/10
 buyingPrice:timberframe_plain,36

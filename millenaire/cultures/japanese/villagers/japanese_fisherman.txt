@@ -18,7 +18,7 @@ bringBackHomeGood=fishcooked
 
 requiredGood=wood_any,20
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 baseAttackStrength=5
 tag=helpInAttacks
 defaultweapon=woodsword

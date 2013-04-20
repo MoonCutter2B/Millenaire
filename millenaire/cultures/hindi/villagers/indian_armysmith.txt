@@ -16,7 +16,8 @@ goal=makesteelhelmet
 goal=makebow
 
 
-toolNeeded=steelSword
+
+toolneededclass=meleeweapons
 
 requiredGood=iron,10
 requiredGood=wool_white,2

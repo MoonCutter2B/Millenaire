@@ -1,6 +1,9 @@
 package org.millenaire.common.goal;
 
+import net.minecraft.item.Item;
+
 import org.millenaire.common.Building;
+import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 
@@ -16,12 +19,42 @@ public class GoalGetTool extends Goal {
 
 		for (final Building shop : villager.getTownHall().getShops()) {
 			for (final InvItem key : villager.getToolsNeeded()) {
-				if ((villager.countInv(key.id(),key.meta) == 0) && (shop.countGoods(key.id(),key.meta)>0) && validateDest(villager,shop))
+				if ((villager.countInv(key.id(),key.meta) == 0) && (shop.countGoods(key.id(),key.meta)>0) &&!hasBetterTool(villager, key) && validateDest(villager,shop))
 					return packDest(shop.getSellingPos(),shop);
 			}
 		}
 
 		return null;
+	}
+	
+	private static final Item[][] classes=new Item[][]{MillVillager.axes,MillVillager.pickaxes,MillVillager.shovels,MillVillager.hoes,
+		MillVillager.helmets,MillVillager.chestplates,MillVillager.legs,MillVillager.boots,
+		MillVillager.weaponsSwords,MillVillager.weaponsRanged};
+
+	private boolean hasBetterTool(MillVillager villager, InvItem key) {
+		
+		if (key.meta>0)
+			return false;
+		
+		for (Item[] toolclass : classes) {
+			
+			int targetPos=-1;
+			
+			for (int i=0;i<toolclass.length && targetPos==-1;i++) {
+				if (toolclass[i].itemID == key.id()) {
+					targetPos=i;
+				}
+			}
+			
+			if (targetPos!=-1) {
+				for (int i=0;i<targetPos;i++) {
+					if (villager.countInv(toolclass[i].itemID,0)>0) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -33,7 +66,7 @@ public class GoalGetTool extends Goal {
 
 		for (final Building shop : villager.getTownHall().getShops()) {
 			for (final InvItem key : villager.getToolsNeeded()) {
-				if ((villager.countInv(key.id(),key.meta) == 0) && (shop.countGoods(key.id(),key.meta)>0) && validateDest(villager,shop)) {
+				if ((villager.countInv(key.id(),key.meta) == 0) && (shop.countGoods(key.id(),key.meta)>0) &&!hasBetterTool(villager, key) && validateDest(villager,shop)) {
 					return true;
 				}
 			}
@@ -57,7 +90,7 @@ public class GoalGetTool extends Goal {
 
 
 		for (final InvItem key : villager.getToolsNeeded()) {
-			if ((villager.countInv(key.id(),key.meta) == 0) && (shop.countGoods(key.id(),key.meta)>0)) {
+			if ((villager.countInv(key.id(),key.meta) == 0) && (shop.countGoods(key.id(),key.meta)>0) &&!hasBetterTool(villager, key)) {
 				villager.takeFromBuilding(shop, key.id(),key.meta, 1);
 			}
 		}

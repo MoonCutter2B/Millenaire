@@ -31,5 +31,8 @@ requiredFood=calva,2
 requiredFood=rasgulla,1
 requiredFood=wine,1
 requiredFood=feta,1
+requiredFood=cake,1
+requiredFood=cookie,5
+
 
 defaultweapon=woodaxe

@@ -1,5 +1,6 @@
 package org.millenaire.client.gui;
 
+import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.client.gui.GuiButton;
@@ -13,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
+import org.millenaire.client.MillClientUtilities;
+import org.millenaire.client.gui.GuiText.MillGuiButton;
 import org.millenaire.common.Building;
 import org.millenaire.common.ContainerTrade;
 import org.millenaire.common.ContainerTrade.MerchantSlot;
@@ -25,6 +28,7 @@ public class GuiTrade extends GuiContainer {
 
 	private Building building;
 	private MillVillager merchant;
+	private EntityPlayer player;
 
 	private int sellingRow=0,buyingRow=0;
 
@@ -40,12 +44,18 @@ public class GuiTrade extends GuiContainer {
 		container=(ContainerTrade)this.inventorySlots;
 
 		this.building = building;
+		this.player = player;
 		ySize = 222;
 		xSize = 248;
-		
+
+
+
 		updateRows(false,0,0);
 		updateRows(true,0,0);
 	}
+
+
+
 
 	public GuiTrade(EntityPlayer player, MillVillager merchant)
 	{
@@ -54,11 +64,36 @@ public class GuiTrade extends GuiContainer {
 		container=(ContainerTrade)this.inventorySlots;
 
 		this.merchant = merchant;
+		this.player = player;
 		ySize = 222;
 		xSize = 248;
-		
+
 		updateRows(false,0,0);
 		updateRows(true,0,0);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void initGui() {
+		super.initGui();
+
+		if (building!=null) {
+			final int xStart = (width - xSize) / 2;
+			final int yStart = (height - ySize) / 2;
+
+			this.buttonList.add(new MillGuiButton(0, xStart + xSize -21, yStart + 5,15,20,"?"));
+		}
+	}
+
+	@Override
+	protected void actionPerformed(GuiButton button) {
+
+		if (button instanceof MillGuiButton) {
+			MillClientUtilities.displayTradeHelp(building, player);
+			return;
+		}
+
+		super.actionPerformed(button);
 	}
 
 	/*
@@ -143,22 +178,22 @@ public class GuiTrade extends GuiContainer {
 		final int x = (width - xSize) / 2;
 		final int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		
+
 		if (sellingRow==0) {
 			drawTexturedModalRect(x + 216, y+68, 5, 5, 11, 7);
 		}
 		if (buyingRow==0) {
 			drawTexturedModalRect(x + 216, y+122, 5, 5, 11, 7);
 		}
-		
+
 		if (sellingRow>=container.nbRowSelling-2) {
 			drawTexturedModalRect(x + 230, y+68, 5, 5, 11, 7);				
 		}
-		
+
 		if (buyingRow>=container.nbRowBuying-2) {
 			drawTexturedModalRect(x + 230, y+122, 5, 5, 11, 7);				
 		}
-		
+
 	}
 
 	@Override
@@ -172,7 +207,22 @@ public class GuiTrade extends GuiContainer {
 			fontRenderer.drawString(merchant.getName()+": "+merchant.getNativeOccupationName(), 8,6, 0x404040);
 			fontRenderer.drawString(MLN.string("ui.isell")+":", 8, 22, 0x404040);
 		}
+
 		fontRenderer.drawString(MLN.string("ui.inventory"), 8+36, (ySize - 96) + 2, 0x404040);
+
+		@SuppressWarnings("rawtypes")
+		Iterator iterator = this.buttonList.iterator();
+
+		while (iterator.hasNext())
+		{
+			GuiButton guibutton = (GuiButton)iterator.next();
+
+			if (guibutton.func_82252_a())
+			{
+				guibutton.func_82251_b(x - this.guiLeft, y - this.guiTop);
+				break;
+			}
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -400,14 +450,14 @@ public class GuiTrade extends GuiContainer {
 	private void updateRows(boolean selling,int change,int row) {
 
 		int pos=0;
-		
+
 		for (Object o : container.inventorySlots) {
 			Slot slot=(Slot)o;
 			if (slot instanceof TradeSlot) {
 				TradeSlot tradeSlot=(TradeSlot)slot;
 				if (tradeSlot.sellingSlot==selling) {
 					tradeSlot.yDisplayPosition+=18*change;
-					
+
 					if (pos/13<row || pos/13>row+1) {//out of display
 						if (tradeSlot.xDisplayPosition>0)
 							tradeSlot.xDisplayPosition=tradeSlot.xDisplayPosition-1000;
@@ -415,13 +465,13 @@ public class GuiTrade extends GuiContainer {
 						if (tradeSlot.xDisplayPosition<0)
 							tradeSlot.xDisplayPosition=tradeSlot.xDisplayPosition+1000;
 					}
-					
+
 					pos++;
 				}
 			} else if (slot instanceof MerchantSlot && selling) {
 				MerchantSlot merchantSlot=(MerchantSlot)slot;
 				merchantSlot.yDisplayPosition+=18*change;
-				
+
 				if (pos/13<row || pos/13>row+1) {//out of display
 					if (merchantSlot.xDisplayPosition>0)
 						merchantSlot.xDisplayPosition=merchantSlot.xDisplayPosition-1000;
@@ -429,7 +479,7 @@ public class GuiTrade extends GuiContainer {
 					if (merchantSlot.xDisplayPosition<0)
 						merchantSlot.xDisplayPosition=merchantSlot.xDisplayPosition+1000;
 				}
-				
+
 				pos++;
 			}
 		}
@@ -464,13 +514,13 @@ public class GuiTrade extends GuiContainer {
 					if (buyingRow>0) {
 						buyingRow--;
 						updateRows(false,1,buyingRow);
-						
+
 					}
 				} else if (dx>=230 && dx<=240) {
 					if (buyingRow<container.nbRowBuying-2) {
 						buyingRow++;
 						updateRows(false,-1,buyingRow);
-						
+
 					}
 				}
 			}

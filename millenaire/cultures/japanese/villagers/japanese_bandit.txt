@@ -20,7 +20,7 @@ goal=goDrink
 goal=patrol
 goal=huntmonster
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
 baseAttackStrength=8
 tag=helpInAttacks

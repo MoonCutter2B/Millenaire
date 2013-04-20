@@ -171,7 +171,7 @@ public class ContainerTrade extends Container {
 				if ((building.countGoods(good.item.id(),good.item.meta) < 1) && !good.autoGenerate)
 					return MLN.string("ui.outofstock");
 				if ((building.getTownHall().getReputation(player.username) < good.minReputation))
-					return MLN.string("ui.reputationneeded",building.culture.getReputationLevel(good.minReputation).label);
+					return MLN.string("ui.reputationneeded",building.culture.getReputationLevelLabel(good.minReputation));
 				final int playerMoney=MillCommonUtilities.countMoney(player.inventory);
 				if (playerMoney < good.getSellingPrice(building.getTownHall()))
 					return MLN.string("ui.missingdeniers").replace("<0>", ""+(good.getSellingPrice(building.getTownHall())-playerMoney));
@@ -231,8 +231,8 @@ public class ContainerTrade extends Container {
 		if (buyingGoods!=null) {
 			for (final Goods g : buyingGoods) {
 
-				if (g.getBuyingPrice(building.getTownHall()) > 0) {
-
+				if (g.getBuyingPrice(building.getTownHall()) > 0 && 
+						(!g.hideIfNotValid || MillCommonUtilities.countChestItems(player.inventory, g.item.id(), g.item.meta)>0)) {
 					final int slotrow=slotnb/13;
 					addSlotToContainer(new TradeSlot(building,player, false, g, 8+(18*(slotnb-(13*slotrow))), 86+(slotrow*18)));
 

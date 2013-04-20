@@ -45,7 +45,7 @@ bringBackHomeGood=wool_black
 bringBackHomeGood=wool_brown
 bringBackHomeGood=wool_pink
 
-toolNeeded=normanBroadsword
+toolneededclass=meleeweapons
 
 tag=helpInAttacks
 defaultweapon=woodaxe

@@ -31,7 +31,7 @@ collectGood=sapling_pine
 collectGood=sapling_birch
 collectGood=sapling_jungle
 
-toolNeeded=steelAxe
+toolneededclass=axes
 
 baseAttackStrength=5
 tag=helpInAttacks

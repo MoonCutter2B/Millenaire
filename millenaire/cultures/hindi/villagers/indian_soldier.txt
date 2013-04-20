@@ -18,11 +18,9 @@ goal=patrol
 goal=huntmonster
 
 
-toolNeeded=steelSword
-toolNeeded=steelchest
-toolNeeded=steellegs
-toolNeeded=steelboots
-toolNeeded=bow
+toolneededclass=armour
+toolneededclass=meleeweapons
+toolneededclass=rangedweapons
 
 baseAttackStrength=4
 tag=helpInAttacks

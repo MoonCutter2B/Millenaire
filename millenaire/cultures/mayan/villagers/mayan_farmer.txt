@@ -14,10 +14,7 @@ goal=plantMaize
 
 bringBackHomeGood=maize
 
-toolNeeded=stonehoe
-toolNeeded=mayanhoe
-toolNeeded=mayanmace
-toolNeeded=stonesword
+toolneededclass=meleeweapons
 
 tag=helpInAttacks
 defaultweapon=woodhoe

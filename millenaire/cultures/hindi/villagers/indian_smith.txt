@@ -14,7 +14,8 @@ goal=makesteelhoe
 
 requiredGood=iron,10
 
-toolNeeded=steelSword
+
+toolneededclass=meleeweapons
 
 baseAttackStrength=5
 tag=helpInAttacks

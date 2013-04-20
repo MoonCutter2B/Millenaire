@@ -1,5 +1,43 @@
 Translation comparison between en_GB and fr
 
+List of gaps found in strings.txt: 
+
+Key missing in the strings.txt file: tradehelp.buyingprice
+Key missing in the strings.txt file: tradehelp.byzantinetools
+Key missing in the strings.txt file: tradehelp.carrot
+Key missing in the strings.txt file: tradehelp.clay
+Key missing in the strings.txt file: tradehelp.feathers
+Key missing in the strings.txt file: tradehelp.freeblock
+Key missing in the strings.txt file: tradehelp.genericfood
+Key missing in the strings.txt file: tradehelp.genericfoodraw
+Key missing in the strings.txt file: tradehelp.genericfoodsweet
+Key missing in the strings.txt file: tradehelp.generictools
+Key missing in the strings.txt file: tradehelp.genericweapon
+Key missing in the strings.txt file: tradehelp.goodsbought
+Key missing in the strings.txt file: tradehelp.goodssold
+Key missing in the strings.txt file: tradehelp.helptext
+Key missing in the strings.txt file: tradehelp.helptitle
+Key missing in the strings.txt file: tradehelp.normanalchemy
+Key missing in the strings.txt file: tradehelp.normanbooks
+Key missing in the strings.txt file: tradehelp.normancider
+Key missing in the strings.txt file: tradehelp.normanleather
+Key missing in the strings.txt file: tradehelp.normantapestry
+Key missing in the strings.txt file: tradehelp.normantapestrywool
+Key missing in the strings.txt file: tradehelp.normantimberframes
+Key missing in the strings.txt file: tradehelp.normantools
+Key missing in the strings.txt file: tradehelp.normantripesboudin
+Key missing in the strings.txt file: tradehelp.normanwhitewool
+Key missing in the strings.txt file: tradehelp.parchments
+Key missing in the strings.txt file: tradehelp.purse
+Key missing in the strings.txt file: tradehelp.seeds
+Key missing in the strings.txt file: tradehelp.sellingprice
+Key missing in the strings.txt file: tradehelp.stone
+Key missing in the strings.txt file: tradehelp.title
+Key missing in the strings.txt file: tradehelp.wand
+Key missing in the strings.txt file: tradehelp.wheat
+Key missing in the strings.txt file: tradehelp.whitewool
+Key missing in the strings.txt file: tradehelp.wood
+
 List of gaps found in culture building names for mayan: 
 
 Building name missing for culture mayan: lonemayanpyramid_a0
@@ -9,4 +47,4 @@ List of gaps found in culture building names for hindi:
 
 Building name missing for culture hindi: pandithouse_a0
 
-Traduction completness: 99%
+Traduction completness: 98%

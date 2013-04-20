@@ -32,7 +32,7 @@ bringBackHomeGood=wood_jungle
 
 startingInv=sapling_pine,10
 
-toolNeeded=normanAxe
+toolneededclass=axes
 
 baseAttackStrength=5
 tag=helpInAttacks

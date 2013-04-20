@@ -42,7 +42,7 @@ bringBackHomeGood=seeds
 
 startingInv=seeds,100
 
-toolNeeded=steelHoe
+toolneededclass=hoes
 
 baseAttackStrength=3
 tag=helpInAttacks

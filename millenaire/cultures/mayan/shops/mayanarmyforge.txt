@@ -1,2 +1,2 @@
-sells=bow,arrow,woodsword,woodaxe,woodshovel,woodhoe,woodpickaxe,stoneaxe,stonepickaxe,stonehoe,stoneshovel,stonesword
-buys=wood,wood_birch,wood_pine,wood_jungle,stone,cobblestone
+sells=bow,stonesword,leatherhelmet,leatherchest,leatherlegs,leatherboots
+buys=wood,wood_birch,wood_pine,wood_jungle,cobblestone,leather

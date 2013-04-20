@@ -16,8 +16,7 @@ goal=makeobsidianflake
 
 toolNeeded=obsidian
 
-toolNeeded=stoneaxe
-toolNeeded=mayanaxe
+toolneededclass=axes
 
 tag=helpInAttacks
 defaultweapon=woodaxe

@@ -28,7 +28,7 @@ bringBackHomeGood=chickenmeat
 requiredGood=seeds,10
 requiredGood=rice,10
 
-toolNeeded=tachiSword
+toolneededclass=meleeweapons
 
 tag=helpInAttacks
 defaultweapon=woodaxe

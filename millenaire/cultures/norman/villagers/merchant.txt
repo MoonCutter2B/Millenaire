@@ -18,7 +18,7 @@ goal=godrink
 goal=visitInn
 goal=VisitBuilding
 
-toolNeeded=normanBroadsword
+toolneededclass=meleeweapons
 
 
 tag=helpInAttacks
