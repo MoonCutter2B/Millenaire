@@ -1,0 +1,8 @@
+max:0;priority:200000;native:Shuudannoujou;around:3;startLevel:-2;orientation:1;signs:3,0,1,2,5,7,8,6,4;shop:japanesetownhall;male:japanese_farmerchief;female:japanese_farmwife;tag:Oven;width:30;length:42
+startLevel:-2;rebuildpath:true;tag:leasure
+startLevel:-2
+startLevel:-2
+startLevel:-2
+startLevel:-2
+startLevel:-2
+
