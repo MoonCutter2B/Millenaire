@@ -658,7 +658,7 @@ public class Culture {
 				culture.loadedLanguages.put(language, this);
 			}
 
-		}
+		} 
 
 		private void loadReputationFile(File file) {
 
