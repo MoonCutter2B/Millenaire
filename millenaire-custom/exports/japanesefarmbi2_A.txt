@@ -1,5 +1,0 @@
-max:0;priority:200000;native:Shuudannoujou;around:3;startLevel:-1;orientation:1;signs:4,2,0,1,3,5,7,8,6;shop:japanesetownhall;length:23;width:36;male:japanese_farmerchief;female:japanese_farmwife;tag:Oven;priority:69;tag:leasure
-priority:49
-priority:29
-priority:10;rebuildpath:true
-priority:5
