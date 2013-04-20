@@ -593,7 +593,10 @@ public class MillWorld {
 								renameNames.put(p, value.split(",")[1]);
 							} else if (key.equalsIgnoreCase("rename_qualifier")) {
 								Point p=new Point(value.split(",")[0]);
-								renameQualifiers.put(p, value.split(",")[1]);
+								if (value.split(",").length>1)
+									renameQualifiers.put(p, value.split(",")[1]);
+								else
+									renameQualifiers.put(p, "");
 							}
 						}
 					}
@@ -1076,11 +1079,11 @@ public class MillWorld {
 					b.changeVillageName(renameNames.get(p));
 					for (int i=0;i<villagesList.pos.size();i++) {
 						if (villagesList.pos.get(i).equals(p))
-							villagesList.names.setElementAt(renameNames.get(p), i);
+							villagesList.names.setElementAt(b.getVillageQualifiedName(), i);
 					}
 					for (int i=0;i<loneBuildingsList.pos.size();i++) {
 						if (loneBuildingsList.pos.get(i).equals(p))
-							loneBuildingsList.names.setElementAt(renameNames.get(p), i);
+							loneBuildingsList.names.setElementAt(b.getVillageQualifiedName(), i);
 					}
 				}
 			}

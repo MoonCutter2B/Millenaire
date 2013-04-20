@@ -3705,8 +3705,6 @@ public class Building {
 		name=s;
 	}
 	public void changeVillageQualifier(String s) {
-		if (s!=null && s.equals(""))
-			qualifier=null;
 		qualifier=s;
 	}
 
