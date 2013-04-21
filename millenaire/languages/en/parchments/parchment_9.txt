@@ -1,4 +1,4 @@
-version:1.1.4
+version:4.8.0
 Millénaire: Mayan Villagers
 
 Village Leaders:
@@ -34,6 +34,8 @@ Ah tz'on: Army Smith. It was this smiths job to create weapons used by the Maya 
 Uxul: Carver. These Mayans had the unique skills to craft the more highly detailed reliefs and ornaments which adorned the great Mayan structures. Carvers will create an elaborate golden ornamental block that will be used to adorn your advanced Mayan villages. They will also carve elaborate reliefs to tell the tale of the Mayans, there reliefs will be found on the more prominent buildings in the village.
 
 Aj K'in: Shaman. The traditional Maya have their own religious functionaries, often hierarchically organized, and charged with the duties of praying and sacrificing on behalf of lineages, local groups, or the entire community. The Mayan villagers will look to the Shaman for guidance.
+
+Ka'kau' We'matz: Cacao farmer. These specialised farmers cultivate cocoa plants in their groves. They then use the beans to produce cacauhaa, a chocolated drink.
 NEW_PAGE
 Children:
 

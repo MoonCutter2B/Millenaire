@@ -1,4 +1,4 @@
-version:1.1.4
+version:4.8.0
 Millénaire: Mayan objects
 
 Food
@@ -7,6 +7,8 @@ Maize. Maize, or corn, was the central component to the diet of the ancient Maya
 Masa. The Mayan tortilla was made from specially treated (nixtamalized) maize flour, which has been a staple food of the Mayan region since pre-Columbian times. The maize tortilla is somewhat thicker and heartier in texture than it's modern day counterpart. The Mayans will make these tortillas by grinding three Maize cobs together in a straight flat line. If you are to obtain maize yourself you would be able to recreate the Masa for yourself.
 
 Wah. Or tamale is a traditional Mayan dish made of masa wrapped around some type of meat and steam cooked. Tamales originated in Mesoamerica as early as 8000 to 5000 BC. Aztec and Maya civilizations as well as the Olmeca and Tolteca before them used tamales as a portable food, often to support their armies but also for hunters and travelers.This is the delicacy of the Mayans they used this food to grow into a strong civilization. Made similar to the masa, wah was created by placing chicken meat between two cobs of maize on a flat plane. If you were so inclined you could recreate your own Mayan wah in this way.
+
+Cacauhaa. This bitter drink made with cacao beans, vanilla and spices was a delicacy for the Mayans and used as part of religious ceremonies.
 NEW_PAGE
 Construction & decoration
 

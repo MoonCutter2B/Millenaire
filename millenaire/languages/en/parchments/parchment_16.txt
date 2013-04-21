@@ -1,4 +1,4 @@
-version:3.1.7
+version:4.8.0
 Millénaire: Japanese Inhabitants
 
 Village heads
@@ -8,12 +8,16 @@ Shuken しゅくん: Lord. This man lives in a walled fort in which he rules his
 Kokushi こくし: Overseer. The Kokushi will run a a village from the imperial office. He makes the village work hard and encourages them to pray. He also demands high taxes from the villagers but they are very religious and at peace with themselves so there are no complaints.
 
 Chōkan ちょうかん: Chief. This man is really a peasant but the Japanese need plenty of food so someone has to lead an agricultural village. He is one of the elders chosen to lead the village. He will give advice to the villagers on farming techniques and defend it from monsters.
+
+Touji: Chief Brewer. This qualified artisan produces sake, whose renown ensures the prosperity of his trading village.
 NEW_PAGE
 Women
 
 Jojoufu じょじょうふ: Brave woman. This is the wife of a guard or soldier. She will do normal tasks such as farming in the fields or making thatch. But when the men are out fighting she gets tasked with defending the village to her last breath. Be careful how you look at her as one wrong movement of the eyes and you've had it.
 
 Reifujin れいふじん: Lady. This women is the wife of a rich man usually the village leader. She tries to make herself look beautiful and doesn't do much else... at all.
+
+Kuramoto: Woman Brewer. This specialist of sake production works with her husband at the brewery.
 
 Tsuma つま: Wife. These women do the tasks that the men don't want to do like tend to the fields, make thatch and cook food. This is boring, backbreaking work but they can't complain without certain repercussions. However without these women the village will starve.
 NEW_PAGE

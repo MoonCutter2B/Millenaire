@@ -1,4 +1,4 @@
-version:1.1.4
+version:4.8.0
 Millénaire: Bâtiments Maya
 
 Centres de village
@@ -29,6 +29,8 @@ Ah Kax Makan: Elevage de volaille. Les Mayas élevaient les poulets principaleme
 Chanan Nah: Maison du gardien. Les guerriers maya, bien que souvent de simple villageois ayant leurs propres activités, étaient des fois totalement dans leur rôle, se concentrant sur l'art de la chasse et de la guerre. Souvent leurs maisons étaient ornés de leurs trophées d'aventure.
 
 Ah Waay Su'uk: Terres chamaniques. La maison des chamanes maya, où résidaient homme et femme, souvent dédié à leur foi.
+
+Ka'kau' Makan: Plantation de cacao. C'est ici que le planteur de cacao récolte les précieuses cosses et produit de la cacauhaa avec.
 NEW_PAGE
 
 Bâtiment inhabités:

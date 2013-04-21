@@ -114,8 +114,8 @@ public class Mill
 		} 
 	} 
 
-	public static final String versionNumber = "4.7.0";
-	public static final String versionBound = "[4.7.0,5.0)";
+	public static final String versionNumber = "4.8.0";
+	public static final String versionBound = "[4.8.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
   

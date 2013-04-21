@@ -1,4 +1,4 @@
-version:1.1.4
+version:4.8.0
 Millénaire: Mayan buildings
 
 Village Centers
@@ -30,6 +30,8 @@ Ah Kax Makan : Chicken Farm. Mayans farmed fowl for it's meat mainly. The meat w
 Chanan Nah : Guardian's House. The Mayan warriors, while in many cases were simple villagers who occupied other jobs as well, were sometimes dedicated warriors who focused on the arts of hunting and warfare. These warriors homes were often adorned with trophies from their adventures.
 
 Ah Waay Su'uk : Shaman Grounds. The home of the Mayan shamans and their wives. Often dedicated to the beliefs of the shaman.
+
+Ka'kau' Makan: Cocoa farm. It's here that the cocoa farmer gathers the precious beans and produces cacauhaa with it.
 
 K'as Koloh-che'/K'as Otoch: Bandit Outposts/Homes. These are locations that Mayans who are no longer welcome in villages reside. These locations usually comprise of a small hut or two, sometimes however, the banished Mayans would find uninhabited ruins and rebuild them into homes. It is advised to stay away from these areas as they Mayans who protect their homes will kill to keep it safe.
 NEW_PAGE

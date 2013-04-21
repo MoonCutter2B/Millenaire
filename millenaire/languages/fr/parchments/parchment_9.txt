@@ -1,4 +1,4 @@
-version:1.1.4
+version:4.8.0
 Millénaire: Villageois mayas
 
 Dirigeants:
@@ -10,6 +10,7 @@ Ix: Reine maya. Les reines maya étaient souvent vêtues tel des déesses du ma�
 
 Atan: Paysan. Les femmes maya furent importantes pour diverses raisons. Elles n'étaient pas de passives subordonnées, mais au lieu de cela avait de nombreux rôles important dans la société. La plupart des activités les plus basiques des femmes étaient la récolte et le tissage. Le standard de beauté maya incluait la décoration des dents avants par des motifs complexes, des cicatrices ou le tatouage de tout le haut du corps, ainsi que les yeux croisés, que les parents provoquaient en pendant des perles devant le nez de leur bébés.
 
+Aj: Femme chamane. Les femmes de chamans aidaient souvent leur maris dans leurs activités de chamane. Tandis que l'homme s'occupait du spirituel, la femme avait plus un rôle matériel, s'occupant des taches physiques.
 NEW_PAGE
 Hommes:
 Winik: Paysan. Il incombait aux hommes de chasser et tuer des daims. Ils s'occupaient aussi de l'agriculture pour la nourriture. Un autre aspect important dans la vie des hommes était la formation des jeunes dans ces domaines.
@@ -28,11 +29,11 @@ Tz'on: Artisan. Ces maya disposaient des compétences pour la fabrication des ou
 
 Ahtz'on: Armurier. Ce sont les forgerons qui fabriquaient les armes maya, incluant le propulseur de javelots, connu sous le nom d'atlatls, sarbacanes, massues d'obsidiennes, lances, haches et dagues d'obsidienne ou de silex. Arcs et flèches étaient aussi d'usage, bien que moins répandus. Bien qu'ayant peu de casques, leurs boucliers finement ouvragés à base d'osier tressé ou de bois, ainsi que de peaux pour la protection. Ils portaient souvent des tuniques renforcés de coton, un manteau affichant leur ordre religieux et des couvre-chef de bois ou tissus élaborés. Les Ah tz'on créeront tout les outils nécessaire à la croissance de votre village.
 
-Uxul: Sculpteur. Ces maya avaient connaissance des techniques pour façonner d'impressionnant bas-reliefs et ornements décorant les bâtiments maya. Les sculpteurs créeront de richement détaillés blocs d'ornementation dorés utilisés pour enrichir les villages les plus avancés. De plus d'impressionnantes gravures racontant l'histoire des maya seront construites dans les principaux bâtiments du village.
+Uxul: Sculpteur. Ces mayas avaient connaissance des techniques pour façonner d'impressionnant bas-reliefs et ornements décorant les bâtiments maya. Les sculpteurs créeront de richement détaillés blocs d'ornementation dorés utilisés pour enrichir les villages les plus avancés. De plus d'impressionnantes gravures racontant l'histoire des maya seront construites dans les principaux bâtiments du village.
 
-Aj k'in: Chamane. Les maya avaient leur propre fonctionnaires religieux, souvent organisés selon une hiérarchie et s'occupant des prières et sacrifices au nom de lignées, de groupes locaux pour l'ensemble de la communauté. Les maya consultent leurs chamanes pour leurs conseils.
+Aj k'in: Chamane. Les mayas avaient leur propre fonctionnaires religieux, souvent organisés selon une hiérarchie et s'occupant des prières et sacrifices au nom de lignées, de groupes locaux pour l'ensemble de la communauté. Les mayas consultent leurs chamanes pour leurs conseils.
 
-Aj: Femme chamane. Les femmes de chamans aidaient souvent leur maris dans leurs activités de chamane. Tandis que l'homme s'occupait du spirituel, la femme avait plus un rôle matériel, s'occupant des taches physiques.
+Ka'kau' We'matz: Planteur de cacao. Ces fermiers spécialisés cultivent les précieuses cosses de cacao dans leurs plantations. Ils s'en servent ensuite pour produire de la cacauhaa, une boisson chocolatée.
 NEW_PAGE
 Enfants:
 

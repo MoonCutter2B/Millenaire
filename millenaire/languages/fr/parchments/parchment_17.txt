@@ -1,4 +1,4 @@
-version:3.1.7
+version:4.8.0
 Millénaire: Bâtiments japonais
 
 Centres de village
@@ -8,6 +8,8 @@ Shuudannoujou: Grosse ferme. C'est le centre d'un village agricole où vivent le
 Bousai: Fort. Ce bâtiment abrite le Shuken et sa femme. Il peut évoluer en une forteresse puissante avec murailles et tours de guet.
 
 Kumonjo: Office impériale. Les Japonais construiraient d'énormes offices impériaux pour centrer leurs villages. le superviseur et sa femme résident ici, surveillant, jour et nuit, le village. Tous les plans de construction pour le village sont crées ici, ainsi que tous projets et propositions supplémentaires.
+
+Tsukurizakaya: Brasserie de saké. Ce bâtiment complexe est dédiée à la production de saké à partir de riz. Le Maître Brasseur et sa femme y travaillent, et un florissant village commerçant se développe autour de la brasserie.
 NEW_PAGE
 Habitations
 
@@ -47,4 +49,4 @@ Bâtiments décoratifs
 
 Ike: Bassin. Un bâtiment décoratif au sein duquel il est agréable de se promener.
 
-Torii: Torii (Portail traditionnel japonais). C'est une belle "porte" telle une construction où les villageois viennent prier.
+Soushi: Temple Shinto. Ce petit temple est utilisé par les habitants pour leurs prières quotidiennes.

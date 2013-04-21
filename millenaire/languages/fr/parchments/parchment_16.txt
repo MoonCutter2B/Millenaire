@@ -1,4 +1,4 @@
-version:3.1.7
+version:4.8.0
 Millénaire: Habitants japonais
 
 Dirigeants du village
@@ -8,12 +8,16 @@ Shukun しゅくん: Seigneur. Cet homme vit dans un fort fortifié duquel il di
 Kokushi こくし: Superviseur. Le Kokushi dirige le village à partir de l'Office impérial. Il oblige les villageois à travailler dur et les encourage à prier. Il oblige aussi les villageois à s'acquitter de taxes élevées mais, ceux-ci sont très religieux et en paix avec eux-mêmes, il n'y a donc aucune plainte.
 
 Chōkan ちょうかん: Chef. Cet homme est en fait un paysan, mais, les Japonais ont besoin de beaucoup de nourriture, il faut donc quelqu'un qui dirige un village agricole. Il est l'un des ainés choisis pour diriger le village. Il donnera des conseils aux villageois sur les techniques de cultures et les défendra des monstres.
+
+Touji: Maître Brasseur. Ce maître artisan est réputé pour sa production de saké qui fait la fortune des villages commerçants. 
 NEW_PAGE
 Femmes
 
 Jojoufu じょじょうふ: Femme courageuse. C'est l'épouse d'un garde ou d'un soldat. Elle fera des tâches courantes telles que cultiver les champs ou faire la chaume. Mais, quand les hommes sortent combattre, elle est chargée de défendre le village jusqu'à son dernier souffle. Prenez garde à la manière dont vous la regardez car un mauvais mouvement d'yeux et vous êtes fichu.
 
 Reifujin れいふじん: Dame. Cette femme est l'épouse d'un homme riche qui est généralement le chef du village. Elle essaie de se rendre belle et ne fait rien d'autre.
+
+Kuramoto: Brasseuse. Cette spécialiste de la production de saké travaille avec son mari à la brasserie.
 
 Tsuma つま: Femmes. Ces femmes font les tâches que les hommes ne veulent pas faire comme entretenir les champs, faire la chaume et cuire la nourriture. C'est un travail lassant et éreintant mais elles ne peuvent pas se plaindre sans qu'il y ait des répercussions. Cependant, sans ces femmes, le village mourrait de faim.
 NEW_PAGE

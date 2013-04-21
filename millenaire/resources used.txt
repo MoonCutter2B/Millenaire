@@ -377,9 +377,8 @@ Laine blanche: 27
 Sculpture Maya: 8
 Roche: 11243
 Pierres: 15392
-Bois tropical: 280
+Bois tropical: 278
 Grès: 13
-Hautes herbes: 1
 Bibliothèque: 48
 Décoration en or: 147
 Bois (tous): 1002
@@ -399,9 +398,8 @@ Laine blanche: 21
 Sculpture Maya: 3
 Roche: 11000
 Pierres: 16109
-Bois tropical: 138
+Bois tropical: 136
 Grès: 5
-Hautes herbes: 1
 Bibliothèque: 48
 Décoration en or: 144
 Bois (tous): 1065
@@ -412,9 +410,8 @@ Laine blanche: 21
 Sculpture Maya: 6
 Roche: 11262
 Pierres: 14854
-Bois tropical: 180
+Bois tropical: 178
 Grès: 136
-Hautes herbes: 1
 Bibliothèque: 48
 Décoration en or: 157
 Bois (tous): 961
@@ -10953,9 +10950,6 @@ Upgrade 2
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|70
 |-
-| style="text-align: center; "|Hautes herbes
-| style="text-align: center; "|1
-|-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|3
 |}
@@ -10998,9 +10992,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Pierres
 | style="text-align: center; "|89
-|-
-| style="text-align: center; "|Bois tropical
-| style="text-align: center; "|1
 |}
 
 
@@ -11012,9 +11003,6 @@ Upgrade 2
 |-
 | style="text-align: center; "|Roche
 | style="text-align: center; "|90
-|-
-| style="text-align: center; "|Bois tropical
-| style="text-align: center; "|1
 |}
 
 

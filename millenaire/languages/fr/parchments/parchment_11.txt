@@ -1,4 +1,4 @@
-version:1.1.4
+version:4.8.0
 Millénaire: Objets maya
 Nourriture
 
@@ -7,6 +7,8 @@ Maïs. Le maïs est le principal composant de la cuisine maya et était grandeme
 Masa. Les tortillas maya étaient fait à base d'une farine de maïs spécialement traité (nixtamalisé), qui était à la base du régime alimentaire dans la région dès l'époque précolombienne. Ces tortillas étaient plus épaisses que les itérations modernes. Pour obtenir ces tortillas les maya prenaient trois épis et les frottaient en ligne sur une surface plane. Si vous aviez votre propre maïs vous pourriez fabriquer du masa.
 
 Wah. Aussi appelé tamales, il s'agit d'un plat traditionnel fait de masa entourant de la viande et cuit à la vapeur. Le tamales provient d'Amérique centrale et son origine remonte au alentour de 8000 à 5000 avant jésus Christ. Aztèques, mayas, Toltèques et Olmèques usèrent tous du tamales comme une nourriture transportable, faisant souvent partie des rations des militaires, chasseurs et autres voyageurs. C'est en partie grâce à ce met que les maya purent devenir une grande civilisation. Fabriqué de manière similaire au masa, le maïs central était remplacé par de la viande de poulet. Si vous avez les ingrédients vous pouvez vous aussi le préparer.
+
+Cacauhaa. Cette boisson amère à base de cacao, vanille et épices était une boisson luxueuse pour les mayas et était utilisée dans leurs cérémonies.
 NEW_PAGE
 Construction & décoration
 

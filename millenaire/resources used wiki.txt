@@ -1317,16 +1317,16 @@
 </table>
 
 |Ka'kau' Makan = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation A</th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td><td>[[File:TallGrass.png|32px|Hautes herbes]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td></td><td>14</td><td>36</td><td></td></tr>
-<tr><th scope="row">Upgrade 1</th><td></td><td>71</td><td>3</td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 2</th><td>75</td><td>70</td><td>3</td><td></td><td>1</td></tr>
-<tr><th scope="row">Upgrade 3</th><td>138</td><td></td><td>2</td><td></td><td></td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation A</th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td></tr>
+<tr><th scope="row">Construction</th><td></td><td></td><td>14</td><td>36</td></tr>
+<tr><th scope="row">Upgrade 1</th><td></td><td>71</td><td>3</td><td></td></tr>
+<tr><th scope="row">Upgrade 2</th><td>75</td><td>70</td><td>3</td><td></td></tr>
+<tr><th scope="row">Upgrade 3</th><td>138</td><td></td><td>2</td><td></td></tr>
 </table>
 <table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation B</th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td></td><td>15</td><td>18</td></tr>
-<tr><th scope="row">Upgrade 1</th><td></td><td>89</td><td></td><td>1</td></tr>
-<tr><th scope="row">Upgrade 2</th><td>90</td><td></td><td></td><td>1</td></tr>
+<tr><th scope="row">Upgrade 1</th><td></td><td>89</td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 2</th><td>90</td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 3</th><td>82</td><td></td><td></td><td></td></tr>
 </table>
 </table>

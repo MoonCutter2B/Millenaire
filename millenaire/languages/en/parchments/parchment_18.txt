@@ -1,4 +1,4 @@
-version:3.1.7
+version:4.8.0
 Millénaire: Japanese Items
 
 Denier. When the Japanese come to this new land they changed their currency to the denier. It comes in three values: Denier (bronze), Denier Argent (silver) worth 64 regular ones, and Denier Or (gold) worth 64 silver ones.
@@ -8,6 +8,8 @@ Food items
 Rice. Bland and tasteless but the Japanese harvest it like there's no tomorrow. If the japanese have rice in their chests they have more children. It is also used in the making of paper.
 
 Udon. This mysterious food item is made by the japanese in their kitchen.
+
+Sake. This rice alcohol produced only in trading villages gives life back to the player and increases conception chances amoung villagers.
 NEW_PAGE
 Tools & Weapons
 
