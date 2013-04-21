@@ -7496,7 +7496,7 @@ public class Building {
 		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
 
 		final File file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_bblocks_temp.bin");
+				+ "_bblocks.bin");
 
 		BuildingBlock[] blocks=getBblocks();
 
@@ -7522,9 +7522,6 @@ public class Building {
 				ds.close();
 				fos.close();
 
-				file1.renameTo(new File(buildingsDir, getPos().getPathString()
-						+ "_bblocks.bin"));
-
 			} catch (final IOException e) {
 				MLN.printException("Error when writing bblocks: ",e);
 			}
@@ -7538,7 +7535,7 @@ public class Building {
 		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
 
 		File file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_paths_temp.bin");
+				+ "_paths.bin");
 
 		if (pathsToBuild!=null) {
 			try {
@@ -7566,9 +7563,6 @@ public class Building {
 				ds.close();
 				fos.close();
 
-				file1.renameTo(new File(buildingsDir, getPos().getPathString()
-						+ "_paths.bin"));
-
 			} catch (final IOException e) {
 				MLN.printException("Error when writing pathsToBuild: ",e);
 			}
@@ -7577,7 +7571,7 @@ public class Building {
 		}
 
 		file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_pathstoclear_temp.bin");
+				+ "_pathstoclear.bin");
 
 		if (oldPathPointsToClear!=null) {
 			try {
@@ -7595,9 +7589,6 @@ public class Building {
 				}
 				ds.close();
 				fos.close();
-
-				file1.renameTo(new File(buildingsDir, getPos().getPathString()
-						+ "_pathstoclear.bin"));
 
 			} catch (final IOException e) {
 				MLN.printException("Error when writing oldPathPointsToClear: ",e);
