@@ -55,7 +55,7 @@ souvlaki,0,4*64,0,0,0,false,,0,true,tradehelp.hindigenericfood
 cake,0,64,0,0,128,false,,0,true,tradehelp.hindigenericfoodsweet
 cookie,0,4,0,0,8,false,,0,true,tradehelp.hindigenericfoodsweet
 feta,0,96,0,0,0,false,,0,true,tradehelp.hindigenericfoodsweet
-
+cacauhaa,0,5*64,0,0,0,false,0,0,true,tradehelp.hindigenericfoodsweet
 
 rasgulla,20,0,8,0,32,,,64*64,true,tradehelp.hindirasgulla
 vegcurry,2*64,3*64,0,0,150,false,,0,true,tradehelp.hindicurry

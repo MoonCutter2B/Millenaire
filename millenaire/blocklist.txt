@@ -195,6 +195,9 @@ planks pine;5;1;false;66/47/27
 planks birch;5;2;false;200/183/22
 planks jungle;5;3;false;177/128/92
 saplings;6;0;false;0/50/0
+saplings pine;6;1;false;0/50/10
+saplings birch;6;2;false;0/50/20
+saplings jungle;6;3;false;0/50/30
 water;9;0;true;0/255/255
 sand;12;0;false;228/231/113
 gravel;13;0;false;50/50/50
@@ -281,6 +284,7 @@ pathochretiles_half;block_path_slab_id;12;false;170/170/100
 pathgravelslabs_half;block_path_slab_id;13;false;175/175/100
 
 maizesoil;-1;0;;64/128/40
+cacaospot;-1;0;;58/23/9
 carrotsoil;-1;0;;64/128/50
 mayanstatue;-1;0;;179/154/118
 fishingspot;-1;0;;0/0/120

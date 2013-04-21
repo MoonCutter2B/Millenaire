@@ -1053,6 +1053,8 @@ public class MillWorld {
 				b.updateBackgroundVillage();
 			}
 			
+			checkConnections();
+			
 			for (UserProfile profile : this.profiles.values()) {
 				if (profile.connected)
 					profile.updateProfile();

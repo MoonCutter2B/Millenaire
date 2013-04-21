@@ -404,9 +404,16 @@ public class MillCommonUtilities {
 		if(chest==null)
 			return 0;
 
+		int maxSlot=chest.getSizeInventory();
+
+		if (chest instanceof InventoryPlayer)
+		{
+			maxSlot=maxSlot-4;//excluding the armour slots
+		}
+		
 		int nb=0;
 
-		for (int i=0;i<chest.getSizeInventory();i++) {
+		for (int i=0;i<maxSlot;i++) {
 			final ItemStack stack = chest.getStackInSlot(i);
 			if ((stack !=null) && (stack.itemID == itemID) && ((meta == -1) || (stack.getItemDamage() < 0) || (stack.getItemDamage() == meta))) {
 				nb+=stack.stackSize;

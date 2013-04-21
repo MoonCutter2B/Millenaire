@@ -1,1 +1,0 @@
-native:Mokuzoukaoku;name_en:Wooden House;name_fr:enfrancais;around:4;startLevel:-1;orientation:3;width:15;length:11

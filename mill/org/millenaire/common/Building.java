@@ -17,6 +17,8 @@ import java.util.Set;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCocoa;
+import net.minecraft.block.BlockLog;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -3656,6 +3658,50 @@ public class Building {
 
 		return null;
 	}
+	
+	public Point getCocoaPlantingLocation() {
+		for (int i=0;i<soilTypes.size();i++) {
+			if (soilTypes.get(i).equals(Mill.CROP_CACAO)) {
+				for (Point p : soils.get(i)) {
+					if (p.getId(worldObj)==0) {
+						if (p.getNorth().getId(worldObj)==Block.wood.blockID && 
+								BlockLog.limitToValidMetadata(p.getNorth().getMeta(worldObj)) == 3)
+							return p;
+						if (p.getEast().getId(worldObj)==Block.wood.blockID && 
+								BlockLog.limitToValidMetadata(p.getEast().getMeta(worldObj)) == 3)
+							return p;
+						if (p.getSouth().getId(worldObj)==Block.wood.blockID && 
+								BlockLog.limitToValidMetadata(p.getSouth().getMeta(worldObj)) == 3)
+							return p;
+						if (p.getWest().getId(worldObj)==Block.wood.blockID && 
+								BlockLog.limitToValidMetadata(p.getWest().getMeta(worldObj)) == 3)
+							return p;
+					}
+					
+				}
+			}
+		}
+
+		return null;
+	}
+	
+	public Point getCocoaHarvestLocation() {
+		for (int i=0;i<soilTypes.size();i++) {
+			if (soilTypes.get(i).equals(Mill.CROP_CACAO)) {
+				for (Point p : soils.get(i)) {
+					if (p.getId(worldObj)==Block.cocoaPlant.blockID) {
+						int meta=p.getMeta(worldObj);
+						
+						if (BlockCocoa.func_72219_c(meta)>=2)
+							return p;
+					}
+					
+				}
+			}
+		}
+
+		return null;
+	}
 
 	public Building getTownHall() {
 		if (townHallPos == null)
@@ -6039,6 +6085,7 @@ public class Building {
 				storeGoods(Block.cobblestone.blockID, 2048);
 				storeGoods(Mill.stone_decoration.blockID, 2, 64);
 				storeGoods(Block.wood.blockID, 1, 512);
+				storeGoods(Block.wood.blockID, 3, 1024);
 			} else if (culture.key.equals("japanese")) {
 				storeGoods(Block.sapling.blockID, 64);
 				storeGoods(Mill.wood_decoration.blockID, 2, 2048);
@@ -7496,7 +7543,7 @@ public class Building {
 		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
 
 		final File file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_bblocks_temp.bin");
+				+ "_bblocks.bin");
 
 		BuildingBlock[] blocks=getBblocks();
 
@@ -7522,8 +7569,6 @@ public class Building {
 				ds.close();
 				fos.close();
 
-				file1.renameTo(new File(buildingsDir, getPos().getPathString()
-						+ "_bblocks.bin"));
 
 			} catch (final IOException e) {
 				MLN.printException("Error when writing bblocks: ",e);
@@ -7538,7 +7583,7 @@ public class Building {
 		final File buildingsDir = MillCommonUtilities.getBuildingsDir(worldObj);
 
 		File file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_paths_temp.bin");
+				+ "_paths.bin");
 
 		if (pathsToBuild!=null) {
 			try {
@@ -7577,7 +7622,7 @@ public class Building {
 		}
 
 		file1 = new File(buildingsDir, getPos().getPathString()
-				+ "_pathstoclear_temp.bin");
+				+ "_pathstoclear.bin");
 
 		if (oldPathPointsToClear!=null) {
 			try {
@@ -8046,4 +8091,5 @@ public class Building {
 			MLN.printException(e);
 		}
 	}
+
 }

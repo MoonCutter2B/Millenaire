@@ -1340,7 +1340,8 @@ public class MLN {
 		ModLoader.addName(Mill.feta, MLN.string("item.feta"));
 		ModLoader.addName(Mill.souvlaki, MLN.string("item.souvlaki"));
 		ModLoader.addName(Mill.purse, MLN.string("item.purse"));
-
+		ModLoader.addName(Mill.sake, MLN.string("item.sake"));
+		ModLoader.addName(Mill.cacauhaa, MLN.string("item.cacauhaa"));
 	}
 
 	private static String now() {

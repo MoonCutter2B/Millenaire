@@ -56,6 +56,8 @@ lambcooked,0,3*64,0,0,0,false,,0,true,tradehelp.genericfood
 souvlaki,0,4*64,0,0,0,false,,0,true,tradehelp.genericfood
 udon,0,30,0,0,0,false,,0,true,tradehelp.genericfood
 
+dye_brown,4,0,0,0,0,false,,0,0,true,tradehelp.mayancocoa
+cacauhaa,4*64,4*60,2,5,0,false,,0,64*64,true,tradehelp.mayancocoa
 cake,0,64,0,0,128,false,,0,true,tradehelp.genericfoodsweet
 cookie,0,4,0,0,8,false,,0,true,tradehelp.genericfoodsweet
 cider,0,96,0,0,2*64,false,,0,true,tradehelp.genericfoodsweet
@@ -64,6 +66,7 @@ rasgulla,0,30,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 wine,0,3*64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 winebasic,0,64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 feta,0,96,0,0,0,false,,0,true,tradehelp.genericfoodsweet
+sake,0,5*64,0,0,0,false,0,0,true,tradehelp.genericfoodsweet
 
 obsidian,0,64,0,0,0,false,,0,false,tradehelp.mayanobsidian
 mayanpickaxe,5*64,5*64,1,1, 0,false,,0,true,tradehelp.mayanobsidian

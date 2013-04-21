@@ -895,6 +895,7 @@ public class Goods {
 		freeGoods.add(new InvItem(Block.blockClay.blockID,0));
 		freeGoods.add(new InvItem(Block.brewingStand.blockID,0));
 		freeGoods.add(new InvItem(Block.leaves.blockID,-1));
+		freeGoods.add(new InvItem(Block.sapling.blockID,-1));
 		freeGoods.add(new InvItem(Block.cake.blockID,0));
 		freeGoods.add(new InvItem(Mill.path,-1));
 		freeGoods.add(new InvItem(Mill.pathSlab,-1));
@@ -1184,8 +1185,10 @@ public class Goods {
 		goodsName.put("villagewand", new InvItem(Mill.summoningWand,0));
 		goodsName.put("vishnuamulet", new InvItem(Mill.vishnu_amulet,0));
 		goodsName.put("wah", new InvItem(Mill.wah,0));
+		goodsName.put("cacauhaa", new InvItem(Mill.cacauhaa,0));
 		goodsName.put("yddrasilamulet", new InvItem(Mill.yddrasil_amulet,0));
 		goodsName.put("yumibow", new InvItem(Mill.yumiBow,0));
+		goodsName.put("sake", new InvItem(Mill.sake,0));
 		goodsName.put("grapes", new InvItem(Mill.grapes,0));
 		goodsName.put("wine", new InvItem(Mill.wineFancy,0));
 		goodsName.put("silk", new InvItem(Mill.silk,0));

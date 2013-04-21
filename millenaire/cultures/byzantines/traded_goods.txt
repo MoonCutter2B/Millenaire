@@ -65,6 +65,7 @@ lambraw,20,0,0,64,32,false,,0,true,tradehelp.genericfoodraw
 lambcooked,1*64,1*64,0,64,80,false,,0,true,tradehelp.byzantinefood
 souvlaki,2*64,2*64,0,64,0,false,,0,true,tradehelp.byzantinefood
 
+
 cake,0,64,0,0,128,false,,0,true,tradehelp.genericfoodsweet
 cookie,0,4,0,0,8,false,,0,true,tradehelp.genericfoodsweet
 cider,0,96,0,0,2*64,false,,0,true,tradehelp.genericfoodsweet
@@ -73,6 +74,8 @@ rasgulla,0,30,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 wine,2*64,2*64,2,5,3*64,false,,0,true,tradehelp.byzantinewine
 winebasic,0,64,0,0,0,false,,0,true,tradehelp.byzantinewine
 feta,1*64,1*64,0,64,80,false,,0,true,tradehelp.byzantinefeta
+sake,0,5*64,0,0,0,false,0,0,true,tradehelp.genericfoodsweet
+cacauhaa,0,5*64,0,0,0,false,0,0,true,tradehelp.genericfoodsweet
 
 paper,15,12,32,128, 0,false,,0,false,tradehelp.byzantinebooks
 book,70,53,16,64, 0,false,,0,false,tradehelp.byzantinebooks

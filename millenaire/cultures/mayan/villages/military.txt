@@ -44,6 +44,7 @@ secondary:mayanalter
 secondary:mayansheepchickenfarm
 secondary:mayansculptorhouse
 secondary:mayanmarket
+secondary:mayancacaofarm
 
 //never for this type of village
 never:mayanshamangrounds

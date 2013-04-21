@@ -297,6 +297,7 @@ item.mayanAxe=Obsidian Axe
 item.mayanShovel=Obsidian Shovel
 item.mayanHoe=Obsidian Hoe
 item.obsidianflake=Obsidian Flake
+item.cacauhaa=Cacauhaa
 
 item.paperwall=Paper Wall
 item.udon=Udon
@@ -306,6 +307,7 @@ item.parchmentsadhu=Book of the Sadhu
 
 item.tachisword=Tachi
 item.yumibow=Yumi Bow
+item.sake=Sake
 
 item.japaneseWarriorBlueLegs=Blue ō-yoroi leggings
 item.japaneseWarriorBlueHelmet=Blue ō-yoroi helmet
@@ -539,6 +541,9 @@ goal.makemayanshovel=Crafting obsidian shovel
 goal.makemayanhoe=Crafting obsidian hoe
 goal.makemayanmace=Crafting obsidian mace
 goal.makeobsidianflake=Breaking obsidian into flakes
+goal.harvestcocoa=Picking cocoa
+goal.plantcocoa=Planting cocoa
+goal.makecacauhaa=Preparing cacauhaa
 
 goal.fish=Fishing
 goal.makethatch=Making thatch
@@ -554,6 +559,8 @@ goal.cookchicken=Cooking chicken
 goal.makeudon=Making udon
 goal.maketachi=Crafting a Tachi sword
 goal.makejapaneseweapons=Crafting Japanese armement
+goal.makesake=Fermenting sake
+
 
 goal.brewpotions=Brewing potions
 goal.harvestwarts=Harvesting warts
@@ -1064,9 +1071,10 @@ tradehelp.japanesetools=Les forgerons japonais utilisent du fer et du cuir pour 
 tradehelp.japaneseweapons=Les forgerons japonais produisent des armures magnifiques, des épées redoutables et des arcs puissants à partir de fer, cuir et laine.
 tradehelp.japanesepaper=Les artisans japonais produisent du papier à partir de riz et s'en servent pour fabriquer des parois translucides.
 tradehelp.japaneseframes=Les artisans japonais produisent des colombages à partir de bois pour construire des bâtiments éléguants.
-tradehelp.japaneserice=Les japonais cultivent du riz pour nourir leur enfants et produire du papier.
+tradehelp.japaneserice=Les japonais cultivent du riz pour nourir leur enfants, produire du papier et dans les villages Bouekigyou Mura, fermenter du saké.
 tradehelp.japanesewheat=Les japonais byzantins cuisinent des udons avec du blé.
 tradehelp.japanesethatch=Les japonais produisent des blocs de chaume à partir de blé.
+tradehelp.japanesesake=Les brasseurs japonais produisent du saké à partir de riz. Le saké guérie le joueur et aide les villageois à avoir des enfants.
 
 
 
@@ -1075,3 +1083,4 @@ tradehelp.mayanfood=Les mayas cultivent du maïs et en font des masa (galettes d
 tradehelp.mayanobsidian=Les artisans d'obsidienne fabrique des outils et des masses avec de l'obsidienne vendue par le joueur. Ces outils ne sont pas très efficaces, mais peuvent être enchantés facilement.
 tradehelp.mayanstonetools=Les artisans mayas fabriquent des outils et des épées à partir de pierre comme outils de base en l'absence d'obsidienne.
 tradehelp.mayanweapons=Les artisans mayas fabriquent des épées en pierre et des armures de cuir. Les artisans d'obsidienne peuvent eux fabriquer des masses plus puissantes et très enchantables.
+tradehelp.mayancocoa=Les planteurs de cacao mayas récoltent des cosses de cacao et s'en servent pour préparer de la cacauhaa, une boisson chocolatée. Elle guérie le joueur et aide les villageois à avoir des enfants.

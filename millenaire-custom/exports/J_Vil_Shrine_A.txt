@@ -1,5 +1,0 @@
-native:Soushi;name_en:Shinto Shrine;name_fr:enfrancais;around:4;startLevel:-1;orientation:3;width:12;length:11
-startLevel:-1
-startLevel:-1
-startLevel:-1
-

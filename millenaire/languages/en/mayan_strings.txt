@@ -22,6 +22,7 @@ villager.mayan_merchant=Merchant
 villager.mayan_chickenfarmer=Chicken Farmer
 villager.mayan_farmer=Corn Farmer
 villager.mayan_obsidiancrafter=Obsidian Crafter
+villager.mayan_cocoafarmer=Cacao farmer
 
 villager.lonemayanfarmer=Solitary Farmer
 villager.lonemayanpeasantwife=Farmer's Wife
@@ -41,3 +42,4 @@ shop.mayanarmyforge=Armours & weapons
 shop.mayansheepchickenfarm=Chicken products
 shop.mayanobsidiancrafter=Obsidian objets
 shop.lonemayanfarm=Farm Products
+shop.mayancocoa=Cocoa & cacauhaa

@@ -385,11 +385,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	//Careful: unlike growth food must be in order from best to worse
 	//As villagers will use only the first available
 	private static final Item[] foodConception=new Item[]{
-		Mill.wineFancy,Item.cake,Mill.calva,Mill.wineBasic,Mill.cider,Mill.rasgulla,Mill.feta,Item.cookie
+		Mill.wineFancy,Item.cake,Mill.calva,Mill.sake,Mill.cacauhaa,Mill.wineBasic,Mill.cider,Mill.rasgulla,Mill.feta,Item.cookie
 	};
 
 	private static final int[] foodConceptionChanceOn=new int[]{
-		2,2,2,3,3,3,3,4
+		2,2,2,2,2,3,3,3,3,4
 	};
 
 	static {
@@ -2753,7 +2753,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 					}
 				}
 
-				if (longDistanceStuck > 3000 && (!vtype.noTeleport || getRecord().raidingVillage)) {//pathing has failed, using long-range teleport
+				if (longDistanceStuck > 3000 && (!vtype.noTeleport || (getRecord()!=null && getRecord().raidingVillage))) {//pathing has failed, using long-range teleport
 					jumpToDest();
 				}
 
@@ -2897,7 +2897,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	private void pathFailedSinceLastTick() {
-		if (pathfailure>=20 && (!vtype.noTeleport || getRecord().raidingVillage)) {
+		if (pathfailure>=20 && (!vtype.noTeleport || (getRecord()!=null && getRecord().raidingVillage))) {
 			jumpToDest();
 			pathfailure=0;
 		} else {
@@ -2907,7 +2907,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (p!=null) {
 				computeNewPath(p);
 			} else {
-				if (!vtype.noTeleport || getRecord().raidingVillage)
+				if (!vtype.noTeleport || (getRecord()!=null && getRecord().raidingVillage))
 					jumpToDest();
 				pathfailure=0;
 			}

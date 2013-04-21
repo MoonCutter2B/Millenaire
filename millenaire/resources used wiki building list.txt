@@ -188,7 +188,7 @@
 |-
 ! Noujou Nojo
 |-
-! Koya
+! Mokuzoukaoku
 |-
 ! Kodachi
 |-
@@ -215,6 +215,8 @@
 ! Kouku
 |-
 ! Sentou
+|-
+! Tsukurizakaya
 |-
 ! Shoko
 |-
@@ -264,103 +266,105 @@
 |-
 ! Zenshou
 |-
-! Torii
+! Soushi
 |-
 ! Kai Ie
 |-
 ! Ah Waay Su'uk~mayanshamangrounds
 |-
-! Uxul Otoch
-|-
-! K'aax
-|-
-! Muul~lonemayanpyramid
-|-
-! Jalab
-|-
 ! Maya Otoch
-|-
-! Sa'at Maya Maize Makan
-|-
-! K'as Otoch
-|-
-! Sa'at Maya Otoch
 |-
 ! Muul~mayanpyramid
 |-
-! Chak Muul
-|-
-! Chanan Nah
-|-
-! Maize Makan
-|-
-! K'eyem
-|-
-! Ix La' Nah
-|-
-! K'in Pak
-|-
-! Pwes
+! Sa'at Maya Otoch
 |-
 ! Mehen Kuuch
 |-
-! Muul~mayanplayerpyramid
-|-
-! Ah Kax Makan
-|-
 ! Cha'an Ka'nal
-|-
-! Sa'at Tunich In-ti'a'al
 |-
 ! Noh Kuuch
 |-
-! Noh Muul
-|-
-! Ch'en~lonemayancave
+! Ka'kau' Makan
 |-
 ! Maya Makan
 |-
 ! Ah Tz'on Si' Took
 |-
-! Laak'Noh Nah
-|-
-! Ah Waay Su'uk~lonemayanshaman
-|-
 ! Yalam Otoch
 |-
 ! Chak
 |-
-! Ciwic
+! Hach Noh Nah
 |-
 ! Kob Took
-|-
-! Hach Noh Nah
 |-
 ! K'u-nah
 |-
 ! Kan Cha'an
 |-
-! Hu'um-Noh
-|-
 ! Zil Otoch
 |-
 ! Chumuk Kuuch
 |-
-! Ta'as Kob Took
+! B'aat Winik Nah
 |-
 ! K'uhul Jalab
 |-
-! B'aat Winik Nah
-|-
 ! Tunich In-ti'a'al
-|-
-! Ni'Nah
 |-
 ! Ch'en~mayancave
 |-
-! Hach Noh Otoch
-|-
 ! Sa'at Muul
+|-
+! Uxul Otoch
+|-
+! K'aax
+|-
+! Jalab
+|-
+! Muul~lonemayanpyramid
+|-
+! Sa'at Maya Maize Makan
+|-
+! K'as Otoch
+|-
+! Chanan Nah
+|-
+! Chak Muul
+|-
+! K'eyem
+|-
+! Maize Makan
+|-
+! K'in Pak
+|-
+! Ix La' Nah
+|-
+! Pwes
+|-
+! Muul~mayanplayerpyramid
+|-
+! Ah Kax Makan
+|-
+! Noh Muul
+|-
+! Sa'at Tunich In-ti'a'al
+|-
+! Ch'en~lonemayancave
+|-
+! Laak'Noh Nah
+|-
+! Ah Waay Su'uk~lonemayanshaman
+|-
+! Ciwic
+|-
+! Hu'um-Noh
+|-
+! Ta'as Kob Took
+|-
+! Ni'Nah
+|-
+! Hach Noh Otoch
 |-
 ! K'as Koloh-che'
 |-

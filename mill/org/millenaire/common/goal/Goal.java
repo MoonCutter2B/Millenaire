@@ -114,6 +114,9 @@ public abstract class Goal {
 		goals.put("brewpotions", new GoalBrewPotions());
 
 		goals.put("gathersilk", new GoalByzantineGatherSilk());
+		
+		goals.put("plantcocoa", new GoalPlantCacao());
+		goals.put("harvestcocoa", new GoalHarvestCacao());
 
 
 		GoalGeneric.loadGenericGoals();

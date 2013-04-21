@@ -41,5 +41,6 @@ requiredFood=wine,1
 requiredFood=feta,1
 requiredFood=cake,1
 requiredFood=cookie,5
+requiredFood=cacauhaa,1
 
 defaultweapon=woodhoe

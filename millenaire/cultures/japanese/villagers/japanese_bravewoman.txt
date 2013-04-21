@@ -43,6 +43,8 @@ requiredFood=wine,1
 requiredFood=feta,1
 requiredFood=cake,1
 requiredFood=cookie,5
+requiredFood=cacauhaa,1
+requiredFood=sake,2
 
 toolneededclass=rangedweapons
 toolneededclass=hoes

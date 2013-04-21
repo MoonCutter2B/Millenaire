@@ -274,6 +274,8 @@ public class Mill
 	public static Item wineBasic,lambRaw,lambCooked,feta,souvlaki;
 
 	public static ItemPurse purse;
+	
+	public static Item sake,cacauhaa;
 
 	public static boolean loadingComplete=false;
 
@@ -288,7 +290,7 @@ public class Mill
 			ENTITY_CAVESPIDER="CaveSpider",ENTITY_ZOMBIE="Zombie";
 
 	public static final String CROP_WHEAT="wheat",CROP_CARROT="carrot",CROP_POTATO="potato",
-			CROP_RICE="rice",CROP_TURMERIC="turmeric",CROP_MAIZE="maize",CROP_VINE="vine";
+			CROP_RICE="rice",CROP_TURMERIC="turmeric",CROP_MAIZE="maize",CROP_VINE="vine",CROP_CACAO="cacao";
 
 	public static boolean startupError=false;
 
@@ -481,6 +483,10 @@ public class Mill
 		souvlaki = (new ItemFoodMultiple(nextItemId(),"souvlaki",5,8,0.8f,2,false)).setUnlocalizedName("ml_souvlaki");
 
 		purse = (ItemPurse) new ItemPurse(nextItemId(),"purse").setMaxStackSize(1).setUnlocalizedName("ml_purse");
+		
+		sake = (new ItemFoodMultiple(nextItemId(),"sake",3,0,0,6,true)).setUnlocalizedName("ml_sake");
+		
+		cacauhaa = (new ItemFoodMultiple(nextItemId(),"cacauhaa",6,0,0,3,true)).setUnlocalizedName("ml_cacauhaa");
 
 		byzantine_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineBrickId,
 				"tilestopvert","tilestophor","tilestopvert","tilestophor","tilesfront","tilestophor").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick");

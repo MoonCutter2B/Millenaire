@@ -35,6 +35,7 @@ byzantineplate;mln83;0;
 byzantinestonetiles;1524;0;
 byzantinetiles;1522;0;
 byzantinetileslab;1523;0;
+cacauhaa;mln94;0;
 cactus;81;0;Cactus
 cake;92;0;Gâteau
 calva;mln5;0;
@@ -195,6 +196,7 @@ redstone;331;0;Redstone
 rice;mln28;0;
 rottenflesh;367;0;Chair putréfiée
 saddle;329;0;Selle
+sake;mln93;0;
 sand;12;0;Sable
 sandstone;24;0;Grès
 sapling;6;0;Pousse de chêne

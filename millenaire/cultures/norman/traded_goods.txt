@@ -71,6 +71,8 @@ rasgulla,0,30,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 wine,0,3*64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 winebasic,0,64,0,0,0,false,,0,true,tradehelp.genericfoodsweet
 feta,0,96,0,0,0,false,,0,true,tradehelp.genericfoodsweet
+sake,0,5*64,0,0,0,false,0,0,true,tradehelp.genericfoodsweet
+cacauhaa,0,5*64,0,0,0,false,0,0,true,tradehelp.genericfoodsweet
 
 bow,2*20,64,0,0,2*25,false,,0,true,tradehelp.genericweapon
 arrow,0,4,0,0,8,false,,0,true,tradehelp.genericweapon
@@ -115,10 +117,10 @@ normanChest,20*64,20*60,0,0,,,,8*64*64,true,tradehelp.normantools
 normanLegs,8*64,8*60,0,0,,,,8*64*64,true,tradehelp.normantools
 normanBoots,5*64,5*60,0,0,,,,8*64*64,true,tradehelp.normantools
 
-normanPickaxe,10*64,10*64,1,1,,,,2*64*64,true,tradehelp.normantools
-normanAxe,10*64,10*64,1,1,,,,2*64*64,true,tradehelp.normantools
-normanShovel,10*64,10*64,1,1,,,,2*64*64,true,tradehelp.normantools
-normanHoe,10*64,10*64,1,1,,,,2*64*64,true,tradehelp.normantools
+normanPickaxe,10*64,9*64,1,1,,,,2*64*64,true,tradehelp.normantools
+normanAxe,10*64,9*64,1,1,,,,2*64*64,true,tradehelp.normantools
+normanShovel,10*64,9*64,1,1,,,,2*64*64,true,tradehelp.normantools
+normanHoe,10*64,9*64,1,1,,,,2*64*64,true,tradehelp.normantools
 stonePickaxe,0,3,0,0, 0,false,,0,true,tradehelp.generictools
 stoneAxe,0,3,0,0, 0,false,,0,true,tradehelp.generictools
 stoneShovel,0,1,0,0, 0,false,,0,true,tradehelp.generictools

@@ -1,0 +1,23 @@
+native_name=Ka'kau' We'matz
+gender=male
+familyNameList=low_caste_family_names
+firstNameList=men_names
+
+texture=/graphics/mob/mayan/mayan_Farmer0.png
+texture=/graphics/mob/mayan/mayan_Farmer1.png
+
+goal=gorest
+goal=gopray
+goal=goDrink
+goal=harvestcocoa
+goal=plantcocoa
+goal=makecacauhaa
+
+bringBackHomeGood=dye_brown
+
+toolneededclass=meleeweapons
+toolneededclass=hoes
+
+tag=helpInAttacks
+defaultweapon=woodhoe
+experiencegiven=3

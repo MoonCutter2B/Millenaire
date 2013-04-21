@@ -41,6 +41,8 @@ mayantemple_A0=Temple
 mayanwatchtower_A0=Tour de guet
 mayanmarket_A0=Marché
 mayanobsidiancrafter_A0=Atelier d'obsidienne
+mayancacaofarm_A0=Plantation de cacao
+mayancacaofarm_B0=Plantation de cacao
 
 mayanplayerpyramid_A0=Pyramide du joueur
 

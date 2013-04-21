@@ -42,3 +42,5 @@ requiredFood=wine,1
 requiredFood=feta,1
 requiredFood=cake,1
 requiredFood=cookie,5
+requiredFood=cacauhaa,2
+requiredFood=sake,1
