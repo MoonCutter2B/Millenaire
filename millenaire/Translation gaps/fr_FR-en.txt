@@ -1,7 +1,3 @@
 Translation comparison between fr_FR and en
 
-List of gaps found between parchments: 
-
-Parchment 9 has a different version: it is at version 4.8.0 while en parchment is at 1.1.4
-
-Traduction completness: 99%
+Traduction completness: 100%

@@ -14,8 +14,6 @@ goal=gopray
 goal=visitInn
 goal=VisitBuilding
 
-toolNeeded=steelSword
-
 
 tag=helpInAttacks
 experiencegiven=3

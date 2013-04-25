@@ -300,6 +300,9 @@ public class Culture {
 			}
 
 			private boolean isCompatible(Vector<String> req,MillVillager v) {
+				
+				if (v.getRecord()==null)
+					return false;
 
 				for (String s : req) {
 
@@ -335,9 +338,9 @@ public class Culture {
 								return false;
 						}
 					} else if (key.equals(hasspouse)) {
-						if (v.getRecord().spousesName.equals(""))
+						if (v.getRecord().spousesName==null || v.getRecord().spousesName.equals(""))
 							return false;
-					} else if (key.equals(nospouse)) {
+					} else if (v.getRecord().spousesName!=null && key.equals(nospouse)) {
 						if (!v.getRecord().spousesName.equals(""))
 							return false;
 					} else if (key.equals(female)) {

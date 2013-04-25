@@ -106,7 +106,7 @@ public class GoalByzantineGatherSilk extends Goal {
 	@Override
 	public int priority(MillVillager villager) {
 
-		int p=100-(villager.getTownHall().nbGoodAvailable(Mill.stone_decoration.blockID, 1, false)*2);
+		int p=100-(villager.getTownHall().nbGoodAvailable(Mill.stone_decoration.blockID, 1, false, false)*2);
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {

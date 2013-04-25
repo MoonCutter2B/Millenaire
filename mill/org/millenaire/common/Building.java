@@ -4253,8 +4253,22 @@ public class Building {
 		nbNightsMerchant = 0;
 	}
 
-	public int nbGoodAvailable(int goodId, int meta, boolean forExport) {
+	public int nbGoodAvailable(int goodId, int meta, boolean forExport, boolean forShop) {
 
+		//if it's being called to take goods to a shop
+		//first check whether this shop also has it deliveredTo
+		
+		if (forShop) {
+			if (culture.shopNeeds.containsKey(location.shop)) {
+				for (final InvItem item : culture.shopNeeds.get(location.shop)) {
+					if (item.id()==goodId && (meta==-1 || (item.meta==meta))) {
+						return 0;
+					}
+				}
+			}
+		}
+		
+		
 		int nb = countGoods(goodId, meta);
 
 		if ((builder != null) && (buildingLocationIP != null)

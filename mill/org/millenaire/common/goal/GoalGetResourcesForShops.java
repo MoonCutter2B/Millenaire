@@ -38,7 +38,7 @@ public class GoalGetResourcesForShops extends Goal {
 
 					if (shop!=villager.getHouse()) {
 
-						final int nbcount=villager.getHouse().nbGoodAvailable(item.id(), item.meta, false);
+						final int nbcount=villager.getHouse().nbGoodAvailable(item.id(), item.meta, false, true);
 						if (nbcount>0) {
 
 							nb+=nbcount;
@@ -47,8 +47,8 @@ public class GoalGetResourcesForShops extends Goal {
 
 						}
 					}
-					if ((villager.getTownHall()!=shop) && (villager.getTownHall().nbGoodAvailable(item.id(),item.meta,false)>0)) {
-						nb+=villager.getTownHall().nbGoodAvailable(item.id(),item.meta,false);
+					if ((villager.getTownHall()!=shop) && (villager.getTownHall().nbGoodAvailable(item.id(),item.meta,false, true)>0)) {
+						nb+=villager.getTownHall().nbGoodAvailable(item.id(),item.meta,false, true);
 
 						if (delayOver || nb>16)
 							return packDest(villager.getTownHall().getSellingPos(),villager.getTownHall());
@@ -79,7 +79,7 @@ public class GoalGetResourcesForShops extends Goal {
 		for (final Building shop : villager.getTownHall().getShops()) {
 			if (!shop.getPos().equals(villager.getGoalDestPoint()) && villager.getCulture().shopNeeds.containsKey(shop.location.shop)) {
 				for (final InvItem item : villager.getCulture().shopNeeds.get(shop.location.shop)) {
-					villager.takeFromBuilding(dest, item.id(), item.meta, dest.nbGoodAvailable(item.id(), item.meta, false));
+					villager.takeFromBuilding(dest, item.id(), item.meta, dest.nbGoodAvailable(item.id(), item.meta, false, true));
 				}
 			}
 		}

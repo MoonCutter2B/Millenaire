@@ -114,8 +114,8 @@ public class Mill
 		} 
 	} 
 
-	public static final String versionNumber = "4.8.0";
-	public static final String versionBound = "[4.8.0,5.0)";
+	public static final String versionNumber = "4.8.1";
+	public static final String versionBound = "[4.8.1,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
   
@@ -350,6 +350,26 @@ public class Mill
 
 		paperWall = new BlockMLNPane(MLN.blockPanesId, "paperwall", "paperwall", Material.cloth, true).setHardness(0.3F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("ml_panes");
 
+		byzantine_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineBrickId,
+				"tilestopvert","tilestophor","tilestopvert","tilestophor","tilesfront","tilestophor").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick");
+		byzantine_tile_slab = (BlockOrientedSlab) new BlockOrientedSlab(MLN.blockByzantineSlabId,"tilestophor","tilestopvert","tilesfront").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick_slab");
+		byzantine_stone_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineMixedId,
+				"tilestopvert","tilestophor","stone","stone","tileshalffront","tileshalfside").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_mixedbrick");
+
+		
+		MinecraftForge.setBlockHarvestLevel(lockedChest, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(wood_decoration, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(paperWall, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(panel, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(stone_decoration, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(byzantine_tiles, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(byzantine_tile_slab, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(byzantine_stone_tiles, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(earth_decoration, "shovel", 0);
+		MinecraftForge.setBlockHarvestLevel(path, "shovel", 0);
+		MinecraftForge.setBlockHarvestLevel(pathSlab, "shovel", 0);
+		
+		
 		proxy.setTextureIds();
 
 		denier = (new ItemText(nextItemId(),"denier")).setUnlocalizedName("ml_denier");
@@ -361,8 +381,11 @@ public class Mill
 		tripes = (new ItemFoodMultiple(nextItemId(),"tripes",5,8,0.8f,2,false)).setUnlocalizedName("ml_tripes");
 
 		normanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"normanpickaxe",EnumToolMaterial.IRON,12).setUnlocalizedName("ml_normanPickaxe");
+		MinecraftForge.setToolClass(normanPickaxe, "pickaxe", 2);
 		normanAxe =  new ItemMillenaireAxe(nextItemId(),"normanaxe",EnumToolMaterial.IRON,12).setUnlocalizedName("ml_normanAxe");
-		normanShovel =  new ItemMillenaireShovel(nextItemId(),"normanshovel",EnumToolMaterial.IRON,12).setUnlocalizedName("ml_normanShovel");
+		MinecraftForge.setToolClass(normanAxe, "axe", 2);
+		normanShovel =  new ItemMillenaireShovel(nextItemId(),"normanshovel",EnumToolMaterial.IRON,20).setUnlocalizedName("ml_normanShovel");
+		MinecraftForge.setToolClass(normanShovel, "shovel", 2);
 		normanHoe =  new ItemMillenaireHoe(nextItemId(),"normanhoe",1500).setUnlocalizedName("ml_normanHoe");
 
 		summoningWand = new ItemSummoningWand(nextItemId(),"summoningwand").setFull3D().setUnlocalizedName("ml_villageWand");
@@ -432,8 +455,11 @@ public class Mill
 		obsidianFlake = new ItemText(nextItemId(),"obsidianflake").setUnlocalizedName("ml_obsidianFlake");
 		mayanMace =  new ItemMillenaireSword(nextItemId(),"mayanmace",1500,6,25,0,0,false).setUnlocalizedName("ml_mayanMace");
 		mayanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"mayanpickaxe",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanPickaxe");
+		MinecraftForge.setToolClass(mayanAxe, "pickaxe", 2);
 		mayanAxe =  new ItemMillenaireAxe(nextItemId(),"mayanaxe",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanAxe");
+		MinecraftForge.setToolClass(mayanAxe, "axe", 2);
 		mayanShovel =  new ItemMillenaireShovel(nextItemId(),"mayanshovel",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanShovel");
+		MinecraftForge.setToolClass(mayanShovel, "shovel", 2);
 		mayanHoe =  new ItemMillenaireHoe(nextItemId(),"mayanhoe",1500).setUnlocalizedName("ml_mayanHoe");
 
 		yumiBow =  new ItemMillenaireBow(nextItemId(),2,(float) 0.5,"yumibow0","yumibow1","yumibow2","yumibow3").setUnlocalizedName("ml_yumiBow").setFull3D();
@@ -488,12 +514,7 @@ public class Mill
 		
 		cacauhaa = (new ItemFoodMultiple(nextItemId(),"cacauhaa",6,0,0,3,true)).setUnlocalizedName("ml_cacauhaa");
 
-		byzantine_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineBrickId,
-				"tilestopvert","tilestophor","tilestopvert","tilestophor","tilesfront","tilestophor").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick");
-		byzantine_tile_slab = (BlockOrientedSlab) new BlockOrientedSlab(MLN.blockByzantineSlabId,"tilestophor","tilestopvert","tilesfront").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick_slab");
-		byzantine_stone_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineMixedId,
-				"tilestopvert","tilestophor","stone","stone","tileshalffront","tileshalfside").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_mixedbrick");
-
+		
 		wood_decoration.setUnlocalizedName("ml_wood_deco").setHardness(2.0F).setResistance(5F).setStepSound(Block.soundWoodFootstep);
 		wood_decoration.registerTexture(0, "timberframeplain");
 		wood_decoration.registerTexture(1, "timberframecross");

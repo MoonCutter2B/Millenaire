@@ -211,8 +211,8 @@ public abstract class Goal {
 		}
 
 		if (balanceOutput1!=null) {
-			if (villager.getTownHall().nbGoodAvailable(balanceOutput1.id(), balanceOutput1.meta, false)<
-					villager.getTownHall().nbGoodAvailable(balanceOutput2.id(), balanceOutput2.meta, false))
+			if (villager.getTownHall().nbGoodAvailable(balanceOutput1.id(), balanceOutput1.meta, false, false)<
+					villager.getTownHall().nbGoodAvailable(balanceOutput2.id(), balanceOutput2.meta, false, false))
 				return false;
 		}
 

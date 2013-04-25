@@ -41,7 +41,7 @@ public class GoalGetGoodsForHousehold extends Goal {
 					}
 
 					for (final Building building : buildings) {
-						final int nbav=building.nbGoodAvailable(key.id(),key.meta,false);
+						final int nbav=building.nbGoodAvailable(key.id(),key.meta,false, false);
 						if ((nbav>0) &&  (building!=villager.getHouse())) {
 							nb+=nbav;
 
@@ -87,7 +87,7 @@ public class GoalGetGoodsForHousehold extends Goal {
 			for (final InvItem key : goods.keySet()) {
 				if (villager.getHouse().countGoods(key.id(),key.meta)<goods.get(key)) {
 
-					final int nb=Math.min(shop.nbGoodAvailable(key.id(),key.meta,false),goods.get(key));
+					final int nb=Math.min(shop.nbGoodAvailable(key.id(),key.meta,false, false),goods.get(key));
 
 					villager.takeFromBuilding(shop, key.id(),key.meta, nb);
 				}
@@ -115,7 +115,7 @@ public class GoalGetGoodsForHousehold extends Goal {
 			for (final InvItem key : goods.keySet()) {
 				if (villager.getHouse().countGoods(key.id(),key.meta)<(goods.get(key)/2)) {
 					for (final Building shop : shops) {
-						final int nbav=shop.nbGoodAvailable(key.id(),key.meta,false);
+						final int nbav=shop.nbGoodAvailable(key.id(),key.meta,false, false);
 						if ((nbav>0) &&  (shop!=villager.getHouse())) {
 							nb+=nbav;
 						}
