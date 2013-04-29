@@ -1185,6 +1185,7 @@ public class Culture {
 
 	public HashMap<String,Vector<Goods>> shopSells=new HashMap<String,Vector<Goods>>();
 	public HashMap<String,Vector<Goods>> shopBuys=new HashMap<String,Vector<Goods>>();
+	public HashMap<String,Vector<Goods>> shopBuysOptional=new HashMap<String,Vector<Goods>>();
 	public HashMap<String,Vector<InvItem>> shopNeeds=new HashMap<String,Vector<InvItem>>();
 
 	public Vector<Goods> goodsVector=new Vector<Goods>();
@@ -1654,11 +1655,10 @@ public class Culture {
 								final boolean autoGenerate=((values.length>6) && !values[6].isEmpty())?Boolean.parseBoolean(values[6]):false;
 								final String tag=((values.length>7) && !values[7].isEmpty())?values[7]:null;
 								final int minReputation=((values.length>8) && !values[8].isEmpty())?MillCommonUtilities.readInteger(values[8]):Integer.MIN_VALUE;
-								final boolean hideIfNotValid=((values.length>9) && !values[9].isEmpty())?Boolean.parseBoolean(values[9]):false;
-								final String desc=((values.length>10) && !values[10].isEmpty())?values[10]:null;
+								final String desc=((values.length>9) && !values[9].isEmpty())?values[9]:null;
 
 								final Goods good=new Goods(name,item,sellingPrice,buyingPrice,reservedQuantity,targetQuantity,
-										foreignMerchantPrice,autoGenerate,tag,minReputation,hideIfNotValid,desc);
+										foreignMerchantPrice,autoGenerate,tag,minReputation,desc);
 
 								if (goods.containsKey(name) || goodsByItem.containsKey(good.item)) {
 									MLN.error(this, "Good "+name+" is present twice in the goods list.");
@@ -1811,6 +1811,20 @@ public class Culture {
 								}
 							}
 							shopBuys.put(file.getName().split("\\.")[0], buys);
+						} else if (key.equals("buysoptional")) {
+							final Vector<Goods> buys=new Vector<Goods>();
+
+							for (final String name : value.split(",")) {
+								if (goods.containsKey(name)) {
+									buys.add(goods.get(name));
+									if (MLN.LogSelling>=MLN.MINOR) {
+										MLN.minor(this, "Loaded optional buying good "+name+" for shop "+file.getName());
+									}
+								} else {
+									MLN.error(this, "Unknown good when loading shop "+file.getName()+": "+name);
+								}
+							}
+							shopBuysOptional.put(file.getName().split("\\.")[0], buys);
 						} else if (key.equals("sells")) {
 							final Vector<Goods> sells=new Vector<Goods>();
 

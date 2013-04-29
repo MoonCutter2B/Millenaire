@@ -61,5 +61,5 @@ never:japanesearmyforge
 never:japanesefarm
 
 
-sellingPrice:sake,4/0
-buyingPrice:sake,3/32
+sellingPrice:sake,2/0
+buyingPrice:sake,1/48

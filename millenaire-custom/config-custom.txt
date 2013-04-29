@@ -21,7 +21,7 @@ generate_building_res=true
 generate_goods_list=true
 
 //Rayon de chargement des tronçons; Rayon autour du joueur dans lequel Millénaire essayera de garder les tronçons chargés. Défaut: 200.
-keep_active_radius=0
+keep_active_radius=500
 
 //Rayon des villages; Rayon des villages normaux (pas des hameaux). Défaut: 65.
 village_radius=80

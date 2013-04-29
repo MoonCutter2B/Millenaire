@@ -2,7 +2,7 @@ name:Muul
 weight:4
 radius:15
 
-mindistancefromspawn:2000
+mindistancefromspawn:1000
 
 biome:forest
 biome:swampland

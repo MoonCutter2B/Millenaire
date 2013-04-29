@@ -3,7 +3,7 @@ weight:10
 radius:20
 carriesraid:true
 
-mindistancefromspawn:1000
+mindistancefromspawn:600
 
 biome:forest
 biome:plains

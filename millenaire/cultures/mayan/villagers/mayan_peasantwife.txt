@@ -33,7 +33,7 @@ toolneededclass=hoes
 defaultweapon=woodhoe
 
 requiredGood=maize,9
-requiredGood=chickenmeatcooked,1
+requiredGood=chickenmeatcooked,2
 
 requiredFood=cider,1
 requiredFood=calva,1

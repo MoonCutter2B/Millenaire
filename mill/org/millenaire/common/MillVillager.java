@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -54,6 +55,7 @@ import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
 import org.millenaire.common.goal.Goal;
 import org.millenaire.common.goal.Goal.GoalInformation;
+import org.millenaire.common.item.Goods;
 import org.millenaire.common.item.Goods.ItemMillenaireAxe;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
 import org.millenaire.common.item.Goods.ItemMillenaireHoe;
@@ -144,7 +146,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				staticStack=new ItemStack(item,1,meta);
 			} else
 				staticStack=null;
-			
+
 			staticStackArray=new ItemStack[]{staticStack};
 		}
 
@@ -310,11 +312,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		Mill.normanHoe,Mill.mayanHoe,Item.hoeIron,Item.hoeStone,
 		Mill.normanShovel,Mill.mayanShovel,Item.shovelWood,Item.shovelStone
 	};
-	
+
 	public static final Item[] weaponsSwords=new Item[]{
 		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordIron,Item.swordStone
 	};
-	
+
 	public static final Item[] weaponsRanged=new Item[]{
 		Mill.yumiBow,Item.bow
 	};
@@ -347,19 +349,19 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		Mill.normanBoots,Mill.byzantineBoots,Mill.japaneseWarriorBlueBoots,Mill.japaneseWarriorRedBoots,Mill.japaneseGuardBoots,Item.bootsDiamond,Item.bootsIron,Item.bootsGold,
 		Item.bootsLeather
 	};
-	
+
 	public static final Item[] pickaxes=new Item[]{
 		Mill.normanPickaxe,Item.pickaxeDiamond,Item.pickaxeIron,Item.pickaxeStone
 	};
-	
+
 	public static final Item[] axes=new Item[]{
 		Mill.normanAxe,Item.axeDiamond,Item.axeIron,Item.axeStone
 	};
-	
+
 	public static final Item[] shovels=new Item[]{
 		Mill.normanShovel,Item.shovelDiamond,Item.shovelIron,Item.shovelStone
 	};
-	
+
 	public static final Item[] hoes=new Item[]{
 		Mill.normanHoe,Item.hoeDiamond,Item.hoeIron,Item.hoeStone
 	};
@@ -612,6 +614,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public boolean shouldLieDown=false;
 
+	public LinkedHashMap<Goods,Integer> merchantSells=new LinkedHashMap<Goods,Integer>();
+
 	public MillVillager(World world) {
 
 		super(world);
@@ -632,6 +636,14 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			final Exception e = new Exception();
 
 			MLN.printException("Creating villager "+this+" in world: "+world, e);
+		}
+	}
+
+	public void calculateMerchantGoods() {
+		for (final InvItem key : vtype.foreignMerchantStock.keySet()) {
+			if (getCulture().goodsByItem.containsKey(key) && getBasicForeignMerchantPrice(key)>0) {
+				merchantSells.put(getCulture().goodsByItem.get(key), getBasicForeignMerchantPrice(key));
+			}
 		}
 	}
 
@@ -1436,7 +1448,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public ItemTool getBestAxe() {
 		ItemTool bestTool=(ItemTool) Item.axeWood;
 		float bestRating=0;
-		
+
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemAxe || item.item instanceof ItemMillenaireAxe)) {
@@ -1448,7 +1460,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				}
 			}
 		}
-		
+
 		return bestTool;
 	}
 
@@ -1456,7 +1468,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		ItemStack[] bestTool=axeWood;
 		float bestRating=0;
-		
+
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemAxe || item.item instanceof ItemMillenaireAxe)) {
@@ -1468,18 +1480,18 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				}
 			}
 		}
-		
+
 		return bestTool;
 	}
 
 	public Item getBestHoe() {
 		Item bestTool=(ItemTool)Item.hoeWood;
 		float bestRating=0;
-		
+
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemHoe || item.item instanceof ItemMillenaireHoe)) {
-					
+
 					if (item.item.getMaxDamage()>bestRating) {
 						bestTool=item.item;
 						bestRating=item.item.getMaxDamage();
@@ -1487,18 +1499,18 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				}
 			}
 		}
-		
+
 		return bestTool;
 	}
 
 	public ItemStack[] getBestHoeStack() {
 		ItemStack[] bestTool=hoeWood;
 		float bestRating=0;
-		
+
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemHoe || item.item instanceof ItemMillenaireHoe)) {
-				
+
 					if (item.item.getMaxDamage()>bestRating) {
 						bestTool=item.staticStackArray;
 						bestRating=item.item.getMaxDamage();
@@ -1506,14 +1518,14 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				}
 			}
 		}
-		
+
 		return bestTool;
 	}
 
 	public ItemTool getBestPickaxe() {
 		ItemTool bestTool=(ItemTool)Item.pickaxeWood;
 		float bestRating=0;
-		
+
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemPickaxe || item.item instanceof ItemMillenairePickaxe)) {
@@ -1525,7 +1537,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				}
 			}
 		}
-		
+
 		return bestTool;
 	}
 
@@ -1533,10 +1545,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 
 	public ItemStack[] getBestPickaxeStack() {
-		
+
 		ItemStack[] bestTool=pickaxeWood;
 		float bestRating=0;
-		
+
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemPickaxe || item.item instanceof ItemMillenairePickaxe)) {
@@ -1548,14 +1560,14 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				}
 			}
 		}
-		
+
 		return bestTool;
 	}
 
 	public ItemTool getBestShovel() {
 		ItemTool bestTool=(ItemTool)Item.shovelWood;
 		float bestRating=0;
-		
+
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemSpade || item.item instanceof ItemMillenaireShovel)) {
@@ -1567,14 +1579,14 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				}
 			}
 		}
-		
+
 		return bestTool;
 	}
 
 	public ItemStack[] getBestShovelStack() {
 		ItemStack[] bestTool=shovelWood;
 		float bestRating=0;
-		
+
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemSpade || item.item instanceof ItemMillenaireShovel)) {
@@ -1586,7 +1598,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				}
 			}
 		}
-		
+
 		return bestTool;
 	}
 
@@ -1716,7 +1728,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		return vtype.femaleChild;
 	}
 
-	public int getForeignMerchantPrice(InvItem item) {
+	public int getBasicForeignMerchantPrice(InvItem item) {
 
 		if (getCulture().goodsByItem.containsKey(item)) {
 
@@ -3112,7 +3124,18 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		dialogueColour=data.readChar();
 		dialogueChat=data.readBoolean();
 		health=data.readInt();
-				
+
+		int nbMerchantSells=data.readInt();
+
+		if (nbMerchantSells>-1) {
+			merchantSells.clear();
+
+			for (int i=0;i<nbMerchantSells;i++) {
+				Goods g=StreamReadWrite.readNullableGoods(data);
+				merchantSells.put(g, data.readInt());
+			}
+		}
+
 		client_lastupdated=worldObj.getWorldTime();
 
 
@@ -3224,7 +3247,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		try {
 			data.write(ServerReceiver.PACKET_VILLAGER);
-			writeVillagerStreamData(data);
+			writeVillagerStreamData(data,false);
 		} catch (final IOException e) {
 			MLN.printException(this+": Error in sendVillagerPacket", e);
 		}
@@ -4037,13 +4060,13 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public void writeSpawnData(ByteArrayDataOutput data) {
 
 		try {
-			writeVillagerStreamData(data);
+			writeVillagerStreamData(data,true);
 		} catch (final IOException e) {
 			MLN.printException("Error in writeSpawnData for villager "+this, e);
 		}
 	}
 
-	private void writeVillagerStreamData(DataOutput data) throws IOException {
+	private void writeVillagerStreamData(DataOutput data,boolean isSpawn) throws IOException {
 
 		if (vtype==null) {
 			MLN.error(this, "Cannot write stream data due to null vtype.");
@@ -4082,6 +4105,23 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		data.writeBoolean(dialogueChat);
 		data.writeInt(health);
 
+		if (isSpawn) {
+			calculateMerchantGoods();
+
+			data.writeInt(merchantSells.size());
+
+			for (Goods g : merchantSells.keySet()) {
+				StreamReadWrite.writeNullableGoods(g, data);
+				data.writeInt(merchantSells.get(g));
+			}
+		} else {
+			data.writeInt(-1);
+		}
+
+	}
+
+	public int getMerchantSellPrice(Goods g) {
+		return merchantSells.get(g);
 	}
 
 }

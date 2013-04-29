@@ -322,11 +322,11 @@ public class GuiTrade extends GuiContainer {
 				int priceColour;
 
 				if (tslot.sellingSlot) {
-					price=MillCommonUtilities.getShortPrice(tslot.good.getSellingPrice(building.getTownHall()));
-					priceColour=MillCommonUtilities.getPriceColourMC(tslot.good.getSellingPrice(building.getTownHall()));
+					price=MillCommonUtilities.getShortPrice(tslot.good.getCalculatedSellingPrice(building,player));
+					priceColour=MillCommonUtilities.getPriceColourMC(tslot.good.getCalculatedSellingPrice(building,player));
 				} else {
-					price=MillCommonUtilities.getShortPrice(tslot.good.getBuyingPrice(building.getTownHall()));
-					priceColour=MillCommonUtilities.getPriceColourMC(tslot.good.getBuyingPrice(building.getTownHall()));
+					price=MillCommonUtilities.getShortPrice(tslot.good.getCalculatedBuyingPrice(building,player));
+					priceColour=MillCommonUtilities.getPriceColourMC(tslot.good.getCalculatedBuyingPrice(building,player));
 				}
 
 				final ItemStack itemstack = slot.getStack();
@@ -353,8 +353,8 @@ public class GuiTrade extends GuiContainer {
 				String price;
 				int priceColour;
 
-				price=MillCommonUtilities.getShortPrice(merchant.getForeignMerchantPrice(tslot.item));
-				priceColour=MillCommonUtilities.getPriceColourMC(merchant.getForeignMerchantPrice(tslot.item));
+				price=MillCommonUtilities.getShortPrice(tslot.good.getCalculatedSellingPrice(merchant));
+				priceColour=MillCommonUtilities.getPriceColourMC(tslot.good.getCalculatedSellingPrice(merchant));
 
 				final ItemStack itemstack = slot.getStack();
 				final List<String> list=itemstack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);

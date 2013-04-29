@@ -3,7 +3,7 @@ weight:10
 radius:15
 biome:forest
 
-mindistancefromspawn:2000
+mindistancefromspawn:1000
 
 //extraBiomes mod
 biome:autumn woods

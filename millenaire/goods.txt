@@ -123,7 +123,7 @@ leatherchest;299;0;Tunique en cuir
 leatherhelmet;298;0;Casque en cuir
 leatherlegs;300;0;Pantalon en cuir
 maize;mln40;0;
-masa;mln42;0;
+masa;mln41;0;
 mayanaxe;mln55;0;
 mayangold;1519;2;
 mayanhoe;mln57;0;
@@ -245,7 +245,7 @@ vegcurry;mln30;0;
 villagewand;mln11;0;
 vines;106;0;Lianes
 vishnuamulet;mln23;0;
-wah;mln41;0;
+wah;mln42;0;
 wheat;296;0;Blé
 wine;mln76;0;
 winebasic;mln87;0;

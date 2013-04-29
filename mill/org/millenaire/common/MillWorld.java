@@ -60,7 +60,7 @@ public class MillWorld {
 	public boolean millenaireEnabled=false;
 	private int lastupdate;
 
-	public Vector<NBTTagCompound> buildingsToLoad=new Vector<NBTTagCompound>();
+//	public Vector<NBTTagCompound> buildingsToLoad=new Vector<NBTTagCompound>();
 
 	private static HashMap<Point,String> buildingsTags=new HashMap<Point,String>();
 	private static HashMap<Point,Integer> buildingsVariation=new HashMap<Point,Integer>();
@@ -374,7 +374,7 @@ public class MillWorld {
 	}
 
 
-
+	//Server-side only
 	private void loadBuildings() {
 
 		final long startTime=System.currentTimeMillis();
@@ -1014,13 +1014,6 @@ public class MillWorld {
 		}
 		Mill.checkedMillenaireDir=true;
 
-		for (final NBTTagCompound tag : buildingsToLoad) {
-			new Building(this,tag);
-		}
-
-		if(buildingsToLoad.size()>0) {
-			buildingsToLoad.clear();
-		}
 
 
 		if (surfaceLoaded) {
@@ -1038,14 +1031,6 @@ public class MillWorld {
 
 
 	public void updateWorldServer(boolean surfaceLoaded) {
-
-		for (final NBTTagCompound tag : buildingsToLoad) {
-			new Building(this,tag);
-		}
-
-		if(buildingsToLoad.size()>0) {
-			buildingsToLoad.clear();
-		}
 
 		if (surfaceLoaded) {
 			for (final Building b : allBuildings()) {

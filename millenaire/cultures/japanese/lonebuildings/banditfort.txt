@@ -1,7 +1,7 @@
 name:Zokuto no Bakusha
 carriesraid:true
 
-mindistancefromspawn:2000
+mindistancefromspawn:1000
 
 weight:10
 radius:50

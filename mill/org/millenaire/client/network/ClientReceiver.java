@@ -73,6 +73,8 @@ public class ClientReceiver implements IPacketHandler
 
 			if (packettype==ServerReceiver.PACKET_BUILDING) {
 				Building.readBuildingPacket(Mill.clientWorld,data);
+			} else if (packettype==ServerReceiver.PACKET_SHOP) {
+				Building.readShopPacket(Mill.clientWorld,data);
 			} else if (packettype==ServerReceiver.PACKET_VILLAGER) {
 				MillVillager.readVillagerPacket(data);
 			} else if (packettype==ServerReceiver.PACKET_TRANSLATED_CHAT) {

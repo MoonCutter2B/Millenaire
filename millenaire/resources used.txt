@@ -212,23 +212,23 @@ Bois (tous): 6
 japanese: 
 gunji resource use: 
 Pierre taillées craquelées: 26
-Laine blanche: 295
-Roche: 11078
-Bois de sapin: 3251
-Pierres: 1643
-Paroi de papier: 694
+Laine blanche: 276
+Roche: 9940
+Bois de sapin: 3023
+Pierres: 1432
+Paroi de papier: 682
 Sable: 232
 Hautes herbes: 168
 Bibliothèque: 12
 Gravier: 564
 Colombages à croix: 63
-Bois de chêne: 5330
-Colombages: 3193
+Bois de chêne: 4759
+Colombages: 3145
 Lingot d'or: 54
 Fougère: 117
 Lingot de fer: 36
-Chaume: 8144
-Bois (tous): 1579
+Chaume: 7298
+Bois (tous): 1467
 
 japanese_controlled resource use: 
 Bois de chêne: 992
@@ -244,61 +244,61 @@ Colombages à croix: 25
 Bois (tous): 294
 
 nogyo resource use: 
-Laine blanche: 197
-Roche: 9741
-Bois de sapin: 3390
-Pierres: 1434
-Paroi de papier: 607
+Laine blanche: 178
+Roche: 8603
+Bois de sapin: 3162
+Pierres: 1223
+Paroi de papier: 595
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
 Gravier: 523
 Colombages à croix: 63
-Bois de chêne: 5148
-Colombages: 3051
+Bois de chêne: 4577
+Colombages: 3003
 Fougère: 117
 Lingot de fer: 18
-Chaume: 9213
-Bois (tous): 1691
+Chaume: 8367
+Bois (tous): 1579
 
 seiji resource use: 
 Pierre taillées craquelées: 26
-Laine blanche: 319
-Roche: 12838
-Bois de sapin: 4345
-Pierres: 2030
-Paroi de papier: 861
+Laine blanche: 300
+Roche: 11700
+Bois de sapin: 4117
+Pierres: 1819
+Paroi de papier: 849
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
 Gravier: 649
 Colombages à croix: 63
-Bois de chêne: 6948
+Bois de chêne: 6377
 Lingot d'or: 54
-Colombages: 3963
+Colombages: 3915
 Fougère: 117
 Lingot de fer: 108
-Chaume: 9560
-Bois (tous): 1991
+Chaume: 8714
+Bois (tous): 1879
 
 trading resource use: 
-Roche: 11149
-Laine blanche: 212
-Bois de sapin: 3692
-Pierres: 1442
-Paroi de papier: 667
+Roche: 10011
+Laine blanche: 193
+Bois de sapin: 3464
+Pierres: 1231
+Paroi de papier: 655
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
 Gravier: 487
 Colombages à croix: 13
-Bois de chêne: 6162
-Colombages: 3173
+Bois de chêne: 5591
+Colombages: 3125
 Lingot d'or: 54
 Fougère: 117
 Lingot de fer: 90
-Chaume: 8376
-Bois (tous): 1553
+Chaume: 7530
+Bois (tous): 1441
 
 
 bandit_cave resource use: 

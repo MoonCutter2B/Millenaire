@@ -3745,7 +3745,7 @@ public class BuildingPlan {
 					irrigation=Integer.parseInt(value);
 				} else if (!importPlan && key.equalsIgnoreCase("shop")) {
 					if (culture!=null) {//culture is null only when using the import feature
-						if ((culture.shopBuys.containsKey(value) || culture.shopSells.containsKey(value))) {
+						if ((culture.shopBuys.containsKey(value) || culture.shopSells.containsKey(value) || culture.shopBuysOptional.containsKey(value))) {
 							shop=value;
 						} else {
 							MLN.error(this, "Undefined shop type: "+value);

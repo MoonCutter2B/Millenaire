@@ -39,6 +39,7 @@ import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.Building;
 import org.millenaire.common.EntityWallDecoration;
 import org.millenaire.common.MLN;
+import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
@@ -1251,8 +1252,6 @@ public class Goods {
 
 	public int minReputation;
 	
-	public boolean hideIfNotValid=false;
-	
 	public String desc=null;
 
 	public Goods(InvItem iv) {
@@ -1266,7 +1265,7 @@ public class Goods {
 
 	public Goods(String name,InvItem item,int sellingPrice,int buyingPrice,int reservedQuantity,
 			int targetQuantity,int foreignMerchantPrice,boolean autoGenerate,String tag,
-			int minReputation, boolean hideIfNotValid, String desc) {
+			int minReputation, String desc) {
 		this.name=name;
 		this.item=item;
 		this.sellingPrice=sellingPrice;
@@ -1277,7 +1276,6 @@ public class Goods {
 		this.targetQuantity=targetQuantity;
 		this.foreignMerchantPrice=foreignMerchantPrice;
 		this.minReputation=minReputation;
-		this.hideIfNotValid=hideIfNotValid;
 		this.desc=desc;
 	}
 
@@ -1295,16 +1293,13 @@ public class Goods {
 		return (g.item.equals(obj));
 	}
 
-	public int getBuyingPrice(Building townHall) {
+	public int getCalculatedBuyingPrice(Building shop,EntityPlayer player) {
 
-		if (townHall==null)
+		if (shop==null)
 			return buyingPrice;
 
 
-		if (townHall.villageType.buyingPrices.containsKey(item))
-			return townHall.villageType.buyingPrices.get(item);
-		else
-			return buyingPrice;
+		return shop.getBuyingPrice(this, player);
 	}
 
 
@@ -1312,22 +1307,51 @@ public class Goods {
 		return Mill.proxy.getItemName(item.id(),item.meta);
 	}
 
-	public int getSellingPrice(Building townHall) {
+	public int getCalculatedSellingPrice(Building shop,EntityPlayer player) {
 
-		if (townHall==null)
+		if (shop==null)
 			return sellingPrice;
 
-		if (townHall.villageType.sellingPrices.containsKey(item))
-			return townHall.villageType.sellingPrices.get(item);
-		else
+		return shop.getSellingPrice(this, player);
+	}
+	
+	public int getBasicSellingPrice(Building shop) {
+
+		if (shop==null)
 			return sellingPrice;
+		
+		if (shop.getTownHall().villageType.sellingPrices.containsKey(item))
+			return shop.getTownHall().villageType.sellingPrices.get(item);
+
+		return sellingPrice;
+	}
+	
+	public int getCalculatedSellingPrice(MillVillager merchant) {
+
+		if (merchant==null)
+			return foreignMerchantPrice;
+		
+		if (merchant.merchantSells.containsKey(this))
+			return merchant.merchantSells.get(this);
+
+		return foreignMerchantPrice;
+	}
+	
+	public int getBasicBuyingPrice(Building shop) {
+
+		if (shop==null)
+			return buyingPrice;
+		
+		if (shop.getTownHall().villageType.buyingPrices.containsKey(item))
+			return shop.getTownHall().villageType.buyingPrices.get(item);
+
+		return buyingPrice;
 	}
 
 	@Override
 	public String toString() {
-
 		return "Goods@"+item.getItemStack().getItemName();
 	}
 
-
+	
 }

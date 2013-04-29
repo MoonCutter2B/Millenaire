@@ -26,6 +26,7 @@ import org.millenaire.common.UserProfile;
 import org.millenaire.common.VillagerRecord;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.item.Goods;
 
 
 public class StreamReadWrite  {
@@ -596,6 +597,37 @@ public class StreamReadWrite  {
 			data.writeInt(p.getiY());
 			data.writeInt(p.getiZ());
 		}
+	}
+	
+	public static void writeNullableGoods(Goods g,DataOutput data) throws IOException {
+		data.writeBoolean(g==null);
+
+		if (g!=null) {
+			data.writeInt(g.item.id());
+			data.writeByte(g.item.meta);
+			writeNullableString(g.requiredTag, data);
+			writeNullableString(g.desc, data);
+			data.writeBoolean(g.autoGenerate);
+			data.writeInt(g.minReputation);
+		}
+	}
+	
+	public static Goods readNullableGoods(DataInput ds) throws IOException {
+
+		final boolean isnull=ds.readBoolean();
+
+		if (isnull)
+			return null;
+
+		InvItem iv=new InvItem(ds.readInt(),ds.readByte());
+		Goods g=new Goods(iv);
+		
+		g.requiredTag=readNullableString(ds);
+		g.desc=readNullableString(ds);
+		g.autoGenerate=ds.readBoolean();
+		g.minReputation=ds.readInt();
+		
+		return g;
 	}
 
 	public static void writeNullablePuja(Puja puja,DataOutput data) throws IOException {
