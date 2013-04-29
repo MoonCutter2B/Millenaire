@@ -11,12 +11,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCocoa;
+import net.minecraft.block.BlockLog;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -28,6 +31,7 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -616,11 +620,16 @@ public class Building {
 
 	private boolean autobuildPaths=false;
 
+	private HashMap<String,LinkedHashMap<Goods,Integer>> shopBuys=new HashMap<String,LinkedHashMap<Goods,Integer>>();
+	private HashMap<String,LinkedHashMap<Goods,Integer>> shopSells=new HashMap<String,LinkedHashMap<Goods,Integer>>();
+
+	//Client-side only on packet reception
 	private Building(MillWorld mw) {
 		this.mw = mw;
 		worldObj=mw.world;
 	}
 
+	//Server-side only, on build
 	public Building(MillWorld mw, Culture c, VillageType villageType,
 			BuildingLocation l, boolean townHall, boolean villageCreation,
 			Point p, Point townHallPos) {
@@ -684,6 +693,7 @@ public class Building {
 		}
 	}
 
+	//Server-side only, on load
 	public Building(MillWorld mw,NBTTagCompound nbttagcompound) {
 		this.mw = mw;
 		worldObj=mw.world;
@@ -701,22 +711,29 @@ public class Building {
 		mw.addBuilding(this, pos);
 	}
 
-	public Building(MillWorld mw,NBTTagCompound nbttagcompound, Point pos) {
-		this.mw = mw;
-		worldObj=mw.world;
-		readFromNBT(nbttagcompound);
-		this.pos = pos;
+	public void computeShopGoods(EntityPlayer player) {
 
-		if (MLN.DEV) {
-			monitor = new PerformanceMonitor(this);
+		final Vector<Goods> sellingGoods=calculateSellingGoods(player.inventory);
+
+		if (sellingGoods!=null) {
+			LinkedHashMap<Goods,Integer> shopSellsPlayer=new LinkedHashMap<Goods,Integer>();
+			for (Goods g : sellingGoods) {
+				if (g.getBasicSellingPrice(this)>0)
+					shopSellsPlayer.put(g, g.getBasicSellingPrice(this));
+			}
+			shopSells.put(player.username, shopSellsPlayer);
 		}
 
-		if (this.pos == null) {
-			final MillenaireException e = new MillenaireException("Null pos!");
-			MLN.printException(e);
-		}
+		final Vector<Goods> buyingGoods=calculateBuyingGoods(player.inventory);
 
-		mw.addBuilding(this, pos);
+		if (buyingGoods!=null) {
+			LinkedHashMap<Goods,Integer> shopBuysPlayer=new LinkedHashMap<Goods,Integer>();
+			for (Goods g : buyingGoods) {
+				if (g.getBasicBuyingPrice(this)>0)
+					shopBuysPlayer.put(g, g.getBasicBuyingPrice(this));
+			}
+			shopBuys.put(player.username, shopBuysPlayer);
+		}
 	}
 
 	public void addAdult(MillVillager child) throws MillenaireException {
@@ -2848,59 +2865,72 @@ public class Building {
 		return matches;
 	}
 
-	public Vector<Goods> getBuyingGoods() {
+	public Vector<Goods> calculateBuyingGoods(IInventory playerInventory) {
 
-		if (!culture.shopBuys.containsKey(location.shop))
+		if (!culture.shopBuys.containsKey(location.shop) && !culture.shopBuysOptional.containsKey(location.shop))
 			return null;
+
+		final Vector<Goods> baseGoods = culture.shopBuys.get(location.shop);
+
+		final Vector<Goods> extraGoods = new Vector<Goods>();
+
+		if (culture.shopBuysOptional.containsKey(location.shop)) {
+			for (Goods g : culture.shopBuysOptional.get(location.shop)) {
+				//null player inventory means no filtering
+				if (playerInventory==null || MillCommonUtilities.countChestItems(playerInventory, g.item.id(), g.item.meta)>0) {
+					extraGoods.add(g);
+				}
+			}
+		}
 
 		if (isTownhall) {
 			final BuildingPlan goalPlan = getCurrentGoalBuildingPlan();
 
 			if (goalPlan != null) {
-
-				final Vector<Goods> baseGoods = culture.shopBuys.get(location.shop);
-
-				final Vector<Goods> extraGoods = new Vector<Goods>();
-
-				if (goalPlan != null) {
-					for (final InvItem key : goalPlan.resCost.keySet()) {
-						if (key.meta != -1) {
-							boolean found = false;
-							for (final Goods tg : baseGoods) {
-								if ((tg.item.id() == key.id())
-										&& (tg.item.meta == key.meta)) {
-									found = true;
-								}
+				for (final InvItem key : goalPlan.resCost.keySet()) {
+					if (key.meta != -1) {
+						boolean found = false;
+						for (final Goods tg : baseGoods) {
+							if ((tg.item.id() == key.id())
+									&& (tg.item.meta == key.meta)) {
+								found = true;
 							}
-							if (!found) {
-								if (culture.goodsByItem.containsKey(key)) {
-									extraGoods.add(culture.goodsByItem.get(key));
-								} else {
-									extraGoods.add(new Goods(key));
-								}
+						}
+						if (!found) {
+							if (culture.goodsByItem.containsKey(key)) {
+								extraGoods.add(culture.goodsByItem.get(key));
+							} else {
+								extraGoods.add(new Goods(key));
 							}
 						}
 					}
 				}
-				if (extraGoods.size() == 0)
-					return baseGoods;
-				else {
-					final Vector<Goods> finalGoods = new Vector<Goods>();
-
-					for (final Goods good : baseGoods) {
-						finalGoods.add(good);
-					}
-
-					for (final Goods good : extraGoods) {
-						finalGoods.add(good);
-					}
-
-					return finalGoods;
-				}
-
 			}
 		}
-		return culture.shopBuys.get(location.shop);
+
+		if (extraGoods.size() == 0)
+			return baseGoods;
+		else {
+			final Vector<Goods> finalGoods = new Vector<Goods>();
+
+			for (final Goods good : baseGoods) {
+				finalGoods.add(good);
+			}
+
+			for (final Goods good : extraGoods) {
+				finalGoods.add(good);
+			}
+
+			return finalGoods;
+		}
+	}
+
+	public Vector<Goods> calculateSellingGoods(IInventory playerInventory) {
+
+		if (!culture.shopSells.containsKey(location.shop))
+			return null;
+
+		return culture.shopSells.get(location.shop);
 	}
 
 	public HashMap<InvItem, Integer> getChestsContent() {
@@ -3528,9 +3558,7 @@ public class Building {
 		return culture.getReputationLevelDesc(getReputation(playerName));
 	}
 
-	public Vector<Goods> getSellingGoods() {
-		return culture.shopSells.get(location.shop);
-	}
+
 
 	public Point getSellingPos() {
 		if (sellingPos != null)
@@ -3652,6 +3680,50 @@ public class Building {
 			final Point p = sugarcanesoils.get(i);
 			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == 0)
 				return p;
+		}
+
+		return null;
+	}
+
+	public Point getCocoaPlantingLocation() {
+		for (int i=0;i<soilTypes.size();i++) {
+			if (soilTypes.get(i).equals(Mill.CROP_CACAO)) {
+				for (Point p : soils.get(i)) {
+					if (p.getId(worldObj)==0) {
+						if (p.getNorth().getId(worldObj)==Block.wood.blockID && 
+								BlockLog.limitToValidMetadata(p.getNorth().getMeta(worldObj)) == 3)
+							return p;
+						if (p.getEast().getId(worldObj)==Block.wood.blockID && 
+								BlockLog.limitToValidMetadata(p.getEast().getMeta(worldObj)) == 3)
+							return p;
+						if (p.getSouth().getId(worldObj)==Block.wood.blockID && 
+								BlockLog.limitToValidMetadata(p.getSouth().getMeta(worldObj)) == 3)
+							return p;
+						if (p.getWest().getId(worldObj)==Block.wood.blockID && 
+								BlockLog.limitToValidMetadata(p.getWest().getMeta(worldObj)) == 3)
+							return p;
+					}
+
+				}
+			}
+		}
+
+		return null;
+	}
+
+	public Point getCocoaHarvestLocation() {
+		for (int i=0;i<soilTypes.size();i++) {
+			if (soilTypes.get(i).equals(Mill.CROP_CACAO)) {
+				for (Point p : soils.get(i)) {
+					if (p.getId(worldObj)==Block.cocoaPlant.blockID) {
+						int meta=p.getMeta(worldObj);
+
+						if (BlockCocoa.func_72219_c(meta)>=2)
+							return p;
+					}
+
+				}
+			}
 		}
 
 		return null;
@@ -4207,7 +4279,21 @@ public class Building {
 		nbNightsMerchant = 0;
 	}
 
-	public int nbGoodAvailable(int goodId, int meta, boolean forExport) {
+	public int nbGoodAvailable(int goodId, int meta, boolean forExport, boolean forShop) {
+
+		//if it's being called to take goods to a shop
+		//first check whether this shop also has it deliveredTo
+
+		if (forShop) {
+			if (culture.shopNeeds.containsKey(location.shop)) {
+				for (final InvItem item : culture.shopNeeds.get(location.shop)) {
+					if (item.id()==goodId && (meta==-1 || (item.meta==meta))) {
+						return 0;
+					}
+				}
+			}
+		}
+
 
 		int nb = countGoods(goodId, meta);
 
@@ -5706,6 +5792,95 @@ public class Building {
 		}
 	}
 
+	public void sendShopPacket(EntityPlayer player) {
+		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		final DataOutputStream data = new DataOutputStream(bytes);
+
+		try {
+
+			data.write(ServerReceiver.PACKET_SHOP);
+
+			StreamReadWrite.writeNullablePoint(getPos(), data);
+
+			if (shopSells.containsKey(player.username)) {
+				data.writeInt(shopSells.get(player.username).size());
+
+				for (Goods g : shopSells.get(player.username).keySet()) {
+					StreamReadWrite.writeNullableGoods(g, data);
+					data.writeInt(shopSells.get(player.username).get(g));
+				}
+			} else {
+				data.writeInt(0);
+			}
+
+			if (shopBuys.containsKey(player.username)) {
+				data.writeInt(shopBuys.get(player.username).size());
+
+				for (Goods g : shopBuys.get(player.username).keySet()) {
+					StreamReadWrite.writeNullableGoods(g, data);
+					data.writeInt(shopBuys.get(player.username).get(g));
+				}
+			} else {
+				data.writeInt(0);
+			}
+		} catch (final IOException e) {
+			MLN.printException(this+": Error in sendShopPacket", e);
+		}
+
+		final Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = ServerReceiver.PACKET_CHANNEL;
+		packet.data = bytes.toByteArray();
+		packet.length = packet.data.length;
+
+		ServerSender.sendPacketToPlayer(packet,player.username);
+	}
+
+	public static void readShopPacket(MillWorld mw,DataInputStream ds) {
+
+		Point pos=null;
+		try {
+			pos = StreamReadWrite.readNullablePoint(ds);
+		} catch (final IOException e) {
+			MLN.printException(e);
+			return;
+		}
+
+		Building building=mw.getBuilding(pos);
+
+		if (building==null) {
+			MLN.error(null, "Received shop packet for null building at: "+pos);
+			return;
+		}
+
+
+		try {
+
+			int nbSells=ds.readInt();
+
+			if (nbSells>0) {
+				LinkedHashMap<Goods,Integer> shopSellsPlayer=new LinkedHashMap<Goods,Integer>();
+				for (int i=0;i<nbSells;i++) {
+					Goods g=StreamReadWrite.readNullableGoods(ds);
+					shopSellsPlayer.put(g, ds.readInt());
+				}
+				building.shopSells.put(Mill.proxy.getSinglePlayerName(), shopSellsPlayer);
+			}
+
+			int nbBuys=ds.readInt();
+
+			if (nbBuys>0) {
+				LinkedHashMap<Goods,Integer> shopBuysPlayer=new LinkedHashMap<Goods,Integer>();
+				for (int i=0;i<nbBuys;i++) {
+					Goods g=StreamReadWrite.readNullableGoods(ds);
+					shopBuysPlayer.put(g, ds.readInt());
+				}
+				building.shopBuys.put(Mill.proxy.getSinglePlayerName(), shopBuysPlayer);
+			}
+
+		} catch (final IOException e) {
+			MLN.printException(e);
+		}
+	}
 
 	public void sendBuildingPacket(EntityPlayer player,boolean sendChest) {
 
@@ -6039,6 +6214,7 @@ public class Building {
 				storeGoods(Block.cobblestone.blockID, 2048);
 				storeGoods(Mill.stone_decoration.blockID, 2, 64);
 				storeGoods(Block.wood.blockID, 1, 512);
+				storeGoods(Block.wood.blockID, 3, 1024);
 			} else if (culture.key.equals("japanese")) {
 				storeGoods(Block.sapling.blockID, 64);
 				storeGoods(Mill.wood_decoration.blockID, 2, 2048);
@@ -8037,4 +8213,35 @@ public class Building {
 			MLN.printException(e);
 		}
 	}
+
+	public Set<Goods> getSellingGoods(EntityPlayer player) {
+
+		if (!shopSells.containsKey(player.username))
+			return null;
+
+		return shopSells.get(player.username).keySet();
+	}
+
+	public Set<Goods> getBuyingGoods(EntityPlayer player) {
+
+		if (!shopBuys.containsKey(player.username))
+			return null;
+
+		return shopBuys.get(player.username).keySet();
+	}
+
+	public int getSellingPrice(Goods g,EntityPlayer player) {
+		if (!shopSells.containsKey(player.username))
+			return 0;
+
+		return shopSells.get(player.username).get(g);
+	}
+
+	public int getBuyingPrice(Goods g,EntityPlayer player) {
+		if (!shopBuys.containsKey(player.username))
+			return 0;
+
+		return shopBuys.get(player.username).get(g);
+	}
+
 }

@@ -35,6 +35,7 @@ byzantineplate;mln83;0;
 byzantinestonetiles;1524;0;
 byzantinetiles;1522;0;
 byzantinetileslab;1523;0;
+cacauhaa;mln94;0;
 cactus;81;0;Cactus
 cake;92;0;Gâteau
 calva;mln5;0;
@@ -122,7 +123,7 @@ leatherchest;299;0;Tunique en cuir
 leatherhelmet;298;0;Casque en cuir
 leatherlegs;300;0;Pantalon en cuir
 maize;mln40;0;
-masa;mln42;0;
+masa;mln41;0;
 mayanaxe;mln55;0;
 mayangold;1519;2;
 mayanhoe;mln57;0;
@@ -167,18 +168,18 @@ parchmentmayanitems;mln45;0;
 parchmentmayanvillagers;mln43;0;
 parchmentsadhu;mln47;0;
 parchmentvillagers;mln17;0;
-pathdirt;1525;0;
-pathdirt_slab;1526;0;
-pathgravel;1525;1;
-pathgravel_slab;1526;1;
-pathgravelslabs;1525;5;
-pathgravelslabs_slab;1526;5;
-pathochretiles;1525;4;
-pathochretiles_slab;1526;4;
-pathsandstone;1525;3;
-pathsandstone_slab;1526;3;
-pathslabs;1525;2;
-pathslabs_slab;1526;2;
+pathdirt;1525;8;
+pathdirt_slab;1526;8;
+pathgravel;1525;9;
+pathgravel_slab;1526;9;
+pathgravelslabs;1525;13;
+pathgravelslabs_slab;1526;13;
+pathochretiles;1525;12;
+pathochretiles_slab;1526;12;
+pathsandstone;1525;11;
+pathsandstone_slab;1526;11;
+pathslabs;1525;10;
+pathslabs_slab;1526;10;
 planks_birch;5;2;Planches de bouleau
 planks_jungle;5;3;Planches d'acajou
 planks_oak;5;0;Planches de chêne
@@ -195,6 +196,7 @@ redstone;331;0;Redstone
 rice;mln28;0;
 rottenflesh;367;0;Chair putréfiée
 saddle;329;0;Selle
+sake;mln93;0;
 sand;12;0;Sable
 sandstone;24;0;Grès
 sapling;6;0;Pousse de chêne
@@ -243,7 +245,7 @@ vegcurry;mln30;0;
 villagewand;mln11;0;
 vines;106;0;Lianes
 vishnuamulet;mln23;0;
-wah;mln41;0;
+wah;mln42;0;
 wheat;296;0;Blé
 wine;mln76;0;
 winebasic;mln87;0;

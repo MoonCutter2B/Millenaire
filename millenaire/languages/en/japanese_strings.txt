@@ -30,6 +30,8 @@ villager.japanese_merchant_food=Food Merchant
 villager.japanese_merchant_blacksmith=Tools Merchant
 villager.japanese_bravewoman=Courageous Woman
 villager.japanese_bandit=Japanese Bandit
+villager.japanese_brewer=Chief Brewer
+villager.japanese_brewerwife=Brewer
 
 shop.japanesetownhall=Central Store
 shop.forge=Tools

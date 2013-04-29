@@ -18,8 +18,6 @@ goal=godrink
 goal=visitInn
 goal=VisitBuilding
 
-toolneededclass=meleeweapons
-
 
 tag=helpInAttacks
 experiencegiven=3

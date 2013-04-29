@@ -1,4 +1,4 @@
-version:3.1.7
+version:4.8.0
 Millénaire: Objets japonais
 
 Denier. Lorsque les Japonais ont pris possession de cette nouvelle terre, ils ont changé leur monnaie en Denier. Celui-ci se décline en 3 valeurs : Denier (bronze), Denier Argent (argenté) qui vaut 64 Deniers, et Denier Or (doré) qui vaut 64 Deniers Argent.
@@ -8,6 +8,8 @@ Nourriture japonaise
 Riz. Fade et insipide, mais les Japonais le récoltent comme s'il n'y avait pas de lendemain. Si les Japonais ont du riz dans leurs coffres, ils auront plus d'enfants. Le riz est aussi utilisé dans la fabrication du papier.
 
 Udon. Cette mystérieuse nourriture est préparée par les Japonais dans leur cuisine. 
+
+Saké. Cet alcohol de riz produit uniquement dans les villages commerçants restore la vie du joueur et augmente les chances de conception des villageois.
 NEW_PAGE
 Outils et armes
 

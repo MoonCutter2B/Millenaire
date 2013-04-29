@@ -39,6 +39,7 @@ public class ServerReceiver implements IPacketHandler
 	public static final int PACKET_MAPINFO = 7;
 	public static final int PACKET_VILLAGELIST = 9;
 	public static final int PACKET_SERVER_CONTENT = 10;
+	public static final int PACKET_SHOP = 11;
 
 	public static final int PACKET_TRANSLATED_CHAT = 100;
 	public static final int PACKET_PROFILE = 101;

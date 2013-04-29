@@ -2,7 +2,7 @@ name:Daibutsu
 weight:5
 radius:10
 
-mindistancefromspawn:2000
+mindistancefromspawn:1000
 
 biome:foresthills
 biome:forest

@@ -122,7 +122,7 @@ public class GoalIndianHarvestSugarCane extends Goal {
 
 	@Override
 	public int priority(MillVillager villager) {
-		int p=200-(villager.getTownHall().nbGoodAvailable(Mill.turmeric.itemID, 0, false)*4);
+		int p=200-(villager.getTownHall().nbGoodAvailable(Mill.turmeric.itemID, 0, false, false)*4);
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {

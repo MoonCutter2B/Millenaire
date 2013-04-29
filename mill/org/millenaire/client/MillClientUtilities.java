@@ -97,7 +97,7 @@ public class MillClientUtilities {
 		page.add(new Line(GuiText.DARKBLUE+MLN.string("tradehelp.goodssold")));
 		page.add(new Line(""));
 
-		Vector<Goods> goods=shop.getSellingGoods();
+		Vector<Goods> goods=shop.calculateSellingGoods(null);
 
 
 		if (goods!=null) {
@@ -105,27 +105,25 @@ public class MillClientUtilities {
 			Vector<ItemStack> stacks=new Vector<ItemStack>();
 			Vector<Integer> prices=new Vector<Integer>();
 			for (final Goods g : goods) {
-				if (g.getSellingPrice(shop.getTownHall()) > 0) {
-					if (lastDesc!=null && (!lastDesc.equals(g.desc))) {
-						Vector<String> vprices=new Vector<String>();
+				if (lastDesc!=null && (!lastDesc.equals(g.desc))) {
+					Vector<String> vprices=new Vector<String>();
 
-						for (int p : prices) {
-							vprices.add(MLN.string("tradehelp.sellingprice")+" "+MillCommonUtilities.getShortPrice(p));
-						}						
+					for (int p : prices) {
+						vprices.add(MLN.string("tradehelp.sellingprice")+" "+MillCommonUtilities.getShortPrice(p));
+					}						
 
-						page.add(new Line(stacks,vprices,MLN.string(lastDesc),4*18));
-						page.add(new Line());
-						stacks=new Vector<ItemStack>();
-						prices=new Vector<Integer>();
-					}
-
-					stacks.add(new ItemStack(g.item.item,1,g.item.meta));
-					prices.add(g.getSellingPrice(shop.getTownHall()));
-					if (g.desc!=null)
-						lastDesc=g.desc;
-					else
-						lastDesc="";
+					page.add(new Line(stacks,vprices,MLN.string(lastDesc),4*18));
+					page.add(new Line());
+					stacks=new Vector<ItemStack>();
+					prices=new Vector<Integer>();
 				}
+
+				stacks.add(new ItemStack(g.item.item,1,g.item.meta));
+				prices.add(g.getBasicSellingPrice(shop));
+				if (g.desc!=null)
+					lastDesc=g.desc;
+				else
+					lastDesc="";
 			}
 			if (lastDesc!=null) {
 				Vector<String> vprices=new Vector<String>();
@@ -142,33 +140,31 @@ public class MillClientUtilities {
 		page.add(new Line(GuiText.DARKBLUE+MLN.string("tradehelp.goodsbought")));
 		page.add(new Line(""));
 
-		goods=shop.getBuyingGoods();
+		goods=shop.calculateBuyingGoods(null);
 
 		if (goods!=null) {
 			String lastDesc=null;
 			Vector<ItemStack> stacks=new Vector<ItemStack>();
 			Vector<Integer> prices=new Vector<Integer>();
 			for (final Goods g : goods) {
-				if (g.getBuyingPrice(shop.getTownHall()) > 0) {
-					if (lastDesc!=null && (!lastDesc.equals(g.desc))) {
-						Vector<String> vprices=new Vector<String>();
+				if (lastDesc!=null && (!lastDesc.equals(g.desc))) {
+					Vector<String> vprices=new Vector<String>();
 
-						for (int p : prices) {
-							vprices.add(MLN.string("tradehelp.buyingprice")+" "+MillCommonUtilities.getShortPrice(p));
-						}						
+					for (int p : prices) {
+						vprices.add(MLN.string("tradehelp.buyingprice")+" "+MillCommonUtilities.getShortPrice(p));
+					}						
 
-						page.add(new Line(stacks,vprices,MLN.string(lastDesc),4*18));
-						page.add(new Line());
-						stacks=new Vector<ItemStack>();
-						prices=new Vector<Integer>();
-					}
-					stacks.add(new ItemStack(g.item.item,1,g.item.meta));
-					prices.add(g.getBuyingPrice(shop.getTownHall()));
-					if (g.desc!=null)
-						lastDesc=g.desc;
-					else
-						lastDesc="";
+					page.add(new Line(stacks,vprices,MLN.string(lastDesc),4*18));
+					page.add(new Line());
+					stacks=new Vector<ItemStack>();
+					prices=new Vector<Integer>();
 				}
+				stacks.add(new ItemStack(g.item.item,1,g.item.meta));
+				prices.add(g.getBasicBuyingPrice(shop));
+				if (g.desc!=null)
+					lastDesc=g.desc;
+				else
+					lastDesc="";
 			}
 			if (lastDesc!=null) {
 				Vector<String> vprices=new Vector<String>();

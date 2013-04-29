@@ -1,0 +1,4 @@
+max:1;priority:80;native:Ka'kau' Makan;around:4;startLevel:-1;orientation:2;male:mayan_cocoafarmer;female:mayan_PeasantWife;width:10;length:13;shop:mayancocoa
+priority:10
+
+pathlevel:1

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -22,11 +21,13 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
@@ -38,6 +39,7 @@ import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.Building;
 import org.millenaire.common.EntityWallDecoration;
 import org.millenaire.common.MLN;
+import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
@@ -247,17 +249,14 @@ public class Goods {
 		}
 	}
 
-	public static class ItemMillenaireAxe extends ItemTool {
+	public static class ItemMillenaireAxe extends ItemAxe {
 
 		int enchantability;
 
 		public final String iconName;
 
 		public ItemMillenaireAxe(int i,String iconName,EnumToolMaterial material,int strength) {
-			super(i, 3, material, new Block[] {
-					Block.planks, Block.bookShelf, Block.wood, Block.chest, 
-					Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin, Block.pumpkinLantern, Mill.wood_decoration, Block.leaves
-			});
+			super(i, material);
 
 			efficiencyOnProperMaterial=strength;
 			enchantability=-1;//use default value
@@ -266,9 +265,7 @@ public class Goods {
 		}
 
 		public ItemMillenaireAxe(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
-			super(i, 3, material, new Block[] {
-					Block.planks, Block.bookShelf, Block.wood, Block.chest, Block.stoneDoubleSlab, Block.stoneSingleSlab, Block.pumpkin, Block.pumpkinLantern, Mill.wood_decoration
-			});
+			super(i,material);
 
 			efficiencyOnProperMaterial=strength;
 			setMaxDamage(durability);
@@ -283,12 +280,6 @@ public class Goods {
 				return super.getItemEnchantability();
 
 			return enchantability;
-		}
-
-		@Override
-		public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
-		{
-			return (par2Block != null) && ((par2Block.blockMaterial == Material.wood) || (par2Block.blockMaterial == Material.plants) || (par2Block.blockMaterial == Material.vine)) ? this.efficiencyOnProperMaterial : super.getStrVsBlock(par1ItemStack, par2Block);
 		}
 
 		@Override
@@ -448,39 +439,21 @@ public class Goods {
 		}
 	}
 
-	public static class ItemMillenairePickaxe extends ItemTool {
+	public static class ItemMillenairePickaxe extends ItemPickaxe {
 
 		int enchantability;
 		public final String iconName;
-		
-		 public static final Block[] blocksEffectiveAgainst = new Block[] {Block.cobblestone, Block.stoneDoubleSlab,
-			 Block.stoneSingleSlab, Block.stone, Block.sandStone, Block.cobblestoneMossy, Block.oreIron, Block.oreLapis, 
-			 Block.oreCoal, Block.blockGold, Block.oreGold, Block.oreDiamond, Block.blockDiamond, 
-			 Block.ice, Block.netherrack, Block.oreLapis, Block.blockLapis, Block.oreRedstone, 
-			 Block.oreRedstoneGlowing, Block.rail, Block.railDetector, Block.railPowered, Block.railActivator, Mill.stone_decoration};
-
 
 		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material,int strength) {
-			super(i, 2, material, blocksEffectiveAgainst);
-
+			super(i, material);
 			efficiencyOnProperMaterial=strength;
 			this.enchantability=-1;
 			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
-
-		public boolean canHarvestBlock(Block par1Block)
-	    {
-	        return par1Block == Block.obsidian ? this.toolMaterial.getHarvestLevel() == 3 : (par1Block != Block.blockDiamond && par1Block != Block.oreDiamond ? (par1Block != Block.oreEmerald && par1Block != Block.blockEmerald ? (par1Block != Block.blockGold && par1Block != Block.oreGold ? (par1Block != Block.oreLapis && par1Block != Block.oreIron ? (par1Block != Block.blockLapis && par1Block != Block.oreLapis ? (par1Block != Block.oreRedstone && par1Block != Block.oreRedstoneGlowing ? (par1Block.blockMaterial == Material.rock ? true : (par1Block.blockMaterial == Material.iron ? true : par1Block.blockMaterial == Material.anvil)) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 1) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2) : this.toolMaterial.getHarvestLevel() >= 2);
-	    }
-		
-		public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
-	    {
-	        return par2Block != null && (par2Block.blockMaterial == Material.iron || par2Block.blockMaterial == Material.anvil || par2Block.blockMaterial == Material.rock) ? this.efficiencyOnProperMaterial : super.getStrVsBlock(par1ItemStack, par2Block);
-	    }
 		
 		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
-			super(i,2, material,blocksEffectiveAgainst);
+			super(i,material);
 
 			efficiencyOnProperMaterial=strength;
 			setMaxDamage(durability);
@@ -504,17 +477,13 @@ public class Goods {
 		}
 	}
 
-	public static class ItemMillenaireShovel extends ItemTool {
+	public static class ItemMillenaireShovel extends ItemSpade {
 
 		int enchantability;
 		public final String iconName;
-		
-		public static final Block[] blocksEffectiveAgainst = new Block[] {Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, 
-			Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium, Mill.earth_decoration, Mill.path, Mill.pathSlab};
-
 
 		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material,int strength) {
-			super(i, 1, material, blocksEffectiveAgainst);
+			super(i, material);
 
 			efficiencyOnProperMaterial=strength;
 			this.enchantability=-1;
@@ -524,19 +493,13 @@ public class Goods {
 		}
 
 		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
-			super(i, 1,  material, blocksEffectiveAgainst);
+			super(i, material);
 			efficiencyOnProperMaterial=strength;
 			setMaxDamage(durability);
 			this.enchantability=enchantability;
 			setCreativeTab(Mill.tabMillenaire);
 			this.iconName=iconName;
 		}
-		
-		@Override
-		public boolean canHarvestBlock(Block par1Block)
-	    {
-	        return par1Block == Block.snow ? true : par1Block == Block.blockSnow;
-	    }
 
 		@Override
 		public int getItemEnchantability() {
@@ -895,6 +858,7 @@ public class Goods {
 		freeGoods.add(new InvItem(Block.blockClay.blockID,0));
 		freeGoods.add(new InvItem(Block.brewingStand.blockID,0));
 		freeGoods.add(new InvItem(Block.leaves.blockID,-1));
+		freeGoods.add(new InvItem(Block.sapling.blockID,-1));
 		freeGoods.add(new InvItem(Block.cake.blockID,0));
 		freeGoods.add(new InvItem(Mill.path,-1));
 		freeGoods.add(new InvItem(Mill.pathSlab,-1));
@@ -1184,8 +1148,10 @@ public class Goods {
 		goodsName.put("villagewand", new InvItem(Mill.summoningWand,0));
 		goodsName.put("vishnuamulet", new InvItem(Mill.vishnu_amulet,0));
 		goodsName.put("wah", new InvItem(Mill.wah,0));
+		goodsName.put("cacauhaa", new InvItem(Mill.cacauhaa,0));
 		goodsName.put("yddrasilamulet", new InvItem(Mill.yddrasil_amulet,0));
 		goodsName.put("yumibow", new InvItem(Mill.yumiBow,0));
+		goodsName.put("sake", new InvItem(Mill.sake,0));
 		goodsName.put("grapes", new InvItem(Mill.grapes,0));
 		goodsName.put("wine", new InvItem(Mill.wineFancy,0));
 		goodsName.put("silk", new InvItem(Mill.silk,0));
@@ -1250,19 +1216,19 @@ public class Goods {
 		goodsName.put("bookandquill", new InvItem(Item.writableBook,0));
 		goodsName.put("purse", new InvItem(Mill.purse,0));
 		
-		goodsName.put("pathdirt", new InvItem(Mill.path,0));
-		goodsName.put("pathgravel", new InvItem(Mill.path,1));
-		goodsName.put("pathslabs", new InvItem(Mill.path,2));
-		goodsName.put("pathsandstone", new InvItem(Mill.path,3));
-		goodsName.put("pathochretiles", new InvItem(Mill.path,4));
-		goodsName.put("pathgravelslabs", new InvItem(Mill.path,5));
+		goodsName.put("pathdirt", new InvItem(Mill.path,8));
+		goodsName.put("pathgravel", new InvItem(Mill.path,9));
+		goodsName.put("pathslabs", new InvItem(Mill.path,10));
+		goodsName.put("pathsandstone", new InvItem(Mill.path,11));
+		goodsName.put("pathochretiles", new InvItem(Mill.path,12));
+		goodsName.put("pathgravelslabs", new InvItem(Mill.path,13));
 		
-		goodsName.put("pathdirt_slab", new InvItem(Mill.pathSlab,0));
-		goodsName.put("pathgravel_slab", new InvItem(Mill.pathSlab,1));
-		goodsName.put("pathslabs_slab", new InvItem(Mill.pathSlab,2));
-		goodsName.put("pathsandstone_slab", new InvItem(Mill.pathSlab,3));
-		goodsName.put("pathochretiles_slab", new InvItem(Mill.pathSlab,4));
-		goodsName.put("pathgravelslabs_slab", new InvItem(Mill.pathSlab,5));
+		goodsName.put("pathdirt_slab", new InvItem(Mill.pathSlab,8));
+		goodsName.put("pathgravel_slab", new InvItem(Mill.pathSlab,9));
+		goodsName.put("pathslabs_slab", new InvItem(Mill.pathSlab,10));
+		goodsName.put("pathsandstone_slab", new InvItem(Mill.pathSlab,11));
+		goodsName.put("pathochretiles_slab", new InvItem(Mill.pathSlab,12));
+		goodsName.put("pathgravelslabs_slab", new InvItem(Mill.pathSlab,13));
 	}
 
 	public InvItem item;
@@ -1286,8 +1252,6 @@ public class Goods {
 
 	public int minReputation;
 	
-	public boolean hideIfNotValid=false;
-	
 	public String desc=null;
 
 	public Goods(InvItem iv) {
@@ -1301,7 +1265,7 @@ public class Goods {
 
 	public Goods(String name,InvItem item,int sellingPrice,int buyingPrice,int reservedQuantity,
 			int targetQuantity,int foreignMerchantPrice,boolean autoGenerate,String tag,
-			int minReputation, boolean hideIfNotValid, String desc) {
+			int minReputation, String desc) {
 		this.name=name;
 		this.item=item;
 		this.sellingPrice=sellingPrice;
@@ -1312,7 +1276,6 @@ public class Goods {
 		this.targetQuantity=targetQuantity;
 		this.foreignMerchantPrice=foreignMerchantPrice;
 		this.minReputation=minReputation;
-		this.hideIfNotValid=hideIfNotValid;
 		this.desc=desc;
 	}
 
@@ -1330,16 +1293,13 @@ public class Goods {
 		return (g.item.equals(obj));
 	}
 
-	public int getBuyingPrice(Building townHall) {
+	public int getCalculatedBuyingPrice(Building shop,EntityPlayer player) {
 
-		if (townHall==null)
+		if (shop==null)
 			return buyingPrice;
 
 
-		if (townHall.villageType.buyingPrices.containsKey(item))
-			return townHall.villageType.buyingPrices.get(item);
-		else
-			return buyingPrice;
+		return shop.getBuyingPrice(this, player);
 	}
 
 
@@ -1347,22 +1307,51 @@ public class Goods {
 		return Mill.proxy.getItemName(item.id(),item.meta);
 	}
 
-	public int getSellingPrice(Building townHall) {
+	public int getCalculatedSellingPrice(Building shop,EntityPlayer player) {
 
-		if (townHall==null)
+		if (shop==null)
 			return sellingPrice;
 
-		if (townHall.villageType.sellingPrices.containsKey(item))
-			return townHall.villageType.sellingPrices.get(item);
-		else
+		return shop.getSellingPrice(this, player);
+	}
+	
+	public int getBasicSellingPrice(Building shop) {
+
+		if (shop==null)
 			return sellingPrice;
+		
+		if (shop.getTownHall().villageType.sellingPrices.containsKey(item))
+			return shop.getTownHall().villageType.sellingPrices.get(item);
+
+		return sellingPrice;
+	}
+	
+	public int getCalculatedSellingPrice(MillVillager merchant) {
+
+		if (merchant==null)
+			return foreignMerchantPrice;
+		
+		if (merchant.merchantSells.containsKey(this))
+			return merchant.merchantSells.get(this);
+
+		return foreignMerchantPrice;
+	}
+	
+	public int getBasicBuyingPrice(Building shop) {
+
+		if (shop==null)
+			return buyingPrice;
+		
+		if (shop.getTownHall().villageType.buyingPrices.containsKey(item))
+			return shop.getTownHall().villageType.buyingPrices.get(item);
+
+		return buyingPrice;
 	}
 
 	@Override
 	public String toString() {
-
 		return "Goods@"+item.getItemStack().getItemName();
 	}
 
-
+	
 }

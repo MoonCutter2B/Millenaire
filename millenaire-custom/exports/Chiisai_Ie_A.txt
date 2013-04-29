@@ -1,1 +1,0 @@
-native:Chiisai Ie;name_en:Small House;name_fr:enfrancais;around:4;startLevel:-1;orientation:3;width:21;length:17

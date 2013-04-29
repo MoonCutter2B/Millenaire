@@ -1,4 +1,4 @@
-version:3.1.7
+version:4.8.0
 Millénaire: Japanese Buildings
 
 Village centres
@@ -7,7 +7,9 @@ Shuudannoujou: Big Farm. The center of an Agricultural village where the farmer 
 
 Bousai: Fort. This building houses the Shuken and his wife and can be upgraded into a mighty stronghold with walls and watchtowers.
 
-Kumonjo: Imperial office.The Japanese would build huge Imperial Offices to center their villages. The Overseer and his Wife reside here, keeping watch over the village day and night. All building plans for the village are fabricated here, as well as additional plans and proposals.
+Kumonjo: Imperial office. The Japanese would build huge Imperial Offices to center their villages. The Overseer and his Wife reside here, keeping watch over the village day and night. All building plans for the village are fabricated here, as well as additional plans and proposals.
+
+Tsukurizakaya: Sake Brewery. This complex structure is dedicated to producing the famous sake from rice. The Chief Brewer and his wife work there, and around the brewery a trading village has developed.
 NEW_PAGE
 Housing
 
@@ -47,4 +49,4 @@ Decorative Buildings
 
 Ike: Pond A decorative building that is nice to walk through.
 
-Torii: Torri Gate. A beautiful gate like structure where the villagers come to pray.
+Soushi: Shinto Shrine. This little shrine is used by the villagers for their prayers.

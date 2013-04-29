@@ -36,6 +36,7 @@ core:mayanmining
 core:mayancornfarm
 core:mayangrove
 core:mayantemple
+core:mayancacaofarm
 
 //to be built after the core ones
 secondary:mayanlargepeasanthouse2

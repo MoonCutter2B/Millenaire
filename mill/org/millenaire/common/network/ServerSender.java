@@ -347,7 +347,11 @@ public class ServerSender {
 
 
 	public static void displayVillageTradeGUI(EntityPlayer player, Building building) {
+		
+		building.computeShopGoods(player);
 
+		building.sendShopPacket(player);
+		
 		building.sendBuildingPacket(player,true);
 
 		if (!building.isTownhall) {

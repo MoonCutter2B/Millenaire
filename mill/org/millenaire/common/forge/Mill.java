@@ -14,6 +14,7 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.AchievementPage;
@@ -114,8 +115,9 @@ public class Mill
 		} 
 	} 
 
-	public static final String versionNumber = "4.7.1";
-	public static final String versionBound = "[4.7.0,5.0)";
+
+	public static final String versionNumber = "4.9.0";
+	public static final String versionBound = "[4.9.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire"; 
   
@@ -274,6 +276,8 @@ public class Mill
 	public static Item wineBasic,lambRaw,lambCooked,feta,souvlaki;
 
 	public static ItemPurse purse;
+	
+	public static Item sake,cacauhaa;
 
 	public static boolean loadingComplete=false;
 
@@ -288,7 +292,7 @@ public class Mill
 			ENTITY_CAVESPIDER="CaveSpider",ENTITY_ZOMBIE="Zombie";
 
 	public static final String CROP_WHEAT="wheat",CROP_CARROT="carrot",CROP_POTATO="potato",
-			CROP_RICE="rice",CROP_TURMERIC="turmeric",CROP_MAIZE="maize",CROP_VINE="vine";
+			CROP_RICE="rice",CROP_TURMERIC="turmeric",CROP_MAIZE="maize",CROP_VINE="vine",CROP_CACAO="cacao";
 
 	public static boolean startupError=false;
 
@@ -348,19 +352,42 @@ public class Mill
 
 		paperWall = new BlockMLNPane(MLN.blockPanesId, "paperwall", "paperwall", Material.cloth, true).setHardness(0.3F).setStepSound(Block.soundClothFootstep).setUnlocalizedName("ml_panes");
 
+		byzantine_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineBrickId,
+				"tilestopvert","tilestophor","tilestopvert","tilestophor","tilesfront","tilestophor").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick");
+		byzantine_tile_slab = (BlockOrientedSlab) new BlockOrientedSlab(MLN.blockByzantineSlabId,"tilestophor","tilestopvert","tilesfront").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick_slab");
+		byzantine_stone_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineMixedId,
+				"tilestopvert","tilestophor","stone","stone","tileshalffront","tileshalfside").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_mixedbrick");
+
+		
+		MinecraftForge.setBlockHarvestLevel(lockedChest, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(wood_decoration, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(paperWall, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(panel, "axe", 0);
+		MinecraftForge.setBlockHarvestLevel(stone_decoration, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(byzantine_tiles, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(byzantine_tile_slab, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(byzantine_stone_tiles, "pickaxe", 0);
+		MinecraftForge.setBlockHarvestLevel(earth_decoration, "shovel", 0);
+		MinecraftForge.setBlockHarvestLevel(path, "shovel", 0);
+		MinecraftForge.setBlockHarvestLevel(pathSlab, "shovel", 0);
+		
+		
 		proxy.setTextureIds();
 
 		denier = (new ItemText(nextItemId(),"denier")).setUnlocalizedName("ml_denier");
 		denier_or = (new ItemText(nextItemId(),"denier_or")).setUnlocalizedName("ml_denier_or");
 		denier_argent = (new ItemText(nextItemId(),"denier_argent")).setUnlocalizedName("ml_denier_argent");
-		ciderapple = (new ItemFoodMultiple(nextItemId(),"ciderapple",0,1,0.05f,0,false)).setUnlocalizedName("ml_ciderapple").setMaxStackSize(64);;
-		cider = (new ItemFoodMultiple(nextItemId(),"cider",4,0,0,2,true)).setUnlocalizedName("ml_cider");
-		calva = (new ItemFoodMultiple(nextItemId(),"calva",4,0,0,9,true)).setUnlocalizedName("ml_calva");
-		tripes = (new ItemFoodMultiple(nextItemId(),"tripes",5,8,0.8f,2,false)).setUnlocalizedName("ml_tripes");
+		ciderapple = (new ItemFoodMultiple(nextItemId(),"ciderapple",0,0,1,0.05f,false,0)).setUnlocalizedName("ml_ciderapple").setMaxStackSize(64);;
+		cider = (new ItemFoodMultiple(nextItemId(),"cider",4,15,0,0,true,5)).setAlwaysEdible().setUnlocalizedName("ml_cider");
+		calva = (new ItemFoodMultiple(nextItemId(),"calva",8,30,0,0,true,10)).setPotionEffect(Potion.damageBoost.id, 90, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_calva");
+		tripes = (new ItemFoodMultiple(nextItemId(),"tripes",0,0,10,1f,false,0)).setPotionEffect(Potion.regeneration.id, 30, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_tripes");
 
-		normanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"normanpickaxe",EnumToolMaterial.IRON,12).setUnlocalizedName("ml_normanPickaxe");
-		normanAxe =  new ItemMillenaireAxe(nextItemId(),"normanaxe",EnumToolMaterial.IRON,12).setUnlocalizedName("ml_normanAxe");
-		normanShovel =  new ItemMillenaireShovel(nextItemId(),"normanshovel",EnumToolMaterial.IRON,12).setUnlocalizedName("ml_normanShovel");
+		normanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"normanpickaxe",EnumToolMaterial.IRON,10,1561,14).setUnlocalizedName("ml_normanPickaxe");
+		MinecraftForge.setToolClass(normanPickaxe, "pickaxe", 2);
+		normanAxe =  new ItemMillenaireAxe(nextItemId(),"normanaxe",EnumToolMaterial.IRON,10,1561,14).setUnlocalizedName("ml_normanAxe");
+		MinecraftForge.setToolClass(normanAxe, "axe", 2);
+		normanShovel =  new ItemMillenaireShovel(nextItemId(),"normanshovel",EnumToolMaterial.IRON,10,1561,14).setUnlocalizedName("ml_normanShovel");
+		MinecraftForge.setToolClass(normanShovel, "shovel", 2);
 		normanHoe =  new ItemMillenaireHoe(nextItemId(),"normanhoe",1500).setUnlocalizedName("ml_normanHoe");
 
 		summoningWand = new ItemSummoningWand(nextItemId(),"summoningwand").setFull3D().setUnlocalizedName("ml_villageWand");
@@ -380,7 +407,7 @@ public class Mill
 
 		parchmentComplete = new ItemParchment(nextItemId(),"parchmentall",new int[]{ItemParchment.villagers,ItemParchment.buildings,ItemParchment.items}).setUnlocalizedName("ml_marchmentComplete");
 
-		boudin = (new ItemFoodMultiple(nextItemId(),"boudin",3,6,0.6f,2,false)).setUnlocalizedName("ml_boudin");
+		boudin = (new ItemFoodMultiple(nextItemId(),"boudin",0,0,10,1f,false,0)).setUnlocalizedName("ml_boudin");
 
 		tapestry = (new ItemTapestry(nextItemId(),"normantapestry",EntityWallDecoration.NORMAN_TAPESTRY)).setUnlocalizedName("ml_tapestry");
 
@@ -395,10 +422,10 @@ public class Mill
 
 		rice = (new ItemMillSeeds(nextItemId(),"rice", crops.blockID,0,Mill.CROP_RICE)).setUnlocalizedName("ml_rice");
 		turmeric = (new ItemMillSeeds(nextItemId(),"turmeric", crops.blockID,2,Mill.CROP_TURMERIC)).setUnlocalizedName("ml_turmeric");
-		vegcurry = (new ItemFoodMultiple(nextItemId(),"curry",2,2,0.3f,0,false)).setUnlocalizedName("ml_vegcurry");
-		chickencurry = (new ItemFoodMultiple(nextItemId(),"currychicken",4,6,0.6f,0,false)).setUnlocalizedName("ml_chickencurry");
+		vegcurry = (new ItemFoodMultiple(nextItemId(),"curry",0,0,6,0.6f,false,0)).setUnlocalizedName("ml_vegcurry");
+		chickencurry = (new ItemFoodMultiple(nextItemId(),"currychicken",0,0,8,0.8f,false,0)).setPotionEffect(Potion.fireResistance.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_chickencurry");
 		brickmould = (new ItemBrickMould(nextItemId(),"brickmould")).setUnlocalizedName("ml_brickmould").setMaxStackSize(1).setMaxDamage(128);
-		rasgulla = (new ItemFoodMultiple(nextItemId(),"rasgulla",2,0,0,0,false)).setUnlocalizedName("ml_rasgullaId").setMaxStackSize(8);
+		rasgulla = (new ItemFoodMultiple(nextItemId(),"rasgulla",2,30,0,0,false,0)).setPotionEffect(Potion.moveSpeed.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_rasgullaId");
 		indianstatue = (new ItemTapestry(nextItemId(),"indianstatue",EntityWallDecoration.INDIAN_STATUE)).setUnlocalizedName("ml_indianstatue");
 
 		parchmentIndianVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.indianVillagers).setUnlocalizedName("ml_parchmentIndianVillagers");
@@ -409,8 +436,8 @@ public class Mill
 
 		mayanstatue = (new ItemTapestry(nextItemId(),"mayanstatue",EntityWallDecoration.MAYAN_STATUE)).setUnlocalizedName("ml_mayanstatue");
 		maize = (new ItemMillSeeds(nextItemId(),"maize", crops.blockID,4,Mill.CROP_MAIZE)).setUnlocalizedName("ml_maize");
-		wah = (new ItemFoodMultiple(nextItemId(),"wah",2,4,0.4f,0,false)).setUnlocalizedName("ml_wah");
-		masa = (new ItemFoodMultiple(nextItemId(),"masa",4,6,0.6f,0,false)).setUnlocalizedName("ml_masa");
+		masa = (new ItemFoodMultiple(nextItemId(),"masa",0,0,6,0.6f,false,0)).setUnlocalizedName("ml_masa");
+		wah = (new ItemFoodMultiple(nextItemId(),"wah",0,0,10,1f,false,0)).setPotionEffect(Potion.digSpeed.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wah");
 
 		parchmentMayanVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.mayanVillagers).setUnlocalizedName("ml_parchmentMayanVillagers");
 		parchmentMayanBuildings = new ItemParchment(nextItemId(),"parchmentbuildings",ItemParchment.mayanBuildings).setUnlocalizedName("ml_parchmentMayanBuildings");
@@ -421,7 +448,7 @@ public class Mill
 
 		unknownPowder =  new ItemText(nextItemId(),"unknownpowder").setUnlocalizedName("ml_unknownPowder").setCreativeTab(Mill.tabMillenaire);
 
-		udon = (new ItemFoodMultiple(nextItemId(),"udon",4,6,0.6f,0,false)).setUnlocalizedName("ml_udon");
+		udon = (new ItemFoodMultiple(nextItemId(),"udon",0,0,10,1f,false,0)).setPotionEffect(Potion.jump.id, 180, 1, 1f).setAlwaysEdible().setUnlocalizedName("ml_udon");
 
 		tachiSword = new ItemMillenaireSword(nextItemId(),"tachisword",250,6,EnumToolMaterial.IRON.getEnchantability(),(float) 0.2,3,false).setUnlocalizedName("ml_taichiSword");
 
@@ -430,8 +457,11 @@ public class Mill
 		obsidianFlake = new ItemText(nextItemId(),"obsidianflake").setUnlocalizedName("ml_obsidianFlake");
 		mayanMace =  new ItemMillenaireSword(nextItemId(),"mayanmace",1500,6,25,0,0,false).setUnlocalizedName("ml_mayanMace");
 		mayanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"mayanpickaxe",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanPickaxe");
+		MinecraftForge.setToolClass(mayanAxe, "pickaxe", 2);
 		mayanAxe =  new ItemMillenaireAxe(nextItemId(),"mayanaxe",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanAxe");
+		MinecraftForge.setToolClass(mayanAxe, "axe", 2);
 		mayanShovel =  new ItemMillenaireShovel(nextItemId(),"mayanshovel",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanShovel");
+		MinecraftForge.setToolClass(mayanShovel, "shovel", 2);
 		mayanHoe =  new ItemMillenaireHoe(nextItemId(),"mayanhoe",1500).setUnlocalizedName("ml_mayanHoe");
 
 		yumiBow =  new ItemMillenaireBow(nextItemId(),2,(float) 0.5,"yumibow0","yumibow1","yumibow2","yumibow3").setUnlocalizedName("ml_yumiBow").setFull3D();
@@ -459,7 +489,7 @@ public class Mill
 
 
 		grapes=(new ItemMillSeeds(nextItemId(),"grapes", crops.blockID,6,Mill.CROP_VINE)).setUnlocalizedName("ml_vine");
-		wineFancy = (new ItemFoodMultiple(nextItemId(),"winefancy",4,0,0,4,true)).setUnlocalizedName("ml_wine");
+		wineFancy = (new ItemFoodMultiple(nextItemId(),"winefancy",8,30,0,0,true,5)).setPotionEffect(Potion.resistance.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wine");
 		silk=new ItemText(nextItemId(),"silk").setUnlocalizedName("ml_silk");
 		byzantineiconsmall = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_SMALL)).setUnlocalizedName("ml_byzantineicon");
 		byzantineiconmedium = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_MEDIUM)).setUnlocalizedName("ml_byzantineiconmedium");
@@ -474,20 +504,19 @@ public class Mill
 		byzantineMace =  new ItemMillenaireSword(nextItemId(),"byzantinemace",120,25,10,0,0,true).setUnlocalizedName("ml_byzantineMace");
 
 		clothes = (ItemClothes) new ItemClothes(nextItemId(),"byzantineclothwool","byzantineclothsilk").setUnlocalizedName("ml_clothes");
-		wineBasic = (new ItemFoodMultiple(nextItemId(),"winebasic",3,0,0,3,true)).setUnlocalizedName("ml_wine_basic");
-		lambRaw = (new ItemFoodMultiple(nextItemId(),"lambraw",0,2,0.2f,0,false)).setMaxStackSize(64).setUnlocalizedName("ml_lamb_raw");
-		lambCooked = (new ItemFoodMultiple(nextItemId(),"lambcooked",0,6,0.6f,0,false)).setMaxStackSize(64).setUnlocalizedName("ml_lamb_cooked");
-		feta = (new ItemFoodMultiple(nextItemId(),"feta",2,0,0,0,false)).setMaxStackSize(8).setUnlocalizedName("ml_feta");
-		souvlaki = (new ItemFoodMultiple(nextItemId(),"souvlaki",5,8,0.8f,2,false)).setUnlocalizedName("ml_souvlaki");
+		wineBasic = (new ItemFoodMultiple(nextItemId(),"winebasic",3,15,0,0,true,5)).setAlwaysEdible().setUnlocalizedName("ml_wine_basic");
+		lambRaw = (new ItemFoodMultiple(nextItemId(),"lambraw",0,0,2,0.2f,false,0)).setUnlocalizedName("ml_lamb_raw");
+		lambCooked = (new ItemFoodMultiple(nextItemId(),"lambcooked",0,0,6,0.6f,false,0)).setUnlocalizedName("ml_lamb_cooked");
+		feta = (new ItemFoodMultiple(nextItemId(),"feta",2,15,0,0,false,0)).setUnlocalizedName("ml_feta");
+		souvlaki = (new ItemFoodMultiple(nextItemId(),"souvlaki",0,0,10,1f,false,0)).setPotionEffect(Potion.heal.id, 1, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_souvlaki");
 
 		purse = (ItemPurse) new ItemPurse(nextItemId(),"purse").setMaxStackSize(1).setUnlocalizedName("ml_purse");
+		
+		sake = (new ItemFoodMultiple(nextItemId(),"sake",8,30,0,0,true,10)).setPotionEffect(Potion.waterBreathing.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_sake");
+		
+		cacauhaa = (new ItemFoodMultiple(nextItemId(),"cacauhaa",6,30,0,0,true,0)).setPotionEffect(Potion.nightVision.id, 30, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_cacauhaa");
 
-		byzantine_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineBrickId,
-				"tilestopvert","tilestophor","tilestopvert","tilestophor","tilesfront","tilestophor").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick");
-		byzantine_tile_slab = (BlockOrientedSlab) new BlockOrientedSlab(MLN.blockByzantineSlabId,"tilestophor","tilestopvert","tilesfront").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_brick_slab");
-		byzantine_stone_tiles = (BlockOrientedBrick) new BlockOrientedBrick(MLN.blockByzantineMixedId,
-				"tilestopvert","tilestophor","stone","stone","tileshalffront","tileshalfside").setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("byzantine_mixedbrick");
-
+		
 		wood_decoration.setUnlocalizedName("ml_wood_deco").setHardness(2.0F).setResistance(5F).setStepSound(Block.soundWoodFootstep);
 		wood_decoration.registerTexture(0, "timberframeplain");
 		wood_decoration.registerTexture(1, "timberframecross");
@@ -611,6 +640,7 @@ public class Mill
 			ModLoader.addRecipe(new ItemStack(byzantine_stone_tiles, 6), new Object []{"###","SSS", Character.valueOf('#'), byzantine_tiles,
 				Character.valueOf('S'), Block.stone});
 
+		
 
 			ModLoader.registerBlock(paperWall);
 

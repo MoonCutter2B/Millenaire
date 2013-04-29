@@ -1,7 +1,7 @@
 package org.millenaire.common;
 
 
-import java.util.Vector;
+import java.util.Set;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods;
@@ -21,12 +20,12 @@ public class ContainerTrade extends Container {
 
 		public MillVillager merchant;
 		public EntityPlayer player;
-		public InvItem item;
+		public final Goods good;
 
-		public MerchantSlot(MillVillager merchant,EntityPlayer player,InvItem item,int xpos,int ypos) {
+		public MerchantSlot(MillVillager merchant,EntityPlayer player,Goods good,int xpos,int ypos) {
 			super(null,-1, xpos, ypos);
 			this.merchant=merchant;
-			this.item=item;
+			this.good=good;
 			this.player=player;
 		}
 
@@ -61,7 +60,7 @@ public class ContainerTrade extends Container {
 
 		@Override
 		public ItemStack getStack() {
-			return new ItemStack(item.id(), Math.min(merchant.getHouse().countGoods(item),99), item.meta);
+			return new ItemStack(good.item.id(), Math.min(merchant.getHouse().countGoods(good.item),99), good.item.meta);
 		}
 
 		@Override
@@ -71,14 +70,14 @@ public class ContainerTrade extends Container {
 		}
 
 		public String isProblem() {
-			if (merchant.getHouse().countGoods(item) < 1)
+			if (merchant.getHouse().countGoods(good.item) < 1)
 				return MLN.string("ui.outofstock");
 			final int playerMoney=MillCommonUtilities.countMoney(player.inventory);
-			if (merchant.getCulture().goodsByItem.containsKey(item)) {
-				if (playerMoney < merchant.getForeignMerchantPrice(item))
-					return MLN.string("ui.missingdeniers").replace("<0>", ""+(merchant.getForeignMerchantPrice(item)-playerMoney));
+			if (merchant.getCulture().goodsByItem.containsKey(good.item)) {
+				if (playerMoney < good.getCalculatedSellingPrice(merchant))
+					return MLN.string("ui.missingdeniers").replace("<0>", ""+(good.getCalculatedSellingPrice(merchant)-playerMoney));
 			} else {
-				MLN.error(null, "Unknown trade good: "+item);
+				MLN.error(null, "Unknown trade good: "+good);
 			}
 			return null;
 		}
@@ -97,7 +96,7 @@ public class ContainerTrade extends Container {
 
 		@Override
 		public String toString() {
-			return item.getName();
+			return good.getName();
 		}
 	}
 
@@ -173,8 +172,8 @@ public class ContainerTrade extends Container {
 				if ((building.getTownHall().getReputation(player.username) < good.minReputation))
 					return MLN.string("ui.reputationneeded",building.culture.getReputationLevelLabel(good.minReputation));
 				final int playerMoney=MillCommonUtilities.countMoney(player.inventory);
-				if (playerMoney < good.getSellingPrice(building.getTownHall()))
-					return MLN.string("ui.missingdeniers").replace("<0>", ""+(good.getSellingPrice(building.getTownHall())-playerMoney));
+				if (playerMoney < good.getCalculatedSellingPrice(building,player))
+					return MLN.string("ui.missingdeniers").replace("<0>", ""+(good.getCalculatedSellingPrice(building,player)-playerMoney));
 			} else {
 				if (MillCommonUtilities.countChestItems(player.inventory, good.item.id(), good.item.meta)==0)
 					return MLN.string("ui.noneininventory");
@@ -207,41 +206,31 @@ public class ContainerTrade extends Container {
 
 		this.building = building;
 
-		final Vector<Goods> sellingGoods=building.getSellingGoods();
+		final Set<Goods> sellingGoods=building.getSellingGoods(player);
 
 		int slotnb=0;
 
 		if (sellingGoods!=null) {
 			for (final Goods g : sellingGoods) {
-				if (g.getSellingPrice(building.getTownHall()) > 0) {
-					final int slotrow=slotnb/13;
-					addSlotToContainer(new TradeSlot(building,player,true, g, 8+(18*(slotnb-(13*slotrow))), 32+(slotrow*18)));
+				final int slotrow=slotnb/13;
+				addSlotToContainer(new TradeSlot(building,player,true, g, 8+(18*(slotnb-(13*slotrow))), 32+(slotrow*18)));
 
-					slotnb++;
-				}
+				slotnb++;
 			}
 		}
 
 		nbRowSelling=((slotnb)/13)+1;
 
-		final Vector<Goods> buyingGoods=building.getBuyingGoods();
+		final Set<Goods> buyingGoods=building.getBuyingGoods(player);
 
 		slotnb=0;
 
 		if (buyingGoods!=null) {
 			for (final Goods g : buyingGoods) {
+				final int slotrow=slotnb/13;
+				addSlotToContainer(new TradeSlot(building,player, false, g, 8+(18*(slotnb-(13*slotrow))), 86+(slotrow*18)));
 
-				if (g.getBuyingPrice(building.getTownHall()) > 0 && 
-						(!g.hideIfNotValid || MillCommonUtilities.countChestItems(player.inventory, g.item.id(), g.item.meta)>0)) {
-					final int slotrow=slotnb/13;
-					addSlotToContainer(new TradeSlot(building,player, false, g, 8+(18*(slotnb-(13*slotrow))), 86+(slotrow*18)));
-
-					slotnb++;
-				} else {
-					if (MLN.LogSelling>=MLN.MAJOR) {
-						MLN.major(this, "Removing trade good "+g.name+" for having price "+g.getBuyingPrice(building.getTownHall()));
-					}
-				}
+				slotnb++;
 			}
 		}
 
@@ -265,23 +254,22 @@ public class ContainerTrade extends Container {
 	public ContainerTrade(EntityPlayer player, MillVillager merchant) {
 
 		this.merchant = merchant;
-
+		
 		int slotnb=0;
+		
+		final Set<Goods> sellingGoods=merchant.merchantSells.keySet();
 
-		for (final InvItem key : merchant.vtype.foreignMerchantStock.keySet()) {
-			if (merchant.getCulture().goodsByItem.containsKey(key)) {
-				if (merchant.getHouse().countGoods(key)>0) {
-					if (slotnb<13) {
-						addSlotToContainer(new MerchantSlot(merchant,player, key, 8+(18*slotnb), 32));
-					} else {
-						addSlotToContainer(new MerchantSlot(merchant,player, key, 8+(18*(slotnb-13)), 50));
-					}
-					slotnb++;
-				}
+		if (sellingGoods!=null) {
+			for (final Goods g : sellingGoods) {
+				final int slotrow=slotnb/13;
+				addSlotToContainer(new MerchantSlot(merchant,player, g, 8+(18*(slotnb-(13*slotrow))), 32+(slotrow*18)));
+
+				slotnb++;
 			}
 		}
 
-
+		nbRowSelling=((slotnb)/13)+1;
+		
 		for(int l = 0; l < 3; l++)
 		{
 			for(int k1 = 0; k1 < 9; k1++)
@@ -330,20 +318,20 @@ public class ContainerTrade extends Container {
 					final int playerMoney=MillCommonUtilities.countMoney(player.inventory);
 
 					if (tslot.sellingSlot) {
-						if (playerMoney < (good.getSellingPrice(building.getTownHall())*nbItems)) {
-							nbItems=MathHelper.floor_double(playerMoney/good.getSellingPrice(building.getTownHall()));
+						if (playerMoney < (good.getCalculatedSellingPrice(building,player)*nbItems)) {
+							nbItems=MathHelper.floor_double(playerMoney/good.getCalculatedSellingPrice(building,player));
 						}
 						if (!good.autoGenerate && (building.countGoods(good.item.id(),good.item.meta) < nbItems)) {
 							nbItems=building.countGoods(good.item.id(),good.item.meta);
 						}
 
 						nbItems=MillCommonUtilities.putItemsInChest(player.inventory, good.item.id(),good.item.meta, nbItems);
-						MillCommonUtilities.changeMoney(player.inventory, -good.getSellingPrice(building.getTownHall())*nbItems,player);
+						MillCommonUtilities.changeMoney(player.inventory, -good.getCalculatedSellingPrice(building,player)*nbItems,player);
 						if (!good.autoGenerate) {
 							building.takeGoods(good.item.id(),good.item.meta, nbItems);
 						}
 
-						building.adjustReputation(player, good.getSellingPrice(building.getTownHall())*nbItems);
+						building.adjustReputation(player, good.getCalculatedSellingPrice(building,player)*nbItems);
 
 						building.getTownHall().adjustLanguage(player,nbItems);
 					} else {
@@ -354,8 +342,8 @@ public class ContainerTrade extends Container {
 
 						nbItems=building.storeGoods(good.item.id(),good.item.meta, nbItems);
 						MillCommonUtilities.getItemsFromChest(player.inventory, good.item.id(),good.item.meta, nbItems);
-						MillCommonUtilities.changeMoney(player.inventory, good.getBuyingPrice(building.getTownHall())*nbItems,player);
-						building.adjustReputation(player, good.getBuyingPrice(building.getTownHall())*nbItems);
+						MillCommonUtilities.changeMoney(player.inventory, good.getCalculatedBuyingPrice(building,player)*nbItems,player);
+						building.adjustReputation(player, good.getCalculatedBuyingPrice(building,player)*nbItems);
 						building.getTownHall().adjustLanguage(player,nbItems);
 
 					}
@@ -375,16 +363,16 @@ public class ContainerTrade extends Container {
 				if (tslot.isProblem()==null) {
 
 					final int playerMoney=MillCommonUtilities.countMoney(player.inventory);
-					if (playerMoney < (merchant.getForeignMerchantPrice(tslot.item)*nbItems)) {
-						nbItems=MathHelper.floor_double(playerMoney/merchant.getForeignMerchantPrice(tslot.item));
+					if (playerMoney < (tslot.good.getCalculatedSellingPrice(merchant)*nbItems)) {
+						nbItems=MathHelper.floor_double(playerMoney/tslot.good.getCalculatedSellingPrice(merchant));
 					}
-					if (merchant.getHouse().countGoods(tslot.item) < nbItems) {
-						nbItems=merchant.getHouse().countGoods(tslot.item);
+					if (merchant.getHouse().countGoods(tslot.good.item) < nbItems) {
+						nbItems=merchant.getHouse().countGoods(tslot.good.item);
 					}
 
-					nbItems=MillCommonUtilities.putItemsInChest(player.inventory, tslot.item.id(), tslot.item.meta, nbItems);
-					MillCommonUtilities.changeMoney(player.inventory, -merchant.getForeignMerchantPrice(tslot.item)*nbItems,player);
-					merchant.getHouse().takeGoods(tslot.item, nbItems);
+					nbItems=MillCommonUtilities.putItemsInChest(player.inventory, tslot.good.item.id(), tslot.good.item.meta, nbItems);
+					MillCommonUtilities.changeMoney(player.inventory, -tslot.good.getCalculatedSellingPrice(merchant)*nbItems,player);
+					merchant.getHouse().takeGoods(tslot.good.item, nbItems);
 					Mill.getMillWorld(player.worldObj).getProfile(player.username).adjustLanguage(merchant.getCulture().key, nbItems);
 				}
 				return slot.getStack();

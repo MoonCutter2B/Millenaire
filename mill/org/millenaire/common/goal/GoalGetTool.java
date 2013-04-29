@@ -3,7 +3,6 @@ package org.millenaire.common.goal;
 import net.minecraft.item.Item;
 
 import org.millenaire.common.Building;
-import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 

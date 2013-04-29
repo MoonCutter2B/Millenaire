@@ -1,7 +1,7 @@
 native_name=Rani
 gender=female
 familyNameList=high_caste_family_names
-firstNameList=high_caste_women_names
+firstNameList=rani_names
 baseHeight=0.9
 model=femaleasymmetrical
 tag=seller

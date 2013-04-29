@@ -415,6 +415,8 @@ public class BuildingPlan {
 
 			MillCommonUtilities.setBlockMetadata(world, p, var9);
 		}
+		
+		
 
 		@Override
 		public String toString() {
@@ -575,8 +577,9 @@ public class BuildingPlan {
 	}
 
 	public static final String bempty="empty", bpreserveground="preserveground",ballbuttrees="allbuttrees",bgrass="grass",bsoil="soil",bricesoil="ricesoil",
-			bturmericsoil="turmericsoil",bmaizesoil="maizesoil",bcarrotsoil="carrotsoil",bpotatosoil="potatosoil",bsugarcanesoil="sugarcanesoil",bnetherwartsoil="netherwartsoil",
-			bvinesoil="vinesoil",bsilkwormblock="silkwormblock",
+			bturmericsoil="turmericsoil",bmaizesoil="maizesoil",bcarrotsoil="carrotsoil",bpotatosoil="potatosoil",
+			bsugarcanesoil="sugarcanesoil",bnetherwartsoil="netherwartsoil",
+			bvinesoil="vinesoil",bsilkwormblock="silkwormblock",bcacaospot="cacaospot",
 			blockedchest="lockedchest",bmainchest="mainchest",
 			bsleepingPos="sleepingPos",bsellingPos="sellingPos",bcraftingPos="craftingPos",
 			bdefendingPos="defendingPos",bshelterPos="shelterPos",bpathStartPos="pathStartPos",bleasurePos="leasurePos",
@@ -2778,6 +2781,8 @@ public class BuildingPlan {
 						b=Block.grass.blockID;
 					} else if (pt.isType(bvinesoil) && villageGeneration) {
 						b=Block.grass.blockID;
+					} else if (pt.isType(bcacaospot) && villageGeneration) {
+						b=Block.cocoaPlant.blockID;
 					} else if (pt.isType(bsoil) && !villageGeneration) {
 						b=Block.dirt.blockID;
 					} else if (pt.isType(bricesoil) && !villageGeneration) {
@@ -2794,6 +2799,8 @@ public class BuildingPlan {
 						b=Block.dirt.blockID;
 					} else if (pt.isType(bvinesoil) && !villageGeneration) {
 						b=Block.dirt.blockID;
+					} else if (pt.isType(bcacaospot) && !villageGeneration) {
+						b=0;
 					} else if (pt.isType(bnetherwartsoil)) {
 						b=Block.slowSand.blockID;
 					} else if (pt.isType(bsilkwormblock)) {
@@ -3738,7 +3745,7 @@ public class BuildingPlan {
 					irrigation=Integer.parseInt(value);
 				} else if (!importPlan && key.equalsIgnoreCase("shop")) {
 					if (culture!=null) {//culture is null only when using the import feature
-						if ((culture.shopBuys.containsKey(value) || culture.shopSells.containsKey(value))) {
+						if ((culture.shopBuys.containsKey(value) || culture.shopSells.containsKey(value) || culture.shopBuysOptional.containsKey(value))) {
 							shop=value;
 						} else {
 							MLN.error(this, "Undefined shop type: "+value);
@@ -3850,6 +3857,8 @@ public class BuildingPlan {
 						}
 					} else if (pt.isType(bvinesoil)) {
 						building.addSoilPoint(Mill.CROP_VINE, p);
+					} else if (pt.isType(bcacaospot)) {
+						building.addSoilPoint(Mill.CROP_CACAO, p);
 					} else if (pt.isType(bsilkwormblock)) {
 						if (!building.silkwormblock.contains(p)) {
 							building.silkwormblock.add(p);

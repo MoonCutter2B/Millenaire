@@ -31,10 +31,10 @@ public class GoalMerchantVisitBuilding extends Goal {
 
 		for (final Building shop : villager.getTownHall().getBuildings()) {
 			for (final Goods good :  villager.getTownHall().culture.goodsVector) {
-				if (!shop.isInn && (shop.nbGoodAvailable(good.item.id(),good.item.meta,true)>0) && neededGoods.containsKey(good) && (neededGoods.get(good)>(villager.getHouse().countGoods(good.item.id(),good.item.meta)+villager.countInv(good.item.id(),good.item.meta)))) {
+				if (!shop.isInn && (shop.nbGoodAvailable(good.item.id(),good.item.meta,true, false)>0) && neededGoods.containsKey(good) && (neededGoods.get(good)>(villager.getHouse().countGoods(good.item.id(),good.item.meta)+villager.countInv(good.item.id(),good.item.meta)))) {
 
 					if (MLN.LogMerchant>=MLN.DEBUG) {
-						MLN.debug(villager,"Shop "+shop+" has "+shop.nbGoodAvailable(good.item.id(),good.item.meta,true)+" good to pick up.");
+						MLN.debug(villager,"Shop "+shop+" has "+shop.nbGoodAvailable(good.item.id(),good.item.meta,true, false)+" good to pick up.");
 					}
 
 					return packDest(shop.getSellingPos(),shop);
@@ -88,9 +88,9 @@ public class GoalMerchantVisitBuilding extends Goal {
 
 		for (final Goods good :  villager.getTownHall().culture.goodsVector) {
 			if (neededGoods.containsKey(good)) {
-				if ((shop.nbGoodAvailable(good.item.id(),good.item.meta,true)>0) && ((villager.getHouse().countGoods(good.item.id(),good.item.meta)+villager.countInv(good.item.id(),good.item.meta))<neededGoods.get(good))) {
+				if ((shop.nbGoodAvailable(good.item.id(),good.item.meta,true, false)>0) && ((villager.getHouse().countGoods(good.item.id(),good.item.meta)+villager.countInv(good.item.id(),good.item.meta))<neededGoods.get(good))) {
 
-					int nb=Math.min(shop.nbGoodAvailable(good.item.id(),good.item.meta,true), neededGoods.get(good)-villager.getHouse().countGoods(good.item.id(),good.item.meta)-villager.countInv(good.item.id(),good.item.meta));
+					int nb=Math.min(shop.nbGoodAvailable(good.item.id(),good.item.meta,true, false), neededGoods.get(good)-villager.getHouse().countGoods(good.item.id(),good.item.meta)-villager.countInv(good.item.id(),good.item.meta));
 					nb=villager.takeFromBuilding(shop, good.item.id(),good.item.meta, nb);
 					if (MLN.LogMerchant>=MLN.MINOR) {
 						MLN.minor(shop,villager+" took "+nb+" "+good.getName()+" for trading.");

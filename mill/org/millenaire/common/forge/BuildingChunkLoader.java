@@ -26,8 +26,8 @@ public class BuildingChunkLoader {
 	
 	public void loadChunks() {
 		if (townHall.winfo!=null) {			
-			for (int cx=townHall.winfo.chunkStartX;cx<townHall.winfo.chunkStartX+townHall.winfo.length/16;cx++) {
-				for (int cz=townHall.winfo.chunkStartZ;cz<townHall.winfo.chunkStartZ+townHall.winfo.width/16;cz++) {
+			for (int cx=townHall.winfo.chunkStartX-1;cx<townHall.winfo.chunkStartX+townHall.winfo.length/16+1;cx++) {
+				for (int cz=townHall.winfo.chunkStartZ-1;cz<townHall.winfo.chunkStartZ+townHall.winfo.width/16+1;cz++) {
 					Ticket ticket=getTicket();
 					
 					if (ticket!=null) {

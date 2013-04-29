@@ -53,6 +53,7 @@ public class GuiQuest extends GuiText {
 		} else {
 			mc.displayGuiScreen(null);
 			mc.setIngameFocus();
+			ClientSender.villagerInteractSpecial(player, villager);
 		}
 	}
 

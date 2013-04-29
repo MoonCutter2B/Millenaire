@@ -6,7 +6,7 @@ biome:ice mountains
 max:1
 keyLoneBuildingGenerateTag:alchemist_tower_generate
 
-mindistancefromspawn:2000
+mindistancefromspawn:1000
 
 //starting buildings:
 centre:alchemisttower

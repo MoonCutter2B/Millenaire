@@ -29,17 +29,21 @@ goal=harvestTurmeric
 goal=plantSugarCane
 goal=harvestSugarCane
 goal=makeRasgulla
+goal=makecurry
+goal=makemurgh
 
 toolneededclass=hoes
 
-requiredGood=rice,1
-requiredGood=turmeric,1
-requiredGood=chickenmeatcooked,1
+requiredGood=sugarcane,12
+requiredGood=rice,5
+requiredGood=turmeric,5
+requiredGood=chickenmeatcooked,5
 
 requiredFood=rasgulla,5
 requiredFood=wine,1
 requiredFood=feta,1
 requiredFood=cake,1
 requiredFood=cookie,5
+requiredFood=cacauhaa,1
 
 defaultweapon=woodhoe

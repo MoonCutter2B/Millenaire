@@ -2,7 +2,7 @@ name:Zenshou
 weight:10
 radius:70
 
-mindistancefromspawn:2000
+mindistancefromspawn:1000
 
 biome:plains
 

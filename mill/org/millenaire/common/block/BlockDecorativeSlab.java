@@ -64,6 +64,8 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 			return i;
 		}
 		
+
+		
 		@Override
 	    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	    {
@@ -185,11 +187,17 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 		final ArrayList<ItemStack> list=itemList;
 
 		for (final int meta: textureSideNames.keySet()) {
-			if (meta<8)
+			if (meta>=8)
 				list.add(new ItemStack(blockID,1,meta));
 		}
 
 	}
+	
+	@Override
+	public int damageDropped(int par1)
+    {
+        return (par1 & 7) | 8;
+    }
 
 	@Override
 	public Icon getIcon(int side, int meta)  {
@@ -217,14 +225,9 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
 		for (final int meta : texturesSide.keySet()) {
-			if (meta<8)
+			if (meta>=8)
 				par3List.add(new ItemStack(par1, 1, meta));
 		}
-	}
-
-	public void registerName(int meta, String name) {
-		names.put(meta, name);
-		names.put(meta | 8, name);
 	}
 
 	public void registerTexture(int meta, String name) {
@@ -311,9 +314,8 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		if (!world.isRemote && MLN.DEV) {
-			Mill.proxy.sendLocalChat(entityplayer, MLN.WHITE, "Meta: "+world.getBlockMetadata(i, j, k));
-		}
+		MLN.temp(this, "Meta: "+world.getBlockMetadata(i, j, k));
+		
 		return super.onBlockActivated(world, i, j, k, entityplayer, par6, par7, par8, par9);
 	}
 }

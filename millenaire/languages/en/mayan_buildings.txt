@@ -40,6 +40,8 @@ mayansheepchickenfarm_A0=Chicken Farm
 mayantemple_A0=Temple
 mayanwatchtower_A0=Watch Tower
 mayanmarket_A0=Market
+mayancacaofarm_A0=Cocoa Plantation
+mayancacaofarm_B0=Cocoa Plantation
 
 mayanplayerpyramid_A0=Player's Pyramid
 

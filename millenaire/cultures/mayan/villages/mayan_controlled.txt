@@ -20,6 +20,7 @@ core:mayansheepchickenfarm
 core:mayanmining
 core:mayansculptorhouse
 core:mayancornfarm
+core:mayancacaofarm
 core:mayancrafter
 core:mayanobsidiancrafter
 core:mayanarmyforge

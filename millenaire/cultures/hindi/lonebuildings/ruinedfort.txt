@@ -2,7 +2,7 @@ name:Purana Qila
 weight:2
 radius:15
 
-mindistancefromspawn:2000
+mindistancefromspawn:1000
 
 biome:desert
 biome:deserthills

@@ -22,7 +22,7 @@ output=vegcurry,1
 
 //s'il y a plus d'objets dans le batiment que ça, arrêter le but
 //if more than that number of item is present in building, stop goal
-buildinglimit=vegcurry,10
+townhalllimit=vegcurry,64
 
 //pas plus de X villageois fesant ce but dans le même bâtiment en même temps
 //no more than X villagers doing this goal in the same building at the same time
