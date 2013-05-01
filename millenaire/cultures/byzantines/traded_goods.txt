@@ -2,7 +2,7 @@
 dirtwall,1,0,0,0,0,true,,0,tradehelp.freeblock
 pathdirt,1,0,0,0,0,true,,0,tradehelp.freeblock
 pathgravel,2,0,0,0,0,true,,0,tradehelp.freeblock
-pathochretiles,16,0,0,0,0,true,,0,tradehelp.freeblock
+pathochretiles,4,0,0,0,0,true,,0,tradehelp.freeblock
 wood,2,1,128,1024,0,false,,0,tradehelp.wood
 wood_birch,2,1,128,512,0,false,,0,tradehelp.wood
 wood_pine,2,1,0,64,0,false,,0,tradehelp.wood
@@ -53,23 +53,23 @@ chickenmeatcooked,28,20,0,0,48,false,,0,tradehelp.genericfood
 fishraw,5,3,0,192,0,false,,0,tradehelp.genericfoodraw
 fishcooked,7,5,0,192,16,false,,0,tradehelp.genericfood
 
-tripes,0,3*64,0,0,0,false,0,0,tradehelp.genericfood
+tripes,0,2*80,0,0,0,false,0,0,tradehelp.genericfood
 boudin,0,64,0,0,0,false,0,0,tradehelp.genericfood
-wah,0,3*64,0,0,0,false,,0,tradehelp.genericfood
+wah,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 masa,0,48,0,0,0,false,,0,tradehelp.genericfood
-chickencurry,0,3*64,0,0,0,false,,0,tradehelp.genericfood
+chickencurry,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 vegcurry,0,40,0,0,0,false,,0,tradehelp.genericfood
-udon,0,3*64,0,0,32,false,,0,tradehelp.genericfood
+udon,0,2*80,0,0,32,false,,0,tradehelp.genericfood
 
 cake,0,64,0,0,128,false,,0,tradehelp.genericfoodsweet
 cookie,0,4,0,0,8,false,,0,tradehelp.genericfoodsweet
 cider,0,80,0,0,2*64,false,,0,tradehelp.genericfoodsweet
-calva,0,3*64,0,0,0,false,0,0,tradehelp.genericfoodsweet
-rasgulla,0,3*64,0,0,0,false,,0,tradehelp.genericfoodsweet
+calva,0,2*80,0,0,0,false,0,0,tradehelp.genericfoodsweet
+rasgulla,0,2*80,0,0,0,false,,0,tradehelp.genericfoodsweet
 
 feta,1*64,1*64,0,64,80,false,,0,tradehelp.byzantinefeta
-sake,0,3*64,0,0,0,false,0,0,tradehelp.genericfoodsweet
-cacauhaa,0,3*64,0,0,0,false,0,0,tradehelp.genericfoodsweet
+sake,0,2*80,0,0,0,false,0,0,tradehelp.genericfoodsweet
+cacauhaa,0,2*80,0,0,0,false,0,0,tradehelp.genericfoodsweet
 
 lambraw,20,0,0,64,32,false,,0,tradehelp.genericfoodraw
 lambcooked,28,24,0,64,80,false,,0,tradehelp.byzantinefood
@@ -81,10 +81,10 @@ paper,15,12,32,128, 0,false,,0,tradehelp.byzantinebooks
 book,70,53,16,64, 0,false,,0,tradehelp.byzantinebooks
 bookshelves,220,166,8,16, 0,false,,0,tradehelp.byzantinebooks
 
-normanPickaxe,0,15*64,0,0,,,,0,tradehelp.generictools
-normanAxe,0,15*64,0,0,,,,0,tradehelp.generictools
-normanShovel,0,15*64,0,0,,,,0,tradehelp.generictools
-normanHoe,0,15*64,0,0,,,,0,tradehelp.generictools
+normanPickaxe,0,10*80,0,0,,,,0,tradehelp.generictools
+normanAxe,0,10*80,0,0,,,,0,tradehelp.generictools
+normanShovel,0,10*80,0,0,,,,0,tradehelp.generictools
+normanHoe,0,10*80,0,0,,,,0,tradehelp.generictools
 stonePickaxe,0,3,0,0, 0,false,,0,tradehelp.generictools
 stoneAxe,0,3,0,0, 0,false,,0,tradehelp.generictools
 stoneShovel,0,1,0,0, 0,false,,0,tradehelp.generictools
@@ -123,7 +123,7 @@ diamondChest,0,3*64*8,0,0, 8*20*64,false,,0,tradehelp.genericweapon
 diamondLegs,0,3*64*7,0,0, 7*20*64,false,,0,tradehelp.genericweapon
 diamondBoots,0,3*64*4,0,0, 4*20*64,false,,0,tradehelp.genericweapon
 yumibow,0,7*64,0,0, 0,false,,0,tradehelp.genericweapon
-tachisword,0,3*64,0,0, 0,false,,0,tradehelp.genericweapon
+tachisword,0,2*80,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardboots,0,96,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardHelmet,0,3*64,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardLegs,0,4*64,0,0, 0,false,,0,tradehelp.genericweapon
@@ -137,11 +137,11 @@ japanesewarriorredHelmet,0,6*64,0,0, 0,false,,0,tradehelp.genericweapon
 japanesewarriorredLegs,0,12*64,0,0, 0,false,,0,tradehelp.genericweapon
 japanesewarriorredPlate,0,18*64,0,0, 0,false,,0,tradehelp.genericweapon
 mayanmace,0,7*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanBroadsword,0,2*64*64,0,0, 2*64*64,false,,0,tradehelp.genericweapon
-normanHelmet,0,15*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanChest,0,30*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanLegs,0,12*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanBoots,0,7*64,0,0, 0,false,,0,tradehelp.genericweapon
+normanBroadsword,0,64*80,0,0, 2*64*64,false,,0,tradehelp.genericweapon
+normanHelmet,0,10*80,0,0, 0,false,,0,tradehelp.genericweapon
+normanChest,0,20*80,0,0, 0,false,,0,tradehelp.genericweapon
+normanLegs,0,8*80,0,0, 0,false,,0,tradehelp.genericweapon
+normanBoots,0,5*80,0,0, 0,false,,0,tradehelp.genericweapon
 
 byzantineMace,48*64,40*64,1,1,64*64,false,,8*64*64,tradehelp.byzantineweapons
 byzantineHelmet,8*64,6*64,1,1,12*64,false,,8*64*64,tradehelp.byzantineweapons
@@ -164,7 +164,7 @@ byzantineiconlarge,8*64,8*64,0,4,10*64,false,,0,tradehelp.byzantinesilk
 clothes_byz_silk,4*64,0,0,2,6*64*64,false,,0,tradehelp.byzantineclothes
 clothes_byz_wool,1*64,0,0,4,6*64*64,false,,0,tradehelp.byzantineclothes
 
-byzantinetiles,32,30,0,1024,36,false,,0,tradehelp.byzantinetiles
+byzantinetiles,16,14,0,1024,36,false,,0,tradehelp.byzantinetiles
 
 
 

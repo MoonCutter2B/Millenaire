@@ -14,13 +14,14 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
- 
+
 import org.millenaire.client.network.ClientReceiver;
 import org.millenaire.common.Culture;
 import org.millenaire.common.EntityWallDecoration;
@@ -115,7 +116,7 @@ public class Mill
 		} 
 	} 
 
-	public static final String versionNumber = "4.9.0";
+	public static final String versionNumber = "4.9.1";
 	public static final String versionBound = "[4.9.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire";
@@ -623,8 +624,9 @@ public class Mill
 			ModLoader.registerBlock(byzantine_tile_slab);
 			ModLoader.registerBlock(byzantine_stone_tiles);
 
-			ModLoader.addSmelting(stone_decoration.blockID, new ItemStack(stone_decoration.blockID,1,0));
 			ModLoader.addSmelting(lambRaw.itemID, new ItemStack(lambCooked,1));
+			
+			FurnaceRecipes.smelting().addSmelting(stone_decoration.blockID, 1, new ItemStack(stone_decoration.blockID,1,0), 0.1f);
 
 			ModLoader.addShapelessRecipe(new ItemStack(vegcurry,1),new Object[]{rice,turmeric});
 			ModLoader.addShapelessRecipe(new ItemStack(chickencurry,1),new Object[]{rice,turmeric,Item.chickenRaw});
@@ -639,6 +641,10 @@ public class Mill
 			ModLoader.addRecipe(new ItemStack(byzantine_stone_tiles, 6), new Object []{"###","SSS", Character.valueOf('#'), byzantine_tiles,
 				Character.valueOf('S'), Block.stone});
 
+			for (int meta=0;meta<16;meta++) {
+				GameRegistry.addRecipe(new ItemStack(Mill.pathSlab,3,meta), "xxx",
+				        'x', new ItemStack(Mill.path,1,meta));
+			}
 		
 
 			ModLoader.registerBlock(paperWall);

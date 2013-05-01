@@ -620,7 +620,7 @@
 |Dhaan = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:ML_whitewashedbricks.png|32px|link=Hindi:Cooked brick|Brique cuite]]</td><td>[[File:ML_mudbrick.png|32px|link=Hindi:Mud brick|Brique de terre]]</td></tr>
 <tr><th scope="row">Construction</th><td>4</td><td></td><td>78</td></tr>
-<tr><th scope="row">Upgrade 1</th><td></td><td>39</td><td></td></tr>
+<tr><th scope="row">Upgrade 1</th><td></td><td>78</td><td></td></tr>
 </table>
 </table>
 

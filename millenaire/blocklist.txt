@@ -324,6 +324,13 @@ redstone torch;76;0;true;174/18/18
 redstone torch lit;76;5;true;255/18/18
 stone button;77;0;true;111/111/111
 snow;78;0;true;58/177/188
+snow;78;1;true;58/177/189
+snow;78;2;true;58/177/190
+snow;78;3;true;58/177/191
+snow;78;4;true;58/177/192
+snow;78;5;true;58/177/193
+snow;78;6;true;58/177/194
+snow;78;7;true;58/177/195
 jukebox;84;0;true;201/153/49
 soul sand;88;0;false;179/136/43
 glowstone;89;0;false;227/207/35

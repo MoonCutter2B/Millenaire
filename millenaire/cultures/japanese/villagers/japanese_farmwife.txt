@@ -31,6 +31,9 @@ bringBackHomeGood=wheat
 bringBackHomeGood=rice
 bringBackHomeGood=seeds
 
+//for thatch
+requiredGood=wheat,16
+
 startingInv=seeds,100
 startingInv=rice,50
 

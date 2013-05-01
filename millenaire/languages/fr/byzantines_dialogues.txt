@@ -9,7 +9,7 @@ v2;30;Fysiká, kai eínai óla lógo ton terástion prospatheión mas! / Evidemm
 newchat;key:harvest,weigth:10
 v1;0;sitári afxánetai polý kalá aftí ti chroniá, étsi eínai ta stafýlia, kathos kai. Lampro, den eínai? / Le blé pousse vraiment bien cette année, tout comme les vignes d'ailleurs. Excellent, non?
 v2;30;Nai, faínetai étsi: Échoume to períergo kairo edo na efcharistíso. / Oui, il semblerait: Nous avons avons un temps étonnant ici qu'il faut remercier.
-v1;60;Akoma kai an afto den échei kanéna noima gia ména! / Comme si j'en avais quelquechose à faire!
+v1;60;Akoma kai an afto den échei kanéna noima gia ména! / Comme si j'en avais quelque chose à faire!
 
 
 
@@ -17,7 +17,7 @@ newchat;key:lightning,weigth:7
 v1;0;Thymáste tin kataigída pou eíchame? Thélo na po to pragmatiká varý! / Tu te rappelles du dernier orage que nous avons eu? 
 v2;30;Fysiká. Schedon katastráfike synkomidí mas. I fýsi eínai arketá entyposiako, e?  / Bien sûr! Presque toutes nos récoltes avaient été détruites. La nature peut être violente, hein?
 v1;60;Entyposiakí eínai éna prágma. Allá ímoun schedon chtypíthike apo keravno! / Violente est une chose. J'ai failli être frappé par la foudre! 
-v2;100;Den ítan mésa sto spíti sas? Xérete oti eínai epikíndyno éxo katá ti diárkeia mias kataigídas! / Tu n'étais pas à l'abri? tu sais combien il est dangereux d'être à l'extérieur pendant un orage? 
+v2;100;Den ítan mésa sto spíti sas? Xérete oti eínai epikíndyno éxo katá ti diárkeia mias kataigídas! / Tu n'étais pas à l'abri? Tu sais combien il est dangereux d'être à l'extérieur pendant un orage? 
 v1;120;Zontaná kai na máthoun. / Live and learn. / On apprend de ses erreurs. 
 
 newchat;key:lightningPig,weigth:1,v1:adult,v2:adult
@@ -25,10 +25,10 @@ newchat;key:lightningPig,weigth:1,v1:adult,v2:adult
 v1;0;Ego den aisthánomai kalá ...  / Je ne me sens pas bien...
 v2;30;Ti tréchei me séna? Eísai árrostos?  / Qu'est-ce qui ne va pas? Tu es malade?
 v1;60;Ochi, ego jj-molis thymíthike kápoia ora-na symveí. / Non, j-j-je me rap-p-pelle juste d'un mauvais souvenir. 
-v2;100;Boreíte íchou pragmatiká epireázontai. Eíste sígouroi oti den eínai árrostos? / Tu semble vraiment affecté. Es-tu sûr de ne pas être malade? 
+v2;100;Boreíte íchou pragmatiká epireázontai. Eíste sígouroi oti den eínai árrostos? / Tu sembles vraiment affecté. Es-tu sûr de ne pas être malade? 
 v1;120;N-ochi, ego aplá f-aisthánontai fovisménoi.  / Sûr, j-j'ai j-juste p-peur.
 v2;150;Ti synévi loipon? / Ben alors, qu'est ce qu'il y a?
-v1;180;Katá ti diárkeia tis l-teleftaía kataigída. Perpátisa éxo apo to chorio-vv, íxera oti den boroúsa na páro píso sto chorio prin apo tin kataigída. Gi 'afto kai krýftike káto apo éna déntro.  / Lors du dernier orage. Je me promenais à l'extérieur du v-v-village, et je su que je ne pouvais pas retourner ici, avant la fin de la tempête. Je me suis caché sous un arbre.
+v1;180;Katá ti diárkeia tis l-teleftaía kataigída. Perpátisa éxo apo to chorio-vv, íxera oti den boroúsa na páro píso sto chorio prin apo tin kataigída. Gi 'afto kai krýftike káto apo éna déntro.  / Lors du dernier orage, je me promenais à l'extérieur du v-v-village, et je sus que je ne pouvais pas retourner ici, avant la fin de la tempête. Je me suis caché sous un arbre.
 v2;210;Tha diakindýneve ti zoí sas éxo apo to chorio! Tha boroúse na eíche pethánei!  / Tu as risqué ta vie hors du village! Tu aurais pu mourir!
 
 v1;240;Loipon, ímoun asfalís. Sti synécheia, omos eída éna gouroúni. I lighning chtýpise. Kai oi nekroí p-gouroúni ... I-afto sikothike kai kiníthike l-san ki emás, ch-kynigoún eména me éna lampero sw-spathí!  / Bref, j'étais en vie. Mais la foudre a frappé un porc. Et ce co-cochon... Je l'ai vu se mettre sur ses deux pattes arrières, et à marcher comme nous, il m'a attaqué av-v-vec une épée brillante!
@@ -36,7 +36,7 @@ v2;290;Tha eínai anoisíes. Tha prépei na ítan énas efiáltis. / Ce que tu d
 
 v1;320;Ítan alítheia! Sosto! Sosto! Sosto! / C'était vrai! Vrai! Vrai! Vrai!
 
-v2;350;Eíste treloí. Pigaínete na párete lígo krasí, kai na iremísoun. / Tu es fou. Vas boire un peu de vin, et te calmer les nerfs.
+v2;350;Eíste treloí. Pigaínete na párete lígo krasí, kai na iremísoun. / Tu es fou. Va boire un peu de vin, et te calmer les nerfs.
 
 v1;380;Tha d-kánoume afto. Boreí-Ísos afto tha voithísei.  / Je, je vais le faire. Peu-peut-être que-que ça va me réconforter.
 

@@ -3,7 +3,7 @@ v1;0;Je sens qu'il va pleuvoir.
 v2;30;Il pleut toujours en Normandie.
 
 newchat;key:beautifulvillage,weigth:10
-v1;0;Il est beau notre village, tu ne trouve pas?
+v1;0;Il est beau notre village, tu ne trouves pas?
 v2;30;Magnifique! Et on y travaille dur!
 
 newchat;key:sunset,weigth:10
@@ -36,7 +36,7 @@ v2;30;Oui, j'ai cru que le toit allait s'envoler.
 v1;60;Il faudrait les renforcer tous.
 
 newchat;key:visitors,weigth:10
-v1;0;Ce qui manque ici, c'est des visiteurs.
+v1;0;Ce qui manque ici, ce sont des visiteurs.
 v2;30;Il y a bien $name...
 v1;60;Oui, mais il est un peu bizarre, non?
 v2;100;C'est vrai qu'on ne sait jamais trop ce qu'il va faire.
@@ -46,7 +46,7 @@ v1;0;C'est quand Noël, déjà?
 v2;30;Je ne sais pas trop... Les saisons ne changent pas ici.
 v1;80;Quel monde bizarre quand même.
 v2;110;Parfois on dirait presque la Normandie...
-v2;140;et puis on se rappele que tout est différent.
+v2;140;Et puis on se rappelle que tout est différent.
 
 newchat;key:william,v2:adult,weigth:10
 v1;0;Tu as déjà vu le Duc Guillaume, toi?
@@ -59,7 +59,7 @@ v1;0;Tu as remarqué, ici la terre flotte si on creuse en-dessous.
 v2;40;Oui, et alors?
 v1;60;En Normandie, elle tombait...
 v2;90;En Normandie, Dieu voulait qu'elle tombe. Ici, il veut qu'elle flotte.
-v2;150;Pourquoi critique-tu Dieu?
+v2;150;Pourquoi critiques-tu Dieu?
 
 newchat;key:likingrain,tag:raining,weigth:10
 v1;0;J'aime bien la pluie.
@@ -91,13 +91,13 @@ v2;75;Tu n'as qu'à compter les vaches pour te distraire.
 v1;110;Déjà fait hier. Et les poulets aussi.
 
 newchat;key:paris,v1:adult,v2:adult,weigth:2
-v1;0;Quel coin paumé ici, quand même. J'aimerai voir autre chose un jour...
+v1;0;Quel coin paumé ici, quand même. J'aimerais voir autre chose un jour...
 v2;30;Les autres villages sont tous pareils.
 v1;60;Pas un village! Un bourg. Ou même une ville!
 v2;90;Quoi, comme Rouen? Tu es fou, c'est à des jours d'ici.
 v1;120;Rouen... ou même... Pourquoi pas Paris?
-v1;150;Tu te rend compte, on dit qu'il y aurait 25 000 personnes là-bas!
-v2;180;Tu divague, mon pauvre. 25 000 personnes au même endroit? Et où on les mettrait?
+v1;150;Tu te rends compte, on dit qu'il y aurait 25 000 personnes là-bas!
+v2;180;Tu divagues, mon pauvre. 25 000 personnes au même endroit? Et où on les mettrait?
 
 newchat;key:calva,v1:adult,v2:adult,v1:male,v2:male,weigth:10
 v1;0;Par ce temps, un petit calva s'impose!
@@ -106,9 +106,9 @@ v1;50;A la Normandie et son climat à calva!
 v2;70;Santé!
 
 newchat;key:boyvillagechief,v1:child,v1:male,v2:adult,weigth:5
-v1;0;Quand je serais grand, je serais le chef du village!
-v2;30;Il va falloir que tu mange beaucoup de soupe avant d'en arriver là.
-v1;60;Et je te ferais punir!
+v1;0;Quand je serais grand, je serai le chef du village!
+v2;30;Il va falloir que tu manges beaucoup de soupe avant d'en arriver là.
+v1;60;Et je te ferai punir!
 v2;70;C'est ça. En attendant, va travailler ou tu vas prendre une claque.
 
 newchat;key:kids1,v1:child,v2:child,weigth:10
@@ -121,11 +121,11 @@ newchat;key:kids2,v1:child,v1:male,v2:child,v2:female,weigth:10
 v1;0;Les filles, ça ne sert à rien.
 
 newchat;key:kids3,v2:child,v2:male,v1:child,v1:female,weigth:10
-v1;0;T'es peut être un garçon, mais je te fait pleurer quand je veux.
+v1;0;T'es peut être un garçon, mais je te fais pleurer quand je veux.
 v2;30;Même pas vrai! Peste!
 
 newchat;key:enderman,v1:adult,v2:child,weigth:10
-v1;0;Sois sage, ou l'homme des limbes t'emportera cette nuit!
+v1;0;Sois sage, ou l'Homme des Limbes t'emportera cette nuit!
 v2;40;Pfff, j'ai passé l'âge de croire à ces bêtises.
 
 newchat;key:badflirt,v1:adult,v2:adult,v1:nospouse,v2:nospouse,v1:male,v2:female,notrel:sibling,v1:notvtype:monk-priest-abbot,weigth:20
@@ -136,7 +136,7 @@ v2;80;Quel nigaud!
 
 newchat;key:badflirt2,v1:vtype:guard-lumberman,v2:adult,v1:hasspouse,v2:female,notrel:sibling,notrel:parent,notrel:child,weigth:20
 v2;0;$targetfirstname, quels beaux muscles!
-v1;30;Tais-toi, malheureuse! Si ma femme t'endend...
+v1;30;Tais-toi, malheureuse! Si ma femme t'entend...
 v2;60;Et bien quoi, bel homme?
 v1;90;Tu sais bien comme elle est jalouse!
 v2;120;Et? Elle te fait peur?
@@ -218,7 +218,7 @@ v2;110;Non.
 newchat;key:cattlefarmer,v1:vtype:cattlefarmermale-cattlefarmerfemale,v2:notvtype:cattlefarmermale-cattlefarmerfemale,weigth:10
 v1;0;J'adore préparer des tripes. D'abord, saigner la vache...
 v1;40;Puis extraire les boyaux...
-v2;60;Arrête, tu me dégoutes!
+v2;60;Arrête, tu me dégoûtes!
 v1;80;Mais tu adores les tripes!
 v2;110;Et je ne veux pas savoir comment elles sont faites.
 
@@ -244,7 +244,7 @@ v2;100;Vive le Compte $targetfirstname!
 v1;130;Vive moi!
 
 newchat;key:lady,v1:vtype:lady,v2:notvtype:knight,weigth:10
-v1;0;Ma beauté est célèbre dans ces contrés.
+v1;0;Ma beauté est célèbre dans ces contrées.
 v2;30;Vous êtes superbe, ma Dame!
 v1;60;Et pourtant j'ai épousé un petit chevalier de rien du tout...
 v2;100;Mais sa Seigneurie deviendra certainement comte un jour!
@@ -305,23 +305,23 @@ v2;90;Ah, oui. Pendant que vous vous occupiez des agneaux nouveau-nés - en Déc
 v1;130;Et alors? Peut être qu'à Bethléem il n'y a pas de saisons. Comme ici!
 
 newchat;key:smith,v1:vtype:smith,weigth:10
-v1;0;La vrai force des normands, c'est leurs outils et leurs armes.
+v1;0;La vraie force des normands, c'est leurs outils et leurs armes.
 v2;40;Et donc leurs forgerons?
 v1;60;Voilà!
 
 
 newchat;key:wife,v1:vtype:wife,v2:male,v2:adult,weigth:10
 v1;0;Pourquoi est-ce toujours les femmes qui construisent?
-v2;40;Si ça te gène, je m'occupe du prochain bâtiment.
+v2;40;Si ça te gêne, je m'occupe du prochain bâtiment.
 v1;80;Vraiment? Tu es adorable! Alors, pour les rideaux, n'oublie pas de...
 v2;120;En fait non, je vais te laisser faire.
 
 
 newchat;key:alchemyworkshop,villager:alchemistapprentice,v1:notvtype:alchemistapprentice-guildmaster,v2:notvtype:alchemistapprentice-guildmaster,v1:adult,v2:adult,weigth:10
 v1;0;Je suis passé devant l'atelier de l'alchimiste hier.
-v1;40;Il y avait une odeur d'œuf pourris horrible!
+v1;40;Il y avait une odeur d'œuf pourri horrible!
 v2;80;Il paraît qu'il essaye de fabriquer la pierre philosophale!
-v1;120;Moi j'ai entendu qu'il veut résusciter les morts.
+v1;120;Moi j'ai entendu qu'il veut ressuciter les morts.
 v2;160;Et moi qu'il va fabriquer un monstre avec des cadavres!
 v1;200;Quelle horreur!
 v2;220;C'était un garçon si charmant pourtant...
@@ -345,7 +345,7 @@ v1;60;Et elle est plus grande que celle du village voisin!
 
 newchat;key:inn,building:inn,v1:notvtype:merchant,v2:notvtype:merchant,weigth:10
 v1;0;Maintenant que nous avons une auberge, nous allons pouvoir commercer!
-v2;40;Autrement dit, les marchants de passage vont se servir dans nos resources.
+v2;40;Autrement dit, les marchands de passage vont se servir dans nos ressources.
 v1;80;Tu as toujours été cynique.
 
 

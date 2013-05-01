@@ -136,7 +136,7 @@ sadhu_9_underwater_1_label=Faire un rapport
 sadhu_9_underwater_1_description=Alors qu'avez vous trouvé au fond des mers?
 sadhu_9_underwater_1_description_success=Vous dites que vous n'avez trouvé signe de vie dans les profondeurs... Ni poissons ou plantes aquatiques? Cela va requérir plus de réflexion de ma part.
 sadhu_9_underwater_1_description_refuse=Je serais toujours ici à prier en espérant que vous changiez d'avis, $name.
-sadhu_9_underwater_1_listing=Je dois plonger à 15 mètres de profondeur.
+sadhu_9_underwater_1_listing=Je dois plonger à 12 mètres de profondeur.
 
 sadhu_10_underwaterglass_0_label=Fenêtre sur les profondeurs
 sadhu_10_underwaterglass_0_description=J'ai réfléchi sur votre dernier rapport, $name. Peut être la visibilité était trop mauvaise durant vos plongeons. J'ai besoin que vous retourniez vers la mer – et y construire une salle d'observation aussi profonde que possible, d'où il sera possible d'observer plus facilement les profondeurs.
@@ -146,7 +146,7 @@ sadhu_10_underwaterglass_1_label=Faire un rapport
 sadhu_10_underwaterglass_1_description=Qu'avez vous vu là où l'homme n'a jamais été?
 sadhu_10_underwaterglass_1_description_success=Alors les fonds océaniques sont vraiment exempt de vie à l'exception de ces étrange poulpes. Ce n'est pas possible... Aucune mer ne peut être si vide, et comment ces animaux peuvent il vivre sans proies? <ret><ret>Vous m'avez donné de quoi réfléchir pour un temps encore, $name. Revenez plus tard, j'espère que j'aurais des réponses pour vous.
 sadhu_10_underwaterglass_1_description_refuse=Je serais toujours ici à prier en espérant que vous changiez d'avis, $name.
-sadhu_10_underwaterglass_1_listing=Je dois construire un observatoire avec un plafond fait de verre au moins 20 mètres sous la surface de la mer.
+sadhu_10_underwaterglass_1_listing=Je dois construire un observatoire avec un plafond fait de verre au moins 15 mètres sous la surface de la mer.
 
 
 

@@ -108,7 +108,7 @@ Roche: 682
 Statue Hindoue: 3
 Pierres: 206
 Grès: 1882
-Brique cuite: 5804
+Brique cuite: 5882
 Brique de terre: 5710
 Bois (tous): 772
 
@@ -119,7 +119,7 @@ Roche: 682
 Statue Hindoue: 3
 Pierres: 190
 Grès: 1882
-Brique cuite: 5574
+Brique cuite: 5652
 Brique de terre: 5223
 Bois (tous): 721
 
@@ -140,7 +140,7 @@ Roche: 1031
 Statue Hindoue: 3
 Pierres: 212
 Grès: 3191
-Brique cuite: 4880
+Brique cuite: 4958
 Brique de terre: 6628
 Bois (tous): 871
 
@@ -149,7 +149,7 @@ Bois de chêne: 516
 Roche: 349
 Pierres: 188
 Grès: 2990
-Brique cuite: 4164
+Brique cuite: 4203
 Brique de terre: 5209
 Bois (tous): 755
 
@@ -159,20 +159,20 @@ Roche: 648
 Statue Hindoue: 2
 Pierres: 218
 Grès: 5353
-Brique cuite: 3979
+Brique cuite: 4018
 Brique de terre: 2738
 Bois (tous): 691
 
 
 adivasifarm resource use: 
 Bois de chêne: 145
-Brique cuite: 81
+Brique cuite: 120
 Brique de terre: 120
 Bois (tous): 41
 
 adivasifarmquest resource use: 
 Bois de chêne: 145
-Brique cuite: 81
+Brique cuite: 120
 Brique de terre: 120
 Bois (tous): 41
 
@@ -4998,7 +4998,7 @@ Upgrade 1
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Brique cuite
-| style="text-align: center; "|39
+| style="text-align: center; "|78
 |}
 
 

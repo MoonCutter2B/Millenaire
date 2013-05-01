@@ -31,6 +31,9 @@ bringBackHomeGood=seeds
 startingInv=seeds,100
 startingInv=rice,50
 
+//for thatch
+requiredGood=wheat,16
+
 requiredFood=cider,5
 requiredFood=calva,2
 requiredFood=rasgulla,1

@@ -1,7 +1,7 @@
 //name, selling price, buying price, reserved quantity, target quantity, foreign merchant price, auto-generated, needed equipment(deprecated), minimum reputation
 dirtwall,1,0,0,0,0,true,,0,tradehelp.freeblock
 pathdirt,1,0,0,0,0,true,,0,tradehelp.freeblock
-pathslabs,16,0,0,0,0,true,,0,tradehelp.freeblock
+pathslabs,4,0,0,0,0,true,,0,tradehelp.freeblock
 wood,2,1,128,1024,0,false,,0,tradehelp.wood
 wood_pine,2,1,0,64,0,false,,0,tradehelp.wood
 wood_birch,2,1,0,64,0,false,,0,tradehelp.wood
@@ -47,26 +47,26 @@ fishraw,5,3,0,192,0,false,,0,tradehelp.genericfoodraw
 fishcooked,7,5,64,192,16,false,,0,tradehelp.genericfood
 
 
-tripes,0,3*64,0,0,0,false,0,0,tradehelp.genericfood
+tripes,0,2*80,0,0,0,false,0,0,tradehelp.genericfood
 boudin,0,64,0,0,0,false,0,0,tradehelp.genericfood
-chickencurry,0,3*64,0,0,0,false,,0,tradehelp.genericfood
+chickencurry,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 vegcurry,0,40,0,0,0,false,,0,tradehelp.genericfood
 lambcooked,0,32,0,0,0,false,,0,tradehelp.genericfood
-souvlaki,0,3*64,0,0,0,false,,0,tradehelp.genericfood
-udon,0,3*64,0,0,0,false,,0,tradehelp.genericfood
+souvlaki,0,2*80,0,0,0,false,,0,tradehelp.genericfood
+udon,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 
 dye_brown,4,0,0,0,0,false,,0,0,tradehelp.mayancocoa
 cake,0,64,0,0,128,false,,0,tradehelp.genericfoodsweet
 cookie,0,4,0,0,8,false,,0,tradehelp.genericfoodsweet
 cider,0,80,0,0,2*64,false,,0,tradehelp.genericfoodsweet
-calva,0,3*64,0,0,0,false,0,0,tradehelp.genericfoodsweet
-rasgulla,0,3*64,0,0,0,false,,0,tradehelp.genericfoodsweet
-wine,0,3*64,0,0,0,false,,0,tradehelp.genericfoodsweet
+calva,0,2*80,0,0,0,false,0,0,tradehelp.genericfoodsweet
+rasgulla,0,2*80,0,0,0,false,,0,tradehelp.genericfoodsweet
+wine,0,2*80,0,0,0,false,,0,tradehelp.genericfoodsweet
 winebasic,0,80,0,0,0,false,,0,tradehelp.genericfoodsweet
 feta,0,96,0,0,0,false,,0,tradehelp.genericfoodsweet
-sake,0,3*64,0,0,0,false,0,0,tradehelp.genericfoodsweet
+sake,0,2*80,0,0,0,false,0,0,tradehelp.genericfoodsweet
 
-wah,2*64,2*60,0,0,3*64,false,,2*64*64,tradehelp.mayanfood
+wah,2*64,2*60,0,0,2*80,false,,2*64*64,tradehelp.mayanfood
 masa,32,30,0,0,40,false,,0,tradehelp.mayanfood
 cacauhaa,2*64,2*60,2,5,0,false,,0,2*64*64,tradehelp.mayancocoa
 
@@ -80,10 +80,10 @@ stoneAxe,4,3,0,0, 0,false,,0,tradehelp.mayanstonetools
 stoneShovel,2,1,0,0, 0,false,,0,tradehelp.mayanstonetools
 stoneHoe,3,2,0,0, 0,false,,0,tradehelp.mayanstonetools
 
-normanPickaxe,0,15*64,0,0,,,,0,tradehelp.generictools
-normanAxe,0,15*64,0,0,,,,0,tradehelp.generictools
-normanShovel,0,15*64,0,0,,,,0,tradehelp.generictools
-normanHoe,0,15*64,0,0,,,,0,tradehelp.generictools
+normanPickaxe,0,10*80,0,0,,,,0,tradehelp.generictools
+normanAxe,0,10*80,0,0,,,,0,tradehelp.generictools
+normanShovel,0,10*80,0,0,,,,0,tradehelp.generictools
+normanHoe,0,10*80,0,0,,,,0,tradehelp.generictools
 steelPickaxe,0,20*3,0,0, 0,false,,0,tradehelp.generictools
 steelAxe,0,20*3,0,0, 0,false,,0,tradehelp.generictools
 steelShovel,0,20*1,0,0, 0,false,,0,tradehelp.generictools
@@ -116,7 +116,7 @@ diamondChest,0,3*64*8,0,0, 8*20*64,false,,0,tradehelp.genericweapon
 diamondLegs,0,3*64*7,0,0, 7*20*64,false,,0,tradehelp.genericweapon
 diamondBoots,0,3*64*4,0,0, 4*20*64,false,,0,tradehelp.genericweapon
 yumibow,0,7*64,0,0, 0,false,,0,tradehelp.genericweapon
-tachisword,0,3*64,0,0, 0,false,,0,tradehelp.genericweapon
+tachisword,0,2*80,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardboots,0,96,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardHelmet,0,3*64,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardLegs,0,4*64,0,0, 0,false,,0,tradehelp.genericweapon
@@ -129,11 +129,11 @@ japanesewarriorredboots,0,4*64,0,0, 0,false,,0,tradehelp.genericweapon
 japanesewarriorredHelmet,0,6*64,0,0, 0,false,,0,tradehelp.genericweapon
 japanesewarriorredLegs,0,12*64,0,0, 0,false,,0,tradehelp.genericweapon
 japanesewarriorredPlate,0,18*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanBroadsword,0,2*64*64,0,0, 2*64*64,false,,0,tradehelp.genericweapon
-normanHelmet,0,15*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanChest,0,30*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanLegs,0,12*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanBoots,0,7*64,0,0, 0,false,,0,tradehelp.genericweapon
+normanBroadsword,0,64*80,0,0, 2*64*64,false,,0,tradehelp.genericweapon
+normanHelmet,0,10*80,0,0, 0,false,,0,tradehelp.genericweapon
+normanChest,0,20*80,0,0, 0,false,,0,tradehelp.genericweapon
+normanLegs,0,8*80,0,0, 0,false,,0,tradehelp.genericweapon
+normanBoots,0,5*80,0,0, 0,false,,0,tradehelp.genericweapon
 byzantineMace,0,64*64,0,0, 0,false,,0,tradehelp.genericweapon
 byzantineHelmet,0,12*64,0,0, 0,false,,0,tradehelp.genericweapon
 byzantinePlate,0,20*64,0,0, 0,false,,0,tradehelp.genericweapon
@@ -161,6 +161,6 @@ parchmentMayanItems,10,0,0,0,0,true,,0,tradehelp.parchments
 parchmentMayanComplete,64,0,0,0,0,true,,0,tradehelp.parchments
 
 maize,3,2,16,32,3,false,,0,tradehelp.mayanfood
-mayangold,5*64,4*64,0,512,,,,2*64*64,tradehelp.mayangold
+mayangold,64,60,0,512,,,,2*64*64,tradehelp.mayangold
 
 

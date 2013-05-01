@@ -1,10 +1,10 @@
 villager.greeting=Konnichiwa, $name-san! / Bonjour, $name-ji!
 villager.greeting=Oi. / Salut !
-villager.greeting=Ogenki desuka, $name-san  / Comment allez vous, $name-ji?
+villager.greeting=Ogenki desuka, $name-san  / Comment allez-vous, $name-ji?
 villager.greeting=Kawatta koto aru? / Quoi de neuf ?
 villager.greeting=Hajimemashite / Ravi de faire votre connaissance.
 villager.greeting=Yokoso. / Bienvenue.
-villager.greeting=Gokigenyou. / Comment allez vous?
+villager.greeting=Gokigenyou. / Comment allez-vous?
 
 villager.gorest=Watashi niwa kyu-kei ga hituyou desu. / Je dois me reposer.
 villager.gorest=A-, mou neru jikan da / Ah, il est l'heure d'aller se coucher.
@@ -26,16 +26,16 @@ villager.DeliverGoodsHousold=Watashi wa mise kara syokuryou wo eta. / J'ai pris 
 
 villager.GetResourcesForBuild=Watashi wa motto takusan no zairyou ga hituyou desu. / J'ai besoin de plus de matière première.
 villager.ConstructionStepByStep=Watashi no chichi wa kentiku no houhou ni tuite watashi ni oshieta. / J'ai appris l'architecture de mon père.
-villager.ConstructionStepByStep=Watashi wa kami ga watashi no kenchiku wo kiniiru koto wo negatte imasu. / J'espère que le Kami aiemra mon bâtiment.
+villager.ConstructionStepByStep=Watashi wa kami ga watashi no kenchiku wo kiniiru koto wo negatte imasu. / J'espère que le Kami aimera mon bâtiment.
 
-villager.GoPlay=watashi wa asobitai desu. / Je veux jouer.
+villager.GoPlay=Watashi wa asobitai desu. / Je veux jouer.
 villager.BecomeAdult=Seityou suru jikan. / Il est temps de grandir.
 male.BecomeAdult=Watashi wa sensi ni naritai desu. / Je veux être un noble samouraï.
 female.BecomeAdult=Watashi wa ituka hahaoya ni naritai desu. / Je veux être mère un jour.
 villager.gopray.chosen=Kokoro wo otitukasete kudasai. / Méditons.
 
 villager.calltoarms=Mura wo mamore! / Défendons le village!
-villager.calltoarms=Karera wa watashitachi wo kougeki suru hi wo koukai suru darou! / Ils  regretterons le jour où ils nous ont attaqué !
+villager.calltoarms=Karera wa watashitachi wo kougeki suru hi wo koukai suru darou! / Ils regretteront le jour où ils nous ont attaqué !
 villager.calltoarms=Kuki wo mote! / Aux armes !
 
 villager.MakeTools=Watashi wa naganen no aida saikoukyu no dougu wo koumyou ni tukutte iru. / Je fabrique les meilleurs outils depuis bien des années.
