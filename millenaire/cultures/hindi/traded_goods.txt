@@ -46,16 +46,16 @@ chickenmeat,20,0,0,0,32,false,,0,tradehelp.genericfoodraw
 chickenmeatcooked,28,20,0,0,48,false,,0,tradehelp.hindigenericfood
 fishraw,5,3,0,192,0,false,,0,tradehelp.genericfoodraw
 fishcooked,7,5,0,192,16,false,,0,tradehelp.hindigenericfood
-wah,0,3*64,0,0,0,false,,0,tradehelp.hindigenericfood
+wah,0,2*80,0,0,0,false,,0,tradehelp.hindigenericfood
 masa,0,48,0,0,0,false,,0,tradehelp.hindigenericfood
-udon,0,3*64,0,0,32,false,,0,tradehelp.hindigenericfood
+udon,0,2*80,0,0,32,false,,0,tradehelp.hindigenericfood
 lambcooked,0,32,0,0,0,false,,0,tradehelp.hindigenericfood
-souvlaki,0,3*64,0,0,0,false,,0,tradehelp.hindigenericfood
+souvlaki,0,2*80,0,0,0,false,,0,tradehelp.hindigenericfood
 
 cake,0,64,0,0,128,false,,0,tradehelp.hindigenericfoodsweet
 cookie,0,4,0,0,8,false,,0,tradehelp.hindigenericfoodsweet
 feta,0,96,0,0,0,false,,0,tradehelp.hindigenericfoodsweet
-cacauhaa,0,3*64,0,0,0,false,0,0,tradehelp.hindigenericfoodsweet
+cacauhaa,0,2*80,0,0,0,false,0,0,tradehelp.hindigenericfoodsweet
 
 rasgulla,2*64,2*60,8,0,3*64,,,2*64*64,tradehelp.hindirasgulla
 vegcurry,32,30,0,0,40,false,,0,tradehelp.hindicurry
@@ -65,10 +65,10 @@ rice,32,0,0,128,48,false,,0,tradehelp.hindicurry
 turmeric,64,0,0,64,90,false,,0,tradehelp.hindicurry
 
 
-normanPickaxe,0,15*64,0,0,,,,0,tradehelp.generictools
-normanAxe,0,15*64,0,0,,,,0,tradehelp.generictools
-normanShovel,0,15*64,0,0,,,,0,tradehelp.generictools
-normanHoe,0,15*64,0,0,,,,0,tradehelp.generictools
+normanPickaxe,0,10*80,0,0,,,,0,tradehelp.generictools
+normanAxe,0,10*80,0,0,,,,0,tradehelp.generictools
+normanShovel,0,10*80,0,0,,,,0,tradehelp.generictools
+normanHoe,0,10*80,0,0,,,,0,tradehelp.generictools
 stonePickaxe,0,3,0,0, 0,false,,0,tradehelp.generictools
 stoneAxe,0,3,0,0, 0,false,,0,tradehelp.generictools
 stoneShovel,0,1,0,0, 0,false,,0,tradehelp.generictools
@@ -105,7 +105,7 @@ diamondChest,0,3*64*8,0,0, 8*20*64,false,,0,tradehelp.genericweapon
 diamondLegs,0,3*64*7,0,0, 7*20*64,false,,0,tradehelp.genericweapon
 diamondBoots,0,3*64*4,0,0, 4*20*64,false,,0,tradehelp.genericweapon
 yumibow,0,7*64,0,0, 0,false,,0,tradehelp.genericweapon
-tachisword,0,3*64,0,0, 0,false,,0,tradehelp.genericweapon
+tachisword,0,2*80,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardboots,0,96,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardHelmet,0,3*64,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardLegs,0,4*64,0,0, 0,false,,0,tradehelp.genericweapon
@@ -119,11 +119,11 @@ japanesewarriorredHelmet,0,6*64,0,0, 0,false,,0,tradehelp.genericweapon
 japanesewarriorredLegs,0,12*64,0,0, 0,false,,0,tradehelp.genericweapon
 japanesewarriorredPlate,0,18*64,0,0, 0,false,,0,tradehelp.genericweapon
 mayanmace,0,7*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanBroadsword,0,2*64*64,0,0, 2*64*64,false,,0,tradehelp.genericweapon
-normanHelmet,0,15*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanChest,0,30*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanLegs,0,12*64,0,0, 0,false,,0,tradehelp.genericweapon
-normanBoots,0,7*64,0,0, 0,false,,0,tradehelp.genericweapon
+normanBroadsword,0,64*80,0,0, 2*64*64,false,,0,tradehelp.genericweapon
+normanHelmet,0,10*80,0,0, 0,false,,0,tradehelp.genericweapon
+normanChest,0,20*80,0,0, 0,false,,0,tradehelp.genericweapon
+normanLegs,0,8*80,0,0, 0,false,,0,tradehelp.genericweapon
+normanBoots,0,5*80,0,0, 0,false,,0,tradehelp.genericweapon
 byzantineMace,0,64*64,0,0, 0,false,,0,tradehelp.genericweapon
 byzantineHelmet,0,12*64,0,0, 0,false,,0,tradehelp.genericweapon
 byzantinePlate,0,20*64,0,0, 0,false,,0,tradehelp.genericweapon

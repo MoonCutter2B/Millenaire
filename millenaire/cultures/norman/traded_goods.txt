@@ -2,7 +2,7 @@
 dirtwall,1,0,0,0,0,true,,0,tradehelp.freeblock
 pathdirt,1,0,0,0,0,true,,0,tradehelp.freeblock
 pathgravel,2,0,0,0,0,true,,0,tradehelp.freeblock
-pathslabs,16,0,0,0,0,true,,0,tradehelp.freeblock
+pathslabs,4,0,0,0,0,true,,0,tradehelp.freeblock
 wood,2,1,128,1024,0,false,,0,tradehelp.wood
 wood_pine,2,1,64,256,0,false,,0,tradehelp.wood
 wood_birch,2,1,64,256,0,false,,0,tradehelp.wood
@@ -58,22 +58,22 @@ cider,64,60,5,10,80,false,,0,tradehelp.normancider
 ciderapple,1,0,0,512,0,false,,0,tradehelp.normancider
 calva,2*64,2*60,2,5,0,false,0,2*64*64,tradehelp.normancider
 
-wah,0,3*64,0,0,0,false,,0,tradehelp.genericfood
+wah,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 masa,0,48,0,0,0,false,,0,tradehelp.genericfood
-chickencurry,0,3*64,0,0,0,false,,0,tradehelp.genericfood
+chickencurry,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 vegcurry,0,40,0,0,0,false,,0,tradehelp.genericfood
-udon,0,3*64,0,0,0,false,,0,tradehelp.genericfood
+udon,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 lambcooked,0,32,0,0,0,false,,0,tradehelp.genericfood
-souvlaki,0,3*64,0,0,0,false,,0,tradehelp.genericfood
+souvlaki,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 
 cake,0,64,0,0,128,false,,0,tradehelp.genericfoodsweet
 cookie,0,4,0,0,8,false,,0,tradehelp.genericfoodsweet
-rasgulla,0,3*64,0,0,0,false,,0,tradehelp.genericfoodsweet
-wine,0,3*64,0,0,0,false,,0,tradehelp.genericfoodsweet
+rasgulla,0,2*80,0,0,0,false,,0,tradehelp.genericfoodsweet
+wine,0,2*80,0,0,0,false,,0,tradehelp.genericfoodsweet
 winebasic,0,80,0,0,0,false,,0,tradehelp.genericfoodsweet
 feta,0,96,0,0,0,false,,0,tradehelp.genericfoodsweet
-sake,0,3*64,0,0,0,false,0,0,tradehelp.genericfoodsweet
-cacauhaa,0,3*64,0,0,0,false,0,0,tradehelp.genericfoodsweet
+sake,0,2*80,0,0,0,false,0,0,tradehelp.genericfoodsweet
+cacauhaa,0,2*80,0,0,0,false,0,0,tradehelp.genericfoodsweet
 
 bow,2*20,64,0,0,2*25,false,,0,tradehelp.genericweapon
 arrow,0,4,0,0,8,false,,0,tradehelp.genericweapon
@@ -98,7 +98,7 @@ byzantinePlate,0,20*64,0,0, 0,false,,0,tradehelp.genericweapon
 byzantineLegs,0,8*64,0,0, 0,false,,0,tradehelp.genericweapon
 byzantineBoots,0,6*64,0,0, 0,false,,0,tradehelp.genericweapon
 yumibow,0,7*64,0,0, 0,false,,0,tradehelp.genericweapon
-tachisword,0,3*64,0,0, 0,false,,0,tradehelp.genericweapon
+tachisword,0,2*80,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardboots,0,96,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardHelmet,0,3*64,0,0, 0,false,,0,tradehelp.genericweapon
 japaneseguardLegs,0,4*64,0,0, 0,false,,0,tradehelp.genericweapon
@@ -159,8 +159,8 @@ parchmentComplete,64,0,0,0,0,true,,0,tradehelp.parchments
 
 
 tapestry,5*64,0,0,0,,,,2*64*64,tradehelp.normantapestry
-timberframe_plain,32,0,0,1024,0,false,0,0,tradehelp.normantimberframes
-timberframe_cross,48,0,0,512,0,false,0,0,tradehelp.normantimberframes
+timberframe_plain,16,0,0,1024,0,false,0,0,tradehelp.normantimberframes
+timberframe_cross,20,0,0,512,0,false,0,0,tradehelp.normantimberframes
 
 //For viking seller
 yddrasilAmulet,0,0,0,0,32*64

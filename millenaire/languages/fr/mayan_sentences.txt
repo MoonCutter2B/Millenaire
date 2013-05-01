@@ -27,9 +27,9 @@ villager.SlaughterChicken=Ah kax si gnat b'ak'. / Les poulets nous donnent leur 
 villager.PlantMaize=K'aaxal tuuxtik gnat ichil k'a'am hoch. / La pluie nous donne une bonne récolte.
 
 villager.GetHouseResources=Ichil chik nah yam ichil utz nah. / Une maison propre est une bonne maison.
-villager.GetGoodsHousold=Ichil chuy ti chik. / Je dois nettoyer
+villager.GetGoodsHousold=Ichil chuy ti chik. / Je dois nettoyer.
 villager.DeliverGoodsHousold=Ti yaab han-ha ti kuch. / Ca fait trop de nourriture à porter.
-villager.makeRasgulla=In-wah mo'nol pall yam k'oh. / Mon enfant est malade
+villager.makeRasgulla=In-wah mo'nol pall yam k'oh. / Mon enfant est malade.
 
 
 villager.GetResourcesForBuild=Yaab' ti- yaab' tunich. / De la pierre, encore de la pierre.
@@ -41,7 +41,7 @@ villager.BecomeAdult=La la la la. /
 male.BecomeAdult=Ichil k'a't ti tz'ak-b' ha ah tz'on. / Je veux devenir chasseur.
 female.BecomeAdult=Ichil k'a't ha ichki. / Je veux un mari.
 
-villager.gopray.chosen=Ichil t'an u- orasion. / Je dit la prière.
+villager.gopray.chosen=Ichil t'an u- orasion. / Je dis la prière.
 mayan_shaman.gopray.chosen=U- orasion tal teech / Ma prière nous protège.
 
 villager.calltoarms=U- k'in yam in-ti'a'al! / Le jour est mien!

@@ -2,7 +2,7 @@
 //       Réglages UI    -    UI Settings
 //--------------------------------------------------------------------------------------------
 
-//Touche liste des villages; Touche pour afficher la liste des villages environants. Défaut: V.
+//Touche liste des villages; Touche pour afficher la liste des villages environnants. Défaut: V.
 //Village List Key; Key to display the list of surrounding villages. Default: V.
 village_list_key=V
 
@@ -10,7 +10,7 @@ village_list_key=V
 //Info Panel Key; Key to display the Millénaire info pannel. Default: M.
 quest_list_key=M
 
-//Touche mode escortes; Touche pour change le mode des escortes (agressif ou non). Défaut: G.
+//Touche mode escortes; Touche pour changer le mode des escortes (agressif ou non). Défaut: G.
 //Agressive Escorts Key; Key to toggle hired villagers between agressive and defensive stances. Default: G.
 escort_key=G
 
@@ -126,7 +126,7 @@ generate_translation_gap=false
 //Generate colour chart; Generate the chart of colours usable in building plans.
 generate_colour_chart=false
 
-//Générer les resources nécessaires; Générer une liste des resources nécessaires pour chaque bâtiment.
+//Générer les resources nécessaires; Générer une liste des ressources nécessaires pour chaque bâtiment.
 //Generate resource list; Generate the list of resources required for every building.
 generate_building_res=false
 

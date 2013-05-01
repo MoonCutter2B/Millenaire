@@ -354,7 +354,7 @@ public class SpecialQuestActions {
 			p=p.getAbove();
 		}
 
-		if (nbWater>15) {
+		if (nbWater>12) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.underwaterdive_success");
 			mw.getProfile(player.username).clearTag(UNDERWATER_DIVE);
 			mw.getProfile(player.username).setTag(UNDERWATER_DIVE+COMPLETE);
@@ -387,7 +387,7 @@ public class SpecialQuestActions {
 			p=p.getAbove();
 		}
 
-		if (nbWater>20) {
+		if (nbWater>15) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.underwaterglass_success");
 			mw.getProfile(player.username).clearTag(UNDERWATER_GLASS);
 			mw.getProfile(player.username).setTag(UNDERWATER_GLASS+COMPLETE);

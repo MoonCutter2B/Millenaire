@@ -134,7 +134,7 @@ sadhu_9_underwater_1_label=Report findings
 sadhu_9_underwater_1_description=So what is there to be seen so deep under the waves?
 sadhu_9_underwater_1_description_success=You say that as deep as you went, there was no sign of life... No fish, and no aquatic plants? This will require much thought on my part.
 sadhu_9_underwater_1_description_refuse=I will stay here and pray you change your mind, $name.
-sadhu_9_underwater_1_listing=Dive at least 15 metres below the surface of a sea.
+sadhu_9_underwater_1_listing=Dive at least 12 metres below the surface of a sea.
 
 sadhu_10_underwaterglass_0_label=Window in the depth
 sadhu_10_underwaterglass_0_description=I have thought long about your report, $name. Maybe you did not see well enough, in your fleeting dives. I need you to go back to the sea and build an observation room as deep as you can, from which to study the depths in peace.
@@ -144,7 +144,7 @@ sadhu_10_underwaterglass_1_label=Report findings
 sadhu_10_underwaterglass_1_description=What have you seen, where no man has ever seen?
 sadhu_10_underwaterglass_1_description_success=So the bottom of the sea is truly a barren place, devoid of life beyond those mysterious squid. This cannot be... No sea can be so empty, and how could such mighty animals survive without prey? <ret><ret>You have given me much to think about, $name. Come back in a while and I pray I will have answers for you.
 sadhu_10_underwaterglass_1_description_refuse=I will stay here and pray you change your mind, $name.
-sadhu_10_underwaterglass_1_listing=Build an observation room with a glass ceiling at least 20 metres below the surface.
+sadhu_10_underwaterglass_1_listing=Build an observation room with a glass ceiling at least 15 metres below the surface.
 
 sadhu_11_pujas_0_label=Knowledge and rituals
 sadhu_11_pujas_0_description=While you have explored the sea, I have focused all my thoughts on this mystery you left me - the enchantment table. I have struggled to decipher the books and the secrets of the construction of the table itself, and understood nothing. But wisdom came in my meditations: the table and the books do not matter. A practical man like you need them, a material support for you to focus on. But the power is not in them, it is in you and the world. And there are other ways to harness it.<ret><ret>I believe even a village pandit can do something similar, with proper training. I want you to go to the nearest Indian village and take this parchment to its priest. With the hymns I have written on it, he should be able to pray the gods to bless tools you give him, provided you give him proper offerings for the deities.

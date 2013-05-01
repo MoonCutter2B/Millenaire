@@ -18,12 +18,12 @@ goal=getHouseTHResources
 goal=deliverResourcesShop
 goal=getGoodsHousehold
 goal=deliverGoodsHousehold
-
+goal=makethatch
 goal=harvestRice
 goal=plantRice
 goal=makeudon
 
-requiredGood=wheat,2
+requiredGood=wheat,16
 requiredGood=chickenmeatcooked,1
 
 requiredFood=cider,5

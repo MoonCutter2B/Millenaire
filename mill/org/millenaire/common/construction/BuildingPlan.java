@@ -805,7 +805,7 @@ public class BuildingPlan {
 
 						if (pt!=null) {
 
-							if (!exportSnow && (pt.blockId!=Block.snow.blockID)) {//snow doesn't get exported as 99% of the case the player did not want it
+							if (exportSnow || (pt.blockId!=Block.snow.blockID)) {//snow doesn't get exported as 99% of the case the player did not want it
 
 								//does the block exist in an earlier upgrade?
 								PointType existing=null;
