@@ -54,7 +54,12 @@ public class ClientReceiver implements IPacketHandler
 			MLN.error(this, "Received a packet with null data on channel: "+packet.channel);
 			return;
 		}
-
+		
+		
+		if (Mill.clientWorld==null) {
+			MLN.error(this, "Received a packet despite null clientWorld.");
+			return;
+		}
 
 		final DataInputStream data = new DataInputStream(new ByteArrayInputStream(packet.data));
 

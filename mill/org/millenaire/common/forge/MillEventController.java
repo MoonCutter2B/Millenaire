@@ -46,6 +46,8 @@ public class MillEventController {
 			}
 		}
 	}
+	
+	
 
 	@ForgeSubscribe
 	public void worldLoaded(Load event)
@@ -68,9 +70,6 @@ public class MillEventController {
 				newWorld.loadData();
 			}
 		}
-		
-		
-		
 	}
 
 	@ForgeSubscribe
@@ -106,7 +105,12 @@ public class MillEventController {
 			return;
 
 		if (!(event.world instanceof WorldServer)) {
-			Mill.clientWorld=null;
+			if (Mill.clientWorld.world==event.world) {
+				Mill.clientWorld=null;
+				MLN.temp(null, "Unloaded client world.");
+			} else {
+				MLN.temp(null, "Skipped unloading client world as it's not current world.");
+			}
 		} else {
 
 			final Vector<MillWorld> toDelete=new Vector<MillWorld>();
