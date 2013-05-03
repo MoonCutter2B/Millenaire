@@ -282,7 +282,7 @@ public class VillageType implements WeightedChoice {
 					} else if (paramkey.equalsIgnoreCase("nameList")) {
 						nameList=value;
 					} else if (paramkey.equalsIgnoreCase("biome")) {
-						biomes.add(value);
+						biomes.add(value.toLowerCase());
 					} else if (paramkey.equalsIgnoreCase("requiredtag")) {
 						requiredTags.add(value);
 					} else if (paramkey.equalsIgnoreCase("forbiddentag")) {
@@ -570,6 +570,7 @@ public class VillageType implements WeightedChoice {
 
 	public boolean isValidForGeneration(MillWorld mw,EntityPlayer player,HashMap<String,Integer> nbVillages,Point pos,String biome,boolean keyLoneBuildingsOnly) {
 
+		
 		if (!generateOnServer && Mill.proxy.isTrueServer())
 			return false;
 

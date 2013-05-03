@@ -160,7 +160,7 @@ public class WorldGenVillage implements IWorldGenerator {
 		}
 	}
 
-	private boolean generateVillage(Point p,World world,VillageType village,EntityPlayer player,Random random,int minDistance,String name,boolean loneBuildings, Point parentVillage) throws MillenaireException {
+	private boolean generateVillage(Point p,World world,VillageType village,EntityPlayer player,EntityPlayer closestPlayer,Random random,int minDistance,String name,boolean loneBuildings, Point parentVillage) throws MillenaireException {
 
 		long startTime;
 
@@ -247,9 +247,9 @@ public class WorldGenVillage implements IWorldGenerator {
 			int minDistanceWithLoneBuildings;
 
 			if (loneBuildings) {
-				if (village.isKeyLoneBuildingForGeneration(null)) {
-					minDistanceWithVillages=Math.min(minDistance, MLN.minDistanceBetweenVillagesAndLoneBuildings)/2;
-					minDistanceWithLoneBuildings=Math.min(minDistance, MLN.minDistanceBetweenLoneBuildings)/2;
+				if (village.isKeyLoneBuildingForGeneration(closestPlayer)) {
+					minDistanceWithVillages=Math.min(minDistance, MLN.minDistanceBetweenVillagesAndLoneBuildings)/4;
+					minDistanceWithLoneBuildings=Math.min(minDistance, MLN.minDistanceBetweenLoneBuildings)/4;
 				} else {
 					minDistanceWithVillages=Math.min(minDistance, MLN.minDistanceBetweenVillagesAndLoneBuildings);
 					minDistanceWithLoneBuildings=Math.min(minDistance, MLN.minDistanceBetweenLoneBuildings);
@@ -506,7 +506,7 @@ public class WorldGenVillage implements IWorldGenerator {
 						village=villageType;
 					}
 
-					if ((village!=null) && generateVillage(p,world,village,generatingPlayer,random,minDistance,name,false,parentVillage))
+					if ((village!=null) && generateVillage(p,world,village,generatingPlayer,closestPlayer,random,minDistance,name,false,parentVillage))
 						return true;//village generated, stopping
 				}
 			}
@@ -525,7 +525,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 
 			for (final Point thp : mw.villagesList.pos) {
-				if (p.distanceTo(thp) < (minDistanceWithVillages/2)) {
+				if (p.distanceTo(thp) < (minDistanceWithVillages/4)) {
 					if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 						MLN.debug(this,"Time taken for finding near villages: "+(System.nanoTime()-startTime));
 					}
@@ -536,7 +536,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			}
 
 			for (final Point thp : mw.loneBuildingsList.pos) {
-				if (p.distanceTo(thp) < (minDistanceWithLoneBuildings/2)) {
+				if (p.distanceTo(thp) < (minDistanceWithLoneBuildings/4)) {
 					if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 						MLN.debug(this,"Time taken for finding near villages: "+(System.nanoTime()-startTime));
 					}
@@ -592,7 +592,7 @@ public class WorldGenVillage implements IWorldGenerator {
 				}
 			}
 
-			final boolean success= generateVillage(p,world,loneBuilding,generatingPlayer,random,minDistance,name,true,null);
+			final boolean success= generateVillage(p,world,loneBuilding,generatingPlayer,closestPlayer,random,minDistance,name,true,null);
 
 			if (success && (closestPlayer!=null) &&
 					loneBuilding.isKeyLoneBuildingForGeneration(closestPlayer) && (loneBuilding.keyLoneBuildingGenerateTag!=null)) {

@@ -1,6 +1,6 @@
 name:Adivasi ka Ghar
-weight:100
-radius:25
+weight:20
+radius:35
 biome:swampland
 //extraBiomes mod
 biome:lush swamplands

@@ -327,7 +327,11 @@ public class StreamReadWrite  {
 		final int enchantmentId=ds.readShort();
 
 		if (enchantmentId>0) {
-			puja.enchantmentTarget=Puja.enchantments[enchantmentId];
+			for (int i=0;i<Puja.enchantments.length;i++) {
+				if (Puja.enchantments[i].effectId==enchantmentId) {
+					puja.enchantmentTarget=Puja.enchantments[i];
+				}
+			}
 		}
 
 		puja.pujaProgress=ds.readShort();
