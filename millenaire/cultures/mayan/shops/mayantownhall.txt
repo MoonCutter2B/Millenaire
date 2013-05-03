@@ -1,4 +1,4 @@
-sells=dirtwall,pathdirt,pathslabs,wood,wood_pine,wood_birch,wood_jungle,gold,mayangold,cobblestone,stone,maize,masa,wah,purse,villageWand,parchmentMayanVillagers,parchmentMayanBuildings,parchmentMayanItems,parchmentMayanComplete
+sells=dirtwall,pathdirt_stable,pathslabs_stable,wood,wood_pine,wood_birch,wood_jungle,gold,mayangold,cobblestone,stone,maize,masa,wah,purse,villageWand,parchmentMayanVillagers,parchmentMayanBuildings,parchmentMayanItems,parchmentMayanComplete
 
 buys=wood,wood_pine,wood_birch,wood_jungle,stone,cobblestone,sandstone,wool_white,gold,mayangold
 

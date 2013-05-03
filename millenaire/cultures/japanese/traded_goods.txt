@@ -1,8 +1,8 @@
 //name, selling price, buying price, reserved quantity, target quantity, foreign merchant price, auto-generated, needed equipment(deprecated), minimum reputation
 dirtwall,1,0,0,0,0,true,,0,tradehelp.freeblock
-pathdirt,1,0,0,0,0,true,,0,tradehelp.freeblock
-pathgravel,2,0,0,0,0,true,,0,tradehelp.freeblock
-pathgravelslabs,4,0,0,0,0,true,,0,tradehelp.freeblock
+pathdirt_stable,1,0,0,0,0,true,,0,tradehelp.freeblock
+pathgravel_stable,2,0,0,0,0,true,,0,tradehelp.freeblock
+pathgravelslabs_stable,4,0,0,0,0,true,,0,tradehelp.freeblock
 wood,2,1,128,1024,0,false,,0,tradehelp.wood
 wood_pine,2,1,128,1024,0,false,,0,tradehelp.wood
 wood_birch,2,1,0,64,0,false,,0,tradehelp.wood

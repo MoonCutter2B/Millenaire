@@ -3,6 +3,8 @@ weight:10
 radius:15
 biome:extreme hills
 biome:ice mountains
+biome:Extreme Hills Edge
+
 max:1
 keyLoneBuildingGenerateTag:alchemist_tower_generate
 

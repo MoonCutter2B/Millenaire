@@ -106,18 +106,18 @@ public class DevModUtilities {
 					if (autoMoveDirection.get(p)==1) {
 						if (autoMoveTarget.get(p)<p.posX) {
 							autoMoveDirection.put(p, -1);
-							autoMoveTarget.put(p, (int) (p.posX-10000));
+							autoMoveTarget.put(p, (int) (p.posX-100000));
 							ServerSender.sendChat(p,MLN.LIGHTGREEN,"Auto-move: turning back.");
 						}
 					} else if (autoMoveDirection.get(p)==-1) {
 						if (autoMoveTarget.get(p)>p.posX) {
 							autoMoveDirection.put(p, 1);
-							autoMoveTarget.put(p, (int) (p.posX+10000));
+							autoMoveTarget.put(p, (int) (p.posX+100000));
 							ServerSender.sendChat(p,MLN.LIGHTGREEN,"Auto-move: turning back again.");
 						}
 					}
 
-					((EntityPlayerMP)p).playerNetServerHandler.setPlayerLocation(p.posX+(autoMoveDirection.get(p)*0.1), p.posY, p.posZ, p.rotationYaw, p.rotationPitch);
+					((EntityPlayerMP)p).playerNetServerHandler.setPlayerLocation(p.posX+(autoMoveDirection.get(p)*0.5), p.posY, p.posZ, p.rotationYaw, p.rotationPitch);
 				}
 			}
 		}
@@ -194,7 +194,7 @@ public class DevModUtilities {
 			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Auto-move disabled");
 		} else {
 			autoMoveDirection.put(player, 1);
-			autoMoveTarget.put(player,(int) (player.posX+2000));
+			autoMoveTarget.put(player,(int) (player.posX+100000));
 			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Auto-move enabled");
 		}
 	}

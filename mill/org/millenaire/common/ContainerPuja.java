@@ -34,7 +34,8 @@ public class ContainerPuja extends Container {
 
 		@Override
 		public void onSlotChanged() {
-			shrine.temple.getTownHall().requestSave("Puja money slot changed");
+			if (!shrine.temple.worldObj.isRemote)
+				shrine.temple.getTownHall().requestSave("Puja money slot changed");
 			super.onSlotChanged();
 		}
 
@@ -58,7 +59,8 @@ public class ContainerPuja extends Container {
 
 		@Override
 		public void onSlotChanged() {
-			shrine.temple.getTownHall().requestSave("Puja offering slot changed");
+			if (!shrine.temple.worldObj.isRemote)
+				shrine.temple.getTownHall().requestSave("Puja offering slot changed");
 			super.onSlotChanged();
 		}
 	}
@@ -85,7 +87,8 @@ public class ContainerPuja extends Container {
 
 			shrine.calculateOfferingsNeeded();
 
-			shrine.temple.getTownHall().requestSave("Puja tool slot changed");
+			if (!shrine.temple.worldObj.isRemote)
+				shrine.temple.getTownHall().requestSave("Puja tool slot changed");
 
 			super.onSlotChanged();
 		}
@@ -97,26 +100,32 @@ public class ContainerPuja extends Container {
 
 	public ContainerPuja(EntityPlayer player, Building temple) {
 
-		this.player=player;
+		try {
 
-		addSlotToContainer(new OfferingSlot(temple.pujas, 0, 26, 19));
-		addSlotToContainer(new MoneySlot(temple.pujas, 1, 8, 55));
-		addSlotToContainer(new MoneySlot(temple.pujas, 2, 26, 55));
-		addSlotToContainer(new MoneySlot(temple.pujas, 3, 44, 55));
-		addSlotToContainer(new ToolSlot(temple.pujas, 4, 86, 37));
+			this.player=player;
 
-		for (int i = 0; i < 3; i++)
-		{
-			for (int k = 0; k < 9; k++)
+			addSlotToContainer(new OfferingSlot(temple.pujas, 0, 26, 19));
+			addSlotToContainer(new MoneySlot(temple.pujas, 1, 8, 55));
+			addSlotToContainer(new MoneySlot(temple.pujas, 2, 26, 55));
+			addSlotToContainer(new MoneySlot(temple.pujas, 3, 44, 55));
+			addSlotToContainer(new ToolSlot(temple.pujas, 4, 86, 37));
+
+			for (int i = 0; i < 3; i++)
 			{
-				addSlotToContainer(new Slot(player.inventory, k + (i * 9) + 9, 8 + (k * 18), 106 + (i * 18)));
+				for (int k = 0; k < 9; k++)
+				{
+					addSlotToContainer(new Slot(player.inventory, k + (i * 9) + 9, 8 + (k * 18), 106 + (i * 18)));
+				}
 			}
+
+			for (int j = 0; j < 9; j++)
+			{
+				addSlotToContainer(new Slot(player.inventory, j, 8 + (j * 18), 164));
+			}
+		} catch (Exception e) {
+			MLN.printException("Exception in ContainerPuja(): ", e);
 		}
 
-		for (int j = 0; j < 9; j++)
-		{
-			addSlotToContainer(new Slot(player.inventory, j, 8 + (j * 18), 164));
-		}
 	}
 
 	@Override

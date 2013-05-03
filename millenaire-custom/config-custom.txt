@@ -29,3 +29,9 @@ village_radius=80
 //Charger toutes les langues; Charger toutes les langues, pour fournir des traductions aux clients si nécessaire.
 load_all_languages=true
 
+//logworldgeneration; 
+logworldgeneration=minor
+
+//logpujas; 
+logpujas=debug
+

@@ -1,4 +1,4 @@
-sells=dirtwall,pathdirt,pathgravel,pathochretiles,wood,wood_birch,cobblestone,stone,sandstone,glass,clay,bricks,byzantinetiles,wool_white,bookshelves,book,paper,painting,byzantineiconsmall,byzantineiconmedium,byzantineiconlarge,iron,leather,purse,villageWand
+sells=dirtwall,pathdirt_stable,pathgravel_stable,pathochretiles_stable,wood,wood_birch,cobblestone,stone,sandstone,glass,clay,bricks,byzantinetiles,wool_white,bookshelves,book,paper,painting,byzantineiconsmall,byzantineiconmedium,byzantineiconlarge,iron,leather,purse,villageWand
 
 buys=wood,wood_pine,wood_birch,wood_jungle,clay,bricks,cobblestone,stone,sandstone,glass,byzantinetiles,wool_white,bookshelves,book,paper,painting,silk,byzantineiconsmall,byzantineiconmedium,byzantineiconlarge,iron,leather
 

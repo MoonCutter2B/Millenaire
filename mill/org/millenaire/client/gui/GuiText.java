@@ -402,7 +402,7 @@ public abstract class GuiText extends GuiScreen {
 					textField.setMaxStringLength(line.textField.getMaxStringLength());
 					textField.setTextColor(-1);
 					line.textField=textField;
-					line.textField.func_82266_h(-1);
+					line.textField.setTextColor(-1);
 					line.textField.setEnableBackgroundDrawing(false);
 
 					textFields.add(textField);
