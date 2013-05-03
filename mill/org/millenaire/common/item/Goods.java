@@ -1216,19 +1216,35 @@ public class Goods {
 		goodsName.put("bookandquill", new InvItem(Item.writableBook,0));
 		goodsName.put("purse", new InvItem(Mill.purse,0));
 		
-		goodsName.put("pathdirt", new InvItem(Mill.path,8));
-		goodsName.put("pathgravel", new InvItem(Mill.path,9));
-		goodsName.put("pathslabs", new InvItem(Mill.path,10));
-		goodsName.put("pathsandstone", new InvItem(Mill.path,11));
-		goodsName.put("pathochretiles", new InvItem(Mill.path,12));
-		goodsName.put("pathgravelslabs", new InvItem(Mill.path,13));
+		goodsName.put("pathdirt", new InvItem(Mill.path,0));
+		goodsName.put("pathgravel", new InvItem(Mill.path,1));
+		goodsName.put("pathslabs", new InvItem(Mill.path,2));
+		goodsName.put("pathsandstone", new InvItem(Mill.path,3));
+		goodsName.put("pathochretiles", new InvItem(Mill.path,4));
+		goodsName.put("pathgravelslabs", new InvItem(Mill.path,5));
 		
-		goodsName.put("pathdirt_slab", new InvItem(Mill.pathSlab,8));
-		goodsName.put("pathgravel_slab", new InvItem(Mill.pathSlab,9));
-		goodsName.put("pathslabs_slab", new InvItem(Mill.pathSlab,10));
-		goodsName.put("pathsandstone_slab", new InvItem(Mill.pathSlab,11));
-		goodsName.put("pathochretiles_slab", new InvItem(Mill.pathSlab,12));
-		goodsName.put("pathgravelslabs_slab", new InvItem(Mill.pathSlab,13));
+		goodsName.put("pathdirt_slab", new InvItem(Mill.pathSlab,0));
+		goodsName.put("pathgravel_slab", new InvItem(Mill.pathSlab,1));
+		goodsName.put("pathslabs_slab", new InvItem(Mill.pathSlab,2));
+		goodsName.put("pathsandstone_slab", new InvItem(Mill.pathSlab,3));
+		goodsName.put("pathochretiles_slab", new InvItem(Mill.pathSlab,4));
+		goodsName.put("pathgravelslabs_slab", new InvItem(Mill.pathSlab,5));
+		
+		goodsName.put("pathdirt_stable", new InvItem(Mill.path,8));
+		goodsName.put("pathgravel_stable", new InvItem(Mill.path,9));
+		goodsName.put("pathslabs_stable", new InvItem(Mill.path,10));
+		goodsName.put("pathsandstone_stable", new InvItem(Mill.path,11));
+		goodsName.put("pathochretiles_stable", new InvItem(Mill.path,12));
+		goodsName.put("pathgravelslabs_stable", new InvItem(Mill.path,13));
+		
+		goodsName.put("pathdirt_slab_stable", new InvItem(Mill.pathSlab,8));
+		goodsName.put("pathgravel_slab_stable", new InvItem(Mill.pathSlab,9));
+		goodsName.put("pathslabs_slab_stable", new InvItem(Mill.pathSlab,10));
+		goodsName.put("pathsandstone_slab_stable", new InvItem(Mill.pathSlab,11));
+		goodsName.put("pathochretiles_slab_stable", new InvItem(Mill.pathSlab,12));
+		goodsName.put("pathgravelslabs_slab_stable", new InvItem(Mill.pathSlab,13));
+		
+		
 	}
 
 	public InvItem item;

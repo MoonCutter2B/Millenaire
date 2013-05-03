@@ -1,4 +1,4 @@
-sells=dirtwall,pathdirt,pathgravel,pathgravelslabs,wood,wood_pine,wood_birch,wood_jungle,cobblestone,stone,chickenmeat,rice,wheat,paperwall,iron,thatched,timberframe_plain,timberframe_cross,fishcooked,fishraw,sake,udon,purse,villageWand,parchmentJapaneseVillagers,parchmentJapaneseBuildings,parchmentJapaneseItems,parchmentJapaneseComplete
+sells=dirtwall,pathdirt_stable,pathgravel_stable,pathgravelslabs_stable,wood,wood_pine,wood_birch,wood_jungle,cobblestone,stone,chickenmeat,rice,wheat,paperwall,iron,thatched,timberframe_plain,timberframe_cross,fishcooked,fishraw,sake,udon,purse,villageWand,parchmentJapaneseVillagers,parchmentJapaneseBuildings,parchmentJapaneseItems,parchmentJapaneseComplete
 
 buys=wood,wood_pine,wood_birch,wood_jungle,stone,cobblestone,thatched,paperwall,rice,wheat,iron,leather
 

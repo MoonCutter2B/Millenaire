@@ -226,6 +226,7 @@ public class GuiActions {
 		if ((temple!=null) && (temple.pujas!=null)) {
 			temple.pujas.changeEnchantment(enchantmentId);
 			player.addStat(MillAchievements.puja, 1);
+			temple.sendBuildingPacket(player, false);
 		}
 	}
 

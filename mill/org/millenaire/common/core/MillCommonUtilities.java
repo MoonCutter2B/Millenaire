@@ -1523,16 +1523,20 @@ public class MillCommonUtilities {
 		int meta=p.getMeta(world);
 		//int bidAbove=p.getAbove().getId(world);
 		//int metaAbove=p.getAbove().getMeta(world);
-		int bidBelow=p.getBelow().getId(world);
-		int metaBelow=p.getBelow().getMeta(world);
+		//int bidBelow=p.getBelow().getId(world);
+		//int metaBelow=p.getBelow().getMeta(world);
 
 		if (th.isPointProtectedFromPathBuilding(p))
 			return false;
 		
-		if (bid==Mill.pathSlab.blockID && pathBid==Mill.path.blockID)
-			pathBid=Mill.pathSlab.blockID;
+		//if (bid==Mill.pathSlab.blockID && pathBid==Mill.path.blockID)
+		//	pathBid=Mill.pathSlab.blockID;
+		
 
-		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid,meta)) && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {
+
+		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid,meta))) {
+			
+			
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
 		}
@@ -1550,7 +1554,7 @@ public class MillCommonUtilities {
 	public static boolean canPathBeBuiltHere(int bid,int meta) {
 		return (bid==Block.dirt.blockID || bid==Block.grass.blockID ||
 				bid==Block.sand.blockID || bid==Block.gravel.blockID 
-				|| ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta<8) || bid==0 || bid==Block.plantYellow.blockID
+				|| ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta<8) || bid==Block.plantYellow.blockID
 				|| bid==Block.plantRed.blockID || bid==Block.mushroomBrown.blockID || bid==Block.mushroomRed.blockID
 				|| bid==Block.tallGrass.blockID || bid==Block.deadBush.blockID);
 	}
@@ -1641,8 +1645,11 @@ public class MillCommonUtilities {
 			}
 		}
 	}
+	
+	private static final boolean PATH_RAISE=false;
 
 
+	@SuppressWarnings("unused")
 	public static Vector<BuildingBlock> buildPath(Building th,ArrayList<AStarNode> path,int pathBid,int pathMeta,int pathWidth) {
 
 		Vector<BuildingBlock> pathPoints=new Vector<BuildingBlock>();
@@ -1706,7 +1713,7 @@ public class MillCommonUtilities {
 							&& ((p.x==lastp.x && p.x==nextp.x) || (p.z==lastp.z && p.z==nextp.z) || true)) {
 
 						//straightening path:   1 0 1 to 1 0.5 1
-						if (lastNode.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
+						if (PATH_RAISE && lastNode.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
 								&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,lastNode.y,node.z);
 							path.set(ip, node);
@@ -1718,7 +1725,7 @@ public class MillCommonUtilities {
 							halfSlab=true;
 
 							//slab a block above:    1 1 2 to 1 1.5 2
-						} else if (!lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
+						} else if (PATH_RAISE && !lastNodeHalfSlab && node.y==lastNode.y && node.y<nextNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
 								&& lastp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,node.y+1,node.z);
 							path.set(ip, node);
@@ -1729,7 +1736,7 @@ public class MillCommonUtilities {
 							halfSlab=true;
 
 							//slab a block above: 2 1 1 to 2 1.5 1
-						} else if (!lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
+						} else if (PATH_RAISE && !lastNodeHalfSlab && node.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, 2, 0).isBlockPassable(th.worldObj)
 								&& nextp.getRelative(0, 2, 0).isBlockPassable(th.worldObj)) {
 							node=new AStarNode(node.x,node.y+1,node.z);
 							path.set(ip, node);

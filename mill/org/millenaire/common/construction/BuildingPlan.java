@@ -129,16 +129,17 @@ public class BuildingPlan {
 			int targetPathLevel=0;
 
 			for (int i=0;i<th.villageType.pathMaterial.size();i++) {
-				if (th.villageType.pathMaterial.get(i).id()==bid
+				if ((th.villageType.pathMaterial.get(i).id()==bid || (th.villageType.pathMaterial.get(i).id()==Mill.path.blockID && bid==Mill.pathSlab.blockID))
 						&& th.villageType.pathMaterial.get(i).meta==meta)
 					targetPathLevel=i;
 			}
 
 			int bid=p.getId(th.worldObj);
 			int meta=p.getMeta(th.worldObj);
-			int bidAbove=p.getAbove().getId(th.worldObj);
-			int bidBelow=p.getBelow().getId(th.worldObj);
+			//int bidAbove=p.getAbove().getId(th.worldObj);
+			//int bidBelow=p.getBelow().getId(th.worldObj);
 
+			/**
 			//if there's a path above, clear it
 			if (bidAbove==Mill.path.blockID || bidAbove==Mill.pathSlab.blockID) {
 				p.getAbove().setBlock(th.worldObj, 0, 0, true, false);
@@ -150,18 +151,13 @@ public class BuildingPlan {
 					p.getBelow().setBlock(th.worldObj,MillCommonUtilities.getBlockIdValidGround(p.getRelative(0, -2, 0).getId(th.worldObj),true), 0, true, false);
 				else
 					p.getBelow().setBlock(th.worldObj, Block.dirt.blockID, 0, true, false);
-			}
+			}**/
 
 			if (bid!=Mill.path.blockID && bid!=Mill.pathSlab.blockID && MillCommonUtilities.canPathBeBuiltHere(bid,meta)) {
 				build(th.worldObj, false, false);
-			} else {
-
-				if (this.bid==Mill.path.blockID && bid==Mill.pathSlab.blockID) {
-					this.bid=(short) Mill.pathSlab.blockID;
-				}
-
+			} else if (bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) {
 				int currentPathLevel=Integer.MAX_VALUE;
-
+				
 				for (int i=0;i<th.villageType.pathMaterial.size();i++) {
 					if (th.villageType.pathMaterial.get(i).meta==meta)
 						currentPathLevel=i;
@@ -170,6 +166,7 @@ public class BuildingPlan {
 				if (currentPathLevel<targetPathLevel) {
 					build(th.worldObj, false, false);
 				}
+				
 			}
 		}
 

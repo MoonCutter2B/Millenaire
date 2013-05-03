@@ -1,5 +1,6 @@
 package org.millenaire.common.goal;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.Building;
@@ -56,6 +57,13 @@ public class GoalPerformPuja extends Goal {
 		final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
 
 		final boolean canContinue=temple.pujas.performPuja(villager);
+		
+		EntityPlayer player=villager.worldObj.getClosestPlayerToEntity(villager, 16);
+		
+		if (player!=null) {
+			temple.sendBuildingPacket(player, false);
+		}
+			
 
 		if (!canContinue)
 			return true;

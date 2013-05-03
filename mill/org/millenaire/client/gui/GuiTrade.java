@@ -425,7 +425,7 @@ public class GuiTrade extends GuiContainer {
 
 			if (!flag && (itemstack!=null))
 			{
-				itemRenderer.renderItemIntoGUI(fontRenderer, mc.renderEngine, itemstack, k, l);
+				itemRenderer.renderItemAndEffectIntoGUI(fontRenderer, mc.renderEngine, itemstack, k, l);
 				itemRenderer.renderItemOverlayIntoGUI(fontRenderer, mc.renderEngine, itemstack, k, l);
 			}
 

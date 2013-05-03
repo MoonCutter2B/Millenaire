@@ -34,7 +34,8 @@ public class ContainerPuja extends Container {
 
 		@Override
 		public void onSlotChanged() {
-			shrine.temple.getTownHall().requestSave("Puja money slot changed");
+			if (!shrine.temple.worldObj.isRemote)
+				shrine.temple.getTownHall().requestSave("Puja money slot changed");
 			super.onSlotChanged();
 		}
 
@@ -58,7 +59,8 @@ public class ContainerPuja extends Container {
 
 		@Override
 		public void onSlotChanged() {
-			shrine.temple.getTownHall().requestSave("Puja offering slot changed");
+			if (!shrine.temple.worldObj.isRemote)
+				shrine.temple.getTownHall().requestSave("Puja offering slot changed");
 			super.onSlotChanged();
 		}
 	}
@@ -85,7 +87,8 @@ public class ContainerPuja extends Container {
 
 			shrine.calculateOfferingsNeeded();
 
-			shrine.temple.getTownHall().requestSave("Puja tool slot changed");
+			if (!shrine.temple.worldObj.isRemote)
+				shrine.temple.getTownHall().requestSave("Puja tool slot changed");
 
 			super.onSlotChanged();
 		}

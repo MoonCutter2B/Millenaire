@@ -32,3 +32,6 @@ load_all_languages=true
 //logworldgeneration; 
 logworldgeneration=minor
 
+//logpujas; 
+logpujas=debug
+
