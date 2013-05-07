@@ -52,6 +52,18 @@ public class ServerSender {
 
 	public static void displayControlledMilitaryGUI(EntityPlayer player,Building townHall) {
 		townHall.sendBuildingPacket(player, false);
+		
+		townHall.sendBuildingPacket(player, false);
+
+		final MillWorld mw=Mill.getMillWorld(player.worldObj);
+
+		for (final Point p : townHall.getKnownVillages()) {
+			final Building b = mw.getBuilding(p);
+			if (b!=null) {
+				b.sendBuildingPacket(player, false);
+			}
+
+		}
 
 		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		final DataOutputStream data = new DataOutputStream(bytes);
