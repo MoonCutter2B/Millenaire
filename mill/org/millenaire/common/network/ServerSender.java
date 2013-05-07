@@ -50,6 +50,27 @@ public class ServerSender {
 		sendPacketToPlayer(packet,player.username);
 	}
 
+	public static void displayControlledMilitaryGUI(EntityPlayer player,Building townHall) {
+		townHall.sendBuildingPacket(player, false);
+
+		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		final DataOutputStream data = new DataOutputStream(bytes);
+
+		try {
+			data.write(ServerReceiver.PACKET_OPENGUI);
+			data.write(CommonGuiHandler.GUI_CONTROLLEDMILITARYPANEL);
+			StreamReadWrite.writeNullablePoint(townHall.getPos(), data);
+		} catch (final IOException e) {
+			MLN.printException(ServerSender.class+": Error in displayControlledMilitaryGUI", e);
+		}
+
+		final Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = ServerReceiver.PACKET_CHANNEL;
+		packet.data = bytes.toByteArray();
+		packet.length = packet.data.length;
+
+		sendPacketToPlayer(packet,player.username);
+	}
 
 	public static void displayHireGUI(EntityPlayer player, MillVillager villager) {
 

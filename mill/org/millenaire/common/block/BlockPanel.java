@@ -41,6 +41,11 @@ public class BlockPanel extends BlockSign {
 			ServerSender.displayControlledProjectGUI(entityplayer,building);
 			return true;
 		}
+		
+		if ((panel.panelType==TileEntityPanel.controlledMilitary) && building.controlledBy(entityplayer.username)) {
+			ServerSender.displayControlledMilitaryGUI(entityplayer,building);
+			return true;
+		}
 
 		ServerSender.displayPanel(entityplayer, new Point(i,j,k));
 

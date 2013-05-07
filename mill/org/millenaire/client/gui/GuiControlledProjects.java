@@ -11,7 +11,7 @@ import org.millenaire.common.MLN;
 import org.millenaire.common.VillagerRecord;
 import org.millenaire.common.construction.BuildingProject;
 
-public class GuiControlledBuildings extends GuiText {
+public class GuiControlledProjects extends GuiText {
 
 	public static class GuiButtonProject extends MillGuiButton {
 
@@ -33,7 +33,7 @@ public class GuiControlledBuildings extends GuiText {
 
 
 
-	public GuiControlledBuildings(net.minecraft.entity.player.EntityPlayer player,Building th) {
+	public GuiControlledProjects(net.minecraft.entity.player.EntityPlayer player,Building th) {
 
 		townhall=th;
 		projects=townhall.getFlatProjectList();
@@ -59,7 +59,6 @@ public class GuiControlledBuildings extends GuiText {
 		}
 
 		fillData();
-
 	}
 
 	@Override

@@ -28,6 +28,10 @@ goal=plantMaize
 goal=makewah
 goal=makemasa
 
+goal=makedirtwall
+goal=makepathdirt
+goal=makepathslabs
+
 toolneededclass=hoes
 
 defaultweapon=woodhoe

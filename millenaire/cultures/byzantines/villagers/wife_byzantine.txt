@@ -54,6 +54,11 @@ goal=makesouvlaki
 goal=buildpath
 goal=clearoldpath
 
+goal=makedirtwall
+goal=makepathdirt
+goal=makepathgravel
+goal=makepathochretiles
+
 requiredFood=cider,5
 requiredFood=calva,2
 requiredFood=rasgulla,1

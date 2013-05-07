@@ -51,7 +51,7 @@ public class BlockDecorative extends Block {
 		}
 	}
 
-	private static final int EXPLOSION_RADIUS = 20;
+	private static final int EXPLOSION_RADIUS = 30;
 
 	public static int getBlockFromDye(int i)
 	{

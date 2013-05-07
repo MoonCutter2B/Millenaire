@@ -275,7 +275,7 @@ public class GuiActions {
 		final Building closestVillage=mw.getClosestVillage(pos);
 
 		if ((closestVillage != null)
-				&& (pos.squareRadiusDistance(closestVillage.getPos())<closestVillage.villageType.radius)) {
+				&& (pos.squareRadiusDistance(closestVillage.getPos())<closestVillage.villageType.radius+10)) {
 			if (closestVillage.controlledBy(player.username)) {
 				ServerSender.displayNewBuildingProjectGUI(player,closestVillage, pos);
 				return;
@@ -337,7 +337,7 @@ public class GuiActions {
 
 		effect*=(MillCommonUtilities.randomInt(40)+80)/100.0;
 
-		chief.getTownHall().adjustRelation(village,(int) effect);
+		chief.getTownHall().adjustRelation(village,(int) effect,false);
 
 		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.username);
 		profile.adjustDiplomacyPoint(chief.getTownHall(), -1);
@@ -359,6 +359,27 @@ public class GuiActions {
 		}
 	}
 
-
+	
+	public static void controlledMilitaryDiplomacy(EntityPlayer player,Building townHall,Point target,int level) {
+		townHall.adjustRelation(target,level,true);
+		townHall.sendBuildingPacket(player, false);
+	}
+	
+	public static void controlledMilitaryPlanRaid(EntityPlayer player,Building townHall,Building target) {
+		if (townHall.raidStart==0) {
+			townHall.adjustRelation(target.getPos(),-100,true);
+			townHall.planRaid(target);
+			townHall.sendBuildingPacket(player, false);
+		}
+	}
+	
+	public static void controlledMilitaryCancelRaid(EntityPlayer player,Building townHall) {
+		if (townHall.raidStart==0) {
+			townHall.cancelRaid();
+			townHall.sendBuildingPacket(player, false);
+		}
+	}
+	
+	
 
 }

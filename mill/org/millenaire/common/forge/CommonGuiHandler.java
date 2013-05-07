@@ -31,6 +31,7 @@ public class CommonGuiHandler implements IGuiHandler {
 	public static final int GUI_CONTROLLEDPROJECTPANEL = 11;
 	public static final int GUI_HIRE = 12;
 	public static final int GUI_NEWVILLAGE = 13;
+	public static final int GUI_CONTROLLEDMILITARYPANEL = 14;
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,

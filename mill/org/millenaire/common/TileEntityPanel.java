@@ -2,7 +2,9 @@ package org.millenaire.common;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +14,7 @@ import net.minecraft.util.MathHelper;
 
 import org.millenaire.client.MillClientUtilities;
 import org.millenaire.common.MillVillager.InvItem;
+import org.millenaire.common.MillVillager.InvItemAlphabeticalComparator;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingProject;
 import org.millenaire.common.core.MillCommonUtilities;
@@ -53,6 +56,8 @@ public class TileEntityPanel extends TileEntitySign {
 	public static final int innVisitors=11;
 
 	public static final int marketMerchants=12;
+	
+	public static final int controlledMilitary=13;
 
 	private static void addProjectToList(EntityPlayer player,BuildingProject project,Building townHall,Vector<String> page) {
 
@@ -745,6 +750,137 @@ public class TileEntityPanel extends TileEntitySign {
 
 		return text;
 	}
+	
+	public static Vector<Vector<String>> generateSummary(EntityPlayer player,Building townHall) {
+		Vector<String> page=new Vector<String>();
+
+		final Vector<Vector<String>> text=new  Vector<Vector<String>>();
+		
+		page.add(MLN.string("panels.villagesummary")+": "+townHall.getVillageQualifiedName());
+		page.add("");
+		
+		int nbMen = 0, nbFemale = 0, nbGrownBoy = 0, nbGrownGirl = 0, nbBoy = 0, nbGirl = 0;
+
+		for (final VillagerRecord vr : townHall.vrecords) {
+			final boolean belongsToVillage=(vr.getType()!=null) && !vr.getType().visitor && !vr.raidingVillage;
+
+			if (belongsToVillage) {
+
+				if (!vr.getType().isChild) {
+					if (vr.gender == MillVillager.MALE) {
+						nbMen++;
+					} else {
+						nbFemale++;
+					}
+				} else {
+					if (vr.villagerSize == MillVillager.max_child_size) {
+						if (vr.gender == MillVillager.MALE) {
+							nbGrownBoy++;
+						} else {
+							nbGrownGirl++;
+						}
+					} else {
+						if (vr.gender == MillVillager.MALE) {
+							nbBoy++;
+						} else {
+							nbGirl++;
+						}
+					}
+				}
+
+			}
+		}
+		
+		page.add(MLN.string("ui.populationnumber",""+(nbMen + nbFemale+nbGrownBoy + nbGrownGirl+nbBoy + nbGirl)));
+		page.add(MLN.string("ui.adults",""+(nbMen + nbFemale),""+nbMen,""+nbFemale));
+		page.add(MLN.string("ui.teens",""+(nbGrownBoy + nbGrownGirl),""+nbGrownBoy,""+nbGrownGirl));
+		page.add(MLN.string("ui.children",""+(nbBoy + nbGirl),""+nbBoy,""+nbGirl));
+		
+		page.add("");
+		
+		if (townHall.buildingGoal == null) {
+			page.add(MLN.string("ui.goalscompleted1")+" "+MLN.string("ui.goalscompleted2"));
+		} else {
+			final BuildingPlan goal = townHall.getCurrentGoalBuildingPlan();
+
+			String status;
+			if ((townHall.buildingLocationIP != null)
+					&& townHall.buildingLocationIP.key.equals(townHall.buildingGoal)) {
+				if (townHall.buildingLocationIP.level == 0) {
+					status = MLN.string("ui.inconstruction");
+				} else {
+					status = MLN.string("ui.upgrading",""+townHall.buildingLocationIP.level);
+				}
+			} else {
+				status = MLN.string(townHall.buildingGoalIssue);
+			}
+			page.add(MLN.string("panels.buildingproject")+" "+goal.nativeName+" "+goal.getGameName()+": "+status);
+			
+			final Vector<InvItem> res=new Vector<InvItem>();
+			final HashMap<InvItem,Integer> resCost=new HashMap<InvItem,Integer>();
+			final HashMap<InvItem,Integer> resHas=new HashMap<InvItem,Integer>();
+			
+			for (final InvItem key : goal.resCost.keySet()) {
+				res.add(key);
+				resCost.put(key,goal.resCost.get(key));
+				int has=townHall.countGoods(key.id(),key.meta);
+				if ((townHall.builder != null) && (townHall.buildingLocationIP != null) && townHall.buildingLocationIP.key.equals(townHall.buildingGoal)) {
+					has+=townHall.builder.countInv(key.id(),key.meta);
+				}
+				if (has > goal.resCost.get(key)) {
+					has=goal.resCost.get(key);
+				}
+
+				resHas.put(key,has);
+			}
+			page.add("");
+			page.add(MLN.string("panels.resourcesneeded")+":");
+			page.add("");
+			
+			Collections.sort(res, new InvItemAlphabeticalComparator());
+
+			for (int i=0;i<res.size();i++) {
+				page.add(res.get(i).getName()+": "+resHas.get(res.get(i))+"/"+resCost.get(res.get(i)));
+			}
+			
+		}
+		page.add("");
+		page.add(MLN.string("panels.currentconstruction"));
+		
+		if (townHall.buildingLocationIP == null) {
+			page.add(MLN.string("ui.noconstruction1")+" "+MLN.string("ui.noconstruction2"));
+		} else {
+			final String planName = townHall.culture.getBuildingPlanSet(townHall.buildingLocationIP.key).getNativeName();
+
+			String status;
+			if (townHall.buildingLocationIP.level == 0) {
+				status = MLN.string("ui.inconstruction");
+			} else {
+				status = MLN.string("ui.upgrading",""+townHall.buildingLocationIP.level);
+			}
+
+			String loc;
+
+			if (townHall.buildingLocationIP != null) {
+
+				final int distance = MathHelper.floor_double(townHall.getPos()
+						.distanceTo(townHall.buildingLocationIP.pos));
+
+				final String direction = MLN.string(townHall.getPos().directionTo(
+						townHall.buildingLocationIP.pos));
+
+				loc = MLN.string("other.shortdistancedirection",""+distance,""+direction);
+			} else {
+				loc = "";
+			}
+			
+			page.add(planName+": "+status+" - "+loc );
+		}
+		
+		text.add(page);
+		
+		return text;
+	}
 
 	public static Vector<Vector<String>> generateResources(EntityPlayer player,Building house) {
 
@@ -759,13 +895,13 @@ public class TileEntityPanel extends TileEntitySign {
 		final BuildingPlan goalPlan=house.getCurrentGoalBuildingPlan();
 
 		final Vector<InvItem> res=new Vector<InvItem>();
-		final Vector<Integer> resCost=new Vector<Integer>();
-		final Vector<Integer> resHas=new Vector<Integer>();
+		final HashMap<InvItem,Integer> resCost=new HashMap<InvItem,Integer>();
+		final HashMap<InvItem,Integer> resHas=new HashMap<InvItem,Integer>();
 
 		if (goalPlan != null) {
 			for (final InvItem key : goalPlan.resCost.keySet()) {
 				res.add(key);
-				resCost.add(goalPlan.resCost.get(key));
+				resCost.put(key,goalPlan.resCost.get(key));
 				int has=house.countGoods(key.id(),key.meta);
 				if ((house.builder != null) && (house.buildingLocationIP != null) && house.buildingLocationIP.key.equals(house.buildingGoal)) {
 					has+=house.builder.countInv(key.id(),key.meta);
@@ -774,7 +910,7 @@ public class TileEntityPanel extends TileEntitySign {
 					has=goalPlan.resCost.get(key);
 				}
 
-				resHas.add(has);
+				resHas.put(key,has);
 			}
 
 			page.add(MLN.string("panels.resourcesneeded")+":");
@@ -807,9 +943,11 @@ public class TileEntityPanel extends TileEntitySign {
 			page.add(name+" - "+status);
 
 			page.add("");
+			
+			Collections.sort(res, new InvItemAlphabeticalComparator());
 
-			for (int i=0;i<resHas.size();i++) {
-				page.add(res.get(i).getName()+": "+resHas.get(i)+"/"+resCost.get(i));
+			for (int i=0;i<res.size();i++) {
+				page.add(res.get(i).getName()+": "+resHas.get(res.get(i))+"/"+resCost.get(res.get(i)));
 			}
 
 			text.add(page);
@@ -823,8 +961,12 @@ public class TileEntityPanel extends TileEntitySign {
 		page.add("");
 
 		final HashMap<InvItem,Integer> contents=house.getChestsContent();
+		
+		List<InvItem> keys=new Vector<InvItem>(contents.keySet());
+		
+		Collections.sort(keys,new InvItemAlphabeticalComparator());
 
-		for (final InvItem key : contents.keySet()) {
+		for (final InvItem key : keys) {
 			page.add(key.getName()+": "+contents.get(key));
 		}
 

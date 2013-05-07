@@ -32,6 +32,10 @@ goal=makeRasgulla
 goal=makecurry
 goal=makemurgh
 
+goal=makedirtwall
+goal=makepathdirt
+goal=makepathsandstone
+
 toolneededclass=hoes
 
 requiredGood=sugarcane,12

@@ -210,6 +210,17 @@ public class ClientReceiver implements IPacketHandler
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: "+guiId);
 				}
+			} else if (guiId==CommonGuiHandler.GUI_CONTROLLEDMILITARYPANEL) {
+				final Point thPos=StreamReadWrite.readNullablePoint(data);
+
+				if (thPos!=null) {
+					final Building building=Mill.clientWorld.getBuilding(thPos);
+					if (building != null) {
+						DisplayActions.displayControlledMilitaryGUI(Mill.proxy.getTheSinglePlayer(), building);
+					}
+				} else {
+					MLN.error(this, "Unknown point in readGUIPacket: "+guiId);
+				}
 			} else if (guiId==CommonGuiHandler.GUI_PANEL) {
 				final Point p=StreamReadWrite.readNullablePoint(data);
 

@@ -86,6 +86,10 @@ public class ServerReceiver implements IPacketHandler
 	public static final int GUIACTION_SUMMONINGWANDUSE = 80;
 	public static final int GUIACTION_MILLCHESTACTIVATE = 81;
 	public static final int GUIACTION_IMPORTBUILDING = 82;
+	
+	public static final int GUIACTION_MILITARY_RELATIONS = 90;
+	public static final int GUIACTION_MILITARY_RAID = 91;
+	public static final int GUIACTION_MILITARY_CANCEL_RAID = 92;
 
 	public static final int DEV_COMMAND_TOGGLE_AUTO_MOVE = 1;
 	public static final int DEV_COMMAND_TEST_PATH = 2;
@@ -429,6 +433,28 @@ public class ServerReceiver implements IPacketHandler
 					GuiActions.hireRelease(player, v);
 				} else {
 					MLN.error(this, "Unknown villager id in readGUIPacket: "+vid);
+				}
+			} else if (guiActionId==GUIACTION_MILITARY_RELATIONS) {
+				final Point thPos=StreamReadWrite.readNullablePoint(data);
+				final Point targetpos=StreamReadWrite.readNullablePoint(data);
+				final int amount=data.read();
+				final Building th=mw.getBuilding(thPos);
+				if (th!=null) {
+					GuiActions.controlledMilitaryDiplomacy(player, th, targetpos, amount);
+				}
+			} else if (guiActionId==GUIACTION_MILITARY_RAID) {
+				final Point thPos=StreamReadWrite.readNullablePoint(data);
+				final Point targetpos=StreamReadWrite.readNullablePoint(data);
+				final Building th=mw.getBuilding(thPos);
+				final Building target=mw.getBuilding(targetpos);
+				if (th!=null) {
+					GuiActions.controlledMilitaryPlanRaid(player, th, target);
+				}
+			} else if (guiActionId==GUIACTION_MILITARY_CANCEL_RAID) {
+				final Point thPos=StreamReadWrite.readNullablePoint(data);
+				final Building th=mw.getBuilding(thPos);
+				if (th!=null) {
+					GuiActions.controlledMilitaryCancelRaid(player, th);
 				}
 			} else {
 				MLN.error(null, "Unknown Gui action: "+guiActionId);

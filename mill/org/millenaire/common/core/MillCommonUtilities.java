@@ -1192,6 +1192,8 @@ public class MillCommonUtilities {
 			playSoundBlockPlaced(world,p,Block.glass,volume);
 		} else if (soundMill.equals("stone")) {
 			playSoundBlockPlaced(world,p,Block.stone,volume);
+		} else if (soundMill.equals("earth")) {
+			playSoundBlockPlaced(world,p,Block.dirt,volume);
 		} else {
 			MLN.printException("Tried to play unknown sound: "+soundMill, new Exception());
 		}

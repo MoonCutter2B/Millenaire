@@ -7,6 +7,7 @@ import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -81,6 +82,15 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public abstract class MillVillager extends EntityCreature  implements IEntityAdditionalSpawnData, IAStarPathedEntity {
 
+	public static class InvItemAlphabeticalComparator implements Comparator<InvItem> {
+
+		@Override
+		public int compare(InvItem arg0, InvItem arg1) {
+			return arg0.getName().compareTo(arg1.getName());
+		}
+		
+	}
+	
 	public static class InvItem implements Comparable<InvItem> {
 
 		public static final int ANYENCHANTED=1;
