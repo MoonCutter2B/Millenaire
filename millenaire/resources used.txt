@@ -127,7 +127,7 @@ indian_controlled resource use:
 Bois de chêne: 172
 Roche: 648
 Statue Hindoue: 2
-Pierres: 100
+Pierres: 180
 Grès: 4329
 Brique cuite: 1047
 Brique de terre: 805
@@ -4647,6 +4647,9 @@ Initial Construction
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|40
+|-
 | style="text-align: center; "|Brique cuite
 | style="text-align: center; "|406
 |-
@@ -4696,7 +4699,7 @@ Upgrade 3
 | style="text-align: center; "|30
 |-
 | style="text-align: center; "|Pierres
-| style="text-align: center; "|36
+| style="text-align: center; "|76
 |-
 | style="text-align: center; "|Grès
 | style="text-align: center; "|650

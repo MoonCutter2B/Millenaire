@@ -169,6 +169,18 @@ ui.chunkbutton=Carte des tronçons
 ui.configbutton=Réglages Millénaire
 ui.serverimportforbidden=Il faut être administrateur pour pouvoir importer des bâtiments sur un serveur.
 
+ui.controldiplomacy=Diplomatie
+ui.raidinprogress=Raid en cours!
+ui.otherraidinprogress=Autre raid en cours.
+ui.otherraidplanned=Autre raid prévu.
+ui.raidcancel=Annuler le raid
+ui.raidplanned=Raid prévu.
+ui.relgood=Excellentes
+ui.relneutral=Neutres
+ui.relbad=Conflit
+ui.raid=Planifier un raid
+
+
 
 help.tab_1=Généralité sur les villages
 help.tab_2=Commerce
@@ -447,6 +459,9 @@ panels.unknownattacker=un endroit inconnu
 panels.raidsperformed=Raids commis
 panels.raidssuffered=Raids subis
 panels.nameand=<0> et
+panels.buildingproject=Projet en cours:
+panels.currentconstruction=Construction en cours:
+panels.villagesummary=Informations clés
 
 //Goals (text displayed above the villager when he is doing it)
 goal.gorest=Se repose
@@ -609,6 +624,8 @@ goal.clearoldpath=Efface un vieux chemin
 goal.gosocialise=Part discuter
 goal.chat=Discute
 
+goal.makepath=Fabrique des blocs de chemins
+goal.makedirtwall=Fabrique du pisé
 
 //other
 other.west=ouest

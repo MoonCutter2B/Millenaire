@@ -52,22 +52,25 @@ public class GuiVillageHead extends GuiText {
 			this.value=plan;
 		}
 	}
+	
 	private class VillageRelation implements Comparable<VillageRelation> {
 
 		int relation;
 		Point pos;
+		String name;
 
-		VillageRelation(Point p, int r) {
+		VillageRelation(Point p, int r,String name) {
 			relation=r;
 			pos=p;
+			this.name=name;
 		}
 
 		@Override
 		public int compareTo(VillageRelation arg0) {
-			return arg0.relation-relation;
+			return name.compareTo(arg0.name);
 		}
-
 	}
+	
 	public static final int ACTION_ICON_LENGTH=15;
 	public static final int ACTION_ICON_HEIGHT=13;
 
@@ -286,8 +289,10 @@ public class GuiVillageHead extends GuiText {
 
 		final ArrayList<VillageRelation> relations=new ArrayList<VillageRelation>();
 
-		for (final Point p : chief.getTownHall().getKnownVillages()) {
-			relations.add(new VillageRelation(p,chief.getTownHall().getRelationWithVillage(p)));
+		for (final Point p : chief.getTownHall().getKnownVillages()) {			
+			final Building b = chief.getTownHall().mw.getBuilding(p);
+			if (b!=null)
+				relations.add(new VillageRelation(p,chief.getTownHall().getRelationWithVillage(p),b.getVillageQualifiedName()));
 		}
 
 		Collections.sort(relations);

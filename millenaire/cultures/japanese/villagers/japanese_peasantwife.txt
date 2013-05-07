@@ -23,6 +23,11 @@ goal=harvestRice
 goal=plantRice
 goal=makeudon
 
+goal=makedirtwall
+goal=makepathdirt
+goal=makepathgravel
+goal=makepathgravelslabs
+
 requiredGood=wheat,16
 requiredGood=chickenmeatcooked,1
 

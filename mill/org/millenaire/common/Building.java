@@ -472,6 +472,11 @@ public class Building {
 
 			building.name=StreamReadWrite.readNullableString(ds);
 			building.qualifier=StreamReadWrite.readNullableString(ds);
+			
+			building.raidTarget=StreamReadWrite.readNullablePoint(ds);
+			building.raidPlanningStart=ds.readLong();
+			building.raidStart=ds.readLong();
+			
 
 			for (final Point p : building.chests) {
 				final TileEntityMillChest chest=p.getMillChest(mw.world);
@@ -976,11 +981,11 @@ public class Building {
 		mw.getProfile(player.username).adjustLanguage(getTownHall().culture.key,l);
 	}
 
-	public void adjustRelation(Point villagePos,int change) {
+	public void adjustRelation(Point villagePos,int change,boolean reset) {
 		//First change to local values
 		int relation=change;
 
-		if (relations.containsKey(villagePos)) {
+		if (relations.containsKey(villagePos) && !reset) {
 			relation+=relations.get(villagePos);
 		}
 
@@ -1164,22 +1169,26 @@ public class Building {
 
 				//no raid between buildings that are both inactive
 				if (isActive || target.isActive) {
-					raidPlanningStart=worldObj.getWorldTime();
-					raidStart=0;
-					raidTarget=target.getPos();
-
-					if (MLN.LogDiplomacy>=MLN.MAJOR) {
-						MLN.major(this, "raidTarget set: "+raidTarget+" name: "+target.name);
-					}
-
-					saveNeeded=true;
-					saveReason="Raid planned";
-
-
-					ServerSender.sendTranslatedSentenceInRange(worldObj, getPos(),MLN.BackgroundRadius,MLN.DARKRED, "raid.planningstarted",getVillageQualifiedName(),target.getVillageQualifiedName());
+					planRaid(target);
 				}
 			}
 		}
+	}
+	
+	public void planRaid(Building target) {
+		raidPlanningStart=worldObj.getWorldTime();
+		raidStart=0;
+		raidTarget=target.getPos();
+
+		if (MLN.LogDiplomacy>=MLN.MAJOR) {
+			MLN.major(this, "raidTarget set: "+raidTarget+" name: "+target.name);
+		}
+		
+		saveNeeded=true;
+		saveReason="Raid planned";
+		
+		ServerSender.sendTranslatedSentenceInRange(worldObj, getPos(),MLN.BackgroundRadius,MLN.DARKRED, "raid.planningstarted",getVillageQualifiedName(),target.getVillageQualifiedName());
+	
 	}
 
 	public PathingWorker calculatePath(MillVillager villager, Point start,
@@ -1364,7 +1373,7 @@ public class Building {
 
 	}
 
-	private void cancelRaid() {
+	public void cancelRaid() {
 
 		if (MLN.LogDiplomacy>=MLN.MAJOR) {
 			MLN.major(this, "Cancelling raid");
@@ -2569,7 +2578,7 @@ public class Building {
 								location = plan.findBuildingLocation(winfo,pathing,
 										this.location.pos, villageType.radius,
 										MillCommonUtilities.getRandom(), -1);
-							} else if (project.location != null) {
+							} else if (project.location != null && canAffordBuildAfterGoal(plan)) {
 								location = project.location
 										.createLocationForLevel(0);
 							}
@@ -3980,14 +3989,14 @@ public class Building {
 				if (distantVillage!=null) {
 					//First case: hamlets & parent village
 					if ((parentVillage!=null) && (p.sameBlock(parentVillage) || parentVillage.sameBlock(distantVillage.parentVillage))) {
-						adjustRelation(p,RELATION_MAX);
+						adjustRelation(p,RELATION_MAX,true);
 						//Player-controlled villages have max relations with each-other:
 					} else if (villageType.playerControlled && (controlledBy.equals(distantVillage.controlledBy))) {
-						adjustRelation(p,RELATION_MAX);
+						adjustRelation(p,RELATION_MAX,true);
 					} else if (distantVillage.culture==culture) {
-						adjustRelation(p,RELATION_GOOD);
+						adjustRelation(p,RELATION_GOOD,true);
 					} else {
-						adjustRelation(p,RELATION_BAD);
+						adjustRelation(p,RELATION_BAD,true);
 					}
 				}
 			}
@@ -5945,7 +5954,11 @@ public class Building {
 
 			StreamReadWrite.writeNullableString(name, data);
 			StreamReadWrite.writeNullableString(qualifier, data);
-
+			
+			StreamReadWrite.writeNullablePoint(raidTarget, data);
+			data.writeLong(raidPlanningStart);
+			data.writeLong(raidStart);
+			
 		} catch (final IOException e) {
 			MLN.printException(this+": Error in sendUpdatePacket", e);
 		}
@@ -7226,12 +7239,12 @@ public class Building {
 
 							if (MillCommonUtilities.randomInt(100)<improveChance) {
 								if (relations.get(p)<RELATION_MAX) {
-									adjustRelation(p,10+MillCommonUtilities.randomInt(10));
+									adjustRelation(p,10+MillCommonUtilities.randomInt(10),false);
 									ServerSender.sendTranslatedSentenceInRange(worldObj, getPos(), MLN.BackgroundRadius,MLN.DARKGREEN,"ui.relationfriendly",getVillageQualifiedName(),village.getVillageQualifiedName(),MillCommonUtilities.getRelationName(relations.get(p)));
 								}
 							} else {
 								if (relations.get(p)>RELATION_MIN) {
-									adjustRelation(p,-10-MillCommonUtilities.randomInt(10));
+									adjustRelation(p,-10-MillCommonUtilities.randomInt(10),false);
 									ServerSender.sendTranslatedSentenceInRange(worldObj, getPos(), MLN.BackgroundRadius,MLN.ORANGE,"ui.relationunfriendly",getVillageQualifiedName(),village.getVillageQualifiedName(),MillCommonUtilities.getRelationName(relations.get(p)));
 								}
 							}
@@ -7586,7 +7599,13 @@ public class Building {
 					{"panels.offense",""+this.getVillageRaidingStrength()},
 					{"panels.defense",""+this.getVillageDefendingStrength()}};
 
-			ServerSender.updatePanel(mw,signs.get(8), lines, TileEntityPanel.military, getPos(), 0);
+			int type;
+			if (villageType.playerControlled) {
+				type = TileEntityPanel.controlledMilitary;
+			} else {
+				type = TileEntityPanel.military;
+			}
+			ServerSender.updatePanel(mw,signs.get(8), lines, type, getPos(), 0);
 		}
 
 		lastSignUpdate = System.currentTimeMillis();

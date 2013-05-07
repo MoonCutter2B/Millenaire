@@ -325,8 +325,14 @@ public class MillClientUtilities {
 		page.add(MLN.string("panels.villagescroll")+": "+townHall.getVillageQualifiedName());
 		page.add("");
 		pages.add(page);
+		
+		Vector<Vector<String>> newPages=TileEntityPanel.generateSummary(player,townHall);
 
-		Vector<Vector<String>> newPages=TileEntityPanel.generateEtatCivil(player,townHall);
+		for (final Vector<String> newPage : newPages) {
+			pages.add(newPage);
+		}
+
+		newPages=TileEntityPanel.generateEtatCivil(player,townHall);
 
 		for (final Vector<String> newPage : newPages) {
 			pages.add(newPage);

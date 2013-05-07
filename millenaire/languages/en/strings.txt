@@ -170,6 +170,18 @@ ui.chunkbutton=Map of chunks
 ui.configbutton=Settings
 ui.serverimportforbidden=Only admin users can import buildings on a server.
 
+ui.controldiplomacy=Diplomacy
+ui.raidinprogress=Raid in progress!
+ui.otherraidinprogress=Other raid in progress.
+ui.otherraidplanned=Other raid planned.
+ui.raidcancel=Cancel the raid.
+ui.raidplanned=Raid planned.
+ui.relgood=Excellent
+ui.relneutral=Neutral
+ui.relbad=Conflict
+ui.raid=Plan a raid
+
+
 help.tab_1=Generalities on villages
 help.tab_2=Trading
 help.tab_3=Reputation & village chief
@@ -451,6 +463,9 @@ panels.unknownattacker=an unknown location
 panels.raidsperformed=Raids Peformed
 panels.raidssuffered=Raids Suffered
 panels.nameand=<0> and
+panels.buildingproject=Current project:
+panels.currentconstruction=Current construction:
+panels.villagesummary=Key information
 
 //Goals (text displayed above the villager when he is doing it)
 goal.gorest=Resting
@@ -611,6 +626,9 @@ goal.clearoldpath=clearing an old path
 
 goal.gosocialise=Off to chat
 goal.chat=Chatting
+
+goal.makedirtwall=Crafting dirt wall blocks
+goal.makepath=Crafting path blocks
 
 //other
 other.west=West

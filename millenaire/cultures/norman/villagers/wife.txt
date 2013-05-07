@@ -26,6 +26,11 @@ goal=makeCalva
 goal=getGoodsHousehold
 goal=deliverGoodsHousehold
 
+goal=makedirtwall
+goal=makepathdirt
+goal=makepathgravel
+goal=makepathslabs
+
 requiredFood=cider,5
 requiredFood=calva,2
 requiredFood=rasgulla,1

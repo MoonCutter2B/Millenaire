@@ -117,7 +117,8 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "4.9.2";
+	public static final String versionNumber = "4.9.3";
+
 	public static final String versionBound = "[4.9.0,5.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire"; 
@@ -380,8 +381,8 @@ public class Mill
 		denier_argent = (new ItemText(nextItemId(),"denier_argent")).setUnlocalizedName("ml_denier_argent");
 		ciderapple = (new ItemFoodMultiple(nextItemId(),"ciderapple",0,0,1,0.05f,false,0)).setUnlocalizedName("ml_ciderapple").setMaxStackSize(64);;
 		cider = (new ItemFoodMultiple(nextItemId(),"cider",4,15,0,0,true,5)).setAlwaysEdible().setUnlocalizedName("ml_cider");
-		calva = (new ItemFoodMultiple(nextItemId(),"calva",8,30,0,0,true,10)).setPotionEffect(Potion.damageBoost.id, 90, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_calva");
-		tripes = (new ItemFoodMultiple(nextItemId(),"tripes",0,0,10,1f,false,0)).setPotionEffect(Potion.regeneration.id, 30, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_tripes");
+		calva = (new ItemFoodMultiple(nextItemId(),"calva",8,30,0,0,true,10)).setPotionEffect(Potion.damageBoost.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_calva");
+		tripes = (new ItemFoodMultiple(nextItemId(),"tripes",0,0,10,1f,false,0)).setPotionEffect(Potion.regeneration.id, 90, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_tripes");
 
 		normanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"normanpickaxe",EnumToolMaterial.IRON,10,1561,14).setUnlocalizedName("ml_normanPickaxe");
 		MinecraftForge.setToolClass(normanPickaxe, "pickaxe", 2);
@@ -424,9 +425,9 @@ public class Mill
 		rice = (new ItemMillSeeds(nextItemId(),"rice", crops.blockID,0,Mill.CROP_RICE)).setUnlocalizedName("ml_rice");
 		turmeric = (new ItemMillSeeds(nextItemId(),"turmeric", crops.blockID,2,Mill.CROP_TURMERIC)).setUnlocalizedName("ml_turmeric");
 		vegcurry = (new ItemFoodMultiple(nextItemId(),"curry",0,0,6,0.6f,false,0)).setUnlocalizedName("ml_vegcurry");
-		chickencurry = (new ItemFoodMultiple(nextItemId(),"currychicken",0,0,8,0.8f,false,0)).setPotionEffect(Potion.fireResistance.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_chickencurry");
+		chickencurry = (new ItemFoodMultiple(nextItemId(),"currychicken",0,0,8,0.8f,false,0)).setPotionEffect(Potion.fireResistance.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_chickencurry");
 		brickmould = (new ItemBrickMould(nextItemId(),"brickmould")).setUnlocalizedName("ml_brickmould").setMaxStackSize(1).setMaxDamage(128);
-		rasgulla = (new ItemFoodMultiple(nextItemId(),"rasgulla",2,30,0,0,false,0)).setPotionEffect(Potion.moveSpeed.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_rasgullaId");
+		rasgulla = (new ItemFoodMultiple(nextItemId(),"rasgulla",2,30,0,0,false,0)).setPotionEffect(Potion.moveSpeed.id, 8*60, 1, 1f).setAlwaysEdible().setUnlocalizedName("ml_rasgullaId");
 		indianstatue = (new ItemTapestry(nextItemId(),"indianstatue",EntityWallDecoration.INDIAN_STATUE)).setUnlocalizedName("ml_indianstatue");
 
 		parchmentIndianVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.indianVillagers).setUnlocalizedName("ml_parchmentIndianVillagers");
@@ -438,7 +439,7 @@ public class Mill
 		mayanstatue = (new ItemTapestry(nextItemId(),"mayanstatue",EntityWallDecoration.MAYAN_STATUE)).setUnlocalizedName("ml_mayanstatue");
 		maize = (new ItemMillSeeds(nextItemId(),"maize", crops.blockID,4,Mill.CROP_MAIZE)).setUnlocalizedName("ml_maize");
 		masa = (new ItemFoodMultiple(nextItemId(),"masa",0,0,6,0.6f,false,0)).setUnlocalizedName("ml_masa");
-		wah = (new ItemFoodMultiple(nextItemId(),"wah",0,0,10,1f,false,0)).setPotionEffect(Potion.digSpeed.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wah");
+		wah = (new ItemFoodMultiple(nextItemId(),"wah",0,0,10,1f,false,0)).setPotionEffect(Potion.digSpeed.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wah");
 
 		parchmentMayanVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.mayanVillagers).setUnlocalizedName("ml_parchmentMayanVillagers");
 		parchmentMayanBuildings = new ItemParchment(nextItemId(),"parchmentbuildings",ItemParchment.mayanBuildings).setUnlocalizedName("ml_parchmentMayanBuildings");
@@ -449,7 +450,7 @@ public class Mill
 
 		unknownPowder =  new ItemText(nextItemId(),"unknownpowder").setUnlocalizedName("ml_unknownPowder").setCreativeTab(Mill.tabMillenaire);
 
-		udon = (new ItemFoodMultiple(nextItemId(),"udon",0,0,10,1f,false,0)).setPotionEffect(Potion.jump.id, 180, 1, 1f).setAlwaysEdible().setUnlocalizedName("ml_udon");
+		udon = (new ItemFoodMultiple(nextItemId(),"udon",0,0,10,1f,false,0)).setPotionEffect(Potion.jump.id, 8*60, 1, 1f).setAlwaysEdible().setUnlocalizedName("ml_udon");
 
 		tachiSword = new ItemMillenaireSword(nextItemId(),"tachisword",250,6,EnumToolMaterial.IRON.getEnchantability(),(float) 0.2,3,false).setUnlocalizedName("ml_taichiSword");
 
@@ -490,7 +491,7 @@ public class Mill
 
 
 		grapes=(new ItemMillSeeds(nextItemId(),"grapes", crops.blockID,6,Mill.CROP_VINE)).setUnlocalizedName("ml_vine");
-		wineFancy = (new ItemFoodMultiple(nextItemId(),"winefancy",8,30,0,0,true,5)).setPotionEffect(Potion.resistance.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wine");
+		wineFancy = (new ItemFoodMultiple(nextItemId(),"winefancy",8,30,0,0,true,5)).setPotionEffect(Potion.resistance.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wine");
 		silk=new ItemText(nextItemId(),"silk").setUnlocalizedName("ml_silk");
 		byzantineiconsmall = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_SMALL)).setUnlocalizedName("ml_byzantineicon");
 		byzantineiconmedium = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_MEDIUM)).setUnlocalizedName("ml_byzantineiconmedium");
@@ -513,9 +514,9 @@ public class Mill
 
 		purse = (ItemPurse) new ItemPurse(nextItemId(),"purse").setMaxStackSize(1).setUnlocalizedName("ml_purse");
 		
-		sake = (new ItemFoodMultiple(nextItemId(),"sake",8,30,0,0,true,10)).setPotionEffect(Potion.waterBreathing.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_sake");
+		sake = (new ItemFoodMultiple(nextItemId(),"sake",8,30,0,0,true,10)).setPotionEffect(Potion.waterBreathing.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_sake");
 		
-		cacauhaa = (new ItemFoodMultiple(nextItemId(),"cacauhaa",6,30,0,0,true,0)).setPotionEffect(Potion.nightVision.id, 30, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_cacauhaa");
+		cacauhaa = (new ItemFoodMultiple(nextItemId(),"cacauhaa",6,30,0,0,true,0)).setPotionEffect(Potion.nightVision.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_cacauhaa");
 
 		
 		wood_decoration.setUnlocalizedName("ml_wood_deco").setHardness(2.0F).setResistance(5F).setStepSound(Block.soundWoodFootstep);

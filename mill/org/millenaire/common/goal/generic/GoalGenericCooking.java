@@ -82,7 +82,7 @@ public class GoalGenericCooking extends GoalGeneric {
 				if (furnace.getStackInSlot(0) == null) {
 					nb=Math.min(64, dest.countGoods(itemToCook));
 
-					furnace.setInventorySlotContents(0, new ItemStack(Item.itemsList[itemToCook.id()],nb));
+					furnace.setInventorySlotContents(0, new ItemStack(Item.itemsList[itemToCook.id()],nb,itemToCook.meta));
 					dest.takeGoods(itemToCook,nb);
 				} else {
 					nb=Math.min(64-furnace.getStackInSlot(0).stackSize, villager.getHouse().countGoods(itemToCook));

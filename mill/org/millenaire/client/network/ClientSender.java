@@ -481,6 +481,66 @@ public class ClientSender {
 
 		createAndSendServerPacket(bytes);
 	}
+	
+	public static void controlledMilitaryDiplomacy(EntityPlayer player,
+			Building th,Point target,int amount) {
+		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		final DataOutputStream data = new DataOutputStream(bytes);
+
+		try {
+			data.write(ServerReceiver.PACKET_GUIACTION);
+			data.write(ServerReceiver.GUIACTION_MILITARY_RELATIONS);
+			StreamReadWrite.writeNullablePoint(th.getPos(), data);
+			StreamReadWrite.writeNullablePoint(target, data);
+			data.write(amount);
+		} catch (final IOException e) {
+			MLN.printException("Error in controlledMilitaryDiplomacy", e);
+		}
+
+		createAndSendServerPacket(bytes);
+		
+		//for immediate feedback
+		GuiActions.controlledMilitaryDiplomacy(player, th, target, amount);
+	}
+	
+	public static void controlledMilitaryPlanRaid(EntityPlayer player,
+			Building th,Point target) {
+		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		final DataOutputStream data = new DataOutputStream(bytes);
+
+		try {
+			data.write(ServerReceiver.PACKET_GUIACTION);
+			data.write(ServerReceiver.GUIACTION_MILITARY_RAID);
+			StreamReadWrite.writeNullablePoint(th.getPos(), data);
+			StreamReadWrite.writeNullablePoint(target, data);
+		} catch (final IOException e) {
+			MLN.printException("Error in controlledMilitaryStartRaid", e);
+		}
+
+		createAndSendServerPacket(bytes);
+		
+		//for immediate feedback
+		GuiActions.controlledMilitaryPlanRaid(player, th, th.mw.getBuilding(target));
+	}
+	
+	public static void controlledMilitaryCancelRaid(EntityPlayer player,
+			Building th) {
+		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		final DataOutputStream data = new DataOutputStream(bytes);
+
+		try {
+			data.write(ServerReceiver.PACKET_GUIACTION);
+			data.write(ServerReceiver.GUIACTION_MILITARY_CANCEL_RAID);
+			StreamReadWrite.writeNullablePoint(th.getPos(), data);
+		} catch (final IOException e) {
+			MLN.printException("Error in controlledMilitaryCancelRaid", e);
+		}
+
+		createAndSendServerPacket(bytes);
+		
+		//for immediate feedback
+		GuiActions.controlledMilitaryCancelRaid(player, th);
+	}
 
 	public static void villagerInteractSpecial(EntityPlayer player,
 			MillVillager villager) {

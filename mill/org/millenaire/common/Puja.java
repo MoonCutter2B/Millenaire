@@ -33,10 +33,10 @@ public class Puja implements IInventory {
 			return 64;
 
 		if (is.itemID==Mill.rice.itemID)
-			return 32;
+			return 8;	
 
 		if (is.itemID==Mill.rasgulla.itemID)
-			return 20;
+			return 64;
 
 		if ((is.itemID==Block.plantRed.blockID) || (is.itemID==Block.plantYellow.blockID))
 			return 16;
@@ -102,9 +102,9 @@ public class Puja implements IInventory {
 		if (nbother>=3)
 			return;
 
-		int cost=50+(enchantmentTarget.getMinEnchantability(currentLevel+1)*enchantmentTarget.getMinEnchantability(currentLevel+1));
+		int cost=50+(enchantmentTarget.getMinEnchantability(currentLevel+1)*10);
 
-		cost=cost*(nbother+1);
+		cost=cost*(nbother/2+1);
 
 		if (MLN.LogPujas>=MLN.MINOR) {
 			MLN.minor(this, "Offering needed: "+cost);

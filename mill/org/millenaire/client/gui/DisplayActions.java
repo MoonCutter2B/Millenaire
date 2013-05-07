@@ -17,7 +17,11 @@ public class DisplayActions {
 
 
 	public static void displayControlledProjectGUI(EntityPlayer player,Building townHall) {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiControlledBuildings(player,townHall));
+		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiControlledProjects(player,townHall));
+	}
+	
+	public static void displayControlledMilitaryGUI(EntityPlayer player,Building townHall) {
+		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiControlledMilitary(player,townHall));
 	}
 
 
