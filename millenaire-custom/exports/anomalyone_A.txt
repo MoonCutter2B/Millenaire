@@ -1,0 +1,1 @@
+native:Anomalie Une;around:4;startLevel:-1;orientation:3;width:18;length:12;exploretag:explored_anomalyone

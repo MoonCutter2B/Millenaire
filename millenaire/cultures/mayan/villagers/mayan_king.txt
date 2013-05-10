@@ -9,7 +9,8 @@ texture=/graphics/mob/mayan/mayan_King1.png
 
 goal=gorest
 goal=gopray
-
+goal=gosocialise
+goal=chat
 
 toolneededclass=meleeweapons
 toolneededclass=armour

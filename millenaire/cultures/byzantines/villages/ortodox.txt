@@ -1,6 +1,6 @@
 name:Chorio orthodoxo
-weight:0
-hillQualifier:goal=stous lofous
+weight:10
+hillQualifier:stous lofous
 lavaQualifier:to hefaisto
 lakeQualifier:limne
 biome:plains

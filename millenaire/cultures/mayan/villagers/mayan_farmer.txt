@@ -11,6 +11,8 @@ goal=gopray
 goal=goDrink
 goal=harvestMaize
 goal=plantMaize
+goal=gosocialise
+goal=chat
 
 bringBackHomeGood=maize
 

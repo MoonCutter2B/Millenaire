@@ -16,7 +16,8 @@ goal=chopTrees
 goal=gatherGoods
 goal=plantSaplings
 goal=bringBackResourcesHome
-
+goal=gosocialise
+goal=chat
 
 startinginv=sapling,5
 startinginv=sapling_jungle,5

@@ -9,6 +9,8 @@ goal=gorest
 goal=gopray
 goal=makemayanstatue
 goal=makemayangoldblock
+goal=gosocialise
+goal=chat
 
 requiredGood=stone,20
 requiredGood=sandstone,20

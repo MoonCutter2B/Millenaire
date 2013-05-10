@@ -24,7 +24,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import org.millenaire.client.network.ClientReceiver;
 import org.millenaire.common.Culture;
-import org.millenaire.common.EntityWallDecoration;
+import org.millenaire.common.EntityMillDecoration;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillWorld;
@@ -117,7 +117,7 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "4.9.3";
+	public static final String versionNumber = "4.9.4";
 
 	public static final String versionBound = "[4.9.0,5.0)";
 	public static final String modId="Millenaire";
@@ -411,7 +411,7 @@ public class Mill
 
 		boudin = (new ItemFoodMultiple(nextItemId(),"boudin",0,0,10,1f,false,0)).setUnlocalizedName("ml_boudin");
 
-		tapestry = (new ItemTapestry(nextItemId(),"normantapestry",EntityWallDecoration.NORMAN_TAPESTRY)).setUnlocalizedName("ml_tapestry");
+		tapestry = (new ItemTapestry(nextItemId(),"normantapestry",EntityMillDecoration.NORMAN_TAPESTRY)).setUnlocalizedName("ml_tapestry");
 
 
 
@@ -428,7 +428,7 @@ public class Mill
 		chickencurry = (new ItemFoodMultiple(nextItemId(),"currychicken",0,0,8,0.8f,false,0)).setPotionEffect(Potion.fireResistance.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_chickencurry");
 		brickmould = (new ItemBrickMould(nextItemId(),"brickmould")).setUnlocalizedName("ml_brickmould").setMaxStackSize(1).setMaxDamage(128);
 		rasgulla = (new ItemFoodMultiple(nextItemId(),"rasgulla",2,30,0,0,false,0)).setPotionEffect(Potion.moveSpeed.id, 8*60, 1, 1f).setAlwaysEdible().setUnlocalizedName("ml_rasgullaId");
-		indianstatue = (new ItemTapestry(nextItemId(),"indianstatue",EntityWallDecoration.INDIAN_STATUE)).setUnlocalizedName("ml_indianstatue");
+		indianstatue = (new ItemTapestry(nextItemId(),"indianstatue",EntityMillDecoration.INDIAN_STATUE)).setUnlocalizedName("ml_indianstatue");
 
 		parchmentIndianVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.indianVillagers).setUnlocalizedName("ml_parchmentIndianVillagers");
 		parchmentIndianBuildings = new ItemParchment(nextItemId(),"parchmentbuildings",ItemParchment.indianBuildings).setUnlocalizedName("ml_parchmentIndianBuildings");
@@ -436,7 +436,7 @@ public class Mill
 		parchmentIndianComplete = new ItemParchment(nextItemId(),"parchmentall",new int[]{ItemParchment.indianVillagers,ItemParchment.indianBuildings,ItemParchment.indianItems}).setUnlocalizedName("ml_marchmentIndianComplete");
 
 
-		mayanstatue = (new ItemTapestry(nextItemId(),"mayanstatue",EntityWallDecoration.MAYAN_STATUE)).setUnlocalizedName("ml_mayanstatue");
+		mayanstatue = (new ItemTapestry(nextItemId(),"mayanstatue",EntityMillDecoration.MAYAN_STATUE)).setUnlocalizedName("ml_mayanstatue");
 		maize = (new ItemMillSeeds(nextItemId(),"maize", crops.blockID,4,Mill.CROP_MAIZE)).setUnlocalizedName("ml_maize");
 		masa = (new ItemFoodMultiple(nextItemId(),"masa",0,0,6,0.6f,false,0)).setUnlocalizedName("ml_masa");
 		wah = (new ItemFoodMultiple(nextItemId(),"wah",0,0,10,1f,false,0)).setPotionEffect(Potion.digSpeed.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wah");
@@ -493,9 +493,9 @@ public class Mill
 		grapes=(new ItemMillSeeds(nextItemId(),"grapes", crops.blockID,6,Mill.CROP_VINE)).setUnlocalizedName("ml_vine");
 		wineFancy = (new ItemFoodMultiple(nextItemId(),"winefancy",8,30,0,0,true,5)).setPotionEffect(Potion.resistance.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wine");
 		silk=new ItemText(nextItemId(),"silk").setUnlocalizedName("ml_silk");
-		byzantineiconsmall = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_SMALL)).setUnlocalizedName("ml_byzantineicon");
-		byzantineiconmedium = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_MEDIUM)).setUnlocalizedName("ml_byzantineiconmedium");
-		byzantineiconlarge = (new ItemTapestry(nextItemId(),"byzantineicon",EntityWallDecoration.BYZANTINE_ICON_LARGE)).setUnlocalizedName("ml_byzantineiconlarge");
+		byzantineiconsmall = (new ItemTapestry(nextItemId(),"byzantineicon",EntityMillDecoration.BYZANTINE_ICON_SMALL)).setUnlocalizedName("ml_byzantineicon");
+		byzantineiconmedium = (new ItemTapestry(nextItemId(),"byzantineicon",EntityMillDecoration.BYZANTINE_ICON_MEDIUM)).setUnlocalizedName("ml_byzantineiconmedium");
+		byzantineiconlarge = (new ItemTapestry(nextItemId(),"byzantineicon",EntityMillDecoration.BYZANTINE_ICON_LARGE)).setUnlocalizedName("ml_byzantineiconlarge");
 
 
 		byzantineLegs = new ItemMillenaireArmour(nextItemId(),"byzantinelegs",EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,2).setUnlocalizedName("ml_byzantineLegs");
@@ -608,8 +608,8 @@ public class Mill
 
 
 
-			EntityRegistry.registerGlobalEntityID(EntityWallDecoration.class, "ml_Tapestry", ModLoader.getUniqueEntityId());
-			EntityRegistry.registerModEntity(EntityWallDecoration.class, "ml_Tapestry",VILLAGER_ENT_ID+7,instance, 80, 3, true);
+			EntityRegistry.registerGlobalEntityID(EntityMillDecoration.class, "ml_Tapestry", ModLoader.getUniqueEntityId());
+			EntityRegistry.registerModEntity(EntityMillDecoration.class, "ml_Tapestry",VILLAGER_ENT_ID+7,instance, 80, 100000, false);
 
 			ModLoader.registerBlock(lockedChest);
 			ModLoader.registerBlock(panel);
@@ -628,7 +628,7 @@ public class Mill
 
 			ModLoader.addSmelting(lambRaw.itemID, new ItemStack(lambCooked,1));
 			
-			FurnaceRecipes.smelting().addSmelting(stone_decoration.blockID, 1, new ItemStack(stone_decoration.blockID,1,0), 0.1f);
+			FurnaceRecipes.smelting().addSmelting(stone_decoration.blockID, 1, new ItemStack(stone_decoration.blockID,1,0), 0.3f);
 
 			ModLoader.addShapelessRecipe(new ItemStack(vegcurry,1),new Object[]{rice,turmeric});
 			ModLoader.addShapelessRecipe(new ItemStack(chickencurry,1),new Object[]{rice,turmeric,Item.chickenRaw});

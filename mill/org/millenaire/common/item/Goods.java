@@ -37,7 +37,7 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.Building;
-import org.millenaire.common.EntityWallDecoration;
+import org.millenaire.common.EntityMillDecoration;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
@@ -749,7 +749,7 @@ public class Goods {
 
 			int orientation = Direction.facingToDirection[side];
 
-			final EntityWallDecoration entitypainting = new EntityWallDecoration(world, i, j, k, orientation, type, false);
+			final EntityMillDecoration entitypainting = new EntityMillDecoration(world, i, j, k, orientation, type, false);
 			if(entitypainting.onValidSurface())
 			{
 				if(!world.isRemote)

@@ -492,7 +492,11 @@ public class ClientSender {
 			data.write(ServerReceiver.GUIACTION_MILITARY_RELATIONS);
 			StreamReadWrite.writeNullablePoint(th.getPos(), data);
 			StreamReadWrite.writeNullablePoint(target, data);
-			data.write(amount);
+			data.writeInt(amount);
+			
+			MLN.temp(null, "Sending relations to "+amount+" between "+th+" and "+target);
+			
+			
 		} catch (final IOException e) {
 			MLN.printException("Error in controlledMilitaryDiplomacy", e);
 		}

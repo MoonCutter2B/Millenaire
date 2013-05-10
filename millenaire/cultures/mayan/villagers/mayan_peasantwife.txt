@@ -31,6 +31,8 @@ goal=makemasa
 goal=makedirtwall
 goal=makepathdirt
 goal=makepathslabs
+goal=gosocialise
+goal=chat
 
 toolneededclass=hoes
 

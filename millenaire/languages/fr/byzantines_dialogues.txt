@@ -3,7 +3,7 @@ v1;0;Agapo ilióloustes méres! / J'aime les jours ensoleillés!
 v2;30;Poios den échei? / Qui ne les aime pas?
 
 newchat;key:nicevillage,weigth:10
-v1;0;Eínai pánta mia efcharístisi na doúme oraío chorió mas, étsi den eínai? C'est toujours un plaisir de voir notre charmant petit village, n'est-ce pas? 
+v1;0;Eínai pánta mia efcharístisi na doúme oraío chorió mas, étsi den eínai? / C'est toujours un plaisir de voir notre charmant petit village, n'est-ce pas? 
 v2;30;Fysiká, kai eínai óla lógo ton terástion prospatheión mas! / Evidemment, c'est le fruit de nos efforts!
 
 newchat;key:harvest,weigth:10

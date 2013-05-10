@@ -1,0 +1,275 @@
+//Français par xIflot
+//French by xIflot
+//Anglais par Teethdude
+//English by Teethdude
+
+newchat;key:stone,weigth:10
+v1;0;Stone is the best material to ever exist. 
+v2;30; It's even better when cooked! Hurray for stone! 
+v1;60;We need to mine it! To work! 
+
+newchat;key:pyramid,building:mayanpyramid,weigth:7
+v1;0;Our pyramid is the most beautiful and the best built. 
+v2;30;It's true. I visited other villages. Theirs are very nice but not elegant like ours! 
+v1;60;Our architecture is unique and original.  
+v2;90;Don't boast too much. I don't want us to be like the vain Byzantines. 
+v1;120;Oh yes, uhhh... I hate them. How could anyone be so pretentious! 
+
+newchat;key:player,weigth:10
+v1;0;We don't get many visitors here. 
+v2;30;Yeah, there is only $name and other lost people... 
+v1;60;Speaking of $name, don't you find him to be increasingly strange, and tired? 
+v2;90;True. He should take some rest. 
+
+newchat;key:miner,weigth:9
+v1;0;We should recruit more miners. 
+v2;30;Ah yes! The rocks and minerals are the best materials in existance. 
+v1;60;I agree... but there are not enough of us in the village, our numbers must grow. 
+v2;90;And we can't put the children to work. They're too young. 
+
+newchat;key:woman,weigth:6,v1:adult,v2:adult,v1:female
+v1;0;It's time to clean the house. 
+v2;30;But you did that yesterday! 
+v1;60;Regardless, I am not allowed to do anything else here. 
+v2;90;You always complain! 
+v1;120;Instead of protesting about me complaining, try to understand why I'm complaining! 
+
+newchat;key:friend,v1:vtype:mayan_miner,v2:adult,weigth:10
+v1;0;Ah my good friend $targetfirstname! How do you do? 
+v2;30;Hello $targetfirstname! Doing what I can really, Buisness is bad. 
+v1;60;Have you stopped selling stone to the Hindis? 
+v2;90;Yes. Now that independant Japanese miners offered their services, they don't need me anymore. 
+v1;120;You just have to offer them something else. 
+v2;150;You have any ideas? 
+
+newchat;key:monster,weigth:5
+v1;0;There are a lot of monsters out now. 
+v2;30;I'm sure the guards can fight them. 
+v1;60;What worries me is if a hoard of those explosive green creatures comes to attack. 
+v2;90;Worry not. We have decoys to use against them. 
+v1;120;Okay, at worst there is $name. He fights well and could defend us.  
+v2;150;I don't doubt it either. He's not that bad. 
+
+newchat;key:normands,weigth:6
+v1;0;Have you seen the skin color of the Normans? There all so pale! 
+v2;30;Oh yes! I have never seen such a color before. It's strange.  
+v1;60;I think they may have been cursed... 
+v2;90;Don't be silly. They are human just like everyone else. 
+v1;120;It's without a doubt alcohol that changed them like that. I'm sure they weren't always that way. 
+v2;150;You are probably wrong. 
+
+newchat;key:alchimist,weigth:4
+v1;0;When exploring the forest, i saw a funny alchemist. 
+v2;30;You seen him too? He is ridiculously weird. 
+v1;60;And how. There was a list of strange ingredients. Do you know what "withered skeleton skulls?" or "soul sand" is? 
+v2;90;No. but it's not very reassuring. 
+v1;120;Yeah! We think he's trying to make a Philosopher Stone. 
+v2;150;Brave $targetfirstname, if you believe in rumors, you are at risque of believing the Earth is round. 
+v1;180;You are probably right. 
+
+newchat;key:dragonegg,v1:adult,v2:adult,weigth:5
+v1;0;I saw a strange black egg in the desert. 
+v2;30;Oh really? What did it look like? 
+v1;60;It was big with violet spots. Very Big. 
+v2;90;Did you drink Norman alcohol again or are you joking? 
+v1;120;But... Its true! I swear! 
+v2;150;Haha! If you think you can trick me like that, you're wrong! 
+
+newchat;key:wither,weigth:3
+v1;0;In the forest i saw a strange black creature. 
+v2;30;Really? Describe it to me, I'm curious! 
+v1;60;Well it was a black skeleton like creature, with two heads at the end of its arms and one on its neck, and it had a look as cold as ice... 
+v2;90;That sends chills down my spine. 
+v1;120;Endermen were attacking it. 
+v2;150;Endermen? They don't exist, you must have been dreaming. 
+
+newchat;key:bakery,notbuilding:mayanbakery,weigth:7
+v1;0;We should build a bakery. It would put us in buisness. 
+v2;30;This is true. We can't settle for homemade bread. 
+v1;60;Let's go talk to the chief. 
+
+newchat;key:bestdad,v1:child,v2:child,weigth:8
+v1;0;My father is the best because he is a lumberman! 
+v2;30;Pfft! Wood is useless! Mine is better because he is a miner! 
+v1;60;Without wood, your dad serves no purpose. 
+v2;90;Oh yeah!? You looking for one?! 
+v1;120;Stop, the stone is useless, admit it. 
+v2;150;Without stone, your dad would be sleeping under the stars! 
+
+newchat;key:becomeadult,v1:child,v2:child,weigth:9
+v1;0;I'm scared to become an adult 
+v2;30;Why so? 
+v1;60;Bah because... There is too much work and we can no longer play... 
+v2;90;You'll see, it's great! 
+v1;120;No... I don't want to I don't want to I don't want to! 
+
+newchat;key:rebellion,v1:child,v2:child,rel:sibling,weigth:6
+v1;0;Mom and Dad are unfair! We always have to clean our room! 
+v2;30;Yeah! We should rebel and demand better treatment! 
+v1;60;Let's fight! Focus on Mother! 
+
+newchat;key:japanese,v1:adult,weigth:8
+v1;0;Hey, $targetfirstname, look at this. 
+v2;30;Funny sword! And a funny Bow! Where did you get this? 
+v1;60;It's a Yumi Bow and a Tachi. From the Japanese Forge. 
+v2;90;It's beautiful and effective. Was it expensive? 
+v1;120;Hell yes! I wasted two silver coins on the bow alone ! 
+v2;150;Whoa! You would have to save a lot before buying them. 
+
+newchat;key:exchange,v1:adult,v2:adult,v1:male,v2:male,weigth:9
+v1;0;Hello $targetlastname, sir. Is our market still holding? 
+v2;30;Yes, yes. As said, I have everything 
+v1;60;Always punctual! Nice to do buisness with you. 
+v2;90;All the pleasure is mine. So... 32 logs against 8 iron ingots. Voila! 
+v1;120;Thank you very much Sir. Have a good day. 
+v2;150;To you too Mr. $targetlastname ! 
+
+newchat;key:embauchement,v1:adult,v2:vtype:mayan_warrior,weigth:7
+v1;0;I'll hire you to protect me, in exchange for 48 coins per day. 
+v2;30;Hmmm. Depends on how long you're hiring me for, $targetfirstname . 
+v1;60;Six Days. My dogs are not sufficient to provide me enough protection. 
+v2;90;Alright, A silver coin. No less. 
+v1;120;That's robbery! 
+v2;150;Not at all, $targetfirstname. I'm risking my life in this job. 
+
+newchat;key:cereal,v2:vtype:mayan_farmer,weigth:9
+v1;0;I'm going to try and grow some rice. 
+v2;30;Rice? What is that? 
+v1;60;A plant I bought from the Hindu. They say its delicious! 
+v2;90;Could I try a taste? 
+v1;120;Sadly no. I need to plant each grain. 
+v2;150;That won't work. 
+
+newchat;key:zombiepigmen,weigth:6
+v1;0;Did you see the last storm? 
+v2;30;And How! Our crops enjoyed the water but it was terrifying. 
+v1;60;Well I was in the plains, and there was a pig next to me. 
+v2;90;And? 
+v1;120;Lightning struck and... He stood up on his hind legs... 
+v2;150;Really?! What did it look like? 
+v1;180;It had green mold on it.. or something like that. and had a gold sword too. 
+v2;210;Did you attack or flee? 
+v1;240;I was unarmed. but it didn't want to attack me. It looked at me, turned it's head and wandered off without really knowing what was going on. 
+v2;270;You should have used fire. What if it attacks the village? 
+v1;300;It was impervious to fire, Lightning struck it again and it felt nothing. 
+
+newchat;key:recolt,weigth:10
+v1;0;The harvest is plentiful this year. 
+v2;30;Yes, and to complain would be stupid. 
+v1;60;Indeed! 
+
+newchat;key:village,weigth:8
+v1;0;I think our village looks nice. 
+v2;30;So do I. It's very artistique. 
+v1;60;It's all through th stone and our mastery of architecture. 
+
+newchat;key:peasantdialog,v1:vtype:mayan_peasant,v2:vtype:mayan_peasant,weigth:10
+v1;0;So much maize to harvest, so little time... 
+v2;30;Yeah, i wish we got part of the harvest. 
+
+
+newchat;key:playerorigins,weigth:10
+v1;0;$name is quite strange person. 
+v2;30;Even stranger than the Normans. 
+v1;60;But where did he come from? 
+v2;90;Not sure, he doesn't seem to be from any culture. 
+
+
+newchat;key:byzantins,weigth:9
+v1;0;I really can't stand those Byzantines, They think they own this land! 
+v2;30;And did you see their buildings? 
+v1;60;Yes i did, Very strange. 
+v2;90;Bricks? What's the point!? 
+v1;120;They even use that glass stuff, just like the Normans do. 
+v2;150;True, but they seem more advanced then the Indians though. They don't have anything in their windows. 
+
+
+newchat;key:dialogchildmother,v1:child,v2:adult,v2:female,rel:parent,weigth:10
+v1;0;Mama! Can I go play further from the village? 
+v2;30;No my child, I don't want you to get hurt. 
+v1;60;Hurt from what? Its not dangerous out there. 
+v2;90;Listen, there are dangerous creatures out there... 
+v1;120;W-What kind of creature mama? 
+v2;150;Horrible things like...Creepers. 
+v1;180;C-c-creepers? 
+v2;210;Yes my child, they'll follow you home and blow you up when you least expect it. 
+
+
+
+newchat;key:tobewarrior,v1:vtype:mayan_warrior,v2:notvtype:mayan_warrior,weigth:9
+v1;0;Becoming a Warrior was the best decision of my life. 
+v2;30;How come? 
+v1;60;Because I can go out and help fight off enemies, much more fun than harvesting maize. 
+v2;90;But my life is much safer. 
+v1;120;True but I always wanted a thrill. 
+
+
+newchat;key:likemydad,v1:male,v2:child,v1:child,weigth:8
+v1;0;I want to be like my dad when I grow up! 
+v2;30;A wimp? 
+v1;60;What? no, he isn't a wimp. 
+
+
+newchat;key:palace,v1:vtype:mayan_king-mayan_leader-mayan_chieftain,v2:adult,weigth:9
+v1;0;It sure is the life living in my wonderful palace. 
+v2;30;And a very marvelous palace it is my leader! 
+
+
+
+newchat;key:become,v1:adult,v2:child,v2:male,rel:child,weigth:9
+v1;0;What do you want to be when you grow up ? 
+v2;30;I dunno, maybe a warrior, or a miner...farmer maybe.. 
+v1;60;Well you'll have to decide some day. 
+
+newchat;key:wah,weigth:9
+v1;0;I so adore eating Wah. 
+v2;30;Me too! Best thing that was ever thought of. 
+
+
+newchat;key:rain,v1:female,v2:female,v1:hasspouse,v2:hasspouse,weigth:9
+v1;0;We need rain for the maize. 
+v2;30;How i wish it would rain. 
+v1;60;Maybe if we go pray, the Spirits will grant us a rain fit for making a perfect harvest this year. 
+v2;90;Alright, let's go as soon as we aren't too busy. 
+
+
+newchat;key:zombie,v2:vtype:warrior,v2:vtype:mayan_warrior,weigth:8
+v1;0;What will we do if a hord of zombies invade? 
+v2;30;Worry not, i am the best trained warrior in all these lands. 
+
+
+
+newchat;key:rich,v1:female,v2:vtype:mayan_peasantwife,v1:vtype:mayan_peasantwife,weigth:8
+v1;0;Rich Women have it made, they don't do any work. 
+v2;30;Yeah I wish I was treated that way. 
+v1;60;I knew i should have married someone with more money. 
+
+
+newchat;key:rule,v1:male,v2:male,v1:notvtype:mayan_king-mayan_leader-mayan_chieftain,v2:notvtype:mayan_king-mayan_leader-mayan_chieftain,weigth:9
+v1;0;I hope that one day I'll rule this village. 
+v2;30;Keep dreaming then, because I'll be on top before you. 
+v1;60;We'll see... we'll see. 
+
+
+newchat;key:indians,weigth:8
+v1;0;The Indians seem much more peaceful than the Normans don't they ? 
+v2;30;Yeah, maybe we should try to ally with them. 
+v1;60;Hmm..Yeah, then maybe together we could raid the Normans, or even the Byzantines. 
+
+newchat;key:gravity,weigth:7
+v1;0;Days are much shorter in these lands. 
+v2;30;Yeah, and the ground seems to float sometimes. 
+v1;60;Except for gravel... and the sand. 
+v2;90;I wonder why ? 
+
+newchat;key:obsidian,v1:vtype:mayan_obsidiancrafter,weigth:8
+v1;0;Obsidian Tools and weapons are the sleekest. 
+v2;30;So luxurious but yet anyone can have some. 
+v1;60;The mace is great for shattering your foe. 
+v2;90;Really? I'd love to see one used in action. 
+
+newchat;key:mayanarchitecture,weigth:7
+v1;0;Mayan Architecture is the strongest in all these lands. 
+v2;30;C'est avec toute la pierre qu'on mine qu'on fait ces beautés. 
+v1;60;I wonder how many more stone homes we'll make ? 
+v2;90;Only time will tell, friend. 

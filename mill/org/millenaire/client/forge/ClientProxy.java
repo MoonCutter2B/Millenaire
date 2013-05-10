@@ -26,7 +26,7 @@ import org.millenaire.client.network.ClientSender;
 import org.millenaire.client.texture.TextureAmuletAlchemist;
 import org.millenaire.client.texture.TextureAmuletVishnu;
 import org.millenaire.client.texture.TextureAmuletYddrasil;
-import org.millenaire.common.EntityWallDecoration;
+import org.millenaire.common.EntityMillDecoration;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
@@ -223,7 +223,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericAsymmFemale.class, new RenderMillVillager(new ModelFemaleAsymmetrical(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericSymmFemale.class, new RenderMillVillager(new ModelFemaleSymmetrical(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericZombie.class, new RenderBiped(new ModelZombie(),0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityWallDecoration.class, new RenderWallDecoration());
+		RenderingRegistry.registerEntityRenderingHandler(EntityMillDecoration.class, new RenderWallDecoration());
 
 		
 		//ModLoader.addAnimation(new TextureVishnuAmulet(ModLoader.getMinecraftInstance()));

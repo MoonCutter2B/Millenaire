@@ -33,7 +33,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import org.millenaire.common.Building;
 import org.millenaire.common.BuildingLocation;
 import org.millenaire.common.Culture;
-import org.millenaire.common.EntityWallDecoration;
+import org.millenaire.common.EntityMillDecoration;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
@@ -157,7 +157,7 @@ public class BuildingPlan {
 				build(th.worldObj, false, false);
 			} else if (bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) {
 				int currentPathLevel=Integer.MAX_VALUE;
-				
+
 				for (int i=0;i<th.villageType.pathMaterial.size();i++) {
 					if (th.villageType.pathMaterial.get(i).meta==meta)
 						currentPathLevel=i;
@@ -166,69 +166,90 @@ public class BuildingPlan {
 				if (currentPathLevel<targetPathLevel) {
 					build(th.worldObj, false, false);
 				}
-				
+
 			}
 		}
 
 
 		public void build(World world, boolean worldGeneration, boolean wandimport) {
 
-			final boolean notifyBlocks=true;
+			try {
 
-			final boolean playSound=!worldGeneration && !wandimport;
+				final boolean notifyBlocks=true;
 
-			if ((special!=BuildingBlock.PRESERVEGROUNDDEPTH) && (special!=BuildingBlock.PRESERVEGROUNDSURFACE) && (special!=BuildingBlock.CLEARTREE)) {
-				//preserve sign posts when importing
-				if (!wandimport || (bid!=0) || (MillCommonUtilities.getBlock(world, p)!=Block.signPost.blockID)) {
+				final boolean playSound=!worldGeneration && !wandimport;
 
-					MillCommonUtilities.setBlockAndMetadata(world, p, bid, meta, notifyBlocks, playSound);
+				if ((special!=BuildingBlock.PRESERVEGROUNDDEPTH) && (special!=BuildingBlock.PRESERVEGROUNDSURFACE) && (special!=BuildingBlock.CLEARTREE)) {
+					//preserve sign posts when importing
+					if (!wandimport || (bid!=0) || (MillCommonUtilities.getBlock(world, p)!=Block.signPost.blockID)) {
+
+						MillCommonUtilities.setBlockAndMetadata(world, p, bid, meta, notifyBlocks, playSound);
+					}
 				}
-			}
 
-			if (special==BuildingBlock.PRESERVEGROUNDDEPTH || special==BuildingBlock.PRESERVEGROUNDSURFACE) {
-				int bid=MillCommonUtilities.getBlock(world, p);
+				if (special==BuildingBlock.PRESERVEGROUNDDEPTH || special==BuildingBlock.PRESERVEGROUNDSURFACE) {
+					int bid=MillCommonUtilities.getBlock(world, p);
 
-				boolean surface=(special==BuildingBlock.PRESERVEGROUNDSURFACE);
+					boolean surface=(special==BuildingBlock.PRESERVEGROUNDSURFACE);
 
-				int validGroundId=MillCommonUtilities.getBlockIdValidGround(bid,surface);
+					int validGroundId=MillCommonUtilities.getBlockIdValidGround(bid,surface);
 
-				if (validGroundId==-1) {
-					Point below=p.getBelow();
-					int targetbid=0;
-					while ((targetbid==0) && (below.getiY()>0)) {
-						bid=MillCommonUtilities.getBlock(world, below);
-						if (MillCommonUtilities.getBlockIdValidGround(bid,surface)>0) {
-							targetbid=MillCommonUtilities.getBlockIdValidGround(bid,surface);
+					if (validGroundId==-1) {
+						Point below=p.getBelow();
+						int targetbid=0;
+						while ((targetbid==0) && (below.getiY()>0)) {
+							bid=MillCommonUtilities.getBlock(world, below);
+							if (MillCommonUtilities.getBlockIdValidGround(bid,surface)>0) {
+								targetbid=MillCommonUtilities.getBlockIdValidGround(bid,surface);
+							}
+							below=below.getBelow();
 						}
-						below=below.getBelow();
-					}
 
-					if ((targetbid==Block.dirt.blockID) && worldGeneration) {
-						targetbid=Block.grass.blockID;
-					} else if ((targetbid==Block.grass.blockID) && !worldGeneration) {
-						targetbid=Block.dirt.blockID;
-					}
-
-					if (targetbid==0) {
-						if (worldGeneration) {
+						if ((targetbid==Block.dirt.blockID) && worldGeneration) {
 							targetbid=Block.grass.blockID;
-						} else {
+						} else if ((targetbid==Block.grass.blockID) && !worldGeneration) {
 							targetbid=Block.dirt.blockID;
 						}
+
+						if (targetbid==0) {
+							if (worldGeneration) {
+								targetbid=Block.grass.blockID;
+							} else {
+								targetbid=Block.dirt.blockID;
+							}
+						}
+
+						MillCommonUtilities.setBlockAndMetadata(world, p, targetbid, 0, notifyBlocks, playSound);
+					} else if (worldGeneration && (validGroundId==Block.dirt.blockID) && (MillCommonUtilities.getBlock(world, p.getAbove())==0)) {
+						MillCommonUtilities.setBlockAndMetadata(world, p, Block.grass.blockID, 0, notifyBlocks, playSound);
+					} else if (validGroundId!=bid && !(validGroundId==Block.dirt.blockID && bid==Block.grass.blockID)) {
+						MillCommonUtilities.setBlockAndMetadata(world, p, validGroundId, 0, notifyBlocks, playSound);
+					}
+					//MLHelper.setBlockAndMetadata(world, p, Block.brick.blockID, 0);
+				} else if (special==BuildingBlock.CLEARTREE) {
+					final int bid=MillCommonUtilities.getBlock(world, p);
+
+					if ((bid==Block.wood.blockID) || (bid==Block.leaves.blockID)) {
+						MillCommonUtilities.setBlockAndMetadata(world, p, 0, 0, notifyBlocks, playSound);
+
+						final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
+
+						int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow,true);
+
+						if (worldGeneration && targetBid==Block.dirt.blockID) {
+							MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
+						} else if (targetBid>0) {
+							MillCommonUtilities.setBlock(world, p.getBelow(), targetBid, notifyBlocks, playSound);
+						}
 					}
 
-					MillCommonUtilities.setBlockAndMetadata(world, p, targetbid, 0, notifyBlocks, playSound);
-				} else if (worldGeneration && (validGroundId==Block.dirt.blockID) && (MillCommonUtilities.getBlock(world, p.getAbove())==0)) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, Block.grass.blockID, 0, notifyBlocks, playSound);
-				} else if (validGroundId!=bid && !(validGroundId==Block.dirt.blockID && bid==Block.grass.blockID)) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, validGroundId, 0, notifyBlocks, playSound);
-				}
-				//MLHelper.setBlockAndMetadata(world, p, Block.brick.blockID, 0);
-			} else if (special==BuildingBlock.CLEARTREE) {
-				final int bid=MillCommonUtilities.getBlock(world, p);
 
-				if ((bid==Block.wood.blockID) || (bid==Block.leaves.blockID)) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, 0, 0, notifyBlocks, playSound);
+
+				} else if (special==BuildingBlock.CLEARGROUND) {
+
+					if (!wandimport || (MillCommonUtilities.getBlock(world, p)!=Block.signPost.blockID)) {
+						MillCommonUtilities.setBlockAndMetadata(world, p, 0, 0, notifyBlocks, playSound);
+					}
 
 					final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
 
@@ -239,145 +260,129 @@ public class BuildingPlan {
 					} else if (targetBid>0) {
 						MillCommonUtilities.setBlock(world, p.getBelow(), targetBid, notifyBlocks, playSound);
 					}
-				}
 
-
-
-			} else if (special==BuildingBlock.CLEARGROUND) {
-
-				if (!wandimport || (MillCommonUtilities.getBlock(world, p)!=Block.signPost.blockID)) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, 0, 0, notifyBlocks, playSound);
-				}
-
-				final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
-
-				int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow,true);
-
-				if (worldGeneration && targetBid==Block.dirt.blockID) {
-					MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
-				} else if (targetBid>0) {
-					MillCommonUtilities.setBlock(world, p.getBelow(), targetBid, notifyBlocks, playSound);
-				}
-
-			} else if (special==BuildingBlock.TAPESTRY) {
-				final EntityWallDecoration tapestry=EntityWallDecoration.createTapestry(world, p, EntityWallDecoration.NORMAN_TAPESTRY);
-				if(tapestry.onValidSurface()) {
-					if(!world.isRemote) {
-						world.spawnEntityInWorld(tapestry);
+				} else if (special==BuildingBlock.TAPESTRY) {
+					final EntityMillDecoration tapestry=EntityMillDecoration.createTapestry(world, p, EntityMillDecoration.NORMAN_TAPESTRY);
+					if(tapestry.onValidSurface()) {
+						if(!world.isRemote) {
+							world.spawnEntityInWorld(tapestry);
+						}
 					}
-				}
-			} else if (special==BuildingBlock.INDIANSTATUE) {
-				final EntityWallDecoration statue=EntityWallDecoration.createTapestry(world, p, EntityWallDecoration.INDIAN_STATUE);
-				if(statue.onValidSurface()) {
-					if(!world.isRemote) {
-						world.spawnEntityInWorld(statue);
+				} else if (special==BuildingBlock.INDIANSTATUE) {
+					final EntityMillDecoration statue=EntityMillDecoration.createTapestry(world, p, EntityMillDecoration.INDIAN_STATUE);
+					if(statue.onValidSurface()) {
+						if(!world.isRemote) {
+							world.spawnEntityInWorld(statue);
+						}
 					}
-				}
-			} else if (special==BuildingBlock.MAYANSTATUE) {
-				final EntityWallDecoration statue=EntityWallDecoration.createTapestry(world, p, EntityWallDecoration.MAYAN_STATUE);
-				if(statue.onValidSurface()) {
-					if(!world.isRemote) {
-						world.spawnEntityInWorld(statue);
+				} else if (special==BuildingBlock.MAYANSTATUE) {
+					final EntityMillDecoration statue=EntityMillDecoration.createTapestry(world, p, EntityMillDecoration.MAYAN_STATUE);
+					if(statue.onValidSurface()) {
+						if(!world.isRemote) {
+							world.spawnEntityInWorld(statue);
+						}
 					}
-				}
-			} else if (special==BuildingBlock.BYZANTINEICONSMALL) {
-				final EntityWallDecoration statue=EntityWallDecoration.createTapestry(world, p, EntityWallDecoration.BYZANTINE_ICON_SMALL);
-				if(statue.onValidSurface()) {
-					if(!world.isRemote) {
-						world.spawnEntityInWorld(statue);
+				} else if (special==BuildingBlock.BYZANTINEICONSMALL) {
+					final EntityMillDecoration statue=EntityMillDecoration.createTapestry(world, p, EntityMillDecoration.BYZANTINE_ICON_SMALL);
+					if(statue.onValidSurface()) {
+						if(!world.isRemote) {
+							world.spawnEntityInWorld(statue);
+						}
 					}
-				}
-			} else if (special==BuildingBlock.BYZANTINEICONMEDIUM) {
-				final EntityWallDecoration statue=EntityWallDecoration.createTapestry(world, p, EntityWallDecoration.BYZANTINE_ICON_MEDIUM);
-				if(statue.onValidSurface()) {
-					if(!world.isRemote) {
-						world.spawnEntityInWorld(statue);
+				} else if (special==BuildingBlock.BYZANTINEICONMEDIUM) {
+					final EntityMillDecoration statue=EntityMillDecoration.createTapestry(world, p, EntityMillDecoration.BYZANTINE_ICON_MEDIUM);
+					if(statue.onValidSurface()) {
+						if(!world.isRemote) {
+							world.spawnEntityInWorld(statue);
+						}
 					}
-				}
-			} else if (special==BuildingBlock.BYZANTINEICONLARGE) {
-				final EntityWallDecoration statue=EntityWallDecoration.createTapestry(world, p, EntityWallDecoration.BYZANTINE_ICON_LARGE);
-				if(statue.onValidSurface()) {
-					if(!world.isRemote) {
-						world.spawnEntityInWorld(statue);
+				} else if (special==BuildingBlock.BYZANTINEICONLARGE) {
+					final EntityMillDecoration statue=EntityMillDecoration.createTapestry(world, p, EntityMillDecoration.BYZANTINE_ICON_LARGE);
+					if(statue.onValidSurface()) {
+						if(!world.isRemote) {
+							world.spawnEntityInWorld(statue);
+						}
 					}
-				}
-			} else if (special==BuildingBlock.OAKSPAWN) {
-				if (worldGeneration) {
-					final WorldGenerator wg = new WorldGenTrees(false);
-					wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
-				}
-			} else if (special==BuildingBlock.PINESPAWN) {
-				if (worldGeneration) {
-					final WorldGenerator wg = new WorldGenTaiga2(false);
-					wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
-				}
-			} else if (special==BuildingBlock.BIRCHSPAWN) {
-				if (worldGeneration) {
-					final WorldGenerator wg = new WorldGenForest(false);
-					wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
-				}
-			} else if (special==BuildingBlock.JUNGLESPAWN) {
-				if (worldGeneration) {
-					final WorldGenerator wg = new WorldGenTrees(true, 4 + MillCommonUtilities.random.nextInt(7), 3, 3, false);
-					wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
-				}
-			} else if (special==BuildingBlock.SPAWNERSKELETON) {
-				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
-				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().setMobID("Skeleton");
-			} else if (special==BuildingBlock.SPAWNERZOMBIE) {
-				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
-				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().setMobID("Zombie");
-			} else if (special==BuildingBlock.SPAWNERSPIDER) {
-				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
-				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().setMobID("Spider");
-			} else if (special==BuildingBlock.SPAWNERCAVESPIDER) {
-				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
-				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().setMobID("CaveSpider");
-			} else if (special==BuildingBlock.SPAWNERCREEPER) {
-				MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
-				final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-				tileentitymobspawner.func_98049_a().setMobID("Creeper");
-			} else if (special==BuildingBlock.DISPENDERUNKNOWNPOWDER) {
-				MillCommonUtilities.setBlockAndMetadata(world, p, Block.dispenser.blockID, 0);
-				final TileEntityDispenser dispenser=p.getDispenser(world);
-				MillCommonUtilities.putItemsInChest(dispenser, Mill.unknownPowder.itemID, 2);
-			} else if (bid==Block.doorWood.blockID) {
-				if (special==BuildingBlock.INVERTEDDOOR) {
-					MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 9, notifyBlocks, playSound);
-				} else {
-					MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 8, notifyBlocks, playSound);
-				}
-			} else if (bid==Block.doorIron.blockID) {
-				if (special==BuildingBlock.INVERTEDDOOR) {
-					MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 9, notifyBlocks, playSound);
-				} else {
-					MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 8, notifyBlocks, playSound);
-				}
-			} else if (bid==Block.bed.blockID) {
-				if ((meta & 3) ==0) {
-					MillCommonUtilities.setBlockAndMetadata(world, p.getEast(), bid, meta - 8, notifyBlocks, playSound);
-				}
-				if ((meta & 3) ==1) {
-					MillCommonUtilities.setBlockAndMetadata(world, p.getSouth(), bid, meta - 8, notifyBlocks, playSound);
-				}
-				if ((meta & 3) ==2) {
-					MillCommonUtilities.setBlockAndMetadata(world, p.getWest(), bid, meta - 8, notifyBlocks, playSound);
-				}
-				if ((meta & 3) ==3) {
-					MillCommonUtilities.setBlockAndMetadata(world, p.getNorth(), bid, meta - 8, notifyBlocks, playSound);
-				}
-			} else if (bid==Block.stoneButton.blockID) {
-				final int newmeta=((BlockButton)Block.stoneButton).onBlockPlaced(world, p.getiX(),p.getiY(),p.getiZ(), 0, 0, 0, 0, 0);
+				} else if (special==BuildingBlock.OAKSPAWN) {
+					if (worldGeneration) {
+						final WorldGenerator wg = new WorldGenTrees(false);
+						wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
+					}
+				} else if (special==BuildingBlock.PINESPAWN) {
+					if (worldGeneration) {
+						final WorldGenerator wg = new WorldGenTaiga2(false);
+						wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
+					}
+				} else if (special==BuildingBlock.BIRCHSPAWN) {
+					if (worldGeneration) {
+						final WorldGenerator wg = new WorldGenForest(false);
+						wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
+					}
+				} else if (special==BuildingBlock.JUNGLESPAWN) {
+					if (worldGeneration) {
+						final WorldGenerator wg = new WorldGenTrees(true, 4 + MillCommonUtilities.random.nextInt(7), 3, 3, false);
+						wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
+					}
+				} else if (special==BuildingBlock.SPAWNERSKELETON) {
+					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
+					tileentitymobspawner.func_98049_a().setMobID("Skeleton");
+				} else if (special==BuildingBlock.SPAWNERZOMBIE) {
+					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
+					tileentitymobspawner.func_98049_a().setMobID("Zombie");
+				} else if (special==BuildingBlock.SPAWNERSPIDER) {
+					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
+					tileentitymobspawner.func_98049_a().setMobID("Spider");
+				} else if (special==BuildingBlock.SPAWNERCAVESPIDER) {
+					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
+					tileentitymobspawner.func_98049_a().setMobID("CaveSpider");
+				} else if (special==BuildingBlock.SPAWNERCREEPER) {
+					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
+					tileentitymobspawner.func_98049_a().setMobID("Creeper");
+				} else if (special==BuildingBlock.DISPENDERUNKNOWNPOWDER) {
+					MillCommonUtilities.setBlockAndMetadata(world, p, Block.dispenser.blockID, 0);
+					final TileEntityDispenser dispenser=p.getDispenser(world);
+					MillCommonUtilities.putItemsInChest(dispenser, Mill.unknownPowder.itemID, 2);
+				} else if (bid==Block.doorWood.blockID) {
+					if (special==BuildingBlock.INVERTEDDOOR) {
+						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 9, notifyBlocks, playSound);
+					} else {
+						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 8, notifyBlocks, playSound);
+					}
+				} else if (bid==Block.doorIron.blockID) {
+					if (special==BuildingBlock.INVERTEDDOOR) {
+						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 9, notifyBlocks, playSound);
+					} else {
+						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 8, notifyBlocks, playSound);
+					}
+				} else if (bid==Block.bed.blockID) {
+					if ((meta & 3) ==0) {
+						MillCommonUtilities.setBlockAndMetadata(world, p.getEast(), bid, meta - 8, notifyBlocks, playSound);
+					}
+					if ((meta & 3) ==1) {
+						MillCommonUtilities.setBlockAndMetadata(world, p.getSouth(), bid, meta - 8, notifyBlocks, playSound);
+					}
+					if ((meta & 3) ==2) {
+						MillCommonUtilities.setBlockAndMetadata(world, p.getWest(), bid, meta - 8, notifyBlocks, playSound);
+					}
+					if ((meta & 3) ==3) {
+						MillCommonUtilities.setBlockAndMetadata(world, p.getNorth(), bid, meta - 8, notifyBlocks, playSound);
+					}
+				} else if (bid==Block.stoneButton.blockID) {
+					final int newmeta=((BlockButton)Block.stoneButton).onBlockPlaced(world, p.getiX(),p.getiY(),p.getiZ(), 0, 0, 0, 0, 0);
 
-				MillCommonUtilities.setBlockMetadata(world, p, newmeta, notifyBlocks);
-			} else if (bid==Block.waterStill.blockID) {
-				MillCommonUtilities.notifyBlock(world, p);
-			} else if (bid==Block.furnaceIdle.blockID) {
-				setFurnaceMeta(world,p);
+					MillCommonUtilities.setBlockMetadata(world, p, newmeta, notifyBlocks);
+				} else if (bid==Block.waterStill.blockID) {
+					MillCommonUtilities.notifyBlock(world, p);
+				} else if (bid==Block.furnaceIdle.blockID) {
+					setFurnaceMeta(world,p);
+				}
+			} catch (Exception e) {
+				MLN.printException("Exception in BuildingBlock.build():",e);
 			}
 		}
 
@@ -412,8 +417,8 @@ public class BuildingPlan {
 
 			MillCommonUtilities.setBlockMetadata(world, p, var9);
 		}
-		
-		
+
+
 
 		@Override
 		public String toString() {
@@ -981,16 +986,16 @@ public class BuildingPlan {
 
 
 	static public void generateWikiTable() {
-		
+
 		HashMap<InvItem,String> picts=new HashMap<InvItem,String>();
 		HashMap<InvItem,String> links=new HashMap<InvItem,String>();
-		
+
 		picts.put(new InvItem(Block.wood,-1), "Wood_Any.gif");
 		picts.put(new InvItem(Block.wood,0), "Wood.png");
 		picts.put(new InvItem(Block.wood,1), "Wood_Pine.png");
 		picts.put(new InvItem(Block.wood,2), "Wood_Birch.png");
 		picts.put(new InvItem(Block.wood,3), "Wood_Jungle.png");
-		
+
 		picts.put(new InvItem(Block.stone,0), "Stone.png");
 		picts.put(new InvItem(Block.glass,0), "Glass.png");
 		picts.put(new InvItem(Block.cloth,0), "White_Wool.png");
@@ -1027,55 +1032,55 @@ public class BuildingPlan {
 		picts.put(new InvItem(Block.stone,0), "Stone.png");
 		picts.put(new InvItem(Block.stone,0), "Stone.png");
 		picts.put(new InvItem(Block.stone,0), "Stone.png");
-		
+
 		picts.put(new InvItem(Item.ingotIron,0), "Ironitm.png");
 		picts.put(new InvItem(Item.ingotGold,0), "Golditm.png");
 		picts.put(new InvItem(Item.ingotIron,0), "Ironitm.png");
 		picts.put(new InvItem(Item.ingotIron,0), "Ironitm.png");
-		
+
 		picts.put(new InvItem(Mill.wood_decoration,0), "ML_colombages_plain.png");
 		links.put(new InvItem(Mill.wood_decoration,0), "|link=Norman:Colombages");
 		picts.put(new InvItem(Mill.wood_decoration,1), "ML_colombages_cross.png");
 		links.put(new InvItem(Mill.wood_decoration,1), "|link=Norman:Colombages");
 		picts.put(new InvItem(Mill.wood_decoration,2), "ML_Thatch.png");
 		links.put(new InvItem(Mill.wood_decoration,2), "|link=Japanese:Thatch");
-		
+
 		picts.put(new InvItem(Mill.stone_decoration,0), "ML_whitewashedbricks.png");
 		links.put(new InvItem(Mill.stone_decoration,0), "|link=Hindi:Cooked brick");
 		picts.put(new InvItem(Mill.stone_decoration,1), "ML_mudbrick.png");
 		links.put(new InvItem(Mill.stone_decoration,1), "|link=Hindi:Mud brick");
 		picts.put(new InvItem(Mill.stone_decoration,2), "ML_Mayan_Gold.png");
 		links.put(new InvItem(Mill.stone_decoration,2), "|link=Mayan:Gold Ornament");
-		
+
 		picts.put(new InvItem(Mill.paperWall,0), "ML_paperwall.png");
 		links.put(new InvItem(Mill.paperWall,0), "|link=Japanese:Paper Wall");
-		
+
 		picts.put(new InvItem(Mill.tapestry,0), "ML_tapestry.png");
 		links.put(new InvItem(Mill.tapestry,0), "|link=Norman:Tapisserie");
-		
+
 		picts.put(new InvItem(Mill.indianstatue,0), "ML_IndianStatue.png");
 		links.put(new InvItem(Mill.indianstatue,0), "|link=Hindi:Statue");
-		
+
 		picts.put(new InvItem(Mill.mayanstatue,0), "ML_MayanStatue.png");
 		links.put(new InvItem(Mill.mayanstatue,0), "|link=Mayan:Carving");
-		
+
 		picts.put(new InvItem(Mill.byzantineiconsmall,0), "ML_ByzantineIconSmall.png");
 		links.put(new InvItem(Mill.byzantineiconsmall,0), "|link=Byzantine:Icon");
 		picts.put(new InvItem(Mill.byzantineiconmedium,0), "ML_ByzantineIconMedium.png");
 		links.put(new InvItem(Mill.byzantineiconmedium,0), "|link=Byzantine:Icon");
 		picts.put(new InvItem(Mill.byzantineiconlarge,0), "ML_ByzantineIconLarge.png");
 		links.put(new InvItem(Mill.byzantineiconlarge,0), "|link=Byzantine:Icon");
-		
+
 		picts.put(new InvItem(Mill.byzantine_tiles,0), "ML_byzSlab.png");
 		links.put(new InvItem(Mill.byzantine_tiles,0), "|link=Blocks#Byzantine");
 
-		
+
 
 		try {
-			
+
 			HashMap<String,Integer> nameCount=new HashMap<String,Integer>();
 			HashMap<BuildingPlanSet,String> uniqueNames=new HashMap<BuildingPlanSet,String>();
-			
+
 			for (final Culture culture : Culture.vectorCultures) {
 				for (final BuildingPlanSet set: culture.vectorPlanSets) {
 					String name=set.plans.get(0)[0].nativeName;
@@ -1085,7 +1090,7 @@ public class BuildingPlan {
 						nameCount.put(name,nameCount.get(name)+1);
 				}
 			}
-			
+
 			for (final Culture culture : Culture.vectorCultures) {
 				for (final BuildingPlanSet set: culture.vectorPlanSets) {
 					if (nameCount.get(set.plans.get(0)[0].nativeName)>1) {
@@ -1095,32 +1100,32 @@ public class BuildingPlan {
 					}
 				}
 			}
-			
+
 			File file = new File(Mill.proxy.getBaseDir(),"resources used wiki building list.txt");
 			BufferedWriter writer=MillCommonUtilities.getWriter(file);
-			
+
 			writer.write("{| class=\"wikitable\""+EOL);
 			writer.write("|-"+EOL);
 			writer.write("! Requirements Template Building Name"+EOL);
 			writer.write("|-"+EOL);
-			
+
 			for (final Culture culture : Culture.vectorCultures) {
 				for (final BuildingPlanSet set: culture.vectorPlanSets) {
 					writer.write("! "+uniqueNames.get(set)+EOL);
 					writer.write("|-"+EOL);
 				}
 			}
-			
+
 			writer.write("|}");
-			
+
 			writer.close();
-			
+
 			file = new File(Mill.proxy.getBaseDir(),"resources used wiki.txt");
 			writer=MillCommonUtilities.getWriter(file);
 
 			writer.write("{{#switch: {{{1|{{BASEPAGENAME}}}}}"+EOL);
-			
-			
+
+
 
 			for (final Culture culture : Culture.vectorCultures) {
 				for (final BuildingPlanSet set: culture.vectorPlanSets) {
@@ -1148,14 +1153,14 @@ public class BuildingPlan {
 						for (final InvItem key : items) {
 							String pict="Unknown Pict:"+key.id()+"/"+key.meta;
 							String link="";
-							
+
 							if (picts.containsKey(key))
 								pict=picts.get(key);
-							
+
 							if (links.containsKey(key))
 								link=links.get(key);
-							
-							
+
+
 							writer.write("<td>[[File:"+pict+"|32px"+link+"|"+key.getName()+"]]</td>");
 						}
 

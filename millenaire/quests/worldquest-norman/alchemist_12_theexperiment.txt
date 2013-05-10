@@ -16,7 +16,7 @@ step:new
 villager:assistant
 duration:1048
 rewardgood:tnt,1
-rewardgood:redstone,32
+rewardgood:redstone,48
 
 step:new
 villager:alchemist

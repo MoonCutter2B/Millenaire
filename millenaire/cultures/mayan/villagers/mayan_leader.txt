@@ -13,6 +13,8 @@ goal=gorest
 goal=gopray
 goal=patrol
 goal=huntmonster
+goal=gosocialise
+goal=chat
 
 toolneededclass=meleeweapons
 toolneededclass=armour

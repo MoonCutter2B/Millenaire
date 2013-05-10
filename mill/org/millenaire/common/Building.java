@@ -1008,6 +1008,9 @@ public class Building {
 			village.relations.put(getPos(), relation);
 			village.saveTownHall("distance relation change");//immediate save as the distance village might be frozen
 		}
+		
+		MLN.temp(this, "Setting relation with "+villagePos+" to "+change+" (reset:"+reset+") in world: "+worldObj);
+		
 	}
 
 	public void adjustReputation(EntityPlayer player,int l) {
@@ -5893,6 +5896,9 @@ public class Building {
 
 	public void sendBuildingPacket(EntityPlayer player,boolean sendChest) {
 
+		if (worldObj.isRemote)
+			return;
+		
 		if (sendChest) {
 			for (final Point p :chests) {
 				final TileEntityMillChest chest=p.getMillChest(worldObj);

@@ -10,4 +10,4 @@ The Normans produce many unique items:
 -Norman sword and armour, made in an armoury and also better than their diamond peers.
 -Boudin, tripes, calvados and cider, foods that instantly restore the player's health.
 -Timber frame blocks, a building block with two variants widely used for building advanced Norman, produced only by a charpentier (carpenter).
--Norman tapestries, made by the lady of a castle from wool (two white, one gray, one gray, one black, one brown) and depicting extracts from the Bayeux Tapestry.
+-Norman tapestries, made by the lady of a castle from wool (two white, one gray, one light gray, one black, one brown) and depicting extracts from the Bayeux Tapestry.

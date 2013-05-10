@@ -14,6 +14,8 @@ goal=mining
 goal=cookstone
 goal=cooksand
 goal=bringBackResourcesHome
+goal=gosocialise
+goal=chat
 
 bringBackHomeGood=cobblestone
 bringBackHomeGood=sandStone

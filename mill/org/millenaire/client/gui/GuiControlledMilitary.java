@@ -36,9 +36,9 @@ public class GuiControlledMilitary extends GuiText {
 
 	public static class GuiButtonDiplomacy extends MillGuiButton {
 
-		public static final int REL_GOOD=200;
+		public static final int REL_GOOD=100;
 		public static final int REL_NEUTRAL=0;
-		public static final int REL_BAD=-200;
+		public static final int REL_BAD=-100;
 		public static final int REL=0;
 		public static final int RAID=1;
 		public static final int RAIDCANCEL=2;

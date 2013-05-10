@@ -13,6 +13,8 @@ goal=bringBackResourcesHome
 goal=breed
 goal=slaughterchicken
 goal=cookchicken
+goal=gosocialise
+goal=chat
 
 collectGood=egg
 collectGood=feather

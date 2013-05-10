@@ -1,0 +1,275 @@
+//Français par xIflot
+//French by xIflot
+//Anglais par Teethdude
+//English by Teethdude
+
+newchat;key:stone,weigth:10
+v1;0;La pierre est le meilleur matériau existant.
+v2;30;C'est encore mieux quand elle est cuite ! Vive la pierre !
+v1;60;Il faut miner ! Au travail !
+
+newchat;key:pyramid,building:mayanpyramid,weigth:7
+v1;0;Notre pyramide est la plus belle est la mieux construite.
+v2;30;C'est sûr. Je suis allé voir les autres villages. Elles sont très belles aussi mais elles n'égalent pas la notre !
+v1;60;En effet ! Notre architecture est très originale et unique.
+v2;90;Ne nous vantons pas trop non plus. Je n'ai pas envie de ressembler à ces vaniteux de byzantins.
+v1;120;Oh oui, eux... je les déteste. Comment peut-on être aussi prétentieux !
+
+newchat;key:player,weigth:10
+v1;0;Ca manque de visiteurs, par ici.
+v2;30;Oui, il n'y a que $name et d'autres personnes perdues...
+v1;60;En parlant de $name, tu ne le trouves pas de plus en plus étrange et fatigué ?
+v2;90;C'est vrai. Il devrait se reposer un peu.
+
+newchat;key:miner,weigth:9
+v1;0;On devrait recruter plus de mineurs.
+v2;30;Oui ! La pierre, la roche et les minerais sont les meilleurs matériaux existants.
+v1;60;Je suis d'accord... mais nous ne sommes pas assez dans le village, il doit s'agrandir.
+v2;90;Et on ne peut pas faire travailler les enfants. Ils sont trop jeunes.
+
+newchat;key:woman,weigth:6,v1:adult,v2:adult,v1:female
+v1;0;Il est temps de s'occuper de la maison.
+v2;30;Mais tu l'as déjà fait hier !
+v1;60;De toute façon, je n'ai le droit de faire que ça ici.
+v2;90;Tu parles ! Tu es toujours à te plaindre !
+v1;120;Au lieu de me reprocher de me plaindre, essaie de comprendre pourquoi je me plains !
+
+newchat;key:friend,v1:vtype:mayan_miner,v2:adult,weigth:10
+v1;0;Ah, mon bon ami $targetfirstname ! Comment te portes-tu ?
+v2;30;Bonjour $targetfirstname ! Je me porte comme je le peux. Les affaires vont mal.
+v1;60;Quoi ? Tu as arrêté d'échanger de la roche avec les hindis?
+v2;90;Oui. Maintenant que des mineurs japonais indépendants ont proposé leurs services, ils n'ont plus besoin de moi.
+v1;120;Tu n'as qu'à leur proposer autre chose.
+v2;150;Tu as des idées, toi ?
+
+newchat;key:monster,weigth:5
+v1;0;Il y a beaucoup de monstres, en ce moment.
+v2;30;J'espère que nos gardes pourront les contrer.
+v1;60;Ce qui m'inquiète, c'est qu'une horde de créatures verdâtres explosives vienne nous attaquer...
+v2;90;Ne t'en fais pas. On a des leurres contre eux.
+v1;120;Tu as raison. Au pire, il y a $name. Il se bat bien et il nous défendra, j'en suis sûr.
+v2;150;Je n'en doute pas non plus. Il n'a pas l'air si mauvais que ça.
+
+newchat;key:normands,weigth:6
+v1;0;Tu as vu la couleur de peau des Normands ? Ils sont tout pâles !
+v2;30;Mais oui ! Je n'avais jamais vu une telle couleur auparavant. C'est étrange.
+v1;60;A croire qu'ils ont été maudits...
+v2;90;Ne dis pas de bêtises. Ce sont des humains comme les autres.
+v1;120;C'est sans doute l'alcool qui les a fait changer de couleur comme ça. Je suis sûr qu'ils ne sont pas blancs depuis toujours.
+v2;150;Allons, tu te trompes voyons.
+
+newchat;key:alchimist,weigth:4
+v1;0;En explorant la forêt, j'ai vu un drôle d'alchimiste...
+v2;30;Tu l'as vu aussi ? Il est drôlement bizzare.
+v1;60;Et comment. Il listait des ingrédients étranges. Tu sais ce que c'est, toi, un "crâne de squelette atrophié" ? Et du "sable des âmes" ?
+v2;90;Non. Mais ce n'est pas très rassurant.
+v1;120;Oui ! On raconte qu'il essaie de fabriquer la pierre philosophale.
+v2;150;Mon brave $targetfirstname, si tu crois aux rumeurs d'ici, tu risques de croire que la Terre est ronde.
+v1;180;Tu as sans doute raison.
+
+newchat;key:dragonegg,v1:adult,v2:adult,weigth:5
+v1;0;J'ai vu un drôle d'oeuf noir, en plein désert.
+v2;30;Ah bon ? Et il ressemblait à quoi ?
+v1;60;Il était gros avec des tâches violettes. Vraiment gros.
+v2;90;Tu es parti boire de l'alcool Normand ou tu me fais une blague ?
+v1;120;Mais... c'est vrai ! Je ne mens pas !
+v2;150;Haha ! Si tu penses m'avoir comme ça, tu te trompes !
+
+newchat;key:wither,weigth:3
+v1;0;Dans la forêt, j'ai vu une étrange créature noire.
+v2;30;Vraiment ? Décris-la moi, je suis curieux !
+v1;60;Eh bien, c'était une espèce de squelette noir. Elle avait deux têtes au bout de ses deux bras et une tête à son cou. Et un regard froid comme de la glace...
+v2;90;Ca fait froid dans le dos.
+v1;120;Des Hommes des Limbes l'attaquaient.
+v2;150;Des Hommes des Limbres ? Allons, cela n'existe pas ! Tu as dû rêver.
+
+newchat;key:bakery,notbuilding:mayanbakery,weigth:7
+v1;0;On devrait construire une boulangerie. Ça ferait remonter nos affaires !
+v2;30;C'est vrai. On ne peut plus se contenter de pain maison.
+v1;60;Allons parler au chef.
+
+newchat;key:bestdad,v1:child,v2:child,weigth:8
+v1;0;Mon papa, c'est le meilleur car il est bûcheron !
+v2;30;Peuh ! Le bois ça sert à rien ! Le mien il est mieux que le tien car il est mineur !
+v1;60;Sans bois, ton papa il servirait à rien !
+v2;90;Ah ouais ?! Tu me cherches ?!
+v1;120;Arrête, la pierre ne sert à rien, c'est tout. Il faut l'avouer.
+v2;150;Sans pierre, ton papa il dormirait à la belle étoile !
+
+newchat;key:becomeadult,v1:child,v2:child,weigth:9
+v1;0;J'ai peur de devenir adulte...
+v2;30;Pourquoi ?
+v1;60;Bah parce que... y a trop de travail et on peut plus jouer...
+v2;90;Mais si. Tu vas voir c'est trop bien !
+v1;120;Non... j'veux pas j'veux pas j'veux pas !
+
+newchat;key:rebellion,v1:child,v2:child,rel:sibling,weigth:6
+v1;0;Papa et maman sont trop injustes ! Il faut toujours qu'on range notre chambre !
+v2;30;Ouais ! On devrait se rebeller et réclamer un meilleur traitement !
+v1;60;A l'assaut ! Cap sur maman !
+
+newchat;key:japanese,v1:adult,weigth:8
+v1;0;Hé, $targetfirstname, regarde ça.
+v2;30;Drôle d'épée ! Et drôle d'arc ! Où t'es tu procuré ça ?
+v1;60;C'est un arc Yumi et un Tachi. De l'armement japonais.
+v2;90;C'est beau et ça a l'air efficace. Ça coûte cher ?
+v1;120;Diable oui ! J'ai dû gaspiller 2 pièces d'argent rien que pour l'arc !
+v2;150;Woah ! Tu as dû beaucoup économiser avant de les acheter.
+
+newchat;key:exchange,v1:adult,v2:adult,v1:male,v2:male,weigth:9
+v1;0;Bonjour, monsieur $targetlastname. Alors, notre marché tient toujours ?
+v2;30;Oui, oui. J'ai tout. Faisons comme nous avions dit.
+v1;60;Toujours aussi ponctuel ! Ravi de faire des affaires avec vous !
+v2;90;Tout le plaisir et pour moi. Alors... 32 bûches contre 8 lingots de fer. Et voilà !
+v1;120;Merci beaucoup, monsieur. Bonne journée.
+v2;150;A vous aussi, monsieur $targetlastname !
+
+newchat;key:embauchement,v1:adult,v2:vtype:mayan_warrior,weigth:7
+v1;0;Je t'embauche pour que tu me protèges en échange de 48 deniers par jour.
+v2;30;Hmmm. Cela dépend combien de temps tu m'embauches, $targetfirstname.
+v1;60;Six jours. Mes chiens ne suffisent pas à assurer une protection complète.
+v2;90;Alors ce sera un dernier d'argent. Pas moins.
+v1;120;C'est du vol !
+v2;150;Pas du tout, $targetfirstname. Je risque ma vie dans ce métier.
+
+newchat;key:cereal,v2:vtype:mayan_farmer,weigth:9
+v1;0;Je vais essayer de faire pousser du riz.
+v2;30;Du riz ? Qu'est-ce que c'est que ça ?
+v1;60;Une plante que j'ai acheté aux hindous. Il paraît que c'est délicieux.
+v2;90;Je peux goûter ?
+v1;120;Désolé, mais non. J'en ai besoin, je dois planter chaque graine.
+v2;150;Ca ne fonctionnera pas.
+
+newchat;key:zombiepigmen,weigth:6
+v1;0;Tu te souviens du dernier orage ?
+v2;30;Et comment ! Nos récoltes ont bien profité de l'eau, mais il était terrifiant.
+v1;60;Et bien, j'étais dans la plaine à côté et il y avait un cochon à côté de moi.
+v2;90;Et ensuite ?
+v1;120;La foudre l'a frappé et... il s'est dressé sur ses jambes...
+v2;150;Vraiment ?! A quoi ressemblait-il ?
+v1;180;Il avait de la moisissure verte sur lui... ou je ne sais pas trop ce que c'était. Et une épée en or, aussi.
+v2;210;Tu l'as attaqué ou tu as fui ?
+v1;240;Je n'avais pas d'arme. Mais il semblait ne pas vouloir m'attaquer. Il me regardait et il tournait la tête. Il errait ensuite sans vraiment savoir où il allait.
+v2;270;Tu aurais dû utiliser le feu. Si ça se trouve, il va attaquer le village.
+v1;300;Il était insensible au feu. La foudre l'a frappé une fois de plus et il n'a rien senti.
+
+newchat;key:recolt,weigth:10
+v1;0;Les récoltes sont abondantes, cette année.
+v2;30;Oui, mais s'en plaindre serait bête.
+v1;60;Bien sûr !
+
+newchat;key:village,weigth:8
+v1;0;Je trouve notre village beau.
+v2;30;Moi aussi. Il est très artistique.
+v1;60;C'est grâce à la pierre et à notre maîtrise de l'architecture.
+
+newchat;key:peasantdialog,v1:vtype:mayan_peasant,v2:vtype:mayan_peasant,weigth:10
+v1;0;Tant de maïs à récolter, et si peu de temps...
+v2;30;Oui, et je souhaite qu'une part de récolte nous revienne.
+
+
+newchat;key:playerorigins,weigth:10
+v1;0;$name est assez étrange.
+v2;30;Encore plus étrange que les normands.
+v1;60;Mais d'où vient-il ?
+v2;90;Je ne suis pas sûr, il n'a pas l'air de venir d'une quelconque culture.
+
+
+newchat;key:byzantins,weigth:9
+v1;0;Je ne peux vraiment pas supporter ces byzantins, ils croient que la Terre leur appartient !
+v2;30;Et tu as vu leurs constructions ?
+v1;60;Oui, je les ai vues. Elles sont vraiment étranges.
+v2;90;Des briques ? Quel est l'intêret !
+v1;120;Ils utilisent même du verre, comme les normands.
+v2;150;Il est vrai, mais ils semblent plus avancés que les indiens. Ils n'ont rien dans leurs fenêtres.
+
+
+newchat;key:dialogchildmother,v1:child,v2:adult,v2:female,rel:parent,weigth:10
+v1;0;Maman ! Je peux aller jouer plus loin dans le village ?
+v2;30;Non mon enfant, je ne veux pas que tu blesses.
+v1;60;Blessé par quoi ? Ce n'est pas dangereux là-bas.
+v2;90;Ecoute, il y a des créatures dangereuses là-bas...
+v1;120;Q-Quelle sorte de créature, maman ?
+v2;150;D'horribles choses comme... des creepers.
+v1;180;D-d-des creepers ?
+v2;210;Oui mon enfant, ils vont te suivre jusqu'à la maison et exploser près de toi quand tu t'y attendras le moins.
+
+
+
+newchat;key:tobewarrior,v1:vtype:mayan_warrior,v2:notvtype:mayan_warrior,weigth:9
+v1;0;Devenir un guerrier a été la meilleure décision de ma vie.
+v2;30;Pourquoi ?
+v1;60;Parce que je peux sortir et combattre les ennemis. C'est plus amusant que de récolter du maïs.
+v2;90;Mais ma vie est plus en sécurité.
+v1;120;C'est vrai mais j'ai toujours voulu des frissons.
+
+
+newchat;key:likemydad,v1:male,v2:child,v1:child,weigth:8
+v1;0;Je veux être comme mon père quand je grandirai !
+v2;30;Une mauviette ?
+v1;60;Quoi ? Il n'est pas une mauviette. 
+
+
+newchat;key:palace,v1:vtype:mayan_king-mayan_leader-mayan_chieftain,v2:adult,weigth:9
+v1;0;Il est sûr que la vie dans mon palais est merveilleuse.
+v2;30;Et c'est un merveilleux palais mon chef !
+
+
+
+newchat;key:become,v1:adult,v2:child,v2:male,rel:child,weigth:9
+v1;0;Que veux-tu devenir quand tu seras grand ?
+v2;30;Je ne sais pas, peut-être un guerrier, ou un mineur... ou un fermier peut-être...
+v1;60;Très bien, tu devras te décider un jour.
+
+newchat;key:wah,weigth:9
+v1;0;J'adore manger du Wah.
+v2;30;Moi aussi ! C'est la meilleure chose à laquelle on ait pensé.
+
+
+newchat;key:rain,v1:female,v2:female,v1:hasspouse,v2:hasspouse,weigth:9
+v1;0;Nous avons besoin de pluie pour le maïs.
+v2;30;Je veux qu'il pleuve.
+v1;60;Peut-être que si nous prions, les Esprits vont nous amener la pluie pour avoir une récolte parfaite cette année !
+v2;90;Oui, allons-y dès que nous ne serons pas trop occupés.
+
+
+newchat;key:zombie,v2:vtype:warrior,v2:vtype:mayan_warrior,weigth:8
+v1;0;Qu'allons-nous faire si une horde de zombies nous envahit ?
+v2;30;Ne t'inquiète pas, je suis le guerrier le mieux entraîné dans la région.
+
+
+
+newchat;key:rich,v1:female,v2:vtype:mayan_peasantwife,v1:vtype:mayan_peasantwife,weigth:8
+v1;0;Les femmes riches ont tout, mais elles ne travaillent pas.
+v2;30;Oui, je souhaite pouvoir ne pas travailler moi aussi.
+v1;60;Je savais que j'aurai dû épouser un mari avec plus d'argent.
+
+
+newchat;key:rule,v1:male,v2:male,v1:notvtype:mayan_king-mayan_leader-mayan_chieftain,v2:notvtype:mayan_king-mayan_leader-mayan_chieftain,weigth:9
+v1;0;J'espère qu'un jour je gouvernerai ce village.
+v2;30;Continue de rêver alors, parce que je serai haut placé avant toi.
+v1;60;On va voir... on va voir.
+
+
+newchat;key:indians,weigth:8
+v1;0;Les indiens ont l'air plus pacifiques que les normands non ?
+v2;30;Oui, peut-être qu'on devrait s'allier à eux.
+v1;60;Hmm... oui, alors peut-être qu'ensemble nous pourrons planifier un raid contre les normands ! Ou même les byzantins.
+
+newchat;key:gravity,weigth:7
+v1;0;Les jours sont plus courts dans ces régions.
+v2;30;Oui, et le sol semble flotter parfois.
+v1;60;Excepté le gravier... et le sable.
+v2;90;Je me demande pourquoi ?
+
+newchat;key:obsidian,v1:vtype:mayan_obsidiancrafter,weigth:8
+v1;0;Les outils d'obsidienne sont les plus affinés.
+v2;30;Si luxueuses mais tout le monde peut en avoir.
+v1;60;La massue est géniale pour écraser son ennemi.
+v2;90;Vraiment ? J'adorerais en voir une en action.
+
+newchat;key:mayanarchitecture,weigth:7
+v1;0;L'architecture maya est la plus solide du monde.
+v2;30;It is with all the stone we mine to make these beauties.
+v1;60;Je me demande combien de maisons de pierre de plus fera-t-on ?
+v2;90;Seul le temps nous le dira, mon ami.

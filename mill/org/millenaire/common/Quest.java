@@ -237,7 +237,7 @@ public class Quest {
 					final VillageType vt=Culture.getCultureByName(culture).getLoneBuildingType(village);
 
 					try {
-						WorldGenVillage.generateBedrockLoneBuilding(new Point(player), world, vt, MillCommonUtilities.random, 100, 200);
+						WorldGenVillage.generateBedrockLoneBuilding(new Point(player), world, vt, MillCommonUtilities.random, 50, 120);
 					} catch (final MillenaireException e) {
 						MLN.printException(e);
 					}

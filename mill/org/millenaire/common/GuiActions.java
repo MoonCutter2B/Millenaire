@@ -50,7 +50,7 @@ public class GuiActions {
 					ent.constructCalculatedPaths();
 					return;
 				}
-				
+
 				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.pathSlab.blockID)) {
 					ent.recalculatePaths(true);
 					return;
@@ -359,27 +359,30 @@ public class GuiActions {
 		}
 	}
 
-	
+
 	public static void controlledMilitaryDiplomacy(EntityPlayer player,Building townHall,Point target,int level) {
 		townHall.adjustRelation(target,level,true);
-		townHall.sendBuildingPacket(player, false);
+		if (!townHall.worldObj.isRemote)
+			townHall.sendBuildingPacket(player, false);
 	}
-	
+
 	public static void controlledMilitaryPlanRaid(EntityPlayer player,Building townHall,Building target) {
 		if (townHall.raidStart==0) {
 			townHall.adjustRelation(target.getPos(),-100,true);
 			townHall.planRaid(target);
-			townHall.sendBuildingPacket(player, false);
+			if (!townHall.worldObj.isRemote)
+				townHall.sendBuildingPacket(player, false);
 		}
 	}
-	
+
 	public static void controlledMilitaryCancelRaid(EntityPlayer player,Building townHall) {
 		if (townHall.raidStart==0) {
 			townHall.cancelRaid();
-			townHall.sendBuildingPacket(player, false);
+			if (!townHall.worldObj.isRemote)
+				townHall.sendBuildingPacket(player, false);
 		}
 	}
-	
-	
+
+
 
 }

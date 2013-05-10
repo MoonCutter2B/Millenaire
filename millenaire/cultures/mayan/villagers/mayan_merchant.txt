@@ -13,6 +13,7 @@ goal=gorest
 goal=gopray
 goal=visitInn
 goal=VisitBuilding
-
+goal=gosocialise
+goal=chat
 
 tag=helpInAttacks

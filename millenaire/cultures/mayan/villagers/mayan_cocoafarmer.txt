@@ -12,6 +12,8 @@ goal=goDrink
 goal=harvestcocoa
 goal=plantcocoa
 goal=makecacauhaa
+goal=gosocialise
+goal=chat
 
 bringBackHomeGood=dye_brown
 

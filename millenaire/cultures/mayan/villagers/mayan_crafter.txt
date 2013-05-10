@@ -11,8 +11,9 @@ goal=makestoneaxe
 goal=makestonepickaxe
 goal=makestoneshovel
 goal=makestonehoe
-
 goal=makemayangoldblock
+goal=gosocialise
+goal=chat
 
 requiredGood=cobblestone,10
 requiredGood=stone,10

@@ -13,3 +13,5 @@ texture=/graphics/mob/mayan/mayan_Rich_Woman3.png
 
 goal=gorest
 goal=gopray
+goal=gosocialise
+goal=chat

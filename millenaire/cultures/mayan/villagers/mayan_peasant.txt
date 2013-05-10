@@ -20,6 +20,8 @@ goal=slaughterChicken
 goal=harvestMaize
 goal=plantMaize
 goal=cookchicken
+goal=gosocialise
+goal=chat
 
 toolneededclass=meleeweapons
 toolneededclass=hoes

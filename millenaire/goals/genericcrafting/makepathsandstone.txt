@@ -17,15 +17,15 @@ sentencekey=makepath
 labelkey=makepath
 
 //objets tenus par le villageois
-heldItems=dirt,sandstone,pathsandstone
+heldItems=dirt,sandstone,pathsandstone_stable
 
 //chaque action consome tous les objets "input" et produit tous les "output"
 //each action will require and use all the inputs and produce all the outputs
-output=pathsandstone,1
+output=pathsandstone_stable,1
 
 //s'il y a plus d'objets dans le batiment que ça, arrêter le but
 //if more than that number of item is present in building, stop goal
-townhalllimit=pathsandstone,128
+townhalllimit=pathsandstone_stable,128
 
 //son à jouer quand un objet est fabriqué
 //sound to play once an object is done

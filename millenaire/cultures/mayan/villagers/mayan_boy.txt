@@ -15,6 +15,8 @@ goal=gorest
 goal=gopray
 goal=becomeAdult
 goal=goPlay
+goal=gosocialise
+goal=chat
 
 requiredFood=wah,3
 requiredFood=masa,3

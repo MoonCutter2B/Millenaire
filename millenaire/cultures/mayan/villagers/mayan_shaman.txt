@@ -9,4 +9,5 @@ texture=/graphics/mob/mayan/mayan_shaman1.png
 
 goal=gorest
 goal=gopray
-
+goal=gosocialise
+goal=chat

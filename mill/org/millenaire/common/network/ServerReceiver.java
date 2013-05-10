@@ -437,7 +437,7 @@ public class ServerReceiver implements IPacketHandler
 			} else if (guiActionId==GUIACTION_MILITARY_RELATIONS) {
 				final Point thPos=StreamReadWrite.readNullablePoint(data);
 				final Point targetpos=StreamReadWrite.readNullablePoint(data);
-				final int amount=data.read();
+				final int amount=data.readInt();
 				final Building th=mw.getBuilding(thPos);
 				if (th!=null) {
 					GuiActions.controlledMilitaryDiplomacy(player, th, targetpos, amount);
