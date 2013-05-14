@@ -34,6 +34,7 @@ start:fisherbyzantine
 start:quarrybyzantine
 start:innbyzantine
 
+player:playersmallhouse
 player:villa urbana
 player:gifthouse
 

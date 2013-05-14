@@ -38,14 +38,14 @@
 </table>
 
 |Demarcheio = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Verre]]</td><td>[[File:Sandstone.png|32px|Grès]]</td><td>[[File:ML_byzSlab.png|32px|link=Blocks#Byzantine|Tuiles byzantines]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td>51</td><td>91</td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 1</th><td>147</td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 2</th><td>20</td><td>2</td><td></td><td></td><td>104</td><td></td></tr>
-<tr><th scope="row">Upgrade 3</th><td>51</td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 4</th><td>85</td><td>10</td><td>27</td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 5</th><td>16</td><td>4</td><td></td><td></td><td>10</td><td></td></tr>
-<tr><th scope="row">Upgrade 6</th><td>84</td><td>2</td><td></td><td>6</td><td></td><td>54</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Birch.png|32px|Bois de bouleau]]</td><td>[[File:Glass.png|32px|Verre]]</td><td>[[File:Sandstone.png|32px|Grès]]</td><td>[[File:White_Wool.png|32px|Laine blanche]]</td><td>[[File:Bookshelf.png|32px|Bibliothèque]]</td><td>[[File:ML_byzSlab.png|32px|link=Blocks#Byzantine|Tuiles byzantines]]</td></tr>
+<tr><th scope="row">Construction</th><td></td><td>70</td><td>53</td><td>38</td><td></td><td></td><td>6</td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 1</th><td>147</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 2</th><td>20</td><td>2</td><td></td><td></td><td></td><td>104</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 3</th><td>51</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 4</th><td>133</td><td>16</td><td>11</td><td></td><td></td><td></td><td></td><td>18</td><td></td></tr>
+<tr><th scope="row">Upgrade 5</th><td>16</td><td>4</td><td></td><td></td><td></td><td>10</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 6</th><td>82</td><td>3</td><td></td><td></td><td>6</td><td></td><td></td><td></td><td>54</td></tr>
 </table>
 </table>
 
@@ -95,6 +95,12 @@
 </table>
 </table>
 
+|Mikro Spiti = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Birch.png|32px|Bois de bouleau]]</td><td>[[File:Glass.png|32px|Verre]]</td><td>[[File:Sandstone.png|32px|Grès]]</td><td>[[File:Brick.png|32px|Briques]]</td></tr>
+<tr><th scope="row">Construction</th><td>78</td><td>32</td><td>19</td><td>1</td><td>11</td><td>2</td><td>28</td><td>64</td></tr>
+</table>
+</table>
+
 |Frourio~fortbyzantine = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Birch.png|32px|Bois de bouleau]]</td><td>[[File:Glass.png|32px|Verre]]</td><td>[[File:White_Wool.png|32px|Laine blanche]]</td><td>[[File:Brick.png|32px|Briques]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td></td><td>70</td><td>127</td><td>1</td><td></td><td>3</td><td></td></tr>
@@ -119,9 +125,9 @@
 </table>
 </table>
 
-|Exochike Katiokia = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Verre]]</td><td>[[File:Sandstone.png|32px|Grès]]</td><td>[[File:White_Wool.png|32px|Laine blanche]]</td><td>[[File:Brick.png|32px|Briques]]</td></tr>
-<tr><th scope="row">Construction</th><td>292</td><td>9</td><td>1</td><td>5</td><td>83</td><td>3</td><td>321</td></tr>
+|Astiko Chorio = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Gravel.png|32px|Gravier]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:Wood_Birch.png|32px|Bois de bouleau]]</td><td>[[File:Glass.png|32px|Verre]]</td><td>[[File:Sandstone.png|32px|Grès]]</td><td>[[File:White_Wool.png|32px|Laine blanche]]</td><td>[[File:Bookshelf.png|32px|Bibliothèque]]</td><td>[[File:ML_byzSlab.png|32px|link=Blocks#Byzantine|Tuiles byzantines]]</td></tr>
+<tr><th scope="row">Construction</th><td>980</td><td>48</td><td>92</td><td>61</td><td>1</td><td>5</td><td>12</td><td>7</td><td>258</td><td>3</td><td>32</td><td>173</td></tr>
 </table>
 </table>
 

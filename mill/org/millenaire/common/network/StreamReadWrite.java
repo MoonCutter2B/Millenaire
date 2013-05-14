@@ -65,6 +65,7 @@ public class StreamReadWrite  {
 
 		for (int i=0;i<nb;i++) {
 			final InvItem item=new InvItem(ds.readInt(),ds.readInt());
+			
 			inv.put(item, ds.readInt());
 		}
 

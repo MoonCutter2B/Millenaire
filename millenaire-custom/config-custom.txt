@@ -36,5 +36,8 @@ logworldgeneration=minor
 logpujas=debug
 
 //loglumberman; 
-loglumberman=debug
+loglumberman=
+
+//logquest; 
+logquest=minor
 

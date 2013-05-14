@@ -29,6 +29,7 @@ core:bakerybyzantine
 core:watchtowerbyzantine
 core:chapelbyzantine
 core:forgebyzantine
+core:playersmallhouse
 core:villa urbana
 core:basilkabyzantine
 core:innbyzantine

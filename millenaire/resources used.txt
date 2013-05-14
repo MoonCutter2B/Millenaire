@@ -21,41 +21,49 @@ Bois (tous): 254
 Briques: 120
 
 emporikos resource use: 
-Bois de chêne: 949
-Laine blanche: 84
-Roche: 3833
-Pierres: 324
-Bois de bouleau: 529
-Verre: 58
-Tuiles byzantines: 672
-Grès: 1843
-Bois (tous): 909
-Briques: 439
+Laine blanche: 90
+Roche: 4645
+Bois de sapin: 5
+Pierres: 404
+Tuiles byzantines: 845
+Bibliothèque: 50
+Gravier: 92
+Briques: 182
+Bois de chêne: 896
+Bois de bouleau: 590
+Verre: 62
+Grès: 2046
+Bois (tous): 1006
 
 military resource use: 
-Bois de chêne: 1313
-Roche: 6280
 Laine blanche: 108
-Pierres: 2866
-Bois de bouleau: 456
-Verre: 53
-Tuiles byzantines: 501
-Grès: 1579
-Bois (tous): 928
-Briques: 465
+Roche: 7046
+Bois de sapin: 5
+Pierres: 2946
+Tuiles byzantines: 674
+Bibliothèque: 32
+Gravier: 92
+Briques: 208
+Bois de chêne: 1314
+Bois de bouleau: 479
+Verre: 57
+Grès: 1782
+Bois (tous): 999
 
 ortodox resource use: 
-Bois de chêne: 806
-Roche: 5173
 Laine blanche: 126
-Pierres: 568
-Bois de bouleau: 488
-Verre: 55
-Tuiles byzantines: 434
-Grès: 1769
-Bibliothèque: 12
-Bois (tous): 852
-Briques: 855
+Roche: 5939
+Bois de sapin: 5
+Pierres: 648
+Tuiles byzantines: 607
+Bibliothèque: 44
+Gravier: 92
+Briques: 598
+Bois de chêne: 807
+Bois de bouleau: 511
+Verre: 59
+Grès: 1972
+Bois (tous): 923
 
 
 ancienttemple resource use: 
@@ -1016,10 +1024,16 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois de chêne
-| style="text-align: center; "|91
+| style="text-align: center; "|53
+|-
+| style="text-align: center; "|Laine blanche
+| style="text-align: center; "|6
+|-
+| style="text-align: center; "|Bois de bouleau
+| style="text-align: center; "|38
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|51
+| style="text-align: center; "|70
 |}
 
 
@@ -1069,13 +1083,16 @@ Upgrade 4
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois de chêne
-| style="text-align: center; "|27
+| style="text-align: center; "|11
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|85
+| style="text-align: center; "|133
+|-
+| style="text-align: center; "|Bibliothèque
+| style="text-align: center; "|18
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|10
+| style="text-align: center; "|16
 |}
 
 
@@ -1103,7 +1120,7 @@ Upgrade 6
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|84
+| style="text-align: center; "|82
 |-
 | style="text-align: center; "|Verre
 | style="text-align: center; "|6
@@ -1112,7 +1129,7 @@ Upgrade 6
 | style="text-align: center; "|54
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|2
+| style="text-align: center; "|3
 |}
 
 
@@ -1415,6 +1432,42 @@ Initial Construction
 |}
 
 
+Mikro Spiti
+playersmallhouse
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|1
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|78
+|-
+| style="text-align: center; "|Bois de bouleau
+| style="text-align: center; "|11
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|32
+|-
+| style="text-align: center; "|Verre
+| style="text-align: center; "|2
+|-
+| style="text-align: center; "|Grès
+| style="text-align: center; "|28
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|19
+|-
+| style="text-align: center; "|Briques
+| style="text-align: center; "|64
+|}
+
+
 Frourio
 fortbyzantine
 
@@ -1673,7 +1726,7 @@ Upgrade 2
 |}
 
 
-Exochike Katiokia
+Astiko Chorio
 villa urbana
 
 ==Requirements==
@@ -1690,19 +1743,34 @@ Initial Construction
 | style="text-align: center; "|3
 |-
 | style="text-align: center; "|Roche
-| style="text-align: center; "|292
+| style="text-align: center; "|980
 |-
-| style="text-align: center; "|Verre
+| style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|5
 |-
+| style="text-align: center; "|Bois de bouleau
+| style="text-align: center; "|12
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|48
+|-
+| style="text-align: center; "|Verre
+| style="text-align: center; "|7
+|-
+| style="text-align: center; "|Tuiles byzantines
+| style="text-align: center; "|173
+|-
 | style="text-align: center; "|Grès
-| style="text-align: center; "|83
+| style="text-align: center; "|258
+|-
+| style="text-align: center; "|Bibliothèque
+| style="text-align: center; "|32
+|-
+| style="text-align: center; "|Gravier
+| style="text-align: center; "|92
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|9
-|-
-| style="text-align: center; "|Briques
-| style="text-align: center; "|321
+| style="text-align: center; "|61
 |}
 
 

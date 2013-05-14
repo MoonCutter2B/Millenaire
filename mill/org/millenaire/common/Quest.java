@@ -127,24 +127,29 @@ public class Quest {
 				MLN.debug(this, "Applying "+set.size()+" tags, clearing "+clear.size()+" tags.");
 			}
 			for (final String[] val : set) {
+				
+				String tag = profile.key+"_"+val[1];
+				
 				if (MLN.LogQuest>=MLN.DEBUG) {
-					MLN.debug(this, "Applying tag: "+val[0]+"/"+val[1]);
+					MLN.debug(this, "Applying tag: "+val[0]+"/"+tag);
 				}
-				if (!villagers.get(val[0]).getVillagerRecord(world).questTags.contains(val[1])) {
-					villagers.get(val[0]).getVillagerRecord(world).questTags.add(val[1]);
+				if (!villagers.get(val[0]).getVillagerRecord(world).questTags.contains(tag)) {
+					villagers.get(val[0]).getVillagerRecord(world).questTags.add(tag);
 					if (MLN.LogQuest>=MLN.MINOR) {
-						MLN.minor(this, "Setting tag: "+val[1]+" on villager: "+val[0]+" ("+villagers.get(val[0]).getVillagerRecord(world).getName()+") Now present: "+villagers.get(val[0]).getVillagerRecord(world).questTags.size());
+						MLN.minor(this, "Setting tag: "+tag+" on villager: "+val[0]+" ("+villagers.get(val[0]).getVillagerRecord(world).getName()+") Now present: "+villagers.get(val[0]).getVillagerRecord(world).questTags.size());
 					}
 
 				}
 			}
 			for (final String[] val : clear) {
+				String tag = profile.key+"_"+val[1];
+				
 				if (MLN.LogQuest>=MLN.DEBUG) {
-					MLN.debug(this, "Clearing tag: "+val[0]+"/"+val[1]);
+					MLN.debug(this, "Clearing tag: "+val[0]+"/"+tag);
 				}
-				villagers.get(val[0]).getVillagerRecord(world).questTags.remove(val[1]);
+				villagers.get(val[0]).getVillagerRecord(world).questTags.remove(tag);
 				if (MLN.LogQuest>=MLN.MINOR) {
-					MLN.minor(this, "Clearing tag: "+val[1]+" on villager: "+val[0]+" ("+villagers.get(val[0]).getVillagerRecord(world).getName()+")");
+					MLN.minor(this, "Clearing tag: "+tag+" on villager: "+val[0]+" ("+villagers.get(val[0]).getVillagerRecord(world).getName()+")");
 				}
 			}
 		}
@@ -339,11 +344,11 @@ public class Quest {
 
 				if (th!=null) {
 					s=s.replaceAll("\\$"+key+"_villagename\\$", th.getVillageQualifiedName());
-					s=s.replaceAll("\\$"+key+"_direction\\$", giverTH.getPos().directionTo(th.getPos()));
-					s=s.replaceAll("\\$"+key+"_tothedirection\\$", giverTH.getPos().directionTo(th.getPos(),true));
-					s=s.replaceAll("\\$"+key+"_directionshort\\$", giverTH.getPos().directionToShort(th.getPos()));
-					s=s.replaceAll("\\$"+key+"_distance\\$", giverTH.getPos().approximateDistanceLongString(th.getPos()));
-					s=s.replaceAll("\\$"+key+"_distanceshort\\$", giverTH.getPos().approximateDistanceShortString(th.getPos()));
+					s=s.replaceAll("\\$"+key+"_direction\\$", MLN.string(giverTH.getPos().directionTo(th.getPos())));
+					s=s.replaceAll("\\$"+key+"_tothedirection\\$", MLN.string(giverTH.getPos().directionTo(th.getPos(),true)));
+					s=s.replaceAll("\\$"+key+"_directionshort\\$", MLN.string(giverTH.getPos().directionToShort(th.getPos())));
+					s=s.replaceAll("\\$"+key+"_distance\\$", MLN.string(giverTH.getPos().approximateDistanceLongString(th.getPos())));
+					s=s.replaceAll("\\$"+key+"_distanceshort\\$", MLN.string(giverTH.getPos().approximateDistanceShortString(th.getPos())));
 
 					final VillagerRecord villager=qiv.getVillagerRecord(world);
 
@@ -357,10 +362,10 @@ public class Quest {
 						final Building th2=qiv2.getTownHall(world);
 
 						if (th2!=null) {
-							s=s.replaceAll("\\$"+key+"_"+key2+"_direction\\$", th.getPos().directionTo(th2.getPos()));
-							s=s.replaceAll("\\$"+key+"_"+key2+"_directionshort\\$", th.getPos().directionToShort(th2.getPos()));
-							s=s.replaceAll("\\$"+key+"_"+key2+"_distance\\$", th.getPos().approximateDistanceLongString(th2.getPos()));
-							s=s.replaceAll("\\$"+key+"_"+key2+"_distanceshort\\$", th.getPos().approximateDistanceShortString(th2.getPos()));
+							s=s.replaceAll("\\$"+key+"_"+key2+"_direction\\$", MLN.string(th.getPos().directionTo(th2.getPos())));
+							s=s.replaceAll("\\$"+key+"_"+key2+"_directionshort\\$", MLN.string(th.getPos().directionToShort(th2.getPos())));
+							s=s.replaceAll("\\$"+key+"_"+key2+"_distance\\$", MLN.string(th.getPos().approximateDistanceLongString(th2.getPos())));
+							s=s.replaceAll("\\$"+key+"_"+key2+"_distanceshort\\$", MLN.string(th.getPos().approximateDistanceShortString(th2.getPos())));
 						} else {//can happen in MP
 							s=s.replaceAll("\\$"+key+"_"+key2+"_direction\\$", "");
 							s=s.replaceAll("\\$"+key+"_"+key2+"_directionshort\\$", "");
@@ -649,9 +654,12 @@ public class Quest {
 				return false;
 
 			for (final String tag : vr.questTags) {
-				if (!requiredTags.contains(tag))
+				
+				String tagPlayer = profile.key+"_"+tag;
+				
+				if (!requiredTags.contains(tagPlayer))
 					return false;
-				if (forbiddenTags.contains(tag))
+				if (forbiddenTags.contains(tagPlayer))
 					return false;
 			}
 			return true;

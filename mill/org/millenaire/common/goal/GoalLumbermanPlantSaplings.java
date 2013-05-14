@@ -16,6 +16,10 @@ import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
 public class GoalLumbermanPlantSaplings extends Goal {
 
+	public GoalLumbermanPlantSaplings() {
+		this.maxSimultaneousInBuilding=1;
+	}
+	
 	@Override
 	public int actionDuration(MillVillager villager) {
 		return 1000;

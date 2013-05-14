@@ -1,0 +1,6 @@
+native:Umaya;name_en:Stable;name_fr:enfrancais;around:4;startLevel:-1;orientation:3;width:16;length:29
+startLevel:-1
+startLevel:-1
+startLevel:-1
+startLevel:-1
+

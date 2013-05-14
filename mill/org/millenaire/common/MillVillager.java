@@ -2523,8 +2523,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	@Override
 	public void onLivingUpdate() {
-		
-		
+
+
 		super.onLivingUpdate();
 
 		this.updateArmSwingProgress();
@@ -2537,7 +2537,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			motionZ=0;
 		}
 	}
-	
+
 	@Override
 	public void onNoPathAvailable() {
 		pathFailedSincelastTick=true;
@@ -3055,7 +3055,16 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
-			inventory.put(new InvItem(nbttagcompound1.getInteger("item"),nbttagcompound1.getInteger("meta")), nbttagcompound1.getInteger("amount"));
+
+			int itemID=nbttagcompound1.getInteger("item");
+			int itemMeta=nbttagcompound1.getInteger("meta");
+
+			//Hack to fix badly saved inventories with sideway wood blocks
+			if (itemID==Block.wood.blockID) {
+				itemMeta=itemMeta & 3;
+			}
+
+			inventory.put(new InvItem(itemID,itemMeta), nbttagcompound1.getInteger("amount"));
 		}
 
 		previousBlock=nbttagcompound.getInteger("previousBlock");

@@ -18,7 +18,7 @@ import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
 
 public class GoalLumbermanChopTrees extends Goal {
-	
+
 	public GoalLumbermanChopTrees() {
 		this.maxSimultaneousInBuilding=1;
 		this.townhallLimit.put(new InvItem(Block.wood.blockID,-1), 4096);
@@ -36,10 +36,12 @@ public class GoalLumbermanChopTrees extends Goal {
 		final Vector<Point> vp=new Vector<Point>();
 		final Vector<Point> buildingp=new Vector<Point>();
 		for (final Building grove : villager.getTownHall().getBuildingsWithTag(Building.tagGrove)) {
-			final Point p=grove.getWoodLocation();
-			if (p!=null) {
-				vp.add(p);
-				buildingp.add(grove.getPos());
+			if (grove.getWoodCount()>4) {
+				final Point p=grove.getWoodLocation();
+				if (p!=null) {
+					vp.add(p);
+					buildingp.add(grove.getPos());
+				}
 			}
 		}
 
@@ -65,17 +67,18 @@ public class GoalLumbermanChopTrees extends Goal {
 
 	@Override
 	public AStarConfig getPathingConfig() {
-		return JPS_CONFIG_WIDE;
+		return JPS_CONFIG_CHOPLUMBER;
 	}
 
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
-		for (final Building grove : villager.getTownHall().getBuildingsWithTag(Building.tagGrove)) {
-			if (grove.getWoodCount()>16)
-				return true;
-		}
-
-		return false;
+		
+		if (villager.countInv(Block.wood.blockID, -1)>64)
+			return false;
+		
+		if (getDestination(villager)==null)
+			return false;
+		return true;
 	}
 
 	@Override
@@ -88,7 +91,7 @@ public class GoalLumbermanChopTrees extends Goal {
 
 		boolean woodFound=false;
 
-		if ((MLN.LogLumberman>=MLN.DEBUG) && villager.extraLog) {
+		if ((MLN.LogLumberman>=MLN.DEBUG)) {
 			MLN.debug(this, "Attempting to gather wood at: "+villager.getGoalDestPoint());
 		}
 
@@ -106,15 +109,15 @@ public class GoalLumbermanChopTrees extends Goal {
 						if ((blockId == Block.wood.blockID) || (blockId==Block.leaves.blockID)) {
 							if (!woodFound) {
 								if (blockId == Block.wood.blockID) {
-									final int meta=villager.getBlockMeta(p);
+									final int meta=villager.getBlockMeta(p) & 3;
 									villager.setBlock(p,0);
-									
+
 									villager.swingItem();
-									
+
 									villager.addToInv(Block.wood.blockID, meta, 1);
 									woodFound=true;
 
-									if ((MLN.LogLumberman>=MLN.DEBUG) && villager.extraLog) {
+									if ((MLN.LogLumberman>=MLN.DEBUG)) {
 										MLN.debug(this, "Gathered wood at: "+villager.getGoalDestPoint());
 									}
 								} else {
@@ -123,7 +126,7 @@ public class GoalLumbermanChopTrees extends Goal {
 										villager.addToInv(Block.sapling.blockID,MillCommonUtilities.getBlockMeta(villager.worldObj, p) & 3, 1);
 									}
 									villager.setBlock(p,0);
-									
+
 									villager.swingItem();
 
 									if (villager.gathersApples() && MillCommonUtilities.chanceOn(16)) {
@@ -152,7 +155,7 @@ public class GoalLumbermanChopTrees extends Goal {
 
 	@Override
 	public int priority(MillVillager villager) {
-		return 100-villager.countInv(Block.wood.blockID, -1);
+		return Math.max(10,125-villager.countInv(Block.wood.blockID, -1));
 	}
 
 	@Override

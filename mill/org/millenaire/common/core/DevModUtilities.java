@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
+import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerSender;
@@ -237,6 +238,16 @@ public class DevModUtilities {
 
 			if (s!="") {
 				ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,"Tags: "+s);
+			}
+			
+			s="";
+			
+			for (InvItem key : villager.inventory.keySet()) {
+				s+=key+":"+villager.inventory.get(key)+" ";
+			}
+			
+			if (s!="") {
+				ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,"Inv: "+s);
 			}
 
 		} else if ((entityplayer.inventory.getCurrentItem() != null) && (entityplayer.inventory.getCurrentItem().itemID == Block.sand.blockID)) {

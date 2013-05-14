@@ -1,0 +1,1 @@
+native:Mikro Spiti;around:4;startLevel:-1;orientation:2;width:6;length:10;reputation:64*64;price:10*64;priority:100000;max:0

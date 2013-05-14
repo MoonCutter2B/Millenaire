@@ -32,6 +32,7 @@ start:architectbyzantine
 start:farmbyzantine
 start:grovebyzantine
 
+player:playersmallhouse
 player:villa urbana
 player:gifthouse
 

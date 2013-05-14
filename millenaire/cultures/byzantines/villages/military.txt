@@ -33,6 +33,7 @@ start:lumberbyzantine
 start:architectbyzantine
 start:fisherbyzantine
 
+player:playersmallhouse
 player:villa urbana
 player:gifthouse
 
