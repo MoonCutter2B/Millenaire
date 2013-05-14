@@ -47,6 +47,8 @@ public class GoalPlantCacao extends Goal {
 		blockId=villager.getBlock(cropPoint);
 		if (blockId == 0) {
 			villager.setBlockAndMetadata(cropPoint,Block.cocoaPlant.blockID,getCocoaMeta(villager.worldObj,cropPoint));
+			
+			villager.swingItem();
 		}
 
 		return true;

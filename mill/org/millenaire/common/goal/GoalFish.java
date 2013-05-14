@@ -26,7 +26,7 @@ public class GoalFish extends Goal {
 
 		return 25000;
 	}
-
+	
 	@Override
 	public GoalInformation getDestination(MillVillager villager) throws Exception {
 
@@ -71,6 +71,8 @@ public class GoalFish extends Goal {
 	public boolean performAction(MillVillager villager) throws Exception {
 
 		villager.addToInv(Item.fishRaw.itemID, 1);
+		
+		villager.swingItem();
 
 		return true;
 	}

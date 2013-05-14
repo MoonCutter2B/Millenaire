@@ -158,7 +158,7 @@ parchmentComplete,64,0,0,0,0,true,,0,tradehelp.parchments
 
 
 
-tapestry,5*64,0,0,0,,,,2*64*64,tradehelp.normantapestry
+tapestry,5*64,0,0,0,10*64,,,2*64*64,tradehelp.normantapestry
 timberframe_plain,16,0,0,1024,0,false,0,0,tradehelp.normantimberframes
 timberframe_cross,20,0,0,512,0,false,0,0,tradehelp.normantimberframes
 

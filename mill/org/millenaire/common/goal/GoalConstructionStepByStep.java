@@ -30,7 +30,7 @@ public class GoalConstructionStepByStep extends Goal {
 
 		return 500-(toolEfficiency*20);
 	}
-
+	
 	@Override
 	public GoalInformation getDestination(MillVillager villager) {
 
@@ -142,6 +142,8 @@ public class GoalConstructionStepByStep extends Goal {
 		}
 
 		bblock.build(villager.worldObj,false,false);
+		
+		villager.swingItem();
 
 		boolean foundNextBlock=false;
 

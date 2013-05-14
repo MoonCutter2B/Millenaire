@@ -68,7 +68,6 @@ public class GoalLumbermanChopTrees extends Goal {
 		return JPS_CONFIG_WIDE;
 	}
 
-
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
 		for (final Building grove : villager.getTownHall().getBuildingsWithTag(Building.tagGrove)) {
@@ -109,6 +108,9 @@ public class GoalLumbermanChopTrees extends Goal {
 								if (blockId == Block.wood.blockID) {
 									final int meta=villager.getBlockMeta(p);
 									villager.setBlock(p,0);
+									
+									villager.swingItem();
+									
 									villager.addToInv(Block.wood.blockID, meta, 1);
 									woodFound=true;
 
@@ -121,6 +123,8 @@ public class GoalLumbermanChopTrees extends Goal {
 										villager.addToInv(Block.sapling.blockID,MillCommonUtilities.getBlockMeta(villager.worldObj, p) & 3, 1);
 									}
 									villager.setBlock(p,0);
+									
+									villager.swingItem();
 
 									if (villager.gathersApples() && MillCommonUtilities.chanceOn(16)) {
 										villager.addToInv(Mill.ciderapple.itemID, 1);

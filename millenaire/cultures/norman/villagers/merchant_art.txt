@@ -13,6 +13,7 @@ goal=gopray
 goal=godrink
 goal=keepStall
 
+merchantstock=tapestry,8
 merchantstock=painting,32
 merchantstock=dye_white,64
 merchantstock=dye_orange,64

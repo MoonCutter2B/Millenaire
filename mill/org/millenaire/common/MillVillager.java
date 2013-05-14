@@ -88,9 +88,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		public int compare(InvItem arg0, InvItem arg1) {
 			return arg0.getName().compareTo(arg1.getName());
 		}
-		
+
 	}
-	
+
 	public static class InvItem implements Comparable<InvItem> {
 
 		public static final int ANYENCHANTED=1;
@@ -715,6 +715,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			{
 				attackTime = 20;
 				entity.attackEntityFrom(DamageSource.causeMobDamage(this), getAttackStrength());
+				swingItem();
 			}
 			isUsingHandToHand=true;
 		}
@@ -1054,7 +1055,13 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 						}
 						heldItemCount=0;
 					}
+
+					if (heldItemCount==0 && goal.swingArms(this)) {
+						this.swingItem();
+					}
+
 					heldItemCount++;
+
 				}
 			} else {
 				if (heldItemCount>HOLD_DURATION) {
@@ -1070,6 +1077,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 					}
 					heldItemCount=0;
 				}
+
+				if (heldItemCount==0 && goal.swingArms(this)) {
+					this.swingItem();
+				}
+
 				heldItemCount++;
 			}
 		} else {
@@ -1288,17 +1300,12 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public void facePoint(Point p, float par2, float par3)
-	{
-		final double var4 = p.x - this.posX;
-		final double var8 = p.z - this.posZ;
-		final double var6 = p.y - (this.posY + this.getEyeHeight());
+	{		
+		final double x = p.x - this.posX;
+		final double z = p.z - this.posZ;
+		final double y = p.y - (this.posY + this.getEyeHeight());
 
-
-		final double var14 = MathHelper.sqrt_double((var4 * var4) + (var8 * var8));
-		final float var12 = (float)((Math.atan2(var8, var4) * 180.0D) / Math.PI) - 90.0F;
-		final float var13 = (float)(-((Math.atan2(var6, var14) * 180.0D) / Math.PI));
-		this.rotationPitch = -this.updateRotation(this.rotationPitch, var13, par3);
-		this.rotationYaw = this.updateRotation(this.rotationYaw, var12, par2);
+		getLookHelper().setLookPosition(x,y,z, 10.0F, getVerticalFaceSpeed());
 	}
 
 	private boolean foreignMerchantNightAction() {
@@ -2516,7 +2523,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	@Override
 	public void onLivingUpdate() {
+		
+		
 		super.onLivingUpdate();
+
+		this.updateArmSwingProgress();
 
 		setFacingDirection();
 
@@ -2526,7 +2537,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			motionZ=0;
 		}
 	}
-
+	
 	@Override
 	public void onNoPathAvailable() {
 		pathFailedSincelastTick=true;
@@ -3146,6 +3157,16 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 		}
 
+		int goalDestEntityID=data.readInt();
+
+		if (goalDestEntityID!=-1) {
+			Entity ent=worldObj.getEntityByID(goalDestEntityID);
+
+			if (ent!=null) {
+				setGoalDestEntity(ent);
+			}
+		}
+
 		client_lastupdated=worldObj.getWorldTime();
 
 
@@ -3299,34 +3320,58 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	private void setFacingDirection() {
 
 		if (entityToAttack!=null) {
-			faceEntity(entityToAttack,30,30);
+			faceEntityMill(entityToAttack,30,30);
 			return;
 		}
 
 		if ((goalKey!=null) && ((getGoalDestPoint()!=null) || (getGoalDestEntity()!=null))) {
 			final Goal goal=Goal.goals.get(goalKey);
 
-			Point facingPoint;
-
-			if (getGoalDestEntity()!=null) {
-				facingPoint=new Point(getGoalDestEntity());
-			} else {
-				facingPoint=getGoalDestPoint();
-			}
-
-			if (goal.lookAtGoal() && (getPos().distanceTo(facingPoint)<goal.range(this))) {
-				facePoint(facingPoint,10.0F, 10.0F);
-				return;
+			if (goal.lookAtGoal()) {
+				if (getGoalDestEntity()!=null  && (getPos().distanceTo(getGoalDestEntity())<goal.range(this))) {
+					faceEntityMill(getGoalDestEntity(),10,10);
+				} else if (getGoalDestPoint()!=null  && (getPos().distanceTo(getGoalDestPoint())<goal.range(this))) {
+					facePoint(getGoalDestPoint(),10,10);
+				}
 			}
 
 			if (goal.lookAtPlayer()) {
 				final EntityPlayer player=worldObj.getClosestPlayerToEntity(this, 10);
 				if (player!=null) {
-					faceEntity(player,10,10);
+					faceEntityMill(player,10,10);
 					return;
 				}
 			}
 		}
+	}
+
+
+	//emptied to prevent generic code from turning the villagers' heads toward the player
+	@Override
+	public void faceEntity(Entity par1Entity, float par2, float par3) {
+
+	}
+
+	public void faceEntityMill(Entity par1Entity, float par2, float par3) {
+		double d0 = par1Entity.posX - this.posX;
+		double d1 = par1Entity.posZ - this.posZ;
+		double d2;
+
+		if (par1Entity instanceof EntityLiving)
+		{
+			EntityLiving entityliving = (EntityLiving)par1Entity;
+			d2 = entityliving.posY + (double)entityliving.getEyeHeight() - (this.posY + (double)this.getEyeHeight());
+		}
+		else
+		{
+			d2 = (par1Entity.boundingBox.minY + par1Entity.boundingBox.maxY) / 2.0D - (this.posY + (double)this.getEyeHeight());
+		}
+
+		double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+		float f2 = (float)(Math.atan2(d1, d0) * 180.0D / Math.PI) - 90.0F;
+		float f3 = (float)(-(Math.atan2(d2, d3) * 180.0D / Math.PI));
+		this.rotationPitch = this.updateRotation(this.rotationPitch, f3, par3);
+		this.rotationYaw = this.updateRotation(this.rotationYaw, f2, par2);
 	}
 
 	public void setGoalBuildingDestPoint(Point newDest) {
@@ -4124,6 +4169,12 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				StreamReadWrite.writeNullableGoods(g, data);
 				data.writeInt(merchantSells.get(g));
 			}
+		} else {
+			data.writeInt(-1);
+		}
+
+		if (getGoalDestEntity()!=null) {
+			data.writeInt(getGoalDestEntity().entityId);
 		} else {
 			data.writeInt(-1);
 		}

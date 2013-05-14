@@ -48,6 +48,7 @@ public class GoalLumbermanPlantSaplings extends Goal {
 		}
 		return packDest(p,buildingP);
 	}
+	
 
 	@Override
 	public ItemStack[] getHeldItemsTravelling(MillVillager villager) {
@@ -82,6 +83,11 @@ public class GoalLumbermanPlantSaplings extends Goal {
 
 		return false;
 	}
+	
+	@Override
+	public int range(MillVillager villager) {
+		return 5;
+	}
 
 	@Override
 	public boolean lookAtGoal() {
@@ -115,6 +121,8 @@ public class GoalLumbermanPlantSaplings extends Goal {
 
 			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Block.sapling.blockID,chosenMeta);
 
+			villager.swingItem();
+			
 			if ((MLN.LogLumberman>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Planted at: "+villager.getGoalDestPoint());
 			}

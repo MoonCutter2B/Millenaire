@@ -90,6 +90,8 @@ public class GoalIndianGatherBrick extends Goal {
 		if ((MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Mill.stone_decoration.blockID) && (MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint())==1)) {
 			villager.addToInv(Mill.stone_decoration.blockID, MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint()), 1);
 			villager.setBlockAndMetadata(villager.getGoalDestPoint(),0,0);
+			
+			villager.swingItem();
 			return false;
 		} else
 			return true;

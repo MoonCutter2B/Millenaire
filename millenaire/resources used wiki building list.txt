@@ -2,6 +2,372 @@
 |-
 ! Requirements Template Building Name
 |-
+! Basilike~placebyzantine_A_basilica
+|-
+! null~loneCastle_A_training
+|-
+! Ampelonas
+|-
+! Latomeio
+|-
+! Archiao Nao
+|-
+! Demarcheio
+|-
+! Stratones
+|-
+! Prebyterio
+|-
+! Chalkeio~forgebyzantine
+|-
+! Krebati~fortbyzantine_A_bed3
+|-
+! Krebati~fortbyzantine_A_bed1
+|-
+! Krebati~fortbyzantine_A_bed2
+|-
+! Frourio~fortbyzantine
+|-
+! Parekklesi
+|-
+! Exochike Katiokia
+|-
+! Archaio theatro
+|-
+! Synergio
+|-
+! Frourio~playerfortbyzantine
+|-
+! Pandocheio
+|-
+! Boske Probaton
+|-
+! Mono Paratiritio~oaktower
+|-
+! Doro spiti
+|-
+! Alsos
+|-
+! Apomonomeno Boske Probaton
+|-
+! Psaras Spiti
+|-
+! Krebati~barracksbyzantine_A_bed
+|-
+! Agrotema
+|-
+! Freatio
+|-
+! Sirotrofia
+|-
+! Krebati~playerfortbyzantine_A_bed3
+|-
+! Krebati~playerfortbyzantine_A_bed2
+|-
+! Krebati~playerfortbyzantine_A_bed1
+|-
+! Paratereteio
+|-
+! Technites Spiti
+|-
+! Basilike~basilkabyzantine
+|-
+! Pharos
+|-
+! Orthodoxe Ekklesia
+|-
+!  
+|-
+! Chani
+|-
+! Mono Paratiritio~birchtower
+|-
+! Mono Paratiritio~pinetower
+|-
+! Mono Paratiritio~jungletower
+|-
+! Monachikos Kastro
+|-
+! null~loneCastle_A_praying
+|-
+! Bomos
+|-
+! Chalkeio~fortbyzantine_A_forge
+|-
+! Taverna
+|-
+! Fournos
+|-
+! Xylokopos Spiti
+|-
+! Chalkeio~playerfortbyzantine_A_forge
+|-
+! Qila ka Bhati
+|-
+! Purana Qila
+|-
+! Puraalekhagar
+|-
+! Dusra Ghar
+|-
+! Sunsan har
+|-
+! Inta bhatta
+|-
+! Tandurust
+|-
+! Adivasi ka Ghar
+|-
+! Sunsan Saray
+|-
+! Visaala saajisa
+|-
+! Pandit ka Ghar
+|-
+! Chota Saraay
+|-
+! Chota ghar
+|-
+! Kisaan ka Ghar
+|-
+! Bari saajisa
+|-
+! Baoli
+|-
+! Chota Mandir
+|-
+! Sena-Nivaas
+|-
+! Bangla
+|-
+! Gaanv ka Mandir
+|-
+! Kunja
+|-
+! Mahal~playerpalace
+|-
+! Saraay
+|-
+! Sainik ka Ghar
+|-
+! Bhare Ghar
+|-
+! Lakarhara ka Ghar
+|-
+! Dhaan
+|-
+! Choti saajisa
+|-
+! Saray
+|-
+! Masaalaa udyaana
+|-
+! Qila
+|-
+! Bhati
+|-
+! Sena ka Bhati
+|-
+! Sadhu ke Peer
+|-
+! Gannaa baagaana
+|-
+! Uphar ghar
+|-
+! Mukhiya ka Ghar
+|-
+! Sikaar
+|-
+! Muurtikaar ka Ghar
+|-
+! Bazaar
+|-
+! Mahal~palace
+|-
+! Zokuto no Bakusha
+|-
+! Noujou Nojo
+|-
+! Mokuzoukaoku
+|-
+! Kodachi
+|-
+! Kikori Koya
+|-
+! Suiden
+|-
+! Tansetsu~japanesearmyforge
+|-
+! Ike
+|-
+! Ido
+|-
+! Yashiro
+|-
+! Chiisai Ie
+|-
+! Tansetsu~japaneseforge
+|-
+! Chuugata Chisho
+|-
+! Eki Tochi
+|-
+! Kouku
+|-
+! Sentou
+|-
+! Tsukurizakaya
+|-
+! Shoko
+|-
+! Bourou
+|-
+! Ichiba
+|-
+! Shuudannoujou
+|-
+! Iwamuro no Hito
+|-
+! Saisekijou
+|-
+! Heisha
+|-
+! Shakuchi
+|-
+! Daibutsu
+|-
+! Youkeijou
+|-
+! Tsuribori
+|-
+! Yaba
+|-
+! Shugi ie
+|-
+! Buttou
+|-
+! Kumonjo
+|-
+! Okurimono hausu
+|-
+! Noufu Ie
+|-
+! Densha
+|-
+! Reinousha Ie
+|-
+! Kofun
+|-
+! Bousai
+|-
+! Shijin
+|-
+! Daidokoro
+|-
+! Zenshou
+|-
+! Soushi
+|-
+! Kai Ie
+|-
+! Ah Waay Su'uk~mayanshamangrounds
+|-
+! Maya Otoch
+|-
+! Muul~mayanpyramid
+|-
+! Sa'at Maya Otoch
+|-
+! Mehen Kuuch
+|-
+! Cha'an Ka'nal
+|-
+! Noh Kuuch
+|-
+! Ka'kau' Makan
+|-
+! Maya Makan
+|-
+! Ah Tz'on Si' Took
+|-
+! Yalam Otoch
+|-
+! Chak
+|-
+! Hach Noh Nah
+|-
+! Kob Took
+|-
+! K'u-nah
+|-
+! Kan Cha'an
+|-
+! Zil Otoch
+|-
+! Chumuk Kuuch
+|-
+! B'aat Winik Nah
+|-
+! K'uhul Jalab
+|-
+! Tunich In-ti'a'al
+|-
+! Ch'en~mayancave
+|-
+! Sa'at Muul
+|-
+! Uxul Otoch
+|-
+! K'aax
+|-
+! Jalab
+|-
+! Muul~lonemayanpyramid
+|-
+! Sa'at Maya Maize Makan
+|-
+! K'as Otoch
+|-
+! Chanan Nah
+|-
+! Chak Muul
+|-
+! K'eyem
+|-
+! Maize Makan
+|-
+! K'in Pak
+|-
+! Ix La' Nah
+|-
+! Pwes
+|-
+! Muul~mayanplayerpyramid
+|-
+! Ah Kax Makan
+|-
+! Noh Muul
+|-
+! Sa'at Tunich In-ti'a'al
+|-
+! Ch'en~lonemayancave
+|-
+! Laak'Noh Nah
+|-
+! Ah Waay Su'uk~lonemayanshaman
+|-
+! Ciwic
+|-
+! Hu'um-Noh
+|-
+! Ta'as Kob Took
+|-
+! Ni'Nah
+|-
+! Hach Noh Otoch
+|-
+! K'as Koloh-che'
+|-
 ! Tour de l'Alchimiste
 |-
 ! Maison du guarde
@@ -113,371 +479,5 @@
 ! Maison du charpentier
 |-
 ! Moulin Abandonné
-|-
-! Zokuto no Bakusha
-|-
-! Noujou Nojo
-|-
-! Mokuzoukaoku
-|-
-! Kodachi
-|-
-! Kikori Koya
-|-
-! Suiden
-|-
-! Tansetsu~japanesearmyforge
-|-
-! Ike
-|-
-! Ido
-|-
-! Yashiro
-|-
-! Chiisai Ie
-|-
-! Tansetsu~japaneseforge
-|-
-! Chuugata Chisho
-|-
-! Eki Tochi
-|-
-! Kouku
-|-
-! Sentou
-|-
-! Tsukurizakaya
-|-
-! Shoko
-|-
-! Bourou
-|-
-! Ichiba
-|-
-! Shuudannoujou
-|-
-! Iwamuro no Hito
-|-
-! Saisekijou
-|-
-! Heisha
-|-
-! Shakuchi
-|-
-! Daibutsu
-|-
-! Youkeijou
-|-
-! Tsuribori
-|-
-! Yaba
-|-
-! Shugi ie
-|-
-! Buttou
-|-
-! Kumonjo
-|-
-! Okurimono hausu
-|-
-! Noufu Ie
-|-
-! Densha
-|-
-! Reinousha Ie
-|-
-! Kofun
-|-
-! Bousai
-|-
-! Shijin
-|-
-! Daidokoro
-|-
-! Zenshou
-|-
-! Soushi
-|-
-! Kai Ie
-|-
-! Basilike~placebyzantine_A_basilica
-|-
-! null~loneCastle_A_training
-|-
-! Ampelonas
-|-
-! Latomeio
-|-
-! Archiao Nao
-|-
-! Demarcheio
-|-
-! Stratones
-|-
-! Prebyterio
-|-
-! Chalkeio~forgebyzantine
-|-
-! Krebati~fortbyzantine_A_bed3
-|-
-! Krebati~fortbyzantine_A_bed1
-|-
-! Krebati~fortbyzantine_A_bed2
-|-
-! Frourio~fortbyzantine
-|-
-! Parekklesi
-|-
-! Exochike Katiokia
-|-
-! Archaio theatro
-|-
-! Synergio
-|-
-! Frourio~playerfortbyzantine
-|-
-! Pandocheio
-|-
-! Boske Probaton
-|-
-! Mono Paratiritio~oaktower
-|-
-! Doro spiti
-|-
-! Alsos
-|-
-! Apomonomeno Boske Probaton
-|-
-! Psaras Spiti
-|-
-! Krebati~barracksbyzantine_A_bed
-|-
-! Agrotema
-|-
-! Freatio
-|-
-! Sirotrofia
-|-
-! Krebati~playerfortbyzantine_A_bed3
-|-
-! Krebati~playerfortbyzantine_A_bed2
-|-
-! Krebati~playerfortbyzantine_A_bed1
-|-
-! Paratereteio
-|-
-! Technites Spiti
-|-
-! Basilike~basilkabyzantine
-|-
-! Pharos
-|-
-! Orthodoxe Ekklesia
-|-
-!  
-|-
-! Chani
-|-
-! Mono Paratiritio~birchtower
-|-
-! Mono Paratiritio~pinetower
-|-
-! Mono Paratiritio~jungletower
-|-
-! Monachikos Kastro
-|-
-! null~loneCastle_A_praying
-|-
-! Bomos
-|-
-! Chalkeio~fortbyzantine_A_forge
-|-
-! Taverna
-|-
-! Fournos
-|-
-! Xylokopos Spiti
-|-
-! Chalkeio~playerfortbyzantine_A_forge
-|-
-! Ah Waay Su'uk~mayanshamangrounds
-|-
-! Maya Otoch
-|-
-! Muul~mayanpyramid
-|-
-! Sa'at Maya Otoch
-|-
-! Mehen Kuuch
-|-
-! Cha'an Ka'nal
-|-
-! Noh Kuuch
-|-
-! Ka'kau' Makan
-|-
-! Maya Makan
-|-
-! Ah Tz'on Si' Took
-|-
-! Yalam Otoch
-|-
-! Chak
-|-
-! Hach Noh Nah
-|-
-! Kob Took
-|-
-! K'u-nah
-|-
-! Kan Cha'an
-|-
-! Zil Otoch
-|-
-! Chumuk Kuuch
-|-
-! B'aat Winik Nah
-|-
-! K'uhul Jalab
-|-
-! Tunich In-ti'a'al
-|-
-! Ch'en~mayancave
-|-
-! Sa'at Muul
-|-
-! Uxul Otoch
-|-
-! K'aax
-|-
-! Jalab
-|-
-! Muul~lonemayanpyramid
-|-
-! Sa'at Maya Maize Makan
-|-
-! K'as Otoch
-|-
-! Chanan Nah
-|-
-! Chak Muul
-|-
-! K'eyem
-|-
-! Maize Makan
-|-
-! K'in Pak
-|-
-! Ix La' Nah
-|-
-! Pwes
-|-
-! Muul~mayanplayerpyramid
-|-
-! Ah Kax Makan
-|-
-! Noh Muul
-|-
-! Sa'at Tunich In-ti'a'al
-|-
-! Ch'en~lonemayancave
-|-
-! Laak'Noh Nah
-|-
-! Ah Waay Su'uk~lonemayanshaman
-|-
-! Ciwic
-|-
-! Hu'um-Noh
-|-
-! Ta'as Kob Took
-|-
-! Ni'Nah
-|-
-! Hach Noh Otoch
-|-
-! K'as Koloh-che'
-|-
-! Qila ka Bhati
-|-
-! Purana Qila
-|-
-! Puraalekhagar
-|-
-! Dusra Ghar
-|-
-! Sunsan har
-|-
-! Inta bhatta
-|-
-! Tandurust
-|-
-! Adivasi ka Ghar
-|-
-! Sunsan Saray
-|-
-! Visaala saajisa
-|-
-! Pandit ka Ghar
-|-
-! Chota Saraay
-|-
-! Chota ghar
-|-
-! Kisaan ka Ghar
-|-
-! Bari saajisa
-|-
-! Baoli
-|-
-! Chota Mandir
-|-
-! Sena-Nivaas
-|-
-! Bangla
-|-
-! Gaanv ka Mandir
-|-
-! Kunja
-|-
-! Mahal~playerpalace
-|-
-! Saraay
-|-
-! Sainik ka Ghar
-|-
-! Bhare Ghar
-|-
-! Lakarhara ka Ghar
-|-
-! Dhaan
-|-
-! Choti saajisa
-|-
-! Saray
-|-
-! Masaalaa udyaana
-|-
-! Qila
-|-
-! Bhati
-|-
-! Sena ka Bhati
-|-
-! Sadhu ke Peer
-|-
-! Gannaa baagaana
-|-
-! Uphar ghar
-|-
-! Mukhiya ka Ghar
-|-
-! Sikaar
-|-
-! Muurtikaar ka Ghar
-|-
-! Bazaar
-|-
-! Mahal~palace
 |-
 |}

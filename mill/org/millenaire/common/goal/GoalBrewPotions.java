@@ -39,6 +39,11 @@ public class GoalBrewPotions extends Goal {
 		}
 		return null;
 	}
+	
+	@Override
+	public boolean swingArms() {
+		return true;
+	}
 
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) throws Exception {

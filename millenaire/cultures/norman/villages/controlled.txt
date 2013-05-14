@@ -7,6 +7,7 @@ forestQualifier:la-fôret
 lavaQualifier:le-volcan
 lakeQualifier:le-lac
 oceanQualifier:l'océan
+carriesraid:true
 
 //starting buildings:
 centre:playerfort

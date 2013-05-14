@@ -112,7 +112,8 @@ public class GoalIndianHarvestSugarCane extends Goal {
 			if (rand<(irrigation/100)) {
 				nbcrop++;
 			}
-
+			
+			villager.swingItem();
 
 			villager.addToInv(Item.reed.itemID, nbcrop);
 		}

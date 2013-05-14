@@ -2,6 +2,7 @@ name:Jaagiir
 playerControlled:true
 weight:0
 qualifier:Jaagiir
+carriesraid:true
 
 pathmaterial:pathdirt
 pathmaterial:pathsandstone

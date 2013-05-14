@@ -3872,9 +3872,9 @@ public class Building {
 		if (!location.tags.contains(tagGrove))
 			return null;
 
-		for (int i = location.minx - 1; i < (location.maxx + 1); i++) {
+		for (int i = location.minx - 3; i < (location.maxx + 3); i++) {
 			for (int j = location.pos.getiY() - 1; j < (location.pos.getiY() + 10); j++) {
-				for (int k = location.minz - 1; k < (location.maxz + 1); k++) {
+				for (int k = location.minz - 3; k < (location.maxz + 3); k++) {
 					if (worldObj.getBlockId(i, j, k) == Block.wood.blockID)
 						return new Point(i, j, k);
 				}

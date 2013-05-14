@@ -92,6 +92,8 @@ public class GoalIndianDryBrick extends Goal {
 	public boolean performAction(MillVillager villager) {
 		if (MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==0) {
 			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Mill.earth_decoration.blockID,0);
+			
+			villager.swingItem();
 		}
 		return true;
 	}

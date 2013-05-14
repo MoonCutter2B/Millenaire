@@ -25,6 +25,10 @@ public class GoalGatherGoods extends Goal {
 		return JPS_CONFIG_WIDE;
 	}
 
+	@Override
+	public int range(MillVillager villager) {
+		return 5;
+	}
 
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {

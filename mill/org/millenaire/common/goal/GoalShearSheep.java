@@ -55,6 +55,11 @@ public class GoalShearSheep extends Goal {
 	public boolean isFightingGoal() {
 		return true;
 	}
+	
+	@Override
+	public int range(MillVillager villager) {
+		return 5;
+	}
 
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) throws Exception {
@@ -104,6 +109,8 @@ public class GoalShearSheep extends Goal {
 						if ((MLN.LogCattleFarmer>=MLN.MAJOR) && villager.extraLog) {
 							MLN.major(this, "Shearing: "+ent);
 						}
+						
+						villager.swingItem();
 					}
 				}
 			}

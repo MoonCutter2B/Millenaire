@@ -111,7 +111,7 @@ public class BuildingLocation implements Cloneable {
 		nbttaglist = nbttagcompound.getTagList("tags");
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
-			final String value=nbttagcompound1.getString("value");
+			final String value=nbttagcompound1.getString("value").toLowerCase();
 
 			//Conversion for backward compatibility
 			if (value.equals("market1") || value.equals("market2") || value.equals("market3")) {

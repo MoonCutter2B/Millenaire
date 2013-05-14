@@ -4,6 +4,7 @@ hillQualifier:stous lophous
 lavaQualifier:to hephaisto
 lakeQualifier:limne
 playerControlled:true
+carriesraid:true
 
 pathmaterial:pathdirt
 pathmaterial:pathgravel

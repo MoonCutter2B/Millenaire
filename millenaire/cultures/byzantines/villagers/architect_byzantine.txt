@@ -38,3 +38,7 @@ baseAttackStrength=8
 tag=helpInAttacks
 defaultweapon=woodaxe
 experiencegiven=5
+
+startingInv=steelchest,1
+startingInv=steellegs,1
+startingInv=steelboots,1

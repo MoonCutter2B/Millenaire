@@ -122,6 +122,9 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 								}
 							}
 						}
+						
+						villager.swingItem();
+						
 						return true;
 					}
 				}
@@ -145,6 +148,8 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 								}
 							}
 						}
+						
+						villager.swingItem();
 
 						return true;
 					}

@@ -3766,7 +3766,7 @@ public class BuildingPlan {
 						}
 					}
 				} else if (key.equalsIgnoreCase("tag")) {
-					tags.add(value);
+					tags.add(value.toLowerCase());
 				} else if (key.equalsIgnoreCase("subbuilding")) {
 					subBuildings.add(value);
 				} else if (key.equalsIgnoreCase("startingsubbuilding")) {

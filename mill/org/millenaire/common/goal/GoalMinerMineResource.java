@@ -32,6 +32,11 @@ public class GoalMinerMineResource extends Goal {
 		}
 		return 0;
 	}
+	
+	@Override
+	public boolean swingArms() {
+		return true;
+	}
 
 	@Override
 	public GoalInformation getDestination(MillVillager villager) throws Exception {
@@ -72,6 +77,10 @@ public class GoalMinerMineResource extends Goal {
 		return JPS_CONFIG_WIDE;
 	}
 
+	@Override
+	public int range(MillVillager villager) {
+		return 5;
+	}
 
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) throws Exception {

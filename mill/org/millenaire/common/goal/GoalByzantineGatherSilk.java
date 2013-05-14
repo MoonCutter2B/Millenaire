@@ -41,6 +41,8 @@ public class GoalByzantineGatherSilk extends Goal {
 				buildingp.add(kiln.getPos());
 			}
 		}
+		
+		
 
 		if (vp.isEmpty())
 			return null;
@@ -97,6 +99,9 @@ public class GoalByzantineGatherSilk extends Goal {
 		if ((MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Mill.wood_decoration.blockID) && (MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint())==4)) {
 			villager.addToInv(Mill.silk.itemID,0, 1);
 			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Mill.wood_decoration.blockID,3);
+			
+			villager.swingItem();
+			
 			return false;
 		} else
 			return true;

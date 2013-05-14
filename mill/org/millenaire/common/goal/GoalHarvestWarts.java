@@ -28,7 +28,7 @@ public class GoalHarvestWarts extends Goal {
 	public boolean lookAtGoal() {
 		return true;
 	}
-
+	
 	@Override
 	public boolean performAction(MillVillager villager) {
 
@@ -37,6 +37,8 @@ public class GoalHarvestWarts extends Goal {
 		if ((villager.getBlock(cropPoint)==Block.netherStalk.blockID) && (villager.getBlockMeta(cropPoint)==3)) {
 			villager.setBlockAndMetadata(cropPoint,0,0);
 			villager.getHouse().storeGoods(Item.netherStalkSeeds.itemID, 1);
+			
+			villager.swingItem();
 		}
 
 		return true;

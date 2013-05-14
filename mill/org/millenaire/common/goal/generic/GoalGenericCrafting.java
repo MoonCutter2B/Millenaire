@@ -14,6 +14,11 @@ import org.millenaire.common.item.Goods;
 
 public class GoalGenericCrafting extends GoalGeneric {
 
+	@Override
+	public boolean swingArms() {
+		return true;
+	}
+
 	public HashMap<InvItem,Integer> inputs=new HashMap<InvItem,Integer>();
 	public HashMap<InvItem,Integer> outputs=new HashMap<InvItem,Integer>();
 

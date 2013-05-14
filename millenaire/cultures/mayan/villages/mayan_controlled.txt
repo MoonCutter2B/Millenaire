@@ -1,6 +1,7 @@
 name:Player's Jub'uy
 weight:0
 playerControlled:true
+carriesraid:true
 
 pathmaterial:pathdirt
 pathmaterial:pathslabs

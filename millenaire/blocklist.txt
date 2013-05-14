@@ -17,6 +17,7 @@ soil;-1;0;;64/128/0
 ricesoil;-1;0;;64/128/10
 turmericsoil;-1;0;;64/128/20
 sugarcanesoil;-1;0;;64/128/30
+potatosoil;-1;0;;64/128/100
 lockedchest;-1;0;;135/30/0
 
 

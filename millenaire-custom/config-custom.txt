@@ -35,3 +35,6 @@ logworldgeneration=minor
 //logpujas; 
 logpujas=debug
 
+//loglumberman; 
+loglumberman=debug
+

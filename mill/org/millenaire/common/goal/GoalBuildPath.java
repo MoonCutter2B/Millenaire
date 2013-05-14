@@ -50,6 +50,8 @@ public class GoalBuildPath extends Goal {
 		villager.getTownHall().pathsToBuildPathIndex++;
 
 		BuildingBlock b=villager.getTownHall().getCurrentPathBuildingBlock();
+		
+		villager.swingItem();
 
 		if (b!=null) {
 			villager.setGoalDestPoint(b.p);

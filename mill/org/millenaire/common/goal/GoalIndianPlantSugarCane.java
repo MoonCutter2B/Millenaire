@@ -92,6 +92,8 @@ public class GoalIndianPlantSugarCane extends Goal {
 		blockId=villager.getBlock(cropPoint);
 		if (((blockId == 0) || (blockId == Block.leaves.blockID))) {
 			villager.setBlock(cropPoint,Block.reed.blockID);
+			
+			villager.swingItem();
 		}
 
 		return true;

@@ -71,3 +71,5 @@ requiredFood=sake,1
 
 baseAttackStrength=2
 defaultweapon=woodaxe
+
+

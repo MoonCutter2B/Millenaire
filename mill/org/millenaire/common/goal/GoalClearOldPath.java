@@ -28,7 +28,8 @@ public class GoalClearOldPath extends Goal {
 
 		return null;
 	}
-
+	
+	
 	@Override
 	public int actionDuration(MillVillager villager) {
 		final int toolEfficiency=(int)villager.getBestShovel().efficiencyOnProperMaterial;
@@ -67,6 +68,8 @@ public class GoalClearOldPath extends Goal {
 
 		p=villager.getTownHall().getCurrentClearPathPoint();
 
+		villager.swingItem();
+		
 		if (p!=null) {
 			villager.setGoalDestPoint(p);
 			return false;

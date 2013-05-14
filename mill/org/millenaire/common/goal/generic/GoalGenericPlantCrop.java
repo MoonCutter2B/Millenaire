@@ -109,6 +109,8 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 
 		villager.setBlockAndMetadata(villager.getGoalDestPoint().getAbove(),getCropBlockId(cropType),getCropBlockMeta(cropType));
 
+		villager.swingItem();
+		
 		return true;
 	}
 

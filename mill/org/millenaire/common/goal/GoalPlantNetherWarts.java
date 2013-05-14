@@ -38,11 +38,13 @@ public class GoalPlantNetherWarts extends Goal {
 		blockId=villager.getBlock(cropPoint);
 		if (blockId == 0) {
 			villager.setBlockAndMetadata(cropPoint,Block.netherStalk.blockID,0);
+			
+			villager.swingItem();
 		}
 
 		return true;
 	}
-
+	
 	@Override
 	public int priority(MillVillager villager) {
 		return 100;

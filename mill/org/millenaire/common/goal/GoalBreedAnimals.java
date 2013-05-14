@@ -110,6 +110,11 @@ public class GoalBreedAnimals extends Goal {
 	public AStarConfig getPathingConfig() {
 		return JPS_CONFIG_WIDE;
 	}
+	
+	@Override
+	public int range(MillVillager villager) {
+		return 5;
+	}
 
 	@Override
 	public boolean isFightingGoal() {
@@ -186,6 +191,8 @@ public class GoalBreedAnimals extends Goal {
 							if (foundBreedingItem>0)
 								villager.getHouse().takeGoods(foundBreedingItem, 1);
 
+							villager.swingItem();
+							
 							ServerSender.sendAnimalBreeding(animal);
 						}
 					}

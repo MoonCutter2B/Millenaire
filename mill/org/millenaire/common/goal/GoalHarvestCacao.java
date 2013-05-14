@@ -53,6 +53,8 @@ Point p=villager.getHouse().getCocoaHarvestLocation();
 					nbcrop++;
 				}
 				villager.addToInv(Item.dyePowder.itemID, 3, nbcrop);
+				
+				villager.swingItem();
 			}
 		}
 

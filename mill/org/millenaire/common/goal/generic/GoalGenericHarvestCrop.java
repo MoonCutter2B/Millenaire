@@ -30,7 +30,6 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 		duration=100;
 	}
 
-
 	@Override
 	public boolean isPossibleGenericGoal(MillVillager villager)
 			throws Exception {
@@ -113,6 +112,8 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 			}
 
 			villager.setBlockAndMetadata(villager.getGoalDestPoint().getAbove(),0,0);
+		
+			villager.swingItem();
 		}
 
 		return true;
