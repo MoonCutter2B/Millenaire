@@ -29,6 +29,7 @@ public class VillagerType implements WeightedChoice {
 	private static final String TAG_DRINKER="heavydrinker";
 	private static final String TAG_SELLER="seller";
 	private static final String TAG_MEDITATES="meditates";
+	private static final String TAG_SACRIFICES="performssacrifices";
 	private static final String TAG_VISITOR="visitor";
 	private static final String TAG_HELPSINATTACKS="helpinattacks";
 	private static final String TAG_GATHERSAPPLES="gathersapples";
@@ -39,6 +40,8 @@ public class VillagerType implements WeightedChoice {
 	private static final String TAG_NOTELEPORT="noteleport";
 	private static final String TAG_HIDENAME="hidename";
 	private static final String TAG_SHOWHEALTH="showhealth";
+	private static final String TAG_DEFENSIVE="defensive";
+	private static final String TAG_NORESURRECT="noresurrect";
 	
 
 	public static VillagerType loadVillagerType(File file, Culture c) {
@@ -238,6 +241,7 @@ public class VillagerType implements WeightedChoice {
 			v.isReligious=v.tags.contains(TAG_RELIGIOUS);
 			v.canSell=v.tags.contains(TAG_SELLER);
 			v.canMeditate=v.tags.contains(TAG_MEDITATES);
+			v.canPerformSacrifices=v.tags.contains(TAG_SACRIFICES);
 			v.visitor=v.tags.contains(TAG_VISITOR);
 			v.helpInAttacks=v.tags.contains(TAG_HELPSINATTACKS);
 			v.isLocalMerchant=v.tags.contains(TAG_LOCALMERCHANT);
@@ -250,6 +254,9 @@ public class VillagerType implements WeightedChoice {
 			v.noTeleport=v.tags.contains(TAG_NOTELEPORT);
 			v.hideName=v.tags.contains(TAG_HIDENAME);
 			v.showHealth=v.tags.contains(TAG_SHOWHEALTH);
+			v.isDefensive=v.tags.contains(TAG_DEFENSIVE);
+			v.noResurrect=v.tags.contains(TAG_NORESURRECT);
+
 
 			v.textures=textures.toArray(new String[0]);
 			v.toolsNeeded=toolsNeeded.toArray(new InvItem[0]);
@@ -330,6 +337,7 @@ public class VillagerType implements WeightedChoice {
 	public boolean isHeavyDrinker = false;
 	public boolean canSell = false;
 	public boolean canMeditate = false;
+	public boolean canPerformSacrifices = false;
 	public boolean visitor = false;
 	public boolean helpInAttacks = false;
 	public boolean isLocalMerchant = false;
@@ -342,6 +350,8 @@ public class VillagerType implements WeightedChoice {
 	public boolean noTeleport = false;
 	public boolean hideName = false;
 	public boolean showHealth = false;
+	public boolean isDefensive = false;
+	public boolean noResurrect = false;
 	public float baseScale = 1;
 	public String familyNameList;
 	public String firstNameList;

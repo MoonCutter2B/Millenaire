@@ -15,6 +15,7 @@ goal=patrol
 goal=huntmonster
 goal=gosocialise
 goal=chat
+goal=bringBackResourcesHome
 
 toolneededclass=meleeweapons
 toolneededclass=armour
@@ -22,3 +23,9 @@ toolneededclass=armour
 baseAttackStrength=4
 tag=helpInAttacks
 defaultweapon=woodsword
+
+bringBackHomeGood=steelsword
+bringBackHomeGood=steelhelmet
+bringBackHomeGood=steelchest
+bringBackHomeGood=steellegs
+bringBackHomeGood=steelboots

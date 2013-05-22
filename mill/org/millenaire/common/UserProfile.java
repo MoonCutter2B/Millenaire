@@ -1018,6 +1018,11 @@ public class UserProfile {
 				if (player!=null && ((mw.world.getWorldTime()%1000)==0) && mw.world.isDaytime()) {
 					testQuests();
 				}
+				
+				if (MLN.DEV && player!=null && ((mw.world.getWorldTime()%20)==0) && mw.world.isDaytime()) {
+					testQuests();
+				}
+				
 			} else {
 				connectionActionDone=false;//so that it gets resent if the player travels back to the overworld
 			}

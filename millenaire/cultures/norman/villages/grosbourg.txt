@@ -1,5 +1,5 @@
 name:Gros Bourg
-weight:30
+weight:10
 qualifier:le-bourg
 radius:55
 carriesraid:true

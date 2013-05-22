@@ -175,9 +175,9 @@ public abstract class Goal {
 
 		if ((villager!=null) && (getCurrentGoalTarget(villager)!=null) &&
 				(getCurrentGoalTarget(villager).horizontalDistanceTo(villager)>range(villager)))
-			return MLN.string("goal."+labelKeyWhileTravelling());
+			return MLN.string("goal."+labelKeyWhileTravelling(villager));
 
-		return MLN.string("goal."+labelKey());
+		return MLN.string("goal."+labelKey(villager));
 	}
 	
 	public boolean swingArms(MillVillager villager) {
@@ -299,11 +299,11 @@ public abstract class Goal {
 		return true;
 	}
 
-	public String labelKey() {
+	public String labelKey(MillVillager villager) {
 		return key;
 	}
 
-	public String labelKeyWhileTravelling() {
+	public String labelKeyWhileTravelling(MillVillager villager) {
 		return key;
 	}
 	

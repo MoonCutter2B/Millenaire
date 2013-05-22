@@ -1278,6 +1278,12 @@
 </table>
 </table>
 
+|Keban Muul~questpyramid = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Lava.png|32px|Lave]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Unknown Pict:49/0|32px|Obsidienne]]</td><td>[[File:MossyStoneBricks.png|32px|Pierres taillées moussues]]</td><td>[[File:CrackedStoneBricks.png|32px|Pierre taillées craquelées]]</td><td>[[File:Ironitm.png|32px|Lingot de fer]]</td><td>[[File:ML_Mayan_Gold.png|32px|link=Mayan:Gold Ornament|Décoration en or]]</td></tr>
+<tr><th scope="row">Construction</th><td>6997</td><td>356</td><td>52</td><td>3103</td><td>102</td><td>179</td><td>1</td><td>22</td></tr>
+</table>
+</table>
+
 |Muul~mayanpyramid = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td><td>[[File:ML_Mayan_Gold.png|32px|link=Mayan:Gold Ornament|Décoration en or]]</td><td>[[File:ML_MayanStatue.png|32px|link=Mayan:Carving|Sculpture Maya]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td>155</td><td>55</td><td>42</td><td></td><td></td></tr>
@@ -1303,13 +1309,19 @@
 </table>
 </table>
 
+|Ajaw Cah~mayancamp = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Gravel.png|32px|Gravier]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td><td>[[File:TallGrass.png|32px|Hautes herbes]]</td><td>[[File:Unknown Pict:49/0|32px|Obsidienne]]</td><td>[[File:Unknown Pict:90/0|32px|Portail]]</td><td>[[File:Ironitm.png|32px|Lingot de fer]]</td></tr>
+<tr><th scope="row">Construction</th><td>802</td><td>3</td><td>43</td><td>204</td><td>123</td><td>14</td><td>6</td><td>6</td></tr>
+</table>
+</table>
+
 |Mehen Kuuch = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
 <tr><th scope="row">Construction</th><td>64</td><td>1</td></tr>
 </table>
 </table>
 
-|Cha'an Ka'nal = <table><tr><td style="vertical-align:top;">
+|Cha'an Ka'nal~mayanwatchtower = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td>369</td><td>15</td></tr>
 <tr><th scope="row">Upgrade 1</th><td>176</td><td></td><td></td></tr>
@@ -1391,6 +1403,18 @@
 </table>
 </table>
 
+|Keban Muul~questpyramid_pit = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>2</td></tr>
+</table>
+</table>
+
+|Cha'an Ka'nal~questguardtower = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td></tr>
+<tr><th scope="row">Construction</th><td>7</td><td>38</td></tr>
+</table>
+</table>
+
 |K'u-nah = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Sandstone.png|32px|Grès]]</td><td>[[File:ML_MayanStatue.png|32px|link=Mayan:Carving|Sculpture Maya]]</td></tr>
 <tr><th scope="row">Construction</th><td>58</td><td>824</td><td>3</td><td></td><td></td></tr>
@@ -1426,9 +1450,21 @@
 </table>
 </table>
 
+|Keban Muul~questpyramid_jail = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>3</td></tr>
+</table>
+</table>
+
 |Chumuk Kuuch = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
 <tr><th scope="row">Construction</th><td>128</td><td>1</td></tr>
+</table>
+</table>
+
+|Ajaw Cah~mayancamp_outerguard = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>4</td></tr>
 </table>
 </table>
 
@@ -1479,6 +1515,12 @@
 |Sa'at Muul = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:MossyStoneBricks.png|32px|Pierres taillées moussues]]</td><td>[[File:CrackedStoneBricks.png|32px|Pierre taillées craquelées]]</td><td>[[File:ML_MayanStatue.png|32px|link=Mayan:Carving|Sculpture Maya]]</td></tr>
 <tr><th scope="row">Construction</th><td>654</td><td>72</td><td>11</td><td>1</td><td>298</td><td>1</td><td>4</td></tr>
+</table>
+</table>
+
+|Ajaw Cah~mayancamp_dig = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>2</td></tr>
 </table>
 </table>
 
@@ -1542,7 +1584,7 @@
 
 |K'eyem = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
-<tr><th scope="row">Construction</th><td>3</td><td>390</td><td>3</td></tr>
+<tr><th scope="row">Construction</th><td>3</td><td>528</td><td>3</td></tr>
 <tr><th scope="row">Upgrade 1</th><td>107</td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 2</th><td>107</td><td></td><td></td></tr>
 </table>
@@ -1581,6 +1623,12 @@
 |Ix La' Nah = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:White_Wool.png|32px|Laine blanche]]</td><td>[[File:Bookshelf.png|32px|Bibliothèque]]</td></tr>
 <tr><th scope="row">Construction</th><td>143</td><td>173</td><td>24</td><td>3</td><td>8</td></tr>
+</table>
+</table>
+
+|Ajaw Cah~mayancamp_wall = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>3</td></tr>
 </table>
 </table>
 
@@ -1627,6 +1675,18 @@
 </table>
 </table>
 
+|Kanan Otoch = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td><td>[[File:TallGrass.png|32px|Hautes herbes]]</td></tr>
+<tr><th scope="row">Construction</th><td>5</td><td>16</td><td>13</td></tr>
+</table>
+</table>
+
+|Ajaw Cah~mayancamp_innerguard = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>4</td></tr>
+</table>
+</table>
+
 |Noh Muul = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:White_Wool.png|32px|Laine blanche]]</td><td>[[File:Bookshelf.png|32px|Bibliothèque]]</td><td>[[File:ML_Mayan_Gold.png|32px|link=Mayan:Gold Ornament|Décoration en or]]</td></tr>
 <tr><th scope="row">Construction</th><td>633</td><td>2087</td><td>74</td><td>6</td><td>18</td><td>3</td></tr>
@@ -1636,6 +1696,12 @@
 |Sa'at Tunich In-ti'a'al = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Ore_Iron.png|32px|Minerai de fer]]</td><td>[[File:Ore_Coal.png|32px|Minerai de charbon]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:MossyStoneBricks.png|32px|Pierres taillées moussues]]</td><td>[[File:CrackedStoneBricks.png|32px|Pierre taillées craquelées]]</td></tr>
 <tr><th scope="row">Construction</th><td>156</td><td>30</td><td>8</td><td>26</td><td>10</td><td>164</td><td>3</td></tr>
+</table>
+</table>
+
+|Keban Muul~questpyramid_guards = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>12</td></tr>
 </table>
 </table>
 
@@ -1676,6 +1742,12 @@
 </table>
 </table>
 
+|Kak Actun~questcave_door = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>8</td></tr>
+</table>
+</table>
+
 |Ta'as Kob Took = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td>24</td><td>15</td><td>19</td></tr>
@@ -1700,6 +1772,18 @@
 <tr><th scope="row">Upgrade 1</th><td>347</td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 2</th><td>347</td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 3</th><td>216</td><td></td><td></td></tr>
+</table>
+</table>
+
+|Kak Actun~questcave = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Bedrock.png|32px|Bedrock]]</td><td>[[File:Lava.png|32px|Lave]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glowstone_(Block).png|32px|Luminite]]</td></tr>
+<tr><th scope="row">Construction</th><td>160</td><td>5269</td><td>2292</td><td>2</td><td>12</td></tr>
+</table>
+</table>
+
+|K'as Maya = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>3</td></tr>
 </table>
 </table>
 

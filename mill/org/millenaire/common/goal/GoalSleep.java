@@ -172,7 +172,7 @@ public class GoalSleep extends Goal {
 	}
 
 	@Override
-	public String labelKeyWhileTravelling() {
+	public String labelKeyWhileTravelling(MillVillager villager) {
 		return key+"_travelling";
 	}
 

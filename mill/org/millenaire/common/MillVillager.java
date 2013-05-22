@@ -82,6 +82,8 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public abstract class MillVillager extends EntityCreature  implements IEntityAdditionalSpawnData, IAStarPathedEntity {
 
+	private static final int ATTACK_RANGE_DEFENSIVE = 20;
+
 	public static class InvItemAlphabeticalComparator implements Comparator<InvItem> {
 
 		@Override
@@ -338,25 +340,26 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public static final Item[] helmets=new Item[]{
 
 		Mill.normanHelmet,Mill.byzantineHelmet,Mill.japaneseWarriorBlueHelmet,Mill.japaneseWarriorRedHelmet,Mill.japaneseGuardHelmet,Item.helmetDiamond,
-		Item.helmetIron,Item.helmetGold,
+		Item.helmetIron,Item.helmetChain,Item.helmetGold,
 
 		Item.helmetLeather
 	};
 
 	public static final Item[] chestplates=new Item[]{
 		Mill.normanPlate,Mill.byzantinePlate,Mill.japaneseWarriorBluePlate,Mill.japaneseWarriorRedPlate,Mill.japaneseGuardPlate
-		,Item.plateDiamond,Item.plateIron,Item.plateGold,
+		,Item.plateDiamond,Item.plateIron,Item.plateChain,Item.plateGold,
 		Item.plateLeather
 	};
 
 	public static final Item[] legs=new Item[]{
 		Mill.normanLegs,Mill.byzantineLegs,Mill.japaneseWarriorBlueLegs,Mill.japaneseWarriorRedLegs,Mill.japaneseGuardLegs,
-		Item.legsDiamond,Item.legsIron,Item.legsGold,
+		Item.legsDiamond,Item.legsIron,Item.legsChain,Item.legsGold,
 		Item.legsLeather
 	};
 
 	public static final Item[] boots=new Item[]{
-		Mill.normanBoots,Mill.byzantineBoots,Mill.japaneseWarriorBlueBoots,Mill.japaneseWarriorRedBoots,Mill.japaneseGuardBoots,Item.bootsDiamond,Item.bootsIron,Item.bootsGold,
+		Mill.normanBoots,Mill.byzantineBoots,Mill.japaneseWarriorBlueBoots,Mill.japaneseWarriorRedBoots,Mill.japaneseGuardBoots,Item.bootsDiamond,
+		Item.bootsIron,Item.bootsChain,Item.bootsGold,
 		Item.bootsLeather
 	};
 
@@ -952,6 +955,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public boolean canMeditate() {
 		return vtype.canMeditate;
+	}
+	
+	public boolean canPerformSacrifices() {
+		return vtype.canPerformSacrifices;
 	}
 
 	public void checkGoals() throws Exception {
@@ -1987,15 +1994,15 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public VillagerRecord getRecord() {
 
-		if ((getHouse()!=null) && (getHouse().vrecords!=null)) {
-			for (final VillagerRecord vr : getHouse().vrecords) {
+		if ((getTownHall()!=null) && (getTownHall().vrecords!=null)) {
+			for (final VillagerRecord vr : getTownHall().vrecords) {
 				if (vr.id==villager_id)
 					return vr;
 			}
 		}
-
-		if ((getTownHall()!=null) && (getTownHall().vrecords!=null)) {
-			for (final VillagerRecord vr : getTownHall().vrecords) {
+		
+		if ((getHouse()!=null) && (getHouse().vrecords!=null)) {
+			for (final VillagerRecord vr : getHouse().vrecords) {
 				if (vr.id==villager_id)
 					return vr;
 			}
@@ -2279,7 +2286,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 
 
-		if (canMeditate() && mw.isGlobalTagSet(MillWorld.PUJAS)) {
+		if ((canMeditate() && mw.isGlobalTagSet(MillWorld.PUJAS)) || (canPerformSacrifices() && mw.isGlobalTagSet(MillWorld.MAYANSACRIFICES))) {
 
 			if (MLN.LogPujas>=MLN.DEBUG) {
 				MLN.debug(this, "canMeditate");
@@ -2692,14 +2699,23 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 
 			if (entityToAttack != null) {
-				if (!entityToAttack.isEntityAlive() || (getPos().distanceTo(entityToAttack) > ATTACK_RANGE) || ((worldObj.difficultySetting == 0) && (entityToAttack instanceof EntityPlayer))) {
+
+				if (vtype.isDefensive && getPos().distanceTo(getHouse().getDefendingPos()) > ATTACK_RANGE_DEFENSIVE)
 					entityToAttack=null;
-				} else {
+				else if (!entityToAttack.isEntityAlive() || (getPos().distanceTo(entityToAttack) > ATTACK_RANGE) || ((worldObj.difficultySetting == 0) && (entityToAttack instanceof EntityPlayer)))
+					entityToAttack=null;
+
+				if (entityToAttack != null)
 					shouldLieDown=false;
-				}
+
 			} else {
 				if (isHostile() && (worldObj.difficultySetting>0) && (getTownHall().closestPlayer!=null) && (getPos().distanceTo(getTownHall().closestPlayer) <= ATTACK_RANGE)) {
-					entityToAttack=worldObj.getClosestPlayer(posX, posY, posZ, 100);
+					int range=ATTACK_RANGE;
+					
+					if (vtype.isDefensive)
+						range=ATTACK_RANGE_DEFENSIVE;
+					
+					entityToAttack=worldObj.getClosestPlayer(posX, posY, posZ, range);
 					clearGoal();
 				}
 			}

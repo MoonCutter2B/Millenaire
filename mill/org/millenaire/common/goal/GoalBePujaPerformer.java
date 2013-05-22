@@ -12,11 +12,32 @@ import org.millenaire.common.network.ServerSender;
 
 public class GoalBePujaPerformer extends Goal {
 
+	@Override
+	public String labelKey(MillVillager villager) {
+		if (villager!=null && villager.canPerformSacrifices())
+			return "besacrificeperformer";
+		
+		return key;
+	}
+	
+	@Override
+	public String labelKeyWhileTravelling(MillVillager villager) {
+		if (villager!=null && villager.canPerformSacrifices())
+			return "besacrificeperformer";
+		
+		return key;
+	}
+
 	public static final int sellingRadius = 7;
 
 	@Override
 	public GoalInformation getDestination(MillVillager villager) {
-		final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		Building temple=null;
+
+		if (villager.canMeditate())
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		else if (villager.canPerformSacrifices())
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 
 		if ((temple!=null) && ((temple.pujas!=null) && ((temple.pujas.priest==null) || (temple.pujas.priest==villager)))) {
 
@@ -33,10 +54,19 @@ public class GoalBePujaPerformer extends Goal {
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
 
-		if (!villager.mw.isGlobalTagSet(MillWorld.PUJAS))
-			return false;
+		Building temple=null;
 
-		final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		if (villager.canMeditate()) {
+			if (!villager.mw.isGlobalTagSet(MillWorld.PUJAS))
+				return false;
+
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		} else if (villager.canPerformSacrifices()) {
+			if (!villager.mw.isGlobalTagSet(MillWorld.MAYANSACRIFICES))
+				return false;
+
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
+		}
 
 		if (temple==null)
 			return false;
@@ -55,7 +85,13 @@ public class GoalBePujaPerformer extends Goal {
 	@Override
 	public boolean isStillValidSpecific(MillVillager villager) throws Exception {
 
-		final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		Building temple=null;
+
+		if (villager.canMeditate()) {
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		} else if (villager.canPerformSacrifices()) {
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
+		}
 
 		if (temple==null)
 			return false;
@@ -82,7 +118,13 @@ public class GoalBePujaPerformer extends Goal {
 	@Override
 	public void onAccept(MillVillager villager) {
 
-		final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		Building temple=null;
+
+		if (villager.canMeditate()) {
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		} else if (villager.canPerformSacrifices()) {
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
+		}
 
 		if (temple==null)
 			return;
@@ -90,13 +132,29 @@ public class GoalBePujaPerformer extends Goal {
 		final EntityPlayer player=villager.worldObj.getClosestPlayer(temple.getCraftingPos().getiX(),temple.getCraftingPos().getiY(),
 				temple.getCraftingPos().getiZ(),sellingRadius);
 
-		ServerSender.sendTranslatedSentence(player,MLN.WHITE,"pujas.priestcoming",villager.getName());
+		if (villager.canMeditate()) {
+			ServerSender.sendTranslatedSentence(player,MLN.WHITE,"pujas.priestcoming",villager.getName());
+		} else if (villager.canPerformSacrifices()) {
+			ServerSender.sendTranslatedSentence(player,MLN.WHITE,"sacrifices.priestcoming",villager.getName());
+		}
+		
+		
 	}
 
 	@Override
 	public boolean performAction(MillVillager villager) {
 
-		final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		Building temple=null;
+
+		
+		if (villager.canMeditate()) {
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		} else if (villager.canPerformSacrifices()) {
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
+		}
+
+		if (temple==null)
+			return true;
 
 		temple.pujas.priest=villager;
 

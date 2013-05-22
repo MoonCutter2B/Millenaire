@@ -1,0 +1,1 @@
+native:Kak Actun;around:4;startLevel:-1;orientation:3;width:30;length:50;max:0;exploretag:explored_mayanquestcave;startingGood:denieror,1,8,0;startingGood:denierargent,1,32,0;startingGood:denier,1,32,0;startingGood:diamondsword,1,4,0;startingGood:diamondhelmet,1,2,0;startingGood:diamondchest,1,2,0;startingGood:diamondboots,1,2,0;startingGood:diamondlegs,1,2,0;type:subbuilding

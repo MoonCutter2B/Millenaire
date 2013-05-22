@@ -25,4 +25,5 @@ baseAttackStrength=6
 tag=helpInAttacks
 defaultweapon=woodsword
 startingInv=bow,1
+startingInv=arrow,64
 experiencegiven=10

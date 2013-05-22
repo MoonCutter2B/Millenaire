@@ -288,6 +288,10 @@ public class BuildingLocation implements Cloneable {
 		if (tags.contains(Building.tagPujas)) {
 			effects.add(MLN.string("effect.pujalocation"));
 		}
+		
+		if (tags.contains(Building.tagSacrifices)) {
+			effects.add(MLN.string("effect.sacrificeslocation"));
+		}
 
 		final BuildingPlan plan=getPlan();
 

@@ -40,6 +40,10 @@ cactus;81;0;Cactus
 cake;92;0;Gâteau
 calva;mln5;0;
 carrot;391;0;Carotte
+chainboots;305;0;Bottes de mailles
+chainchest;303;0;Cotte de mailles
+chainhelmet;302;0;Casque de mailles
+chainlegs;304;0;Jambières de mailles
 chickencurry;mln31;0;
 chickenmeat;365;0;Poulet cru
 chickenmeatcooked;366;0;Poulet rôti
@@ -94,9 +98,19 @@ fishcooked;350;0;Poisson cuit
 fishraw;349;0;Poisson cru
 flint;318;0;Silex
 flintandsteel;259;0;Briquet
+ghasttear;370;0;Larme de Ghast
 glass;20;0;Verre
 gold;266;0;Lingot d'or
+goldaxe;286;0;Hache en or
+goldboots;317;0;Bottes en or
+goldchest;315;0;Plastron en or
+goldhelmet;314;0;Casque en or
+goldhoe;294;0;Houe en or
+goldlegs;316;0;Jambières en or
 goldore;14;0;Minerai d'or
+goldpickaxe;285;0;Pioche en or
+goldshovel;284;0;Pelle en or
+goldsword;283;0;Épée en or
 grapes;mln75;0;
 gravel;13;0;Gravier
 gunpowder;289;0;Poudre à canon
@@ -129,6 +143,7 @@ mayangold;1519;2;
 mayanhoe;mln57;0;
 mayanmace;mln53;0;
 mayanpickaxe;mln54;0;
+mayanquestcrown;mln95;0;
 mayanshovel;mln56;0;
 mayanstatue;mln39;0;
 melonseeds;362;0;Graines de pastèque

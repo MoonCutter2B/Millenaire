@@ -4,23 +4,24 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
+import net.minecraft.item.ItemSword;
 
 import org.millenaire.common.forge.Mill;
-import org.millenaire.common.item.Goods.ItemMillenaireAxe;
 
 
 public class ContainerPuja extends Container {
 
 	public static class MoneySlot extends Slot {
 
-		Puja shrine;
+		PujaSacrifice shrine;
 
-		public MoneySlot(Puja shrine,  int par2, int par3,
+		public MoneySlot(PujaSacrifice shrine,  int par2, int par3,
 				int par4) {
 			super(shrine, par2, par3, par4);
 			this.shrine=shrine;
@@ -45,9 +46,9 @@ public class ContainerPuja extends Container {
 
 	public static class OfferingSlot extends Slot {
 
-		Puja shrine;
+		PujaSacrifice shrine;
 
-		public OfferingSlot(Puja shrine,  int par2, int par3,
+		public OfferingSlot(PujaSacrifice shrine,  int par2, int par3,
 				int par4) {
 			super(shrine, par2, par3, par4);
 			this.shrine=shrine;
@@ -55,7 +56,7 @@ public class ContainerPuja extends Container {
 
 		@Override
 		public boolean isItemValid(ItemStack par1ItemStack) {
-			return Puja.getOfferingValue(par1ItemStack)>0;
+			return shrine.getOfferingValue(par1ItemStack)>0;
 		}
 
 		@Override
@@ -68,9 +69,9 @@ public class ContainerPuja extends Container {
 
 	public static class ToolSlot extends Slot {
 
-		Puja shrine;
+		PujaSacrifice shrine;
 
-		public ToolSlot(Puja shrine, int par2, int par3,
+		public ToolSlot(PujaSacrifice shrine, int par2, int par3,
 				int par4) {
 			super(shrine, par2, par3, par4);
 			this.shrine=shrine;
@@ -80,7 +81,10 @@ public class ContainerPuja extends Container {
 		public boolean isItemValid(ItemStack is) {
 			final Item item=Item.itemsList[is.itemID];
 
-			return ((item instanceof ItemSpade) || (item instanceof ItemAxe) || (item instanceof ItemPickaxe) || (item instanceof ItemMillenaireAxe));
+			if (shrine.type==PujaSacrifice.MAYAN)
+				return ((item instanceof ItemSword) || (item instanceof ItemArmor) || (item instanceof ItemBow) || (item instanceof ItemAxe));
+			
+			return ((item instanceof ItemSpade) || (item instanceof ItemAxe) || (item instanceof ItemPickaxe));
 		}
 
 		@Override
@@ -98,18 +102,26 @@ public class ContainerPuja extends Container {
 	}
 
 	EntityPlayer player;
+	
+	PujaSacrifice shrine;
+	
+	ToolSlot slotTool;
 
 	public ContainerPuja(EntityPlayer player, Building temple) {
-
+		
 		try {
 
 			this.player=player;
+			
+			shrine=temple.pujas;
+			
+			slotTool=new ToolSlot(temple.pujas, 4, 86, 37);
 
 			addSlotToContainer(new OfferingSlot(temple.pujas, 0, 26, 19));
 			addSlotToContainer(new MoneySlot(temple.pujas, 1, 8, 55));
 			addSlotToContainer(new MoneySlot(temple.pujas, 2, 26, 55));
 			addSlotToContainer(new MoneySlot(temple.pujas, 3, 44, 55));
-			addSlotToContainer(new ToolSlot(temple.pujas, 4, 86, 37));
+			addSlotToContainer(slotTool);
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -167,14 +179,14 @@ public class ContainerPuja extends Container {
                          return null;
                      }
                  }
-                 else if (Puja.getOfferingValue(itemstack1)>0)
+                 else if (shrine.getOfferingValue(itemstack1)>0)
                  {
                      if (!this.mergeItemStack(itemstack1, 0, 1, false))
                      {
                          return null;
                      }
                  }
-                 else if (itemstack1.getItem() instanceof ItemTool)
+                 else if (slotTool.isItemValid(itemstack1))
                  {
                      if (!this.mergeItemStack(itemstack1, 4, 5, false))
                      {

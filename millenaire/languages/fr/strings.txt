@@ -219,6 +219,9 @@ quest.cqsadhustartexplanation=Trouvez un villageois qui puisse vous guider dans 
 quest.cqchapteralchemist=L'Alchimiste
 quest.cqalchemiststartexplanation=Trouvez un villageois qui vous guidera dans un village norman où vous êtes au moins "ami du village".
 
+quest.cqchapterfallenking=Le Roi Déchu
+quest.cqfallenkingstartexplanation=Trouvez un chamane qui vous guidera dans un village maya où vous êtes au moins "ami du village".
+
 quest.cqallcompleted=Vous avez terminé tous les chapitres actuellement disponibles.
 quest.cqcheckforupdates=Visitez www.millenaire.org pour des mises à jour avec plus de missions.
 quest.cqchapternotstarted=Vous n'avez pas commençé le chapitre "<0>".
@@ -526,6 +529,8 @@ goal.Makesteelsword=Fabrique une épée de fer
 goal.makeindianstatue=Sculpte
 goal.performpujas=Fait un puja
 goal.bepujaperformer=Disponible pour les pujas
+goal.performsacrifices=Sacrifie une offrande
+goal.besacrificeperformer=Disponible pour les sacrifices
 
 goal.PlantMaize=Plante du maïs
 goal.HarvestMaize=Récolte du maïs
@@ -718,6 +723,9 @@ actions.thevoid_success=Vous avez contemplé le Vide!
 
 actions.enchantmenttable_success=Vous avez construit une table d'enchantement près du Sadhu.
 
+actions.mayan_siege_start=La pyramide est prise d'assaut! <0> ghasts, <1> incendiaires et <2> squelettes vous attaquent. Vainquez-les.
+actions.mayan_siege_success=Vous avez vaincu les forces attaquant la pyramide!
+actions.mayan_siege_update=Il reste <0> ghast(s), <1> incendiaire(s) et <2> squelettes.
 
 info.culturetitle=Cultures
 info.culture=Culture <0>
@@ -820,6 +828,35 @@ pujas.offeringslot2=Ils n'acceptent pas tout. Expérimentez.
 pujas.moneyslot=Mettez de l'argent pour le pandit.
 pujas.toolslot=Mettez l'outil à enchanter.
 
+sacrifices.priestcoming=<0>: Vous avez besoin de sacrifier aux Dieux? C'est sage de les appaiser.
+sacrifices.panditfee=Pour le chamane
+sacrifices.offering=Sacrifice
+mayan.god0=A Ah Puch - pour la survie
+mayan.god1=A K'inich Ajaw - pour la flamme
+mayan.god2=A Cabrakan - pour les chocs
+mayan.god3=A Ah Tabai - pour les flèches
+mayan.god4=A Cum Hau - pour la veangeance
+
+mayan.god5=A Uqux Cho - pour l'aisance du caïman
+mayan.god6=A Uqux Palo - pour le travail sous l'eau
+
+mayan.god7=A Alom - pour l'air
+
+mayan.god8=A Buluc Chabtan - pour la violence
+mayan.god9=A Ah Puch - pour la lutte contre les morts
+mayan.god10=A Cum Hau - pour la lutte contre les créatures
+
+mayan.god11=A Huracan - pour le souffle
+mayan.god12=A K'inich Ajaw - pour la flamme
+mayan.god13=A Ek Chuah - pour la fortune
+
+mayan.god14=A Buluc Chabtan - pour la violence
+mayan.god15=A Huracan - pour le souffle
+mayan.god16=A K'inich Ajaw - pour la flamme
+mayan.god17=A Ek Chuah - pour la fortune
+
+mayan.god18=A Witz - pour la résistance
+
 culture.norman=Normande
 culture.hindi=Hindi
 culture.japanese=Japonaise
@@ -851,6 +888,7 @@ effect.towncentre=Centre du village
 effect.shop=Commerce: <0>
 effect.irrigation=Irrigation: <0>% de récoltes en plus
 effect.pujalocation=Tenue de pujas
+effect.sacrificeslocation=Tenue de sacrifices
 effect.healing=Guérison du joueur
 
 chunk.chunkmap=Carte des tronçons (chunks)

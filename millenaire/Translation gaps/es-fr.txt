@@ -2,12 +2,54 @@ Translation comparison between es and fr
 
 List of gaps found in strings.txt: 
 
+Key missing in the strings.txt file: achievement.attila.desc
+Key missing in the strings.txt file: achievement.attila.name
+Key missing in the strings.txt file: achievement.cheers.desc
+Key missing in the strings.txt file: achievement.cheers.name
+Key missing in the strings.txt file: achievement.cresus.desc
+Key missing in the strings.txt file: achievement.cresus.name
+Key missing in the strings.txt file: achievement.darkside.desc
+Key missing in the strings.txt file: achievement.darkside.name
+Key missing in the strings.txt file: achievement.explorer.desc
+Key missing in the strings.txt file: achievement.explorer.name
+Key missing in the strings.txt file: achievement.firstcontact.desc
+Key missing in the strings.txt file: achievement.firstcontact.name
+Key missing in the strings.txt file: achievement.forbiddenknwoledge.desc
+Key missing in the strings.txt file: achievement.forbiddenknwoledge.name
+Key missing in the strings.txt file: achievement.hired.desc
+Key missing in the strings.txt file: achievement.hired.name
+Key missing in the strings.txt file: achievement.magellan.desc
+Key missing in the strings.txt file: achievement.magellan.name
+Key missing in the strings.txt file: achievement.maitreapenser.desc
+Key missing in the strings.txt file: achievement.maitreapenser.name
+Key missing in the strings.txt file: achievement.marcopolo.desc
+Key missing in the strings.txt file: achievement.marcopolo.name
+Key missing in the strings.txt file: achievement.masterfarmer.desc
+Key missing in the strings.txt file: achievement.masterfarmer.name
+Key missing in the strings.txt file: achievement.pantheon.desc
+Key missing in the strings.txt file: achievement.pantheon.name
+Key missing in the strings.txt file: achievement.puja.desc
+Key missing in the strings.txt file: achievement.puja.name
+Key missing in the strings.txt file: achievement.scipio.desc
+Key missing in the strings.txt file: achievement.scipio.name
+Key missing in the strings.txt file: achievement.selfdefense.desc
+Key missing in the strings.txt file: achievement.selfdefense.name
+Key missing in the strings.txt file: achievement.summoningwand.desc
+Key missing in the strings.txt file: achievement.summoningwand.name
+Key missing in the strings.txt file: achievement.thequest.desc
+Key missing in the strings.txt file: achievement.thequest.name
+Key missing in the strings.txt file: achievement.villageleader.desc
+Key missing in the strings.txt file: achievement.villageleader.name
+Key missing in the strings.txt file: achievementpage.name
+Key missing in the strings.txt file: actions.mayan_siege_start
+Key missing in the strings.txt file: actions.mayan_siege_success
+Key missing in the strings.txt file: actions.mayan_siege_update
 Key missing in the strings.txt file: chunk.caption
-Key missing in the strings.txt file: chunk.captionblack
 Key missing in the strings.txt file: chunk.captionblue
 Key missing in the strings.txt file: chunk.captiongeneral
 Key missing in the strings.txt file: chunk.captiongreen
 Key missing in the strings.txt file: chunk.captionpurple
+Key missing in the strings.txt file: chunk.captionwhite
 Key missing in the strings.txt file: chunk.chunkcoords
 Key missing in the strings.txt file: chunk.chunkforced
 Key missing in the strings.txt file: chunk.chunkmap
@@ -15,19 +57,102 @@ Key missing in the strings.txt file: chunk.explanations
 Key missing in the strings.txt file: chunk.playerposition
 Key missing in the strings.txt file: chunk.settings
 Key missing in the strings.txt file: chunk.village
+Key missing in the strings.txt file: config.background_radius.desc
+Key missing in the strings.txt file: config.background_radius.label
+Key missing in the strings.txt file: config.bandit_raid_radius.desc
+Key missing in the strings.txt file: config.bandit_raid_radius.label
+Key missing in the strings.txt file: config.bonus_code.desc
+Key missing in the strings.txt file: config.bonus_code.label
+Key missing in the strings.txt file: config.display_names.desc
+Key missing in the strings.txt file: config.display_names.label
+Key missing in the strings.txt file: config.display_start.desc
+Key missing in the strings.txt file: config.display_start.label
+Key missing in the strings.txt file: config.dynamic_textures.desc
+Key missing in the strings.txt file: config.dynamic_textures.label
+Key missing in the strings.txt file: config.escort_key.desc
+Key missing in the strings.txt file: config.escort_key.label
+Key missing in the strings.txt file: config.fallback_language.desc
+Key missing in the strings.txt file: config.fallback_language.label
+Key missing in the strings.txt file: config.generate_building_res.desc
+Key missing in the strings.txt file: config.generate_building_res.label
+Key missing in the strings.txt file: config.generate_colour_chart.desc
+Key missing in the strings.txt file: config.generate_colour_chart.label
+Key missing in the strings.txt file: config.generate_goods_list.desc
+Key missing in the strings.txt file: config.generate_goods_list.label
+Key missing in the strings.txt file: config.generate_lone_buildings.desc
+Key missing in the strings.txt file: config.generate_lone_buildings.label
+Key missing in the strings.txt file: config.generate_translation_gap.desc
+Key missing in the strings.txt file: config.generate_translation_gap.label
+Key missing in the strings.txt file: config.generate_villages.desc
+Key missing in the strings.txt file: config.generate_villages.label
+Key missing in the strings.txt file: config.invalidbonuscode
+Key missing in the strings.txt file: config.keep_active_radius.desc
+Key missing in the strings.txt file: config.keep_active_radius.label
+Key missing in the strings.txt file: config.language_learning.desc
+Key missing in the strings.txt file: config.language_learning.label
+Key missing in the strings.txt file: config.load_all_languages.desc
+Key missing in the strings.txt file: config.load_all_languages.label
+Key missing in the strings.txt file: config.max_children_number.desc
+Key missing in the strings.txt file: config.max_children_number.label
+Key missing in the strings.txt file: config.min_distance_between_buildings.desc
+Key missing in the strings.txt file: config.min_distance_between_buildings.label
+Key missing in the strings.txt file: config.min_lonebuilding_distance.desc
+Key missing in the strings.txt file: config.min_lonebuilding_distance.label
+Key missing in the strings.txt file: config.min_village_distance.desc
+Key missing in the strings.txt file: config.min_village_distance.label
+Key missing in the strings.txt file: config.min_village_lonebuilding_distance.desc
+Key missing in the strings.txt file: config.min_village_lonebuilding_distance.label
+Key missing in the strings.txt file: config.page.bonus
+Key missing in the strings.txt file: config.page.bonus.desc
+Key missing in the strings.txt file: config.page.devtools
+Key missing in the strings.txt file: config.page.uisettings
+Key missing in the strings.txt file: config.page.villagebehaviour
+Key missing in the strings.txt file: config.page.villagebehaviour.desc
+Key missing in the strings.txt file: config.page.worldgeneration
+Key missing in the strings.txt file: config.page.worldgeneration.desc
+Key missing in the strings.txt file: config.pagetitle
+Key missing in the strings.txt file: config.quest_list_key.desc
+Key missing in the strings.txt file: config.quest_list_key.label
+Key missing in the strings.txt file: config.raiding_rate.desc
+Key missing in the strings.txt file: config.raiding_rate.label
+Key missing in the strings.txt file: config.spawn_protection_radius.desc
+Key missing in the strings.txt file: config.spawn_protection_radius.label
+Key missing in the strings.txt file: config.validbonuscode
+Key missing in the strings.txt file: config.valuefalse
+Key missing in the strings.txt file: config.valuetrue
+Key missing in the strings.txt file: config.village_list_key.desc
+Key missing in the strings.txt file: config.village_list_key.label
+Key missing in the strings.txt file: config.village_paths.desc
+Key missing in the strings.txt file: config.village_paths.label
+Key missing in the strings.txt file: config.village_radius.desc
+Key missing in the strings.txt file: config.village_radius.label
+Key missing in the strings.txt file: config.villagers_names_distance.desc
+Key missing in the strings.txt file: config.villagers_names_distance.label
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_client.desc
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_client.label
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_sp.desc
+Key missing in the strings.txt file: config.villagers_sentence_in_chat_distance_sp.label
 Key missing in the strings.txt file: culture.byzantines
+Key missing in the strings.txt file: culturereputation.scourgeofgod
 Key missing in the strings.txt file: effect.healing
 Key missing in the strings.txt file: effect.irrigation
 Key missing in the strings.txt file: effect.pujalocation
+Key missing in the strings.txt file: effect.sacrificeslocation
 Key missing in the strings.txt file: effect.shop
 Key missing in the strings.txt file: effect.towncentre
+Key missing in the strings.txt file: goal.besacrificeperformer
 Key missing in the strings.txt file: goal.breed
+Key missing in the strings.txt file: goal.buildpath
+Key missing in the strings.txt file: goal.chat
+Key missing in the strings.txt file: goal.clearoldpath
 Key missing in the strings.txt file: goal.cookchicken
 Key missing in the strings.txt file: goal.cooklamb
 Key missing in the strings.txt file: goal.cookpork
 Key missing in the strings.txt file: goal.cooksteak
 Key missing in the strings.txt file: goal.gathersilk
 Key missing in the strings.txt file: goal.getitemtokeep
+Key missing in the strings.txt file: goal.gosocialise
+Key missing in the strings.txt file: goal.harvestcocoa
 Key missing in the strings.txt file: goal.harvestvines
 Key missing in the strings.txt file: goal.makearrow
 Key missing in the strings.txt file: goal.makebook
@@ -40,11 +165,17 @@ Key missing in the strings.txt file: goal.makebyzantinehelmet
 Key missing in the strings.txt file: goal.makebyzantinelegs
 Key missing in the strings.txt file: goal.makebyzantinemace
 Key missing in the strings.txt file: goal.makebyzantinetiles
+Key missing in the strings.txt file: goal.makecacauhaa
 Key missing in the strings.txt file: goal.makeclothes_byz_silk
 Key missing in the strings.txt file: goal.makeclothes_byz_wool
 Key missing in the strings.txt file: goal.makecurry
+Key missing in the strings.txt file: goal.makedirtwall
 Key missing in the strings.txt file: goal.makeicon
 Key missing in the strings.txt file: goal.makeindianstatue
+Key missing in the strings.txt file: goal.makeleatherboots
+Key missing in the strings.txt file: goal.makeleatherchest
+Key missing in the strings.txt file: goal.makeleatherhelmet
+Key missing in the strings.txt file: goal.makeleatherlegs
 Key missing in the strings.txt file: goal.makemasa
 Key missing in the strings.txt file: goal.makemayanaxe
 Key missing in the strings.txt file: goal.makemayangoldblock
@@ -57,7 +188,9 @@ Key missing in the strings.txt file: goal.makemurgh
 Key missing in the strings.txt file: goal.makeobsidianflake
 Key missing in the strings.txt file: goal.makepaperrice
 Key missing in the strings.txt file: goal.makepaperwoodpulp
+Key missing in the strings.txt file: goal.makepath
 Key missing in the strings.txt file: goal.makerottenflesh
+Key missing in the strings.txt file: goal.makesake
 Key missing in the strings.txt file: goal.makesouvlaki
 Key missing in the strings.txt file: goal.makesteelaxe
 Key missing in the strings.txt file: goal.makesteelboots
@@ -77,6 +210,8 @@ Key missing in the strings.txt file: goal.maketachi
 Key missing in the strings.txt file: goal.makewah
 Key missing in the strings.txt file: goal.makewine
 Key missing in the strings.txt file: goal.paintpainting
+Key missing in the strings.txt file: goal.performsacrifices
+Key missing in the strings.txt file: goal.plantcocoa
 Key missing in the strings.txt file: goal.plantvines
 Key missing in the strings.txt file: goal.shearsheep
 Key missing in the strings.txt file: goal.slaughtercow
@@ -113,6 +248,7 @@ Key missing in the strings.txt file: item.byzantinemace
 Key missing in the strings.txt file: item.byzantinemixedbrick
 Key missing in the strings.txt file: item.byzantineplate
 Key missing in the strings.txt file: item.byzantineslab
+Key missing in the strings.txt file: item.cacauhaa
 Key missing in the strings.txt file: item.clothes_byz_silk
 Key missing in the strings.txt file: item.clothes_byz_wool
 Key missing in the strings.txt file: item.emptysilkwormblock
@@ -121,16 +257,135 @@ Key missing in the strings.txt file: item.fullsilkwormblock
 Key missing in the strings.txt file: item.grapes
 Key missing in the strings.txt file: item.lambcooked
 Key missing in the strings.txt file: item.lambraw
+Key missing in the strings.txt file: item.pathdirt
+Key missing in the strings.txt file: item.pathgravel
+Key missing in the strings.txt file: item.pathgravelslabs
+Key missing in the strings.txt file: item.pathochretiles
+Key missing in the strings.txt file: item.pathsandstone
+Key missing in the strings.txt file: item.pathslabs
+Key missing in the strings.txt file: item.purse
+Key missing in the strings.txt file: item.sake
 Key missing in the strings.txt file: item.silk
 Key missing in the strings.txt file: item.souvlaki
+Key missing in the strings.txt file: item.vine
 Key missing in the strings.txt file: item.wine
 Key missing in the strings.txt file: item.winebasic
+Key missing in the strings.txt file: mayan.god0
+Key missing in the strings.txt file: mayan.god1
+Key missing in the strings.txt file: mayan.god10
+Key missing in the strings.txt file: mayan.god11
+Key missing in the strings.txt file: mayan.god12
+Key missing in the strings.txt file: mayan.god13
+Key missing in the strings.txt file: mayan.god14
+Key missing in the strings.txt file: mayan.god15
+Key missing in the strings.txt file: mayan.god16
+Key missing in the strings.txt file: mayan.god17
+Key missing in the strings.txt file: mayan.god18
+Key missing in the strings.txt file: mayan.god2
+Key missing in the strings.txt file: mayan.god3
+Key missing in the strings.txt file: mayan.god4
+Key missing in the strings.txt file: mayan.god5
+Key missing in the strings.txt file: mayan.god6
+Key missing in the strings.txt file: mayan.god7
+Key missing in the strings.txt file: mayan.god8
+Key missing in the strings.txt file: mayan.god9
 Key missing in the strings.txt file: other.buildinghealing
+Key missing in the strings.txt file: other.chattosomeone
 Key missing in the strings.txt file: other.localmerchantinteract
+Key missing in the strings.txt file: panels.buildingproject
+Key missing in the strings.txt file: panels.currentconstruction
+Key missing in the strings.txt file: panels.villagesummary
+Key missing in the strings.txt file: quest.cqchapterfallenking
 Key missing in the strings.txt file: quest.cqcheckquestlistandhelp
+Key missing in the strings.txt file: quest.cqfallenkingstartexplanation
+Key missing in the strings.txt file: sacrifices.offering
+Key missing in the strings.txt file: sacrifices.panditfee
+Key missing in the strings.txt file: sacrifices.priestcoming
+Key missing in the strings.txt file: startup.bonus
+Key missing in the strings.txt file: tradehelp.buyingprice
+Key missing in the strings.txt file: tradehelp.byzantinebooks
+Key missing in the strings.txt file: tradehelp.byzantineclothes
+Key missing in the strings.txt file: tradehelp.byzantinefeta
+Key missing in the strings.txt file: tradehelp.byzantinefood
+Key missing in the strings.txt file: tradehelp.byzantinesilk
+Key missing in the strings.txt file: tradehelp.byzantinetiles
+Key missing in the strings.txt file: tradehelp.byzantinetools
+Key missing in the strings.txt file: tradehelp.byzantineweapons
+Key missing in the strings.txt file: tradehelp.byzantinewheat
+Key missing in the strings.txt file: tradehelp.byzantinewine
+Key missing in the strings.txt file: tradehelp.carrot
+Key missing in the strings.txt file: tradehelp.clay
+Key missing in the strings.txt file: tradehelp.feathers
+Key missing in the strings.txt file: tradehelp.freeblock
+Key missing in the strings.txt file: tradehelp.genericfood
+Key missing in the strings.txt file: tradehelp.genericfoodraw
+Key missing in the strings.txt file: tradehelp.genericfoodsweet
+Key missing in the strings.txt file: tradehelp.generictools
+Key missing in the strings.txt file: tradehelp.genericweapon
+Key missing in the strings.txt file: tradehelp.goodsbought
+Key missing in the strings.txt file: tradehelp.goodssold
+Key missing in the strings.txt file: tradehelp.helptext
+Key missing in the strings.txt file: tradehelp.helptitle
+Key missing in the strings.txt file: tradehelp.hindibricks
+Key missing in the strings.txt file: tradehelp.hindicurry
+Key missing in the strings.txt file: tradehelp.hindigenericfood
+Key missing in the strings.txt file: tradehelp.hindigenericfoodsweet
+Key missing in the strings.txt file: tradehelp.hindirasgulla
+Key missing in the strings.txt file: tradehelp.hindistatue
+Key missing in the strings.txt file: tradehelp.hinditools
+Key missing in the strings.txt file: tradehelp.japaneseframes
+Key missing in the strings.txt file: tradehelp.japanesegold
+Key missing in the strings.txt file: tradehelp.japanesepaper
+Key missing in the strings.txt file: tradehelp.japaneserice
+Key missing in the strings.txt file: tradehelp.japanesesake
+Key missing in the strings.txt file: tradehelp.japanesethatch
+Key missing in the strings.txt file: tradehelp.japanesetools
+Key missing in the strings.txt file: tradehelp.japaneseudon
+Key missing in the strings.txt file: tradehelp.japaneseweapons
+Key missing in the strings.txt file: tradehelp.japanesewheat
+Key missing in the strings.txt file: tradehelp.mayancocoa
+Key missing in the strings.txt file: tradehelp.mayanfood
+Key missing in the strings.txt file: tradehelp.mayangold
+Key missing in the strings.txt file: tradehelp.mayanobsidian
+Key missing in the strings.txt file: tradehelp.mayanstonetools
+Key missing in the strings.txt file: tradehelp.mayanweapons
+Key missing in the strings.txt file: tradehelp.normanalchemy
+Key missing in the strings.txt file: tradehelp.normanbooks
+Key missing in the strings.txt file: tradehelp.normancider
+Key missing in the strings.txt file: tradehelp.normanleather
+Key missing in the strings.txt file: tradehelp.normantapestry
+Key missing in the strings.txt file: tradehelp.normantapestrywool
+Key missing in the strings.txt file: tradehelp.normantimberframes
+Key missing in the strings.txt file: tradehelp.normantools
+Key missing in the strings.txt file: tradehelp.normantripesboudin
+Key missing in the strings.txt file: tradehelp.normanwheat
+Key missing in the strings.txt file: tradehelp.normanwhitewool
+Key missing in the strings.txt file: tradehelp.parchments
+Key missing in the strings.txt file: tradehelp.purse
+Key missing in the strings.txt file: tradehelp.seeds
+Key missing in the strings.txt file: tradehelp.sellingprice
+Key missing in the strings.txt file: tradehelp.stone
+Key missing in the strings.txt file: tradehelp.title
+Key missing in the strings.txt file: tradehelp.wand
+Key missing in the strings.txt file: tradehelp.whitewool
+Key missing in the strings.txt file: tradehelp.wood
+Key missing in the strings.txt file: ui.bonusavailable
+Key missing in the strings.txt file: ui.buybonusbuilding
 Key missing in the strings.txt file: ui.chunkbutton
 Key missing in the strings.txt file: ui.communicationexplanations
+Key missing in the strings.txt file: ui.configbutton
+Key missing in the strings.txt file: ui.controldiplomacy
 Key missing in the strings.txt file: ui.helpbutton
+Key missing in the strings.txt file: ui.otherraidinprogress
+Key missing in the strings.txt file: ui.otherraidplanned
+Key missing in the strings.txt file: ui.raid
+Key missing in the strings.txt file: ui.raidcancel
+Key missing in the strings.txt file: ui.raidinprogress
+Key missing in the strings.txt file: ui.raidplanned
+Key missing in the strings.txt file: ui.relbad
+Key missing in the strings.txt file: ui.relgood
+Key missing in the strings.txt file: ui.relneutral
+Key missing in the strings.txt file: ui.serverimportforbidden
 Key missing in the strings.txt file: ui.villagerelationsnobutton
 
 List of gaps found in quest files: 
@@ -145,6 +400,78 @@ Key missing in the quests.txt file: architectwife_1_description_success
 Key missing in the quests.txt file: architectwife_1_description_timeup
 Key missing in the quests.txt file: architectwife_1_label
 Key missing in the quests.txt file: architectwife_1_listing
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_0_description
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_0_description_refuse
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_0_description_success
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_0_label
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_1_description
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_1_description_success
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_1_label
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_1_listing
+Key missing in the quests.txt file: fallenking_1_firstomens_0_description
+Key missing in the quests.txt file: fallenking_1_firstomens_0_description_refuse
+Key missing in the quests.txt file: fallenking_1_firstomens_0_description_success
+Key missing in the quests.txt file: fallenking_1_firstomens_0_label
+Key missing in the quests.txt file: fallenking_1_firstomens_1_description
+Key missing in the quests.txt file: fallenking_1_firstomens_1_description_success
+Key missing in the quests.txt file: fallenking_1_firstomens_1_label
+Key missing in the quests.txt file: fallenking_1_firstomens_1_listing
+Key missing in the quests.txt file: fallenking_2_warpreparations_0_description
+Key missing in the quests.txt file: fallenking_2_warpreparations_0_description_refuse
+Key missing in the quests.txt file: fallenking_2_warpreparations_0_description_success
+Key missing in the quests.txt file: fallenking_2_warpreparations_0_label
+Key missing in the quests.txt file: fallenking_2_warpreparations_1_description
+Key missing in the quests.txt file: fallenking_2_warpreparations_1_description_success
+Key missing in the quests.txt file: fallenking_2_warpreparations_1_label
+Key missing in the quests.txt file: fallenking_2_warpreparations_1_listing
+Key missing in the quests.txt file: fallenking_3_thecamp_0_description
+Key missing in the quests.txt file: fallenking_3_thecamp_0_description_refuse
+Key missing in the quests.txt file: fallenking_3_thecamp_0_description_success
+Key missing in the quests.txt file: fallenking_3_thecamp_0_label
+Key missing in the quests.txt file: fallenking_3_thecamp_1_description
+Key missing in the quests.txt file: fallenking_3_thecamp_1_description_success
+Key missing in the quests.txt file: fallenking_3_thecamp_1_label
+Key missing in the quests.txt file: fallenking_3_thecamp_1_listing
+Key missing in the quests.txt file: fallenking_4_newomens_0_description
+Key missing in the quests.txt file: fallenking_4_newomens_0_description_refuse
+Key missing in the quests.txt file: fallenking_4_newomens_0_description_success
+Key missing in the quests.txt file: fallenking_4_newomens_0_label
+Key missing in the quests.txt file: fallenking_4_newomens_1_description
+Key missing in the quests.txt file: fallenking_4_newomens_1_description_success
+Key missing in the quests.txt file: fallenking_4_newomens_1_label
+Key missing in the quests.txt file: fallenking_4_newomens_1_listing
+Key missing in the quests.txt file: fallenking_5_thepyramid_0_description
+Key missing in the quests.txt file: fallenking_5_thepyramid_0_description_refuse
+Key missing in the quests.txt file: fallenking_5_thepyramid_0_description_success
+Key missing in the quests.txt file: fallenking_5_thepyramid_0_label
+Key missing in the quests.txt file: fallenking_6_thesiege_0_description
+Key missing in the quests.txt file: fallenking_6_thesiege_0_description_refuse
+Key missing in the quests.txt file: fallenking_6_thesiege_0_description_success
+Key missing in the quests.txt file: fallenking_6_thesiege_0_label
+Key missing in the quests.txt file: fallenking_6_thesiege_1_description
+Key missing in the quests.txt file: fallenking_6_thesiege_1_description_success
+Key missing in the quests.txt file: fallenking_6_thesiege_1_label
+Key missing in the quests.txt file: fallenking_6_thesiege_1_listing
+Key missing in the quests.txt file: fallenking_7_thepit_0_description
+Key missing in the quests.txt file: fallenking_7_thepit_0_description_refuse
+Key missing in the quests.txt file: fallenking_7_thepit_0_description_success
+Key missing in the quests.txt file: fallenking_7_thepit_0_label
+Key missing in the quests.txt file: fallenking_7_thepit_1_description
+Key missing in the quests.txt file: fallenking_7_thepit_1_description_success
+Key missing in the quests.txt file: fallenking_7_thepit_1_label
+Key missing in the quests.txt file: fallenking_7_thepit_1_listing
+Key missing in the quests.txt file: fallenking_8_sacrifice_0_description
+Key missing in the quests.txt file: fallenking_8_sacrifice_0_description_refuse
+Key missing in the quests.txt file: fallenking_8_sacrifice_0_description_success
+Key missing in the quests.txt file: fallenking_8_sacrifice_0_label
+Key missing in the quests.txt file: fallenking_8_sacrifice_1_description
+Key missing in the quests.txt file: fallenking_8_sacrifice_1_description_success
+Key missing in the quests.txt file: fallenking_8_sacrifice_1_label
+Key missing in the quests.txt file: fallenking_8_sacrifice_1_listing
+Key missing in the quests.txt file: fallenking_9_backtothevillage_0_description
+Key missing in the quests.txt file: fallenking_9_backtothevillage_0_description_refuse
+Key missing in the quests.txt file: fallenking_9_backtothevillage_0_description_success
+Key missing in the quests.txt file: fallenking_9_backtothevillage_0_label
 Key missing in the quests.txt file: lumbermanwine_0_description
 Key missing in the quests.txt file: lumbermanwine_0_description_refuse
 Key missing in the quests.txt file: lumbermanwine_0_description_success
@@ -155,172 +482,70 @@ List of gaps found between parchments:
 Parchment 1 has a different version: it is at version unknown while fr parchment is at 4.2.1
 Parchment 2 has a different version: it is at version unknown while fr parchment is at 1.1.4
 Parchment 3 has a different version: it is at version unknown while fr parchment is at 1.1.4
-Parchment 9 has a different version: it is at version unknown while fr parchment is at 1.1.4
+Parchment 9 has a different version: it is at version unknown while fr parchment is at 4.8.0
+Parchment 10 has a different version: it is at version 1.1.4 while fr parchment is at 4.8.0
+Parchment 11 has a different version: it is at version 1.1.4 while fr parchment is at 4.8.0
 Parchment 17 is missing.
 Parchment 16 is missing.
 Parchment 18 is missing.
-Help 1 is missing.
-Help 2 is missing.
-Help 3 is missing.
-Help 4 is missing.
-Help 5 is missing.
-Help 6 is missing.
-Help 7 is missing.
-Help 8 is missing.
-Help 9 is missing.
-Help 10 is missing.
-Help 11 is missing.
-Help 12 is missing.
-Help 13 is missing.
 
-List of gaps found in culture strings for byzantines: 
+List of gaps found in culture dialogues for byzantines: 
 
-String missing for culture byzantines: culture.byzantines
-String missing for culture byzantines: shop.armyforge
-String missing for culture byzantines: shop.bakery
-String missing for culture byzantines: shop.clothing
-String missing for culture byzantines: shop.fishery
-String missing for culture byzantines: shop.forge
-String missing for culture byzantines: shop.lonesheep
-String missing for culture byzantines: shop.lonetower
-String missing for culture byzantines: shop.sheepfarm
-String missing for culture byzantines: shop.tavernbyz
-String missing for culture byzantines: shop.townhall
-String missing for culture byzantines: villager.architect_byzantine
-String missing for culture byzantines: villager.armysmith_byzantine
-String missing for culture byzantines: villager.artisan_byzantine
-String missing for culture byzantines: villager.artwife_byzantine
-String missing for culture byzantines: villager.baron_byzantine
-String missing for culture byzantines: villager.boy_byzantine
-String missing for culture byzantines: villager.centurio_byzantine
-String missing for culture byzantines: villager.farmiller_byzantine
-String missing for culture byzantines: villager.farmiller_wife_byzantine
-String missing for culture byzantines: villager.fisherman_byzantine
-String missing for culture byzantines: villager.girl_byzantine
-String missing for culture byzantines: villager.keeper_byzantine
-String missing for culture byzantines: villager.keeperbirch_byzantine
-String missing for culture byzantines: villager.keeperoak_byzantine
-String missing for culture byzantines: villager.keeperpine_byzantine
-String missing for culture byzantines: villager.keepertropical_byzantine
-String missing for culture byzantines: villager.loneshepherd_byzantine
-String missing for culture byzantines: villager.loneshepherdf_byzantine
-String missing for culture byzantines: villager.lumberman_byzantine
-String missing for culture byzantines: villager.merchant_art
-String missing for culture byzantines: villager.merchant_byzantine
-String missing for culture byzantines: villager.merchant_food
-String missing for culture byzantines: villager.merchant_hindi
-String missing for culture byzantines: villager.merchant_japanese
-String missing for culture byzantines: villager.merchant_materials
-String missing for culture byzantines: villager.merchant_mayan
-String missing for culture byzantines: villager.merchant_norman
-String missing for culture byzantines: villager.miner_byzantine
-String missing for culture byzantines: villager.pastor_byzantine
-String missing for culture byzantines: villager.patriarch_byzantine
-String missing for culture byzantines: villager.playersoldier_byzantine
-String missing for culture byzantines: villager.richwife_byzantine
-String missing for culture byzantines: villager.shepherd_byzantine
-String missing for culture byzantines: villager.shepherd_female_byzantine
-String missing for culture byzantines: villager.silkfarmer_byzantine
-String missing for culture byzantines: villager.silkfarmerwife_byzantine
-String missing for culture byzantines: villager.smith_byzantine
-String missing for culture byzantines: villager.smuggler_silk
-String missing for culture byzantines: villager.soldier_byzantine
-String missing for culture byzantines: villager.teenagerfemale
-String missing for culture byzantines: villager.teenagermale
-String missing for culture byzantines: villager.wife_byzantine
-
-List of gaps found in culture sentences for byzantines: 
-
-Sentences missing for culture byzantines: architect_byzantine.construction
-Sentences missing for culture byzantines: armysmith_byzantine.makebyzantinemace
-Sentences missing for culture byzantines: armysmith_byzantine.makeindiantools
-Sentences missing for culture byzantines: artisan_byzantine.greeting
-Sentences missing for culture byzantines: artisan_byzantine.makepainting
-Sentences missing for culture byzantines: keeperbirch_byzantine.greeting
-Sentences missing for culture byzantines: keeperoak_byzantine.greeting
-Sentences missing for culture byzantines: keeperpine_byzantine.greeting
-Sentences missing for culture byzantines: keepertropical_byzantine.greeting
-Sentences missing for culture byzantines: lumberman_byzantine.bringbackresourceshome
-Sentences missing for culture byzantines: lumberman_byzantine.choptrees
-Sentences missing for culture byzantines: lumberman_byzantine.gathergoods
-Sentences missing for culture byzantines: lumberman_byzantine.plantsaplings
-Sentences missing for culture byzantines: merchant_art.greeting
-Sentences missing for culture byzantines: miner_byzantine.mining
-Sentences missing for culture byzantines: pastor_byzantine.makebooks
-Sentences missing for culture byzantines: patriarch_byzantine.makebooks
-Sentences missing for culture byzantines: smith_byzantine.makeindiantools
-Sentences missing for culture byzantines: villager.becomeadult
-Sentences missing for culture byzantines: villager.calltoarms
-Sentences missing for culture byzantines: villager.goplay
-Sentences missing for culture byzantines: villager.gorest
-Sentences missing for culture byzantines: villager.greeting
-Sentences missing for culture byzantines: villager.makebread
-Sentences missing for culture byzantines: wife_byzantine.cooking
-Sentences missing for culture byzantines: wife_byzantine.delivergoodshousehold
-Sentences missing for culture byzantines: wife_byzantine.getgoodshousehold
-Sentences missing for culture byzantines: wife_byzantine.gethousethresources
-Sentences missing for culture byzantines: wife_byzantine.greeting
+Dialogue missing for culture byzantines: boyvillagechief
+Dialogue missing for culture byzantines: brothersister
+Dialogue missing for culture byzantines: brothertalk1
+Dialogue missing for culture byzantines: chatter1
+Dialogue missing for culture byzantines: chatter10
+Dialogue missing for culture byzantines: chatter11
+Dialogue missing for culture byzantines: chatter2
+Dialogue missing for culture byzantines: chatter3
+Dialogue missing for culture byzantines: chatter4
+Dialogue missing for culture byzantines: chatter5
+Dialogue missing for culture byzantines: chatter6
+Dialogue missing for culture byzantines: chatter7
+Dialogue missing for culture byzantines: chatter8
+Dialogue missing for culture byzantines: chatter9
+Dialogue missing for culture byzantines: clothes1
+Dialogue missing for culture byzantines: clothes2
+Dialogue missing for culture byzantines: clothes3
+Dialogue missing for culture byzantines: clothes4
+Dialogue missing for culture byzantines: doll
+Dialogue missing for culture byzantines: flirt1
+Dialogue missing for culture byzantines: flirt2
+Dialogue missing for culture byzantines: flirt3
+Dialogue missing for culture byzantines: flirt4
+Dialogue missing for culture byzantines: flirt5
+Dialogue missing for culture byzantines: flirt6
+Dialogue missing for culture byzantines: girl
+Dialogue missing for culture byzantines: householdTry
+Dialogue missing for culture byzantines: kids1
+Dialogue missing for culture byzantines: kids2
+Dialogue missing for culture byzantines: kids3
+Dialogue missing for culture byzantines: pride1
+Dialogue missing for culture byzantines: pride2
+Dialogue missing for culture byzantines: pride3
+Dialogue missing for culture byzantines: rain
+Dialogue missing for culture byzantines: religious1
+Dialogue missing for culture byzantines: religious2
+Dialogue missing for culture byzantines: sistertalk1
+Dialogue missing for culture byzantines: talking1
+Dialogue missing for culture byzantines: talking2
+Dialogue missing for culture byzantines: talking3
+Dialogue missing for culture byzantines: talking4
+Dialogue missing for culture byzantines: talking5
+Dialogue missing for culture byzantines: talking6
+Dialogue missing for culture byzantines: talking7
+Dialogue missing for culture byzantines: talking8
+Dialogue missing for culture byzantines: talking9
+Dialogue missing for culture byzantines: weird1
+Dialogue missing for culture byzantines: weird2
+Dialogue missing for culture byzantines: weird3
+Dialogue missing for culture byzantines: wine
+Dialogue missing for culture byzantines: woodSword
 
 List of gaps found in culture building names for byzantines: 
 
-Building name missing for culture byzantines: ancienttemplebyzantine_a0
-Building name missing for culture byzantines: ancienttheatrebyzantine_a0
-Building name missing for culture byzantines: architectbyzantine_a0
-Building name missing for culture byzantines: artisanbyzantine_a0
-Building name missing for culture byzantines: bakerybyzantine_a0
-Building name missing for culture byzantines: barracksbyzantine_a0
-Building name missing for culture byzantines: barracksbyzantine_a_bed_a0
-Building name missing for culture byzantines: basilkabyzantine_a0
-Building name missing for culture byzantines: birchtower_a0
-Building name missing for culture byzantines: chapelbyzantine_a0
-Building name missing for culture byzantines: churchbyzantine_a0
-Building name missing for culture byzantines: churchbyzantine_a9
-Building name missing for culture byzantines: churchbyzantine_a_altar_a0
-Building name missing for culture byzantines: farmbyzantine_a0
-Building name missing for culture byzantines: fisherbyzantine_a0
-Building name missing for culture byzantines: forgebyzantine_a0
-Building name missing for culture byzantines: fortbyzantine_a0
-Building name missing for culture byzantines: fortbyzantine_a_bed1_a0
-Building name missing for culture byzantines: fortbyzantine_a_bed2_a0
-Building name missing for culture byzantines: fortbyzantine_a_bed3_a0
-Building name missing for culture byzantines: fortbyzantine_a_forge_a0
-Building name missing for culture byzantines: grovebirchbyzantine_a0
-Building name missing for culture byzantines: grovebyzantine_a0
-Building name missing for culture byzantines: groveoakbyzantine_a0
-Building name missing for culture byzantines: guesthousebyzantine_a0
-Building name missing for culture byzantines: innbyzantine_a0
-Building name missing for culture byzantines: jungletower_a0
-Building name missing for culture byzantines: lighthouse_a0
-Building name missing for culture byzantines: lonecastle_a0
-Building name missing for culture byzantines: lonecastle_a_living_a0
-Building name missing for culture byzantines: lonecastle_a_praying_a0
-Building name missing for culture byzantines: lonecastle_a_training_a0
-Building name missing for culture byzantines: lonesheepfarm_a0
-Building name missing for culture byzantines: lonesheepfarm_b0
-Building name missing for culture byzantines: lumberbyzantine_a0
-Building name missing for culture byzantines: oaktower_a0
-Building name missing for culture byzantines: pinetower_a0
-Building name missing for culture byzantines: placebyzantine_a0
-Building name missing for culture byzantines: placebyzantine_a_basilica_a0
-Building name missing for culture byzantines: playerfortbyzantine_a0
-Building name missing for culture byzantines: playerfortbyzantine_a_bed1_a0
-Building name missing for culture byzantines: playerfortbyzantine_a_bed2_a0
-Building name missing for culture byzantines: playerfortbyzantine_a_bed3_a0
-Building name missing for culture byzantines: playerfortbyzantine_a_forge_a0
-Building name missing for culture byzantines: presbyterybyzantine_a0
-Building name missing for culture byzantines: quarrybyzantine_a0
-Building name missing for culture byzantines: sheepbyzantine_a0
-Building name missing for culture byzantines: silkfarmbyzantine_a0
-Building name missing for culture byzantines: tavernbyzantine_a0
-Building name missing for culture byzantines: testfarm_a0
-Building name missing for culture byzantines: testfarm_a_backerei_a0
-Building name missing for culture byzantines: villa urbana_a0
-Building name missing for culture byzantines: vineyardbyzantine_a0
-Building name missing for culture byzantines: watchtowerbyzantine_a0
-Building name missing for culture byzantines: well_a0
-Building name missing for culture byzantines: workshopbyzantine_a0
-
-Different number of reputation levels for culture byzantines: 0 in es, 10 in fr.
+Building name missing for culture byzantines: playersmallhouse_a0
 
 List of gaps found in culture strings for hindi: 
 
@@ -334,6 +559,7 @@ String missing for culture hindi: villager.indian_adivasipeasantwife
 
 List of gaps found in culture building names for hindi: 
 
+Building name missing for culture hindi: gifthouse_a0
 Building name missing for culture hindi: playerestate_a0
 Building name missing for culture hindi: tank_a0
 
@@ -341,6 +567,7 @@ List of gaps found in culture strings for japanese:
 
 String missing for culture japanese: culture.japanese
 String missing for culture japanese: shop.armyforge
+String missing for culture japanese: shop.fishery
 String missing for culture japanese: shop.forge
 String missing for culture japanese: shop.japanesecrafter
 String missing for culture japanese: shop.japaneseoutpost
@@ -348,29 +575,101 @@ String missing for culture japanese: shop.japanesetownhall
 String missing for culture japanese: shop.kitchen
 String missing for culture japanese: shop.lonemine
 String missing for culture japanese: villager.japanese_bandit
+String missing for culture japanese: villager.japanese_brewer
+String missing for culture japanese: villager.japanese_brewerwife
 
 List of gaps found in culture building names for japanese: 
 
 Building name missing for culture japanese: banditfort_a0
 Building name missing for culture japanese: bath_a0
+Building name missing for culture japanese: chickenfarm_a0
+Building name missing for culture japanese: gifthouse_a0
 Building name missing for culture japanese: japanesehouselarge_a0
 Building name missing for culture japanese: japanesehousemedium_a0
 Building name missing for culture japanese: japanesequarry_b0
+Building name missing for culture japanese: sakebrewery_a0
 Building name missing for culture japanese: well_a0
-Shop name missing for culture japanese in both languages: shop.fishery
-Shop name missing for culture japanese in both languages: shop.fishery
-Shop name missing for culture japanese in both languages: shop.fishery
 
 List of gaps found in culture strings for mayan: 
 
 String missing for culture mayan: culture.mayan
 String missing for culture mayan: shop.lonemayanfarm
 String missing for culture mayan: shop.mayanarmyforge
+String missing for culture mayan: shop.mayancocoa
 String missing for culture mayan: shop.mayancrafter
 String missing for culture mayan: shop.mayanobsidiancrafter
 String missing for culture mayan: shop.mayansheepchickenfarm
 String missing for culture mayan: shop.mayantownhall
+String missing for culture mayan: villager.mayan_cocoafarmer
 String missing for culture mayan: villager.mayan_obsidiancrafter
+
+List of gaps found in culture dialogues for mayan: 
+
+Dialogue missing for culture mayan: alchimist
+Dialogue missing for culture mayan: bakery
+Dialogue missing for culture mayan: become
+Dialogue missing for culture mayan: becomeadult
+Dialogue missing for culture mayan: bestdad
+Dialogue missing for culture mayan: byzantins
+Dialogue missing for culture mayan: cereal
+Dialogue missing for culture mayan: dialogchildmother
+Dialogue missing for culture mayan: dragonegg
+Dialogue missing for culture mayan: embauchement
+Dialogue missing for culture mayan: exchange
+Dialogue missing for culture mayan: friend
+Dialogue missing for culture mayan: gravity
+Dialogue missing for culture mayan: indians
+Dialogue missing for culture mayan: japanese
+Dialogue missing for culture mayan: likemydad
+Dialogue missing for culture mayan: mayanarchitecture
+Dialogue missing for culture mayan: miner
+Dialogue missing for culture mayan: monster
+Dialogue missing for culture mayan: normands
+Dialogue missing for culture mayan: obsidian
+Dialogue missing for culture mayan: palace
+Dialogue missing for culture mayan: peasantdialog
+Dialogue missing for culture mayan: player
+Dialogue missing for culture mayan: playerorigins
+Dialogue missing for culture mayan: pyramid
+Dialogue missing for culture mayan: rain
+Dialogue missing for culture mayan: rebellion
+Dialogue missing for culture mayan: recolt
+Dialogue missing for culture mayan: rich
+Dialogue missing for culture mayan: rule
+Dialogue missing for culture mayan: stone
+Dialogue missing for culture mayan: tobewarrior
+Dialogue missing for culture mayan: village
+Dialogue missing for culture mayan: wah
+Dialogue missing for culture mayan: wither
+Dialogue missing for culture mayan: woman
+Dialogue missing for culture mayan: zombie
+Dialogue missing for culture mayan: zombiepigmen
+
+List of gaps found in culture building names for mayan: 
+
+Building name missing for culture mayan: gifthouse_a0
+Building name missing for culture mayan: mayancacaofarm_a0
+Building name missing for culture mayan: mayancacaofarm_b0
+Building name missing for culture mayan in both languages: questpyramid_a0
+Building name missing for culture mayan in both languages: mayancamp_a0
+Building name missing for culture mayan in both languages: questpyramid_pit_a0
+Building name missing for culture mayan in both languages: questguardtower_a0
+Building name missing for culture mayan in both languages: questpyramid_jail_a0
+Building name missing for culture mayan in both languages: mayancamp_outerguard_a0
+Building name missing for culture mayan in both languages: mayancamp_dig_a0
+Building name missing for culture mayan in both languages: mayancamp_wall_a0
+Building name missing for culture mayan in both languages: questcamphouse_a0
+Building name missing for culture mayan in both languages: mayancamp_innerguard_a0
+Building name missing for culture mayan in both languages: questpyramid_guards_a0
+Building name missing for culture mayan in both languages: questcave_door_a0
+Building name missing for culture mayan in both languages: questcave_a0
+Building name missing for culture mayan in both languages: mayancamp_jail_a0
+Villager name missing for culture mayan in both languages: villager.questfallenking
+Villager name missing for culture mayan in both languages: villager.questkingelitewarrior
+Villager name missing for culture mayan in both languages: villager.questkinglieutnant
+Villager name missing for culture mayan in both languages: villager.questkingscout
+Villager name missing for culture mayan in both languages: villager.questkingwarrior
+Villager name missing for culture mayan in both languages: villager.questshaman
 
 List of gaps found in culture strings for norman: 
 
@@ -406,4 +705,66 @@ List of gaps found in culture sentences for norman:
 
 Different number of sentences for culture norman: villager.greeting
 
-Traduction completness: 75%
+List of gaps found in culture dialogues for norman: 
+
+Dialogue missing for culture norman: alchemyworkshop
+Dialogue missing for culture norman: alouette
+Dialogue missing for culture norman: archives
+Dialogue missing for culture norman: badflirt
+Dialogue missing for culture norman: badflirt2
+Dialogue missing for culture norman: bakery
+Dialogue missing for culture norman: beautifulvillage
+Dialogue missing for culture norman: boudintripes
+Dialogue missing for culture norman: boyvillagechief
+Dialogue missing for culture norman: byzantines
+Dialogue missing for culture norman: calva
+Dialogue missing for culture norman: carpenter
+Dialogue missing for culture norman: cattlefarmer
+Dialogue missing for culture norman: christmas
+Dialogue missing for culture norman: church
+Dialogue missing for culture norman: confession
+Dialogue missing for culture norman: confession2
+Dialogue missing for culture norman: countingcows
+Dialogue missing for culture norman: dagobert
+Dialogue missing for culture norman: enderman
+Dialogue missing for culture norman: farmer
+Dialogue missing for culture norman: floatingearth
+Dialogue missing for culture norman: frerejacques
+Dialogue missing for culture norman: guildmaster
+Dialogue missing for culture norman: harvest
+Dialogue missing for culture norman: horses
+Dialogue missing for culture norman: indianfood
+Dialogue missing for culture norman: inn
+Dialogue missing for culture norman: kids1
+Dialogue missing for culture norman: kids2
+Dialogue missing for culture norman: kids3
+Dialogue missing for culture norman: knight
+Dialogue missing for culture norman: lady
+Dialogue missing for culture norman: likingrain
+Dialogue missing for culture norman: loupyesttu
+Dialogue missing for culture norman: lumberman
+Dialogue missing for culture norman: market
+Dialogue missing for culture norman: merchant
+Dialogue missing for culture norman: miner
+Dialogue missing for culture norman: monk
+Dialogue missing for culture norman: paris
+Dialogue missing for culture norman: pigherd
+Dialogue missing for culture norman: priest
+Dialogue missing for culture norman: priest2
+Dialogue missing for culture norman: rain
+Dialogue missing for culture norman: seneschal
+Dialogue missing for culture norman: shepherd
+Dialogue missing for culture norman: smith
+Dialogue missing for culture norman: storm
+Dialogue missing for culture norman: sunset
+Dialogue missing for culture norman: tavern
+Dialogue missing for culture norman: tripes
+Dialogue missing for culture norman: visitors
+Dialogue missing for culture norman: wife
+Dialogue missing for culture norman: william
+
+List of gaps found in culture building names for norman: 
+
+Building name missing for culture norman: gifthouse_a0
+
+Traduction completness: 72%

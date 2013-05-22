@@ -1,3 +1,30 @@
 Translation comparison between fr and en
 
-Traduction completness: 100%
+List of gaps found in culture dialogues for hindi: 
+
+Dialogue missing for culture hindi: monsoon
+
+List of gaps found in culture building names for mayan: 
+
+Building name missing for culture mayan in both languages: questpyramid_a0
+Building name missing for culture mayan in both languages: mayancamp_a0
+Building name missing for culture mayan in both languages: questpyramid_pit_a0
+Building name missing for culture mayan in both languages: questguardtower_a0
+Building name missing for culture mayan in both languages: questpyramid_jail_a0
+Building name missing for culture mayan in both languages: mayancamp_outerguard_a0
+Building name missing for culture mayan in both languages: mayancamp_dig_a0
+Building name missing for culture mayan in both languages: mayancamp_wall_a0
+Building name missing for culture mayan in both languages: questcamphouse_a0
+Building name missing for culture mayan in both languages: mayancamp_innerguard_a0
+Building name missing for culture mayan in both languages: questpyramid_guards_a0
+Building name missing for culture mayan in both languages: questcave_door_a0
+Building name missing for culture mayan in both languages: questcave_a0
+Building name missing for culture mayan in both languages: mayancamp_jail_a0
+Villager name missing for culture mayan in both languages: villager.questfallenking
+Villager name missing for culture mayan in both languages: villager.questkingelitewarrior
+Villager name missing for culture mayan in both languages: villager.questkinglieutnant
+Villager name missing for culture mayan in both languages: villager.questkingscout
+Villager name missing for culture mayan in both languages: villager.questkingwarrior
+Villager name missing for culture mayan in both languages: villager.questshaman
+
+Traduction completness: 99%

@@ -173,6 +173,7 @@ spawnerzombie;-1;0;;80/0/121
 spawnerspider;-1;0;;80/0/122
 spawnercavespider;-1;0;;80/0/123
 spawnercreeper;-1;0;;80/0/124
+spawnerblaze;-1;0;;80/0/125
 dispenserunknownpowder;-1;0;;200/200/0
 netherwartsoil;-1;0;;100/10/62
 plainSignGuess;-1;0;;0/0/225
@@ -297,6 +298,7 @@ mayan gold;block_stone_id;2;false;255/213/1
 ice;79;0;false;150/255/255
 snowblock;80;0;false;230/255/255
 lava;10;0;true;232/57/16
+lavastill;11;0;true;232/57/17
 netherrack;87;0;false;253/56/11
 tnt;46;0;false;253/52/6
 oak leaves;18;0;false;40/107/14
@@ -381,3 +383,5 @@ vinesoil;-1;0;;0/256/256
 chiseled stone brick;98;3;false;88/88/88
 smooth sandstone;24;2;false;195/178/51
 cobblestone wall;139;0;false;74/74/74
+
+portal;90;0;true;128/0/255

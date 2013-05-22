@@ -145,9 +145,9 @@ public class GuiControlledMilitary extends GuiText {
 				} else {
 					if (townhall.raidStart>0) {
 						if (townhall.raidTarget.equals(vr.pos)) {
-							text.add(new Line(DARKRED+MLN.string(DARKRED+"ui.raidinprogress")));
+							text.add(new Line(DARKRED+MLN.string("ui.raidinprogress")));
 						} else {
-							text.add(new Line(DARKRED+MLN.string(DARKRED+"ui.otherraidinprogress")));
+							text.add(new Line(DARKRED+MLN.string("ui.otherraidinprogress")));
 						}
 					} else {
 						if (townhall.raidTarget.equals(vr.pos)) {

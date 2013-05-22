@@ -13,6 +13,7 @@ goal=harvestMaize
 goal=plantMaize
 goal=gosocialise
 goal=chat
+goal=bringBackResourcesHome
 
 bringBackHomeGood=maize
 

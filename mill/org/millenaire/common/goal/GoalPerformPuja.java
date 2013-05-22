@@ -11,6 +11,22 @@ import org.millenaire.common.MillWorld;
 public class GoalPerformPuja extends Goal {
 
 	@Override
+	public String labelKey(MillVillager villager) {
+		if (villager!=null && villager.canPerformSacrifices())
+			return "performsacrifices";
+		
+		return key;
+	}
+	
+	@Override
+	public String labelKeyWhileTravelling(MillVillager villager) {
+		if (villager!=null && villager.canPerformSacrifices())
+			return "performsacrifices";
+		
+		return key;
+	}
+	
+	@Override
 	public int actionDuration(MillVillager villager) throws Exception {
 		return 100;
 	}
@@ -18,7 +34,12 @@ public class GoalPerformPuja extends Goal {
 	@Override
 	public GoalInformation getDestination(MillVillager villager) throws Exception {
 
-		final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		Building temple=null;
+
+		if (villager.canMeditate())
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		else if (villager.canPerformSacrifices())
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 
 		if ((temple!=null) && ((temple.pujas!=null) && ((temple.pujas.priest==null) || (temple.pujas.priest==villager)) && temple.pujas.canPray()))
 			return packDest(temple.getCraftingPos(),temple);
@@ -29,7 +50,12 @@ public class GoalPerformPuja extends Goal {
 	@Override
 	public ItemStack[] getHeldItemsDestination(MillVillager villager) {
 
-		final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		Building temple=null;
+
+		if (villager.canMeditate())
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		else if (villager.canPerformSacrifices())
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 
 		if (temple.pujas.getStackInSlot(0)!=null)
 			return new ItemStack[]{temple.pujas.getStackInSlot(0)};
@@ -45,8 +71,13 @@ public class GoalPerformPuja extends Goal {
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) throws Exception {
 
-		if (!villager.mw.isGlobalTagSet(MillWorld.PUJAS))
-			return false;
+		if (villager.canMeditate()) {
+			if (!villager.mw.isGlobalTagSet(MillWorld.PUJAS))
+				return false;
+		} else if (villager.canPerformSacrifices()) {
+			if (!villager.mw.isGlobalTagSet(MillWorld.MAYANSACRIFICES))
+				return false;
+		}
 
 		return (getDestination(villager)!=null);
 	}
@@ -59,7 +90,12 @@ public class GoalPerformPuja extends Goal {
 	@Override
 	public boolean performAction(MillVillager villager) throws Exception {
 
-		final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		Building temple=null;
+
+		if (villager.canMeditate())
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
+		else if (villager.canPerformSacrifices())
+			temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 
 		final boolean canContinue=temple.pujas.performPuja(villager);
 		

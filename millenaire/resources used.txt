@@ -384,12 +384,12 @@ Bois de chêne: 562
 Laine blanche: 27
 Sculpture Maya: 8
 Roche: 11243
-Pierres: 15392
+Pierres: 15598
 Bois tropical: 278
 Grès: 13
 Bibliothèque: 48
 Décoration en or: 147
-Bois (tous): 1002
+Bois (tous): 1011
 
 mayan_controlled resource use: 
 Bois de chêne: 73
@@ -405,19 +405,19 @@ Bois de chêne: 502
 Laine blanche: 21
 Sculpture Maya: 3
 Roche: 11000
-Pierres: 16109
+Pierres: 16315
 Bois tropical: 136
 Grès: 5
 Bibliothèque: 48
 Décoration en or: 144
-Bois (tous): 1065
+Bois (tous): 1074
 
 religious resource use: 
 Bois de chêne: 471
 Laine blanche: 21
 Sculpture Maya: 6
 Roche: 11262
-Pierres: 14854
+Pierres: 14992
 Bois tropical: 178
 Grès: 136
 Bibliothèque: 48
@@ -497,6 +497,35 @@ Sculpture Maya: 4
 Pierres: 72
 Pierres taillées moussues: 298
 Bois (tous): 11
+
+questcamp resource use: 
+Roche: 802
+Obsidienne: 14
+Bois tropical: 350
+Lingot de fer: 6
+Hautes herbes: 149
+Gravier: 3
+Bois (tous): 74
+Portail: 6
+
+questcave resource use: 
+Roche: 160
+Bedrock: 5269
+Lave: 2292
+Luminite: 12
+Bois (tous): 2
+
+questpyramid resource use: 
+Pierre taillées craquelées: 179
+Roche: 6997
+Obsidienne: 3103
+Bois tropical: 146
+Pierres taillées moussues: 102
+Lave: 356
+Lingot de fer: 1
+Hautes herbes: 26
+Décoration en or: 22
+Bois (tous): 83
 
 norman: 
 agricole resource use: 
@@ -10675,6 +10704,42 @@ Upgrade 3
 |}
 
 
+Keban Muul
+questpyramid
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Pierre taillées craquelées
+| style="text-align: center; "|179
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|6997
+|-
+| style="text-align: center; "|Obsidienne
+| style="text-align: center; "|3103
+|-
+| style="text-align: center; "|Pierres taillées moussues
+| style="text-align: center; "|102
+|-
+| style="text-align: center; "|Lingot de fer
+| style="text-align: center; "|1
+|-
+| style="text-align: center; "|Lave
+| style="text-align: center; "|356
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|52
+|-
+| style="text-align: center; "|Décoration en or
+| style="text-align: center; "|22
+|}
+
+
 Muul
 mayanpyramid
 
@@ -10908,6 +10973,42 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|8
+|}
+
+
+Ajaw Cah
+mayancamp
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|802
+|-
+| style="text-align: center; "|Obsidienne
+| style="text-align: center; "|14
+|-
+| style="text-align: center; "|Bois tropical
+| style="text-align: center; "|204
+|-
+| style="text-align: center; "|Lingot de fer
+| style="text-align: center; "|6
+|-
+| style="text-align: center; "|Hautes herbes
+| style="text-align: center; "|123
+|-
+| style="text-align: center; "|Gravier
+| style="text-align: center; "|3
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|43
+|-
+| style="text-align: center; "|Portail
+| style="text-align: center; "|6
 |}
 
 
@@ -11415,6 +11516,39 @@ Upgrade 3
 |}
 
 
+Keban Muul
+questpyramid_pit
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|2
+|}
+
+
+Cha'an Ka'nal
+questguardtower
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois tropical
+| style="text-align: center; "|38
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|7
+|}
+
+
 K'u-nah
 mayantemple
 
@@ -11701,6 +11835,21 @@ Initial Construction
 |}
 
 
+Keban Muul
+questpyramid_jail
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|3
+|}
+
+
 Chumuk Kuuch
 mayanplayerlargefield
 
@@ -11716,6 +11865,21 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|1
+|}
+
+
+Ajaw Cah
+mayancamp_outerguard
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|4
 |}
 
 
@@ -12092,6 +12256,21 @@ Initial Construction
 |}
 
 
+Ajaw Cah
+mayancamp_dig
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|2
+|}
+
+
 Uxul Otoch
 mayansculptorhouse
 
@@ -12411,7 +12590,7 @@ Initial Construction
 | style="text-align: center; "|3
 |-
 | style="text-align: center; "|Pierres
-| style="text-align: center; "|390
+| style="text-align: center; "|528
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|3
@@ -12684,6 +12863,21 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|24
+|}
+
+
+Ajaw Cah
+mayancamp_wall
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|3
 |}
 
 
@@ -13050,6 +13244,42 @@ Upgrade 4
 |}
 
 
+Kanan Otoch
+questcamphouse
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois tropical
+| style="text-align: center; "|16
+|-
+| style="text-align: center; "|Hautes herbes
+| style="text-align: center; "|13
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|5
+|}
+
+
+Ajaw Cah
+mayancamp_innerguard
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|4
+|}
+
+
 Noh Muul
 mayanplayerestate
 
@@ -13110,6 +13340,21 @@ Initial Construction
 |-
 | style="text-align: center; "|Minerai de fer
 | style="text-align: center; "|8
+|}
+
+
+Keban Muul
+questpyramid_guards
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|12
 |}
 
 
@@ -13313,6 +13558,21 @@ Initial Construction
 |}
 
 
+Kak Actun
+questcave_door
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|8
+|}
+
+
 Ta'as Kob Took
 mayanobsidiancrafter
 
@@ -13469,6 +13729,48 @@ Upgrade 3
 |-
 | style="text-align: center; "|Roche
 | style="text-align: center; "|216
+|}
+
+
+Kak Actun
+questcave
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|160
+|-
+| style="text-align: center; "|Bedrock
+| style="text-align: center; "|5269
+|-
+| style="text-align: center; "|Lave
+| style="text-align: center; "|2292
+|-
+| style="text-align: center; "|Luminite
+| style="text-align: center; "|12
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|2
+|}
+
+
+K'as Maya
+mayancamp_jail
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|3
 |}
 
 

@@ -52,6 +52,7 @@ import org.millenaire.common.UserProfile;
 import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
+import org.millenaire.common.item.Goods.IItemInitialEnchantmens;
 import org.millenaire.common.pathing.atomicstryker.AStarNode;
 import org.millenaire.common.pathing.atomicstryker.AStarStatic;
 
@@ -169,16 +170,18 @@ public class MillCommonUtilities {
 		public Vector<String> names=new Vector<String>();
 		public Vector<String> types=new Vector<String>();
 		public Vector<String> cultures=new Vector<String>();
+		public Vector<String> generatedFor=new Vector<String>();
 
 		public VillageList() {
 
 		}
 
-		public void addVillage(Point p,String name, String type,String culture) {
+		public void addVillage(Point p,String name, String type,String culture,String generatedFor) {
 			pos.add(p);
 			names.add(name);
 			types.add(type);
 			cultures.add(culture);
+			this.generatedFor.add(generatedFor);
 		}
 
 		public void removeVillage(Point p) {
@@ -196,6 +199,7 @@ public class MillCommonUtilities {
 				names.remove(id);
 				types.remove(id);
 				cultures.remove(id);
+				generatedFor.remove(id);
 			}
 		}
 
@@ -204,6 +208,7 @@ public class MillCommonUtilities {
 			names.clear();
 			types.clear();
 			cultures.clear();
+			generatedFor.clear();
 		}
 
 	}
@@ -1242,6 +1247,11 @@ public class MillCommonUtilities {
 			ItemStack stack = chest.getStackInSlot(i);
 			if (stack ==null) {
 				stack=new ItemStack(item,1,meta);
+				
+				if (stack.getItem() instanceof IItemInitialEnchantmens) {
+					((IItemInitialEnchantmens)stack.getItem()).applyEnchantments(stack);
+				}
+				
 				if ((toPut-nb) <= stack.getMaxStackSize()) {
 					stack.stackSize=toPut-nb;
 					nb=toPut;
@@ -1455,11 +1465,11 @@ public class MillCommonUtilities {
 
 
 
-	static public void spawnMobsSpawner(World world, Point p,String mobType) {
+	static public Entity spawnMobsSpawner(World world, Point p,String mobType) {
 
 		final EntityLiving entityliving = (EntityLiving)EntityList.createEntityByName(mobType, world);
 		if(entityliving == null)
-			return;
+			return null;
 
 		final int x=MillCommonUtilities.randomInt(2)-1;
 		final int z=MillCommonUtilities.randomInt(2)-1;
@@ -1470,13 +1480,15 @@ public class MillCommonUtilities {
 		final int ez = (int) (p.z + z);
 
 		if ((world.getBlockId(ex, ey, ez)>0) && (world.getBlockId(ex, ey+1, ez)>0))
-			return;
+			return null;
 
 		entityliving.setLocationAndAngles(ex, ey, ez, world.rand.nextFloat() * 360F, 0.0F);
 
 		world.spawnEntityInWorld(entityliving);
 
 		entityliving.spawnExplosionParticle();
+		
+		return entityliving;
 	}
 
 	public static String swapConfigBlockId(String s) {

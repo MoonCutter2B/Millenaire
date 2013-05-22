@@ -249,6 +249,72 @@ public class Goods {
 		}
 	}
 
+	public static interface IItemInitialEnchantmens {
+		
+		public void applyEnchantments(ItemStack stack);
+		
+	}
+
+	public static class ItemMayanQuestCrown extends ItemArmor implements IItemInitialEnchantmens {
+
+		public final String iconName;
+
+		public ItemMayanQuestCrown(int id,String iconName, int armourId, int type) {
+			super(id, EnumArmorMaterial.CHAIN, armourId, type);
+			setMaxDamage(0);			
+			this.iconName=iconName;
+			setCreativeTab(Mill.tabMillenaire);
+		}
+
+		@Override
+		public void applyEnchantments(ItemStack stack) {
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.respiration.effectId, stack)==0) {
+				stack.addEnchantment(Enchantment.respiration, 3);
+			}
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.aquaAffinity.effectId, stack)==0) {
+				stack.addEnchantment(Enchantment.aquaAffinity, 1);
+			}
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.protection.effectId, stack)==0) {
+				stack.addEnchantment(Enchantment.protection, 4);
+			}
+		}
+
+		@Override
+		public boolean onItemUse(ItemStack stack,
+				EntityPlayer par2EntityPlayer, World par3World, int par4,
+				int par5, int par6, int par7, float par8, float par9,
+				float par10) {
+
+			applyEnchantments(stack);
+
+			return super.onItemUse(stack, par2EntityPlayer, par3World, par4, par5,
+					par6, par7, par8, par9, par10);
+		}
+
+		@Override
+		public void registerIcons(IconRegister iconRegister)
+		{
+			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
+		}
+
+		@Override
+		public void onUpdate(ItemStack par1ItemStack, World par2World,
+				Entity par3Entity, int par4, boolean par5) {
+			applyEnchantments(par1ItemStack);
+			super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
+		}
+
+		@Override
+		public boolean onItemUseFirst(ItemStack stack, EntityPlayer player,
+				World world, int x, int y, int z, int side, float hitX,
+				float hitY, float hitZ) {
+			applyEnchantments(stack);
+			return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY,
+					hitZ);
+		}
+
+	}
+
 	public static class ItemMillenaireAxe extends ItemAxe {
 
 		int enchantability;
@@ -451,7 +517,7 @@ public class Goods {
 			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
-		
+
 		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
 			super(i,material);
 
@@ -516,7 +582,7 @@ public class Goods {
 		}
 	}
 
-	public static class ItemMillenaireSword extends ItemSword {
+	public static class ItemMillenaireSword extends ItemSword implements IItemInitialEnchantmens {
 
 		int damage;
 		float criticalChance;
@@ -576,13 +642,10 @@ public class Goods {
 		}
 
 		@Override
-		public void onCreated(ItemStack par1ItemStack, World par2World,
+		public void onCreated(ItemStack stack, World par2World,
 				EntityPlayer par3EntityPlayer) {
 
-			if (knockback) {
-				par1ItemStack.addEnchantment(Enchantment.knockback, 2);
-			}
-
+			applyEnchantments(stack);
 		}
 
 
@@ -592,12 +655,7 @@ public class Goods {
 				int par5, int par6, int par7, float par8, float par9,
 				float par10) {
 
-			if (knockback) {
-				if (EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId, par1ItemStack)==0) {
-					par1ItemStack.addEnchantment(Enchantment.knockback, 2);
-				}
-
-			}
+			applyEnchantments(par1ItemStack);
 			return super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5,
 					par6, par7, par8, par9, par10);
 		}
@@ -607,14 +665,7 @@ public class Goods {
 				World world, int x, int y, int z, int side, float hitX,
 				float hitY, float hitZ) {
 
-			if (knockback) {
-				if (EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId, stack)==0) {
-					stack.addEnchantment(Enchantment.knockback, 2);
-				}
-
-			}
-
-
+			applyEnchantments(stack);
 			return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY,
 					hitZ);
 		}
@@ -622,13 +673,14 @@ public class Goods {
 		@Override
 		public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player,
 				Entity entity) {
-			if (knockback) {
-				if (EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId, stack)==0) {
-					stack.addEnchantment(Enchantment.knockback, 2);
-				}
-
-			}
+			applyEnchantments(stack);
 			return super.onLeftClickEntity(stack, player, entity);
+		}
+		@Override
+		public void applyEnchantments(ItemStack stack) {
+			if (knockback) {
+				stack.addEnchantment(Enchantment.knockback, 2);
+			}
 		}
 
 	}
@@ -1056,6 +1108,22 @@ public class Goods {
 		goodsName.put("steelpickaxe", new InvItem(Item.pickaxeIron,0));
 		goodsName.put("steelshovel", new InvItem(Item.shovelIron,0));
 		goodsName.put("steelsword", new InvItem(Item.swordIron,0));
+
+		goodsName.put("goldaxe", new InvItem(Item.axeGold,0));
+		goodsName.put("goldboots", new InvItem(Item.bootsGold,0));
+		goodsName.put("goldchest", new InvItem(Item.plateGold,0));
+		goodsName.put("goldhelmet", new InvItem(Item.helmetGold,0));
+		goodsName.put("goldhoe", new InvItem(Item.hoeGold,0));
+		goodsName.put("goldlegs", new InvItem(Item.legsGold,0));
+		goodsName.put("goldpickaxe", new InvItem(Item.pickaxeGold,0));
+		goodsName.put("goldshovel", new InvItem(Item.shovelGold,0));
+		goodsName.put("goldsword", new InvItem(Item.swordGold,0));
+
+		goodsName.put("chainboots", new InvItem(Item.bootsChain,0));
+		goodsName.put("chainchest", new InvItem(Item.plateChain,0));
+		goodsName.put("chainhelmet", new InvItem(Item.helmetChain,0));
+		goodsName.put("chainlegs", new InvItem(Item.legsChain,0));
+
 		goodsName.put("stone", new InvItem(Block.stone,0));
 		goodsName.put("stoneaxe", new InvItem(Item.axeStone,0));
 		goodsName.put("stonehoe", new InvItem(Item.hoeStone,0));
@@ -1066,7 +1134,8 @@ public class Goods {
 		goodsName.put("sugarcane", new InvItem(Item.reed,0));
 		goodsName.put("carrot", new InvItem(Item.carrot,0));
 		goodsName.put("potato", new InvItem(Item.potato,0));
- 
+		goodsName.put("ghasttear", new InvItem(Item.ghastTear,0));
+
 
 		goodsName.put("alchemistamulet", new InvItem(Mill.alchemist_amulet,0));
 		goodsName.put("alchimistexplosive", new InvItem(Mill.stone_decoration,3));
@@ -1149,6 +1218,8 @@ public class Goods {
 		goodsName.put("vishnuamulet", new InvItem(Mill.vishnu_amulet,0));
 		goodsName.put("wah", new InvItem(Mill.wah,0));
 		goodsName.put("cacauhaa", new InvItem(Mill.cacauhaa,0));
+		goodsName.put("mayanquestcrown", new InvItem(Mill.mayanQuestCrown,0));
+
 		goodsName.put("yddrasilamulet", new InvItem(Mill.yddrasil_amulet,0));
 		goodsName.put("yumibow", new InvItem(Mill.yumiBow,0));
 		goodsName.put("sake", new InvItem(Mill.sake,0));
@@ -1215,36 +1286,36 @@ public class Goods {
 		goodsName.put("gravel", new InvItem(Block.gravel,0));
 		goodsName.put("bookandquill", new InvItem(Item.writableBook,0));
 		goodsName.put("purse", new InvItem(Mill.purse,0));
-		
+
 		goodsName.put("pathdirt", new InvItem(Mill.path,0));
 		goodsName.put("pathgravel", new InvItem(Mill.path,1));
 		goodsName.put("pathslabs", new InvItem(Mill.path,2));
 		goodsName.put("pathsandstone", new InvItem(Mill.path,3));
 		goodsName.put("pathochretiles", new InvItem(Mill.path,4));
 		goodsName.put("pathgravelslabs", new InvItem(Mill.path,5));
-		
+
 		goodsName.put("pathdirt_slab", new InvItem(Mill.pathSlab,0));
 		goodsName.put("pathgravel_slab", new InvItem(Mill.pathSlab,1));
 		goodsName.put("pathslabs_slab", new InvItem(Mill.pathSlab,2));
 		goodsName.put("pathsandstone_slab", new InvItem(Mill.pathSlab,3));
 		goodsName.put("pathochretiles_slab", new InvItem(Mill.pathSlab,4));
 		goodsName.put("pathgravelslabs_slab", new InvItem(Mill.pathSlab,5));
-		
+
 		goodsName.put("pathdirt_stable", new InvItem(Mill.path,8));
 		goodsName.put("pathgravel_stable", new InvItem(Mill.path,9));
 		goodsName.put("pathslabs_stable", new InvItem(Mill.path,10));
 		goodsName.put("pathsandstone_stable", new InvItem(Mill.path,11));
 		goodsName.put("pathochretiles_stable", new InvItem(Mill.path,12));
 		goodsName.put("pathgravelslabs_stable", new InvItem(Mill.path,13));
-		
+
 		goodsName.put("pathdirt_slab_stable", new InvItem(Mill.pathSlab,8));
 		goodsName.put("pathgravel_slab_stable", new InvItem(Mill.pathSlab,9));
 		goodsName.put("pathslabs_slab_stable", new InvItem(Mill.pathSlab,10));
 		goodsName.put("pathsandstone_slab_stable", new InvItem(Mill.pathSlab,11));
 		goodsName.put("pathochretiles_slab_stable", new InvItem(Mill.pathSlab,12));
 		goodsName.put("pathgravelslabs_slab_stable", new InvItem(Mill.pathSlab,13));
-		
-		
+
+
 	}
 
 	public InvItem item;
@@ -1267,7 +1338,7 @@ public class Goods {
 	public boolean autoGenerate=false;
 
 	public int minReputation;
-	
+
 	public String desc=null;
 
 	public Goods(InvItem iv) {
@@ -1330,34 +1401,34 @@ public class Goods {
 
 		return shop.getSellingPrice(this, player);
 	}
-	
+
 	public int getBasicSellingPrice(Building shop) {
 
 		if (shop==null)
 			return sellingPrice;
-		
+
 		if (shop.getTownHall().villageType.sellingPrices.containsKey(item))
 			return shop.getTownHall().villageType.sellingPrices.get(item);
 
 		return sellingPrice;
 	}
-	
+
 	public int getCalculatedSellingPrice(MillVillager merchant) {
 
 		if (merchant==null)
 			return foreignMerchantPrice;
-		
+
 		if (merchant.merchantSells.containsKey(this))
 			return merchant.merchantSells.get(this);
 
 		return foreignMerchantPrice;
 	}
-	
+
 	public int getBasicBuyingPrice(Building shop) {
 
 		if (shop==null)
 			return buyingPrice;
-		
+
 		if (shop.getTownHall().villageType.buyingPrices.containsKey(item))
 			return shop.getTownHall().villageType.buyingPrices.get(item);
 
@@ -1369,5 +1440,5 @@ public class Goods {
 		return "Goods@"+item.getItemStack().getItemName();
 	}
 
-	
+
 }

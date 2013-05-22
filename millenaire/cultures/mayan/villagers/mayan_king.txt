@@ -11,6 +11,7 @@ goal=gorest
 goal=gopray
 goal=gosocialise
 goal=chat
+goal=bringBackResourcesHome
 
 toolneededclass=meleeweapons
 toolneededclass=armour
@@ -18,3 +19,9 @@ toolneededclass=armour
 baseAttackStrength=5
 tag=helpInAttacks
 defaultweapon=woodsword
+
+bringBackHomeGood=steelsword
+bringBackHomeGood=steelhelmet
+bringBackHomeGood=steelchest
+bringBackHomeGood=steellegs
+bringBackHomeGood=steelboots

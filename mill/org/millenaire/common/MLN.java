@@ -193,8 +193,8 @@ public class MLN {
 				errors=new Vector<String>();
 
 				for (final Goal goal : Goal.goals.values()) {
-					if (!strings.containsKey("goal."+goal.labelKey()) && !ref.strings.containsKey("goal."+goal.labelKey())) {
-						errors.add("Could not find label for goal."+goal.labelKey()+" (class: "+(goal.getClass().getSimpleName())+") in either language.");
+					if (!strings.containsKey("goal."+goal.labelKey(null)) && !ref.strings.containsKey("goal."+goal.labelKey(null))) {
+						errors.add("Could not find label for goal."+goal.labelKey(null)+" (class: "+(goal.getClass().getSimpleName())+") in either language.");
 					}
 				}
 
@@ -1342,6 +1342,7 @@ public class MLN {
 		ModLoader.addName(Mill.purse, MLN.string("item.purse"));
 		ModLoader.addName(Mill.sake, MLN.string("item.sake"));
 		ModLoader.addName(Mill.cacauhaa, MLN.string("item.cacauhaa"));
+		ModLoader.addName(Mill.mayanQuestCrown, MLN.string("item.mayanQuestCrown"));
 	}
 
 	private static String now() {

@@ -33,6 +33,13 @@ public class GoalGoPray extends Goal {
 			if (temple!=null)
 				return packDest(temple.getCraftingPos(),temple);
 		}
+		
+		if (villager.canPerformSacrifices()) {
+			final Building temple=villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
+
+			if (temple!=null)
+				return packDest(temple.getCraftingPos(),temple);
+		}
 
 		return packDest(villager.getTownHall().getRandomLocationWithTag(Building.tagPraying));
 	}
@@ -40,7 +47,7 @@ public class GoalGoPray extends Goal {
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
 
-		if (villager.hasPrayedToday && !villager.canMeditate())
+		if (villager.hasPrayedToday && (!villager.canMeditate() && !villager.canPerformSacrifices()))
 			return false;
 
 		final Point p=villager.getTownHall().getRandomLocationWithTag(Building.tagPraying);
@@ -63,7 +70,7 @@ public class GoalGoPray extends Goal {
 	@Override
 	public int priority(MillVillager villager) {
 
-		if (villager.canMeditate())
+		if (villager.canMeditate() || villager.canPerformSacrifices())
 			return 200;
 
 		if (villager.isPriest())

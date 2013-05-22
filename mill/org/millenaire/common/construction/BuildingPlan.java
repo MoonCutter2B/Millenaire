@@ -75,6 +75,7 @@ public class BuildingPlan {
 		public static byte BYZANTINEICONMEDIUM = 19;
 		public static byte BYZANTINEICONLARGE = 20;
 		public static byte PRESERVEGROUNDSURFACE = 21;
+		public static byte SPAWNERBLAZE = 22;
 
 		public static BuildingBlock read(NBTTagCompound nbttagcompound,String label) {
 			final Point p=Point.read(nbttagcompound, label+"pos");
@@ -343,6 +344,10 @@ public class BuildingPlan {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
 					tileentitymobspawner.func_98049_a().setMobID("Creeper");
+				} else if (special==BuildingBlock.SPAWNERBLAZE) {
+					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
+					tileentitymobspawner.func_98049_a().setMobID("Blaze");
 				} else if (special==BuildingBlock.DISPENDERUNKNOWNPOWDER) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.dispenser.blockID, 0);
 					final TileEntityDispenser dispenser=p.getDispenser(world);
@@ -380,6 +385,8 @@ public class BuildingPlan {
 					MillCommonUtilities.notifyBlock(world, p);
 				} else if (bid==Block.furnaceIdle.blockID) {
 					setFurnaceMeta(world,p);
+				} else if (bid==Block.portal.blockID) {
+					Block.portal.tryToCreatePortal(world,p.getiX(),p.getiY(),p.getiZ());
 				}
 			} catch (Exception e) {
 				MLN.printException("Exception in BuildingBlock.build():",e);
@@ -639,7 +646,7 @@ public class BuildingPlan {
 			bbyzantineiconsmall="byzantineiconsmall",bbyzantineiconmedium="byzantineiconmedium",bbyzantineiconlarge="byzantineiconlarge",
 			bfishingspot="fishingspot",
 			bspawnerskeleton="spawnerskeleton",bspawnerzombie="spawnerzombie",bspawnerspider="spawnerspider",
-			bspawnercavespider="spawnercavespider",bspawnercreeper="spawnercreeper",bdispenserunknownpowder="dispenserunknownpowder",
+			bspawnercavespider="spawnercavespider",bspawnercreeper="spawnercreeper",bspawnerblaze="spawnerblaze",bdispenserunknownpowder="dispenserunknownpowder",
 			bhealingspot="healingspot",
 			bplainSignGuess="plainSignGuess",bbrewingstand="brewingstand";
 
@@ -3329,6 +3336,10 @@ public class BuildingPlan {
 					} else if (pt.isType(bspawnercreeper)) {
 						final Point p=adjustForOrientation(x, y+i+firstLevel, z,j-lengthOffset,k-widthOffset,orientation);
 						bblocks.add(new BuildingBlock(p,0,0,BuildingBlock.SPAWNERCREEPER));
+						nbBlocksToPut++;
+					} else if (pt.isType(bspawnerblaze)) {
+						final Point p=adjustForOrientation(x, y+i+firstLevel, z,j-lengthOffset,k-widthOffset,orientation);
+						bblocks.add(new BuildingBlock(p,0,0,BuildingBlock.SPAWNERBLAZE));
 						nbBlocksToPut++;
 					} else if (pt.isType(bdispenserunknownpowder)) {
 						final Point p=adjustForOrientation(x, y+i+firstLevel, z,j-lengthOffset,k-widthOffset,orientation);

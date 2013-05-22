@@ -29,7 +29,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 	static public HashSet<Integer> coordsTried=new HashSet<Integer>();
 
-	public static boolean generateBedrockLoneBuilding(Point p,World world,VillageType village,Random random,int minDistance,int maxDistance) throws MillenaireException {
+	public static boolean generateBedrockLoneBuilding(Point p,World world,VillageType village,Random random,int minDistance,int maxDistance,EntityPlayer player) throws MillenaireException {
 
 		if (world.isRemote)
 			return false;
@@ -98,7 +98,12 @@ public class WorldGenVillage implements IWorldGenerator {
 		}
 		townHallEntity.initialiseVillage();
 
-		Mill.getMillWorld(world).registerLoneBuildingsLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true);
+		String playerName=null;
+
+		if (player!=null)
+			playerName=player.username;
+
+		Mill.getMillWorld(world).registerLoneBuildingsLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true,playerName);
 
 		MLN.major(null,"Finished bedrock building "+village+" at "+townHallEntity.getPos());
 
@@ -108,7 +113,7 @@ public class WorldGenVillage implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 			IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		
+
 		if (world.provider.dimensionId!=0)
 			return;
 
@@ -248,8 +253,8 @@ public class WorldGenVillage implements IWorldGenerator {
 
 			if (loneBuildings) {
 				if (village.isKeyLoneBuildingForGeneration(closestPlayer)) {
-					minDistanceWithVillages=Math.min(minDistance, MLN.minDistanceBetweenVillagesAndLoneBuildings)/4;
-					minDistanceWithLoneBuildings=Math.min(minDistance, MLN.minDistanceBetweenLoneBuildings)/4;
+					minDistanceWithVillages=Math.min(minDistance, MLN.minDistanceBetweenVillagesAndLoneBuildings)/2;
+					minDistanceWithLoneBuildings=Math.min(minDistance, MLN.minDistanceBetweenLoneBuildings)/2;
 				} else {
 					minDistanceWithVillages=Math.min(minDistance, MLN.minDistanceBetweenVillagesAndLoneBuildings);
 					minDistanceWithLoneBuildings=Math.min(minDistance, MLN.minDistanceBetweenLoneBuildings);
@@ -327,11 +332,15 @@ public class WorldGenVillage implements IWorldGenerator {
 
 		townHallEntity.initialiseVillage();
 
+		String playerName=null;
+
+		if (closestPlayer!=null)
+			playerName=closestPlayer.username;
 
 		if (loneBuildings) {
-			mw.registerLoneBuildingsLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true);
+			mw.registerLoneBuildingsLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true,playerName);
 		} else {
-			mw.registerVillageLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true);
+			mw.registerVillageLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true,playerName);
 			townHallEntity.initialiseRelations(parentVillage);
 			if (village.playerControlled) {
 				townHallEntity.storeGoods(Mill.parchmentVillageScroll.itemID, mw.villagesList.pos.size()-1, 1);
@@ -525,7 +534,7 @@ public class WorldGenVillage implements IWorldGenerator {
 
 
 			for (final Point thp : mw.villagesList.pos) {
-				if (p.distanceTo(thp) < (minDistanceWithVillages/4)) {
+				if (p.distanceTo(thp) < (minDistanceWithVillages/2)) {
 					if (MLN.LogWorldGeneration>=MLN.DEBUG) {
 						MLN.debug(this,"Time taken for finding near villages: "+(System.nanoTime()-startTime));
 					}

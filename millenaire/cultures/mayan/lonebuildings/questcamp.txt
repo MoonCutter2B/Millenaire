@@ -1,0 +1,27 @@
+name:Ajaw Cah
+weight:0
+radius:50
+
+
+
+biome:forest
+biome:foresthills
+biome:jungle
+//extraBiomes mod
+biome:lush swamplands
+biome:rainforest
+biome:jungle
+
+keyLoneBuildingGenerateTag:fallenking_camp_generate
+generateforplayer:true
+
+mindistancefromspawn:1000
+
+//starting buildings:
+centre:mayancamp
+
+start:questcamphouse
+start:questcamphouse
+start:questguardtower
+start:questguardtower
+start:questguardtower

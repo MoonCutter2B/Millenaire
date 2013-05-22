@@ -42,6 +42,9 @@ import org.millenaire.common.block.BlockOrientedBrick;
 import org.millenaire.common.block.BlockOrientedSlab;
 import org.millenaire.common.block.BlockPanel;
 import org.millenaire.common.construction.BuildingPlan;
+import org.millenaire.common.entity.EntityTargetedBlaze;
+import org.millenaire.common.entity.EntityTargetedGhast;
+import org.millenaire.common.entity.EntityTargetedWitherSkeleton;
 import org.millenaire.common.forge.BuildingChunkLoader.ChunkLoaderCallback;
 import org.millenaire.common.goal.Goal;
 import org.millenaire.common.item.Goods;
@@ -51,6 +54,7 @@ import org.millenaire.common.item.Goods.ItemAmuletVishnu;
 import org.millenaire.common.item.Goods.ItemAmuletYddrasil;
 import org.millenaire.common.item.Goods.ItemBrickMould;
 import org.millenaire.common.item.Goods.ItemClothes;
+import org.millenaire.common.item.Goods.ItemMayanQuestCrown;
 import org.millenaire.common.item.Goods.ItemMillenaireArmour;
 import org.millenaire.common.item.Goods.ItemMillenaireAxe;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
@@ -117,9 +121,9 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "4.9.5";
+	public static final String versionNumber = "5.0.0";
 
-	public static final String versionBound = "[4.9.0,5.0)";
+	public static final String versionBound = "[5.0.0,6.0)";
 	public static final String modId="Millenaire";
 	public static final String name = "Mill\u00e9naire"; 
   
@@ -161,6 +165,7 @@ public class Mill
 	public static int japaneseWarriorRedArmourId=0;
 	public static int japaneseGuardArmourId=0;
 	public static int byzantineArmourId=0;
+	public static int mayanQuestArmourId=0;
 
 	public static Item denier;
 	public static Item denier_or;
@@ -280,6 +285,8 @@ public class Mill
 	public static ItemPurse purse;
 	
 	public static Item sake,cacauhaa;
+	
+	public static Item mayanQuestCrown;
 
 	public static boolean loadingComplete=false;
 
@@ -291,7 +298,7 @@ public class Mill
 	public static final String ENTITY_PIG="Pig",ENTITY_COW="Cow",ENTITY_CHICKEN="Chicken",ENTITY_SHEEP="Sheep";
 
 	public static final String ENTITY_SKELETON="Skeleton",ENTITY_CREEPER="Creeper",ENTITY_SPIDER="Spider",
-			ENTITY_CAVESPIDER="CaveSpider",ENTITY_ZOMBIE="Zombie";
+			ENTITY_CAVESPIDER="CaveSpider",ENTITY_ZOMBIE="Zombie",ENTITY_TARGETED_GHAST="MillGhast",ENTITY_TARGETED_BLAZE="MillBlaze",ENTITY_TARGETED_WITHERSKELETON="MillWitherSkeleton";
 
 	public static final String CROP_WHEAT="wheat",CROP_CARROT="carrot",CROP_POTATO="potato",
 			CROP_RICE="rice",CROP_TURMERIC="turmeric",CROP_MAIZE="maize",CROP_VINE="vine",CROP_CACAO="cacao";
@@ -518,6 +525,10 @@ public class Mill
 		
 		cacauhaa = (new ItemFoodMultiple(nextItemId(),"cacauhaa",6,30,0,0,true,0)).setPotionEffect(Potion.nightVision.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_cacauhaa");
 
+		mayanQuestCrown = new ItemMayanQuestCrown(nextItemId(),"mayanquestcrown",mayanQuestArmourId,0).setUnlocalizedName("ml_mayanQuestCrown");
+		
+		//mayanQuestCrown = new ItemMillenaireArmour(nextItemId(),"mayanquestcrown",EnumArmorMaterial.DIAMOND,mayanQuestArmourId,1,20,0).setUnlocalizedName("ml_mayanQuestCrown");
+		
 		
 		wood_decoration.setUnlocalizedName("ml_wood_deco").setHardness(2.0F).setResistance(5F).setStepSound(Block.soundWoodFootstep);
 		wood_decoration.registerTexture(0, "timberframeplain");
@@ -561,7 +572,10 @@ public class Mill
 		entityNames.put(MillVillager.MLEntityGenericAsymmFemale.class, MillVillager.GENERIC_ASYMM_FEMALE);
 		entityNames.put(MillVillager.MLEntityGenericSymmFemale.class, MillVillager.GENERIC_SYMM_FEMALE);
 		entityNames.put(MillVillager.MLEntityGenericZombie.class, MillVillager.GENERIC_ZOMBIE);
-
+		
+		entityNames.put(EntityTargetedGhast.class, ENTITY_TARGETED_GHAST);
+		entityNames.put(EntityTargetedBlaze.class, ENTITY_TARGETED_BLAZE);
+		entityNames.put(EntityTargetedWitherSkeleton.class, ENTITY_TARGETED_WITHERSKELETON);
 
 		try {
 			final int chanceToEncourageFire[]=(int[]) ModLoader.getPrivateValue(BlockFire.class, Block.fire, 0);
@@ -606,10 +620,18 @@ public class Mill
 			EntityRegistry.registerGlobalEntityID(MillVillager.MLEntityGenericMale.class, MillVillager.GENERIC_VILLAGER, EntityRegistry.findGlobalUniqueEntityId());
 			EntityRegistry.registerModEntity(MillVillager.MLEntityGenericMale.class,MillVillager.GENERIC_VILLAGER, VILLAGER_ENT_ID,instance, 64, 3, true);
 
-
-
 			EntityRegistry.registerGlobalEntityID(EntityMillDecoration.class, "ml_Tapestry", ModLoader.getUniqueEntityId());
 			EntityRegistry.registerModEntity(EntityMillDecoration.class, "ml_Tapestry",VILLAGER_ENT_ID+7,instance, 80, 100000, false);
+			
+			EntityRegistry.registerGlobalEntityID(EntityTargetedGhast.class, ENTITY_TARGETED_GHAST, EntityRegistry.findGlobalUniqueEntityId());
+			EntityRegistry.registerModEntity(EntityTargetedGhast.class,ENTITY_TARGETED_GHAST, VILLAGER_ENT_ID+8,instance, 64, 3, true);
+			
+			EntityRegistry.registerGlobalEntityID(EntityTargetedBlaze.class, ENTITY_TARGETED_BLAZE, EntityRegistry.findGlobalUniqueEntityId());
+			EntityRegistry.registerModEntity(EntityTargetedBlaze.class,ENTITY_TARGETED_BLAZE, VILLAGER_ENT_ID+9,instance, 64, 3, true);
+
+			EntityRegistry.registerGlobalEntityID(EntityTargetedWitherSkeleton.class, ENTITY_TARGETED_WITHERSKELETON, EntityRegistry.findGlobalUniqueEntityId());
+			EntityRegistry.registerModEntity(EntityTargetedWitherSkeleton.class,ENTITY_TARGETED_WITHERSKELETON, VILLAGER_ENT_ID+10,instance, 64, 3, true);
+
 
 			ModLoader.registerBlock(lockedChest);
 			ModLoader.registerBlock(panel);

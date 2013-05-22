@@ -3,6 +3,7 @@ gender=male
 familyNameList=high_caste_family_names
 firstNameList=men_names
 tag=religious
+tag=performssacrifices
 
 texture=/graphics/mob/mayan/mayan_shaman0.png
 texture=/graphics/mob/mayan/mayan_shaman1.png
@@ -11,3 +12,5 @@ goal=gorest
 goal=gopray
 goal=gosocialise
 goal=chat
+goal=performpujas
+goal=bepujaperformer

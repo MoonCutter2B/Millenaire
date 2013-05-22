@@ -34,6 +34,7 @@ bringBackHomeGood=rice
 startingInv=seeds,100
 startingInv=rice,50
 startingInv=bow,1
+startingInv=arrow,64
 tag=helpInAttacks
 
 requiredFood=cider,5

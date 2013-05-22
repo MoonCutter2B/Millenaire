@@ -23,6 +23,7 @@ toolneededclass=meleeweapons
 toolneededclass=armour
 toolneededclass=rangedweapons
 startingInv=bow,1
+startingInv=arrow,64
 
 baseAttackStrength=4
 tag=helpInAttacks

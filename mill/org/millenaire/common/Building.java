@@ -396,6 +396,7 @@ public class Building {
 	public static final String tagSugarPlantation = "sugarplantation";
 	public static final String tagHoF = "hof";
 	public static final String tagPujas = "pujas";
+	public static final String tagSacrifices = "sacrifices";
 	public static final String tagVineyard = "vineyard";
 	public static final String tagSilkwormFarm = "silkwormfarm";
 	public static final String tagDespawnAllMobs = "despawnallmobs";
@@ -602,7 +603,7 @@ public class Building {
 	public boolean underAttack=false;
 	private int nbAnimalsRespawned;
 
-	public Puja pujas=null;
+	public PujaSacrifice pujas=null;
 	public String controlledBy=null;
 
 	public String controlledByName=null;
@@ -694,7 +695,11 @@ public class Building {
 		}
 
 		if (l.tags.contains(tagPujas)) {
-			pujas=new Puja(this);
+			pujas=new PujaSacrifice(this,PujaSacrifice.PUJA);
+		}
+		
+		if (l.tags.contains(tagSacrifices)) {
+			pujas=new PujaSacrifice(this,PujaSacrifice.MAYAN);
 		}
 	}
 
@@ -1530,17 +1535,17 @@ public class Building {
 	private void checkExploreTag(EntityPlayer player) {
 		if ((player != null) && !mw.getProfile(player.username).isTagSet(location.getPlan().exploreTag)) {
 
-			if ((pos.distanceToSquared(player) < 16)) {
+			if ((this.getSleepingPos().distanceToSquared(player) < 16)) {
 
 				// Testing that there is a line of sight between the player and
-				// the chest
+				// the sleeping pos
 				boolean valid = true;
-				int x = pos.getiX();
-				int z = pos.getiZ();
+				int x = getSleepingPos().getiX();
+				int z = getSleepingPos().getiZ();
 
 				while (valid
 						&& ((x != (int) player.posX) || (z != (int) player.posZ))) {
-					final int bid = worldObj.getBlockId(x, pos.getiY() + 1, z);
+					final int bid = worldObj.getBlockId(x, getSleepingPos().getiY() + 1, z);
 
 					if ((bid > 0) && Block.blocksList[bid].isOpaqueCube()) {
 						valid = false;
@@ -4846,13 +4851,13 @@ public class Building {
 			}
 
 
-			if (location.tags.contains(tagPujas)) {
-				pujas=new Puja(this,nbttagcompound.getCompoundTag("pujas"));
+			if (location.tags.contains(tagPujas) || location.tags.contains(tagSacrifices)) {
+				pujas=new PujaSacrifice(this,nbttagcompound.getCompoundTag("pujas"));
 				if (MLN.LogPujas>=MLN.MINOR) {
 					MLN.minor(this, "read pujas object");
 				}
 			}
-
+			
 			lastGoodsRefresh=nbttagcompound.getLong("lastGoodsRefresh");
 
 			if (location.tags.contains(tagInn) && !isTownhall) {
@@ -5568,10 +5573,6 @@ public class Building {
 		boolean resurect = ((time >= 13000) && (time < 13100));
 
 
-		if (resurect) {
-			resurect=true;
-		}
-
 		for (final VillagerRecord vr : vrecords) {
 			final Vector<MillVillager> found = new Vector<MillVillager>();
 			for (final MillVillager v : villagers) {
@@ -5589,7 +5590,7 @@ public class Building {
 						if (!vr.killed && (worldObj.getWorldTime()>(vr.raiderSpawn+INVADER_SPAWNING_DELAY))) {
 							respawn=true;
 						}
-					} else if (!vr.awayraiding && !vr.awayhired) {
+					} else if (!vr.awayraiding && !vr.awayhired && !vr.getType().noResurrect) {
 						//Villagers raiding an other village never get respawn at all
 						//Killed villagers have to wait for the night. Despawneds one are recreated ASAP.
 						if (!vr.killed || resurect) {
@@ -7194,10 +7195,9 @@ public class Building {
 			if (villageType.lonebuilding) {
 				mw.registerLoneBuildingsLocation(
 						worldObj, getPos(), getVillageQualifiedName(), villageType,
-						culture, false);
+						culture, false, null);
 			} else {
-				mw
-				.registerVillageLocation(worldObj, getPos(), getVillageQualifiedName(), villageType, culture, false);
+				mw.registerVillageLocation(worldObj, getPos(), getVillageQualifiedName(), villageType, culture, false, null);
 			}
 			declaredPos = true;
 		}

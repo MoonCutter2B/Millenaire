@@ -258,6 +258,7 @@ public class ClientProxy extends CommonProxy
 		Mill.japaneseWarriorRedArmourId = ModLoader.addArmor("ML_japanese_warrior_red");
 		Mill.japaneseGuardArmourId = ModLoader.addArmor("ML_japanese_guard");
 		Mill.byzantineArmourId = ModLoader.addArmor("ML_byzantine");
+		Mill.mayanQuestArmourId = ModLoader.addArmor("ML_mayan_quest");
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Vector;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,6 +21,7 @@ import org.millenaire.common.core.MillCommonUtilities.ExtFileFilter;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
 import org.millenaire.common.item.Goods;
+import org.millenaire.common.item.Goods.IItemInitialEnchantmens;
 import org.millenaire.common.network.ServerSender;
 
 public class Quest {
@@ -135,6 +137,7 @@ public class Quest {
 				}
 				if (!villagers.get(val[0]).getVillagerRecord(world).questTags.contains(tag)) {
 					villagers.get(val[0]).getVillagerRecord(world).questTags.add(tag);
+					villagers.get(val[0]).getVillagerRecord(world).getTownHall().requestSave("quest tag");
 					if (MLN.LogQuest>=MLN.MINOR) {
 						MLN.minor(this, "Setting tag: "+tag+" on villager: "+val[0]+" ("+villagers.get(val[0]).getVillagerRecord(world).getName()+") Now present: "+villagers.get(val[0]).getVillagerRecord(world).questTags.size());
 					}
@@ -148,6 +151,7 @@ public class Quest {
 					MLN.debug(this, "Clearing tag: "+val[0]+"/"+tag);
 				}
 				villagers.get(val[0]).getVillagerRecord(world).questTags.remove(tag);
+				villagers.get(val[0]).getVillagerRecord(world).getTownHall().requestSave("quest tag");
 				if (MLN.LogQuest>=MLN.MINOR) {
 					MLN.minor(this, "Clearing tag: "+tag+" on villager: "+val[0]+" ("+villagers.get(val[0]).getVillagerRecord(world).getName()+")");
 				}
@@ -192,7 +196,11 @@ public class Quest {
 				final int nbLeft=getCurrentStep().rewardGoods.get(item)-MillCommonUtilities.putItemsInChest(player.inventory, item.id(), item.meta, getCurrentStep().rewardGoods.get(item));
 
 				if (nbLeft>0) {//couldn't fit in inventory
-					MillCommonUtilities.spawnItem(world, villager.getPos(), new ItemStack(item.id(),nbLeft,item.meta), 0);
+					EntityItem entItem=MillCommonUtilities.spawnItem(world, villager.getPos(), new ItemStack(item.id(),nbLeft,item.meta), 0);
+					
+					if (entItem.getEntityItem().getItem() instanceof IItemInitialEnchantmens) {
+						((IItemInitialEnchantmens)entItem.getEntityItem().getItem()).applyEnchantments(entItem.getEntityItem());
+					}
 				}
 
 				reward+=" "+getCurrentStep().rewardGoods.get(item)+" "+item.getName();
@@ -242,7 +250,7 @@ public class Quest {
 					final VillageType vt=Culture.getCultureByName(culture).getLoneBuildingType(village);
 
 					try {
-						WorldGenVillage.generateBedrockLoneBuilding(new Point(player), world, vt, MillCommonUtilities.random, 50, 120);
+						WorldGenVillage.generateBedrockLoneBuilding(new Point(player), world, vt, MillCommonUtilities.random, 50, 120,player);
 					} catch (final MillenaireException e) {
 						MLN.printException(e);
 					}
@@ -650,18 +658,31 @@ public class Quest {
 			if (profile.villagersInQuests.containsKey(vr.id))
 				return false;
 
-			if (!types.contains(vr.type))
+			if (!types.isEmpty() && !types.contains(vr.type))
 				return false;
+			
+			for (final String tag : requiredTags) {
+				String tagPlayer = profile.key+"_"+tag;
+				
+				if (!vr.questTags.contains(tagPlayer))
+					return false;
+			}
+			
+			for (final String tag : forbiddenTags) {
+				String tagPlayer = profile.key+"_"+tag;
+				
+				if (vr.questTags.contains(tagPlayer))
+					return false;
+			}
 
 			for (final String tag : vr.questTags) {
 				
 				String tagPlayer = profile.key+"_"+tag;
 				
-				if (!requiredTags.contains(tagPlayer))
-					return false;
 				if (forbiddenTags.contains(tagPlayer))
 					return false;
 			}
+			
 			return true;
 		}
 	}
@@ -675,8 +696,8 @@ public class Quest {
 
 	private static final String REL_SAMEVILLAGE = "samevillage";
 
-	public static final int[] WORLD_MISSION_NB = new int[]{15,13};
-	public static final String[] WORLD_MISSION_KEYS = new String[]{"sadhu","alchemist"};
+	public static final int[] WORLD_MISSION_NB = new int[]{15,13,10};
+	public static final String[] WORLD_MISSION_KEYS = new String[]{"sadhu","alchemist","fallenking"};
 
 	private static void adjustToKRep(int rep) {
 		try {

@@ -1,0 +1,1 @@
+native:Ajaw Cah;around:4;startLevel:-1;orientation:3;width:31;length:30;male:questkingwarrior;male:questkingwarrior;type:subbuilding

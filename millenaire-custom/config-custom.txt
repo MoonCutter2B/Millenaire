@@ -30,7 +30,7 @@ village_radius=80
 load_all_languages=true
 
 //logworldgeneration; 
-logworldgeneration=minor
+logworldgeneration=major
 
 //logpujas; 
 logpujas=debug
@@ -39,5 +39,11 @@ logpujas=debug
 loglumberman=
 
 //logquest; 
-logquest=minor
+logquest=major
+
+//Distance min entre bâtiments; Distance minimale entre deux bâtiments isolés générés. Défaut: 600.
+min_lonebuilding_distance=300
+
+//Distance min villages/bâtiments; Distance minimale entre villages et bâtiments isolés générés. Défaut: 300.
+min_village_lonebuilding_distance=100
 

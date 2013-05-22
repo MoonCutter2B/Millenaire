@@ -18,7 +18,7 @@ import org.millenaire.common.Culture;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
-import org.millenaire.common.Puja;
+import org.millenaire.common.PujaSacrifice;
 import org.millenaire.common.Quest;
 import org.millenaire.common.Quest.QuestInstance;
 import org.millenaire.common.Quest.QuestInstanceVillager;
@@ -65,7 +65,7 @@ public class StreamReadWrite  {
 
 		for (int i=0;i<nb;i++) {
 			final InvItem item=new InvItem(ds.readInt(),ds.readInt());
-			
+
 			inv.put(item, ds.readInt());
 		}
 
@@ -314,24 +314,24 @@ public class StreamReadWrite  {
 		return vr;
 	}
 
-	public static Puja readOrUpdateNullablePuja(DataInput ds,Building b,Puja puja) throws IOException {
+	public static PujaSacrifice readOrUpdateNullablePuja(DataInput ds,Building b,PujaSacrifice puja) throws IOException {
 
 		final boolean isnull=ds.readBoolean();
 
 		if (isnull)
 			return null;
 
+		short type=ds.readShort();
+
 		if (puja==null) {
-			puja=new Puja(b);
+			puja=new PujaSacrifice(b,type);
 		}
 
 		final int enchantmentId=ds.readShort();
 
-		if (enchantmentId>0) {
-			for (int i=0;i<Puja.enchantments.length;i++) {
-				if (Puja.enchantments[i].effectId==enchantmentId) {
-					puja.enchantmentTarget=Puja.enchantments[i];
-				}
+		for (int i=0;i<puja.getTargets().size();i++) {
+			if (puja.getTargets().get(i).enchantment.effectId==enchantmentId) {
+				puja.currentTarget=puja.getTargets().get(i);
 			}
 		}
 
@@ -603,7 +603,7 @@ public class StreamReadWrite  {
 			data.writeInt(p.getiZ());
 		}
 	}
-	
+
 	public static void writeNullableGoods(Goods g,DataOutput data) throws IOException {
 		data.writeBoolean(g==null);
 
@@ -616,7 +616,7 @@ public class StreamReadWrite  {
 			data.writeInt(g.minReputation);
 		}
 	}
-	
+
 	public static Goods readNullableGoods(DataInput ds) throws IOException {
 
 		final boolean isnull=ds.readBoolean();
@@ -626,20 +626,23 @@ public class StreamReadWrite  {
 
 		InvItem iv=new InvItem(ds.readInt(),ds.readByte());
 		Goods g=new Goods(iv);
-		
+
 		g.requiredTag=readNullableString(ds);
 		g.desc=readNullableString(ds);
 		g.autoGenerate=ds.readBoolean();
 		g.minReputation=ds.readInt();
-		
+
 		return g;
 	}
 
-	public static void writeNullablePuja(Puja puja,DataOutput data) throws IOException {
+	public static void writeNullablePuja(PujaSacrifice puja,DataOutput data) throws IOException {
 		data.writeBoolean(puja==null);
 		if (puja!=null) {
-			if (puja.enchantmentTarget!=null) {
-				data.writeShort(puja.enchantmentTarget.effectId);
+
+			data.writeShort(puja.type);
+
+			if (puja.currentTarget!=null) {
+				data.writeShort(puja.currentTarget.enchantment.effectId);
 			} else {
 				data.writeShort(0);
 			}

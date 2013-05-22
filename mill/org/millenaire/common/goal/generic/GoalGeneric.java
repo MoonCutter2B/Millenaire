@@ -126,7 +126,7 @@ public abstract class GoalGeneric extends Goal {
 	}
 
 	@Override
-	public String labelKey() {
+	public String labelKey(MillVillager villager) {
 		if (labelKey==null)
 			return key;
 
@@ -134,7 +134,7 @@ public abstract class GoalGeneric extends Goal {
 	}
 
 	@Override
-	public String labelKeyWhileTravelling() {
+	public String labelKeyWhileTravelling(MillVillager villager) {
 		if (labelKey==null)
 			return key;
 

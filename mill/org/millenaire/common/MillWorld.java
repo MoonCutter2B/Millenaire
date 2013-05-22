@@ -39,6 +39,7 @@ public class MillWorld {
 	public static final String CULTURE_CONTROL="culturecontrol_";
 	public static final String CROP_PLANTING="cropplanting_";
 	public static final String PUJAS="pujas";
+	public static final String MAYANSACRIFICES="mayansacrifices";
 
 	private final HashMap<Point,Building> buildings=new HashMap<Point,Building>();
 	private final HashMap<Point,String> renameNames=new HashMap<Point,String>();
@@ -60,7 +61,7 @@ public class MillWorld {
 	public boolean millenaireEnabled=false;
 	private int lastupdate;
 
-//	public Vector<NBTTagCompound> buildingsToLoad=new Vector<NBTTagCompound>();
+	//	public Vector<NBTTagCompound> buildingsToLoad=new Vector<NBTTagCompound>();
 
 	private static HashMap<Point,String> buildingsTags=new HashMap<Point,String>();
 	private static HashMap<Point,Integer> buildingsVariation=new HashMap<Point,Integer>();
@@ -225,21 +226,24 @@ public class MillWorld {
 
 				if (village.keyLonebuilding || (village.keyLoneBuildingGenerateTag!=null)) {
 
-					final Point p=loneBuildingsList.pos.get(i);
+					if (!village.generatedForPlayer || (player.username.equalsIgnoreCase(loneBuildingsList.generatedFor.get(i)))) {
 
-					final int distance = MathHelper.floor_double(p.horizontalDistanceTo(player));
+						final Point p=loneBuildingsList.pos.get(i);
 
-					if (distance <= 2000) {
-						final String direction=new Point(player).directionTo(p,true);
+						final int distance = MathHelper.floor_double(p.horizontalDistanceTo(player));
 
-						final VillageInfo vi=new VillageInfo();
-						vi.distance=distance;
+						if (distance <= 2000) {
+							final String direction=new Point(player).directionTo(p,true);
 
-						if (village!=null) {
-							vi.textKey="command.villagelistkeylonebuilding";
-							vi.values=new String[]{village.name, ""+distance, direction};
+							final VillageInfo vi=new VillageInfo();
+							vi.distance=distance;
+
+							if (village!=null) {
+								vi.textKey="command.villagelistkeylonebuilding";
+								vi.values=new String[]{village.name, ""+distance, direction};
+							}
+							villageList.add(vi);
 						}
-						villageList.add(vi);
 					}
 				}
 			}
@@ -501,8 +505,14 @@ public class MillWorld {
 						}
 
 						final Culture c=Culture.getCultureByName(culture);
+
+						String generatedFor=null;
+						if (line.split(";").length>4) {
+							generatedFor=line.split(";")[4];
+						}	
+
 						registerVillageLocation(world,new Point(Integer.parseInt(p[0]),Integer.parseInt(p[1]),Integer.parseInt(p[2])),line.split(";")[0],
-								c.getVillageType(type),c,false);
+								c.getVillageType(type),c,false,generatedFor);
 					}
 
 
@@ -543,8 +553,14 @@ public class MillWorld {
 						}
 
 						final Culture c=Culture.getCultureByName(culture);
+
+						String generatedFor=null;
+						if (line.split(";").length>4) {
+							generatedFor=line.split(";")[4];
+						}						
+
 						registerLoneBuildingsLocation(world,new Point(Integer.parseInt(p[0]),Integer.parseInt(p[1]),Integer.parseInt(p[2])),line.split(";")[0],
-								c.getLoneBuildingType(type),c,false);
+								c.getLoneBuildingType(type),c,false,generatedFor);
 					}
 
 
@@ -565,7 +581,7 @@ public class MillWorld {
 
 
 		MLN.generateVillages=MLN.generateVillagesDefault;
-		
+
 		renameNames.clear();
 		renameQualifiers.clear();
 
@@ -657,7 +673,7 @@ public class MillWorld {
 		}
 	}
 
-	public void registerLoneBuildingsLocation(World world, Point pos, String name, VillageType type, Culture culture, boolean newVillage) {
+	public void registerLoneBuildingsLocation(World world, Point pos, String name, VillageType type, Culture culture, boolean newVillage,String playerName) {
 
 		boolean found=false;
 
@@ -670,7 +686,10 @@ public class MillWorld {
 		if (found)
 			return;
 
-		loneBuildingsList.addVillage(pos,name,type.key,culture.key);
+		if (!type.generatedForPlayer)
+			playerName=null;
+
+		loneBuildingsList.addVillage(pos,name,type.key,culture.key,playerName);
 
 		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(null, "Registering lone buildings: "+name+" / "+type+" / "+culture+" / "+pos);
@@ -692,7 +711,7 @@ public class MillWorld {
 
 	}
 
-	public void registerVillageLocation(World world, Point pos, String name, VillageType type, Culture culture, boolean newVillage) {
+	public void registerVillageLocation(World world, Point pos, String name, VillageType type, Culture culture, boolean newVillage,String playerName) {
 
 		boolean found=false;
 
@@ -715,7 +734,10 @@ public class MillWorld {
 		if (found)
 			return;
 
-		villagesList.addVillage(pos, name, type.key, culture.key);
+		if (!type.generatedForPlayer)
+			playerName=null;
+
+		villagesList.addVillage(pos, name, type.key, culture.key,playerName);
 
 		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(null, "Registering village: "+name+" / "+type+" / "+culture+" / "+pos);
@@ -815,7 +837,14 @@ public class MillWorld {
 
 			for (int i=0;i<loneBuildingsList.pos.size();i++) {
 				final Point p=loneBuildingsList.pos.get(i);
-				writer.write(loneBuildingsList.names.get(i)+";"+p.getiX()+"/"+p.getiY()+"/"+p.getiZ()+";"+loneBuildingsList.types.get(i)+";"+loneBuildingsList.cultures.get(i)+System.getProperty("line.separator"));
+
+				String generatedFor=loneBuildingsList.generatedFor.get(i);
+
+				if (generatedFor==null)
+					generatedFor="";
+
+				writer.write(loneBuildingsList.names.get(i)+";"+p.getiX()+"/"+p.getiY()+"/"+p.getiZ()+";"+loneBuildingsList.types.get(i)+";"
+						+loneBuildingsList.cultures.get(i)+";"+generatedFor+System.getProperty("line.separator"));
 			}
 			writer.flush();
 			if (MLN.LogWorldGeneration>=MLN.MAJOR) {
@@ -848,7 +877,13 @@ public class MillWorld {
 
 			for (int i=0;i<villagesList.pos.size();i++) {
 				final Point p=villagesList.pos.get(i);
-				writer.write(villagesList.names.get(i)+";"+p.getiX()+"/"+p.getiY()+"/"+p.getiZ()+";"+villagesList.types.get(i)+";"+villagesList.cultures.get(i)+System.getProperty("line.separator"));
+
+				String generatedFor=villagesList.generatedFor.get(i);
+
+				if (generatedFor==null)
+					generatedFor="";
+
+				writer.write(villagesList.names.get(i)+";"+p.getiX()+"/"+p.getiY()+"/"+p.getiZ()+";"+villagesList.types.get(i)+";"+villagesList.cultures.get(i)+";"+generatedFor+System.getProperty("line.separator"));
 			}
 			writer.flush();
 			if (MLN.LogWorldGeneration>=MLN.MAJOR) {
@@ -1037,9 +1072,9 @@ public class MillWorld {
 				b.updateBuildingServer();
 				b.updateBackgroundVillage();
 			}
-			
+
 			checkConnections();
-			
+
 			for (UserProfile profile : this.profiles.values()) {
 				if (profile.connected)
 					profile.updateProfile();
@@ -1052,14 +1087,14 @@ public class MillWorld {
 
 				SpecialQuestActions.onTick(this,player);
 			}
-			
+
 			if (MLN.DEV) {
 
 				//testLocations("worldupdate");
 
 				DevModUtilities.runAutoMove(world);
 			}
-			
+
 			for (Point p : renameNames.keySet()) {
 				if (buildings.containsKey(p)) {
 					Building b=buildings.get(p);

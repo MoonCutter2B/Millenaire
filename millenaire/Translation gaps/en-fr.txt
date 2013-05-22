@@ -1,3 +1,134 @@
 Translation comparison between en and fr
 
-Traduction completness: 100%
+List of gaps found in strings.txt: 
+
+Key missing in the strings.txt file: actions.mayan_siege_start
+Key missing in the strings.txt file: actions.mayan_siege_success
+Key missing in the strings.txt file: actions.mayan_siege_update
+Key missing in the strings.txt file: effect.sacrificeslocation
+Key missing in the strings.txt file: goal.besacrificeperformer
+Key missing in the strings.txt file: goal.performsacrifices
+Key missing in the strings.txt file: mayan.god0
+Key missing in the strings.txt file: mayan.god1
+Key missing in the strings.txt file: mayan.god10
+Key missing in the strings.txt file: mayan.god11
+Key missing in the strings.txt file: mayan.god12
+Key missing in the strings.txt file: mayan.god13
+Key missing in the strings.txt file: mayan.god14
+Key missing in the strings.txt file: mayan.god15
+Key missing in the strings.txt file: mayan.god16
+Key missing in the strings.txt file: mayan.god17
+Key missing in the strings.txt file: mayan.god18
+Key missing in the strings.txt file: mayan.god2
+Key missing in the strings.txt file: mayan.god3
+Key missing in the strings.txt file: mayan.god4
+Key missing in the strings.txt file: mayan.god5
+Key missing in the strings.txt file: mayan.god6
+Key missing in the strings.txt file: mayan.god7
+Key missing in the strings.txt file: mayan.god8
+Key missing in the strings.txt file: mayan.god9
+Key missing in the strings.txt file: quest.cqchapterfallenking
+Key missing in the strings.txt file: quest.cqfallenkingstartexplanation
+Key missing in the strings.txt file: sacrifices.offering
+Key missing in the strings.txt file: sacrifices.panditfee
+Key missing in the strings.txt file: sacrifices.priestcoming
+
+List of gaps found in quest files: 
+
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_0_description
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_0_description_refuse
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_0_description_success
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_0_label
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_1_description
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_1_description_success
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_1_label
+Key missing in the quests.txt file: fallenking_10_thebrokendoor_1_listing
+Key missing in the quests.txt file: fallenking_1_firstomens_0_description
+Key missing in the quests.txt file: fallenking_1_firstomens_0_description_refuse
+Key missing in the quests.txt file: fallenking_1_firstomens_0_description_success
+Key missing in the quests.txt file: fallenking_1_firstomens_0_label
+Key missing in the quests.txt file: fallenking_1_firstomens_1_description
+Key missing in the quests.txt file: fallenking_1_firstomens_1_description_success
+Key missing in the quests.txt file: fallenking_1_firstomens_1_label
+Key missing in the quests.txt file: fallenking_1_firstomens_1_listing
+Key missing in the quests.txt file: fallenking_2_warpreparations_0_description
+Key missing in the quests.txt file: fallenking_2_warpreparations_0_description_refuse
+Key missing in the quests.txt file: fallenking_2_warpreparations_0_description_success
+Key missing in the quests.txt file: fallenking_2_warpreparations_0_label
+Key missing in the quests.txt file: fallenking_2_warpreparations_1_description
+Key missing in the quests.txt file: fallenking_2_warpreparations_1_description_success
+Key missing in the quests.txt file: fallenking_2_warpreparations_1_label
+Key missing in the quests.txt file: fallenking_2_warpreparations_1_listing
+Key missing in the quests.txt file: fallenking_3_thecamp_0_description
+Key missing in the quests.txt file: fallenking_3_thecamp_0_description_refuse
+Key missing in the quests.txt file: fallenking_3_thecamp_0_description_success
+Key missing in the quests.txt file: fallenking_3_thecamp_0_label
+Key missing in the quests.txt file: fallenking_3_thecamp_1_description
+Key missing in the quests.txt file: fallenking_3_thecamp_1_description_success
+Key missing in the quests.txt file: fallenking_3_thecamp_1_label
+Key missing in the quests.txt file: fallenking_3_thecamp_1_listing
+Key missing in the quests.txt file: fallenking_4_newomens_0_description
+Key missing in the quests.txt file: fallenking_4_newomens_0_description_refuse
+Key missing in the quests.txt file: fallenking_4_newomens_0_description_success
+Key missing in the quests.txt file: fallenking_4_newomens_0_label
+Key missing in the quests.txt file: fallenking_4_newomens_1_description
+Key missing in the quests.txt file: fallenking_4_newomens_1_description_success
+Key missing in the quests.txt file: fallenking_4_newomens_1_label
+Key missing in the quests.txt file: fallenking_4_newomens_1_listing
+Key missing in the quests.txt file: fallenking_5_thepyramid_0_description
+Key missing in the quests.txt file: fallenking_5_thepyramid_0_description_refuse
+Key missing in the quests.txt file: fallenking_5_thepyramid_0_description_success
+Key missing in the quests.txt file: fallenking_5_thepyramid_0_label
+Key missing in the quests.txt file: fallenking_6_thesiege_0_description
+Key missing in the quests.txt file: fallenking_6_thesiege_0_description_refuse
+Key missing in the quests.txt file: fallenking_6_thesiege_0_description_success
+Key missing in the quests.txt file: fallenking_6_thesiege_0_label
+Key missing in the quests.txt file: fallenking_6_thesiege_1_description
+Key missing in the quests.txt file: fallenking_6_thesiege_1_description_success
+Key missing in the quests.txt file: fallenking_6_thesiege_1_label
+Key missing in the quests.txt file: fallenking_6_thesiege_1_listing
+Key missing in the quests.txt file: fallenking_7_thepit_0_description
+Key missing in the quests.txt file: fallenking_7_thepit_0_description_refuse
+Key missing in the quests.txt file: fallenking_7_thepit_0_description_success
+Key missing in the quests.txt file: fallenking_7_thepit_0_label
+Key missing in the quests.txt file: fallenking_7_thepit_1_description
+Key missing in the quests.txt file: fallenking_7_thepit_1_description_success
+Key missing in the quests.txt file: fallenking_7_thepit_1_label
+Key missing in the quests.txt file: fallenking_7_thepit_1_listing
+Key missing in the quests.txt file: fallenking_8_sacrifice_0_description
+Key missing in the quests.txt file: fallenking_8_sacrifice_0_description_refuse
+Key missing in the quests.txt file: fallenking_8_sacrifice_0_description_success
+Key missing in the quests.txt file: fallenking_8_sacrifice_0_label
+Key missing in the quests.txt file: fallenking_8_sacrifice_1_description
+Key missing in the quests.txt file: fallenking_8_sacrifice_1_description_success
+Key missing in the quests.txt file: fallenking_8_sacrifice_1_label
+Key missing in the quests.txt file: fallenking_8_sacrifice_1_listing
+Key missing in the quests.txt file: fallenking_9_backtothevillage_0_description
+Key missing in the quests.txt file: fallenking_9_backtothevillage_0_description_refuse
+Key missing in the quests.txt file: fallenking_9_backtothevillage_0_description_success
+Key missing in the quests.txt file: fallenking_9_backtothevillage_0_label
+
+List of gaps found in culture building names for mayan: 
+
+Building name missing for culture mayan in both languages: questpyramid_a0
+Building name missing for culture mayan in both languages: mayancamp_a0
+Building name missing for culture mayan in both languages: questpyramid_pit_a0
+Building name missing for culture mayan in both languages: questguardtower_a0
+Building name missing for culture mayan in both languages: questpyramid_jail_a0
+Building name missing for culture mayan in both languages: mayancamp_outerguard_a0
+Building name missing for culture mayan in both languages: mayancamp_dig_a0
+Building name missing for culture mayan in both languages: mayancamp_wall_a0
+Building name missing for culture mayan in both languages: questcamphouse_a0
+Building name missing for culture mayan in both languages: mayancamp_innerguard_a0
+Building name missing for culture mayan in both languages: questpyramid_guards_a0
+Building name missing for culture mayan in both languages: questcave_door_a0
+Building name missing for culture mayan in both languages: questcave_a0
+Building name missing for culture mayan in both languages: mayancamp_jail_a0
+Villager name missing for culture mayan in both languages: villager.questfallenking
+Villager name missing for culture mayan in both languages: villager.questkingelitewarrior
+Villager name missing for culture mayan in both languages: villager.questkinglieutnant
+Villager name missing for culture mayan in both languages: villager.questkingscout
+Villager name missing for culture mayan in both languages: villager.questkingwarrior
+Villager name missing for culture mayan in both languages: villager.questshaman
+
+Traduction completness: 96%

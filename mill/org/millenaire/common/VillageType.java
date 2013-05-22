@@ -227,6 +227,8 @@ public class VillageType implements WeightedChoice {
 	public boolean generateOnServer=true;
 
 	public int minDistanceFromSpawn=0;
+	
+	public boolean generatedForPlayer=false;
 
 	public VillageType(Culture c,File file,boolean lone) throws Exception {
 		lonebuilding=lone;
@@ -257,6 +259,8 @@ public class VillageType implements WeightedChoice {
 						spawnable=Boolean.parseBoolean(value);
 					} else if (paramkey.equalsIgnoreCase("generateonserver")) {
 						generateOnServer=Boolean.parseBoolean(value);
+					} else if (paramkey.equalsIgnoreCase("generateforplayer")) {
+						generatedForPlayer=Boolean.parseBoolean(value);
 					} else if (paramkey.equalsIgnoreCase("carriesraid")) {
 						carriesRaid=Boolean.parseBoolean(value);
 					} else if (paramkey.equalsIgnoreCase("keyLoneBuilding")) {

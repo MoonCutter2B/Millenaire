@@ -44,11 +44,11 @@ secondary:mayansculptorhouse
 secondary:mayanmarket
 secondary:mayancrafter
 secondary:mayanobsidiancrafter
+secondary:mayanshamangrounds
 
 //never for this type of village
 never:mayanarmyforge
 never:mayanballcourt
 never:mayanlargepeasanthouse
-never:mayanshamangrounds
 never:mayancalendar
 never:mayanwatchtower

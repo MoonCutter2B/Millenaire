@@ -27,3 +27,4 @@ tag=helpInAttacks
 defaultweapon=woodsword
 experiencegiven=10
 startingInv=bow,1
+startingInv=arrow,64

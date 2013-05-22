@@ -480,7 +480,7 @@ public class VillagerRecord implements Cloneable {
 			nbttagcompound1.setString("tag", tag);
 			nbttaglist.appendTag(nbttagcompound1);
 		}
-		nbttagcompound.setTag("questTags", nbttaglist);
+		nbttagcompound.setTag(label + "questTags", nbttaglist);
 
 		nbttaglist = new NBTTagList();
 		for (final InvItem key : inventory.keySet()) {

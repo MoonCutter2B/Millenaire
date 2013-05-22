@@ -1,11 +1,18 @@
 package org.millenaire.common;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 
 import org.millenaire.common.core.MillCommonUtilities;
+import org.millenaire.common.entity.EntityTargetedBlaze;
+import org.millenaire.common.entity.EntityTargetedGhast;
+import org.millenaire.common.entity.EntityTargetedWitherSkeleton;
+import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerSender;
 
 public class SpecialQuestActions {
@@ -18,10 +25,13 @@ public class SpecialQuestActions {
 	public static final String UNDERWATER_DIVE="action_underwater_dive";
 	public static final String TOPOFTHEWORLD="action_topoftheworld";
 	public static final String BOTTOMOFTHEWORLD="action_bottomoftheworld";
+
 	public static final String BOREHOLE="action_borehole";
 	public static final String BOREHOLETNT="action_boreholetnt";
 	public static final String BOREHOLETNTLIT="action_boreholetntlit";
 	public static final String THEVOID="action_thevoid";
+
+	public static final String MAYANSIEGE="action_mayansiege";
 
 	private static void handleBorehole(MillWorld mw, EntityPlayer player) {
 
@@ -399,6 +409,108 @@ public class SpecialQuestActions {
 		}
 	}
 
+	private static void handleMayanSiege(MillWorld mw, EntityPlayer player) {
+		if (!mw.getProfile(player.username).isTagSet(MAYANSIEGE) || mw.getProfile(player.username).isTagSet(MAYANSIEGE+COMPLETE))
+			return;
+
+		final String siegeStatus=mw.getProfile(player.username).getActionData("mayan_siege_status");
+
+		if (siegeStatus==null) {//start siege			
+			for (Point p : mw.loneBuildingsList.pos) {
+				Building b=mw.getBuilding(p);
+				if (b!=null) {
+					if (b.villageType.key.equals("questpyramid") && p.distanceTo(player)<50) {
+
+						int nbGhasts=0,nbBlazes=0,nbSkel=0;
+
+						for (int i=0;i<12;i++) {
+							Point spawn=b.location.pos.getRelative(-10+MillCommonUtilities.randomInt(20), 20, -10+MillCommonUtilities.randomInt(20));
+							EntityTargetedGhast ent=(EntityTargetedGhast)MillCommonUtilities.spawnMobsSpawner(mw.world, spawn, Mill.ENTITY_TARGETED_GHAST);
+							if (ent!=null) {
+								ent.target=b.location.pos.getRelative(0, 20, 0);
+								nbGhasts++;
+							}
+						}
+
+						for (int i=0;i<12;i++) {
+
+							Point spawn=b.location.pos.getRelative(-5+MillCommonUtilities.randomInt(10), 15, -5+MillCommonUtilities.randomInt(10));
+							EntityTargetedBlaze ent=(EntityTargetedBlaze)MillCommonUtilities.spawnMobsSpawner(mw.world, spawn, Mill.ENTITY_TARGETED_BLAZE);
+							if (ent!=null) {
+								ent.target=b.location.pos.getRelative(0, 10, 0);
+								nbBlazes++;
+							}
+						}
+
+						for (int i=0;i<5;i++) {
+							Point spawn=b.location.pos.getRelative(5, 12, -5+MillCommonUtilities.randomInt(10));
+							Entity ent=MillCommonUtilities.spawnMobsSpawner(mw.world, spawn, Mill.ENTITY_TARGETED_WITHERSKELETON);
+							if (ent!=null) {
+								nbSkel++;
+							}
+							spawn=b.location.pos.getRelative(-5, 12, -5+MillCommonUtilities.randomInt(10));
+							ent=MillCommonUtilities.spawnMobsSpawner(mw.world, spawn, Mill.ENTITY_TARGETED_WITHERSKELETON);
+							if (ent!=null) {
+								nbSkel++;
+							}
+						}
+						
+						mw.getProfile(player.username).setActionData("mayan_siege_status", "started");
+						mw.getProfile(player.username).setActionData("mayan_siege_ghasts", ""+nbGhasts);
+						mw.getProfile(player.username).setActionData("mayan_siege_blazes", ""+nbBlazes);
+						mw.getProfile(player.username).setActionData("mayan_siege_skeletons", ""+nbSkel);
+
+						ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.mayan_siege_start",""+nbGhasts,""+nbBlazes,""+nbSkel);
+					}
+				}
+			}
+		} else if (siegeStatus.equals("started")) {
+
+			for (Point p : mw.loneBuildingsList.pos) {
+				Building b=mw.getBuilding(p);
+				if (b!=null) {
+					if (b.villageType.key.equals("questpyramid") && p.distanceTo(player)<50) {
+						List<Entity> mobs = MillCommonUtilities
+								.getEntitiesWithinAABB(mw.world,
+										EntityTargetedGhast.class, b.location.pos, 128,128);
+
+						int nbGhasts=mobs.size();
+
+						mobs = MillCommonUtilities
+								.getEntitiesWithinAABB(mw.world,
+										EntityTargetedBlaze.class, b.location.pos, 128,128);
+
+						int nbBlazes=mobs.size();
+						
+						mobs = MillCommonUtilities
+								.getEntitiesWithinAABB(mw.world,
+										EntityTargetedWitherSkeleton.class, b.location.pos, 128,128);
+
+						int nbSkel=mobs.size();
+
+						if (nbGhasts==0 && nbBlazes==0 && nbSkel==0) {
+							mw.getProfile(player.username).setActionData("mayan_siege_status", "finished");
+							mw.getProfile(player.username).setTag(MAYANSIEGE+COMPLETE);
+							ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.mayan_siege_success");
+						} else {
+							int oldGhasts=Integer.parseInt(mw.getProfile(player.username).getActionData("mayan_siege_ghasts"));
+							int oldBlazes=Integer.parseInt(mw.getProfile(player.username).getActionData("mayan_siege_blazes"));
+							int oldSkel=Integer.parseInt(mw.getProfile(player.username).getActionData("mayan_siege_skeletons"));
+
+							if (oldGhasts!=nbGhasts || oldBlazes!=nbBlazes || oldSkel!=nbSkel) {
+								ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.mayan_siege_update",""+nbGhasts,""+nbBlazes,""+nbSkel);
+								mw.getProfile(player.username).setActionData("mayan_siege_ghasts", ""+nbGhasts);
+								mw.getProfile(player.username).setActionData("mayan_siege_blazes",""+nbBlazes);
+								mw.getProfile(player.username).setActionData("mayan_siege_skeletons",""+nbSkel);
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+
 	public static void onTick(MillWorld mw, EntityPlayer player) {
 
 		long startTime;
@@ -425,9 +537,11 @@ public class SpecialQuestActions {
 				handleBoreholeTNT(mw,player);
 				handleTheVoid(mw,player);
 				handleEnchantmentTable(mw,player);
+
 			}
 			if ((worldTime % 10) == 0) {
 				handleBoreholeTNTLit(mw,player);
+				handleMayanSiege(mw,player);
 			}
 		}
 	}

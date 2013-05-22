@@ -276,13 +276,17 @@
 |-
 ! Maya Otoch
 |-
+! Keban Muul~questpyramid
+|-
 ! Muul~mayanpyramid
 |-
 ! Sa'at Maya Otoch
 |-
+! Ajaw Cah~mayancamp
+|-
 ! Mehen Kuuch
 |-
-! Cha'an Ka'nal
+! Cha'an Ka'nal~mayanwatchtower
 |-
 ! Noh Kuuch
 |-
@@ -300,13 +304,21 @@
 |-
 ! Kob Took
 |-
+! Keban Muul~questpyramid_pit
+|-
+! Cha'an Ka'nal~questguardtower
+|-
 ! K'u-nah
 |-
 ! Kan Cha'an
 |-
 ! Zil Otoch
 |-
+! Keban Muul~questpyramid_jail
+|-
 ! Chumuk Kuuch
+|-
+! Ajaw Cah~mayancamp_outerguard
 |-
 ! B'aat Winik Nah
 |-
@@ -317,6 +329,8 @@
 ! Ch'en~mayancave
 |-
 ! Sa'at Muul
+|-
+! Ajaw Cah~mayancamp_dig
 |-
 ! Uxul Otoch
 |-
@@ -342,15 +356,23 @@
 |-
 ! Ix La' Nah
 |-
+! Ajaw Cah~mayancamp_wall
+|-
 ! Pwes
 |-
 ! Muul~mayanplayerpyramid
 |-
 ! Ah Kax Makan
 |-
+! Kanan Otoch
+|-
+! Ajaw Cah~mayancamp_innerguard
+|-
 ! Noh Muul
 |-
 ! Sa'at Tunich In-ti'a'al
+|-
+! Keban Muul~questpyramid_guards
 |-
 ! Ch'en~lonemayancave
 |-
@@ -362,11 +384,17 @@
 |-
 ! Hu'um-Noh
 |-
+! Kak Actun~questcave_door
+|-
 ! Ta'as Kob Took
 |-
 ! Ni'Nah
 |-
 ! Hach Noh Otoch
+|-
+! Kak Actun~questcave
+|-
+! K'as Maya
 |-
 ! K'as Koloh-che'
 |-
