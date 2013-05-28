@@ -260,7 +260,7 @@ public class Goods {
 		public final String iconName;
 
 		public ItemMayanQuestCrown(int id,String iconName, int armourId, int type) {
-			super(id, EnumArmorMaterial.CHAIN, armourId, type);
+			super(id, EnumArmorMaterial.DIAMOND, armourId, type);
 			setMaxDamage(0);			
 			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
@@ -1249,6 +1249,8 @@ public class Goods {
 		goodsName.put("lambcooked", new InvItem(Mill.lambCooked,0));
 		goodsName.put("feta", new InvItem(Mill.feta,0));
 		goodsName.put("souvlaki", new InvItem(Mill.souvlaki,0));
+		
+		goodsName.put("ikayaki", new InvItem(Mill.ikayaki,0));
 
 		goodsName.put("tnt", new InvItem(Block.tnt,0));
 		goodsName.put("vines", new InvItem(Block.vine,0));

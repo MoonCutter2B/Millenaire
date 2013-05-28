@@ -61,7 +61,8 @@ vegcurry,0,40,0,0,0,false,,0,tradehelp.genericfood
 lambcooked,0,32,0,0,0,false,,0,tradehelp.genericfood
 souvlaki,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 
-udon,2*64,2*60,64,124,32,false,,2*64*64,tradehelp.japaneseudon
+udon,32,30,64,124,32,false,,0,tradehelp.japaneseudon
+ikayaki,2*64,2*60,64,124,32,false,,2*64*64,tradehelp.japaneseikayaki
 sake,0,2*70,2,5,0,false,,2*64*64,tradehelp.japanesesake
 
 

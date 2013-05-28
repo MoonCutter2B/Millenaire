@@ -15,6 +15,7 @@ goal=becomeAdult
 goal=goPlay
 
 requiredFood=udon,3
+requiredFood=ikayaki,3
 requiredFood=rice,3
 requiredFood=bread,1
 requiredFood=beefcooked,1

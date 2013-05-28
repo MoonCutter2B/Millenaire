@@ -114,6 +114,7 @@ goldsword;283;0;Épée en or
 grapes;mln75;0;
 gravel;13;0;Gravier
 gunpowder;289;0;Poudre à canon
+ikayaki;mln96;0;
 indianstatue;mln34;0;
 iron;265;0;Lingot de fer
 ironore;15;0;Minerai de fer

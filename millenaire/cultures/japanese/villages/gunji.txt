@@ -56,3 +56,4 @@ never:japanesefarmbig
 never:japanesekitchen
 never:bath
 never:well
+never:squidfarm

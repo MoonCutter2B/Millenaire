@@ -22,6 +22,7 @@ goal=makethatch
 goal=harvestRice
 goal=plantRice
 goal=makeudon
+goal=slaughtersquid
 
 goal=makedirtwall
 goal=makepathdirt

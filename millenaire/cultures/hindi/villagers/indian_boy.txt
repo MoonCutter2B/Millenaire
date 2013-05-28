@@ -26,6 +26,7 @@ requiredFood=masa,1
 requiredFood=chickencurry,3
 requiredFood=vegcurry,3
 requiredFood=udon,1
+requiredFood=ikayaki,1
 requiredFood=lambcooked,1
 requiredFood=souvlaki,1
 

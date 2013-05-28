@@ -59,4 +59,25 @@ lonemayanmining_A0=Mine maya abandonée
 lonemayanpyramid_A0=Pyramide maya abandonée
 mayanpyramid_A0=Pyramide
 
-gifthouse_a0=Maison bonus
+gifthouse_A0=Maison bonus
+
+
+questpyramid_A0=Pyramide Maudite
+questpyramid_pit_A0=Pyramide Maudite
+questpyramid_guards_A0=Pyramide Maudite
+
+questpyramid_jail_A0=Pyramide Maudite
+
+questguardtower_A0=Tour de guarde
+questcamphouse_A0=Barraque
+questbarrack_A0=Barraque
+
+mayancamp_A0=Camp Maya
+mayancamp_outerguard_A0=Camp Maya
+mayancamp_dig_A0=Camp Maya
+mayancamp_wall_A0=Camp Maya
+mayancamp_jail_A0=Camp Maya
+mayancamp_innerguard_A0=Camp Maya
+
+questcave_door_A0=Caverne Maya
+questcave_A0=Caverne Maya

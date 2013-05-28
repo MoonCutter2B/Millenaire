@@ -51,6 +51,7 @@ chickenfarm_a0=Elevage de poulets
 bath_A0=Bain public
 well_A0=Puit
 sakebrewery_A0=Brasserie de saké
+squidfarm_A0=Elevage de calmar
 
 japaneseoutpost_A0=Avant-poste Japonais
 japanesearmyforge_A0=Forge militaire

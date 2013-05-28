@@ -62,7 +62,8 @@ wah,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 masa,0,48,0,0,0,false,,0,tradehelp.genericfood
 chickencurry,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 vegcurry,0,40,0,0,0,false,,0,tradehelp.genericfood
-udon,0,2*80,0,0,0,false,,0,tradehelp.genericfood
+udon,0,40,0,0,0,false,,0,tradehelp.genericfood
+ikayaki,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 lambcooked,0,32,0,0,0,false,,0,tradehelp.genericfood
 souvlaki,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 

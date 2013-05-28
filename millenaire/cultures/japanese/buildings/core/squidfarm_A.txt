@@ -1,0 +1,4 @@
+native:Ika Sakuba;around:4;startLevel:-2;orientation:1;width:21;length:17;tag:squids;priority:80
+
+pathlevel:1
+

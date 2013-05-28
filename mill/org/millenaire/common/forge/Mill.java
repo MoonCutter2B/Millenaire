@@ -288,6 +288,8 @@ public class Mill
 	
 	public static Item mayanQuestCrown;
 
+	public static Item ikayaki;
+	
 	public static boolean loadingComplete=false;
 
 	public static boolean startMessageDisplayed=false;
@@ -295,7 +297,7 @@ public class Mill
 	@SuppressWarnings("rawtypes")
 	public static HashMap<Class,String> entityNames;
 
-	public static final String ENTITY_PIG="Pig",ENTITY_COW="Cow",ENTITY_CHICKEN="Chicken",ENTITY_SHEEP="Sheep";
+	public static final String ENTITY_PIG="Pig",ENTITY_COW="Cow",ENTITY_CHICKEN="Chicken",ENTITY_SHEEP="Sheep",ENTITY_SQUID="Squid";
 
 	public static final String ENTITY_SKELETON="Skeleton",ENTITY_CREEPER="Creeper",ENTITY_SPIDER="Spider",
 			ENTITY_CAVESPIDER="CaveSpider",ENTITY_ZOMBIE="Zombie",ENTITY_TARGETED_GHAST="MillGhast",ENTITY_TARGETED_BLAZE="MillBlaze",ENTITY_TARGETED_WITHERSKELETON="MillWitherSkeleton";
@@ -457,7 +459,7 @@ public class Mill
 
 		unknownPowder =  new ItemText(nextItemId(),"unknownpowder").setUnlocalizedName("ml_unknownPowder").setCreativeTab(Mill.tabMillenaire);
 
-		udon = (new ItemFoodMultiple(nextItemId(),"udon",0,0,10,1f,false,0)).setPotionEffect(Potion.jump.id, 8*60, 1, 1f).setAlwaysEdible().setUnlocalizedName("ml_udon");
+		udon = (new ItemFoodMultiple(nextItemId(),"udon",0,0,8,0.8f,false,0)).setAlwaysEdible().setUnlocalizedName("ml_udon");
 
 		tachiSword = new ItemMillenaireSword(nextItemId(),"tachisword",250,6,EnumToolMaterial.IRON.getEnchantability(),(float) 0.2,3,false).setUnlocalizedName("ml_taichiSword");
 
@@ -521,14 +523,14 @@ public class Mill
 
 		purse = (ItemPurse) new ItemPurse(nextItemId(),"purse").setMaxStackSize(1).setUnlocalizedName("ml_purse");
 		
-		sake = (new ItemFoodMultiple(nextItemId(),"sake",8,30,0,0,true,10)).setPotionEffect(Potion.waterBreathing.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_sake");
+		sake = (new ItemFoodMultiple(nextItemId(),"sake",8,30,0,0,true,10)).setPotionEffect(Potion.jump.id, 8*60, 1, 1f).setAlwaysEdible().setUnlocalizedName("ml_sake");
 		
 		cacauhaa = (new ItemFoodMultiple(nextItemId(),"cacauhaa",6,30,0,0,true,0)).setPotionEffect(Potion.nightVision.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_cacauhaa");
 
 		mayanQuestCrown = new ItemMayanQuestCrown(nextItemId(),"mayanquestcrown",mayanQuestArmourId,0).setUnlocalizedName("ml_mayanQuestCrown");
 		
-		//mayanQuestCrown = new ItemMillenaireArmour(nextItemId(),"mayanquestcrown",EnumArmorMaterial.DIAMOND,mayanQuestArmourId,1,20,0).setUnlocalizedName("ml_mayanQuestCrown");
-		
+		ikayaki = (new ItemFoodMultiple(nextItemId(),"ikayaki",0,0,10,1f,false,0)).setPotionEffect(Potion.waterBreathing.id, 8*60, 2, 1f).setAlwaysEdible().setUnlocalizedName("ml_ikayaki");
+
 		
 		wood_decoration.setUnlocalizedName("ml_wood_deco").setHardness(2.0F).setResistance(5F).setStepSound(Block.soundWoodFootstep);
 		wood_decoration.registerTexture(0, "timberframeplain");

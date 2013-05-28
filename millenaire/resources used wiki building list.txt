@@ -200,6 +200,8 @@
 |-
 ! Tansetsu~japanesearmyforge
 |-
+! Ika Sakuba
+|-
 ! Ike
 |-
 ! Ido
@@ -356,6 +358,8 @@
 |-
 ! Ix La' Nah
 |-
+! Kanan Otoch~questbarrack
+|-
 ! Ajaw Cah~mayancamp_wall
 |-
 ! Pwes
@@ -364,7 +368,7 @@
 |-
 ! Ah Kax Makan
 |-
-! Kanan Otoch
+! Kanan Otoch~questcamphouse
 |-
 ! Ajaw Cah~mayancamp_innerguard
 |-

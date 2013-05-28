@@ -52,7 +52,7 @@ secondary:japanesemarket
 secondary:japanesearmyforge
 secondary:well
 secondary:chickenfarm
-
+secondary:squidfarm
 
 //not to be built
 never:japanesefort

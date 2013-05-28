@@ -252,42 +252,42 @@ Colombages à croix: 25
 Bois (tous): 294
 
 nogyo resource use: 
-Laine blanche: 178
-Roche: 8603
-Bois de sapin: 3162
-Pierres: 1223
-Paroi de papier: 595
+Laine blanche: 180
+Roche: 9127
+Bois de sapin: 3347
+Pierres: 1350
+Paroi de papier: 610
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
-Gravier: 523
+Gravier: 545
 Colombages à croix: 63
-Bois de chêne: 4577
-Colombages: 3003
+Bois de chêne: 4831
+Colombages: 3101
 Fougère: 117
 Lingot de fer: 18
-Chaume: 8367
-Bois (tous): 1579
+Chaume: 8825
+Bois (tous): 1601
 
 seiji resource use: 
 Pierre taillées craquelées: 26
-Laine blanche: 300
-Roche: 11700
-Bois de sapin: 4117
-Pierres: 1819
-Paroi de papier: 849
+Laine blanche: 302
+Roche: 12224
+Bois de sapin: 4302
+Pierres: 1946
+Paroi de papier: 864
 Hautes herbes: 168
 Sable: 232
 Bibliothèque: 12
-Gravier: 649
+Gravier: 671
 Colombages à croix: 63
-Bois de chêne: 6377
+Bois de chêne: 6631
 Lingot d'or: 54
-Colombages: 3915
+Colombages: 4013
 Fougère: 117
 Lingot de fer: 108
-Chaume: 8714
-Bois (tous): 1879
+Chaume: 9172
+Bois (tous): 1901
 
 trading resource use: 
 Roche: 10011
@@ -517,15 +517,16 @@ Bois (tous): 2
 
 questpyramid resource use: 
 Pierre taillées craquelées: 179
-Roche: 6997
+Roche: 7577
 Obsidienne: 3103
+Pierres: 136
 Bois tropical: 146
 Pierres taillées moussues: 102
 Lave: 356
 Lingot de fer: 1
 Hautes herbes: 26
 Décoration en or: 22
-Bois (tous): 83
+Bois (tous): 115
 
 norman: 
 agricole resource use: 
@@ -6674,6 +6675,101 @@ Upgrade 6
 | style="text-align: center; "|28
 |-
 | style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|1
+|}
+
+
+Ika Sakuba
+squidfarm
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|47
+|-
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|161
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|36
+|-
+| style="text-align: center; "|Chaume
+| style="text-align: center; "|458
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|18
+|}
+
+
+Upgrade 1
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|10
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|74
+|-
+| style="text-align: center; "|Gravier
+| style="text-align: center; "|22
+|}
+
+
+Upgrade 2
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|207
+|-
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|13
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|17
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|4
+|}
+
+
+Upgrade 3
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Laine blanche
+| style="text-align: center; "|2
+|-
+| style="text-align: center; "|Paroi de papier
+| style="text-align: center; "|15
+|-
+| style="text-align: center; "|Colombages
+| style="text-align: center; "|98
+|}
+
+
+Upgrade 4
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|524
+|-
+| style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|1
 |}
 
@@ -12863,6 +12959,27 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|24
+|}
+
+
+Kanan Otoch
+questbarrack
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Roche
+| style="text-align: center; "|290
+|-
+| style="text-align: center; "|Pierres
+| style="text-align: center; "|68
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|16
 |}
 
 

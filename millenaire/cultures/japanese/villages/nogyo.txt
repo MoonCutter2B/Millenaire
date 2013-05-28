@@ -36,12 +36,10 @@ player:japanesehouselarge
 player:gifthouse
 
 //to be built in priority
+core:squidfarm
 core:japanesefishery
-core:japaneselookout
 core:japanesecrafter
-core:japanesesamuraih
 core:japanesequarry
-core:japaneseforge
 core:japanesekitchen
 core:japanesemarket
 core:chickenfarm
@@ -51,6 +49,9 @@ core:well
 secondary:japanesearchive
 secondary:japaneseshintoshrine
 secondary:japaneseinn
+secondary:japaneselookout
+secondary:japaneseforge
+secondary:japanesesamuraih
 
 //not to be built
 never:japanesepalace

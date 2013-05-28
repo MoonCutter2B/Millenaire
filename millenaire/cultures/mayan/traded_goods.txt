@@ -53,7 +53,8 @@ chickencurry,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 vegcurry,0,40,0,0,0,false,,0,tradehelp.genericfood
 lambcooked,0,32,0,0,0,false,,0,tradehelp.genericfood
 souvlaki,0,2*80,0,0,0,false,,0,tradehelp.genericfood
-udon,0,2*80,0,0,0,false,,0,tradehelp.genericfood
+udon,0,40,0,0,0,false,,0,tradehelp.genericfood
+ikayaki,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 
 dye_brown,4,0,0,0,0,false,,0,0,tradehelp.mayancocoa
 cake,0,64,0,0,128,false,,0,tradehelp.genericfoodsweet

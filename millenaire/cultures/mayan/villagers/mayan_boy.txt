@@ -31,6 +31,7 @@ requiredFood=vegcurry,1
 requiredFood=boudin,1
 requiredFood=tripes,1
 requiredFood=udon,1
+requiredFood=ikayaki,1
 requiredFood=lambcooked,1
 requiredFood=souvlaki,1
 

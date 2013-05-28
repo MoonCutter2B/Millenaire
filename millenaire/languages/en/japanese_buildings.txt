@@ -51,6 +51,7 @@ chickenfarm_a0=Chicken Farm
 bath_A0=Bath House
 well_A0=Well
 sakebrewery_A0=Sake Brewery
+squidfarm_A0=Squid Farm
 
 japaneseoutpost_A0=Japanese Outpost
 japanesearmyforge_A0=Army Forge

@@ -221,6 +221,10 @@ quest.cqsadhustartexplanation=Find a villager able to guide you in an Indian vil
 quest.cqchapteralchemist=The Alchemist
 quest.cqalchemiststartexplanation=Find a villager able to guide you in a Norman village where you have at least "Friend of the village" as reputation.
 
+quest.cqchapterfallenking=The Fallen King
+quest.cqfallenkingstartexplanation=Find a shaman that can guide you in a Mayan village where you have at least "Friend of the village" as reputation.
+
+
 quest.cqallcompleted=Congratulations, you have completed all the Creation Quest missions currently available!
 quest.cqcheckforupdates=Check www.millenaire.org for future updates with more missions.
 quest.cqchapternotstarted=You have not started the chapter "<0>".
@@ -320,6 +324,7 @@ item.parchmentsadhu=Book of the Sadhu
 item.tachisword=Tachi
 item.yumibow=Yumi Bow
 item.sake=Sake
+item.ikayaki=Ikayaki
 
 item.japaneseWarriorBlueLegs=Blue ō-yoroi leggings
 item.japaneseWarriorBlueHelmet=Blue ō-yoroi helmet
@@ -536,6 +541,8 @@ goal.makesteelboots=Crafting steel boots
 goal.makeindianstatue=Carving statue
 goal.performpujas=Performing a puja
 goal.bepujaperformer=Available for pujas
+goal.performsacrifices=Making a sacrifice
+goal.besacrificeperformer=Available for sacrifices
 
 goal.PlantMaize=Planting maize
 goal.HarvestMaize=Harvesting maize
@@ -575,7 +582,7 @@ goal.makeudon=Making udon
 goal.maketachi=Crafting a Tachi sword
 goal.makejapaneseweapons=Crafting Japanese armement
 goal.makesake=Fermenting sake
-
+goal.slaughtersquid=Fishing squids
 
 goal.brewpotions=Brewing potions
 goal.harvestwarts=Harvesting warts
@@ -720,6 +727,10 @@ actions.thevoid_success=You have peered into the Void!
 
 actions.enchantmenttable_success=You have built an enchantment table close to the Sadhu.
 
+actions.mayan_siege_start=The pyramid is under attack! <0> ghasts, <1> blazes and <2> skeletons are attacking. Destroy them.
+actions.mayan_siege_success=You have defeated the forces attacking the pyramid!
+actions.mayan_siege_update=<0> ghast(s), <1> blaze(s) and <2> skeleton(s) are left.
+
 info.culturetitle=Cultures
 info.culture=<0> Culture
 info.culturereputation=Reputation: <0>
@@ -823,6 +834,36 @@ pujas.offeringslot2=They will not accept everything. Experiment.
 pujas.moneyslot=Put money for the pandit.
 pujas.toolslot=Put the tool to be enchanted.
 
+sacrifices.priestcoming=<0>: You need to have a sacrifice performed? It is wise to appease the Gods.
+sacrifices.panditfee=For the shaman
+sacrifices.offering=Sacrifice
+
+mayan.god0=To Ah Puch - for survival
+mayan.god1=To K'inich Ajaw - for flammes
+mayan.god2=To Cabrakan - for impacts
+mayan.god3=To Ah Tabai - for arrows
+mayan.god4=To Cum Hau - for vengence
+
+mayan.god5=To Uqux Cho - for the caiman's breath
+mayan.god6=To Uqux Palo - for work under the waves
+
+mayan.god7=To Alom - for lightness
+
+mayan.god8=To Buluc Chabtan - for violence
+mayan.god9=To Ah Puch - for fighting the deads
+mayan.god10=To Cum Hau - for fighting creatures
+
+mayan.god11=To Huracan - for the strong breath
+mayan.god12=To K'inich Ajaw - for the flamme
+mayan.god13=To Ek Chuah - for fortune
+
+mayan.god14=To Buluc Chabtan - for violence
+mayan.god15=To Huracan - for the strong breath
+mayan.god16=To K'inich Ajaw - for the flamme
+mayan.god17=To Ek Chuah - for fortune
+
+mayan.god18=To Witz - for toughness
+
 culture.norman=Norman
 culture.hindi=Hindi
 culture.japanese=Japanese
@@ -853,6 +894,7 @@ effect.towncentre=Village Centre
 effect.shop=Shop: <0>
 effect.irrigation=Irrigation: <0>% extra crops
 effect.pujalocation=Pujas held
+effect.sacrificeslocation=Sacrifices held
 effect.healing=Heals Player
 
 chunk.chunkmap=Map of chunks
@@ -1083,7 +1125,7 @@ tradehelp.hindibricks=The Indians leave wet mud bricks in the sun to cook to mak
 tradehelp.hindistatue=Indian sculptors produce these bas-relief of Hindu gods for adorning Indian temples.
 
 tradehelp.japanesegold=The Japanese use gold to decorate some buildings.
-tradehelp.japaneseudon=The Japanese cook udons from wheat and chicken. They nourish the player and help children grow. They also provide a temporary "Jump Boost" bonus.
+tradehelp.japaneseudon=The Japanese cook udons from wheat and chicken. They nourish the player and help children grow.
 tradehelp.japanesetools=Japanese smiths use iron and leather to produce iron tools and Japanese armor.
 tradehelp.japaneseweapons=Japanese blacksmiths produce beautiful armor and formidable swords from iron, leather, and wool.
 tradehelp.japanesepaper=Japanese artisans produce paper from rice and use it to make translucent walls.
@@ -1091,7 +1133,8 @@ tradehelp.japaneseframes=Japanese craftsmen produce timber frames from wood to b
 tradehelp.japaneserice=The Japanese use rice to grow and nourish their children, to produce paper, and to ferment sake.
 tradehelp.japanesewheat=The Japanese cook wheat to make udons.
 tradehelp.japanesethatch=Japanese produce blocks from wheat.
-tradehelp.japanesesake=Japanese sake brewers use rice to brew sake. Sake heals and regenerates the player and helps the villagers have children. It also provides a temporary "Water Breathing" bonus.
+tradehelp.japanesesake=Japanese sake brewers use rice to brew sake. Sake heals and regenerates the player and helps the villagers have children. It also provides a temporary "Jump Boost" bonus.
+tradehelp.japaneseikayaki=The Japanse raise squids and grill them to make ikayakis. They nourish the player and help children grow. They also provide a temporary "Water Breathing" bonus.
 
 tradehelp.mayangold=Mayan artisans need gold to produce decorative blocks. They require players to provide the gold for them.
 tradehelp.mayanfood=The Mayan people grow corn and make masa (maize tortillas) and wah (by adding chicken) from it. They nourish the player and help children grow. Wah also provide a temporary "Haste" bonus.

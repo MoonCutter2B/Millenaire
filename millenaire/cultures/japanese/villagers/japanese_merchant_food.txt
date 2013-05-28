@@ -21,5 +21,6 @@ merchantstock=chickenmeat,8
 merchantstock=fishcooked,8
 merchantstock=egg,4
 merchantstock=udon,4
+merchantstock=ikayaki,4
 
 experiencegiven=3

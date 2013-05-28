@@ -20,6 +20,8 @@ mindistancefromspawn:1000
 //starting buildings:
 centre:questpyramid
 
+start:questbarrack
+start:questbarrack
 start:questcamphouse
 start:questcamphouse
 start:questguardtower

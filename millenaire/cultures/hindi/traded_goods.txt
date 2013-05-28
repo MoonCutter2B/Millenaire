@@ -48,7 +48,8 @@ fishraw,5,3,0,192,0,false,,0,tradehelp.genericfoodraw
 fishcooked,7,5,0,192,16,false,,0,tradehelp.hindigenericfood
 wah,0,2*80,0,0,0,false,,0,tradehelp.hindigenericfood
 masa,0,48,0,0,0,false,,0,tradehelp.hindigenericfood
-udon,0,2*80,0,0,32,false,,0,tradehelp.hindigenericfood
+udon,0,40,0,0,32,false,,0,tradehelp.genericfood
+ikayaki,0,2*80,0,0,0,false,,0,tradehelp.genericfood
 lambcooked,0,32,0,0,0,false,,0,tradehelp.hindigenericfood
 souvlaki,0,2*80,0,0,0,false,,0,tradehelp.hindigenericfood
 

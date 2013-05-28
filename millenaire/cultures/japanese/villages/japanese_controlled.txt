@@ -28,6 +28,7 @@ core:japanesesamuraih
 core:japanesegrove
 core:japanesepaddy
 core:japanesekitchen
+core:squidfarm
 core:japaneseshintoshrine
 core:japanesepagoda
 core:japanesearchive

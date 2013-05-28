@@ -840,6 +840,16 @@
 </table>
 </table>
 
+|Ika Sakuba = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Gravel.png|32px|Gravier]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:White_Wool.png|32px|Laine blanche]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|Colombages]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|Chaume]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|Paroi de papier]]</td></tr>
+<tr><th scope="row">Construction</th><td></td><td>36</td><td></td><td>18</td><td>47</td><td>161</td><td></td><td></td><td>458</td><td></td></tr>
+<tr><th scope="row">Upgrade 1</th><td></td><td>74</td><td>22</td><td></td><td></td><td>10</td><td></td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 2</th><td></td><td>17</td><td></td><td>4</td><td>207</td><td>13</td><td></td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 3</th><td></td><td></td><td></td><td></td><td></td><td></td><td>2</td><td>98</td><td></td><td>15</td></tr>
+<tr><th scope="row">Upgrade 4</th><td>524</td><td></td><td></td><td></td><td></td><td>1</td><td></td><td></td><td></td><td></td></tr>
+</table>
+</table>
+
 |Ike = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Sand.png|32px|Sable]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td></tr>
 <tr><th scope="row">Construction</th><td>153</td><td>12</td><td>21</td></tr>
@@ -1626,6 +1636,12 @@
 </table>
 </table>
 
+|Kanan Otoch~questbarrack = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Roche]]</td><td>[[File:Cobblestone.png|32px|Pierres]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>290</td><td>68</td><td>16</td></tr>
+</table>
+</table>
+
 |Ajaw Cah~mayancamp_wall = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
 <tr><th scope="row">Construction</th><td>3</td></tr>
@@ -1675,7 +1691,7 @@
 </table>
 </table>
 
-|Kanan Otoch = <table><tr><td style="vertical-align:top;">
+|Kanan Otoch~questcamphouse = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td><td>[[File:TallGrass.png|32px|Hautes herbes]]</td></tr>
 <tr><th scope="row">Construction</th><td>5</td><td>16</td><td>13</td></tr>
 </table>

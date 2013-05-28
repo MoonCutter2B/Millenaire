@@ -36,6 +36,13 @@ villager.merchant_mayanfarmer=Farmer Trader
 villager.merchant_mayanhunter=Hunter Trader
 villager.merchant_mayanshaman=Shaman Trader
 
+villager.questfallenking=Fallen King
+villager.questkingelitewarrior=Elite Warrior
+villager.questkinglieutnant=Lieutenant
+villager.questkingscout=Scout
+villager.questkingwarrior=Warrior
+villager.questshaman=Shaman
+
 shop.mayantownhall=Central Store
 shop.mayancrafter=Tools
 shop.mayanarmyforge=Armours & weapons

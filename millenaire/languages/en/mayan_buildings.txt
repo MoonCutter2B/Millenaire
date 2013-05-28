@@ -57,3 +57,22 @@ lonemayanmining_A0=Lost Stone Mine
 mayanpyramid_A0=Pyramid
 
 gifthouse_a0=Gift House
+
+questpyramid_A0=Cursed Pyramid
+questpyramid_pit_A0=Cursed Pyramid
+questpyramid_guards_A0=Cursed Pyramid
+questpyramid_jail_A0=Cursed Pyramid
+
+questguardtower_A0=Guard tower
+questcamphouse_A0=Barrack
+questbarrack_A0=Barrack
+
+mayancamp_A0=Mayan Camp
+mayancamp_outerguard_A0=Mayan Camp
+mayancamp_dig_A0=Mayan Camp
+mayancamp_wall_A0=Mayan Camp
+mayancamp_jail_A0=Mayan Camp
+mayancamp_innerguard_A0=Mayan Camp
+
+questcave_door_A0=Mayan Cave
+questcave_A0=Mayan Cave

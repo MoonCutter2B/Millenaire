@@ -59,7 +59,7 @@ never:bath
 never:japanesekitchen
 never:japanesearmyforge
 never:japanesefarm
-
+never:squidfarm
 
 sellingPrice:sake,2/0
 buyingPrice:sake,1/48

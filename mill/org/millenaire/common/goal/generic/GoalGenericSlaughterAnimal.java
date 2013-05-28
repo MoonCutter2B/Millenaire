@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.passive.EntityAnimal;
 
 import org.millenaire.common.Building;
 import org.millenaire.common.MLN;
@@ -15,6 +15,7 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
+import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
@@ -51,8 +52,7 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 				final List<Entity> animals=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, (Class)EntityList.stringToClassMapping.get(animalKey), dest.getPos(), 15, 10);
 
 				for (final Entity ent : animals) {
-					EntityAnimal animal=(EntityAnimal)ent;
-					if (!animal.isChild() && !animal.isDead) {
+					if (!ent.isDead && !isEntityChild(ent)) {
 						if ((closest==null) || (pos.distanceTo(ent) < bestDist)) {
 							closest=ent;
 							destBuilding=dest;
@@ -72,6 +72,9 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 
 	@Override
 	public AStarConfig getPathingConfig() {
+		if (animalKey.equals(Mill.ENTITY_SQUID))
+			return JPS_CONFIG_SLAUGHTERSQUIDS;
+		
 		return JPS_CONFIG_TIGHT;
 	}
 
@@ -96,6 +99,15 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 		return true;
 	}
 
+	private boolean isEntityChild(Entity ent) {
+		if (!(ent instanceof EntityAgeable))
+			return false;
+
+		final EntityAgeable animal=(EntityAgeable)ent;
+
+		return animal.isChild();
+	}
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean performAction(MillVillager villager) throws Exception {
@@ -109,9 +121,7 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 
 		for (final Entity ent : animals) {
 			if (!ent.isDead) {
-				final EntityAnimal animal=(EntityAnimal)ent;
-
-				if (!animal.isChild()) {
+				if (!isEntityChild(ent)) {
 					if(villager.canEntityBeSeen(ent)) {
 						villager.setEntityToAttack(ent);
 
@@ -122,22 +132,20 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 								}
 							}
 						}
-						
+
 						villager.swingItem();
-						
+
 						return true;
 					}
 				}
 			}
 		}
-		
+
 		animals=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, (Class)EntityList.stringToClassMapping.get(animalKey), villager.getPos(), 2, 5);
 
 		for (final Entity ent : animals) {
 			if (!ent.isDead) {
-				final EntityAnimal animal=(EntityAnimal)ent;
-
-				if (!animal.isChild()) {
+				if (!isEntityChild(ent)) {
 					if(villager.canEntityBeSeen(ent)) {
 						villager.setEntityToAttack(ent);
 
@@ -148,7 +156,7 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 								}
 							}
 						}
-						
+
 						villager.swingItem();
 
 						return true;
@@ -156,8 +164,8 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 				}
 			}
 		}
-		
-		
+
+
 		return true;
 	}
 
@@ -243,11 +251,10 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 
 		for (final Entity ent : animals) {
 
-			final EntityAnimal animal=(EntityAnimal)ent;
-
-			if (!animal.isChild()) {
+			if (!ent.isDead && !isEntityChild(ent)) {
 				nbanimals++;
 			}
+
 		}
 
 		int targetAnimals=0;

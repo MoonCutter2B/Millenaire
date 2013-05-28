@@ -162,6 +162,7 @@ cowspawn;-1;0;;100/10/10
 pigspawn;-1;0;;120/10/10
 sheepspawn;-1;0;;140/10/10
 chickenspawn;-1;0;;160/10/10
+squidspawn;-1;0;;50/10/200
 oakspawn;-1;0;;0/100/0
 pinespawn;-1;0;;34/53/34
 birchspawn;-1;0;;162/201/101

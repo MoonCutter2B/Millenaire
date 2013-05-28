@@ -21,15 +21,17 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
 import net.minecraft.block.BlockLog;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -7072,7 +7074,8 @@ public class Building {
 	}
 
 	private void updatePens() {
-		if (!worldObj.isDaytime() && (vrecords.size() > 0) && !worldObj.isRemote) {
+		//animals only spawn in buildings that are either inhabited or never will be
+		if (!worldObj.isDaytime() && (vrecords.size() > 0 || (location.maleResident.isEmpty() && location.femaleResident.isEmpty())) && !worldObj.isRemote) {
 
 			int nbMaxRespawn=0;
 			for (final Vector<Point> spawnPoints : spawns) {
@@ -7081,10 +7084,10 @@ public class Building {
 
 
 			if (nbAnimalsRespawned<=nbMaxRespawn) {
-				int sheep = 0, cow = 0, pig = 0, chicken = 0;
+				int sheep = 0, cow = 0, pig = 0, chicken = 0, squid=0;
 
 				final List<Entity> animals = MillCommonUtilities.getEntitiesWithinAABB(
-						worldObj, EntityAnimal.class, getPos(), 15, 5);
+						worldObj, IAnimals.class, getPos(), 15, 5);
 
 				for (final Entity animal : animals) {
 					if (animal instanceof EntitySheep) {
@@ -7095,6 +7098,8 @@ public class Building {
 						cow++;
 					} else if (animal instanceof EntityChicken) {
 						chicken++;
+					} else if (animal instanceof EntitySquid) {
+						squid++;
 					}
 				}
 
@@ -7108,11 +7113,19 @@ public class Building {
 						nb = pig;
 					} else if (spawnTypes.get(i).equals(Mill.ENTITY_COW)) {
 						nb = cow;
+					} else if (spawnTypes.get(i).equals(Mill.ENTITY_SQUID)) {
+						nb = squid;
+					}
+					
+					int multipliyer=1;
+					
+					if (spawnTypes.get(i).equals(Mill.ENTITY_SQUID)) {
+						multipliyer=2;
 					}
 
-					for (int j = 0; j < (spawns.get(i).size() - nb); j++) {
+					for (int j = 0; j < (spawns.get(i).size()*multipliyer - nb); j++) {
 						if (MillCommonUtilities.chanceOn(100)) {
-							final EntityAnimal animal = (EntityAnimal) EntityList
+							final EntityCreature animal = (EntityCreature) EntityList
 									.createEntityByName(spawnTypes.get(i),
 											worldObj);
 							final Point pen = spawns.get(i).get(

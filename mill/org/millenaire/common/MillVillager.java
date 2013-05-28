@@ -384,7 +384,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		Mill.tripes,Mill.boudin,
 		Mill.vegcurry,Mill.chickencurry,Mill.rice,
 		Mill.masa,Mill.wah,
-		Mill.udon,
+		Mill.udon,Mill.ikayaki,
 		Mill.lambCooked,Mill.souvlaki
 	};
 
@@ -393,7 +393,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		6,4,
 		3,5,1,
 		3,5,
-		5,
+		5,5,
 		3,6
 	};
 

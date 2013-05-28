@@ -633,7 +633,7 @@ public class BuildingPlan {
 			bsignpostTop="signpostTop",bsignpostBottom="signpostBottom",bsignpostLeft="signpostLeft",bsignpostRight="signpostRight",
 			bsignwallTop="signwallTop",bsignwallBottom="signwallBottom",bsignwallLeft="signwallLeft",bsignwallRight="signwallRight",
 			bladderTop="ladderTop",bladderBottom="ladderBottom",bladderLeft="ladderLeft",bladderRight="ladderRight",
-			bcowspawn="cowspawn",bsheepspawn="sheepspawn",bchickenspawn="chickenspawn",bpigspawn="pigspawn",
+			bcowspawn="cowspawn",bsheepspawn="sheepspawn",bchickenspawn="chickenspawn",bpigspawn="pigspawn",bsquidspawn="squidspawn",
 			bstonesource="stonesource",bsandsource="sandsource",bsandstonesource="sandstonesource",bclaysource="claysource",bgravelsource="gravelsource",bfurnace="furnace",
 			bfreestone="freestone",bfreesand="freesand",bfreesandstone="freesandstone",bfreegravel="freegravel",btapestry="tapestry",bstall="stall",bfreewool="freewool",
 			bdoorTop="doorTop",bdoorBottom="doorBottom",bdoorRight="doorRight",bdoorLeft="doorLeft",
@@ -2154,6 +2154,8 @@ public class BuildingPlan {
 						MLN.warning(this, "Building has sheeps spawn but no sheeps tag.");
 					} else if (plan[i][j][k].isType(bpigspawn) && !tags.contains("pigs")) {
 						MLN.warning(this, "Building has pig spawn but no pig tag.");
+					} else if (plan[i][j][k].isType(bsquidspawn) && !tags.contains("squids")) {
+						MLN.warning(this, "Building has squid spawn but no squid tag.");
 					}
 					if (plan[i][j][k].isType(bchickenspawn)) {
 						chicken++;
@@ -3138,6 +3140,9 @@ public class BuildingPlan {
 						b=Block.cloth.blockID;
 					} else if (pt.isType(bfreestone)) {
 						b=Block.stone.blockID;
+						
+					} else if (pt.isType(bsquidspawn)) {
+						b=Block.waterStill.blockID;
 					}
 
 
@@ -3906,6 +3911,8 @@ public class BuildingPlan {
 						building.addSpawnPoint(Mill.ENTITY_COW, p);
 					} else if (pt.isType(bpigspawn)) {
 						building.addSpawnPoint(Mill.ENTITY_PIG, p);
+					} else if (pt.isType(bsquidspawn)) {
+						building.addSpawnPoint(Mill.ENTITY_SQUID, p);
 					} else if (pt.isType(bsheepspawn)) {
 						building.addSpawnPoint(Mill.ENTITY_SHEEP, p);
 					} else if (pt.isType(bstonesource)) {

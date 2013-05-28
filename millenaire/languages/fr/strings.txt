@@ -313,6 +313,7 @@ item.udon=Udon
 item.tachisword=Tachi
 item.yumibow=Arc Yumi
 item.sake=Saké
+item.ikayaki=Ikayaki
 
 item.japaneseWarriorBlueLegs=Jambières ō-yoroi bleues
 item.japaneseWarriorBlueHelmet=Casque ō-yoroi bleu
@@ -555,6 +556,7 @@ goal.makepaperwall=Fabrique des parois de papier
 goal.cookfish=Cuit du poisson
 goal.makeudon=Fait des udons
 goal.makesake=Fermente du saké
+goal.slaughtersquid=Pêche des calmars
 
 goal.makeglassbottles=Fabrique des fioles
 goal.harvestwarts=Récolte des verrues
@@ -1119,7 +1121,7 @@ tradehelp.hindibricks=Les indiens produisent des briques de terre cuitent au sol
 tradehelp.hindistatue=Les sculpteurs indiens produisent ces bas-relief de dieux hindous qui ornent les temples indiens.
 
 tradehelp.japanesegold=Les japonais utilisent de l'or pour décorer certains bâtiments
-tradehelp.japaneseudon=Les japonais cuisinent des udons à partir de blé et de poulet. Ils nourrissent le joueur et aident les enfants à grandir. Ils donnent également un bonus "Amélioration des sauts" temporaire.
+tradehelp.japaneseudon=Les japonais cuisinent des udons à partir de blé et de poulet. Ils nourrissent le joueur et aident les enfants à grandir.
 tradehelp.japanesetools=Les forgerons japonais utilisent du fer et du cuir pour produire des outils en fer et des armures japonaises.
 tradehelp.japaneseweapons=Les forgerons japonais produisent des armures magnifiques, des épées redoutables et des arcs puissants à partir de fer, cuir et laine.
 tradehelp.japanesepaper=Les artisans japonais produisent du papier à partir de riz et s'en servent pour fabriquer des parois translucides.
@@ -1127,8 +1129,8 @@ tradehelp.japaneseframes=Les artisans japonais produisent des colombages à part
 tradehelp.japaneserice=Les japonais cultivent du riz pour nourir leur enfants, produire du papier et dans les villages Bouekigyou Mura, fermenter du saké.
 tradehelp.japanesewheat=Les japonais byzantins cuisinent des udons avec du blé.
 tradehelp.japanesethatch=Les japonais produisent des blocs de chaume à partir de blé.
-tradehelp.japanesesake=Les brasseurs japonais produisent du saké à partir de riz. Le saké guérie et regénère le joueur et aide les villageois à avoir des enfants. Il donne également un bonus "Apnée" temporaire.
-
+tradehelp.japanesesake=Les brasseurs japonais produisent du saké à partir de riz. Le saké guérie et regénère le joueur et aide les villageois à avoir des enfants. Il donne également un bonus "Saut" temporaire.
+tradehelp.japaneseikayaki=Les Japonais élèvent des calmars et les grillent pour en faire des ikayakis. Ils nourrissent le joueur et aident les enfants à grandir et donnent également un bonus "Apnée" temporaire.
 
 
 tradehelp.mayangold=Les artisans mayas ont besoin d'or pour produire des blocs décoratifs. Ils ont besoin du joueur pour leur en fournir.

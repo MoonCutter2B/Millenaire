@@ -1343,6 +1343,7 @@ public class MLN {
 		ModLoader.addName(Mill.sake, MLN.string("item.sake"));
 		ModLoader.addName(Mill.cacauhaa, MLN.string("item.cacauhaa"));
 		ModLoader.addName(Mill.mayanQuestCrown, MLN.string("item.mayanQuestCrown"));
+		ModLoader.addName(Mill.ikayaki, MLN.string("item.ikayaki"));
 	}
 
 	private static String now() {
