@@ -4,8 +4,4 @@ List of gaps found in culture dialogues for hindi:
 
 Dialogue missing for culture hindi: monsoon
 
-List of gaps found in culture building names for mayan: 
-
-Building name missing for culture mayan in both languages: questbarrack_a0
-
 Traduction completness: 99%

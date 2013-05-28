@@ -265,7 +265,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public static final int CONCEPTION_CHANCE = 6;
 
-	public static final int FOREIGN_MERCHANT_NB_NIGHTS_BEFORE_LEAVING=3;
+	public static final int FOREIGN_MERCHANT_NB_NIGHTS_BEFORE_LEAVING=5;
 	public static final int MALE=1,FEMALE=2;
 
 	public static final String GENERIC_VILLAGER="ml_GenericVillager";

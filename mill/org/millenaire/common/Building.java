@@ -6933,7 +6933,7 @@ public class Building {
 
 			final int maxMerchants=stalls.size();
 
-			if ((vrecords.size() < maxMerchants) && MillCommonUtilities.chanceOn(2)) {
+			if ((vrecords.size() < maxMerchants)) {
 				if (MLN.LogMerchant >= MLN.MAJOR) {
 					MLN.major(this, "Attempting to create a foreign merchant.");
 				}
