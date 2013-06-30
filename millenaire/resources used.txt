@@ -236,7 +236,7 @@ Lingot d'or: 54
 Fougère: 117
 Lingot de fer: 36
 Chaume: 7298
-Bois (tous): 1467
+Bois (tous): 1439
 
 japanese_controlled resource use: 
 Bois de chêne: 992
@@ -249,7 +249,7 @@ Colombages: 483
 Chaume: 1733
 Gravier: 2
 Colombages à croix: 25
-Bois (tous): 294
+Bois (tous): 266
 
 nogyo resource use: 
 Laine blanche: 180
@@ -267,7 +267,7 @@ Colombages: 3101
 Fougère: 117
 Lingot de fer: 18
 Chaume: 8825
-Bois (tous): 1601
+Bois (tous): 1573
 
 seiji resource use: 
 Pierre taillées craquelées: 26
@@ -287,7 +287,7 @@ Colombages: 4013
 Fougère: 117
 Lingot de fer: 108
 Chaume: 9172
-Bois (tous): 1901
+Bois (tous): 1873
 
 trading resource use: 
 Roche: 10011
@@ -306,7 +306,7 @@ Lingot d'or: 54
 Fougère: 117
 Lingot de fer: 90
 Chaume: 7530
-Bois (tous): 1441
+Bois (tous): 1413
 
 
 bandit_cave resource use: 
@@ -6329,17 +6329,6 @@ Initial Construction
 |}
 
 
-Upgrade 1
-
-{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
-! scope="col"|Resource
-! scope="col"|Quantity
-|-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|9
-|}
-
-
 ===Variation B===
 Initial Construction
 
@@ -6352,17 +6341,6 @@ Initial Construction
 |}
 
 
-Upgrade 1
-
-{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
-! scope="col"|Resource
-! scope="col"|Quantity
-|-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|10
-|}
-
-
 ===Variation C===
 Initial Construction
 
@@ -6372,17 +6350,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|11
-|}
-
-
-Upgrade 1
-
-{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
-! scope="col"|Resource
-! scope="col"|Quantity
-|-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|9
 |}
 
 

@@ -9,6 +9,7 @@ step:new
 villager:startvillager
 duration:1048
 setplayertagsuccess:sadhu_5b_start
+setplayertagsuccess:adivasifarmquest_generate
 
 step:new
 villager:startvillager

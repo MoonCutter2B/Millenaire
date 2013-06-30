@@ -1015,8 +1015,7 @@ public class Building {
 			village.relations.put(getPos(), relation);
 			village.saveTownHall("distance relation change");//immediate save as the distance village might be frozen
 		}
-		
-		MLN.temp(this, "Setting relation with "+villagePos+" to "+change+" (reset:"+reset+") in world: "+worldObj);
+
 		
 	}
 

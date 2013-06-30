@@ -797,15 +797,12 @@
 |Kodachi = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation A</th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
 <tr><th scope="row">Construction</th><td>10</td></tr>
-<tr><th scope="row">Upgrade 1</th><td>9</td></tr>
 </table>
 <table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation B</th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
 <tr><th scope="row">Construction</th><td>11</td></tr>
-<tr><th scope="row">Upgrade 1</th><td>10</td></tr>
 </table>
 <table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation C</th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
 <tr><th scope="row">Construction</th><td>11</td></tr>
-<tr><th scope="row">Upgrade 1</th><td>9</td></tr>
 </table>
 </table>
 

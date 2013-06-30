@@ -273,3 +273,81 @@ v1;0;L'architecture maya est la plus solide du monde.
 v2;30;It is with all the stone we mine to make these beauties.
 v1;60;Je me demande combien de maisons de pierre de plus fera-t-on ?
 v2;90;Seul le temps nous le dira, mon ami.
+
+
+newchat;key:cacaoyer,weigth:7
+v1;0;Il y a peu de cacaoyers, par ici. Cet endroit est malsain.
+v2;40;Plantons-en.
+v1;80;Dis-tu ! Les graines de cacaoyer coûtent extrêmement cher !
+v2;120;Ek Chuah nous aidera.
+
+newchat;key:chickenegg,weigth:5
+v1;0;Nous n'avons pas assez de poulets à sacrifier.
+v2;40;Il me semble avoir croisé $name. Achetons-lui des oeufs ?
+v1;90;Tu parles avec raison, faisons cela.
+
+newchat;key:ahmunghanan,weigth:6
+v1;0;Grâce à Ah Mun et Ghanan, nos récoltes sont bonnes. Gloire à eux ! 
+v2;30;Remercions-les pendant la prière. 
+v1;80;Que pourrait-on leur offrir ? 
+v2;120;Ne fais pas l'idiot ! Notre sang, bien sûr !  Don't be stupid! Our blood, of course!
+
+newchat;key:badweather,weigth:8
+v1;0;Chac est en colère. Il fait mauvais temps.
+v2;40;Nous ne le prions pas assez.
+
+newchat;key:monotheisme,weigth:4
+v1;0;Comment ? $name serait monothéïste ? 
+V2;35;Il a l'air de ne pas prendre au sérieux notre religion... 
+v1;75;Allons. Il n'est pas assez bête pour ne pas croire en nos Dieux. 
+
+newchat;key:mayangods,v1:adult,v2:adult,weigth:8
+v1;0;La foi est notre seule arme dans ces étranges régions.
+v2;40;Compte tenu de notre situation, nous devons punir ceux qui offensent nos Dieux.
+v1;80;On ne doit surtout pas les vexer.
+
+newchat;key:poktapok,weigth:7
+v1;0;J'adore le Pok-ta-Pok !  
+v2;40;Moi aussi ! Il faut dire que c'est un de nos seuls divertisements, ici.
+v1;80;C'est vrai. On s'ennuie... et j'ai perdu ma dernière balle ! 
+
+newchat;key:year,weigth:5
+v1;0;Nous savions avant tout le monde qu'une année dure précisément 365,2420 jours. 
+v2;40;Nous sommes doués dans tous les domaines : mathématiques, art, géographie... 
+
+newchat;key:puja,weigth:6
+v1;0;Es-tu allé à la prière ? 
+v2;35;Évidemment ! Un vrai maya se doit d'y aller ! 
+v1;80;Haha ! Tu as raison ! Quelle question stupide j'ai posée. 
+
+newchat;key:endofworld,weigth:3
+v1;0;Nos chamanes et nos astrologues voient quelque chose. 
+v2;40;Ah bon ? Quoi donc ?  
+v1;80;Ils voient un évenement important en l'an 2012.   
+v2;120;Oula ! Tu ne crois pas qu'ils projettent un peu trop loin ?  
+
+newchat;key:xaire,weigth:3
+v1;0;Xaire, $targetfirstname!   
+v2;30;Xaire ? Comment ça "xaire" ?
+v1;70;J'ai entendu un byzantin me saluer de cette façon. 
+v2;110;Allons. Tu es maya. Salue-nous dans notre langue. 
+v1;150;Un véritable maya doit avoir des connaissances dans tous les domaines.  
+v2;200;Je t'accorde qu'il est bon de savoir parler plusieurs langues, mais tu ne vas pas parler de cette façon dans le village !  
+
+newchat;key:bloodbis,v1:adult,v2:adult,weigth:2
+v1;0;Mutilons-nous à la prochaine prière.  
+v2;40;Je l'ai déjà fait. Pas toi ?  
+v1;80;J-J-Je préfère garder mon sang... 
+v2;120;Et voilà, tu nous refais le même coup ! A chaque fois que tu as l'air déterminé, tu changes d'avis !  
+v1;160;Mais je ne veux pas ! Je ne veux pas !
+v2;200;Tu refuses d'honorer nos Dieux ?! 
+
+newchat;key:cacao,weigth:6
+v1;0;Que le cacao est sain, et délicieux... 
+v2;40;Sain, sans doute ! Mais délicieux, sûrement pas ! Le Wah est bien meilleur. 
+v1;80;Le cacao est l'aliment préféré des Dieux. Mange ce qu'ils t'offrent, plutôt.  
+
+newchat;key:reborn,weigth:7
+v1;0;Quel merveilleux papillon là-bas. Peut-être est-ce notre ami, sacrifié quatre ans plus tôt ? 
+v2;40;Je pense plutôt qu'il serait un colibri !  
+v1;80;Ce n'est pas nous qui le saurons. 

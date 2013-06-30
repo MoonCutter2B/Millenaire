@@ -15,3 +15,4 @@ rewardgood:rottenflesh,1
 rewardgood:vegcurry,1
 setplayertagsuccess:sadhu_5b_done
 clearplayertagsuccess:sadhu_5b_start
+clearplayertagsuccess:adivasifarmquest_generate

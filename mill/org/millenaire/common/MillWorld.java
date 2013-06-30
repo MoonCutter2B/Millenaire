@@ -1065,72 +1065,76 @@ public class MillWorld {
 
 
 
-	public void updateWorldServer(boolean surfaceLoaded) {
+	public void updateWorldServer() {
 
-		if (surfaceLoaded) {
-			for (final Building b : allBuildings()) {
-				b.updateBuildingServer();
-				b.updateBackgroundVillage();
-			}
-
-			checkConnections();
-
-			for (UserProfile profile : this.profiles.values()) {
-				if (profile.connected)
-					profile.updateProfile();
-			}
-
-			for (final Object o : world.playerEntities) {
-				final EntityPlayer player=(EntityPlayer)o;
-
-				//MillCommonUtilities.getServerProfile(player.worldObj,player.username).updateProfile();
-
-				SpecialQuestActions.onTick(this,player);
-			}
-
-			if (MLN.DEV) {
-
-				//testLocations("worldupdate");
-
-				DevModUtilities.runAutoMove(world);
-			}
-
-			for (Point p : renameNames.keySet()) {
-				if (buildings.containsKey(p)) {
-					Building b=buildings.get(p);
-					b.changeVillageName(renameNames.get(p));
-					for (int i=0;i<villagesList.pos.size();i++) {
-						if (villagesList.pos.get(i).equals(p))
-							villagesList.names.setElementAt(b.getVillageQualifiedName(), i);
-					}
-					for (int i=0;i<loneBuildingsList.pos.size();i++) {
-						if (loneBuildingsList.pos.get(i).equals(p))
-							loneBuildingsList.names.setElementAt(b.getVillageQualifiedName(), i);
-					}
-				}
-			}
-			for (Point p : renameQualifiers.keySet()) {
-				if (buildings.containsKey(p)) {
-					Building b=buildings.get(p);
-					b.changeVillageQualifier(renameQualifiers.get(p));
-					for (int i=0;i<villagesList.pos.size();i++) {
-						if (villagesList.pos.get(i).equals(p))
-							villagesList.names.setElementAt(b.getVillageQualifiedName(), i);
-					}
-					for (int i=0;i<loneBuildingsList.pos.size();i++) {
-						if (loneBuildingsList.pos.get(i).equals(p))
-							loneBuildingsList.names.setElementAt(b.getVillageQualifiedName(), i);
-					}
-				}
-			}
-			renameNames.clear();
-			renameQualifiers.clear();
-
-			forcePreload();
-
-			testLog();
-
+		for (final Building b : allBuildings()) {
+			b.updateBuildingServer();
+			b.updateBackgroundVillage();
 		}
+
+		checkConnections();
+
+		
+		for (UserProfile profile : this.profiles.values()) {
+			if (!profile.connected && profile.getPlayer()!=null) {
+				profile.connectUser();
+			}
+			if (profile.connected) {
+				profile.updateProfile();
+			}
+		}
+
+		for (final Object o : world.playerEntities) {
+			final EntityPlayer player=(EntityPlayer)o;
+
+			//MillCommonUtilities.getServerProfile(player.worldObj,player.username).updateProfile();
+
+			SpecialQuestActions.onTick(this,player);
+		}
+
+		if (MLN.DEV) {
+
+			//testLocations("worldupdate");
+
+			DevModUtilities.runAutoMove(world);
+		}
+
+		for (Point p : renameNames.keySet()) {
+			if (buildings.containsKey(p)) {
+				Building b=buildings.get(p);
+				b.changeVillageName(renameNames.get(p));
+				for (int i=0;i<villagesList.pos.size();i++) {
+					if (villagesList.pos.get(i).equals(p))
+						villagesList.names.setElementAt(b.getVillageQualifiedName(), i);
+				}
+				for (int i=0;i<loneBuildingsList.pos.size();i++) {
+					if (loneBuildingsList.pos.get(i).equals(p))
+						loneBuildingsList.names.setElementAt(b.getVillageQualifiedName(), i);
+				}
+			}
+		}
+		for (Point p : renameQualifiers.keySet()) {
+			if (buildings.containsKey(p)) {
+				Building b=buildings.get(p);
+				b.changeVillageQualifier(renameQualifiers.get(p));
+				for (int i=0;i<villagesList.pos.size();i++) {
+					if (villagesList.pos.get(i).equals(p))
+						villagesList.names.setElementAt(b.getVillageQualifiedName(), i);
+				}
+				for (int i=0;i<loneBuildingsList.pos.size();i++) {
+					if (loneBuildingsList.pos.get(i).equals(p))
+						loneBuildingsList.names.setElementAt(b.getVillageQualifiedName(), i);
+				}
+			}
+		}
+		renameNames.clear();
+		renameQualifiers.clear();
+
+		forcePreload();
+
+		testLog();
+
+
 	}
 
 }

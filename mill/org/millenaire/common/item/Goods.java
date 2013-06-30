@@ -250,9 +250,9 @@ public class Goods {
 	}
 
 	public static interface IItemInitialEnchantmens {
-		
+
 		public void applyEnchantments(ItemStack stack);
-		
+
 	}
 
 	public static class ItemMayanQuestCrown extends ItemArmor implements IItemInitialEnchantmens {
@@ -679,7 +679,9 @@ public class Goods {
 		@Override
 		public void applyEnchantments(ItemStack stack) {
 			if (knockback) {
-				stack.addEnchantment(Enchantment.knockback, 2);
+				if (EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId, stack)==0) {
+					stack.addEnchantment(Enchantment.knockback, 2);
+				}
 			}
 		}
 
@@ -1249,7 +1251,7 @@ public class Goods {
 		goodsName.put("lambcooked", new InvItem(Mill.lambCooked,0));
 		goodsName.put("feta", new InvItem(Mill.feta,0));
 		goodsName.put("souvlaki", new InvItem(Mill.souvlaki,0));
-		
+
 		goodsName.put("ikayaki", new InvItem(Mill.ikayaki,0));
 
 		goodsName.put("tnt", new InvItem(Block.tnt,0));

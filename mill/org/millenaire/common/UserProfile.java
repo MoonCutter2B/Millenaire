@@ -65,7 +65,7 @@ public class UserProfile {
 	private final HashMap<String, String> actionData = new HashMap<String, String>();
 
 	private final MillWorld mw;
-	private boolean connectionActionDone=false;
+	boolean connectionActionDone=false;
 	public boolean connected=false;
 
 	private boolean showNewWorldMessageDone=false;

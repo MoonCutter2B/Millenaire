@@ -47,3 +47,6 @@ min_lonebuilding_distance=300
 //Distance min villages/bâtiments; Distance minimale entre villages et bâtiments isolés générés. Défaut: 300.
 min_village_lonebuilding_distance=100
 
+//Distance d'affichage des noms; Distance à laquelle les noms apparaissent. Défaut: 20.
+villagers_names_distance=5
+

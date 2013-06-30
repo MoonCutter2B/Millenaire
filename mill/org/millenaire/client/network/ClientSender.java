@@ -494,7 +494,6 @@ public class ClientSender {
 			StreamReadWrite.writeNullablePoint(target, data);
 			data.writeInt(amount);
 			
-			MLN.temp(null, "Sending relations to "+amount+" between "+th+" and "+target);
 			
 			
 		} catch (final IOException e) {

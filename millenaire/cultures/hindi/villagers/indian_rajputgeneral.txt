@@ -9,6 +9,8 @@ health=60
 texture=/graphics/mob/indian/ML_rajput_leader0.png
 texture=/graphics/mob/indian/ML_rajput_leader1.png
 
+goal=gosocialise
+goal=chat
 goal=gorest
 goal=gopray
 goal=patrol

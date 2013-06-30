@@ -40,7 +40,7 @@ public class ServerTickHandler implements ITickHandler
 			return;
 
 		for (final MillWorld mw : Mill.serverWorlds) {
-			mw.updateWorldServer(true);
+			mw.updateWorldServer();
 		}
 	}
 }

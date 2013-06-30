@@ -273,3 +273,80 @@ v1;0;Mayan Architecture is the strongest in all these lands.
 v2;30;C'est avec toute la pierre qu'on mine qu'on fait ces beautés. 
 v1;60;I wonder how many more stone homes we'll make ? 
 v2;90;Only time will tell, friend. 
+
+newchat;key:cacaoyer,weigth:7
+v1;0;There are few cocoa trees here, this place is unhealthy.
+v2;40;Let's plant some.
+v1;80;Says you! Cocoa beans are extremely expensive!
+v2;120;Ek Chuah will help us.
+
+newchat;key:chickenegg,weigth:5
+v1;0;We don't have enough chickens to sacrifice.
+v2;40;I think we passed by $name. Let's buy eggs from him.
+v1;90;You are right, let's do that.
+
+newchat;key:ahmunghanan,weigth:6
+v1;0;Thanks to Ah Mun and Ghanan, our harvests are good. Praise be to them!
+v2;30;Let's thank them during prayer.
+v1;80;What can we offer them?
+v2;120;Ne fais pas l'idiot ! Notre sang, bien sûr !  Don't be stupid! Our blood, of course!
+
+newchat;key:badweather,weigth:8
+v1;0;Chac is angry. The weather is bad.
+v2;40;We're not praying enough.
+
+newchat;key:monotheisme,weigth:4
+v1;0;Really? $name is monotheistic?
+V2;35;He doesn't seem to take our religion seriously...
+v1;75;Come on, He's not stupid enough to not believe in our Gods.
+
+newchat;key:mayangods,v1:adult,v2:adult,weigth:8
+v1;0;Faith is our only weapon in these strange lands.
+v2;40;Given our situation, we need to punish those who offend our gods.
+v1;80;We can certainly not get them offended.
+
+newchat;key:poktapok,weigth:7
+v1;0;I love Pok-ta-Pok!
+v2;40;Me too! I must say that it is one of our few fun activity here.
+v1;80;It's true. It's boring...and I lost my last ball!
+
+newchat;key:year,weigth:5
+v1;0;We knew before anyone else that one year was precisely 365.2420 days.
+v2;40;We are good in all areas: mathematics, art, geography...
+
+newchat;key:puja,weigth:6
+v1;0;Did you go to pray?
+v2;35;Of Course! A real mayan must!
+v1;80;Haha! Of course! What a stupid question I asked.
+
+newchat;key:endofworld,weigth:3
+v1;0;Our shamans and our astrologers see something.
+v2;40;Oh really? What?
+v1;80;They see an important event in the year 2012.
+v2;120;You do not think they are planning a little too far ahead?
+
+newchat;key:xaire,weigth:3
+v1;0;Xaire, $targetfirstname!
+v2;30;Xaire? What's "xaire"?
+v1;70;A Byzantine greeted me this way.
+v2;110;Come on. You are mayan. Let's greet ourselves in our language.
+v1;150;A real mayan must have knowledge in all areas.
+v2;200;I grant you that it is good to be able to speak several languages​​, but you will not talk that way in the village!
+
+newchat;key:bloodbis,v1:adult,v2:adult,weigth:2
+v1;0;Let's mutilate ourselves during the next prayer.
+v2;40;I have already done so. Not you?
+v1;80;J-J-Je préfère garder mon sang...
+v2;120;And now, you're doing it again! Every time you look decided, you change your mind!
+v1;160;I don't want to!
+v2;200;You refuse to honour our Gods?!
+
+newchat;key:cacao,weigth:6
+v1;0;Cocoa is healthy and delicious...
+v2;40;Healthy, no doubt! But delicious, surely not! Wah is so much better.
+v1;80;Cocoa is the favourite food of the gods. Eat what they offer you.
+
+newchat;key:reborn,weigth:7
+v1;0;What a wonderful butterfly over there. Maybe this is our friend, sacrificed four years earlier?
+v2;40;I think he would be a hummingbird instead!
+v1;80;We won't be the ones to know.

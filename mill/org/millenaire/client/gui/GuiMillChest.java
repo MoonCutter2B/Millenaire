@@ -12,6 +12,18 @@ import org.millenaire.common.block.BlockMillChest;
 
 public class GuiMillChest extends GuiChest {
 
+	@Override
+	protected void keyTyped(char par1, int par2) {
+		if (!locked) {
+			super.keyTyped(par1, par2);
+		} else {
+			if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode)
+	        {
+	            this.mc.thePlayer.closeScreen();
+	        }
+		}
+	}
+
 	public static GuiMillChest createGUI(World world, int i, int j, int k, EntityPlayer entityplayer) {
 		final TileEntityMillChest lockedchest = (TileEntityMillChest) world.getBlockTileEntity(i, j, k);
 

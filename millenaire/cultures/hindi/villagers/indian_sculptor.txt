@@ -5,6 +5,8 @@ firstNameList=men_names
 
 texture=/graphics/mob/indian/ML_Scultor0.png
 
+goal=gosocialise
+goal=chat
 goal=gorest
 goal=gopray
 goal=makeindianstatue

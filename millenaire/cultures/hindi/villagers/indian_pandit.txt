@@ -8,6 +8,8 @@ tag=meditates
 texture=/graphics/mob/indian/ML_priest0.png
 texture=/graphics/mob/indian/ML_priest1.png
 
+goal=gosocialise
+goal=chat
 goal=gorest
 goal=gopray
 goal=performpujas

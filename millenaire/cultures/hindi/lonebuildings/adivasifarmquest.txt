@@ -8,7 +8,7 @@ biome:swampland
 biome:lush swamplands
 
 max:1
-keyLoneBuildingGenerateTag:sadhu_5b_start
+keyLoneBuildingGenerateTag:adivasifarmquest_generate
 
 //starting buildings:
 centre:adivasifarm

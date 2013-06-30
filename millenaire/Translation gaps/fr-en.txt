@@ -1,7 +1,3 @@
 Translation comparison between fr and en
 
-List of gaps found in culture dialogues for hindi: 
-
-Dialogue missing for culture hindi: monsoon
-
-Traduction completness: 99%
+Traduction completness: 100%

@@ -7,6 +7,8 @@ tag=chief
 texture=/graphics/mob/indian/ML_raja0.png
 texture=/graphics/mob/indian/ML_raja1.png
 
+goal=gosocialise
+goal=chat
 goal=gorest
 goal=gopray
 
