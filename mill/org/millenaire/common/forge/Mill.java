@@ -121,7 +121,7 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "5.1.2";
+	public static final String versionNumber = "5.1.3";
 
 	public static final String versionBound = "[5.0.0,6.0)";
 	public static final String modId="Millenaire";
@@ -600,7 +600,7 @@ public class Mill
 
 	@Init
 	public void load(FMLInitializationEvent evt) {
-
+		
 		if (startupError)
 			return;
 
@@ -744,6 +744,8 @@ public class Mill
 		proxy.loadLanguages();
 	}
 
+
+
 	@PostInit
 	public void modsLoaded(FMLPostInitializationEvent evt)
 	{
@@ -752,7 +754,7 @@ public class Mill
 
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event)
-	{
+	{		
 		MLN.loadConfig();
 
 		initBlockItems();

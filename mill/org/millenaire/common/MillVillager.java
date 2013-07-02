@@ -2285,6 +2285,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			return true;
 		}
 
+		final UserProfile profile=mw.getProfile(entityplayer.username);
 
 		if ((canMeditate() && mw.isGlobalTagSet(MillWorld.PUJAS)) || (canPerformSacrifices() && mw.isGlobalTagSet(MillWorld.MAYANSACRIFICES))) {
 
@@ -2352,7 +2353,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 		}
 
-		if (this.isLocalMerchant()) {
+		if (this.isLocalMerchant() && !profile.villagersInQuests.containsKey(villager_id)) {
 			ServerSender.sendTranslatedSentence(entityplayer,MLN.ORANGE, "other.localmerchantinteract",getName(),hiredBy);
 			return false;
 		}

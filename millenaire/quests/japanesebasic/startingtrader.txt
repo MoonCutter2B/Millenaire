@@ -1,0 +1,12 @@
+minreputation:0
+chanceperhour:0.1
+maxsimultaneous:1
+step:new
+definevillager:key=startvillager,type=japanese/japanese_merchant,forbiddenplayertag=startingtrader_done
+villager:startvillager
+duration:5
+requiredgood:diamond,2
+requiredgood:gold,8
+rewardmoney:32*64
+rewardreputation:256
+settagsuccess:startvillager,startingtrader_done

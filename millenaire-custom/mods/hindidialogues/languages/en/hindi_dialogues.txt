@@ -1,4 +1,0 @@
-newchat;key:monsoon,tag:notraining,weigth:10
-v1;0;Barish nahi ho rahi hai. / La mousson ne vient pas.
-v2;30;Barish hogi. Chintit mat ho. / Elle viendra, ne t'inquiète pas.
-v1;60;Tum har sal yahi bolte ho... / Tu dis ça chaque année...

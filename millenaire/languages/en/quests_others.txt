@@ -199,6 +199,18 @@ fishingfrenzy_1_description_refuse=Not an apt fisher eh? Oh well, you may still 
 fishingfrenzy_1_description_timeup=You could not catch the fish in time. The villagers of $startvillager_villagename$ have noted your disgrace.
 fishingfrenzy_1_listing=Catch four fishes and bring them to $wife_villagername$
 
+poems_0_label=Writing Poems
+poems_0_description=Could you help me, $name?<ret>I am missing my friends and family in the capital. We always enjoy writing poems and letters to each other. I hope for the day when we can write to each others again. When that day comes, I would like to be prepared.<ret>Could you gather some bits and pieces for me?
+I would need ten papers and two each of black, yellow and red dyes.
+poems_0_description_success=Arigatou gozaimasu! Thank you very much!<ret>You are honourable to help me like this. Here is my grateful reward.
+poems_0_description_refuse=I will write a poem on the selfishness of men.
+
+
+startingtrader_0_label=Aspiring Trader
+startingtrader_0_description=Hey! Are you a trader...? Looking for a good deal? <ret>It’s hard making a living being a trader. Buy it low and sell it high. Hahaha!<ret>And yet, a farmer gets more respect than me. But I have new plans to trade with other villages, dealing in luxury goods! I just lack a starting stock.<ret><ret>I would need two diamonds and eight gold bars. Could you sell me that?
+startingtrader_0_description_success=Good, very good... This will work nice for my plans. Doumo arigatou! Many thanks!
+startingtrader_0_description_refuse=You have no talent for trade!
+
 
 architectwife_0_label=Husband's lunch
 architectwife_0_description=My husband $architect_villagername$ the architect is starving and I forgot to pack food for him! Could you please take him this fish?

@@ -200,6 +200,17 @@ fishingfrenzy_1_description_refuse=
 fishingfrenzy_1_description_timeup=Vous n'avez pas réussit à pêcher les poissons à temps.
 fishingfrenzy_1_listing=Attrapez quatre poissons et apportez les à $wife_villagername$.
 
+poems_0_label=La Poétesse
+poems_0_description=Pourriez vous m'aider, $name?<ret>Mes amis et ma famille de la capitale me manques. Nous aimons nous écrire des poèmes et des lettres. J'espère qu'un jour ça sera de nouveau possible. Je voudrais être prête!<ret>Pourriez-vous m'apporter les objets nécessaires? Il me faudrait dix papiers, et deux exemplaires de chacun de ces colorants: noir, jaune et rouge.
+poems_0_description_success=Arigatou gozaimasu! Merci beaucoup! Vous êtes un homme très galant. Voici ma récompense.
+poems_0_description_refuse=J'écrirais un poème sur l'égoïsme des hommes.
+
+
+startingtrader_0_label=Le marchand ambitieux
+startingtrader_0_description=Hey! Vous êtes un marchand? Vous cherchez une bonne affaire?<ret>C'est dur de gagner sa vie dans les affaires. Acheter bon marché, vendre cher. Hahaha!<ret>Et pourtant, même un fermier est plus respecté que moi. Mais j'ai des projets de commerce avec des nouveaux villages, du commerce de luxe! Il me faut juste un stock pour débuter.<ret><ret>Il me faudrait deux diamants et huit lingots d'or. Vous pourriez me vendre ça?
+startingtrader_0_description_success=Bien, très bien... Ca me conviendra parfaitement! Doumo arigatou! Merci beaucoup!
+startingtrader_0_description_refuse=Vous n'y connaissez rien en affaire!
+
 
 architectwife_0_label=Le repas du mari
 architectwife_0_description=Mon mari l'architecte $architect_villagername$ meurt de faim et j'ai oublié son repas! Pouvez-vous lui apporter ce poisson?
