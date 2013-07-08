@@ -6,11 +6,11 @@ import java.util.Vector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
@@ -22,12 +22,17 @@ import org.millenaire.common.ContainerPuja.OfferingSlot;
 import org.millenaire.common.ContainerPuja.ToolSlot;
 import org.millenaire.common.MLN;
 import org.millenaire.common.PujaSacrifice;
+import org.millenaire.common.forge.Mill;
 
 public class GuiPujas extends GuiContainer
 {
 	private final Building temple;
 	private final EntityPlayer player;
-
+	
+	private static final ResourceLocation texturePujas = new ResourceLocation(Mill.modId,"/graphics/gui/ML_pujas.png");
+	private static final ResourceLocation textureSacrifices = new ResourceLocation(Mill.modId,"/graphics/gui/ML_mayansacrifices.png");
+	
+	
 	public GuiPujas(EntityPlayer player, Building temple)
 	{
 		super(new ContainerPuja(player, temple));
@@ -117,9 +122,9 @@ public class GuiPujas extends GuiContainer
 		try {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			if (temple.pujas!=null && temple.pujas.type==PujaSacrifice.MAYAN)
-				mc.renderEngine.bindTexture("/graphics/gui/ML_mayansacrifices.png");
+				mc.func_110434_K().func_110577_a(textureSacrifices);
 			else
-				mc.renderEngine.bindTexture("/graphics/gui/ML_pujas.png");
+				mc.func_110434_K().func_110577_a(texturePujas);
 			final int j = (width - xSize) / 2;
 			final int k = (height - ySize) / 2;
 			drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
@@ -318,57 +323,6 @@ public class GuiPujas extends GuiContainer
 			MLN.printException("Exception in drawScreenGUIScreen: ", e);
 		}
 
-	}
-
-
-
-	/**
-	 * Draws an inventory slot
-	 */
-	@Override
-	protected void drawSlotInventory(Slot par1Slot)
-	{
-
-		if (par1Slot==null) {
-			MLN.printException("Tried drawing null slot", new Exception());
-			return;
-		}
-
-		try {
-			final int i = par1Slot.xDisplayPosition;
-			final int j = par1Slot.yDisplayPosition;
-			final ItemStack itemstack = par1Slot.getStack();
-			boolean flag = false;
-			final int k = i;
-			final int l = j;
-			zLevel = 100F;
-			itemRenderer.zLevel = 100F;
-
-			if (itemstack == null)
-			{
-				final Icon icon = par1Slot.getBackgroundIconIndex();
-
-				if (icon != null )
-				{
-					GL11.glDisable(GL11.GL_LIGHTING);
-					mc.renderEngine.bindTexture("/gui/items.png");
-					this.drawTexturedModelRectFromIcon(i, j, icon, 16, 16);
-					GL11.glEnable(GL11.GL_LIGHTING);
-					flag = true;
-				}
-			}
-
-			if (!flag && (itemstack!=null))
-			{
-				itemRenderer.renderItemAndEffectIntoGUI(fontRenderer, mc.renderEngine, itemstack, k, l);
-				itemRenderer.renderItemOverlayIntoGUI(fontRenderer, mc.renderEngine, itemstack, k, l);
-			}
-
-			itemRenderer.zLevel = 0.0F;
-			zLevel = 0.0F;
-		} catch (final Exception e) {
-			MLN.printException("Error when trying to render slot in GuiTrade. Slot: "+par1Slot.slotNumber,e);
-		}
 	}
 
 

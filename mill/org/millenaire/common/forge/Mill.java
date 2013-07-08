@@ -74,17 +74,12 @@ import org.millenaire.common.network.ConnectionHandler;
 import org.millenaire.common.network.ServerReceiver;
 
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
-import cpw.mods.fml.common.Mod.ServerStarted;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkMod.SidedPacketHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -121,10 +116,10 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "5.1.3";
+	public static final String versionNumber = "5.1.4";
 
 	public static final String versionBound = "[5.0.0,6.0)";
-	public static final String modId="Millenaire";
+	public static final String modId="millenaire";
 	public static final String name = "Mill\u00e9naire"; 
   
 	public static final String version = name+" "+versionNumber;
@@ -166,6 +161,7 @@ public class Mill
 	public static int japaneseGuardArmourId=0;
 	public static int byzantineArmourId=0;
 	public static int mayanQuestArmourId=0;
+	
 
 	public static Item denier;
 	public static Item denier_or;
@@ -403,7 +399,7 @@ public class Mill
 
 		summoningWand = new ItemSummoningWand(nextItemId(),"summoningwand").setFull3D().setUnlocalizedName("ml_villageWand");
 
-		normanBroadsword = new ItemMillenaireSword(nextItemId(),"normansword",1500,15,EnumToolMaterial.EMERALD.getEnchantability(),0,0,false).setUnlocalizedName("ml_normanBroadsword");
+		normanBroadsword = new ItemMillenaireSword(nextItemId(),"normansword",1500,20,EnumToolMaterial.EMERALD.getEnchantability(),0,0,false).setUnlocalizedName("ml_normanBroadsword");
 		normanHelmet = new ItemMillenaireArmour(nextItemId(),"normanhelmet",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),0).setUnlocalizedName("ml_normanHelmet");
 		normanPlate = new ItemMillenaireArmour(nextItemId(),"normanplate",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),1).setUnlocalizedName("ml_normanPlate");
 		normanLegs = new ItemMillenaireArmour(nextItemId(),"normanlegs",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),2).setUnlocalizedName("ml_normanLegs");
@@ -597,8 +593,18 @@ public class Mill
 			MLN.printException("Could not access BlockFire's fields: ",e);
 		}
 	}
+	
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event)
+	{		
+		MLN.loadConfig();
 
-	@Init
+		initBlockItems();
+
+		AchievementPage.registerAchievementPage(MillAchievements.millAchievements);
+	}
+
+	@EventHandler
 	public void load(FMLInitializationEvent evt) {
 		
 		if (startupError)
@@ -746,29 +752,7 @@ public class Mill
 
 
 
-	@PostInit
-	public void modsLoaded(FMLPostInitializationEvent evt)
-	{
-		/* and this replaces modsLoaded(), all mods are loaded at this point, do inter-mod stuff here */
-	}
 
-	@PreInit
-	public void preInit(FMLPreInitializationEvent event)
-	{		
-		MLN.loadConfig();
 
-		initBlockItems();
-
-		AchievementPage.registerAchievementPage(MillAchievements.millAchievements);
-	}
-
-	@ServerStarted
-	public void serverStarted(FMLServerStartedEvent event)
-	{
-		/*
-		 * Should you need something particular done on a server, this is the place
-		 * fires on both the Integrated Server ("SSP") and real servers
-		 */
-	}
 }
 

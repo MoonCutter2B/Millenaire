@@ -10,11 +10,13 @@ import java.util.Vector;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumArmorMaterial;
@@ -48,6 +50,8 @@ import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.VillageList;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerSender;
+
+import com.google.common.collect.Multimap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -225,6 +229,22 @@ public class Goods {
 
 	public static class ItemMillenaireArmour extends ItemArmor {
 
+		private static final ResourceLocation norman1 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_norman_1.png");
+		private static final ResourceLocation norman2 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_norman_2.png");
+
+		private static final ResourceLocation japaneseGuard1 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_japanese_guard_1.png");
+		private static final ResourceLocation japaneseGuard2 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_japanese_guard_2.png");
+
+		private static final ResourceLocation japaneseWarriorBlue1 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_japanese_warrior_blue_1.png");
+		private static final ResourceLocation japaneseWarriorBlue2 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_japanese_warrior_blue_2.png");
+
+		private static final ResourceLocation japaneseWarriorRed1 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_japanese_warrior_red_1.png");
+		private static final ResourceLocation japaneseWarriorRed2 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_japanese_warrior_red_2.png");
+
+		private static final ResourceLocation byzantine1 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_byzantine_1.png");
+		private static final ResourceLocation byzantine2 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_byzantine_2.png");
+		
+		
 		int  enchantmentValue;
 
 		public final String iconName;
@@ -247,6 +267,56 @@ public class Goods {
 		{
 			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 		}
+
+		@Override
+		public String getArmorTexture(ItemStack par1, Entity entity, int slot, int layer){
+			if (par1.itemID == Mill.normanHelmet.itemID
+					|| par1.itemID == Mill.normanPlate.itemID
+					|| par1.itemID == Mill.normanBoots.itemID){
+				return norman1.toString();
+			}
+			if (par1.itemID == Mill.normanLegs.itemID){
+				return norman2.toString();
+			}
+			
+			if (par1.itemID == Mill.japaneseGuardHelmet.itemID
+					|| par1.itemID == Mill.japaneseGuardPlate.itemID
+					|| par1.itemID == Mill.japaneseGuardBoots.itemID){
+				return japaneseGuard1.toString();
+			}
+			if (par1.itemID == Mill.japaneseGuardLegs.itemID){
+				return japaneseGuard2.toString();
+			}
+			
+			if (par1.itemID == Mill.japaneseWarriorBlueHelmet.itemID
+					|| par1.itemID == Mill.japaneseWarriorBluePlate.itemID
+					|| par1.itemID == Mill.japaneseWarriorBlueBoots.itemID){
+				return japaneseWarriorBlue1.toString();
+			}
+			if (par1.itemID == Mill.japaneseWarriorBlueLegs.itemID){
+				return japaneseWarriorBlue2.toString();
+			}
+			
+			if (par1.itemID == Mill.japaneseWarriorRedHelmet.itemID
+					|| par1.itemID == Mill.japaneseWarriorRedPlate.itemID
+					|| par1.itemID == Mill.japaneseWarriorRedBoots.itemID){
+				return japaneseWarriorRed1.toString();
+			}
+			if (par1.itemID == Mill.japaneseWarriorRedLegs.itemID){
+				return japaneseWarriorRed2.toString();
+			}
+			
+			if (par1.itemID == Mill.byzantineHelmet.itemID
+					|| par1.itemID == Mill.byzantinePlate.itemID
+					|| par1.itemID == Mill.byzantineBoots.itemID){
+				return byzantine1.toString();
+			}
+			if (par1.itemID == Mill.byzantineLegs.itemID){
+				return byzantine2.toString();
+			}
+			
+			return norman1.toString();
+		}
 	}
 
 	public static interface IItemInitialEnchantmens {
@@ -257,6 +327,9 @@ public class Goods {
 
 	public static class ItemMayanQuestCrown extends ItemArmor implements IItemInitialEnchantmens {
 
+		private static final ResourceLocation mayan1 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_mayan_quest_1.png");
+		
+		
 		public final String iconName;
 
 		public ItemMayanQuestCrown(int id,String iconName, int armourId, int type) {
@@ -264,6 +337,11 @@ public class Goods {
 			setMaxDamage(0);			
 			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
+		}
+		
+		@Override
+		public String getArmorTexture(ItemStack par1, Entity entity, int slot, int layer){
+			return mayan1.toString();
 		}
 
 		@Override
@@ -603,16 +681,27 @@ public class Goods {
 			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
-		@Override
-		public int getDamageVsEntity(Entity entity) {
 
-			if ((entity!=null) && MillCommonUtilities.probability(criticalChance) && !entity.worldObj.isRemote) {
-				ServerSender.sendTranslatedSentenceInRange(entity.worldObj, new Point(entity), 10,MLN.DARKRED, "weapon.criticalstrike",""+criticalMultiple);
+
+		public int getDamageVsEntity() {
+
+			if (MillCommonUtilities.probability(criticalChance)) {
+				//ServerSender.sendTranslatedSentenceInRange(entity.worldObj, new Point(entity), 10,MLN.DARKRED, "weapon.criticalstrike",""+criticalMultiple);
 				return damage*criticalMultiple;
 			}
 
 			return damage;
 		}
+
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		public Multimap func_111205_h()
+		{
+			Multimap multimap = super.func_111205_h();
+			multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", getDamageVsEntity(), 0));
+			return multimap;
+		}
+
+
 		@Override
 		public int getItemEnchantability() {
 			return enchantability;
@@ -621,13 +710,6 @@ public class Goods {
 		public void registerIcons(IconRegister iconRegister)
 		{
 			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
-		}
-
-		@Override
-		public boolean hitEntity(ItemStack itemstack,
-				EntityLiving entityliving, EntityLiving player) {
-
-			return super.hitEntity(itemstack, entityliving, player);
 		}
 
 		@Override

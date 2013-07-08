@@ -173,7 +173,7 @@ public class AStarStatic
 	{
 		final Block b = Block.blocksList[blockID];
 		if (b != null)
-			return b.isLadder(world, x, y, z);
+			return b.isLadder(world, x, y, z, null);
 		return false;
 	}
 

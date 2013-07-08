@@ -2,13 +2,13 @@ package org.millenaire.client.texture;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.Texture;
-import net.minecraft.client.renderer.texture.TextureStitched;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.world.World;
 
 import org.millenaire.common.Point;
 
-public class TextureAmuletAlchemist extends TextureStitched {
+public class TextureAmuletAlchemist extends TextureAtlasSprite {
 
 	private static final int radius=5;
 	
@@ -28,10 +28,10 @@ public class TextureAmuletAlchemist extends TextureStitched {
 		if (iconPos<0)
 			iconPos=0;
 
-		if (iconPos != this.frameCounter)
+		if (iconPos != this.field_110973_g)
         {
-            this.frameCounter = iconPos;
-            this.textureSheet.copyFrom(this.originX, this.originY, (Texture)this.textureList.get(this.frameCounter), this.rotated);
+            this.field_110973_g = iconPos;
+            TextureUtil.func_110998_a((int[])this.field_110976_a.get(this.field_110973_g), this.width, this.height, this.field_110975_c, this.field_110974_d, false, false);
         }
 	}
 	

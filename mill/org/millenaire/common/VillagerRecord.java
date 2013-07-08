@@ -3,6 +3,7 @@ package org.millenaire.common;
 import java.util.HashMap;
 import java.util.Vector;
 
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 import org.millenaire.common.MillVillager.InvItem;
+import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
 public class VillagerRecord implements Cloneable {
@@ -51,7 +53,7 @@ public class VillagerRecord implements Cloneable {
 		vr.familyName = nbttagcompound.getString(label + "_familyName");
 		vr.nameKey = nbttagcompound.getString(label + "_propertype");
 		vr.occupation = nbttagcompound.getString(label + "_occupation");
-		vr.texture = nbttagcompound.getString(label + "_texture");
+		vr.texture = new ResourceLocation(Mill.modId,nbttagcompound.getString(label + "_texture"));
 		vr.housePos = Point.read(nbttagcompound, label + "_housePos");
 		vr.townHallPos = Point.read(nbttagcompound, label + "_townHallPos");
 		vr.originalVillagePos = Point.read(nbttagcompound, label + "_originalVillagePos");
@@ -111,7 +113,9 @@ public class VillagerRecord implements Cloneable {
 
 	public Vector<String> questTags = new Vector<String>();
 
-	public String type, firstName, familyName, nameKey, occupation, texture;
+	public String type, firstName, familyName, nameKey, occupation;
+	
+	public ResourceLocation texture;
 
 	private Building house;
 
@@ -235,7 +239,7 @@ public class VillagerRecord implements Cloneable {
 
 	public Item getBestMeleeWeapon() {
 
-		int max=1;
+		double max=1;
 		Item best=null;
 
 		for (final InvItem item : inventory.keySet()) {
@@ -243,8 +247,8 @@ public class VillagerRecord implements Cloneable {
 				if (Item.itemsList[item.id()]==null) {
 					MLN.error(this, "Attempting to check null melee weapon with id: "+inventory.get(item));
 				} else {
-					if (Item.itemsList[item.id()].getDamageVsEntity(null)>max) {
-						max=Item.itemsList[item.id()].getDamageVsEntity(null);
+					if (MillCommonUtilities.getItemWeaponDamage(Item.itemsList[item.id()])>max) {
+						max=MillCommonUtilities.getItemWeaponDamage(Item.itemsList[item.id()]);
 						best=Item.itemsList[item.id()];
 					}
 				}
@@ -252,8 +256,8 @@ public class VillagerRecord implements Cloneable {
 		}
 
 		if ((getType()!=null) && (getType().startingWeapon!=null)) {
-			if (Item.itemsList[getType().startingWeapon.id()].getDamageVsEntity(null)>max) {
-				max=Item.itemsList[getType().startingWeapon.id()].getDamageVsEntity(null);
+			if (MillCommonUtilities.getItemWeaponDamage(Item.itemsList[getType().startingWeapon.id()])>max) {
+				max=MillCommonUtilities.getItemWeaponDamage(Item.itemsList[getType().startingWeapon.id()]);
 				best=Item.itemsList[getType().startingWeapon.id()];
 			}
 		}
@@ -312,7 +316,7 @@ public class VillagerRecord implements Cloneable {
 		final Item bestMelee=getBestMeleeWeapon();
 
 		if (bestMelee!=null) {
-			attack+=bestMelee.getDamageVsEntity(null);
+			attack+=MillCommonUtilities.getItemWeaponDamage(bestMelee);
 		}
 
 		strength+=attack*2;
@@ -453,7 +457,7 @@ public class VillagerRecord implements Cloneable {
 			nbttagcompound.setString(label + "_spousesName", spousesName);
 		}
 		nbttagcompound.setInteger(label + "_gender", gender);
-		nbttagcompound.setString(label + "_texture", texture);
+		nbttagcompound.setString(label + "_texture", texture.func_110623_a());
 
 		nbttagcompound.setBoolean(label + "_killed", killed);
 		nbttagcompound.setBoolean(label + "_raidingVillage", raidingVillage);

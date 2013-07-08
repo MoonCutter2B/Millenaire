@@ -358,16 +358,6 @@ public class EntityMillDecoration extends EntityPainting  implements IEntityAddi
 		clientY=data.readDouble();
 		clientZ=data.readDouble();
 	}
-    
-    @Override
-	public boolean interact(EntityPlayer par1EntityPlayer) {
-
-		if (MLN.DEV) {
-			MLN.major(this, worldObj+" Type: "+type+", direction: "+hangingDirection+" y: "+yPosition+" y pos: "+posY);
-		}
-
-		return super.interact(par1EntityPlayer);
-	}
 
 	@Override
 	public void onUpdate() {

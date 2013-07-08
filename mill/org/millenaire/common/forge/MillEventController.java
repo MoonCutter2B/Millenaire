@@ -2,7 +2,6 @@ package org.millenaire.common.forge;
 
 import java.util.Vector;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITasks;
@@ -20,7 +19,6 @@ import net.minecraftforge.event.world.WorldEvent.Unload;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillWorld;
-import org.millenaire.common.core.MillCommonUtilities;
 
 public class MillEventController {
 
@@ -38,8 +36,8 @@ public class MillEventController {
 
 			EntityAITasks targetTasks;
 			try {
-				targetTasks = (EntityAITasks)MillCommonUtilities.getPrivateValue(EntityLiving.class, mob, 60);
-				targetTasks.addTask(3, new EntityAINearestAttackableTarget(mob, MillVillager.class, 16.0F, 0, false));
+				targetTasks = mob.targetTasks;
+				targetTasks.addTask(3, new EntityAINearestAttackableTarget(mob, MillVillager.class, 10, false));
 
 			} catch (final Exception e) {
 				MLN.printException("Error when trying to make new mob "+mob+" target villagers:", e);

@@ -3,6 +3,7 @@ package org.millenaire.client.gui;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.millenaire.client.network.ClientSender;
@@ -58,10 +59,12 @@ public class GuiNewVillage extends GuiText {
 	public int getPageSize() {
 		return 19;
 	}
+	
+	ResourceLocation background=new ResourceLocation(Mill.modId,"/graphics/gui/ML_panel.png");
 
 	@Override
-	public String getPNGPath() {
-		return "/graphics/gui/ML_panel.png";
+	public ResourceLocation getPNGPath() {
+		return background;
 	}
 
 	@Override

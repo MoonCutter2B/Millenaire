@@ -1,309 +1,309 @@
 //Item key;item id;item meta;label (indicative only)
 //This file is auto-generated and indicative only. Don't edit it.
 
-akwardpotion;373;16;Potion
-alchemistamulet;mln24;0;
-alchimistexplosive;1519;3;
+akwardpotion;373;16;Awkward Potion
+alchemistamulet;mln24;0;item.ml_dwarves_amulet.name
+alchimistexplosive;1519;3;tile.ml_stone_deco.3.name
 anyenchanted;-1;0;
-arrow;262;0;Flèche
+arrow;262;0;Arrow
 beefcooked;364;0;Steak
-beefraw;363;0;Bœuf cru
-bone;352;0;Os
-book;340;0;Livre
-bookandquill;386;0;Livre et plume
-bookshelves;47;0;Bibliothèque
-bottle;374;0;Fiole
-boudin;mln21;0;
-bow;261;0;Arc
-bowlempty;281;0;Bol
-bowlsoup;282;0;Soupe aux champignons
-bread;297;0;Pain
-brickmould;mln32;0;
-bricks;45;0;Briques
-bucketempty;325;0;Seau
-bucketlava;327;0;Seau de lave
-bucketmilk;335;0;Seau de lait
-bucketwater;326;0;Seau d’eau
-byzantineboots;mln84;0;
-byzantinehelmet;mln82;0;
-byzantineiconlarge;mln80;0;
-byzantineiconmedium;mln79;0;
-byzantineiconsmall;mln78;0;
-byzantinelegs;mln81;0;
-byzantinemace;mln85;0;
-byzantineplate;mln83;0;
-byzantinestonetiles;1524;0;
-byzantinetiles;1522;0;
-byzantinetileslab;1523;0;
-cacauhaa;mln94;0;
+beefraw;363;0;Raw Beef
+bone;352;0;Bone
+book;340;0;Book
+bookandquill;386;0;Book and Quill
+bookshelves;47;0;Bookshelf
+bottle;374;0;Glass Bottle
+boudin;mln21;0;item.ml_boudin.name
+bow;261;0;Bow
+bowlempty;281;0;Bowl
+bowlsoup;282;0;Mushroom Stew
+bread;297;0;Bread
+brickmould;mln32;0;item.ml_brickmould.name
+bricks;45;0;Bricks
+bucketempty;325;0;Bucket
+bucketlava;327;0;Lava Bucket
+bucketmilk;335;0;Milk
+bucketwater;326;0;Water Bucket
+byzantineboots;mln84;0;item.ml_byzantineBoots.name
+byzantinehelmet;mln82;0;item.ml_byzantineHelmet.name
+byzantineiconlarge;mln80;0;item.ml_byzantineiconlarge.name
+byzantineiconmedium;mln79;0;item.ml_byzantineiconmedium.name
+byzantineiconsmall;mln78;0;item.ml_byzantineicon.name
+byzantinelegs;mln81;0;item.ml_byzantineLegs.name
+byzantinemace;mln85;0;item.ml_byzantineMace.name
+byzantineplate;mln83;0;item.ml_byzantinePlate.name
+byzantinestonetiles;1524;0;tile.byzantine_mixedbrick.name
+byzantinetiles;1522;0;tile.byzantine_brick.name
+byzantinetileslab;1523;0;tile.byzantine_brick_slab.name
+cacauhaa;mln94;0;item.ml_cacauhaa.name
 cactus;81;0;Cactus
-cake;92;0;Gâteau
-calva;mln5;0;
-carrot;391;0;Carotte
-chainboots;305;0;Bottes de mailles
-chainchest;303;0;Cotte de mailles
-chainhelmet;302;0;Casque de mailles
-chainlegs;304;0;Jambières de mailles
-chickencurry;mln31;0;
-chickenmeat;365;0;Poulet cru
-chickenmeatcooked;366;0;Poulet rôti
-cider;mln4;0;
-ciderapple;mln3;0;
-clay;337;0;Argile
-clock;347;0;Montre
-clothes_byz_silk;mln86;1;
-clothes_byz_wool;mln86;0;
-coal;263;0;Charbon
-cobblestone;4;0;Pierres
-compass;345;0;Boussole
-cookedbrick;1519;0;
+cake;92;0;Cake
+calva;mln5;0;item.ml_calva.name
+carrot;391;0;Carrot
+chainboots;305;0;Chain Boots
+chainchest;303;0;Chain Chestplate
+chainhelmet;302;0;Chain Helmet
+chainlegs;304;0;Chain Leggings
+chickencurry;mln31;0;item.ml_chickencurry.name
+chickenmeat;365;0;Raw Chicken
+chickenmeatcooked;366;0;Cooked Chicken
+cider;mln4;0;item.ml_cider.name
+ciderapple;mln3;0;item.ml_ciderapple.name
+clay;337;0;Clay
+clock;347;0;Clock
+clothes_byz_silk;mln86;1;item.clothes_byz_silk.name
+clothes_byz_wool;mln86;0;item.clothes_byz_wool.name
+coal;263;0;Coal
+cobblestone;4;0;Cobblestone
+compass;345;0;Compass
+cookedbrick;1519;0;tile.ml_stone_deco.0.name
 cookie;357;0;Cookie
-denier;mln0;0;
-denierargent;mln2;0;
-denieror;mln1;0;
-diamond;264;0;Diamant
-diamondaxe;279;0;Hache en diamant
-diamondboots;313;0;Bottes en diamant
-diamondchest;311;0;Plastron en diamant
-diamondhelmet;310;0;Casque en diamant
-diamondhoe;293;0;Houe en diamant
-diamondlegs;312;0;Jambières en diamant
-diamondpickaxe;278;0;Pioche en diamant
-diamondshovel;277;0;Pelle en diamant
-diamondsword;276;0;Épée en diamant
-dirt;3;0;Terre
-dirtwall;1518;1;
-dye_black;351;0;Poche d’encre
-dye_blue;351;4;Lapis-lazuli
-dye_brown;351;3;Fèves de cacao
-dye_cyan;351;6;Teinture cyan
-dye_gray;351;8;Teinture grise
-dye_green;351;2;Vert de cactus
-dye_lightblue;351;12;Teinture bleu clair
-dye_lightgray;351;7;Teinture gris clair
-dye_lime;351;10;Teinture vert clair
-dye_magenta;351;13;Teinture magenta
-dye_orange;351;14;Teinture orange
-dye_pink;351;9;Teinture rose
-dye_purple;351;5;Teinture violette
-dye_red;351;1;Rouge de rose
-dye_white;351;15;Poudre d'os
-dye_yellow;351;11;Jaune pissenlit
-egg;344;0;Œuf
+denier;mln0;0;item.ml_denier.name
+denierargent;mln2;0;item.ml_denier_argent.name
+denieror;mln1;0;item.ml_denier_or.name
+diamond;264;0;Diamond
+diamondaxe;279;0;Diamond Axe
+diamondboots;313;0;Diamond Boots
+diamondchest;311;0;Diamond Chestplate
+diamondhelmet;310;0;Diamond Helmet
+diamondhoe;293;0;Diamond Hoe
+diamondlegs;312;0;Diamond Leggings
+diamondpickaxe;278;0;Diamond Pickaxe
+diamondshovel;277;0;Diamond Shovel
+diamondsword;276;0;Diamond Sword
+dirt;3;0;Dirt
+dirtwall;1518;1;tile.ml_earth_deco.1.name
+dye_black;351;0;Ink Sac
+dye_blue;351;4;Lapis Lazuli
+dye_brown;351;3;Cocoa Beans
+dye_cyan;351;6;Cyan Dye
+dye_gray;351;8;Gray Dye
+dye_green;351;2;Cactus Green
+dye_lightblue;351;12;Light Blue Dye
+dye_lightgray;351;7;Light Gray Dye
+dye_lime;351;10;Lime Dye
+dye_magenta;351;13;Magenta Dye
+dye_orange;351;14;Orange Dye
+dye_pink;351;9;Pink Dye
+dye_purple;351;5;Purple Dye
+dye_red;351;1;Rose Red
+dye_white;351;15;Bone Meal
+dye_yellow;351;11;Dandelion Yellow
+egg;344;0;Egg
 enchantedsword;-2;0;
-enderpearl;368;0;Perle du Néant
-feather;288;0;Plume
-feta;mln90;0;
-fishcooked;350;0;Poisson cuit
-fishraw;349;0;Poisson cru
-flint;318;0;Silex
-flintandsteel;259;0;Briquet
-ghasttear;370;0;Larme de Ghast
-glass;20;0;Verre
-gold;266;0;Lingot d'or
-goldaxe;286;0;Hache en or
-goldboots;317;0;Bottes en or
-goldchest;315;0;Plastron en or
-goldhelmet;314;0;Casque en or
-goldhoe;294;0;Houe en or
-goldlegs;316;0;Jambières en or
-goldore;14;0;Minerai d'or
-goldpickaxe;285;0;Pioche en or
-goldshovel;284;0;Pelle en or
-goldsword;283;0;Épée en or
-grapes;mln75;0;
-gravel;13;0;Gravier
-gunpowder;289;0;Poudre à canon
-ikayaki;mln96;0;
-indianstatue;mln34;0;
-iron;265;0;Lingot de fer
-ironore;15;0;Minerai de fer
-japaneseguardboots;mln70;0;
-japaneseguardhelmet;mln68;0;
-japaneseguardlegs;mln67;0;
-japaneseguardplate;mln69;0;
-japanesewarriorblueboots;mln62;0;
-japanesewarriorbluehelmet;mln60;0;
-japanesewarriorbluelegs;mln59;0;
-japanesewarriorblueplate;mln61;0;
-japanesewarriorredboots;mln66;0;
-japanesewarriorredhelmet;mln64;0;
-japanesewarriorredlegs;mln63;0;
-japanesewarriorredplate;mln65;0;
-lambcooked;mln89;0;
-lambraw;mln88;0;
-leather;334;0;Cuir
-leatherboots;301;0;Bottes en cuir
-leatherchest;299;0;Tunique en cuir
-leatherhelmet;298;0;Casque en cuir
-leatherlegs;300;0;Pantalon en cuir
-maize;mln40;0;
-masa;mln41;0;
-mayanaxe;mln55;0;
-mayangold;1519;2;
-mayanhoe;mln57;0;
-mayanmace;mln53;0;
-mayanpickaxe;mln54;0;
-mayanquestcrown;mln95;0;
-mayanshovel;mln56;0;
-mayanstatue;mln39;0;
-melonseeds;362;0;Graines de pastèque
-melonslice;360;0;Pastèque
-mudbrick;1519;1;
-mushroombrown;39;0;Champignon
-mushroomred;40;0;Champignon
-netherwart;372;0;Verrue du Nether
-normanaxe;mln8;0;
-normanboots;mln16;0;
-normanbroadsword;mln12;0;
-normanchest;mln14;0;
-normanhelmet;mln13;0;
-normanhoe;mln10;0;
-normanlegs;mln15;0;
-normanpickaxe;mln7;0;
-normanshovel;mln9;0;
-obsidian;49;0;Obsidienne
-obsidianflake;mln52;0;
-painting;321;0;Tableau
-paper;339;0;Papier
-paperwall;1521;0;
-parchmentbuildings;mln18;0;
-parchmentcomplete;mln20;0;
-parchmentindianbuildings;mln36;0;
-parchmentindiancomplete;mln38;0;
-parchmentindianitems;mln37;0;
-parchmentindianvillagers;mln35;0;
-parchmentitems;mln19;0;
-parchmentjapanesebuildings;mln72;0;
-parchmentjapanesecomplete;mln74;0;
-parchmentjapaneseitems;mln73;0;
-parchmentjapanesevillagers;mln71;0;
-parchmentmayanbuildings;mln44;0;
-parchmentmayancomplete;mln46;0;
-parchmentmayanitems;mln45;0;
-parchmentmayanvillagers;mln43;0;
-parchmentsadhu;mln47;0;
-parchmentvillagers;mln17;0;
-pathdirt;1525;0;
-pathdirt_slab;1526;0;
-pathdirt_slab_stable;1526;8;
-pathdirt_stable;1525;8;
-pathgravel;1525;1;
-pathgravel_slab;1526;1;
-pathgravel_slab_stable;1526;9;
-pathgravel_stable;1525;9;
-pathgravelslabs;1525;5;
-pathgravelslabs_slab;1526;5;
-pathgravelslabs_slab_stable;1526;13;
-pathgravelslabs_stable;1525;13;
-pathochretiles;1525;4;
-pathochretiles_slab;1526;4;
-pathochretiles_slab_stable;1526;12;
-pathochretiles_stable;1525;12;
-pathsandstone;1525;3;
-pathsandstone_slab;1526;3;
-pathsandstone_slab_stable;1526;11;
-pathsandstone_stable;1525;11;
-pathslabs;1525;2;
-pathslabs_slab;1526;2;
-pathslabs_slab_stable;1526;10;
-pathslabs_stable;1525;10;
-planks_birch;5;2;Planches de bouleau
-planks_jungle;5;3;Planches d'acajou
-planks_oak;5;0;Planches de chêne
-planks_pine;5;1;Planches de sapin
-porkchops;319;0;Côtelette de porc crue
-porkchopscooked;320;0;Côtelette de porc cuite
-potato;392;0;Pomme de terre
-pumpkin;86;0;Citrouille
-pumpkinseeds;361;0;Graines de citrouille
-purse;mln92;0;
-rasgulla;mln33;0;
+enderpearl;368;0;Ender Pearl
+feather;288;0;Feather
+feta;mln90;0;item.ml_feta.name
+fishcooked;350;0;Cooked Fish
+fishraw;349;0;Raw Fish
+flint;318;0;Flint
+flintandsteel;259;0;Flint and Steel
+ghasttear;370;0;Ghast Tear
+glass;20;0;Glass
+gold;266;0;Gold Ingot
+goldaxe;286;0;Golden Axe
+goldboots;317;0;Golden Boots
+goldchest;315;0;Golden Chestplate
+goldhelmet;314;0;Golden Helmet
+goldhoe;294;0;Golden Hoe
+goldlegs;316;0;Golden Leggings
+goldore;14;0;Gold Ore
+goldpickaxe;285;0;Golden Pickaxe
+goldshovel;284;0;Golden Shovel
+goldsword;283;0;Golden Sword
+grapes;mln75;0;item.ml_vine.name
+gravel;13;0;Gravel
+gunpowder;289;0;Gunpowder
+ikayaki;mln96;0;item.ml_ikayaki.name
+indianstatue;mln34;0;item.ml_indianstatue.name
+iron;265;0;Iron Ingot
+ironore;15;0;Iron Ore
+japaneseguardboots;mln70;0;item.ml_japaneseGuardBoots.name
+japaneseguardhelmet;mln68;0;item.ml_japaneseGuardHelmet.name
+japaneseguardlegs;mln67;0;item.ml_japaneseGuardLegs.name
+japaneseguardplate;mln69;0;item.ml_japaneseGuardPlate.name
+japanesewarriorblueboots;mln62;0;item.ml_japaneseWarriorBlueBoots.name
+japanesewarriorbluehelmet;mln60;0;item.ml_japaneseWarriorBlueHelmet.name
+japanesewarriorbluelegs;mln59;0;item.ml_japaneseWarriorBlueLegs.name
+japanesewarriorblueplate;mln61;0;item.ml_japaneseWarriorBluePlate.name
+japanesewarriorredboots;mln66;0;item.ml_japaneseWarriorRedBoots.name
+japanesewarriorredhelmet;mln64;0;item.ml_japaneseWarriorRedHelmet.name
+japanesewarriorredlegs;mln63;0;item.ml_japaneseWarriorRedLegs.name
+japanesewarriorredplate;mln65;0;item.ml_japaneseWarriorRedPlate.name
+lambcooked;mln89;0;item.ml_lamb_cooked.name
+lambraw;mln88;0;item.ml_lamb_raw.name
+leather;334;0;Leather
+leatherboots;301;0;Leather Boots
+leatherchest;299;0;Leather Tunic
+leatherhelmet;298;0;Leather Cap
+leatherlegs;300;0;Leather Pants
+maize;mln40;0;item.ml_maize.name
+masa;mln41;0;item.ml_masa.name
+mayanaxe;mln55;0;item.ml_mayanAxe.name
+mayangold;1519;2;tile.ml_stone_deco.2.name
+mayanhoe;mln57;0;item.ml_mayanHoe.name
+mayanmace;mln53;0;item.ml_mayanMace.name
+mayanpickaxe;mln54;0;item.ml_mayanPickaxe.name
+mayanquestcrown;mln95;0;item.ml_mayanQuestCrown.name
+mayanshovel;mln56;0;item.ml_mayanShovel.name
+mayanstatue;mln39;0;item.ml_mayanstatue.name
+melonseeds;362;0;Melon Seeds
+melonslice;360;0;Melon
+mudbrick;1519;1;tile.ml_stone_deco.1.name
+mushroombrown;39;0;Mushroom
+mushroomred;40;0;Mushroom
+netherwart;372;0;Nether Wart
+normanaxe;mln8;0;item.ml_normanAxe.name
+normanboots;mln16;0;item.ml_normanBoots.name
+normanbroadsword;mln12;0;item.ml_normanBroadsword.name
+normanchest;mln14;0;item.ml_normanPlate.name
+normanhelmet;mln13;0;item.ml_normanHelmet.name
+normanhoe;mln10;0;item.ml_normanHoe.name
+normanlegs;mln15;0;item.ml_normanLegs.name
+normanpickaxe;mln7;0;item.ml_normanPickaxe.name
+normanshovel;mln9;0;item.ml_normanShovel.name
+obsidian;49;0;Obsidian
+obsidianflake;mln52;0;item.ml_obsidianFlake.name
+painting;321;0;Painting
+paper;339;0;Paper
+paperwall;1521;0;tile.ml_panes.name
+parchmentbuildings;mln18;0;item.ml_parchmentBuildings.name
+parchmentcomplete;mln20;0;item.ml_marchmentComplete.name
+parchmentindianbuildings;mln36;0;item.ml_parchmentIndianBuildings.name
+parchmentindiancomplete;mln38;0;item.ml_marchmentIndianComplete.name
+parchmentindianitems;mln37;0;item.ml_parchmentIndianItems.name
+parchmentindianvillagers;mln35;0;item.ml_parchmentIndianVillagers.name
+parchmentitems;mln19;0;item.ml_parchmentItems.name
+parchmentjapanesebuildings;mln72;0;item.ml_parchmentJapaneseBuildings.name
+parchmentjapanesecomplete;mln74;0;item.ml_parchmentJapaneseComplete.name
+parchmentjapaneseitems;mln73;0;item.ml_parchmentJapaneseItems.name
+parchmentjapanesevillagers;mln71;0;item.ml_parchmentJapaneseVillagers.name
+parchmentmayanbuildings;mln44;0;item.ml_parchmentMayanBuildings.name
+parchmentmayancomplete;mln46;0;item.ml_parchmentMayanComplete.name
+parchmentmayanitems;mln45;0;item.ml_parchmentMayanItems.name
+parchmentmayanvillagers;mln43;0;item.ml_parchmentMayanVillagers.name
+parchmentsadhu;mln47;0;item.ml_parchmentSadhu.name
+parchmentvillagers;mln17;0;item.ml_parchmentVillagers.name
+pathdirt;1525;0;tile.ml_path.0.name
+pathdirt_slab;1526;0;tile.ml_path_slab.0.name
+pathdirt_slab_stable;1526;8;tile.ml_path_slab.8.name
+pathdirt_stable;1525;8;tile.ml_path.8.name
+pathgravel;1525;1;tile.ml_path.1.name
+pathgravel_slab;1526;1;tile.ml_path_slab.1.name
+pathgravel_slab_stable;1526;9;tile.ml_path_slab.9.name
+pathgravel_stable;1525;9;tile.ml_path.9.name
+pathgravelslabs;1525;5;tile.ml_path.5.name
+pathgravelslabs_slab;1526;5;tile.ml_path_slab.5.name
+pathgravelslabs_slab_stable;1526;13;tile.ml_path_slab.13.name
+pathgravelslabs_stable;1525;13;tile.ml_path.13.name
+pathochretiles;1525;4;tile.ml_path.4.name
+pathochretiles_slab;1526;4;tile.ml_path_slab.4.name
+pathochretiles_slab_stable;1526;12;tile.ml_path_slab.12.name
+pathochretiles_stable;1525;12;tile.ml_path.12.name
+pathsandstone;1525;3;tile.ml_path.3.name
+pathsandstone_slab;1526;3;tile.ml_path_slab.3.name
+pathsandstone_slab_stable;1526;11;tile.ml_path_slab.11.name
+pathsandstone_stable;1525;11;tile.ml_path.11.name
+pathslabs;1525;2;tile.ml_path.2.name
+pathslabs_slab;1526;2;tile.ml_path_slab.2.name
+pathslabs_slab_stable;1526;10;tile.ml_path_slab.10.name
+pathslabs_stable;1525;10;tile.ml_path.10.name
+planks_birch;5;2;Birch Wood Planks
+planks_jungle;5;3;Jungle Wood Planks
+planks_oak;5;0;Oak Wood Planks
+planks_pine;5;1;Spruce Wood Planks
+porkchops;319;0;Raw Porkchop
+porkchopscooked;320;0;Cooked Porkchop
+potato;392;0;Potato
+pumpkin;86;0;Pumpkin
+pumpkinseeds;361;0;Pumpkin Seeds
+purse;mln92;0;item.ml_purse.name
+rasgulla;mln33;0;item.ml_rasgullaId.name
 redflower;38;0;Rose
 redstone;331;0;Redstone
-rice;mln28;0;
-rottenflesh;367;0;Chair putréfiée
-saddle;329;0;Selle
-sake;mln93;0;
-sand;12;0;Sable
-sandstone;24;0;Grès
-sapling;6;0;Pousse de chêne
-sapling_birch;6;2;Pousse de bouleau
-sapling_jungle;6;3;Pousse d'acajou
-sapling_pine;6;1;Pousse de sapin
-seeds;295;0;Graines
-shears;359;0;Cisailles
-silk;mln77;0;
-silkwormblockempty;1517;3;
-silkwormblockfull;1517;4;
-skollhatiamulet;mln26;0;
-slimeball;341;0;Boule gluante
-snow;78;0;Neige
-souvlaki;mln91;0;
-spidereye;375;0;Œil d'araignée
-steelaxe;258;0;Hache en fer
-steelboots;309;0;Bottes en fer
-steelchest;307;0;Plastron en fer
-steelhelmet;306;0;Casque en fer
-steelhoe;292;0;Houe en fer
-steellegs;308;0;Jambières en fer
-steelpickaxe;257;0;Pioche en fer
-steelshovel;256;0;Pelle en fer
-steelsword;267;0;Épée en fer
-stone;1;0;Roche
-stoneaxe;275;0;Hache en pierre
-stonebrick;98;0;Pierres taillées
-stonehoe;291;0;Houe en pierre
-stonepickaxe;274;0;Pioche en pierre
-stoneshovel;273;0;Pelle en pierre
-stonesword;272;0;Épée en pierre
-string;287;0;Ficelle
-sugarcane;338;0;Canne à sucre
-tachisword;mln50;0;
-tapestry;mln22;0;
-thatched;1517;2;
-timberframe_cross;1517;1;
-timberframe_plain;1517;0;
+rice;mln28;0;item.ml_rice.name
+rottenflesh;367;0;Rotten Flesh
+saddle;329;0;Saddle
+sake;mln93;0;item.ml_sake.name
+sand;12;0;Sand
+sandstone;24;0;Sandstone
+sapling;6;0;Oak Sapling
+sapling_birch;6;2;Birch Sapling
+sapling_jungle;6;3;Jungle Sapling
+sapling_pine;6;1;Spruce Sapling
+seeds;295;0;Seeds
+shears;359;0;Shears
+silk;mln77;0;item.ml_silk.name
+silkwormblockempty;1517;3;tile.ml_wood_deco.3.name
+silkwormblockfull;1517;4;tile.ml_wood_deco.4.name
+skollhatiamulet;mln26;0;item.ml_skoll_hati_amulet.name
+slimeball;341;0;Slimeball
+snow;78;0;Snow
+souvlaki;mln91;0;item.ml_souvlaki.name
+spidereye;375;0;Spider Eye
+steelaxe;258;0;Iron Axe
+steelboots;309;0;Iron Boots
+steelchest;307;0;Iron Chestplate
+steelhelmet;306;0;Iron Helmet
+steelhoe;292;0;Iron Hoe
+steellegs;308;0;Iron Leggings
+steelpickaxe;257;0;Iron Pickaxe
+steelshovel;256;0;Iron Shovel
+steelsword;267;0;Iron Sword
+stone;1;0;Stone
+stoneaxe;275;0;Stone Axe
+stonebrick;98;0;Stone Bricks
+stonehoe;291;0;Stone Hoe
+stonepickaxe;274;0;Stone Pickaxe
+stoneshovel;273;0;Stone Shovel
+stonesword;272;0;Stone Sword
+string;287;0;String
+sugarcane;338;0;Sugar Canes
+tachisword;mln50;0;item.ml_taichiSword.name
+tapestry;mln22;0;item.ml_tapestry.name
+thatched;1517;2;tile.ml_wood_deco.2.name
+timberframe_cross;1517;1;tile.ml_wood_deco.1.name
+timberframe_plain;1517;0;tile.ml_wood_deco.0.name
 tnt;46;0;TNT
-tripes;mln6;0;
-turmeric;mln29;0;
-udon;mln49;0;
-unknownpowder;mln48;0;
-vegcurry;mln30;0;
-villagewand;mln11;0;
-vines;106;0;Lianes
-vishnuamulet;mln23;0;
-wah;mln42;0;
-wheat;296;0;Blé
-wine;mln76;0;
-winebasic;mln87;0;
+tripes;mln6;0;item.ml_tripes.name
+turmeric;mln29;0;item.ml_turmeric.name
+udon;mln49;0;item.ml_udon.name
+unknownpowder;mln48;0;item.ml_unknownPowder.name
+vegcurry;mln30;0;item.ml_vegcurry.name
+villagewand;mln11;0;item.ml_villageWand.name
+vines;106;0;Vines
+vishnuamulet;mln23;0;item.ml_raven_amulet.name
+wah;mln42;0;item.ml_wah.name
+wheat;296;0;Wheat
+wine;mln76;0;item.ml_wine.name
+winebasic;mln87;0;item.ml_wine_basic.name
 wood;17;0;
 wood_any;17;-1;
 wood_birch;17;2;
 wood_jungle;17;3;
 wood_oak;17;0;
 wood_pine;17;1;
-woodaxe;271;0;Hache en bois
-woodhoe;290;0;Houe en bois
-woodpickaxe;270;0;Pioche en bois
-woodshovel;269;0;Pelle en bois
-woodsword;268;0;Épée en bois
-wool_black;35;15;Laine noire
-wool_blue;35;11;Laine bleue
-wool_brown;35;12;Laine marron
-wool_cyan;35;9;Laine cyan
-wool_gray;35;7;Laine grise
-wool_green;35;13;Laine verte
-wool_lightblue;35;3;Laine bleu clair
-wool_lightgray;35;8;Laine gris clair
-wool_limegreen;35;5;Laine vert clair
-wool_magenta;35;2;Laine magenta
-wool_orange;35;1;Laine orange
-wool_pink;35;6;Laine rose
-wool_purple;35;10;Laine violette
-wool_red;35;14;Laine rouge
-wool_white;35;0;Laine blanche
-wool_yellow;35;4;Laine jaune
-yddrasilamulet;mln25;0;
-yellowflower;37;0;Fleur
-yumibow;mln58;0;
+woodaxe;271;0;Wooden Axe
+woodhoe;290;0;Wooden Hoe
+woodpickaxe;270;0;Wooden Pickaxe
+woodshovel;269;0;Wooden Shovel
+woodsword;268;0;Wooden Sword
+wool_black;35;15;Black Wool
+wool_blue;35;11;Blue Wool
+wool_brown;35;12;Brown Wool
+wool_cyan;35;9;Cyan Wool
+wool_gray;35;7;Gray Wool
+wool_green;35;13;Green Wool
+wool_lightblue;35;3;Light Blue Wool
+wool_lightgray;35;8;Light Gray Wool
+wool_limegreen;35;5;Lime Wool
+wool_magenta;35;2;Magenta Wool
+wool_orange;35;1;Orange Wool
+wool_pink;35;6;Pink Wool
+wool_purple;35;10;Purple Wool
+wool_red;35;14;Red Wool
+wool_white;35;0;Wool
+wool_yellow;35;4;Yellow Wool
+yddrasilamulet;mln25;0;item.ml_yddrasil_amulet.name
+yellowflower;37;0;Flower
+yumibow;mln58;0;item.ml_yumiBow.name

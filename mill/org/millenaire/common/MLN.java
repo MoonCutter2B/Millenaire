@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
 
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
@@ -902,21 +903,26 @@ public class MLN {
 
 		return hofData;
 	}
+	
+	public static final ResourceLocation textureLargeChest64=new ResourceLocation(Mill.modId,"/graphics/item/ML_lockedlargechest_64.png");
+	public static final ResourceLocation textureLargeChest=new ResourceLocation(Mill.modId,"/graphics/item/ML_lockedlargechest.png");
+	public static final ResourceLocation textureChest64=new ResourceLocation(Mill.modId,"/graphics/item/ML_lockedchest_64.png");
+	public static final ResourceLocation textureChest=new ResourceLocation(Mill.modId,"/graphics/item/ML_lockedchest.png");
 
-	public static String getLargeLockedChestTexture() {
+	public static ResourceLocation getLargeLockedChestTexture() {
 
 		if (MLN.dynamictextures && (textureSize>=64))
-			return "/graphics/item/ML_lockedlargechest_64.png";
+			return textureLargeChest64;
 
-		return "/graphics/item/ML_lockedlargechest.png";
+		return textureLargeChest;
 	}
 
-	public static String getLockedChestTexture() {
+	public static ResourceLocation getLockedChestTexture() {
 
 		if (MLN.dynamictextures && (textureSize>=64))
-			return "/graphics/item/ML_lockedchest_64.png";
+			return textureChest64;
 
-		return "/graphics/item/ML_lockedchest.png";
+		return textureChest;
 	}
 
 	public static Vector<Vector<String>> getParchment(int id) {

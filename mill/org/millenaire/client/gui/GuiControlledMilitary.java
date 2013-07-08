@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.millenaire.client.network.ClientSender;
@@ -13,6 +14,7 @@ import org.millenaire.common.MLN;
 import org.millenaire.common.Point;
 import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.core.MillCommonUtilities;
+import org.millenaire.common.forge.Mill;
 
 public class GuiControlledMilitary extends GuiText {
 
@@ -132,12 +134,12 @@ public class GuiControlledMilitary extends GuiText {
 				GuiButtonDiplomacy relGood=new GuiButtonDiplomacy(vr.pos,GuiButtonDiplomacy.REL,GuiButtonDiplomacy.REL_GOOD,MLN.string("ui.relgood"));
 				GuiButtonDiplomacy relNeutral=new GuiButtonDiplomacy(vr.pos,GuiButtonDiplomacy.REL,GuiButtonDiplomacy.REL_NEUTRAL,MLN.string("ui.relneutral"));
 				GuiButtonDiplomacy relBad=new GuiButtonDiplomacy(vr.pos,GuiButtonDiplomacy.REL,GuiButtonDiplomacy.REL_BAD,MLN.string("ui.relbad"));
-				
+
 				text.add(new Line(relGood,relNeutral,relBad));
 				text.add(new Line(false));
-				
-				
-				
+
+
+
 				if (townhall.raidTarget==null) {
 					GuiButtonDiplomacy raid=new GuiButtonDiplomacy(vr.pos,GuiButtonDiplomacy.RAID,GuiButtonDiplomacy.REL_BAD,MLN.string("ui.raid"));
 					text.add(new Line(raid));
@@ -155,7 +157,7 @@ public class GuiControlledMilitary extends GuiText {
 							text.add(new Line(raid));
 							text.add(new Line(false));
 							text.add(new Line(LIGHTRED+MLN.string("ui.raidplanned")));
-							
+
 						} else {
 							GuiButtonDiplomacy raid=new GuiButtonDiplomacy(vr.pos,GuiButtonDiplomacy.RAID,GuiButtonDiplomacy.REL_BAD,MLN.string("ui.raid"));
 							text.add(new Line(raid));
@@ -170,18 +172,18 @@ public class GuiControlledMilitary extends GuiText {
 
 		final Vector<Vector<Line>> pages = new Vector<Vector<Line>>();
 		pages.add(text);
-		
+
 		Vector<Vector<String>> milpages = TileEntityPanel.generateMilitary(player, townhall);
-		
+
 		for (Vector<String> textPage : milpages) {
 			Vector<Line> page=new Vector<Line>();
-			
+
 			for (String s : textPage) {
 				page.add(new Line(s));
 			}
 			pages.add(page);
 		}
-		
+
 		descText=adjustText(pages);
 
 		buttonPagination();
@@ -197,10 +199,11 @@ public class GuiControlledMilitary extends GuiText {
 		return 19;
 	}
 
+	ResourceLocation background=new ResourceLocation(Mill.modId,"/graphics/gui/ML_panel.png");
 
 	@Override
-	public String getPNGPath() {
-		return "/graphics/gui/ML_panel.png";
+	public ResourceLocation getPNGPath() {
+		return background;
 	}
 
 	@Override

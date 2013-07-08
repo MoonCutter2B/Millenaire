@@ -13,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
-import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.input.Keyboard;
 import org.millenaire.client.MillClientUtilities;
@@ -64,7 +63,7 @@ public class ClientProxy extends CommonProxy
 	public File getBaseDir() {
 
 		if (baseDir==null) {
-			baseDir=new File(new File(Minecraft.getMinecraftDir(),"mods"), "millenaire");
+			baseDir=new File(new File(Minecraft.getMinecraft().mcDataDir,"mods"), "millenaire");
 		}
 
 		return baseDir;
@@ -94,7 +93,7 @@ public class ClientProxy extends CommonProxy
 	public File getCustomDir() {
 
 		if (customDir==null) {
-			customDir=new File(new File(Minecraft.getMinecraftDir(),"mods"), "millenaire-custom");
+			customDir=new File(new File(Minecraft.getMinecraft().mcDataDir,"mods"), "millenaire-custom");
 		}
 
 		return customDir;
@@ -119,8 +118,8 @@ public class ClientProxy extends CommonProxy
 			MLN.error(null, "Looked for name of null item: "+id);
 			return MLN.string("error.unknownitem");
 		}
-
-		return StringTranslate.getInstance().translateNamedKey(Item.itemsList[id].getUnlocalizedName(new ItemStack(id,1,meta)));
+		
+		return new ItemStack(id,1,meta).getDisplayName();
 	}
 
 	@Override
@@ -140,7 +139,7 @@ public class ClientProxy extends CommonProxy
 	
 	@Override
 	public String getSinglePlayerName() {
-		return Minecraft.getMinecraft().session.username;
+		return Minecraft.getMinecraft().func_110432_I().func_111285_a();
 	}
 
 	@Override

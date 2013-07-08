@@ -3,12 +3,14 @@ package org.millenaire.client.gui;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.lwjgl.input.Keyboard;
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.Building;
 import org.millenaire.common.MLN;
+import org.millenaire.common.forge.Mill;
 
 public class GuiNegationWand extends GuiText {
 
@@ -78,11 +80,13 @@ public class GuiNegationWand extends GuiText {
 		return 16;
 	}
 
-	@Override
-	public String getPNGPath() {
-		return "/graphics/gui/ML_quest.png";
-	}
+	ResourceLocation background=new ResourceLocation(Mill.modId,"/graphics/gui/ML_quest.png");
 
+	@Override
+	public ResourceLocation getPNGPath() {
+		return background;
+	}
+	
 	@Override
 	public int getXSize() {
 		return 256;

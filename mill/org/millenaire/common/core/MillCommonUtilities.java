@@ -26,11 +26,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.util.AxisAlignedBB;
@@ -55,6 +58,8 @@ import org.millenaire.common.forge.MillAchievements;
 import org.millenaire.common.item.Goods.IItemInitialEnchantmens;
 import org.millenaire.common.pathing.atomicstryker.AStarNode;
 import org.millenaire.common.pathing.atomicstryker.AStarStatic;
+
+import com.google.common.collect.Multimap;
 
 
 public class MillCommonUtilities {
@@ -415,7 +420,7 @@ public class MillCommonUtilities {
 		{
 			maxSlot=maxSlot-4;//excluding the armour slots
 		}
-		
+
 		int nb=0;
 
 		for (int i=0;i<maxSlot;i++) {
@@ -1247,11 +1252,11 @@ public class MillCommonUtilities {
 			ItemStack stack = chest.getStackInSlot(i);
 			if (stack ==null) {
 				stack=new ItemStack(item,1,meta);
-				
+
 				if (stack.getItem() instanceof IItemInitialEnchantmens) {
 					((IItemInitialEnchantmens)stack.getItem()).applyEnchantments(stack);
 				}
-				
+
 				if ((toPut-nb) <= stack.getMaxStackSize()) {
 					stack.stackSize=toPut-nb;
 					nb=toPut;
@@ -1487,7 +1492,7 @@ public class MillCommonUtilities {
 		world.spawnEntityInWorld(entityliving);
 
 		entityliving.spawnExplosionParticle();
-		
+
 		return entityliving;
 	}
 
@@ -1542,15 +1547,15 @@ public class MillCommonUtilities {
 
 		if (th.isPointProtectedFromPathBuilding(p))
 			return false;
-		
+
 		//if (bid==Mill.pathSlab.blockID && pathBid==Mill.path.blockID)
 		//	pathBid=Mill.pathSlab.blockID;
-		
+
 
 
 		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid,meta))) {
-			
-			
+
+
 			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
 			return true;
 		}
@@ -1659,7 +1664,7 @@ public class MillCommonUtilities {
 			}
 		}
 	}
-	
+
 	private static final boolean PATH_RAISE=false;
 
 
@@ -1732,7 +1737,7 @@ public class MillCommonUtilities {
 							node=new AStarNode(node.x,lastNode.y,node.z);
 							path.set(ip, node);
 							halfSlab=true;
-						
+
 							//straightening path:   1 2 1 to 1 1.5 1
 						} else if (lastNode.y==nextNode.y && node.y<lastNode.y && p.getRelative(0, lastNode.y-node.y, 0).isBlockPassable(th.worldObj)
 								&& p.getRelative(0, lastNode.y-node.y+1, 0).isBlockPassable(th.worldObj)) {
@@ -1840,7 +1845,7 @@ public class MillCommonUtilities {
 
 		if (bid==0)
 			return false;
-		
+
 		if (bid==Block.chest.blockID || bid==Mill.lockedChest.blockID || bid==Block.workbench.blockID || bid==Block.furnaceIdle.blockID || bid==Block.furnaceBurning.blockID)
 			return true;
 
@@ -1902,6 +1907,19 @@ public class MillCommonUtilities {
 		} 
 
 		return v.speech_key;		
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static double getItemWeaponDamage(Item item) {
+		Multimap multimap = item.func_111205_h();
+
+		if (multimap.containsKey(SharedMonsterAttributes.field_111264_e.func_111108_a())) {
+			if (multimap.get(SharedMonsterAttributes.field_111264_e.func_111108_a()) instanceof AttributeModifier) {
+				AttributeModifier weaponModifier=(AttributeModifier) multimap.get(SharedMonsterAttributes.field_111264_e.func_111108_a());
+				return weaponModifier.func_111164_d();
+			}
+		}
+		return 0;
 	}
 
 }

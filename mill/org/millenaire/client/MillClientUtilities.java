@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureObject;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
@@ -41,16 +43,20 @@ public class MillClientUtilities {
 	private static long lastPing=0;
 	private static long lastFreeRes=0;
 
+	private static final ResourceLocation textureTest=new ResourceLocation(Mill.modId,"/textures/blocks/blockGold.png");
 
 	public static void checkTextSize() {
-		final int texture=ModLoader.getMinecraftInstance().renderEngine.getTexture("/textures/blocks/blockGold.png");
+		final TextureObject texture=ModLoader.getMinecraftInstance().renderEngine.func_110581_b(textureTest);
 
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture);
+		if (texture==null)
+			return;
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.func_110552_b());
 		final int textSize = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, 0, GL11.GL_TEXTURE_WIDTH);
 
 		if (textSize!=MLN.textureSize) {
 			MLN.textureSize=textSize;
-			ModLoader.getMinecraftInstance().renderEngine.refreshTextures();
+			ModLoader.getMinecraftInstance().renderEngine.func_110550_d();
 		}
 	}
 

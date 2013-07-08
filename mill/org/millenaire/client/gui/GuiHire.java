@@ -3,6 +3,7 @@ package org.millenaire.client.gui;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.lwjgl.input.Keyboard;
@@ -10,6 +11,7 @@ import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.core.MillCommonUtilities;
+import org.millenaire.common.forge.Mill;
 
 public class GuiHire extends GuiText {
 
@@ -102,7 +104,7 @@ public class GuiHire extends GuiText {
 			text.add(new Line(MLN.string("hire.hireablevillagernoreputation")));
 		}
 		text.add(new Line());
-		text.add(new Line(MLN.string("hire.health")+": "+(villager.getHealth()*0.5)+"/"+(villager.getMaxHealth()*0.5)));
+		text.add(new Line(MLN.string("hire.health")+": "+(villager.func_110143_aJ()*0.5)+"/"+(villager.getMaxHealth()*0.5)));
 		text.add(new Line(MLN.string("hire.strength")+": "+villager.getAttackStrength()));
 		text.add(new Line(MLN.string("hire.cost")+": "+MillCommonUtilities.getShortPrice(villager.getHireCost(player))));
 
@@ -123,11 +125,13 @@ public class GuiHire extends GuiText {
 		return 16;
 	}
 
-	@Override
-	public String getPNGPath() {
-		return "/graphics/gui/ML_quest.png";
-	}
+	ResourceLocation background=new ResourceLocation(Mill.modId,"/graphics/gui/ML_quest.png");
 
+	@Override
+	public ResourceLocation getPNGPath() {
+		return background;
+	}
+	
 	@Override
 	public int getXSize() {
 		return 256;

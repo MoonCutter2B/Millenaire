@@ -1,7 +1,6 @@
 package org.millenaire.client;
 
 
-import java.lang.reflect.Field;
 import java.util.Vector;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -9,13 +8,10 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.item.EnumArmorMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.pathfinding.PathPoint;
-import net.minecraftforge.client.ForgeHooksClient;
 
 import org.lwjgl.opengl.GL11;
 import org.millenaire.common.MLN;
@@ -33,21 +29,17 @@ public class RenderMillVillager extends RenderBiped {
 	private static final float LINE_HEIGHT = 0.2f;
 	private static final int LINE_SIZE = 60;
 
-	private final ModelBiped modelArmorChestplate;
-	private final ModelBiped modelArmor;
 	private final ModelBiped modelCloth;
 
 	public RenderMillVillager(ModelBiped modelbiped, float f) {
 		super(modelbiped, f);
 		modelBipedMain = (ModelBiped)mainModel;
-		modelArmorChestplate = new ModelBiped(1.0F);
-		modelArmor = new ModelBiped(0.5F);
 		if (modelbiped instanceof ModelFemaleAsymmetrical) {
-			modelCloth = new ModelFemaleAsymmetrical(0);
+			modelCloth = new ModelFemaleAsymmetrical(0.1f);
 		} else if (modelbiped instanceof ModelFemaleSymmetrical) {
-			modelCloth = new ModelFemaleSymmetrical(0);
+			modelCloth = new ModelFemaleSymmetrical(0.1f);
 		} else {
-			modelCloth = new ModelBiped(0);
+			modelCloth = new ModelBiped(0.1f);
 		}
 	}
 
@@ -93,13 +85,12 @@ public class RenderMillVillager extends RenderBiped {
 		final MillVillager villager = (MillVillager) entityliving;
 
 		if (villager.isUsingBow) {
-			modelArmorChestplate.aimedBow = modelArmor.aimedBow = modelBipedMain.aimedBow = true;
+			modelCloth.aimedBow = modelBipedMain.aimedBow = true;
 		}
-
 
 		super.doRenderLiving(entityliving, d, d1, d2, f, f1);
 
-		modelArmorChestplate.aimedBow = modelArmor.aimedBow = modelBipedMain.aimedBow = false;
+		modelCloth.aimedBow = modelBipedMain.aimedBow = false;
 
 		doRenderVillagerName(villager, d, d1, d2);
 	}
@@ -248,13 +239,13 @@ public class RenderMillVillager extends RenderBiped {
 				}
 				
 				if (villager.vtype.showHealth) {
-					displayText(MLN.string("hire.health")+": "+(villager.getHealth()*0.5)+"/"+(villager.getMaxHealth()*0.5),SCALE,0xa0dddddd,(float)x,(float)y + villagerSize+height, (float)z);
+					displayText(MLN.string("hire.health")+": "+(villager.func_110143_aJ()*0.5)+"/"+(villager.getMaxHealth()*0.5),SCALE,0xa0dddddd,(float)x,(float)y + villagerSize+height, (float)z);
 					height+=LINE_HEIGHT;
 				}
 
 			} else if (villager.hiredBy.equals(profile.playerName)) {
 				String s;
-				s=MLN.string("hire.health")+": "+(villager.getHealth()*0.5)+"/"+(villager.getMaxHealth()*0.5);
+				s=MLN.string("hire.health")+": "+(villager.func_110143_aJ()*0.5)+"/"+(villager.getMaxHealth()*0.5);
 
 				if (villager.aggressiveStance) {
 					s=s+" - "+MLN.string("hire.aggressive");
@@ -284,7 +275,7 @@ public class RenderMillVillager extends RenderBiped {
 	}
 
 	@Override
-	protected void preRenderCallback(EntityLiving entityliving, float f)
+	protected void preRenderCallback(EntityLivingBase entityliving, float f)
 	{
 		preRenderScale((MillVillager)entityliving, f);
 	}
@@ -295,7 +286,7 @@ public class RenderMillVillager extends RenderBiped {
 	}
 
 	@Override
-	protected void rotateCorpse(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+	protected void rotateCorpse(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 
 		final MillVillager v=(MillVillager) par1EntityLiving;
 
@@ -313,89 +304,13 @@ public class RenderMillVillager extends RenderBiped {
 	}
 
 
-	protected int setArmorModel(MillVillager villager, int armourPartId, float f)
-	{
-		
-		final ItemStack itemstack = villager.getArmourPiece(armourPartId);
-		final Field field_armorList = (net.minecraft.client.renderer.entity.RenderPlayer.class).getDeclaredFields()[3];
-		field_armorList.setAccessible(true);
-		try {
-
-			final String[] armorPrefixes=(String[]) field_armorList.get(null);
-
-			if (itemstack != null)
-			{
-				final Item var5 = itemstack.getItem();
-
-				if (var5 instanceof ItemArmor)
-				{
-					final ItemArmor var6 = (ItemArmor)var5;
-					this.loadTexture(ForgeHooksClient.getArmorTexture(villager,itemstack, "/armor/" + armorPrefixes[var6.renderIndex] + "_" + (armourPartId == 2 ? 2 : 1) + ".png",armourPartId,1));
-					final ModelBiped var7 = armourPartId == 2 ? this.modelArmor : this.modelArmorChestplate;
-					var7.bipedHead.showModel = armourPartId == 0;
-					var7.bipedHeadwear.showModel = armourPartId == 0;
-					var7.bipedBody.showModel = (armourPartId == 1) || (armourPartId == 2);
-					var7.bipedRightArm.showModel = armourPartId == 1;
-					var7.bipedLeftArm.showModel = armourPartId == 1;
-					var7.bipedRightLeg.showModel = (armourPartId == 2) || (armourPartId == 3);
-					var7.bipedLeftLeg.showModel = (armourPartId == 2) || (armourPartId == 3);
-					this.setRenderPassModel(var7);
-
-					if (var7 != null)
-					{
-						var7.onGround = this.mainModel.onGround;
-					}
-
-					if (var7 != null)
-					{
-						var7.isRiding = this.mainModel.isRiding;
-					}
-
-					if (var7 != null)
-					{
-						var7.isChild = this.mainModel.isChild;
-					}
-
-					final float var8 = 1.0F;
-
-					if (var6.getArmorMaterial() == EnumArmorMaterial.CLOTH)
-					{
-						final int var9 = var6.getColor(itemstack);
-						final float var10 = ((var9 >> 16) & 255) / 255.0F;
-						final float var11 = ((var9 >> 8) & 255) / 255.0F;
-						final float var12 = (var9 & 255) / 255.0F;
-						GL11.glColor3f(var8 * var10, var8 * var11, var8 * var12);
-
-						if (itemstack.isItemEnchanted())
-							return 31;
-
-						return 16;
-					}
-
-					GL11.glColor3f(var8, var8, var8);
-
-					if (itemstack.isItemEnchanted())
-						return 15;
-
-					return 1;
-				}
-			}
-		} catch (final Exception e) {
-			MLN.printException("Error when loading armour: ",e);
-		} catch (Error e) {
-			//to handle change in ForgeHooksClient.getArmorTexture's signature 
-		}
-
-
-		return -1;
-	}
 
 	protected int setClothModel(MillVillager villager, int clothPartID, float f)
 	{
 
 		try {
-			final String clothTexture=villager.getClothTexturePath();
-
+			final ResourceLocation clothTexture=villager.getClothTexturePath();
+			
 			if (clothTexture==null) {
 				modelCloth.bipedHead.showModel = false;
 				modelCloth.bipedHeadwear.showModel = false;
@@ -406,9 +321,8 @@ public class RenderMillVillager extends RenderBiped {
 				modelCloth.bipedLeftLeg.showModel = false;
 				return -1;
 			} 
-
-			this.loadTexture(clothTexture);
-
+			
+			this.func_110776_a(clothTexture);
 			modelCloth.bipedHead.showModel = true;
 			modelCloth.bipedHeadwear.showModel = true;
 			modelCloth.bipedBody.showModel = true;
@@ -417,30 +331,20 @@ public class RenderMillVillager extends RenderBiped {
 			modelCloth.bipedRightLeg.showModel = true;
 			modelCloth.bipedLeftLeg.showModel = true;
 			this.setRenderPassModel(modelCloth);
+			
+			
+           
+			modelCloth.onGround = this.mainModel.onGround;
+			modelCloth.isRiding = this.mainModel.isRiding;
+			modelCloth.isChild = this.mainModel.isChild;
+            float f1 = 1.0F;
 
-			if (modelCloth != null)
-			{
-				modelCloth.onGround = this.mainModel.onGround;
-			}
+            GL11.glColor3f(f1, f1, f1);
 
-			if (modelCloth != null)
-			{
-				modelCloth.isRiding = this.mainModel.isRiding;
-			}
-
-			if (modelCloth != null)
-			{
-				modelCloth.isChild = this.mainModel.isChild;
-			}
-
-			final float var8 = 1.0F;
-
-			GL11.glColor3f(var8, var8, var8);
-
-			return 1;
+            return 1;
 
 		} catch (final Exception e) {
-			MLN.printException("Error when loading armour: ",e);
+			MLN.printException("Error when loading cloth: ",e);
 		}
 
 
@@ -448,10 +352,10 @@ public class RenderMillVillager extends RenderBiped {
 	}
 
 	@Override
-	protected int shouldRenderPass(EntityLiving entityliving, int i, float f)
+	protected int shouldRenderPass(EntityLivingBase entityliving, int i, float f)
 	{
 
-		final int armourRes=setArmorModel((MillVillager)entityliving, i, f);
+		final int armourRes=func_130006_a((MillVillager)entityliving, i, f);
 		int clothRes=-1;
 
 		if (i==0) {
@@ -463,4 +367,14 @@ public class RenderMillVillager extends RenderBiped {
 
 		return clothRes;
 	}
+	
+	
+	@Override
+    protected ResourceLocation func_110856_a(EntityLiving par1EntityLiving)
+    {
+    	MillVillager villager=(MillVillager)par1EntityLiving;
+    	
+    	
+        return villager.texture;
+    }
 }

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Vector;
 
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -26,6 +27,7 @@ import org.millenaire.common.UserProfile;
 import org.millenaire.common.VillagerRecord;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods;
 
 
@@ -268,6 +270,16 @@ public class StreamReadWrite  {
 
 		return ds.readUTF();
 	}
+	
+	public static ResourceLocation readNullableResourceLocation(DataInput ds) throws IOException {
+
+		final boolean isnull=ds.readBoolean();
+
+		if (isnull)
+			return null;
+
+		return new ResourceLocation(Mill.modId,ds.readUTF());
+	}
 
 	public static VillagerRecord readNullableVillagerRecord(MillWorld mw,DataInput ds) throws IOException {
 
@@ -284,7 +296,7 @@ public class StreamReadWrite  {
 		vr.familyName=readNullableString(ds);
 		vr.nameKey=readNullableString(ds);
 		vr.occupation=readNullableString(ds);
-		vr.texture=readNullableString(ds);
+		vr.texture=readNullableResourceLocation(ds);
 
 		vr.nb=ds.readInt();
 		vr.gender=ds.readInt();
@@ -688,6 +700,16 @@ public class StreamReadWrite  {
 			data.writeUTF(s);
 		}
 	}
+	
+
+	public static void writeNullableResourceLocation(ResourceLocation rs,DataOutput data) throws IOException {
+
+		data.writeBoolean(rs==null);
+
+		if (rs!=null) {
+			data.writeUTF(rs.func_110623_a());
+		}
+	}
 
 	public static void writeNullableVillagerRecord(VillagerRecord vr,DataOutput data) throws IOException {
 
@@ -702,7 +724,7 @@ public class StreamReadWrite  {
 			writeNullableString(vr.familyName,data);
 			writeNullableString(vr.nameKey,data);
 			writeNullableString(vr.occupation,data);
-			writeNullableString(vr.texture,data);
+			writeNullableResourceLocation(vr.texture,data);
 
 			data.writeInt(vr.nb);
 			data.writeInt(vr.gender);

@@ -3,9 +3,11 @@ package org.millenaire.client.gui;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.millenaire.common.MLN;
+import org.millenaire.common.forge.Mill;
 
 
 public class GuiHelp extends GuiText {
@@ -101,10 +103,11 @@ public class GuiHelp extends GuiText {
 		return 20;
 	}
 
+	ResourceLocation background=new ResourceLocation(Mill.modId,"/graphics/gui/ML_help.png");
 
 	@Override
-	public String getPNGPath() {
-		return "/graphics/gui/ML_help.png";
+	public ResourceLocation getPNGPath() {
+		return background;
 	}
 
 	@Override

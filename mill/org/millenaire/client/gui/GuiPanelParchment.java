@@ -3,6 +3,7 @@ package org.millenaire.client.gui;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
@@ -108,13 +109,16 @@ public class GuiPanelParchment extends GuiText {
 	public int getPageSize() {
 		return 19;
 	}
+	
+	ResourceLocation backgroundParchment=new ResourceLocation(Mill.modId,"/graphics/gui/ML_parchment.png");
+	ResourceLocation backgroundPanel=new ResourceLocation(Mill.modId,"/graphics/gui/ML_panel.png");
 
 	@Override
-	public String getPNGPath() {
+	public ResourceLocation getPNGPath() {
 		if (isParchment)
-			return "/graphics/gui/ML_parchment.png";
+			return backgroundParchment;
 		else
-			return "/graphics/gui/ML_panel.png";
+			return backgroundPanel;
 	}
 
 	@Override

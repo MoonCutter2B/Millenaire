@@ -5666,7 +5666,7 @@ public class Building {
 								villager.size = vr.villagerSize;
 								villager.isRaider = vr.raidingVillage;
 
-								if (!villager.isTextureValid(villager.getTexture())) {
+								if (!villager.isTextureValid(villager.getTexture().func_110623_a())) {
 									villager.setTexture(villager.getNewTexture());
 								}
 
@@ -6763,8 +6763,8 @@ public class Building {
 				final EntityPlayer player = worldObj.getClosestPlayer(p.getiX(), p.getiY(),
 						p.getiZ(), 4);
 
-				if ((player!=null) && (player.getHealth()<player.getMaxHealth())) {
-					player.setEntityHealth(player.getHealth()+1);
+				if ((player!=null) && (player.func_110143_aJ()<player.func_110138_aP())) {
+					player.setEntityHealth(player.func_110143_aJ()+1);
 					ServerSender.sendTranslatedSentence(player, MLN.LIGHTGREEN, "other.buildinghealing", getNativeBuildingName());
 				}
 

@@ -3,6 +3,7 @@ package org.millenaire.client;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
@@ -10,13 +11,19 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.millenaire.common.EntityMillDecoration;
 import org.millenaire.common.EntityMillDecoration.EnumWallDecoration;
+import org.millenaire.common.forge.Mill;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+
+
 @SideOnly(Side.CLIENT)
 public class RenderWallDecoration extends Render
 {
+	public static final ResourceLocation textureTapestries=new ResourceLocation(Mill.modId,"/graphics/art/ML_Tapestry.png");
+	public static final ResourceLocation textureSculptures=new ResourceLocation(Mill.modId,"/graphics/art/ML_Scultures.png");
+	
     public void renderThePainting(EntityMillDecoration ent, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
@@ -24,9 +31,9 @@ public class RenderWallDecoration extends Render
         GL11.glRotatef(par8, 0.0F, 1.0F, 0.0F);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         if (ent.type==EntityMillDecoration.NORMAN_TAPESTRY) {
-			loadTexture("/graphics/art/ML_Tapestry.png");
+        	func_110776_a(textureTapestries);
 		} else {
-			loadTexture("/graphics/art/ML_Scultures.png");
+			func_110776_a(textureSculptures);
 		}
         EnumWallDecoration enumart = ent.art;
         float f2 = 0.0625F;
@@ -147,4 +154,14 @@ public class RenderWallDecoration extends Render
     {
         this.renderThePainting((EntityMillDecoration)par1Entity, par2, par4, par6, par8, par9);
     }
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity) {
+		EntityMillDecoration ent=(EntityMillDecoration)entity;
+		if (ent.type==EntityMillDecoration.NORMAN_TAPESTRY) {
+        	return textureTapestries;
+		} else {
+			return textureSculptures;
+		}
+	}
 }

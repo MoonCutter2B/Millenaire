@@ -78,7 +78,7 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer
 		field_35378_c = new ModelLargeLockedChest();
 	}
 
-	public void func_35376_a(TileEntityChest tileentitychest, double d, double d1, double d2,
+	public void renderTileEntityChestAt(TileEntityChest tileentitychest, double d, double d1, double d2,
 			float f)
 	{
 		int i;
@@ -103,12 +103,12 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer
 		if ((tileentitychest.adjacentChestXPos != null) || (tileentitychest.adjacentChestZPosition != null))
 		{
 			modelchest = field_35378_c;
-			bindTextureByName(MLN.getLargeLockedChestTexture());
+			func_110628_a(MLN.getLargeLockedChestTexture());
 		}
 		else
 		{
 			modelchest = field_35377_b;
-			bindTextureByName(MLN.getLockedChestTexture());
+			func_110628_a(MLN.getLockedChestTexture());
 		}
 		GL11.glPushMatrix();
 		GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
@@ -173,6 +173,6 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer
 	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2,
 			float f)
 	{
-		func_35376_a((TileEntityChest)tileentity, d, d1, d2, f);
+		renderTileEntityChestAt((TileEntityChest)tileentity, d, d1, d2, f);
 	}
 }

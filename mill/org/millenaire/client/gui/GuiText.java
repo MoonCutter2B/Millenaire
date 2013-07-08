@@ -10,6 +10,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 
@@ -489,7 +490,7 @@ public abstract class GuiText extends GuiScreen {
 
 		drawDefaultBackground();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(getPNGPath());
+		this.mc.func_110434_K().func_110577_a(getPNGPath());
 		final int xStart = (width - getXSize()) / 2;
 		final int yStart = (height - getYSize()) / 2;
 		drawTexturedModalRect(xStart, yStart, 0, 0, getXSize(), getYSize());
@@ -697,7 +698,7 @@ public abstract class GuiText extends GuiScreen {
 
 	public abstract int getPageSize();
 
-	public abstract String getPNGPath();
+	public abstract ResourceLocation getPNGPath();
 
 	public int getTextXStart() {
 		return 8;
