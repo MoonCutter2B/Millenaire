@@ -6,11 +6,11 @@ import java.util.Vector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
@@ -29,8 +29,8 @@ public class GuiPujas extends GuiContainer
 	private final Building temple;
 	private final EntityPlayer player;
 	
-	private static final ResourceLocation texturePujas = new ResourceLocation(Mill.modId,"/graphics/gui/ML_pujas.png");
-	private static final ResourceLocation textureSacrifices = new ResourceLocation(Mill.modId,"/graphics/gui/ML_mayansacrifices.png");
+	private static final ResourceLocation texturePujas = new ResourceLocation(Mill.modId,"/textures/gui/ML_pujas.png");
+	private static final ResourceLocation textureSacrifices = new ResourceLocation(Mill.modId,"/textures/gui/ML_mayansacrifices.png");
 	
 	
 	public GuiPujas(EntityPlayer player, Building temple)

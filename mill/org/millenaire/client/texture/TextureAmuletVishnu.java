@@ -34,7 +34,7 @@ public class TextureAmuletVishnu extends TextureAtlasSprite {
 		if (iconPos != this.field_110973_g)
         {
             this.field_110973_g = iconPos;
-            TextureUtil.func_110998_a((int[])this.field_110976_a.get(this.field_110973_g), this.width, this.height, this.field_110975_c, this.field_110974_d, false, false);
+            TextureUtil.func_110998_a((int[])this.field_110976_a.get(this.field_110973_g), this.field_130223_c, this.field_130224_d, this.field_110975_c, this.field_110974_d, false, false);
         }
 	}
 	

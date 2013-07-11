@@ -3,7 +3,7 @@ package org.millenaire.client.gui;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Keyboard;
 import org.millenaire.common.MLN;
@@ -59,7 +59,7 @@ public class GuiConfig extends GuiText {
 		return 19;
 	}
 
-	ResourceLocation background=new ResourceLocation(Mill.modId,"/graphics/gui/ML_config.png");
+	ResourceLocation background=new ResourceLocation(Mill.modId,"/textures/gui/ML_config.png");
 	
 	@Override
 	public ResourceLocation getPNGPath() {

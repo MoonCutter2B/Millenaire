@@ -3,8 +3,8 @@ package org.millenaire.client.gui;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -110,8 +110,8 @@ public class GuiPanelParchment extends GuiText {
 		return 19;
 	}
 	
-	ResourceLocation backgroundParchment=new ResourceLocation(Mill.modId,"/graphics/gui/ML_parchment.png");
-	ResourceLocation backgroundPanel=new ResourceLocation(Mill.modId,"/graphics/gui/ML_panel.png");
+	ResourceLocation backgroundParchment=new ResourceLocation(Mill.modId,"/textures/gui/ML_parchment.png");
+	ResourceLocation backgroundPanel=new ResourceLocation(Mill.modId,"/textures/gui/ML_panel.png");
 
 	@Override
 	public ResourceLocation getPNGPath() {

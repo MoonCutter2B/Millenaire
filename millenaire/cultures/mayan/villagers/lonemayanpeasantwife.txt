@@ -6,13 +6,13 @@ tag=seller
 baseHeight=0.9
 model=femaleasymmetrical
 
-texture=/graphics/mob/mayan/mayan_Peasant_Wife0.png
-texture=/graphics/mob/mayan/mayan_Peasant_Wife1.png
-texture=/graphics/mob/mayan/mayan_Peasant_Wife2.png
-texture=/graphics/mob/mayan/mayan_Peasant_Wife3.png
-texture=/graphics/mob/mayan/mayan_Peasant_Wife4.png
-texture=/graphics/mob/mayan/mayan_Peasant_Wife5.png
-texture=/graphics/mob/mayan/mayan_Peasant_Wife6.png
+texture=/textures/entity/mayan/mayan_Peasant_Wife0.png
+texture=/textures/entity/mayan/mayan_Peasant_Wife1.png
+texture=/textures/entity/mayan/mayan_Peasant_Wife2.png
+texture=/textures/entity/mayan/mayan_Peasant_Wife3.png
+texture=/textures/entity/mayan/mayan_Peasant_Wife4.png
+texture=/textures/entity/mayan/mayan_Peasant_Wife5.png
+texture=/textures/entity/mayan/mayan_Peasant_Wife6.png
 
 goal=gorest
 goal=goDrink

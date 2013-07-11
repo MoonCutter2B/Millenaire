@@ -77,7 +77,7 @@ public class MillEventController {
 		if (Mill.startupError)
 			return;
 
-		if (event.world.getWorldInfo().getDimension()!=0)
+		if (event.world.getWorldInfo().getVanillaDimension()!=0)
 			return;
 
 		if (!(event.world instanceof WorldServer)) {
@@ -99,7 +99,7 @@ public class MillEventController {
 		if (Mill.startupError)
 			return;
 
-		if (event.world.getWorldInfo().getDimension()!=0)
+		if (event.world.getWorldInfo().getVanillaDimension()!=0)
 			return;
 
 		if (!(event.world instanceof WorldServer)) {

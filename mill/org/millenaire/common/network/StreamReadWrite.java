@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Vector;
 
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 
 import org.millenaire.common.Building;
 import org.millenaire.common.BuildingLocation;

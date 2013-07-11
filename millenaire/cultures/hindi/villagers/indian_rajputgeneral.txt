@@ -6,8 +6,8 @@ tag=chief
 baseHeight=1.1
 health=60
 
-texture=/graphics/mob/indian/ML_rajput_leader0.png
-texture=/graphics/mob/indian/ML_rajput_leader1.png
+texture=/textures/entity/indian/ML_rajput_leader0.png
+texture=/textures/entity/indian/ML_rajput_leader1.png
 
 goal=gosocialise
 goal=chat

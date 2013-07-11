@@ -4,8 +4,8 @@ familyNameList=questshaman_family_name
 firstNameList=questshaman_name
 tag=religious
 
-texture=/graphics/mob/mayan/mayan_shaman0.png
-texture=/graphics/mob/mayan/mayan_shaman1.png
+texture=/textures/entity/mayan/mayan_shaman0.png
+texture=/textures/entity/mayan/mayan_shaman1.png
 
 goal=gorest
 goal=gopray

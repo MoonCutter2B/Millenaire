@@ -3,7 +3,7 @@ gender=male
 familyNameList=family_names
 firstNameList=men_names
 
-texture=/graphics/mob/norman/ML_AlchemistApprentice0.png
+texture=/textures/entity/norman/ML_AlchemistApprentice0.png
 
 goal=gorest
 goal=gosocialise

@@ -7,7 +7,7 @@ tag=foreignmerchant
 chanceWeight=10
 baseheight=1.1
 health=30
-texture=/graphics/mob/norman/ML_Merchant_Viking0.png
+texture=/textures/entity/norman/ML_Merchant_Viking0.png
 
 goal=gorest
 goal=gopray

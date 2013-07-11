@@ -4,8 +4,8 @@ familyNameList=family_names
 firstNameList=men_names
 tag=religious
 
-texture=/graphics/mob/norman/ML_Priest0.png
-texture=/graphics/mob/norman/ML_Priest1.png
+texture=/textures/entity/norman/ML_Priest0.png
+texture=/textures/entity/norman/ML_Priest1.png
 
 goal=gorest
 goal=gosocialise

@@ -5,8 +5,8 @@ firstNameList=women_names
 baseheight=0.8
 tag=seller
 
-texture=/graphics/mob/norman/ML_Wife0.png
-texture=/graphics/mob/norman/ML_Wife1.png
+texture=/textures/entity/norman/ML_Wife0.png
+texture=/textures/entity/norman/ML_Wife1.png
 
 goal=gorest
 goal=goDrink

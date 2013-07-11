@@ -129,7 +129,7 @@ public class WorldGenVillage implements IWorldGenerator {
 		try {
 			generateVillageAtPoint(world, random, chunkX*16, 0, chunkZ*16, null,true,false,Integer.MAX_VALUE, null, null, null);
 		} catch (final Exception e) {
-			MLN.printException("Exception when attempting to generate village in "+world+" (dimension: "+world.getWorldInfo().getDimension()+")", e);
+			MLN.printException("Exception when attempting to generate village in "+world+" (dimension: "+world.getWorldInfo().getVanillaDimension()+")", e);
 		}
 	}
 

@@ -8,8 +8,8 @@ tag=raider
 tag=noteleport
 health=40
 
-texture=/graphics/mob/norman/ML_Armoredbandit0.png
-texture=/graphics/mob/norman/ML_Armoredbandit1.png
+texture=/textures/entity/norman/ML_Armoredbandit0.png
+texture=/textures/entity/norman/ML_Armoredbandit1.png
 
 goal=gorest
 goal=goDrink

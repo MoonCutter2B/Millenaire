@@ -6,7 +6,7 @@ tag=chief
 baseheight=1.1
 health=60
 
-texture=/graphics/mob/norman/ML_Knight0.png
+texture=/textures/entity/norman/ML_Knight0.png
 
 goal=gorest
 goal=gosocialise

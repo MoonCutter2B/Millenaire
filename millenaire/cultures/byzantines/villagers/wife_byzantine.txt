@@ -10,31 +10,31 @@ tag=seller
 
 model=femaleasymmetrical
 
-texture=/graphics/mob/byzanz/female/byz.female.A.png
-texture=/graphics/mob/byzanz/female/byz.female.B.png
-texture=/graphics/mob/byzanz/female/byz.female.C.png
-texture=/graphics/mob/byzanz/female/byz.female.D.png
-texture=/graphics/mob/byzanz/female/byz.female.E.png
-texture=/graphics/mob/byzanz/female/byz.female.F.png
-texture=/graphics/mob/byzanz/female/byz.female.G.png
-texture=/graphics/mob/byzanz/female/byz.female.H.png
-texture=/graphics/mob/byzanz/female/byz.female.I.png
-texture=/graphics/mob/byzanz/female/byz.female.J.png
-texture=/graphics/mob/byzanz/female/byz.female.K.png
-texture=/graphics/mob/byzanz/female/byz.female.L.png
-texture=/graphics/mob/byzanz/female/byz.female.M.png
-texture=/graphics/mob/byzanz/female/byz.female.N.png
+texture=/textures/entity/byzanz/female/byz.female.A.png
+texture=/textures/entity/byzanz/female/byz.female.B.png
+texture=/textures/entity/byzanz/female/byz.female.C.png
+texture=/textures/entity/byzanz/female/byz.female.D.png
+texture=/textures/entity/byzanz/female/byz.female.E.png
+texture=/textures/entity/byzanz/female/byz.female.F.png
+texture=/textures/entity/byzanz/female/byz.female.G.png
+texture=/textures/entity/byzanz/female/byz.female.H.png
+texture=/textures/entity/byzanz/female/byz.female.I.png
+texture=/textures/entity/byzanz/female/byz.female.J.png
+texture=/textures/entity/byzanz/female/byz.female.K.png
+texture=/textures/entity/byzanz/female/byz.female.L.png
+texture=/textures/entity/byzanz/female/byz.female.M.png
+texture=/textures/entity/byzanz/female/byz.female.N.png
 
-clothes=free,/graphics/mob/byzanz/female/clothes/byz.defaultwife.1.A.png
-clothes=free,/graphics/mob/byzanz/female/clothes/byz.defaultwife.1.B.png
-clothes=free,/graphics/mob/byzanz/female/clothes/byz.defaultwife.1.C.png
-clothes=free,/graphics/mob/byzanz/female/clothes/byz.defaultwife.1.D.png
-clothes=free,/graphics/mob/byzanz/female/clothes/byz.defaultwife.1.E.png
+clothes=free,/textures/entity/byzanz/female/clothes/byz.defaultwife.1.A.png
+clothes=free,/textures/entity/byzanz/female/clothes/byz.defaultwife.1.B.png
+clothes=free,/textures/entity/byzanz/female/clothes/byz.defaultwife.1.C.png
+clothes=free,/textures/entity/byzanz/female/clothes/byz.defaultwife.1.D.png
+clothes=free,/textures/entity/byzanz/female/clothes/byz.defaultwife.1.E.png
 
-clothes=clothes_byz_wool,/graphics/mob/byzanz/female/clothes/byz.defaultwife.2.A.png
-clothes=clothes_byz_wool,/graphics/mob/byzanz/female/clothes/byz.defaultwife.2.B.png
-clothes=clothes_byz_wool,/graphics/mob/byzanz/female/clothes/byz.defaultwife.2.C.png
-clothes=clothes_byz_wool,/graphics/mob/byzanz/female/clothes/byz.defaultwife.2.D.png
+clothes=clothes_byz_wool,/textures/entity/byzanz/female/clothes/byz.defaultwife.2.A.png
+clothes=clothes_byz_wool,/textures/entity/byzanz/female/clothes/byz.defaultwife.2.B.png
+clothes=clothes_byz_wool,/textures/entity/byzanz/female/clothes/byz.defaultwife.2.C.png
+clothes=clothes_byz_wool,/textures/entity/byzanz/female/clothes/byz.defaultwife.2.D.png
 
 toolNeeded=clothes_byz_wool
 

@@ -3,12 +3,12 @@ package org.millenaire.common;
 import java.util.HashMap;
 import java.util.Vector;
 
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ResourceLocation;
 
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.core.MillCommonUtilities;

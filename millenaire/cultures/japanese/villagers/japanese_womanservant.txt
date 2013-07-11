@@ -5,8 +5,8 @@ firstNameList=low_caste_women_names
 baseHeight=0.85
 tag=seller
 
-texture=/graphics/mob/japanese/japanese_Peasant_Wife0.png
-texture=/graphics/mob/japanese/japanese_Peasant_Wife1.png
+texture=/textures/entity/japanese/japanese_Peasant_Wife0.png
+texture=/textures/entity/japanese/japanese_Peasant_Wife1.png
 
 goal=gorest
 goal=gopray

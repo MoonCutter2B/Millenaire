@@ -5,7 +5,7 @@ firstNameList=men_names
 tag=chief
 tag=religious
 
-texture=/graphics/mob/norman/ML_Abbot0.png
+texture=/textures/entity/norman/ML_Abbot0.png
 
 goal=gorest
 goal=gosocialise

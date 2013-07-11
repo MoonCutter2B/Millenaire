@@ -20,10 +20,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
 
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
+import net.minecraft.util.ResourceLocation;
 
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Quest.QuestStep;
@@ -904,10 +904,10 @@ public class MLN {
 		return hofData;
 	}
 	
-	public static final ResourceLocation textureLargeChest64=new ResourceLocation(Mill.modId,"/graphics/item/ML_lockedlargechest_64.png");
-	public static final ResourceLocation textureLargeChest=new ResourceLocation(Mill.modId,"/graphics/item/ML_lockedlargechest.png");
-	public static final ResourceLocation textureChest64=new ResourceLocation(Mill.modId,"/graphics/item/ML_lockedchest_64.png");
-	public static final ResourceLocation textureChest=new ResourceLocation(Mill.modId,"/graphics/item/ML_lockedchest.png");
+	public static final ResourceLocation textureLargeChest64=new ResourceLocation(Mill.modId,"/textures/entity/chest/ML_lockedlargechest_64.png");
+	public static final ResourceLocation textureLargeChest=new ResourceLocation(Mill.modId,"/textures/entity/chest/ML_lockedlargechest.png");
+	public static final ResourceLocation textureChest64=new ResourceLocation(Mill.modId,"/textures/entity/chest/ML_lockedchest_64.png");
+	public static final ResourceLocation textureChest=new ResourceLocation(Mill.modId,"/textures/entity/chest/ML_lockedchest.png");
 
 	public static ResourceLocation getLargeLockedChestTexture() {
 

@@ -6,7 +6,7 @@ tag=visitor
 tag=foreignmerchant
 chanceWeight=10
 
-texture=/graphics/mob/norman/ML_Merchant_Wool0.png
+texture=/textures/entity/norman/ML_Merchant_Wool0.png
 
 goal=gorest
 goal=gopray

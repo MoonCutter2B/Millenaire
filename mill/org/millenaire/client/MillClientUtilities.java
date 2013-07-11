@@ -5,11 +5,11 @@ import java.util.Vector;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureObject;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
 

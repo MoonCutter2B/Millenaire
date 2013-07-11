@@ -5,10 +5,10 @@ firstNameList=men_names
 tag=heavydrinker
 tag=seller
 
-texture=/graphics/mob/norman/ML_Lumberman0.png
-texture=/graphics/mob/norman/ML_Lumberman1.png
-texture=/graphics/mob/norman/ML_Lumberman2.png
-texture=/graphics/mob/norman/ML_Lumberman3.png
+texture=/textures/entity/norman/ML_Lumberman0.png
+texture=/textures/entity/norman/ML_Lumberman1.png
+texture=/textures/entity/norman/ML_Lumberman2.png
+texture=/textures/entity/norman/ML_Lumberman3.png
 
 goal=gorest
 goal=gopray

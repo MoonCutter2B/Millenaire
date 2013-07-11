@@ -327,27 +327,27 @@ public class BuildingPlan {
 				} else if (special==BuildingBlock.SPAWNERSKELETON) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.func_98049_a().setMobID("Skeleton");
+					tileentitymobspawner.getSpawnerLogic().setMobID("Skeleton");
 				} else if (special==BuildingBlock.SPAWNERZOMBIE) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.func_98049_a().setMobID("Zombie");
+					tileentitymobspawner.getSpawnerLogic().setMobID("Zombie");
 				} else if (special==BuildingBlock.SPAWNERSPIDER) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.func_98049_a().setMobID("Spider");
+					tileentitymobspawner.getSpawnerLogic().setMobID("Spider");
 				} else if (special==BuildingBlock.SPAWNERCAVESPIDER) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.func_98049_a().setMobID("CaveSpider");
+					tileentitymobspawner.getSpawnerLogic().setMobID("CaveSpider");
 				} else if (special==BuildingBlock.SPAWNERCREEPER) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.func_98049_a().setMobID("Creeper");
+					tileentitymobspawner.getSpawnerLogic().setMobID("Creeper");
 				} else if (special==BuildingBlock.SPAWNERBLAZE) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.func_98049_a().setMobID("Blaze");
+					tileentitymobspawner.getSpawnerLogic().setMobID("Blaze");
 				} else if (special==BuildingBlock.DISPENDERUNKNOWNPOWDER) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.dispenser.blockID, 0);
 					final TileEntityDispenser dispenser=p.getDispenser(world);

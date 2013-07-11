@@ -3,7 +3,7 @@ gender=male
 familyNameList=alchemistassistant_last
 firstNameList=alchemistassistant_first
 
-texture=/graphics/mob/norman/ML_AlchemistAssistant0.png
+texture=/textures/entity/norman/ML_AlchemistAssistant0.png
 
 goal=gorest
 goal=gopray

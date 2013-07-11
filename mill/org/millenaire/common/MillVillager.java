@@ -17,7 +17,6 @@ import java.util.Vector;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockFenceGate;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
@@ -45,6 +44,7 @@ import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -1376,13 +1376,13 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public ItemStack getCurrentItemOrArmor(int par1)
 	{
 		if (par1>0)
-			return getCurrentArmor(par1-1);
+			return func_130225_q(par1-1);
 		
 		return this.heldItem;
 	}
 
 	@Override
-	public ItemStack getCurrentArmor(int type) {
+	public ItemStack func_130225_q(int type) {
 
 		if (type==0) {
 			for (final Item weapon : helmets) {
@@ -2042,7 +2042,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		int total = 0;
 		for (int i = 0; i < 4; i++)
 		{
-			final ItemStack armour=getCurrentArmor(i);
+			final ItemStack armour=func_130225_q(i);
 
 			if ((armour != null) && (armour.getItem() instanceof ItemArmor))
 			{

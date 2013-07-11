@@ -4,16 +4,16 @@ familyNameList=greek_family_names
 firstNameList=greek_men_names
 tag=religious
 
-texture=/graphics/mob/byzanz/noblemale/byz.religious.A.png
-texture=/graphics/mob/byzanz/noblemale/byz.religious.B.png
-texture=/graphics/mob/byzanz/noblemale/byz.religious.C.png
-texture=/graphics/mob/byzanz/noblemale/byz.religious.D.png
-texture=/graphics/mob/byzanz/noblemale/byz.religious.E.png
-texture=/graphics/mob/byzanz/noblemale/byz.religious.F.png
+texture=/textures/entity/byzanz/noblemale/byz.religious.A.png
+texture=/textures/entity/byzanz/noblemale/byz.religious.B.png
+texture=/textures/entity/byzanz/noblemale/byz.religious.C.png
+texture=/textures/entity/byzanz/noblemale/byz.religious.D.png
+texture=/textures/entity/byzanz/noblemale/byz.religious.E.png
+texture=/textures/entity/byzanz/noblemale/byz.religious.F.png
 
-clothes=free,/graphics/mob/byzanz/noblemale/clothes/byz.priest.1.A.png
-clothes=free,/graphics/mob/byzanz/noblemale/clothes/byz.priest.1.B.png
-clothes=free,/graphics/mob/byzanz/noblemale/clothes/byz.priest.1.C.png
+clothes=free,/textures/entity/byzanz/noblemale/clothes/byz.priest.1.A.png
+clothes=free,/textures/entity/byzanz/noblemale/clothes/byz.priest.1.B.png
+clothes=free,/textures/entity/byzanz/noblemale/clothes/byz.priest.1.C.png
 
 toolNeeded=clothes_byz_silk
 

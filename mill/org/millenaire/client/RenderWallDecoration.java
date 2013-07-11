@@ -3,9 +3,9 @@ package org.millenaire.client;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -21,8 +21,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderWallDecoration extends Render
 {
-	public static final ResourceLocation textureTapestries=new ResourceLocation(Mill.modId,"/graphics/art/ML_Tapestry.png");
-	public static final ResourceLocation textureSculptures=new ResourceLocation(Mill.modId,"/graphics/art/ML_Scultures.png");
+	public static final ResourceLocation textureTapestries=new ResourceLocation(Mill.modId,"/textures/painting/ML_Tapestry.png");
+	public static final ResourceLocation textureSculptures=new ResourceLocation(Mill.modId,"/textures/painting/ML_Scultures.png");
 	
     public void renderThePainting(EntityMillDecoration ent, double par2, double par4, double par6, float par8, float par9)
     {

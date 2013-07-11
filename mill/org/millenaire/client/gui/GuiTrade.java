@@ -7,11 +7,11 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.millenaire.client.MillClientUtilities;
@@ -169,7 +169,7 @@ public class GuiTrade extends GuiContainer {
 		}
 	}
 
-	ResourceLocation background=new ResourceLocation(Mill.modId,"/graphics/gui/ML_trade.png");
+	ResourceLocation background=new ResourceLocation(Mill.modId,"/textures/gui/ML_trade.png");
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)

@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.Building;
@@ -199,7 +199,7 @@ public class GuiControlledMilitary extends GuiText {
 		return 19;
 	}
 
-	ResourceLocation background=new ResourceLocation(Mill.modId,"/graphics/gui/ML_panel.png");
+	ResourceLocation background=new ResourceLocation(Mill.modId,"/textures/gui/ML_panel.png");
 
 	@Override
 	public ResourceLocation getPNGPath() {

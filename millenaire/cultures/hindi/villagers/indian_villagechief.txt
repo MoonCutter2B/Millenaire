@@ -4,8 +4,8 @@ familyNameList=high_caste_family_names
 firstNameList=men_names
 tag=chief
 
-texture=/graphics/mob/indian/ML_chief0.png
-texture=/graphics/mob/indian/ML_chief1.png
+texture=/textures/entity/indian/ML_chief0.png
+texture=/textures/entity/indian/ML_chief1.png
 
 goal=gosocialise
 goal=chat

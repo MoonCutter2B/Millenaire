@@ -7,10 +7,10 @@ malechild=japanese_boy
 femalechild=japanese_girl
 baseHeight=0.85
 
-texture=/graphics/mob/japanese/japanese_Peasant_Wife0.png
-texture=/graphics/mob/japanese/japanese_Peasant_Wife1.png
-texture=/graphics/mob/japanese/japanese_Peasant_Wife2.png
-texture=/graphics/mob/japanese/japanese_Peasant_Wife3.png
+texture=/textures/entity/japanese/japanese_Peasant_Wife0.png
+texture=/textures/entity/japanese/japanese_Peasant_Wife1.png
+texture=/textures/entity/japanese/japanese_Peasant_Wife2.png
+texture=/textures/entity/japanese/japanese_Peasant_Wife3.png
 
 goal=gorest
 goal=gopray

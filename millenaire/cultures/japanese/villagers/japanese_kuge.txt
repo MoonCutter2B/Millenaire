@@ -7,7 +7,7 @@ tag=archer
 baseHeight=0.93
 health=25
 
-texture=/graphics/mob/japanese/japanese_Overseer1.png
+texture=/textures/entity/japanese/japanese_Overseer1.png
 
 goal=gorest
 goal=gopray

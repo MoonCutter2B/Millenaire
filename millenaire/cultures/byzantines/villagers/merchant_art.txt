@@ -6,7 +6,7 @@ tag=visitor
 tag=foreignmerchant
 chanceWeight=10
 
-texture=/graphics/mob/byzanz/merchant0.png
+texture=/textures/entity/byzanz/merchant0.png
 
 goal=gorest
 goal=gopray

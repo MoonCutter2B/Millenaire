@@ -3,8 +3,8 @@ package org.millenaire.client.gui;
 import java.util.Vector;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.ResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.MLN;
@@ -154,7 +154,7 @@ public class GuiQuest extends GuiText {
 		return 16;
 	}
 	
-	ResourceLocation background=new ResourceLocation(Mill.modId,"/graphics/gui/ML_quest.png");
+	ResourceLocation background=new ResourceLocation(Mill.modId,"/textures/gui/ML_quest.png");
 
 	@Override
 	public ResourceLocation getPNGPath() {

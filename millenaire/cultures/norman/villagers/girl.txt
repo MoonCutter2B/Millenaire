@@ -6,8 +6,8 @@ tag=child
 familyNameList=family_names
 firstNameList=women_names
 
-texture=/graphics/mob/norman/ML_Girl0.png
-texture=/graphics/mob/norman/ML_Girl1.png
+texture=/textures/entity/norman/ML_Girl0.png
+texture=/textures/entity/norman/ML_Girl1.png
 
 goal=gorest
 goal=gosocialise

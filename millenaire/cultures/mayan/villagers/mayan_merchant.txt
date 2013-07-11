@@ -6,8 +6,8 @@ tag=visitor
 
 tag=localmerchant
 
-texture=/graphics/mob/mayan/mayan_merchant0.png
-texture=/graphics/mob/mayan/mayan_merchant1.png
+texture=/textures/entity/mayan/mayan_merchant0.png
+texture=/textures/entity/mayan/mayan_merchant1.png
 
 goal=gorest
 goal=gopray
