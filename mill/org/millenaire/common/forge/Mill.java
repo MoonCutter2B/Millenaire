@@ -116,7 +116,7 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "5.1.5";
+	public static final String versionNumber = "5.1.6";
 
 	public static final String versionBound = "[5.0.0,6.0)";
 	public static final String modId="millenaire";

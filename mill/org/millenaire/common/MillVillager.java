@@ -767,7 +767,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 					}
 				}
 
-				final EntityArrow arrow = new EntityArrow(this.worldObj, this, (EntityLiving)entity, 1.6F, 12.0F);
+				final EntityArrow arrow = new EntityArrow(this.worldObj, this, (EntityLivingBase)entity, 1.6F, 12.0F);
 
 				this.worldObj.playSoundAtEntity(this, "random.bow", 1.0F, 1.0F / ((this.getRNG().nextFloat() * 0.4F) + 0.8F));
 				this.worldObj.spawnEntityInWorld(arrow);
