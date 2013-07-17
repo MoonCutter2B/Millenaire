@@ -3385,9 +3385,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		double d1 = par1Entity.posZ - this.posZ;
 		double d2;
 
-		if (par1Entity instanceof EntityLiving)
+		if (par1Entity instanceof EntityLivingBase)
 		{
-			EntityLiving entityliving = (EntityLiving)par1Entity;
+			EntityLivingBase entityliving = (EntityLivingBase)par1Entity;
 			d2 = entityliving.posY + (double)entityliving.getEyeHeight() - (this.posY + (double)this.getEyeHeight());
 		}
 		else

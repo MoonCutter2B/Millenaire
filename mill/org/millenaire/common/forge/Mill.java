@@ -116,7 +116,7 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "5.1.6";
+	public static final String versionNumber = "5.1.7";
 
 	public static final String versionBound = "[5.0.0,6.0)";
 	public static final String modId="millenaire";
@@ -139,6 +139,8 @@ public class Mill
 
 	public static Vector<File> loadingDirs=new Vector<File>();
 	private static int nextItemId=MLN.itemRangeStart-1;
+	
+	
 
 	public static Block lockedChest;
 	public static Block panel;

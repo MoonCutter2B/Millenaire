@@ -3,10 +3,11 @@ gender=female
 familyNameList=noble_family_names
 firstNameList=women_names
 baseheight=0.9
+model=femaleasymmetrical
 tag=seller
 
-texture=/textures/entity/norman/ML_Lady0.png
-texture=/textures/entity/norman/ML_Lady1.png
+texture=/textures/entity/norman/ML_Lady0_Asymmetric.png
+texture=/textures/entity/norman/ML_Lady1_Asymmetric.png
 
 goal=gorest
 goal=gosocialise
