@@ -4,6 +4,10 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.InventoryLargeChest;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
@@ -12,7 +16,7 @@ import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerSender;
 import org.millenaire.common.network.StreamReadWrite;
 
-public class TileEntityMillChest extends TileEntityChest {
+public class TileEntityMillChest extends TileEntityChest implements ISidedInventory {
 
 	public static void readUpdatePacket(DataInputStream ds,World world) {
 
@@ -198,5 +202,44 @@ public class TileEntityMillChest extends TileEntityChest {
 		}
 	}
 
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		return new int[0];
+	}
 
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		return false;
+	}
+
+
+	public static class InventoryMillLargeChest extends InventoryLargeChest implements ISidedInventory {
+
+		public InventoryMillLargeChest(String par1Str,
+				IInventory par2iInventory, IInventory par3iInventory) {
+			super(par1Str, par2iInventory, par3iInventory);
+		}
+		
+		@Override
+		public int[] getAccessibleSlotsFromSide(int var1) {
+			return new int[0];
+		}
+
+		@Override
+		public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+			return false;
+		}
+
+		@Override
+		public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+			return false;
+		}
+		
+	}
+	
 }

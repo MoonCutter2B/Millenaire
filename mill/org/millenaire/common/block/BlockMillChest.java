@@ -1,5 +1,7 @@
 package org.millenaire.common.block;
 
+import static net.minecraftforge.common.ForgeDirection.DOWN;
+
 import java.util.Random;
 
 import net.minecraft.block.BlockChest;
@@ -14,6 +16,7 @@ import net.minecraft.world.World;
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.Point;
 import org.millenaire.common.TileEntityMillChest;
+import org.millenaire.common.TileEntityMillChest.InventoryMillLargeChest;
 import org.millenaire.common.forge.Mill;
 
 
@@ -22,12 +25,80 @@ public class BlockMillChest extends BlockChest {
 	public static ContainerChest createContainer(World world, int i, int j, int k, EntityPlayer entityplayer) {
 		final TileEntityMillChest lockedchest = (TileEntityMillChest) world.getBlockTileEntity(i, j, k);
 
-		final IInventory chest=getChestInventory(lockedchest,world,i,j,k);
+		final IInventory chest=getInventory(lockedchest,world,i,j,k);
 
 		return new ContainerChest(entityplayer.inventory,chest);
 	}
 
-	public static IInventory getChestInventory(TileEntityMillChest lockedchest,World world, int i, int j, int k) {
+	
+	
+	@Override
+	public IInventory getInventory(World par1World, int par2, int par3, int par4)
+    {
+		final TileEntityMillChest lockedchest = (TileEntityMillChest) par1World.getBlockTileEntity(par2, par3, par4);
+
+		IInventory chest=lockedchest;
+		
+        if (lockedchest == null)
+        {
+            return null;
+        }
+        else if (par1World.isBlockSolidOnSide(par2, par3 + 1, par4, DOWN))
+        {
+            return null;
+        }
+        else if (isOcelotBlockingChest(par1World, par2, par3, par4))
+        {
+            return null;
+        }
+        else if (par1World.getBlockId(par2 - 1, par3, par4) == this.blockID && (par1World.isBlockSolidOnSide(par2 - 1, par3 + 1, par4, DOWN) || isOcelotBlockingChest(par1World, par2 - 1, par3, par4)))
+        {
+            return null;
+        }
+        else if (par1World.getBlockId(par2 + 1, par3, par4) == this.blockID && (par1World.isBlockSolidOnSide(par2 + 1, par3 + 1, par4, DOWN) || isOcelotBlockingChest(par1World, par2 + 1, par3, par4)))
+        {
+            return null;
+        }
+        else if (par1World.getBlockId(par2, par3, par4 - 1) == this.blockID && (par1World.isBlockSolidOnSide(par2, par3 + 1, par4 - 1, DOWN) || isOcelotBlockingChest(par1World, par2, par3, par4 - 1)))
+        {
+            return null;
+        }
+        else if (par1World.getBlockId(par2, par3, par4 + 1) == this.blockID && (par1World.isBlockSolidOnSide(par2, par3 + 1, par4 + 1, DOWN) || isOcelotBlockingChest(par1World, par2, par3, par4 + 1)))
+        {
+            return null;
+        }
+        else
+        {
+        	
+        	final String largename=lockedchest.getInvLargeName();
+        	
+            if (par1World.getBlockId(par2 - 1, par3, par4) == this.blockID)
+            {
+            	chest = new InventoryMillLargeChest(largename, (TileEntityChest)par1World.getBlockTileEntity(par2 - 1, par3, par4), lockedchest);
+            }
+
+            if (par1World.getBlockId(par2 + 1, par3, par4) == this.blockID)
+            {
+            	chest = new InventoryMillLargeChest(largename, lockedchest, (TileEntityChest)par1World.getBlockTileEntity(par2 + 1, par3, par4));
+            }
+
+            if (par1World.getBlockId(par2, par3, par4 - 1) == this.blockID)
+            {
+            	chest = new InventoryMillLargeChest(largename, (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4 - 1),lockedchest);
+            }
+
+            if (par1World.getBlockId(par2, par3, par4 + 1) == this.blockID)
+            {
+            	chest = new InventoryMillLargeChest(largename, lockedchest, (TileEntityChest)par1World.getBlockTileEntity(par2, par3, par4 + 1));
+            }
+
+            return chest;
+        }
+    }
+
+
+
+	public static IInventory getInventory(TileEntityMillChest lockedchest,World world, int i, int j, int k) {
 
 		final String largename=lockedchest.getInvLargeName();
 
