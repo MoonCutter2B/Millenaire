@@ -14,8 +14,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumArmorMaterial;
@@ -50,8 +48,6 @@ import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.VillageList;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerSender;
-
-import com.google.common.collect.Multimap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -244,22 +240,12 @@ public class Goods {
 		private static final ResourceLocation byzantine1 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_byzantine_1.png");
 		private static final ResourceLocation byzantine2 = new ResourceLocation(Mill.modId,"textures/models/armor/ML_byzantine_2.png");
 		
-		
-		int  enchantmentValue;
-
 		public final String iconName;
 
-		public ItemMillenaireArmour(int id,String iconName, EnumArmorMaterial material, int armourId, double durationMultiplier, int enchantmentValue, int type) {
+		public ItemMillenaireArmour(int id,String iconName, EnumArmorMaterial material, int armourId, int type) {
 			super(id, material, armourId, type);
-			setMaxDamage((int) (getMaxDamage()*durationMultiplier));
-			this.enchantmentValue=enchantmentValue;
 			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
-		}
-
-		@Override
-		public int getItemEnchantability() {
-			return enchantmentValue;
 		}
 
 		@Override
@@ -395,35 +381,13 @@ public class Goods {
 
 	public static class ItemMillenaireAxe extends ItemAxe {
 
-		int enchantability;
 
 		public final String iconName;
 
-		public ItemMillenaireAxe(int i,String iconName,EnumToolMaterial material,int strength) {
+		public ItemMillenaireAxe(int i,String iconName,EnumToolMaterial material) {
 			super(i, material);
-
-			efficiencyOnProperMaterial=strength;
-			enchantability=-1;//use default value
 			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
-		}
-
-		public ItemMillenaireAxe(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
-			super(i,material);
-
-			efficiencyOnProperMaterial=strength;
-			setMaxDamage(durability);
-			this.enchantability=enchantability;
-			this.iconName=iconName;
-			setCreativeTab(Mill.tabMillenaire);
-		}
-
-		@Override
-		public int getItemEnchantability() {
-			if (enchantability==-1)
-				return super.getItemEnchantability();
-
-			return enchantability;
 		}
 
 		@Override
@@ -569,9 +533,8 @@ public class Goods {
 
 		public final String iconName;
 
-		public ItemMillenaireHoe(int i,String iconName,int durability) {
-			super(i, EnumToolMaterial.IRON);//material has no effect except durability that is overridden
-			setMaxDamage(durability);
+		public ItemMillenaireHoe(int i,String iconName,EnumToolMaterial material) {
+			super(i, material);
 			setCreativeTab(Mill.tabMillenaire);
 			this.iconName=iconName;
 		}
@@ -585,33 +548,12 @@ public class Goods {
 
 	public static class ItemMillenairePickaxe extends ItemPickaxe {
 
-		int enchantability;
 		public final String iconName;
 
-		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material,int strength) {
-			super(i, material);
-			efficiencyOnProperMaterial=strength;
-			this.enchantability=-1;
-			this.iconName=iconName;
-			setCreativeTab(Mill.tabMillenaire);
-		}
-
-		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
+		public ItemMillenairePickaxe(int i,String iconName,EnumToolMaterial material) {
 			super(i,material);
-
-			efficiencyOnProperMaterial=strength;
-			setMaxDamage(durability);
-			this.enchantability=enchantability;
 			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
-		}
-
-		@Override
-		public int getItemEnchantability() {
-			if (enchantability==-1)
-				return super.getItemEnchantability();
-
-			return enchantability;
 		}
 
 		@Override
@@ -623,34 +565,14 @@ public class Goods {
 
 	public static class ItemMillenaireShovel extends ItemSpade {
 
-		int enchantability;
 		public final String iconName;
 
-		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material,int strength) {
+		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material) {
 			super(i, material);
 
-			efficiencyOnProperMaterial=strength;
-			this.enchantability=-1;
 			this.iconName=iconName;
 
 			setCreativeTab(Mill.tabMillenaire);
-		}
-
-		public ItemMillenaireShovel(int i,String iconName,EnumToolMaterial material,int strength,int durability,int enchantability) {
-			super(i, material);
-			efficiencyOnProperMaterial=strength;
-			setMaxDamage(durability);
-			this.enchantability=enchantability;
-			setCreativeTab(Mill.tabMillenaire);
-			this.iconName=iconName;
-		}
-
-		@Override
-		public int getItemEnchantability() {
-			if (enchantability==-1)
-				return super.getItemEnchantability();
-
-			return enchantability;
 		}
 
 		@Override
@@ -662,65 +584,38 @@ public class Goods {
 
 	public static class ItemMillenaireSword extends ItemSword implements IItemInitialEnchantmens {
 
-		int damage;
 		float criticalChance;
 		int criticalMultiple;
-		int enchantability;
 
 		public final String iconName;
 
 		boolean knockback;
-		public ItemMillenaireSword(int i,String iconName,int maxUse,int damage, int enchantability,float criticalChance,int criticalMultiple,boolean knockback) {
-			super(i, EnumToolMaterial.IRON);//material isn't really used (all uses are overridden)
-			setMaxDamage(maxUse);
-			this.damage=damage;
+		public ItemMillenaireSword(int i,String iconName,EnumToolMaterial material,float criticalChance,int criticalMultiple,boolean knockback) {
+			super(i, material);
 			this.criticalChance=criticalChance;
 			this.criticalMultiple=criticalMultiple;
-			this.enchantability=enchantability;
 			this.knockback=knockback;
 			this.iconName=iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
 
-		public int getDamageVsEntity() {
+		@SuppressWarnings("deprecation")
+		@Override
+	    public float getDamageVsEntity(Entity entity, ItemStack itemStack) {
 
 			if (MillCommonUtilities.probability(criticalChance)) {
-				//ServerSender.sendTranslatedSentenceInRange(entity.worldObj, new Point(entity), 10,MLN.DARKRED, "weapon.criticalstrike",""+criticalMultiple);
-				return damage*criticalMultiple;
+				ServerSender.sendTranslatedSentenceInRange(entity.worldObj, new Point(entity), 10,MLN.DARKRED, "weapon.criticalstrike",""+criticalMultiple);
+				return super.getDamageVsEntity(entity, itemStack)*criticalMultiple;
 			}
 
-			return damage;
+			return super.getDamageVsEntity(entity, itemStack);
 		}
 
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		public Multimap func_111205_h()
-		{
-			Multimap multimap = super.func_111205_h();
-			multimap.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", getDamageVsEntity(), 0));
-			return multimap;
-		}
-
-
-		@Override
-		public int getItemEnchantability() {
-			return enchantability;
-		}
 		@Override
 		public void registerIcons(IconRegister iconRegister)
 		{
 			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
-		}
-
-		@Override
-		public boolean onBlockStartBreak(ItemStack itemstack, int i, int j,
-				int k, EntityPlayer player) {
-
-			if (MLN.DEV && (i==Block.grass.blockID)) {
-				MillCommonUtilities.spawnItem(player.worldObj, new Point(i,j,k), new ItemStack(Item.appleGold.itemID,1,0), 0.3f);
-			}
-
-			return super.onBlockStartBreak(itemstack, i, j, k, player);
 		}
 
 		@Override

@@ -19,6 +19,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -116,7 +117,7 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "5.1.7";
+	public static final String versionNumber = "5.1.8";
 
 	public static final String versionBound = "[5.0.0,6.0)";
 	public static final String modId="millenaire";
@@ -140,6 +141,13 @@ public class Mill
 	public static Vector<File> loadingDirs=new Vector<File>();
 	private static int nextItemId=MLN.itemRangeStart-1;
 	
+	static EnumToolMaterial TOOLS_norman = EnumHelper.addToolMaterial("normanTools", 2, 1561, 10.0F, 4.0F, 10);
+	static EnumToolMaterial TOOLS_obsidian = EnumHelper.addToolMaterial("obsidianTools", 3, 1561, 6.0F, 2.0F, 25);
+	
+	static EnumArmorMaterial ARMOUR_norman= EnumHelper.addArmorMaterial("normanArmour", 66, new int[]{3, 8, 6, 3}, 10);
+	static EnumArmorMaterial ARMOUR_japaneseWarrior= EnumHelper.addArmorMaterial("japaneseWarrior", 33, new int[]{2, 6, 5, 2}, 25);
+	static EnumArmorMaterial ARMOUR_japaneseGuard= EnumHelper.addArmorMaterial("japaneseGuard", 25, new int[]{2, 5, 4, 1}, 25);
+	static EnumArmorMaterial ARMOUR_byzantine= EnumHelper.addArmorMaterial("byzantineArmour", 33, new int[]{3, 8, 6, 3}, 20);
 	
 
 	public static Block lockedChest;
@@ -391,21 +399,21 @@ public class Mill
 		calva = (new ItemFoodMultiple(nextItemId(),"calva",8,30,0,0,true,10)).setPotionEffect(Potion.damageBoost.id, 180, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_calva");
 		tripes = (new ItemFoodMultiple(nextItemId(),"tripes",0,0,10,1f,false,0)).setPotionEffect(Potion.regeneration.id, 90, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_tripes");
 
-		normanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"normanpickaxe",EnumToolMaterial.IRON,10,1561,14).setUnlocalizedName("ml_normanPickaxe");
+		normanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"normanpickaxe",TOOLS_norman).setUnlocalizedName("ml_normanPickaxe");
 		MinecraftForge.setToolClass(normanPickaxe, "pickaxe", 2);
-		normanAxe =  new ItemMillenaireAxe(nextItemId(),"normanaxe",EnumToolMaterial.IRON,10,1561,14).setUnlocalizedName("ml_normanAxe");
+		normanAxe =  new ItemMillenaireAxe(nextItemId(),"normanaxe",TOOLS_norman).setUnlocalizedName("ml_normanAxe");
 		MinecraftForge.setToolClass(normanAxe, "axe", 2);
-		normanShovel =  new ItemMillenaireShovel(nextItemId(),"normanshovel",EnumToolMaterial.IRON,10,1561,14).setUnlocalizedName("ml_normanShovel");
+		normanShovel =  new ItemMillenaireShovel(nextItemId(),"normanshovel",TOOLS_norman).setUnlocalizedName("ml_normanShovel");
 		MinecraftForge.setToolClass(normanShovel, "shovel", 2);
-		normanHoe =  new ItemMillenaireHoe(nextItemId(),"normanhoe",1500).setUnlocalizedName("ml_normanHoe");
+		normanHoe =  new ItemMillenaireHoe(nextItemId(),"normanhoe",TOOLS_norman).setUnlocalizedName("ml_normanHoe");
 
 		summoningWand = new ItemSummoningWand(nextItemId(),"summoningwand").setFull3D().setUnlocalizedName("ml_villageWand");
 
-		normanBroadsword = new ItemMillenaireSword(nextItemId(),"normansword",1500,20,EnumToolMaterial.EMERALD.getEnchantability(),0,0,false).setUnlocalizedName("ml_normanBroadsword");
-		normanHelmet = new ItemMillenaireArmour(nextItemId(),"normanhelmet",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),0).setUnlocalizedName("ml_normanHelmet");
-		normanPlate = new ItemMillenaireArmour(nextItemId(),"normanplate",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),1).setUnlocalizedName("ml_normanPlate");
-		normanLegs = new ItemMillenaireArmour(nextItemId(),"normanlegs",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),2).setUnlocalizedName("ml_normanLegs");
-		normanBoots = new ItemMillenaireArmour(nextItemId(),"normanboots",EnumArmorMaterial.DIAMOND,normanArmourId,2,EnumArmorMaterial.DIAMOND.getEnchantability(),3).setUnlocalizedName("ml_normanBoots");
+		normanBroadsword = new ItemMillenaireSword(nextItemId(),"normansword",TOOLS_norman,0,0,false).setUnlocalizedName("ml_normanBroadsword");
+		normanHelmet = new ItemMillenaireArmour(nextItemId(),"normanhelmet",ARMOUR_norman,normanArmourId,0).setUnlocalizedName("ml_normanHelmet");
+		normanPlate = new ItemMillenaireArmour(nextItemId(),"normanplate",ARMOUR_norman,normanArmourId,1).setUnlocalizedName("ml_normanPlate");
+		normanLegs = new ItemMillenaireArmour(nextItemId(),"normanlegs",ARMOUR_norman,normanArmourId,2).setUnlocalizedName("ml_normanLegs");
+		normanBoots = new ItemMillenaireArmour(nextItemId(),"normanboots",ARMOUR_norman,normanArmourId,3).setUnlocalizedName("ml_normanBoots");
 
 		parchmentVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.villagers).setUnlocalizedName("ml_parchmentVillagers");
 
@@ -459,37 +467,37 @@ public class Mill
 
 		udon = (new ItemFoodMultiple(nextItemId(),"udon",0,0,8,0.8f,false,0)).setAlwaysEdible().setUnlocalizedName("ml_udon");
 
-		tachiSword = new ItemMillenaireSword(nextItemId(),"tachisword",250,6,EnumToolMaterial.IRON.getEnchantability(),(float) 0.2,3,false).setUnlocalizedName("ml_taichiSword");
+		tachiSword = new ItemMillenaireSword(nextItemId(),"tachisword",EnumToolMaterial.IRON,(float) 0.2,5,false).setUnlocalizedName("ml_taichiSword");
 
 		negationWand = new ItemNegationWand(nextItemId(),"negationwand").setFull3D().setUnlocalizedName("ml_negationWand");
 
 		obsidianFlake = new ItemText(nextItemId(),"obsidianflake").setUnlocalizedName("ml_obsidianFlake");
-		mayanMace =  new ItemMillenaireSword(nextItemId(),"mayanmace",1500,6,25,0,0,false).setUnlocalizedName("ml_mayanMace");
-		mayanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"mayanpickaxe",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanPickaxe");
+		mayanMace =  new ItemMillenaireSword(nextItemId(),"mayanmace",TOOLS_obsidian,0,0,false).setUnlocalizedName("ml_mayanMace");
+		mayanPickaxe =  new ItemMillenairePickaxe(nextItemId(),"mayanpickaxe",TOOLS_obsidian).setUnlocalizedName("ml_mayanPickaxe");
 		MinecraftForge.setToolClass(mayanAxe, "pickaxe", 2);
-		mayanAxe =  new ItemMillenaireAxe(nextItemId(),"mayanaxe",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanAxe");
+		mayanAxe =  new ItemMillenaireAxe(nextItemId(),"mayanaxe",TOOLS_obsidian).setUnlocalizedName("ml_mayanAxe");
 		MinecraftForge.setToolClass(mayanAxe, "axe", 2);
-		mayanShovel =  new ItemMillenaireShovel(nextItemId(),"mayanshovel",EnumToolMaterial.EMERALD,6,1500,25).setUnlocalizedName("ml_mayanShovel");
+		mayanShovel =  new ItemMillenaireShovel(nextItemId(),"mayanshovel",TOOLS_obsidian).setUnlocalizedName("ml_mayanShovel");
 		MinecraftForge.setToolClass(mayanShovel, "shovel", 2);
-		mayanHoe =  new ItemMillenaireHoe(nextItemId(),"mayanhoe",1500).setUnlocalizedName("ml_mayanHoe");
+		mayanHoe =  new ItemMillenaireHoe(nextItemId(),"mayanhoe",TOOLS_obsidian).setUnlocalizedName("ml_mayanHoe");
 
 		yumiBow =  new ItemMillenaireBow(nextItemId(),2,(float) 0.5,"yumibow0","yumibow1","yumibow2","yumibow3").setUnlocalizedName("ml_yumiBow").setFull3D();
 
 
-		japaneseWarriorBlueLegs = new ItemMillenaireArmour(nextItemId(),"japanesebluelegs",EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,2).setUnlocalizedName("ml_japaneseWarriorBlueLegs");
-		japaneseWarriorBlueHelmet = new ItemMillenaireArmour(nextItemId(),"japanesebluehelmet",EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,0).setUnlocalizedName("ml_japaneseWarriorBlueHelmet");
-		japaneseWarriorBluePlate = new ItemMillenaireArmour(nextItemId(),"japaneseblueplate",EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,1).setUnlocalizedName("ml_japaneseWarriorBluePlate");
-		japaneseWarriorBlueBoots = new ItemMillenaireArmour(nextItemId(),"japaneseblueboots",EnumArmorMaterial.IRON,japaneseWarriorBlueArmourId,1,25,3).setUnlocalizedName("ml_japaneseWarriorBlueBoots");
+		japaneseWarriorBlueLegs = new ItemMillenaireArmour(nextItemId(),"japanesebluelegs",ARMOUR_japaneseWarrior,japaneseWarriorBlueArmourId,2).setUnlocalizedName("ml_japaneseWarriorBlueLegs");
+		japaneseWarriorBlueHelmet = new ItemMillenaireArmour(nextItemId(),"japanesebluehelmet",ARMOUR_japaneseWarrior,japaneseWarriorBlueArmourId,0).setUnlocalizedName("ml_japaneseWarriorBlueHelmet");
+		japaneseWarriorBluePlate = new ItemMillenaireArmour(nextItemId(),"japaneseblueplate",ARMOUR_japaneseWarrior,japaneseWarriorBlueArmourId,1).setUnlocalizedName("ml_japaneseWarriorBluePlate");
+		japaneseWarriorBlueBoots = new ItemMillenaireArmour(nextItemId(),"japaneseblueboots",ARMOUR_japaneseWarrior,japaneseWarriorBlueArmourId,3).setUnlocalizedName("ml_japaneseWarriorBlueBoots");
 
-		japaneseWarriorRedLegs = new ItemMillenaireArmour(nextItemId(),"japaneseredlegs",EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,2).setUnlocalizedName("ml_japaneseWarriorRedLegs");
-		japaneseWarriorRedHelmet = new ItemMillenaireArmour(nextItemId(),"japaneseredhelmet",EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,0).setUnlocalizedName("ml_japaneseWarriorRedHelmet");
-		japaneseWarriorRedPlate = new ItemMillenaireArmour(nextItemId(),"japaneseredplate",EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,1).setUnlocalizedName("ml_japaneseWarriorRedPlate");
-		japaneseWarriorRedBoots = new ItemMillenaireArmour(nextItemId(),"japaneseredboots",EnumArmorMaterial.IRON,japaneseWarriorRedArmourId,1,25,3).setUnlocalizedName("ml_japaneseWarriorRedBoots");
+		japaneseWarriorRedLegs = new ItemMillenaireArmour(nextItemId(),"japaneseredlegs",ARMOUR_japaneseWarrior,japaneseWarriorRedArmourId,2).setUnlocalizedName("ml_japaneseWarriorRedLegs");
+		japaneseWarriorRedHelmet = new ItemMillenaireArmour(nextItemId(),"japaneseredhelmet",ARMOUR_japaneseWarrior,japaneseWarriorRedArmourId,0).setUnlocalizedName("ml_japaneseWarriorRedHelmet");
+		japaneseWarriorRedPlate = new ItemMillenaireArmour(nextItemId(),"japaneseredplate",ARMOUR_japaneseWarrior,japaneseWarriorRedArmourId,1).setUnlocalizedName("ml_japaneseWarriorRedPlate");
+		japaneseWarriorRedBoots = new ItemMillenaireArmour(nextItemId(),"japaneseredboots",ARMOUR_japaneseWarrior,japaneseWarriorRedArmourId,3).setUnlocalizedName("ml_japaneseWarriorRedBoots");
 
-		japaneseGuardLegs = new ItemMillenaireArmour(nextItemId(),"japaneseguardlegs",EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,2).setUnlocalizedName("ml_japaneseGuardLegs");
-		japaneseGuardHelmet = new ItemMillenaireArmour(nextItemId(),"japaneseguardhelmet",EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,0).setUnlocalizedName("ml_japaneseGuardHelmet");
-		japaneseGuardPlate = new ItemMillenaireArmour(nextItemId(),"japaneseguardplate",EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,1).setUnlocalizedName("ml_japaneseGuardPlate");
-		japaneseGuardBoots = new ItemMillenaireArmour(nextItemId(),"japaneseguardboots",EnumArmorMaterial.CHAIN,japaneseGuardArmourId,1,25,3).setUnlocalizedName("ml_japaneseGuardBoots");
+		japaneseGuardLegs = new ItemMillenaireArmour(nextItemId(),"japaneseguardlegs",ARMOUR_japaneseGuard,japaneseGuardArmourId,2).setUnlocalizedName("ml_japaneseGuardLegs");
+		japaneseGuardHelmet = new ItemMillenaireArmour(nextItemId(),"japaneseguardhelmet",ARMOUR_japaneseGuard,japaneseGuardArmourId,0).setUnlocalizedName("ml_japaneseGuardHelmet");
+		japaneseGuardPlate = new ItemMillenaireArmour(nextItemId(),"japaneseguardplate",ARMOUR_japaneseGuard,japaneseGuardArmourId,1).setUnlocalizedName("ml_japaneseGuardPlate");
+		japaneseGuardBoots = new ItemMillenaireArmour(nextItemId(),"japaneseguardboots",ARMOUR_japaneseGuard,japaneseGuardArmourId,3).setUnlocalizedName("ml_japaneseGuardBoots");
 
 		parchmentJapaneseVillagers = new ItemParchment(nextItemId(),"parchmentvillagers",ItemParchment.japaneseVillagers).setUnlocalizedName("ml_parchmentJapaneseVillagers");
 		parchmentJapaneseBuildings = new ItemParchment(nextItemId(),"parchmentbuildings",ItemParchment.japaneseBuildings).setUnlocalizedName("ml_parchmentJapaneseBuildings");
@@ -505,12 +513,12 @@ public class Mill
 		byzantineiconlarge = (new ItemTapestry(nextItemId(),"byzantineicon",EntityMillDecoration.BYZANTINE_ICON_LARGE)).setUnlocalizedName("ml_byzantineiconlarge");
 
 
-		byzantineLegs = new ItemMillenaireArmour(nextItemId(),"byzantinelegs",EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,2).setUnlocalizedName("ml_byzantineLegs");
-		byzantineHelmet = new ItemMillenaireArmour(nextItemId(),"byzantinehelmet",EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,0).setUnlocalizedName("ml_byzantineHelmet");
-		byzantinePlate = new ItemMillenaireArmour(nextItemId(),"byzantineplate",EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,1).setUnlocalizedName("ml_byzantinePlate");
-		byzantineBoots = new ItemMillenaireArmour(nextItemId(),"byzantineboots",EnumArmorMaterial.DIAMOND,byzantineArmourId,1,20,3).setUnlocalizedName("ml_byzantineBoots");
+		byzantineLegs = new ItemMillenaireArmour(nextItemId(),"byzantinelegs",ARMOUR_byzantine,byzantineArmourId,2).setUnlocalizedName("ml_byzantineLegs");
+		byzantineHelmet = new ItemMillenaireArmour(nextItemId(),"byzantinehelmet",ARMOUR_byzantine,byzantineArmourId,0).setUnlocalizedName("ml_byzantineHelmet");
+		byzantinePlate = new ItemMillenaireArmour(nextItemId(),"byzantineplate",ARMOUR_byzantine,byzantineArmourId,1).setUnlocalizedName("ml_byzantinePlate");
+		byzantineBoots = new ItemMillenaireArmour(nextItemId(),"byzantineboots",ARMOUR_byzantine,byzantineArmourId,3).setUnlocalizedName("ml_byzantineBoots");
 
-		byzantineMace =  new ItemMillenaireSword(nextItemId(),"byzantinemace",120,25,10,0,0,true).setUnlocalizedName("ml_byzantineMace");
+		byzantineMace =  new ItemMillenaireSword(nextItemId(),"byzantinemace",EnumToolMaterial.IRON,0,0,true).setUnlocalizedName("ml_byzantineMace");
 
 		clothes = (ItemClothes) new ItemClothes(nextItemId(),"byzantineclothwool","byzantineclothsilk").setUnlocalizedName("ml_clothes");
 		wineBasic = (new ItemFoodMultiple(nextItemId(),"winebasic",3,15,0,0,true,5)).setAlwaysEdible().setUnlocalizedName("ml_wine_basic");
