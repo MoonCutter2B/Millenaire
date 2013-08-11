@@ -30,7 +30,7 @@ public class GuiMillChest extends GuiChest {
 		if ((lockedchest==null) || (world.isRemote && !lockedchest.loaded))
 			return null;
 
-		final IInventory chest=BlockMillChest.getChestInventory(lockedchest,world,i,j,k);
+		final IInventory chest=BlockMillChest.getInventory(lockedchest,world,i,j,k);
 
 		return new GuiMillChest(entityplayer,chest,lockedchest);
 	}
