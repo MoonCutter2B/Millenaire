@@ -8268,7 +8268,7 @@ public class Building {
 	}
 
 	public int getSellingPrice(Goods g,EntityPlayer player) {
-		if (!shopSells.containsKey(player.username))
+		if (player==null || !shopSells.containsKey(player.username))//normally player should never be null, just checking
 			return 0;
 
 		return shopSells.get(player.username).get(g);

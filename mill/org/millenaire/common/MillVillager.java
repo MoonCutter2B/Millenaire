@@ -20,7 +20,6 @@ import net.minecraft.block.BlockFenceGate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
@@ -319,7 +318,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		Mill.normanAxe,Mill.mayanAxe,Item.axeIron,Item.axeStone,
 		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeIron,Item.pickaxeStone,
 		Mill.normanHoe,Mill.mayanHoe,Item.hoeIron,Item.hoeStone,
-		Mill.normanShovel,Mill.mayanShovel,Item.shovelWood,Item.shovelStone
+		Mill.normanShovel,Mill.mayanShovel,Item.shovelStone,Item.shovelWood
 	};
 
 	public static final Item[] weaponsHandToHand=new Item[]{
@@ -327,11 +326,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		Mill.normanAxe,Mill.mayanAxe,Item.axeIron,Item.axeStone,
 		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeIron,Item.pickaxeStone,
 		Mill.normanHoe,Mill.mayanHoe,Item.hoeIron,Item.hoeStone,
-		Mill.normanShovel,Mill.mayanShovel,Item.shovelWood,Item.shovelStone
+		Mill.normanShovel,Mill.mayanShovel,Item.shovelStone,Item.shovelWood
 	};
 
 	public static final Item[] weaponsSwords=new Item[]{
-		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordIron,Item.swordStone
+		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordIron,Item.swordStone,Item.swordWood
 	};
 
 	public static final Item[] weaponsRanged=new Item[]{
@@ -369,19 +368,19 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	};
 
 	public static final Item[] pickaxes=new Item[]{
-		Mill.normanPickaxe,Item.pickaxeDiamond,Item.pickaxeIron,Item.pickaxeStone
+		Mill.normanPickaxe,Item.pickaxeDiamond,Item.pickaxeIron,Item.pickaxeStone,Item.pickaxeWood
 	};
 
 	public static final Item[] axes=new Item[]{
-		Mill.normanAxe,Item.axeDiamond,Item.axeIron,Item.axeStone
+		Mill.normanAxe,Item.axeDiamond,Item.axeIron,Item.axeStone,Item.axeWood
 	};
 
 	public static final Item[] shovels=new Item[]{
-		Mill.normanShovel,Item.shovelDiamond,Item.shovelIron,Item.shovelStone
+		Mill.normanShovel,Item.shovelDiamond,Item.shovelIron,Item.shovelStone,Item.shovelWood
 	};
 
 	public static final Item[] hoes=new Item[]{
-		Mill.normanHoe,Item.hoeDiamond,Item.hoeIron,Item.hoeStone
+		Mill.normanHoe,Item.hoeDiamond,Item.hoeIron,Item.hoeStone,Item.hoeWood
 	};
 
 	private static final Item[] foodGrowth=new Item[]{

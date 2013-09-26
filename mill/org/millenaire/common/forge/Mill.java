@@ -117,7 +117,7 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "5.1.9";
+	public static final String versionNumber = "5.1.10";
 
 	public static final String versionBound = "[5.0.0,6.0)";
 	public static final String modId="millenaire";
@@ -303,7 +303,7 @@ public class Mill
 	@SuppressWarnings("rawtypes")
 	public static HashMap<Class,String> entityNames;
 
-	public static final String ENTITY_PIG="Pig",ENTITY_COW="Cow",ENTITY_CHICKEN="Chicken",ENTITY_SHEEP="Sheep",ENTITY_SQUID="Squid";
+	public static final String ENTITY_PIG="Pig",ENTITY_COW="Cow",ENTITY_CHICKEN="Chicken",ENTITY_SHEEP="Sheep",ENTITY_SQUID="Squid",ENTITY_WOLF="Wolf";
 
 	public static final String ENTITY_SKELETON="Skeleton",ENTITY_CREEPER="Creeper",ENTITY_SPIDER="Spider",
 			ENTITY_CAVESPIDER="CaveSpider",ENTITY_ZOMBIE="Zombie",ENTITY_TARGETED_GHAST="MillGhast",ENTITY_TARGETED_BLAZE="MillBlaze",ENTITY_TARGETED_WITHERSKELETON="MillWitherSkeleton";

@@ -348,6 +348,7 @@ public class BuildingPlan {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
 					tileentitymobspawner.getSpawnerLogic().setMobID("Blaze");
+					
 				} else if (special==BuildingBlock.DISPENDERUNKNOWNPOWDER) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Block.dispenser.blockID, 0);
 					final TileEntityDispenser dispenser=p.getDispenser(world);
@@ -633,7 +634,7 @@ public class BuildingPlan {
 			bsignpostTop="signpostTop",bsignpostBottom="signpostBottom",bsignpostLeft="signpostLeft",bsignpostRight="signpostRight",
 			bsignwallTop="signwallTop",bsignwallBottom="signwallBottom",bsignwallLeft="signwallLeft",bsignwallRight="signwallRight",
 			bladderTop="ladderTop",bladderBottom="ladderBottom",bladderLeft="ladderLeft",bladderRight="ladderRight",
-			bcowspawn="cowspawn",bsheepspawn="sheepspawn",bchickenspawn="chickenspawn",bpigspawn="pigspawn",bsquidspawn="squidspawn",
+			bcowspawn="cowspawn",bsheepspawn="sheepspawn",bchickenspawn="chickenspawn",bpigspawn="pigspawn",bsquidspawn="squidspawn",bwolfspawn="wolfspawn",
 			bstonesource="stonesource",bsandsource="sandsource",bsandstonesource="sandstonesource",bclaysource="claysource",bgravelsource="gravelsource",bfurnace="furnace",
 			bfreestone="freestone",bfreesand="freesand",bfreesandstone="freesandstone",bfreegravel="freegravel",btapestry="tapestry",bstall="stall",bfreewool="freewool",
 			bdoorTop="doorTop",bdoorBottom="doorBottom",bdoorRight="doorRight",bdoorLeft="doorLeft",
@@ -3915,6 +3916,8 @@ public class BuildingPlan {
 						building.addSpawnPoint(Mill.ENTITY_SQUID, p);
 					} else if (pt.isType(bsheepspawn)) {
 						building.addSpawnPoint(Mill.ENTITY_SHEEP, p);
+					} else if (pt.isType(bwolfspawn)) {
+						building.addSpawnPoint(Mill.ENTITY_WOLF, p);
 					} else if (pt.isType(bstonesource)) {
 						building.addSourcePoint(Block.stone.blockID, p);
 					} else if (pt.isType(bsandsource)) {
