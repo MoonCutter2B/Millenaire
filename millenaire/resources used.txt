@@ -220,23 +220,23 @@ Bois (tous): 6
 japanese: 
 gunji resource use: 
 Cracked Stone Bricks: 26
-Wool: 276
-Stone: 9940
-Bois de sapin: 3023
-Cobblestone: 1432
+Wool: 278
+Stone: 9970
+Bois de sapin: 3071
+Cobblestone: 1472
 tile.ml_panes.name: 682
-Sand: 232
-Grass: 168
+Sand: 286
+Grass: 263
 Bookshelf: 12
-Gravel: 564
+Gravel: 584
 tile.ml_wood_deco.1.name: 63
-Bois de chêne: 4759
-tile.ml_wood_deco.0.name: 3145
+Bois de chêne: 4785
+tile.ml_wood_deco.0.name: 3107
 Gold Ingot: 54
 Fern: 117
 Iron Ingot: 36
-tile.ml_wood_deco.2.name: 7298
-Bois (tous): 1439
+tile.ml_wood_deco.2.name: 7306
+Bois (tous): 1449
 
 japanese_controlled resource use: 
 Bois de chêne: 992
@@ -252,61 +252,61 @@ tile.ml_wood_deco.1.name: 25
 Bois (tous): 266
 
 nogyo resource use: 
-Wool: 180
-Stone: 9127
-Bois de sapin: 3347
-Cobblestone: 1350
+Wool: 182
+Stone: 9157
+Bois de sapin: 3395
+Cobblestone: 1390
 tile.ml_panes.name: 610
-Grass: 168
-Sand: 232
+Grass: 263
+Sand: 286
 Bookshelf: 12
-Gravel: 545
+Gravel: 565
 tile.ml_wood_deco.1.name: 63
-Bois de chêne: 4831
-tile.ml_wood_deco.0.name: 3101
+Bois de chêne: 4857
+tile.ml_wood_deco.0.name: 3063
 Fern: 117
 Iron Ingot: 18
-tile.ml_wood_deco.2.name: 8825
-Bois (tous): 1573
+tile.ml_wood_deco.2.name: 8833
+Bois (tous): 1583
 
 seiji resource use: 
 Cracked Stone Bricks: 26
-Wool: 302
-Stone: 12224
-Bois de sapin: 4302
-Cobblestone: 1946
+Wool: 304
+Stone: 12254
+Bois de sapin: 4350
+Cobblestone: 1986
 tile.ml_panes.name: 864
-Grass: 168
-Sand: 232
+Grass: 263
+Sand: 286
 Bookshelf: 12
-Gravel: 671
+Gravel: 691
 tile.ml_wood_deco.1.name: 63
-Bois de chêne: 6631
+Bois de chêne: 6657
 Gold Ingot: 54
-tile.ml_wood_deco.0.name: 4013
+tile.ml_wood_deco.0.name: 3975
 Fern: 117
 Iron Ingot: 108
-tile.ml_wood_deco.2.name: 9172
-Bois (tous): 1873
+tile.ml_wood_deco.2.name: 9180
+Bois (tous): 1883
 
 trading resource use: 
-Stone: 10011
-Wool: 193
-Bois de sapin: 3464
-Cobblestone: 1231
+Stone: 10041
+Wool: 195
+Bois de sapin: 3512
+Cobblestone: 1271
 tile.ml_panes.name: 655
-Grass: 168
-Sand: 232
+Grass: 263
+Sand: 286
 Bookshelf: 12
-Gravel: 487
+Gravel: 507
 tile.ml_wood_deco.1.name: 13
-Bois de chêne: 5591
-tile.ml_wood_deco.0.name: 3125
+Bois de chêne: 5617
+tile.ml_wood_deco.0.name: 3087
 Gold Ingot: 54
 Fern: 117
 Iron Ingot: 90
-tile.ml_wood_deco.2.name: 7530
-Bois (tous): 1413
+tile.ml_wood_deco.2.name: 7538
+Bois (tous): 1423
 
 
 bandit_cave resource use: 
@@ -328,6 +328,19 @@ Iron Ingot: 127
 tile.ml_wood_deco.2.name: 498
 Gravel: 228
 Bois (tous): 129
+
+hotspringsinn resource use: 
+Bois de chêne: 199
+Stone: 3969
+Wool: 51
+Bois de sapin: 1622
+Moss Stone: 244
+Cobblestone: 972
+tile.ml_panes.name: 78
+tile.ml_wood_deco.0.name: 1196
+Grass: 1086
+Gravel: 1027
+Bois (tous): 142
 
 japaneseoutpost resource use: 
 Bois de chêne: 300
@@ -6872,6 +6885,39 @@ Initial Construction
 |}
 
 
+Onsenmachi
+hotspringsinn_A_market
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Wool
+| style="text-align: center; "|9
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|10
+|}
+
+
+Onsenmachi
+hotspringsinn_A_kitchen
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|8
+|}
+
+
 Tansetsu
 japaneseforge
 
@@ -8346,6 +8392,51 @@ Initial Construction
 |}
 
 
+Onsenmachi
+hotspringsinn
+
+==Requirements==
+Initial Construction
+
+{| border="1" cellpadding="1" cellspacing="1" style="width: 300px;"
+! scope="col"|Resource
+! scope="col"|Quantity
+|-
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|199
+|-
+| style="text-align: center; "|Wool
+| style="text-align: center; "|51
+|-
+| style="text-align: center; "|Stone
+| style="text-align: center; "|3969
+|-
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|1622
+|-
+| style="text-align: center; "|Moss Stone
+| style="text-align: center; "|244
+|-
+| style="text-align: center; "|Cobblestone
+| style="text-align: center; "|972
+|-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|78
+|-
+| style="text-align: center; "|tile.ml_wood_deco.0.name
+| style="text-align: center; "|1196
+|-
+| style="text-align: center; "|Grass
+| style="text-align: center; "|1086
+|-
+| style="text-align: center; "|Gravel
+| style="text-align: center; "|1027
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|142
+|}
+
+
 Youkeijou
 chickenfarm
 
@@ -8441,13 +8532,25 @@ Initial Construction
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois de chêne
-| style="text-align: center; "|1
+| style="text-align: center; "|18
 |-
-| style="text-align: center; "|Cobblestone
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|32
+|-
+| style="text-align: center; "|tile.ml_wood_deco.2.name
+| style="text-align: center; "|150
+|-
+| style="text-align: center; "|Grass
+| style="text-align: center; "|95
+|-
+| style="text-align: center; "|Sand
+| style="text-align: center; "|54
+|-
+| style="text-align: center; "|Gravel
 | style="text-align: center; "|8
 |-
 | style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|4
+| style="text-align: center; "|7
 |}
 
 
@@ -8457,11 +8560,11 @@ Upgrade 1
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
-| style="text-align: center; "|tile.ml_wood_deco.2.name
-| style="text-align: center; "|142
+| style="text-align: center; "|Cobblestone
+| style="text-align: center; "|39
 |-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|1
+| style="text-align: center; "|Gravel
+| style="text-align: center; "|10
 |}
 
 
@@ -8471,8 +8574,11 @@ Upgrade 2
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
-| style="text-align: center; "|Bois de chêne
-| style="text-align: center; "|19
+| style="text-align: center; "|Cobblestone
+| style="text-align: center; "|6
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|2
 |}
 
 
@@ -8483,7 +8589,13 @@ Upgrade 3
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Bois de chêne
-| style="text-align: center; "|38
+| style="text-align: center; "|64
+|-
+| style="text-align: center; "|Bois de sapin
+| style="text-align: center; "|16
+|-
+| style="text-align: center; "|Cobblestone
+| style="text-align: center; "|3
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|1
@@ -8496,8 +8608,17 @@ Upgrade 4
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
-| style="text-align: center; "|tile.ml_wood_deco.0.name
-| style="text-align: center; "|38
+| style="text-align: center; "|Bois de chêne
+| style="text-align: center; "|2
+|-
+| style="text-align: center; "|Wool
+| style="text-align: center; "|2
+|-
+| style="text-align: center; "|Gravel
+| style="text-align: center; "|2
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|2
 |}
 
 
@@ -8508,7 +8629,10 @@ Upgrade 5
 ! scope="col"|Quantity
 |-
 | style="text-align: center; "|Stone
-| style="text-align: center; "|150
+| style="text-align: center; "|180
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|4
 |}
 
 

@@ -64,3 +64,7 @@ lonemine_A0=Lone Japanese Mine
 banditfort_A0=Bandit Fort
 
 gifthouse_a0=Gift House
+
+hotspringsinn_a0=Hot Springs Inn
+hotspringsinn_a_kitchen_a0=Hot Springs Inn
+hotspringsinn_a_market_a0=Hot Springs Inn

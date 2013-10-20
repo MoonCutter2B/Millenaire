@@ -2281,6 +2281,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 
 	public boolean interactSpecial(EntityPlayer entityplayer) {
+		
+		if (getTownHall()==null) {
+			MLN.error(this,"Trying to interact with a villager with no TH.");
+		}
+		
 		if (isChief()) {
 			ServerSender.displayVillageChiefGUI(entityplayer, this);
 			return true;

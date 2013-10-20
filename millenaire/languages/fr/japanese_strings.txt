@@ -32,6 +32,9 @@ villager.japanese_bravewoman=Femme courageuse
 villager.japanese_bandit=Bandit japonais
 villager.japanese_brewer=Maître brasseur
 villager.japanese_brewerwife=Brasseuse
+villager.japanese_innkeeper=Aubergiste
+villager.japanese_innkeeperwife=Aubergiste
+villager.japanese_innservant=Servante
 
 shop.japanesetownhall=Magasin central
 shop.forge=Outils
@@ -41,3 +44,4 @@ shop.kitchen=Nourriture
 shop.lonemine=Minerais
 shop.japaneseoutpost=Magasin central
 shop.fishery=Poisson
+shop.japaneseinn=Auberge

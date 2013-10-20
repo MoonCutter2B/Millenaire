@@ -486,6 +486,22 @@ public class ServerSender {
 			MLN.printException("Could not find player "+player+" to send a packet to.",new Exception());
 			return;
 		}
+		
+		if (packet.data==null || packet.data.length==0) {
+			MLN.printException("Tried sending a packet with null data to player "+playerName,new Exception());
+			return;
+		}
+		
+		if (MLN.DEV && (packet.data==null || packet.data.length>15000)) {
+			MLN.printException("Tried sending a packet with high data size "+packet.data.length+" to player "+playerName,new Exception());
+			return;
+		}
+
+		
+		if (packet.data==null || packet.data.length>32766) {
+			MLN.printException("Tried sending a packet with data content too high to player "+playerName,new Exception());
+			return;
+		}
 
 		player.playerNetServerHandler.sendPacketToPlayer(packet);
 	}
@@ -495,6 +511,21 @@ public class ServerSender {
 
 		if (server==null) {//when game is closing?
 			MLN.error(null, "Wanted to send a packet in sendPacketToPlayersInRange but server is null.");
+			return;
+		}
+		
+		if (packet.data==null || packet.data.length==0) {
+			MLN.printException("Tried sending a packet with null data to players in range.",new Exception());
+			return;
+		}
+		
+		if (MLN.DEV && (packet.data==null || packet.data.length>15000)) {
+			MLN.printException("Tried sending a packet with high data size "+packet.data.length+" to players in range.",new Exception());
+			return;
+		}
+		
+		if (packet.data==null || packet.data.length>32766) {
+			MLN.printException("Tried sending a packet with data content too high to players in range.",new Exception());
 			return;
 		}
 

@@ -210,6 +210,10 @@
 |-
 ! Chiisai Ie
 |-
+! Onsenmachi~hotspringsinn_A_market
+|-
+! Onsenmachi~hotspringsinn_A_kitchen
+|-
 ! Tansetsu~japaneseforge
 |-
 ! Chuugata Chisho
@@ -239,6 +243,8 @@
 ! Shakuchi
 |-
 ! Daibutsu
+|-
+! Onsenmachi~hotspringsinn
 |-
 ! Youkeijou
 |-

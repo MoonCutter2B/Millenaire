@@ -65,3 +65,6 @@ banditfort_A0=Fort de bandits
 
 gifthouse_a0=Maison bonus
 
+hotspringsinn_a0=Auberge sources chaudes
+hotspringsinn_a_kitchen_a0=Auberge sources chaudes
+hotspringsinn_a_market_a0=Auberge sources chaudes

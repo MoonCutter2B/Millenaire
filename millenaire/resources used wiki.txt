@@ -872,6 +872,18 @@
 </table>
 </table>
 
+|Onsenmachi~hotspringsinn_A_market = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:White_Wool.png|32px|Wool]]</td></tr>
+<tr><th scope="row">Construction</th><td>10</td><td>9</td></tr>
+</table>
+</table>
+
+|Onsenmachi~hotspringsinn_A_kitchen = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td></tr>
+<tr><th scope="row">Construction</th><td>8</td></tr>
+</table>
+</table>
+
 |Tansetsu~japaneseforge = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td>42</td><td>30</td><td>7</td><td>5</td><td>26</td><td></td><td></td><td>175</td><td></td></tr>
@@ -1032,6 +1044,12 @@
 </table>
 </table>
 
+|Onsenmachi~hotspringsinn = <table><tr><td style="vertical-align:top;">
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:MossyCobblestone.png|32px|Moss Stone]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
+<tr><th scope="row">Construction</th><td>3969</td><td>972</td><td>1027</td><td>142</td><td>199</td><td>1622</td><td>1086</td><td>51</td><td>244</td><td>1196</td><td>78</td></tr>
+</table>
+</table>
+
 |Youkeijou = <table><tr><td style="vertical-align:top;">
 <table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td></td><td>16</td><td>20</td><td>50</td><td></td><td>130</td></tr>
@@ -1043,13 +1061,13 @@
 </table>
 
 |Tsuribori = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation A</th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td>8</td><td>4</td><td>1</td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 1</th><td></td><td></td><td>1</td><td></td><td></td><td>142</td></tr>
-<tr><th scope="row">Upgrade 2</th><td></td><td></td><td></td><td>19</td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 3</th><td></td><td></td><td>1</td><td>38</td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 4</th><td></td><td></td><td></td><td></td><td>38</td><td></td></tr>
-<tr><th scope="row">Upgrade 5</th><td>150</td><td></td><td></td><td></td><td></td><td></td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation A</th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Sand.png|32px|Sand]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td></tr>
+<tr><th scope="row">Construction</th><td></td><td></td><td>54</td><td>8</td><td>7</td><td>18</td><td>32</td><td>95</td><td></td><td>150</td></tr>
+<tr><th scope="row">Upgrade 1</th><td></td><td>39</td><td></td><td>10</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 2</th><td></td><td>6</td><td></td><td></td><td>2</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 3</th><td></td><td>3</td><td></td><td></td><td>1</td><td>64</td><td>16</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 4</th><td></td><td></td><td></td><td>2</td><td>2</td><td>2</td><td></td><td></td><td>2</td><td></td></tr>
+<tr><th scope="row">Upgrade 5</th><td>180</td><td></td><td></td><td></td><td>4</td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>
 <table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation B</th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td>8</td><td>4</td><td>1</td><td></td><td></td></tr>
