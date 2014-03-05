@@ -150,8 +150,8 @@ public class GuiVillageHead extends GuiText {
 		Vector<Line> text=new Vector<Line>();
 
 		String game="";
-		if (chief.getGameOccupationName(player.username).length()>0) {
-			game=" ("+chief.getGameOccupationName(player.username)+")";
+		if (chief.getGameOccupationName(player.getDisplayName()).length()>0) {
+			game=" ("+chief.getGameOccupationName(player.getDisplayName())+")";
 		}
 
 		text.add(new Line(chief.getName()+", "+chief.getNativeOccupationName()+game,false));
@@ -160,18 +160,18 @@ public class GuiVillageHead extends GuiText {
 
 		String col="";
 
-		if (chief.getTownHall().getReputation(player.username)>=(8*64*64)) {
+		if (chief.getTownHall().getReputation(player.getDisplayName())>=(8*64*64)) {
 			col=DARKGREEN;
-		} else if (chief.getTownHall().getReputation(player.username)>=(64*64)) {
+		} else if (chief.getTownHall().getReputation(player.getDisplayName())>=(64*64)) {
 			col=DARKBLUE;
-		} else if (chief.getTownHall().getReputation(player.username)<(-4*64)) {
+		} else if (chief.getTownHall().getReputation(player.getDisplayName())<(-4*64)) {
 			col=DARKRED;
-		} else if (chief.getTownHall().getReputation(player.username)<0) {
+		} else if (chief.getTownHall().getReputation(player.getDisplayName())<0) {
 			col=LIGHTRED;
 		}
 
-		text.add(new Line(col+MLN.string("ui.yourstatus")+": "+chief.getTownHall().getReputationLevelLabel(player.username),false));
-		text.add(new Line(col+chief.getTownHall().getReputationLevelDesc(player.username).replaceAll("\\$name", player.username)));
+		text.add(new Line(col+MLN.string("ui.yourstatus")+": "+chief.getTownHall().getReputationLevelLabel(player.getDisplayName()),false));
+		text.add(new Line(col+chief.getTownHall().getReputationLevelDesc(player.getDisplayName()).replaceAll("\\$name", player.getDisplayName())));
 		text.add(new Line());
 		text.add(new Line(MLN.string("ui.possiblehousing")+":"));
 		text.add(new Line());
@@ -180,7 +180,7 @@ public class GuiVillageHead extends GuiText {
 
 		final UserProfile profile=Mill.proxy.getClientProfile();
 
-		final int reputation=chief.getTownHall().getReputation(player.username);
+		final int reputation=chief.getTownHall().getReputation(player.getDisplayName());
 
 		for (final Vector<BuildingProject> level : projects) {
 			for (final BuildingProject project : level) {

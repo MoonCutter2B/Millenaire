@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.world.World;
 
@@ -188,13 +189,13 @@ public class PathingBinary {
 		for (short i=0;i<region.length;i++) {
 			for (short j=0;j<region[0].length;j++) {
 				for (short k=0;k<region[0][0].length;k++) {
-					final int bid=world.getBlockId(surfaceXstart+i, surfaceYstart+j, surfaceZstart+k);
-					//if (bid==Block.ladder.blockID) {
+					final Block block=world.getBlock(surfaceXstart+i, surfaceYstart+j, surfaceZstart+k);
+					//if (bid==Blocks.ladder.blockID) {
 					//	region[i][j][k]=new MLPathingPathCalcTile(true, true, new short[]{i,j,k});
 					//} else
-					if ((bid==Block.waterMoving.blockID) || (bid==Block.waterStill.blockID) || (bid==Block.lavaStill.blockID) || (bid==Block.lavaMoving.blockID) || (bid==Block.fence.blockID)) {
+					if ((block==Blocks.flowing_water) || (block==Blocks.water) || (block==Blocks.lava) || (block==Blocks.flowing_lava) || (block==Blocks.fence)) {
 						region[i][j][k]=new PathingPathCalcTile(false, false, new short[]{i,j,k});
-					} else if ((bid==0) || !Block.blocksList[bid].isOpaqueCube()) {
+					} else if ((block==Blocks.air) || !block.isBlockNormalCube()) {
 						region[i][j][k]=null;
 					} else {
 						region[i][j][k]=new PathingPathCalcTile(true, false, new short[]{i,j,k});
@@ -289,9 +290,9 @@ public class PathingBinary {
 				if ((i!=0) || (j!=0)) {
 					for (short k=10;k>-10;k--) {
 						//let's check that the block is solid and the two above are not:
-						if (MillCommonUtilities.isBlockIdSolid(world.getBlockId(p[0]+i, p[1]+k, p[2]+j))
-								&& !MillCommonUtilities.isBlockIdSolid(world.getBlockId(p[0]+i, p[1]+k+1, p[2]+j))
-								&& !MillCommonUtilities.isBlockIdSolid(world.getBlockId(p[0]+i, p[1]+k+2, p[2]+j))) {
+						if (MillCommonUtilities.isBlockIdSolid(world.getBlock(p[0]+i, p[1]+k, p[2]+j))
+								&& !MillCommonUtilities.isBlockIdSolid(world.getBlock(p[0]+i, p[1]+k+1, p[2]+j))
+								&& !MillCommonUtilities.isBlockIdSolid(world.getBlock(p[0]+i, p[1]+k+2, p[2]+j))) {
 
 							newP[1]=(short) (p[1]+k);
 							if (MLN.DEV) {

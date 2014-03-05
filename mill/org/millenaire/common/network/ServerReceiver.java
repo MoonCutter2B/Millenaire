@@ -1,5 +1,8 @@
 package org.millenaire.common.network;
 
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -10,8 +13,7 @@ import java.util.Vector;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.network.NetHandlerPlayServer;
 
 import org.millenaire.common.Building;
 import org.millenaire.common.Culture;
@@ -25,11 +27,10 @@ import org.millenaire.common.construction.BuildingProject;
 import org.millenaire.common.core.DevModUtilities;
 import org.millenaire.common.forge.Mill;
 
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 
-public class ServerReceiver implements IPacketHandler
-{
+public class ServerReceiver {
 
 	public static final String PACKET_CHANNEL = "millenaire";
 
@@ -94,31 +95,24 @@ public class ServerReceiver implements IPacketHandler
 	public static final int DEV_COMMAND_TOGGLE_AUTO_MOVE = 1;
 	public static final int DEV_COMMAND_TEST_PATH = 2;
 
-	public INetworkManager networkManager=null;
-
-	/**
-	 * Only packets sent from clients to a server arrive here.
-	 */
-	@Override
-	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
+	@SubscribeEvent
+	public void onPacketData(ServerCustomPacketEvent event)
 	{
 
 		if (Mill.serverWorlds.size()==0)//normally only if ML has not loaded properly
 			return;
-
-		final DataInputStream dataStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-		final EntityPlayer sender = (EntityPlayer)player;
+	
+		ByteBufInputStream dataStream = new ByteBufInputStream(event.packet.payload());
+		EntityPlayerMP sender = ((NetHandlerPlayServer)event.handler).playerEntity;
 		MillWorld mw=Mill.getMillWorld(sender.worldObj);
 
 		if (mw==null) {//possibly the player is in the Nether or something of that kind
 			mw=Mill.serverWorlds.firstElement();
 		}
-
+		
 		if (mw==null) {
 			MLN.error(this, "ServerReceiver.onPacketData: could not find MillWorld.");
 		}
-
-		networkManager=manager;
 
 		try {
 			final int packettype=dataStream.read();
@@ -134,7 +128,7 @@ public class ServerReceiver implements IPacketHandler
 			} else if (packettype==PACKET_VILLAGELIST_REQUEST) {
 				mw.displayVillageList(sender,dataStream.readBoolean());
 			} else if (packettype==PACKET_DECLARERELEASENUMBER) {
-				mw.getProfile(sender.username).receiveDeclareReleaseNumberPacket(dataStream);
+				mw.getProfile(sender.getDisplayName()).receiveDeclareReleaseNumberPacket(dataStream);
 			} else if (packettype==PACKET_VILLAGERINTERACT_REQUEST) {
 				readVillagerInteractRequestPacket(sender,dataStream);
 			} else if (packettype==PACKET_AVAILABLECONTENT) {
@@ -149,7 +143,7 @@ public class ServerReceiver implements IPacketHandler
 	}
 
 	private void readAvailableContentPacket(EntityPlayer player,
-			DataInputStream ds) {
+			ByteBufInputStream ds) {
 
 		final HashMap<String,Integer> nbStrings=new HashMap<String,Integer>();
 		final HashMap<String,Integer> nbBuildingNames=new HashMap<String,Integer>();
@@ -211,8 +205,7 @@ public class ServerReceiver implements IPacketHandler
 				lonebuildings.put(key, v);
 			}
 
-			final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			final DataOutputStream data = new DataOutputStream(bytes);
+			final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
 
 			data.write(PACKET_SERVER_CONTENT);
 
@@ -231,20 +224,14 @@ public class ServerReceiver implements IPacketHandler
 				}
 			}
 
-			final Packet250CustomPayload packet = new Packet250CustomPayload();
-			packet.channel = PACKET_CHANNEL;
-			packet.data = bytes.toByteArray();
-			packet.length = packet.data.length;
-
-
-			ServerSender.sendPacketToPlayer(packet, player.username);
+			ServerSender.createAndSendPacketToPlayer(data, player);
 
 		} catch (final IOException e) {
 			MLN.printException("Error in readAvailableContentPacket: ", e);
 		}
 	}
 
-	private void readDevCommandPacket(EntityPlayer player,DataInputStream data) {
+	private void readDevCommandPacket(EntityPlayer player,ByteBufInputStream data) {
 
 		try {
 			final int commandId=data.read();
@@ -263,7 +250,7 @@ public class ServerReceiver implements IPacketHandler
 	
 	
 
-	private void readGuiActionPacket(EntityPlayer player,DataInputStream data) {
+	private void readGuiActionPacket(EntityPlayer player,ByteBufInputStream data) {
 
 		final MillWorld mw=Mill.getMillWorld(player.worldObj);
 
@@ -345,7 +332,7 @@ public class ServerReceiver implements IPacketHandler
 				
 				EntityPlayerMP playerMP=(EntityPlayerMP)player;
 				
-				if (!Mill.proxy.isTrueServer() || playerMP.mcServer.getConfigurationManager().areCommandsAllowed(playerMP.username))
+				if (!Mill.proxy.isTrueServer() || playerMP.mcServer.getConfigurationManager().isPlayerOpped(playerMP.getDisplayName()))
 					BuildingPlan.importBuilding(player,Mill.serverWorlds.firstElement().world, pos);
 				else
 					ServerSender.sendTranslatedSentence(player,MLN.DARKRED, "ui.serverimportforbidden");
@@ -465,7 +452,7 @@ public class ServerReceiver implements IPacketHandler
 		}
 	}
 
-	private void readMapInfoRequestPacket(EntityPlayer player,DataInputStream data) {
+	private void readMapInfoRequestPacket(EntityPlayer player,ByteBufInputStream data) {
 
 		final MillWorld mw=Mill.getMillWorld(player.worldObj);
 
@@ -483,7 +470,7 @@ public class ServerReceiver implements IPacketHandler
 		}
 	}
 
-	private void readVillagerInteractRequestPacket(EntityPlayer player,DataInputStream data) {
+	private void readVillagerInteractRequestPacket(EntityPlayer player,ByteBufInputStream data) {
 
 		final MillWorld mw=Mill.getMillWorld(player.worldObj);
 

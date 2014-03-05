@@ -1,25 +1,26 @@
 package org.millenaire.common.block;
 
-import net.minecraft.block.BlockHalfSlab;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
-public class BlockOrientedSlab extends BlockHalfSlab {
+public class BlockOrientedSlab extends BlockSlab {
 	
 	public final String  textureTopVertName, textureTopHorName,textureSideName;
-	public Icon  textureTopVert, textureTopHor,textureSide;
+	public IIcon  textureTopVert, textureTopHor,textureSide;
 
-	public BlockOrientedSlab(int par1,String textureTopVertName,String textureTopHorName,String textureSideName)
+	public BlockOrientedSlab(String textureTopVertName,String textureTopHorName,String textureSideName)
 	{
-		super(par1, false, Material.rock);
+		super(false, Material.rock);
 		this.setCreativeTab(Mill.tabMillenaire);
 		setLightOpacity(0);
 		this.textureTopVertName=textureTopVertName;
@@ -28,7 +29,7 @@ public class BlockOrientedSlab extends BlockHalfSlab {
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		textureTopVert=MillCommonUtilities.getIcon(iconRegister, textureTopVertName);
 		textureTopHor=MillCommonUtilities.getIcon(iconRegister, textureTopHorName);
@@ -42,14 +43,14 @@ public class BlockOrientedSlab extends BlockHalfSlab {
 	@Override
 	protected ItemStack createStackedBlock(int par1)
 	{
-		return new ItemStack(blockID, 2, 0);
+		return new ItemStack(this, 2, 0);
 	}
 
 	/**
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
 	@Override
-	public Icon getIcon(int side, int meta)
+	public IIcon getIcon(int side, int meta)
 	{
 		meta = meta & 1;
 
@@ -78,7 +79,7 @@ public class BlockOrientedSlab extends BlockHalfSlab {
 	}
 
 	@Override
-	public String getFullSlabName(int var1) {
+	public String func_150002_b(int var1) {
 		return "byzantinebrick";
 	}
 
@@ -89,12 +90,12 @@ public class BlockOrientedSlab extends BlockHalfSlab {
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack)
 	{
 
-		if(world.getBlockId(x, y - 1, z) == blockID){
+		if(world.getBlock(x, y - 1, z) == this){
 
 			final int meta = world.getBlockMetadata(x, y-1, z);
 			
-			MillCommonUtilities.setBlockAndMetadata(world,x, y-1, z,Mill.byzantine_tiles.blockID,meta & 1, true, false);
-			MillCommonUtilities.setBlockAndMetadata(world,x, y, z,0, 0, true, false);
+			MillCommonUtilities.setBlockAndMetadata(world,x, y-1, z,Mill.byzantine_tiles,meta & 1, true, false);
+			MillCommonUtilities.setBlockAndMetadata(world,x, y, z,Blocks.air, 0, true, false);
 
 		} else {
 

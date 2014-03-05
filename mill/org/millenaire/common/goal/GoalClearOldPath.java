@@ -1,6 +1,7 @@
 package org.millenaire.common.goal;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MLN;
@@ -32,7 +33,7 @@ public class GoalClearOldPath extends Goal {
 	
 	@Override
 	public int actionDuration(MillVillager villager) {
-		final int toolEfficiency=(int)villager.getBestShovel().efficiencyOnProperMaterial;
+		final int toolEfficiency=(int)villager.getBestShovel().getDigSpeed(new ItemStack(villager.getBestShovel(),1), Blocks.dirt,0);
 
 		return 100-(toolEfficiency*5);
 	}
@@ -48,19 +49,19 @@ public class GoalClearOldPath extends Goal {
 		if (MLN.LogVillagePaths>=MLN.DEBUG)
 			MLN.debug(villager, "Clearing old path block: "+p);
 
-		int bid=p.getId(villager.worldObj);
+		Block block=p.getBlock(villager.worldObj);
 		int meta=p.getMeta(villager.worldObj);
 
 		if (meta<8) {//8 and above are stable paths
-			if (bid==Mill.pathSlab.blockID) {
-				p.setBlock(villager.worldObj, 0, 0, true, false);		
-			} else if (bid==Mill.path.blockID) {
+			if (block==Mill.pathSlab) {
+				p.setBlock(villager.worldObj, Blocks.air, 0, true, false);		
+			} else if (block==Mill.path) {
 
-				int bidBelow=p.getBelow().getId(villager.worldObj);
-				if (MillCommonUtilities.getBlockIdValidGround(bidBelow,true)>0)
-					p.setBlock(villager.worldObj, MillCommonUtilities.getBlockIdValidGround(bidBelow,true), 0, true, false);
+				Block blockBelow=p.getBelow().getBlock(villager.worldObj);
+				if (MillCommonUtilities.getBlockIdValidGround(blockBelow,true)!=null)
+					p.setBlock(villager.worldObj, MillCommonUtilities.getBlockIdValidGround(blockBelow,true), 0, true, false);
 				else
-					p.setBlock(villager.worldObj, Block.dirt.blockID, 0, true, false);		
+					p.setBlock(villager.worldObj, Blocks.dirt, 0, true, false);		
 			}
 		}
 

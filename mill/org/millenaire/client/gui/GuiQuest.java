@@ -113,13 +113,13 @@ public class GuiQuest extends GuiText {
 		final Vector<Line> text=new Vector<Line>();
 
 		String game="";
-		if (villager.getGameOccupationName(player.username).length()>0) {
-			game=" ("+villager.getGameOccupationName(player.username)+")";
+		if (villager.getGameOccupationName(player.getDisplayName()).length()>0) {
+			game=" ("+villager.getGameOccupationName(player.getDisplayName())+")";
 		}
 
 		text.add(new Line(villager.getName()+", "+villager.getNativeOccupationName()+game));
 		text.add(new Line());
-		text.add(new Line(baseText.replaceAll("\\$name", player.username)));
+		text.add(new Line(baseText.replaceAll("\\$name", player.getDisplayName())));
 
 		final UserProfile profile=Mill.proxy.getClientProfile();
 

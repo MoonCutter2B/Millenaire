@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.util.Vector;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -13,9 +13,9 @@ import org.millenaire.common.Building;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
+import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.item.Goods;
-import org.millenaire.common.Point;
 
 public class GoalGenericCooking extends GoalGeneric {
 
@@ -39,11 +39,11 @@ public class GoalGenericCooking extends GoalGeneric {
 
 					if (furnace !=null) {
 						//check for fuel addition
-						if (((furnace.getStackInSlot(1) == null) || (furnace.getStackInSlot(1).stackSize<32)) && (dest.countGoods(Block.wood.blockID,-1)>4))
+						if (((furnace.getStackInSlot(1) == null) || (furnace.getStackInSlot(1).stackSize<32)) && (dest.countGoods(Blocks.log,-1)>4))
 							return packDest(p,dest);
 
 						//check for item addition
-						if ((dest.countGoods(itemToCook)>=minimumToCook) && ((furnace.getStackInSlot(0) == null) || ((furnace.getStackInSlot(0).itemID==itemToCook.id()) && (furnace.getStackInSlot(0).getItemDamage()==itemToCook.meta) && (furnace.getStackInSlot(0).stackSize<32))))
+						if ((dest.countGoods(itemToCook)>=minimumToCook) && ((furnace.getStackInSlot(0) == null) || ((furnace.getStackInSlot(0).getItem()==itemToCook.getItem()) && (furnace.getStackInSlot(0).getItemDamage()==itemToCook.meta) && (furnace.getStackInSlot(0).stackSize<32))))
 							return packDest(p,dest);
 
 						//check items for removal
@@ -77,12 +77,12 @@ public class GoalGenericCooking extends GoalGeneric {
 		
 		if ((furnace !=null) && (dest!=null)) {
 			if (((furnace.getStackInSlot(0) == null) && (dest.countGoods(itemToCook)>=minimumToCook))
-					|| ((furnace.getStackInSlot(0) != null) && (furnace.getStackInSlot(0).itemID==itemToCook.id()) && (furnace.getStackInSlot(0).getItemDamage()==itemToCook.meta) && (furnace.getStackInSlot(0).stackSize<64) && (dest.countGoods(itemToCook)>0))) {
+					|| ((furnace.getStackInSlot(0) != null) && (furnace.getStackInSlot(0).getItem()==itemToCook.getItem()) && (furnace.getStackInSlot(0).getItemDamage()==itemToCook.meta) && (furnace.getStackInSlot(0).stackSize<64) && (dest.countGoods(itemToCook)>0))) {
 				int nb;
 				if (furnace.getStackInSlot(0) == null) {
 					nb=Math.min(64, dest.countGoods(itemToCook));
 
-					furnace.setInventorySlotContents(0, new ItemStack(Item.itemsList[itemToCook.id()],nb,itemToCook.meta));
+					furnace.setInventorySlotContents(0, new ItemStack(itemToCook.getItem(),nb,itemToCook.meta));
 					dest.takeGoods(itemToCook,nb);
 				} else {
 					nb=Math.min(64-furnace.getStackInSlot(0).stackSize, villager.getHouse().countGoods(itemToCook));
@@ -92,27 +92,27 @@ public class GoalGenericCooking extends GoalGeneric {
 			}
 
 			if ((furnace.getStackInSlot(2) != null)) {
-				final int id=furnace.getStackInSlot(2).itemID;
+				final Item item=furnace.getStackInSlot(2).getItem();
 				final int meta=furnace.getStackInSlot(2).getItemDamage();
 
-				dest.storeGoods(id, meta, furnace.getStackInSlot(2).stackSize);
+				dest.storeGoods(item, meta, furnace.getStackInSlot(2).stackSize);
 				furnace.setInventorySlotContents(2, null);
 			}
 		}
 
-		if (dest.countGoods(Block.wood.blockID,-1)>0) {
+		if (dest.countGoods(Blocks.log,-1)>0) {
 			if (furnace.getStackInSlot(1) == null) {
-				final int nbplanks=Math.min(64, dest.countGoods(Block.wood.blockID,-1)*4);
+				final int nbplanks=Math.min(64, dest.countGoods(Blocks.log,-1)*4);
 
-				furnace.setInventorySlotContents(1, new ItemStack(Block.planks,nbplanks));
-				dest.takeGoods(Block.wood.blockID,-1,nbplanks/4);
+				furnace.setInventorySlotContents(1, new ItemStack(Blocks.planks,nbplanks));
+				dest.takeGoods(Blocks.log,-1,nbplanks/4);
 
 			} else if (furnace.getStackInSlot(1).stackSize<64) {
 
-				final int nbplanks=Math.min(64-furnace.getStackInSlot(1).stackSize, dest.countGoods(Block.wood.blockID,-1)*4);
+				final int nbplanks=Math.min(64-furnace.getStackInSlot(1).stackSize, dest.countGoods(Blocks.log,-1)*4);
 
-				furnace.setInventorySlotContents(1, new ItemStack(Block.planks,furnace.getStackInSlot(1).stackSize+nbplanks));
-				dest.takeGoods(Block.wood.blockID,-1,nbplanks/4);
+				furnace.setInventorySlotContents(1, new ItemStack(Blocks.planks,furnace.getStackInSlot(1).stackSize+nbplanks));
+				dest.takeGoods(Blocks.log,-1,nbplanks/4);
 
 			}
 		}

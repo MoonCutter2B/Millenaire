@@ -2,13 +2,13 @@ package org.millenaire.common.goal;
 
 import java.util.Vector;
 
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.Building;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.Point;
 import org.millenaire.common.MillVillager.InvItem;
+import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
@@ -18,7 +18,7 @@ public class GoalIndianGatherBrick extends Goal {
 
 	public GoalIndianGatherBrick() {
 		maxSimultaneousInBuilding=2;
-		townhallLimit.put(new InvItem(Mill.stone_decoration.blockID,1), 4096);
+		townhallLimit.put(new InvItem(Mill.stone_decoration,1), 4096);
 	}
 	
 	
@@ -57,7 +57,7 @@ public class GoalIndianGatherBrick extends Goal {
 
 	@Override
 	public ItemStack[] getHeldItemsTravelling(MillVillager villager) {
-		return new ItemStack[]{new ItemStack(Item.pickaxeWood.itemID,1,0)};
+		return villager.getBestPickaxeStack();
 	}
 
 	@Override
@@ -87,9 +87,9 @@ public class GoalIndianGatherBrick extends Goal {
 
 	@Override
 	public boolean performAction(MillVillager villager) {
-		if ((MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Mill.stone_decoration.blockID) && (MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint())==1)) {
-			villager.addToInv(Mill.stone_decoration.blockID, MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint()), 1);
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),0,0);
+		if ((MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Mill.stone_decoration) && (MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint())==1)) {
+			villager.addToInv(Mill.stone_decoration, MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint()), 1);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Blocks.air,0);
 			
 			villager.swingItem();
 			return false;
@@ -101,7 +101,7 @@ public class GoalIndianGatherBrick extends Goal {
 	@Override
 	public int priority(MillVillager villager) {
 
-		int p=100-(villager.getTownHall().nbGoodAvailable(Mill.stone_decoration.blockID, 1, false, false)*2);
+		int p=100-(villager.getTownHall().nbGoodAvailable(Mill.stone_decoration, 1, false, false)*2);
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {

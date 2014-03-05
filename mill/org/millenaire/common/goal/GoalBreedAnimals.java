@@ -10,6 +10,7 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -19,6 +20,8 @@ import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerSender;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
+
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 
 public class GoalBreedAnimals extends Goal {
@@ -53,14 +56,14 @@ public class GoalBreedAnimals extends Goal {
 
 		for (Class animalClass : validAnimals) {
 
-			int[] breedingItems=getBreedingItems(animalClass);
+			Item[] breedingItems=getBreedingItems(animalClass);
 
 			boolean available=false;
 
 			if (breedingItems==null) {
 				available=true;
 			} else {
-				for (int breedingItem : breedingItems) {
+				for (Item breedingItem : breedingItems) {
 					if (!available && villager.getHouse().countGoods(breedingItem)>0) {
 						available=true;
 					}
@@ -96,7 +99,7 @@ public class GoalBreedAnimals extends Goal {
 					for (final Entity ent : animals) {
 						EntityAnimal animal=(EntityAnimal)ent;
 
-						if (animal.getGrowingAge() == 0 && animal.inLove==0)
+						if (animal.getGrowingAge() == 0 && !animal.isInLove())
 							return packDest(null,villager.getHouse(),animal);
 					}
 				}
@@ -131,13 +134,13 @@ public class GoalBreedAnimals extends Goal {
 		return true;
 	}
 
-	static private final int[] CEREALS=new int[]{Item.wheat.itemID,Mill.rice.itemID,Mill.maize.itemID};
-	static private final int[] SEEDS=new int[]{Item.seeds.itemID,Mill.rice.itemID,Mill.maize.itemID};
-	static private final int[] CARROTS=new int[]{Item.carrot.itemID};
+	static private final Item[] CEREALS=new Item[]{Items.wheat,Mill.rice,Mill.maize};
+	static private final Item[] SEEDS=new Item[]{Items.wheat_seeds,Mill.rice,Mill.maize};
+	static private final Item[] CARROTS=new Item[]{Items.carrot};
 
 
 	@SuppressWarnings({ "rawtypes" })
-	private int[] getBreedingItems(Class animalClass) {
+	private Item[] getBreedingItems(Class animalClass) {
 		if (animalClass==EntityCow.class || animalClass==EntitySheep.class)
 			return CEREALS;
 		if (animalClass==EntityPig.class)
@@ -164,15 +167,15 @@ public class GoalBreedAnimals extends Goal {
 
 					final EntityAnimal animal=(EntityAnimal)ent;
 
-					int[] breedingItems=getBreedingItems(animal.getClass());
+					Item[] breedingItems=getBreedingItems(animal.getClass());
 
 					boolean available=false;
-					int foundBreedingItem=-1;
+					Item foundBreedingItem=null;
 
 					if (breedingItems==null) {
 						available=true;
 					} else {
-						for (int breedingItem : breedingItems) {
+						for (Item breedingItem : breedingItems) {
 							if (!available && villager.getHouse().countGoods(breedingItem)>0) {
 								available=true;
 								foundBreedingItem=breedingItem;
@@ -184,11 +187,10 @@ public class GoalBreedAnimals extends Goal {
 					if (available) {
 
 						if (!animal.isChild() && !animal.isInLove() && animal.getGrowingAge() == 0) {
-
-							animal.inLove=600;
+							ReflectionHelper.setPrivateValue(EntityAnimal.class, animal, 600, 0);
 							animal.setTarget(null);
 
-							if (foundBreedingItem>0)
+							if (foundBreedingItem!=null)
 								villager.getHouse().takeGoods(foundBreedingItem, 1);
 
 							villager.swingItem();
@@ -212,12 +214,12 @@ public class GoalBreedAnimals extends Goal {
 		
 		EntityAnimal animal=(EntityAnimal)villager.getGoalDestEntity();
 		
-		int[] breedingItems=getBreedingItems(animal.getClass());
+		Item[] breedingItems=getBreedingItems(animal.getClass());
 		
 		if (breedingItems!=null) {
-			for (int breedingItem : breedingItems) {
+			for (Item breedingItem : breedingItems) {
 				if (villager.getHouse().countGoods(breedingItem)>0) {
-					return new ItemStack[]{new ItemStack(Item.itemsList[breedingItem],1)};
+					return new ItemStack[]{new ItemStack(breedingItem,1)};
 				}
 			}
 		}

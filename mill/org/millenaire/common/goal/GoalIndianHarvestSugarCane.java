@@ -2,7 +2,8 @@ package org.millenaire.common.goal;
 
 import java.util.Vector;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -87,8 +88,8 @@ public class GoalIndianHarvestSugarCane extends Goal {
 
 		Point cropPoint=villager.getGoalDestPoint().getRelative(0, 3, 0);
 
-		if (villager.getBlock(cropPoint)==Block.reed.blockID) {
-			villager.setBlockAndMetadata(cropPoint,0,0);
+		if (villager.getBlock(cropPoint)==Blocks.reeds) {
+			villager.setBlockAndMetadata(cropPoint,Blocks.air,0);
 
 			int nbcrop=1;
 			final float irrigation=villager.getTownHall().getVillageIrrigation();
@@ -97,13 +98,13 @@ public class GoalIndianHarvestSugarCane extends Goal {
 				nbcrop++;
 			}
 
-			villager.addToInv(Item.reed.itemID, nbcrop);
+			villager.addToInv(Items.reeds, nbcrop);
 		}
 
 		cropPoint=villager.getGoalDestPoint().getRelative(0, 2, 0);
 
-		if (villager.getBlock(cropPoint)==Block.reed.blockID) {
-			villager.setBlockAndMetadata(cropPoint,0,0);
+		if (villager.getBlock(cropPoint)==Blocks.reeds) {
+			villager.setBlockAndMetadata(cropPoint,Blocks.air,0);
 
 
 			int nbcrop=1;
@@ -115,7 +116,7 @@ public class GoalIndianHarvestSugarCane extends Goal {
 			
 			villager.swingItem();
 
-			villager.addToInv(Item.reed.itemID, nbcrop);
+			villager.addToInv(Items.reeds, nbcrop);
 		}
 
 		return true;
@@ -123,7 +124,7 @@ public class GoalIndianHarvestSugarCane extends Goal {
 
 	@Override
 	public int priority(MillVillager villager) {
-		int p=200-(villager.getTownHall().nbGoodAvailable(Mill.turmeric.itemID, 0, false, false)*4);
+		int p=200-(villager.getTownHall().nbGoodAvailable(Mill.turmeric, 0, false, false)*4);
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {

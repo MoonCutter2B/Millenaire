@@ -1,8 +1,9 @@
 package org.millenaire.common;
 
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -435,7 +436,7 @@ public class VillagerType implements WeightedChoice {
 		return false;
 	}
 
-	public void readVillagerTypeInfoPacket(DataInputStream ds) throws IOException {
+	public void readVillagerTypeInfoPacket(ByteBufInputStream ds) throws IOException {
 		name=StreamReadWrite.readNullableString(ds);
 		altkey=StreamReadWrite.readNullableString(ds);
 		altname=StreamReadWrite.readNullableString(ds);
@@ -449,7 +450,7 @@ public class VillagerType implements WeightedChoice {
 		return "VT: "+culture.key+"/"+key;
 	}
 
-	public void writeVillagerTypeInfo(DataOutputStream data) throws IOException {
+	public void writeVillagerTypeInfo(ByteBufOutputStream data) throws IOException {
 		data.writeUTF(key);
 		StreamReadWrite.writeNullableString(name, data);
 		StreamReadWrite.writeNullableString(altkey, data);

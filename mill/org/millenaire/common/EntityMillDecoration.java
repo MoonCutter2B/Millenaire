@@ -1,19 +1,20 @@
 package org.millenaire.common;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityPainting;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
-
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
@@ -105,13 +106,13 @@ public class EntityMillDecoration extends EntityPainting  implements IEntityAddi
 		final int i=p.getiX();
 		final int j=p.getiY();
 		final int k=p.getiZ();
-		if (MillCommonUtilities.isBlockIdSolid(world.getBlockId(i-1, j, k)))
+		if (MillCommonUtilities.isBlockIdSolid(world.getBlock(i-1, j, k)))
 			return 3;
-		else if (MillCommonUtilities.isBlockIdSolid(world.getBlockId(i+1, j, k)))
+		else if (MillCommonUtilities.isBlockIdSolid(world.getBlock(i+1, j, k)))
 			return 1;
-		else if (MillCommonUtilities.isBlockIdSolid(world.getBlockId(i, j, k-1)))
+		else if (MillCommonUtilities.isBlockIdSolid(world.getBlock(i, j, k-1)))
 			return 2;
-		else if (MillCommonUtilities.isBlockIdSolid(world.getBlockId(i, j, k+1)))
+		else if (MillCommonUtilities.isBlockIdSolid(world.getBlock(i, j, k+1)))
 			return 0;
 		return 0;
 	}
@@ -126,9 +127,9 @@ public class EntityMillDecoration extends EntityPainting  implements IEntityAddi
     public EntityMillDecoration(World par1World, int par2, int par3, int par4, int par5)
     {
         this(par1World);
-        this.xPosition = par2;
-        this.yPosition = par3;
-        this.zPosition = par4;
+        this.posX = par2;
+        this.posY = par3;
+        this.posZ = par4;
     }
 
 	public EntityMillDecoration(World world,int type)
@@ -145,9 +146,9 @@ public class EntityMillDecoration extends EntityPainting  implements IEntityAddi
 		
 		this.type=type;
 
-		xPosition = x;
-		yPosition = y;
-		zPosition = z;
+		posX = x;
+		posY = y;
+		posZ = z;
 
 		final ArrayList<EnumWallDecoration> arraylist = new ArrayList<EnumWallDecoration>();
 		final EnumWallDecoration aenumart[] = EnumWallDecoration.values();
@@ -213,9 +214,9 @@ public class EntityMillDecoration extends EntityPainting  implements IEntityAddi
 		nbttagcompound.setInteger("Type", type);
 		nbttagcompound.setString("Motive", this.art.title);
 		nbttagcompound.setByte("Direction", (byte)this.hangingDirection);
-		nbttagcompound.setInteger("TileX", this.xPosition);
-		nbttagcompound.setInteger("TileY", this.yPosition);
-		nbttagcompound.setInteger("TileZ", this.zPosition);
+		nbttagcompound.setDouble("TileX", this.posX);
+		nbttagcompound.setDouble("TileY", this.posY);
+		nbttagcompound.setDouble("TileZ", this.posZ);
 
         switch (this.hangingDirection)
         {
@@ -280,9 +281,9 @@ public class EntityMillDecoration extends EntityPainting  implements IEntityAddi
             }
         }
 
-        this.xPosition = nbttagcompound.getInteger("TileX");
-        this.yPosition = nbttagcompound.getInteger("TileY");
-        this.zPosition = nbttagcompound.getInteger("TileZ");
+        this.posX = nbttagcompound.getInteger("TileX");
+        this.posY = nbttagcompound.getInteger("TileY");
+        this.posZ = nbttagcompound.getInteger("TileZ");
         this.setDirection(this.hangingDirection);
 	}
 
@@ -324,39 +325,53 @@ public class EntityMillDecoration extends EntityPainting  implements IEntityAddi
     }
     
     @Override
-	public void writeSpawnData(ByteArrayDataOutput data) {
-		data.write(type);
-		data.write(hangingDirection);
-		data.writeInt(xPosition);
-		data.writeInt(yPosition);
-		data.writeInt(zPosition);
-		data.writeUTF(art.title);
-		data.writeDouble(posX);
-		data.writeDouble(posY);
-		data.writeDouble(posZ);
+	public void writeSpawnData(ByteBuf ds) {
+    	final ByteBufOutputStream data = new ByteBufOutputStream(ds);
+		try {
+			data.write(type);
+			data.write(hangingDirection);
+			data.writeDouble(posX);
+			data.writeDouble(posY);
+			data.writeDouble(posZ);
+			data.writeUTF(art.title);
+			data.writeDouble(posX);
+			data.writeDouble(posY);
+			data.writeDouble(posZ);
+			data.close();
+		} catch (IOException e) {
+			MLN.printException("Exception for painting "+this, e);
+		}
 	}
     
     @Override
-	public void readSpawnData(ByteArrayDataInput data) {
-		type=data.readByte();
-		hangingDirection=data.readByte();
-		xPosition=data.readInt();
-		yPosition=data.readInt();
-		zPosition=data.readInt();
+	public void readSpawnData(ByteBuf ds) {
+    	final ByteBufInputStream data = new ByteBufInputStream(ds);
+    	
+		try {
+			type=data.readByte();
+			hangingDirection=data.readByte();
+			posX=data.readInt();
+			posY=data.readInt();
+			posZ=data.readInt();
 
-		final String title=data.readUTF();
+			final String title=data.readUTF();
 
-		for(final EnumWallDecoration enumart : EnumWallDecoration.values())
-		{
-			if(enumart.title.equals(title))
+			for(final EnumWallDecoration enumart : EnumWallDecoration.values())
 			{
-				art = enumart;
+				if(enumart.title.equals(title))
+				{
+					art = enumart;
+				}
 			}
+			
+			clientX=data.readDouble();
+			clientY=data.readDouble();
+			clientZ=data.readDouble();
+			data.close();
+		} catch (IOException e) {
+			MLN.printException("Exception for villager "+this, e);
 		}
 		
-		clientX=data.readDouble();
-		clientY=data.readDouble();
-		clientZ=data.readDouble();
 	}
 
 	@Override

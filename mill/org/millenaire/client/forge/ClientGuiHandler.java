@@ -22,7 +22,7 @@ public class ClientGuiHandler extends CommonGuiHandler {
 			int x, int y, int z) {
 
 		if (ID==GUI_MILL_CHEST) {
-			final TileEntity te = world.getBlockTileEntity(x, y, z);
+			final TileEntity te = world.getTileEntity(x, y, z);
 			if ((te != null) && (te instanceof TileEntityMillChest))
 				return GuiMillChest.createGUI(world, x, y, z, player);
 		} else if (ID==GUI_TRADE) {

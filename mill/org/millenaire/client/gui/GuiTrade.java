@@ -1,5 +1,7 @@
 package org.millenaire.client.gui;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,6 +27,8 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
+import cpw.mods.fml.relauncher.ReflectionHelper;
+
 public class GuiTrade extends GuiContainer {
 
 	private Building building;
@@ -34,6 +38,7 @@ public class GuiTrade extends GuiContainer {
 	private int sellingRow=0,buyingRow=0;
 
 	private final ContainerTrade container;
+	private Method drawSlotInventory;
 
 	private static RenderItem itemRenderer = new RenderItem();
 
@@ -42,14 +47,14 @@ public class GuiTrade extends GuiContainer {
 
 		super(new ContainerTrade(player, building));
 
+		drawSlotInventory=ReflectionHelper.findMethod(GuiContainer.class, this, new String[]{"func_146977_a","func_146977_a"}, Method.class);
+		
 		container=(ContainerTrade)this.inventorySlots;
 
 		this.building = building;
 		this.player = player;
 		ySize = 222;
 		xSize = 248;
-
-
 
 		updateRows(false,0,0);
 		updateRows(true,0,0);
@@ -61,6 +66,8 @@ public class GuiTrade extends GuiContainer {
 	public GuiTrade(EntityPlayer player, MillVillager merchant)
 	{
 		super(new ContainerTrade(player, merchant));
+		
+		drawSlotInventory=ReflectionHelper.findMethod(GuiContainer.class, this, new String[]{"func_146977_a","func_146977_a"}, Method.class);
 
 		container=(ContainerTrade)this.inventorySlots;
 
@@ -108,7 +115,7 @@ public class GuiTrade extends GuiContainer {
 
 			for (int i2 = 0; i2 < list.size(); i2++)
 			{
-				final int k2 = fontRenderer.getStringWidth(list.get(i2));
+				final int k2 = fontRendererObj.getStringWidth(list.get(i2));
 
 				if (k2 > l1)
 				{
@@ -147,14 +154,14 @@ public class GuiTrade extends GuiContainer {
 
 				if (j4 == 0)
 				{
-					s = (new StringBuilder()).append("\247").append(Integer.toHexString(stack.getRarity().rarityColor)).append(s).toString();
+					s = (new StringBuilder()).append("\247").append(Integer.toHexString(stack.getRarity().rarityColor.getFormattingCode())).append(s).toString();
 				}
 				else
 				{
 					s = (new StringBuilder()).append("\2477").append(s).toString();
 				}
 
-				fontRenderer.drawStringWithShadow(s, j2, l2, -1);
+				fontRendererObj.drawStringWithShadow(s, j2, l2, -1);
 
 				if (j4 == 0)
 				{
@@ -175,7 +182,7 @@ public class GuiTrade extends GuiContainer {
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.func_110434_K().func_110577_a(background);
+		this.mc.renderEngine.bindTexture(background);
 		final int x = (width - xSize) / 2;
 		final int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
@@ -201,15 +208,15 @@ public class GuiTrade extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int x, int y)
 	{
 		if (building!=null) {
-			fontRenderer.drawString(building.getNativeBuildingName(), 8,6, 0x404040);
-			fontRenderer.drawString(MLN.string("ui.wesell")+":", 8, 22, 0x404040);
-			fontRenderer.drawString(MLN.string("ui.webuy")+":", 8, 76, 0x404040);
+			fontRendererObj.drawString(building.getNativeBuildingName(), 8,6, 0x404040);
+			fontRendererObj.drawString(MLN.string("ui.wesell")+":", 8, 22, 0x404040);
+			fontRendererObj.drawString(MLN.string("ui.webuy")+":", 8, 76, 0x404040);
 		} else {
-			fontRenderer.drawString(merchant.getName()+": "+merchant.getNativeOccupationName(), 8,6, 0x404040);
-			fontRenderer.drawString(MLN.string("ui.isell")+":", 8, 22, 0x404040);
+			fontRendererObj.drawString(merchant.getName()+": "+merchant.getNativeOccupationName(), 8,6, 0x404040);
+			fontRendererObj.drawString(MLN.string("ui.isell")+":", 8, 22, 0x404040);
 		}
 
-		fontRenderer.drawString(MLN.string("ui.inventory"), 8+36, (ySize - 96) + 2, 0x404040);
+		fontRendererObj.drawString(MLN.string("ui.inventory"), 8+36, (ySize - 96) + 2, 0x404040);
 
 		@SuppressWarnings("rawtypes")
 		Iterator iterator = this.buttonList.iterator();
@@ -218,9 +225,9 @@ public class GuiTrade extends GuiContainer {
 		{
 			GuiButton guibutton = (GuiButton)iterator.next();
 
-			if (guibutton.func_82252_a())
+			if (guibutton.func_146115_a())
 			{
-				guibutton.func_82251_b(x - this.guiLeft, y - this.guiTop);
+				guibutton.func_146111_b(x - this.guiLeft, y - this.guiTop);
 				break;
 			}
 		}
@@ -249,8 +256,12 @@ public class GuiTrade extends GuiContainer {
 		for(int i1 = 0; i1 < inventorySlots.inventorySlots.size(); i1++)
 		{
 			final Slot slot1 = (Slot)inventorySlots.inventorySlots.get(i1);
-			drawSlotInventory(slot1);
-
+			try {
+				drawSlotInventory.invoke(slot1);
+			} catch (Exception e) {
+				MLN.printException("Exception when trying to access drawSlotInventory", e);
+			}
+			
 			String problem=null;
 
 			if (slot1 instanceof TradeSlot) {
@@ -305,8 +316,8 @@ public class GuiTrade extends GuiContainer {
 		if(inventoryplayer.getItemStack() != null)
 		{
 			GL11.glTranslatef(0.0F, 0.0F, 32F);
-			itemRenderer.renderItemIntoGUI(fontRenderer, mc.renderEngine, inventoryplayer.getItemStack(), i - k - 8, j - l - 8);
-			itemRenderer.renderItemOverlayIntoGUI(fontRenderer, mc.renderEngine, inventoryplayer.getItemStack(), i - k - 8, j - l - 8);
+			itemRenderer.renderItemIntoGUI(fontRendererObj, mc.renderEngine, inventoryplayer.getItemStack(), i - k - 8, j - l - 8);
+			itemRenderer.renderItemOverlayIntoGUI(fontRendererObj, mc.renderEngine, inventoryplayer.getItemStack(), i - k - 8, j - l - 8);
 		}
 		GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
 		RenderHelper.disableStandardItemLighting();
@@ -482,4 +493,6 @@ public class GuiTrade extends GuiContainer {
 
 		super.mouseClicked(x, y, clickType);
 	}
+	
+	
 }

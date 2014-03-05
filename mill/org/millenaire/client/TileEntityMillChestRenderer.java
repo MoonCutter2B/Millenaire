@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntityChest;
 
 import org.lwjgl.opengl.GL11;
 import org.millenaire.common.MLN;
+import org.millenaire.common.block.BlockMillChest;
 
 public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer
 {
@@ -82,7 +83,7 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer
 			float f)
 	{
 		int i;
-		if (tileentitychest.worldObj == null)
+		if (tileentitychest.getWorldObj() == null)
 		{
 			i = 0;
 		}
@@ -90,9 +91,9 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer
 		{
 			final Block block = tileentitychest.getBlockType();
 			i = tileentitychest.getBlockMetadata();
-			if ((block != null) && (i == 0) && (block instanceof BlockChest))
+			if ((block != null) && (i == 0) && (block instanceof BlockMillChest))
 			{
-				((BlockChest)block).unifyAdjacentChests(tileentitychest.worldObj, tileentitychest.xCoord, tileentitychest.yCoord, tileentitychest.zCoord);
+				((BlockMillChest)block).unifyMillChests(tileentitychest.getWorldObj(), tileentitychest.xCoord, tileentitychest.yCoord, tileentitychest.zCoord);
 				i = tileentitychest.getBlockMetadata();
 			}
 			tileentitychest.checkForAdjacentChests();
@@ -100,15 +101,15 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer
 		if ((tileentitychest.adjacentChestZNeg != null) || (tileentitychest.adjacentChestXNeg != null))
 			return;
 		ModelLockedChest modelchest;
-		if ((tileentitychest.adjacentChestXPos != null) || (tileentitychest.adjacentChestZPosition != null))
+		if ((tileentitychest.adjacentChestXPos != null) || (tileentitychest.adjacentChestZPos != null))
 		{
 			modelchest = field_35378_c;
-			func_110628_a(MLN.getLargeLockedChestTexture());
+			bindTexture(MLN.getLargeLockedChestTexture());
 		}
 		else
 		{
 			modelchest = field_35377_b;
-			func_110628_a(MLN.getLockedChestTexture());
+			bindTexture(MLN.getLockedChestTexture());
 		}
 		GL11.glPushMatrix();
 		GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
@@ -137,7 +138,7 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer
 		{
 			GL11.glTranslatef(1.0F, 0.0F, 0.0F);
 		}
-		if ((i == 5) && (tileentitychest.adjacentChestZPosition != null))
+		if ((i == 5) && (tileentitychest.adjacentChestZPos != null))
 		{
 			GL11.glTranslatef(0.0F, 0.0F, -1F);
 		}

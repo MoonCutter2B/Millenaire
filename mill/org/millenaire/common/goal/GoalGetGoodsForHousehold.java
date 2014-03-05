@@ -35,13 +35,13 @@ public class GoalGetGoodsForHousehold extends Goal {
 			int nb=0;
 
 			for (final InvItem key : goods.keySet()) {
-				if (villager.getHouse().countGoods(key.id(),key.meta)<(goods.get(key)/2)) {
+				if (villager.getHouse().countGoods(key.getItem(),key.meta)<(goods.get(key)/2)) {
 					if (buildings==null) {
 						buildings=villager.getTownHall().getBuildings();
 					}
 
 					for (final Building building : buildings) {
-						final int nbav=building.nbGoodAvailable(key.id(),key.meta,false, false);
+						final int nbav=building.nbGoodAvailable(key,false, false);
 						if ((nbav>0) &&  (building!=villager.getHouse())) {
 							nb+=nbav;
 
@@ -85,11 +85,11 @@ public class GoalGetGoodsForHousehold extends Goal {
 			final HashMap<InvItem,Integer> goods=v.requiresGoods();
 
 			for (final InvItem key : goods.keySet()) {
-				if (villager.getHouse().countGoods(key.id(),key.meta)<goods.get(key)) {
+				if (villager.getHouse().countGoods(key.getItem(),key.meta)<goods.get(key)) {
 
-					final int nb=Math.min(shop.nbGoodAvailable(key.id(),key.meta,false, false),goods.get(key));
+					final int nb=Math.min(shop.nbGoodAvailable(key,false, false),goods.get(key));
 
-					villager.takeFromBuilding(shop, key.id(),key.meta, nb);
+					villager.takeFromBuilding(shop, key.getItem(),key.meta, nb);
 				}
 			}
 
@@ -113,9 +113,9 @@ public class GoalGetGoodsForHousehold extends Goal {
 
 
 			for (final InvItem key : goods.keySet()) {
-				if (villager.getHouse().countGoods(key.id(),key.meta)<(goods.get(key)/2)) {
+				if (villager.getHouse().countGoods(key.getItem(),key.meta)<(goods.get(key)/2)) {
 					for (final Building shop : shops) {
-						final int nbav=shop.nbGoodAvailable(key.id(),key.meta,false, false);
+						final int nbav=shop.nbGoodAvailable(key,false, false);
 						if ((nbav>0) &&  (shop!=villager.getHouse())) {
 							nb+=nbav;
 						}

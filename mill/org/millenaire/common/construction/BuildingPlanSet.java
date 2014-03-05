@@ -1,8 +1,9 @@
 package org.millenaire.common.construction;
 
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
@@ -233,7 +234,7 @@ public  class BuildingPlanSet {
 		}
 	}
 
-	public void readBuildingPlanSetInfoPacket(DataInputStream ds) throws IOException {
+	public void readBuildingPlanSetInfoPacket(ByteBufInputStream ds) throws IOException {
 
 		final int nb=ds.readInt();
 
@@ -257,7 +258,7 @@ public  class BuildingPlanSet {
 		return key+" ("+plans.size()+" / "+max+"/"+plans.get(0)[0].nativeName+")";
 	}
 
-	public void writeBuildingPlanSetInfo(DataOutputStream data) throws IOException {
+	public void writeBuildingPlanSetInfo(ByteBufOutputStream data) throws IOException {
 		data.writeUTF(key);
 		data.writeInt(plans.size());
 

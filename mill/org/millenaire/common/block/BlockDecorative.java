@@ -7,11 +7,13 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -24,16 +26,16 @@ public class BlockDecorative extends Block {
 
 		BlockDecorative block;
 
-		public ItemDecorative(int i)
+		public ItemDecorative(Block b)
 		{
-			super(i);
+			super(b);
 			setMaxDamage(0);
 			setHasSubtypes(true);
-			this.block=(BlockDecorative)Block.blocksList[i+256];
+			this.block=(BlockDecorative)b;
 		}
 
 		@Override
-		public Icon getIconFromDamage(int i)
+		public IIcon getIconFromDamage(int i)
 		{
 			return block.getIcon(2, i);
 		}
@@ -65,28 +67,28 @@ public class BlockDecorative extends Block {
 	HashMap<Integer,String> textureSideNames=new HashMap<Integer,String>();
 	HashMap<Integer,String> textureTopNames=new HashMap<Integer,String>();
 	HashMap<Integer,String> textureBottomNames=new HashMap<Integer,String>();
-	HashMap<Integer,Icon> texturesSide=new HashMap<Integer,Icon>();
-	HashMap<Integer,Icon> texturesTop=new HashMap<Integer,Icon>();
-	HashMap<Integer,Icon> texturesBottom=new HashMap<Integer,Icon>();
+	HashMap<Integer,IIcon> texturesSide=new HashMap<Integer,IIcon>();
+	HashMap<Integer,IIcon> texturesTop=new HashMap<Integer,IIcon>();
+	HashMap<Integer,IIcon> texturesBottom=new HashMap<Integer,IIcon>();
 
 	HashMap<Integer,String> names=new HashMap<Integer,String>();
 
-	public BlockDecorative(int i, Material material) {
-		super(i, material);
+	public BlockDecorative(Material material) {
+		super(material);
 		setTickRandomly(true);
 		this.setCreativeTab(Mill.tabMillenaire);
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void addCreativeItems(@SuppressWarnings("rawtypes") ArrayList itemList) {
-		final ArrayList<ItemStack> list=itemList;
-
-		for (final int meta: textureSideNames.keySet()) {
-			list.add(new ItemStack(blockID,1,meta));
-		}
-
-	}
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	public void addCreativeItems(@SuppressWarnings("rawtypes") ArrayList itemList) {
+//		final ArrayList<ItemStack> list=itemList;
+//
+//		for (final int meta: textureSideNames.keySet()) {
+//			list.add(new ItemStack(this,1,meta));
+//		}
+//
+//	}
 
 	@Override
 	public int damageDropped(int i)
@@ -98,16 +100,16 @@ public class BlockDecorative extends Block {
 	public void alchemistExplosion(World world, int i,
 			int j, int k) {
 
-		MillCommonUtilities.setBlockAndMetadata(world, i, j, k, 0, 0, true, false);
+		MillCommonUtilities.setBlockAndMetadata(world, i, j, k, null, 0, true, false);
 
 		for (int y=EXPLOSION_RADIUS;y>=-EXPLOSION_RADIUS;y--) {
 			if (((y+j)>=0) && ((y+j)<128)) {
 				for (int x=-EXPLOSION_RADIUS;x<=EXPLOSION_RADIUS;x++) {
 					for (int z=-EXPLOSION_RADIUS;z<=EXPLOSION_RADIUS;z++) {
 						if (((x*x)+(y*y)+(z*z))<=(EXPLOSION_RADIUS*EXPLOSION_RADIUS)) {
-							int bid=world.getBlockId(i+x, j+y, k+z);
-							if (bid>0) {								
-								MillCommonUtilities.setBlockAndMetadata(world,i+x, j+y, k+z, 0, 0, true, false);
+							Block block=world.getBlock(i+x, j+y, k+z);
+							if (block!=Blocks.air) {								
+								MillCommonUtilities.setBlockAndMetadata(world,i+x, j+y, k+z, null, 0, true, false);
 							}
 						}
 					}
@@ -122,7 +124,7 @@ public class BlockDecorative extends Block {
 	public void dropBlockAsItemWithChance(World par1World, int i, int j,
 			int k, int meta, float par6, int par7) {
 
-		if (blockID==Mill.stone_decoration.blockID && meta==3) {
+		if (this==Mill.stone_decoration && meta==3) {
 			boolean isExplosion=false;
 
 			//Hack to check whether the drop is due to an explosion
@@ -145,7 +147,7 @@ public class BlockDecorative extends Block {
 		super.dropBlockAsItemWithChance(par1World, i, j, k, meta, par6, par7);
 	}
 	@Override
-	public Icon getIcon(int side, int meta)  {
+	public IIcon getIcon(int side, int meta)  {
 
 		if (side==1) {
 			if (texturesTop.containsKey(meta))
@@ -167,11 +169,11 @@ public class BlockDecorative extends Block {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+	public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs, List par3List)
 	{
 
 		for (final int meta : texturesSide.keySet()) {
-			par3List.add(new ItemStack(par1, 1, meta));
+			par3List.add(new ItemStack(item, 1, meta));
 		}
 	}
 
@@ -192,7 +194,7 @@ public class BlockDecorative extends Block {
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		for (int meta : textureTopNames.keySet()) {
 			texturesTop.put(meta, MillCommonUtilities.getIcon(iconRegister, textureTopNames.get(meta)));
@@ -211,20 +213,20 @@ public class BlockDecorative extends Block {
 
 		final int meta=world.getBlockMetadata(i, j, k);
 
-		if ((blockID==Mill.earth_decoration.blockID) && (meta==0)) {
+		if ((this==Mill.earth_decoration) && (meta==0)) {
 			if(world.getBlockLightValue(i, j + 1, k) >= 15)
 			{
 				if(MillCommonUtilities.chanceOn(5))
 				{
-					MillCommonUtilities.setBlockAndMetadata(world,i, j, k,Mill.stone_decoration.blockID, 1, true, false);
+					MillCommonUtilities.setBlockAndMetadata(world,i, j, k,Mill.stone_decoration, 1, true, false);
 				}
 			}
-		} else if ((blockID==Mill.wood_decoration.blockID) && (meta==3)) {
+		} else if ((this==Mill.wood_decoration) && (meta==3)) {
 			if(world.getBlockLightValue(i, j + 1, k) <7)
 			{
 				if(MillCommonUtilities.chanceOn(5))
 				{
-					MillCommonUtilities.setBlockAndMetadata(world,i, j, k,Mill.wood_decoration.blockID, 4, true, false);
+					MillCommonUtilities.setBlockAndMetadata(world,i, j, k,Mill.wood_decoration, 4, true, false);
 				}
 			}
 		}

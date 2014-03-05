@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureUtil;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 import org.millenaire.common.Point;
@@ -28,10 +29,10 @@ public class TextureAmuletAlchemist extends TextureAtlasSprite {
 		if (iconPos<0)
 			iconPos=0;
 
-		if (iconPos != this.field_110973_g)
+		if (iconPos != this.frameCounter)
         {
-            this.field_110973_g = iconPos;
-            TextureUtil.func_110998_a((int[])this.field_110976_a.get(this.field_110973_g), this.field_130223_c, this.field_130224_d, this.field_110975_c, this.field_110974_d, false, false);
+            this.frameCounter = iconPos;
+            TextureUtil.uploadTextureMipmap((int[][])this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
         }
 	}
 	
@@ -50,22 +51,22 @@ public class TextureAmuletAlchemist extends TextureAtlasSprite {
 			for (int i=p.getiX()-radius;i<(p.getiX()+radius);i++) {
 				for (int j=p.getiZ()-radius;j<(p.getiZ()+radius);j++) {
 					for (int k=startY;k<endY;k++) {
-						final int bid=world.getBlockId(i, k, j);
-						if (bid==Block.oreCoal.blockID) {
+						final Block block=world.getBlock(i, k, j);
+						if (block==Blocks.coal_ore) {
 							score++;
-						} else if (bid==Block.oreDiamond.blockID) {
+						} else if (block==Blocks.diamond_ore) {
 							score+=30;
-						} else if (bid==Block.oreEmerald.blockID) {
+						} else if (block==Blocks.emerald_ore) {
 							score+=30;
-						} else if (bid==Block.oreGold.blockID) {
+						} else if (block==Blocks.gold_ore) {
 							score+=10;
-						} else if (bid==Block.oreIron.blockID) {
+						} else if (block==Blocks.iron_ore) {
 							score+=5;
-						} else if (bid==Block.oreLapis.blockID) {
+						} else if (block==Blocks.lapis_ore) {
 							score+=10;
-						} else if (bid==Block.oreRedstone.blockID) {
+						} else if (block==Blocks.redstone_ore) {
 							score+=5;
-						} else if (bid==Block.oreRedstoneGlowing.blockID) {
+						} else if (block==Blocks.lit_redstone_ore) {
 							score+=5;
 						}
 					}

@@ -1,7 +1,7 @@
 package org.millenaire.common.goal;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MillVillager;
@@ -34,9 +34,9 @@ public class GoalHarvestWarts extends Goal {
 
 		final Point cropPoint=villager.getGoalDestPoint().getAbove();
 
-		if ((villager.getBlock(cropPoint)==Block.netherStalk.blockID) && (villager.getBlockMeta(cropPoint)==3)) {
-			villager.setBlockAndMetadata(cropPoint,0,0);
-			villager.getHouse().storeGoods(Item.netherStalkSeeds.itemID, 1);
+		if ((villager.getBlock(cropPoint)==Blocks.nether_wart) && (villager.getBlockMeta(cropPoint)==3)) {
+			villager.setBlockAndMetadata(cropPoint,Blocks.air,0);
+			villager.getHouse().storeGoods(Items.nether_wart, 1);
 			
 			villager.swingItem();
 		}
@@ -46,7 +46,7 @@ public class GoalHarvestWarts extends Goal {
 
 	@Override
 	public int priority(MillVillager villager) {
-		final int p=100-(villager.getHouse().countGoods(Item.netherStalkSeeds.itemID)*4);
+		final int p=100-(villager.getHouse().countGoods(Items.nether_wart)*4);
 
 		return p;
 	}

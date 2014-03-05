@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 import org.millenaire.common.MillVillager;
@@ -47,9 +48,9 @@ public class GoalSleep extends Goal {
 					for (int l=0;l<8;l++) {
 						final Point p=sleepPos.getRelative(i*(1-((l&1)*2)), j*(1-(l&2)), k*(1-((l&4)/2)));
 
-						final int blockId=MillCommonUtilities.getBlock(world, p);
+						final Block block=MillCommonUtilities.getBlock(world, p);
 
-						if (blockId==Block.bed.blockID) {
+						if (block==Blocks.bed) {
 							final int meta=MillCommonUtilities.getBlockMeta(world, p);
 
 							if (!BlockBed.isBlockHeadOfBed(meta)) {
@@ -205,7 +206,7 @@ public class GoalSleep extends Goal {
 
 		float floatingHeight;
 
-		if (villager.getBlock(villager.getGoalDestPoint())==Block.bed.blockID) {
+		if (villager.getBlock(villager.getGoalDestPoint())==Blocks.bed) {
 			floatingHeight=0.7f;
 		} else {
 			floatingHeight=0.2f;

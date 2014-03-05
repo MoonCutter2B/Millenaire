@@ -2,9 +2,9 @@ package org.millenaire.common.goal;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.init.Blocks;
 
 import org.millenaire.common.Building;
 import org.millenaire.common.MLN;
@@ -18,8 +18,8 @@ import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 public class GoalShearSheep extends Goal {
 
 	public GoalShearSheep() {
-		buildingLimit.put(new InvItem(Block.cloth.blockID,0), 1024);
-		townhallLimit.put(new InvItem(Block.cloth.blockID,0), 1024);
+		buildingLimit.put(new InvItem(Blocks.wool,0), 1024);
+		townhallLimit.put(new InvItem(Blocks.wool,0), 1024);
 	}
 	
 	@Override
@@ -104,7 +104,7 @@ public class GoalShearSheep extends Goal {
 
 				if (!animal.isChild()) {
 					if (!animal.getSheared()) {
-						villager.addToInv(Block.cloth.blockID,((EntitySheep)ent).getFleeceColor(), 3);
+						villager.addToInv(Blocks.wool,((EntitySheep)ent).getFleeceColor(), 3);
 						((EntitySheep)ent).setSheared(true);
 						if ((MLN.LogCattleFarmer>=MLN.MAJOR) && villager.extraLog) {
 							MLN.major(this, "Shearing: "+ent);

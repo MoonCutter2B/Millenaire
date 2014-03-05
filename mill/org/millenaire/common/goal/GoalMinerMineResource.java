@@ -3,7 +3,8 @@ package org.millenaire.common.goal;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MLN;
@@ -18,15 +19,15 @@ public class GoalMinerMineResource extends Goal {
 	@Override
 	public int actionDuration(MillVillager villager) {
 
-		final int blockId=villager.getBlock(villager.getGoalDestPoint());
+		final Block block=villager.getBlock(villager.getGoalDestPoint());
 
-		if ((blockId == Block.stone.blockID) || (blockId == Block.sandStone.blockID)) {
-			final int toolEfficiency=(int)villager.getBestPickaxe().efficiencyOnProperMaterial;
+		if ((block == Blocks.stone) || (block == Blocks.sandstone)) {
+			final int toolEfficiency=(int)villager.getBestPickaxe().getDigSpeed(new ItemStack(villager.getBestPickaxe(),1), Blocks.sandstone, 0);
 
 			return 7000-(200*toolEfficiency);
 
-		} else if ((blockId == Block.sand.blockID) || (blockId == Block.blockClay.blockID) || (blockId == Block.gravel.blockID)) {
-			final int toolEfficiency=(int)villager.getBestShovel().efficiencyOnProperMaterial;
+		} else if ((block == Blocks.sand) || (block == Blocks.clay) || (block == Blocks.gravel)) {
+			final int toolEfficiency=(int)villager.getBestShovel().getDigSpeed(new ItemStack(villager.getBestShovel(),1), Blocks.sand, 0);
 
 			return 7000-(200*toolEfficiency);
 		}
@@ -47,10 +48,10 @@ public class GoalMinerMineResource extends Goal {
 
 		for (int i=0;i<sources.size();i++) {
 			for (int j=0;j<sources.get(i).size();j++) {
-				final int blockId=villager.getBlock(sources.get(i).get(j));
+				final Block block=villager.getBlock(sources.get(i).get(j));
 
-				if ((blockId == Block.stone.blockID) || (blockId == Block.sandStone.blockID) || (blockId == Block.sand.blockID)
-						|| (blockId == Block.blockClay.blockID) || (blockId == Block.gravel.blockID)) {
+				if ((block == Blocks.stone) || (block == Blocks.sandstone) || (block == Blocks.sand)
+						|| (block == Blocks.clay) || (block == Blocks.gravel)) {
 					validSources.add(sources.get(i).get(j));
 				}
 
@@ -66,7 +67,7 @@ public class GoalMinerMineResource extends Goal {
 	@Override
 	public ItemStack[] getHeldItemsTravelling(MillVillager villager) throws Exception {
 
-		if ((villager.getBlock(villager.getGoalDestPoint())==Block.sand.blockID) || (villager.getBlock(villager.getGoalDestPoint())==Block.blockClay.blockID) || (villager.getBlock(villager.getGoalDestPoint())==Block.gravel.blockID))
+		if ((villager.getBlock(villager.getGoalDestPoint())==Blocks.sand) || (villager.getBlock(villager.getGoalDestPoint())==Blocks.clay) || (villager.getBlock(villager.getGoalDestPoint())==Blocks.gravel))
 			return villager.getBestShovelStack();
 
 		return villager.getBestPickaxeStack();
@@ -95,44 +96,44 @@ public class GoalMinerMineResource extends Goal {
 	@Override
 	public boolean performAction(MillVillager villager) throws Exception {
 
-		final int blockId=villager.getBlock(villager.getGoalDestPoint());
+		final Block block=villager.getBlock(villager.getGoalDestPoint());
 
-		if (blockId == Block.sand.blockID) {
-			villager.addToInv(Block.sand.blockID, 1);
+		if (block == Blocks.sand) {
+			villager.addToInv(Blocks.sand, 1);
 
-			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.sand,4.0f);
+			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Blocks.sand,4.0f);
 
 			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gathered sand at: "+villager.getGoalDestPoint());
 			}
-		} else if (blockId==Block.stone.blockID) {
-			villager.addToInv(Block.cobblestone.blockID, 1);
+		} else if (block==Blocks.stone) {
+			villager.addToInv(Blocks.cobblestone, 1);
 
-			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.stone,4.0f);
+			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Blocks.stone,4.0f);
 
 			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gather cobblestone at: "+villager.getGoalDestPoint());
 			}
-		} else if (blockId==Block.sandStone.blockID) {
-			villager.addToInv(Block.sandStone.blockID, 1);
+		} else if (block==Blocks.sandstone) {
+			villager.addToInv(Blocks.sandstone, 1);
 
-			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.sandStone,4.0f);
+			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Blocks.sandstone,4.0f);
 
 			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gather sand stone at: "+villager.getGoalDestPoint());
 			}
-		} else if (blockId==Block.blockClay.blockID) {
-			villager.addToInv(Item.clay.itemID, 1);
+		} else if (block==Blocks.clay) {
+			villager.addToInv(Items.clay_ball, 1);
 
-			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.blockClay,4.0f);
+			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Blocks.clay,4.0f);
 
 			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gather clay at: "+villager.getGoalDestPoint());
 			}
-		} else if (blockId==Block.gravel.blockID) {
-			villager.addToInv(Block.gravel.blockID, 1);
+		} else if (block==Blocks.gravel) {
+			villager.addToInv(Blocks.gravel, 1);
 
-			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Block.gravel,4.0f);
+			MillCommonUtilities.playSoundBlockBreaking(villager.worldObj,villager.getGoalDestPoint(),Blocks.gravel,4.0f);
 
 			if ((MLN.LogMiner>=MLN.DEBUG) && villager.extraLog) {
 				MLN.debug(this, "Gather gravel at: "+villager.getGoalDestPoint());

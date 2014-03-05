@@ -3,10 +3,11 @@ package org.millenaire.common;
 import java.util.Map;
 import java.util.Vector;
 
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -18,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.Constants;
 
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
@@ -124,89 +126,89 @@ public class PujaSacrifice implements IInventory {
 
 	public int getOfferingValueMayan(ItemStack is) {
 
-		if (is.itemID==Item.skull.itemID)
+		if (is.getItem()==Items.skull)
 			return 64*64;
 
-		if (is.itemID==Item.ghastTear.itemID)
+		if (is.getItem()==Items.ghast_tear)
 			return 64*6;
 
-		if (is.itemID==Item.blazeRod.itemID)
+		if (is.getItem()==Items.blaze_rod)
 			return 64;
 
-		if (is.itemID==Mill.cacauhaa.itemID)
+		if (is.getItem()==Mill.cacauhaa)
 			return 64;
 
-		if (is.itemID==Item.chickenRaw.itemID)
+		if (is.getItem()==Items.chicken)
 			return 1;
 
-		if (is.itemID==Item.beefRaw.itemID)
+		if (is.getItem()==Items.beef)
 			return 1;
 
-		if (is.itemID==Item.porkRaw.itemID)
+		if (is.getItem()==Items.porkchop)
 			return 1;
 
-		if (is.itemID==Item.fishRaw.itemID)
+		if (is.getItem()==Items.fish)
 			return 1;
 
-		if (is.itemID==Item.leather.itemID)
+		if (is.getItem()==Items.leather)
 			return 1;
 
-		if (is.itemID==Item.dyePowder.itemID && is.getItemDamage()==0)
+		if (is.getItem()==Items.dye && is.getItemDamage()==0)
 			return 1;
 
-		if (is.itemID==Item.slimeBall.itemID)
+		if (is.getItem()==Items.slime_ball)
 			return 1;
 
-		if (is.itemID==Item.rottenFlesh.itemID)
+		if (is.getItem()==Items.rotten_flesh)
 			return 2;
 
-		if (is.itemID==Item.bone.itemID)
+		if (is.getItem()==Items.bone)
 			return 2;
 
-		if (is.itemID==Item.magmaCream.itemID)
+		if (is.getItem()==Items.magma_cream)
 			return 4;
 
-		if (is.itemID==Item.gunpowder.itemID)
+		if (is.getItem()==Items.gunpowder)
 			return 4;
 
-		if (is.itemID==Item.spiderEye.itemID)
+		if (is.getItem()==Items.spider_eye)
 			return 4;
 
-		if (is.itemID==Item.enderPearl.itemID)
+		if (is.getItem()==Items.ender_pearl)
 			return 6;
 
 		return 0;
 	}
 
 	public int getOfferingValuePuja(ItemStack is) {
-		if (is.itemID==Item.diamond.itemID)
+		if (is.getItem()==Items.diamond)
 			return 64*6;
 
-		if (is.itemID==Item.bucketMilk.itemID)
+		if (is.getItem()==Items.milk_bucket)
 			return 64*2;
 
-		if (is.itemID==Item.appleGold.itemID)
+		if (is.getItem()==Items.golden_apple)
 			return 64+32;
 
-		if (is.itemID==Item.ingotGold.itemID)
+		if (is.getItem()==Items.gold_ingot)
 			return 64;
 
-		if (is.itemID==Mill.rice.itemID)
+		if (is.getItem()==Mill.rice)
 			return 8;	
 
-		if (is.itemID==Mill.rasgulla.itemID)
+		if (is.getItem()==Mill.rasgulla)
 			return 64;
 
-		if ((is.itemID==Block.plantRed.blockID) || (is.itemID==Block.plantYellow.blockID))
+		if ((is.getItem()==Item.getItemFromBlock(Blocks.red_flower)) || (is.getItem()==Item.getItemFromBlock(Blocks.yellow_flower)))
 			return 16;
 
-		if ((is.itemID==Block.tallGrass.blockID) || (is.itemID==Item.appleRed.itemID))
+		if ((is.getItem()==Item.getItemFromBlock(Blocks.tallgrass) || (is.getItem()==Items.apple)))
 			return 8;
 
-		if ((is.itemID==Block.cloth.blockID) && (is.getItemDamage()==0))
+		if (is.getItem()==Item.getItemFromBlock(Blocks.wool) && (is.getItemDamage()==0))
 			return 8;
 
-		if (is.itemID==Item.melon.itemID)
+		if (is.getItem()==Items.melon)
 			return 4;
 
 		return 0;
@@ -343,11 +345,6 @@ public class PujaSacrifice implements IInventory {
 		calculateOfferingsNeeded();
 	}
 
-	@Override
-	public void closeChest()
-	{
-	}
-
 	private void completeOffering() {
 
 		final int currentlevel=EnchantmentHelper.getEnchantmentLevel(currentTarget.enchantment.effectId, items[4]);
@@ -359,11 +356,11 @@ public class PujaSacrifice implements IInventory {
 
 			for (int i = 0; i < enchList.tagCount(); i++)
 			{
-				final short id = ((NBTTagCompound)enchList.tagAt(i)).getShort("id");
+				final short id = ((NBTTagCompound)enchList.getCompoundTagAt(i)).getShort("id");
 
 				if (id == currentTarget.enchantment.effectId)
 				{
-					((NBTTagCompound)enchList.tagAt(i)).setShort("lvl", (short) (currentlevel+1));
+					((NBTTagCompound)enchList.getCompoundTagAt(i)).setShort("lvl", (short) (currentlevel+1));
 				}
 			}
 
@@ -435,14 +432,6 @@ public class PujaSacrifice implements IInventory {
 		return 64;
 	}
 
-	/**
-	 * Returns the name of the inventory.
-	 */
-	@Override
-	public String getInvName()
-	{
-		return MLN.string("pujas.invanme");
-	}
 
 	public int getOfferingProgressScaled(int scale) {
 		if (offeringNeeded==0)
@@ -494,11 +483,6 @@ public class PujaSacrifice implements IInventory {
 	}
 
 	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return true;
 	}
@@ -506,16 +490,6 @@ public class PujaSacrifice implements IInventory {
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
 		return false;
-	}
-
-	@Override
-	public void onInventoryChanged() {
-
-	}
-
-	@Override
-	public void openChest()
-	{
 	}
 
 	public boolean performPuja(MillVillager priest) {
@@ -547,12 +521,12 @@ public class PujaSacrifice implements IInventory {
 
 	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 
-		final NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items");
+		final NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		items = new ItemStack[getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			final NBTTagCompound nbttagcompound = (NBTTagCompound)nbttaglist.tagAt(i);
+			final NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
 			final byte byte0 = nbttagcompound.getByte("Slot");
 
 			if ((byte0 >= 0) && (byte0 < items.length))
@@ -663,5 +637,30 @@ public class PujaSacrifice implements IInventory {
 		}
 
 		par1NBTTagCompound.setTag("Items", nbttaglist);
+	}
+
+	@Override
+	public String getInventoryName() {
+		return MLN.string("pujas.invanme");
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public void markDirty() {
+		
+	}
+
+	@Override
+	public void openInventory() {
+		
+	}
+
+	@Override
+	public void closeInventory() {
+		
 	}
 }

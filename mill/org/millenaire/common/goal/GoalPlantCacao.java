@@ -1,6 +1,7 @@
 package org.millenaire.common.goal;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -11,7 +12,7 @@ import org.millenaire.common.Point;
 
 public class GoalPlantCacao extends Goal {
 
-	private static ItemStack[] cacao=new ItemStack[]{new ItemStack(Block.cocoaPlant, 1)};
+	private static ItemStack[] cacao=new ItemStack[]{new ItemStack(Blocks.cocoa, 1)};
 
 	@Override
 	public GoalInformation getDestination(MillVillager villager) {
@@ -40,13 +41,13 @@ public class GoalPlantCacao extends Goal {
 	@Override
 	public boolean performAction(MillVillager villager) {
 
-		int blockId=villager.getBlock(villager.getGoalDestPoint());
+		Block block=villager.getBlock(villager.getGoalDestPoint());
 
 		final Point cropPoint=villager.getGoalDestPoint();
 
-		blockId=villager.getBlock(cropPoint);
-		if (blockId == 0) {
-			villager.setBlockAndMetadata(cropPoint,Block.cocoaPlant.blockID,getCocoaMeta(villager.worldObj,cropPoint));
+		block=villager.getBlock(cropPoint);
+		if (block == Blocks.air) {
+			villager.setBlockAndMetadata(cropPoint,Blocks.cocoa,getCocoaMeta(villager.worldObj,cropPoint));
 			
 			villager.swingItem();
 		}
@@ -56,28 +57,28 @@ public class GoalPlantCacao extends Goal {
 	
 	private int getCocoaMeta(World world, Point p) {
 
-		final int var5 = p.getRelative(0, 0, -1).getId(world);
-		final int var6 = p.getRelative(0, 0, 1).getId(world);
-		final int var7 = p.getRelative(-1, 0, 0).getId(world);
-		final int var8 = p.getRelative(1, 0, 0).getId(world);
+		final Block var5 = p.getRelative(0, 0, -1).getBlock(world);
+		final Block var6 = p.getRelative(0, 0, 1).getBlock(world);
+		final Block var7 = p.getRelative(-1, 0, 0).getBlock(world);
+		final Block var8 = p.getRelative(1, 0, 0).getBlock(world);
 		byte meta = 0;
 
-		if (var5==Block.wood.blockID)
+		if (var5==Blocks.log)
 		{
 			meta = 2;
 		}
 
-		if (var6==Block.wood.blockID)
+		if (var6==Blocks.log)
 		{
 			meta = 0;
 		}
 
-		if (var7==Block.wood.blockID)
+		if (var7==Blocks.log)
 		{
 			meta = 1;
 		}
 
-		if (var8==Block.wood.blockID)
+		if (var8==Blocks.log)
 		{
 			meta = 3;
 		}

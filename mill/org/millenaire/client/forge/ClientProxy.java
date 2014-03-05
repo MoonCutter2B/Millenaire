@@ -1,18 +1,18 @@
 package org.millenaire.client.forge;
 
 import java.io.File;
-import java.util.EnumSet;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;
 import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 import org.lwjgl.input.Keyboard;
 import org.millenaire.client.MillClientUtilities;
@@ -21,6 +21,7 @@ import org.millenaire.client.ModelFemaleSymmetrical;
 import org.millenaire.client.RenderMillVillager;
 import org.millenaire.client.RenderWallDecoration;
 import org.millenaire.client.TileEntityMillChestRenderer;
+import org.millenaire.client.network.ClientReceiver;
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.client.texture.TextureAmuletAlchemist;
 import org.millenaire.client.texture.TextureAmuletVishnu;
@@ -37,10 +38,9 @@ import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ClientProxy extends CommonProxy
 {
@@ -71,10 +71,10 @@ public class ClientProxy extends CommonProxy
 
 	@Override
 	public UserProfile getClientProfile() {
-		if (Mill.clientWorld.profiles.containsKey(Mill.proxy.getTheSinglePlayer().username))
-			return Mill.clientWorld.profiles.get(Mill.proxy.getTheSinglePlayer().username);
+		if (Mill.clientWorld.profiles.containsKey(Mill.proxy.getTheSinglePlayer().getDisplayName()))
+			return Mill.clientWorld.profiles.get(Mill.proxy.getTheSinglePlayer().getDisplayName());
 
-		final UserProfile profile=new UserProfile(Mill.clientWorld, Mill.proxy.getTheSinglePlayer().username, Mill.proxy.getTheSinglePlayer().username);
+		final UserProfile profile=new UserProfile(Mill.clientWorld, Mill.proxy.getTheSinglePlayer().getDisplayName(), Mill.proxy.getTheSinglePlayer().getDisplayName());
 		Mill.clientWorld.profiles.put(profile.key, profile);
 		return profile;
 	}
@@ -100,10 +100,10 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public String getItemName(int id, int meta) {
-		if ((id<1) || (id>=Item.itemsList.length)) {
+	public String getItemName(Item item, int meta) {
+		if ((item==null)) {
 			try {
-				throw new MillenaireException("Invalid item id: "+id);
+				throw new MillenaireException("Truing to get the name of a null item.");
 			} catch (final Exception e) {
 				MLN.printException(e);
 			}
@@ -113,13 +113,8 @@ public class ClientProxy extends CommonProxy
 		if (meta==-1) {
 			meta=0;
 		}
-
-		if (Item.itemsList[id]==null) {
-			MLN.error(null, "Looked for name of null item: "+id);
-			return MLN.string("error.unknownitem");
-		}
 		
-		return new ItemStack(id,1,meta).getDisplayName();
+		return new ItemStack(item,1,meta).getDisplayName();
 	}
 
 	@Override
@@ -134,12 +129,12 @@ public class ClientProxy extends CommonProxy
 
 	@Override
 	public EntityPlayer getTheSinglePlayer() {
-		return ModLoader.getMinecraftInstance().thePlayer;
+		return Minecraft.getMinecraft().thePlayer;
 	}
 	
 	@Override
 	public String getSinglePlayerName() {
-		return Minecraft.getMinecraft().func_110432_I().func_111285_a();
+		return Minecraft.getMinecraft().thePlayer.getDisplayName();
 	}
 
 	@Override
@@ -185,7 +180,7 @@ public class ClientProxy extends CommonProxy
 
 	@Override
 	public void loadLanguages() {
-		final Minecraft minecraft=ModLoader.getMinecraftInstance();
+		final Minecraft minecraft=Minecraft.getMinecraft();
 
 		MLN.loadLanguages(minecraft.gameSettings.language);
 	}
@@ -213,7 +208,7 @@ public class ClientProxy extends CommonProxy
 
 	@Override
 	public void registerForgeClientClasses() {
-		TickRegistry.registerTickHandler(new ClientTickHandler(EnumSet.of(TickType.CLIENT)), Side.CLIENT);
+		FMLCommonHandler.instance().bus().register(new ClientTickHandler()); 
 	}
 
 	@Override
@@ -225,39 +220,49 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityMillDecoration.class, new RenderWallDecoration());
 
 		
-		//ModLoader.addAnimation(new TextureVishnuAmulet(ModLoader.getMinecraftInstance()));
-		//ModLoader.addAnimation(new TextureAlchemistAmulet(ModLoader.getMinecraftInstance()));
-		//ModLoader.addAnimation(new TextureYddrasilAmulet(ModLoader.getMinecraftInstance()));
+		//ModLoader.addAnimation(new TextureVishnuAmulet(Minecraft.getMinecraft()));
+		//ModLoader.addAnimation(new TextureAlchemistAmulet(Minecraft.getMinecraft()));
+		//ModLoader.addAnimation(new TextureYddrasilAmulet(Minecraft.getMinecraft()));
 
 
 	}
 
 	@Override
 	public void registerTileEntities() {
-		ModLoader.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding", new TileEntityMillChestRenderer());
-		ModLoader.registerTileEntity(TileEntityPanel.class, "ml_TileEntityPanel");
+		//GameRegistry.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding", new TileEntityMillChestRenderer());
+		GameRegistry.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding");
+		GameRegistry.registerTileEntity(TileEntityPanel.class, "ml_TileEntityPanel");
 	}
 
 	@Override
 	public void sendChatAdmin(String s) {
 		s=s.trim();
-		ModLoader.getMinecraftInstance().ingameGUI.getChatGUI().printChatMessage(s);
+		Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(s));
+	}
+	
+	@Override
+	public void sendChatAdmin(String s, EnumChatFormatting colour) {
+		s=s.trim();
+		ChatComponentText cc=new ChatComponentText(s);
+		cc.getChatStyle().setColor(colour);
+		Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(cc);
 	}
 
 	@Override
 	public void sendLocalChat(EntityPlayer player,char colour, String s) {
 		s=s.trim();
-		ModLoader.getMinecraftInstance().ingameGUI.getChatGUI().printChatMessage("\247"+colour+s);
+		Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("\247"+colour+s));
 	}
 
 	@Override
 	public void setTextureIds() {
-		Mill.normanArmourId = ModLoader.addArmor("ML_norman");
-		Mill.japaneseWarriorBlueArmourId = ModLoader.addArmor("ML_japanese_warrior_blue");
-		Mill.japaneseWarriorRedArmourId = ModLoader.addArmor("ML_japanese_warrior_red");
-		Mill.japaneseGuardArmourId = ModLoader.addArmor("ML_japanese_guard");
-		Mill.byzantineArmourId = ModLoader.addArmor("ML_byzantine");
-		Mill.mayanQuestArmourId = ModLoader.addArmor("ML_mayan_quest");
+		
+		Mill.normanArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_norman");
+		Mill.japaneseWarriorBlueArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_japanese_warrior_blue");
+		Mill.japaneseWarriorRedArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_japanese_warrior_red");
+		Mill.japaneseGuardArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_japanese_guard");
+		Mill.byzantineArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_byzantine");
+		Mill.mayanQuestArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_mayan_quest");
 	}
 
 	@Override
@@ -266,7 +271,7 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void declareAmuletTextures(IconRegister iconRegister) {
+	public void declareAmuletTextures(IIconRegister iconRegister) {
 		TextureMap textureMap=(TextureMap)iconRegister;
 		
 		textureMap.setTextureEntry(Mill.modId+":amulet_alchemist"+MLN.getTextSuffix(), new TextureAmuletAlchemist(Mill.modId+":amulet_alchemist"+MLN.getTextSuffix()));
@@ -275,7 +280,10 @@ public class ClientProxy extends CommonProxy
 		
 	}
 	
-	
+	@Override
+	public void initNetwork() {
+		Mill.millChannel.register(new ClientReceiver());
+	}
 	
 
 }

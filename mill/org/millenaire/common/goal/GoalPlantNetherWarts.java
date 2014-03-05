@@ -1,6 +1,7 @@
 package org.millenaire.common.goal;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MillVillager;
@@ -31,13 +32,13 @@ public class GoalPlantNetherWarts extends Goal {
 	@Override
 	public boolean performAction(MillVillager villager) {
 
-		int blockId=villager.getBlock(villager.getGoalDestPoint());
+		Block block=villager.getBlock(villager.getGoalDestPoint());
 
 		final Point cropPoint=villager.getGoalDestPoint().getAbove();
 
-		blockId=villager.getBlock(cropPoint);
-		if (blockId == 0) {
-			villager.setBlockAndMetadata(cropPoint,Block.netherStalk.blockID,0);
+		block=villager.getBlock(cropPoint);
+		if (block == Blocks.air) {
+			villager.setBlockAndMetadata(cropPoint,Blocks.nether_wart,0);
 			
 			villager.swingItem();
 		}

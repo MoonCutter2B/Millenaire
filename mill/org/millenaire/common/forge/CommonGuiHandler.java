@@ -47,7 +47,7 @@ public class CommonGuiHandler implements IGuiHandler {
 		final MillWorld mw=Mill.getMillWorld(world);
 
 		if (ID==GUI_MILL_CHEST) {
-			final TileEntity te = world.getBlockTileEntity(x, y, z);
+			final TileEntity te = world.getTileEntity(x, y, z);
 			if ((te != null) && (te instanceof TileEntityMillChest))
 				return BlockMillChest.createContainer(world, x, y, z, player);
 		} else if (ID==GUI_TRADE) {

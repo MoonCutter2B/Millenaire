@@ -20,9 +20,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.ResourceLocation;
 
 import org.millenaire.common.MillVillager.InvItem;
@@ -491,7 +491,6 @@ public class MLN {
 
 	public static boolean logPerformed=false;
 
-	public static final char COLOUR = '\247';
 	public static final char BLACK = '0';
 	public static final char DARKBLUE = '1';
 	public static final char DARKGREEN = '2';
@@ -514,20 +513,6 @@ public class MLN {
 	public static int KeepActiveRadius=200;
 	public static int BackgroundRadius=2000;
 	public static int BanditRaidRadius=1500;
-	public static int blockBuildingId = 1515;
-	public static int blockPanelId = 1516;
-	public static int blockWoodId = 1517;
-	public static int blockEarthId = 1518;
-	public static int blockStoneId = 1519;
-	public static int blockCropsId = 1520;
-	public static int blockPanesId = 1521;
-	public static int blockByzantineBrickId = 1522;
-	public static int blockByzantineSlabId = 1523;
-	public static int blockByzantineMixedId = 1524;
-	public static int blockPathId = 1525;
-	public static int blockPathSlabId = 1526;
-	public static int itemRangeStart = 25744;
-
 
 	public static int LogBuildingPlan = 0;
 	public static int LogCattleFarmer=0;
@@ -575,7 +560,7 @@ public class MLN {
 	public static boolean displayNames = true;
 	public static boolean displayStart = true;
 	public static final String EOL = System.getProperty("line.separator");
-	public static Vector<Integer> forbiddenBlocks = new Vector<Integer>();
+	public static Vector<Block> forbiddenBlocks = new Vector<Block>();
 	public static boolean generateBuildingRes = false;
 	public static boolean generateColourSheet = false;
 	public static boolean generateVillages = true;
@@ -727,21 +712,6 @@ public class MLN {
 			configPage.add(new MillConfig(MLN.class.getField("LogCulture"),"LogCulture",MillConfig.LOG).setDisplayDev(true));
 			configPage.add(new MillConfig(MLN.class.getField("LogTranslation"),"LogTranslation",MillConfig.LOG).setDisplayDev(true));
 
-			configPage.add(new MillConfig(MLN.class.getField("blockBuildingId"),"block_building_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockPanelId"),"block_panel_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockWoodId"),"block_wood_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockEarthId"),"block_earth_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockStoneId"),"block_stone_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockCropsId"),"block_crops_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockPanesId"),"block_panes_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockByzantineBrickId"),"block_byzantine_brick_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockByzantineSlabId"),"block_byzantine_slab_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockByzantineMixedId"),"block_byzantine_mixedbrick_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockPathId"),"block_path_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("blockPathSlabId"),"block_path_slab_id",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-			configPage.add(new MillConfig(MLN.class.getField("itemRangeStart"),"item_range_start",MillConfig.EDITABLE_INTEGER).setDisplay(false));
-
-
 			configPages.add(configPage);
 			configPageTitles.add("config.page.devtools");
 			configPageDesc.add(null);
@@ -823,16 +793,14 @@ public class MLN {
 	private static void applyLanguage() {
 		nameItems();
 
-		ModLoader.addLocalization("entity.ml_GenericVillager.name", MLN.string("other.malevillager"));
-		ModLoader.addLocalization("entity.ml_GenericAsimmFemale.name", MLN.string("other.femalevillager"));
-		ModLoader.addLocalization("entity.ml_GenericSimmFemale.name", MLN.string("other.femalevillager"));
+		LanguageRegistry.instance().addStringLocalization("entity.ml_GenericVillager.name", MLN.string("other.malevillager"));
+		LanguageRegistry.instance().addStringLocalization("entity.ml_GenericAsimmFemale.name", MLN.string("other.femalevillager"));
+		LanguageRegistry.instance().addStringLocalization("entity.ml_GenericSimmFemale.name", MLN.string("other.femalevillager"));
 
 
 		if (!Mill.proxy.isTrueServer()) {
 
-			LanguageRegistry.reloadLanguageTable();
-
-			final InvItem iv=new InvItem(Mill.summoningWand.itemID,1);
+			final InvItem iv=new InvItem(Mill.summoningWand,1);
 
 			MLN.major(null, "Language loaded: "+effective_language+". Wand name: "+MLN.string("item.villagewand")
 					+" Wand invitem name: "+iv.getName());
@@ -868,7 +836,7 @@ public class MLN {
 		final EntityPlayer player=Mill.proxy.getTheSinglePlayer();
 
 		if (player!=null)
-			return s.replaceAll("\\$name", player.username);
+			return s.replaceAll("\\$name", player.getDisplayName());
 		else
 			return s;
 	}
@@ -1187,169 +1155,169 @@ public class MLN {
 	}
 
 	private static void nameItems() {
-		ModLoader.addName(Mill.lockedChest, MLN.string("item.building"));
-		ModLoader.addName(Mill.denier, MLN.string("item.denier"));
-		ModLoader.addName(Mill.denier_or, MLN.string("item.denieror"));
-		ModLoader.addName(Mill.denier_argent, MLN.string("item.denierargent"));
+		LanguageRegistry.addName(Mill.lockedChest, MLN.string("item.building"));
+		LanguageRegistry.addName(Mill.denier, MLN.string("item.denier"));
+		LanguageRegistry.addName(Mill.denier_or, MLN.string("item.denieror"));
+		LanguageRegistry.addName(Mill.denier_argent, MLN.string("item.denierargent"));
 
-		ModLoader.addName(Mill.calva, MLN.string("item.calva"));
-		ModLoader.addName(Mill.tripes, MLN.string("item.tripes"));
-		ModLoader.addName(Mill.boudin, MLN.string("item.boudin"));
+		LanguageRegistry.addName(Mill.calva, MLN.string("item.calva"));
+		LanguageRegistry.addName(Mill.tripes, MLN.string("item.tripes"));
+		LanguageRegistry.addName(Mill.boudin, MLN.string("item.boudin"));
 
-		ModLoader.addName(Mill.ciderapple, MLN.string("item.ciderapple"));
-		ModLoader.addName(Mill.cider, MLN.string("item.cider"));
-		ModLoader.addName(Mill.summoningWand, MLN.string("item.villagewand"));
-		ModLoader.addName(Mill.negationWand, MLN.string("item.negationwand"));
-		ModLoader.addName(Mill.normanPickaxe, MLN.string("item.normanPickaxe"));
-		ModLoader.addName(Mill.normanAxe, MLN.string("item.normanAxe"));
-		ModLoader.addName(Mill.normanShovel, MLN.string("item.normanShovel"));
-		ModLoader.addName(Mill.normanHoe, MLN.string("item.normanHoe"));
-		ModLoader.addName(Mill.normanBroadsword, MLN.string("item.normanBroadsword"));
-		ModLoader.addName(Mill.normanHelmet, MLN.string("item.normanHelmet"));
-		ModLoader.addName(Mill.normanPlate, MLN.string("item.normanPlate"));
-		ModLoader.addName(Mill.normanLegs, MLN.string("item.normanLegs"));
-		ModLoader.addName(Mill.normanBoots, MLN.string("item.normanBoots"));
-		ModLoader.addName(Mill.parchmentVillagers, MLN.string("item.normanvillagers"));
-		ModLoader.addName(Mill.parchmentBuildings, MLN.string("item.normanbuildings"));
-		ModLoader.addName(Mill.parchmentItems, MLN.string("item.normanitems"));
-		ModLoader.addName(Mill.parchmentComplete, MLN.string("item.normanfull"));
-		ModLoader.addName(Mill.tapestry, MLN.string("item.tapestry"));
-		ModLoader.addName(Mill.vishnu_amulet, MLN.string("item.vishnu_amulet"));
-		ModLoader.addName(Mill.alchemist_amulet, MLN.string("item.alchemist_amulet"));
-		ModLoader.addName(Mill.yddrasil_amulet, MLN.string("item.yddrasil_amulet"));
-		ModLoader.addName(Mill.skoll_hati_amulet, MLN.string("item.skoll_hati_amulet"));
-		ModLoader.addName(Mill.parchmentVillageScroll, MLN.string("item.villagescroll"));
-		ModLoader.addName(Mill.rice, MLN.string("item.rice"));
-		ModLoader.addName(Mill.turmeric, MLN.string("item.turmeric"));
-		ModLoader.addName(Mill.vegcurry,  MLN.string("item.vegcurry"));
-		ModLoader.addName(Mill.chickencurry,  MLN.string("item.chickencurry"));
-		ModLoader.addName(Mill.brickmould,  MLN.string("item.brickmould"));
-		ModLoader.addName(Mill.rasgulla,  MLN.string("item.rasgulla"));
-		ModLoader.addName(Mill.indianstatue, MLN.string("item.indianstatue"));
+		LanguageRegistry.addName(Mill.ciderapple, MLN.string("item.ciderapple"));
+		LanguageRegistry.addName(Mill.cider, MLN.string("item.cider"));
+		LanguageRegistry.addName(Mill.summoningWand, MLN.string("item.villagewand"));
+		LanguageRegistry.addName(Mill.negationWand, MLN.string("item.negationwand"));
+		LanguageRegistry.addName(Mill.normanPickaxe, MLN.string("item.normanPickaxe"));
+		LanguageRegistry.addName(Mill.normanAxe, MLN.string("item.normanAxe"));
+		LanguageRegistry.addName(Mill.normanShovel, MLN.string("item.normanShovel"));
+		LanguageRegistry.addName(Mill.normanHoe, MLN.string("item.normanHoe"));
+		LanguageRegistry.addName(Mill.normanBroadsword, MLN.string("item.normanBroadsword"));
+		LanguageRegistry.addName(Mill.normanHelmet, MLN.string("item.normanHelmet"));
+		LanguageRegistry.addName(Mill.normanPlate, MLN.string("item.normanPlate"));
+		LanguageRegistry.addName(Mill.normanLegs, MLN.string("item.normanLegs"));
+		LanguageRegistry.addName(Mill.normanBoots, MLN.string("item.normanBoots"));
+		LanguageRegistry.addName(Mill.parchmentVillagers, MLN.string("item.normanvillagers"));
+		LanguageRegistry.addName(Mill.parchmentBuildings, MLN.string("item.normanbuildings"));
+		LanguageRegistry.addName(Mill.parchmentItems, MLN.string("item.normanitems"));
+		LanguageRegistry.addName(Mill.parchmentComplete, MLN.string("item.normanfull"));
+		LanguageRegistry.addName(Mill.tapestry, MLN.string("item.tapestry"));
+		LanguageRegistry.addName(Mill.vishnu_amulet, MLN.string("item.vishnu_amulet"));
+		LanguageRegistry.addName(Mill.alchemist_amulet, MLN.string("item.alchemist_amulet"));
+		LanguageRegistry.addName(Mill.yddrasil_amulet, MLN.string("item.yddrasil_amulet"));
+		LanguageRegistry.addName(Mill.skoll_hati_amulet, MLN.string("item.skoll_hati_amulet"));
+		LanguageRegistry.addName(Mill.parchmentVillageScroll, MLN.string("item.villagescroll"));
+		LanguageRegistry.addName(Mill.rice, MLN.string("item.rice"));
+		LanguageRegistry.addName(Mill.turmeric, MLN.string("item.turmeric"));
+		LanguageRegistry.addName(Mill.vegcurry,  MLN.string("item.vegcurry"));
+		LanguageRegistry.addName(Mill.chickencurry,  MLN.string("item.chickencurry"));
+		LanguageRegistry.addName(Mill.brickmould,  MLN.string("item.brickmould"));
+		LanguageRegistry.addName(Mill.rasgulla,  MLN.string("item.rasgulla"));
+		LanguageRegistry.addName(Mill.indianstatue, MLN.string("item.indianstatue"));
 
-		ModLoader.addName(Mill.parchmentIndianVillagers, MLN.string("item.indianvillagers"));
-		ModLoader.addName(Mill.parchmentIndianBuildings, MLN.string("item.indianbuildings"));
-		ModLoader.addName(Mill.parchmentIndianItems, MLN.string("item.indianitems"));
-		ModLoader.addName(Mill.parchmentIndianComplete, MLN.string("item.indianfull"));
+		LanguageRegistry.addName(Mill.parchmentIndianVillagers, MLN.string("item.indianvillagers"));
+		LanguageRegistry.addName(Mill.parchmentIndianBuildings, MLN.string("item.indianbuildings"));
+		LanguageRegistry.addName(Mill.parchmentIndianItems, MLN.string("item.indianitems"));
+		LanguageRegistry.addName(Mill.parchmentIndianComplete, MLN.string("item.indianfull"));
 
-		ModLoader.addName(new ItemStack(Mill.wood_decoration, 1, 0), MLN.string("item.plaintimber"));
-		ModLoader.addName(new ItemStack(Mill.wood_decoration, 1, 1), MLN.string("item.crosstimber"));
-		ModLoader.addName(new ItemStack(Mill.wood_decoration, 1, 2), MLN.string("item.thatched"));
-		ModLoader.addName(new ItemStack(Mill.wood_decoration, 1, 3), MLN.string("item.emptysilkwormblock"));
-		ModLoader.addName(new ItemStack(Mill.wood_decoration, 1, 4), MLN.string("item.fullsilkwormblock"));
-		ModLoader.addName(new ItemStack(Mill.earth_decoration, 1, 0),MLN.string("item.wetbrick"));
-		ModLoader.addName(new ItemStack(Mill.earth_decoration, 1, 1),MLN.string("item.dirtwall"));
-		ModLoader.addName(new ItemStack(Mill.stone_decoration, 1, 0), MLN.string("item.cookedbrick"));
-		ModLoader.addName(new ItemStack(Mill.stone_decoration, 1, 1), MLN.string("item.mudbrick"));
-		ModLoader.addName(new ItemStack(Mill.stone_decoration, 1, 2), MLN.string("item.mayangold"));
-		ModLoader.addName(new ItemStack(Mill.stone_decoration, 1, 3), MLN.string("item.alchimistexplosive"));
-
-		ModLoader.addName(new ItemStack(Mill.path, 1, 0), MLN.string("item.pathdirt"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 1), MLN.string("item.pathgravel"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 2), MLN.string("item.pathslabs"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 3), MLN.string("item.pathsandstone"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 4), MLN.string("item.pathochretiles"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 5), MLN.string("item.pathgravelslabs"));
+		LanguageRegistry.addName(new ItemStack(Mill.wood_decoration, 1, 0), MLN.string("item.plaintimber"));
+		LanguageRegistry.addName(new ItemStack(Mill.wood_decoration, 1, 1), MLN.string("item.crosstimber"));
+		LanguageRegistry.addName(new ItemStack(Mill.wood_decoration, 1, 2), MLN.string("item.thatched"));
+		LanguageRegistry.addName(new ItemStack(Mill.wood_decoration, 1, 3), MLN.string("item.emptysilkwormblock"));
+		LanguageRegistry.addName(new ItemStack(Mill.wood_decoration, 1, 4), MLN.string("item.fullsilkwormblock"));
+		LanguageRegistry.addName(new ItemStack(Mill.earth_decoration, 1, 0),MLN.string("item.wetbrick"));
+		LanguageRegistry.addName(new ItemStack(Mill.earth_decoration, 1, 1),MLN.string("item.dirtwall"));
+		LanguageRegistry.addName(new ItemStack(Mill.stone_decoration, 1, 0), MLN.string("item.cookedbrick"));
+		LanguageRegistry.addName(new ItemStack(Mill.stone_decoration, 1, 1), MLN.string("item.mudbrick"));
+		LanguageRegistry.addName(new ItemStack(Mill.stone_decoration, 1, 2), MLN.string("item.mayangold"));
+		LanguageRegistry.addName(new ItemStack(Mill.stone_decoration, 1, 3), MLN.string("item.alchimistexplosive"));
 		
-		ModLoader.addName(new ItemStack(Mill.path, 1, 8), MLN.string("item.pathdirt"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 9), MLN.string("item.pathgravel"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 10), MLN.string("item.pathslabs"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 11), MLN.string("item.pathsandstone"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 12), MLN.string("item.pathochretiles"));
-		ModLoader.addName(new ItemStack(Mill.path, 1, 13), MLN.string("item.pathgravelslabs"));
-
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 0), MLN.string("item.pathdirt"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 1), MLN.string("item.pathgravel"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 2), MLN.string("item.pathslabs"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 3), MLN.string("item.pathsandstone"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 4), MLN.string("item.pathochretiles"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 5), MLN.string("item.pathgravelslabs"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 0), MLN.string("item.pathdirt"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 1), MLN.string("item.pathgravel"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 2), MLN.string("item.pathslabs"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 3), MLN.string("item.pathsandstone"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 4), MLN.string("item.pathochretiles"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 5), MLN.string("item.pathgravelslabs"));
 		
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 8), MLN.string("item.pathdirt"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 9), MLN.string("item.pathgravel"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 10), MLN.string("item.pathslabs"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 11), MLN.string("item.pathsandstone"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 12), MLN.string("item.pathochretiles"));
-		ModLoader.addName(new ItemStack(Mill.pathSlab, 1, 13), MLN.string("item.pathgravelslabs"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 8), MLN.string("item.pathdirt"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 9), MLN.string("item.pathgravel"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 10), MLN.string("item.pathslabs"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 11), MLN.string("item.pathsandstone"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 12), MLN.string("item.pathochretiles"));
+		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 13), MLN.string("item.pathgravelslabs"));
 
-		ModLoader.addName(Mill.mayanstatue, MLN.string("item.mayanstatue"));
-		ModLoader.addName(Mill.maize, MLN.string("item.maize"));
-		ModLoader.addName(Mill.wah, MLN.string("item.wah"));
-		ModLoader.addName(Mill.masa, MLN.string("item.masa"));
-		ModLoader.addName(Mill.unknownPowder, MLN.string("item.unknownpowder"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 0), MLN.string("item.pathdirt"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 1), MLN.string("item.pathgravel"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 2), MLN.string("item.pathslabs"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 3), MLN.string("item.pathsandstone"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 4), MLN.string("item.pathochretiles"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 5), MLN.string("item.pathgravelslabs"));
+		
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 8), MLN.string("item.pathdirt"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 9), MLN.string("item.pathgravel"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 10), MLN.string("item.pathslabs"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 11), MLN.string("item.pathsandstone"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 12), MLN.string("item.pathochretiles"));
+		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 13), MLN.string("item.pathgravelslabs"));
 
-		ModLoader.addName(Mill.parchmentMayanVillagers, MLN.string("item.mayanvillagers"));
-		ModLoader.addName(Mill.parchmentMayanBuildings, MLN.string("item.mayanbuildings"));
-		ModLoader.addName(Mill.parchmentMayanItems, MLN.string("item.mayanitems"));
-		ModLoader.addName(Mill.parchmentMayanComplete, MLN.string("item.mayanfull"));
-		ModLoader.addName(Mill.parchmentSadhu, MLN.string("item.parchmentsadhu"));
+		LanguageRegistry.addName(Mill.mayanstatue, MLN.string("item.mayanstatue"));
+		LanguageRegistry.addName(Mill.maize, MLN.string("item.maize"));
+		LanguageRegistry.addName(Mill.wah, MLN.string("item.wah"));
+		LanguageRegistry.addName(Mill.masa, MLN.string("item.masa"));
+		LanguageRegistry.addName(Mill.unknownPowder, MLN.string("item.unknownpowder"));
 
-		ModLoader.addName(new ItemStack(Mill.paperWall, 1, 0), MLN.string("item.paperwall"));
-		ModLoader.addName(Mill.udon, MLN.string("item.udon"));
+		LanguageRegistry.addName(Mill.parchmentMayanVillagers, MLN.string("item.mayanvillagers"));
+		LanguageRegistry.addName(Mill.parchmentMayanBuildings, MLN.string("item.mayanbuildings"));
+		LanguageRegistry.addName(Mill.parchmentMayanItems, MLN.string("item.mayanitems"));
+		LanguageRegistry.addName(Mill.parchmentMayanComplete, MLN.string("item.mayanfull"));
+		LanguageRegistry.addName(Mill.parchmentSadhu, MLN.string("item.parchmentsadhu"));
 
-		ModLoader.addName(Mill.tachiSword, MLN.string("item.tachisword"));
+		LanguageRegistry.addName(new ItemStack(Mill.paperWall, 1, 0), MLN.string("item.paperwall"));
+		LanguageRegistry.addName(Mill.udon, MLN.string("item.udon"));
 
-		ModLoader.addName(Mill.obsidianFlake, MLN.string("item.obsidianFlake"));
-		ModLoader.addName(Mill.mayanPickaxe, MLN.string("item.mayanPickaxe"));
-		ModLoader.addName(Mill.mayanAxe, MLN.string("item.mayanAxe"));
-		ModLoader.addName(Mill.mayanShovel, MLN.string("item.mayanShovel"));
-		ModLoader.addName(Mill.mayanHoe, MLN.string("item.mayanHoe"));
-		ModLoader.addName(Mill.mayanMace, MLN.string("item.mayanMace"));
+		LanguageRegistry.addName(Mill.tachiSword, MLN.string("item.tachisword"));
 
-		ModLoader.addName(Mill.yumiBow, MLN.string("item.yumibow"));
+		LanguageRegistry.addName(Mill.obsidianFlake, MLN.string("item.obsidianFlake"));
+		LanguageRegistry.addName(Mill.mayanPickaxe, MLN.string("item.mayanPickaxe"));
+		LanguageRegistry.addName(Mill.mayanAxe, MLN.string("item.mayanAxe"));
+		LanguageRegistry.addName(Mill.mayanShovel, MLN.string("item.mayanShovel"));
+		LanguageRegistry.addName(Mill.mayanHoe, MLN.string("item.mayanHoe"));
+		LanguageRegistry.addName(Mill.mayanMace, MLN.string("item.mayanMace"));
 
-		ModLoader.addName(Mill.japaneseWarriorBlueLegs, MLN.string("item.japaneseWarriorBlueLegs"));
-		ModLoader.addName(Mill.japaneseWarriorBlueHelmet, MLN.string("item.japaneseWarriorBlueHelmet"));
-		ModLoader.addName(Mill.japaneseWarriorBluePlate, MLN.string("item.japaneseWarriorBluePlate"));
-		ModLoader.addName(Mill.japaneseWarriorBlueBoots, MLN.string("item.japaneseWarriorBlueBoots"));
+		LanguageRegistry.addName(Mill.yumiBow, MLN.string("item.yumibow"));
 
-		ModLoader.addName(Mill.japaneseWarriorRedLegs, MLN.string("item.japaneseWarriorRedLegs"));
-		ModLoader.addName(Mill.japaneseWarriorRedHelmet, MLN.string("item.japaneseWarriorRedHelmet"));
-		ModLoader.addName(Mill.japaneseWarriorRedPlate, MLN.string("item.japaneseWarriorRedPlate"));
-		ModLoader.addName(Mill.japaneseWarriorRedBoots, MLN.string("item.japaneseWarriorRedBoots"));
+		LanguageRegistry.addName(Mill.japaneseWarriorBlueLegs, MLN.string("item.japaneseWarriorBlueLegs"));
+		LanguageRegistry.addName(Mill.japaneseWarriorBlueHelmet, MLN.string("item.japaneseWarriorBlueHelmet"));
+		LanguageRegistry.addName(Mill.japaneseWarriorBluePlate, MLN.string("item.japaneseWarriorBluePlate"));
+		LanguageRegistry.addName(Mill.japaneseWarriorBlueBoots, MLN.string("item.japaneseWarriorBlueBoots"));
 
-		ModLoader.addName(Mill.japaneseGuardLegs, MLN.string("item.japaneseGuardLegs"));
-		ModLoader.addName(Mill.japaneseGuardHelmet, MLN.string("item.japaneseGuardHelmet"));
-		ModLoader.addName(Mill.japaneseGuardPlate, MLN.string("item.japaneseGuardPlate"));
-		ModLoader.addName(Mill.japaneseGuardBoots, MLN.string("item.japaneseGuardBoots"));
+		LanguageRegistry.addName(Mill.japaneseWarriorRedLegs, MLN.string("item.japaneseWarriorRedLegs"));
+		LanguageRegistry.addName(Mill.japaneseWarriorRedHelmet, MLN.string("item.japaneseWarriorRedHelmet"));
+		LanguageRegistry.addName(Mill.japaneseWarriorRedPlate, MLN.string("item.japaneseWarriorRedPlate"));
+		LanguageRegistry.addName(Mill.japaneseWarriorRedBoots, MLN.string("item.japaneseWarriorRedBoots"));
 
-		ModLoader.addName(Mill.parchmentJapaneseVillagers, MLN.string("item.japanesevillagers"));
-		ModLoader.addName(Mill.parchmentJapaneseBuildings, MLN.string("item.japanesebuildings"));
-		ModLoader.addName(Mill.parchmentJapaneseItems, MLN.string("item.japaneseitems"));
-		ModLoader.addName(Mill.parchmentJapaneseComplete, MLN.string("item.japanesefull"));
+		LanguageRegistry.addName(Mill.japaneseGuardLegs, MLN.string("item.japaneseGuardLegs"));
+		LanguageRegistry.addName(Mill.japaneseGuardHelmet, MLN.string("item.japaneseGuardHelmet"));
+		LanguageRegistry.addName(Mill.japaneseGuardPlate, MLN.string("item.japaneseGuardPlate"));
+		LanguageRegistry.addName(Mill.japaneseGuardBoots, MLN.string("item.japaneseGuardBoots"));
 
-
-		ModLoader.addName(Mill.grapes, MLN.string("item.grapes"));
-		ModLoader.addName(Mill.wineFancy, MLN.string("item.wine"));
-		ModLoader.addName(Mill.silk, MLN.string("item.silk"));
-		ModLoader.addName(Mill.byzantineiconsmall, MLN.string("item.byzantineiconsmall"));
-		ModLoader.addName(Mill.byzantineiconmedium, MLN.string("item.byzantineiconmedium"));
-		ModLoader.addName(Mill.byzantineiconlarge, MLN.string("item.byzantineiconlarge"));
-		ModLoader.addName(Mill.byzantine_tiles, MLN.string("item.byzantinebrick"));
-		ModLoader.addName(Mill.byzantine_tile_slab, MLN.string("item.byzantineslab"));
-		ModLoader.addName(Mill.byzantine_stone_tiles, MLN.string("item.byzantinemixedbrick"));
-
-		ModLoader.addName(Mill.byzantineLegs, MLN.string("item.byzantineLegs"));
-		ModLoader.addName(Mill.byzantineHelmet, MLN.string("item.byzantineHelmet"));
-		ModLoader.addName(Mill.byzantinePlate, MLN.string("item.byzantinePlate"));
-		ModLoader.addName(Mill.byzantineBoots, MLN.string("item.byzantineBoots"));
+		LanguageRegistry.addName(Mill.parchmentJapaneseVillagers, MLN.string("item.japanesevillagers"));
+		LanguageRegistry.addName(Mill.parchmentJapaneseBuildings, MLN.string("item.japanesebuildings"));
+		LanguageRegistry.addName(Mill.parchmentJapaneseItems, MLN.string("item.japaneseitems"));
+		LanguageRegistry.addName(Mill.parchmentJapaneseComplete, MLN.string("item.japanesefull"));
 
 
-		ModLoader.addName(Mill.byzantineMace, MLN.string("item.byzantineMace"));
+		LanguageRegistry.addName(Mill.grapes, MLN.string("item.grapes"));
+		LanguageRegistry.addName(Mill.wineFancy, MLN.string("item.wine"));
+		LanguageRegistry.addName(Mill.silk, MLN.string("item.silk"));
+		LanguageRegistry.addName(Mill.byzantineiconsmall, MLN.string("item.byzantineiconsmall"));
+		LanguageRegistry.addName(Mill.byzantineiconmedium, MLN.string("item.byzantineiconmedium"));
+		LanguageRegistry.addName(Mill.byzantineiconlarge, MLN.string("item.byzantineiconlarge"));
+		LanguageRegistry.addName(Mill.byzantine_tiles, MLN.string("item.byzantinebrick"));
+		LanguageRegistry.addName(Mill.byzantine_tile_slab, MLN.string("item.byzantineslab"));
+		LanguageRegistry.addName(Mill.byzantine_stone_tiles, MLN.string("item.byzantinemixedbrick"));
+
+		LanguageRegistry.addName(Mill.byzantineLegs, MLN.string("item.byzantineLegs"));
+		LanguageRegistry.addName(Mill.byzantineHelmet, MLN.string("item.byzantineHelmet"));
+		LanguageRegistry.addName(Mill.byzantinePlate, MLN.string("item.byzantinePlate"));
+		LanguageRegistry.addName(Mill.byzantineBoots, MLN.string("item.byzantineBoots"));
 
 
-		ModLoader.addName(new ItemStack(Mill.clothes, 1, 0), MLN.string("item.clothes_byz_wool"));
-		ModLoader.addName(new ItemStack(Mill.clothes, 1, 1), MLN.string("item.clothes_byz_silk"));
-		ModLoader.addName(Mill.wineBasic, MLN.string("item.wineBasic"));
-		ModLoader.addName(Mill.lambRaw, MLN.string("item.lambRaw"));
-		ModLoader.addName(Mill.lambCooked, MLN.string("item.lambCooked"));
-		ModLoader.addName(Mill.feta, MLN.string("item.feta"));
-		ModLoader.addName(Mill.souvlaki, MLN.string("item.souvlaki"));
-		ModLoader.addName(Mill.purse, MLN.string("item.purse"));
-		ModLoader.addName(Mill.sake, MLN.string("item.sake"));
-		ModLoader.addName(Mill.cacauhaa, MLN.string("item.cacauhaa"));
-		ModLoader.addName(Mill.mayanQuestCrown, MLN.string("item.mayanQuestCrown"));
-		ModLoader.addName(Mill.ikayaki, MLN.string("item.ikayaki"));
+		LanguageRegistry.addName(Mill.byzantineMace, MLN.string("item.byzantineMace"));
+
+
+		LanguageRegistry.addName(new ItemStack(Mill.clothes, 1, 0), MLN.string("item.clothes_byz_wool"));
+		LanguageRegistry.addName(new ItemStack(Mill.clothes, 1, 1), MLN.string("item.clothes_byz_silk"));
+		LanguageRegistry.addName(Mill.wineBasic, MLN.string("item.wineBasic"));
+		LanguageRegistry.addName(Mill.lambRaw, MLN.string("item.lambRaw"));
+		LanguageRegistry.addName(Mill.lambCooked, MLN.string("item.lambCooked"));
+		LanguageRegistry.addName(Mill.feta, MLN.string("item.feta"));
+		LanguageRegistry.addName(Mill.souvlaki, MLN.string("item.souvlaki"));
+		LanguageRegistry.addName(Mill.purse, MLN.string("item.purse"));
+		LanguageRegistry.addName(Mill.sake, MLN.string("item.sake"));
+		LanguageRegistry.addName(Mill.cacauhaa, MLN.string("item.cacauhaa"));
+		LanguageRegistry.addName(Mill.mayanQuestCrown, MLN.string("item.mayanQuestCrown"));
+		LanguageRegistry.addName(Mill.ikayaki, MLN.string("item.ikayaki"));
 	}
 
 	private static String now() {
@@ -1614,11 +1582,11 @@ public class MLN {
 								//} else if (key.equalsIgnoreCase("fallback_language")) {
 								//	fallback_language=value.toLowerCase();
 							} else if (key.equalsIgnoreCase("forbidden_blocks")) {
-								for (final String id : value.split(",")) {
-									if (Integer.parseInt(id)>0) {
-										forbiddenBlocks.add(Integer.parseInt(id));
+								for (final String name : value.split(",")) {
+									if (Block.blockRegistry.containsKey(name)) {
+										forbiddenBlocks.add((Block)Block.blockRegistry.getObject(name));
 									} else {
-										System.out.println("Could not read forbidden ID: "+id);
+										System.out.println("Could not read forbidden name: "+name);
 									}
 								}
 							} else if (key.equalsIgnoreCase("log.TileEntityBuilding")) {
@@ -1855,7 +1823,7 @@ public class MLN {
 		if (key.startsWith("_item:")) {
 			final int id=Integer.parseInt(key.split(":")[1]);
 			final int meta=Integer.parseInt(key.split(":")[2]);
-			final InvItem item=new InvItem(id,meta);
+			final InvItem item=new InvItem(MillCommonUtilities.getItemById(id),meta);
 			return item.getName();
 		}
 

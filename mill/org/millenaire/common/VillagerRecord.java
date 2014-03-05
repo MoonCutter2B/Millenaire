@@ -3,12 +3,14 @@ package org.millenaire.common;
 import java.util.HashMap;
 import java.util.Vector;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.Constants;
 
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.core.MillCommonUtilities;
@@ -74,18 +76,18 @@ public class VillagerRecord implements Cloneable {
 		vr.awayhired = nbttagcompound.getBoolean(label + "_awayhired");
 
 		NBTTagList nbttaglist = nbttagcompound
-				.getTagList(label + "questTags");
+				.getTagList(label + "questTags", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			vr.questTags.add(nbttagcompound1.getString("tag"));
 		}
 
-		nbttaglist = nbttagcompound.getTagList(label + "_inventory");
+		nbttaglist = nbttagcompound.getTagList(label + "_inventory", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
-			vr.inventory.put(new InvItem(nbttagcompound1.getInteger("item"),nbttagcompound1.getInteger("meta")), nbttagcompound1.getInteger("amount"));
+			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			vr.inventory.put(new InvItem(Item.getItemById(nbttagcompound1.getInteger("item")),nbttagcompound1.getInteger("meta")), nbttagcompound1.getInteger("amount"));
 		}
 
 		if (vr.getType()==null) {
@@ -173,12 +175,12 @@ public class VillagerRecord implements Cloneable {
 		return null;
 	}
 
-	public int countInv(int id) {
-		return countInv(id,0);
+	public int countInv(Item item) {
+		return countInv(item,0);
 	}
 
-	public int countInv(int id,int meta) {
-		final InvItem key=new InvItem(id,meta);
+	public int countInv(Item item,int meta) {
+		final InvItem key=new InvItem(item,meta);
 		if (inventory.containsKey(key))
 			return inventory.get(key);
 		else
@@ -207,28 +209,28 @@ public class VillagerRecord implements Cloneable {
 
 		if (type==0) {
 			for (final Item weapon : MillVillager.helmets) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 			return null;
 		}
 		if (type==1) {
 			for (final Item weapon : MillVillager.chestplates) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 			return null;
 		}
 		if (type==2) {
 			for (final Item weapon : MillVillager.legs) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 			return null;
 		}
 		if (type==3) {
 			for (final Item weapon : MillVillager.boots) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 			return null;
@@ -244,21 +246,21 @@ public class VillagerRecord implements Cloneable {
 
 		for (final InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
-				if (Item.itemsList[item.id()]==null) {
+				if (item.getItem()==null) {
 					MLN.error(this, "Attempting to check null melee weapon with id: "+inventory.get(item));
 				} else {
-					if (MillCommonUtilities.getItemWeaponDamage(Item.itemsList[item.id()])>max) {
-						max=MillCommonUtilities.getItemWeaponDamage(Item.itemsList[item.id()]);
-						best=Item.itemsList[item.id()];
+					if (MillCommonUtilities.getItemWeaponDamage(item.getItem())>max) {
+						max=MillCommonUtilities.getItemWeaponDamage(item.getItem());
+						best=item.getItem();
 					}
 				}
 			}
 		}
 
 		if ((getType()!=null) && (getType().startingWeapon!=null)) {
-			if (MillCommonUtilities.getItemWeaponDamage(Item.itemsList[getType().startingWeapon.id()])>max) {
-				max=MillCommonUtilities.getItemWeaponDamage(Item.itemsList[getType().startingWeapon.id()]);
-				best=Item.itemsList[getType().startingWeapon.id()];
+			if (MillCommonUtilities.getItemWeaponDamage(getType().startingWeapon.getItem())>max) {
+				max=MillCommonUtilities.getItemWeaponDamage(getType().startingWeapon.getItem());
+				best=getType().startingWeapon.getItem();
 			}
 		}
 
@@ -321,7 +323,7 @@ public class VillagerRecord implements Cloneable {
 
 		strength+=attack*2;
 
-		if ((getType().isArcher && (countInv(Item.bow.itemID)>0)) || (countInv(Mill.yumiBow.itemID)>0)) {
+		if ((getType().isArcher && (countInv(Items.bow)>0)) || (countInv(Mill.yumiBow)>0)) {
 			strength+=10;
 		}
 
@@ -457,7 +459,7 @@ public class VillagerRecord implements Cloneable {
 			nbttagcompound.setString(label + "_spousesName", spousesName);
 		}
 		nbttagcompound.setInteger(label + "_gender", gender);
-		nbttagcompound.setString(label + "_texture", texture.func_110623_a());
+		nbttagcompound.setString(label + "_texture", texture.getResourcePath());
 
 		nbttagcompound.setBoolean(label + "_killed", killed);
 		nbttagcompound.setBoolean(label + "_raidingVillage", raidingVillage);
@@ -490,7 +492,7 @@ public class VillagerRecord implements Cloneable {
 		for (final InvItem key : inventory.keySet()) {
 
 			final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-			nbttagcompound1.setInteger("item", key.id());
+			nbttagcompound1.setInteger("item", Item.getIdFromItem(key.getItem()));
 			nbttagcompound1.setInteger("meta", key.meta);
 			nbttagcompound1.setInteger("amount", inventory.get(key));
 			nbttaglist.appendTag(nbttagcompound1);

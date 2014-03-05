@@ -3,6 +3,7 @@ package org.millenaire.common.goal;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.Building;
@@ -21,12 +22,12 @@ public class GoalLumbermanChopTrees extends Goal {
 
 	public GoalLumbermanChopTrees() {
 		this.maxSimultaneousInBuilding=1;
-		this.townhallLimit.put(new InvItem(Block.wood.blockID,-1), 4096);
+		this.townhallLimit.put(new InvItem(Blocks.log,-1), 4096);
 	}
 
 	@Override
 	public int actionDuration(MillVillager villager) {
-		final int toolEfficiency=(int)villager.getBestAxe().efficiencyOnProperMaterial;
+		final int toolEfficiency=(int)villager.getBestAxe().getDigSpeed(new ItemStack(villager.getBestAxe(),1), Blocks.log,0);;
 		return 1000-(toolEfficiency*40);
 	}
 
@@ -73,7 +74,7 @@ public class GoalLumbermanChopTrees extends Goal {
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
 		
-		if (villager.countInv(Block.wood.blockID, -1)>64)
+		if (villager.countInv(Blocks.log, -1)>64)
 			return false;
 		
 		if (getDestination(villager)==null)
@@ -104,17 +105,17 @@ public class GoalLumbermanChopTrees extends Goal {
 
 					if (!winfo.isConstructionOrLoggingForbiddenHere(p)) {
 
-						final int blockId=villager.getBlock(p);
+						final Block block=villager.getBlock(p);
 
-						if ((blockId == Block.wood.blockID) || (blockId==Block.leaves.blockID)) {
+						if ((block == Blocks.log) || (block==Blocks.leaves)) {
 							if (!woodFound) {
-								if (blockId == Block.wood.blockID) {
+								if (block == Blocks.log) {
 									final int meta=villager.getBlockMeta(p) & 3;
-									villager.setBlock(p,0);
+									villager.setBlock(p,Blocks.air);
 
 									villager.swingItem();
 
-									villager.addToInv(Block.wood.blockID, meta, 1);
+									villager.addToInv(Blocks.log, meta, 1);
 									woodFound=true;
 
 									if ((MLN.LogLumberman>=MLN.DEBUG)) {
@@ -123,14 +124,14 @@ public class GoalLumbermanChopTrees extends Goal {
 								} else {
 
 									if (MillCommonUtilities.randomInt(4) == 0) {
-										villager.addToInv(Block.sapling.blockID,MillCommonUtilities.getBlockMeta(villager.worldObj, p) & 3, 1);
+										villager.addToInv(Blocks.sapling,MillCommonUtilities.getBlockMeta(villager.worldObj, p) & 3, 1);
 									}
-									villager.setBlock(p,0);
+									villager.setBlock(p,Blocks.air);
 
 									villager.swingItem();
 
 									if (villager.gathersApples() && MillCommonUtilities.chanceOn(16)) {
-										villager.addToInv(Mill.ciderapple.itemID, 1);
+										villager.addToInv(Mill.ciderapple, 1);
 									}
 
 
@@ -155,7 +156,7 @@ public class GoalLumbermanChopTrees extends Goal {
 
 	@Override
 	public int priority(MillVillager villager) {
-		return Math.max(10,125-villager.countInv(Block.wood.blockID, -1));
+		return Math.max(10,125-villager.countInv(Blocks.log, -1));
 	}
 
 	@Override

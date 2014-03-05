@@ -6,8 +6,11 @@ import java.util.HashMap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.pathfinding.PathPoint;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import org.millenaire.common.MLN;
@@ -40,14 +43,14 @@ public class DevModUtilities {
 
 			for (final AStarNode node : result) {
 				if ((node!=result.get(0)) && (node!=result.get(result.size()-1))) {
-					MillCommonUtilities.setBlockAndMetadata(world, (new Point(node)).getBelow(), Block.cloth.blockID, meta);
+					MillCommonUtilities.setBlockAndMetadata(world, (new Point(node)).getBelow(), Blocks.wool, meta);
 				}
 			}
 		}
 
 		@Override
 		public void onNoPathAvailable() {
-			ServerSender.sendChat(caller,MLN.DARKRED,"No path available.");
+			ServerSender.sendChat(caller,EnumChatFormatting.DARK_RED,"No path available.");
 		}
 
 	}
@@ -57,41 +60,41 @@ public class DevModUtilities {
 	private static HashMap<EntityPlayer, Integer> autoMoveTarget=new HashMap<EntityPlayer, Integer>();
 	public static void fillInFreeGoods(EntityPlayer player) {
 
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorBlueLegs.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorBlueBoots.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorBlueHelmet.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorBluePlate.itemID, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorBlueLegs, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorBlueBoots, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorBlueHelmet, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorBluePlate, 1);
 
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorRedLegs.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorRedBoots.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorRedHelmet.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorRedPlate.itemID, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorRedLegs, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorRedBoots, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorRedHelmet, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseWarriorRedPlate, 1);
 
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseGuardLegs.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseGuardBoots.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseGuardHelmet.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseGuardPlate.itemID, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseGuardLegs, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseGuardBoots, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseGuardHelmet, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.japaneseGuardPlate, 1);
 
 
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.summoningWand.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.skoll_hati_amulet.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Item.pocketSundial.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.normanAxe.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.normanPickaxe.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.normanShovel.itemID, 1);
-		MillCommonUtilities.putItemsInChest(player.inventory, Block.blockGold.blockID,0, 64);
-		MillCommonUtilities.putItemsInChest(player.inventory,Block.wood.blockID, 64);
-		MillCommonUtilities.putItemsInChest(player.inventory,Item.coal.itemID, 64);
-		MillCommonUtilities.putItemsInChest(player.inventory, Block.cobblestone.blockID, 128);
-		MillCommonUtilities.putItemsInChest(player.inventory, Block.stone.blockID, 512);
-		MillCommonUtilities.putItemsInChest(player.inventory, Block.sand.blockID, 128);
-		MillCommonUtilities.putItemsInChest(player.inventory, Block.cloth.blockID, 64);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.summoningWand, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.skoll_hati_amulet, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Items.clock, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.normanAxe, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.normanPickaxe, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.normanShovel, 1);
+		MillCommonUtilities.putItemsInChest(player.inventory, Blocks.gold_block,0, 64);
+		MillCommonUtilities.putItemsInChest(player.inventory,Blocks.log, 64);
+		MillCommonUtilities.putItemsInChest(player.inventory,Items.coal, 64);
+		MillCommonUtilities.putItemsInChest(player.inventory, Blocks.cobblestone, 128);
+		MillCommonUtilities.putItemsInChest(player.inventory, Blocks.stone, 512);
+		MillCommonUtilities.putItemsInChest(player.inventory, Blocks.sand, 128);
+		MillCommonUtilities.putItemsInChest(player.inventory, Blocks.wool, 64);
 
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.calva.itemID,0, 2);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.chickencurry.itemID,2);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.rice.itemID,0, 64);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.maize.itemID,0, 64);
-		MillCommonUtilities.putItemsInChest(player.inventory, Mill.turmeric.itemID,0, 64);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.calva,0, 2);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.chickencurry,2);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.rice,0, 64);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.maize,0, 64);
+		MillCommonUtilities.putItemsInChest(player.inventory, Mill.turmeric,0, 64);
 
 	}
 
@@ -108,13 +111,13 @@ public class DevModUtilities {
 						if (autoMoveTarget.get(p)<p.posX) {
 							autoMoveDirection.put(p, -1);
 							autoMoveTarget.put(p, (int) (p.posX-100000));
-							ServerSender.sendChat(p,MLN.LIGHTGREEN,"Auto-move: turning back.");
+							ServerSender.sendChat(p,EnumChatFormatting.GREEN,"Auto-move: turning back.");
 						}
 					} else if (autoMoveDirection.get(p)==-1) {
 						if (autoMoveTarget.get(p)>p.posX) {
 							autoMoveDirection.put(p, 1);
 							autoMoveTarget.put(p, (int) (p.posX+100000));
-							ServerSender.sendChat(p,MLN.LIGHTGREEN,"Auto-move: turning back again.");
+							ServerSender.sendChat(p,EnumChatFormatting.GREEN,"Auto-move: turning back again.");
 						}
 					}
 
@@ -140,19 +143,19 @@ public class DevModUtilities {
 					for (int l=0;(l<8) && ((start==null) || (end==null));l++) {
 						final Point p=centre.getRelative(i*(1-((l&1)*2)), j*(1-(l&2)), k*(1-((l&4)/2)));
 
-						final int bid=MillCommonUtilities.getBlock(player.worldObj, p);
+						final Block block=MillCommonUtilities.getBlock(player.worldObj, p);
 
-						if ((start==null) && (bid==Block.blockGold.blockID)) {
+						if ((start==null) && (block==Blocks.gold_block)) {
 							start=p;
 						}
 
-						if ((end==null) && (bid==Block.blockIron.blockID)) {
+						if ((end==null) && (block==Blocks.iron_block)) {
 							end=p.getAbove();
 							toleranceMode=0;
-						} else if ((end==null) && (bid==Block.blockDiamond.blockID)) {
+						} else if ((end==null) && (block==Blocks.diamond_block)) {
 							end=p.getAbove();
 							toleranceMode=1;
-						} else if ((end==null) && (bid==Block.blockLapis.blockID)) {
+						} else if ((end==null) && (block==Blocks.lapis_block)) {
 							end=p.getAbove();
 							toleranceMode=2;
 						}
@@ -176,13 +179,13 @@ public class DevModUtilities {
 				jpsConfig = new AStarConfig(true,false,false,true);
 			}
 
-			ServerSender.sendChat(player,MLN.DARKGREEN,"Calculating path. Tolerance H: "+jpsConfig.toleranceHorizontal);
+			ServerSender.sendChat(player,EnumChatFormatting.DARK_GREEN,"Calculating path. Tolerance H: "+jpsConfig.toleranceHorizontal);
 
 
 			final AStarPathPlanner jpsPathPlanner=new AStarPathPlanner(player.worldObj, pathedEntity);
 			jpsPathPlanner.getPath(start.getiX(), start.getiY(), start.getiZ(), end.getiX(), end.getiY(), end.getiZ(), jpsConfig);
 		} else {
-			ServerSender.sendChat(player,MLN.DARKRED,"Could not find start or end: "+start+" - "+end);
+			ServerSender.sendChat(player,EnumChatFormatting.DARK_RED,"Could not find start or end: "+start+" - "+end);
 		}
 
 	}
@@ -192,35 +195,35 @@ public class DevModUtilities {
 		if (autoMoveDirection.containsKey(player)) {
 			autoMoveDirection.remove(player);
 			autoMoveTarget.remove(player);
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Auto-move disabled");
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Auto-move disabled");
 		} else {
 			autoMoveDirection.put(player, 1);
 			autoMoveTarget.put(player,(int) (player.posX+100000));
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Auto-move enabled");
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Auto-move enabled");
 		}
 	}
 
 	public static void villagerInteractDev(EntityPlayer entityplayer, MillVillager villager) {
 		if (villager.isChild()) {
 			villager.growSize();
-			ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,villager.getName()+": Size: "+villager.size+" gender: "+villager.gender);
-			if ((entityplayer.inventory.getCurrentItem() != null) && (entityplayer.inventory.getCurrentItem().itemID == Mill.summoningWand.itemID)) {
+			ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,villager.getName()+": Size: "+villager.size+" gender: "+villager.gender);
+			if ((entityplayer.inventory.getCurrentItem() != null) && (entityplayer.inventory.getCurrentItem().getItem() == Mill.summoningWand)) {
 				villager.size=20;
 				villager.growSize();
 			}
 		}
 		if (entityplayer.inventory.getCurrentItem() == null) {
-			ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,villager.getName()+": Current goal: "+villager.getGoalLabel(villager.goalKey)+" Current pos: "+villager.getPos());
-			ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,villager.getName()+": House: "+villager.housePoint+" Town Hall: "+villager.townHallPoint);
-			ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,villager.getName()+": ID: "+villager.villager_id);
+			ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,villager.getName()+": Current goal: "+villager.getGoalLabel(villager.goalKey)+" Current pos: "+villager.getPos());
+			ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,villager.getName()+": House: "+villager.housePoint+" Town Hall: "+villager.townHallPoint);
+			ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,villager.getName()+": ID: "+villager.villager_id);
 			if (villager.getRecord()!=null) {
-				ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,villager.getName()+": Spouse: "+villager.getRecord().spousesName);
+				ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,villager.getName()+": Spouse: "+villager.getRecord().spousesName);
 			}
 
 			if ((villager.getPathDestPoint() != null) && (villager.pathEntity != null) && (villager.pathEntity.getCurrentPathLength()>1)) {
-				ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,villager.getName()+": Dest: "+villager.getPathDestPoint()+" distance: "+villager.getPathDestPoint().distanceTo(villager)+" stuck: "+villager.longDistanceStuck+" jump:"+villager.pathEntity.getNextTargetPathPoint());
+				ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,villager.getName()+": Dest: "+villager.getPathDestPoint()+" distance: "+villager.getPathDestPoint().distanceTo(villager)+" stuck: "+villager.longDistanceStuck+" jump:"+villager.pathEntity.getNextTargetPathPoint());
 			} else {
-				ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,villager.getName()+": No dest point.");
+				ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,villager.getName()+": No dest point.");
 			}
 
 			String s="";
@@ -232,12 +235,12 @@ public class DevModUtilities {
 			}
 
 
-			if (villager.mw.getProfile(entityplayer.username).villagersInQuests.containsKey(villager.villager_id)) {
-				s+=" quest: "+villager.mw.getProfile(entityplayer.username).villagersInQuests.get(villager.villager_id).quest.key+"/"+villager.mw.getProfile(entityplayer.username).villagersInQuests.get(villager.villager_id).getCurrentVillager().id;
+			if (villager.mw.getProfile(entityplayer.getDisplayName()).villagersInQuests.containsKey(villager.villager_id)) {
+				s+=" quest: "+villager.mw.getProfile(entityplayer.getDisplayName()).villagersInQuests.get(villager.villager_id).quest.key+"/"+villager.mw.getProfile(entityplayer.getDisplayName()).villagersInQuests.get(villager.villager_id).getCurrentVillager().id;
 			}
 
 			if (s!="") {
-				ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,"Tags: "+s);
+				ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,"Tags: "+s);
 			}
 			
 			s="";
@@ -247,40 +250,40 @@ public class DevModUtilities {
 			}
 			
 			if (s!="") {
-				ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,"Inv: "+s);
+				ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,"Inv: "+s);
 			}
 
-		} else if ((entityplayer.inventory.getCurrentItem() != null) && (entityplayer.inventory.getCurrentItem().itemID == Block.sand.blockID)) {
+		} else if ((entityplayer.inventory.getCurrentItem() != null) && (entityplayer.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.sand))) {
 			if (villager.hiredBy==null) {
-				villager.hiredBy=entityplayer.username;
-				ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,"Hired: "+entityplayer.username);
+				villager.hiredBy=entityplayer.getDisplayName();
+				ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,"Hired: "+entityplayer.getDisplayName());
 			} else {
 				villager.hiredBy=null;
-				ServerSender.sendChat(entityplayer,MLN.LIGHTGREEN,"No longer hired");
+				ServerSender.sendChat(entityplayer,EnumChatFormatting.GREEN,"No longer hired");
 			}
-		} else if ((entityplayer.inventory.getCurrentItem() != null) && (entityplayer.inventory.getCurrentItem().itemID == Block.dirt.blockID) && (villager.pathEntity!=null)) {
+		} else if ((entityplayer.inventory.getCurrentItem() != null) && (entityplayer.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.dirt)) && (villager.pathEntity!=null)) {
 			final int meta=MillCommonUtilities.randomInt(16);
 
 			for (final PathPoint p :villager.pathEntity.pointsCopy) {
-				if (villager.worldObj.getBlockId(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest.blockID) {
-					MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.cloth.blockID, meta);
+				if (villager.worldObj.getBlock(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest) {
+					MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Blocks.wool, meta);
 				}
 			}
 			PathPoint p = villager.pathEntity.getCurrentTargetPathPoint();
-			if ((p!=null) && (villager.worldObj.getBlockId(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest.blockID)) {
-				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.blockGold.blockID, 0);
+			if ((p!=null) && (villager.worldObj.getBlock(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest)) {
+				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Blocks.gold_block, 0);
 			}
 			p = villager.pathEntity.getNextTargetPathPoint();
-			if ((p!=null) && (villager.worldObj.getBlockId(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest.blockID)) {
-				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.blockDiamond.blockID, 0);
+			if ((p!=null) && (villager.worldObj.getBlock(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest)) {
+				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Blocks.diamond_block, 0);
 			}
 			p = villager.pathEntity.getPreviousTargetPathPoint();
-			if ((p!=null) && (villager.worldObj.getBlockId(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest.blockID)) {
-				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Block.blockIron.blockID, 0);
+			if ((p!=null) && (villager.worldObj.getBlock(p.xCoord, p.yCoord-1, p.zCoord)!=Mill.lockedChest)) {
+				MillCommonUtilities.setBlockAndMetadata(villager.worldObj, (new Point(p)).getBelow(), Blocks.iron_block, 0);
 			}
 		}
 
-		if (villager.hasChildren() && (entityplayer.inventory.getCurrentItem() != null) && (entityplayer.inventory.getCurrentItem().itemID == Mill.summoningWand.itemID)) {
+		if (villager.hasChildren() && (entityplayer.inventory.getCurrentItem() != null) && (entityplayer.inventory.getCurrentItem().getItem() == Mill.summoningWand)) {
 			final MillVillager child=villager.getHouse().createChild(villager, villager.getTownHall(), villager.getRecord().spousesName);
 			if (child!=null) {
 				child.size=20;

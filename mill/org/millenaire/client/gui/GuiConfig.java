@@ -133,7 +133,7 @@ public class GuiConfig extends GuiText {
 					text.add(new Line(config.getDesc(),false));
 
 				if (config.hasTextField()) {
-					MillGuiTextField textField=new MillGuiTextField(fontRenderer, 0, 0, 0, 0, config.key);
+					MillGuiTextField textField=new MillGuiTextField(fontRendererObj, 0, 0, 0, 0, config.key);
 					textField.setText(config.getStringValue());
 					textField.setMaxStringLength(config.strLimit);
 					textField.setTextColor(-1);

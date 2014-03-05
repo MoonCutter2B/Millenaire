@@ -2,10 +2,10 @@ package org.millenaire.common.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -24,13 +24,12 @@ public class BlockOrientedBrick extends Block {
 
 
 	String topTextureId,topTextureRotateId,bottomTextureId,bottomTextureRotateId,frontbackTextureId,sideTextureId;
-	Icon topTexture,topTextureRotate,bottomTexture,bottomTextureRotate,frontbackTexture,sideTexture;
+	IIcon topTexture,topTextureRotate,bottomTexture,bottomTextureRotate,frontbackTexture,sideTexture;
 
-	public BlockOrientedBrick(int blockId,
-			String topTextureId,String topTextureRotateId,String bottomTextureId,String bottomTextureRotateId,
+	public BlockOrientedBrick(String topTextureId,String topTextureRotateId,String bottomTextureId,String bottomTextureRotateId,
 			String frontbackTextureId,String sideTextureId)
 	{
-		super(blockId, Material.rock);
+		super(Material.rock);
 		this.setCreativeTab(Mill.tabMillenaire);
 
 		this.topTextureId=topTextureId;
@@ -42,7 +41,7 @@ public class BlockOrientedBrick extends Block {
 	}
 	
 	@Override
-	public void registerIcons(IconRegister iconRegister)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		topTexture=MillCommonUtilities.getIcon(iconRegister, topTextureId);
 		topTextureRotate=MillCommonUtilities.getIcon(iconRegister, topTextureRotateId);
@@ -59,7 +58,7 @@ public class BlockOrientedBrick extends Block {
 	@Override
 	protected ItemStack createStackedBlock(int par1)
 	{
-		return new ItemStack(this.blockID, 1, 0);
+		return new ItemStack(this, 1, 0);
 	}
 
 
@@ -76,7 +75,7 @@ public class BlockOrientedBrick extends Block {
 	 * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
 	 */
 	@Override
-	public Icon getIcon(int side, int meta)
+	public IIcon getIcon(int side, int meta)
 	{
 
 		if (side == 0) {

@@ -1,12 +1,17 @@
 package org.millenaire.client.network;
 
+import static io.netty.buffer.Unpooled.buffer;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.client.C17PacketCustomPayload;
 
 import org.millenaire.common.Building;
 import org.millenaire.common.Culture;
@@ -21,13 +26,10 @@ import org.millenaire.common.network.StreamReadWrite;
 
 public class ClientSender {
 
-	public static INetworkManager networkManager=null;
-
 	public static void activateMillChest(EntityPlayer player,
 			Point pos) {
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -37,14 +39,13 @@ public class ClientSender {
 			MLN.printException("Error in activateMillChest", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 	public static void controlledBuildingsForgetBuilding(EntityPlayer player,
 			Building townHall, BuildingProject project) {
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -56,7 +57,7 @@ public class ClientSender {
 			MLN.printException("Error in controlledBuildingsToggleUpgrades", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 
 		GuiActions.controlledBuildingsForgetBuilding(player, townHall, project);
 	}
@@ -64,8 +65,7 @@ public class ClientSender {
 	public static void controlledBuildingsToggleUpgrades(EntityPlayer player,
 			Building townHall, BuildingProject project, boolean allow) {
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -78,26 +78,15 @@ public class ClientSender {
 			MLN.printException("Error in controlledBuildingsToggleUpgrades", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 
 		GuiActions.controlledBuildingsToggleUpgrades(player, townHall, project, allow);
 	}
 
-	private static void createAndSendServerPacket(ByteArrayOutputStream bytes) {
-
-
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
-
-		sendPacketToServer(packet);
-	}
 
 
 	public static void devCommand(int devcommand) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_DEVCOMMAND);
@@ -106,12 +95,11 @@ public class ClientSender {
 			MLN.printException("Error in devCommand", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 	public static void displayVillageList(boolean loneBuildings) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_VILLAGELIST_REQUEST);
@@ -120,13 +108,12 @@ public class ClientSender {
 			MLN.printException("Error in displayVillageList", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void hireExtend(EntityPlayer player, MillVillager villager) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -136,15 +123,14 @@ public class ClientSender {
 			MLN.printException("Error in hireExtend", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 
 		GuiActions.hireExtend(player, villager);
 	}
 
 
 	public static void hireHire(EntityPlayer player, MillVillager villager) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -154,15 +140,14 @@ public class ClientSender {
 			MLN.printException("Error in hireHire", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 
 		GuiActions.hireHire(player, villager);
 	}
 
 
 	public static void hireRelease(EntityPlayer player, MillVillager villager) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -172,15 +157,14 @@ public class ClientSender {
 			MLN.printException("Error in hireRelease", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 
 		GuiActions.hireRelease(player, villager);
 	}
 
 
 	public static void importBuilding(EntityPlayer player, Point pos) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -190,13 +174,12 @@ public class ClientSender {
 			MLN.printException("Error in importBuilding", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void negationWand(EntityPlayer player, Building townHall) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -206,14 +189,13 @@ public class ClientSender {
 			MLN.printException("Error in negationWand", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void newBuilding(EntityPlayer player, Building townHall, Point pos,
 			String planKey) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -225,14 +207,13 @@ public class ClientSender {
 			MLN.printException("Error in newBuilding", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void newVillageCreation(EntityPlayer player, Point pos,
 			String cultureKey, String villageTypeKey) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -244,14 +225,13 @@ public class ClientSender {
 			MLN.printException("Error in newVillageCreation", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void pujasChangeEnchantment(EntityPlayer player, Building temple,
 			int enchantmentId) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -262,13 +242,12 @@ public class ClientSender {
 			MLN.printException("Error in pujasChangeEnchantment", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void questCompleteStep(EntityPlayer player, MillVillager villager) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -278,13 +257,12 @@ public class ClientSender {
 			MLN.printException("Error in questCompleteStep", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void questRefuse(EntityPlayer player, MillVillager villager) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -294,34 +272,27 @@ public class ClientSender {
 			MLN.printException("Error in questRefuse", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void requestMapInfo(Building townHall) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream ds = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
-			ds.write(ServerReceiver.PACKET_MAPINFO_REQUEST);
-			StreamReadWrite.writeNullablePoint(townHall.getPos(), ds);
+			data.write(ServerReceiver.PACKET_MAPINFO_REQUEST);
+			StreamReadWrite.writeNullablePoint(townHall.getPos(), data);
 		} catch (final IOException e) {
 			MLN.printException(townHall+": Error in sendUpdatePacket", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
-
-		sendPacketToServer(packet);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void sendAvailableContent() {
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_AVAILABLECONTENT);
@@ -340,22 +311,11 @@ public class ClientSender {
 			MLN.printException("Error in displayVillageList", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
-
-		sendPacketToServer(packet);
-	}
-
-
-	public static void sendPacketToServer(Packet250CustomPayload packet) {
-		networkManager.addToSendQueue(packet);
+		createAndSendServerPacket(data);
 	}
 
 	public static void sendVersionInfo() {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_DECLARERELEASENUMBER);
@@ -364,20 +324,14 @@ public class ClientSender {
 			MLN.printException("Error in sendVersionInfo", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
-
-		sendPacketToServer(packet);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void summoningWandUse(EntityPlayer player,
 			Point pos) {
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -387,15 +341,14 @@ public class ClientSender {
 			MLN.printException("Error in summoningWandUse", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void villageChiefPerformBuilding(EntityPlayer player,
 			MillVillager chief, String planKey) {
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -406,14 +359,13 @@ public class ClientSender {
 			MLN.printException("Error in villageChiefPerformBuilding", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void villageChiefPerformCrop(EntityPlayer player,
 			MillVillager chief, String value) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -424,14 +376,13 @@ public class ClientSender {
 			MLN.printException("Error in villageChiefPerformCrop", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void villageChiefPerformCultureControl(EntityPlayer player,
 			MillVillager chief) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -441,14 +392,13 @@ public class ClientSender {
 			MLN.printException("Error in villageChiefPerformCultureControl", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 
 
 	public static void villageChiefPerformDiplomacy(EntityPlayer player,
 			MillVillager chief, Point village, boolean praise) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -460,7 +410,7 @@ public class ClientSender {
 			MLN.printException("Error in villageChiefPerformDiplomacy", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 
 		//also in local for immediate feedback
 		GuiActions.villageChiefPerformDiplomacy(player, chief, village, praise);
@@ -468,8 +418,7 @@ public class ClientSender {
 
 	public static void villageChiefPerformVillageScroll(EntityPlayer player,
 			MillVillager chief) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -479,13 +428,12 @@ public class ClientSender {
 			MLN.printException("Error in villageChiefPerformVillageScroll", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 	}
 	
 	public static void controlledMilitaryDiplomacy(EntityPlayer player,
 			Building th,Point target,int amount) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -500,7 +448,7 @@ public class ClientSender {
 			MLN.printException("Error in controlledMilitaryDiplomacy", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 		
 		//for immediate feedback
 		GuiActions.controlledMilitaryDiplomacy(player, th, target, amount);
@@ -508,8 +456,7 @@ public class ClientSender {
 	
 	public static void controlledMilitaryPlanRaid(EntityPlayer player,
 			Building th,Point target) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -520,7 +467,7 @@ public class ClientSender {
 			MLN.printException("Error in controlledMilitaryStartRaid", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 		
 		//for immediate feedback
 		GuiActions.controlledMilitaryPlanRaid(player, th, th.mw.getBuilding(target));
@@ -528,8 +475,7 @@ public class ClientSender {
 	
 	public static void controlledMilitaryCancelRaid(EntityPlayer player,
 			Building th) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_GUIACTION);
@@ -539,7 +485,7 @@ public class ClientSender {
 			MLN.printException("Error in controlledMilitaryCancelRaid", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
 		
 		//for immediate feedback
 		GuiActions.controlledMilitaryCancelRaid(player, th);
@@ -547,8 +493,7 @@ public class ClientSender {
 
 	public static void villagerInteractSpecial(EntityPlayer player,
 			MillVillager villager) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_VILLAGERINTERACT_REQUEST);
@@ -557,6 +502,23 @@ public class ClientSender {
 			MLN.printException("Error in villagerInteractSpecial", e);
 		}
 
-		createAndSendServerPacket(bytes);
+		createAndSendServerPacket(data);
+	}
+	
+	public static ByteBufOutputStream getNewByteBufOutputStream() {
+		return new ByteBufOutputStream(buffer());
+	}
+	
+	public static C17PacketCustomPayload createServerPacket(ByteBufOutputStream data) {
+		return new C17PacketCustomPayload(ServerReceiver.PACKET_CHANNEL, data.buffer());
+	}
+	
+	public static void sendPacketToServer(Packet packet) {
+		Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(packet);
+	}
+	
+
+	private static void createAndSendServerPacket(ByteBufOutputStream bytes) {
+		sendPacketToServer(createServerPacket(bytes));
 	}
 }

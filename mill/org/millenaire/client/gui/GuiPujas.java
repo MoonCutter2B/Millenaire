@@ -1,5 +1,6 @@
 package org.millenaire.client.gui;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Vector;
 
@@ -24,10 +25,13 @@ import org.millenaire.common.MLN;
 import org.millenaire.common.PujaSacrifice;
 import org.millenaire.common.forge.Mill;
 
+import cpw.mods.fml.relauncher.ReflectionHelper;
+
 public class GuiPujas extends GuiContainer
 {
 	private final Building temple;
 	private final EntityPlayer player;
+	private Method drawSlotInventory;
 	
 	private static final ResourceLocation texturePujas = new ResourceLocation(Mill.modId,"/textures/gui/ML_pujas.png");
 	private static final ResourceLocation textureSacrifices = new ResourceLocation(Mill.modId,"/textures/gui/ML_mayansacrifices.png");
@@ -45,6 +49,8 @@ public class GuiPujas extends GuiContainer
 		if (MLN.LogPujas>=MLN.DEBUG) {
 			MLN.debug(this, "Opening shrine GUI");
 		}
+		
+		drawSlotInventory=ReflectionHelper.findMethod(GuiContainer.class, this, new String[]{"func_146977_a","func_146977_a"}, Method.class);
 	}
 
 	private int getNbPerLines() {
@@ -122,9 +128,9 @@ public class GuiPujas extends GuiContainer
 		try {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			if (temple.pujas!=null && temple.pujas.type==PujaSacrifice.MAYAN)
-				mc.func_110434_K().func_110577_a(textureSacrifices);
+				mc.renderEngine.bindTexture(textureSacrifices);
 			else
-				mc.func_110434_K().func_110577_a(texturePujas);
+				mc.renderEngine.bindTexture(texturePujas);
 			final int j = (width - xSize) / 2;
 			final int k = (height - ySize) / 2;
 			drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
@@ -170,11 +176,11 @@ public class GuiPujas extends GuiContainer
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		if (temple.pujas.type==PujaSacrifice.MAYAN) {
-			fontRenderer.drawString(MLN.string("sacrifices.offering"), 8, 6, 0x404040);
-			fontRenderer.drawString(MLN.string("sacrifices.panditfee"), 8, 75, 0x404040);
+			fontRendererObj.drawString(MLN.string("sacrifices.offering"), 8, 6, 0x404040);
+			fontRendererObj.drawString(MLN.string("sacrifices.panditfee"), 8, 75, 0x404040);
 		} else {
-			fontRenderer.drawString(MLN.string("pujas.offering"), 8, 6, 0x404040);
-			fontRenderer.drawString(MLN.string("pujas.panditfee"), 8, 75, 0x404040);
+			fontRendererObj.drawString(MLN.string("pujas.offering"), 8, 6, 0x404040);
+			fontRendererObj.drawString(MLN.string("pujas.panditfee"), 8, 75, 0x404040);
 		}
 
 
@@ -182,7 +188,7 @@ public class GuiPujas extends GuiContainer
 
 
 
-		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, (ySize - 104) + 2, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, (ySize - 104) + 2, 0x404040);
 	}
 
 
@@ -237,8 +243,8 @@ public class GuiPujas extends GuiContainer
 		if(inventoryplayer.getItemStack() != null)
 		{
 			GL11.glTranslatef(0.0F, 0.0F, 32F);
-			itemRenderer.renderItemIntoGUI(fontRenderer, mc.renderEngine, inventoryplayer.getItemStack(), x - k - 8, y - l - 8);
-			itemRenderer.renderItemOverlayIntoGUI(fontRenderer, mc.renderEngine, inventoryplayer.getItemStack(), x - k - 8, y - l - 8);
+			itemRender.renderItemIntoGUI(fontRendererObj, mc.renderEngine, inventoryplayer.getItemStack(), x - k - 8, y - l - 8);
+			itemRender.renderItemOverlayIntoGUI(fontRendererObj, mc.renderEngine, inventoryplayer.getItemStack(), x - k - 8, y - l - 8);
 		}
 		GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
 		RenderHelper.disableStandardItemLighting();
@@ -285,10 +291,10 @@ public class GuiPujas extends GuiContainer
 				if (x>startx + getTargetXStart() + colPos*getButtonWidth() && x<startx + getTargetXStart() + (colPos+1)*getButtonWidth() &&
 						y>starty + getTargetYStart() + (getButtonHeight()*linePos) && y<starty + getTargetYStart() + (getButtonHeight()*(linePos+1))) {
 					final String s=MLN.string(temple.pujas.getTargets().get(cp).mouseOver);
-					final int stringlength=fontRenderer.getStringWidth(s);
+					final int stringlength=fontRendererObj.getStringWidth(s);
 
 					drawGradientRect((x-startx) + 5, y-starty - 3, (x-startx) + stringlength + 3, (y-starty) + 8 + 3, 0xc0000000, 0xc0000000);
-					fontRenderer.drawString(s, (x+8)-startx, y-starty, 0xA0A0A0);
+					fontRendererObj.drawString(s, (x+8)-startx, y-starty, 0xA0A0A0);
 				}
 
 
@@ -371,7 +377,7 @@ public class GuiPujas extends GuiContainer
 
 			for (int i2 = 0; i2 < list.size(); i2++)
 			{
-				final int k2 = fontRenderer.getStringWidth(list.get(i2));
+				final int k2 = fontRendererObj.getStringWidth(list.get(i2));
 
 				if (k2 > l1)
 				{
@@ -390,7 +396,7 @@ public class GuiPujas extends GuiContainer
 			}
 
 			zLevel = 300F;
-			itemRenderer.zLevel = 300F;
+			itemRender.zLevel = 300F;
 			final int k3 = 0xf0100010;
 			drawGradientRect(j2 - 3, l2 - 4, j2 + i3 + 3, l2 - 3, k3, k3);
 			drawGradientRect(j2 - 3, l2 + j3 + 3, j2 + i3 + 3, l2 + j3 + 4, k3, k3);
@@ -410,14 +416,15 @@ public class GuiPujas extends GuiContainer
 
 				if (j4 == 0 && stack!=null)
 				{
-					s = (new StringBuilder()).append("\247").append(Integer.toHexString(stack.getRarity().rarityColor)).append(s).toString();
+					s = (new StringBuilder()).append("\247").append(Integer.toHexString(stack.getRarity().rarityColor.getFormattingCode())).append(s).toString();
+					
 				}
 				else
 				{
 					s = (new StringBuilder()).append("\2477").append(s).toString();
 				}
 
-				fontRenderer.drawStringWithShadow(s, j2, l2, -1);
+				fontRendererObj.drawStringWithShadow(s, j2, l2, -1);
 
 				if (j4 == 0)
 				{
@@ -428,7 +435,17 @@ public class GuiPujas extends GuiContainer
 			}
 
 			zLevel = 0.0F;
-			itemRenderer.zLevel = 0.0F;
+			itemRender.zLevel = 0.0F;
 		}
 	}
+	
+	public void drawSlotInventory(Slot slot) {
+		
+		try {
+			drawSlotInventory.invoke(slot);
+		} catch (Exception e) {
+			MLN.printException("Exception when trying to access drawSlotInventory", e);
+		}
+	}
+	
 }

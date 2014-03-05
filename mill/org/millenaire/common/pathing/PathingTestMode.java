@@ -40,6 +40,8 @@ public class PathingTestMode {
 				}
 			}
 
+			reader.close();	
+			
 			final PathingSurface surface=new PathingSurface(region, region[region.length/2][region[0].length/2][region[0][0].length/2]);
 
 			System.out.println("Surface loaded.");
@@ -67,6 +69,7 @@ public class PathingTestMode {
 				}
 			}
 
+			reader.close();
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}

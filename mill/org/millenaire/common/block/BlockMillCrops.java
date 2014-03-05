@@ -9,9 +9,11 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import org.millenaire.common.core.MillCommonUtilities;
@@ -27,12 +29,12 @@ public class BlockMillCrops extends BlockCrops
 	String riceTexture0name,riceTexture1name,turmericTexture0name,
 	turmericTexture1name,maizeTexture0name,maizeTexture1name,vineTexture0name,vineTexture1name;
 	
-	Icon riceTexture0,riceTexture1,turmericTexture0,
+	IIcon riceTexture0,riceTexture1,turmericTexture0,
 	turmericTexture1,maizeTexture0,maizeTexture1,vineTexture0,vineTexture1;
 
-	public BlockMillCrops(int i)
+	public BlockMillCrops()
 	{
-		super(i);
+		super();
 
 		riceTexture0name="rice0";
 		riceTexture1name="rice1";
@@ -49,7 +51,7 @@ public class BlockMillCrops extends BlockCrops
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		riceTexture0=MillCommonUtilities.getIcon(iconRegister, riceTexture0name);
 		riceTexture1=MillCommonUtilities.getIcon(iconRegister, riceTexture1name);
@@ -67,16 +69,17 @@ public class BlockMillCrops extends BlockCrops
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
 	{
-		final int i = par1World.getBlockId(par2, par3, par4);
+		final Block block = par1World.getBlock(par2, par3, par4);
 
-		return (i == Block.tilledField.blockID);
+		return (block == Blocks.farmland);
 	}
 
 	@Override
-	public boolean canThisPlantGrowOnThisBlockID(int i)
+	public boolean canPlaceBlockOn(Block block)
 	{
-		return ((i == Block.tilledField.blockID) ||
-				(i == Block.dirt.blockID));
+		return ((block == Blocks.farmland) ||
+				(block == Blocks.dirt) ||
+				(block == Blocks.grass));
 	}
 
 	public void fertilize(World world, int i, int j, int k)
@@ -102,7 +105,7 @@ public class BlockMillCrops extends BlockCrops
 	}
 
 	@Override
-	public Icon getIcon(int i, int meta)
+	public IIcon getIcon(int i, int meta)
 	{
 		if (meta==0)
 			return riceTexture0;
@@ -148,24 +151,24 @@ public class BlockMillCrops extends BlockCrops
 	}
 	
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(int par1, Random par2Random, int par3)
     {
-		return idDropped(par1);
+		return getItemDropped(par1);
     }
 
 
-	public int idDropped(int meta)
+	public Item getItemDropped(int meta)
 	{
 		if ((meta == 0) || (meta == 1))
-			return Mill.rice.itemID;
+			return Mill.rice;
 		else if ((meta == 2) || (meta == 3))
-			return Mill.turmeric.itemID;
+			return Mill.turmeric;
 		else if ((meta == 4) || (meta == 5))
-			return Mill.maize.itemID;
+			return Mill.maize;
 		else if ((meta == 6) || (meta == 7))
-			return Mill.grapes.itemID;
+			return Mill.grapes;
 		else
-			return -1;
+			return null;
 	}
 	
 	/**
@@ -178,11 +181,11 @@ public class BlockMillCrops extends BlockCrops
     }
 	
     @Override 
-    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
     {
         ArrayList<ItemStack> ret =  new ArrayList<ItemStack>();
 
-        ret.add(new ItemStack(idDropped(metadata), 1, 0));
+        ret.add(new ItemStack(getItemDropped(metadata), 1, 0));
         
         if (metadata %2 == 1)
         {
@@ -190,7 +193,7 @@ public class BlockMillCrops extends BlockCrops
             {
                 if (world.rand.nextInt(15) <= metadata)
                 {
-                    ret.add(new ItemStack(idDropped(metadata), 1, 0));
+                    ret.add(new ItemStack(getItemDropped(metadata), 1, 0));
                 }
             }
         }
@@ -203,13 +206,13 @@ public class BlockMillCrops extends BlockCrops
 	 * their own) Args: x, y, z, neighbor blockID
 	 */
 	@Override
-	public void onNeighborBlockChange(World world, int i, int j, int k, int par5)
+	public void onNeighborBlockChange(World world, int i, int j, int k, Block b)
 	{
-		final int soilId = world.getBlockId(i, j-1, k);
+		final Block soilBlock = world.getBlock(i, j-1, k);
 
 		//reverting field decay
-		if (soilId==Block.dirt.blockID) {
-			MillCommonUtilities.setBlockAndMetadata(world, i, j-1, k, Block.tilledField.blockID, 0, true, false);
+		if (soilBlock==Blocks.dirt) {
+			MillCommonUtilities.setBlockAndMetadata(world, i, j-1, k, Blocks.farmland, 0, true, false);
 		}
 	}
 
@@ -217,7 +220,7 @@ public class BlockMillCrops extends BlockCrops
 	public void updateTick(World world, int i, int j, int k, Random random)
 	{
 		
-		checkFlowerChange(world, i, j, k);
+		checkAndDropBlock(world, i, j, k);
 
 		if(world.getBlockLightValue(i, j + 1, k) >= 9)
 		{

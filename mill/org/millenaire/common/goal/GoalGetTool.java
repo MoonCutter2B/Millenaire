@@ -18,7 +18,7 @@ public class GoalGetTool extends Goal {
 
 		for (final Building shop : villager.getTownHall().getShops()) {
 			for (final InvItem key : villager.getToolsNeeded()) {
-				if ((villager.countInv(key.id(),key.meta) == 0) && (shop.countGoods(key.id(),key.meta)>0) &&!hasBetterTool(villager, key) && validateDest(villager,shop))
+				if ((villager.countInv(key.getItem(),key.meta) == 0) && (shop.countGoods(key.getItem(),key.meta)>0) &&!hasBetterTool(villager, key) && validateDest(villager,shop))
 					return packDest(shop.getSellingPos(),shop);
 			}
 		}
@@ -40,14 +40,14 @@ public class GoalGetTool extends Goal {
 			int targetPos=-1;
 			
 			for (int i=0;i<toolclass.length && targetPos==-1;i++) {
-				if (toolclass[i].itemID == key.id()) {
+				if (toolclass[i] == key.getItem()) {
 					targetPos=i;
 				}
 			}
 			
 			if (targetPos!=-1) {
 				for (int i=0;i<targetPos;i++) {
-					if (villager.countInv(toolclass[i].itemID,0)>0) {
+					if (villager.countInv(toolclass[i],0)>0) {
 						return true;
 					}
 				}
@@ -65,7 +65,7 @@ public class GoalGetTool extends Goal {
 
 		for (final Building shop : villager.getTownHall().getShops()) {
 			for (final InvItem key : villager.getToolsNeeded()) {
-				if ((villager.countInv(key.id(),key.meta) == 0) && (shop.countGoods(key.id(),key.meta)>0) &&!hasBetterTool(villager, key) && validateDest(villager,shop)) {
+				if ((villager.countInv(key.getItem(),key.meta) == 0) && (shop.countGoods(key.getItem(),key.meta)>0) &&!hasBetterTool(villager, key) && validateDest(villager,shop)) {
 					return true;
 				}
 			}
@@ -89,8 +89,8 @@ public class GoalGetTool extends Goal {
 
 
 		for (final InvItem key : villager.getToolsNeeded()) {
-			if ((villager.countInv(key.id(),key.meta) == 0) && (shop.countGoods(key.id(),key.meta)>0) &&!hasBetterTool(villager, key)) {
-				villager.takeFromBuilding(shop, key.id(),key.meta, 1);
+			if ((villager.countInv(key.getItem(),key.meta) == 0) && (shop.countGoods(key.getItem(),key.meta)>0) &&!hasBetterTool(villager, key)) {
+				villager.takeFromBuilding(shop, key.getItem(),key.meta, 1);
 			}
 		}
 

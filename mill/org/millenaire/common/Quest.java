@@ -8,10 +8,9 @@ import java.util.Vector;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.src.ModLoader;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import org.millenaire.common.MLN.MillenaireException;
@@ -171,7 +170,7 @@ public class Quest {
 				applyPlayerTags(getCurrentStep().setPlayerTagsFailure,getCurrentStep().clearPlayerTagsFailure);
 
 				if (getCurrentStep().getDescriptionTimeUp()!=null) {
-					ServerSender.sendChat(profile.getPlayer(),MLN.ORANGE,getDescriptionTimeUp(profile)+" ("+MLN.string("quest.reputationlost")+": "+getCurrentStep().penaltyReputation+")");
+					ServerSender.sendChat(profile.getPlayer(),EnumChatFormatting.RED,getDescriptionTimeUp(profile)+" ("+MLN.string("quest.reputationlost")+": "+getCurrentStep().penaltyReputation+")");
 				}
 
 				destroySelf();
@@ -187,16 +186,16 @@ public class Quest {
 
 			for (final InvItem item : getCurrentStep().requiredGood.keySet()) {
 				if (item.special==0) {
-					villager.addToInv(item.id(), item.meta, getCurrentStep().requiredGood.get(item));
-					MillCommonUtilities.getItemsFromChest(player.inventory, item.id(), item.meta, getCurrentStep().requiredGood.get(item));
+					villager.addToInv(item.getItem(), item.meta, getCurrentStep().requiredGood.get(item));
+					MillCommonUtilities.getItemsFromChest(player.inventory, item.getItem(), item.meta, getCurrentStep().requiredGood.get(item));
 				}
 			}
 
 			for (final InvItem item : getCurrentStep().rewardGoods.keySet()) {
-				final int nbLeft=getCurrentStep().rewardGoods.get(item)-MillCommonUtilities.putItemsInChest(player.inventory, item.id(), item.meta, getCurrentStep().rewardGoods.get(item));
+				final int nbLeft=getCurrentStep().rewardGoods.get(item)-MillCommonUtilities.putItemsInChest(player.inventory, item.getItem(), item.meta, getCurrentStep().rewardGoods.get(item));
 
 				if (nbLeft>0) {//couldn't fit in inventory
-					EntityItem entItem=MillCommonUtilities.spawnItem(world, villager.getPos(), new ItemStack(item.id(),nbLeft,item.meta), 0);
+					EntityItem entItem=MillCommonUtilities.spawnItem(world, villager.getPos(), new ItemStack(item.getItem(),nbLeft,item.meta), 0);
 					
 					if (entItem.getEntityItem().getItem() instanceof IItemInitialEnchantmens) {
 						((IItemInitialEnchantmens)entItem.getEntityItem().getItem()).applyEnchantments(entItem.getEntityItem());
@@ -212,7 +211,7 @@ public class Quest {
 			}
 
 			if (getCurrentStep().rewardReputation>0) {
-				mw.getProfile(player.username).adjustReputation(villager.getTownHall(),getCurrentStep().rewardReputation);
+				mw.getProfile(player.getDisplayName()).adjustReputation(villager.getTownHall(),getCurrentStep().rewardReputation);
 
 				reward+=" "+getCurrentStep().rewardReputation+" reputation";
 
@@ -226,15 +225,9 @@ public class Quest {
 					reward+=" "+experience+" experience";
 					MillCommonUtilities.spawnExp(world, villager.getPos().getRelative(0, 2, 0), experience);
 				}
-
-				if (ModLoader.isModLoaded("mod_HeroesGuild")) {
-					adjustToKRep(getCurrentStep().rewardReputation);
-					reward+=" "+(getCurrentStep().rewardReputation*TOK_REP_MULTIPLE)+" Tale of Kingdoms reputation";
-				}
-
 			}
 
-			mw.getProfile(player.username).adjustLanguage(villager.getCulture().key, QUEST_LANGUAGE_BONUS);
+			mw.getProfile(player.getDisplayName()).adjustLanguage(villager.getCulture().key, QUEST_LANGUAGE_BONUS);
 
 			if (!world.isRemote) {
 
@@ -260,7 +253,7 @@ public class Quest {
 
 
 
-			String res=getDescriptionSuccess(mw.getProfile(player.username));
+			String res=getDescriptionSuccess(mw.getProfile(player.getDisplayName()));
 
 			if (reward.length()>0) {
 				res+="<ret><ret>"+MLN.string("quest.obtained")+":"+reward;
@@ -270,7 +263,7 @@ public class Quest {
 			if (currentStep>=quest.steps.size()) {
 				player.addStat(MillAchievements.thequest, 1);
 
-				if (mw.getProfile(player.username).isWorldQuestFinished()) {
+				if (mw.getProfile(player.getDisplayName()).isWorldQuestFinished()) {
 					player.addStat(MillAchievements.forbiddenknwoledge, 1);
 				}
 
@@ -395,7 +388,7 @@ public class Quest {
 
 			final MillVillager cv=getCurrentVillager().getVillager(world);
 			if ((cv != null) && (getCurrentStep().penaltyReputation>0)) {
-				mw.getProfile(player.username).adjustReputation(cv.getTownHall(),-getCurrentStep().penaltyReputation);
+				mw.getProfile(player.getDisplayName()).adjustReputation(cv.getTownHall(),-getCurrentStep().penaltyReputation);
 				replost=" (Reputation lost: "+getCurrentStep().penaltyReputation+")";
 			}
 
@@ -403,7 +396,7 @@ public class Quest {
 			applyPlayerTags(getCurrentStep().setPlayerTagsFailure,getCurrentStep().clearPlayerTagsFailure);
 			applyGlobalTags(getCurrentStep().setGlobalTagsFailure,getCurrentStep().clearGlobalTagsFailure);
 
-			final String s=getDescriptionRefuse(mw.getProfile(player.username))+replost;
+			final String s=getDescriptionRefuse(mw.getProfile(player.getDisplayName()))+replost;
 
 
 			destroySelf();
@@ -562,7 +555,7 @@ public class Quest {
 
 			final MillWorld mw=Mill.getMillWorld(player.worldObj);
 
-			final UserProfile profile=mw.getProfile(player.username);
+			final UserProfile profile=mw.getProfile(player.getDisplayName());
 
 			String lackingGoods=null;
 			for (final InvItem item : requiredGood.keySet()) {
@@ -586,13 +579,13 @@ public class Quest {
 					for (int i=0;i<player.inventory.getSizeInventory();i++) {
 						final ItemStack stack = player.inventory.getStackInSlot(i);
 
-						if ((stack!=null) && stack.isItemEnchanted() && (Item.itemsList[stack.itemID] instanceof ItemSword)) {
+						if ((stack!=null) && stack.isItemEnchanted() && (stack.getItem() instanceof ItemSword)) {
 							nbenchanted++;
 						}
 					}
 					diff=requiredGood.get(item)-nbenchanted;
 				} else {
-					diff=requiredGood.get(item)-MillCommonUtilities.countChestItems(player.inventory, item.id(), item.meta);
+					diff=requiredGood.get(item)-MillCommonUtilities.countChestItems(player.inventory, item.getItem(), item.meta);
 				}
 
 				if (diff>0) {

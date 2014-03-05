@@ -6,6 +6,7 @@ package org.millenaire.common.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -26,14 +27,14 @@ import org.millenaire.common.network.ServerSender;
 public class ItemMillSeeds extends ItemText
 {
 
-	public final int cropID;
+	public final Block crop;
 	public final int cropMeta;
 	public final String cropKey;
 
-	public ItemMillSeeds(int i,String iconName, int j, int k, String cropKey)
+	public ItemMillSeeds(String iconName, Block j, int k, String cropKey)
 	{
-		super(i,iconName);
-		cropID = j;
+		super(iconName);
+		crop = j;
 		cropMeta=k;
 		this.cropKey=cropKey;
 		this.setCreativeTab(Mill.tabMillenaire);
@@ -49,7 +50,7 @@ public class ItemMillSeeds extends ItemText
 		if (!entityplayer.canPlayerEdit(i, j, k, l, itemstack) || !entityplayer.canPlayerEdit(i, j + 1, k, l, itemstack))
 			return false;
 
-		final UserProfile profile=Mill.getMillWorld(world).getProfile(entityplayer.username);
+		final UserProfile profile=Mill.getMillWorld(world).getProfile(entityplayer.getDisplayName());
 
 		if (!profile.isTagSet(MillWorld.CROP_PLANTING+cropKey) && !MLN.DEV) {
 			if (!world.isRemote) {
@@ -58,11 +59,11 @@ public class ItemMillSeeds extends ItemText
 			return false;
 		}
 
-		final int i1 = world.getBlockId(i, j, k);
-		if ((i1 == Block.tilledField.blockID) && world.isAirBlock(i, j + 1, k))
+		final Block block = world.getBlock(i, j, k);
+		if ((block == Blocks.farmland) && world.isAirBlock(i, j + 1, k))
 		{
 			
-			MillCommonUtilities.setBlockAndMetadata(world,i,j+1,k,cropID, cropMeta, true, false);
+			MillCommonUtilities.setBlockAndMetadata(world,i,j+1,k,crop, cropMeta, true, false);
 			itemstack.stackSize--;
 			
 			if (!world.isRemote) {

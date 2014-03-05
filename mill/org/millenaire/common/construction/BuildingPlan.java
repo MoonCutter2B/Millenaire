@@ -19,6 +19,8 @@ import javax.imageio.ImageIO;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButton;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityDispenser;
@@ -81,27 +83,35 @@ public class BuildingPlan {
 			final Point p=Point.read(nbttagcompound, label+"pos");
 			return new BuildingBlock(p,nbttagcompound.getInteger(label+"bid"),nbttagcompound.getInteger(label+"meta"),nbttagcompound.getInteger(label+"special"));
 		}
-		public short bid;
+		public Block block;
 		public byte meta;
 		public Point p;
 
-		public byte special=0;
+		public byte special;
 
 
 
-		BuildingBlock(Point p,int bid) {
-			this(p,bid,0);
+		BuildingBlock(Point p,Block block) {
+			this(p,block,0);
 		}
 
-		public BuildingBlock(Point p,int bid,int meta) {
+		public BuildingBlock(Point p,Block block,int meta) {
 			this.p=p;
-			this.bid=(short) bid;
+			this.block=block;
 			this.meta=(byte) meta;
+			special=0;
 		}
 
-		public BuildingBlock(Point p,int bid,int meta,int special) {
+		public BuildingBlock(Point p,Block block,int meta,int special) {
 			this.p=p;
-			this.bid=(short) bid;
+			this.block=block;
+			this.meta=(byte) meta;
+			this.special=(byte) special;
+		}
+		
+		public BuildingBlock(Point p,int blockID,int meta,int special) {
+			this.p=p;
+			this.block=(Block) Block.blockRegistry.getObjectById(blockID);
 			this.meta=(byte) meta;
 			this.special=(byte) special;
 		}
@@ -111,9 +121,9 @@ public class BuildingPlan {
 			if (special!=0)
 				return false;
 
-			final int bid=MillCommonUtilities.getBlock(world, p);
+			final Block block=MillCommonUtilities.getBlock(world, p);
 
-			if (this.bid!=bid)
+			if (this.block!=block)
 				return false;
 
 			final int meta=MillCommonUtilities.getBlockMeta(world, p);
@@ -130,15 +140,13 @@ public class BuildingPlan {
 			int targetPathLevel=0;
 
 			for (int i=0;i<th.villageType.pathMaterial.size();i++) {
-				if ((th.villageType.pathMaterial.get(i).id()==bid || (th.villageType.pathMaterial.get(i).id()==Mill.path.blockID && bid==Mill.pathSlab.blockID))
+				if ((th.villageType.pathMaterial.get(i).getBlock()==block || (th.villageType.pathMaterial.get(i).getBlock()==Mill.path && block==Mill.pathSlab))
 						&& th.villageType.pathMaterial.get(i).meta==meta)
 					targetPathLevel=i;
 			}
 
-			int bid=p.getId(th.worldObj);
+			Block currentBlock=p.getBlock(th.worldObj);
 			int meta=p.getMeta(th.worldObj);
-			//int bidAbove=p.getAbove().getId(th.worldObj);
-			//int bidBelow=p.getBelow().getId(th.worldObj);
 
 			/**
 			//if there's a path above, clear it
@@ -151,12 +159,12 @@ public class BuildingPlan {
 				if (MillCommonUtilities.getBlockIdValidGround(p.getRelative(0, -2, 0).getId(th.worldObj),true)>0)
 					p.getBelow().setBlock(th.worldObj,MillCommonUtilities.getBlockIdValidGround(p.getRelative(0, -2, 0).getId(th.worldObj),true), 0, true, false);
 				else
-					p.getBelow().setBlock(th.worldObj, Block.dirt.blockID, 0, true, false);
+					p.getBelow().setBlock(th.worldObj, Blocks.dirt.blockID, 0, true, false);
 			}**/
 
-			if (bid!=Mill.path.blockID && bid!=Mill.pathSlab.blockID && MillCommonUtilities.canPathBeBuiltHere(bid,meta)) {
+			if (currentBlock!=Mill.path && currentBlock!=Mill.pathSlab && MillCommonUtilities.canPathBeBuiltHere(currentBlock,meta)) {
 				build(th.worldObj, false, false);
-			} else if (bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) {
+			} else if (currentBlock==Mill.path || currentBlock==Mill.pathSlab) {
 				int currentPathLevel=Integer.MAX_VALUE;
 
 				for (int i=0;i<th.villageType.pathMaterial.size();i++) {
@@ -182,65 +190,65 @@ public class BuildingPlan {
 
 				if ((special!=BuildingBlock.PRESERVEGROUNDDEPTH) && (special!=BuildingBlock.PRESERVEGROUNDSURFACE) && (special!=BuildingBlock.CLEARTREE)) {
 					//preserve sign posts when importing
-					if (!wandimport || (bid!=0) || (MillCommonUtilities.getBlock(world, p)!=Block.signPost.blockID)) {
+					if (!wandimport || (block!=Blocks.air) || (MillCommonUtilities.getBlock(world, p)!=Blocks.standing_sign)) {
 
-						MillCommonUtilities.setBlockAndMetadata(world, p, bid, meta, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p, block, meta, notifyBlocks, playSound);
 					}
 				}
 
 				if (special==BuildingBlock.PRESERVEGROUNDDEPTH || special==BuildingBlock.PRESERVEGROUNDSURFACE) {
-					int bid=MillCommonUtilities.getBlock(world, p);
+					Block block=MillCommonUtilities.getBlock(world, p);
 
 					boolean surface=(special==BuildingBlock.PRESERVEGROUNDSURFACE);
 
-					int validGroundId=MillCommonUtilities.getBlockIdValidGround(bid,surface);
+					Block validGroundBlock=MillCommonUtilities.getBlockIdValidGround(block,surface);
 
-					if (validGroundId==-1) {
+					if (validGroundBlock==null) {
 						Point below=p.getBelow();
-						int targetbid=0;
-						while ((targetbid==0) && (below.getiY()>0)) {
-							bid=MillCommonUtilities.getBlock(world, below);
-							if (MillCommonUtilities.getBlockIdValidGround(bid,surface)>0) {
-								targetbid=MillCommonUtilities.getBlockIdValidGround(bid,surface);
+						Block targetblock=null;
+						while ((targetblock==null) && (below.getiY()>0)) {
+							block=MillCommonUtilities.getBlock(world, below);
+							if (MillCommonUtilities.getBlockIdValidGround(block,surface)!=null) {
+								targetblock=MillCommonUtilities.getBlockIdValidGround(block,surface);
 							}
 							below=below.getBelow();
 						}
 
-						if ((targetbid==Block.dirt.blockID) && worldGeneration) {
-							targetbid=Block.grass.blockID;
-						} else if ((targetbid==Block.grass.blockID) && !worldGeneration) {
-							targetbid=Block.dirt.blockID;
+						if ((targetblock==Blocks.dirt) && worldGeneration) {
+							targetblock=Blocks.grass;
+						} else if ((targetblock==Blocks.grass) && !worldGeneration) {
+							targetblock=Blocks.dirt;
 						}
 
-						if (targetbid==0) {
+						if (targetblock==Blocks.air) {
 							if (worldGeneration) {
-								targetbid=Block.grass.blockID;
+								targetblock=Blocks.grass;
 							} else {
-								targetbid=Block.dirt.blockID;
+								targetblock=Blocks.dirt;
 							}
 						}
 
-						MillCommonUtilities.setBlockAndMetadata(world, p, targetbid, 0, notifyBlocks, playSound);
-					} else if (worldGeneration && (validGroundId==Block.dirt.blockID) && (MillCommonUtilities.getBlock(world, p.getAbove())==0)) {
-						MillCommonUtilities.setBlockAndMetadata(world, p, Block.grass.blockID, 0, notifyBlocks, playSound);
-					} else if (validGroundId!=bid && !(validGroundId==Block.dirt.blockID && bid==Block.grass.blockID)) {
-						MillCommonUtilities.setBlockAndMetadata(world, p, validGroundId, 0, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p, targetblock, 0, notifyBlocks, playSound);
+					} else if (worldGeneration && (validGroundBlock==Blocks.dirt) && (MillCommonUtilities.getBlock(world, p.getAbove())==null)) {
+						MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.grass, 0, notifyBlocks, playSound);
+					} else if (validGroundBlock!=block && !(validGroundBlock==Blocks.dirt && block==Blocks.grass)) {
+						MillCommonUtilities.setBlockAndMetadata(world, p, validGroundBlock, 0, notifyBlocks, playSound);
 					}
-					//MLHelper.setBlockAndMetadata(world, p, Block.brick.blockID, 0);
+					//MLHelper.setBlockAndMetadata(world, p, Blocks.brick_block.blockID, 0);
 				} else if (special==BuildingBlock.CLEARTREE) {
-					final int bid=MillCommonUtilities.getBlock(world, p);
+					final Block block=MillCommonUtilities.getBlock(world, p);
 
-					if ((bid==Block.wood.blockID) || (bid==Block.leaves.blockID)) {
-						MillCommonUtilities.setBlockAndMetadata(world, p, 0, 0, notifyBlocks, playSound);
+					if ((block==Blocks.log) || (block==Blocks.leaves)) {
+						MillCommonUtilities.setBlockAndMetadata(world, p, null, 0, notifyBlocks, playSound);
 
-						final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
+						final Block blockBelow=MillCommonUtilities.getBlock(world, p.getBelow());
 
-						int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow,true);
+						Block targetBlock= MillCommonUtilities.getBlockIdValidGround(blockBelow,true);
 
-						if (worldGeneration && targetBid==Block.dirt.blockID) {
-							MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
-						} else if (targetBid>0) {
-							MillCommonUtilities.setBlock(world, p.getBelow(), targetBid, notifyBlocks, playSound);
+						if (worldGeneration && targetBlock==Blocks.dirt) {
+							MillCommonUtilities.setBlock(world, p.getBelow(), Blocks.grass, notifyBlocks, playSound);
+						} else if (targetBlock!=null) {
+							MillCommonUtilities.setBlock(world, p.getBelow(), targetBlock, notifyBlocks, playSound);
 						}
 					}
 
@@ -248,18 +256,18 @@ public class BuildingPlan {
 
 				} else if (special==BuildingBlock.CLEARGROUND) {
 
-					if (!wandimport || (MillCommonUtilities.getBlock(world, p)!=Block.signPost.blockID)) {
-						MillCommonUtilities.setBlockAndMetadata(world, p, 0, 0, notifyBlocks, playSound);
+					if (!wandimport || (MillCommonUtilities.getBlock(world, p)!=Blocks.standing_sign)) {
+						MillCommonUtilities.setBlockAndMetadata(world, p, null, 0, notifyBlocks, playSound);
 					}
 
-					final int bidBelow=MillCommonUtilities.getBlock(world, p.getBelow());
+					final Block blockBelow=MillCommonUtilities.getBlock(world, p.getBelow());
 
-					int targetBid= MillCommonUtilities.getBlockIdValidGround(bidBelow,true);
+					Block targetBlock= MillCommonUtilities.getBlockIdValidGround(blockBelow,true);
 
-					if (worldGeneration && targetBid==Block.dirt.blockID) {
-						MillCommonUtilities.setBlock(world, p.getBelow(), Block.grass.blockID, notifyBlocks, playSound);
-					} else if (targetBid>0) {
-						MillCommonUtilities.setBlock(world, p.getBelow(), targetBid, notifyBlocks, playSound);
+					if (worldGeneration && targetBlock==Blocks.dirt) {
+						MillCommonUtilities.setBlock(world, p.getBelow(), Blocks.grass, notifyBlocks, playSound);
+					} else if (targetBlock!=null) {
+						MillCommonUtilities.setBlock(world, p.getBelow(), targetBlock, notifyBlocks, playSound);
 					}
 
 				} else if (special==BuildingBlock.TAPESTRY) {
@@ -316,7 +324,7 @@ public class BuildingPlan {
 					}
 				} else if (special==BuildingBlock.BIRCHSPAWN) {
 					if (worldGeneration) {
-						final WorldGenerator wg = new WorldGenForest(false);
+						final WorldGenerator wg = new WorldGenForest(false,true);
 						wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
 					}
 				} else if (special==BuildingBlock.JUNGLESPAWN) {
@@ -325,69 +333,69 @@ public class BuildingPlan {
 						wg.generate(world, MillCommonUtilities.random, p.getiX(), p.getiY(), p.getiZ());
 					}
 				} else if (special==BuildingBlock.SPAWNERSKELETON) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.mob_spawner, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.getSpawnerLogic().setMobID("Skeleton");
+					tileentitymobspawner.func_145881_a().setEntityName("Skeleton");
 				} else if (special==BuildingBlock.SPAWNERZOMBIE) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.mob_spawner, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.getSpawnerLogic().setMobID("Zombie");
+					tileentitymobspawner.func_145881_a().setEntityName("Zombie");
 				} else if (special==BuildingBlock.SPAWNERSPIDER) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.mob_spawner, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.getSpawnerLogic().setMobID("Spider");
+					tileentitymobspawner.func_145881_a().setEntityName("Spider");
 				} else if (special==BuildingBlock.SPAWNERCAVESPIDER) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.mob_spawner, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.getSpawnerLogic().setMobID("CaveSpider");
+					tileentitymobspawner.func_145881_a().setEntityName("CaveSpider");
 				} else if (special==BuildingBlock.SPAWNERCREEPER) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.mob_spawner, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.getSpawnerLogic().setMobID("Creeper");
+					tileentitymobspawner.func_145881_a().setEntityName("Creeper");
 				} else if (special==BuildingBlock.SPAWNERBLAZE) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, Block.mobSpawner.blockID, 0);
+					MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.mob_spawner, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
-					tileentitymobspawner.getSpawnerLogic().setMobID("Blaze");
+					tileentitymobspawner.func_145881_a().setEntityName("Blaze");
 					
 				} else if (special==BuildingBlock.DISPENDERUNKNOWNPOWDER) {
-					MillCommonUtilities.setBlockAndMetadata(world, p, Block.dispenser.blockID, 0);
+					MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.dispenser, 0);
 					final TileEntityDispenser dispenser=p.getDispenser(world);
-					MillCommonUtilities.putItemsInChest(dispenser, Mill.unknownPowder.itemID, 2);
-				} else if (bid==Block.doorWood.blockID) {
+					MillCommonUtilities.putItemsInChest(dispenser, Mill.unknownPowder, 2);
+				} else if (block==Blocks.wooden_door) {
 					if (special==BuildingBlock.INVERTEDDOOR) {
-						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 9, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), block, 9, notifyBlocks, playSound);
 					} else {
-						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 8, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), block, 8, notifyBlocks, playSound);
 					}
-				} else if (bid==Block.doorIron.blockID) {
+				} else if (block==Blocks.iron_door) {
 					if (special==BuildingBlock.INVERTEDDOOR) {
-						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 9, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), block, 9, notifyBlocks, playSound);
 					} else {
-						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), bid, 8, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p.getAbove(), block, 8, notifyBlocks, playSound);
 					}
-				} else if (bid==Block.bed.blockID) {
+				} else if (block==Blocks.bed) {
 					if ((meta & 3) ==0) {
-						MillCommonUtilities.setBlockAndMetadata(world, p.getEast(), bid, meta - 8, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p.getEast(), block, meta - 8, notifyBlocks, playSound);
 					}
 					if ((meta & 3) ==1) {
-						MillCommonUtilities.setBlockAndMetadata(world, p.getSouth(), bid, meta - 8, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p.getSouth(), block, meta - 8, notifyBlocks, playSound);
 					}
 					if ((meta & 3) ==2) {
-						MillCommonUtilities.setBlockAndMetadata(world, p.getWest(), bid, meta - 8, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p.getWest(), block, meta - 8, notifyBlocks, playSound);
 					}
 					if ((meta & 3) ==3) {
-						MillCommonUtilities.setBlockAndMetadata(world, p.getNorth(), bid, meta - 8, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p.getNorth(), block, meta - 8, notifyBlocks, playSound);
 					}
-				} else if (bid==Block.stoneButton.blockID) {
-					final int newmeta=((BlockButton)Block.stoneButton).onBlockPlaced(world, p.getiX(),p.getiY(),p.getiZ(), 0, 0, 0, 0, 0);
+				} else if (block==Blocks.stone_button) {
+					final int newmeta=((BlockButton)Blocks.stone_button).onBlockPlaced(world, p.getiX(),p.getiY(),p.getiZ(), 0, 0, 0, 0, 0);
 
 					MillCommonUtilities.setBlockMetadata(world, p, newmeta, notifyBlocks);
-				} else if (bid==Block.waterStill.blockID) {
+				} else if (block==Blocks.water) {
 					MillCommonUtilities.notifyBlock(world, p);
-				} else if (bid==Block.furnaceIdle.blockID) {
+				} else if (block==Blocks.furnace) {
 					setFurnaceMeta(world,p);
-				} else if (bid==Block.portal.blockID) {
-					Block.portal.tryToCreatePortal(world,p.getiX(),p.getiY(),p.getiZ());
+				} else if (block==Blocks.portal) {
+					Blocks.portal.func_150000_e(world,p.getiX(),p.getiY(),p.getiZ());
 				}
 			} catch (Exception e) {
 				MLN.printException("Exception in BuildingBlock.build():",e);
@@ -397,28 +405,28 @@ public class BuildingPlan {
 
 		private void setFurnaceMeta(World world, Point p) {
 
-			final int var5 = p.getRelative(0, 0, -1).getId(world);
-			final int var6 = p.getRelative(0, 0, 1).getId(world);
-			final int var7 = p.getRelative(-1, 0, 0).getId(world);
-			final int var8 = p.getRelative(1, 0, 0).getId(world);
+			final Block var5 = p.getRelative(0, 0, -1).getBlock(world);
+			final Block var6 = p.getRelative(0, 0, 1).getBlock(world);
+			final Block var7 = p.getRelative(-1, 0, 0).getBlock(world);
+			final Block var8 = p.getRelative(1, 0, 0).getBlock(world);
 			byte var9 = 3;
 
-			if (Block.opaqueCubeLookup[var5] && (var5!=Block.furnaceIdle.blockID) && (var5!=Block.furnaceBurning.blockID) && !Block.opaqueCubeLookup[var6])
+			if (var5.isOpaqueCube() && (var5!=Blocks.furnace) && (var5!=Blocks.lit_furnace) && !var6.isOpaqueCube())
 			{
 				var9 = 3;
 			}
 
-			if (Block.opaqueCubeLookup[var6] && (var6!=Block.furnaceIdle.blockID) && (var6!=Block.furnaceBurning.blockID) && !Block.opaqueCubeLookup[var5])
+			if (var6.isOpaqueCube() && (var6!=Blocks.furnace) && (var6!=Blocks.lit_furnace) && !var5.isOpaqueCube())
 			{
 				var9 = 2;
 			}
 
-			if (Block.opaqueCubeLookup[var7] && (var7!=Block.furnaceIdle.blockID) && (var7!=Block.furnaceBurning.blockID) && !Block.opaqueCubeLookup[var8])
+			if (var7.isOpaqueCube() && (var7!=Blocks.furnace) && (var7!=Blocks.lit_furnace) && !var8.isOpaqueCube())
 			{
 				var9 = 5;
 			}
 
-			if (Block.opaqueCubeLookup[var8] && (var8!=Block.furnaceIdle.blockID) && (var8!=Block.furnaceBurning.blockID) && !Block.opaqueCubeLookup[var7])
+			if (var8.isOpaqueCube() && (var8!=Blocks.furnace) && (var8!=Blocks.lit_furnace) && !var7.isOpaqueCube())
 			{
 				var9 = 4;
 			}
@@ -430,11 +438,11 @@ public class BuildingPlan {
 
 		@Override
 		public String toString() {
-			return "(id: "+bid+" meta: "+meta+" pos:"+p+")";
+			return "(block: "+block+" meta: "+meta+" pos:"+p+")";
 		}
 
 		public void write(NBTTagCompound nbttagcompound,String label) {
-			nbttagcompound.setInteger(label+"bid", bid);
+			nbttagcompound.setInteger(label+"bid", Block.getIdFromBlock(block));
 			nbttagcompound.setInteger(label+"meta", meta);
 			nbttagcompound.setInteger(label+"special", special);
 			p.write(nbttagcompound, label+"pos");
@@ -519,42 +527,53 @@ public class BuildingPlan {
 				MLN.major(null, "Loading colour point: "+getColourString(colour)+", "+params[0]);
 			}
 
-			params[1]=MillCommonUtilities.swapConfigBlockId(params[1]);
-
-			if (Integer.parseInt(params[1]) == -1)
+			if (params[1].length()==0)
 				return new PointType(colour,params[0]);
 			else
-				return new PointType(colour,Integer.parseInt(params[1]),Integer.parseInt(params[2]),Boolean.parseBoolean(params[3]));
+				return new PointType(colour,params[1],Integer.parseInt(params[2]),Boolean.parseBoolean(params[3]));
 
 		}
-		int colour=-1,blockId=-1,meta=-1;
+		int colour=-1,meta=-1;
 		char letter;
-		String name=null;
+		final String name;
+		Block block;
 
 		boolean secondStep=false;
 
-		public PointType(char letter,int blockId,int meta,boolean secondStep) {
+		public PointType(char letter,String minecraftBlockName,int meta,boolean secondStep) {
 			this.letter=letter;
-			this.blockId=blockId;
+			this.block=Block.getBlockFromName(minecraftBlockName);
 			this.meta=meta;
 			this.secondStep=secondStep;
+			name=null;
+		}
+		
+		public PointType(char letter,Block block,int meta,boolean secondStep) {
+			this.letter=letter;
+			this.block=block;
+			this.meta=meta;
+			this.secondStep=secondStep;
+			name=null;
 		}
 
 		public PointType(char letter,String name) {
 			this.name=name;
 			this.letter=letter;
+			block=null;
 		}
 
-		public PointType(int colour,int blockId,int meta,boolean secondStep) {
+		public PointType(int colour,String minecraftBlockName,int meta,boolean secondStep) {
 			this.colour=colour;
-			this.blockId=blockId;
+			this.block=Block.getBlockFromName(minecraftBlockName);
 			this.meta=meta;
 			this.secondStep=secondStep;
+			name=null;
 		}
 
 		public PointType(int colour,String name) {
 			this.name=name;
 			this.colour=colour;
+			block=null;
 		}
 
 		public boolean isSubType(String type) {
@@ -566,10 +585,14 @@ public class BuildingPlan {
 		public boolean isType(String type) {
 			return type.equalsIgnoreCase(name);
 		}
+		
+		public Block getBlock() {
+			return block;
+		}
 
 		@Override
 		public String toString() {
-			return name+"/"+colour+"/"+blockId+"/"+meta+"/"+MillCommonUtilities.getPointHash(blockId, meta);
+			return name+"/"+colour+"/"+block+"/"+meta+"/"+MillCommonUtilities.getPointHash(block, meta);
 		}
 	}
 	public static class StartingGood {
@@ -708,9 +731,9 @@ public class BuildingPlan {
 			int xEnd=startPoint.getiX()+1;
 			boolean found=false;
 			while (!found && (xEnd<(startPoint.getiX()+257))) {
-				final int bid=world.getBlockId(xEnd, startPoint.getiY(), startPoint.getiZ());
+				final Block block=world.getBlock(xEnd, startPoint.getiY(), startPoint.getiZ());
 
-				if (bid==Block.signPost.blockID) {
+				if (block==Blocks.standing_sign) {
 					found=true;
 					break;
 				}
@@ -725,9 +748,9 @@ public class BuildingPlan {
 			int zEnd=startPoint.getiZ()+1;
 			found=false;
 			while (!found && (zEnd<(startPoint.getiZ()+257))) {
-				final int bid=world.getBlockId(startPoint.getiX(), startPoint.getiY(), zEnd);
+				final Block block=world.getBlock(startPoint.getiX(), startPoint.getiY(), zEnd);
 
-				if (bid==Block.signPost.blockID) {
+				if (block==Blocks.standing_sign) {
 					found=true;
 					break;
 				}
@@ -804,18 +827,18 @@ public class BuildingPlan {
 					for (int k=0;k<width;k++) {
 						level[i][k]=null;
 
-						final int bid=world.getBlockId(i+startPoint.getiX()+1, j+startPoint.getiY()+startLevel, k+startPoint.getiZ()+1);
+						final Block block=world.getBlock(i+startPoint.getiX()+1, j+startPoint.getiY()+startLevel, k+startPoint.getiZ()+1);
 						final int meta=world.getBlockMetadata(i+startPoint.getiX()+1, j+startPoint.getiY()+startLevel, k+startPoint.getiZ()+1);
 
-						if (bid!=0) {
+						if (block!=Blocks.air) {
 							blockFound=true;
 						}
 
-						final PointType pt=reverseColourPoints.get(MillCommonUtilities.getPointHash(bid, meta));
+						final PointType pt=reverseColourPoints.get(MillCommonUtilities.getPointHash(block, meta));
 
 						if (pt!=null) {
 
-							if (exportSnow || (pt.blockId!=Block.snow.blockID)) {//snow doesn't get exported as 99% of the case the player did not want it
+							if (exportSnow || (pt.block!=Blocks.snow)) {//snow doesn't get exported as 99% of the case the player did not want it
 
 								//does the block exist in an earlier upgrade?
 								PointType existing=null;
@@ -829,17 +852,17 @@ public class BuildingPlan {
 								}
 
 								if (existing==null) {
-									if ((pt.name!=null) || (pt.blockId!=0) || (upgradeLevel!=0)) {
+									if ((pt.name!=null) || (pt.block!=Blocks.air) || (upgradeLevel!=0)) {
 										level[i][k]=pt;
 									}
 								} else {
-									if ((existing!=pt) && !(existing.isType(bempty) && (pt.blockId==0))) {
+									if ((existing!=pt) && !(existing.isType(bempty) && (pt.block!=Blocks.air))) {
 										level[i][k]=pt;
 									}
 								}
 							}
 						} else {
-							Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(),MLN.ORANGE, "export.errorunknownblockid",""+bid+"/"+meta+"/"+MillCommonUtilities.getPointHash(bid, meta));
+							Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(),MLN.ORANGE, "export.errorunknownblockid",""+block+"/"+meta+"/"+MillCommonUtilities.getPointHash(block, meta));
 						}
 					}
 				}
@@ -998,53 +1021,49 @@ public class BuildingPlan {
 		HashMap<InvItem,String> picts=new HashMap<InvItem,String>();
 		HashMap<InvItem,String> links=new HashMap<InvItem,String>();
 
-		picts.put(new InvItem(Block.wood,-1), "Wood_Any.gif");
-		picts.put(new InvItem(Block.wood,0), "Wood.png");
-		picts.put(new InvItem(Block.wood,1), "Wood_Pine.png");
-		picts.put(new InvItem(Block.wood,2), "Wood_Birch.png");
-		picts.put(new InvItem(Block.wood,3), "Wood_Jungle.png");
+		picts.put(new InvItem(Blocks.log,-1), "Wood_Any.gif");
+		picts.put(new InvItem(Blocks.log,0), "Wood.png");
+		picts.put(new InvItem(Blocks.log,1), "Wood_Pine.png");
+		picts.put(new InvItem(Blocks.log,2), "Wood_Birch.png");
+		picts.put(new InvItem(Blocks.log,3), "Wood_Jungle.png");
 
-		picts.put(new InvItem(Block.stone,0), "Stone.png");
-		picts.put(new InvItem(Block.glass,0), "Glass.png");
-		picts.put(new InvItem(Block.cloth,0), "White_Wool.png");
-		picts.put(new InvItem(Block.sandStone,0), "Sandstone.png");
-		picts.put(new InvItem(Block.cobblestone,0), "Cobblestone.png");
-		picts.put(new InvItem(Block.brick,0), "Brick.png");
-		picts.put(new InvItem(Block.sand,0), "Sand.png");
-		picts.put(new InvItem(Block.glowStone,0), "Glowstone_(Block).png");
-		picts.put(new InvItem(Block.bookShelf,0), "Bookshelf.png");
-		picts.put(new InvItem(Block.gravel,0), "Gravel.png");
-		picts.put(new InvItem(Block.sandStone,2), "SmoothSandstone.png");
-		picts.put(new InvItem(Block.stoneBrick,3), "ChiselledStoneBricks.png");
-		picts.put(new InvItem(Block.stoneBrick,2), "CrackedStoneBricks.png");
-		picts.put(new InvItem(Block.tallGrass,1), "TallGrass.png");
-		picts.put(new InvItem(Block.tallGrass,2), "Fern.png");
-		picts.put(new InvItem(Block.cobblestoneMossy,0), "MossyCobblestone.png");
-		picts.put(new InvItem(Block.stoneBrick,1), "MossyStoneBricks.png");
-		picts.put(new InvItem(Block.oreIron,0), "Ore_Iron.png");
-		picts.put(new InvItem(Block.oreCoal,0), "Ore_Coal.png");
-		picts.put(new InvItem(Block.oreGold,0), "Ore_Gold.png");
-		picts.put(new InvItem(Block.oreRedstone,0), "Ore_Redstone.png");
-		picts.put(new InvItem(Block.oreLapis,0), "Ore_Lapis_Lazuli.png");
-		picts.put(new InvItem(Block.oreDiamond,0), "Ore_Diamond.png");
-		picts.put(new InvItem(Block.pumpkinLantern,0), "Jack-O-Lantern.png");
-		picts.put(new InvItem(Block.melon,0), "Melon (Block).png");
-		picts.put(new InvItem(Block.blockLapis,0), "Lapis_Lazuli_(Block).png");
-		picts.put(new InvItem(Block.torchRedstoneIdle,0), "Redstone_Torch.png");
-		picts.put(new InvItem(Block.bedrock,0), "Bedrock.png");
-		picts.put(new InvItem(Block.netherStalk,0), "Nether_Wart.png");
-		picts.put(new InvItem(Block.lavaStill,0), "Lava.png");
-		picts.put(new InvItem(Block.lavaMoving,0), "Lava.png");
-		picts.put(new InvItem(Block.stoneButton,0), "Stone_Button.png");
-		picts.put(new InvItem(Block.redstoneWire,0), "Redstone_Dust.png");
-		picts.put(new InvItem(Block.stone,0), "Stone.png");
-		picts.put(new InvItem(Block.stone,0), "Stone.png");
-		picts.put(new InvItem(Block.stone,0), "Stone.png");
+		picts.put(new InvItem(Blocks.stone,0), "Stone.png");
+		picts.put(new InvItem(Blocks.glass,0), "Glass.png");
+		picts.put(new InvItem(Blocks.wool,0), "White_Wool.png");
+		picts.put(new InvItem(Blocks.sandstone,0), "Sandstone.png");
+		picts.put(new InvItem(Blocks.cobblestone,0), "Cobblestone.png");
+		picts.put(new InvItem(Blocks.brick_block,0), "Brick.png");
+		picts.put(new InvItem(Blocks.sand,0), "Sand.png");
+		picts.put(new InvItem(Blocks.glowstone,0), "Glowstone_(Block).png");
+		picts.put(new InvItem(Blocks.bookshelf,0), "Bookshelf.png");
+		picts.put(new InvItem(Blocks.gravel,0), "Gravel.png");
+		picts.put(new InvItem(Blocks.sandstone,2), "SmoothSandstone.png");
+		picts.put(new InvItem(Blocks.stonebrick,3), "ChiselledStoneBricks.png");
+		picts.put(new InvItem(Blocks.stonebrick,2), "CrackedStoneBricks.png");
+		picts.put(new InvItem(Blocks.tallgrass,1), "TallGrass.png");
+		picts.put(new InvItem(Blocks.tallgrass,2), "Fern.png");
+		picts.put(new InvItem(Blocks.mossy_cobblestone,0), "MossyCobblestone.png");
+		picts.put(new InvItem(Blocks.stonebrick,1), "MossyStoneBricks.png");
+		picts.put(new InvItem(Blocks.iron_ore,0), "Ore_Iron.png");
+		picts.put(new InvItem(Blocks.coal_ore,0), "Ore_Coal.png");
+		picts.put(new InvItem(Blocks.gold_ore,0), "Ore_Gold.png");
+		picts.put(new InvItem(Blocks.redstone_ore,0), "Ore_Redstone.png");
+		picts.put(new InvItem(Blocks.lapis_ore,0), "Ore_Lapis_Lazuli.png");
+		picts.put(new InvItem(Blocks.diamond_ore,0), "Ore_Diamond.png");
+		picts.put(new InvItem(Blocks.lit_pumpkin,0), "Jack-O-Lantern.png");
+		picts.put(new InvItem(Blocks.melon_block,0), "Melon (Block).png");
+		picts.put(new InvItem(Blocks.lapis_block,0), "Lapis_Lazuli_(Block).png");
+		picts.put(new InvItem(Blocks.unlit_redstone_torch,0), "Redstone_Torch.png");
+		picts.put(new InvItem(Blocks.bedrock,0), "Bedrock.png");
+		picts.put(new InvItem(Blocks.nether_wart,0), "Nether_Wart.png");
+		picts.put(new InvItem(Blocks.lava,0), "Lava.png");
+		picts.put(new InvItem(Blocks.flowing_lava,0), "Lava.png");
+		picts.put(new InvItem(Blocks.stone_button,0), "Stone_Button.png");
+		picts.put(new InvItem(Blocks.redstone_wire,0), "Redstone_Dust.png");
+		picts.put(new InvItem(Blocks.stone,0), "Stone.png");
 
-		picts.put(new InvItem(Item.ingotIron,0), "Ironitm.png");
-		picts.put(new InvItem(Item.ingotGold,0), "Golditm.png");
-		picts.put(new InvItem(Item.ingotIron,0), "Ironitm.png");
-		picts.put(new InvItem(Item.ingotIron,0), "Ironitm.png");
+		picts.put(new InvItem(Items.iron_ingot,0), "Ironitm.png");
+		picts.put(new InvItem(Items.gold_ingot,0), "Golditm.png");
 
 		picts.put(new InvItem(Mill.wood_decoration,0), "ML_colombages_plain.png");
 		links.put(new InvItem(Mill.wood_decoration,0), "|link=Norman:Colombages");
@@ -1073,11 +1092,11 @@ public class BuildingPlan {
 		links.put(new InvItem(Mill.mayanstatue,0), "|link=Mayan:Carving");
 
 		picts.put(new InvItem(Mill.byzantineiconsmall,0), "ML_ByzantineIconSmall.png");
-		links.put(new InvItem(Mill.byzantineiconsmall,0), "|link=Byzantine:Icon");
+		links.put(new InvItem(Mill.byzantineiconsmall,0), "|link=Byzantine:IIcon");
 		picts.put(new InvItem(Mill.byzantineiconmedium,0), "ML_ByzantineIconMedium.png");
-		links.put(new InvItem(Mill.byzantineiconmedium,0), "|link=Byzantine:Icon");
+		links.put(new InvItem(Mill.byzantineiconmedium,0), "|link=Byzantine:IIcon");
 		picts.put(new InvItem(Mill.byzantineiconlarge,0), "ML_ByzantineIconLarge.png");
-		links.put(new InvItem(Mill.byzantineiconlarge,0), "|link=Byzantine:Icon");
+		links.put(new InvItem(Mill.byzantineiconlarge,0), "|link=Byzantine:IIcon");
 
 		picts.put(new InvItem(Mill.byzantine_tiles,0), "ML_byzSlab.png");
 		links.put(new InvItem(Mill.byzantine_tiles,0), "|link=Blocks#Byzantine");
@@ -1159,7 +1178,7 @@ public class BuildingPlan {
 						Collections.sort(items);
 
 						for (final InvItem key : items) {
-							String pict="Unknown Pict:"+key.id()+"/"+key.meta;
+							String pict="Unknown Pict:"+key.item+"/"+key.meta;
 							String link="";
 
 							if (picts.containsKey(key))
@@ -1488,21 +1507,21 @@ public class BuildingPlan {
 		charPoints.put('S', new PointType('S',bsignwallGuess));
 
 
-		charPoints.put('/', new PointType('/',0,0,false));
-		charPoints.put('d', new PointType('d',Block.dirt.blockID,0,false));
-		charPoints.put('p', new PointType('p',Block.planks.blockID,0,false));
-		charPoints.put('g', new PointType('g',Block.glass.blockID,0,false));
-		charPoints.put('c', new PointType('c',Block.cobblestone.blockID,0,false));
-		charPoints.put('C', new PointType('C',Block.workbench.blockID,0,false));
-		charPoints.put('F', new PointType('F',Block.furnaceIdle.blockID,0,false));
-		charPoints.put('W', new PointType('W',Block.cloth.blockID,0,false));
-		charPoints.put('o', new PointType('o',Block.stone.blockID,0,false));
-		charPoints.put('h', new PointType('h',Block.stairsCobblestone.blockID,0,false));
-		charPoints.put('I', new PointType('I',Block.blockIron.blockID,0,false));
-		charPoints.put('l', new PointType('h',Block.stoneSingleSlab.blockID,0,false));
-		charPoints.put('T', new PointType('T',Block.torchWood.blockID,0,true));
-		charPoints.put('f', new PointType('f',Block.fence.blockID,0,true));
-		charPoints.put('w', new PointType('w',Block.waterStill.blockID,0,true));
+		charPoints.put('/', new PointType('/',Blocks.air,0,false));
+		charPoints.put('d', new PointType('d',Blocks.dirt,0,false));
+		charPoints.put('p', new PointType('p',Blocks.planks,0,false));
+		charPoints.put('g', new PointType('g',Blocks.glass,0,false));
+		charPoints.put('c', new PointType('c',Blocks.cobblestone,0,false));
+		charPoints.put('C', new PointType('C',Blocks.crafting_table,0,false));
+		charPoints.put('F', new PointType('F',Blocks.furnace,0,false));
+		charPoints.put('W', new PointType('W',Blocks.wool,0,false));
+		charPoints.put('o', new PointType('o',Blocks.stone,0,false));
+		charPoints.put('h', new PointType('h',Blocks.stone_stairs,0,false));
+		charPoints.put('I', new PointType('I',Blocks.iron_block,0,false));
+		charPoints.put('l', new PointType('h',Blocks.stone_slab,0,false));
+		charPoints.put('T', new PointType('T',Blocks.torch,0,true));
+		charPoints.put('f', new PointType('f',Blocks.fence,0,true));
+		charPoints.put('w', new PointType('w',Blocks.water,0,true));
 		return false;
 	}
 	public static HashMap<String,BuildingPlanSet> loadPlans(Vector<File> culturesDirs,Culture culture) {
@@ -1603,16 +1622,18 @@ public class BuildingPlan {
 		//First all the "normal" blocks:
 		for (final PointType pt : colourPoints.values()) {
 			if (pt.name==null) {
+				
+				Block block=pt.getBlock();
 
-				reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.blockId, pt.meta), pt);
+				reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.block, pt.meta), pt);
 
-				if ((pt.blockId==Block.torchWood.blockID) ||
-						(pt.blockId==Block.torchRedstoneIdle.blockID) || (pt.blockId==Block.leaves.blockID)) {
+				if ((block==Blocks.torch) ||
+						(block==Blocks.unlit_redstone_torch) || (block==Blocks.leaves)) {
 					for (int i=0;i<16;i++) {
-						reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.blockId, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.block, i), pt);
 					}
-				} else if (pt.blockId==Mill.path.blockID || pt.blockId==Mill.pathSlab.blockID) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.blockId, pt.meta & 7), pt);
+				} else if (block==Mill.path || block==Mill.pathSlab) {
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.block, pt.meta & 7), pt);
 				}
 
 			}
@@ -1622,302 +1643,302 @@ public class BuildingPlan {
 		for (final PointType pt : colourPoints.values()) {
 			if (pt.name!=null) {
 				if (pt.name.equals(bpreserveground)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.dirt.blockID, 0), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.grass.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.dirt, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.grass, 0), pt);
 				}  else if (pt.name.equals(blockedchest)) {
 					for (int i=0;i<16;i++) {
-						reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.chest.blockID, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.chest, i), pt);
 					}
 					for (int i=0;i<16;i++) {
-						reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.lockedChest.blockID, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.lockedChest, i), pt);
 					}
 
 
 				}  else if (pt.name.equals(blogoakhor)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.wood.blockID, 8), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 8), pt);
 				}  else if (pt.name.equals(blogoakvert)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.wood.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 4), pt);
 
 				}  else if (pt.name.equals(blogpinehor)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.wood.blockID, 8+1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 8+1), pt);
 				}  else if (pt.name.equals(blogpinevert)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.wood.blockID, 4+1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 4+1), pt);
 
 				}  else if (pt.name.equals(blogbirchhor)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.wood.blockID, 8+2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 8+2), pt);
 				}  else if (pt.name.equals(blogbirchvert)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.wood.blockID, 4+2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 4+2), pt);
 
 				}  else if (pt.name.equals(blogjunglehor)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.wood.blockID, 8+3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 8+3), pt);
 				}  else if (pt.name.equals(blogjunglevert)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.wood.blockID, 4+3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 4+3), pt);
 
 
 
 					//Regular stairs:
 				}  else if (pt.name.equals(bwoodstairsOakTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 1), pt);
 				}  else if (pt.name.equals(bwoodstairsOakBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 0), pt);
 				}  else if (pt.name.equals(bwoodstairsOakLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 2), pt);
 				}  else if (pt.name.equals(bwoodstairsOakRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 3), pt);
 				}  else if (pt.name.equals(bwoodstairsPineTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 1), pt);
 				}  else if (pt.name.equals(bwoodstairsPineBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 0), pt);
 				}  else if (pt.name.equals(bwoodstairsPineLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 2), pt);
 				}  else if (pt.name.equals(bwoodstairsPineRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 3), pt);
 
 				}  else if (pt.name.equals(bwoodstairsBirchTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 1), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 0), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 2), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 3), pt);
 
 				}  else if (pt.name.equals(bwoodstairsJungleTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 1), pt);
 				}  else if (pt.name.equals(bwoodstairsJungleBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 0), pt);
 				}  else if (pt.name.equals(bwoodstairsJungleLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 2), pt);
 				}  else if (pt.name.equals(bwoodstairsJungleRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 3), pt);
 
 				}  else if (pt.name.equals(bstonestairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 1), pt);
 				}  else if (pt.name.equals(bstonestairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 0), pt);
 				}  else if (pt.name.equals(bstonestairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 2), pt);
 				}  else if (pt.name.equals(bstonestairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 3), pt);
 
 				}  else if (pt.name.equals(bstonebrickstairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 1), pt);
 				}  else if (pt.name.equals(bstonebrickstairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 0), pt);
 				}  else if (pt.name.equals(bstonebrickstairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 2), pt);
 				}  else if (pt.name.equals(bstonebrickstairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 3), pt);
 
 				}  else if (pt.name.equals(bbrickstairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 1), pt);
 				}  else if (pt.name.equals(bbrickstairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 0), pt);
 				}  else if (pt.name.equals(bbrickstairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 2), pt);
 				}  else if (pt.name.equals(bbrickstairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 3), pt);
 
 				}  else if (pt.name.equals(bsandstonestairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsSandStone.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 1), pt);
 				}  else if (pt.name.equals(bsandstonestairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsSandStone.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 0), pt);
 				}  else if (pt.name.equals(bsandstonestairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsSandStone.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 2), pt);
 				}  else if (pt.name.equals(bsandstonestairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsSandStone.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 3), pt);
 
 					//Inversed stairs:
 				}  else if (pt.name.equals(bwoodstairsOakInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 5), pt);
 				}  else if (pt.name.equals(bwoodstairsOakInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 4), pt);
 				}  else if (pt.name.equals(bwoodstairsOakInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 6), pt);
 				}  else if (pt.name.equals(bwoodstairsOakInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodOak.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 7), pt);
 
 				}  else if (pt.name.equals(bwoodstairsPineInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 5), pt);
 				}  else if (pt.name.equals(bwoodstairsPineInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 4), pt);
 				}  else if (pt.name.equals(bwoodstairsPineInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 6), pt);
 				}  else if (pt.name.equals(bwoodstairsPineInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodSpruce.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 7), pt);
 
 				}  else if (pt.name.equals(bwoodstairsBirchInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 5), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 4), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 6), pt);
 				}  else if (pt.name.equals(bwoodstairsBirchInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodBirch.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 7), pt);
 
 				}  else if (pt.name.equals(bwoodstairsJungleInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 5), pt);
 				}  else if (pt.name.equals(bwoodstairsJungleInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 4), pt);
 				}  else if (pt.name.equals(bwoodstairsJungleInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 6), pt);
 				}  else if (pt.name.equals(bwoodstairsJungleInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsWoodJungle.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 7), pt);
 
 				}  else if (pt.name.equals(bstonestairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 5), pt);
 				}  else if (pt.name.equals(bstonestairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 4), pt);
 				}  else if (pt.name.equals(bstonestairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 6), pt);
 				}  else if (pt.name.equals(bstonestairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsCobblestone.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 7), pt);
 
 				}  else if (pt.name.equals(bstonebrickstairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 5), pt);
 				}  else if (pt.name.equals(bstonebrickstairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 4), pt);
 				}  else if (pt.name.equals(bstonebrickstairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 6), pt);
 				}  else if (pt.name.equals(bstonebrickstairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsStoneBrick.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 7), pt);
 
 				}  else if (pt.name.equals(bbrickstairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 5), pt);
 				}  else if (pt.name.equals(bbrickstairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 4), pt);
 				}  else if (pt.name.equals(bbrickstairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 6), pt);
 				}  else if (pt.name.equals(bbrickstairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsBrick.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 7), pt);
 
 				}  else if (pt.name.equals(bsandstonestairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsSandStone.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 5), pt);
 				}  else if (pt.name.equals(bsandstonestairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsSandStone.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 4), pt);
 				}  else if (pt.name.equals(bsandstonestairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsSandStone.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 6), pt);
 				}  else if (pt.name.equals(bsandstonestairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.stairsSandStone.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 7), pt);
 
 
 				}  else if (pt.name.equals(bbyzantinetiles_bottomtop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tiles.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tiles, 1), pt);
 				}  else if (pt.name.equals(bbyzantinetiles_leftright)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tiles.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tiles, 0), pt);
 				}  else if (pt.name.equals(bbyzantinestonetiles_bottomtop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_stone_tiles.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_stone_tiles, 1), pt);
 				}  else if (pt.name.equals(bbyzantinestonetiles_leftright)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_stone_tiles.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_stone_tiles, 0), pt);
 
 				}  else if (pt.name.equals(bbyzantineslab_bottomtop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab, 1), pt);
 				}  else if (pt.name.equals(bbyzantineslab_leftright)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab, 0), pt);
 				}  else if (pt.name.equals(bbyzantineslab_bottomtop_inv)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab.blockID, 9), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab, 9), pt);
 				}  else if (pt.name.equals(bbyzantineslab_leftright_inv)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab.blockID, 8), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab, 8), pt);
 
 
 				}  else if (pt.name.equals(bsignpostTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.signPost.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.standing_sign, 5), pt);
 				}  else if (pt.name.equals(bsignpostBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.signPost.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.standing_sign, 4), pt);
 				}  else if (pt.name.equals(bsignpostLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.signPost.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.standing_sign, 2), pt);
 				}  else if (pt.name.equals(bsignpostRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.signPost.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.standing_sign, 3), pt);
 
 				}  else if (pt.name.equals(bsignwallTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.signWall.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, 5), pt);
 				}  else if (pt.name.equals(bsignwallBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.signWall.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, 4), pt);
 				}  else if (pt.name.equals(bsignwallLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.signWall.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, 2), pt);
 				}  else if (pt.name.equals(bsignwallRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.signWall.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, 3), pt);
 
 				}  else if (pt.name.equals(bladderTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.ladder.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.ladder, 5), pt);
 				}  else if (pt.name.equals(bladderBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.ladder.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.ladder, 4), pt);
 				}  else if (pt.name.equals(bladderLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.ladder.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.ladder, 2), pt);
 				}  else if (pt.name.equals(bladderRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.ladder.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.ladder, 3), pt);
 
 				}  else if (pt.name.equals(bfurnace)) {
 					for (int i=0;i<16;i++) {
-						reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.furnaceIdle.blockID, i), pt);
-						reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.furnaceBurning.blockID, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.furnace, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.lit_furnace, i), pt);
 					}
 				}  else if (pt.name.equals(bbrewingstand)) {
 					for (int i=0;i<16;i++) {
-						reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.brewingStand.blockID, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brewing_stand, i), pt);
 					}
 				}  else if (pt.name.equals(bdoorTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorWood.blockID, 0), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorWood.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 7), pt);
 				}  else if (pt.name.equals(bdoorBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorWood.blockID, 2), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorWood.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 5), pt);
 				}  else if (pt.name.equals(bdoorLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorWood.blockID, 3), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorWood.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 6), pt);
 				}  else if (pt.name.equals(bdoorRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorWood.blockID, 1), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorWood.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 4), pt);
 
 				}  else if (pt.name.equals(birondoorTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 0), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 7), pt);
 				}  else if (pt.name.equals(birondoorBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 2), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 5), pt);
 				}  else if (pt.name.equals(birondoorLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 3), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 6), pt);
 				}  else if (pt.name.equals(birondoorRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 1), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.doorIron.blockID, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 4), pt);
 
 				}  else if (pt.name.equals(btrapdoorTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.trapdoor.blockID, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.trapdoor, 1), pt);
 				}  else if (pt.name.equals(btrapdoorBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.trapdoor.blockID, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.trapdoor, 0), pt);
 				}  else if (pt.name.equals(btrapdoorLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.trapdoor.blockID, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.trapdoor, 3), pt);
 				}  else if (pt.name.equals(btrapdoorRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.trapdoor.blockID, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.trapdoor, 2), pt);
 
 
 
 
 				}  else if (pt.name.equals(bfenceGateHorizontal)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.fenceGate.blockID, 1), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.fenceGate.blockID, 3), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.fenceGate.blockID, 5), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.fenceGate.blockID, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 7), pt);
 				}  else if (pt.name.equals(bfenceGateVertical)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.fenceGate.blockID, 0), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.fenceGate.blockID, 2), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.fenceGate.blockID, 4), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.fenceGate.blockID, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 6), pt);
 
 
 				}  else if (pt.name.equals(bbedTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.bed.blockID, 8), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.bed, 8), pt);
 				}  else if (pt.name.equals(bbedBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.bed.blockID, 10), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.bed, 10), pt);
 				}  else if (pt.name.equals(bbedLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.bed.blockID, 9), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.bed, 9), pt);
 				}  else if (pt.name.equals(bbedRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.bed.blockID, 11), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.bed, 11), pt);
 
 				}	else if (pt.name.equals(bplainSignGuess)) {
 					for (int i=0;i<16;i++) {
-						reverseColourPoints.put(MillCommonUtilities.getPointHash(Block.signWall.blockID, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, i), pt);
 					}
 				}
 			}
@@ -2194,12 +2215,16 @@ public class BuildingPlan {
 		culture=c;
 	}
 
-	private void addToCost(int id,int nb) {
-		addToCost(id,0,nb);
+	private void addToCost(Block block,int nb) {
+		addToCost(block,0,nb);
+	}
+	
+	private void addToCost(Item item,int nb) {
+		addToCost(Block.getBlockFromItem(item),0,nb);
 	}
 
-	private void addToCost(int id,int meta,int nb) {
-		final InvItem key=new InvItem(id,meta);
+	private void addToCost(Block block,int meta,int nb) {
+		final InvItem key=new InvItem(block,meta);
 
 		if (resCost.containsKey(key)) {
 			nb+=resCost.get(key);
@@ -2236,7 +2261,7 @@ public class BuildingPlan {
 				for (int x=location.pos.getiX()+(length/2);x>=(location.pos.getiX()-(length/2));x--) {
 
 					for (int y=location.pos.getiY()+plan.length;y>=location.pos.getiY();y--) {
-						if (worldObj.getBlockId(x, y, z)==Block.signWall.blockID) {
+						if (worldObj.getBlock(x, y, z)==Blocks.wall_sign) {
 							final TileEntitySign sign=new Point(x,y,z).getSign(worldObj);
 							if (sign!=null) {
 								if (signNb<hofData.size()) {
@@ -2317,93 +2342,93 @@ public class BuildingPlan {
 					if (p==null)
 						throw new MillenaireException("PointType null at "+i+"/"+j+"/"+k);
 
-					if ((p.blockId==Block.wood.blockID) && ((p.meta & 3)==0)) {
+					if ((p.block==Blocks.log) && ((p.meta & 3)==0)) {
 						plankOakCost+=4;
-					} else if ((p.blockId==Block.wood.blockID) && ((p.meta & 3)==1)) {
+					} else if ((p.block==Blocks.log) && ((p.meta & 3)==1)) {
 						plankPineCost+=4;
-					} else if ((p.blockId==Block.wood.blockID) && ((p.meta & 3)==2)) {
+					} else if ((p.block==Blocks.log) && ((p.meta & 3)==2)) {
 						plankBirchCost+=4;
-					} else if ((p.blockId==Block.wood.blockID) && ((p.meta & 3)==3)) {
+					} else if ((p.block==Blocks.log) && ((p.meta & 3)==3)) {
 						plankJungleCost+=4;
-					} else if ((p.blockId==Block.planks.blockID) && (p.meta==0)) {
+					} else if ((p.block==Blocks.planks) && (p.meta==0)) {
 						plankOakCost++;
-					} else if ((p.blockId==Block.planks.blockID) && (p.meta==1)) {
+					} else if ((p.block==Blocks.planks) && (p.meta==1)) {
 						plankPineCost++;
-					} else if ((p.blockId==Block.planks.blockID) && (p.meta==2)) {
+					} else if ((p.block==Blocks.planks) && (p.meta==2)) {
 						plankBirchCost++;
-					} else if ((p.blockId==Block.planks.blockID) && (p.meta==3)) {
+					} else if ((p.block==Blocks.planks) && (p.meta==3)) {
 						plankJungleCost++;
 
-					} else if (p.blockId==Mill.byzantine_tiles.blockID) {
+					} else if (p.block==Mill.byzantine_tiles) {
 						byzBricksHalf+=2;
-					} else if (p.blockId==Mill.byzantine_tile_slab.blockID) {
+					} else if (p.block==Mill.byzantine_tile_slab) {
 						byzBricksHalf++;
-					} else if (p.blockId==Mill.byzantine_stone_tiles.blockID) {
+					} else if (p.block==Mill.byzantine_stone_tiles) {
 						byzBricksHalf++;
-						addToCost(Block.stone.blockID,1);
+						addToCost(Blocks.stone,1);
 
-					} else if (p.blockId==Block.thinGlass.blockID) {
+					} else if (p.block==Blocks.glass_pane) {
 						glassPaneCost++;
-					} else if (p.blockId==Block.workbench.blockID) {
+					} else if (p.block==Blocks.crafting_table) {
 						plankCost+=4;
-					} else if (p.blockId==Block.chest.blockID) {
+					} else if (p.block==Blocks.chest) {
 						plankCost+=8;
-					} else if (p.blockId==Block.furnaceIdle.blockID) {
-						addToCost(Block.cobblestone.blockID,8);
-					} else if (p.blockId==Block.torchWood.blockID) {
+					} else if (p.block==Blocks.furnace) {
+						addToCost(Blocks.cobblestone,8);
+					} else if (p.block==Blocks.torch) {
 						plankCost++;
-					} else if (p.blockId==Block.fence.blockID) {
+					} else if (p.block==Blocks.fence) {
 						plankCost++;
-					} else if (p.blockId==Block.fenceGate.blockID) {
+					} else if (p.block==Blocks.fence_gate) {
 						plankCost+=4;
-					} else if (p.blockId==Block.pressurePlatePlanks.blockID) {
+					} else if (p.block==Blocks.wooden_pressure_plate) {
 						plankCost+=2;
-					} else if (p.blockId==Block.pressurePlateStone.blockID) {
-						addToCost(Block.stone.blockID,2);
-					} else if ((p.blockId==Block.stoneBrick.blockID) && (p.meta==0)) {//only normal stone bricks are auto-crafted from stone
-						addToCost(Block.stone.blockID,1);
-					} else if ((p.blockId==Block.stoneSingleSlab.blockID) && ((p.meta & 7)==0)) {
-						addToCost(Block.stone.blockID,1);
-					} else if ((p.blockId==Block.stoneSingleSlab.blockID) && ((p.meta & 7)==1)) {
-						addToCost(Block.sandStone.blockID,1);
-					} else if ((p.blockId==Block.stoneSingleSlab.blockID) && ((p.meta & 7)==2)) {
+					} else if (p.block==Blocks.stone_pressure_plate) {
+						addToCost(Blocks.stone,2);
+					} else if ((p.block==Blocks.stonebrick) && (p.meta==0)) {//only normal stone bricks are auto-crafted from stone
+						addToCost(Blocks.stone,1);
+					} else if ((p.block==Blocks.stone_slab) && ((p.meta & 7)==0)) {
+						addToCost(Blocks.stone,1);
+					} else if ((p.block==Blocks.stone_slab) && ((p.meta & 7)==1)) {
+						addToCost(Blocks.sandstone,1);
+					} else if ((p.block==Blocks.stone_slab) && ((p.meta & 7)==2)) {
 						plankCost++;
-					} else if ((p.blockId==Block.stoneSingleSlab.blockID) && ((p.meta & 7)==3)) {
-						addToCost(Block.cobblestone.blockID,1);
-					} else if ((p.blockId==Block.stoneSingleSlab.blockID) && ((p.meta & 7)==4)) {
-						addToCost(Block.brick.blockID,1);
-					} else if ((p.blockId==Block.stoneSingleSlab.blockID) && ((p.meta & 7)==5)) {
-						addToCost(Block.stone.blockID,1);
+					} else if ((p.block==Blocks.stone_slab) && ((p.meta & 7)==3)) {
+						addToCost(Blocks.cobblestone,1);
+					} else if ((p.block==Blocks.stone_slab) && ((p.meta & 7)==4)) {
+						addToCost(Blocks.brick_block,1);
+					} else if ((p.block==Blocks.stone_slab) && ((p.meta & 7)==5)) {
+						addToCost(Blocks.stone,1);
 
-					} else if ((p.blockId==Block.woodSingleSlab.blockID) && ((p.meta & 7)==0)) {
+					} else if ((p.block==Blocks.wooden_slab) && ((p.meta & 7)==0)) {
 						plankOakCost++;
-					} else if ((p.blockId==Block.woodSingleSlab.blockID) && ((p.meta & 7)==1)) {
+					} else if ((p.block==Blocks.wooden_slab) && ((p.meta & 7)==1)) {
 						plankPineCost++;
-					} else if ((p.blockId==Block.woodSingleSlab.blockID) && ((p.meta & 7)==2)) {
+					} else if ((p.block==Blocks.wooden_slab) && ((p.meta & 7)==2)) {
 						plankBirchCost++;
-					} else if ((p.blockId==Block.woodSingleSlab.blockID) && ((p.meta & 7)==3)) {
+					} else if ((p.block==Blocks.wooden_slab) && ((p.meta & 7)==3)) {
 						plankJungleCost++;
 
-					} else if ((p.blockId==Block.cloth.blockID)) {
-						addToCost(Block.cloth.blockID,1);
+					} else if ((p.block==Blocks.wool)) {
+						addToCost(Blocks.wool,1);
 
 
-					} else if (p.blockId==Block.stoneDoubleSlab.blockID) {
-						addToCost(Block.stone.blockID,1);
-					} else if (p.blockId==Block.blockIron.blockID) {
-						addToCost(Item.ingotIron.itemID,9);
-					} else if (p.blockId==Block.fenceIron.blockID) {
-						addToCost(Item.ingotIron.itemID,1);
-					} else if (p.blockId==Block.blockGold.blockID) {
-						addToCost(Item.ingotGold.itemID,9);
-					} else if (p.blockId==Block.cauldron.blockID) {
-						addToCost(Item.ingotIron.itemID,7);
-					} else if (p.blockId==Block.cobblestoneWall.blockID) {
-						addToCost(Block.cobblestone.blockID,1);
+					} else if (p.block==Blocks.double_stone_slab) {
+						addToCost(Blocks.stone,1);
+					} else if (p.block==Blocks.iron_block) {
+						addToCost(Items.iron_ingot,9);
+					} else if (p.block==Blocks.iron_bars) {
+						addToCost(Items.iron_ingot,1);
+					} else if (p.block==Blocks.gold_block) {
+						addToCost(Items.gold_ingot,9);
+					} else if (p.block==Blocks.cauldron) {
+						addToCost(Items.iron_ingot,7);
+					} else if (p.block==Blocks.cobblestone_wall) {
+						addToCost(Blocks.cobblestone,1);
 					} else if (p.isType(blockedchest)) {
 						plankCost+=8;
 					} else if (p.isType(bfurnace)) {
-						addToCost(Block.cobblestone.blockID,8);
+						addToCost(Blocks.cobblestone,8);
 					} else if (p.isType(bmainchest)) {
 						plankCost+=8;
 					} else if (p.isSubType(prefixWoodstairOak)) {
@@ -2415,13 +2440,13 @@ public class BuildingPlan {
 					} else if (p.isSubType(prefixWoodstairJungle)) {
 						plankJungleCost+=2;
 					} else if (p.isSubType(prefixStonestair)) {
-						addToCost(Block.cobblestone.blockID,2);
+						addToCost(Blocks.cobblestone,2);
 					} else if (p.isSubType(prefixBrickStonestair)) {
-						addToCost(Block.stone.blockID,2);
+						addToCost(Blocks.stone,2);
 					} else if (p.isSubType(prefixSandStoneStair)) {
-						addToCost(Block.sandStone.blockID,2);
+						addToCost(Blocks.sandstone,2);
 					} else if (p.isSubType(prefixBrickstair)) {
-						addToCost(Block.brick.blockID,2);
+						addToCost(Blocks.brick_block,2);
 					} else if (p.isSubType(prefixLadder)) {
 						plankCost+=2;
 					} else if (p.isSubType(prefixSign)) {
@@ -2432,19 +2457,19 @@ public class BuildingPlan {
 						plankCost+=6;
 					} else if (p.isSubType(prefixBed)) {
 						plankCost+=3;
-						addToCost(Block.cloth.blockID,0,3);
+						addToCost(Blocks.wool,0,3);
 					} else if (p.isType(btapestry)) {
-						addToCost(Mill.tapestry.itemID,1);
+						addToCost(Mill.tapestry,1);
 					} else if (p.isType(bindianstatue)) {
-						addToCost(Mill.indianstatue.itemID,1);
+						addToCost(Mill.indianstatue,1);
 					} else if (p.isType(bmayanstatue)) {
-						addToCost(Mill.mayanstatue.itemID,1);
+						addToCost(Mill.mayanstatue,1);
 					} else if (p.isType(bbyzantineiconsmall)) {
-						addToCost(Mill.byzantineiconsmall.itemID,1);
+						addToCost(Mill.byzantineiconsmall,1);
 					} else if (p.isType(bbyzantineiconmedium)) {
-						addToCost(Mill.byzantineiconmedium.itemID,1);
+						addToCost(Mill.byzantineiconmedium,1);
 					} else if (p.isType(bbyzantineiconmedium)) {
-						addToCost(Mill.byzantineiconmedium.itemID,1);
+						addToCost(Mill.byzantineiconmedium,1);
 					} else if (p.isType(bsilkwormblock)) {
 						plankCost+=4;
 
@@ -2455,10 +2480,10 @@ public class BuildingPlan {
 
 					} else if (p.isType(bbyzantinestonetiles_bottomtop)) {
 						byzBricksHalf++;
-						addToCost(Block.stone.blockID,1);
+						addToCost(Blocks.stone,1);
 					} else if (p.isType(bbyzantinestonetiles_leftright)) {
 						byzBricksHalf++;
-						addToCost(Block.stone.blockID,1);
+						addToCost(Blocks.stone,1);
 
 					} else if (p.isType(bbyzantineslab_bottomtop)) {
 						byzBricksHalf++;
@@ -2470,9 +2495,9 @@ public class BuildingPlan {
 						byzBricksHalf++;
 
 
-					} else if ((p.blockId > 0) && !Goods.freeGoods.contains(new InvItem(p.blockId,p.meta))
-							&& !Goods.freeGoods.contains(new InvItem(p.blockId,-1))) {
-						addToCost(p.blockId,p.meta,1);
+					} else if ((p.block != null && p.block!=Blocks.air) && !Goods.freeGoods.contains(new InvItem(p.block,p.meta))
+							&& !Goods.freeGoods.contains(new InvItem(p.block,-1))) {
+						addToCost(p.block,p.meta,1);
 					}
 				}
 			}
@@ -2480,32 +2505,32 @@ public class BuildingPlan {
 
 
 		if (plankCost > 0) {
-			addToCost(Block.wood.blockID,-1,(int)Math.max(Math.ceil((plankCost*1.0)/4),1));
+			addToCost(Blocks.log,-1,(int)Math.max(Math.ceil((plankCost*1.0)/4),1));
 		}
 
 		if (plankOakCost > 0) {
-			addToCost(Block.wood.blockID,0,(int)Math.max(Math.ceil((plankOakCost*1.0)/4),1));
+			addToCost(Blocks.log,0,(int)Math.max(Math.ceil((plankOakCost*1.0)/4),1));
 		}
 
 		if (plankPineCost > 0) {
-			addToCost(Block.wood.blockID,1,(int)Math.max(Math.ceil((plankPineCost*1.0)/4),1));
+			addToCost(Blocks.log,1,(int)Math.max(Math.ceil((plankPineCost*1.0)/4),1));
 		}
 
 		if (plankBirchCost > 0) {
-			addToCost(Block.wood.blockID,2,(int)Math.max(Math.ceil((plankBirchCost*1.0)/4),1));
+			addToCost(Blocks.log,2,(int)Math.max(Math.ceil((plankBirchCost*1.0)/4),1));
 		}
 
 		if (plankJungleCost > 0) {
-			addToCost(Block.wood.blockID,3,(int)Math.max(Math.ceil((plankJungleCost*1.0)/4),1));
+			addToCost(Blocks.log,3,(int)Math.max(Math.ceil((plankJungleCost*1.0)/4),1));
 		}
 
 		if (glassPaneCost > 0) {
-			addToCost(Block.glass.blockID,0,(int)Math.max(Math.ceil((glassPaneCost*6.0)/16),1));
+			addToCost(Blocks.glass,0,(int)Math.max(Math.ceil((glassPaneCost*6.0)/16),1));
 		}
 
 
 		if (byzBricksHalf > 0) {
-			addToCost(Mill.byzantine_tiles.blockID,0,(int)Math.max(Math.ceil(byzBricksHalf/2),1));
+			addToCost(Mill.byzantine_tiles,0,(int)Math.max(Math.ceil(byzBricksHalf/2),1));
 		}
 
 		if (MLN.LogBuildingPlan>=MLN.MAJOR) {
@@ -2618,7 +2643,7 @@ public class BuildingPlan {
 			return 0;
 	}
 
-	public int getBlock(World worldObj,Point p) {
+	public Block getBlock(World worldObj,Point p) {
 		return MillCommonUtilities.getBlock(worldObj, p);
 	}
 
@@ -2747,8 +2772,8 @@ public class BuildingPlan {
 
 					final Point p=adjustForOrientation(x, y+i+firstLevel, z,j-lengthOffset,ak-widthOffset,orientation);
 
-					if (pt.blockId==0) {
-						bblocks.add(new BuildingBlock(p,0,0));
+					if (pt.block==Blocks.air) {
+						bblocks.add(new BuildingBlock(p,Blocks.air,0));
 					}
 				}
 			}
@@ -2764,147 +2789,148 @@ public class BuildingPlan {
 
 
 					final PointType pt=plan[ai][j][ak];
-					int b=-1,m=0;
-
+					int m=0;
+					Block b=null;
+					
 					final Point p=adjustForOrientation(x, y+ai+firstLevel, z,j-lengthOffset,ak-widthOffset,orientation);
 
-					if ((pt.blockId > 0) && !pt.secondStep) {//standard block
-						b=pt.blockId;
+					if ((pt.block != null && pt.block != Blocks.air) && !pt.secondStep) {//standard block
+						b=pt.block;
 						m=pt.meta;
 					} else if (pt.isType(bempty) && !isUpdate && !TYPE_SUBBUILDING.equals(type)) {
-						b=0;
+						b=Blocks.air;
 					} else if (pt.isType(bgrass) && villageGeneration) {
-						b=Block.grass.blockID;
+						b=Blocks.grass;
 					} else if (pt.isType(bgrass) && !villageGeneration) {
-						b=Block.dirt.blockID;
+						b=Blocks.dirt;
 					} else if (pt.isType(bsoil) && villageGeneration) {
-						b=Block.grass.blockID;
+						b=Blocks.grass;
 					} else if (pt.isType(bricesoil) && villageGeneration) {
-						b=Block.grass.blockID;
+						b=Blocks.grass;
 					} else if (pt.isType(bturmericsoil) && villageGeneration) {
-						b=Block.grass.blockID;
+						b=Blocks.grass;
 					} else if (pt.isType(bmaizesoil) && villageGeneration) {
-						b=Block.grass.blockID;
+						b=Blocks.grass;
 					} else if (pt.isType(bcarrotsoil) && villageGeneration) {
-						b=Block.grass.blockID;
+						b=Blocks.grass;
 					} else if (pt.isType(bpotatosoil) && villageGeneration) {
-						b=Block.grass.blockID;
+						b=Blocks.grass;
 					} else if (pt.isType(bsugarcanesoil) && villageGeneration) {
-						b=Block.grass.blockID;
+						b=Blocks.grass;
 					} else if (pt.isType(bvinesoil) && villageGeneration) {
-						b=Block.grass.blockID;
+						b=Blocks.grass;
 					} else if (pt.isType(bcacaospot) && villageGeneration) {
-						b=Block.cocoaPlant.blockID;
+						b=Blocks.cocoa;
 					} else if (pt.isType(bsoil) && !villageGeneration) {
-						b=Block.dirt.blockID;
+						b=Blocks.dirt;
 					} else if (pt.isType(bricesoil) && !villageGeneration) {
-						b=Block.dirt.blockID;
+						b=Blocks.dirt;
 					} else if (pt.isType(bturmericsoil) && !villageGeneration) {
-						b=Block.dirt.blockID;
+						b=Blocks.dirt;
 					} else if (pt.isType(bmaizesoil) && !villageGeneration) {
-						b=Block.dirt.blockID;
+						b=Blocks.dirt;
 					} else if (pt.isType(bpotatosoil) && villageGeneration) {
-						b=Block.dirt.blockID;
+						b=Blocks.dirt;
 					} else if (pt.isType(bcarrotsoil) && !villageGeneration) {
-						b=Block.dirt.blockID;
+						b=Blocks.dirt;
 					} else if (pt.isType(bsugarcanesoil) && !villageGeneration) {
-						b=Block.dirt.blockID;
+						b=Blocks.dirt;
 					} else if (pt.isType(bvinesoil) && !villageGeneration) {
-						b=Block.dirt.blockID;
+						b=Blocks.dirt;
 					} else if (pt.isType(bcacaospot) && !villageGeneration) {
-						b=0;
+						b=null;
 					} else if (pt.isType(bnetherwartsoil)) {
-						b=Block.slowSand.blockID;
+						b=Blocks.soul_sand;
 					} else if (pt.isType(bsilkwormblock)) {
-						b=Mill.wood_decoration.blockID;
+						b=Mill.wood_decoration;
 						m=3;
 					} else if (pt.isType(blockedchest)) {
-						b=Mill.lockedChest.blockID;
+						b=Mill.lockedChest;
 					} else if (pt.isType(bfurnace)) {
-						b=Block.furnaceIdle.blockID;
+						b=Blocks.furnace;
 					} else if (pt.isType(bbrewingstand)) {
-						b=Block.brewingStand.blockID;
+						b=Blocks.brewing_stand;
 
 
 					} else if (pt.isType(blogoakhor)) {
-						b=Block.wood.blockID;
+						b=Blocks.log;
 						m=getWoodMeta(0,orientation);
 					} else if (pt.isType(blogoakvert)) {
-						b=Block.wood.blockID;
+						b=Blocks.log;
 						m=getWoodMeta(1,orientation);
 
 					} else if (pt.isType(blogpinehor)) {
-						b=Block.wood.blockID;
+						b=Blocks.log;
 						m=1+getWoodMeta(0,orientation);
 					} else if (pt.isType(blogpinevert)) {
-						b=Block.wood.blockID;
+						b=Blocks.log;
 						m=1+getWoodMeta(1,orientation);
 
 					} else if (pt.isType(blogbirchhor)) {
-						b=Block.wood.blockID;
+						b=Blocks.log;
 						m=2+getWoodMeta(0,orientation);
 					} else if (pt.isType(blogbirchvert)) {
-						b=Block.wood.blockID;
+						b=Blocks.log;
 						m=2+getWoodMeta(1,orientation);
 
 					} else if (pt.isType(blogjunglehor)) {
-						b=Block.wood.blockID;
+						b=Blocks.log;
 						m=3+getWoodMeta(0,orientation);
 					} else if (pt.isType(blogjunglevert)) {
-						b=Block.wood.blockID;
+						b=Blocks.log;
 						m=3+getWoodMeta(1,orientation);
 
 
 					} else if (pt.isType(bwoodstairsOakTop)) {
-						b=Block.stairsWoodOak.blockID;
+						b=Blocks.oak_stairs;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bwoodstairsOakRight)) {
-						b=Block.stairsWoodOak.blockID;
+						b=Blocks.oak_stairs;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bwoodstairsOakBottom)) {
-						b=Block.stairsWoodOak.blockID;
+						b=Blocks.oak_stairs;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bwoodstairsOakLeft)) {
-						b=Block.stairsWoodOak.blockID;
+						b=Blocks.oak_stairs;
 						m=getStairMeta(3,orientation);
 
 					} else if (pt.isType(bwoodstairsPineTop)) {
-						b=Block.stairsWoodSpruce.blockID;
+						b=Blocks.spruce_stairs;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bwoodstairsPineRight)) {
-						b=Block.stairsWoodSpruce.blockID;
+						b=Blocks.spruce_stairs;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bwoodstairsPineBottom)) {
-						b=Block.stairsWoodSpruce.blockID;
+						b=Blocks.spruce_stairs;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bwoodstairsPineLeft)) {
-						b=Block.stairsWoodSpruce.blockID;
+						b=Blocks.spruce_stairs;
 						m=getStairMeta(3,orientation);
 
 					} else if (pt.isType(bwoodstairsBirchTop)) {
-						b=Block.stairsWoodBirch.blockID;
+						b=Blocks.birch_stairs;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bwoodstairsBirchRight)) {
-						b=Block.stairsWoodBirch.blockID;
+						b=Blocks.birch_stairs;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bwoodstairsBirchBottom)) {
-						b=Block.stairsWoodBirch.blockID;
+						b=Blocks.birch_stairs;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bwoodstairsBirchLeft)) {
-						b=Block.stairsWoodBirch.blockID;
+						b=Blocks.birch_stairs;
 						m=getStairMeta(3,orientation);
 
 					} else if (pt.isType(bwoodstairsJungleTop)) {
-						b=Block.stairsWoodJungle.blockID;
+						b=Blocks.jungle_stairs;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bwoodstairsJungleRight)) {
-						b=Block.stairsWoodJungle.blockID;
+						b=Blocks.jungle_stairs;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bwoodstairsJungleBottom)) {
-						b=Block.stairsWoodJungle.blockID;
+						b=Blocks.jungle_stairs;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bwoodstairsJungleLeft)) {
-						b=Block.stairsWoodJungle.blockID;
+						b=Blocks.jungle_stairs;
 						m=getStairMeta(3,orientation);
 
 
@@ -2912,242 +2938,242 @@ public class BuildingPlan {
 
 
 					}  else if (pt.isType(bstonestairsTop)) {
-						b=Block.stairsCobblestone.blockID;
+						b=Blocks.stone_stairs;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bstonestairsRight)) {
-						b=Block.stairsCobblestone.blockID;
+						b=Blocks.stone_stairs;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bstonestairsBottom)) {
-						b=Block.stairsCobblestone.blockID;
+						b=Blocks.stone_stairs;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bstonestairsLeft)) {
-						b=Block.stairsCobblestone.blockID;
+						b=Blocks.stone_stairs;
 						m=getStairMeta(3,orientation);
 					}  else if (pt.isType(bstonebrickstairsTop)) {
-						b=Block.stairsStoneBrick.blockID;
+						b=Blocks.stone_brick_stairs;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bstonebrickstairsRight)) {
-						b=Block.stairsStoneBrick.blockID;
+						b=Blocks.stone_brick_stairs;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bstonebrickstairsBottom)) {
-						b=Block.stairsStoneBrick.blockID;
+						b=Blocks.stone_brick_stairs;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bstonebrickstairsLeft)) {
-						b=Block.stairsStoneBrick.blockID;
+						b=Blocks.stone_brick_stairs;
 						m=getStairMeta(3,orientation);
 					}  else if (pt.isType(bbrickstairsTop)) {
-						b=Block.stairsBrick.blockID;
+						b=Blocks.brick_stairs;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bbrickstairsRight)) {
-						b=Block.stairsBrick.blockID;
+						b=Blocks.brick_stairs;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bbrickstairsBottom)) {
-						b=Block.stairsBrick.blockID;
+						b=Blocks.brick_stairs;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bbrickstairsLeft)) {
-						b=Block.stairsBrick.blockID;
+						b=Blocks.brick_stairs;
 						m=getStairMeta(3,orientation);
 					}  else if (pt.isType(bsandstonestairsTop)) {
-						b=Block.stairsSandStone.blockID;
+						b=Blocks.sandstone_stairs;
 						m=getStairMeta(0,orientation);
 					} else if (pt.isType(bsandstonestairsRight)) {
-						b=Block.stairsSandStone.blockID;
+						b=Blocks.sandstone_stairs;
 						m=getStairMeta(1,orientation);
 					} else if (pt.isType(bsandstonestairsBottom)) {
-						b=Block.stairsSandStone.blockID;
+						b=Blocks.sandstone_stairs;
 						m=getStairMeta(2,orientation);
 					} else if (pt.isType(bsandstonestairsLeft)) {
-						b=Block.stairsSandStone.blockID;
+						b=Blocks.sandstone_stairs;
 						m=getStairMeta(3,orientation);
 
 
 
 					} else if (pt.isType(bwoodstairsOakInvTop)) {
-						b=Block.stairsWoodOak.blockID;
+						b=Blocks.oak_stairs;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bwoodstairsOakInvRight)) {
-						b=Block.stairsWoodOak.blockID;
+						b=Blocks.oak_stairs;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bwoodstairsOakInvBottom)) {
-						b=Block.stairsWoodOak.blockID;
+						b=Blocks.oak_stairs;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bwoodstairsOakInvLeft)) {
-						b=Block.stairsWoodOak.blockID;
+						b=Blocks.oak_stairs;
 						m=getStairMeta(3,orientation)+4;
 
 					} else if (pt.isType(bwoodstairsPineInvTop)) {
-						b=Block.stairsWoodSpruce.blockID;
+						b=Blocks.spruce_stairs;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bwoodstairsPineInvRight)) {
-						b=Block.stairsWoodSpruce.blockID;
+						b=Blocks.spruce_stairs;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bwoodstairsPineInvBottom)) {
-						b=Block.stairsWoodSpruce.blockID;
+						b=Blocks.spruce_stairs;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bwoodstairsPineInvLeft)) {
-						b=Block.stairsWoodSpruce.blockID;
+						b=Blocks.spruce_stairs;
 						m=getStairMeta(3,orientation)+4;
 
 					} else if (pt.isType(bwoodstairsBirchInvTop)) {
-						b=Block.stairsWoodBirch.blockID;
+						b=Blocks.birch_stairs;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bwoodstairsBirchInvRight)) {
-						b=Block.stairsWoodBirch.blockID;
+						b=Blocks.birch_stairs;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bwoodstairsBirchInvBottom)) {
-						b=Block.stairsWoodBirch.blockID;
+						b=Blocks.birch_stairs;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bwoodstairsBirchInvLeft)) {
-						b=Block.stairsWoodBirch.blockID;
+						b=Blocks.birch_stairs;
 						m=getStairMeta(3,orientation)+4;
 
 					} else if (pt.isType(bwoodstairsJungleInvTop)) {
-						b=Block.stairsWoodJungle.blockID;
+						b=Blocks.jungle_stairs;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bwoodstairsJungleInvRight)) {
-						b=Block.stairsWoodJungle.blockID;
+						b=Blocks.jungle_stairs;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bwoodstairsJungleInvBottom)) {
-						b=Block.stairsWoodJungle.blockID;
+						b=Blocks.jungle_stairs;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bwoodstairsJungleInvLeft)) {
-						b=Block.stairsWoodJungle.blockID;
+						b=Blocks.jungle_stairs;
 						m=getStairMeta(3,orientation)+4;
 
 
 
 
 					}  else if (pt.isType(bstonestairsInvTop)) {
-						b=Block.stairsCobblestone.blockID;
+						b=Blocks.stone_stairs;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bstonestairsInvRight)) {
-						b=Block.stairsCobblestone.blockID;
+						b=Blocks.stone_stairs;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bstonestairsInvBottom)) {
-						b=Block.stairsCobblestone.blockID;
+						b=Blocks.stone_stairs;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bstonestairsInvLeft)) {
-						b=Block.stairsCobblestone.blockID;
+						b=Blocks.stone_stairs;
 						m=getStairMeta(3,orientation)+4;
 					}  else if (pt.isType(bstonebrickstairsInvTop)) {
-						b=Block.stairsStoneBrick.blockID;
+						b=Blocks.stone_brick_stairs;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bstonebrickstairsInvRight)) {
-						b=Block.stairsStoneBrick.blockID;
+						b=Blocks.stone_brick_stairs;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bstonebrickstairsInvBottom)) {
-						b=Block.stairsStoneBrick.blockID;
+						b=Blocks.stone_brick_stairs;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bstonebrickstairsInvLeft)) {
-						b=Block.stairsStoneBrick.blockID;
+						b=Blocks.stone_brick_stairs;
 						m=getStairMeta(3,orientation)+4;
 					}  else if (pt.isType(bbrickstairsInvTop)) {
-						b=Block.stairsBrick.blockID;
+						b=Blocks.brick_stairs;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bbrickstairsInvRight)) {
-						b=Block.stairsBrick.blockID;
+						b=Blocks.brick_stairs;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bbrickstairsInvBottom)) {
-						b=Block.stairsBrick.blockID;
+						b=Blocks.brick_stairs;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bbrickstairsInvLeft)) {
-						b=Block.stairsBrick.blockID;
+						b=Blocks.brick_stairs;
 						m=getStairMeta(3,orientation)+4;
 					}  else if (pt.isType(bsandstonestairsInvTop)) {
-						b=Block.stairsSandStone.blockID;
+						b=Blocks.sandstone_stairs;
 						m=getStairMeta(0,orientation)+4;
 					} else if (pt.isType(bsandstonestairsInvRight)) {
-						b=Block.stairsSandStone.blockID;
+						b=Blocks.sandstone_stairs;
 						m=getStairMeta(1,orientation)+4;
 					} else if (pt.isType(bsandstonestairsInvBottom)) {
-						b=Block.stairsSandStone.blockID;
+						b=Blocks.sandstone_stairs;
 						m=getStairMeta(2,orientation)+4;
 					} else if (pt.isType(bsandstonestairsInvLeft)) {
-						b=Block.stairsSandStone.blockID;
+						b=Blocks.sandstone_stairs;
 						m=getStairMeta(3,orientation)+4;
 
 					} else if (pt.isType(bbyzantinetiles_bottomtop)) {
-						b=Mill.byzantine_tiles.blockID;
+						b=Mill.byzantine_tiles;
 						m=getOrientedBlockMeta(0,orientation);
 					} else if (pt.isType(bbyzantinetiles_leftright)) {
-						b=Mill.byzantine_tiles.blockID;
+						b=Mill.byzantine_tiles;
 						m=getOrientedBlockMeta(1,orientation);
 					} else if (pt.isType(bbyzantinestonetiles_bottomtop)) {
-						b=Mill.byzantine_stone_tiles.blockID;
+						b=Mill.byzantine_stone_tiles;
 						m=getOrientedBlockMeta(0,orientation);
 					} else if (pt.isType(bbyzantinestonetiles_leftright)) {
-						b=Mill.byzantine_stone_tiles.blockID;
+						b=Mill.byzantine_stone_tiles;
 						m=getOrientedBlockMeta(1,orientation);
 
 					} else if (pt.isType(bbyzantineslab_bottomtop)) {
-						b=Mill.byzantine_tile_slab.blockID;
+						b=Mill.byzantine_tile_slab;
 						m=getOrientedBlockMeta(0,orientation);
 					} else if (pt.isType(bbyzantineslab_leftright)) {
-						b=Mill.byzantine_tile_slab.blockID;
+						b=Mill.byzantine_tile_slab;
 						m=getOrientedBlockMeta(1,orientation);
 					} else if (pt.isType(bbyzantineslab_bottomtop_inv)) {
-						b=Mill.byzantine_tile_slab.blockID;
+						b=Mill.byzantine_tile_slab;
 						m=getOrientedBlockMeta(0,orientation)+8;
 					} else if (pt.isType(bbyzantineslab_leftright_inv)) {
-						b=Mill.byzantine_tile_slab.blockID;
+						b=Mill.byzantine_tile_slab;
 						m=getOrientedBlockMeta(1,orientation)+8;
 
 
 
 					} else if (pt.isType(bsignpostTop)) {
-						b=Block.signPost.blockID;
+						b=Blocks.standing_sign;
 						m=getSignOrLadderMeta(0,orientation);
 					} else if (pt.isType(bsignpostRight)) {
-						b=Block.signPost.blockID;
+						b=Blocks.standing_sign;
 						m=getSignOrLadderMeta(1,orientation);
 					} else if (pt.isType(bsignpostBottom)) {
-						b=Block.signPost.blockID;
+						b=Blocks.standing_sign;
 						m=getSignOrLadderMeta(2,orientation);
 					} else if (pt.isType(bsignpostLeft)) {
-						b=Block.signPost.blockID;
+						b=Blocks.standing_sign;
 						m=getSignOrLadderMeta(3,orientation);
 					} else if (pt.isType(bsleepingPos)) {
-						b=0;
+						b=Blocks.air;
 						location.sleepingPos=p;
 					} else if (pt.isType(bsellingPos)) {
-						b=0;
+						b=Blocks.air;
 						location.sellingPos=p;
 					} else if (pt.isType(bcraftingPos)) {
-						b=0;
+						b=Blocks.air;
 						location.craftingPos=p;
 					} else if (pt.isType(bshelterPos)) {
-						b=0;
+						b=Blocks.air;
 						location.shelterPos=p;
 					} else if (pt.isType(bdefendingPos)) {
-						b=0;
+						b=Blocks.air;
 						location.defendingPos=p;
 					} else if (pt.isType(bsandsource)) {
-						b=Block.sand.blockID;
+						b=Blocks.sand;
 					} else if (pt.isType(bsandstonesource)) {
-						b=Block.sandStone.blockID;
+						b=Blocks.sandstone;
 					} else if (pt.isType(bclaysource)) {
-						b=Block.blockClay.blockID;
+						b=Blocks.clay;
 					} else if (pt.isType(bgravelsource)) {
-						b=Block.gravel.blockID;
+						b=Blocks.gravel;
 					} else if (pt.isType(bstonesource)) {
-						b=Block.stone.blockID;
+						b=Blocks.stone;
 					} else if (pt.isType(bfreesand)) {
-						b=Block.sand.blockID;
+						b=Blocks.sand;
 					} else if (pt.isType(bfreesandstone)) {
-						b=Block.sandStone.blockID;
+						b=Blocks.sandstone;
 					} else if (pt.isType(bfreegravel)) {
-						b=Block.gravel.blockID;
+						b=Blocks.gravel;
 					} else if (pt.isType(bfreewool)) {
-						b=Block.cloth.blockID;
+						b=Blocks.wool;
 					} else if (pt.isType(bfreestone)) {
-						b=Block.stone.blockID;
+						b=Blocks.stone;
 						
 					} else if (pt.isType(bsquidspawn)) {
-						b=Block.waterStill.blockID;
+						b=Blocks.water;
 					}
 
 
-					if (b >-1) {
+					if (b != null) {
 						bblocks.add(new BuildingBlock(p,b,m));
 						nbBlocksToPut++;
 					}
@@ -3164,114 +3190,115 @@ public class BuildingPlan {
 					final int ai = ((i+firstLevel)<0) ? -i-firstLevel-1 : i;
 
 					final PointType pt=plan[ai][j][ak];
-					int b=-1,m=0;
+					int m=0;
+					Block b=null;
 					final Point p=adjustForOrientation(x, y+ai+firstLevel, z,j-lengthOffset,ak-widthOffset,orientation);
 
-					if ((pt.blockId != -1) && pt.secondStep) {//standard block
-						b=pt.blockId;
+					if ((pt.block != null) && pt.secondStep) {//standard block
+						b=pt.block;
 						m=pt.meta;
 					} else if (pt.isType(bwoodstairsOakGuess)) {
-						b=Block.stairsWoodOak.blockID;
+						b=Blocks.oak_stairs;
 						m=-1;
 					} else if (pt.isType(bstonestairGuess)) {
-						b=Block.stairsCobblestone.blockID;
+						b=Blocks.stone_stairs;
 						m=-1;
 					} else if (pt.isType(bladderGuess)) {
-						b=Block.ladder.blockID;
+						b=Blocks.ladder;
 						m=-1;
 					} else if (pt.isType(bsignwallGuess)) {
-						b=Mill.panel.blockID;
+						b=Mill.panel;
 						m=guessSignMeta(bblocks,p);
 					} else if (pt.isType(bplainSignGuess)) {
-						b=Block.signWall.blockID;
+						b=Blocks.wall_sign;
 						m=guessSignMeta(bblocks,p);
 					} else if (pt.isType(bsignwallTop)) {
-						b=Mill.panel.blockID;
+						b=Mill.panel;
 						m=getSignOrLadderMeta(0,orientation);
 					} else if (pt.isType(bsignwallRight)) {
-						b=Mill.panel.blockID;
+						b=Mill.panel;
 						m=getSignOrLadderMeta(3,orientation);
 					} else if (pt.isType(bsignwallBottom)) {
-						b=Mill.panel.blockID;
+						b=Mill.panel;
 						m=getSignOrLadderMeta(2,orientation);
 					} else if (pt.isType(bsignwallLeft)) {
-						b=Mill.panel.blockID;
+						b=Mill.panel;
 						m=getSignOrLadderMeta(1,orientation);
 					} else if (pt.isType(bladderTop)) {
-						b=Block.ladder.blockID;
+						b=Blocks.ladder;
 						m=getSignOrLadderMeta(0,orientation);
 					} else if (pt.isType(bladderRight)) {
-						b=Block.ladder.blockID;
+						b=Blocks.ladder;
 						m=getSignOrLadderMeta(3,orientation);
 					} else if (pt.isType(bladderBottom)) {
-						b=Block.ladder.blockID;
+						b=Blocks.ladder;
 						m=getSignOrLadderMeta(2,orientation);
 					} else if (pt.isType(bladderLeft)) {
-						b=Block.ladder.blockID;
+						b=Blocks.ladder;
 						m=getSignOrLadderMeta(1,orientation);
 					} else if (pt.isType(bdoorTop)) {
-						b=Block.doorWood.blockID;
+						b=Blocks.wooden_door;
 						m=getDoorMeta(0,orientation);
 					} else if (pt.isType(bdoorRight)) {
-						b=Block.doorWood.blockID;
+						b=Blocks.wooden_door;
 						m=getDoorMeta(1,orientation);
 					} else if (pt.isType(bdoorBottom)) {
-						b=Block.doorWood.blockID;
+						b=Blocks.wooden_door;
 						m=getDoorMeta(2,orientation);
 					} else if (pt.isType(bdoorLeft)) {
-						b=Block.doorWood.blockID;
+						b=Blocks.wooden_door;
 						m=getDoorMeta(3,orientation);
 
 					} else if (pt.isType(birondoorTop)) {
-						b=Block.doorIron.blockID;
+						b=Blocks.iron_door;
 						m=getDoorMeta(0,orientation);
 					} else if (pt.isType(birondoorRight)) {
-						b=Block.doorIron.blockID;
+						b=Blocks.iron_door;
 						m=getDoorMeta(1,orientation);
 					} else if (pt.isType(birondoorBottom)) {
-						b=Block.doorIron.blockID;
+						b=Blocks.iron_door;
 						m=getDoorMeta(2,orientation);
 					} else if (pt.isType(birondoorLeft)) {
-						b=Block.doorIron.blockID;
+						b=Blocks.iron_door;
 						m=getDoorMeta(3,orientation);
 
 					} else if (pt.isType(btrapdoorTop)) {
-						b=Block.trapdoor.blockID;
+						b=Blocks.trapdoor;
 						m=getTrapdoorMeta(0,orientation);
 					} else if (pt.isType(btrapdoorRight)) {
-						b=Block.trapdoor.blockID;
+						b=Blocks.trapdoor;
 						m=getTrapdoorMeta(1,orientation);
 					} else if (pt.isType(btrapdoorBottom)) {
-						b=Block.trapdoor.blockID;
+						b=Blocks.trapdoor;
 						m=getTrapdoorMeta(2,orientation);
 					} else if (pt.isType(btrapdoorLeft)) {
-						b=Block.trapdoor.blockID;
+						b=Blocks.trapdoor;
 						m=getTrapdoorMeta(3,orientation);
 
 
 					} else if (pt.isType(bfenceGateHorizontal)) {
-						b=Block.fenceGate.blockID;
+						b=Blocks.fence_gate;
 						m=getFenceGateMeta(0,orientation);
 					} else if (pt.isType(bfenceGateVertical)) {
-						b=Block.fenceGate.blockID;
+						b=Blocks.fence_gate;
 						m=getFenceGateMeta(1,orientation);
 
 
 					} else if (pt.isType(bbedTop)) {
-						b=Block.bed.blockID;
+						b=Blocks.bed;
 						m=getBedMeta(0,orientation)+8;
 					} else if (pt.isType(bbedRight)) {
-						b=Block.bed.blockID;
+						b=Blocks.bed;
 						m=getBedMeta(1,orientation)+8;
 					} else if (pt.isType(bbedBottom)) {
-						b=Block.bed.blockID;
+						b=Blocks.bed;
 						m=getBedMeta(2,orientation)+8;
 					} else if (pt.isType(bbedLeft)) {
-						b=Block.bed.blockID;
+						b=Blocks.bed;
 						m=getBedMeta(3,orientation)+8;
 					}
 
-					if (b > -1) {
+					if (b != null) {
 						bblocks.add(new BuildingBlock(p,b,m));
 						nbBlocksToPut++;
 					}
@@ -3363,7 +3390,7 @@ public class BuildingPlan {
 					if (pt.isType(bmainchest)) {
 						final Point p=adjustForOrientation(x, y+i+firstLevel, z,j-lengthOffset,k-widthOffset,orientation);
 						location.chestPos=p;
-						bblocks.add(new BuildingBlock(p,Mill.lockedChest.blockID,1));
+						bblocks.add(new BuildingBlock(p,Mill.lockedChest,1));
 						nbBlocksToPut++;
 					}
 				}
@@ -3387,30 +3414,30 @@ public class BuildingPlan {
 		for (int i=0;i<bblocks.size();i++) {
 			final BuildingBlock bb=bblocks.get(i);
 
-			int bid;
+			Block block;
 			int bmeta;
 			int special;
 
 			if (bbmap.containsKey(bb.p)) {
-				bid=bbmap.get(bb.p).bid;
+				block=bbmap.get(bb.p).block;
 				bmeta=bbmap.get(bb.p).meta;
 				special=bbmap.get(bb.p).special;
 			} else {
-				bid=MillCommonUtilities.getBlock(world, bb.p);
+				block=MillCommonUtilities.getBlock(world, bb.p);
 				bmeta=MillCommonUtilities.getBlockMeta(world, bb.p);
 				special=0;
 			}
 
-			if ((((bid == bb.bid) && (bmeta == bb.meta) && (special==0))
-					|| ((bid == Block.grass.blockID) && (bb.bid == Block.dirt.blockID))) && (bb.special==0)) {
+			if ((((block == bb.block) && (bmeta == bb.meta) && (special==0))
+					|| ((block == Blocks.grass) && (bb.block == Blocks.dirt))) && (bb.special==0)) {
 				toDelete[i]=true;
-			} else if ((bb.special==BuildingBlock.CLEARTREE) && (bid!=Block.wood.blockID) && (bid!=Block.leaves.blockID)) {
+			} else if ((bb.special==BuildingBlock.CLEARTREE) && (block!=Blocks.log) && (block!=Blocks.leaves)) {
 				toDelete[i]=true;
-			} else if ((bb.special==BuildingBlock.CLEARGROUND) && (bid==0)) {
+			} else if ((bb.special==BuildingBlock.CLEARGROUND) && (block==null || block==Blocks.air)) {
 				toDelete[i]=true;
-			} else if ((bb.special==BuildingBlock.PRESERVEGROUNDDEPTH) && MillCommonUtilities.getBlockIdValidGround(bid,false)==bid) {
+			} else if ((bb.special==BuildingBlock.PRESERVEGROUNDDEPTH) && MillCommonUtilities.getBlockIdValidGround(block,false)==block) {
 				toDelete[i]=true;
-			} else if ((bb.special==BuildingBlock.PRESERVEGROUNDSURFACE) && MillCommonUtilities.getBlockIdValidGround(bid,true)==bid) {
+			} else if ((bb.special==BuildingBlock.PRESERVEGROUNDSURFACE) && MillCommonUtilities.getBlockIdValidGround(block,true)==block) {
 				toDelete[i]=true;
 			} else {
 				bbmap.put(bb.p, bb);
@@ -3565,13 +3592,13 @@ public class BuildingPlan {
 
 		for (final BuildingBlock block : bblocks) {
 
-			if (block.p.sameBlock(west) && isBlockOpaqueCube(block.bid)) {
+			if (block.p.sameBlock(west) && isBlockOpaqueCube(block.block)) {
 				westOpen=false;
-			} else if (block.p.sameBlock(east) && isBlockOpaqueCube(block.bid)) {
+			} else if (block.p.sameBlock(east) && isBlockOpaqueCube(block.block)) {
 				eastOpen=false;
-			} else if (block.p.sameBlock(south) && isBlockOpaqueCube(block.bid)) {
+			} else if (block.p.sameBlock(south) && isBlockOpaqueCube(block.block)) {
 				southOpen=false;
-			} else if (block.p.sameBlock(north) && isBlockOpaqueCube(block.bid)) {
+			} else if (block.p.sameBlock(north) && isBlockOpaqueCube(block.block)) {
 				northOpen=false;
 			}
 		}
@@ -3667,27 +3694,27 @@ public class BuildingPlan {
 		}
 	}
 
-	public boolean isBlockOpaqueCube(int blockId)
+	public boolean isBlockOpaqueCube(Block block)
 	{
-		return MillCommonUtilities.isBlockOpaqueCube(blockId);
+		return MillCommonUtilities.isBlockOpaqueCube(block);
 	}
 
-	public boolean isBuildable(int blockId) {
-		return ((blockId == 0) || (blockId == Block.leaves.blockID)	 || (blockId == Block.wood.blockID) || (blockId == Block.mushroomBrown.blockID)
-				|| (blockId == Block.mushroomRed.blockID)	 || (blockId == Block.plantRed.blockID) || (blockId == Block.plantYellow.blockID));
+	public boolean isBuildable(Block block) {
+		return ((block == Blocks.air) || (block == Blocks.leaves)	 || (block == Blocks.log) || (block == Blocks.brown_mushroom)
+				|| (block == Blocks.red_mushroom)	 || (block == Blocks.red_flower) || (block == Blocks.yellow_flower));
 	}
 
 	public boolean mapIsOpaqueBlock(Map<Point,BuildingBlock>map, Point p) {
-		return (map.containsKey(p) && isBlockOpaqueCube(map.get(p).bid));
+		return (map.containsKey(p) && isBlockOpaqueCube(map.get(p).block));
 	}
 
 	public boolean mapIsStairBlock(Map<Point,BuildingBlock>map, Point p) {
 		if (!map.containsKey(p))
 			return false;
 
-		final int bid=map.get(p).bid;
+		final Block block=map.get(p).block;
 
-		return ((bid == Block.stairsCobblestone.blockID) || (bid == Block.stairsWoodOak.blockID));
+		return ((block == Blocks.stone_stairs) || (block == Blocks.oak_stairs));
 	}
 
 	private void readConfigLine(File file, String line, boolean importPlan) {
@@ -3919,15 +3946,15 @@ public class BuildingPlan {
 					} else if (pt.isType(bwolfspawn)) {
 						building.addSpawnPoint(Mill.ENTITY_WOLF, p);
 					} else if (pt.isType(bstonesource)) {
-						building.addSourcePoint(Block.stone.blockID, p);
+						building.addSourcePoint(Blocks.stone, p);
 					} else if (pt.isType(bsandsource)) {
-						building.addSourcePoint(Block.sand.blockID, p);
+						building.addSourcePoint(Blocks.sand, p);
 					} else if (pt.isType(bsandstonesource)) {
-						building.addSourcePoint(Block.sandStone.blockID, p);
+						building.addSourcePoint(Blocks.sandstone, p);
 					} else if (pt.isType(bclaysource)) {
-						building.addSourcePoint(Block.blockClay.blockID, p);
+						building.addSourcePoint(Blocks.clay, p);
 					} else if (pt.isType(bgravelsource)) {
-						building.addSourcePoint(Block.gravel.blockID, p);
+						building.addSourcePoint(Blocks.gravel, p);
 					} else if (pt.isType(bspawnerskeleton)) {
 						building.addMobSpawnerPoint(Mill.ENTITY_SKELETON, p);
 					} else if (pt.isType(bspawnerzombie)) {
@@ -3995,12 +4022,12 @@ public class BuildingPlan {
 
 		for (final BuildingBlock block : bblocks) {
 			map.put(block.p, block);
-			if ((block.bid == Block.ladder.blockID) && (block.meta==-1)) {
+			if ((block.block == Blocks.ladder) && (block.meta==-1)) {
 				ladders.add(block);
-			} else if (block.bid == Block.doorWood.blockID) {
+			} else if (block.block == Blocks.wooden_door) {
 				doors.add(block);
-			} else if (((block.bid == Block.stairsCobblestone.blockID)
-					|| (block.bid == Block.stairsWoodOak.blockID))  && (block.meta==-1)) {
+			} else if (((block.block == Blocks.stone_stairs)
+					|| (block.block == Blocks.oak_stairs))  && (block.meta==-1)) {
 				block.meta=-1;
 				stairs.add(block);
 			}
@@ -4054,7 +4081,7 @@ public class BuildingPlan {
 
 					if (map.containsKey(ladder.p.getAbove())) {
 						final BuildingBlock b=map.get(ladder.p.getAbove());
-						if ((b.bid == Block.ladder.blockID) && (b.meta != 0)) {
+						if ((b.block == Blocks.ladder) && (b.meta != 0)) {
 							if ((b.meta==5) && northValid[i]) {
 								ladder.meta=b.meta;
 								goOn=true;
@@ -4075,7 +4102,7 @@ public class BuildingPlan {
 							MLN.major(this, buildingKey+": trying ladder below. "+northValid[i]+"/"+southValid[i]+"/"+westValid[i]+"/"+eastValid[i]);
 						}
 						final BuildingBlock b=map.get(ladder.p.getBelow());
-						if ((b.bid == Block.ladder.blockID) && (b.meta != 0)) {
+						if ((b.block == Blocks.ladder) && (b.meta != 0)) {
 							if ((b.meta==5) && northValid[i]) {
 								if (MLN.LogBuildingPlan>=MLN.MAJOR) {
 									MLN.major(this, buildingKey+": copying blow: north");
@@ -4152,19 +4179,19 @@ public class BuildingPlan {
 		for (final BuildingBlock door : doors) {
 			final int orientation=door.meta & 3;
 			if (orientation == 2) {
-				if ((!map.containsKey(door.p.getWest()) || (map.get(door.p.getWest()).bid==0) || (map.get(door.p.getWest()).bid==Block.doorWood.blockID)) && map.containsKey(door.p.getEast())) {
+				if ((!map.containsKey(door.p.getWest()) || (map.get(door.p.getWest()).block==Blocks.air) || (map.get(door.p.getWest()).block==Blocks.wooden_door)) && map.containsKey(door.p.getEast())) {
 					door.special=BuildingBlock.INVERTEDDOOR;
 				}
 			} else if (orientation == 3) {
-				if ((!map.containsKey(door.p.getNorth()) || (map.get(door.p.getNorth()).bid==0) || (map.get(door.p.getNorth()).bid==Block.doorWood.blockID)) && map.containsKey(door.p.getSouth())) {
+				if ((!map.containsKey(door.p.getNorth()) || (map.get(door.p.getNorth()).block==Blocks.air) || (map.get(door.p.getNorth()).block==Blocks.wooden_door)) && map.containsKey(door.p.getSouth())) {
 					door.special=BuildingBlock.INVERTEDDOOR;
 				}
 			} else if (orientation == 0) {
-				if ((!map.containsKey(door.p.getEast()) || (map.get(door.p.getEast()).bid==0) || (map.get(door.p.getEast()).bid==Block.doorWood.blockID)) && map.containsKey(door.p.getWest())) {
+				if ((!map.containsKey(door.p.getEast()) || (map.get(door.p.getEast()).block==Blocks.air) || (map.get(door.p.getEast()).block==Blocks.wooden_door)) && map.containsKey(door.p.getWest())) {
 					door.special=BuildingBlock.INVERTEDDOOR;
 				}
 			} else if (orientation == 1) {
-				if ((!map.containsKey(door.p.getSouth()) || (map.get(door.p.getSouth()).bid==0) || (map.get(door.p.getSouth()).bid==Block.doorWood.blockID)) && map.containsKey(door.p.getNorth())) {
+				if ((!map.containsKey(door.p.getSouth()) || (map.get(door.p.getSouth()).block==Blocks.air) || (map.get(door.p.getSouth()).block==Blocks.wooden_door)) && map.containsKey(door.p.getNorth())) {
 					door.special=BuildingBlock.INVERTEDDOOR;
 				}
 			}
@@ -4317,11 +4344,11 @@ public class BuildingPlan {
 		for (int x=cx-width-2;x<(cx+width+2);x++) {
 			for (int z=cz-length-2;z<(cz+length+2);z++) {
 				for (int y=0;y<(plan.length+2);y++) {
-					final int bid=world.getBlockId(x,y,z);
+					final Block block=world.getBlock(x,y,z);
 
-					if ((bid!=Block.bedrock.blockID) && (bid!=Block.stone.blockID) && (bid!=Block.dirt.blockID) && (bid!=Block.gravel.blockID) &&
-							(bid!=Block.oreCoal.blockID) && (bid!=Block.oreDiamond.blockID) && (bid!=Block.oreGold.blockID) && (bid!=Block.oreIron.blockID)
-							&& (bid!=Block.oreLapis.blockID) && (bid!=Block.oreRedstone.blockID))
+					if ((block!=Blocks.bedrock) && (block!=Blocks.stone) && (block!=Blocks.dirt) && (block!=Blocks.gravel) &&
+							(block!=Blocks.coal_ore) && (block!=Blocks.diamond_ore) && (block!=Blocks.gold_ore) && (block!=Blocks.iron_ore)
+							&& (block!=Blocks.lapis_ore) && (block!=Blocks.redstone_ore))
 						return new LocationReturn(LocationReturn.CONSTRUCTION_FORBIDEN,null);
 				}
 			}

@@ -1,6 +1,6 @@
 package org.millenaire.common.goal;
 
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -11,6 +11,7 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
+import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
 public class GoalConstructionStepByStep extends Goal {
@@ -23,9 +24,9 @@ public class GoalConstructionStepByStep extends Goal {
 		if (bblock==null)
 			return 0;
 
-		final int toolEfficiency=(int)villager.getBestShovel().efficiencyOnProperMaterial;
+		final int toolEfficiency=(int)villager.getBestShovel().getDigSpeed(new ItemStack(villager.getBestShovel(),1), Blocks.dirt,0);
 
-		if ((bblock.bid==0) || (bblock.bid==Block.dirt.blockID))
+		if ((bblock.block==Blocks.air) || (bblock.block==Blocks.dirt))
 			return 100-(toolEfficiency*5);
 
 		return 500-(toolEfficiency*20);
@@ -48,10 +49,10 @@ public class GoalConstructionStepByStep extends Goal {
 		final BuildingBlock bblock=villager.getTownHall().getCurrentBlock();
 
 		if (bblock!=null) {
-			if (bblock.bid==0)
+			if (bblock.block==Blocks.air)
 				return villager.getBestShovelStack();
 			else
-				return new ItemStack[]{new ItemStack(Item.itemsList[bblock.bid], 1, bblock.meta)};
+				return new ItemStack[]{new ItemStack(bblock.block, 1, bblock.meta)};
 		} else
 			return  villager.getBestShovelStack();
 	}
@@ -106,32 +107,32 @@ public class GoalConstructionStepByStep extends Goal {
 			return true;
 
 		if ((MLN.LogWifeAI>=MLN.MINOR)) {
-			MLN.minor(villager, "Setting block at "+bblock.p+" type: "+bblock.bid+" replacing: "+villager.getBlock(bblock.p)+" distance: "+bblock.p.distanceTo(villager));
+			MLN.minor(villager, "Setting block at "+bblock.p+" type: "+bblock.block+" replacing: "+villager.getBlock(bblock.p)+" distance: "+bblock.p.distanceTo(villager));
 		}
 
 		if ((bblock.p.horizontalDistanceTo(villager) < 1)  && (bblock.p.getiY()>villager.posY) && (bblock.p.getiY()<(villager.posY+2))) {
 			boolean jumped=false;
 			final World world=villager.worldObj;
-			if (!world.isBlockOpaqueCube(villager.getPos().getiX()+1,villager.getPos().getiY()+1,villager.getPos().getiZ())
-					&& !world.isBlockOpaqueCube(villager.getPos().getiX()+1,villager.getPos().getiY()+2,villager.getPos().getiZ())) {
+			if (!MillCommonUtilities.isBlockOpaqueCube(world,villager.getPos().getiX()+1,villager.getPos().getiY()+1,villager.getPos().getiZ())
+					&& !MillCommonUtilities.isBlockOpaqueCube(world,villager.getPos().getiX()+1,villager.getPos().getiY()+2,villager.getPos().getiZ())) {
 
 				villager.setPosition(villager.getPos().getiX()+1,villager.getPos().getiY()+1,villager.getPos().getiZ());
 				jumped=true;
 			}
-			if (!jumped && !world.isBlockOpaqueCube(villager.getPos().getiX()-1,villager.getPos().getiY()+1,villager.getPos().getiZ())
-					&& !world.isBlockOpaqueCube(villager.getPos().getiX()-1,villager.getPos().getiY()+2,villager.getPos().getiZ())) {
+			if (!jumped && !MillCommonUtilities.isBlockOpaqueCube(world,villager.getPos().getiX()-1,villager.getPos().getiY()+1,villager.getPos().getiZ())
+					&& !MillCommonUtilities.isBlockOpaqueCube(world,villager.getPos().getiX()-1,villager.getPos().getiY()+2,villager.getPos().getiZ())) {
 
 				villager.setPosition(villager.getPos().getiX()-1,villager.getPos().getiY()+1,villager.getPos().getiZ());
 				jumped=true;
 			}
-			if (!jumped && !world.isBlockOpaqueCube(villager.getPos().getiX(),villager.getPos().getiY(),villager.getPos().getiZ()+1)
-					&& !world.isBlockOpaqueCube(villager.getPos().getiX(),villager.getPos().getiY()+2,villager.getPos().getiZ()+1)) {
+			if (!jumped && !MillCommonUtilities.isBlockOpaqueCube(world,villager.getPos().getiX(),villager.getPos().getiY(),villager.getPos().getiZ()+1)
+					&& !MillCommonUtilities.isBlockOpaqueCube(world,villager.getPos().getiX(),villager.getPos().getiY()+2,villager.getPos().getiZ()+1)) {
 
 				villager.setPosition(villager.getPos().getiX(),villager.getPos().getiY()+1,villager.getPos().getiZ()+1);
 				jumped=true;
 			}
-			if (!jumped && !world.isBlockOpaqueCube(villager.getPos().getiX(),villager.getPos().getiY()+1,villager.getPos().getiZ()-1)
-					&& !world.isBlockOpaqueCube(villager.getPos().getiX(),villager.getPos().getiY()+2,villager.getPos().getiZ()-1)) {
+			if (!jumped && !MillCommonUtilities.isBlockOpaqueCube(world,villager.getPos().getiX(),villager.getPos().getiY()+1,villager.getPos().getiZ()-1)
+					&& !MillCommonUtilities.isBlockOpaqueCube(world,villager.getPos().getiX(),villager.getPos().getiY()+2,villager.getPos().getiZ()-1)) {
 
 				villager.setPosition(villager.getPos().getiX(),villager.getPos().getiY()+1,villager.getPos().getiZ()-1);
 				jumped=true;
@@ -165,7 +166,7 @@ public class GoalConstructionStepByStep extends Goal {
 			final BuildingPlan plan = villager.getTownHall().getCurrentBuildingPlan();
 
 			for (final InvItem key : plan.resCost.keySet()) {
-				villager.takeFromInv(key.id(),key.meta, plan.resCost.get(key));
+				villager.takeFromInv(key.getItem(),key.meta, plan.resCost.get(key));
 			}
 			
 			if (villager.getTownHall().buildingLocationIP!=null && villager.getTownHall().buildingLocationIP.level==0) {

@@ -1,6 +1,6 @@
 package org.millenaire.common.item;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
@@ -22,9 +22,9 @@ public class ItemFoodMultiple extends ItemFood {
 
 	public final String iconName;
 
-	public ItemFoodMultiple(int id, String iconName, int healthAmount, int regenerationDuration,
+	public ItemFoodMultiple(String iconName, int healthAmount, int regenerationDuration,
 			int foodAmount, float saturation, boolean drink, int drunkDuration) {
-		super(id,foodAmount,saturation,false);
+		super(foodAmount,saturation,false);
 		this.healthAmount = healthAmount;
 		this.drink=drink;
 		this.regenerationDuration=regenerationDuration;
@@ -40,7 +40,7 @@ public class ItemFoodMultiple extends ItemFood {
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister)
+	public void registerIcons(IIconRegister iconRegister)
 	{
 		itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 	}
@@ -62,7 +62,7 @@ public class ItemFoodMultiple extends ItemFood {
 		itemstack.stackSize--;
 		world.playSoundAtEntity(entityplayer, "random.burp", 0.5F, (world.rand.nextFloat() * 0.1F) + 0.9F);
 
-		entityplayer.getFoodStats().addStats(this);
+		entityplayer.getFoodStats().func_151686_a(this, itemstack);
 		entityplayer.heal(healthAmount);
 
 		if (drink) {

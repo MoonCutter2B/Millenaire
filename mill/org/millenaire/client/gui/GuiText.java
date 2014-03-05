@@ -258,7 +258,7 @@ public abstract class GuiText extends GuiScreen {
 
 						int lnpos=0;
 
-						while (fontRenderer.getStringWidth(l)>lineSize) {
+						while (fontRendererObj.getStringWidth(l)>lineSize) {
 							int end = l.lastIndexOf(' ', lineSizeInChar);
 							if (end<1) {
 								end=lineSizeInChar;
@@ -398,7 +398,7 @@ public abstract class GuiText extends GuiScreen {
 						}
 					}
 				} else if (line.textField!=null) {
-					MillGuiTextField textField=new MillGuiTextField(fontRenderer,xStart+(getXSize() / 2) +40,yStart+vpos,95,20,line.textField.fieldKey);
+					MillGuiTextField textField=new MillGuiTextField(fontRendererObj,xStart+(getXSize() / 2) +40,yStart+vpos,95,20,line.textField.fieldKey);
 					textField.setText(line.textField.getText());
 					textField.setMaxStringLength(line.textField.getMaxStringLength());
 					textField.setTextColor(-1);
@@ -490,7 +490,7 @@ public abstract class GuiText extends GuiScreen {
 
 		drawDefaultBackground();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.func_110434_K().func_110577_a(getPNGPath());
+		this.mc.renderEngine.bindTexture(getPNGPath());
 		final int xStart = (width - getXSize()) / 2;
 		final int yStart = (height - getYSize()) / 2;
 		drawTexturedModalRect(xStart, yStart, 0, 0, getXSize(), getYSize());
@@ -518,17 +518,17 @@ public abstract class GuiText extends GuiScreen {
 
 
 					if (descText.get(pageNum).get(cp).shadow) {
-						fontRenderer.drawStringWithShadow(descText.get(pageNum).get(cp).text, getTextXStart()+
+						fontRendererObj.drawStringWithShadow(descText.get(pageNum).get(cp).text, getTextXStart()+
 								descText.get(pageNum).get(cp).margin,vpos, 0x101010);
 					} else {
-						fontRenderer.drawString(descText.get(pageNum).get(cp).text, getTextXStart()+descText.get(pageNum).get(cp).margin,vpos, 0x101010);
+						fontRendererObj.drawString(descText.get(pageNum).get(cp).text, getTextXStart()+descText.get(pageNum).get(cp).margin,vpos, 0x101010);
 					}
 
 					vpos+=10;
 				}
 			}
 
-			fontRenderer.drawString((pageNum+1)+"/"+getNbPage(), (getXSize()/2)-10,getYSize()-10, 0x101010);
+			fontRendererObj.drawString((pageNum+1)+"/"+getNbPage(), (getXSize()/2)-10,getYSize()-10, 0x101010);
 
 			vpos=6;
 
@@ -551,8 +551,8 @@ public abstract class GuiText extends GuiScreen {
 							String legend=descText.get(pageNum).get(cp).iconExtraLegends.get(ic);
 							
 							GL11.glEnable(GL11.GL_DEPTH_TEST);
-							itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, icon, getTextXStart()+18*ic, vpos);
-							itemRenderer.renderItemOverlayIntoGUI(this.fontRenderer, this.mc.renderEngine, icon, getTextXStart()+18*ic, vpos, null);
+							itemRenderer.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, icon, getTextXStart()+18*ic, vpos);
+							itemRenderer.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.renderEngine, icon, getTextXStart()+18*ic, vpos, null);
 							
 							if (((xStart+getTextXStart()+18*ic) < i) && (yStart+vpos < j) && ((xStart+getTextXStart()+18*ic)+16 > i) && (yStart+vpos+16 > j)) {
 								hoverIcon=icon;
@@ -599,7 +599,7 @@ public abstract class GuiText extends GuiScreen {
         {
             if (k == 0)
             {
-                list.set(k, "\u00a7" + Integer.toHexString(par1ItemStack.getRarity().rarityColor) + (String)list.get(k));
+                list.set(k, par1ItemStack.getRarity().rarityColor + (String)list.get(k));
             }
             else
             {
@@ -608,7 +608,7 @@ public abstract class GuiText extends GuiScreen {
         }
 
         FontRenderer font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
-        drawHoveringText(list, par2, par3, (font == null ? fontRenderer : font));
+        drawHoveringText(list, par2, par3, (font == null ? fontRendererObj : font));
     }
 	
 	@SuppressWarnings({ "rawtypes" })
@@ -724,7 +724,7 @@ public abstract class GuiText extends GuiScreen {
 	private int getLineWidthInChars(int lineWidthInPx) {
 		String testLine="a";
 
-		while (fontRenderer.getStringWidth(testLine)<lineWidthInPx) {
+		while (fontRendererObj.getStringWidth(testLine)<lineWidthInPx) {
 			testLine+="a";
 		}
 

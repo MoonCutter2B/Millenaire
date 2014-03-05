@@ -1,8 +1,9 @@
 package org.millenaire.common;
 
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -163,7 +164,7 @@ public class VillageType implements WeightedChoice {
 
 		final Vector<VillageType> villages=new Vector<VillageType>();
 
-		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.username);
+		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.getDisplayName());
 
 		for (final Culture culture : Culture.vectorCultures) {
 			for (final VillageType village : culture.vectorVillageTypes) {
@@ -563,7 +564,7 @@ public class VillageType implements WeightedChoice {
 			return true;
 
 		if (player!=null) {
-			final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.username);
+			final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.getDisplayName());
 
 			if ((keyLoneBuildingGenerateTag !=null) && profile.isTagSet(keyLoneBuildingGenerateTag))
 				return true;
@@ -618,7 +619,7 @@ public class VillageType implements WeightedChoice {
 		return true;
 	}
 
-	public void readVillageTypeInfoPacket(DataInputStream ds) throws IOException {
+	public void readVillageTypeInfoPacket(ByteBufInputStream ds) throws IOException {
 		playerControlled=ds.readBoolean();
 		spawnable=ds.readBoolean();
 		name=StreamReadWrite.readNullableString(ds);
@@ -636,7 +637,7 @@ public class VillageType implements WeightedChoice {
 	}
 
 
-	public void writeVillageTypeInfo(DataOutputStream data) throws IOException {
+	public void writeVillageTypeInfo(ByteBufOutputStream data) throws IOException {
 		data.writeUTF(key);
 		data.writeBoolean(playerControlled);
 		data.writeBoolean(spawnable);

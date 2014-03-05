@@ -2,6 +2,7 @@ package org.millenaire.common.goal;
 
 import java.util.Vector;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -13,11 +14,11 @@ import org.millenaire.common.core.MillCommonUtilities;
 
 public class GoalFish extends Goal {
 
-	private static ItemStack[] fishingRod=new ItemStack[]{new ItemStack(Item.fishingRod, 1)};
+	private static ItemStack[] fishingRod=new ItemStack[]{new ItemStack(Items.fishing_rod, 1)};
 
 	public GoalFish() {
-		buildingLimit.put(new InvItem(Item.fishRaw.itemID,0), 512);
-		buildingLimit.put(new InvItem(Item.fishCooked.itemID,0), 512);
+		buildingLimit.put(new InvItem(Items.fish,0), 512);
+		buildingLimit.put(new InvItem(Items.cooked_fished,0), 512);
 	}
 	
 	
@@ -70,7 +71,7 @@ public class GoalFish extends Goal {
 	@Override
 	public boolean performAction(MillVillager villager) throws Exception {
 
-		villager.addToInv(Item.fishRaw.itemID, 1);
+		villager.addToInv(Items.fish, 1);
 		
 		villager.swingItem();
 
@@ -83,7 +84,7 @@ public class GoalFish extends Goal {
 		if (villager.getGoalBuildingDest()==null)
 			return 20;
 		
-		return 100-(villager.getGoalBuildingDest().countGoods(Item.fishRaw.itemID));
+		return 100-(villager.getGoalBuildingDest().countGoods(Items.fish));
 	}
 
 	@Override

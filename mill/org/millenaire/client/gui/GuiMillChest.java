@@ -17,7 +17,7 @@ public class GuiMillChest extends GuiChest {
 		if (!locked) {
 			super.keyTyped(par1, par2);
 		} else {
-			if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode)
+			if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode())
 	        {
 	            this.mc.thePlayer.closeScreen();
 	        }
@@ -25,7 +25,7 @@ public class GuiMillChest extends GuiChest {
 	}
 
 	public static GuiMillChest createGUI(World world, int i, int j, int k, EntityPlayer entityplayer) {
-		final TileEntityMillChest lockedchest = (TileEntityMillChest) world.getBlockTileEntity(i, j, k);
+		final TileEntityMillChest lockedchest = (TileEntityMillChest) world.getTileEntity(i, j, k);
 
 		if ((lockedchest==null) || (world.isRemote && !lockedchest.loaded))
 			return null;

@@ -1,10 +1,10 @@
 package org.millenaire.common;
 
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,14 +13,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Vector;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.network.play.server.S3FPacketCustomPayload;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.Constants;
 
 import org.millenaire.common.TileEntityPanel.PanelPacketInfo;
 import org.millenaire.common.core.DevModUtilities;
@@ -155,11 +158,11 @@ public class MillWorld {
 		for (final String tag : globalTags) {
 			s+=tag+" ";
 		}
-		ServerSender.sendChat(player,MLN.LIGHTGREEN, "Tags: "+s);
+		ServerSender.sendChat(player,EnumChatFormatting.GREEN, "Tags: "+s);
 
-		ServerSender.sendChat(player,MLN.LIGHTGREEN, "ActionData: "+s);
+		ServerSender.sendChat(player,EnumChatFormatting.GREEN, "ActionData: "+s);
 		final String biomeName=world.getWorldChunkManager().getBiomeGenAt((int)player.posX, (int)player.posZ).biomeName.toLowerCase();
-		ServerSender.sendChat(player,MLN.LIGHTGREEN, "Biome: "+biomeName+", time: "+(world.getWorldTime()%24000)+" / "+world.getWorldTime());
+		ServerSender.sendChat(player,EnumChatFormatting.GREEN, "Biome: "+biomeName+", time: "+(world.getWorldTime()%24000)+" / "+world.getWorldTime());
 	}
 
 	public void displayVillageList(EntityPlayer player,boolean loneBuildings) {
@@ -226,7 +229,7 @@ public class MillWorld {
 
 				if (village.keyLonebuilding || (village.keyLoneBuildingGenerateTag!=null)) {
 
-					if (!village.generatedForPlayer || (player.username.equalsIgnoreCase(loneBuildingsList.generatedFor.get(i)))) {
+					if (!village.generatedForPlayer || (player.getDisplayName().equalsIgnoreCase(loneBuildingsList.generatedFor.get(i)))) {
 
 						final Point p=loneBuildingsList.pos.get(i);
 
@@ -297,9 +300,9 @@ public class MillWorld {
 					if (((i*i)+(j*j))<(radius*radius)) {
 						if (!world.getChunkProvider().chunkExists((i+centreX), (j+centreZ))) {
 							world.getChunkProvider().loadChunk((i+centreX), (j+centreZ));
-							final int bid=world.getBlockId((i+centreX)*16,60, (j+centreZ)*16);
+							final Block block=world.getBlock((i+centreX)*16,60, (j+centreZ)*16);
 							world.getChunkProvider().saveChunks(false, null);
-							MLN.minor(this, "Forcing population of chunk "+(i+centreX)+"/"+(j+centreZ)+", bid: "+bid);
+							MLN.minor(this, "Forcing population of chunk "+(i+centreX)+"/"+(j+centreZ)+", block: "+block);
 							nbGenerated++;
 						}
 					}
@@ -394,9 +397,9 @@ public class MillWorld {
 				final FileInputStream fileinputstream = new FileInputStream(file);
 				final NBTTagCompound nbttagcompound = CompressedStreamTools.readCompressed(fileinputstream);
 
-				final NBTTagList nbttaglist = nbttagcompound.getTagList("buildings");
+				final NBTTagList nbttaglist = nbttagcompound.getTagList("buildings", Constants.NBT.TAG_COMPOUND);
 				for(int i = 0; i < nbttaglist.tagCount(); i++) {
-					final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+					final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
 					new Building(this,nbttagcompound1);
 				}
 
@@ -642,7 +645,7 @@ public class MillWorld {
 		return cultures.size();
 	}
 
-	public void receiveVillageListPacket(DataInputStream ds) {
+	public void receiveVillageListPacket(ByteBufInputStream ds) {
 
 		if (MLN.LogNetwork>=MLN.MINOR) {
 			MLN.minor(this, "Received village list packet.");
@@ -917,8 +920,7 @@ public class MillWorld {
 	}
 
 	public void sendVillageListPacket(EntityPlayer player) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_VILLAGELIST);
@@ -943,12 +945,9 @@ public class MillWorld {
 			MLN.printException(this+": Error in sendVillageListPacket", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
+		S3FPacketCustomPayload packet = ServerSender.createServerPacket(data);
 
-		ServerSender.sendPacketToPlayer(packet, player.username);
+		ServerSender.sendPacketToPlayer(packet, player);
 	}
 
 	public void setGlobalTag(String tag) {
@@ -1087,7 +1086,7 @@ public class MillWorld {
 		for (final Object o : world.playerEntities) {
 			final EntityPlayer player=(EntityPlayer)o;
 
-			//MillCommonUtilities.getServerProfile(player.worldObj,player.username).updateProfile();
+			//MillCommonUtilities.getServerProfile(player.worldObj,player.getDisplayName()).updateProfile();
 
 			SpecialQuestActions.onTick(this,player);
 		}

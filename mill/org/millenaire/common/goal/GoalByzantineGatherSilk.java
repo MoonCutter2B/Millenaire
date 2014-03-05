@@ -2,7 +2,7 @@ package org.millenaire.common.goal;
 
 import java.util.Vector;
 
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.Building;
@@ -16,12 +16,12 @@ import org.millenaire.common.forge.Mill;
 
 public class GoalByzantineGatherSilk extends Goal {
 
-	private static ItemStack[] shears={new ItemStack(Item.shears,1)};
+	private static ItemStack[] shears={new ItemStack(Items.shears,1)};
 	
 	public GoalByzantineGatherSilk() {
 		maxSimultaneousInBuilding=2;
-		buildingLimit.put(new InvItem(Mill.silk.itemID), 128);
-		townhallLimit.put(new InvItem(Mill.silk.itemID), 128);
+		buildingLimit.put(new InvItem(Mill.silk), 128);
+		townhallLimit.put(new InvItem(Mill.silk), 128);
 	}
 
 	@Override
@@ -96,9 +96,9 @@ public class GoalByzantineGatherSilk extends Goal {
 
 	@Override
 	public boolean performAction(MillVillager villager) {
-		if ((MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Mill.wood_decoration.blockID) && (MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint())==4)) {
-			villager.addToInv(Mill.silk.itemID,0, 1);
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Mill.wood_decoration.blockID,3);
+		if ((MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Mill.wood_decoration) && (MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint())==4)) {
+			villager.addToInv(Mill.silk,0, 1);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Mill.wood_decoration,3);
 			
 			villager.swingItem();
 			
@@ -111,7 +111,7 @@ public class GoalByzantineGatherSilk extends Goal {
 	@Override
 	public int priority(MillVillager villager) {
 
-		int p=100-(villager.getTownHall().nbGoodAvailable(Mill.stone_decoration.blockID, 1, false, false)*2);
+		int p=100-(villager.getTownHall().nbGoodAvailable(new InvItem(Mill.stone_decoration, 1), false, false)*2);
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {

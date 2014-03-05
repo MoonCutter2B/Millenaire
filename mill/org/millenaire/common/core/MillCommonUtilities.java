@@ -19,9 +19,10 @@ import java.util.Random;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHalfSlab;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityList;
@@ -32,12 +33,12 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.ISaveHandler;
@@ -60,6 +61,8 @@ import org.millenaire.common.pathing.atomicstryker.AStarNode;
 import org.millenaire.common.pathing.atomicstryker.AStarStatic;
 
 import com.google.common.collect.Multimap;
+
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 
 public class MillCommonUtilities {
@@ -226,7 +229,7 @@ public class MillCommonUtilities {
 
 	static public Random random=new Random();
 
-	public static Icon getIcon(IconRegister register,String iconName) {
+	public static IIcon getIcon(IIconRegister register,String iconName) {
 		return register.registerIcon(Mill.modId+":"+iconName+MLN.getTextSuffix());
 	}
 
@@ -259,7 +262,7 @@ public class MillCommonUtilities {
 		for (int i=0;i<chest.getSizeInventory() && !hasPurse;i++) {
 			final ItemStack stack = chest.getStackInSlot(i);
 			if (stack !=null) {
-				if (stack.itemID == Mill.purse.itemID) {					
+				if (stack.getItem() == Mill.purse) {					
 					hasPurse=true;
 				}
 			}
@@ -267,16 +270,16 @@ public class MillCommonUtilities {
 
 		if (hasPurse) {
 
-			final int current_denier = getItemsFromChest(chest,Mill.denier.itemID,0,Integer.MAX_VALUE);
-			final int current_denier_argent = getItemsFromChest(chest,Mill.denier_argent.itemID,0,Integer.MAX_VALUE);
-			final int current_denier_or = getItemsFromChest(chest,Mill.denier_or.itemID,0,Integer.MAX_VALUE);
+			final int current_denier = getItemsFromChest(chest,Mill.denier,0,Integer.MAX_VALUE);
+			final int current_denier_argent = getItemsFromChest(chest,Mill.denier_argent,0,Integer.MAX_VALUE);
+			final int current_denier_or = getItemsFromChest(chest,Mill.denier_or,0,Integer.MAX_VALUE);
 
 			int finalChange=current_denier_or*64*64+current_denier_argent*64+current_denier+toChange;
 
 			for (int i=0;i<chest.getSizeInventory() && finalChange!=0;i++) {
 				final ItemStack stack = chest.getStackInSlot(i);
 				if (stack !=null) {
-					if (stack.itemID == Mill.purse.itemID) {					
+					if (stack.getItem() == Mill.purse) {					
 						int content=Mill.purse.totalDeniers(stack)+finalChange;
 
 						if (content>=0) {
@@ -301,30 +304,30 @@ public class MillCommonUtilities {
 				player.addStat(MillAchievements.cresus, 1);
 			}
 
-			final int current_denier = countChestItems(chest,Mill.denier.itemID,0);
-			final int current_denier_argent = countChestItems(chest,Mill.denier_argent.itemID,0);
-			final int current_denier_or = countChestItems(chest,Mill.denier_or.itemID,0);
+			final int current_denier = countChestItems(chest,Mill.denier,0);
+			final int current_denier_argent = countChestItems(chest,Mill.denier_argent,0);
+			final int current_denier_or = countChestItems(chest,Mill.denier_or,0);
 
 			if (MLN.LogWifeAI>=MLN.MAJOR) {
 				MLN.major(null, "Putting: "+denier+"/"+denier_argent+"/"+denier_or+" replacing "+current_denier+"/"+current_denier_argent+"/"+current_denier_or);
 			}
 
 			if (denier < current_denier) {
-				getItemsFromChest(chest,Mill.denier.itemID,0,current_denier-denier);
+				getItemsFromChest(chest,Mill.denier,0,current_denier-denier);
 			} else if (denier > current_denier) {
-				putItemsInChest(chest,Mill.denier.itemID,0,denier-current_denier);
+				putItemsInChest(chest,Mill.denier,0,denier-current_denier);
 			}
 
 			if (denier_argent < current_denier_argent) {
-				getItemsFromChest(chest,Mill.denier_argent.itemID,0,current_denier_argent-denier_argent);
+				getItemsFromChest(chest,Mill.denier_argent,0,current_denier_argent-denier_argent);
 			} else if (denier_argent > current_denier_argent) {
-				putItemsInChest(chest,Mill.denier_argent.itemID,0,denier_argent-current_denier_argent);
+				putItemsInChest(chest,Mill.denier_argent,0,denier_argent-current_denier_argent);
 			}
 
 			if (denier_or < current_denier_or) {
-				getItemsFromChest(chest,Mill.denier_or.itemID,0,current_denier_or-denier_or);
+				getItemsFromChest(chest,Mill.denier_or,0,current_denier_or-denier_or);
 			} else if (denier_or > current_denier_or) {
-				putItemsInChest(chest,Mill.denier_or.itemID,0,denier_or-current_denier_or);
+				putItemsInChest(chest,Mill.denier_or,0,denier_or-current_denier_or);
 			}
 
 		}
@@ -347,7 +350,7 @@ public class MillCommonUtilities {
 		for (int i=0;i<chest.getSizeInventory();i++) {
 			final ItemStack stack = chest.getStackInSlot(i);
 			if (stack !=null) {
-				if (stack.itemID == Mill.purse.itemID) {
+				if (stack.getItem() == Mill.purse) {
 					if (!placedInPurse) {
 						Mill.purse.setDeniers(stack,player, denier, denier_argent, denier_or);
 						placedInPurse=true;
@@ -359,35 +362,35 @@ public class MillCommonUtilities {
 		}
 
 		if (placedInPurse) {
-			getItemsFromChest(chest,Mill.denier.itemID,0,Integer.MAX_VALUE);
-			getItemsFromChest(chest,Mill.denier_argent.itemID,0,Integer.MAX_VALUE);
-			getItemsFromChest(chest,Mill.denier_or.itemID,0,Integer.MAX_VALUE);
+			getItemsFromChest(chest,Mill.denier,0,Integer.MAX_VALUE);
+			getItemsFromChest(chest,Mill.denier_argent,0,Integer.MAX_VALUE);
+			getItemsFromChest(chest,Mill.denier_or,0,Integer.MAX_VALUE);
 		} else {
 
-			final int current_denier = countChestItems(chest,Mill.denier.itemID,0);
-			final int current_denier_argent = countChestItems(chest,Mill.denier_argent.itemID,0);
-			final int current_denier_or = countChestItems(chest,Mill.denier_or.itemID,0);
+			final int current_denier = countChestItems(chest,Mill.denier,0);
+			final int current_denier_argent = countChestItems(chest,Mill.denier_argent,0);
+			final int current_denier_or = countChestItems(chest,Mill.denier_or,0);
 
 			if (MLN.LogWifeAI>=MLN.MAJOR) {
 				MLN.major(null, "Putting: "+denier+"/"+denier_argent+"/"+denier_or+" replacing "+current_denier+"/"+current_denier_argent+"/"+current_denier_or);
 			}
 
 			if (denier < current_denier) {
-				getItemsFromChest(chest,Mill.denier.itemID,0,current_denier-denier);
+				getItemsFromChest(chest,Mill.denier,0,current_denier-denier);
 			} else if (denier > current_denier) {
-				putItemsInChest(chest,Mill.denier.itemID,0,denier-current_denier);
+				putItemsInChest(chest,Mill.denier,0,denier-current_denier);
 			}
 
 			if (denier_argent < current_denier_argent) {
-				getItemsFromChest(chest,Mill.denier_argent.itemID,0,current_denier_argent-denier_argent);
+				getItemsFromChest(chest,Mill.denier_argent,0,current_denier_argent-denier_argent);
 			} else if (denier_argent > current_denier_argent) {
-				putItemsInChest(chest,Mill.denier_argent.itemID,0,denier_argent-current_denier_argent);
+				putItemsInChest(chest,Mill.denier_argent,0,denier_argent-current_denier_argent);
 			}
 
 			if (denier_or < current_denier_or) {
-				getItemsFromChest(chest,Mill.denier_or.itemID,0,current_denier_or-denier_or);
+				getItemsFromChest(chest,Mill.denier_or,0,current_denier_or-denier_or);
 			} else if (denier_or > current_denier_or) {
-				putItemsInChest(chest,Mill.denier_or.itemID,0,denier_or-current_denier_or);
+				putItemsInChest(chest,Mill.denier_or,0,denier_or-current_denier_or);
 			}
 		}
 	}
@@ -398,8 +401,8 @@ public class MillCommonUtilities {
 		for (int i = x - rx; i <= (x + rx); i++) {
 			for (int j = y - ry; j <= (y + ry); j++) {
 				for (int k = z - rz; k <= (z + rz); k++) {
-					//if (worldObj.getBlockId(i, j, k) != 0 && worldObj.getBlockId(i, j, k) != Block.snow.blockID)
-					if (world.isBlockOpaqueCube(i, j, k)) {
+					//if (worldObj.getBlock(i, j, k) != 0 && worldObj.getBlock(i, j, k) != Blocks.snow.blockID)
+					if (world.getBlock(i, j, k)!=null && world.getBlock(i, j, k).isBlockNormalCube()) {
 						counter++;
 					}
 				}
@@ -409,8 +412,12 @@ public class MillCommonUtilities {
 		return counter;
 
 	}
+	
+	static public int countChestItems(IInventory chest, Block block, int meta) {
+		return countChestItems(chest,Item.getItemFromBlock(block),meta);
+	}
 
-	static public int countChestItems(IInventory chest, int itemID, int meta) {
+	static public int countChestItems(IInventory chest, Item item, int meta) {
 		if(chest==null)
 			return 0;
 
@@ -425,7 +432,7 @@ public class MillCommonUtilities {
 
 		for (int i=0;i<maxSlot;i++) {
 			final ItemStack stack = chest.getStackInSlot(i);
-			if ((stack !=null) && (stack.itemID == itemID) && ((meta == -1) || (stack.getItemDamage() < 0) || (stack.getItemDamage() == meta))) {
+			if ((stack !=null) && (stack.getItem() == item) && ((meta == -1) || (stack.getItemDamage() < 0) || (stack.getItemDamage() == meta))) {
 				nb+=stack.stackSize;
 			}
 
@@ -433,14 +440,14 @@ public class MillCommonUtilities {
 		return nb;
 	}
 
-	static public int countFurnaceItems(IInventory furnace, int itemID, int meta) {
+	static public int countFurnaceItems(IInventory furnace, Item item, int meta) {
 		if(furnace==null)
 			return 0;
 
 		int nb=0;
 
 		final ItemStack stack = furnace.getStackInSlot(2);
-		if ((stack !=null) && (stack.itemID == itemID) && ((meta == -1) || (stack.getItemDamage() < 0) || (stack.getItemDamage() == meta))) {
+		if ((stack !=null) && (stack.getItem() == item) && ((meta == -1) || (stack.getItemDamage() < 0) || (stack.getItemDamage() == meta))) {
 			nb+=stack.stackSize;
 		}
 
@@ -454,13 +461,13 @@ public class MillCommonUtilities {
 		for (int i=0;i<chest.getSizeInventory();i++) {
 			final ItemStack stack = chest.getStackInSlot(i);
 			if (stack !=null) {
-				if (stack.itemID == Mill.purse.itemID)
+				if (stack.getItem() == Mill.purse)
 					deniers+=Mill.purse.totalDeniers(stack);
-				else if (stack.itemID == Mill.denier.itemID) {
+				else if (stack.getItem() == Mill.denier) {
 					deniers+=stack.stackSize;
-				} else if (stack.itemID == Mill.denier_argent.itemID) {
+				} else if (stack.getItem() == Mill.denier_argent) {
 					deniers+=stack.stackSize*64;
-				} else if (stack.itemID == Mill.denier_or.itemID) {
+				} else if (stack.getItem() == Mill.denier_or) {
 					deniers+=stack.stackSize*64*64;
 				}
 			}
@@ -492,9 +499,9 @@ public class MillCommonUtilities {
 		for (int i=0;i<50;i++) {
 			dest=dest.getRelative(5-MillCommonUtilities.randomInt(10), 5-MillCommonUtilities.randomInt(20), 5-MillCommonUtilities.randomInt(10));
 
-			if (isBlockIdSolid(world.getBlockId(dest.getiX(), dest.getiY()-1, dest.getiZ())) &&
-					!isBlockIdSolid(world.getBlockId(dest.getiX(), dest.getiY(), dest.getiZ())) &&
-					!isBlockIdSolid(world.getBlockId(dest.getiX(), dest.getiY()+1, dest.getiZ())))
+			if (isBlockIdSolid(world.getBlock(dest.getiX(), dest.getiY()-1, dest.getiZ())) &&
+					!isBlockIdSolid(world.getBlock(dest.getiX(), dest.getiY(), dest.getiZ())) &&
+					!isBlockIdSolid(world.getBlock(dest.getiX(), dest.getiY()+1, dest.getiZ())))
 				return dest;
 		}
 
@@ -514,7 +521,7 @@ public class MillCommonUtilities {
 
 		int y = world.getTopSolidOrLiquidBlock(x, z);
 
-		while ((y>-1) && !MillCommonUtilities.isBlockIdGround(world.getBlockId(x, y, z))) {
+		while ((y>-1) && !MillCommonUtilities.isBlockIdGround(world.getBlock(x, y, z))) {
 			y--;
 		}
 
@@ -531,7 +538,7 @@ public class MillCommonUtilities {
 			return null;
 
 		int y=findTopSoilBlock(world,dest.getiX(),dest.getiZ());
-		while ((y<250) && (isBlockIdSolid(world.getBlockId(dest.getiX(), y, dest.getiZ())) || isBlockIdSolid(world.getBlockId(dest.getiX(), y+1, dest.getiZ())))) {
+		while ((y<250) && (isBlockIdSolid(world.getBlock(dest.getiX(), y, dest.getiZ())) || isBlockIdSolid(world.getBlock(dest.getiX(), y+1, dest.getiZ())))) {
 			y++;
 		}
 
@@ -545,16 +552,16 @@ public class MillCommonUtilities {
 		return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,true),"UTF8"));
 	}
 
-	public static int getBlock(World world,Point p)
+	public static Block getBlock(World world,Point p)
 	{
 		if((p.x < 0xfe17b800) || (p.z < 0xfe17b800) || (p.x >= 0x1e84800) || (p.z > 0x1e84800))
-			return -1;
+			return null;
 		if(p.y < 0)
-			return -1;
+			return null;
 		if(p.y >= 256)
-			return -1;
+			return null;
 
-		return world.getBlockId(p.getiX(), p.getiY(), p.getiZ());
+		return world.getBlock(p.getiX(), p.getiY(), p.getiZ());
 	}
 
 	public static int getBlockMeta(World world,Point p)
@@ -569,7 +576,7 @@ public class MillCommonUtilities {
 		return world.getBlockMetadata(p.getiX(), p.getiY(), p.getiZ());
 	}
 
-	public static Vector<Point> getBlocksAround(World world, int[] blockIds, Point pos,
+	public static Vector<Point> getBlocksAround(World world, Block[] targetBlocks, Point pos,
 			int rx, int ry, int rz) {
 
 		final Vector<Point> matches=new Vector<Point>();
@@ -578,8 +585,8 @@ public class MillCommonUtilities {
 		for (int i = pos.getiX() - rx; i <= (pos.getiX() + rx); i++) {
 			for (int j = pos.getiY() - ry; j <= (pos.getiY() + ry); j++) {
 				for (int k = pos.getiZ() - rz; k <= (pos.getiZ() + rz); k++) {
-					for (int l=0;l<blockIds.length;l++)
-						if (world.getBlockId(i, j, k) == blockIds[l]) {
+					for (int l=0;l<targetBlocks.length;l++)
+						if (world.getBlock(i, j, k) == targetBlocks[l]) {
 							matches.add(new Point(i, j, k));
 						}
 				}
@@ -616,13 +623,13 @@ public class MillCommonUtilities {
 				rx, ry, rz);
 	}
 
-	public static Point getClosestBlock(World world, int[] blockIds, Point pos,
+	public static Point getClosestBlock(World world, Block[] blocks, Point pos,
 			int rx, int ry, int rz) {
-		return getClosestBlockMeta(world, blockIds, -1, pos,rx,ry,rz);
+		return getClosestBlockMeta(world, blocks, -1, pos,rx,ry,rz);
 
 	}
 
-	public static Point getClosestBlockMeta(World world, int[] blockIds, int meta, Point pos,
+	public static Point getClosestBlockMeta(World world, Block[] blocks, int meta, Point pos,
 			int rx, int ry, int rz) {
 
 		Point closest = null;
@@ -631,8 +638,8 @@ public class MillCommonUtilities {
 		for (int i = pos.getiX() - rx; i <= (pos.getiX() + rx); i++) {
 			for (int j = pos.getiY() - ry; j <= (pos.getiY() + ry); j++) {
 				for (int k = pos.getiZ() - rz; k <= (pos.getiZ() + rz); k++) {
-					for (int l=0;l<blockIds.length;l++)
-						if (world.getBlockId(i, j, k) == blockIds[l]) {
+					for (int l=0;l<blocks.length;l++)
+						if (world.getBlock(i, j, k) == blocks[l]) {
 							if ((meta == -1) || (world.getBlockMetadata(i, j, k)==meta)) {
 
 								final Point temp = new Point(i, j, k);
@@ -666,7 +673,7 @@ public class MillCommonUtilities {
 
 				if (!item.isDead ) {
 					for (final InvItem key : items) {
-						if ((item.getEntityItem().itemID == key.id()) && (item.getEntityItem().getItemDamage() == key.meta)) {
+						if ((item.getEntityItem().getItem() == key.getItem()) && (item.getEntityItem().getItemDamage() == key.meta)) {
 							final double dist=item.getDistanceSq(p.x, p.y, p.z);
 							if (dist < bestdist) {
 								bestdist=dist;
@@ -708,8 +715,11 @@ public class MillCommonUtilities {
 		return total;
 	}
 
+	static public int getItemsFromChest(IInventory chest, Block block, int meta,int toTake) {
+		return getItemsFromChest(chest,Item.getItemFromBlock(block),meta,toTake);
+	}
 
-	static public int getItemsFromChest(IInventory chest, int itemID, int meta,int toTake) {
+	static public int getItemsFromChest(IInventory chest, Item item, int meta,int toTake) {
 		if(chest==null)
 			return 0;
 
@@ -726,7 +736,7 @@ public class MillCommonUtilities {
 			final ItemStack stack = chest.getStackInSlot(i);
 
 
-			if ((stack !=null) && (stack.itemID == itemID) && ((stack.getItemDamage() == meta) || (meta==-1))) {
+			if ((stack !=null) && (stack.getItem() == item) && ((stack.getItemDamage() == meta) || (meta==-1))) {
 				if (stack.stackSize <= (toTake-nb)) {
 					nb+=stack.stackSize;
 					chest.setInventorySlotContents(i, null);
@@ -740,14 +750,14 @@ public class MillCommonUtilities {
 		return nb;
 	}
 
-	static public int getItemsFromFurnace(IInventory furnace, int itemID, int toTake) {
+	static public int getItemsFromFurnace(IInventory furnace, Item item, int toTake) {
 		if(furnace==null)
 			return 0;
 
 		int nb=0;
 
 		final ItemStack stack = furnace.getStackInSlot(2);
-		if ((stack !=null) && (stack.itemID == itemID)) {
+		if ((stack !=null) && (stack.getItem() == item)) {
 			if (stack.stackSize <= (toTake-nb)) {
 				nb+=stack.stackSize;
 				furnace.setInventorySlotContents(2, null);
@@ -761,30 +771,47 @@ public class MillCommonUtilities {
 		return nb;
 	}
 
+	static public boolean isBlockOpaqueCube(World world,int i,int j,int k) {
+		Block b=world.getBlock(i, j, k);
+		if (b==null)
+			return false;
+		return b.isBlockNormalCube();
+	}
+	
+	static public boolean isBlockOpaqueCube(Block b) {
+		if (b==null)
+			return false;
+		return b.isBlockNormalCube();
+	}
+	
 	static public int[] getJumpDestination(World world, int x,int y,int z) {
 
-		if (!world.isBlockOpaqueCube(x, y, z) && !world.isBlockOpaqueCube(x, y+1, z))
+		if (!isBlockOpaqueCube(world,x, y, z) && !isBlockOpaqueCube(world,x, y+1, z))
 			return new int[]{x,y,z};
 
-		if (!world.isBlockOpaqueCube(x+1, y, z) && !world.isBlockOpaqueCube(x+1, y+1, z))
+		if (!isBlockOpaqueCube(world,x+1, y, z) && !isBlockOpaqueCube(world,x+1, y+1, z))
 			return new int[]{x+1,y,z};
 
-		if (!world.isBlockOpaqueCube(x-1, y, z) && !world.isBlockOpaqueCube(x-1, y+1, z))
+		if (!isBlockOpaqueCube(world,x-1, y, z) && !isBlockOpaqueCube(world,x-1, y+1, z))
 			return new int[]{x-1,y,z};
 
-		if (!world.isBlockOpaqueCube(x, y, z+1) && !world.isBlockOpaqueCube(x, y+1, z+1))
+		if (!isBlockOpaqueCube(world,x, y, z+1) && !isBlockOpaqueCube(world,x, y+1, z+1))
 			return new int[]{x,y,z+1};
 
-		if (!world.isBlockOpaqueCube(x, y, z-1) && !world.isBlockOpaqueCube(x, y+1, z-1))
+		if (!isBlockOpaqueCube(world,x, y, z-1) && !isBlockOpaqueCube(world,x, y+1, z-1))
 			return new int[]{x,y,z-1};
 
 		return null;
 	}
 
-	static public int getPointHash(int bid,int meta) {
-		return (bid << 8)+meta;
+	static public int getPointHash(String special) {
+		return ("sp_"+special).hashCode();
 	}
 
+	static public int getPointHash(Block b,int meta) {
+		return (Block.blockRegistry.getNameForObject(b)+"_"+meta).hashCode();
+	}
+	
 	public static int getPriceColour(int price) {
 		if (price >= (64*64))
 			return 0xFFE500;
@@ -808,16 +835,16 @@ public class MillCommonUtilities {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Object getPrivateValue(Class pclass, Object obj, int pos) throws IllegalArgumentException, SecurityException, NoSuchFieldException {
 
-		return ModLoader.getPrivateValue(pclass, obj, pos);
+		return ReflectionHelper.getPrivateValue(pclass, obj, pos);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Object getPrivateValue(Class pclass, Object obj, String nameMCP,String name) throws IllegalArgumentException, SecurityException, NoSuchFieldException {
 		//	Log.debug(EntityCreature.class.getSimpleName());
 		if (EntityCreature.class.getSimpleName().equals("EntityCreature"))
-			return ModLoader.getPrivateValue(pclass, obj, nameMCP);
+			return ReflectionHelper.getPrivateValue(pclass, obj, nameMCP);
 		else
-			return ModLoader.getPrivateValue(pclass, obj, name);
+			return ReflectionHelper.getPrivateValue(pclass, obj, name);
 	}
 
 
@@ -866,7 +893,7 @@ public class MillCommonUtilities {
 			if (o instanceof EntityPlayer) {
 				final EntityPlayer player=(EntityPlayer)o;
 
-				if (player.username.equals(playerName))
+				if (player.getDisplayName().equals(playerName))
 					return player;
 			}
 		}
@@ -874,10 +901,10 @@ public class MillCommonUtilities {
 		return null;
 	}
 
-	public static Vector<EntityPlayer> getServerPlayers(World world) {
+	public static Vector<EntityClientPlayerMP> getServerPlayers(World world) {
 		@SuppressWarnings("unchecked")
 		final
-		Vector<EntityPlayer> players=new Vector<EntityPlayer>(world.playerEntities);
+		Vector<EntityClientPlayerMP> players=new Vector<EntityClientPlayerMP>(world.playerEntities);
 		return players;
 	}
 
@@ -983,95 +1010,84 @@ public class MillCommonUtilities {
 
 	}
 
-	public static boolean isBlockIdGround(int b) {
+	public static boolean isBlockIdGround(Block b) {
 
-		if (b == Block.bedrock.blockID)
+		if (b == Blocks.bedrock)
 			return true;
-		else if (b == Block.blockClay.blockID)
+		else if (b == Blocks.clay)
 			return true;
-		else if (b == Block.dirt.blockID)
+		else if (b == Blocks.dirt)
 			return true;
-		else if (b == Block.grass.blockID)
+		else if (b == Blocks.grass)
 			return true;
-		else if (b == Block.gravel.blockID)
+		else if (b == Blocks.gravel)
 			return true;
-		else if (b == Block.obsidian.blockID)
+		else if (b == Blocks.obsidian)
 			return true;
-		else if (b == Block.sand.blockID)
+		else if (b == Blocks.sand)
 			return true;
-		else if (b == Block.tilledField.blockID)
-			return true;
-
-		return false;
-	}
-
-	public static boolean isBlockIdGroundOrCeiling(int b) {
-
-		if (b == Block.stone.blockID)
-			return true;
-		else if (b == Block.sandStone.blockID)
+		else if (b == Blocks.farmland)
 			return true;
 
 		return false;
 	}
 
-	public static boolean isBlockIdLiquid(int b) {
-		if (b<1)
+	public static boolean isBlockIdGroundOrCeiling(Block b) {
+
+		if (b == Blocks.stone)
+			return true;
+		else if (b == Blocks.sandstone)
+			return true;
+
+		return false;
+	}
+
+	public static boolean isBlockIdLiquid(Block b) {
+		if (b==null)
 			return false;
 
-		if ((b==Block.waterStill.blockID) || (b==Block.waterMoving.blockID) || (b==Block.lavaStill.blockID)
-				|| (b==Block.lavaMoving.blockID))
+		if ((b==Blocks.water) || (b==Blocks.flowing_water) || (b==Blocks.lava)
+				|| (b==Blocks.flowing_lava))
 			return true;
 
 		return false;
 	}
 
-	public static boolean isBlockIdSolid(int b) {
-		if (b<1)
+	public static boolean isBlockIdSolid(Block b) {
+		if (b==null)
 			return false;
 
-		if ((Block.blocksList[b] != null) && Block.blocksList[b].isOpaqueCube())
+		if (b.isOpaqueCube())
 			return true;
-		if ((b==Block.glass.blockID) || (b==Block.thinGlass.blockID) || (b==Block.stoneSingleSlab.blockID)  || (b==Block.woodSingleSlab.blockID) || (b==Block.stairsCobblestone.blockID)
-				|| (b==Block.stairsWoodOak.blockID) ||  (b==Block.stairsBrick.blockID)
-				|| (b==Block.stairsNetherBrick.blockID) || (b==Block.stairsStoneBrick.blockID)
-				|| (b==Block.fenceIron.blockID) || (b==Mill.paperWall.blockID))
+		if ((b==Blocks.glass) || (b==Blocks.glass_pane) || (b==Blocks.stone_slab)  || (b instanceof BlockSlab) || (b instanceof BlockStairs)
+				|| (b==Blocks.fence) || (b==Mill.paperWall))
 			return true;
 
 		return false;
 	}
 
-	public static int getBlockIdValidGround(int b,boolean surface) {
+	public static Block getBlockIdValidGround(Block b,boolean surface) {
 
-		if (b == Block.bedrock.blockID)
-			return Block.dirt.blockID;
-		else if (b == Block.stone.blockID && surface)
-			return Block.dirt.blockID;
-		else if (b == Block.stone.blockID && !surface)
-			return Block.stone.blockID;
-		else if (b == Block.dirt.blockID)
-			return Block.dirt.blockID;
-		else if (b == Block.grass.blockID)
-			return Block.dirt.blockID;
-		else if (b == Block.gravel.blockID)
-			return Block.gravel.blockID;
-		else if (b == Block.sand.blockID)
-			return Block.sand.blockID;
-		else if (b == Block.sandStone.blockID && surface)
-			return Block.sand.blockID;
-		else if (b == Block.sandStone.blockID && !surface)
-			return Block.sandStone.blockID;
+		if (b == Blocks.bedrock)
+			return Blocks.dirt;
+		else if (b == Blocks.stone && surface)
+			return Blocks.dirt;
+		else if (b == Blocks.stone && !surface)
+			return Blocks.stone;
+		else if (b == Blocks.dirt)
+			return Blocks.dirt;
+		else if (b == Blocks.grass)
+			return Blocks.dirt;
+		else if (b == Blocks.gravel)
+			return Blocks.gravel;
+		else if (b == Blocks.sand)
+			return Blocks.sand;
+		else if (b == Blocks.sandstone && surface)
+			return Blocks.sand;
+		else if (b == Blocks.sandstone && !surface)
+			return Blocks.sandstone;
 
-		return -1;
-	}
-
-	public static boolean isBlockOpaqueCube(int blockId)
-	{
-		final Block block = Block.blocksList[blockId];
-		if(block == null)
-			return false;
-		else
-			return block.isOpaqueCube();
+		return null;
 	}
 
 	static public String[] limitSignText(String[] lines) {
@@ -1166,7 +1182,7 @@ public class MillCommonUtilities {
 
 	public static void notifyBlock(World world,Point p)
 	{
-		world.notifyBlockChange(p.getiX()+1, p.getiY(), p.getiZ(), 0);
+		world.notifyBlockChange(p.getiX()+1, p.getiY(), p.getiZ(), null);
 	}
 
 
@@ -1181,29 +1197,29 @@ public class MillCommonUtilities {
 
 	public static void playSoundBlockBreaking(World world,Point p,Block b,float volume) {
 		if ((b!=null) && (b.stepSound != null)) {
-			playSound(world,p,b.stepSound.getBreakSound(),b.stepSound.stepSoundVolume*volume,b.stepSound.stepSoundPitch);
+			playSound(world,p,b.stepSound.getBreakSound(),b.stepSound.getVolume()*volume,b.stepSound.getPitch());
 		}
 	}
 
 	public static void playSoundBlockPlaced(World world,Point p,Block b,float volume) {
 		if ((b!=null) && (b.stepSound != null)) {
-			playSound(world,p,b.stepSound.getPlaceSound(),b.stepSound.stepSoundVolume*volume,b.stepSound.stepSoundPitch);
+			playSound(world,p,b.stepSound.soundName,b.stepSound.getVolume()*volume,b.stepSound.getPitch());
 		}
 	}
 
 	public static void playSoundByMillName(World world,Point p,String soundMill,float volume) {
 		if (soundMill.equals("metal")) {
-			playSoundBlockPlaced(world,p,Block.blockIron,volume);
+			playSoundBlockPlaced(world,p,Blocks.iron_block,volume);
 		} else if (soundMill.equals("wood")) {
-			playSoundBlockPlaced(world,p,Block.wood,volume);
+			playSoundBlockPlaced(world,p,Blocks.log,volume);
 		} else if (soundMill.equals("wool")) {
-			playSoundBlockPlaced(world,p,Block.cloth,volume);
+			playSoundBlockPlaced(world,p,Blocks.wool,volume);
 		} else if (soundMill.equals("glass")) {
-			playSoundBlockPlaced(world,p,Block.glass,volume);
+			playSoundBlockPlaced(world,p,Blocks.glass,volume);
 		} else if (soundMill.equals("stone")) {
-			playSoundBlockPlaced(world,p,Block.stone,volume);
+			playSoundBlockPlaced(world,p,Blocks.stone,volume);
 		} else if (soundMill.equals("earth")) {
-			playSoundBlockPlaced(world,p,Block.dirt,volume);
+			playSoundBlockPlaced(world,p,Blocks.dirt,volume);
 		} else {
 			MLN.printException("Tried to play unknown sound: "+soundMill, new Exception());
 		}
@@ -1214,11 +1230,19 @@ public class MillCommonUtilities {
 		return getRandom().nextDouble()<probability;
 	}
 
-	static public int putItemsInChest(IInventory chest, int item, int toPut) {
+	static public int putItemsInChest(IInventory chest, Item item, int toPut) {
 		return putItemsInChest(chest,item,0,toPut);
 	}
+	
+	static public int putItemsInChest(IInventory chest, Block block, int toPut) {
+		return putItemsInChest(chest,Item.getItemFromBlock(block),0,toPut);
+	}
+	
+	static public int putItemsInChest(IInventory chest, Block block, int meta, int toPut) {
+		return putItemsInChest(chest,Item.getItemFromBlock(block),meta,toPut);
+	}
 
-	static public int putItemsInChest(IInventory chest, int item, int meta, int toPut) {
+	static public int putItemsInChest(IInventory chest, Item item, int meta, int toPut) {
 
 		if(chest==null)
 			return 0;
@@ -1236,7 +1260,7 @@ public class MillCommonUtilities {
 
 		for (int i=0;(i<maxSlot) && (nb < toPut);i++) {
 			final ItemStack stack = chest.getStackInSlot(i);
-			if ((stack != null) && (stack.itemID == item) && (stack.getItemDamage()==meta)) {
+			if ((stack != null) && (stack.getItem() == item) && (stack.getItemDamage()==meta)) {
 				//Log.major(chest, Log.TileEntityBuilding, "stack.getMaxStackSize(): "+stack.getMaxStackSize()+", stack.stackSize: "+stack.stackSize);
 				if ((stack.getMaxStackSize()-stack.stackSize) >= (toPut-nb)) {
 					stack.stackSize+=(toPut-nb);
@@ -1286,12 +1310,12 @@ public class MillCommonUtilities {
 		return res;
 	}
 
-	public static boolean setBlock(World world,Point p, int blockId)
+	public static boolean setBlock(World world,Point p, Block block)
 	{
-		return setBlock(world,p,blockId,true, false);
+		return setBlock(world,p,block,true, false);
 	}
 
-	public static boolean setBlock(World world,Point p, int bid, boolean notify, boolean playSound)
+	public static boolean setBlock(World world,Point p, Block block, boolean notify, boolean playSound)
 	{
 		if((p.x < 0xfe17b800) || (p.z < 0xfe17b800) || (p.x >= 0x1e84800) || (p.z > 0x1e84800))
 			return false;
@@ -1300,26 +1324,24 @@ public class MillCommonUtilities {
 		if(p.y >= 256)
 			return false;
 
-		if (playSound && (bid==0)) {
-			final int oldBid=world.getBlockId(p.getiX(), p.getiY(), p.getiZ());
+		if (playSound && (block==Blocks.air)) {
+			final Block oldBlock=world.getBlock(p.getiX(), p.getiY(), p.getiZ());
 
-			if (oldBid>0) {
-				final Block block = Block.blocksList[oldBid];
-				if ((block!=null) && (block.stepSound!=null)) {
-					playSoundBlockBreaking(world,p,block,2.0f);
+			if (oldBlock!=null) {
+				if (oldBlock.stepSound!=null) {
+					playSoundBlockBreaking(world,p,oldBlock,2.0f);
 				}
 			}
 		}
 
 		if (notify) {
-			world.setBlock(p.getiX(), p.getiY(), p.getiZ(), bid,0,3);
+			world.setBlock(p.getiX(), p.getiY(), p.getiZ(), block,0,3);
 		} else {
-			world.setBlock(p.getiX(), p.getiY(), p.getiZ(), bid,0,2);
+			world.setBlock(p.getiX(), p.getiY(), p.getiZ(), block,0,2);
 		}
 
-		if (playSound && (bid>0)) {
-			final Block block = Block.blocksList[bid];
-			if ((block!=null) && (block.stepSound!=null)) {
+		if (playSound && (block!=Blocks.air)) {
+			if (block.stepSound!=null) {
 				playSoundBlockPlaced(world,p,block,2.0f);
 			}
 		}
@@ -1327,12 +1349,12 @@ public class MillCommonUtilities {
 		return true;
 	}
 
-	public static boolean setBlockAndMetadata(World world,Point p,int bid, int metadata)
+	public static boolean setBlockAndMetadata(World world,Point p,Block block, int metadata)
 	{
-		return setBlockAndMetadata(world,p,bid,metadata,true,false);
+		return setBlockAndMetadata(world,p,block,metadata,true,false);
 	}
 
-	public static boolean setBlockAndMetadata(World world,int x,int y,int z,int bid, int metadata, boolean notify, boolean playSound)
+	public static boolean setBlockAndMetadata(World world,int x,int y,int z,Block block, int metadata, boolean notify, boolean playSound)
 	{
 		if((x < 0xfe17b800) || (z < 0xfe17b800) || (x >= 0x1e84800) || (z > 0x1e84800))
 			return false;
@@ -1341,27 +1363,25 @@ public class MillCommonUtilities {
 		if(y >= 256)
 			return false;
 
-		if (playSound && (bid==0)) {
-			final int oldBid=world.getBlockId(x,y,z);
+		if (playSound && (block!=Blocks.air)) {
+			final Block oldBlock=world.getBlock(x,y,z);
 
-			if (oldBid>0) {
-				final Block block = Block.blocksList[oldBid];
-				if ((block!=null) && (block.stepSound!=null)) {
-					playSoundBlockBreaking(world,new Point(x,y,z),block,2.0f);
+			if (oldBlock!=null) {
+				if ((oldBlock.stepSound!=null)) {
+					playSoundBlockBreaking(world,new Point(x,y,z),oldBlock,2.0f);
 				}
 
 			}
 		}
 
 		if (notify) {
-			world.setBlock(x,y,z, bid, metadata,3);
+			world.setBlock(x,y,z, block, metadata,3);
 		} else {
-			world.setBlock(x,y,z, bid, metadata,2);
+			world.setBlock(x,y,z, block, metadata,2);
 		}
 
-		if (playSound && (bid>0)) {
-			final Block block = Block.blocksList[bid];
-			if ((block!=null) && (block.stepSound!=null)) {
+		if (playSound && block!=Blocks.air) {
+			if ((block.stepSound!=null)) {
 				playSoundBlockPlaced(world,new Point(x,y,z),block,2.0f);
 			}
 		}
@@ -1369,9 +1389,9 @@ public class MillCommonUtilities {
 		return true;
 	}
 
-	public static boolean setBlockAndMetadata(World world,Point p,int bid, int metadata, boolean notify, boolean playSound)
+	public static boolean setBlockAndMetadata(World world,Point p,Block block, int metadata, boolean notify, boolean playSound)
 	{
-		return setBlockAndMetadata(world,p.getiX(),p.getiY(),p.getiZ(),bid,metadata,notify,playSound);
+		return setBlockAndMetadata(world,p.getiX(),p.getiY(),p.getiZ(),block,metadata,notify,playSound);
 	}
 
 	public static boolean setBlockMetadata(World world,Point p, int metadata)
@@ -1407,9 +1427,9 @@ public class MillCommonUtilities {
 	public static void setPrivateValue(Class pclass, Object obj, String nameMCP,String name, Object value) throws IllegalArgumentException, SecurityException, NoSuchFieldException {
 		//	Log.debug(EntityCreature.class.getSimpleName());
 		if (EntityCreature.class.getSimpleName().equals("EntityCreature")) {
-			ModLoader.setPrivateValue(pclass, obj, nameMCP, value);
+			ReflectionHelper.setPrivateValue(pclass, obj, value, nameMCP);
 		} else {
-			ModLoader.setPrivateValue(pclass, obj, name, value);
+			ReflectionHelper.setPrivateValue(pclass, obj, value, name);
 		}
 	}
 
@@ -1484,7 +1504,7 @@ public class MillCommonUtilities {
 		final int ey = (int) p.y;
 		final int ez = (int) (p.z + z);
 
-		if ((world.getBlockId(ex, ey, ez)>0) && (world.getBlockId(ex, ey+1, ez)>0))
+		if ((world.getBlock(ex, ey, ez)!=Blocks.air) && (world.getBlock(ex, ey+1, ez)!=Blocks.air))
 			return null;
 
 		entityliving.setLocationAndAngles(ex, ey, ez, world.rand.nextFloat() * 360F, 0.0F);
@@ -1496,30 +1516,6 @@ public class MillCommonUtilities {
 		return entityliving;
 	}
 
-	public static String swapConfigBlockId(String s) {
-		if (s.equals("block_wood_id")) {
-			s=""+Mill.wood_decoration.blockID;
-		} else if (s.equals("block_earth_id")) {
-			s=""+Mill.earth_decoration.blockID;
-		} else if (s.equals("block_stone_id")) {
-			s=""+Mill.stone_decoration.blockID;
-		} else if (s.equals("block_crops_id")) {
-			s=""+Mill.crops.blockID;
-		} else if (s.equals("block_panes_id")) {
-			s=""+Mill.paperWall.blockID;
-		} else if (s.equals("block_byzantine_tile_id")) {
-			s=""+Mill.byzantine_tiles.blockID;
-		} else if (s.equals("block_byzantine_tile_slab_id")) {
-			s=""+Mill.byzantine_tile_slab.blockID;
-		} else if (s.equals("block_byzantine_stone_tiles_id")) {
-			s=""+Mill.byzantine_stone_tiles.blockID;
-		} else if (s.equals("block_path_id")) {
-			s=""+Mill.path.blockID;
-		} else if (s.equals("block_path_slab_id")) {
-			s=""+Mill.pathSlab.blockID;
-		}
-		return s;
-	}
 
 	static public long unpackLong(int nb1, int nb2) {
 
@@ -1537,8 +1533,8 @@ public class MillCommonUtilities {
 		}
 	}
 
-	private static boolean attemptPathBuild(Building th,World world,Vector<BuildingBlock> pathPoints,Point p,int pathBid,int pathMeta) {
-		int bid=p.getId(world);
+	private static boolean attemptPathBuild(Building th,World world,Vector<BuildingBlock> pathPoints,Point p,Block pathBlock,int pathMeta) {
+		Block block=p.getBlock(world);
 		int meta=p.getMeta(world);
 		//int bidAbove=p.getAbove().getId(world);
 		//int metaAbove=p.getAbove().getMeta(world);
@@ -1553,10 +1549,10 @@ public class MillCommonUtilities {
 
 
 
-		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(bid,meta))) {
+		if (p.getRelative(0, 2, 0).isBlockPassable(world) && p.getAbove().isBlockPassable(world) && (canPathBeBuiltHere(block,meta))) {
 
 
-			pathPoints.add(new BuildingBlock(p,pathBid,pathMeta));
+			pathPoints.add(new BuildingBlock(p,pathBlock,pathMeta));
 			return true;
 		}
 		//if (p.getAbove().isBlockPassable(world) && p.isBlockPassable(world) && (canPathBeBuiltOnTopOfThis(bidBelow,metaBelow))) {//path on raised ground
@@ -1570,32 +1566,32 @@ public class MillCommonUtilities {
 		return false;
 	}
 
-	public static boolean canPathBeBuiltHere(int bid,int meta) {
-		return (bid==Block.dirt.blockID || bid==Block.grass.blockID ||
-				bid==Block.sand.blockID || bid==Block.gravel.blockID 
-				|| ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta<8) || bid==Block.plantYellow.blockID
-				|| bid==Block.plantRed.blockID || bid==Block.mushroomBrown.blockID || bid==Block.mushroomRed.blockID
-				|| bid==Block.tallGrass.blockID || bid==Block.deadBush.blockID);
+	public static boolean canPathBeBuiltHere(Block block,int meta) {
+		return (block==Blocks.dirt || block==Blocks.grass ||
+				block==Blocks.sand || block==Blocks.gravel 
+				|| ((block==Mill.path || block==Mill.pathSlab) && meta<8) || block==Blocks.yellow_flower
+				|| block==Blocks.red_flower || block==Blocks.brown_mushroom || block==Blocks.red_mushroom
+				|| block==Blocks.tallgrass || block==Blocks.deadbush);
 	}
 
-	public static boolean canPathBeBuiltOnTopOfThis(int bid,int meta) {
-		return (bid==Block.dirt.blockID || bid==Block.grass.blockID ||
-				bid==Block.sand.blockID || bid==Block.gravel.blockID 
-				|| ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta<8) || bid==Block.stone.blockID
-				|| bid==Block.sandStone.blockID);
+	public static boolean canPathBeBuiltOnTopOfThis(Block block,int meta) {
+		return (block==Blocks.dirt || block==Blocks.grass ||
+				block==Blocks.sand || block==Blocks.gravel 
+				|| ((block==Mill.path || block==Mill.pathSlab) && meta<8) || block==Blocks.stone
+				|| block==Blocks.sandstone);
 	}
 
 	public static boolean isPointOnStablePath(Point p,World world) {
-		int bid=p.getId(world);
+		Block block=p.getBlock(world);
 		int meta=p.getMeta(world);
 
-		if ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta>7)
+		if ((block==Mill.path || block==Mill.pathSlab) && meta>7)
 			return true;
 
-		bid=p.getBelow().getId(world);
+		block=p.getBelow().getBlock(world);
 		meta=p.getBelow().getMeta(world);
 
-		if ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta>7)
+		if ((block==Mill.path || block==Mill.pathSlab) && meta>7)
 			return true;
 
 		return false;
@@ -1669,7 +1665,7 @@ public class MillCommonUtilities {
 
 
 	@SuppressWarnings("unused")
-	public static Vector<BuildingBlock> buildPath(Building th,ArrayList<AStarNode> path,int pathBid,int pathMeta,int pathWidth) {
+	public static Vector<BuildingBlock> buildPath(Building th,ArrayList<AStarNode> path,Block pathBlock,int pathMeta,int pathWidth) {
 
 		Vector<BuildingBlock> pathPoints=new Vector<BuildingBlock>();
 
@@ -1767,21 +1763,21 @@ public class MillCommonUtilities {
 
 						}
 					} else {
-						int bid=p.getBelow().getId(th.worldObj);
+						Block block=p.getBelow().getBlock(th.worldObj);
 
-						if (bid==Mill.pathSlab.blockID)
+						if (block==Mill.pathSlab)
 							halfSlab=true;
 					}
 				}
 
 				Point p=(new Point(node)).getBelow();
 
-				int nodePathBid=pathBid;
+				Block nodePathBlock=pathBlock;
 
-				if (nodePathBid==Mill.path.blockID && halfSlab)
-					nodePathBid=Mill.pathSlab.blockID;
+				if (nodePathBlock==Mill.path && halfSlab)
+					nodePathBlock=Mill.pathSlab;
 
-				attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBid,pathMeta);
+				attemptPathBuild(th,th.worldObj,pathPoints,p,nodePathBlock,pathMeta);
 
 				if (lastNode!=null) {
 					int dx=p.getiX()-lastNode.x;
@@ -1819,14 +1815,14 @@ public class MillCommonUtilities {
 						}
 
 						if (secondPoint!=null) {
-							boolean success=attemptPathBuild(th,th.worldObj,pathPoints,secondPoint,nodePathBid,pathMeta);
+							boolean success=attemptPathBuild(th,th.worldObj,pathPoints,secondPoint,nodePathBlock,pathMeta);
 
 							if (!success && secondPointAlternate!=null)
-								attemptPathBuild(th,th.worldObj,pathPoints,secondPointAlternate,nodePathBid,pathMeta);
+								attemptPathBuild(th,th.worldObj,pathPoints,secondPointAlternate,nodePathBlock,pathMeta);
 						}
 
 						if (thirdPoint!=null)
-							attemptPathBuild(th,th.worldObj,pathPoints,thirdPoint,nodePathBid,pathMeta);
+							attemptPathBuild(th,th.worldObj,pathPoints,thirdPoint,nodePathBlock,pathMeta);
 					}
 				}
 
@@ -1841,21 +1837,16 @@ public class MillCommonUtilities {
 	}
 
 	private static boolean isStairsOrSlabOrChest(World world,Point p) {
-		int bid=p.getId(world);
+		Block block=p.getBlock(world);
 
-		if (bid==0)
-			return false;
-
-		if (bid==Block.chest.blockID || bid==Mill.lockedChest.blockID || bid==Block.workbench.blockID || bid==Block.furnaceIdle.blockID || bid==Block.furnaceBurning.blockID)
+		if (block==Blocks.chest || block==Mill.lockedChest || block==Blocks.crafting_table || block==Blocks.furnace || block==Blocks.lit_furnace)
 			return true;
 
-		if (Block.blocksList[bid] instanceof BlockStairs)
+		if (block instanceof BlockStairs)
 			return true;
 
-		if (Block.blocksList[bid] instanceof BlockHalfSlab) {
-			BlockHalfSlab b=(BlockHalfSlab)Block.blocksList[bid];
-
-			if (!b.isOpaqueCube())
+		if (block instanceof BlockSlab) {
+			if (!block.isOpaqueCube())
 				return true;
 		}
 
@@ -1911,15 +1902,28 @@ public class MillCommonUtilities {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static double getItemWeaponDamage(Item item) {
-		Multimap multimap = item.func_111205_h();
+		Multimap multimap = item.getItemAttributeModifiers();
 
-		if (multimap.containsKey(SharedMonsterAttributes.field_111264_e.func_111108_a())) {
-			if (multimap.get(SharedMonsterAttributes.field_111264_e.func_111108_a()) instanceof AttributeModifier) {
-				AttributeModifier weaponModifier=(AttributeModifier) multimap.get(SharedMonsterAttributes.field_111264_e.func_111108_a());
-				return weaponModifier.func_111164_d();
+		if (multimap.containsKey(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName())) {
+			if (multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()) instanceof AttributeModifier) {
+				AttributeModifier weaponModifier=(AttributeModifier) multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
+				return weaponModifier.getAmount();
 			}
 		}
 		return 0;
 	}
+	
+	public static int getBlockId(Block b) {
+		return Block.blockRegistry.getIDForObject(b);
+	}
+	
+	public static int getItemId(Item it) {
+		return Item.itemRegistry.getIDForObject(it);
+	}
+	
+	public static Item getItemById(int id) {
+		return (Item) Item.itemRegistry.getObjectById(id);
+	}
+
 
 }

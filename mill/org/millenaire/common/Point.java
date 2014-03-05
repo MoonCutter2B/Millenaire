@@ -248,12 +248,8 @@ public class Point {
 		return new Point(x,y-1,z);
 	}
 
-	public Block getBlock(World world) {
-		return Block.blocksList[world.getBlockId(getiX(), getiY(), getiZ())];
-	}
-
 	public TileEntityBrewingStand getBrewingStand(World world) {
-		final TileEntity ent=world.getBlockTileEntity(getiX(),getiY() , getiZ());
+		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
 
 		if ((ent != null) && (ent instanceof TileEntityBrewingStand))
 			return (TileEntityBrewingStand)ent;
@@ -262,7 +258,7 @@ public class Point {
 	}
 
 	public TileEntityChest getChest(World world) {
-		final TileEntity ent=world.getBlockTileEntity(getiX(),getiY() , getiZ());
+		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
 
 		if ((ent != null) && (ent instanceof TileEntityChest))
 			return (TileEntityChest)ent;
@@ -283,7 +279,7 @@ public class Point {
 	}
 
 	public TileEntityDispenser getDispenser(World world) {
-		final TileEntity ent=world.getBlockTileEntity(getiX(),getiY() , getiZ());
+		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
 
 		if ((ent != null) && (ent instanceof TileEntityDispenser))
 			return (TileEntityDispenser)ent;
@@ -296,7 +292,7 @@ public class Point {
 	}
 
 	public TileEntityFurnace getFurnace(World world) {
-		final TileEntity ent=world.getBlockTileEntity(getiX(),getiY() , getiZ());
+		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
 
 		if ((ent != null) && (ent instanceof TileEntityFurnace))
 			return (TileEntityFurnace)ent;
@@ -304,8 +300,8 @@ public class Point {
 		return null;
 	}
 
-	public int getId(World world) {
-		return world.getBlockId(getiX(), getiY(), getiZ());
+	public Block getBlock(World world) {
+		return world.getBlock(getiX(), getiY(), getiZ());
 	}
 
 	public String getIntString() {
@@ -329,7 +325,7 @@ public class Point {
 	}
 
 	public TileEntityMillChest getMillChest(World world) {
-		final TileEntity ent=world.getBlockTileEntity(getiX(),getiY() , getiZ());
+		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
 
 		if ((ent != null) && (ent instanceof TileEntityMillChest))
 			return (TileEntityMillChest)ent;
@@ -346,7 +342,7 @@ public class Point {
 	}
 
 	public TileEntityPanel getPanel(World world) {
-		final TileEntity ent=world.getBlockTileEntity(getiX(),getiY() , getiZ());
+		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
 
 		if ((ent != null) && (ent instanceof TileEntityPanel))
 			return (TileEntityPanel)ent;
@@ -372,7 +368,7 @@ public class Point {
 	}
 
 	public TileEntitySign getSign(World world) {
-		final TileEntity ent=world.getBlockTileEntity(getiX(),getiY() , getiZ());
+		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
 
 		if ((ent != null) && (ent instanceof TileEntitySign))
 			return (TileEntitySign)ent;
@@ -385,7 +381,7 @@ public class Point {
 	}
 
 	public TileEntity getTileEntity(World world) {
-		return world.getBlockTileEntity(getiX(),getiY() , getiZ());
+		return world.getTileEntity(getiX(),getiY() , getiZ());
 	}
 
 	public Point getWest() {
@@ -480,8 +476,8 @@ public class Point {
 		return ((getiX()==p.getiX()) && (getiZ()==p.getiZ()));
 	}
 
-	public void setBlock(World world,int bid,int meta,boolean notify,boolean sound) {
-		MillCommonUtilities.setBlockAndMetadata(world, this, bid, meta, notify, sound);
+	public void setBlock(World world,Block block,int meta,boolean notify,boolean sound) {
+		MillCommonUtilities.setBlockAndMetadata(world, this, block, meta, notify, sound);
 	}
 
 	public int squareRadiusDistance(Point p) {

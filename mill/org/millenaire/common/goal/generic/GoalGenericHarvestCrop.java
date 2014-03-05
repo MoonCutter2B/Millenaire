@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.util.Vector;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -87,7 +88,7 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 	}
 
 	private boolean isValidHarvestSoil(World world,Point p) {
-		return (p.getAbove().getId(world)==GoalGenericPlantCrop.getCropBlockId(cropType)
+		return (p.getAbove().getBlock(world)==GoalGenericPlantCrop.getCropBlock(cropType)
 				&& p.getAbove().getMeta(world)==getCropBlockRipeMeta(cropType));
 	}
 
@@ -111,7 +112,7 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 				}
 			}
 
-			villager.setBlockAndMetadata(villager.getGoalDestPoint().getAbove(),0,0);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint().getAbove(),Blocks.air,0);
 		
 			villager.swingItem();
 		}

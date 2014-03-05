@@ -78,7 +78,7 @@ public class RenderMillVillager extends RenderBiped {
 	}
 
 	@Override
-	public void doRenderLiving(EntityLiving entityliving, double d, double d1, double d2,
+	public void doRender(EntityLivingBase entityliving, double d, double d1, double d2,
 			float f, float f1)
 	{
 
@@ -88,7 +88,7 @@ public class RenderMillVillager extends RenderBiped {
 			modelCloth.aimedBow = modelBipedMain.aimedBow = true;
 		}
 
-		super.doRenderLiving(entityliving, d, d1, d2, f, f1);
+		super.doRender(entityliving, d, d1, d2, f, f1);
 
 		modelCloth.aimedBow = modelBipedMain.aimedBow = false;
 
@@ -126,13 +126,13 @@ public class RenderMillVillager extends RenderBiped {
 		}
 
 
-		final UserProfile profile=Mill.clientWorld.getProfile(Mill.proxy.getTheSinglePlayer().username);
+		final UserProfile profile=Mill.clientWorld.getProfile(Mill.proxy.getTheSinglePlayer().getDisplayName());
 
 		final float f4 = villager.getDistanceToEntity(renderManager.livingPlayer);
 
 		if(f4 < MLN.VillagersNamesDistance){
-			final String gameSpeech=villager.getGameSpeech(Mill.proxy.getTheSinglePlayer().username);
-			final String nativeSpeech=villager.getNativeSpeech(Mill.proxy.getTheSinglePlayer().username);
+			final String gameSpeech=villager.getGameSpeech(Mill.proxy.getTheSinglePlayer().getDisplayName());
+			final String nativeSpeech=villager.getNativeSpeech(Mill.proxy.getTheSinglePlayer().getDisplayName());
 
 			//gameSpeech=villager.speech_key+"_"+villager.speech_variant;
 			//nativeSpeech="" +(villager.worldObj.getWorldTime()-villager.speech_started)+"/"+villager.speech_started+"/"+villager.worldObj.getWorldTime();
@@ -239,13 +239,13 @@ public class RenderMillVillager extends RenderBiped {
 				}
 				
 				if (villager.vtype.showHealth) {
-					displayText(MLN.string("hire.health")+": "+(villager.func_110143_aJ()*0.5)+"/"+(villager.getMaxHealth()*0.5),SCALE,0xa0dddddd,(float)x,(float)y + villagerSize+height, (float)z);
+					displayText(MLN.string("hire.health")+": "+(villager.getHealth()*0.5)+"/"+(villager.getMaxHealth()*0.5),SCALE,0xa0dddddd,(float)x,(float)y + villagerSize+height, (float)z);
 					height+=LINE_HEIGHT;
 				}
 
 			} else if (villager.hiredBy.equals(profile.playerName)) {
 				String s;
-				s=MLN.string("hire.health")+": "+(villager.func_110143_aJ()*0.5)+"/"+(villager.getMaxHealth()*0.5);
+				s=MLN.string("hire.health")+": "+(villager.getHealth()*0.5)+"/"+(villager.getMaxHealth()*0.5);
 
 				if (villager.aggressiveStance) {
 					s=s+" - "+MLN.string("hire.aggressive");
@@ -322,7 +322,7 @@ public class RenderMillVillager extends RenderBiped {
 				return -1;
 			} 
 			
-			this.func_110776_a(clothTexture);
+			this.bindTexture(clothTexture);
 			modelCloth.bipedHead.showModel = true;
 			modelCloth.bipedHeadwear.showModel = true;
 			modelCloth.bipedBody.showModel = true;
@@ -354,8 +354,8 @@ public class RenderMillVillager extends RenderBiped {
 	@Override
 	protected int shouldRenderPass(EntityLivingBase entityliving, int i, float f)
 	{
-
-		final int armourRes=func_130006_a((MillVillager)entityliving, i, f);
+		
+		final int armourRes=this.inheritRenderPass(entityliving, i, f);
 		int clothRes=-1;
 
 		if (i==0) {
@@ -370,7 +370,7 @@ public class RenderMillVillager extends RenderBiped {
 	
 	
 	@Override
-    protected ResourceLocation func_110856_a(EntityLiving par1EntityLiving)
+    protected ResourceLocation getEntityTexture(EntityLiving par1EntityLiving)
     {
     	MillVillager villager=(MillVillager)par1EntityLiving;
     	

@@ -1,5 +1,6 @@
 package org.millenaire.common;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -24,7 +25,7 @@ public class WorldWrapper {
 
 		int y = findTopSoilBlock(x,z);
 
-		while ((y<127) && MillCommonUtilities.isBlockIdSolid(world.getBlockId(x, y, z))) {
+		while ((y<127) && MillCommonUtilities.isBlockIdSolid(world.getBlock(x, y, z))) {
 			y++;
 		}
 
@@ -35,8 +36,8 @@ public class WorldWrapper {
 		return MillCommonUtilities.findTopSoilBlock(world,x,z);
 	}
 
-	public int getBlockId(int x, int y, int z) {
-		return world.getBlockId(x, y, z);
+	public Block getBlockId(int x, int y, int z) {
+		return world.getBlock(x, y, z);
 	}
 
 	public EntityPlayer getClosestPlayer(int i, int j, int k, int l) {

@@ -2,8 +2,8 @@ package org.millenaire.client.gui;
 
 import java.util.Vector;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.src.ModLoader;
 import net.minecraft.world.World;
 
 import org.millenaire.client.MillClientUtilities;
@@ -17,20 +17,20 @@ public class DisplayActions {
 
 
 	public static void displayControlledProjectGUI(EntityPlayer player,Building townHall) {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiControlledProjects(player,townHall));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiControlledProjects(player,townHall));
 	}
 	
 	public static void displayControlledMilitaryGUI(EntityPlayer player,Building townHall) {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiControlledMilitary(player,townHall));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiControlledMilitary(player,townHall));
 	}
 
 
 	public static void displayHelpGUI() {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiHelp());
+		Minecraft.getMinecraft().displayGuiScreen(new GuiHelp());
 	}
 	
 	public static void displayConfigGUI() {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiConfig());
+		Minecraft.getMinecraft().displayGuiScreen(new GuiConfig());
 	}
 	
 	public static void displayChunkGUI(EntityPlayer player,World world) {
@@ -39,7 +39,7 @@ public class DisplayActions {
 
 
 	public static void displayHireGUI(EntityPlayer player, MillVillager villager) {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiHire(player,villager));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiHire(player,villager));
 	}
 
 
@@ -51,34 +51,34 @@ public class DisplayActions {
 
 
 	public static void displayNegationWandGUI(EntityPlayer player,Building townHall) {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiNegationWand(player,townHall));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiNegationWand(player,townHall));
 	}
 
 
 	public static void displayNewBuildingProjectGUI(EntityPlayer player,
 			Building townHall, Point pos) {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiNewBuildingProject(player,townHall,pos));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiNewBuildingProject(player,townHall,pos));
 	}
 
 
 
 
 	public static void displayNewVillageGUI(EntityPlayer player,Point pos) {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiNewVillage(player,pos));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiNewVillage(player,pos));
 	}
 
 	public static void displayParchmentPanelGUI(EntityPlayer player,Vector<Vector<String>> pages,
 			Building building, int mapType,
 			boolean isParchment) {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,pages, building,mapType, isParchment));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiPanelParchment(player,pages, building,mapType, isParchment));
 
 	}
 
 
 	public static void displayQuestGUI(EntityPlayer player, MillVillager villager) {
-		final UserProfile profile=Mill.clientWorld.getProfile(player.username);
+		final UserProfile profile=Mill.clientWorld.getProfile(player.getDisplayName());
 		if (profile.villagersInQuests.containsKey(villager.villager_id)) {
-			ModLoader.getMinecraftInstance().displayGuiScreen(new GuiQuest(player,villager));
+			Minecraft.getMinecraft().displayGuiScreen(new GuiQuest(player,villager));
 		}
 	}
 
@@ -95,6 +95,6 @@ public class DisplayActions {
 
 
 	public static void displayVillageChiefGUI(EntityPlayer player, MillVillager chief) {
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiVillageHead(player,chief));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiVillageHead(player,chief));
 	}
 }

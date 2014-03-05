@@ -62,7 +62,7 @@ public class GoalGetResourcesForBuild extends Goal {
 			final BuildingPlan plan = villager.getTownHall().getCurrentBuildingPlan();
 
 			for (final InvItem key : plan.resCost.keySet()) {
-				villager.takeFromBuilding(villager.getTownHall(), key.id(),key.meta, plan.resCost.get(key));
+				villager.takeFromBuilding(villager.getTownHall(), key.getItem(),key.meta, plan.resCost.get(key));
 			}
 		}
 

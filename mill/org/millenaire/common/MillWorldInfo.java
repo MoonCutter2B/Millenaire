@@ -1,14 +1,16 @@
 package org.millenaire.common;
 
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
@@ -34,7 +36,7 @@ public class MillWorldInfo implements Cloneable {
 		public static final byte OTHER=9;
 		public static final byte PATH=10;
 
-		public static void readPacket(DataInputStream ds) {
+		public static void readPacket(ByteBufInputStream ds) {
 			Point pos=null;
 			try {
 				pos = StreamReadWrite.readNullablePoint(ds);
@@ -141,8 +143,7 @@ public class MillWorldInfo implements Cloneable {
 		}
 
 		public void sendMapInfoPacket(EntityPlayer player) {
-			final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-			final DataOutputStream ds = new DataOutputStream(bytes);
+			final ByteBufOutputStream ds = ServerSender.getNewByteBufOutputStream();
 
 			try {
 
@@ -164,12 +165,7 @@ public class MillWorldInfo implements Cloneable {
 				MLN.printException(this+": Error in sendUpdatePacket", e);
 			}
 
-			final Packet250CustomPayload packet = new Packet250CustomPayload();
-			packet.channel = ServerReceiver.PACKET_CHANNEL;
-			packet.data = bytes.toByteArray();
-			packet.length = packet.data.length;
-
-			ServerSender.sendPacketToPlayer(packet, player.username);
+			ServerSender.createAndSendPacketToPlayer(ds, player);
 		}
 	}
 
@@ -213,14 +209,14 @@ public class MillWorldInfo implements Cloneable {
 
 		return target;
 	}
-	static public boolean isForbiddenBlockForConstruction(int bid) {
-		return ((bid == Block.waterStill.blockID) || (bid == Block.waterMoving.blockID) || (bid == Block.ice.blockID)
-				|| (bid == Block.lavaMoving.blockID) || (bid == Block.lavaStill.blockID) ||
-				(bid == Block.planks.blockID) || (bid == Block.cobblestone.blockID) || (bid == Block.brick.blockID)
-				|| (bid == Block.chest.blockID) || (bid == Block.glass.blockID)
-				|| (bid == Mill.earth_decoration.blockID)
-				|| (bid == Mill.stone_decoration.blockID)
-				|| (bid == Mill.wood_decoration.blockID));
+	static public boolean isForbiddenBlockForConstruction(Block block) {
+		return ((block == Blocks.water) || (block == Blocks.flowing_water) || (block == Blocks.ice)
+				|| (block == Blocks.flowing_lava) || (block == Blocks.lava) ||
+				(block == Blocks.planks) || (block == Blocks.cobblestone) || (block == Blocks.brick_block)
+				|| (block == Blocks.chest) || (block == Blocks.glass)
+				|| (block == Mill.earth_decoration)
+				|| (block == Mill.stone_decoration)
+				|| (block == Mill.wood_decoration));
 	}
 	public static short[][] shortArrayDeepClone(short[][] source) {
 
@@ -567,9 +563,6 @@ public class MillWorldInfo implements Cloneable {
 
 		for (int i=0;i<16;i++) {
 			for (int j=0;j<16;j++) {
-
-
-
 				final short miny=(short) Math.max(yBaseline-25, 1);
 				final short maxy=(short) Math.min(yBaseline+25, 255);
 
@@ -583,13 +576,13 @@ public class MillWorldInfo implements Cloneable {
 
 				short y=maxy;
 
-				int bid;
+				Block block;
 
 				short ceilingSize=0;
-				int tbid=chunk.getBlockID(i,y,j);
+				Block tblock=chunk.getBlock(i,y,j);
 
-				while ((y>=miny) && !MillCommonUtilities.isBlockIdGround(tbid)) {
-					if (MillCommonUtilities.isBlockIdGroundOrCeiling(tbid)) {
+				while ((y>=miny) && !MillCommonUtilities.isBlockIdGround(tblock)) {
+					if (MillCommonUtilities.isBlockIdGroundOrCeiling(tblock)) {
 						ceilingSize++;
 					} else {
 						ceilingSize=0;
@@ -601,7 +594,7 @@ public class MillWorldInfo implements Cloneable {
 						break;
 					}
 
-					tbid=chunk.getBlockID(i,y,j);
+					tblock=chunk.getBlock(i,y,j);
 				}
 
 				constructionHeight[mx][mz]=y;
@@ -610,17 +603,17 @@ public class MillWorldInfo implements Cloneable {
 
 
 				if ((y<=maxy) && (y>1)) {
-					bid=chunk.getBlockID(i, y,j);
+					block=chunk.getBlock(i, y,j);
 				} else {
-					bid=-1;
+					block=null;
 				}
 
 				boolean onground=true;//used to continue looking for surface if starting in water
 				short lastLiquid=-1;
 
-				while ((bid>-1) && (MillCommonUtilities.isBlockIdSolid(bid) || MillCommonUtilities.isBlockIdLiquid(bid) || !onground)) {
+				while ((block!=null) && (MillCommonUtilities.isBlockIdSolid(block) || MillCommonUtilities.isBlockIdLiquid(block) || !onground)) {
 
-					if (bid==Block.wood.blockID) {
+					if (block==Blocks.log) {
 						heightDone=true;
 					} else if (!heightDone) {//everything solid but wood counts
 						constructionHeight[mx][mz]++;
@@ -628,23 +621,23 @@ public class MillWorldInfo implements Cloneable {
 						heightDone=true;
 					}
 
-					if (isForbiddenBlockForConstruction(bid)) {
+					if (isForbiddenBlockForConstruction(block)) {
 						buildingForbidden[mx][mz]=true;
 					}
 
-					if (MillCommonUtilities.isBlockIdLiquid(bid)) {
+					if (MillCommonUtilities.isBlockIdLiquid(block)) {
 						onground=false;
 						lastLiquid=y;
-					} else if (MillCommonUtilities.isBlockIdSolid(bid)) {
+					} else if (MillCommonUtilities.isBlockIdSolid(block)) {
 						onground=true;
 					}
 
 					y++;
 
 					if ((y<=maxy) && (y>1)) {
-						bid=chunk.getBlockID(i, y,j);
+						block=chunk.getBlock(i, y,j);
 					} else {
-						bid=-1;
+						block=null;
 					}
 				}
 
@@ -652,7 +645,7 @@ public class MillWorldInfo implements Cloneable {
 					y=lastLiquid;
 				}
 
-				while ((y<=maxy) && (y>1) && !(!MillCommonUtilities.isBlockIdSolid(chunk.getBlockID(i, y,j)) && !MillCommonUtilities.isBlockIdSolid(chunk.getBlockID(i, y+1,j)))) {
+				while ((y<=maxy) && (y>1) && !(!MillCommonUtilities.isBlockIdSolid(chunk.getBlock(i, y,j)) && !MillCommonUtilities.isBlockIdSolid(chunk.getBlock(i, y+1,j)))) {
 					y++;
 				}
 
@@ -661,20 +654,20 @@ public class MillWorldInfo implements Cloneable {
 				topGround[mx][mz]=y;
 				spaceAbove[mx][mz]=0;
 
-				final int soilbid=chunk.getBlockID(i,y-1,j);
-				bid=chunk.getBlockID(i,y,j);
+				final Block soilBlock=chunk.getBlock(i,y-1,j);
+				block=chunk.getBlock(i,y,j);
 
-				if ((bid==Block.waterMoving.blockID) || (bid==Block.waterStill.blockID)) {
+				if ((block==Blocks.flowing_water) || (block==Blocks.water)) {
 					water[mx][mz]=true;
 				}
 
-				if ((soilbid==Block.wood.blockID)) {
+				if ((soilBlock==Blocks.log)) {
 					tree[mx][mz]=true;
 				} else {
 					tree[mx][mz]=false;
 				}
 
-				if (soilbid==Mill.path.blockID || soilbid==Mill.pathSlab.blockID) {
+				if (soilBlock==Mill.path || soilBlock==Mill.pathSlab) {
 					path[mx][mz]=true;
 				} else {
 					path[mx][mz]=false;
@@ -682,25 +675,25 @@ public class MillWorldInfo implements Cloneable {
 
 				boolean blocked=false;
 
-				if (!(bid==Block.fence.blockID) && !MillCommonUtilities.isBlockIdSolid(bid) && (bid != Block.waterMoving.blockID) &&
-						(bid != Block.waterStill.blockID)) {
+				if (!(soilBlock==Blocks.fence) && !MillCommonUtilities.isBlockIdSolid(block) && (block != Blocks.flowing_water) &&
+						(soilBlock != Blocks.water)) {
 					spaceAbove[mx][mz]=1;
 				} else {
 					blocked=true;
 				}
 
-				if ((bid == Block.lavaMoving.blockID) || (bid == Block.lavaStill.blockID)) {
+				if ((block == Blocks.flowing_lava) || (block == Blocks.lava)) {
 					if (MLN.LogWorldInfo>=MLN.DEBUG) {
-						MLN.debug(this, "Found danger: "+bid);
+						MLN.debug(this, "Found danger: "+block);
 					}
 					danger[mx][mz]=true;
 				} else {
 					danger[mx][mz]=false;
-					for (final int id : MLN.forbiddenBlocks) {
-						if (id == bid) {
+					for (final Block forbiddenBlock : MLN.forbiddenBlocks) {
+						if (forbiddenBlock == block) {
 							danger[mx][mz]=true;
 						}
-						if (soilbid == bid) {
+						if (soilBlock == block) {
 							danger[mx][mz]=true;
 						}
 					}
@@ -712,22 +705,22 @@ public class MillWorldInfo implements Cloneable {
 					}
 				}
 
-				if (isForbiddenBlockForConstruction(bid)) {
+				if (isForbiddenBlockForConstruction(block)) {
 					buildingForbidden[mx][mz]=true;
 				}
 
 				y++;
 
 				while ((y<maxy) && (y>0)) {
-					bid=chunk.getBlockID(i,y,j);
+					block=chunk.getBlock(i,y,j);
 
-					if (!blocked && (spaceAbove[mx][mz]<3) && !MillCommonUtilities.isBlockIdSolid(bid)) {
+					if (!blocked && (spaceAbove[mx][mz]<3) && !MillCommonUtilities.isBlockIdSolid(block)) {
 						spaceAbove[mx][mz]++;
 					} else {
 						blocked=true;
 					}
 
-					if (isForbiddenBlockForConstruction(bid)) {
+					if (isForbiddenBlockForConstruction(block)) {
 						buildingForbidden[mx][mz]=true;
 					}
 
@@ -761,12 +754,12 @@ public class MillWorldInfo implements Cloneable {
 									|| ((topGround[mx+1][mz]+2)<topGround[mx][mz]))) {
 
 								final short ntg=topGround[mx-1][mz];
-								final boolean samesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg, startZ+mapStartZ+j));
-								final boolean belowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j));
-								final boolean below2solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg-2, startZ+mapStartZ+j));
-								final boolean abovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j));
-								final boolean above2solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j));
-								final boolean above3solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+3, startZ+mapStartZ+j));
+								final boolean samesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg, startZ+mapStartZ+j));
+								final boolean belowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j));
+								final boolean below2solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg-2, startZ+mapStartZ+j));
+								final boolean abovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j));
+								final boolean above2solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j));
+								final boolean above3solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+3, startZ+mapStartZ+j));
 
 
 								//check if same level works
@@ -810,12 +803,12 @@ public class MillWorldInfo implements Cloneable {
 									|| ((topGround[mx][mz+1]+2)<topGround[mx][mz]))) {
 
 								final short ntg=topGround[mx][mz-1];
-								final boolean samesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg, startZ+mapStartZ+j));
-								final boolean belowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j));
-								final boolean below2solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg-2, startZ+mapStartZ+j));
-								final boolean abovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j));
-								final boolean above2solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j));
-								final boolean above3solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+3, startZ+mapStartZ+j));
+								final boolean samesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg, startZ+mapStartZ+j));
+								final boolean belowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j));
+								final boolean below2solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg-2, startZ+mapStartZ+j));
+								final boolean abovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j));
+								final boolean above2solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j));
+								final boolean above3solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+3, startZ+mapStartZ+j));
 
 
 								//check if same level works
@@ -870,16 +863,16 @@ public class MillWorldInfo implements Cloneable {
 									&& (topGround[mx-1][mz]<topGround[mx+1][mz])) {
 
 								final short ntg=topGround[mx-1][mz];
-								final boolean samesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg, startZ+mapStartZ+j));
-								final boolean belowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j));
-								final boolean abovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j));
-								final boolean above2solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j));
+								final boolean samesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg, startZ+mapStartZ+j));
+								final boolean belowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j));
+								final boolean abovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j));
+								final boolean above2solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j));
 
 								//using the world obj because we might be beyond the chunk
-								final boolean nextsamesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i+1, ntg, startZ+mapStartZ+j));
-								final boolean nextbelowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i+1, ntg-1, startZ+mapStartZ+j));
-								final boolean nextabovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i+1, ntg+1, startZ+mapStartZ+j));
-								final boolean nextabove2solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i+1, ntg+2, startZ+mapStartZ+j));
+								final boolean nextsamesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i+1, ntg, startZ+mapStartZ+j));
+								final boolean nextbelowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i+1, ntg-1, startZ+mapStartZ+j));
+								final boolean nextabovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i+1, ntg+1, startZ+mapStartZ+j));
+								final boolean nextabove2solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i+1, ntg+2, startZ+mapStartZ+j));
 
 								//check if same level works
 								if (belowsolid && nextbelowsolid && !samesolid && !nextsamesolid && !abovesolid && !nextabovesolid ) {
@@ -909,16 +902,16 @@ public class MillWorldInfo implements Cloneable {
 									&& (topGround[mx][mz-1]<topGround[mx][mz+1])) {
 
 								final short ntg=topGround[mx][mz-1];
-								final boolean samesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg, startZ+mapStartZ+j));
-								final boolean belowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j));
-								final boolean abovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j));
-								final boolean above2solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j));
+								final boolean samesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg, startZ+mapStartZ+j));
+								final boolean belowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j));
+								final boolean abovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j));
+								final boolean above2solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j));
 
 								//using the world obj because we might be beyond the chunk
-								final boolean nextsamesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg, startZ+mapStartZ+j+1));
-								final boolean nextbelowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j+1));
-								final boolean nextabovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j+1));
-								final boolean nextabove2solid=MillCommonUtilities.isBlockIdSolid(world.getBlockId(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j+1));
+								final boolean nextsamesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg, startZ+mapStartZ+j+1));
+								final boolean nextbelowsolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg-1, startZ+mapStartZ+j+1));
+								final boolean nextabovesolid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+1, startZ+mapStartZ+j+1));
+								final boolean nextabove2solid=MillCommonUtilities.isBlockIdSolid(world.getBlock(startX+mapStartX+i, ntg+2, startZ+mapStartZ+j+1));
 
 								//check if same level works
 								if (belowsolid && nextbelowsolid && !samesolid && !nextsamesolid && !abovesolid && !nextabovesolid ) {

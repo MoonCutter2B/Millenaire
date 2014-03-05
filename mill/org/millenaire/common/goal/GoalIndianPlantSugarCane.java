@@ -3,6 +3,7 @@ package org.millenaire.common.goal;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.Building;
@@ -13,7 +14,7 @@ import org.millenaire.common.Point;
 
 public class GoalIndianPlantSugarCane extends Goal {
 
-	private static ItemStack[] sugarcane=new ItemStack[]{new ItemStack(Block.reed, 1)};
+	private static ItemStack[] sugarcane=new ItemStack[]{new ItemStack(Blocks.reeds, 1)};
 
 	@Override
 	public GoalInformation getDestination(MillVillager villager) {
@@ -85,13 +86,13 @@ public class GoalIndianPlantSugarCane extends Goal {
 	@Override
 	public boolean performAction(MillVillager villager) {
 
-		int blockId=villager.getBlock(villager.getGoalDestPoint());
+		Block block=villager.getBlock(villager.getGoalDestPoint());
 
 		final Point cropPoint=villager.getGoalDestPoint().getAbove();
 
-		blockId=villager.getBlock(cropPoint);
-		if (((blockId == 0) || (blockId == Block.leaves.blockID))) {
-			villager.setBlock(cropPoint,Block.reed.blockID);
+		block=villager.getBlock(cropPoint);
+		if (((block == Blocks.air) || (block == Blocks.leaves))) {
+			villager.setBlock(cropPoint,Blocks.reeds);
 			
 			villager.swingItem();
 		}

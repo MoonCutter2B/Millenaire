@@ -39,7 +39,7 @@ public class GoalDeliverResourcesShop extends Goal {
 
 			if (villager.getCulture().shopNeeds.containsKey(shop.location.shop)) {
 				for (final InvItem item : villager.getCulture().shopNeeds.get(shop.location.shop)) {
-					final int nbcount=villager.countInv(item.id(),item.meta);
+					final int nbcount=villager.countInv(item.getItem(),item.meta);
 					if (nbcount>0) {
 						nb+=nbcount;
 						if (delayOver)
@@ -63,8 +63,8 @@ public class GoalDeliverResourcesShop extends Goal {
 		if( shop!=null) {
 			if (villager.getCulture().shopNeeds.containsKey(shop.location.shop)) {
 				for (final InvItem item : villager.getCulture().shopNeeds.get(shop.location.shop)) {
-					if (villager.countInv(item.id(),item.meta)>0) {
-						items.add(new ItemStack(item.id(),1,item.meta));
+					if (villager.countInv(item.getItem(),item.meta)>0) {
+						items.add(new ItemStack(item.getItem(),1,item.meta));
 					}
 				}
 			}
@@ -88,7 +88,7 @@ public class GoalDeliverResourcesShop extends Goal {
 		if( shop!=null) {
 			if (villager.getCulture().shopNeeds.containsKey(shop.location.shop)) {
 				for (final InvItem item : villager.getCulture().shopNeeds.get(shop.location.shop)) {
-					villager.putInBuilding(shop, item.id(),item.meta, 256);
+					villager.putInBuilding(shop, item.getItem(),item.meta, 256);
 				}
 			}
 		}
@@ -103,7 +103,7 @@ public class GoalDeliverResourcesShop extends Goal {
 		for (final Building shop : villager.getTownHall().getShops()) {
 			if (villager.getCulture().shopNeeds.containsKey(shop.location.shop)) {
 				for (final InvItem item : villager.getCulture().shopNeeds.get(shop.location.shop)) {
-					priority+=villager.countInv(item.id(),item.meta)*10;
+					priority+=villager.countInv(item.getItem(),item.meta)*10;
 				}
 			}
 		}

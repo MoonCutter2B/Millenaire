@@ -23,8 +23,8 @@ public class GoalDeliverGoodsHousehold extends Goal {
 		for (final MillVillager v : villager.getHouse().villagers) {
 
 			for (final InvItem key : v.requiresGoods().keySet()) {
-				if (villager.countInv(key.id(),key.meta)>0) {
-					items.add(new ItemStack(key.id(),1,key.meta));
+				if (villager.countInv(key.getItem(),key.meta)>0) {
+					items.add(new ItemStack(key.getItem(),1,key.meta));
 				}
 			}
 
@@ -43,7 +43,7 @@ public class GoalDeliverGoodsHousehold extends Goal {
 
 		for (final MillVillager v : villager.getHouse().villagers) {
 			for (final InvItem key : v.requiresGoods().keySet()) {
-				villager.putInBuilding(villager.getHouse(), key.id(),key.meta, 256);
+				villager.putInBuilding(villager.getHouse(), key.getItem(),key.meta, 256);
 			}
 
 		}

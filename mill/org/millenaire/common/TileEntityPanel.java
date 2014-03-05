@@ -1,6 +1,7 @@
 package org.millenaire.common;
 
-import java.io.DataInputStream;
+import io.netty.buffer.ByteBufInputStream;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.MathHelper;
@@ -95,7 +97,7 @@ public class TileEntityPanel extends TileEntitySign {
 		final Vector<String> page=new Vector<String>();
 
 		page.add(vr.getName());
-		page.add(vr.getGameOccupation(player.username));
+		page.add(vr.getGameOccupation(player.getDisplayName()));
 		page.add("");
 
 		if ((vr.mothersName!=null) && (vr.mothersName.length()>0)) {
@@ -260,9 +262,9 @@ public class TileEntityPanel extends TileEntitySign {
 			}
 
 			if (belongsToVillage) {
-				page.add(vr.getName()+", "+vr.getGameOccupation(player.username).toLowerCase()+error);
+				page.add(vr.getName()+", "+vr.getGameOccupation(player.getDisplayName()).toLowerCase()+error);
 			} else {
-				visitorsPage.add(vr.getName()+", "+vr.getGameOccupation(player.username).toLowerCase()+error);
+				visitorsPage.add(vr.getName()+", "+vr.getGameOccupation(player.getDisplayName()).toLowerCase()+error);
 			}
 
 		}
@@ -307,7 +309,7 @@ public class TileEntityPanel extends TileEntitySign {
 			page.add(MLN.string("panels.houseunoccupied"));
 		} else if (wife==null) {
 
-			page.add(MLN.string("panels.man")+": "+husband.getName()+", "+husband.getGameOccupation(player.username));
+			page.add(MLN.string("panels.man")+": "+husband.getName()+", "+husband.getGameOccupation(player.getDisplayName()));
 			page.add("");
 			if (house.location.femaleResident.size()==0) {
 				page.add(MLN.string("panels.nofemaleresident"));
@@ -316,7 +318,7 @@ public class TileEntityPanel extends TileEntitySign {
 			}
 		} else if (husband==null) {
 
-			page.add(MLN.string("panels.woman")+": "+wife.getName()+", "+wife.getGameOccupation(player.username));
+			page.add(MLN.string("panels.woman")+": "+wife.getName()+", "+wife.getGameOccupation(player.getDisplayName()));
 			page.add("");
 			if ((house.location.maleResident==null) || (house.location.maleResident.size()==0)) {
 				page.add(MLN.string("panels.nomaleresident"));
@@ -325,9 +327,9 @@ public class TileEntityPanel extends TileEntitySign {
 			}
 		} else {
 
-			page.add(MLN.string("panels.woman")+": "+wife.getName()+", "+wife.getGameOccupation(player.username).toLowerCase());
+			page.add(MLN.string("panels.woman")+": "+wife.getName()+", "+wife.getGameOccupation(player.getDisplayName()).toLowerCase());
 
-			page.add(MLN.string("panels.man")+": "+husband.getName()+", "+husband.getGameOccupation(player.username).toLowerCase());
+			page.add(MLN.string("panels.man")+": "+husband.getName()+", "+husband.getGameOccupation(player.getDisplayName()).toLowerCase());
 
 			if (house.vrecords.size()>2) {
 				page.add("");
@@ -336,7 +338,7 @@ public class TileEntityPanel extends TileEntitySign {
 				for (final VillagerRecord vr : house.vrecords) {
 					if (vr.getType().isChild) {
 
-						page.add(vr.getName()+", "+vr.getGameOccupation(player.username).toLowerCase());
+						page.add(vr.getName()+", "+vr.getGameOccupation(player.getDisplayName()).toLowerCase());
 					}
 				}
 			}
@@ -562,17 +564,17 @@ public class TileEntityPanel extends TileEntitySign {
 
 				final Item bestMelee=vr.getBestMeleeWeapon();
 				if (bestMelee!=null) {
-					weapon=Mill.proxy.getItemName(bestMelee.itemID,0);
+					weapon=Mill.proxy.getItemName(bestMelee,0);
 				}
 
-				if (vr.getType().isArcher && (vr.countInv(Item.bow.itemID)>0)) {
+				if (vr.getType().isArcher && (vr.countInv(Items.bow)>0)) {
 					if (weapon.length()>0) {
 						weapon+=", ";
 					}
-					weapon+=Mill.proxy.getItemName(Item.bow.itemID,0);
+					weapon+=Mill.proxy.getItemName(Items.bow,0);
 				}
 
-				page.add(vr.getName()+", "+vr.getGameOccupation(player.username));
+				page.add(vr.getName()+", "+vr.getGameOccupation(player.getDisplayName()));
 				page.add(status);
 				page.add(MLN.string("panels.health")+": "+vr.getMaxHealth()+
 						", "+MLN.string("panels.armour")+": "+vr.getTotalArmorValue()+
@@ -604,17 +606,17 @@ public class TileEntityPanel extends TileEntitySign {
 
 					final Item bestMelee=vr.getBestMeleeWeapon();
 					if (bestMelee!=null) {
-						weapon=Mill.proxy.getItemName(bestMelee.itemID,0);
+						weapon=Mill.proxy.getItemName(bestMelee,0);
 					}
 
-					if (vr.getType().isArcher && (vr.countInv(Item.bow.itemID)>0)) {
+					if (vr.getType().isArcher && (vr.countInv(Items.bow)>0)) {
 						if (weapon.length()>0) {
 							weapon+=", ";
 						}
-						weapon+=Mill.proxy.getItemName(Item.bow.itemID,0);
+						weapon+=Mill.proxy.getItemName(Items.bow,0);
 					}
 
-					page.add(vr.getName()+", "+vr.getGameOccupation(player.username));
+					page.add(vr.getName()+", "+vr.getGameOccupation(player.getDisplayName()));
 					page.add(status);
 					page.add(MLN.string("panels.health")+": "+vr.getMaxHealth()+
 							", "+MLN.string("panels.armour")+": "+vr.getTotalArmorValue()+
@@ -823,9 +825,9 @@ public class TileEntityPanel extends TileEntitySign {
 			for (final InvItem key : goal.resCost.keySet()) {
 				res.add(key);
 				resCost.put(key,goal.resCost.get(key));
-				int has=townHall.countGoods(key.id(),key.meta);
+				int has=townHall.countGoods(key.getItem(),key.meta);
 				if ((townHall.builder != null) && (townHall.buildingLocationIP != null) && townHall.buildingLocationIP.key.equals(townHall.buildingGoal)) {
-					has+=townHall.builder.countInv(key.id(),key.meta);
+					has+=townHall.builder.countInv(key.getItem(),key.meta);
 				}
 				if (has > goal.resCost.get(key)) {
 					has=goal.resCost.get(key);
@@ -902,9 +904,9 @@ public class TileEntityPanel extends TileEntitySign {
 			for (final InvItem key : goalPlan.resCost.keySet()) {
 				res.add(key);
 				resCost.put(key,goalPlan.resCost.get(key));
-				int has=house.countGoods(key.id(),key.meta);
+				int has=house.countGoods(key.getItem(),key.meta);
 				if ((house.builder != null) && (house.buildingLocationIP != null) && house.buildingLocationIP.key.equals(house.buildingGoal)) {
-					has+=house.builder.countInv(key.id(),key.meta);
+					has+=house.builder.countInv(key.getItem(),key.meta);
 				}
 				if (has > goalPlan.resCost.get(key)) {
 					has=goalPlan.resCost.get(key);
@@ -1000,7 +1002,7 @@ public class TileEntityPanel extends TileEntitySign {
 		return text;
 	}
 
-	public static void readPacket(DataInputStream ds) {
+	public static void readPacket(ByteBufInputStream ds) {
 
 		try {
 
@@ -1069,7 +1071,7 @@ public class TileEntityPanel extends TileEntitySign {
 	}
 
 	@Override
-	public boolean isEditable() {
+	public boolean func_145914_a() {
 		return false;
 	}
 }

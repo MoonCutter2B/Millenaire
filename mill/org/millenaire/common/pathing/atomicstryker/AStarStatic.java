@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -169,9 +170,8 @@ public class AStarStatic
 		return MathHelper.floor_double(input);
 	}
 
-	public static boolean isLadder(World world, int blockID, int x, int y, int z)
+	public static boolean isLadder(World world, Block b, int x, int y, int z)
 	{
-		final Block b = Block.blocksList[blockID];
 		if (b != null)
 			return b.isLadder(world, x, y, z, null);
 		return false;
@@ -191,23 +191,23 @@ public class AStarStatic
 		//Added test for fences
 		//Note that test isn't perfect (entities can walk on the top of fences, this is forbidden here)
 		if (iy>0) {
-			final int bid = worldObj.getBlockId(ix, iy-1, iz);
+			final Block block = worldObj.getBlock(ix, iy-1, iz);
 
-			if ((bid==Block.fence.blockID) || (bid==Block.fenceIron.blockID) || (bid==Block.netherFence.blockID))
+			if ((block==Blocks.fence) || (block==Blocks.iron_bars) || (block==Blocks.nether_brick_fence))
 				return false;
 		}
 
-		final int id = worldObj.getBlockId(ix, iy, iz);
-		if (id != 0)
+		final Block block = worldObj.getBlock(ix, iy, iz);
+		if (block != null)
 		{
 			//Kinniken
 			//Allows passage through wooden doors and fence gates
 			if (config.canUseDoors) {
-				if ((id==Block.doorWood.blockID) || (id==Block.fenceGate.blockID))
+				if ((block==Blocks.wooden_door) || (block==Blocks.fence_gate))
 					return true;
 			}
 
-			return !Block.blocksList[id].blockMaterial.isSolid();
+			return !block.getMaterial().isSolid();
 		}
 
 		return true;
@@ -236,17 +236,17 @@ public class AStarStatic
 	 */
 	public static boolean isViable(World worldObj, int x, int y, int z, int yoffset, AStarConfig config)
 	{
-		final int id = worldObj.getBlockId(x, y, z);
+		final Block block = worldObj.getBlock(x, y, z);
 
-		if ((id == Block.ladder.blockID) && isPassableBlock(worldObj, x, y+1, z,config))
+		if ((block == Blocks.ladder) && isPassableBlock(worldObj, x, y+1, z,config))
 			return true;
 
 		if (!isPassableBlock(worldObj, x, y, z,config)
 				|| !isPassableBlock(worldObj, x, y+1, z,config)
-				|| (isPassableBlock(worldObj, x, y-1, z,config) && ((id != Block.waterStill.blockID) || (id != Block.waterMoving.blockID))))
+				|| (isPassableBlock(worldObj, x, y-1, z,config) && ((block != Blocks.water) || (block != Blocks.flowing_water))))
 			return false;
 		
-		if (!config.canSwim && (id == Block.waterStill.blockID || id == Block.waterMoving.blockID)) {
+		if (!config.canSwim && (block == Blocks.water || block == Blocks.flowing_water)) {
 			return false;
 		}
 

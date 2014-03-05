@@ -24,8 +24,8 @@ public class GoalMerchantVisitInn extends Goal {
 		final Vector<ItemStack> items=new Vector<ItemStack>();
 
 		for (final InvItem good : villager.getInventoryKeys()) {
-			if (villager.countInv(good.id(),good.meta)>0) {
-				items.add(new ItemStack(good.id(),1,good.meta));
+			if (villager.countInv(good.getItem(),good.meta)>0) {
+				items.add(new ItemStack(good.getItem(),1,good.meta));
 			}
 		}
 
@@ -46,8 +46,8 @@ public class GoalMerchantVisitInn extends Goal {
 		int nb=0;
 
 		for (final InvItem good : villager.getInventoryKeys()) {
-			final int nbcount=villager.countInv(good.id(),good.meta);
-			if ((nbcount>0) && (villager.getTownHall().nbGoodNeeded(good.id(), good.meta)==0)) {
+			final int nbcount=villager.countInv(good.getItem(),good.meta);
+			if ((nbcount>0) && (villager.getTownHall().nbGoodNeeded(good.getItem(), good.meta)==0)) {
 
 				nb+=nbcount;
 
@@ -59,7 +59,7 @@ public class GoalMerchantVisitInn extends Goal {
 		}
 
 		for (final Goods good : villager.getTownHall().culture.goodsVector) {
-			if ((villager.getHouse().countGoods(good.item.id(),good.item.meta)>0) && (villager.countInv(good.item.id(),good.item.meta)<villager.getTownHall().nbGoodNeeded(good.item.id(), good.item.meta))) {
+			if ((villager.getHouse().countGoods(good.item.getItem(),good.item.meta)>0) && (villager.countInv(good.item.getItem(),good.item.meta)<villager.getTownHall().nbGoodNeeded(good.item.getItem(), good.item.meta))) {
 				if (MLN.LogMerchant>=MLN.MAJOR) {
 					MLN.major(this, "Visiting the Inn to take imports");
 				}
@@ -77,11 +77,11 @@ public class GoalMerchantVisitInn extends Goal {
 		String s="";
 
 		for (final InvItem good : villager.getInventoryKeys()) {
-			if ((villager.countInv(good.id(),good.meta)>0) && (villager.getTownHall().nbGoodNeeded(good.id(), good.meta)==0)) {
-				final int nb=villager.putInBuilding(villager.getHouse(), good.id(),good.meta, 99999999);
+			if ((villager.countInv(good.getItem(),good.meta)>0) && (villager.getTownHall().nbGoodNeeded(good.getItem(), good.meta)==0)) {
+				final int nb=villager.putInBuilding(villager.getHouse(), good.getItem(),good.meta, 99999999);
 
 				if (nb>0) {
-					s+=";"+good.id()+"/"+good.meta+"/"+nb;
+					s+=";"+good.getItem()+"/"+good.meta+"/"+nb;
 				}
 			}
 		}
@@ -92,12 +92,12 @@ public class GoalMerchantVisitInn extends Goal {
 		s="";
 
 		for (final Goods good : villager.getTownHall().culture.goodsVector) {
-			final int nbNeeded=villager.getTownHall().nbGoodNeeded(good.item.id(), good.item.meta);
-			if (villager.countInv(good.item.id(),good.item.meta)<nbNeeded) {
-				final int nb=villager.takeFromBuilding(villager.getHouse(), good.item.id(),good.item.meta, nbNeeded-villager.countInv(good.item.id(),good.item.meta));
+			final int nbNeeded=villager.getTownHall().nbGoodNeeded(good.item.getItem(), good.item.meta);
+			if (villager.countInv(good.item.getItem(),good.item.meta)<nbNeeded) {
+				final int nb=villager.takeFromBuilding(villager.getHouse(), good.item.getItem(),good.item.meta, nbNeeded-villager.countInv(good.item.getItem(),good.item.meta));
 
 				if (nb>0) {
-					s+=";"+good.item.id()+"/"+good.item.meta+"/"+nb;
+					s+=";"+good.item.getItem()+"/"+good.item.meta+"/"+nb;
 				}
 			}
 		}

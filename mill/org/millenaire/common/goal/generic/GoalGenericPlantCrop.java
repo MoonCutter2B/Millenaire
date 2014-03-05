@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 import org.millenaire.common.Building;
@@ -46,8 +47,8 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 	}
 
 	private boolean isValidPlantingLocation(World world,Point p) {
-		if ((p.getAbove().getId(world) == 0 || p.getAbove().getId(world) == Block.snow.blockID || p.getAbove().getId(world) == Block.leaves.blockID)
-				&& (p.getId(world)==Block.grass.blockID || p.getId(world)==Block.dirt.blockID || p.getId(world)==Block.tilledField.blockID)) {
+		if ((p.getAbove().getBlock(world) == Blocks.air || p.getAbove().getBlock(world) == Blocks.snow || p.getAbove().getBlock(world) == Blocks.leaves)
+				&& (p.getBlock(world)==Blocks.grass || p.getBlock(world)==Blocks.dirt || p.getBlock(world)==Blocks.farmland)) {
 			return true;
 		}
 		return false;
@@ -103,32 +104,32 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 				dest.takeGoods(seedItem, 1);
 		}
 
-		if (villager.getGoalDestPoint().getId(villager.worldObj)!=Block.tilledField.blockID) {
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(), Block.tilledField.blockID, 0);
+		if (villager.getGoalDestPoint().getBlock(villager.worldObj)!=Blocks.farmland) {
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(), Blocks.farmland, 0);
 		}
 
-		villager.setBlockAndMetadata(villager.getGoalDestPoint().getAbove(),getCropBlockId(cropType),getCropBlockMeta(cropType));
+		villager.setBlockAndMetadata(villager.getGoalDestPoint().getAbove(),getCropBlock(cropType),getCropBlockMeta(cropType));
 
 		villager.swingItem();
 		
 		return true;
 	}
 
-	public static int getCropBlockId(String cropType) {
+	public static Block getCropBlock(String cropType) {
 		if (cropType.equals(Mill.CROP_WHEAT)) {
-			return Block.crops.blockID;
+			return Blocks.wheat;
 		}
 		if (cropType.equals(Mill.CROP_CARROT)) {
-			return Block.carrot.blockID;
+			return Blocks.carrots;
 		}
 		if (cropType.equals(Mill.CROP_POTATO)) {
-			return Block.potato.blockID;
+			return Blocks.potatoes;
 		}
 		if (cropType.equals(Mill.CROP_RICE) || cropType.equals(Mill.CROP_TURMERIC)
 				|| cropType.equals(Mill.CROP_MAIZE) || cropType.equals(Mill.CROP_VINE)) {
-			return Mill.crops.blockID;
+			return Mill.crops;
 		}
-		return 0;
+		return null;
 	}
 
 	public static int getCropBlockMeta(String cropType) {

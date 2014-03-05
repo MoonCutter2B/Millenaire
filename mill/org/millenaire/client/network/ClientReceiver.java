@@ -1,14 +1,15 @@
 package org.millenaire.client.network;
 
-import java.io.ByteArrayInputStream;
+import io.netty.buffer.ByteBufInputStream;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.entity.player.EntityPlayer;
 
 import org.millenaire.client.MillClientUtilities;
 import org.millenaire.client.gui.DisplayActions;
@@ -28,16 +29,16 @@ import org.millenaire.common.network.ServerReceiver;
 import org.millenaire.common.network.StreamReadWrite;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
-public class ClientReceiver implements IPacketHandler
-{
+public class ClientReceiver {
 	/**
 	 * Only packets sent from a server to this specific client arrive here
 	 */
-	@Override
-	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
+	@SubscribeEvent
+	public void onPacketData(ServerCustomPacketEvent event)
 	{
 
 		if (FMLCommonHandler.instance().getSide().isServer() && (MLN.LogNetwork>=MLN.MAJOR)) {
@@ -45,13 +46,13 @@ public class ClientReceiver implements IPacketHandler
 			return;
 		}
 		
-		if (packet==null) {
+		if (event.packet==null) {
 			MLN.error(this, "Received a null packet!");
 			return;
 		}
 		
-		if (packet.data==null) {
-			MLN.error(this, "Received a packet with null data on channel: "+packet.channel);
+		if (event.packet.payload()==null) {
+			MLN.error(this, "Received a packet with null data on channel: "+event.packet.channel());
 			return;
 		}
 		
@@ -61,9 +62,9 @@ public class ClientReceiver implements IPacketHandler
 			return;
 		}
 
-		final DataInputStream data = new DataInputStream(new ByteArrayInputStream(packet.data));
-
-		ClientSender.networkManager=manager;
+		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		ByteBufInputStream data = new ByteBufInputStream(event.packet.payload());
+		
 
 		try {
 			final int packettype=data.read();
@@ -113,7 +114,7 @@ public class ClientReceiver implements IPacketHandler
 		}
 	}
 
-	private void readAnimalBreedPacket(DataInputStream data) {
+	private void readAnimalBreedPacket(ByteBufInputStream data) {
 
 		try {
 			Point p=StreamReadWrite.readNullablePoint(data);
@@ -125,8 +126,8 @@ public class ClientReceiver implements IPacketHandler
 				
 				EntityAnimal animal=(EntityAnimal)ent;
 				
-				if (animal.entityId==endId) {
-					animal.inLove=600;
+				if (animal.getEntityId()==endId) {
+					ReflectionHelper.setPrivateValue(EntityAnimal.class, animal, 600, 0);
 					MillCommonUtilities.generateHearts(animal);
 				}
 			}
@@ -136,7 +137,7 @@ public class ClientReceiver implements IPacketHandler
 		}
 	}
 
-	private void readGUIPacket(DataInputStream data) {
+	private void readGUIPacket(ByteBufInputStream data) {
 
 		try {
 			final int guiId=data.read();
@@ -267,7 +268,7 @@ public class ClientReceiver implements IPacketHandler
 	}
 
 
-	private void readServerContentPacket(DataInputStream data) {
+	private void readServerContentPacket(ByteBufInputStream data) {
 		int nbCultures;
 		try {
 			nbCultures = data.readShort();
@@ -283,7 +284,7 @@ public class ClientReceiver implements IPacketHandler
 		}
 	}
 
-	private void readTranslatedChatPackage(DataInputStream data) {
+	private void readTranslatedChatPackage(ByteBufInputStream data) {
 		try {
 
 			final char colour=data.readChar();
@@ -304,7 +305,7 @@ public class ClientReceiver implements IPacketHandler
 		}
 	}
 	
-	private void readVillagerSentencePackage(DataInputStream data) {
+	private void readVillagerSentencePackage(ByteBufInputStream data) {
 		try {
 			
 			final MillVillager v=Mill.clientWorld.villagers.get(data.readLong());

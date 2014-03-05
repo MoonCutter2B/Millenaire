@@ -31,9 +31,9 @@ public class RenderWallDecoration extends Render
         GL11.glRotatef(par8, 0.0F, 1.0F, 0.0F);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         if (ent.type==EntityMillDecoration.NORMAN_TAPESTRY) {
-        	func_110776_a(textureTapestries);
+        	bindTexture(textureTapestries);
 		} else {
-			func_110776_a(textureSculptures);
+			bindTexture(textureSculptures);
 		}
         EnumWallDecoration enumart = ent.art;
         float f2 = 0.0625F;
@@ -156,7 +156,7 @@ public class RenderWallDecoration extends Render
     }
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		EntityMillDecoration ent=(EntityMillDecoration)entity;
 		if (ent.type==EntityMillDecoration.NORMAN_TAPESTRY) {
         	return textureTapestries;

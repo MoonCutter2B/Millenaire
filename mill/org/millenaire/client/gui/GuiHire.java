@@ -67,7 +67,7 @@ public class GuiHire extends GuiText {
 			buttonList.add(new GuiButton(BUTTON_CLOSE, xStart+(getXSize() / 2) + 37, (yStart+getYSize())-40, 63,20, MLN.string("hire.close")));
 
 		} else {
-			if ((villager.getTownHall().getReputation(player.username)>=REPUTATION_NEEDED) && (MillCommonUtilities.countMoney(player.inventory)>=villager.getHireCost(player))) {
+			if ((villager.getTownHall().getReputation(player.getDisplayName())>=REPUTATION_NEEDED) && (MillCommonUtilities.countMoney(player.inventory)>=villager.getHireCost(player))) {
 				buttonList.add(new GuiButton(BUTTON_HIRE, (xStart+(getXSize() / 2)) - 100, (yStart+getYSize())-40, 95, 20, MLN.string("hire.hire")));
 			}
 			buttonList.add(new GuiButton(BUTTON_CLOSE, (xStart+(getXSize() / 2)) + 5, (yStart+getYSize())-40, 95, 20, MLN.string("hire.close")));
@@ -98,13 +98,13 @@ public class GuiHire extends GuiText {
 
 		if (villager.hiredBy!=null) {
 			text.add(new Line(MLN.string("hire.hiredvillager",""+Math.round((villager.hiredUntil-villager.worldObj.getWorldTime())/1000),Keyboard.getKeyName(MLN.keyAggressiveEscorts))));
-		} else if (villager.getTownHall().getReputation(player.username)>=REPUTATION_NEEDED) {
+		} else if (villager.getTownHall().getReputation(player.getDisplayName())>=REPUTATION_NEEDED) {
 			text.add(new Line(MLN.string("hire.hireablevillager")));
 		} else {
 			text.add(new Line(MLN.string("hire.hireablevillagernoreputation")));
 		}
 		text.add(new Line());
-		text.add(new Line(MLN.string("hire.health")+": "+(villager.func_110143_aJ()*0.5)+"/"+(villager.getMaxHealth()*0.5)));
+		text.add(new Line(MLN.string("hire.health")+": "+(villager.getHealth()*0.5)+"/"+(villager.getMaxHealth()*0.5)));
 		text.add(new Line(MLN.string("hire.strength")+": "+villager.getAttackStrength()));
 		text.add(new Line(MLN.string("hire.cost")+": "+MillCommonUtilities.getShortPrice(villager.getHireCost(player))));
 

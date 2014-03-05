@@ -39,13 +39,13 @@ public class ItemParchment extends ItemText {
 
 	private final int[] textsId;
 
-	public ItemParchment(int i, String iconName,int t) {
-		this(i,iconName,new int[]{t});
+	public ItemParchment(String iconName,int t) {
+		this(iconName,new int[]{t});
 		this.setCreativeTab(Mill.tabMillenaire);
 	}
 
-	public ItemParchment(int i, String iconName,int[] tIds) {
-		super(i,iconName);
+	public ItemParchment(String iconName,int[] tIds) {
+		super(iconName);
 		textsId=tIds;
 		maxStackSize = 1;
 	}

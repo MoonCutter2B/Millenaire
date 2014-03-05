@@ -17,8 +17,8 @@ public class ItemPurse extends ItemText {
 	private static final String ML_PURSE_DENIEROR = "ml_Purse_denieror";
 	private static final String ML_PURSE_RAND = "ml_Purse_rand";
 
-	public ItemPurse(int par1,String iconName) {
-		super(par1,iconName);
+	public ItemPurse(String iconName) {
+		super(iconName);
 	}
 	
 	public void setDeniers(ItemStack purse,EntityPlayer player,int amount) {
@@ -48,7 +48,7 @@ public class ItemPurse extends ItemText {
 
 	private void setItemName(ItemStack purse) {
 		if (purse.stackTagCompound == null) {
-			purse.setItemName(MLN.string("item.purse"));
+			purse.setStackDisplayName(MLN.string("item.purse"));
 		} else {
 			int deniers=purse.stackTagCompound.getInteger(ML_PURSE_DENIER);
 			int denierargent=purse.stackTagCompound.getInteger(ML_PURSE_DENIERARGENT);
@@ -68,7 +68,7 @@ public class ItemPurse extends ItemText {
 
 			label.trim();
 
-			purse.setItemName("\247"+MLN.WHITE+MLN.string("item.purse")+": "+label);		
+			purse.setStackDisplayName("\247"+MLN.WHITE+MLN.string("item.purse")+": "+label);		
 		}
 
 	}
@@ -104,13 +104,13 @@ public class ItemPurse extends ItemText {
 			int denierargent=purse.stackTagCompound.getInteger(ML_PURSE_DENIERARGENT);
 			int denieror=purse.stackTagCompound.getInteger(ML_PURSE_DENIEROR);
 
-			int result=MillCommonUtilities.putItemsInChest(player.inventory, Mill.denier.itemID, deniers);
+			int result=MillCommonUtilities.putItemsInChest(player.inventory, Mill.denier, deniers);
 			purse.stackTagCompound.setInteger(ML_PURSE_DENIER, deniers-result);
 
-			result=MillCommonUtilities.putItemsInChest(player.inventory, Mill.denier_argent.itemID, denierargent);
+			result=MillCommonUtilities.putItemsInChest(player.inventory, Mill.denier_argent, denierargent);
 			purse.stackTagCompound.setInteger(ML_PURSE_DENIERARGENT, denierargent-result);
 
-			result=MillCommonUtilities.putItemsInChest(player.inventory, Mill.denier_or.itemID, denieror);
+			result=MillCommonUtilities.putItemsInChest(player.inventory, Mill.denier_or, denieror);
 			purse.stackTagCompound.setInteger(ML_PURSE_DENIEROR, denieror-result);
 			
 			purse.stackTagCompound.setInteger(ML_PURSE_RAND,player.worldObj.isRemote?0:1);
@@ -122,9 +122,9 @@ public class ItemPurse extends ItemText {
 	private void storeDeniersInPurse(ItemStack purse,
 			EntityPlayer player) {
 
-		int deniers=MillCommonUtilities.getItemsFromChest(player.inventory, Mill.denier.itemID, 0, Integer.MAX_VALUE);
-		int denierargent=MillCommonUtilities.getItemsFromChest(player.inventory, Mill.denier_argent.itemID, 0, Integer.MAX_VALUE);
-		int denieror=MillCommonUtilities.getItemsFromChest(player.inventory, Mill.denier_or.itemID, 0, Integer.MAX_VALUE);
+		int deniers=MillCommonUtilities.getItemsFromChest(player.inventory, Mill.denier, 0, Integer.MAX_VALUE);
+		int denierargent=MillCommonUtilities.getItemsFromChest(player.inventory, Mill.denier_argent, 0, Integer.MAX_VALUE);
+		int denieror=MillCommonUtilities.getItemsFromChest(player.inventory, Mill.denier_or, 0, Integer.MAX_VALUE);
 
 		int total=totalDeniers(purse)+deniers+denierargent*64+denieror*64*64;
 

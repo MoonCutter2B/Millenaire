@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Vector;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureObject;
+import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeChunkManager;
@@ -46,17 +46,17 @@ public class MillClientUtilities {
 	private static final ResourceLocation textureTest=new ResourceLocation(Mill.modId,"/textures/blocks/blockGold.png");
 
 	public static void checkTextSize() {
-		final TextureObject texture=ModLoader.getMinecraftInstance().renderEngine.func_110581_b(textureTest);
+		final ITextureObject texture=Minecraft.getMinecraft().renderEngine.getTexture(textureTest);
 
 		if (texture==null)
 			return;
 		
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.func_110552_b());
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getGlTextureId());
 		final int textSize = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, 0, GL11.GL_TEXTURE_WIDTH);
 
 		if (textSize!=MLN.textureSize) {
 			MLN.textureSize=textSize;
-			ModLoader.getMinecraftInstance().renderEngine.func_110550_d();
+			Minecraft.getMinecraft().renderEngine.tick();
 		}
 	}
 
@@ -89,7 +89,7 @@ public class MillClientUtilities {
 
 		pages.add(page);
 
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,pages, null,GuiPanelParchment.CHUNK_MAP, true));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiPanelParchment(player,pages, null,GuiPanelParchment.CHUNK_MAP, true));
 	}
 
 	public static void displayTradeHelp(Building shop,EntityPlayer player) {
@@ -194,7 +194,7 @@ public class MillClientUtilities {
 
 		pages.add(page);
 
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,null,pages, 0, true));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiPanelParchment(player,null,pages, 0, true));
 	}
 
 
@@ -274,7 +274,7 @@ public class MillClientUtilities {
 
 		pages.add(page);
 
-		ModLoader.getMinecraftInstance().displayGuiScreen(new GuiPanelParchment(player,pages, null,0, true));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiPanelParchment(player,pages, null,0, true));
 	}
 
 	public static void displayPanel(World world,EntityPlayer player,Point p) {
@@ -308,9 +308,10 @@ public class MillClientUtilities {
 				String bonus="";
 
 				if (MLN.bonusEnabled)
-					bonus=" "+MLN.COLOUR+MLN.BLUE+MLN.string("startup.bonus");
+					bonus=" "+MLN.string("startup.bonus");
 
-				Mill.proxy.sendChatAdmin(MLN.string("startup.millenaireloaded",Mill.version,Keyboard.getKeyName(MLN.keyVillageList))+bonus);
+				Mill.proxy.sendChatAdmin(MLN.string("startup.millenaireloaded",Mill.version,Keyboard.getKeyName(MLN.keyVillageList)));
+				Mill.proxy.sendChatAdmin(MLN.string("startup.bonus",Mill.version,bonus),EnumChatFormatting.BLUE);
 			}
 			if (MLN.VillageRadius>70) {
 				Mill.proxy.sendChatAdmin(MLN.string("startup.radiuswarning"));
@@ -419,7 +420,7 @@ public class MillClientUtilities {
 					for (final Object o :list) {
 						final MillVillager villager=(MillVillager)o;
 
-						if (player.username.equals(villager.hiredBy)) {
+						if (player.getDisplayName().equals(villager.hiredBy)) {
 							villager.aggressiveStance=stance;
 						}
 					}
@@ -481,7 +482,7 @@ public class MillClientUtilities {
 					//TODO make it work in SP
 					//					if (Keyboard.isKeyDown(Keyboard.KEY_Q) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
 					//
-					//						Mill.controller().getProfile(player.username).testQuests(world);
+					//						Mill.controller().getProfile(player.getDisplayName()).testQuests(world);
 					//						lastPing=System.currentTimeMillis();
 					//					}
 
@@ -498,7 +499,7 @@ public class MillClientUtilities {
 
 	public static void updateBowIcon(ItemMillenaireBow bow,EntityPlayer entityplayer) {
 		final ItemStack itemstack1 = entityplayer.inventory.getCurrentItem();
-		if (entityplayer.isUsingItem() && (itemstack1.itemID == bow.itemID)) {
+		if (entityplayer.isUsingItem() && (itemstack1.getItem() == bow)) {
 			final int k = itemstack1.getMaxItemUseDuration() - entityplayer.getItemInUseCount();
 			if(k >= 18) {
 				bow.setBowIcon(3);
@@ -556,8 +557,8 @@ public class MillClientUtilities {
 			return;
 		}
 
-		String gameSpeech=MillCommonUtilities.getVillagerSentence(v,player.username,false);
-		String nativeSpeech=MillCommonUtilities.getVillagerSentence(v,player.username,true);				
+		String gameSpeech=MillCommonUtilities.getVillagerSentence(v,player.getDisplayName(),false);
+		String nativeSpeech=MillCommonUtilities.getVillagerSentence(v,player.getDisplayName(),true);				
 
 		if (nativeSpeech!=null || gameSpeech!=null) {
 

@@ -28,7 +28,7 @@ public class GoalBringBackResourcesHome extends Goal {
 		for (final InvItem key : villager.getInventoryKeys()) {
 			for (final InvItem key2 : villager.getGoodsToBringBackHome()) {
 				if (key2.equals(key)) {
-					items.add(new ItemStack(key.id(), 1,key.meta));
+					items.add(new ItemStack(key.getItem(), 1,key.meta));
 				}
 			}
 		}
@@ -82,7 +82,7 @@ public class GoalBringBackResourcesHome extends Goal {
 		for (final InvItem key : villager.getInventoryKeys()) {
 			for (final InvItem key2 : villager.getGoodsToBringBackHome()) {
 				if (key2.matches(key)) {
-					villager.putInBuilding(villager.getHouse(), key.id(), key.meta, 256);
+					villager.putInBuilding(villager.getHouse(), key.getItem(), key.meta, 256);
 				}
 			}
 		}

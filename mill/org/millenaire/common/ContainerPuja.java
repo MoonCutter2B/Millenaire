@@ -29,9 +29,9 @@ public class ContainerPuja extends Container {
 
 		@Override
 		public boolean isItemValid(ItemStack is) {
-			return ((is.itemID==Mill.denier.itemID)
-					|| (is.itemID==Mill.denier_or.itemID)
-					|| (is.itemID==Mill.denier_argent.itemID));
+			return ((is.getItem()==Mill.denier)
+					|| (is.getItem()==Mill.denier_or)
+					|| (is.getItem()==Mill.denier_argent));
 		}
 
 		@Override
@@ -79,7 +79,7 @@ public class ContainerPuja extends Container {
 
 		@Override
 		public boolean isItemValid(ItemStack is) {
-			final Item item=Item.itemsList[is.itemID];
+			final Item item=is.getItem();
 
 			if (shrine.type==PujaSacrifice.MAYAN)
 				return ((item instanceof ItemSword) || (item instanceof ItemArmor) || (item instanceof ItemBow) || (item instanceof ItemAxe));
@@ -172,7 +172,7 @@ public class ContainerPuja extends Container {
              }
              else if (stackID > 4)//normal inv
              {
-                 if (itemstack1.itemID==Mill.denier.itemID || itemstack1.itemID==Mill.denier_argent.itemID || itemstack1.itemID==Mill.denier_or.itemID)
+                 if (itemstack1.getItem()==Mill.denier || itemstack1.getItem()==Mill.denier_argent || itemstack1.getItem()==Mill.denier_or)
                  {
                      if (!this.mergeItemStack(itemstack1, 1, 4, false))
                      {

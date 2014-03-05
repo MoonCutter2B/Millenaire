@@ -2,17 +2,20 @@ package org.millenaire.common.forge;
 
 import java.io.File;
 
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.src.ModLoader;
+import net.minecraft.item.Item;
+import net.minecraft.util.EnumChatFormatting;
 
 import org.millenaire.common.MLN;
 import org.millenaire.common.TileEntityMillChest;
 import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.UserProfile;
 import org.millenaire.common.item.Goods.ItemMillenaireBow;
+import org.millenaire.common.network.ServerReceiver;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 
@@ -64,7 +67,7 @@ public class CommonProxy {
 		return customDir;
 	}
 
-	public String getItemName(int id, int meta) {
+	public String getItemName(Item item, int meta) {
 		return "";
 	}
 
@@ -130,11 +133,15 @@ public class CommonProxy {
 	}
 
 	public void registerTileEntities() {
-		ModLoader.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding");
-		ModLoader.registerTileEntity(TileEntityPanel.class, "ml_TileEntityPanel");
+		GameRegistry.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding");
+		GameRegistry.registerTileEntity(TileEntityPanel.class, "ml_TileEntityPanel");
 	}
 
 	public void sendChatAdmin(String s) {
+
+	}
+	
+	public void sendChatAdmin(String s, EnumChatFormatting colour) {
 
 	}
 
@@ -151,7 +158,7 @@ public class CommonProxy {
 
 	}
 	
-	public void declareAmuletTextures(IconRegister iconRegister) {
+	public void declareAmuletTextures(IIconRegister iconRegister) {
 		
 		
 		
@@ -161,4 +168,8 @@ public class CommonProxy {
 		return null;
 	}
 
+	public void initNetwork() {
+		Mill.millChannel.register(new ServerReceiver());
+	}
+	
 }

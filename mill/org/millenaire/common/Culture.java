@@ -1,8 +1,10 @@
 package org.millenaire.common;
 
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -1002,7 +1004,7 @@ public class Culture {
 		return false;
 	}
 
-	public static void readCultureMissingContentPacket(DataInputStream data) {
+	public static void readCultureMissingContentPacket(ByteBufInputStream data) {
 		String key;
 		try {
 			key = data.readUTF();
@@ -1014,7 +1016,7 @@ public class Culture {
 			culture.mainLanguageServer=main;
 			culture.fallbackLanguageServer=fallback;
 
-			final String playerName=Mill.proxy.getTheSinglePlayer().username;
+			final String playerName=Mill.proxy.getTheSinglePlayer().getDisplayName();
 
 			final CultureLanguage[] langs=new CultureLanguage[]{main,fallback};
 
@@ -1980,7 +1982,7 @@ public class Culture {
 
 
 
-	public void writeCultureAvailableContentPacket(DataOutputStream data) throws IOException {
+	public void writeCultureAvailableContentPacket(ByteBufOutputStream data) throws IOException {
 
 		data.writeUTF(key);
 
@@ -2016,7 +2018,7 @@ public class Culture {
 		}
 	}
 
-	public void writeCultureMissingContentPackPacket(DataOutputStream data,
+	public void writeCultureMissingContentPackPacket(ByteBufOutputStream data,
 			String mainLanguage,String fallbackLanguage,
 			int nbStrings, int nbBuildingNames,int nbSentences,int nbFallbackStrings, int nbFallbackBuildingNames,int nbFallbackSentences,
 			Vector<String> planSetAvailable,Vector<String> villagerAvailable,

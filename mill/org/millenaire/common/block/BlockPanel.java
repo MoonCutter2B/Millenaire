@@ -3,6 +3,7 @@ package org.millenaire.common.block;
 import java.util.Random;
 
 import net.minecraft.block.BlockSign;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -16,8 +17,8 @@ import org.millenaire.common.network.ServerSender;
 public class BlockPanel extends BlockSign {
 
 	@SuppressWarnings("rawtypes")
-	public BlockPanel(int i, Class class1, boolean flag) {
-		super(i, class1, flag);
+	public BlockPanel(Class class1, boolean flag) {
+		super(class1, flag);
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class BlockPanel extends BlockSign {
 		if (world.isRemote)
 			return true;
 
-		final TileEntityPanel panel=(TileEntityPanel) world.getBlockTileEntity(i, j, k);
+		final TileEntityPanel panel=(TileEntityPanel) world.getTileEntity(i, j, k);
 
 		if ((panel==null) || (panel.panelType==0))
 			return false;
@@ -37,12 +38,12 @@ public class BlockPanel extends BlockSign {
 		if (building==null)
 			return false;
 
-		if ((panel.panelType==TileEntityPanel.controlledProjects) && building.controlledBy(entityplayer.username)) {
-			ServerSender.displayControlledProjectGUI(entityplayer,building);
+		if ((panel.panelType==TileEntityPanel.controlledProjects) && building.controlledBy(entityplayer.getDisplayName())) {
+			ServerSender.displayControlledProjectGUI((EntityClientPlayerMP) entityplayer,building);
 			return true;
 		}
 		
-		if ((panel.panelType==TileEntityPanel.controlledMilitary) && building.controlledBy(entityplayer.username)) {
+		if ((panel.panelType==TileEntityPanel.controlledMilitary) && building.controlledBy(entityplayer.getDisplayName())) {
 			ServerSender.displayControlledMilitaryGUI(entityplayer,building);
 			return true;
 		}

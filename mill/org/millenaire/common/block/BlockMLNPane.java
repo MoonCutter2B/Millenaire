@@ -5,30 +5,31 @@ import org.millenaire.common.forge.Mill;
 
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 
 public class BlockMLNPane extends BlockPane {
 
-	private Icon sideTexture;
+	private IIcon sideTexture;
 	private final String textureName,sideTextureName;
 	
-	public BlockMLNPane(int i, String textureName, String sideTexture, Material material, boolean flag) {
-		super(i, textureName, sideTexture, material, flag);
+	public BlockMLNPane(String textureName, String sideTexture, Material material, boolean flag) {
+		super(textureName, sideTexture, material, flag);
 		this.textureName=textureName;
 		this.sideTextureName=sideTexture;
 		this.setCreativeTab(Mill.tabMillenaire);
 	}
 	
 	@Override
-	public void registerIcons(IconRegister iconRegister)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		this.blockIcon = MillCommonUtilities.getIcon(iconRegister, textureName);
         this.sideTexture = MillCommonUtilities.getIcon(iconRegister, sideTextureName);
 	}
 	
+	//was getSideTextureIndex
 	@Override
-	public Icon getSideTextureIndex()
+	public IIcon func_150097_e()
     {
         return this.sideTexture;
     }

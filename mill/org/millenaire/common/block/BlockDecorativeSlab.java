@@ -6,21 +6,25 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHalfSlab;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
-public class BlockDecorativeSlab extends BlockHalfSlab {
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+public class BlockDecorativeSlab extends BlockSlab {
 
 	public static class ItemDecorativeSlab extends ItemSlab {
 
@@ -28,25 +32,24 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 		
 		private final boolean isFullBlockDec;
 
-	    /** Instance of BlockHalfSlab. */
-	    private final BlockHalfSlab theHalfSlabDec;
+	    /** Instance of BlockSlab. */
+	    private final BlockSlab theHalfSlabDec;
 
 	    /** The double-slab block corresponding to this item. */
-	    private final BlockHalfSlab doubleSlabDec;
-
-		public ItemDecorativeSlab(int i,BlockDecorativeSlab halfSlab,BlockDecorativeSlab fullBlock, boolean full)
+	    private final BlockSlab doubleSlabDec;
+	    
+		public ItemDecorativeSlab(Block b,BlockDecorativeSlab halfSlab,BlockDecorativeSlab fullBlock, boolean full)
 		{
-			super(i,halfSlab,fullBlock,full);
+			super(b,halfSlab,fullBlock,full);
 			setMaxDamage(0);
 			setHasSubtypes(true);
-			this.block=(BlockDecorativeSlab)Block.blocksList[i+256];
 			this.theHalfSlabDec = halfSlab;
 	        this.doubleSlabDec = fullBlock;
 	        this.isFullBlockDec = full;
 		}
 
 		@Override
-		public Icon getIconFromDamage(int i)
+		public IIcon getIconFromDamage(int i)
 		{
 			return block.getIcon(2, i);
 		}
@@ -82,14 +85,14 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	        }
 	        else
 	        {
-	            int i1 = par3World.getBlockId(par4, par5, par6);
+	            Block block = par3World.getBlock(par4, par5, par6);
 	            int j1 = par3World.getBlockMetadata(par4, par5, par6);
 
-	            if ((par7 == 1) && i1 == this.theHalfSlabDec.blockID && j1 == par1ItemStack.getItemDamage())
+	            if ((par7 == 1) && block == this.theHalfSlabDec && j1 == par1ItemStack.getItemDamage())
 	            {
-	                if (par3World.checkBlockCollision(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec.blockID, j1, 3))
+	                if (par3World.checkBlockCollision(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec, j1, 3))
 	                {
-	                    par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.doubleSlabDec.stepSound.getPlaceSound(), (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F, this.doubleSlabDec.stepSound.getPitch() * 0.8F);
+	                    par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.doubleSlabDec.stepSound.soundName, (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F, this.doubleSlabDec.stepSound.getPitch() * 0.8F);
 	                    --par1ItemStack.stackSize;
 	                }
 
@@ -134,15 +137,15 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	            ++par4;
 	        }
 
-	        int i1 = par3World.getBlockId(par4, par5, par6);
+	        Block block = par3World.getBlock(par4, par5, par6);
 	        int j1 = par3World.getBlockMetadata(par4, par5, par6);
 	        int k1 = j1 & 7;
 
-	        if (i1 == this.theHalfSlabDec.blockID && k1 == par1ItemStack.getItemDamage())
+	        if (block == this.theHalfSlabDec && k1 == par1ItemStack.getItemDamage())
 	        {
-	            if (par3World.checkBlockCollision(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec.blockID, k1, 3))
+	            if (par3World.checkBlockCollision(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec, k1, 3))
 	            {
-	                par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.doubleSlabDec.stepSound.getPlaceSound(), (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F, this.doubleSlabDec.stepSound.getPitch() * 0.8F);
+	                par3World.playSoundEffect((double)((float)par4 + 0.5F), (double)((float)par5 + 0.5F), (double)((float)par6 + 0.5F), this.doubleSlabDec.stepSound.soundName, (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F, this.doubleSlabDec.stepSound.getPitch() * 0.8F);
 	                --par1ItemStack.stackSize;
 	            }
 
@@ -167,30 +170,33 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	HashMap<Integer,String> textureSideNames=new HashMap<Integer,String>();
 	HashMap<Integer,String> textureTopNames=new HashMap<Integer,String>();
 	HashMap<Integer,String> textureBottomNames=new HashMap<Integer,String>();
-	HashMap<Integer,Icon> texturesSide=new HashMap<Integer,Icon>();
-	HashMap<Integer,Icon> texturesTop=new HashMap<Integer,Icon>();
-	HashMap<Integer,Icon> texturesBottom=new HashMap<Integer,Icon>();
+	HashMap<Integer,IIcon> texturesSide=new HashMap<Integer,IIcon>();
+	HashMap<Integer,IIcon> texturesTop=new HashMap<Integer,IIcon>();
+	HashMap<Integer,IIcon> texturesBottom=new HashMap<Integer,IIcon>();
 
 	HashMap<Integer,String> names=new HashMap<Integer,String>();
 
-	public BlockDecorativeSlab(int i, Material material, boolean full) {
-		super(i, full, material);
+	public BlockDecorativeSlab(Material material, boolean full) {
+		super(full, material);
 		setTickRandomly(true);
 		setLightOpacity(0);
 		this.setCreativeTab(Mill.tabMillenaire);
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void addCreativeItems(@SuppressWarnings("rawtypes") ArrayList itemList) {
-		final ArrayList<ItemStack> list=itemList;
+//	@SuppressWarnings("unchecked")
+//	@Override
+//	public void addCreativeItems(@SuppressWarnings("rawtypes") ArrayList itemList) {
+//		final ArrayList<ItemStack> list=itemList;
+//
+//		for (final int meta: textureSideNames.keySet()) {
+//			if (meta>=8)
+//				list.add(new ItemStack(this,1,meta));
+//		}
+//
+//	}
 
-		for (final int meta: textureSideNames.keySet()) {
-			if (meta>=8)
-				list.add(new ItemStack(blockID,1,meta));
-		}
-
-	}
+	
+	
 	
 	@Override
 	public int damageDropped(int par1)
@@ -199,7 +205,7 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
     }
 
 	@Override
-	public Icon getIcon(int side, int meta)  {
+	public IIcon getIcon(int side, int meta)  {
 
 		if (side==1) {
 			if (texturesTop.containsKey(meta))
@@ -221,11 +227,11 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+	public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs, List par3List)
 	{
 		for (final int meta : texturesSide.keySet()) {
 			if (meta>=8)
-				par3List.add(new ItemStack(par1, 1, meta));
+				par3List.add(new ItemStack(item, 1, meta));
 		}
 	}
 
@@ -250,7 +256,8 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	}
 
 	@Override
-	public void registerIcons(IconRegister iconRegister)
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		for (int meta : textureTopNames.keySet()) {
 			texturesTop.put(meta, MillCommonUtilities.getIcon(iconRegister, textureTopNames.get(meta)));
@@ -264,14 +271,14 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	}
 
 	@Override
-	public String getFullSlabName(int meta) {
+	public String func_150002_b(int meta) {
 		return names.get(meta);
 	}
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
-		if (this.isDoubleSlab)
+		if (this.opaque)
 		{
 			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		}
@@ -290,7 +297,7 @@ public class BlockDecorativeSlab extends BlockHalfSlab {
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
-        if (this.isDoubleSlab)
+        if (this.opaque)
         {
             return super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
         }

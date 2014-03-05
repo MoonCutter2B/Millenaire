@@ -1,17 +1,17 @@
 package org.millenaire.common;
 
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Vector;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.util.EnumChatFormatting;
 
 import org.millenaire.common.Quest.QuestInstance;
 import org.millenaire.common.Quest.QuestInstanceVillager;
@@ -567,7 +567,7 @@ public class UserProfile {
 
 	}
 
-	public void receiveDeclareReleaseNumberPacket(DataInputStream ds) {
+	public void receiveDeclareReleaseNumberPacket(ByteBufInputStream ds) {
 		try {
 			releaseNumber=ds.readUTF();
 
@@ -580,7 +580,7 @@ public class UserProfile {
 		}
 	}
 
-	public void receiveProfilePacket(DataInputStream ds) {
+	public void receiveProfilePacket(ByteBufInputStream ds) {
 
 		if (MLN.LogNetwork>=MLN.MINOR) {
 			MLN.minor(null, "Receiving profile packet");
@@ -657,7 +657,7 @@ public class UserProfile {
 		}
 	}
 
-	public void receiveQuestInstanceDeletePacket(DataInputStream ds) {
+	public void receiveQuestInstanceDeletePacket(ByteBufInputStream ds) {
 		try {
 			deleteQuestInstances(ds.readLong());
 		} catch (final IOException e) {
@@ -665,7 +665,7 @@ public class UserProfile {
 		}
 	}
 
-	public void receiveQuestInstancePacket(DataInputStream ds) {
+	public void receiveQuestInstancePacket(ByteBufInputStream ds) {
 		try {
 			final QuestInstance qi=StreamReadWrite.readNullableQuestInstance(mw,ds);
 
@@ -812,8 +812,7 @@ public class UserProfile {
 		if (this.mw.world.isRemote)
 			return;
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_PROFILE);
@@ -876,14 +875,7 @@ public class UserProfile {
 			MLN.printException(this+": Error in sendProfilePacket", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
-
-
-
-		ServerSender.sendPacketToPlayer(packet, key);
+		ServerSender.createAndSendPacketToPlayer(data, this.getPlayer());
 	}
 
 	public void sendQuestInstanceDeletePacket(long id) {
@@ -891,8 +883,7 @@ public class UserProfile {
 		if (mw.world.isRemote)
 			return;
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_QUESTINSTANCEDELETE);
@@ -901,12 +892,7 @@ public class UserProfile {
 			MLN.printException(this+": Error in sendQuestInstanceDeletePacket", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
-
-		ServerSender.sendPacketToPlayer(packet, key);
+		ServerSender.createAndSendPacketToPlayer(data, this.getPlayer());
 	}
 
 	public void sendQuestInstancePacket(QuestInstance qi) {
@@ -924,8 +910,8 @@ public class UserProfile {
 			}
 		}
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
+
 
 		try {
 			data.write(ServerReceiver.PACKET_QUESTINSTANCE);
@@ -935,16 +921,7 @@ public class UserProfile {
 			MLN.printException(this+": Error in sendQuestInstancePacket", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
-
-		if (MLN.LogNetwork>=MLN.MINOR) {
-			MLN.minor(null, "Sending quest instance packet");
-		}
-
-		ServerSender.sendPacketToPlayer(packet, key);
+		ServerSender.createAndSendPacketToPlayer(data, this.getPlayer());
 	}
 
 	public void setActionData(String key, String value) {
@@ -965,7 +942,7 @@ public class UserProfile {
 
 	public void showNewWorldMessage() {
 		if (!showNewWorldMessageDone) {
-			ServerSender.sendChat(getPlayer(), MLN.YELLOW,getWorldQuestStatusShort());
+			ServerSender.sendChat(getPlayer(), EnumChatFormatting.YELLOW,getWorldQuestStatusShort());
 			showNewWorldMessageDone=true;
 		}
 	}

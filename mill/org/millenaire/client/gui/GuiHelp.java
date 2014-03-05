@@ -67,18 +67,18 @@ public class GuiHelp extends GuiText {
 		if ((mouseX>0) && (mouseX<32)) {
 			final int pos=(mouseY)/32;
 			if ((pos>=0) && (pos<NB_CHAPTERS)) {
-				final int stringlength=fontRenderer.getStringWidth(MLN.string("help.tab_"+(pos+1)));
+				final int stringlength=fontRendererObj.getStringWidth(MLN.string("help.tab_"+(pos+1)));
 				drawGradientRect((mouseX+10) - 3, (mouseY+10) - 3, (mouseX+10 + stringlength + 3), (mouseY+10 + 14), 0xc0000000, 0xc0000000);
-				fontRenderer.drawString(MLN.string("help.tab_"+(pos+1)), mouseX+10, mouseY+10, 0x909090);
+				fontRendererObj.drawString(MLN.string("help.tab_"+(pos+1)), mouseX+10, mouseY+10, 0x909090);
 			}
 		}
 
 		if ((mouseX>224) && (mouseX<256)) {
 			final int pos=(mouseY)/32;
 			if ((pos>=0) && (pos<(NB_CHAPTERS-7))) {
-				final int stringlength=fontRenderer.getStringWidth(MLN.string("help.tab_"+(pos+8)));
+				final int stringlength=fontRendererObj.getStringWidth(MLN.string("help.tab_"+(pos+8)));
 				drawGradientRect((mouseX+10) - 3, (mouseY+10) - 3, (mouseX+10 + stringlength + 3), (mouseY+10 + 14), 0xc0000000, 0xc0000000);
-				fontRenderer.drawString(MLN.string("help.tab_"+(pos+8)), mouseX+10, mouseY+10, 0x909090);
+				fontRendererObj.drawString(MLN.string("help.tab_"+(pos+8)), mouseX+10, mouseY+10, 0x909090);
 			}
 		}
 

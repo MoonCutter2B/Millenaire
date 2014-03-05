@@ -1,8 +1,8 @@
 package org.millenaire.common.goal;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MillVillager;
@@ -40,11 +40,11 @@ Point p=villager.getHouse().getCocoaHarvestLocation();
 
 		Point cropPoint=villager.getGoalDestPoint();
 		
-		if (cropPoint.getId(villager.worldObj)==Block.cocoaPlant.blockID) {
+		if (cropPoint.getBlock(villager.worldObj)==Blocks.cocoa) {
 			int meta=cropPoint.getMeta(villager.worldObj);
 			
-			if (BlockCocoa.func_72219_c(meta)>=2) {
-				villager.setBlockAndMetadata(cropPoint,0,0);
+			if (BlockCocoa.func_149987_c(meta)>=2) {
+				villager.setBlockAndMetadata(cropPoint,Blocks.air,0);
 
 				int nbcrop=2;
 				final float irrigation=villager.getTownHall().getVillageIrrigation();
@@ -52,7 +52,7 @@ Point p=villager.getHouse().getCocoaHarvestLocation();
 				if (rand<(irrigation/100)) {
 					nbcrop++;
 				}
-				villager.addToInv(Item.dyePowder.itemID, 3, nbcrop);
+				villager.addToInv(Items.dye, 3, nbcrop);
 				
 				villager.swingItem();
 			}

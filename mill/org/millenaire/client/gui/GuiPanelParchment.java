@@ -264,22 +264,22 @@ public class GuiPanelParchment extends GuiText {
 		}
 
 		if (villagerHover != null) {
-			int stringlength=fontRenderer.getStringWidth(villagerHover.getName());
-			stringlength=Math.max(stringlength,fontRenderer.getStringWidth(villagerHover.getNativeOccupationName()));
+			int stringlength=fontRendererObj.getStringWidth(villagerHover.getName());
+			stringlength=Math.max(stringlength,fontRendererObj.getStringWidth(villagerHover.getNativeOccupationName()));
 
-			final boolean gameString=((villagerHover.getGameOccupationName(player.username)!=null) && (villagerHover.getGameOccupationName(player.username).length()>0));
+			final boolean gameString=((villagerHover.getGameOccupationName(player.getDisplayName())!=null) && (villagerHover.getGameOccupationName(player.getDisplayName()).length()>0));
 
 			if (gameString) {
-				stringlength=Math.max(stringlength, fontRenderer.getStringWidth(villagerHover.getGameOccupationName(player.username)));
+				stringlength=Math.max(stringlength, fontRendererObj.getStringWidth(villagerHover.getGameOccupationName(player.getDisplayName())));
 
 				drawGradientRect((i+10) - 3 - xStart, (j+10) - 3 - yStart, (i+10 + stringlength + 3)- xStart, (j+10 + 33) - yStart, 0xc0000000, 0xc0000000);
-				fontRenderer.drawString(villagerHover.getName(), (i+10)- xStart, (j+10)- yStart, 0x909090);
-				fontRenderer.drawString(villagerHover.getNativeOccupationName(), (i+10)- xStart, ((j+10)- yStart)+11, 0x909090);
-				fontRenderer.drawString(villagerHover.getGameOccupationName(player.username), (i+10)- xStart, ((j+10)- yStart)+22, 0x909090);
+				fontRendererObj.drawString(villagerHover.getName(), (i+10)- xStart, (j+10)- yStart, 0x909090);
+				fontRendererObj.drawString(villagerHover.getNativeOccupationName(), (i+10)- xStart, ((j+10)- yStart)+11, 0x909090);
+				fontRendererObj.drawString(villagerHover.getGameOccupationName(player.getDisplayName()), (i+10)- xStart, ((j+10)- yStart)+22, 0x909090);
 			} else {
 				drawGradientRect((i+10) - 3 - xStart, (j+10) - 3 - yStart, (i+10 + stringlength + 3)- xStart, (j+10 + 22) - yStart, 0xc0000000, 0xc0000000);
-				fontRenderer.drawString(villagerHover.getName(), (i+10)- xStart, (j+10)- yStart, 0x909090);
-				fontRenderer.drawString(villagerHover.getNativeOccupationName(), (i+10)- xStart, ((j+10)- yStart)+11, 0x909090);
+				fontRendererObj.drawString(villagerHover.getName(), (i+10)- xStart, (j+10)- yStart, 0x909090);
+				fontRendererObj.drawString(villagerHover.getNativeOccupationName(), (i+10)- xStart, ((j+10)- yStart)+11, 0x909090);
 			}
 		} else if (locHover != null) {
 
@@ -292,10 +292,10 @@ public class GuiPanelParchment extends GuiText {
 			String nativeString;
 
 			if (unreachable) {
-				stringlength=fontRenderer.getStringWidth(locHover.getPlan().nativeName+" - "+MLN.string("panels.unreachablebuilding"));
+				stringlength=fontRendererObj.getStringWidth(locHover.getPlan().nativeName+" - "+MLN.string("panels.unreachablebuilding"));
 				nativeString=locHover.getPlan().nativeName+" - "+MLN.string("panels.unreachablebuilding");
 			} else {
-				stringlength=fontRenderer.getStringWidth(locHover.getPlan().nativeName);
+				stringlength=fontRendererObj.getStringWidth(locHover.getPlan().nativeName);
 				nativeString=locHover.getPlan().nativeName;
 			}
 
@@ -304,7 +304,7 @@ public class GuiPanelParchment extends GuiText {
 			final boolean gameString=((locHover.getPlan().getGameName()!=null) && (locHover.getPlan().getGameName().length()>0));
 
 			if (gameString) {
-				stringlength=Math.max(stringlength, fontRenderer.getStringWidth(locHover.getPlan().getGameName()));
+				stringlength=Math.max(stringlength, fontRendererObj.getStringWidth(locHover.getPlan().getGameName()));
 				nblines++;
 			}
 
@@ -313,21 +313,21 @@ public class GuiPanelParchment extends GuiText {
 			nblines+=effects.size();
 
 			for (final String s : effects) {
-				stringlength=Math.max(stringlength, fontRenderer.getStringWidth(s));
+				stringlength=Math.max(stringlength, fontRendererObj.getStringWidth(s));
 			}
 
 			drawGradientRect(i - 3 - xStart, j - 3 - yStart, (i + stringlength + 3)- xStart, (j + (11*nblines)) - yStart, 0xc0000000, 0xc0000000);
-			fontRenderer.drawString(nativeString, i- xStart, j- yStart, 0x909090);
+			fontRendererObj.drawString(nativeString, i- xStart, j- yStart, 0x909090);
 
 			int pos=1;
 
 			if (gameString) {
-				fontRenderer.drawString(locHover.getPlan().getGameName(), i- xStart, (j- yStart)+11, 0x909090);
+				fontRendererObj.drawString(locHover.getPlan().getGameName(), i- xStart, (j- yStart)+11, 0x909090);
 				pos++;
 			}
 
 			for (final String s : effects) {
-				fontRenderer.drawString(s, i- xStart, (j- yStart)+(11*pos), 0x909090);
+				fontRendererObj.drawString(s, i- xStart, (j- yStart)+(11*pos), 0x909090);
 				pos++;
 			}
 		}
@@ -433,7 +433,7 @@ public class GuiPanelParchment extends GuiText {
 			int stringlength=0;
 
 			for (String s : labels) {
-				int w=fontRenderer.getStringWidth(s);
+				int w=fontRendererObj.getStringWidth(s);
 				if (w>stringlength)
 					stringlength=w;
 			}
@@ -442,7 +442,7 @@ public class GuiPanelParchment extends GuiText {
 			drawGradientRect(i - 3 - windowXstart + 10, j - 3 - windowYstart, (i + stringlength + 3) - windowXstart + 10 , (j + 11*labels.size()) - windowYstart, 0xc0000000, 0xc0000000);
 
 			for (int si=0;si<labels.size();si++) {
-				fontRenderer.drawString(labels.get(si), i- windowXstart + 10, j- windowYstart + 11*(si), 0x909090);
+				fontRendererObj.drawString(labels.get(si), i- windowXstart + 10, j- windowYstart + 11*(si), 0x909090);
 			}
 
 		}

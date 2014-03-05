@@ -1,10 +1,12 @@
 package org.millenaire.common.goal;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
+import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
@@ -29,7 +31,7 @@ public class GoalBuildPath extends Goal {
 
 	@Override
 	public int actionDuration(MillVillager villager) {
-		final int toolEfficiency=(int)villager.getBestShovel().efficiencyOnProperMaterial;
+		final int toolEfficiency=(int)villager.getBestShovel().getDigSpeed(new ItemStack(villager.getBestShovel(),1), Blocks.dirt, 0);
 
 		return 100-(toolEfficiency*5);
 	}
@@ -111,10 +113,10 @@ public class GoalBuildPath extends Goal {
 		final BuildingBlock bblock=villager.getTownHall().getCurrentPathBuildingBlock();
 
 		if (bblock!=null) {
-			if (bblock.bid==0)
+			if (bblock.block==Blocks.air)
 				return villager.getBestShovelStack();
 			else
-				return new ItemStack[]{new ItemStack(Item.itemsList[bblock.bid], 1, bblock.meta)};
+				return new ItemStack[]{new ItemStack(Item.getItemFromBlock(bblock.block), 1, bblock.meta)};
 		} else
 			return  villager.getBestShovelStack();
 	}

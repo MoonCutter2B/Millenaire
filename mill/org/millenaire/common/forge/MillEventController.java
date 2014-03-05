@@ -10,7 +10,6 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldServerMulti;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.WorldEvent.Load;
 import net.minecraftforge.event.world.WorldEvent.Save;
@@ -20,9 +19,11 @@ import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillWorld;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 public class MillEventController {
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void entityCreated(EntityJoinWorldEvent event) {
 
 		if (Mill.startupError)
@@ -47,7 +48,7 @@ public class MillEventController {
 	
 	
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void worldLoaded(Load event)
 	{
 		if (Mill.displayMillenaireLocationError && !Mill.proxy.isTrueServer()) {
@@ -70,7 +71,7 @@ public class MillEventController {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void worldSaved(Save event)
 	{
 
@@ -92,7 +93,7 @@ public class MillEventController {
 		}
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void worldUnloaded(Unload event)
 	{
 

@@ -2,6 +2,8 @@ package org.millenaire.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.world.World;
@@ -40,34 +42,34 @@ public class GuiActions {
 			if (mw.buildingExists(p)) {
 				final Building ent=mw.getBuilding(p);
 
-				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Block.sand.blockID)) {
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Blocks.sand))) {
 					ent.testModeGoods();
 					return;
 				}
 
-				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.path.blockID)) {
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Mill.path))) {
 					ent.clearOldPaths();
 					ent.constructCalculatedPaths();
 					return;
 				}
 
-				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.pathSlab.blockID)) {
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() == Item.getItemFromBlock(Mill.pathSlab))) {
 					ent.recalculatePaths(true);
 					return;
 				}
 
-				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.denier_or.itemID)) {
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() == Mill.denier_or)) {
 					ent.displayInfos(player);
 					return;
 				}
 
-				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Item.glassBottle.itemID)) {
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() == Items.glass_bottle)) {
 					mw.setGlobalTag("alchemy");
 					MLN.major(mw, "Set alchemy tag.");
 					return;
 				}
 
-				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().itemID == Mill.summoningWand.itemID)) {
+				if ((player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() == Mill.summoningWand)) {
 
 					ent.displayInfos(player);
 
@@ -90,15 +92,15 @@ public class GuiActions {
 		}
 
 
-		if(world.isBlockOpaqueCube(p.getiX(), p.getiY() + 1, p.getiZ()))
+		if(MillCommonUtilities.isBlockOpaqueCube(world,p.getiX(), p.getiY() + 1, p.getiZ()))
 			return;
-		if((world.getBlockId(p.getiX() - 1, p.getiY(), p.getiZ()) == Mill.lockedChest.blockID) && world.isBlockOpaqueCube(p.getiX() - 1, p.getiY() + 1, p.getiZ()))
+		if((world.getBlock(p.getiX() - 1, p.getiY(), p.getiZ()) == Mill.lockedChest) && MillCommonUtilities.isBlockOpaqueCube(world,p.getiX() - 1, p.getiY() + 1, p.getiZ()))
 			return;
-		if((world.getBlockId(p.getiX() + 1, p.getiY(), p.getiZ()) == Mill.lockedChest.blockID) && world.isBlockOpaqueCube(p.getiX() + 1, p.getiY() + 1, p.getiZ()))
+		if((world.getBlock(p.getiX() + 1, p.getiY(), p.getiZ()) == Mill.lockedChest) && MillCommonUtilities.isBlockOpaqueCube(world,p.getiX() + 1, p.getiY() + 1, p.getiZ()))
 			return;
-		if((world.getBlockId(p.getiX(), p.getiY(), p.getiZ() - 1) == Mill.lockedChest.blockID) && world.isBlockOpaqueCube(p.getiX(), p.getiY() + 1, p.getiZ() - 1))
+		if((world.getBlock(p.getiX(), p.getiY(), p.getiZ() - 1) == Mill.lockedChest) && MillCommonUtilities.isBlockOpaqueCube(world,p.getiX(), p.getiY() + 1, p.getiZ() - 1))
 			return;
-		if((world.getBlockId(p.getiX(), p.getiY(), p.getiZ() + 1) == Mill.lockedChest.blockID) && world.isBlockOpaqueCube(p.getiX(), p.getiY() + 1, p.getiZ() + 1))
+		if((world.getBlock(p.getiX(), p.getiY(), p.getiZ() + 1) == Mill.lockedChest) && MillCommonUtilities.isBlockOpaqueCube(world,p.getiX(), p.getiY() + 1, p.getiZ() + 1))
 			return;
 
 		ServerSender.displayMillChest(player, p);
@@ -117,13 +119,13 @@ public class GuiActions {
 	}
 
 	public static void hireExtend(EntityPlayer player, MillVillager villager) {
-		villager.hiredBy=player.username;
+		villager.hiredBy=player.getDisplayName();
 		villager.hiredUntil+=24000;
 		MillCommonUtilities.changeMoney(player.inventory, -villager.getHireCost(player),player);
 	}
 
 	public static void hireHire(EntityPlayer player, MillVillager villager) {
-		villager.hiredBy=player.username;
+		villager.hiredBy=player.getDisplayName();
 		villager.hiredUntil=villager.worldObj.getWorldTime()+24000;
 		final VillagerRecord vr=villager.getTownHall().getVillagerRecordById(villager.villager_id);
 		if (vr!=null) {
@@ -176,7 +178,7 @@ public class GuiActions {
 			}
 
 			if (MLN.DEV) {
-				MillCommonUtilities.setBlock(townhall.mw.world, lr.errorPos.getRelative(0, 30, 0), Block.gravel.blockID);
+				MillCommonUtilities.setBlock(townhall.mw.world, lr.errorPos.getRelative(0, 30, 0), Blocks.gravel);
 			}
 
 			ServerSender.sendTranslatedSentence(player,MLN.ORANGE, "ui.problemat",pos.distanceDirectionShort(lr.errorPos),error);
@@ -231,7 +233,7 @@ public class GuiActions {
 	}
 
 	public static void questCompleteStep(EntityPlayer player, MillVillager villager) {
-		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.username);
+		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.getDisplayName());
 		final QuestInstance qi=profile.villagersInQuests.get(villager.villager_id);
 
 		if (qi==null) {
@@ -242,7 +244,7 @@ public class GuiActions {
 	}
 
 	public static void questRefuse(EntityPlayer player, MillVillager villager) {
-		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.username);
+		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.getDisplayName());
 		final QuestInstance qi=profile.villagersInQuests.get(villager.villager_id);
 		if (qi==null) {
 			MLN.error(villager, "Could not find quest instance for this villager.");
@@ -252,8 +254,8 @@ public class GuiActions {
 	}
 
 	private static void setSign(Building townhall,int i,int j,BuildingProject project) {
-		MillCommonUtilities.setBlockAndMetadata(townhall.worldObj, i, MillCommonUtilities.findTopSoilBlock(townhall.worldObj, i, j), j, Block.signPost.blockID,0,true,false);
-		final TileEntitySign sign=(TileEntitySign) townhall.worldObj.getBlockTileEntity(i, MillCommonUtilities.findTopSoilBlock(townhall.worldObj,i, j), j);
+		MillCommonUtilities.setBlockAndMetadata(townhall.worldObj, i, MillCommonUtilities.findTopSoilBlock(townhall.worldObj, i, j), j, Blocks.standing_sign,0,true,false);
+		final TileEntitySign sign=(TileEntitySign) townhall.worldObj.getTileEntity(i, MillCommonUtilities.findTopSoilBlock(townhall.worldObj,i, j), j);
 		if (sign!=null) {
 			sign.signText=new String[]{project.getNativeName(),"",project.getGameName(),""};
 		}
@@ -276,21 +278,21 @@ public class GuiActions {
 
 		if ((closestVillage != null)
 				&& (pos.squareRadiusDistance(closestVillage.getPos())<closestVillage.villageType.radius+10)) {
-			if (closestVillage.controlledBy(player.username)) {
+			if (closestVillage.controlledBy(player.getDisplayName())) {
 				ServerSender.displayNewBuildingProjectGUI(player,closestVillage, pos);
 				return;
 			} else
 				return;
 		}
 
-		final int bid=MillCommonUtilities.getBlock(player.worldObj, pos);
+		final Block block=MillCommonUtilities.getBlock(player.worldObj, pos);
 
-		if (bid == Block.obsidian.blockID) {
+		if (block == Blocks.obsidian) {
 			final WorldGenVillage genVillage=new WorldGenVillage();
 			genVillage.generateVillageAtPoint(player.worldObj, MillCommonUtilities.random, pos.getiX(), pos.getiY(), pos.getiZ(), player, false, true, 0,null,null,null);
 		}
 
-		if (bid == Block.blockGold.blockID) {
+		if (block == Blocks.gold_block) {
 			ServerSender.displayNewVillageGUI(player,pos);
 
 		}
@@ -307,14 +309,14 @@ public class GuiActions {
 
 
 	public static void villageChiefPerformCrop(EntityPlayer player,MillVillager chief,String value) {
-		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.username);
+		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.getDisplayName());
 		profile.setTag(MillWorld.CROP_PLANTING+value);
 		MillCommonUtilities.changeMoney(player.inventory, -CROP_PRICE,player);
 		ServerSender.sendTranslatedSentence(player,MLN.WHITE, "ui.croplearned",chief.getName(),"item."+value);
 	}
 
 	public static void villageChiefPerformCultureControl(EntityPlayer player,MillVillager chief) {
-		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.username);
+		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.getDisplayName());
 		profile.setTag(MillWorld.CULTURE_CONTROL+chief.getCulture().key);
 		ServerSender.sendTranslatedSentence(player,MLN.WHITE, "ui.control_gotten",chief.getName(),"culture."+chief.getCulture().key);
 	}
@@ -328,7 +330,7 @@ public class GuiActions {
 			effect=-10;
 		}
 
-		final int reputation=Math.min(chief.getTownHall().getReputation(player.username),Building.MAX_REPUTATION);
+		final int reputation=Math.min(chief.getTownHall().getReputation(player.getDisplayName()),Building.MAX_REPUTATION);
 
 		//coeff is weighted average of log ration and regular ratio (to make it progressive but not too much)
 		final float coeff=(float) ((((Math.log(reputation)/Math.log(Building.MAX_REPUTATION))*2)+(reputation/(Building.MAX_REPUTATION)))/3);
@@ -339,7 +341,7 @@ public class GuiActions {
 
 		chief.getTownHall().adjustRelation(village,(int) effect,false);
 
-		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.username);
+		final UserProfile profile=Mill.getMillWorld(player.worldObj).getProfile(player.getDisplayName());
 		profile.adjustDiplomacyPoint(chief.getTownHall(), -1);
 
 		if (MLN.LogVillage>=MLN.MAJOR) {
@@ -353,7 +355,7 @@ public class GuiActions {
 			final Point p=Mill.getMillWorld(player.worldObj).villagesList.pos.get(i);
 			if (chief.getTownHall().getPos().sameBlock(p)) {
 				MillCommonUtilities.changeMoney(player.inventory, -VILLAGE_SCROLL_PRICE,player);
-				MillCommonUtilities.putItemsInChest(player.inventory, Mill.parchmentVillageScroll.itemID, i, 1);
+				MillCommonUtilities.putItemsInChest(player.inventory, Mill.parchmentVillageScroll, i, 1);
 				ServerSender.sendTranslatedSentence(player,MLN.WHITE, "ui.scrollbought",chief.getName());
 			}
 		}

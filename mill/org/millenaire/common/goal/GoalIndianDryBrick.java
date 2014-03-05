@@ -2,6 +2,7 @@ package org.millenaire.common.goal;
 
 import java.util.Vector;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.Building;
@@ -49,7 +50,7 @@ public class GoalIndianDryBrick extends Goal {
 
 	@Override
 	public ItemStack[] getHeldItemsTravelling(MillVillager villager) {
-		return new ItemStack[]{new ItemStack(Mill.brickmould.itemID,1,0)};
+		return new ItemStack[]{new ItemStack(Mill.brickmould,1,0)};
 	}
 
 	@Override
@@ -90,8 +91,8 @@ public class GoalIndianDryBrick extends Goal {
 
 	@Override
 	public boolean performAction(MillVillager villager) {
-		if (MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==0) {
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Mill.earth_decoration.blockID,0);
+		if (MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Blocks.air) {
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Mill.earth_decoration,0);
 			
 			villager.swingItem();
 		}

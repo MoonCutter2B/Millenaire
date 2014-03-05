@@ -64,7 +64,7 @@ public class GoalGatherGoods extends Goal {
 			final EntityItem item=MillCommonUtilities.getClosestItemVertical(villager.worldObj, villager.getGoalDestPoint(), goods, 3, 20);
 			if (item != null) {
 				item.setDead();
-				villager.addToInv(item.getEntityItem().itemID,item.getEntityItem().getItemDamage(),1);
+				villager.addToInv(item.getEntityItem().getItem(),item.getEntityItem().getItemDamage(),1);
 				return true;
 			}
 		}

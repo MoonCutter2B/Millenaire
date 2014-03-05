@@ -1,10 +1,10 @@
 package org.millenaire.common;
 
-import java.io.ByteArrayOutputStream;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.DataInput;
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -27,6 +27,8 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemAxe;
@@ -37,7 +39,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.AxisAlignedBB;
@@ -45,8 +46,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.Constants;
 
 import org.millenaire.common.Culture.CultureLanguage.Dialogue;
 import org.millenaire.common.MLN.MillenaireException;
@@ -78,7 +81,6 @@ import org.millenaire.common.pathing.atomicstryker.AStarStatic;
 import org.millenaire.common.pathing.atomicstryker.IAStarPathedEntity;
 
 import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
@@ -102,66 +104,87 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		public static final int ANYENCHANTED=1;
 		public static final int ENCHANTEDSWORD=2;
 
-		public Item item=null;
-		public final ItemStack staticStack;
-		public final ItemStack[] staticStackArray;
-		public int meta=0;
-		public int special=0;
+		final public Item item;
+		final public Block block;
+		final public ItemStack staticStack;
+		final public ItemStack[] staticStackArray;
+		final public int meta;
+		final public int special;
 
 		public InvItem(Block block,int meta) {
-			this.item=Item.itemsList[block.blockID];
+			this.block=block;
+			this.item=Item.getItemFromBlock(block);
 			this.meta=meta;
 			staticStack=new ItemStack(item,1,meta);
 			staticStackArray=new ItemStack[]{staticStack};
+			special=0;
 		}
 
 		public InvItem(int special) {
 			this.special=special;
 			staticStack=null;
 			staticStackArray=new ItemStack[]{staticStack};
+			item=null;
+			block=null;
+			meta=0;
 		}
-
-		public InvItem(int id,int meta) {
-			if (Item.itemsList[id]==null) {
-				MLN.printException("Tried creating InvItem with null id: "+id, new Exception());
-			} else {
-				item=Item.itemsList[id];
-			}
-			this.meta=meta;
-			staticStack=new ItemStack(item,1,meta);
-			staticStackArray=new ItemStack[]{staticStack};
+		
+		public InvItem(Item item) {
+			this(item,0);
+		}
+		
+		public InvItem(Block block) {
+			this(Item.getItemFromBlock(block),0);
 		}
 
 		public InvItem(Item item,int meta) {
 			this.item=item;
+			this.block=Block.getBlockFromItem(item);
 			this.meta=meta;
 			staticStack=new ItemStack(item,1,meta);
 			staticStackArray=new ItemStack[]{staticStack};
+			special=0;
 		}
 
 		public InvItem(ItemStack is) {
 			item=is.getItem();
+			this.block=Block.getBlockFromItem(item);
 			if (is.getItemDamage()>0) {
 				meta=is.getItemDamage();
+			} else {
+				meta=0;
 			}
 			staticStack=new ItemStack(item,1,meta);
 			staticStackArray=new ItemStack[]{staticStack};
+			special=0;
 		}
 
 		public InvItem(String s) {
+			special=0;
 			if (s.split("/").length>2) {
 				final int id=Integer.parseInt(s.split("/")[0]);
 
-				if (Item.itemsList[id]==null) {
+				if (Item.getItemById(id)==null) {
 					MLN.printException("Tried creating InvItem with null id from string: "+s, new Exception());
+					item=null;
 				} else {
-					item=Item.itemsList[id];
+					item=Item.getItemById(id);
+				}
+				
+				if (Block.getBlockById(id)==null) {
+					block=null;
+				} else {
+					block=(Block) Block.blockRegistry.getObjectById(id);
 				}
 
 				meta=Integer.parseInt(s.split("/")[1]);
 				staticStack=new ItemStack(item,1,meta);
-			} else
+			} else {
 				staticStack=null;
+				item=null;
+				block=null;
+				meta=0;
+			}
 
 			staticStackArray=new ItemStack[]{staticStack};
 		}
@@ -192,41 +215,35 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				return MLN.string("ui.anyenchanted");
 			else if (special==ENCHANTEDSWORD)
 				return MLN.string("ui.enchantedsword");
-			else if ((meta==-1) && (id()==Block.wood.blockID))
+			else if ((meta==-1) && (block==Blocks.log))
 				return MLN.string("ui.woodforplanks");
-			else if ((meta==0) && (id()==Block.wood.blockID))
+			else if ((meta==0) && (block==Blocks.log))
 				return MLN.string("ui.woodoak");
-			else if ((meta==1) && (id()==Block.wood.blockID))
+			else if ((meta==1) && (block==Blocks.log))
 				return MLN.string("ui.woodpine");
-			else if ((meta==2) && (id()==Block.wood.blockID))
+			else if ((meta==2) && (block==Blocks.log))
 				return MLN.string("ui.woodbirch");
-			else if ((meta==3) && (id()==Block.wood.blockID))
+			else if ((meta==3) && (block==Blocks.log))
 				return MLN.string("ui.woodjungle");
 			else if (meta==-1)
-				return Mill.proxy.getItemName(id(), 0);
+				return Mill.proxy.getItemName(item, 0);
 			else
-				return Mill.proxy.getItemName(id(), meta);
+				return Mill.proxy.getItemName(item, meta);
 		}
 
 		public String getTranslationKey() {
-			return "_item:"+id()+":"+meta;
+			return "_item:"+Item.getIdFromItem(item)+":"+meta;
 		}
 
 		@Override
 		public int hashCode() {
-			return id()+(meta << 8);
+			return Item.getIdFromItem(item)+(meta << 8);
 		}
 
-		public int id() {
-			if (item!=null)
-				return item.itemID;
-
-			if (special>0)
-				return -special;
-
-			return 0;
+		public Block getBlock() {
+			return block;
 		}
-
+		
 		public boolean matches(InvItem ii) {
 
 			return ((ii.item==item) && ((ii.meta==meta) || (ii.meta==-1) || (meta==-1)));
@@ -239,7 +256,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		@Override
 		public int compareTo(InvItem ii) {
-			return id()*20+meta-ii.id()*20-ii.meta;
+			return Item.getIdFromItem(item)*20+meta-Item.getIdFromItem(ii.getItem())*20-ii.meta;
 		}
 	}
 
@@ -250,9 +267,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 	public static class MLEntityGenericMale extends MillVillager {
 		public MLEntityGenericMale(World world) {
-
 			super(world);
-
 		}
 	}
 	public static class MLEntityGenericSymmFemale extends MillVillager {
@@ -263,6 +278,12 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public static class MLEntityGenericZombie extends MillVillager {
 		public MLEntityGenericZombie(World world) {
 			super(world);
+		}
+
+		@Override
+		public void readSpawnData(ByteBuf additionalData) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	private static final String FREE_CLOTHES = "free";
@@ -278,33 +299,33 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public static final String GENERIC_ZOMBIE="ml_GenericZombie";
 
 
-	public static ItemStack[] hoeWood=new ItemStack[]{new ItemStack(Item.hoeWood, 1)};
-	public static ItemStack[] hoeStone=new ItemStack[]{new ItemStack(Item.hoeStone, 1)};
-	public static ItemStack[] hoeSteel=new ItemStack[]{new ItemStack(Item.hoeIron, 1)};
+	public static ItemStack[] hoeWood=new ItemStack[]{new ItemStack(Items.wooden_hoe, 1)};
+	public static ItemStack[] hoeStone=new ItemStack[]{new ItemStack(Items.stone_hoe, 1)};
+	public static ItemStack[] hoeSteel=new ItemStack[]{new ItemStack(Items.iron_hoe, 1)};
 	public static ItemStack[] hoeNorman=new ItemStack[]{new ItemStack(Mill.normanHoe, 1)};
 	public static ItemStack[] hoeMayan=new ItemStack[]{new ItemStack(Mill.mayanHoe, 1)};
 
-	public static ItemStack[] shovelWood=new ItemStack[]{new ItemStack(Item.shovelWood, 1)};
-	public static ItemStack[] shovelStone=new ItemStack[]{new ItemStack(Item.shovelStone, 1)};
-	public static ItemStack[] shovelSteel=new ItemStack[]{new ItemStack(Item.shovelIron, 1)};
+	public static ItemStack[] shovelWood=new ItemStack[]{new ItemStack(Items.wooden_shovel, 1)};
+	public static ItemStack[] shovelStone=new ItemStack[]{new ItemStack(Items.stone_shovel, 1)};
+	public static ItemStack[] shovelSteel=new ItemStack[]{new ItemStack(Items.iron_shovel, 1)};
 	public static ItemStack[] shovelNorman=new ItemStack[]{new ItemStack(Mill.normanShovel, 1)};
 	public static ItemStack[] shovelMayan=new ItemStack[]{new ItemStack(Mill.mayanShovel, 1)};
 
-	public static ItemStack[] pickaxeWood=new ItemStack[]{new ItemStack(Item.pickaxeWood, 1)};
-	public static ItemStack[] pickaxeStone=new ItemStack[]{new ItemStack(Item.pickaxeStone, 1)};
-	public static ItemStack[] pickaxeSteel=new ItemStack[]{new ItemStack(Item.pickaxeIron, 1)};
+	public static ItemStack[] pickaxeWood=new ItemStack[]{new ItemStack(Items.wooden_pickaxe, 1)};
+	public static ItemStack[] pickaxeStone=new ItemStack[]{new ItemStack(Items.stone_pickaxe, 1)};
+	public static ItemStack[] pickaxeSteel=new ItemStack[]{new ItemStack(Items.iron_pickaxe, 1)};
 	public static ItemStack[] pickaxeNorman=new ItemStack[]{new ItemStack(Mill.normanPickaxe, 1)};
 	public static ItemStack[] pickaxeMayan=new ItemStack[]{new ItemStack(Mill.mayanPickaxe, 1)};
 
-	public static ItemStack[] axeWood=new ItemStack[]{new ItemStack(Item.axeWood, 1)};
-	public static ItemStack[] axeStone=new ItemStack[]{new ItemStack(Item.axeStone, 1)};
-	public static ItemStack[] axeSteel=new ItemStack[]{new ItemStack(Item.axeIron, 1)};
+	public static ItemStack[] axeWood=new ItemStack[]{new ItemStack(Items.wooden_axe, 1)};
+	public static ItemStack[] axeStone=new ItemStack[]{new ItemStack(Items.stone_axe, 1)};
+	public static ItemStack[] axeSteel=new ItemStack[]{new ItemStack(Items.iron_axe, 1)};
 	public static ItemStack[] axeNorman=new ItemStack[]{new ItemStack(Mill.normanAxe, 1)};
 	public static ItemStack[] axeMayan=new ItemStack[]{new ItemStack(Mill.mayanAxe, 1)};
 
-	public static ItemStack[] swordWood=new ItemStack[]{new ItemStack(Item.swordWood, 1)};
-	public static ItemStack[] swordStone=new ItemStack[]{new ItemStack(Item.swordStone, 1)};
-	public static ItemStack[] swordSteel=new ItemStack[]{new ItemStack(Item.swordIron, 1)};
+	public static ItemStack[] swordWood=new ItemStack[]{new ItemStack(Items.wooden_sword, 1)};
+	public static ItemStack[] swordStone=new ItemStack[]{new ItemStack(Items.stone_sword, 1)};
+	public static ItemStack[] swordSteel=new ItemStack[]{new ItemStack(Items.iron_sword, 1)};
 	public static ItemStack[] swordNorman=new ItemStack[]{new ItemStack(Mill.normanBroadsword, 1)};
 	public static ItemStack[] swordMayan=new ItemStack[]{new ItemStack(Mill.mayanMace, 1)};
 	public static ItemStack[] swordByzantine=new ItemStack[]{new ItemStack(Mill.byzantineMace, 1)};
@@ -313,78 +334,78 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public static final HashMap<String,String[]> oldVillagers=new HashMap<String,String[]>();
 	//In descending order of priority:
 	public static final Item[] weapons=new Item[]{
-		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordIron,Item.swordStone,
-		Mill.yumiBow,Item.bow,
-		Mill.normanAxe,Mill.mayanAxe,Item.axeIron,Item.axeStone,
-		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeIron,Item.pickaxeStone,
-		Mill.normanHoe,Mill.mayanHoe,Item.hoeIron,Item.hoeStone,
-		Mill.normanShovel,Mill.mayanShovel,Item.shovelStone,Item.shovelWood
+		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Items.diamond_sword,Mill.mayanMace,Items.iron_sword,Items.stone_sword,
+		Mill.yumiBow,Items.bow,
+		Mill.normanAxe,Mill.mayanAxe,Items.iron_axe,Items.stone_axe,
+		Mill.normanPickaxe,Mill.mayanPickaxe,Items.iron_pickaxe,Items.stone_pickaxe,
+		Mill.normanHoe,Mill.mayanHoe,Items.iron_hoe,Items.stone_hoe,
+		Mill.normanShovel,Mill.mayanShovel,Items.stone_shovel,Items.wooden_shovel
 	};
 
 	public static final Item[] weaponsHandToHand=new Item[]{
-		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordIron,Item.swordStone,
-		Mill.normanAxe,Mill.mayanAxe,Item.axeIron,Item.axeStone,
-		Mill.normanPickaxe,Mill.mayanPickaxe,Item.pickaxeIron,Item.pickaxeStone,
-		Mill.normanHoe,Mill.mayanHoe,Item.hoeIron,Item.hoeStone,
-		Mill.normanShovel,Mill.mayanShovel,Item.shovelStone,Item.shovelWood
+		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Items.diamond_sword,Mill.mayanMace,Items.iron_sword,Items.stone_sword,
+		Mill.normanAxe,Mill.mayanAxe,Items.iron_axe,Items.stone_axe,
+		Mill.normanPickaxe,Mill.mayanPickaxe,Items.iron_pickaxe,Items.stone_pickaxe,
+		Mill.normanHoe,Mill.mayanHoe,Items.iron_hoe,Items.stone_hoe,
+		Mill.normanShovel,Mill.mayanShovel,Items.stone_shovel,Items.wooden_shovel
 	};
 
 	public static final Item[] weaponsSwords=new Item[]{
-		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Item.swordDiamond,Mill.mayanMace,Item.swordIron,Item.swordStone,Item.swordWood
+		Mill.normanBroadsword,Mill.tachiSword,Mill.byzantineMace,Items.diamond_sword,Mill.mayanMace,Items.iron_sword,Items.stone_sword,Items.wooden_sword
 	};
 
 	public static final Item[] weaponsRanged=new Item[]{
-		Mill.yumiBow,Item.bow
+		Mill.yumiBow,Items.bow
 	};
 
 	private static final Item[] weaponsBow=new Item[]{
-		Mill.yumiBow,Item.bow
+		Mill.yumiBow,Items.bow
 	};
 
 	public static final Item[] helmets=new Item[]{
 
-		Mill.normanHelmet,Mill.byzantineHelmet,Mill.japaneseWarriorBlueHelmet,Mill.japaneseWarriorRedHelmet,Mill.japaneseGuardHelmet,Item.helmetDiamond,
-		Item.helmetIron,Item.helmetChain,Item.helmetGold,
+		Mill.normanHelmet,Mill.byzantineHelmet,Mill.japaneseWarriorBlueHelmet,Mill.japaneseWarriorRedHelmet,Mill.japaneseGuardHelmet,Items.diamond_helmet,
+		Items.iron_helmet,Items.chainmail_helmet,Items.golden_helmet,
 
-		Item.helmetLeather
+		Items.leather_helmet
 	};
 
 	public static final Item[] chestplates=new Item[]{
 		Mill.normanPlate,Mill.byzantinePlate,Mill.japaneseWarriorBluePlate,Mill.japaneseWarriorRedPlate,Mill.japaneseGuardPlate
-		,Item.plateDiamond,Item.plateIron,Item.plateChain,Item.plateGold,
-		Item.plateLeather
+		,Items.diamond_chestplate,Items.iron_chestplate,Items.chainmail_chestplate,Items.golden_chestplate,
+		Items.leather_chestplate
 	};
 
 	public static final Item[] legs=new Item[]{
 		Mill.normanLegs,Mill.byzantineLegs,Mill.japaneseWarriorBlueLegs,Mill.japaneseWarriorRedLegs,Mill.japaneseGuardLegs,
-		Item.legsDiamond,Item.legsIron,Item.legsChain,Item.legsGold,
-		Item.legsLeather
+		Items.diamond_leggings,Items.iron_leggings,Items.chainmail_leggings,Items.golden_leggings,
+		Items.leather_leggings
 	};
 
 	public static final Item[] boots=new Item[]{
-		Mill.normanBoots,Mill.byzantineBoots,Mill.japaneseWarriorBlueBoots,Mill.japaneseWarriorRedBoots,Mill.japaneseGuardBoots,Item.bootsDiamond,
-		Item.bootsIron,Item.bootsChain,Item.bootsGold,
-		Item.bootsLeather
+		Mill.normanBoots,Mill.byzantineBoots,Mill.japaneseWarriorBlueBoots,Mill.japaneseWarriorRedBoots,Mill.japaneseGuardBoots,Items.diamond_boots,
+		Items.iron_boots,Items.chainmail_boots,Items.golden_boots,
+		Items.leather_boots
 	};
 
 	public static final Item[] pickaxes=new Item[]{
-		Mill.normanPickaxe,Item.pickaxeDiamond,Item.pickaxeIron,Item.pickaxeStone,Item.pickaxeWood
+		Mill.normanPickaxe,Items.diamond_pickaxe,Items.iron_pickaxe,Items.stone_pickaxe,Items.wooden_pickaxe
 	};
 
 	public static final Item[] axes=new Item[]{
-		Mill.normanAxe,Item.axeDiamond,Item.axeIron,Item.axeStone,Item.axeWood
+		Mill.normanAxe,Items.diamond_axe,Items.iron_axe,Items.stone_axe,Items.wooden_axe
 	};
 
 	public static final Item[] shovels=new Item[]{
-		Mill.normanShovel,Item.shovelDiamond,Item.shovelIron,Item.shovelStone,Item.shovelWood
+		Mill.normanShovel,Items.diamond_shovel,Items.iron_shovel,Items.stone_shovel,Items.wooden_shovel
 	};
 
 	public static final Item[] hoes=new Item[]{
-		Mill.normanHoe,Item.hoeDiamond,Item.hoeIron,Item.hoeStone,Item.hoeWood
+		Mill.normanHoe,Items.diamond_hoe,Items.iron_hoe,Items.stone_hoe,Items.wooden_hoe
 	};
 
 	private static final Item[] foodGrowth=new Item[]{
-		Item.egg,Item.bread,Item.beefCooked,Item.porkCooked,Item.chickenCooked,Item.fishCooked,Item.carrot,Item.bakedPotato,
+		Items.egg,Items.bread,Items.cooked_beef,Items.porkchop,Items.cooked_chicken,Items.cooked_fished,Items.carrot,Items.baked_potato,
 		Mill.tripes,Mill.boudin,
 		Mill.vegcurry,Mill.chickencurry,Mill.rice,
 		Mill.masa,Mill.wah,
@@ -404,7 +425,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	//Careful: unlike growth food must be in order from best to worse
 	//As villagers will use only the first available
 	private static final Item[] foodConception=new Item[]{
-		Mill.wineFancy,Item.cake,Mill.calva,Mill.sake,Mill.cacauhaa,Mill.wineBasic,Mill.cider,Mill.rasgulla,Mill.feta,Item.cookie
+		Mill.wineFancy,Items.cake,Mill.calva,Mill.sake,Mill.cacauhaa,Mill.wineBasic,Mill.cider,Mill.rasgulla,Mill.feta,Items.cookie
 	};
 
 	private static final int[] foodConceptionChanceOn=new int[]{
@@ -521,7 +542,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		return villager;
 	}
-	public static void readVillagerPacket(DataInputStream data) {
+	public static void readVillagerPacket(ByteBufInputStream data) {
 		try {
 			final long villager_id=data.readLong();
 
@@ -561,7 +582,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	public boolean nightActionPerformed=false;
 	public long speech_started=0;
 	public HashMap<InvItem,Integer> inventory;
-	public int previousBlock;
+	public Block previousBlock;
 	public int previousBlockMeta;
 	public int size = 0;
 	public long pathingTime,timeSinceLastPathingTimeDisplay,villager_id=0;
@@ -644,7 +665,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		mw=Mill.getMillWorld(world);
 
 		inventory=new HashMap<InvItem,Integer>();
-		setEntityHealth(getMaxHealth());
+		setHealth(getMaxHealth());
 
 		isImmuneToFire=true;
 
@@ -652,7 +673,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		jpsPathPlanner=new AStarPathPlanner(world, this);
 		
-		 this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(MOVE_SPEED);
+		 this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(MOVE_SPEED);
 
 		if (MLN.LogVillagerSpawn>=MLN.DEBUG) {
 			final Exception e = new Exception();
@@ -673,12 +694,21 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	protected int getExperiencePoints(EntityPlayer par1EntityPlayer) {
 		return vtype.expgiven;
 	}
-	public void addToInv(int id,int nb) {
-		addToInv(id,0,nb);
+	
+	public void addToInv(Block block,int nb) {
+		addToInv(Item.getItemFromBlock(block),0,nb);
+	}
+	
+	public void addToInv(Block block,int meta,int nb) {
+		addToInv(block,meta,nb);
+	}
+	
+	public void addToInv(Item item,int nb) {
+		addToInv(item,0,nb);
 	}
 
-	public void addToInv(int id,int meta,int nb) {
-		final InvItem key=new InvItem(id,meta);
+	public void addToInv(Item item,int meta,int nb) {
+		final InvItem key=new InvItem(item,meta);
 		if (inventory.containsKey(key)) {
 			inventory.put(key,inventory.get(key)+nb);
 		} else {
@@ -693,7 +723,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public void addToInv(InvItem iv,int nb) {
-		addToInv(iv.id(),iv.meta,nb);
+		addToInv(iv.getItem(),iv.meta,nb);
 	}
 
 	public void adjustSize() {
@@ -752,7 +782,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				final ItemStack weapon=getWeapon();
 
 				if (weapon!=null) {
-					final Item item=Item.itemsList[weapon.itemID];
+					final Item item=weapon.getItem();
 
 					if (item instanceof ItemMillenaireBow) {
 						final ItemMillenaireBow bow=(ItemMillenaireBow)item;
@@ -796,7 +826,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		if ((ds.getSourceOfDamage()==null) && (ds!=DamageSource.outOfWorld))
 			return false;
 
-		final boolean hadFullHealth=(getMaxHealth()==func_110143_aJ());
+		final boolean hadFullHealth=(getMaxHealth()==getHealth());
 
 		final boolean b=super.attackEntityFrom(ds, i);
 
@@ -813,9 +843,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 					if (!isRaider) {
 						if (!vtype.hostile) {
-							MillCommonUtilities.getServerProfile(player.worldObj,player.username).adjustReputation(getTownHall(), (int) (-i*10));
+							MillCommonUtilities.getServerProfile(player.worldObj,player.getDisplayName()).adjustReputation(getTownHall(), (int) (-i*10));
 						}
-						if ((worldObj.difficultySetting != 0) && (this.func_110143_aJ()<(getMaxHealth()-10))) {
+						if ((worldObj.difficultySetting != EnumDifficulty.PEACEFUL) && (this.getHealth()<(getMaxHealth()-10))) {
 							entityToAttack = entity;
 							clearGoal();
 							if (getTownHall() != null) {
@@ -828,7 +858,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 						}
 					}
 
-					if (lastAttackByPlayer && (func_110143_aJ()<=0)) {
+					if (lastAttackByPlayer && (getHealth()<=0)) {
 						if (vtype.hostile) {
 							player.addStat(MillAchievements.selfdefense, 1);
 						} else {
@@ -921,8 +951,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		boolean foundConceptionFood=false;
 
 		for (int i=0;(i<foodConception.length) && !foundConceptionFood;i++) {
-			if (getHouse().countGoods(foodConception[i].itemID)>0) {
-				getHouse().takeGoods(foodConception[i].itemID, 1);
+			if (getHouse().countGoods(foodConception[i])>0) {
+				getHouse().takeGoods(foodConception[i], 1);
 				foundConceptionFood=true;
 				if (MillCommonUtilities.randomInt(foodConceptionChanceOn[i])==0) {
 					createChild=true;
@@ -1216,13 +1246,16 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		return MillCommonUtilities.countBlocksAround(worldObj, x, y, z, rx, ry, rz);
 	}
 
-	public int countInv(int id) {
-		return countInv(id,0);
+	public int countInv(Item item) {
+		return countInv(item,0);
 	}
 
-	public int countInv(int id,int meta) {
-
-		return countInv(new InvItem(id,meta));
+	public int countInv(Item item,int meta) {
+		return countInv(new InvItem(item,meta));
+	}
+	
+	public int countInv(Block block,int meta) {
+		return countInv(new InvItem(Item.getItemFromBlock(block),meta));
 	}
 
 	public int countInv(InvItem key) {
@@ -1230,7 +1263,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		if (key.meta==-1) {//undefined, so has to try the 16 possible values
 			int nb=0;
 			for (int i=0;i<16;i++) {
-				final InvItem tkey=new InvItem(key.id(),i);
+				final InvItem tkey=new InvItem(key.item,i);
 				if (inventory.containsKey(tkey)) {
 					nb+=inventory.get(tkey);
 				}
@@ -1244,11 +1277,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			return 0;
 	}
 
-	public int countItemsAround(int itemID,int radius) {
-		return countItemsAround(new int[]{itemID},radius);
+	public int countItemsAround(Item item,int radius) {
+		return countItemsAround(new Item[]{item},radius);
 	}
 
-	public int countItemsAround(int[] itemIDs,int radius) {
+	public int countItemsAround(Item[] items,int radius) {
 		final List<Entity> list = MillCommonUtilities.getEntitiesWithinAABB(worldObj, EntityItem.class, getPos(), radius, radius);
 
 		int count=0;
@@ -1259,8 +1292,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 					final EntityItem entity = (EntityItem)list.get(i);
 
 					if (!entity.isDead) {
-						for (final int id : itemIDs) {
-							if (id==entity.getEntityItem().itemID) {
+						for (final Item id : items) {
+							if (id==entity.getEntityItem().getItem()) {
 								count++;
 							}
 						}
@@ -1300,10 +1333,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public void detrampleCrops() {
 		if (getPos().sameBlock(prevPoint) &&
-				((previousBlock == Block.crops.blockID) || (previousBlock == Mill.crops.blockID)) && (getBlock(getPos()) == 0) && (getBlock(getPos().getBelow()) == Block.dirt.blockID)) {
+				((previousBlock == Blocks.wheat) || (previousBlock == Mill.crops)) && (getBlock(getPos()) != Blocks.air) && (getBlock(getPos().getBelow()) == Blocks.dirt)) {
 			setBlock(getPos(), previousBlock);
 			setBlockMetadata(getPos(), previousBlockMeta);
-			setBlock(getPos().getBelow(),Block.tilledField.blockID);
+			setBlock(getPos().getBelow(),Blocks.farmland);
 		}
 
 		previousBlock = getBlock(getPos());
@@ -1372,7 +1405,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 	
 	@Override
-	public ItemStack getCurrentItemOrArmor(int par1)
+	public ItemStack getEquipmentInSlot(int par1)
 	{
 		if (par1>0)
 			return func_130225_q(par1-1);
@@ -1385,28 +1418,28 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		if (type==0) {
 			for (final Item weapon : helmets) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 			return null;
 		}
 		if (type==1) {
 			for (final Item weapon : chestplates) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 			return null;
 		}
 		if (type==2) {
 			for (final Item weapon : legs) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 			return null;
 		}
 		if (type==3) {
 			for (final Item weapon : boots) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 			return null;
@@ -1440,9 +1473,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		final int x = (int)ref.x;
 		final int y = (int)ref.y;
 		final int z = (int)ref.z;
-		final Block block = Block.blocksList[worldObj.getBlockId(x, y, z)];
+		final Block block = worldObj.getBlock(x, y, z);
 
-		if (block==Block.bed) {
+		if (block==Blocks.bed) {
 			final int var2 = (block == null ? 0 : block.getBedDirection(worldObj, x, y, z));
 
 			switch (var2)
@@ -1458,13 +1491,13 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 		} else {
 
-			if (worldObj.getBlockId(x+1, y, z)==0)
+			if (worldObj.getBlock(x+1, y, z)==Blocks.air)
 				return 0.0F;
-			else if (worldObj.getBlockId(x, y, z+1)==0)
+			else if (worldObj.getBlock(x, y, z+1)==Blocks.air)
 				return 90.0F;
-			else if (worldObj.getBlockId(x-1, y, z)==0)
+			else if (worldObj.getBlock(x-1, y, z)==Blocks.air)
 				return 180.0F;
-			else if (worldObj.getBlockId(x, y, z-1)==0)
+			else if (worldObj.getBlock(x, y, z-1)==Blocks.air)
 				return 270.0F;
 
 		}
@@ -1475,16 +1508,16 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemTool getBestAxe() {
-		ItemTool bestTool=(ItemTool) Item.axeWood;
+		ItemTool bestTool=(ItemTool) Items.wooden_axe;
 		float bestRating=0;
 
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemAxe || item.item instanceof ItemMillenaireAxe)) {
 					ItemTool tool=(ItemTool)item.item;
-					if (tool.getStrVsBlock(item.staticStack, Block.wood)>bestRating) {
+					if (tool.func_150893_a(item.staticStack, Blocks.log)>bestRating) {
 						bestTool=tool;
-						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+						bestRating=tool.func_150893_a(item.staticStack, Blocks.stone);
 					}
 				}
 			}
@@ -1502,9 +1535,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemAxe || item.item instanceof ItemMillenaireAxe)) {
 					ItemTool tool=(ItemTool)item.item;
-					if (tool.getStrVsBlock(item.staticStack, Block.wood)>bestRating) {
+					if (tool.func_150893_a(item.staticStack, Blocks.log)>bestRating) {
 						bestTool=item.staticStackArray;
-						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+						bestRating=tool.func_150893_a(item.staticStack, Blocks.stone);
 					}
 				}
 			}
@@ -1514,7 +1547,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public Item getBestHoe() {
-		Item bestTool=(ItemTool)Item.hoeWood;
+		Item bestTool=(ItemTool)Items.wooden_hoe;
 		float bestRating=0;
 
 		for (InvItem item : inventory.keySet()) {
@@ -1552,16 +1585,16 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemTool getBestPickaxe() {
-		ItemTool bestTool=(ItemTool)Item.pickaxeWood;
+		ItemTool bestTool=(ItemTool)Items.wooden_pickaxe;
 		float bestRating=0;
 
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemPickaxe || item.item instanceof ItemMillenairePickaxe)) {
 					ItemTool tool=(ItemTool)item.item;
-					if (tool.getStrVsBlock(item.staticStack, Block.stone)>bestRating) {
+					if (tool.func_150893_a(item.staticStack, Blocks.stone)>bestRating) {
 						bestTool=tool;
-						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+						bestRating=tool.func_150893_a(item.staticStack, Blocks.stone);
 					}
 				}
 			}
@@ -1582,9 +1615,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemPickaxe || item.item instanceof ItemMillenairePickaxe)) {
 					ItemTool tool=(ItemTool)item.item;
-					if (tool.getStrVsBlock(item.staticStack, Block.stone)>bestRating) {
+					if (tool.func_150893_a(item.staticStack, Blocks.stone)>bestRating) {
 						bestTool=item.staticStackArray;
-						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+						bestRating=tool.func_150893_a(item.staticStack, Blocks.stone);
 					}
 				}
 			}
@@ -1594,16 +1627,16 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public ItemTool getBestShovel() {
-		ItemTool bestTool=(ItemTool)Item.shovelWood;
+		ItemTool bestTool=(ItemTool)Items.wooden_shovel;
 		float bestRating=0;
 
 		for (InvItem item : inventory.keySet()) {
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemSpade || item.item instanceof ItemMillenaireShovel)) {
 					ItemTool tool=(ItemTool)item.item;
-					if (tool.getStrVsBlock(item.staticStack, Block.dirt)>bestRating) {
+					if (tool.func_150893_a(item.staticStack, Blocks.dirt)>bestRating) {
 						bestTool=tool;
-						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+						bestRating=tool.func_150893_a(item.staticStack, Blocks.stone);
 					}
 				}
 			}
@@ -1620,9 +1653,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if (inventory.get(item)>0) {
 				if (item.staticStack!=null && (item.item instanceof ItemSpade || item.item instanceof ItemMillenaireShovel)) {
 					ItemTool tool=(ItemTool)item.item;
-					if (tool.getStrVsBlock(item.staticStack, Block.dirt)>bestRating) {
+					if (tool.func_150893_a(item.staticStack, Blocks.dirt)>bestRating) {
 						bestTool=item.staticStackArray;
-						bestRating=tool.getStrVsBlock(item.staticStack, Block.stone);
+						bestRating=tool.func_150893_a(item.staticStack, Blocks.stone);
 					}
 				}
 			}
@@ -1631,7 +1664,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		return bestTool;
 	}
 
-	public int getBlock(Point p)
+	public Block getBlock(Point p)
 	{
 		return MillCommonUtilities.getBlock(worldObj, p);
 	}
@@ -1653,7 +1686,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		final Point rp=new Point(i,j,k);
 		final double dist=rp.distanceTo(housePoint);
-		if(worldObj.getBlockId(i, j - 1, k) == Block.tilledField.blockID)
+		if(worldObj.getBlock(i, j - 1, k) == Blocks.farmland)
 			return -50;
 		else if (dist > 10)
 			return -(float)dist;
@@ -1675,12 +1708,12 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		return bp;
 	}
 
-	public Point getClosestBlock(int[] blockIds, Point pos,
+	public Point getClosestBlock(Block[] blockIds, Point pos,
 			int rx, int ry, int rz) {
 		return MillCommonUtilities.getClosestBlock(worldObj, blockIds, pos, rx, ry, rz);
 	}
 
-	public Point getClosestBlockMeta(int[] blockIds,int meta, Point pos,
+	public Point getClosestBlockMeta(Block[] blockIds,int meta, Point pos,
 			int rx, int ry, int rz) {
 		return MillCommonUtilities.getClosestBlockMeta(worldObj, blockIds, meta, pos, rx, ry, rz);
 	}
@@ -1867,7 +1900,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		int cost=vtype.hireCost;
 
-		if (getTownHall().controlledBy(player.username)) {
+		if (getTownHall().controlledBy(player.getDisplayName())) {
 			cost=cost/2;
 		}
 
@@ -1898,8 +1931,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		return vtype.maleChild;
 	}
 
-
-	public int getMaxHealth() {
+	public float computeMaxHealth() {
 
 		if (vtype==null)//happens when called by Minecraft before the villager is fully created
 			return 40;
@@ -2075,28 +2107,28 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		if (isUsingBow) {
 			for (final Item weapon : weaponsBow) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 		}
 
 		if (isUsingHandToHand || !vtype.isArcher) {
 			for (final Item weapon : weaponsHandToHand) {
-				if (countInv(weapon.itemID)>0)
+				if (countInv(weapon)>0)
 					return new ItemStack(weapon,1);
 			}
 
 			if ((vtype!=null) && (vtype.startingWeapon!=null))
-				return new ItemStack(vtype.startingWeapon.id(), 1, vtype.startingWeapon.meta);
+				return new ItemStack(vtype.startingWeapon.getItem(), 1, vtype.startingWeapon.meta);
 		}
 
 		for (final Item weapon : weapons) {
-			if (countInv(weapon.itemID)>0)
+			if (countInv(weapon)>0)
 				return new ItemStack(weapon,1);
 		}
 
 		if ((vtype!=null) && (vtype.startingWeapon!=null))
-			return new ItemStack(vtype.startingWeapon.id(), 1, vtype.startingWeapon.meta);
+			return new ItemStack(vtype.startingWeapon.getItem(), 1, vtype.startingWeapon.meta);
 
 		return null;
 	}
@@ -2107,14 +2139,14 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		int nb=0;
 
-		nb=getHouse().takeGoods(Item.egg.itemID, 1);
+		nb=getHouse().takeGoods(Items.egg, 1);
 		if (nb==1) {
 			growth+=1+MillCommonUtilities.randomInt(5);
 		}
 
 		for (int i=0;i<foodGrowth.length;i++) {
 			if ((growth<10) && ((size+growth)<max_child_size)) {
-				nb=getHouse().takeGoods(foodGrowth[i].itemID, 1);
+				nb=getHouse().takeGoods(foodGrowth[i], 1);
 				if (nb==1) {
 					growth+=foodGrowthValues[i]+MillCommonUtilities.randomInt(foodGrowthValues[i]);
 				}
@@ -2140,14 +2172,14 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if ((pathEntity==null) || (pathEntity.getCurrentPathLength()==0)//door must be closed
 					|| ((pathEntity.getPastTargetPathPoint(2)!=null) && doorToClose.sameBlock(pathEntity.getPastTargetPathPoint(2)))
 					) {
-				if (getBlock(doorToClose)==Block.doorWood.blockID) {
+				if (getBlock(doorToClose)==Blocks.wooden_door) {
 					final int meta=getBlockMeta(doorToClose);
 
 					if ((meta & 4) == 4) {
 						toggleDoor(doorToClose.getiX(),doorToClose.getiY(),doorToClose.getiZ());
 					}
 					doorToClose=null;
-				} else if (getBlock(doorToClose)==Block.fenceGate.blockID) {
+				} else if (getBlock(doorToClose)==Blocks.fence_gate) {
 					if (closeFenceGate(doorToClose.getiX(),doorToClose.getiY(),doorToClose.getiZ())) {
 						doorToClose=null;
 					}
@@ -2159,10 +2191,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			if ((pathEntity!=null) && (pathEntity.getCurrentPathLength()>0)) {
 				PathPoint p=null;
 				//check for wood door:
-				if ((pathEntity.getCurrentTargetPathPoint()!=null) && (worldObj.getBlockId(pathEntity.getCurrentTargetPathPoint().xCoord, pathEntity.getCurrentTargetPathPoint().yCoord, pathEntity.getCurrentTargetPathPoint().zCoord)==Block.doorWood.blockID)) {
+				if ((pathEntity.getCurrentTargetPathPoint()!=null) && (worldObj.getBlock(pathEntity.getCurrentTargetPathPoint().xCoord, pathEntity.getCurrentTargetPathPoint().yCoord, pathEntity.getCurrentTargetPathPoint().zCoord)==Blocks.wooden_door)) {
 					p=pathEntity.getCurrentTargetPathPoint();
 				} else if ((pathEntity.getNextTargetPathPoint()!=null) &&
-						(worldObj.getBlockId(pathEntity.getNextTargetPathPoint().xCoord, pathEntity.getNextTargetPathPoint().yCoord, pathEntity.getNextTargetPathPoint().zCoord)==Block.doorWood.blockID)) {
+						(worldObj.getBlock(pathEntity.getNextTargetPathPoint().xCoord, pathEntity.getNextTargetPathPoint().yCoord, pathEntity.getNextTargetPathPoint().zCoord)==Blocks.wooden_door)) {
 					p=pathEntity.getNextTargetPathPoint();
 				}
 
@@ -2173,9 +2205,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 						doorToClose=new Point(p);
 					}
 				} else {//check for fence gate:
-					if ((pathEntity.getNextTargetPathPoint()!=null) && (worldObj.getBlockId(pathEntity.getNextTargetPathPoint().xCoord,pathEntity.getNextTargetPathPoint().yCoord, pathEntity.getNextTargetPathPoint().zCoord)==Block.fenceGate.blockID)) {
+					if ((pathEntity.getNextTargetPathPoint()!=null) && (worldObj.getBlock(pathEntity.getNextTargetPathPoint().xCoord,pathEntity.getNextTargetPathPoint().yCoord, pathEntity.getNextTargetPathPoint().zCoord)==Blocks.fence_gate)) {
 						p=pathEntity.getNextTargetPathPoint();
-					} else if ((pathEntity.getCurrentTargetPathPoint()!=null) && (worldObj.getBlockId(pathEntity.getCurrentTargetPathPoint().xCoord, pathEntity.getCurrentTargetPathPoint().yCoord, pathEntity.getCurrentTargetPathPoint().zCoord)==Block.fenceGate.blockID)) {
+					} else if ((pathEntity.getCurrentTargetPathPoint()!=null) && (worldObj.getBlock(pathEntity.getCurrentTargetPathPoint().xCoord, pathEntity.getCurrentTargetPathPoint().yCoord, pathEntity.getCurrentTargetPathPoint().zCoord)==Blocks.fence_gate)) {
 						p=pathEntity.getCurrentTargetPathPoint();
 					}
 
@@ -2192,7 +2224,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	private boolean hasBow() {
 		for (final Item weapon : weaponsBow) {
-			if (countInv(weapon.itemID)>0)
+			if (countInv(weapon)>0)
 				return true;
 		}
 		return false;
@@ -2221,9 +2253,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		this.familyName=familyName;
 
 		texture = getNewTexture();
-		setEntityHealth(getMaxHealth());
+		setHealth(getMaxHealth());
 		
-		 this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(v.health);
+		 this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(v.health);
 
 		updateClothTexturePath();
 
@@ -2236,7 +2268,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		if (!respawn) {
 			for (final InvItem item : v.startingInv.keySet()) {
-				addToInv(item.id(),item.meta,v.startingInv.get(item));
+				addToInv(item.getItem(),item.meta,v.startingInv.get(item));
 			}
 		}
 
@@ -2249,7 +2281,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		if (worldObj.isRemote || this.isVillagerSleeping())
 			return true;
 
-		final UserProfile profile=mw.getProfile(entityplayer.username);
+		final UserProfile profile=mw.getProfile(entityplayer.getDisplayName());
 
 		entityplayer.addStat(MillAchievements.firstContact, 1);
 
@@ -2291,7 +2323,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			return true;
 		}
 
-		final UserProfile profile=mw.getProfile(entityplayer.username);
+		final UserProfile profile=mw.getProfile(entityplayer.getDisplayName());
 
 		if ((canMeditate() && mw.isGlobalTagSet(MillWorld.PUJAS)) || (canPerformSacrifices() && mw.isGlobalTagSet(MillWorld.MAYANSACRIFICES))) {
 
@@ -2299,7 +2331,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				MLN.debug(this, "canMeditate");
 			}
 
-			if ((getTownHall().getReputation(entityplayer.username)>=Building.MIN_REPUTATION_FOR_TRADE)) {
+			if ((getTownHall().getReputation(entityplayer.getDisplayName())>=Building.MIN_REPUTATION_FOR_TRADE)) {
 				for (final BuildingLocation l : getTownHall().getLocations()) {
 					if ((l.level>=0) && (l.getSellingPos() != null) && (l.getSellingPos().distanceTo(this) < 8)) {
 						final Building b=l.getBuilding(worldObj);
@@ -2323,8 +2355,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 		}
 
-		if (isSeller() && !getTownHall().controlledBy(entityplayer.username)) {
-			if ((getTownHall().getReputation(entityplayer.username)>=Building.MIN_REPUTATION_FOR_TRADE) && getTownHall().chestLocked) {
+		if (isSeller() && !getTownHall().controlledBy(entityplayer.getDisplayName())) {
+			if ((getTownHall().getReputation(entityplayer.getDisplayName())>=Building.MIN_REPUTATION_FOR_TRADE) && getTownHall().chestLocked) {
 				for (final BuildingLocation l : getTownHall().getLocations()) {
 					if ((l.level>=0) && (l.shop != null) && (l.shop.length()>0)) {
 						if (((l.getSellingPos() != null) && (l.getSellingPos().distanceTo(this) < 5)) || (l.sleepingPos.distanceTo(this) < 5)) {
@@ -2350,7 +2382,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 
 		if (vtype.hireCost>0) {
-			if ((hiredBy==null) || hiredBy.equals(entityplayer.username)) {
+			if ((hiredBy==null) || hiredBy.equals(entityplayer.getDisplayName())) {
 				ServerSender.displayHireGUI(entityplayer, this);
 				return true;
 			} else {
@@ -2396,7 +2428,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	@Override
 	protected boolean isMovementBlocked()
 	{
-		return (this.func_110143_aJ() <= 0) || this.isVillagerSleeping();
+		return (this.getHealth() <= 0) || this.isVillagerSleeping();
 	}
 
 	public boolean isPriest() {
@@ -2461,7 +2493,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		for (final InvItem iv : inventory.keySet()) {
 			if (inventory.get(iv)>0) {
-				MillCommonUtilities.spawnItem(worldObj, getPos(), new ItemStack(iv.id(),inventory.get(iv),iv.meta), 0);
+				MillCommonUtilities.spawnItem(worldObj, getPos(), new ItemStack(iv.getItem(),inventory.get(iv),iv.meta), 0);
 			}
 		}
 
@@ -2490,7 +2522,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	private void leaveVillage() {
 		//Foreign merchants leave with their stocks
 		for (final InvItem iv : vtype.foreignMerchantStock.keySet()) {
-			getHouse().takeGoods(iv.id(),iv.meta, vtype.foreignMerchantStock.get(iv));
+			getHouse().takeGoods(iv.getItem(),iv.meta, vtype.foreignMerchantStock.get(iv));
 		}
 
 		getTownHall().deleteVillager(this);
@@ -2657,8 +2689,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 			timer++;
 
-			if ((func_110143_aJ() < getMaxHealth()) & (MillCommonUtilities.randomInt(1600)==0)) {
-				setEntityHealth(func_110143_aJ()+1);
+			if ((getHealth() < getMaxHealth()) & (MillCommonUtilities.randomInt(1600)==0)) {
+				setHealth(getHealth()+1);
 			}
 
 			detrampleCrops();
@@ -2709,14 +2741,14 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 				if (vtype.isDefensive && getPos().distanceTo(getHouse().getDefendingPos()) > ATTACK_RANGE_DEFENSIVE)
 					entityToAttack=null;
-				else if (!entityToAttack.isEntityAlive() || (getPos().distanceTo(entityToAttack) > ATTACK_RANGE) || ((worldObj.difficultySetting == 0) && (entityToAttack instanceof EntityPlayer)))
+				else if (!entityToAttack.isEntityAlive() || (getPos().distanceTo(entityToAttack) > ATTACK_RANGE) || ((worldObj.difficultySetting == EnumDifficulty.PEACEFUL) && (entityToAttack instanceof EntityPlayer)))
 					entityToAttack=null;
 
 				if (entityToAttack != null)
 					shouldLieDown=false;
 
 			} else {
-				if (isHostile() && (worldObj.difficultySetting>0) && (getTownHall().closestPlayer!=null) && (getPos().distanceTo(getTownHall().closestPlayer) <= ATTACK_RANGE)) {
+				if (isHostile() && (worldObj.difficultySetting!=EnumDifficulty.PEACEFUL) && (getTownHall().closestPlayer!=null) && (getPos().distanceTo(getTownHall().closestPlayer) <= ATTACK_RANGE)) {
 					int range=ATTACK_RANGE;
 					
 					if (vtype.isDefensive)
@@ -2751,10 +2783,10 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 						final EntityItem item=getClosestItemVertical(goods,3,30);
 						if (item != null) {
 							item.setDead();
-							if (item.getEntityItem().itemID==Block.sapling.blockID) {
-								addToInv(item.getEntityItem().itemID,item.getEntityItem().getItemDamage() & 3,1);
+							if (item.getEntityItem().getItem()==Item.getItemFromBlock(Blocks.sapling)) {
+								addToInv(item.getEntityItem().getItem(),item.getEntityItem().getItemDamage() & 3,1);
 							} else {
-								addToInv(item.getEntityItem().itemID,item.getEntityItem().getItemDamage(),1);
+								addToInv(item.getEntityItem().getItem(),item.getEntityItem().getItemDamage(),1);
 							}
 						}
 					}
@@ -2990,13 +3022,13 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		return true;
 	}
-	public int putInBuilding(Building building,int id,int nb) {
-		return putInBuilding(building,id,0,nb);
+	public int putInBuilding(Building building,Item item,int nb) {
+		return putInBuilding(building,item,0,nb);
 	}
 
-	public int putInBuilding(Building building,int id,int meta,int nb) {
-		nb=takeFromInv(id,meta,nb);
-		building.storeGoods(id,meta, nb);
+	public int putInBuilding(Building building,Item item,int meta,int nb) {
+		nb=takeFromInv(item,meta,nb);
+		building.storeGoods(item,meta, nb);
 
 		return nb;
 	}
@@ -3070,27 +3102,27 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			villager_id=Math.abs(nbttagcompound.getLong("villager_lid"));
 		}
 
-		if (!isTextureValid(texture.func_110623_a())) {
+		if (!isTextureValid(texture.getResourcePath())) {
 			texture=getNewTexture();
 		}
 
-		final NBTTagList nbttaglist = nbttagcompound.getTagList("inventory");
+		final NBTTagList nbttaglist = nbttagcompound.getTagList("inventory", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.tagAt(i);
+			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
 
 			int itemID=nbttagcompound1.getInteger("item");
 			int itemMeta=nbttagcompound1.getInteger("meta");
 
 			//Hack to fix badly saved inventories with sideway wood blocks
-			if (itemID==Block.wood.blockID) {
+			if (itemID==Block.getIdFromBlock(Blocks.log)) {
 				itemMeta=itemMeta & 3;
 			}
 
-			inventory.put(new InvItem(itemID,itemMeta), nbttagcompound1.getInteger("amount"));
+			inventory.put(new InvItem(Item.getItemById(itemID),itemMeta), nbttagcompound1.getInteger("amount"));
 		}
 
-		previousBlock=nbttagcompound.getInteger("previousBlock");
+		previousBlock=Block.getBlockById(nbttagcompound.getInteger("previousBlock"));
 		previousBlockMeta=nbttagcompound.getInteger("previousBlockMeta");
 		size=nbttagcompound.getInteger("size");
 
@@ -3120,9 +3152,9 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	@Override
-	public void readSpawnData(ByteArrayDataInput data) {
+	public void readSpawnData(ByteBuf ds) {
 
-
+		ByteBufInputStream data = new ByteBufInputStream(ds);
 		try {
 			villager_id=data.readLong();
 			readVillagerStreamdata(data);
@@ -3176,7 +3208,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		dialogueTargetLastName=StreamReadWrite.readNullableString(data);
 		dialogueColour=data.readChar();
 		dialogueChat=data.readBoolean();
-		setEntityHealth(data.readFloat());
+		setHealth(data.readFloat());
 
 		int nbMerchantSells=data.readInt();
 
@@ -3305,8 +3337,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	private void sendVillagerPacket() {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_VILLAGER);
@@ -3315,22 +3346,17 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			MLN.printException(this+": Error in sendVillagerPacket", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
-
-		ServerSender.sendPacketToPlayersInRange(packet,getPos(),30);
+		ServerSender.sendPacketToPlayersInRange(data,getPos(),30);
 	}
 
-	public boolean setBlock(Point p, int blockId)
+	public boolean setBlock(Point p, Block block)
 	{
-		return MillCommonUtilities.setBlock(worldObj,p,blockId,true,true);
+		return MillCommonUtilities.setBlock(worldObj,p,block,true,true);
 	}
 
-	public boolean setBlockAndMetadata(Point p, int bid,int metadata)
+	public boolean setBlockAndMetadata(Point p, Block block,int metadata)
 	{
-		return MillCommonUtilities.setBlockAndMetadata(worldObj,p,bid,metadata,true,true);
+		return MillCommonUtilities.setBlockAndMetadata(worldObj,p,block,metadata,true,true);
 	}
 
 	public boolean setBlockMetadata(Point p, int metadata)
@@ -3340,7 +3366,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	@Override
 	public void setDead() {
-		if (func_110143_aJ()<=0) {
+		if (getHealth()<=0) {
 			killVillager();
 		}
 	}
@@ -3460,7 +3486,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public void setHealth(int h) {
-		setEntityHealth(h);
+		setHealth(h);
 	}
 
 	public void setHousePoint(Point p) {
@@ -3468,13 +3494,13 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		house=null;
 	}
 
-	public void setInv(int id,int nb) {
-		setInv(id,0,nb);
+	public void setInv(Item item,int nb) {
+		setInv(item,0,nb);
 	}
 
 
-	public void setInv(int id,int meta,int nb) {
-		inventory.put(new InvItem(id,meta), nb);
+	public void setInv(Item item,int meta,int nb) {
+		inventory.put(new InvItem(item,meta), nb);
 		if (getTownHall()!=null) {
 			getTownHall().updateVillagerRecord(this);
 		}
@@ -3589,50 +3615,62 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 	}
 
-	public int takeFromBuilding(Building building,int id,int nb) {
-		return takeFromBuilding(building,id,0,nb);
+	public int takeFromBuilding(Building building,InvItem ii,int nb) {
+		return takeFromBuilding(building,ii.getItem(),ii.meta,nb);
+	}
+	
+	public int takeFromBuilding(Building building,Item item,int nb) {
+		return takeFromBuilding(building,item,0,nb);
 	}
 
-	public int takeFromBuilding(Building building,int id,int meta,int nb) {
-		if ((id==Block.wood.blockID) && (meta==-1)) {
+	public int takeFromBuilding(Building building,Item item,int meta,int nb) {
+		if (item==Item.getItemFromBlock(Blocks.log) && (meta==-1)) {
 			int nb2,total=0;
-			nb2=building.takeGoods(id,0, nb);
-			addToInv(id,0,nb2);
+			nb2=building.takeGoods(item,0, nb);
+			addToInv(item,0,nb2);
 			total+=nb2;
-			nb2=building.takeGoods(id,0, nb-total);
-			addToInv(id,0,nb2);
+			nb2=building.takeGoods(item,0, nb-total);
+			addToInv(item,0,nb2);
 			total+=nb2;
-			nb2=building.takeGoods(id,0, nb-total);
-			addToInv(id,0,nb2);
+			nb2=building.takeGoods(item,0, nb-total);
+			addToInv(item,0,nb2);
 			total+=nb2;
 			return total;
 		}
-		nb=building.takeGoods(id,meta, nb);
-		addToInv(id,meta,nb);
+		nb=building.takeGoods(item,meta, nb);
+		addToInv(item,meta,nb);
 		return nb;
 	}
 
-	public int takeFromInv(int id,int nb) {
-		return takeFromInv(id,0,nb);
+	public int takeFromInv(Item item,int nb) {
+		return takeFromInv(item,0,nb);
+	}
+	
+	public int takeFromInv(Block block,int nb) {
+		return takeFromInv(Item.getItemFromBlock(block),0,nb);
+	}
+	
+	public int takeFromInv(Block block, int meta,int nb) {
+		return takeFromInv(Item.getItemFromBlock(block),meta,nb);
 	}
 
-	public int takeFromInv(int id,int meta,int nb) {
+	public int takeFromInv(Item item,int meta,int nb) {
 
-		if ((id==Block.wood.blockID) && (meta==-1)) {
+		if (item==Item.getItemFromBlock(Blocks.log) && (meta==-1)) {
 			int total=0,nb2;
-			InvItem key=new InvItem(id,0);
+			InvItem key=new InvItem(item,0);
 			if (inventory.containsKey(key)) {
 				nb2=Math.min(nb, inventory.get(key));
 				inventory.put(key,inventory.get(key)-nb2);
 				total+=nb2;
 			}
-			key=new InvItem(id,1);
+			key=new InvItem(item,1);
 			if (inventory.containsKey(key)) {
 				nb2=Math.min(nb-total, inventory.get(key));
 				inventory.put(key,inventory.get(key)-nb2);
 				total+=nb2;
 			}
-			key=new InvItem(id,2);
+			key=new InvItem(item,2);
 			if (inventory.containsKey(key)) {
 				nb2=Math.min(nb-total, inventory.get(key));
 				inventory.put(key,inventory.get(key)-nb2);
@@ -3643,7 +3681,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 			return total;
 		} else {
-			final InvItem key=new InvItem(id,meta);
+			final InvItem key=new InvItem(item,meta);
 			if (inventory.containsKey(key)) {
 				nb=Math.min(nb, inventory.get(key));
 				inventory.put(key,inventory.get(key)-nb);
@@ -3662,7 +3700,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public int takeFromInv(InvItem item,int nb) {
-		return takeFromInv(item.id(),item.meta,nb);
+		return takeFromInv(item.getItem(),item.meta,nb);
 	}
 
 	private void targetDefender() {
@@ -3775,8 +3813,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			boolean flag1;
 			for(flag1 = false; !flag1 && (j > 0);)
 			{
-				final int i1 = worldObj.getBlockId(i, j - 1, k);
-				if((i1 == 0) || !Block.blocksList[i1].blockMaterial.isSolid())
+				final Block block = worldObj.getBlock(i, j - 1, k);
+				if((block == Blocks.air) || !block.isBlockNormalCube())
 				{
 					posY--;
 					j--;
@@ -3874,7 +3912,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		//best cloth to wear has changed
 		if (bestClothName!=null) {
-			if (!bestClothName.equals(clothName) || !vtype.isClothValid(clothName, clothTexture.func_110623_a())) {
+			if (!bestClothName.equals(clothName) || !vtype.isClothValid(clothName, clothTexture.getResourcePath())) {
 				clothName=bestClothName;
 				clothTexture=new ResourceLocation(Mill.modId,vtype.getRandomClothTexture(bestClothName));
 			}
@@ -3887,8 +3925,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	private void updateHired() {
 
 		try {
-			if ((func_110143_aJ() < getMaxHealth()) & (MillCommonUtilities.randomInt(1600)==0)) {
-				setEntityHealth(func_110143_aJ()+1);
+			if ((getHealth() < getMaxHealth()) & (MillCommonUtilities.randomInt(1600)==0)) {
+				setHealth(getHealth()+1);
 			}
 
 			final EntityPlayer entityplayer = worldObj.getPlayerEntityByName(hiredBy);
@@ -3913,11 +3951,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 
 			if (entityToAttack != null) {
-				if ((getPos().distanceTo(entityToAttack) > ATTACK_RANGE) || (worldObj.difficultySetting == 0)) {
+				if ((getPos().distanceTo(entityToAttack) > ATTACK_RANGE) || (worldObj.difficultySetting == EnumDifficulty.PEACEFUL)) {
 					entityToAttack=null;
 				}
 			} else {
-				if (isHostile() && (worldObj.difficultySetting>0) && (getTownHall().closestPlayer!=null) && (getPos().distanceTo(getTownHall().closestPlayer) <= ATTACK_RANGE)) {
+				if (isHostile() && (worldObj.difficultySetting!=EnumDifficulty.PEACEFUL) && (getTownHall().closestPlayer!=null) && (getPos().distanceTo(getTownHall().closestPlayer) <= ATTACK_RANGE)) {
 					entityToAttack=worldObj.getClosestPlayer(posX, posY, posZ, 100);
 
 				}
@@ -4066,7 +4104,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 			nbttagcompound.setString("culture", getCulture().key);
 
-			nbttagcompound.setString("texture", texture.func_110623_a());
+			nbttagcompound.setString("texture", texture.getResourcePath());
 			if (housePoint != null) {
 				housePoint.write(nbttagcompound, "housePos");
 			}
@@ -4112,7 +4150,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			for (final InvItem key : inventory.keySet()) {
 
 				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("item", key.id());
+				nbttagcompound1.setInteger("item", Item.getIdFromItem(key.getItem()));
 				nbttagcompound1.setInteger("meta", key.meta);
 				nbttagcompound1.setInteger("amount", inventory.get(key));
 				nbttaglist.appendTag(nbttagcompound1);
@@ -4120,7 +4158,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 			nbttagcompound.setTag("inventory", nbttaglist);
 
-			nbttagcompound.setInteger("previousBlock", previousBlock);
+			nbttagcompound.setInteger("previousBlock", Block.getIdFromBlock(previousBlock));
 			nbttagcompound.setInteger("previousBlockMeta", previousBlockMeta);
 			nbttagcompound.setInteger("size", size);
 			nbttagcompound.setBoolean("hasPrayedToday", hasPrayedToday);
@@ -4136,7 +4174,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 			if (clothName!=null) {
 				nbttagcompound.setString("clothName", clothName);
-				nbttagcompound.setString("clothTexture", clothTexture.func_110624_b());
+				nbttagcompound.setString("clothTexture", clothTexture.getResourcePath());
 			}
 		} catch (final Exception e) {
 			MLN.printException("Exception when attempting to save villager "+this, e);
@@ -4144,8 +4182,8 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	@Override
-	public void writeSpawnData(ByteArrayDataOutput data) {
-
+	public void writeSpawnData(ByteBuf ds) {
+		final ByteBufOutputStream data = new ByteBufOutputStream(ds);
 		try {
 			writeVillagerStreamData(data,true);
 		} catch (final IOException e) {
@@ -4153,7 +4191,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 	}
 
-	private void writeVillagerStreamData(DataOutput data,boolean isSpawn) throws IOException {
+	private void writeVillagerStreamData(ByteBufOutputStream data,boolean isSpawn) throws IOException {
 
 		if (vtype==null) {
 			MLN.error(this, "Cannot write stream data due to null vtype.");
@@ -4192,7 +4230,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		StreamReadWrite.writeNullableString(dialogueTargetLastName,data);
 		data.writeChar(dialogueColour);
 		data.writeBoolean(dialogueChat);
-		data.writeFloat(func_110143_aJ());
+		data.writeFloat(getHealth());
 
 		if (isSpawn) {
 			calculateMerchantGoods();
@@ -4208,7 +4246,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 
 		if (getGoalDestEntity()!=null) {
-			data.writeInt(getGoalDestEntity().entityId);
+			data.writeInt(getGoalDestEntity().getEntityId());
 		} else {
 			data.writeInt(-1);
 		}
@@ -4220,9 +4258,13 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	@Override
-    protected void func_110147_ax()
+    protected void applyEntityAttributes()
     {
-        super.func_110147_ax();
-        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(MOVE_SPEED);
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(MOVE_SPEED);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(computeMaxHealth());
     }
+
 }
+
+

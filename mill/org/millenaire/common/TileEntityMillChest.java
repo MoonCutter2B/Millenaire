@@ -1,6 +1,7 @@
 package org.millenaire.common;
 
-import java.io.DataInputStream;
+import io.netty.buffer.ByteBufInputStream;
+
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +19,7 @@ import org.millenaire.common.network.StreamReadWrite;
 
 public class TileEntityMillChest extends TileEntityChest implements ISidedInventory {
 
-	public static void readUpdatePacket(DataInputStream ds,World world) {
+	public static void readUpdatePacket(ByteBufInputStream ds,World world) {
 
 		Point pos=null;
 		try {
@@ -54,49 +55,6 @@ public class TileEntityMillChest extends TileEntityChest implements ISidedInvent
 	public boolean loaded=false;
 	public boolean serverDevMode=false;
 
-	@Override
-	public void checkForAdjacentChests()
-	{
-		if (adjacentChestChecked)
-			return;
-		adjacentChestChecked = true;
-		adjacentChestZNeg = null;
-		adjacentChestXPos = null;
-		adjacentChestXNeg = null;
-		adjacentChestZPosition = null;
-		if (worldObj.getBlockId(xCoord - 1, yCoord, zCoord) == Mill.lockedChest.blockID)
-		{
-			adjacentChestXNeg = (TileEntityChest)worldObj.getBlockTileEntity(xCoord - 1, yCoord, zCoord);
-		}
-		if (worldObj.getBlockId(xCoord + 1, yCoord, zCoord) == Mill.lockedChest.blockID)
-		{
-			adjacentChestXPos = (TileEntityChest)worldObj.getBlockTileEntity(xCoord + 1, yCoord, zCoord);
-		}
-		if (worldObj.getBlockId(xCoord, yCoord, zCoord - 1) == Mill.lockedChest.blockID)
-		{
-			adjacentChestZNeg = (TileEntityChest)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord - 1);
-		}
-		if (worldObj.getBlockId(xCoord, yCoord, zCoord + 1) == Mill.lockedChest.blockID)
-		{
-			adjacentChestZPosition = (TileEntityChest)worldObj.getBlockTileEntity(xCoord, yCoord, zCoord + 1);
-		}
-		if (adjacentChestZNeg != null)
-		{
-			adjacentChestZNeg.updateContainingBlockInfo();
-		}
-		if (adjacentChestZPosition != null)
-		{
-			adjacentChestZPosition.updateContainingBlockInfo();
-		}
-		if (adjacentChestXPos != null)
-		{
-			adjacentChestXPos.updateContainingBlockInfo();
-		}
-		if (adjacentChestXNeg != null)
-		{
-			adjacentChestXNeg.updateContainingBlockInfo();
-		}
-	}
 
 	public String getInvLargeName() {
 
@@ -122,7 +80,7 @@ public class TileEntityMillChest extends TileEntityChest implements ISidedInvent
 	}
 
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 
 		if (buildingPos==null)
 			return MLN.string("ui.unlockedchest");
@@ -175,7 +133,7 @@ public class TileEntityMillChest extends TileEntityChest implements ISidedInvent
 		if (building==null)
 			return true;
 
-		if (building.lockedForPlayer(player.username))
+		if (building.lockedForPlayer(player.getDisplayName()))
 			return true;
 		return false;
 	}

@@ -1,6 +1,8 @@
 package org.millenaire.common;
 
-import java.io.ByteArrayOutputStream;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -33,16 +35,18 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityDispenser;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -50,6 +54,7 @@ import net.minecraft.world.gen.feature.WorldGenForest;
 import net.minecraft.world.gen.feature.WorldGenTaiga2;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.util.Constants;
 
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager.InvItem;
@@ -121,8 +126,8 @@ public class Building {
 				return;
 			}
 
-			//	pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,Block.cloth.blockID,MillCommonUtilities.randomInt(16),pathWidth));
-			info.pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,pathConstructionGood.id(),pathConstructionGood.meta,pathWidth));
+			//	pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,Blocks.wool.blockID,MillCommonUtilities.randomInt(16),pathWidth));
+			info.pathsReceived.add(MillCommonUtilities.buildPath(Building.this, result,pathConstructionGood.block,pathConstructionGood.meta,pathWidth));
 			info.nbPathsReceived++;
 
 			checkForRebuild();
@@ -407,7 +412,7 @@ public class Building {
 
 	public static final String versionCompatibility = "1.0";
 
-	public static void readBuildingPacket(MillWorld mw,DataInputStream ds) {
+	public static void readBuildingPacket(MillWorld mw,ByteBufInputStream ds) {
 
 		Point pos=null;
 		try {
@@ -557,7 +562,7 @@ public class Building {
 	public Point sellingPlace = null;
 	public Vector<Point> signs = new Vector<Point>();
 	public Vector<Vector<Point>> sources = new Vector<Vector<Point>>();
-	public Vector<Integer> sourceTypes = new Vector<Integer>();
+	public Vector<Block> sourceTypes = new Vector<Block>();
 	public Vector<Vector<Point>> spawns = new Vector<Vector<Point>>();
 	public Vector<String> spawnTypes = new Vector<String>();
 	public Vector<Vector<Point>> mobSpawners = new Vector<Vector<Point>>();
@@ -733,7 +738,7 @@ public class Building {
 				if (g.getBasicSellingPrice(this)>0)
 					shopSellsPlayer.put(g, g.getBasicSellingPrice(this));
 			}
-			shopSells.put(player.username, shopSellsPlayer);
+			shopSells.put(player.getDisplayName(), shopSellsPlayer);
 		}
 
 		final Vector<Goods> buyingGoods=calculateBuyingGoods(player.inventory);
@@ -744,7 +749,7 @@ public class Building {
 				if (g.getBasicBuyingPrice(this)>0)
 					shopBuysPlayer.put(g, g.getBasicBuyingPrice(this));
 			}
-			shopBuys.put(player.username, shopBuysPlayer);
+			shopBuys.put(player.getDisplayName(), shopBuysPlayer);
 		}
 	}
 
@@ -897,7 +902,7 @@ public class Building {
 			if (villagers.get(i).villager_id==villager.villager_id) {
 				if (villagers.get(i) == villager) {//same object
 					villagers.remove(i);
-				} else if (villagers.get(i).entityId == villager.entityId) {
+				} else if (villagers.get(i).getEntityId() == villager.getEntityId()) {
 					if (MLN.LogVillager>=MLN.MAJOR) {
 						MLN.major(villagers.get(i), "Two copies with same entityId!");
 					}
@@ -934,15 +939,15 @@ public class Building {
 		}
 	}
 
-	public void addSourcePoint(int blockId, Point p) {
-		if (!sourceTypes.contains(blockId)) {
+	public void addSourcePoint(Block block, Point p) {
+		if (!sourceTypes.contains(block)) {
 			final Vector<Point> spawnsPoint=new Vector<Point>();
 			spawnsPoint.add(p);
 			sources.add(spawnsPoint);
-			sourceTypes.add(blockId);
+			sourceTypes.add(block);
 		} else {
 			for (int i=0;i<sourceTypes.size();i++) {
-				if (sourceTypes.get(i).equals(blockId)) {
+				if (sourceTypes.get(i).equals(block)) {
 					if (!sources.get(i).contains(p)) {
 						sources.get(i).add(p);
 					}
@@ -985,7 +990,7 @@ public class Building {
 	}
 
 	public void adjustLanguage(EntityPlayer player,int l) {
-		mw.getProfile(player.username).adjustLanguage(getTownHall().culture.key,l);
+		mw.getProfile(player.getDisplayName()).adjustLanguage(getTownHall().culture.key,l);
 	}
 
 	public void adjustRelation(Point villagePos,int change,boolean reset) {
@@ -1020,7 +1025,7 @@ public class Building {
 	}
 
 	public void adjustReputation(EntityPlayer player,int l) {
-		mw.getProfile(player.username).adjustReputation(getTownHall(), l);
+		mw.getProfile(player.getDisplayName()).adjustReputation(getTownHall(), l);
 	}
 
 	public boolean areBlocksLeft() {
@@ -1058,7 +1063,7 @@ public class Building {
 
 					for (final InvItem good : content.keySet()) {
 						if ((content.get(good) > 0)
-								&& (inn.getTownHall().nbGoodNeeded(good.id(),
+								&& (inn.getTownHall().nbGoodNeeded(good.getItem(),
 										good.meta) > 0)) {
 							moveNeeded = true;
 							break;
@@ -1273,10 +1278,10 @@ public class Building {
 					for (int dy=-2;dy<3;dy++) {
 						final int y=dy+basey;
 
-						final int bid=worldObj.getBlockId(x, y, z);
+						final Block block=worldObj.getBlock(x, y, z);
 						final int meta=worldObj.getBlockMetadata(x, y, z);
 
-						if ((bid==Mill.path.blockID || bid==Mill.pathSlab.blockID) && meta<8) {
+						if ((block==Mill.path || block==Mill.pathSlab) && meta<8) {
 							final Point p=new Point(x,y,z);
 							if (!newPathPoints.contains(p)) {
 								oldPathPointsToClearNew.add(p);
@@ -1330,7 +1335,7 @@ public class Building {
 	public boolean canAffordBuild(BuildingPlan plan) {
 
 		for (final InvItem key : plan.resCost.keySet()) {
-			if (plan.resCost.get(key) > countGoods(key.id(), key.meta))
+			if (plan.resCost.get(key) > countGoods(key.getItem(), key.meta))
 				return false;
 		}
 		return true;
@@ -1343,10 +1348,10 @@ public class Building {
 		for (final InvItem key : plan.resCost.keySet()) {
 			if ((goalPlan != null) && goalPlan.resCost.containsKey(key)) {
 				if ((plan.resCost.get(key) + goalPlan.resCost.get(key)) > countGoods(
-						key.id(), key.meta))
+						key.getItem(), key.meta))
 					return false;
 			} else {
-				if (plan.resCost.get(key) > countGoods(key.id(), key.meta))
+				if (plan.resCost.get(key) > countGoods(key.getItem(), key.meta))
 					return false;
 			}
 		}
@@ -1534,7 +1539,7 @@ public class Building {
 	}
 
 	private void checkExploreTag(EntityPlayer player) {
-		if ((player != null) && !mw.getProfile(player.username).isTagSet(location.getPlan().exploreTag)) {
+		if ((player != null) && !mw.getProfile(player.getDisplayName()).isTagSet(location.getPlan().exploreTag)) {
 
 			if ((this.getSleepingPos().distanceToSquared(player) < 16)) {
 
@@ -1546,9 +1551,9 @@ public class Building {
 
 				while (valid
 						&& ((x != (int) player.posX) || (z != (int) player.posZ))) {
-					final int bid = worldObj.getBlockId(x, getSleepingPos().getiY() + 1, z);
+					final Block block = worldObj.getBlock(x, getSleepingPos().getiY() + 1, z);
 
-					if ((bid > 0) && Block.blocksList[bid].isOpaqueCube()) {
+					if (block!=Blocks.air && block.isBlockNormalCube()) {
 						valid = false;
 					} else {
 						if (x > (int) player.posX) {
@@ -1566,7 +1571,7 @@ public class Building {
 				}
 
 				if (valid) {
-					mw.getProfile(player.username)
+					mw.getProfile(player.getDisplayName())
 					.setTag(location.getPlan().exploreTag);
 
 					ServerSender.sendTranslatedSentence(player,MLN.DARKGREEN, "other.exploredbuilding",location.getPlan().nativeName);
@@ -1580,10 +1585,10 @@ public class Building {
 		if (!worldObj.isDaytime() || underAttack)
 			return;
 
-		if ((closestPlayer == null) || controlledBy(closestPlayer.username))
+		if ((closestPlayer == null) || controlledBy(closestPlayer.getDisplayName()))
 			return;
 
-		if ((closestPlayer != null) && (seller == null) && (getReputation(closestPlayer.username) >= MIN_REPUTATION_FOR_TRADE) && chestLocked) {
+		if ((closestPlayer != null) && (seller == null) && (getReputation(closestPlayer.getDisplayName()) >= MIN_REPUTATION_FOR_TRADE) && chestLocked) {
 			sellingPlace = null;
 
 			for (final BuildingLocation l : getLocations()) {
@@ -1682,16 +1687,16 @@ public class Building {
 	public void clearOldPaths() {
 		if (oldPathPointsToClear!=null) {
 			for (final Point p : oldPathPointsToClear) {
-				final int bid=p.getId(worldObj);
-				final int bidBelow=p.getBelow().getId(worldObj);
+				final Block block=p.getBlock(worldObj);
+				final Block blockBelow=p.getBelow().getBlock(worldObj);
 
-				if (bid==Mill.pathSlab.blockID) {
-					p.setBlock(worldObj, 0, 0, true, false);
-				} else if (bid==Mill.path.blockID) {
-					if (MillCommonUtilities.getBlockIdValidGround(bidBelow,true)>0) {
-						p.setBlock(worldObj, MillCommonUtilities.getBlockIdValidGround(bidBelow,true), 0, true, false);
+				if (block==Mill.pathSlab) {
+					p.setBlock(worldObj, block, 0, true, false);
+				} else if (block==Mill.path) {
+					if (MillCommonUtilities.getBlockIdValidGround(blockBelow,true)!=null) {
+						p.setBlock(worldObj, MillCommonUtilities.getBlockIdValidGround(blockBelow,true), 0, true, false);
 					} else {
-						p.setBlock(worldObj, Block.dirt.blockID, 0, true, false);
+						p.setBlock(worldObj, Blocks.dirt, 0, true, false);
 					}
 				}
 			}
@@ -1765,11 +1770,19 @@ public class Building {
 		return nb;
 	}
 
-	public int countGoods(int item) {
+	public int countGoods(Item item) {
 		return countGoods(item, 0);
 	}
+	
+	public int countGoods(Block block) {
+		return countGoods(Item.getItemFromBlock(block), 0);
+	}
+	
+	public int countGoods(Block block, int meta) {
+		return countGoods(Item.getItemFromBlock(block), meta);
+	}
 
-	public int countGoods(int item, int meta) {
+	public int countGoods(Item item, int meta) {
 		int count = 0;
 
 		for (final Point p : chests) {
@@ -1786,7 +1799,7 @@ public class Building {
 	}
 
 	public int countGoods(InvItem iv) {
-		return countGoods(iv.id(), iv.meta);
+		return countGoods(iv.getItem(), iv.meta);
 	}
 
 	public MillVillager createChild(MillVillager mother, Building townHall,
@@ -2010,68 +2023,68 @@ public class Building {
 			}
 		}
 
-		ServerSender.sendChat(player,MLN.LIGHTGREEN,"It has " + villagers.size() + " villagers registered. ("
+		ServerSender.sendChat(player,EnumChatFormatting.GREEN,"It has " + villagers.size() + " villagers registered. ("
 				+ nbAdults + " adults, " + nbGrownChild + " grown children)");
-		ServerSender.sendChat(player,MLN.LIGHTGREEN,"Pos: " + getPos() + " sell pos:" + getSellingPos());
+		ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Pos: " + getPos() + " sell pos:" + getSellingPos());
 
 		if (isTownhall) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"It has " + buildings.size() + " houses registered.");
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Connections build: " + (pathing != null));
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Village name: " + getVillageQualifiedName());
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Current building plan: " + getCurrentBuildingPlan() + " at "
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"It has " + buildings.size() + " houses registered.");
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Connections build: " + (pathing != null));
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Village name: " + getVillageQualifiedName());
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Current building plan: " + getCurrentBuildingPlan() + " at "
 					+ buildingLocationIP);
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Current builder: " + builder);
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Current seller: " + seller);
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Rep: " + getReputation(player.username) + " bought: " + buildingsBought);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Current builder: " + builder);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Current seller: " + seller);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Rep: " + getReputation(player.getDisplayName()) + " bought: " + buildingsBought);
 		}
 
 		if (isInn) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Merchant: " + merchantRecord);
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Merchant nights: " + nbNightsMerchant);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Merchant: " + merchantRecord);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Merchant nights: " + nbNightsMerchant);
 		}
 
 		if (location.tags == null) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"UNKNOWN TAGS");
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"UNKNOWN TAGS");
 		} else {
 			if (location.tags.size() > 0) {
 				String s = "Tags: ";
 				for (final String tag : location.tags) {
 					s += tag + " ";
 				}
-				ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
+				ServerSender.sendChat(player,EnumChatFormatting.GREEN,s);
 			}
 		}
 		if (chests.size() > 1) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Chests registered: " + chests.size());
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Chests registered: " + chests.size());
 		}
 		if (furnaces.size() > 1) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Furnaces registered: " + furnaces.size());
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Furnaces registered: " + furnaces.size());
 		}
 
 
 		for (int i=0;i<soilTypes.size();i++) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Fields registered: " + soilTypes.get(i)+": "+soils.get(i).size());
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Fields registered: " + soilTypes.get(i)+": "+soils.get(i).size());
 		}
 
 		if (sugarcanesoils.size() > 0) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Sugar cane soils registered: " + sugarcanesoils.size());
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Sugar cane soils registered: " + sugarcanesoils.size());
 		}
 
 		if (fishingspots.size() > 0) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Fishing spots registered: " + fishingspots.size());
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Fishing spots registered: " + fishingspots.size());
 		}
 		if (stalls.size() > 0) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Stalls registered: " + stalls.size());
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Stalls registered: " + stalls.size());
 		}
 		if (woodspawn.size() > 0) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,"Wood spawn registered: " + woodspawn.size());
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,"Wood spawn registered: " + woodspawn.size());
 		}
 		if (spawns.size() > 0) {
 			String s = "Pens: ";
 			for (int i = 0; i < spawns.size(); i++) {
 				s += spawnTypes.get(i) + ": " + spawns.get(i).size() + " ";
 			}
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,s);
 		}
 
 		if (mobSpawners.size() > 0) {
@@ -2080,23 +2093,23 @@ public class Building {
 				s += mobSpawnerTypes.get(i) + ": " + mobSpawners.get(i).size()
 						+ " ";
 			}
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,s);
 		}
 
 		if (sources.size() > 0) {
 			String s = "Sources: ";
 			for (int i = 0; i < sources.size(); i++) {
-				s += Item.itemsList[sourceTypes.get(i)].getUnlocalizedName() + ": "
+				s += sourceTypes.get(i).getUnlocalizedName() + ": "
 						+ sources.get(i).size() + " ";
 			}
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,s);
 		}
 
 		for (final MillVillager villager : villagers) {
 			if (villager == null) {
-				ServerSender.sendChat(player,MLN.LIGHTGREEN,"NULL villager!");
+				ServerSender.sendChat(player,EnumChatFormatting.GREEN,"NULL villager!");
 			} else {
-				ServerSender.sendChat(player,MLN.LIGHTGREEN,villager.getClass().getSimpleName() + ": "
+				ServerSender.sendChat(player,EnumChatFormatting.GREEN,villager.getClass().getSimpleName() + ": "
 						+ villager.getPos()
 						+ (villager.isEntityAlive() ? "" : " DEAD") + " "
 						+ villager.getGoalLabel(villager.goalKey));
@@ -2120,7 +2133,7 @@ public class Building {
 		}
 
 		if (!s.equals("")) {
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,s);
 		}
 
 		if ((pathsToBuild!=null) || (oldPathPointsToClear!=null)) {
@@ -2137,7 +2150,7 @@ public class Building {
 				s=s+" oldPathPointsToClear:null";
 			}
 
-			ServerSender.sendChat(player,MLN.LIGHTGREEN,s);
+			ServerSender.sendChat(player,EnumChatFormatting.GREEN,s);
 		}
 
 		validateVillagerList();
@@ -2209,7 +2222,7 @@ public class Building {
 
 			for (final Goods good : culture.goodsVector) {
 				if (nbStolen<=1024) {
-					int nbToTake=nbGoodNeeded(good.item.id(),good.item.meta);
+					int nbToTake=nbGoodNeeded(good.item.getItem(),good.item.meta);
 					nbToTake=Math.min(nbToTake,Math.max(0, 1024-nbStolen));
 
 
@@ -2219,14 +2232,14 @@ public class Building {
 						if (nbToTake>0) {
 
 							if (MLN.LogDiplomacy>=MLN.DEBUG) {
-								MLN.debug(this, "Able to take: "+nbToTake+" "+Mill.proxy.getItemName(good.item.id(), good.item.meta));
+								MLN.debug(this, "Able to take: "+nbToTake+" "+Mill.proxy.getItemName(good.item.getItem(), good.item.meta));
 							}
 
 							targetVillage.takeGoods(good.item, nbToTake);
 							this.storeGoods(good.item, nbToTake);
 							nbStolen+=nbToTake;
 
-							taken+=";"+good.item.id()+"/"+good.item.meta+"/"+nbToTake;
+							taken+=";"+good.item.getItem()+"/"+good.item.meta+"/"+nbToTake;
 						}
 					}
 				}
@@ -2348,7 +2361,7 @@ public class Building {
 
 					final TileEntityMillChest chest=chests.get(chestId).getMillChest(worldObj);
 					if (chest!=null) {
-						MillCommonUtilities.putItemsInChest(chest, sg.item.id(), sg.item.meta, nb);
+						MillCommonUtilities.putItemsInChest(chest, sg.item.getItem(), sg.item.meta, nb);
 					}
 
 				}
@@ -2529,12 +2542,12 @@ public class Building {
 							location.pos.getiX(), location.pos.getiZ());
 
 					for (int i = groundLevel + 1; i < location.pos.getiY(); i++) {
-						MillCommonUtilities.setBlockAndMetadata(worldObj, location.pos, Block.dirt.blockID, 0);
+						MillCommonUtilities.setBlockAndMetadata(worldObj, location.pos, Blocks.dirt, 0);
 					}
 					/**
 					worldObj.setBlockWithNotify(location.pos.getiX(),
 							location.pos.getiY(), location.pos.getiZ(),
-							Block.signPost.blockID);
+							Blocks.standing_sign.blockID);
 					final TileEntitySign sign = location.pos.getSign(worldObj);
 					if (sign != null) {
 						sign.signText =  MillCommonUtilities.limitSignText(new String[] {
@@ -2613,10 +2626,10 @@ public class Building {
 										location.pos.getiX(),
 										location.pos.getiY(),
 										location.pos.getiZ(),
-										Block.signPost.blockID);
+										Blocks.standing_sign.blockID);
 
 								final TileEntitySign sign = (TileEntitySign) worldObj
-								.getBlockTileEntity(
+								.getTileEntity(
 										location.pos.getiX(),
 										location.pos.getiY(),
 										location.pos.getiZ());
@@ -2786,17 +2799,17 @@ public class Building {
 			for (int i = -50; i < 50; i++) {
 				for (int j = -10; j < 20; j++) {
 					for (int k = -50; k < 50; k++) {
-						final int bid = worldObj.getBlockId(i + pos.getiX(), j
+						final Block block = worldObj.getBlock(i + pos.getiX(), j
 								+ pos.getiY(), k + pos.getiZ());
-						if (bid == Block.cactus.blockID) {
+						if (block == Blocks.cactus) {
 							cactus++;
-						} else if (bid == Block.wood.blockID) {
+						} else if (block == Blocks.log) {
 							wood++;
-						} else if (bid == Block.lavaStill.blockID) {
+						} else if (block == Blocks.lava) {
 							lava++;
-						} else if (bid == Block.waterStill.blockID) {
-							if (worldObj.getBlockId(i + pos.getiX(),
-									j + pos.getiY() + 1, k + pos.getiZ()) == 0) {
+						} else if (block == Blocks.water) {
+							if (worldObj.getBlock(i + pos.getiX(),
+									j + pos.getiY() + 1, k + pos.getiZ()) == Blocks.air) {
 								if ((j + pos.getiY()) < 65) {
 									ocean++;
 								} else {
@@ -2895,7 +2908,7 @@ public class Building {
 		if (culture.shopBuysOptional.containsKey(location.shop)) {
 			for (Goods g : culture.shopBuysOptional.get(location.shop)) {
 				//null player inventory means no filtering
-				if (playerInventory==null || MillCommonUtilities.countChestItems(playerInventory, g.item.id(), g.item.meta)>0) {
+				if (playerInventory==null || MillCommonUtilities.countChestItems(playerInventory, g.item.getItem(), g.item.meta)>0) {
 					extraGoods.add(g);
 				}
 			}
@@ -2909,7 +2922,7 @@ public class Building {
 					if (key.meta != -1) {
 						boolean found = false;
 						for (final Goods tg : baseGoods) {
-							if ((tg.item.id() == key.id())
+							if ((tg.item.getItem() == key.getItem())
 									&& (tg.item.meta == key.meta)) {
 								found = true;
 							}
@@ -2977,7 +2990,7 @@ public class Building {
 		return contents;
 	}
 
-	public Point getClosestBlockAround(Point p, int[] blockIds, int hlimit,
+	public Point getClosestBlockAround(Point p, Block[] blocks, int hlimit,
 			int vstart, int vend) {
 
 		if (pathing == null)
@@ -2996,9 +3009,9 @@ public class Building {
 			if (((x > winfo.mapStartX) && (x < (winfo.mapStartX + winfo.length)))
 					&& ((z > winfo.mapStartZ) && (z < (winfo.mapStartZ + winfo.width)))) {
 				for (int i = vend; i >= vstart; i--) {
-					final int bid = worldObj.getBlockId(x, i, z);
-					for (final int id : blockIds) {
-						if (bid == id) {
+					final Block block = worldObj.getBlock(x, i, z);
+					for (final Block tblock : blocks) {
+						if (block == tblock) {
 							final Point np = new Point(x, i, z);
 							if (pathing.isValidPoint(np))
 								return np;
@@ -3152,10 +3165,10 @@ public class Building {
 			} else {
 				final BuildingBlock b=pathsToBuild.get(pathsToBuildIndex).get(pathsToBuildPathIndex);
 
-				final int bid=b.p.getId(worldObj);
+				final Block block=b.p.getBlock(worldObj);
 				final int meta=b.p.getMeta(worldObj);
 
-				if (MillCommonUtilities.canPathBeBuiltHere(bid,meta) && ((bid!=b.bid) || (meta!=b.meta)))
+				if (MillCommonUtilities.canPathBeBuiltHere(block,meta) && ((block!=b.block) || (meta!=b.meta)))
 					return b;
 
 				pathsToBuildPathIndex++;
@@ -3181,13 +3194,13 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(brickspot.size());
 		for (int i = start; i < brickspot.size(); i++) {
 			final Point p = brickspot.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p) == 0)
+			if (MillCommonUtilities.getBlock(worldObj, p) == null)
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = brickspot.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p) == 0)
+			if (MillCommonUtilities.getBlock(worldObj, p) == null)
 				return p;
 		}
 
@@ -3224,14 +3237,14 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(brickspot.size());
 		for (int i = start; i < brickspot.size(); i++) {
 			final Point p = brickspot.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.stone_decoration.blockID)
+			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.stone_decoration)
 					&& (MillCommonUtilities.getBlockMeta(worldObj, p) == 1))
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = brickspot.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.stone_decoration.blockID)
+			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.stone_decoration)
 					&& (MillCommonUtilities.getBlockMeta(worldObj, p) == 1))
 				return p;
 		}
@@ -3321,7 +3334,7 @@ public class Building {
 
 		for (int i = 0; i < brickspot.size(); i++) {
 			final Point p = brickspot.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p) == 0) {
+			if (MillCommonUtilities.getBlock(worldObj, p) == null) {
 				nb++;
 			}
 		}
@@ -3337,7 +3350,7 @@ public class Building {
 
 		for (int i = 0; i < brickspot.size(); i++) {
 			final Point p = brickspot.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.stone_decoration.blockID)
+			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.stone_decoration)
 					&& (MillCommonUtilities.getBlockMeta(worldObj, p) == 1)) {
 				nb++;
 			}
@@ -3353,7 +3366,7 @@ public class Building {
 		int nb = 0;
 		for (int i = 0; i < netherwartsoils.size(); i++) {
 			final Point p = netherwartsoils.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Block.netherStalk.blockID)
+			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Blocks.nether_wart)
 					&& (MillCommonUtilities.getBlockMeta(worldObj, p.getAbove()) >= 3)) {
 				nb++;
 			}
@@ -3369,7 +3382,7 @@ public class Building {
 		int nb = 0;
 		for (int i = 0; i < netherwartsoils.size(); i++) {
 			final Point p = netherwartsoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == 0) {
+			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null) {
 				nb++;
 			}
 		}
@@ -3395,7 +3408,7 @@ public class Building {
 		int nb = 0;
 		for (int i = 0; i < silkwormblock.size(); i++) {
 			final Point p = silkwormblock.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.wood_decoration.blockID)
+			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.wood_decoration)
 					&& (MillCommonUtilities.getBlockMeta(worldObj, p) == 4)) {
 				nb++;
 			}
@@ -3411,7 +3424,7 @@ public class Building {
 		int nb = 0;
 		for (int i = 0; i < sugarcanesoils.size(); i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getRelative(0, 2, 0)) == Block.reed.blockID) {
+			if (MillCommonUtilities.getBlock(worldObj, p.getRelative(0, 2, 0)) == Blocks.reeds) {
 				nb++;
 			}
 		}
@@ -3426,7 +3439,7 @@ public class Building {
 		int nb = 0;
 		for (int i = 0; i < sugarcanesoils.size(); i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == 0) {
+			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null) {
 				nb++;
 			}
 		}
@@ -3437,7 +3450,7 @@ public class Building {
 	public void getNeededImportGoods(HashMap<Goods, Integer> neededGoods) {
 
 		for (final Goods good : culture.goodsVector) {
-			final int nbneeded = nbGoodNeeded(good.item.id(), good.item.meta);
+			final int nbneeded = nbGoodNeeded(good.item.getItem(), good.item.meta);
 			if (nbneeded > 0) {
 				if (MLN.LogMerchant >= MLN.DEBUG) {
 					MLN.debug(this, "Import needed: " + good.getName() + " - "
@@ -3460,14 +3473,14 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(netherwartsoils.size());
 		for (int i = start; i < netherwartsoils.size(); i++) {
 			final Point p = netherwartsoils.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Block.netherStalk.blockID)
+			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Blocks.nether_wart)
 					&& (MillCommonUtilities.getBlockMeta(worldObj, p.getAbove()) == 3))
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = netherwartsoils.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Block.netherStalk.blockID)
+			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Blocks.nether_wart)
 					&& (MillCommonUtilities.getBlockMeta(worldObj, p.getAbove()) == 3))
 				return p;
 		}
@@ -3482,13 +3495,13 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(netherwartsoils.size());
 		for (int i = start; i < netherwartsoils.size(); i++) {
 			final Point p = netherwartsoils.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == 0) && (MillCommonUtilities.getBlock(worldObj, p) == Block.slowSand.blockID))
+			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null) && (MillCommonUtilities.getBlock(worldObj, p) == Blocks.soul_sand))
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = netherwartsoils.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == 0) && (MillCommonUtilities.getBlock(worldObj, p) == Block.slowSand.blockID))
+			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null) && (MillCommonUtilities.getBlock(worldObj, p) == Blocks.soul_sand))
 				return p;
 		}
 
@@ -3531,8 +3544,8 @@ public class Building {
 
 	public Point getPlantingLocation() {
 		for (final Point p : woodspawn) {
-			final int bid = MillCommonUtilities.getBlock(worldObj, p);
-			if ((bid == 0) || (bid == Block.snow.blockID))
+			final Block block = MillCommonUtilities.getBlock(worldObj, p);
+			if ((block == null) || (block == Blocks.snow))
 				return p;
 		}
 		return null;
@@ -3633,14 +3646,14 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(silkwormblock.size());
 		for (int i = start; i < silkwormblock.size(); i++) {
 			final Point p = silkwormblock.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.wood_decoration.blockID)
+			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.wood_decoration)
 					&& (MillCommonUtilities.getBlockMeta(worldObj, p) == 4))
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = silkwormblock.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.wood_decoration.blockID)
+			if ((MillCommonUtilities.getBlock(worldObj, p) == Mill.wood_decoration)
 					&& (MillCommonUtilities.getBlockMeta(worldObj, p) == 4))
 				return p;
 		}
@@ -3670,13 +3683,13 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(sugarcanesoils.size());
 		for (int i = start; i < sugarcanesoils.size(); i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getRelative(0, 2, 0)) == Block.reed.blockID)
+			if (MillCommonUtilities.getBlock(worldObj, p.getRelative(0, 2, 0)) == Blocks.reeds)
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getRelative(0, 2, 0)) == Block.reed.blockID)
+			if (MillCommonUtilities.getBlock(worldObj, p.getRelative(0, 2, 0)) == Blocks.reeds)
 				return p;
 		}
 
@@ -3690,13 +3703,13 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(sugarcanesoils.size());
 		for (int i = start; i < sugarcanesoils.size(); i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == 0)
+			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null)
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == 0)
+			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null)
 				return p;
 		}
 
@@ -3707,18 +3720,18 @@ public class Building {
 		for (int i=0;i<soilTypes.size();i++) {
 			if (soilTypes.get(i).equals(Mill.CROP_CACAO)) {
 				for (Point p : soils.get(i)) {
-					if (p.getId(worldObj)==0) {
-						if (p.getNorth().getId(worldObj)==Block.wood.blockID && 
-								BlockLog.limitToValidMetadata(p.getNorth().getMeta(worldObj)) == 3)
+					if (p.getBlock(worldObj)==null) {
+						if (p.getNorth().getBlock(worldObj)==Blocks.log && 
+								BlockLog.func_150165_c((int)(p.getNorth().getMeta(worldObj))) == 3)
 							return p;
-						if (p.getEast().getId(worldObj)==Block.wood.blockID && 
-								BlockLog.limitToValidMetadata(p.getEast().getMeta(worldObj)) == 3)
+						if (p.getEast().getBlock(worldObj)==Blocks.log && 
+								BlockLog.func_150165_c((int)(p.getEast().getMeta(worldObj))) == 3)
 							return p;
-						if (p.getSouth().getId(worldObj)==Block.wood.blockID && 
-								BlockLog.limitToValidMetadata(p.getSouth().getMeta(worldObj)) == 3)
+						if (p.getSouth().getBlock(worldObj)==Blocks.log && 
+								BlockLog.func_150165_c((int)(p.getSouth().getMeta(worldObj))) == 3)
 							return p;
-						if (p.getWest().getId(worldObj)==Block.wood.blockID && 
-								BlockLog.limitToValidMetadata(p.getWest().getMeta(worldObj)) == 3)
+						if (p.getWest().getBlock(worldObj)==Blocks.log && 
+								BlockLog.func_150165_c((p.getWest().getMeta(worldObj))) == 3)
 							return p;
 					}
 
@@ -3733,10 +3746,10 @@ public class Building {
 		for (int i=0;i<soilTypes.size();i++) {
 			if (soilTypes.get(i).equals(Mill.CROP_CACAO)) {
 				for (Point p : soils.get(i)) {
-					if (p.getId(worldObj)==Block.cocoaPlant.blockID) {
+					if (p.getBlock(worldObj)==Blocks.cocoa) {
 						int meta=p.getMeta(worldObj);
 
-						if (BlockCocoa.func_72219_c(meta)>=2)
+						if (BlockCocoa.func_149987_c(meta)>=2)
 							return p;
 					}
 
@@ -3865,7 +3878,7 @@ public class Building {
 		for (int i = location.minx - 3; i < (location.maxx + 3); i++) {
 			for (int j = location.pos.getiY() - 1; j < (location.pos.getiY() + 10); j++) {
 				for (int k = location.minz - 3; k < (location.maxz + 3); k++) {
-					if (worldObj.getBlockId(i, j, k) == Block.wood.blockID) {
+					if (worldObj.getBlock(i, j, k) == Blocks.log) {
 						nb++;
 					}
 				}
@@ -3881,7 +3894,7 @@ public class Building {
 		for (int i = location.minx - 3; i < (location.maxx + 3); i++) {
 			for (int j = location.pos.getiY() - 1; j < (location.pos.getiY() + 10); j++) {
 				for (int k = location.minz - 3; k < (location.maxz + 3); k++) {
-					if (worldObj.getBlockId(i, j, k) == Block.wood.blockID)
+					if (worldObj.getBlock(i, j, k) == Blocks.log)
 						return new Point(i, j, k);
 				}
 			}
@@ -3891,12 +3904,12 @@ public class Building {
 
 	public void growTree(World world, int i, int j, int k, Random random) {
 		final int meta = world.getBlockMetadata(i, j, k) & 3;
-		MillCommonUtilities.setBlockAndMetadata(worldObj, i,j,k, 0, 0, true, false);
+		MillCommonUtilities.setBlockAndMetadata(worldObj, i,j,k, null, 0, true, false);
 		WorldGenerator obj = null;
 		if (meta == 1) {
 			obj = new WorldGenTaiga2(true);
 		} else if (meta == 2) {
-			obj = new WorldGenForest(true);
+			obj = new WorldGenForest(true, true);//No idea what that second boolean does...
 		} else if (meta == 3) {
 			obj = new WorldGenTrees(true, 4, 3, 3, false);
 		} else {
@@ -4026,7 +4039,7 @@ public class Building {
 		buildings.add(getPos());
 
 		if (villageType.playerControlled && (controller!=null)) {
-			final UserProfile profile=mw.getProfile(controller.username);
+			final UserProfile profile=mw.getProfile(controller.getDisplayName());
 			controlledBy=profile.key;
 			profile.adjustReputation(this, 32 * 64 * 64);
 		}
@@ -4271,8 +4284,8 @@ public class Building {
 
 		// moving Inn goods to dest
 		for (final InvItem key : contents.keySet()) {
-			final int nb = takeGoods(key.id(), key.meta, 9999999);
-			destInn.storeGoods(key.id(), key.meta, nb);
+			final int nb = takeGoods(key.getItem(), key.meta, 9999999);
+			destInn.storeGoods(key.getItem(), key.meta, nb);
 			destInn.addToImports(key, nb);
 			addToExports(key, nb);
 		}
@@ -4296,8 +4309,24 @@ public class Building {
 
 		nbNightsMerchant = 0;
 	}
+	
+	public int nbGoodAvailable(Block block, boolean forExport, boolean forShop) {
+		return nbGoodAvailable(new InvItem(block),forExport,forShop);
+	}
+	
+	public int nbGoodAvailable(Block block, int meta, boolean forExport, boolean forShop) {
+		return nbGoodAvailable(new InvItem(block,meta),forExport,forShop);
+	}
+	
+	public int nbGoodAvailable(Item item, boolean forExport, boolean forShop) {
+		return nbGoodAvailable(new InvItem(item),forExport,forShop);
+	}
+	
+	public int nbGoodAvailable(Item item, int meta, boolean forExport, boolean forShop) {
+		return nbGoodAvailable(new InvItem(item,meta),forExport,forShop);
+	}
 
-	public int nbGoodAvailable(int goodId, int meta, boolean forExport, boolean forShop) {
+	public int nbGoodAvailable(InvItem ii, boolean forExport, boolean forShop) {
 
 		//if it's being called to take goods to a shop
 		//first check whether this shop also has it deliveredTo
@@ -4305,7 +4334,7 @@ public class Building {
 		if (forShop) {
 			if (culture.shopNeeds.containsKey(location.shop)) {
 				for (final InvItem item : culture.shopNeeds.get(location.shop)) {
-					if (item.id()==goodId && (meta==-1 || (item.meta==meta))) {
+					if (item.matches(ii)) {
 						return 0;
 					}
 				}
@@ -4313,11 +4342,11 @@ public class Building {
 		}
 
 
-		int nb = countGoods(goodId, meta);
+		int nb = countGoods(ii.getItem(), ii.meta);
 
 		if ((builder != null) && (buildingLocationIP != null)
 				&& buildingLocationIP.key.equals(buildingGoal)) {
-			nb += builder.countInv(goodId, meta);
+			nb += builder.countInv(ii);
 		}
 
 		if (nb == 0)
@@ -4325,14 +4354,12 @@ public class Building {
 
 		int reserveAmount = 0;
 
-		final InvItem item = new InvItem(goodId, meta);
-
 		boolean tradedHere=false;
 
 		if ((location.shop!=null) && culture.shopSells.containsKey(location.shop)) {
 
 			for (final Goods g : culture.shopSells.get(location.shop)) {
-				if (g.item.matches(item)) {
+				if (g.item.matches(ii)) {
 					tradedHere=true;
 				}
 			}
@@ -4341,9 +4368,9 @@ public class Building {
 
 
 		if (isTownhall || tradedHere || forExport) {
-			if (meta==-1) {
+			if (ii.meta==-1) {
 				for (int i=0;i<16;i++) {
-					final InvItem nitem = new InvItem(goodId, i);
+					final InvItem nitem = new InvItem(ii.item, i);
 					if (culture.goodsByItem.containsKey(nitem)) {
 						final Goods good = culture.goodsByItem.get(nitem);
 						if (good != null) {
@@ -4356,8 +4383,8 @@ public class Building {
 					}
 				}
 			} else {
-				if (culture.goodsByItem.containsKey(item)) {
-					final Goods good = culture.goodsByItem.get(item);
+				if (culture.goodsByItem.containsKey(ii.item)) {
+					final Goods good = culture.goodsByItem.get(ii.item);
 					if (good != null) {
 						if (forExport) {
 							reserveAmount = good.targetQuantity;
@@ -4373,7 +4400,7 @@ public class Building {
 
 			if ((vr.housePos!=null) && vr.housePos.equals(getPos()) && (vr.getType()!=null)) {
 				for (final InvItem requiredItem : vr.getType().requiredFoodAndGoods.keySet()) {
-					if (item.matches(requiredItem)) {
+					if (ii.matches(requiredItem)) {
 						reserveAmount+=vr.getType().requiredFoodAndGoods.get(requiredItem);
 					}
 				}
@@ -4384,14 +4411,14 @@ public class Building {
 
 
 		if (MLN.LogMerchant>=MLN.DEBUG) {
-			MLN.debug(this, "Reserved amount: "+item.getName()+": "+reserveAmount+"/"+nb);
+			MLN.debug(this, "Reserved amount: "+ii.getName()+": "+reserveAmount+"/"+nb);
 		}
 
 		final BuildingPlan project = this.getCurrentGoalBuildingPlan();
 
 		if (project != null) {
 			for (final InvItem key : project.resCost.keySet()) {
-				if ((key.id() == goodId) && ((key.meta == meta) || (meta==-1) || (key.meta==-1))) {
+				if (key.matches(ii)) {
 
 					if (MLN.LogMerchant>=MLN.DEBUG) {
 						MLN.debug(this, "Needed for project: "+project.resCost.get(key));
@@ -4413,30 +4440,30 @@ public class Building {
 		return 0;
 	}
 
-	public int nbGoodNeeded(int goodId, int meta) {
+	public int nbGoodNeeded(Item item, int meta) {
 
-		int nb = countGoods(goodId, meta);
+		int nb = countGoods(item, meta);
 
 		if ((builder != null) && (buildingLocationIP != null)
 				&& buildingLocationIP.key.equals(buildingGoal)) {
-			nb += builder.countInv(goodId, meta);
+			nb += builder.countInv(item, meta);
 		}
 
 		int targetAmount = 0;
-		final InvItem item = new InvItem(goodId, meta);
+		final InvItem invitem = new InvItem(item, meta);
 
 		if (meta==-1) {
 			for (int i=0;i<16;i++) {
-				if (culture.goodsByItem.containsKey(item)) {
-					final Goods good = culture.goodsByItem.get(new InvItem(goodId, i));
+				if (culture.goodsByItem.containsKey(invitem)) {
+					final Goods good = culture.goodsByItem.get(new InvItem(item, i));
 					if (good != null) {
 						targetAmount += good.targetQuantity;
 					}
 				}
 			}
 		} else {
-			if (culture.goodsByItem.containsKey(item)) {
-				final Goods good = culture.goodsByItem.get(item);
+			if (culture.goodsByItem.containsKey(invitem)) {
+				final Goods good = culture.goodsByItem.get(invitem);
 				if (good != null) {
 					targetAmount = good.targetQuantity;
 				}
@@ -4451,14 +4478,14 @@ public class Building {
 
 		if (project != null) {
 			for (final InvItem key : project.resCost.keySet()) {
-				if ((key.id() == goodId) && ((key.meta == meta) || (meta==-1) || (key.meta==-1))) {
+				if ((key.getItem() == item) && ((key.meta == meta) || (meta==-1) || (key.meta==-1))) {
 					neededForProject+=project.resCost.get(key);
 				}
 			}
 		}
 
 		if (MLN.LogMerchant>=MLN.DEBUG) {
-			MLN.debug(this, "Goods needed: "+item.getName()+": "+targetAmount+"/"+neededForProject+"/"+nb);
+			MLN.debug(this, "Goods needed: "+invitem.getName()+": "+targetAmount+"/"+neededForProject+"/"+nb);
 		}
 
 		return Math.max((neededForProject + targetAmount) - nb, 0);
@@ -4482,7 +4509,7 @@ public class Building {
 
 				for (int i=0;i<size;i++) {
 					final Point p=new Point(ds.readInt(),ds.readShort(),ds.readInt());
-					final BuildingBlock b=new BuildingBlock(p,ds.readShort(),ds.readByte(),ds.readByte());
+					final BuildingBlock b=new BuildingBlock(p,ds.readInt(),ds.readByte(),ds.readByte());
 					bblocks[i] = b;
 				}
 
@@ -4564,10 +4591,10 @@ public class Building {
 				//MLN.warning(this, "No sleeping pos found, using the chest pos instead.");
 			}
 
-			NBTTagList nbttaglist = nbttagcompound.getTagList("chests");
+			NBTTagList nbttaglist = nbttagcompound.getTagList("chests", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					if (!chests.contains(p)) {
@@ -4580,30 +4607,30 @@ public class Building {
 				chests.insertElementAt(pos, 0);
 			}
 
-			nbttaglist = nbttagcompound.getTagList("furnaces");
+			nbttaglist = nbttagcompound.getTagList("furnaces", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					furnaces.add(p);
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("brewingStands");
+			nbttaglist = nbttagcompound.getTagList("brewingStands", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					brewingStands.add(p);
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("signs");
+			nbttaglist = nbttagcompound.getTagList("signs", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					signs.add(p);
@@ -4612,10 +4639,10 @@ public class Building {
 
 
 
-			nbttaglist = nbttagcompound.getTagList("netherwartsoils");
+			nbttaglist = nbttagcompound.getTagList("netherwartsoils", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					netherwartsoils.add(p);
@@ -4624,10 +4651,10 @@ public class Building {
 
 
 
-			nbttaglist = nbttagcompound.getTagList("silkwormblock");
+			nbttaglist = nbttagcompound.getTagList("silkwormblock", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					silkwormblock.add(p);
@@ -4636,70 +4663,70 @@ public class Building {
 
 
 
-			nbttaglist = nbttagcompound.getTagList("sugarcanesoils");
+			nbttaglist = nbttagcompound.getTagList("sugarcanesoils", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					sugarcanesoils.add(p);
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("fishingspots");
+			nbttaglist = nbttagcompound.getTagList("fishingspots", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					fishingspots.add(p);
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("healingspots");
+			nbttaglist = nbttagcompound.getTagList("healingspots", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					healingspots.add(p);
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("stalls");
+			nbttaglist = nbttagcompound.getTagList("stalls", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					stalls.add(p);
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("woodspawn");
+			nbttaglist = nbttagcompound.getTagList("woodspawn", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					woodspawn.add(p);
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("brickspot");
+			nbttaglist = nbttagcompound.getTagList("brickspot", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					brickspot.add(p);
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("spawns");
+			nbttaglist = nbttagcompound.getTagList("spawns", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 
 				String spawnType=nbttagcompound1.getString("type");
 
@@ -4718,10 +4745,10 @@ public class Building {
 				final Vector<Point> v = new Vector<Point>();
 
 				final NBTTagList nbttaglist2 = nbttagcompound1
-						.getTagList("points");
+						.getTagList("points", Constants.NBT.TAG_COMPOUND);
 				for (int j = 0; j < nbttaglist2.tagCount(); j++) {
 					final NBTTagCompound nbttagcompound2 = (NBTTagCompound) nbttaglist2
-							.tagAt(j);
+							.getCompoundTagAt(j);
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
 						v.add(p);
@@ -4739,19 +4766,19 @@ public class Building {
 
 			nbAnimalsRespawned=nbttagcompound.getInteger("nbAnimalsRespawned");
 
-			nbttaglist = nbttagcompound.getTagList("mobspawns");
+			nbttaglist = nbttagcompound.getTagList("mobspawns", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 
 				mobSpawnerTypes.add(nbttagcompound1.getString("type"));
 				final Vector<Point> v = new Vector<Point>();
 
 				final NBTTagList nbttaglist2 = nbttagcompound1
-						.getTagList("points");
+						.getTagList("points", Constants.NBT.TAG_COMPOUND);
 				for (int j = 0; j < nbttaglist2.tagCount(); j++) {
 					final NBTTagCompound nbttagcompound2 = (NBTTagCompound) nbttaglist2
-							.tagAt(j);
+							.getCompoundTagAt(j);
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
 						v.add(p);
@@ -4767,19 +4794,19 @@ public class Building {
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("sources");
+			nbttaglist = nbttagcompound.getTagList("sources", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 
-				sourceTypes.add(nbttagcompound1.getInteger("type"));
+				sourceTypes.add(Block.getBlockById(nbttagcompound1.getInteger("type")));
 				final Vector<Point> v = new Vector<Point>();
 
 				final NBTTagList nbttaglist2 = nbttagcompound1
-						.getTagList("points");
+						.getTagList("points", Constants.NBT.TAG_COMPOUND);
 				for (int j = 0; j < nbttaglist2.tagCount(); j++) {
 					final NBTTagCompound nbttagcompound2 = (NBTTagCompound) nbttaglist2
-							.tagAt(j);
+							.getCompoundTagAt(j);
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
 						v.add(p);
@@ -4792,14 +4819,14 @@ public class Building {
 				if (MLN.LogHybernation >= MLN.MAJOR) {
 					MLN.debug(this, "Loaded " + v.size()
 							+ " sources points for "
-							+ Item.itemsList[sourceTypes.get(i)].getUnlocalizedName());
+							+ sourceTypes.get(i).getUnlocalizedName());
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("villagersrecords");
+			nbttaglist = nbttagcompound.getTagList("villagersrecords", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final VillagerRecord vr = VillagerRecord.read(mw,culture,townHallPos,
 						nbttagcompound1, "vr");
 
@@ -4813,17 +4840,17 @@ public class Building {
 				}
 			}
 
-			nbttaglist = nbttagcompound.getTagList("visitorsList");
+			nbttaglist = nbttagcompound.getTagList("visitorsList", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				visitorsList.add(nbttagcompound1.getString("visitor"));
 			}
 
-			nbttaglist = nbttagcompound.getTagList("subBuildings");
+			nbttaglist = nbttagcompound.getTagList("subBuildings", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
 					subBuildings.add(p);
@@ -4832,18 +4859,18 @@ public class Building {
 
 			readLegacySoilsFromNBT(nbttagcompound);
 
-			nbttaglist = nbttagcompound.getTagList("genericsoils");
+			nbttaglist = nbttagcompound.getTagList("genericsoils", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 
 				final String type=nbttagcompound1.getString("type");
 
 				final NBTTagList nbttaglist2 = nbttagcompound1
-						.getTagList("points");
+						.getTagList("points", Constants.NBT.TAG_COMPOUND);
 				for (int j = 0; j < nbttaglist2.tagCount(); j++) {
 					final NBTTagCompound nbttagcompound2 = (NBTTagCompound) nbttaglist2
-							.tagAt(j);
+							.getCompoundTagAt(j);
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
 						addSoilPoint(type,p);
@@ -4908,18 +4935,18 @@ public class Building {
 	public void readInn(NBTTagCompound nbttagcompound)
 			throws MillenaireException {
 
-		NBTTagList nbttaglist = nbttagcompound.getTagList("importedGoods");
+		NBTTagList nbttaglist = nbttagcompound.getTagList("importedGoods", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound tag = (NBTTagCompound) nbttaglist.tagAt(i);
-			final InvItem good = new InvItem(tag.getInteger("itemid"),
+			final NBTTagCompound tag = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
+			final InvItem good = new InvItem(Item.getItemById(tag.getInteger("itemid")),
 					tag.getInteger("itemmeta"));
 			imported.put(good, tag.getInteger("quantity"));
 		}
 
-		nbttaglist = nbttagcompound.getTagList("exportedGoods");
+		nbttaglist = nbttagcompound.getTagList("exportedGoods", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound tag = (NBTTagCompound) nbttaglist.tagAt(i);
-			final InvItem good = new InvItem(tag.getInteger("itemid"),
+			final NBTTagCompound tag = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
+			final InvItem good = new InvItem(Item.getItemById(tag.getInteger("itemid")),
 					tag.getInteger("itemmeta"));
 			exported.put(good, tag.getInteger("quantity"));
 		}
@@ -4927,50 +4954,50 @@ public class Building {
 
 	//for old pre-4.3 soil handling
 	private void readLegacySoilsFromNBT(NBTTagCompound nbttagcompound) {
-		NBTTagList nbttaglist = nbttagcompound.getTagList("soils");
+		NBTTagList nbttaglist = nbttagcompound.getTagList("soils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				addSoilPoint(Mill.CROP_WHEAT,p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("ricesoils");
+		nbttaglist = nbttagcompound.getTagList("ricesoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				addSoilPoint(Mill.CROP_RICE,p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("turmericsoils");
+		nbttaglist = nbttagcompound.getTagList("turmericsoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				addSoilPoint(Mill.CROP_TURMERIC,p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("maizesoils");
+		nbttaglist = nbttagcompound.getTagList("maizesoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				addSoilPoint(Mill.CROP_MAIZE,p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("vinesoils");
+		nbttaglist = nbttagcompound.getTagList("vinesoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				addSoilPoint(Mill.CROP_VINE,p);
@@ -5000,7 +5027,7 @@ public class Building {
 
 					for (int j=0;j<sizePath;j++) {
 						final Point p=new Point(ds.readInt(),ds.readShort(),ds.readInt());
-						final BuildingBlock b=new BuildingBlock(p,ds.readShort(),ds.readByte(),ds.readByte());
+						final BuildingBlock b=new BuildingBlock(p,ds.readInt(),ds.readByte(),ds.readByte());
 						path.add(b);
 					}
 					pathsToBuild.add(path);
@@ -5062,20 +5089,20 @@ public class Building {
 		controlledBy=nbttagcompound.getString("controlledBy");
 
 		// legacy, to be removed later
-		NBTTagList nbttaglist = nbttagcompound.getTagList("houses");
+		NBTTagList nbttaglist = nbttagcompound.getTagList("houses", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				buildings.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("buildings");
+		nbttaglist = nbttagcompound.getTagList("buildings", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				buildings.add(p);
@@ -5084,10 +5111,10 @@ public class Building {
 
 		initialiseBuildingProjects();
 
-		nbttaglist = nbttagcompound.getTagList("locations");
+		nbttaglist = nbttagcompound.getTagList("locations", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			final BuildingLocation location = BuildingLocation.read(
 					nbttagcompound1, "location", "locations");
 			if (location==null) {
@@ -5180,20 +5207,20 @@ public class Building {
 			bblocksPos=nbttagcompound.getInteger("bblocksPos");
 		}
 
-		nbttaglist = nbttagcompound.getTagList("buildingsBought");
+		nbttaglist = nbttagcompound.getTagList("buildingsBought", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			buildingsBought.add(nbttagcompound1.getString("key"));
 		}
 
 		parentVillage = Point.read(nbttagcompound, "parentVillage");
 
 		if (nbttagcompound.hasKey("relations")) {
-			nbttaglist = nbttagcompound.getTagList("relations");
+			nbttaglist = nbttagcompound.getTagList("relations", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-						.tagAt(i);
+						.getCompoundTagAt(i);
 
 				relations.put(Point.read(nbttagcompound1, "pos"), nbttagcompound1.getInteger("value"));
 			}
@@ -5208,17 +5235,17 @@ public class Building {
 		raidStart=nbttagcompound.getLong("raidStart");
 		underAttack=nbttagcompound.getBoolean("underAttack");
 
-		nbttaglist = nbttagcompound.getTagList("raidsPerformed");
+		nbttaglist = nbttagcompound.getTagList("raidsPerformed", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			raidsPerformed.add(nbttagcompound1.getString("raid"));
 		}
 
-		nbttaglist = nbttagcompound.getTagList("raidsTaken");
+		nbttaglist = nbttagcompound.getTagList("raidsTaken", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+					.getCompoundTagAt(i);
 			raidsSuffered.add(nbttagcompound1.getString("raid"));
 		}
 
@@ -5666,7 +5693,7 @@ public class Building {
 								villager.size = vr.villagerSize;
 								villager.isRaider = vr.raidingVillage;
 
-								if (!villager.isTextureValid(villager.getTexture().func_110623_a())) {
+								if (!villager.isTextureValid(villager.getTexture().getResourcePath())) {
 									villager.setTexture(villager.getNewTexture());
 								}
 
@@ -5807,8 +5834,7 @@ public class Building {
 	}
 
 	public void sendShopPacket(EntityPlayer player) {
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 
@@ -5816,23 +5842,23 @@ public class Building {
 
 			StreamReadWrite.writeNullablePoint(getPos(), data);
 
-			if (shopSells.containsKey(player.username)) {
-				data.writeInt(shopSells.get(player.username).size());
+			if (shopSells.containsKey(player.getDisplayName())) {
+				data.writeInt(shopSells.get(player.getDisplayName()).size());
 
-				for (Goods g : shopSells.get(player.username).keySet()) {
+				for (Goods g : shopSells.get(player.getDisplayName()).keySet()) {
 					StreamReadWrite.writeNullableGoods(g, data);
-					data.writeInt(shopSells.get(player.username).get(g));
+					data.writeInt(shopSells.get(player.getDisplayName()).get(g));
 				}
 			} else {
 				data.writeInt(0);
 			}
 
-			if (shopBuys.containsKey(player.username)) {
-				data.writeInt(shopBuys.get(player.username).size());
+			if (shopBuys.containsKey(player.getDisplayName())) {
+				data.writeInt(shopBuys.get(player.getDisplayName()).size());
 
-				for (Goods g : shopBuys.get(player.username).keySet()) {
+				for (Goods g : shopBuys.get(player.getDisplayName()).keySet()) {
 					StreamReadWrite.writeNullableGoods(g, data);
-					data.writeInt(shopBuys.get(player.username).get(g));
+					data.writeInt(shopBuys.get(player.getDisplayName()).get(g));
 				}
 			} else {
 				data.writeInt(0);
@@ -5841,15 +5867,10 @@ public class Building {
 			MLN.printException(this+": Error in sendShopPacket", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
-
-		ServerSender.sendPacketToPlayer(packet,player.username);
+		ServerSender.createAndSendPacketToPlayer(data, player);
 	}
 
-	public static void readShopPacket(MillWorld mw,DataInputStream ds) {
+	public static void readShopPacket(MillWorld mw,ByteBufInputStream ds) {
 
 		Point pos=null;
 		try {
@@ -5912,8 +5933,7 @@ public class Building {
 			}
 		}
 
-		final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		final DataOutputStream data = new DataOutputStream(bytes);
+		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 
@@ -5971,20 +5991,15 @@ public class Building {
 			MLN.printException(this+": Error in sendUpdatePacket", e);
 		}
 
-		final Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = ServerReceiver.PACKET_CHANNEL;
-		packet.data = bytes.toByteArray();
-		packet.length = packet.data.length;
+		mw.getProfile(player.getDisplayName()).buildingsSent.put(pos, mw.world.getWorldTime());
 
-		mw.getProfile(player.username).buildingsSent.put(pos, mw.world.getWorldTime());
-
-		ServerSender.sendPacketToPlayer(packet,player.username);
+		ServerSender.createAndSendPacketToPlayer(data, player);
 	}
 
 	private void sendInitialBuildingPackets() {
 		for (final EntityPlayer player : MillCommonUtilities.getServerPlayers(mw.world)) {
 			if (pos.distanceToSquared(player)<(16*16)) {
-				final UserProfile profile=MillCommonUtilities.getServerProfile(mw.world,player.username);
+				final UserProfile profile=MillCommonUtilities.getServerProfile(mw.world,player.getDisplayName());
 
 				if (!profile.buildingsSent.containsKey(pos)) {
 					this.sendBuildingPacket(player, false);
@@ -6016,11 +6031,11 @@ public class Building {
 		defendingPos = p;
 	}
 
-	public void setGoods(int item, int newVal) {
+	public void setGoods(Item item, int newVal) {
 		setGoods(item, 0, newVal);
 	}
 
-	public void setGoods(int item, int meta, int newVal) {
+	public void setGoods(Item item, int meta, int newVal) {
 		final int nb = countGoods(item, meta);
 
 		if (nb < newVal) {
@@ -6087,11 +6102,19 @@ public class Building {
 		}
 	}
 
-	public int storeGoods(int item, int toPut) {
+	public int storeGoods(Item item, int toPut) {
 		return storeGoods(item, 0, toPut);
 	}
+	
+	public int storeGoods(Block block,int toPut) {
+		return storeGoods(Item.getItemFromBlock(block),0,toPut);
+	}
 
-	public int storeGoods(int item, int meta, int toPut) {
+	public int storeGoods(Block block, int meta, int toPut) {
+		return storeGoods(Item.getItemFromBlock(block),meta,toPut);
+	}
+	
+	public int storeGoods(Item item, int meta, int toPut) {
 
 		int stored = 0;
 
@@ -6113,7 +6136,7 @@ public class Building {
 	}
 
 	public int storeGoods(InvItem item, int toPut) {
-		return storeGoods(item.id(), item.meta, toPut);
+		return storeGoods(item.getItem(), item.meta, toPut);
 	}
 
 	private void swapMerchants(Building destInn) {
@@ -6124,17 +6147,17 @@ public class Building {
 
 		// moving Inn goods to dest
 		for (final InvItem key : contents.keySet()) {
-			final int nb = takeGoods(key.id(), key.meta, contents.get(key));
-			destInn.storeGoods(key.id(), key.meta, nb);
+			final int nb = takeGoods(key.getItem(), key.meta, contents.get(key));
+			destInn.storeGoods(key.getItem(), key.meta, nb);
 			destInn.addToImports(key, nb);
 			addToExports(key, nb);
 		}
 
 		// moving dest Inn goods here
 		for (final InvItem key : destContents.keySet()) {
-			final int nb = destInn.takeGoods(key.id(), key.meta,
+			final int nb = destInn.takeGoods(key.getItem(), key.meta,
 					destContents.get(key));
-			storeGoods(key.id(), key.meta, nb);
+			storeGoods(key.getItem(), key.meta, nb);
 			destInn.addToExports(key, nb);
 			addToImports(key, nb);
 		}
@@ -6173,11 +6196,19 @@ public class Building {
 		saveReason = "Swapped merchant";
 	}
 
-	public int takeGoods(int item, int toTake) {
+	public int takeGoods(Item item, int toTake) {
 		return takeGoods(item, 0, toTake);
 	}
+	
+	public int takeGoods(Block block, int toTake) {
+		return takeGoods(Item.getItemFromBlock(block), 0, toTake);
+	}
+	
+	public int takeGoods(Block block, int meta, int toTake) {
+		return takeGoods(Item.getItemFromBlock(block), meta, toTake);
+	}
 
-	public int takeGoods(int item, int meta, int toTake) {
+	public int takeGoods(Item item, int meta, int toTake) {
 		int taken = 0;
 
 		int i = 0;
@@ -6195,7 +6226,7 @@ public class Building {
 		i = 0;
 		while ((taken < toTake) && (i < furnaces.size())) {
 			final TileEntityFurnace furnace = (TileEntityFurnace) worldObj
-					.getBlockTileEntity(furnaces.get(i).getiX(), furnaces
+					.getTileEntity(furnaces.get(i).getiX(), furnaces
 							.get(i).getiY(), furnaces.get(i).getiZ());
 
 			if (furnace != null) {
@@ -6210,68 +6241,68 @@ public class Building {
 	}
 
 	public int takeGoods(InvItem item, int toTake) {
-		return takeGoods(item.id(), item.meta, toTake);
+		return takeGoods(item.getItem(), item.meta, toTake);
 	}
 
 	public void testModeGoods() {
 		if (isTownhall && !villageType.lonebuilding) {
-			final int stored=storeGoods(Mill.denier_or.itemID, 64);
+			final int stored=storeGoods(Mill.denier_or, 64);
 
 			if (stored<64) {
 				MLN.error(this, "Should have stored 64 test goods but stored only "+stored);
 			}
 
-			storeGoods(Mill.summoningWand.itemID, 1);
+			storeGoods(Mill.summoningWand, 1);
 			if (culture.key.equals("hindi")) {
-				storeGoods(Mill.indianstatue.itemID, 64);
-				storeGoods(Mill.stone_decoration.blockID, 0, 2048);
-				storeGoods(Mill.stone_decoration.blockID, 1, 2048);
-				storeGoods(Block.sandStone.blockID, 2048);
-				storeGoods(Block.stone.blockID, 2048);
-				storeGoods(Block.cobblestone.blockID, 512);
+				storeGoods(Mill.indianstatue, 64);
+				storeGoods(Mill.stone_decoration, 0, 2048);
+				storeGoods(Mill.stone_decoration, 1, 2048);
+				storeGoods(Blocks.sandstone, 2048);
+				storeGoods(Blocks.stone, 2048);
+				storeGoods(Blocks.cobblestone, 512);
 			} else if (culture.key.equals("mayan")) {
-				storeGoods(Block.sandStone.blockID, 512);
-				storeGoods(Block.stone.blockID, 3500);
-				storeGoods(Block.cobblestone.blockID, 2048);
-				storeGoods(Mill.stone_decoration.blockID, 2, 64);
-				storeGoods(Block.wood.blockID, 1, 512);
-				storeGoods(Block.wood.blockID, 3, 1024);
+				storeGoods(Blocks.sandstone, 512);
+				storeGoods(Blocks.stone, 3500);
+				storeGoods(Blocks.cobblestone, 2048);
+				storeGoods(Mill.stone_decoration, 2, 64);
+				storeGoods(Blocks.log, 1, 512);
+				storeGoods(Blocks.log, 3, 1024);
 			} else if (culture.key.equals("japanese")) {
-				storeGoods(Block.sapling.blockID, 64);
-				storeGoods(Mill.wood_decoration.blockID, 2, 2048);
-				storeGoods(Block.gravel.blockID, 512);
-				storeGoods(Mill.paperWall.blockID, 2048);
-				storeGoods(Block.stone.blockID, 2048);
-				storeGoods(Block.cobblestone.blockID, 1024);
-				storeGoods(Mill.wood_decoration.blockID, 0, 512);
-				storeGoods(Mill.wood_decoration.blockID, 1, 512);
-				storeGoods(Block.wood.blockID,1, 512);
+				storeGoods(Blocks.sapling, 64);
+				storeGoods(Mill.wood_decoration, 2, 2048);
+				storeGoods(Blocks.gravel, 512);
+				storeGoods(Mill.paperWall, 2048);
+				storeGoods(Blocks.stone, 2048);
+				storeGoods(Blocks.cobblestone, 1024);
+				storeGoods(Mill.wood_decoration, 0, 512);
+				storeGoods(Mill.wood_decoration, 1, 512);
+				storeGoods(Blocks.log,1, 512);
 			} else if (culture.key.equals("byzantines")) {
-				storeGoods(Block.glass.blockID, 512);
-				storeGoods(Block.cobblestone.blockID, 1500);
-				storeGoods(Block.stone.blockID, 1500);
-				storeGoods(Block.brick.blockID, 512);
-				storeGoods(Block.sandStone.blockID, 512);
-				storeGoods(Block.cloth.blockID, 11, 64);
-				storeGoods(Block.cloth.blockID, 14, 64);
-				storeGoods(Block.wood.blockID, 2, 128);
-				storeGoods(Block.bookShelf.blockID, 0, 64);
-				storeGoods(Mill.byzantine_tiles.blockID, 128);
-				storeGoods(Mill.byzantine_tile_slab.blockID, 128);
-				storeGoods(Mill.byzantine_stone_tiles.blockID,128);
+				storeGoods(Blocks.glass, 512);
+				storeGoods(Blocks.cobblestone, 1500);
+				storeGoods(Blocks.stone, 1500);
+				storeGoods(Blocks.brick_block, 512);
+				storeGoods(Blocks.sandstone, 512);
+				storeGoods(Blocks.wool, 11, 64);
+				storeGoods(Blocks.wool, 14, 64);
+				storeGoods(Blocks.log, 2, 128);
+				storeGoods(Blocks.bookshelf, 0, 64);
+				storeGoods(Mill.byzantine_tiles, 128);
+				storeGoods(Mill.byzantine_tile_slab, 128);
+				storeGoods(Mill.byzantine_stone_tiles,128);
 
 			} else {
-				storeGoods(Block.glass.blockID, 512);
-				storeGoods(Block.cobblestone.blockID, 2048);
-				storeGoods(Block.stone.blockID, 3500);
-				storeGoods(Mill.wood_decoration.blockID, 0, 2048);
-				storeGoods(Mill.wood_decoration.blockID, 1, 2048);
-				storeGoods(Block.cloth.blockID, 11, 64);
-				storeGoods(Block.cloth.blockID, 14, 64);
+				storeGoods(Blocks.glass, 512);
+				storeGoods(Blocks.cobblestone, 2048);
+				storeGoods(Blocks.stone, 3500);
+				storeGoods(Mill.wood_decoration, 0, 2048);
+				storeGoods(Mill.wood_decoration, 1, 2048);
+				storeGoods(Blocks.wool, 11, 64);
+				storeGoods(Blocks.wool, 14, 64);
 			}
-			storeGoods(Block.wood.blockID, 1024);
-			storeGoods(Item.ingotIron.itemID, 256);
-			storeGoods(Block.cloth.blockID, 64);
+			storeGoods(Blocks.log, 1024);
+			storeGoods(Items.iron_ingot, 256);
+			storeGoods(Blocks.wool, 64);
 		}
 
 	}
@@ -6284,11 +6315,11 @@ public class Building {
 
 				final Point p=new Point(winfo.mapStartX+i,winfo.topGround[i][j]-1,winfo.mapStartZ+j);
 
-				if (MillCommonUtilities.getBlock(worldObj, p)!=Mill.lockedChest.blockID) {
+				if (MillCommonUtilities.getBlock(worldObj, p)!=Mill.lockedChest) {
 					if (!winfo.topAdjusted[i][j]) {
-						MillCommonUtilities.setBlockAndMetadata(worldObj, p, Block.cloth.blockID,pathing.regions[i][j]%16);
+						MillCommonUtilities.setBlockAndMetadata(worldObj, p, Blocks.wool,pathing.regions[i][j]%16);
 					} else {
-						MillCommonUtilities.setBlockAndMetadata(worldObj, p, Block.blockIron.blockID,0);
+						MillCommonUtilities.setBlockAndMetadata(worldObj, p, Blocks.iron_block,0);
 					}
 				}
 
@@ -6385,8 +6416,8 @@ public class Building {
 			}
 		}
 
-		if (this.countGoods(Mill.negationWand.itemID)==0) {
-			storeGoods(Mill.negationWand.itemID,1);
+		if (this.countGoods(Mill.negationWand)==0) {
+			storeGoods(Mill.negationWand,1);
 		}
 	}
 
@@ -6455,12 +6486,12 @@ public class Building {
 
 		for (int i = 0; i < signs.size(); i++) {
 			final Point p = signs.get(i);
-			if ((p != null) && (MillCommonUtilities.getBlock(worldObj, p) != Mill.panel.blockID)) {
+			if ((p != null) && (MillCommonUtilities.getBlock(worldObj, p) != Mill.panel)) {
 				final int meta = MillCommonUtilities.guessSignMetaData(worldObj, p);
 
 				if (meta > 0) {
 					MillCommonUtilities.setBlockAndMetadata(worldObj, p,
-							Mill.panel.blockID, meta);
+							Mill.panel, meta);
 				}
 			} else if (p == null) {
 				MLN.error(this, "The pos of sign "+i+" is null.");
@@ -6737,7 +6768,7 @@ public class Building {
 				final TileEntityDispenser dispenser = p.getDispenser(worldObj);
 				if (dispenser != null) {
 					MillCommonUtilities.putItemsInChest(dispenser,
-							Mill.unknownPowder.itemID, 1);
+							Mill.unknownPowder, 1);
 				}
 			}
 
@@ -6747,7 +6778,7 @@ public class Building {
 	private void updateGrove() {
 		for (final Point p : woodspawn) {
 			if (MillCommonUtilities.chanceOn(4000)
-					&& (MillCommonUtilities.getBlock(worldObj, p) == Block.sapling.blockID)) {
+					&& (MillCommonUtilities.getBlock(worldObj, p) == Blocks.sapling)) {
 				growTree(worldObj, p.getiX(), p.getiY(), p.getiZ(),
 						MillCommonUtilities.random);
 			}
@@ -6763,8 +6794,8 @@ public class Building {
 				final EntityPlayer player = worldObj.getClosestPlayer(p.getiX(), p.getiY(),
 						p.getiZ(), 4);
 
-				if ((player!=null) && (player.func_110143_aJ()<player.func_110138_aP())) {
-					player.setEntityHealth(player.func_110143_aJ()+1);
+				if ((player!=null) && (player.getHealth()<player.getMaxHealth())) {
+					player.setHealth(player.getHealth()+1);
 					ServerSender.sendTranslatedSentence(player, MLN.LIGHTGREEN, "other.buildinghealing", getNativeBuildingName());
 				}
 
@@ -6810,12 +6841,12 @@ public class Building {
 		if (p == null)
 			return;
 
-		if (worldObj.getBlockId(p.getiX(), p.getiY(), p.getiZ()) != Mill.panel.blockID) {
+		if (worldObj.getBlock(p.getiX(), p.getiY(), p.getiZ()) != Mill.panel) {
 
 			final int meta = MillCommonUtilities.guessSignMetaData(worldObj, p);
 
 			if (meta > 0) {
-				MillCommonUtilities.setBlockAndMetadata(worldObj, p, Mill.panel.blockID, meta);
+				MillCommonUtilities.setBlockAndMetadata(worldObj, p, Mill.panel, meta);
 			}
 		}
 
@@ -6882,12 +6913,12 @@ public class Building {
 		for (int i = 0; i < signs.size(); i++) {
 			final Point p = signs.get(i);
 			if ((p != null)
-					&& (MillCommonUtilities.getBlock(worldObj, p) != Mill.panel.blockID)) {
+					&& (MillCommonUtilities.getBlock(worldObj, p) != Mill.panel)) {
 				final int meta = MillCommonUtilities.guessSignMetaData(worldObj, p);
 
 				if (meta > 0) {
 					MillCommonUtilities.setBlockAndMetadata(worldObj, p,
-							Mill.panel.blockID, meta);
+							Mill.panel, meta);
 				}
 			}
 		}
@@ -6918,8 +6949,8 @@ public class Building {
 
 	private void updateKiln() {
 		for (final Point p : brickspot) {
-			if (MillCommonUtilities.getBlock(worldObj, p) == Block.grass.blockID) {
-				MillCommonUtilities.setBlock(worldObj, p, Block.dirt.blockID);
+			if (MillCommonUtilities.getBlock(worldObj, p) == Blocks.grass) {
+				MillCommonUtilities.setBlock(worldObj, p, Blocks.dirt);
 			}
 		}
 	}
@@ -6975,7 +7006,7 @@ public class Building {
 				worldObj.spawnEntityInWorld(merchant);
 
 				for (final InvItem iv : merchant.vtype.foreignMerchantStock.keySet()) {
-					storeGoods(iv.id(),iv.meta,merchant.vtype.foreignMerchantStock.get(iv));
+					storeGoods(iv.getItem(),iv.meta,merchant.vtype.foreignMerchantStock.get(iv));
 				}
 
 				if (MLN.LogMerchant >= MLN.MAJOR) {
@@ -7005,12 +7036,12 @@ public class Building {
 		for (int i = 0; i < signs.size(); i++) {
 			final Point p = signs.get(i);
 			if ((p != null)
-					&& (MillCommonUtilities.getBlock(worldObj, p) != Mill.panel.blockID)) {
+					&& (MillCommonUtilities.getBlock(worldObj, p) != Mill.panel)) {
 				final int meta = MillCommonUtilities.guessSignMetaData(worldObj, p);
 
 				if (meta > 0) {
 					MillCommonUtilities.setBlockAndMetadata(worldObj, p,
-							Mill.panel.blockID, meta);
+							Mill.panel, meta);
 				}
 			}
 		}
@@ -7030,10 +7061,10 @@ public class Building {
 		for (int i = 0; i < mobSpawners.size(); i++) {
 			for (int j = 0; j < mobSpawners.get(i).size(); j++) {
 				if (MillCommonUtilities.chanceOn(180)) {
-					final int bid = MillCommonUtilities.getBlock(worldObj, mobSpawners
+					final Block block = MillCommonUtilities.getBlock(worldObj, mobSpawners
 							.get(i).get(j));
 
-					if (bid == Block.mobSpawner.blockID) {
+					if (block == Blocks.mob_spawner) {
 
 						final List<Entity> mobs = MillCommonUtilities
 								.getEntitiesWithinAABB(worldObj,
@@ -7061,7 +7092,7 @@ public class Building {
 		for (final Point p :netherwartsoils) {
 
 			if (MillCommonUtilities.chanceOn(1000)) {
-				if (MillCommonUtilities.getBlock(worldObj, p.getAbove())==Block.netherStalk.blockID) {
+				if (MillCommonUtilities.getBlock(worldObj, p.getAbove())==Blocks.nether_wart) {
 					final int meta=MillCommonUtilities.getBlockMeta(worldObj, p.getAbove());
 
 					if (meta<3) {
@@ -7228,7 +7259,7 @@ public class Building {
 			if (!villageType.playerControlled && !villageType.lonebuilding) {
 
 				for (final EntityPlayer player : MillCommonUtilities.getServerPlayers(worldObj)) {
-					final UserProfile profile=MillCommonUtilities.getServerProfile(worldObj, player.username);
+					final UserProfile profile=MillCommonUtilities.getServerProfile(worldObj, player.getDisplayName());
 					profile.adjustDiplomacyPoint(this, 5);
 				}
 
@@ -7277,7 +7308,7 @@ public class Building {
 		if (villageType.playerControlled
 				&& ((worldObj.getWorldTime() % 1000) == 0)
 				&& (countGoods(
-						Mill.parchmentVillageScroll.itemID, -1) == 0)) {
+						Mill.parchmentVillageScroll, -1) == 0)) {
 
 			for (int i = 0; i < mw.villagesList.pos
 					.size(); i++) {
@@ -7285,7 +7316,7 @@ public class Building {
 						.get(i);
 				if (getPos().sameBlock(p)) {
 					storeGoods(
-							Mill.parchmentVillageScroll.itemID,
+							Mill.parchmentVillageScroll,
 							i, 1);
 				}
 			}
@@ -7327,18 +7358,18 @@ public class Building {
 		for (int i = 0; i < signs.size(); i++) {
 			final Point p = signs.get(i);
 			if ((p != null)
-					&& (MillCommonUtilities.getBlock(worldObj, p) != Mill.panel.blockID)) {
+					&& (MillCommonUtilities.getBlock(worldObj, p) != Mill.panel)) {
 				final int meta = MillCommonUtilities.guessSignMetaData(worldObj, p);
 
 				if (meta > 0) {
 					MillCommonUtilities.setBlockAndMetadata(worldObj, p,
-							Mill.panel.blockID, meta);
+							Mill.panel, meta);
 				}
 			}
 		}
 
 		TileEntityPanel sign = (TileEntityPanel) worldObj
-				.getBlockTileEntity(signs.get(0).getiX(), signs.get(0).getiY(),
+				.getTileEntity(signs.get(0).getiX(), signs.get(0).getiY(),
 						signs.get(0).getiZ());
 
 		if (sign != null) {
@@ -7380,10 +7411,10 @@ public class Building {
 			for (final InvItem key : goalPlan.resCost.keySet()) {
 				res.add(key);
 				resCost.add(goalPlan.resCost.get(key));
-				int has = countGoods(key.id(), key.meta);
+				int has = countGoods(key.getItem(), key.meta);
 				if ((builder != null) && (buildingLocationIP != null)
 						&& buildingLocationIP.key.equals(buildingGoal)) {
-					has += builder.countInv(key.id(), key.meta);
+					has += builder.countInv(key.getItem(), key.meta);
 				}
 				if (has > goalPlan.resCost.get(key)) {
 					has = goalPlan.resCost.get(key);
@@ -7727,7 +7758,7 @@ public class Building {
 					ds.writeInt(b.p.getiX());
 					ds.writeShort(b.p.getiY());
 					ds.writeInt(b.p.getiZ());
-					ds.writeShort(b.bid);
+					ds.writeInt(MillCommonUtilities.getBlockId(b.block));
 					ds.writeByte(b.meta);
 					ds.writeByte(b.special);
 				}
@@ -7768,7 +7799,7 @@ public class Building {
 						ds.writeInt(b.p.getiX());
 						ds.writeShort(b.p.getiY());
 						ds.writeInt(b.p.getiZ());
-						ds.writeShort(b.bid);
+						ds.writeInt(Block.getIdFromBlock(b.block));
 						ds.writeByte(b.meta);
 						ds.writeByte(b.special);
 					}
@@ -8011,7 +8042,7 @@ public class Building {
 			nbttaglist = new NBTTagList();
 			for (int i = 0; i < sources.size(); i++) {
 				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("type", sourceTypes.get(i));
+				nbttagcompound1.setInteger("type", Block.getIdFromBlock(sourceTypes.get(i)));
 				final NBTTagList nbttaglist2 = new NBTTagList();
 				for (final Point p : sources.get(i)) {
 					final NBTTagCompound nbttagcompound2 = new NBTTagCompound();
@@ -8196,7 +8227,7 @@ public class Building {
 			nbttaglist = new NBTTagList();
 			for (final InvItem good : imported.keySet()) {
 				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("itemid", good.id());
+				nbttagcompound1.setInteger("itemid", Item.getIdFromItem(good.getItem()));
 				nbttagcompound1.setInteger("itemmeta", good.meta);
 				nbttagcompound1.setInteger("quantity", imported.get(good));
 				nbttaglist.appendTag(nbttagcompound1);
@@ -8206,7 +8237,7 @@ public class Building {
 			nbttaglist = new NBTTagList();
 			for (final InvItem good : exported.keySet()) {
 				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("itemid", good.id());
+				nbttagcompound1.setInteger("itemid", Item.getIdFromItem(good.getItem()));
 				nbttagcompound1.setInteger("itemmeta", good.meta);
 				nbttagcompound1.setInteger("quantity", exported.get(good));
 				nbttaglist.appendTag(nbttagcompound1);
@@ -8253,32 +8284,32 @@ public class Building {
 
 	public Set<Goods> getSellingGoods(EntityPlayer player) {
 
-		if (!shopSells.containsKey(player.username))
+		if (!shopSells.containsKey(player.getDisplayName()))
 			return null;
 
-		return shopSells.get(player.username).keySet();
+		return shopSells.get(player.getDisplayName()).keySet();
 	}
 
 	public Set<Goods> getBuyingGoods(EntityPlayer player) {
 
-		if (!shopBuys.containsKey(player.username))
+		if (!shopBuys.containsKey(player.getDisplayName()))
 			return null;
 
-		return shopBuys.get(player.username).keySet();
+		return shopBuys.get(player.getDisplayName()).keySet();
 	}
 
 	public int getSellingPrice(Goods g,EntityPlayer player) {
-		if (player==null || !shopSells.containsKey(player.username))//normally player should never be null, just checking
+		if (player==null || !shopSells.containsKey(player.getDisplayName()))//normally player should never be null, just checking
 			return 0;
 
-		return shopSells.get(player.username).get(g);
+		return shopSells.get(player.getDisplayName()).get(g);
 	}
 
 	public int getBuyingPrice(Goods g,EntityPlayer player) {
-		if (!shopBuys.containsKey(player.username))
+		if (!shopBuys.containsKey(player.getDisplayName()))
 			return 0;
 
-		return shopBuys.get(player.username).get(g);
+		return shopBuys.get(player.getDisplayName()).get(g);
 	}
 
 }

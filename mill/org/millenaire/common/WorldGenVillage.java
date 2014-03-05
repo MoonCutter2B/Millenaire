@@ -101,7 +101,7 @@ public class WorldGenVillage implements IWorldGenerator {
 		String playerName=null;
 
 		if (player!=null)
-			playerName=player.username;
+			playerName=player.getDisplayName();
 
 		Mill.getMillWorld(world).registerLoneBuildingsLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true,playerName);
 
@@ -335,7 +335,7 @@ public class WorldGenVillage implements IWorldGenerator {
 		String playerName=null;
 
 		if (closestPlayer!=null)
-			playerName=closestPlayer.username;
+			playerName=closestPlayer.getDisplayName();
 
 		if (loneBuildings) {
 			mw.registerLoneBuildingsLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true,playerName);
@@ -343,7 +343,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			mw.registerVillageLocation(world,townHallEntity.getPos(),townHallEntity.getVillageQualifiedName(),townHallEntity.villageType,townHallEntity.culture,true,playerName);
 			townHallEntity.initialiseRelations(parentVillage);
 			if (village.playerControlled) {
-				townHallEntity.storeGoods(Mill.parchmentVillageScroll.itemID, mw.villagesList.pos.size()-1, 1);
+				townHallEntity.storeGoods(Mill.parchmentVillageScroll, mw.villagesList.pos.size()-1, 1);
 
 			}
 		}
@@ -606,7 +606,7 @@ public class WorldGenVillage implements IWorldGenerator {
 			if (success && (closestPlayer!=null) &&
 					loneBuilding.isKeyLoneBuildingForGeneration(closestPlayer) && (loneBuilding.keyLoneBuildingGenerateTag!=null)) {
 
-				final UserProfile profile=mw.getProfile(closestPlayer.username);
+				final UserProfile profile=mw.getProfile(closestPlayer.getDisplayName());
 				profile.clearTag(loneBuilding.keyLoneBuildingGenerateTag);
 			}
 

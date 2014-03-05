@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 
 import org.millenaire.common.core.MillCommonUtilities;
@@ -35,7 +36,7 @@ public class SpecialQuestActions {
 
 	private static void handleBorehole(MillWorld mw, EntityPlayer player) {
 
-		if (!mw.getProfile(player.username).isTagSet(BOREHOLE) || mw.getProfile(player.username).isTagSet(BOREHOLE+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(BOREHOLE) || mw.getProfile(player.getDisplayName()).isTagSet(BOREHOLE+COMPLETE))
 			return;
 
 		if (player.posY>10)
@@ -48,10 +49,10 @@ public class SpecialQuestActions {
 				boolean ok=true,stop=false;
 
 				for (int y=127;(y>0) && !stop;y--) {
-					final int bid=mw.world.getBlockId(x, y, z);
-					if (bid==Block.bedrock.blockID) {
+					final Block block=mw.world.getBlock(x, y, z);
+					if (block==Blocks.bedrock) {
 						stop=true;
-					} else if (bid!=0) {
+					} else if (block!=Blocks.air) {
 						stop=true;
 						ok=false;
 					}
@@ -65,13 +66,13 @@ public class SpecialQuestActions {
 
 		if (nbok>=25) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.borehole_success");
-			mw.getProfile(player.username).clearTag(BOREHOLE);
-			mw.getProfile(player.username).setTag(BOREHOLE+COMPLETE);
-			mw.getProfile(player.username).setActionData(BOREHOLE+"_pos", new Point(player).getIntString());
+			mw.getProfile(player.getDisplayName()).clearTag(BOREHOLE);
+			mw.getProfile(player.getDisplayName()).setTag(BOREHOLE+COMPLETE);
+			mw.getProfile(player.getDisplayName()).setActionData(BOREHOLE+"_pos", new Point(player).getIntString());
 			return;
 		}
 
-		final String maxKnownStr=mw.getProfile(player.username).getActionData(BOREHOLE+"_max");
+		final String maxKnownStr=mw.getProfile(player.getDisplayName()).getActionData(BOREHOLE+"_max");
 
 		int maxKnown=0;
 
@@ -81,15 +82,15 @@ public class SpecialQuestActions {
 
 		if (nbok>maxKnown) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.borehole_nblineok",""+nbok);
-			mw.getProfile(player.username).setActionData(BOREHOLE+"_max", ""+nbok);
+			mw.getProfile(player.getDisplayName()).setActionData(BOREHOLE+"_max", ""+nbok);
 		}
 	}
 
 	private static void handleBoreholeTNT(MillWorld mw, EntityPlayer player) {
-		if (!mw.getProfile(player.username).isTagSet(BOREHOLETNT) || mw.getProfile(player.username).isTagSet(BOREHOLETNT+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(BOREHOLETNT) || mw.getProfile(player.getDisplayName()).isTagSet(BOREHOLETNT+COMPLETE))
 			return;
 
-		final String pStr=mw.getProfile(player.username).getActionData(BOREHOLE+"_pos");
+		final String pStr=mw.getProfile(player.getDisplayName()).getActionData(BOREHOLE+"_pos");
 
 		if (pStr==null)
 			return;
@@ -105,10 +106,10 @@ public class SpecialQuestActions {
 			for (int z=(p.getiZ()-2);z<(p.getiZ()+3);z++) {
 				boolean obsidian=false;
 				for (int y=6;y>0;y--) {
-					final int bid=mw.world.getBlockId(x, y, z);
-					if (bid==Block.obsidian.blockID) {
+					final Block block=mw.world.getBlock(x, y, z);
+					if (block==Blocks.obsidian) {
 						obsidian=true;
-					} else if (obsidian && (bid==Block.tnt.blockID)) {
+					} else if (obsidian && (block==Blocks.tnt)) {
 						nbTNT++;
 					}
 				}
@@ -117,15 +118,15 @@ public class SpecialQuestActions {
 
 		if (nbTNT>=20) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.boreholetnt_success");
-			mw.getProfile(player.username).clearTag(BOREHOLETNT);
-			mw.getProfile(player.username).setTag(BOREHOLETNT+COMPLETE);
-			mw.getProfile(player.username).setTag(BOREHOLETNTLIT);
-			mw.getProfile(player.username).clearActionData(BOREHOLETNT+"_max");
+			mw.getProfile(player.getDisplayName()).clearTag(BOREHOLETNT);
+			mw.getProfile(player.getDisplayName()).setTag(BOREHOLETNT+COMPLETE);
+			mw.getProfile(player.getDisplayName()).setTag(BOREHOLETNTLIT);
+			mw.getProfile(player.getDisplayName()).clearActionData(BOREHOLETNT+"_max");
 			return;
 		} else if (nbTNT==0)
 			return;
 
-		final String maxKnownStr=mw.getProfile(player.username).getActionData(BOREHOLETNT+"_max");
+		final String maxKnownStr=mw.getProfile(player.getDisplayName()).getActionData(BOREHOLETNT+"_max");
 
 		int maxKnown=0;
 
@@ -135,44 +136,44 @@ public class SpecialQuestActions {
 
 		if (nbTNT>maxKnown) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.boreholetnt_nbtnt",""+nbTNT);
-			mw.getProfile(player.username).setActionData(BOREHOLETNT+"_max", ""+nbTNT);
+			mw.getProfile(player.getDisplayName()).setActionData(BOREHOLETNT+"_max", ""+nbTNT);
 		}
 
 	}
 
 	private static void handleBoreholeTNTLit(MillWorld mw, EntityPlayer player) {
-		if (!mw.getProfile(player.username).isTagSet(BOREHOLETNTLIT) || mw.getProfile(player.username).isTagSet(BOREHOLETNTLIT+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(BOREHOLETNTLIT) || mw.getProfile(player.getDisplayName()).isTagSet(BOREHOLETNTLIT+COMPLETE))
 			return;
 
-		final Point p=new Point(mw.getProfile(player.username).getActionData(BOREHOLE+"_pos"));
+		final Point p=new Point(mw.getProfile(player.getDisplayName()).getActionData(BOREHOLE+"_pos"));
 
 		final int nbtnt=mw.world.getEntitiesWithinAABB(EntityTNTPrimed.class, AxisAlignedBB.getBoundingBox(p.x, p.y, p.z,
 				p.x + 1, p.y + 1, p.z + 1).expand(8D, 4D, 8D)).size();
 
 		if (nbtnt>0) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.boreholetntlit_success");
-			mw.getProfile(player.username).clearTag(BOREHOLETNTLIT);
-			mw.getProfile(player.username).setTag(BOREHOLETNTLIT+COMPLETE);
+			mw.getProfile(player.getDisplayName()).clearTag(BOREHOLETNTLIT);
+			mw.getProfile(player.getDisplayName()).setTag(BOREHOLETNTLIT+COMPLETE);
 			return;
 		}
 
 	}
 
 	private static void handleBottomOfTheWorld(MillWorld mw, EntityPlayer player) {
-		if (!mw.getProfile(player.username).isTagSet(BOTTOMOFTHEWORLD) || mw.getProfile(player.username).isTagSet(BOTTOMOFTHEWORLD+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(BOTTOMOFTHEWORLD) || mw.getProfile(player.getDisplayName()).isTagSet(BOTTOMOFTHEWORLD+COMPLETE))
 			return;
 
 		if (player.posY<4) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.bottomoftheworld_success");
-			mw.getProfile(player.username).clearTag(BOTTOMOFTHEWORLD);
-			mw.getProfile(player.username).setTag(BOTTOMOFTHEWORLD+COMPLETE);
+			mw.getProfile(player.getDisplayName()).clearTag(BOTTOMOFTHEWORLD);
+			mw.getProfile(player.getDisplayName()).setTag(BOTTOMOFTHEWORLD+COMPLETE);
 			return;
 		}
 	}
 
 	private static void handleContinuousExplore(MillWorld mw, EntityPlayer player, long worldTime, String biome, String mob, int nbMob, int minTravel) {
 
-		if (!mw.getProfile(player.username).isTagSet(EXPLORE_TAG+biome) || mw.getProfile(player.username).isTagSet(EXPLORE_TAG+biome+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(EXPLORE_TAG+biome) || mw.getProfile(player.getDisplayName()).isTagSet(EXPLORE_TAG+biome+COMPLETE))
 			return;
 
 		if (mw.world.isDaytime())
@@ -189,14 +190,14 @@ public class SpecialQuestActions {
 		if (player.posY<=(surface-2))
 			return;
 
-		final String testnbstr=mw.getProfile(player.username).getActionData(biome+"_explore_nbcomplete");
+		final String testnbstr=mw.getProfile(player.getDisplayName()).getActionData(biome+"_explore_nbcomplete");
 
 		int nbtest=0;
 		if (testnbstr!=null) {
 			nbtest=Integer.parseInt(testnbstr);
 
 			for (int i=1;i<=nbtest;i++) {
-				final String pointstr=mw.getProfile(player.username).getActionData(biome+"_explore_point"+i);
+				final String pointstr=mw.getProfile(player.getDisplayName()).getActionData(biome+"_explore_point"+i);
 				if (pointstr!=null) {
 					final Point p=new Point(pointstr);
 					if (p.horizontalDistanceTo(player)<minTravel)
@@ -209,17 +210,17 @@ public class SpecialQuestActions {
 
 		if (nbtest>=20) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions."+biome+"_success");
-			mw.getProfile(player.username).clearActionData(biome+"_explore_nbcomplete");
+			mw.getProfile(player.getDisplayName()).clearActionData(biome+"_explore_nbcomplete");
 			for (int i=1;i<=10;i++) {
-				mw.getProfile(player.username).clearActionData(biome+"_explore_point"+i);
+				mw.getProfile(player.getDisplayName()).clearActionData(biome+"_explore_point"+i);
 			}
-			mw.getProfile(player.username).clearTag(EXPLORE_TAG+biome);
-			mw.getProfile(player.username).setTag(EXPLORE_TAG+biome+COMPLETE);
+			mw.getProfile(player.getDisplayName()).clearTag(EXPLORE_TAG+biome);
+			mw.getProfile(player.getDisplayName()).setTag(EXPLORE_TAG+biome+COMPLETE);
 			return;
 		}
 
-		mw.getProfile(player.username).setActionData(biome+"_explore_point"+nbtest, new Point(player).getIntString());
-		mw.getProfile(player.username).setActionData(biome+"_explore_nbcomplete", ""+nbtest);
+		mw.getProfile(player.getDisplayName()).setActionData(biome+"_explore_point"+nbtest, new Point(player).getIntString());
+		mw.getProfile(player.getDisplayName()).setActionData(biome+"_explore_nbcomplete", ""+nbtest);
 		ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions."+biome+"_continue",""+(nbtest*5));
 
 		MillCommonUtilities.spawnMobsAround(mw.world, new Point(player), 20, mob, 2, 4);
@@ -228,7 +229,7 @@ public class SpecialQuestActions {
 
 	private static void handleEnchantmentTable(MillWorld mw, EntityPlayer player) {
 
-		if (!mw.getProfile(player.username).isTagSet(ENCHANTMENTTABLE) || mw.getProfile(player.username).isTagSet(ENCHANTMENTTABLE+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(ENCHANTMENTTABLE) || mw.getProfile(player.getDisplayName()).isTagSet(ENCHANTMENTTABLE+COMPLETE))
 			return;
 
 		boolean closeEnough=false;
@@ -248,9 +249,9 @@ public class SpecialQuestActions {
 			for (int z=(int)player.posZ-5;z<((int)player.posZ+5);z++) {
 				for (int y=(int)player.posY-3;y<((int)player.posY+3);y++) {
 
-					final int bid=mw.world.getBlockId(x, y, z);
+					final Block block=mw.world.getBlock(x, y, z);
 
-					if (bid==Block.enchantmentTable.blockID) {
+					if (block==Blocks.enchanting_table) {
 
 						int nbBookShelves=0;
 
@@ -263,12 +264,12 @@ public class SpecialQuestActions {
 									continue;
 								}
 
-								if (mw.world.getBlockId(x + (dx * 2), y, z + (dz * 2)) == Block.bookShelf.blockID)
+								if (mw.world.getBlock(x + (dx * 2), y, z + (dz * 2)) == Blocks.bookshelf)
 								{
 									nbBookShelves++;
 								}
 
-								if (mw.world.getBlockId(x + (dx * 2), y + 1, z + (dz * 2)) == Block.bookShelf.blockID)
+								if (mw.world.getBlock(x + (dx * 2), y + 1, z + (dz * 2)) == Blocks.bookshelf)
 								{
 									nbBookShelves++;
 								}
@@ -278,22 +279,22 @@ public class SpecialQuestActions {
 									continue;
 								}
 
-								if (mw.world.getBlockId(x + (dx * 2), y, z + dz) == Block.bookShelf.blockID)
+								if (mw.world.getBlock(x + (dx * 2), y, z + dz) == Blocks.bookshelf)
 								{
 									nbBookShelves++;
 								}
 
-								if (mw.world.getBlockId(x + (dx * 2), y + 1, z + dz) == Block.bookShelf.blockID)
+								if (mw.world.getBlock(x + (dx * 2), y + 1, z + dz) == Blocks.bookshelf)
 								{
 									nbBookShelves++;
 								}
 
-								if (mw.world.getBlockId(x + dx, y, z + (dz * 2)) == Block.bookShelf.blockID)
+								if (mw.world.getBlock(x + dx, y, z + (dz * 2)) == Blocks.bookshelf)
 								{
 									nbBookShelves++;
 								}
 
-								if (mw.world.getBlockId(x + dx, y + 1, z + (dz * 2)) == Block.bookShelf.blockID)
+								if (mw.world.getBlock(x + dx, y + 1, z + (dz * 2)) == Blocks.bookshelf)
 								{
 									nbBookShelves++;
 								}
@@ -302,8 +303,8 @@ public class SpecialQuestActions {
 
 						if (nbBookShelves>0) {
 							ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.enchantmenttable_success");
-							mw.getProfile(player.username).clearTag(ENCHANTMENTTABLE);
-							mw.getProfile(player.username).setTag(ENCHANTMENTTABLE+COMPLETE);
+							mw.getProfile(player.getDisplayName()).clearTag(ENCHANTMENTTABLE);
+							mw.getProfile(player.getDisplayName()).setTag(ENCHANTMENTTABLE+COMPLETE);
 							return;
 						}
 
@@ -317,7 +318,7 @@ public class SpecialQuestActions {
 
 	private static void handleTheVoid(MillWorld mw, EntityPlayer player) {
 
-		if (!mw.getProfile(player.username).isTagSet(THEVOID) || mw.getProfile(player.username).isTagSet(THEVOID+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(THEVOID) || mw.getProfile(player.getDisplayName()).isTagSet(THEVOID+COMPLETE))
 			return;
 
 		if (player.posY>30)
@@ -326,12 +327,12 @@ public class SpecialQuestActions {
 		for (int i=-5;i<5;i++) {
 			for (int j=-5;j<5;j++) {
 
-				final int bid=mw.world.getBlockId((int)player.posX+i, 0, (int)player.posZ+j);
+				final Block block=mw.world.getBlock((int)player.posX+i, 0, (int)player.posZ+j);
 
-				if (bid==0) {
+				if (block==Blocks.air) {
 					ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.thevoid_success");
-					mw.getProfile(player.username).clearTag(THEVOID);
-					mw.getProfile(player.username).setTag(THEVOID+COMPLETE);
+					mw.getProfile(player.getDisplayName()).clearTag(THEVOID);
+					mw.getProfile(player.getDisplayName()).setTag(THEVOID+COMPLETE);
 					return;
 				}
 
@@ -340,67 +341,67 @@ public class SpecialQuestActions {
 	}
 
 	private static void handleTopOfTheWorld(MillWorld mw, EntityPlayer player) {
-		if (!mw.getProfile(player.username).isTagSet(TOPOFTHEWORLD) || mw.getProfile(player.username).isTagSet(TOPOFTHEWORLD+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(TOPOFTHEWORLD) || mw.getProfile(player.getDisplayName()).isTagSet(TOPOFTHEWORLD+COMPLETE))
 			return;
 
 		if (player.posY>250) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.topoftheworld_success");
-			mw.getProfile(player.username).clearTag(TOPOFTHEWORLD);
-			mw.getProfile(player.username).setTag(TOPOFTHEWORLD+COMPLETE);
+			mw.getProfile(player.getDisplayName()).clearTag(TOPOFTHEWORLD);
+			mw.getProfile(player.getDisplayName()).setTag(TOPOFTHEWORLD+COMPLETE);
 			return;
 		}
 	}
 
 	private static void handleUnderwaterDive(MillWorld mw, EntityPlayer player) {
-		if (!mw.getProfile(player.username).isTagSet(UNDERWATER_DIVE) || mw.getProfile(player.username).isTagSet(UNDERWATER_DIVE+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(UNDERWATER_DIVE) || mw.getProfile(player.getDisplayName()).isTagSet(UNDERWATER_DIVE+COMPLETE))
 			return;
 
 		Point p=new Point(player);
 
 		int nbWater=0;
 
-		while (MillCommonUtilities.getBlock(mw.world, p)==Block.waterStill.blockID) {
+		while (MillCommonUtilities.getBlock(mw.world, p)==Blocks.water) {
 			nbWater++;
 			p=p.getAbove();
 		}
 
 		if (nbWater>12) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.underwaterdive_success");
-			mw.getProfile(player.username).clearTag(UNDERWATER_DIVE);
-			mw.getProfile(player.username).setTag(UNDERWATER_DIVE+COMPLETE);
+			mw.getProfile(player.getDisplayName()).clearTag(UNDERWATER_DIVE);
+			mw.getProfile(player.getDisplayName()).setTag(UNDERWATER_DIVE+COMPLETE);
 			return;
 		}
 	}
 
 	private static void handleUnderwaterGlass(MillWorld mw, EntityPlayer player) {
-		if (!mw.getProfile(player.username).isTagSet(UNDERWATER_GLASS) || mw.getProfile(player.username).isTagSet(UNDERWATER_GLASS+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(UNDERWATER_GLASS) || mw.getProfile(player.getDisplayName()).isTagSet(UNDERWATER_GLASS+COMPLETE))
 			return;
 
 		Point p=new Point(player);
 
-		int bid=MillCommonUtilities.getBlock(mw.world, p);
+		Block block=MillCommonUtilities.getBlock(mw.world, p);
 
-		while ((bid==0) || ((bid>0) && !MillCommonUtilities.isBlockOpaqueCube(bid) && (bid!=Block.glass.blockID) && (bid!=Block.thinGlass.blockID))) {
+		while ((block!=null) && !MillCommonUtilities.isBlockOpaqueCube(block) && (block!=Blocks.glass) && (block!=Blocks.glass_pane)) {
 			p=p.getAbove();
-			bid=MillCommonUtilities.getBlock(mw.world, p);
+			block=MillCommonUtilities.getBlock(mw.world, p);
 		}
 
-		bid=MillCommonUtilities.getBlock(mw.world, p);
+		block=MillCommonUtilities.getBlock(mw.world, p);
 
-		if ((bid!=Block.glass.blockID) && (bid!=Block.thinGlass.blockID))
+		if ((block!=Blocks.glass) && (block!=Blocks.glass_pane))
 			return;
 		p=p.getAbove();
 		int nbWater=0;
 
-		while (MillCommonUtilities.getBlock(mw.world, p)==Block.waterStill.blockID) {
+		while (MillCommonUtilities.getBlock(mw.world, p)==Blocks.water) {
 			nbWater++;
 			p=p.getAbove();
 		}
 
 		if (nbWater>15) {
 			ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.underwaterglass_success");
-			mw.getProfile(player.username).clearTag(UNDERWATER_GLASS);
-			mw.getProfile(player.username).setTag(UNDERWATER_GLASS+COMPLETE);
+			mw.getProfile(player.getDisplayName()).clearTag(UNDERWATER_GLASS);
+			mw.getProfile(player.getDisplayName()).setTag(UNDERWATER_GLASS+COMPLETE);
 			return;
 		}
 
@@ -410,10 +411,10 @@ public class SpecialQuestActions {
 	}
 
 	private static void handleMayanSiege(MillWorld mw, EntityPlayer player) {
-		if (!mw.getProfile(player.username).isTagSet(MAYANSIEGE) || mw.getProfile(player.username).isTagSet(MAYANSIEGE+COMPLETE))
+		if (!mw.getProfile(player.getDisplayName()).isTagSet(MAYANSIEGE) || mw.getProfile(player.getDisplayName()).isTagSet(MAYANSIEGE+COMPLETE))
 			return;
 
-		final String siegeStatus=mw.getProfile(player.username).getActionData("mayan_siege_status");
+		final String siegeStatus=mw.getProfile(player.getDisplayName()).getActionData("mayan_siege_status");
 
 		if (siegeStatus==null) {//start siege			
 			for (Point p : mw.loneBuildingsList.pos) {
@@ -455,10 +456,10 @@ public class SpecialQuestActions {
 							}
 						}
 						
-						mw.getProfile(player.username).setActionData("mayan_siege_status", "started");
-						mw.getProfile(player.username).setActionData("mayan_siege_ghasts", ""+nbGhasts);
-						mw.getProfile(player.username).setActionData("mayan_siege_blazes", ""+nbBlazes);
-						mw.getProfile(player.username).setActionData("mayan_siege_skeletons", ""+nbSkel);
+						mw.getProfile(player.getDisplayName()).setActionData("mayan_siege_status", "started");
+						mw.getProfile(player.getDisplayName()).setActionData("mayan_siege_ghasts", ""+nbGhasts);
+						mw.getProfile(player.getDisplayName()).setActionData("mayan_siege_blazes", ""+nbBlazes);
+						mw.getProfile(player.getDisplayName()).setActionData("mayan_siege_skeletons", ""+nbSkel);
 
 						ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.mayan_siege_start",""+nbGhasts,""+nbBlazes,""+nbSkel);
 					}
@@ -489,19 +490,19 @@ public class SpecialQuestActions {
 						int nbSkel=mobs.size();
 
 						if (nbGhasts==0 && nbBlazes==0 && nbSkel==0) {
-							mw.getProfile(player.username).setActionData("mayan_siege_status", "finished");
-							mw.getProfile(player.username).setTag(MAYANSIEGE+COMPLETE);
+							mw.getProfile(player.getDisplayName()).setActionData("mayan_siege_status", "finished");
+							mw.getProfile(player.getDisplayName()).setTag(MAYANSIEGE+COMPLETE);
 							ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.mayan_siege_success");
 						} else {
-							int oldGhasts=Integer.parseInt(mw.getProfile(player.username).getActionData("mayan_siege_ghasts"));
-							int oldBlazes=Integer.parseInt(mw.getProfile(player.username).getActionData("mayan_siege_blazes"));
-							int oldSkel=Integer.parseInt(mw.getProfile(player.username).getActionData("mayan_siege_skeletons"));
+							int oldGhasts=Integer.parseInt(mw.getProfile(player.getDisplayName()).getActionData("mayan_siege_ghasts"));
+							int oldBlazes=Integer.parseInt(mw.getProfile(player.getDisplayName()).getActionData("mayan_siege_blazes"));
+							int oldSkel=Integer.parseInt(mw.getProfile(player.getDisplayName()).getActionData("mayan_siege_skeletons"));
 
 							if (oldGhasts!=nbGhasts || oldBlazes!=nbBlazes || oldSkel!=nbSkel) {
 								ServerSender.sendTranslatedSentence(player,MLN.LIGHTGREY,"actions.mayan_siege_update",""+nbGhasts,""+nbBlazes,""+nbSkel);
-								mw.getProfile(player.username).setActionData("mayan_siege_ghasts", ""+nbGhasts);
-								mw.getProfile(player.username).setActionData("mayan_siege_blazes",""+nbBlazes);
-								mw.getProfile(player.username).setActionData("mayan_siege_skeletons",""+nbSkel);
+								mw.getProfile(player.getDisplayName()).setActionData("mayan_siege_ghasts", ""+nbGhasts);
+								mw.getProfile(player.getDisplayName()).setActionData("mayan_siege_blazes",""+nbBlazes);
+								mw.getProfile(player.getDisplayName()).setActionData("mayan_siege_skeletons",""+nbSkel);
 							}
 						}
 					}

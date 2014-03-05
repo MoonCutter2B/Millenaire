@@ -3,6 +3,7 @@ package org.millenaire.common.goal;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.Building;
@@ -58,17 +59,17 @@ public class GoalLumbermanPlantSaplings extends Goal {
 	public ItemStack[] getHeldItemsTravelling(MillVillager villager) {
 
 		int meta=0;
-		if (villager.takeFromInv(Block.sapling.blockID,0, 1)==1) {
+		if (villager.takeFromInv(Blocks.sapling,0, 1)==1) {
 			meta=0;
-		} else if (villager.takeFromInv(Block.sapling.blockID,1, 1)==1) {
+		} else if (villager.takeFromInv(Blocks.sapling,1, 1)==1) {
 			meta=1;
-		} else if (villager.takeFromInv(Block.sapling.blockID,2, 1)==1) {
+		} else if (villager.takeFromInv(Blocks.sapling,2, 1)==1) {
 			meta=2;
-		} else if (villager.takeFromInv(Block.sapling.blockID,3, 1)==1) {
+		} else if (villager.takeFromInv(Blocks.sapling,3, 1)==1) {
 			meta=3;
 		}
 
-		return new ItemStack[]{new ItemStack(Block.sapling.blockID,1,meta)};
+		return new ItemStack[]{new ItemStack(Blocks.sapling,1,meta)};
 	}
 
 	@Override
@@ -101,20 +102,20 @@ public class GoalLumbermanPlantSaplings extends Goal {
 	@Override
 	public boolean performAction(MillVillager villager) {
 
-		final int bid=MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint());
-		if ((bid==0) || (bid==Block.snow.blockID)) {
+		final Block block=MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint());
+		if ((block==Blocks.air) || (block==Blocks.snow)) {
 
 			final int metaStart=MillCommonUtilities.randomInt(4);
 			int chosenMeta=-1;
 
 			for (int i=metaStart;(i<4) && (chosenMeta==-1);i++) {
-				if (villager.takeFromInv(Block.sapling.blockID,i, 1)==1) {
+				if (villager.takeFromInv(Blocks.sapling,i, 1)==1) {
 					chosenMeta=i;
 				}
 			}
 
 			for (int i=0;(i<metaStart) && (chosenMeta==-1);i++) {
-				if (villager.takeFromInv(Block.sapling.blockID,i, 1)==1) {
+				if (villager.takeFromInv(Blocks.sapling,i, 1)==1) {
 					chosenMeta=i;
 				}
 			}
@@ -123,7 +124,7 @@ public class GoalLumbermanPlantSaplings extends Goal {
 				chosenMeta=0;
 			}
 
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Block.sapling.blockID,chosenMeta);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Blocks.sapling,chosenMeta);
 
 			villager.swingItem();
 			
