@@ -6,8 +6,8 @@ baseheight=0.9
 model=femaleasymmetrical
 tag=seller
 
-texture=/textures/entity/norman/ML_Lady0_Asymmetric.png
-texture=/textures/entity/norman/ML_Lady1_Asymmetric.png
+texture=textures/entity/norman/ML_Lady0_Asymmetric.png
+texture=textures/entity/norman/ML_Lady1_Asymmetric.png
 
 goal=gorest
 goal=gosocialise

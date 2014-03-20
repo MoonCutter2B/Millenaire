@@ -4,8 +4,8 @@ familyNameList=noble_family_names
 firstNameList=men_names
 tag=chief
 health=50
-texture=/textures/entity/norman/ML_Seneschal0.png
-texture=/textures/entity/norman/ML_Seneschal1.png
+texture=textures/entity/norman/ML_Seneschal0.png
+texture=textures/entity/norman/ML_Seneschal1.png
 
 goal=gorest
 goal=gosocialise

@@ -125,7 +125,7 @@ public class GuiHire extends GuiText {
 		return 16;
 	}
 
-	ResourceLocation background=new ResourceLocation(Mill.modId,"/textures/gui/ML_quest.png");
+	ResourceLocation background=new ResourceLocation(Mill.modId,"textures/gui/ML_quest.png");
 
 	@Override
 	public ResourceLocation getPNGPath() {

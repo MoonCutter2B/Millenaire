@@ -23,9 +23,8 @@ import org.millenaire.common.ContainerPuja.OfferingSlot;
 import org.millenaire.common.ContainerPuja.ToolSlot;
 import org.millenaire.common.MLN;
 import org.millenaire.common.PujaSacrifice;
+import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
-
-import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class GuiPujas extends GuiContainer
 {
@@ -33,8 +32,8 @@ public class GuiPujas extends GuiContainer
 	private final EntityPlayer player;
 	private Method drawSlotInventory;
 	
-	private static final ResourceLocation texturePujas = new ResourceLocation(Mill.modId,"/textures/gui/ML_pujas.png");
-	private static final ResourceLocation textureSacrifices = new ResourceLocation(Mill.modId,"/textures/gui/ML_mayansacrifices.png");
+	private static final ResourceLocation texturePujas = new ResourceLocation(Mill.modId,"textures/gui/ML_pujas.png");
+	private static final ResourceLocation textureSacrifices = new ResourceLocation(Mill.modId,"textures/gui/ML_mayansacrifices.png");
 	
 	
 	public GuiPujas(EntityPlayer player, Building temple)
@@ -50,7 +49,7 @@ public class GuiPujas extends GuiContainer
 			MLN.debug(this, "Opening shrine GUI");
 		}
 		
-		drawSlotInventory=ReflectionHelper.findMethod(GuiContainer.class, this, new String[]{"func_146977_a","func_146977_a"}, Method.class);
+		drawSlotInventory=MillCommonUtilities.getDrawSlotInventoryMethod(this);
 	}
 
 	private int getNbPerLines() {
@@ -442,7 +441,7 @@ public class GuiPujas extends GuiContainer
 	public void drawSlotInventory(Slot slot) {
 		
 		try {
-			drawSlotInventory.invoke(slot);
+			drawSlotInventory.invoke(this,slot);
 		} catch (Exception e) {
 			MLN.printException("Exception when trying to access drawSlotInventory", e);
 		}

@@ -10,9 +10,9 @@ tag=defensive
 tag=noresurrect
 health=70
 
-texture=/textures/entity/mayan/mayan_Warrior0.png
-texture=/textures/entity/mayan/mayan_Warrior1.png
-texture=/textures/entity/mayan/mayan_Warrior2.png
+texture=textures/entity/mayan/mayan_Warrior0.png
+texture=textures/entity/mayan/mayan_Warrior1.png
+texture=textures/entity/mayan/mayan_Warrior2.png
 
 goal=gorest
 goal=goDrink

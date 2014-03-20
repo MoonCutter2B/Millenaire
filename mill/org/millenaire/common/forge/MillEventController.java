@@ -51,6 +51,9 @@ public class MillEventController {
 	@SubscribeEvent
 	public void worldLoaded(Load event)
 	{
+		
+		Mill.proxy.loadLanguages();
+		
 		if (Mill.displayMillenaireLocationError && !Mill.proxy.isTrueServer()) {
 			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKRED, "ERREUR: Impossible de trouver le fichier de configuration "+Mill.proxy.getConfigFile().getAbsolutePath()+". V\u00e9rifiez que le dossier millenaire est bien dans minecraft/mods/");
 			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKRED, "ERROR: Could not find the config file at "+Mill.proxy.getConfigFile().getAbsolutePath()+". Check that the millenaire directory is in minecraft/mods/");

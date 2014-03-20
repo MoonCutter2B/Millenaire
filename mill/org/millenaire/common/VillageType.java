@@ -1,9 +1,9 @@
 package org.millenaire.common;
 
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
 
 import java.io.BufferedReader;
+import java.io.DataOutput;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -637,7 +637,7 @@ public class VillageType implements WeightedChoice {
 	}
 
 
-	public void writeVillageTypeInfo(ByteBufOutputStream data) throws IOException {
+	public void writeVillageTypeInfo(DataOutput data) throws IOException {
 		data.writeUTF(key);
 		data.writeBoolean(playerControlled);
 		data.writeBoolean(spawnable);

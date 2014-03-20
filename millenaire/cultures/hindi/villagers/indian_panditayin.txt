@@ -6,10 +6,10 @@ tag=religious
 baseHeight=0.9
 model=femaleasymmetrical
 
-texture=/textures/entity/indian/ML_Rich_Woman0.png
-texture=/textures/entity/indian/ML_Rich_Woman1.png
-texture=/textures/entity/indian/ML_Rich_Woman2.png
-texture=/textures/entity/indian/ML_Rich_Woman3.png
+texture=textures/entity/indian/ML_Rich_Woman0.png
+texture=textures/entity/indian/ML_Rich_Woman1.png
+texture=textures/entity/indian/ML_Rich_Woman2.png
+texture=textures/entity/indian/ML_Rich_Woman3.png
 
 goal=gosocialise
 goal=chat

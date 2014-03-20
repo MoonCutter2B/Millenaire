@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -761,8 +762,8 @@ public class MLN {
 	}
 
 	public static void checkBonusCode(boolean manual) {
-		
-		
+
+
 		if (Mill.proxy.getSinglePlayerName()==null) {
 			bonusEnabled=false;
 			return;
@@ -779,7 +780,7 @@ public class MLN {
 		if (!bonusEnabled && !manual) {
 			(new BonusThread(login)).start();
 		}
-		
+
 		if (manual && bonusCode!=null && bonusCode.length()==4) {
 			if (bonusEnabled) {
 				Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKGREEN,MLN.string("config.validbonuscode"));
@@ -790,6 +791,7 @@ public class MLN {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private static void applyLanguage() {
 		nameItems();
 
@@ -808,7 +810,11 @@ public class MLN {
 			if (MLN.generateBuildingRes) {//Doing it now because it requires item names
 				MLN.major(null, "Generating building res file.");
 				BuildingPlan.generateBuildingRes();
-				BuildingPlan.generateWikiTable();
+				try {
+					BuildingPlan.generateWikiTable();
+				} catch (MillenaireException e) {
+					MLN.printException(e);
+				}
 				MLN.major(null, "Generated building res file.");
 			}
 		}
@@ -871,11 +877,11 @@ public class MLN {
 
 		return hofData;
 	}
-	
-	public static final ResourceLocation textureLargeChest64=new ResourceLocation(Mill.modId,"/textures/entity/chest/ML_lockedlargechest_64.png");
-	public static final ResourceLocation textureLargeChest=new ResourceLocation(Mill.modId,"/textures/entity/chest/ML_lockedlargechest.png");
-	public static final ResourceLocation textureChest64=new ResourceLocation(Mill.modId,"/textures/entity/chest/ML_lockedchest_64.png");
-	public static final ResourceLocation textureChest=new ResourceLocation(Mill.modId,"/textures/entity/chest/ML_lockedchest.png");
+
+	public static final ResourceLocation textureLargeChest64=new ResourceLocation(Mill.modId,"textures/entity/chest/ML_lockedlargechest_64.png");
+	public static final ResourceLocation textureLargeChest=new ResourceLocation(Mill.modId,"textures/entity/chest/ML_lockedlargechest.png");
+	public static final ResourceLocation textureChest64=new ResourceLocation(Mill.modId,"textures/entity/chest/ML_lockedchest_64.png");
+	public static final ResourceLocation textureChest=new ResourceLocation(Mill.modId,"textures/entity/chest/ML_lockedchest.png");
 
 	public static ResourceLocation getLargeLockedChestTexture() {
 
@@ -1011,8 +1017,6 @@ public class MLN {
 		} else {
 			writeText("Starting new session. Mods: "+mods);
 		}
-
-		checkBonusCode(false);
 	}
 
 	public static Vector<File> getLanguageDirs() {
@@ -1144,6 +1148,8 @@ public class MLN {
 
 		if (MLN.DEV)
 			writeBaseConfigFile();
+
+		Minecraft.getMinecraft().refreshResources();
 	}
 
 	public static void major(Object obj, String s) {
@@ -1154,6 +1160,7 @@ public class MLN {
 		writeText("MINOR: "+obj+": "+s);
 	}
 
+	@SuppressWarnings("deprecation")
 	private static void nameItems() {
 		LanguageRegistry.addName(Mill.lockedChest, MLN.string("item.building"));
 		LanguageRegistry.addName(Mill.denier, MLN.string("item.denier"));
@@ -1211,14 +1218,14 @@ public class MLN {
 		LanguageRegistry.addName(new ItemStack(Mill.stone_decoration, 1, 1), MLN.string("item.mudbrick"));
 		LanguageRegistry.addName(new ItemStack(Mill.stone_decoration, 1, 2), MLN.string("item.mayangold"));
 		LanguageRegistry.addName(new ItemStack(Mill.stone_decoration, 1, 3), MLN.string("item.alchimistexplosive"));
-		
+
 		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 0), MLN.string("item.pathdirt"));
 		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 1), MLN.string("item.pathgravel"));
 		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 2), MLN.string("item.pathslabs"));
 		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 3), MLN.string("item.pathsandstone"));
 		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 4), MLN.string("item.pathochretiles"));
 		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 5), MLN.string("item.pathgravelslabs"));
-		
+
 		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 8), MLN.string("item.pathdirt"));
 		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 9), MLN.string("item.pathgravel"));
 		LanguageRegistry.addName(new ItemStack(Mill.path, 1, 10), MLN.string("item.pathslabs"));
@@ -1232,7 +1239,7 @@ public class MLN {
 		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 3), MLN.string("item.pathsandstone"));
 		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 4), MLN.string("item.pathochretiles"));
 		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 5), MLN.string("item.pathgravelslabs"));
-		
+
 		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 8), MLN.string("item.pathdirt"));
 		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 9), MLN.string("item.pathgravel"));
 		LanguageRegistry.addName(new ItemStack(Mill.pathSlab, 1, 10), MLN.string("item.pathslabs"));

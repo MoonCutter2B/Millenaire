@@ -5,7 +5,9 @@ import java.util.Random;
 import net.minecraft.block.BlockSign;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.millenaire.common.Building;
 import org.millenaire.common.Point;
@@ -19,6 +21,17 @@ public class BlockPanel extends BlockSign {
 	@SuppressWarnings("rawtypes")
 	public BlockPanel(Class class1, boolean flag) {
 		super(class1, flag);
+	}
+	
+	@Override
+	public int getFlammability(IBlockAccess world, int x, int y, int z,
+			ForgeDirection face) {
+		return 200;
+	}
+	@Override
+	public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z,
+			ForgeDirection face) {		
+		return 60;
 	}
 
 	@Override

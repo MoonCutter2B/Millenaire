@@ -6,7 +6,7 @@ tag=HelpInAttacks
 tag=raider
 tag=archer
 hiringcost=1
-texture=/textures/entity/byzanz/soldier0.png
+texture=textures/entity/byzanz/soldier0.png
 
 goal=gorest
 goal=gosocialise

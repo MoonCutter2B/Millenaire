@@ -15,6 +15,7 @@ public class EntityTargetedBlaze extends EntityBlaze {
 		super(par1World);
 	}
 
+	@Override
 	protected boolean canDespawn()
 	{
 		return false;
@@ -54,7 +55,7 @@ public class EntityTargetedBlaze extends EntityBlaze {
 	        double d6 = (this.target.z - this.posZ) / par7;
 	        AxisAlignedBB axisalignedbb = this.boundingBox.copy();
 
-	        for (int i = 1; (double)i < par7; ++i)
+	        for (int i = 1; i < par7; ++i)
 	        {
 	            axisalignedbb.offset(d4, d5, d6);
 

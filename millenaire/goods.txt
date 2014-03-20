@@ -1,309 +1,309 @@
 //Item key;item id;item meta;label (indicative only)
 //This file is auto-generated and indicative only. Don't edit it.
 
-akwardpotion;373;16;Awkward Potion
-alchemistamulet;mln24;0;item.ml_dwarves_amulet.name
-alchimistexplosive;1519;3;tile.ml_stone_deco.3.name
-anyenchanted;-1;0;
-arrow;262;0;Arrow
-beefcooked;364;0;Steak
-beefraw;363;0;Raw Beef
-bone;352;0;Bone
-book;340;0;Book
-bookandquill;386;0;Book and Quill
-bookshelves;47;0;Bookshelf
-bottle;374;0;Glass Bottle
-boudin;mln21;0;item.ml_boudin.name
-bow;261;0;Bow
-bowlempty;281;0;Bowl
-bowlsoup;282;0;Mushroom Stew
-bread;297;0;Bread
-brickmould;mln32;0;item.ml_brickmould.name
-bricks;45;0;Bricks
-bucketempty;325;0;Bucket
-bucketlava;327;0;Lava Bucket
-bucketmilk;335;0;Milk
-bucketwater;326;0;Water Bucket
-byzantineboots;mln84;0;item.ml_byzantineBoots.name
-byzantinehelmet;mln82;0;item.ml_byzantineHelmet.name
-byzantineiconlarge;mln80;0;item.ml_byzantineiconlarge.name
-byzantineiconmedium;mln79;0;item.ml_byzantineiconmedium.name
-byzantineiconsmall;mln78;0;item.ml_byzantineicon.name
-byzantinelegs;mln81;0;item.ml_byzantineLegs.name
-byzantinemace;mln85;0;item.ml_byzantineMace.name
-byzantineplate;mln83;0;item.ml_byzantinePlate.name
-byzantinestonetiles;1524;0;tile.byzantine_mixedbrick.name
-byzantinetiles;1522;0;tile.byzantine_brick.name
-byzantinetileslab;1523;0;tile.byzantine_brick_slab.name
-cacauhaa;mln94;0;item.ml_cacauhaa.name
-cactus;81;0;Cactus
-cake;92;0;Cake
-calva;mln5;0;item.ml_calva.name
-carrot;391;0;Carrot
-chainboots;305;0;Chain Boots
-chainchest;303;0;Chain Chestplate
-chainhelmet;302;0;Chain Helmet
-chainlegs;304;0;Chain Leggings
-chickencurry;mln31;0;item.ml_chickencurry.name
-chickenmeat;365;0;Raw Chicken
-chickenmeatcooked;366;0;Cooked Chicken
-cider;mln4;0;item.ml_cider.name
-ciderapple;mln3;0;item.ml_ciderapple.name
-clay;337;0;Clay
-clock;347;0;Clock
-clothes_byz_silk;mln86;1;item.clothes_byz_silk.name
-clothes_byz_wool;mln86;0;item.clothes_byz_wool.name
-coal;263;0;Coal
-cobblestone;4;0;Cobblestone
-compass;345;0;Compass
-cookedbrick;1519;0;tile.ml_stone_deco.0.name
-cookie;357;0;Cookie
-denier;mln0;0;item.ml_denier.name
-denierargent;mln2;0;item.ml_denier_argent.name
-denieror;mln1;0;item.ml_denier_or.name
-diamond;264;0;Diamond
-diamondaxe;279;0;Diamond Axe
-diamondboots;313;0;Diamond Boots
-diamondchest;311;0;Diamond Chestplate
-diamondhelmet;310;0;Diamond Helmet
-diamondhoe;293;0;Diamond Hoe
-diamondlegs;312;0;Diamond Leggings
-diamondpickaxe;278;0;Diamond Pickaxe
-diamondshovel;277;0;Diamond Shovel
-diamondsword;276;0;Diamond Sword
-dirt;3;0;Dirt
-dirtwall;1518;1;tile.ml_earth_deco.1.name
-dye_black;351;0;Ink Sac
-dye_blue;351;4;Lapis Lazuli
-dye_brown;351;3;Cocoa Beans
-dye_cyan;351;6;Cyan Dye
-dye_gray;351;8;Gray Dye
-dye_green;351;2;Cactus Green
-dye_lightblue;351;12;Light Blue Dye
-dye_lightgray;351;7;Light Gray Dye
-dye_lime;351;10;Lime Dye
-dye_magenta;351;13;Magenta Dye
-dye_orange;351;14;Orange Dye
-dye_pink;351;9;Pink Dye
-dye_purple;351;5;Purple Dye
-dye_red;351;1;Rose Red
-dye_white;351;15;Bone Meal
-dye_yellow;351;11;Dandelion Yellow
-egg;344;0;Egg
-enchantedsword;-2;0;
-enderpearl;368;0;Ender Pearl
-feather;288;0;Feather
-feta;mln90;0;item.ml_feta.name
-fishcooked;350;0;Cooked Fish
-fishraw;349;0;Raw Fish
-flint;318;0;Flint
-flintandsteel;259;0;Flint and Steel
-ghasttear;370;0;Ghast Tear
-glass;20;0;Glass
-gold;266;0;Gold Ingot
-goldaxe;286;0;Golden Axe
-goldboots;317;0;Golden Boots
-goldchest;315;0;Golden Chestplate
-goldhelmet;314;0;Golden Helmet
-goldhoe;294;0;Golden Hoe
-goldlegs;316;0;Golden Leggings
-goldore;14;0;Gold Ore
-goldpickaxe;285;0;Golden Pickaxe
-goldshovel;284;0;Golden Shovel
-goldsword;283;0;Golden Sword
-grapes;mln75;0;item.ml_vine.name
-gravel;13;0;Gravel
-gunpowder;289;0;Gunpowder
-ikayaki;mln96;0;item.ml_ikayaki.name
-indianstatue;mln34;0;item.ml_indianstatue.name
-iron;265;0;Iron Ingot
-ironore;15;0;Iron Ore
-japaneseguardboots;mln70;0;item.ml_japaneseGuardBoots.name
-japaneseguardhelmet;mln68;0;item.ml_japaneseGuardHelmet.name
-japaneseguardlegs;mln67;0;item.ml_japaneseGuardLegs.name
-japaneseguardplate;mln69;0;item.ml_japaneseGuardPlate.name
-japanesewarriorblueboots;mln62;0;item.ml_japaneseWarriorBlueBoots.name
-japanesewarriorbluehelmet;mln60;0;item.ml_japaneseWarriorBlueHelmet.name
-japanesewarriorbluelegs;mln59;0;item.ml_japaneseWarriorBlueLegs.name
-japanesewarriorblueplate;mln61;0;item.ml_japaneseWarriorBluePlate.name
-japanesewarriorredboots;mln66;0;item.ml_japaneseWarriorRedBoots.name
-japanesewarriorredhelmet;mln64;0;item.ml_japaneseWarriorRedHelmet.name
-japanesewarriorredlegs;mln63;0;item.ml_japaneseWarriorRedLegs.name
-japanesewarriorredplate;mln65;0;item.ml_japaneseWarriorRedPlate.name
-lambcooked;mln89;0;item.ml_lamb_cooked.name
-lambraw;mln88;0;item.ml_lamb_raw.name
-leather;334;0;Leather
-leatherboots;301;0;Leather Boots
-leatherchest;299;0;Leather Tunic
-leatherhelmet;298;0;Leather Cap
-leatherlegs;300;0;Leather Pants
-maize;mln40;0;item.ml_maize.name
-masa;mln41;0;item.ml_masa.name
-mayanaxe;mln55;0;item.ml_mayanAxe.name
-mayangold;1519;2;tile.ml_stone_deco.2.name
-mayanhoe;mln57;0;item.ml_mayanHoe.name
-mayanmace;mln53;0;item.ml_mayanMace.name
-mayanpickaxe;mln54;0;item.ml_mayanPickaxe.name
-mayanquestcrown;mln95;0;item.ml_mayanQuestCrown.name
-mayanshovel;mln56;0;item.ml_mayanShovel.name
-mayanstatue;mln39;0;item.ml_mayanstatue.name
-melonseeds;362;0;Melon Seeds
-melonslice;360;0;Melon
-mudbrick;1519;1;tile.ml_stone_deco.1.name
-mushroombrown;39;0;Mushroom
-mushroomred;40;0;Mushroom
-netherwart;372;0;Nether Wart
-normanaxe;mln8;0;item.ml_normanAxe.name
-normanboots;mln16;0;item.ml_normanBoots.name
-normanbroadsword;mln12;0;item.ml_normanBroadsword.name
-normanchest;mln14;0;item.ml_normanPlate.name
-normanhelmet;mln13;0;item.ml_normanHelmet.name
-normanhoe;mln10;0;item.ml_normanHoe.name
-normanlegs;mln15;0;item.ml_normanLegs.name
-normanpickaxe;mln7;0;item.ml_normanPickaxe.name
-normanshovel;mln9;0;item.ml_normanShovel.name
-obsidian;49;0;Obsidian
-obsidianflake;mln52;0;item.ml_obsidianFlake.name
-painting;321;0;Painting
-paper;339;0;Paper
-paperwall;1521;0;tile.ml_panes.name
-parchmentbuildings;mln18;0;item.ml_parchmentBuildings.name
-parchmentcomplete;mln20;0;item.ml_marchmentComplete.name
-parchmentindianbuildings;mln36;0;item.ml_parchmentIndianBuildings.name
-parchmentindiancomplete;mln38;0;item.ml_marchmentIndianComplete.name
-parchmentindianitems;mln37;0;item.ml_parchmentIndianItems.name
-parchmentindianvillagers;mln35;0;item.ml_parchmentIndianVillagers.name
-parchmentitems;mln19;0;item.ml_parchmentItems.name
-parchmentjapanesebuildings;mln72;0;item.ml_parchmentJapaneseBuildings.name
-parchmentjapanesecomplete;mln74;0;item.ml_parchmentJapaneseComplete.name
-parchmentjapaneseitems;mln73;0;item.ml_parchmentJapaneseItems.name
-parchmentjapanesevillagers;mln71;0;item.ml_parchmentJapaneseVillagers.name
-parchmentmayanbuildings;mln44;0;item.ml_parchmentMayanBuildings.name
-parchmentmayancomplete;mln46;0;item.ml_parchmentMayanComplete.name
-parchmentmayanitems;mln45;0;item.ml_parchmentMayanItems.name
-parchmentmayanvillagers;mln43;0;item.ml_parchmentMayanVillagers.name
-parchmentsadhu;mln47;0;item.ml_parchmentSadhu.name
-parchmentvillagers;mln17;0;item.ml_parchmentVillagers.name
-pathdirt;1525;0;tile.ml_path.0.name
-pathdirt_slab;1526;0;tile.ml_path_slab.0.name
-pathdirt_slab_stable;1526;8;tile.ml_path_slab.8.name
-pathdirt_stable;1525;8;tile.ml_path.8.name
-pathgravel;1525;1;tile.ml_path.1.name
-pathgravel_slab;1526;1;tile.ml_path_slab.1.name
-pathgravel_slab_stable;1526;9;tile.ml_path_slab.9.name
-pathgravel_stable;1525;9;tile.ml_path.9.name
-pathgravelslabs;1525;5;tile.ml_path.5.name
-pathgravelslabs_slab;1526;5;tile.ml_path_slab.5.name
-pathgravelslabs_slab_stable;1526;13;tile.ml_path_slab.13.name
-pathgravelslabs_stable;1525;13;tile.ml_path.13.name
-pathochretiles;1525;4;tile.ml_path.4.name
-pathochretiles_slab;1526;4;tile.ml_path_slab.4.name
-pathochretiles_slab_stable;1526;12;tile.ml_path_slab.12.name
-pathochretiles_stable;1525;12;tile.ml_path.12.name
-pathsandstone;1525;3;tile.ml_path.3.name
-pathsandstone_slab;1526;3;tile.ml_path_slab.3.name
-pathsandstone_slab_stable;1526;11;tile.ml_path_slab.11.name
-pathsandstone_stable;1525;11;tile.ml_path.11.name
-pathslabs;1525;2;tile.ml_path.2.name
-pathslabs_slab;1526;2;tile.ml_path_slab.2.name
-pathslabs_slab_stable;1526;10;tile.ml_path_slab.10.name
-pathslabs_stable;1525;10;tile.ml_path.10.name
-planks_birch;5;2;Birch Wood Planks
-planks_jungle;5;3;Jungle Wood Planks
-planks_oak;5;0;Oak Wood Planks
-planks_pine;5;1;Spruce Wood Planks
-porkchops;319;0;Raw Porkchop
-porkchopscooked;320;0;Cooked Porkchop
-potato;392;0;Potato
-pumpkin;86;0;Pumpkin
-pumpkinseeds;361;0;Pumpkin Seeds
-purse;mln92;0;item.ml_purse.name
-rasgulla;mln33;0;item.ml_rasgullaId.name
-redflower;38;0;Rose
-redstone;331;0;Redstone
-rice;mln28;0;item.ml_rice.name
-rottenflesh;367;0;Rotten Flesh
-saddle;329;0;Saddle
-sake;mln93;0;item.ml_sake.name
-sand;12;0;Sand
-sandstone;24;0;Sandstone
-sapling;6;0;Oak Sapling
-sapling_birch;6;2;Birch Sapling
-sapling_jungle;6;3;Jungle Sapling
-sapling_pine;6;1;Spruce Sapling
-seeds;295;0;Seeds
-shears;359;0;Shears
-silk;mln77;0;item.ml_silk.name
-silkwormblockempty;1517;3;tile.ml_wood_deco.3.name
-silkwormblockfull;1517;4;tile.ml_wood_deco.4.name
-skollhatiamulet;mln26;0;item.ml_skoll_hati_amulet.name
-slimeball;341;0;Slimeball
-snow;78;0;Snow
-souvlaki;mln91;0;item.ml_souvlaki.name
-spidereye;375;0;Spider Eye
-steelaxe;258;0;Iron Axe
-steelboots;309;0;Iron Boots
-steelchest;307;0;Iron Chestplate
-steelhelmet;306;0;Iron Helmet
-steelhoe;292;0;Iron Hoe
-steellegs;308;0;Iron Leggings
-steelpickaxe;257;0;Iron Pickaxe
-steelshovel;256;0;Iron Shovel
-steelsword;267;0;Iron Sword
-stone;1;0;Stone
-stoneaxe;275;0;Stone Axe
-stonebrick;98;0;Stone Bricks
-stonehoe;291;0;Stone Hoe
-stonepickaxe;274;0;Stone Pickaxe
-stoneshovel;273;0;Stone Shovel
-stonesword;272;0;Stone Sword
-string;287;0;String
-sugarcane;338;0;Sugar Canes
-tachisword;mln50;0;item.ml_taichiSword.name
-tapestry;mln22;0;item.ml_tapestry.name
-thatched;1517;2;tile.ml_wood_deco.2.name
-timberframe_cross;1517;1;tile.ml_wood_deco.1.name
-timberframe_plain;1517;0;tile.ml_wood_deco.0.name
-tnt;46;0;TNT
-tripes;mln6;0;item.ml_tripes.name
-turmeric;mln29;0;item.ml_turmeric.name
-udon;mln49;0;item.ml_udon.name
-unknownpowder;mln48;0;item.ml_unknownPowder.name
-vegcurry;mln30;0;item.ml_vegcurry.name
-villagewand;mln11;0;item.ml_villageWand.name
-vines;106;0;Vines
-vishnuamulet;mln23;0;item.ml_raven_amulet.name
-wah;mln42;0;item.ml_wah.name
-wheat;296;0;Wheat
-wine;mln76;0;item.ml_wine.name
-winebasic;mln87;0;item.ml_wine_basic.name
-wood;17;0;
-wood_any;17;-1;
-wood_birch;17;2;
-wood_jungle;17;3;
-wood_oak;17;0;
-wood_pine;17;1;
-woodaxe;271;0;Wooden Axe
-woodhoe;290;0;Wooden Hoe
-woodpickaxe;270;0;Wooden Pickaxe
-woodshovel;269;0;Wooden Shovel
-woodsword;268;0;Wooden Sword
-wool_black;35;15;Black Wool
-wool_blue;35;11;Blue Wool
-wool_brown;35;12;Brown Wool
-wool_cyan;35;9;Cyan Wool
-wool_gray;35;7;Gray Wool
-wool_green;35;13;Green Wool
-wool_lightblue;35;3;Light Blue Wool
-wool_lightgray;35;8;Light Gray Wool
-wool_limegreen;35;5;Lime Wool
-wool_magenta;35;2;Magenta Wool
-wool_orange;35;1;Orange Wool
-wool_pink;35;6;Pink Wool
-wool_purple;35;10;Purple Wool
-wool_red;35;14;Red Wool
-wool_white;35;0;Wool
-wool_yellow;35;4;Yellow Wool
-yddrasilamulet;mln25;0;item.ml_yddrasil_amulet.name
-yellowflower;37;0;Flower
-yumibow;mln58;0;item.ml_yumiBow.name
+akwardpotion;minecraft:potion;16;Awkward Potion
+alchemistamulet;millenaire:item.ml_dwarves_amulet;0;item.ml_dwarves_amulet.name
+alchimistexplosive;millenaire:tile.ml_stone_deco;3;tile.ml_stone_deco.3.name
+anyenchanted;null;0;
+arrow;minecraft:arrow;0;Arrow
+beefcooked;minecraft:cooked_beef;0;Steak
+beefraw;minecraft:beef;0;Raw Beef
+bone;minecraft:bone;0;Bone
+book;minecraft:book;0;Book
+bookandquill;minecraft:writable_book;0;Book and Quill
+bookshelves;minecraft:bookshelf;0;Bookshelf
+bottle;minecraft:glass_bottle;0;Glass Bottle
+boudin;millenaire:item.ml_boudin;0;item.ml_boudin.name
+bow;minecraft:bow;0;Bow
+bowlempty;minecraft:bowl;0;Bowl
+bowlsoup;minecraft:mushroom_stew;0;Mushroom Stew
+bread;minecraft:bread;0;Bread
+brickmould;millenaire:item.ml_brickmould;0;item.ml_brickmould.name
+bricks;minecraft:brick_block;0;Bricks
+bucketempty;minecraft:bucket;0;Bucket
+bucketlava;minecraft:lava_bucket;0;Lava Bucket
+bucketmilk;minecraft:milk_bucket;0;Milk
+bucketwater;minecraft:water_bucket;0;Water Bucket
+byzantineboots;millenaire:item.ml_byzantineBoots;0;item.ml_byzantineBoots.name
+byzantinehelmet;millenaire:item.ml_byzantineHelmet;0;item.ml_byzantineHelmet.name
+byzantineiconlarge;millenaire:item.ml_byzantineiconlarge;0;item.ml_byzantineiconlarge.name
+byzantineiconmedium;millenaire:item.ml_byzantineiconmedium;0;item.ml_byzantineiconmedium.name
+byzantineiconsmall;millenaire:item.ml_byzantineicon;0;item.ml_byzantineicon.name
+byzantinelegs;millenaire:item.ml_byzantineLegs;0;item.ml_byzantineLegs.name
+byzantinemace;millenaire:item.ml_byzantineMace;0;item.ml_byzantineMace.name
+byzantineplate;millenaire:item.ml_byzantinePlate;0;item.ml_byzantinePlate.name
+byzantinestonetiles;millenaire:tile.byzantine_mixedbrick;0;tile.byzantine_mixedbrick.name
+byzantinetiles;millenaire:tile.byzantine_brick;0;tile.byzantine_brick.name
+byzantinetileslab;millenaire:tile.byzantine_brick_slab;0;tile.byzantine_brick_slab.name
+cacauhaa;millenaire:item.ml_cacauhaa;0;item.ml_cacauhaa.name
+cactus;minecraft:cactus;0;Cactus
+cake;minecraft:cake;0;Cake
+calva;millenaire:item.ml_calva;0;item.ml_calva.name
+carrot;minecraft:carrot;0;Carrot
+chainboots;minecraft:chainmail_boots;0;Chain Boots
+chainchest;minecraft:chainmail_chestplate;0;Chain Chestplate
+chainhelmet;minecraft:chainmail_helmet;0;Chain Helmet
+chainlegs;minecraft:chainmail_leggings;0;Chain Leggings
+chickencurry;millenaire:item.ml_chickencurry;0;item.ml_chickencurry.name
+chickenmeat;minecraft:chicken;0;Raw Chicken
+chickenmeatcooked;minecraft:cooked_chicken;0;Cooked Chicken
+cider;millenaire:item.ml_cider;0;item.ml_cider.name
+ciderapple;millenaire:item.ml_ciderapple;0;item.ml_ciderapple.name
+clay;minecraft:clay_ball;0;Clay
+clock;minecraft:clock;0;Clock
+clothes_byz_silk;millenaire:item.ml_clothes;1;item.clothes_byz_silk.name
+clothes_byz_wool;millenaire:item.ml_clothes;0;item.clothes_byz_wool.name
+coal;minecraft:coal;0;Coal
+cobblestone;minecraft:cobblestone;0;Cobblestone
+compass;minecraft:compass;0;Compass
+cookedbrick;millenaire:tile.ml_stone_deco;0;tile.ml_stone_deco.0.name
+cookie;minecraft:cookie;0;Cookie
+denier;millenaire:item.ml_denier;0;item.ml_denier.name
+denierargent;millenaire:item.ml_denier_argent;0;item.ml_denier_argent.name
+denieror;millenaire:item.ml_denier_or;0;item.ml_denier_or.name
+diamond;minecraft:diamond;0;Diamond
+diamondaxe;minecraft:diamond_axe;0;Diamond Axe
+diamondboots;minecraft:diamond_boots;0;Diamond Boots
+diamondchest;minecraft:diamond_chestplate;0;Diamond Chestplate
+diamondhelmet;minecraft:diamond_helmet;0;Diamond Helmet
+diamondhoe;minecraft:diamond_hoe;0;Diamond Hoe
+diamondlegs;minecraft:diamond_leggings;0;Diamond Leggings
+diamondpickaxe;minecraft:diamond_pickaxe;0;Diamond Pickaxe
+diamondshovel;minecraft:diamond_shovel;0;Diamond Shovel
+diamondsword;minecraft:diamond_sword;0;Diamond Sword
+dirt;minecraft:dirt;0;Dirt
+dirtwall;millenaire:tile.ml_earth_deco;1;tile.ml_earth_deco.1.name
+dye_black;minecraft:dye;0;Ink Sac
+dye_blue;minecraft:dye;4;Lapis Lazuli
+dye_brown;minecraft:dye;3;Cocoa Beans
+dye_cyan;minecraft:dye;6;Cyan Dye
+dye_gray;minecraft:dye;8;Gray Dye
+dye_green;minecraft:dye;2;Cactus Green
+dye_lightblue;minecraft:dye;12;Light Blue Dye
+dye_lightgray;minecraft:dye;7;Light Gray Dye
+dye_lime;minecraft:dye;10;Lime Dye
+dye_magenta;minecraft:dye;13;Magenta Dye
+dye_orange;minecraft:dye;14;Orange Dye
+dye_pink;minecraft:dye;9;Pink Dye
+dye_purple;minecraft:dye;5;Purple Dye
+dye_red;minecraft:dye;1;Rose Red
+dye_white;minecraft:dye;15;Bone Meal
+dye_yellow;minecraft:dye;11;Dandelion Yellow
+egg;minecraft:egg;0;Egg
+enchantedsword;null;0;
+enderpearl;minecraft:ender_pearl;0;Ender Pearl
+feather;minecraft:feather;0;Feather
+feta;millenaire:item.ml_feta;0;item.ml_feta.name
+fishcooked;minecraft:cooked_fished;0;Cooked Fish
+fishraw;minecraft:fish;0;Raw Fish
+flint;minecraft:flint;0;Flint
+flintandsteel;minecraft:flint_and_steel;0;Flint and Steel
+ghasttear;minecraft:ghast_tear;0;Ghast Tear
+glass;minecraft:glass;0;Glass
+gold;minecraft:gold_ingot;0;Gold Ingot
+goldaxe;minecraft:golden_axe;0;Golden Axe
+goldboots;minecraft:golden_boots;0;Golden Boots
+goldchest;minecraft:golden_chestplate;0;Golden Chestplate
+goldhelmet;minecraft:golden_helmet;0;Golden Helmet
+goldhoe;minecraft:golden_hoe;0;Golden Hoe
+goldlegs;minecraft:golden_leggings;0;Golden Leggings
+goldore;minecraft:gold_ore;0;Gold Ore
+goldpickaxe;minecraft:golden_pickaxe;0;Golden Pickaxe
+goldshovel;minecraft:golden_shovel;0;Golden Shovel
+goldsword;minecraft:golden_sword;0;Golden Sword
+grapes;millenaire:item.ml_vine;0;item.ml_vine.name
+gravel;minecraft:gravel;0;Gravel
+gunpowder;minecraft:gunpowder;0;Gunpowder
+ikayaki;millenaire:item.ml_ikayaki;0;item.ml_ikayaki.name
+indianstatue;millenaire:item.ml_indianstatue;0;item.ml_indianstatue.name
+iron;minecraft:iron_ingot;0;Iron Ingot
+ironore;minecraft:iron_ore;0;Iron Ore
+japaneseguardboots;millenaire:item.ml_japaneseGuardBoots;0;item.ml_japaneseGuardBoots.name
+japaneseguardhelmet;millenaire:item.ml_japaneseGuardHelmet;0;item.ml_japaneseGuardHelmet.name
+japaneseguardlegs;millenaire:item.ml_japaneseGuardLegs;0;item.ml_japaneseGuardLegs.name
+japaneseguardplate;millenaire:item.ml_japaneseGuardPlate;0;item.ml_japaneseGuardPlate.name
+japanesewarriorblueboots;millenaire:item.ml_japaneseWarriorBlueBoots;0;item.ml_japaneseWarriorBlueBoots.name
+japanesewarriorbluehelmet;millenaire:item.ml_japaneseWarriorBlueHelmet;0;item.ml_japaneseWarriorBlueHelmet.name
+japanesewarriorbluelegs;millenaire:item.ml_japaneseWarriorBlueLegs;0;item.ml_japaneseWarriorBlueLegs.name
+japanesewarriorblueplate;millenaire:item.ml_japaneseWarriorBluePlate;0;item.ml_japaneseWarriorBluePlate.name
+japanesewarriorredboots;millenaire:item.ml_japaneseWarriorRedBoots;0;item.ml_japaneseWarriorRedBoots.name
+japanesewarriorredhelmet;millenaire:item.ml_japaneseWarriorRedHelmet;0;item.ml_japaneseWarriorRedHelmet.name
+japanesewarriorredlegs;millenaire:item.ml_japaneseWarriorRedLegs;0;item.ml_japaneseWarriorRedLegs.name
+japanesewarriorredplate;millenaire:item.ml_japaneseWarriorRedPlate;0;item.ml_japaneseWarriorRedPlate.name
+lambcooked;millenaire:item.ml_lamb_cooked;0;item.ml_lamb_cooked.name
+lambraw;millenaire:item.ml_lamb_raw;0;item.ml_lamb_raw.name
+leather;minecraft:leather;0;Leather
+leatherboots;minecraft:leather_boots;0;Leather Boots
+leatherchest;minecraft:leather_chestplate;0;Leather Tunic
+leatherhelmet;minecraft:leather_helmet;0;Leather Cap
+leatherlegs;minecraft:leather_leggings;0;Leather Pants
+maize;millenaire:item.ml_maize;0;item.ml_maize.name
+masa;millenaire:item.ml_masa;0;item.ml_masa.name
+mayanaxe;millenaire:item.ml_mayanAxe;0;item.ml_mayanAxe.name
+mayangold;millenaire:tile.ml_stone_deco;2;tile.ml_stone_deco.2.name
+mayanhoe;millenaire:item.ml_mayanHoe;0;item.ml_mayanHoe.name
+mayanmace;millenaire:item.ml_mayanMace;0;item.ml_mayanMace.name
+mayanpickaxe;millenaire:item.ml_mayanPickaxe;0;item.ml_mayanPickaxe.name
+mayanquestcrown;millenaire:item.ml_mayanQuestCrown;0;item.ml_mayanQuestCrown.name
+mayanshovel;millenaire:item.ml_mayanShovel;0;item.ml_mayanShovel.name
+mayanstatue;millenaire:item.ml_mayanstatue;0;item.ml_mayanstatue.name
+melonseeds;minecraft:melon_seeds;0;Melon Seeds
+melonslice;minecraft:melon;0;Melon
+mudbrick;millenaire:tile.ml_stone_deco;1;tile.ml_stone_deco.1.name
+mushroombrown;minecraft:brown_mushroom;0;Mushroom
+mushroomred;minecraft:red_mushroom;0;Mushroom
+netherwart;minecraft:nether_wart;0;Nether Wart
+normanaxe;millenaire:item.ml_normanAxe;0;item.ml_normanAxe.name
+normanboots;millenaire:item.ml_normanBoots;0;item.ml_normanBoots.name
+normanbroadsword;millenaire:item.ml_normanBroadsword;0;item.ml_normanBroadsword.name
+normanchest;millenaire:item.ml_normanPlate;0;item.ml_normanPlate.name
+normanhelmet;millenaire:item.ml_normanHelmet;0;item.ml_normanHelmet.name
+normanhoe;millenaire:item.ml_normanHoe;0;item.ml_normanHoe.name
+normanlegs;millenaire:item.ml_normanLegs;0;item.ml_normanLegs.name
+normanpickaxe;millenaire:item.ml_normanPickaxe;0;item.ml_normanPickaxe.name
+normanshovel;millenaire:item.ml_normanShovel;0;item.ml_normanShovel.name
+obsidian;minecraft:obsidian;0;Obsidian
+obsidianflake;millenaire:item.ml_obsidianFlake;0;item.ml_obsidianFlake.name
+painting;minecraft:painting;0;Painting
+paper;minecraft:paper;0;Paper
+paperwall;millenaire:tile.ml_panes;0;tile.ml_panes.name
+parchmentbuildings;millenaire:item.ml_parchmentBuildings;0;item.ml_parchmentBuildings.name
+parchmentcomplete;millenaire:item.ml_marchmentComplete;0;item.ml_marchmentComplete.name
+parchmentindianbuildings;millenaire:item.ml_parchmentIndianBuildings;0;item.ml_parchmentIndianBuildings.name
+parchmentindiancomplete;millenaire:item.ml_marchmentIndianComplete;0;item.ml_marchmentIndianComplete.name
+parchmentindianitems;millenaire:item.ml_parchmentIndianItems;0;item.ml_parchmentIndianItems.name
+parchmentindianvillagers;millenaire:item.ml_parchmentIndianVillagers;0;item.ml_parchmentIndianVillagers.name
+parchmentitems;millenaire:item.ml_parchmentItems;0;item.ml_parchmentItems.name
+parchmentjapanesebuildings;millenaire:item.ml_parchmentJapaneseBuildings;0;item.ml_parchmentJapaneseBuildings.name
+parchmentjapanesecomplete;millenaire:item.ml_parchmentJapaneseComplete;0;item.ml_parchmentJapaneseComplete.name
+parchmentjapaneseitems;millenaire:item.ml_parchmentJapaneseItems;0;item.ml_parchmentJapaneseItems.name
+parchmentjapanesevillagers;millenaire:item.ml_parchmentJapaneseVillagers;0;item.ml_parchmentJapaneseVillagers.name
+parchmentmayanbuildings;millenaire:item.ml_parchmentMayanBuildings;0;item.ml_parchmentMayanBuildings.name
+parchmentmayancomplete;millenaire:item.ml_parchmentMayanComplete;0;item.ml_parchmentMayanComplete.name
+parchmentmayanitems;millenaire:item.ml_parchmentMayanItems;0;item.ml_parchmentMayanItems.name
+parchmentmayanvillagers;millenaire:item.ml_parchmentMayanVillagers;0;item.ml_parchmentMayanVillagers.name
+parchmentsadhu;millenaire:item.ml_parchmentSadhu;0;item.ml_parchmentSadhu.name
+parchmentvillagers;millenaire:item.ml_parchmentVillagers;0;item.ml_parchmentVillagers.name
+pathdirt;millenaire:tile.ml_path;0;tile.ml_path.0.name
+pathdirt_slab;millenaire:tile.ml_path_slab;0;tile.ml_path_slab.0.name
+pathdirt_slab_stable;millenaire:tile.ml_path_slab;8;tile.ml_path_slab.8.name
+pathdirt_stable;millenaire:tile.ml_path;8;tile.ml_path.8.name
+pathgravel;millenaire:tile.ml_path;1;tile.ml_path.1.name
+pathgravel_slab;millenaire:tile.ml_path_slab;1;tile.ml_path_slab.1.name
+pathgravel_slab_stable;millenaire:tile.ml_path_slab;9;tile.ml_path_slab.9.name
+pathgravel_stable;millenaire:tile.ml_path;9;tile.ml_path.9.name
+pathgravelslabs;millenaire:tile.ml_path;5;tile.ml_path.5.name
+pathgravelslabs_slab;millenaire:tile.ml_path_slab;5;tile.ml_path_slab.5.name
+pathgravelslabs_slab_stable;millenaire:tile.ml_path_slab;13;tile.ml_path_slab.13.name
+pathgravelslabs_stable;millenaire:tile.ml_path;13;tile.ml_path.13.name
+pathochretiles;millenaire:tile.ml_path;4;tile.ml_path.4.name
+pathochretiles_slab;millenaire:tile.ml_path_slab;4;tile.ml_path_slab.4.name
+pathochretiles_slab_stable;millenaire:tile.ml_path_slab;12;tile.ml_path_slab.12.name
+pathochretiles_stable;millenaire:tile.ml_path;12;tile.ml_path.12.name
+pathsandstone;millenaire:tile.ml_path;3;tile.ml_path.3.name
+pathsandstone_slab;millenaire:tile.ml_path_slab;3;tile.ml_path_slab.3.name
+pathsandstone_slab_stable;millenaire:tile.ml_path_slab;11;tile.ml_path_slab.11.name
+pathsandstone_stable;millenaire:tile.ml_path;11;tile.ml_path.11.name
+pathslabs;millenaire:tile.ml_path;2;tile.ml_path.2.name
+pathslabs_slab;millenaire:tile.ml_path_slab;2;tile.ml_path_slab.2.name
+pathslabs_slab_stable;millenaire:tile.ml_path_slab;10;tile.ml_path_slab.10.name
+pathslabs_stable;millenaire:tile.ml_path;10;tile.ml_path.10.name
+planks_birch;minecraft:planks;2;Birch Wood Planks
+planks_jungle;minecraft:planks;3;Jungle Wood Planks
+planks_oak;minecraft:planks;0;Oak Wood Planks
+planks_pine;minecraft:planks;1;Spruce Wood Planks
+porkchops;minecraft:porkchop;0;Raw Porkchop
+porkchopscooked;minecraft:cooked_porkchop;0;Cooked Porkchop
+potato;minecraft:potato;0;Potato
+pumpkin;minecraft:pumpkin;0;Pumpkin
+pumpkinseeds;minecraft:pumpkin_seeds;0;Pumpkin Seeds
+purse;millenaire:item.ml_purse;0;item.ml_purse.name
+rasgulla;millenaire:item.ml_rasgullaId;0;item.ml_rasgullaId.name
+redflower;minecraft:red_flower;0;Poppy
+redstone;minecraft:redstone;0;Redstone
+rice;millenaire:item.ml_rice;0;item.ml_rice.name
+rottenflesh;minecraft:rotten_flesh;0;Rotten Flesh
+saddle;minecraft:saddle;0;Saddle
+sake;millenaire:item.ml_sake;0;item.ml_sake.name
+sand;minecraft:sand;0;Sand
+sandstone;minecraft:sandstone;0;Sandstone
+sapling;minecraft:sapling;0;Oak Sapling
+sapling_birch;minecraft:sapling;2;Birch Sapling
+sapling_jungle;minecraft:sapling;3;Jungle Sapling
+sapling_pine;minecraft:sapling;1;Spruce Sapling
+seeds;minecraft:wheat_seeds;0;Seeds
+shears;minecraft:shears;0;Shears
+silk;millenaire:item.ml_silk;0;item.ml_silk.name
+silkwormblockempty;millenaire:tile.ml_wood_deco;3;tile.ml_wood_deco.3.name
+silkwormblockfull;millenaire:tile.ml_wood_deco;4;tile.ml_wood_deco.4.name
+skollhatiamulet;millenaire:item.ml_skoll_hati_amulet;0;item.ml_skoll_hati_amulet.name
+slimeball;minecraft:slime_ball;0;Slimeball
+snow;minecraft:snow;0;Snow
+souvlaki;millenaire:item.ml_souvlaki;0;item.ml_souvlaki.name
+spidereye;minecraft:spider_eye;0;Spider Eye
+steelaxe;minecraft:iron_axe;0;Iron Axe
+steelboots;minecraft:iron_boots;0;Iron Boots
+steelchest;minecraft:iron_chestplate;0;Iron Chestplate
+steelhelmet;minecraft:iron_helmet;0;Iron Helmet
+steelhoe;minecraft:iron_hoe;0;Iron Hoe
+steellegs;minecraft:iron_leggings;0;Iron Leggings
+steelpickaxe;minecraft:iron_pickaxe;0;Iron Pickaxe
+steelshovel;minecraft:iron_shovel;0;Iron Shovel
+steelsword;minecraft:iron_sword;0;Iron Sword
+stone;minecraft:stone;0;Stone
+stoneaxe;minecraft:stone_axe;0;Stone Axe
+stonebrick;minecraft:stonebrick;0;Stone Bricks
+stonehoe;minecraft:stone_hoe;0;Stone Hoe
+stonepickaxe;minecraft:stone_pickaxe;0;Stone Pickaxe
+stoneshovel;minecraft:stone_shovel;0;Stone Shovel
+stonesword;minecraft:stone_sword;0;Stone Sword
+string;millenaire:item.ml_silk;0;item.ml_silk.name
+sugarcane;minecraft:reeds;0;Sugar Canes
+tachisword;millenaire:item.ml_taichiSword;0;item.ml_taichiSword.name
+tapestry;millenaire:item.ml_tapestry;0;item.ml_tapestry.name
+thatched;millenaire:tile.ml_wood_deco;2;tile.ml_wood_deco.2.name
+timberframe_cross;millenaire:tile.ml_wood_deco;1;tile.ml_wood_deco.1.name
+timberframe_plain;millenaire:tile.ml_wood_deco;0;tile.ml_wood_deco.0.name
+tnt;minecraft:tnt;0;TNT
+tripes;millenaire:item.ml_tripes;0;item.ml_tripes.name
+turmeric;millenaire:item.ml_turmeric;0;item.ml_turmeric.name
+udon;millenaire:item.ml_udon;0;item.ml_udon.name
+unknownpowder;millenaire:item.ml_unknownPowder;0;item.ml_unknownPowder.name
+vegcurry;millenaire:item.ml_vegcurry;0;item.ml_vegcurry.name
+villagewand;millenaire:item.ml_villageWand;0;item.ml_villageWand.name
+vines;minecraft:vine;0;Vines
+vishnuamulet;millenaire:item.ml_raven_amulet;0;item.ml_raven_amulet.name
+wah;millenaire:item.ml_wah;0;item.ml_wah.name
+wheat;minecraft:wheat;0;Wheat
+wine;millenaire:item.ml_wine;0;item.ml_wine.name
+winebasic;millenaire:item.ml_wine_basic;0;item.ml_wine_basic.name
+wood;minecraft:log;0;
+wood_any;minecraft:log;-1;
+wood_birch;minecraft:log;2;
+wood_jungle;minecraft:log;3;
+wood_oak;minecraft:log;0;
+wood_pine;minecraft:log;1;
+woodaxe;minecraft:wooden_axe;0;Wooden Axe
+woodhoe;minecraft:wooden_hoe;0;Wooden Hoe
+woodpickaxe;minecraft:wooden_pickaxe;0;Wooden Pickaxe
+woodshovel;minecraft:wooden_shovel;0;Wooden Shovel
+woodsword;minecraft:wooden_sword;0;Wooden Sword
+wool_black;minecraft:wool;15;Black Wool
+wool_blue;minecraft:wool;11;Blue Wool
+wool_brown;minecraft:wool;12;Brown Wool
+wool_cyan;minecraft:wool;9;Cyan Wool
+wool_gray;minecraft:wool;7;Gray Wool
+wool_green;minecraft:wool;13;Green Wool
+wool_lightblue;minecraft:wool;3;Light Blue Wool
+wool_lightgray;minecraft:wool;8;Light Gray Wool
+wool_limegreen;minecraft:wool;5;Lime Wool
+wool_magenta;minecraft:wool;2;Magenta Wool
+wool_orange;minecraft:wool;1;Orange Wool
+wool_pink;minecraft:wool;6;Pink Wool
+wool_purple;minecraft:wool;10;Purple Wool
+wool_red;minecraft:wool;14;Red Wool
+wool_white;minecraft:wool;0;Wool
+wool_yellow;minecraft:wool;4;Yellow Wool
+yddrasilamulet;millenaire:item.ml_yddrasil_amulet;0;item.ml_yddrasil_amulet.name
+yellowflower;minecraft:yellow_flower;0;Dandelion
+yumibow;millenaire:item.ml_yumiBow;0;item.ml_yumiBow.name

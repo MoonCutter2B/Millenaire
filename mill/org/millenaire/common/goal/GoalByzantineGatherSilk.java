@@ -17,7 +17,7 @@ import org.millenaire.common.forge.Mill;
 public class GoalByzantineGatherSilk extends Goal {
 
 	private static ItemStack[] shears={new ItemStack(Items.shears,1)};
-	
+
 	public GoalByzantineGatherSilk() {
 		maxSimultaneousInBuilding=2;
 		buildingLimit.put(new InvItem(Mill.silk), 128);
@@ -41,8 +41,8 @@ public class GoalByzantineGatherSilk extends Goal {
 				buildingp.add(kiln.getPos());
 			}
 		}
-		
-		
+
+
 
 		if (vp.isEmpty())
 			return null;
@@ -67,7 +67,7 @@ public class GoalByzantineGatherSilk extends Goal {
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
 
-		
+
 
 		boolean delayOver;
 		if (!villager.lastGoalTime.containsKey(this)) {
@@ -99,9 +99,9 @@ public class GoalByzantineGatherSilk extends Goal {
 		if ((MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Mill.wood_decoration) && (MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint())==4)) {
 			villager.addToInv(Mill.silk,0, 1);
 			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Mill.wood_decoration,3);
-			
+
 			villager.swingItem();
-			
+
 			return false;
 		} else
 			return true;
@@ -110,9 +110,7 @@ public class GoalByzantineGatherSilk extends Goal {
 
 	@Override
 	public int priority(MillVillager villager) {
-
 		int p=100-(villager.getTownHall().nbGoodAvailable(new InvItem(Mill.stone_decoration, 1), false, false)*2);
-
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {
 				p=p/2;

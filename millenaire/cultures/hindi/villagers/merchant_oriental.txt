@@ -6,8 +6,8 @@ tag=visitor
 tag=foreignmerchant
 chanceWeight=10
 
-texture=/textures/entity/indian/ML_Merchant_Oriental0.png
-texture=/textures/entity/indian/ML_Merchant_Oriental1.png
+texture=textures/entity/indian/ML_Merchant_Oriental0.png
+texture=textures/entity/indian/ML_Merchant_Oriental1.png
 
 goal=gorest
 goal=gopray

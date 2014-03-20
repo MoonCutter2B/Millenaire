@@ -1,6 +1,5 @@
 package org.millenaire.client.gui;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
@@ -27,8 +26,6 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
-import cpw.mods.fml.relauncher.ReflectionHelper;
-
 public class GuiTrade extends GuiContainer {
 
 	private Building building;
@@ -47,7 +44,7 @@ public class GuiTrade extends GuiContainer {
 
 		super(new ContainerTrade(player, building));
 
-		drawSlotInventory=ReflectionHelper.findMethod(GuiContainer.class, this, new String[]{"func_146977_a","func_146977_a"}, Method.class);
+		drawSlotInventory=MillCommonUtilities.getDrawSlotInventoryMethod(this);
 		
 		container=(ContainerTrade)this.inventorySlots;
 
@@ -67,7 +64,7 @@ public class GuiTrade extends GuiContainer {
 	{
 		super(new ContainerTrade(player, merchant));
 		
-		drawSlotInventory=ReflectionHelper.findMethod(GuiContainer.class, this, new String[]{"func_146977_a","func_146977_a"}, Method.class);
+		drawSlotInventory=MillCommonUtilities.getDrawSlotInventoryMethod(this);
 
 		container=(ContainerTrade)this.inventorySlots;
 
@@ -154,7 +151,7 @@ public class GuiTrade extends GuiContainer {
 
 				if (j4 == 0)
 				{
-					s = (new StringBuilder()).append("\247").append(Integer.toHexString(stack.getRarity().rarityColor.getFormattingCode())).append(s).toString();
+					s = (new StringBuilder()).append(stack.getRarity().rarityColor).append(s).toString();
 				}
 				else
 				{
@@ -176,7 +173,7 @@ public class GuiTrade extends GuiContainer {
 		}
 	}
 
-	ResourceLocation background=new ResourceLocation(Mill.modId,"/textures/gui/ML_trade.png");
+	ResourceLocation background=new ResourceLocation(Mill.modId,"textures/gui/ML_trade.png");
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
@@ -232,6 +229,8 @@ public class GuiTrade extends GuiContainer {
 			}
 		}
 	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -257,7 +256,7 @@ public class GuiTrade extends GuiContainer {
 		{
 			final Slot slot1 = (Slot)inventorySlots.inventorySlots.get(i1);
 			try {
-				drawSlotInventory.invoke(slot1);
+				drawSlotInventory.invoke(this,slot1);
 			} catch (Exception e) {
 				MLN.printException("Exception when trying to access drawSlotInventory", e);
 			}

@@ -3,8 +3,8 @@ gender=male
 familyNameList=low_caste_family_names
 firstNameList=men_names
 
-texture=/textures/entity/mayan/mayan_Farmer0.png
-texture=/textures/entity/mayan/mayan_Farmer1.png
+texture=textures/entity/mayan/mayan_Farmer0.png
+texture=textures/entity/mayan/mayan_Farmer1.png
 
 goal=gorest
 goal=gopray

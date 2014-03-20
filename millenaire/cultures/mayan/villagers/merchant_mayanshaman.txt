@@ -6,8 +6,8 @@ tag=visitor
 tag=foreignmerchant
 chanceWeight=10
 
-texture=/textures/entity/mayan/mayan_shaman0.png
-texture=/textures/entity/mayan/mayan_shaman1.png
+texture=textures/entity/mayan/mayan_shaman0.png
+texture=textures/entity/mayan/mayan_shaman1.png
 
 goal=gorest
 goal=gopray

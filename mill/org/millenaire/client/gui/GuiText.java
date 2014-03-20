@@ -611,6 +611,7 @@ public abstract class GuiText extends GuiScreen {
         drawHoveringText(list, par2, par3, (font == null ? fontRendererObj : font));
     }
 	
+	@Override
 	@SuppressWarnings({ "rawtypes" })
 	protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font)
     {

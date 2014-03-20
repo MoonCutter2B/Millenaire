@@ -110,8 +110,8 @@ public class GuiPanelParchment extends GuiText {
 		return 19;
 	}
 	
-	ResourceLocation backgroundParchment=new ResourceLocation(Mill.modId,"/textures/gui/ML_parchment.png");
-	ResourceLocation backgroundPanel=new ResourceLocation(Mill.modId,"/textures/gui/ML_panel.png");
+	ResourceLocation backgroundParchment=new ResourceLocation(Mill.modId,"textures/gui/ML_parchment.png");
+	ResourceLocation backgroundPanel=new ResourceLocation(Mill.modId,"textures/gui/ML_panel.png");
 
 	@Override
 	public ResourceLocation getPNGPath() {
@@ -356,8 +356,8 @@ public class GuiPanelParchment extends GuiText {
 		final int startX=(getXSize()-chunkMapSizeInBlocks/8)/2;
 		final int startY=(getYSize()-chunkMapSizeInBlocks/8)/2;
 
-		int posXstart=((int)player.chunkCoordX*16-chunkMapSizeInBlocks/2);
-		int posZstart=((int)player.chunkCoordZ*16-chunkMapSizeInBlocks/2);
+		int posXstart=(player.chunkCoordX*16-chunkMapSizeInBlocks/2);
+		int posZstart=(player.chunkCoordZ*16-chunkMapSizeInBlocks/2);
 
 
 		int mouseX=(i-startX-windowXstart)/2*16+posXstart;

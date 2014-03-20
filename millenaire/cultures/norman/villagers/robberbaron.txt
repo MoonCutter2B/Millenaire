@@ -9,7 +9,7 @@ tag=raider
 tag=noteleport
 health=60
 
-texture=/textures/entity/norman/ML_BaronFelon0.png
+texture=textures/entity/norman/ML_BaronFelon0.png
 
 goal=gorest
 goal=goDrink

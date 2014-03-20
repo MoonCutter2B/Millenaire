@@ -11,7 +11,7 @@ tag=raider
 tag=noteleport
 health=25
 
-texture=/textures/entity/japanese/japanese_bandit.png
+texture=textures/entity/japanese/japanese_bandit.png
 
 
 goal=gorest

@@ -6,7 +6,7 @@ baseHeight=0.85
 malechild=japanese_boy
 femalechild=japanese_girl
 
-texture=/textures/entity/japanese/japanese_BrewerWoman.png
+texture=textures/entity/japanese/japanese_BrewerWoman.png
 
 goal=gorest
 goal=gopray

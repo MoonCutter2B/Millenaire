@@ -1,11 +1,14 @@
 package org.millenaire.common.forge;
 
 import java.io.File;
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Vector;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.init.Blocks;
@@ -17,11 +20,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 
+import org.millenaire.client.network.ClientReceiver;
 import org.millenaire.common.Culture;
 import org.millenaire.common.EntityMillDecoration;
 import org.millenaire.common.MLN;
@@ -104,9 +110,9 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "5.3.0";
+	public static final String versionNumber = "5.2.0b1";
 
-	public static final String versionBound = "[5.3.0,6.0)";
+	public static final String versionBound = "[5.2.0,6.0)";
 	public static final String modId="millenaire";
 	public static final String name = "Millénaire"; 
 
@@ -134,7 +140,7 @@ public class Mill
 	static ArmorMaterial ARMOUR_japaneseWarrior= EnumHelper.addArmorMaterial("japaneseWarrior", 33, new int[]{2, 6, 5, 2}, 25);
 	static ArmorMaterial ARMOUR_japaneseGuard= EnumHelper.addArmorMaterial("japaneseGuard", 25, new int[]{2, 5, 4, 1}, 25);
 	static ArmorMaterial ARMOUR_byzantine= EnumHelper.addArmorMaterial("byzantineArmour", 33, new int[]{3, 8, 6, 3}, 20);
-	
+
 	public static FMLEventChannel millChannel;
 
 
@@ -339,7 +345,7 @@ public class Mill
 
 		lockedChest = (new BlockMillChest().setBlockName("ml_building").setHardness(10F).setResistance(2000F)).setStepSound(Block.soundTypeWood);
 
-		panel = (new BlockPanel(TileEntityPanel.class,false).setBlockName("ml_panel").setHardness(10F).setResistance(2000F)).setStepSound(Block.soundTypeWood);;
+		panel = (new BlockPanel(TileEntityPanel.class,false).setBlockName("ml_panel").setHardness(10F).setResistance(2000F)).setStepSound(Block.soundTypeWood);
 		wood_decoration = new BlockDecorative(Material.wood);
 		earth_decoration = new BlockDecorative(Material.ground);
 		stone_decoration = new BlockDecorative(Material.rock);
@@ -558,7 +564,7 @@ public class Mill
 		entityNames.put(EntityTargetedBlaze.class, ENTITY_TARGETED_BLAZE);
 		entityNames.put(EntityTargetedWitherSkeleton.class, ENTITY_TARGETED_WITHERSKELETON);
 
-		
+
 	}
 
 	@EventHandler
@@ -569,22 +575,14 @@ public class Mill
 		initBlockItems();
 
 		AchievementPage.registerAchievementPage(MillAchievements.millAchievements);
+		
+		registerBlocksItemsEntities();
+
+		if (event.getSide() == Side.CLIENT)
+			Minecraft.getMinecraft().refreshResources();
 	}
-
-	@EventHandler
-	public void load(FMLInitializationEvent evt) {
-
-		if (startupError)
-			return;
-
-
-
-		LanguageRegistry.instance().addStringLocalization("itemGroup.Millenaire", "en_US", name);
-
-		if (MLN.stopDefaultVillages) {
-			//MapGenVillage.villageSpawnBiomes=Arrays.asList(new BiomeGenBase[] { });
-		}
-
+	
+	private void registerBlocksItemsEntities() {
 		try {
 			EntityRegistry.registerGlobalEntityID(MillVillager.MLEntityGenericAsymmFemale.class, MillVillager.GENERIC_ASYMM_FEMALE, EntityRegistry.findGlobalUniqueEntityId());
 			EntityRegistry.registerModEntity(MillVillager.MLEntityGenericAsymmFemale.class,MillVillager.GENERIC_ASYMM_FEMALE, VILLAGER_ENT_ID+1,instance, 64, 3, true);
@@ -608,21 +606,23 @@ public class Mill
 			EntityRegistry.registerModEntity(EntityTargetedWitherSkeleton.class,ENTITY_TARGETED_WITHERSKELETON, VILLAGER_ENT_ID+10,instance, 64, 3, true);
 
 
-			GameRegistry.registerBlock(lockedChest,Mill.modId+":"+lockedChest.getUnlocalizedName());
-			GameRegistry.registerBlock(panel,Mill.modId+":"+panel.getUnlocalizedName());
-			GameRegistry.registerBlock(wood_decoration,ItemDecorative.class,Mill.modId+":"+wood_decoration.getUnlocalizedName());
-			GameRegistry.registerBlock(earth_decoration,ItemDecorative.class,Mill.modId+":"+earth_decoration.getUnlocalizedName());
-			GameRegistry.registerBlock(stone_decoration,ItemDecorative.class,Mill.modId+":"+stone_decoration.getUnlocalizedName());
-			GameRegistry.registerBlock(path,Mill.modId+":"+path.getUnlocalizedName());
-			GameRegistry.registerBlock(pathSlab,Mill.modId+":"+pathSlab.getUnlocalizedName());
+			GameRegistry.registerBlock(lockedChest,lockedChest.getUnlocalizedName());
+			GameRegistry.registerBlock(panel,panel.getUnlocalizedName());
+			GameRegistry.registerBlock(wood_decoration,ItemDecorative.class,wood_decoration.getUnlocalizedName());
+			GameRegistry.registerBlock(earth_decoration,ItemDecorative.class,earth_decoration.getUnlocalizedName());
+			GameRegistry.registerBlock(stone_decoration,ItemDecorative.class,stone_decoration.getUnlocalizedName());
+			GameRegistry.registerBlock(path,ItemDecorativeSlab.class,path.getUnlocalizedName());
+			GameRegistry.registerBlock(pathSlab,ItemDecorativeSlab.class,pathSlab.getUnlocalizedName());
 
-			
-			Item.itemRegistry.addObject(Block.getIdFromBlock(path), "ml_path", new ItemDecorativeSlab(path, pathSlab, path, true));
-			Item.itemRegistry.addObject(Block.getIdFromBlock(pathSlab), "ml_path_slab", new ItemDecorativeSlab(pathSlab, pathSlab, path, false));
 
-			GameRegistry.registerBlock(byzantine_tiles,Mill.modId+":"+byzantine_tiles.getUnlocalizedName());
-			GameRegistry.registerBlock(byzantine_tile_slab,Mill.modId+":"+byzantine_tile_slab.getUnlocalizedName());
-			GameRegistry.registerBlock(byzantine_stone_tiles,Mill.modId+":"+byzantine_stone_tiles.getUnlocalizedName());
+			//GameRegistry.registerItem(new ItemDecorativeSlab(path, pathSlab, path, true), "ml_path");
+			//GameRegistry.registerItem(new ItemDecorativeSlab(pathSlab, pathSlab, path, false), "ml_path_slab");
+			//Item.itemRegistry.addObject(Block.getIdFromBlock(path), "ml_path", new ItemDecorativeSlab(path, pathSlab, path, true));
+			//Item.itemRegistry.addObject(Block.getIdFromBlock(pathSlab), "ml_path_slab", new ItemDecorativeSlab(pathSlab, pathSlab, path, false));
+
+			GameRegistry.registerBlock(byzantine_tiles,byzantine_tiles.getUnlocalizedName());
+			GameRegistry.registerBlock(byzantine_tile_slab,byzantine_tile_slab.getUnlocalizedName());
+			GameRegistry.registerBlock(byzantine_stone_tiles,byzantine_stone_tiles.getUnlocalizedName());
 
 			GameRegistry.addSmelting(lambRaw, new ItemStack(lambCooked,1), 0.3f);
 
@@ -647,12 +647,18 @@ public class Mill
 			}
 
 
-			GameRegistry.registerBlock(paperWall,Mill.modId+":"+paperWall.getUnlocalizedName());
-			
-			Blocks.fire.setFireInfo(wood_decoration, 5, 20);
-			Blocks.fire.setFireInfo(crops, 60, 100);
-			Blocks.fire.setFireInfo(paperWall, 30, 60);
+			GameRegistry.registerBlock(paperWall,paperWall.getUnlocalizedName());
 
+			Field[] fields = Mill.class.getFields();
+
+			for (Field f : fields) {
+				if (f.getType().isAssignableFrom(Item.class)) {
+					Item item=(Item)f.get(this);
+					GameRegistry.registerItem(item,item.getUnlocalizedName());
+				}
+			}
+			GameRegistry.registerItem(clothes,clothes.getUnlocalizedName());
+			GameRegistry.registerItem(purse,purse.getUnlocalizedName());
 
 			proxy.registerTileEntities();
 			proxy.registerGraphics();
@@ -661,6 +667,20 @@ public class Mill
 		} catch (final Exception e) {
 			MLN.error(this, "Exception in mod initialisation: ");
 			MLN.printException(e);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void load(FMLInitializationEvent evt) {
+
+		if (startupError)
+			return;
+		
+		LanguageRegistry.instance().addStringLocalization("itemGroup.Millenaire", "en_US", name);
+
+		if (MLN.stopDefaultVillages) {
+			MapGenVillage.villageSpawnBiomes=Arrays.asList(new BiomeGenBase[] { });
 		}
 
 		boolean error=false;
@@ -701,6 +721,11 @@ public class Mill
 		}
 
 		FMLCommonHandler.instance().bus().register(new ServerTickHandler()); 
+		FMLCommonHandler.instance().bus().register(this);
+		
+		millChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(ServerReceiver.PACKET_CHANNEL);
+		millChannel.register(new ServerReceiver());
+		millChannel.register(new ClientReceiver());
 
 		proxy.registerForgeClientClasses();
 
@@ -711,14 +736,23 @@ public class Mill
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(this, new ChunkLoaderCallback());
 
-
+		MLN.checkBonusCode(false);
 
 		proxy.loadLanguages();
+		
+		for (Object o : Block.blockRegistry) {
+			Block b=(Block)o;
+			
+			if (Item.getItemFromBlock(b)==null)
+				MLN.major(null, "Block without item: "+b);
+			
+		}
+		
 	}
 
 	@EventHandler
-    public void serverLoad(FMLServerStartingEvent event) {
-		millChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(ServerReceiver.PACKET_CHANNEL);
-    }
+	public void serverLoad(FMLServerStartingEvent event) {
+
+	}
 }
 

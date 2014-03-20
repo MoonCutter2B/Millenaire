@@ -8,8 +8,8 @@ health=12
 tag=raider
 tag=noteleport
 
-texture=/textures/entity/mayan/mayanbanditboy0.png
-texture=/textures/entity/mayan/mayanbanditboy1.png
+texture=textures/entity/mayan/mayanbanditboy0.png
+texture=textures/entity/mayan/mayanbanditboy1.png
 
 goal=gorest
 goal=goDrink

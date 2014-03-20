@@ -115,6 +115,7 @@ public class MillAchievements extends Achievement {
 			super(name, achievements);
 		}
 		
+		@Override
 		public String getName()
 	    {
 	        return MLN.string("achievementpage.name");

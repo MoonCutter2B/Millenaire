@@ -1,0 +1,1 @@
+native:Onsenmachi;around:4;startLevel:-3;orientation:3;width:84;length:65;startingsubbuilding:hotspringsinn_A_market;startingsubbuilding:hotspringsinn_A_kitchen;showtownhallsigns:false;startingGood:rice,1,8,16;startingGood:udon,1,2,4;startingGood:ikayaki,1,2,4;startingGood:sake,1,4,4;startingGood:bread,1,8,16;male:japanese_innkeeper;female:japanese_innkeeperwife;shop:japaneseinn

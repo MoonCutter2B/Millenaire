@@ -355,7 +355,7 @@ public class GuiVillageHead extends GuiText {
 		return 16;
 	}
 
-	ResourceLocation background=new ResourceLocation(Mill.modId,"/textures/gui/ML_village_chief.png");
+	ResourceLocation background=new ResourceLocation(Mill.modId,"textures/gui/ML_village_chief.png");
 
 	@Override
 	public ResourceLocation getPNGPath() {

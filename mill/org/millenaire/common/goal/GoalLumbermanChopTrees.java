@@ -73,10 +73,10 @@ public class GoalLumbermanChopTrees extends Goal {
 
 	@Override
 	public boolean isPossibleSpecific(MillVillager villager) {
-		
+
 		if (villager.countInv(Blocks.log, -1)>64)
 			return false;
-		
+
 		if (getDestination(villager)==null)
 			return false;
 		return true;

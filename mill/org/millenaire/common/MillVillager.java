@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 
 import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -80,8 +81,6 @@ import org.millenaire.common.pathing.atomicstryker.AStarPathPlanner;
 import org.millenaire.common.pathing.atomicstryker.AStarStatic;
 import org.millenaire.common.pathing.atomicstryker.IAStarPathedEntity;
 
-import com.google.common.io.ByteArrayDataInput;
-
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
 public abstract class MillVillager extends EntityCreature  implements IEntityAdditionalSpawnData, IAStarPathedEntity {
@@ -111,13 +110,23 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		final public int meta;
 		final public int special;
 
-		public InvItem(Block block,int meta) {
+		public InvItem(Block block,int meta) {			
 			this.block=block;
 			this.item=Item.getItemFromBlock(block);
 			this.meta=meta;
 			staticStack=new ItemStack(item,1,meta);
 			staticStackArray=new ItemStack[]{staticStack};
 			special=0;
+			checkValidity();
+		}
+
+		private void checkValidity() {
+			if (block==Blocks.air) {
+				MLN.printException(new MillenaireException("Attempted to create an InvItem for air blocks."));
+			}
+			if (item==null && block==null && special==0) {
+				MLN.printException(new MillenaireException("Attempted to create an empty InvItem."));
+			}
 		}
 
 		public InvItem(int special) {
@@ -127,6 +136,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			item=null;
 			block=null;
 			meta=0;
+			checkValidity();
 		}
 		
 		public InvItem(Item item) {
@@ -139,16 +149,25 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		public InvItem(Item item,int meta) {
 			this.item=item;
-			this.block=Block.getBlockFromItem(item);
+			if (Block.getBlockFromItem(item)!=Blocks.air) {
+				block=Block.getBlockFromItem(item);
+			} else {
+				block=null;
+			}
 			this.meta=meta;
 			staticStack=new ItemStack(item,1,meta);
 			staticStackArray=new ItemStack[]{staticStack};
 			special=0;
+			checkValidity();
 		}
 
 		public InvItem(ItemStack is) {
 			item=is.getItem();
-			this.block=Block.getBlockFromItem(item);
+			if (Block.getBlockFromItem(item)!=Blocks.air) {
+				block=Block.getBlockFromItem(item);
+			} else {
+				block=null;
+			}
 			if (is.getItemDamage()>0) {
 				meta=is.getItemDamage();
 			} else {
@@ -157,6 +176,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			staticStack=new ItemStack(item,1,meta);
 			staticStackArray=new ItemStack[]{staticStack};
 			special=0;
+			checkValidity();
 		}
 
 		public InvItem(String s) {
@@ -187,6 +207,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 
 			staticStackArray=new ItemStack[]{staticStack};
+			checkValidity();
 		}
 
 		@Override
@@ -227,8 +248,14 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 				return MLN.string("ui.woodjungle");
 			else if (meta==-1)
 				return Mill.proxy.getItemName(item, 0);
-			else
-				return Mill.proxy.getItemName(item, meta);
+			else {
+				if (item!=null)
+					return Mill.proxy.getItemName(item, meta);
+				else {
+					MLN.printException(new MillenaireException("Trying to get the name of an invalid InvItem."));
+					return "";
+				}
+			}
 		}
 
 		public String getTranslationKey() {
@@ -700,7 +727,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 	
 	public void addToInv(Block block,int meta,int nb) {
-		addToInv(block,meta,nb);
+		addToInv(Item.getItemFromBlock(block),meta,nb);
 	}
 	
 	public void addToInv(Item item,int nb) {
@@ -1547,7 +1574,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	public Item getBestHoe() {
-		Item bestTool=(ItemTool)Items.wooden_hoe;
+		Item bestTool=Items.wooden_hoe;
 		float bestRating=0;
 
 		for (InvItem item : inventory.keySet()) {
@@ -2948,6 +2975,12 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 		isUsingBow=false;//will be set to true if the NPC is attacking with a bow in attackEntity()
 		isUsingHandToHand=false;
+		
+		for (int i=0;i<5;i++) {
+			if (getEquipmentInSlot(i)!=null && getEquipmentInSlot(i).getItem()==null) {
+				MLN.printException("ItemStack with null item: "+getEquipmentInSlot(i), new Exception());
+			}
+		}
 
 		super.onUpdate();
 
@@ -3109,7 +3142,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		final NBTTagList nbttaglist = nbttagcompound.getTagList("inventory", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 
 			int itemID=nbttagcompound1.getInteger("item");
 			int itemMeta=nbttagcompound1.getInteger("meta");
@@ -3337,7 +3370,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 	}
 
 	private void sendVillagerPacket() {
-		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
+		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_VILLAGER);
@@ -3418,14 +3451,14 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		if (par1Entity instanceof EntityLivingBase)
 		{
 			EntityLivingBase entityliving = (EntityLivingBase)par1Entity;
-			d2 = entityliving.posY + (double)entityliving.getEyeHeight() - (this.posY + (double)this.getEyeHeight());
+			d2 = entityliving.posY + entityliving.getEyeHeight() - (this.posY + this.getEyeHeight());
 		}
 		else
 		{
-			d2 = (par1Entity.boundingBox.minY + par1Entity.boundingBox.maxY) / 2.0D - (this.posY + (double)this.getEyeHeight());
+			d2 = (par1Entity.boundingBox.minY + par1Entity.boundingBox.maxY) / 2.0D - (this.posY + this.getEyeHeight());
 		}
 
-		double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d1 * d1);
+		double d3 = MathHelper.sqrt_double(d0 * d0 + d1 * d1);
 		float f2 = (float)(Math.atan2(d1, d0) * 180.0D / Math.PI) - 90.0F;
 		float f3 = (float)(-(Math.atan2(d2, d3) * 180.0D / Math.PI));
 		this.rotationPitch = this.updateRotation(this.rotationPitch, f3, par3);
@@ -4191,7 +4224,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 	}
 
-	private void writeVillagerStreamData(ByteBufOutputStream data,boolean isSpawn) throws IOException {
+	private void writeVillagerStreamData(DataOutput data,boolean isSpawn) throws IOException {
 
 		if (vtype==null) {
 			MLN.error(this, "Cannot write stream data due to null vtype.");

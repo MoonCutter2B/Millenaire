@@ -1,0 +1,19 @@
+name:Onsenmachi
+weight:10
+radius:90
+
+mindistancefromspawn:1000
+
+biome:extreme hills
+biome:river
+biome:plains
+biome:forest
+
+//extraBiomes mod
+biome:autumn woods
+biome:green hills
+biome:forested hills
+
+
+//starting buildings:
+centre:hotspringsinn

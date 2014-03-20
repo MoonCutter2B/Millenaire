@@ -4,7 +4,7 @@ familyNameList=family_names
 firstNameList=men_names
 tag=chief
 
-texture=/textures/entity/norman/ML_GuildMaster0.png
+texture=textures/entity/norman/ML_GuildMaster0.png
 
 goal=gorest
 goal=gosocialise

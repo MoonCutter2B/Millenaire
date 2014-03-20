@@ -1,9 +1,9 @@
 package org.millenaire.common;
 
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
 
 import java.io.DataInputStream;
+import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -480,11 +480,11 @@ public class Building {
 
 			building.name=StreamReadWrite.readNullableString(ds);
 			building.qualifier=StreamReadWrite.readNullableString(ds);
-			
+
 			building.raidTarget=StreamReadWrite.readNullablePoint(ds);
 			building.raidPlanningStart=ds.readLong();
 			building.raidStart=ds.readLong();
-			
+
 
 			for (final Point p : building.chests) {
 				final TileEntityMillChest chest=p.getMillChest(mw.world);
@@ -704,7 +704,7 @@ public class Building {
 		if (l.tags.contains(tagPujas)) {
 			pujas=new PujaSacrifice(this,PujaSacrifice.PUJA);
 		}
-		
+
 		if (l.tags.contains(tagSacrifices)) {
 			pujas=new PujaSacrifice(this,PujaSacrifice.MAYAN);
 		}
@@ -1021,7 +1021,7 @@ public class Building {
 			village.saveTownHall("distance relation change");//immediate save as the distance village might be frozen
 		}
 
-		
+
 	}
 
 	public void adjustReputation(EntityPlayer player,int l) {
@@ -1188,7 +1188,7 @@ public class Building {
 			}
 		}
 	}
-	
+
 	public void planRaid(Building target) {
 		raidPlanningStart=worldObj.getWorldTime();
 		raidStart=0;
@@ -1197,12 +1197,12 @@ public class Building {
 		if (MLN.LogDiplomacy>=MLN.MAJOR) {
 			MLN.major(this, "raidTarget set: "+raidTarget+" name: "+target.name);
 		}
-		
+
 		saveNeeded=true;
 		saveReason="Raid planned";
-		
+
 		ServerSender.sendTranslatedSentenceInRange(worldObj, getPos(),MLN.BackgroundRadius,MLN.DARKRED, "raid.planningstarted",getVillageQualifiedName(),target.getVillageQualifiedName());
-	
+
 	}
 
 	public PathingWorker calculatePath(MillVillager villager, Point start,
@@ -1773,11 +1773,11 @@ public class Building {
 	public int countGoods(Item item) {
 		return countGoods(item, 0);
 	}
-	
+
 	public int countGoods(Block block) {
 		return countGoods(Item.getItemFromBlock(block), 0);
 	}
-	
+
 	public int countGoods(Block block, int meta) {
 		return countGoods(Item.getItemFromBlock(block), meta);
 	}
@@ -2232,7 +2232,7 @@ public class Building {
 						if (nbToTake>0) {
 
 							if (MLN.LogDiplomacy>=MLN.DEBUG) {
-								MLN.debug(this, "Able to take: "+nbToTake+" "+Mill.proxy.getItemName(good.item.getItem(), good.item.meta));
+								MLN.debug(this, "Able to take: "+nbToTake+" "+Mill.proxy.getInvItemName(good.item));
 							}
 
 							targetVillage.takeGoods(good.item, nbToTake);
@@ -3194,13 +3194,13 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(brickspot.size());
 		for (int i = start; i < brickspot.size(); i++) {
 			final Point p = brickspot.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p) == null)
+			if (MillCommonUtilities.getBlock(worldObj, p) == Blocks.air)
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = brickspot.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p) == null)
+			if (MillCommonUtilities.getBlock(worldObj, p) == Blocks.air)
 				return p;
 		}
 
@@ -3334,7 +3334,7 @@ public class Building {
 
 		for (int i = 0; i < brickspot.size(); i++) {
 			final Point p = brickspot.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p) == null) {
+			if (MillCommonUtilities.getBlock(worldObj, p) == Blocks.air) {
 				nb++;
 			}
 		}
@@ -3382,7 +3382,7 @@ public class Building {
 		int nb = 0;
 		for (int i = 0; i < netherwartsoils.size(); i++) {
 			final Point p = netherwartsoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null) {
+			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Blocks.air) {
 				nb++;
 			}
 		}
@@ -3439,7 +3439,7 @@ public class Building {
 		int nb = 0;
 		for (int i = 0; i < sugarcanesoils.size(); i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null) {
+			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Blocks.air) {
 				nb++;
 			}
 		}
@@ -3495,13 +3495,13 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(netherwartsoils.size());
 		for (int i = start; i < netherwartsoils.size(); i++) {
 			final Point p = netherwartsoils.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null) && (MillCommonUtilities.getBlock(worldObj, p) == Blocks.soul_sand))
+			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Blocks.air) && (MillCommonUtilities.getBlock(worldObj, p) == Blocks.soul_sand))
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = netherwartsoils.get(i);
-			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null) && (MillCommonUtilities.getBlock(worldObj, p) == Blocks.soul_sand))
+			if ((MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Blocks.air) && (MillCommonUtilities.getBlock(worldObj, p) == Blocks.soul_sand))
 				return p;
 		}
 
@@ -3545,7 +3545,7 @@ public class Building {
 	public Point getPlantingLocation() {
 		for (final Point p : woodspawn) {
 			final Block block = MillCommonUtilities.getBlock(worldObj, p);
-			if ((block == null) || (block == Blocks.snow))
+			if ((block == Blocks.air) || (block == Blocks.snow))
 				return p;
 		}
 		return null;
@@ -3703,13 +3703,13 @@ public class Building {
 		final int start = MillCommonUtilities.randomInt(sugarcanesoils.size());
 		for (int i = start; i < sugarcanesoils.size(); i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null)
+			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Blocks.air)
 				return p;
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == null)
+			if (MillCommonUtilities.getBlock(worldObj, p.getAbove()) == Blocks.air)
 				return p;
 		}
 
@@ -3720,15 +3720,15 @@ public class Building {
 		for (int i=0;i<soilTypes.size();i++) {
 			if (soilTypes.get(i).equals(Mill.CROP_CACAO)) {
 				for (Point p : soils.get(i)) {
-					if (p.getBlock(worldObj)==null) {
+					if (p.getBlock(worldObj)==Blocks.air) {
 						if (p.getNorth().getBlock(worldObj)==Blocks.log && 
-								BlockLog.func_150165_c((int)(p.getNorth().getMeta(worldObj))) == 3)
+								BlockLog.func_150165_c((p.getNorth().getMeta(worldObj))) == 3)
 							return p;
 						if (p.getEast().getBlock(worldObj)==Blocks.log && 
-								BlockLog.func_150165_c((int)(p.getEast().getMeta(worldObj))) == 3)
+								BlockLog.func_150165_c((p.getEast().getMeta(worldObj))) == 3)
 							return p;
 						if (p.getSouth().getBlock(worldObj)==Blocks.log && 
-								BlockLog.func_150165_c((int)(p.getSouth().getMeta(worldObj))) == 3)
+								BlockLog.func_150165_c((p.getSouth().getMeta(worldObj))) == 3)
 							return p;
 						if (p.getWest().getBlock(worldObj)==Blocks.log && 
 								BlockLog.func_150165_c((p.getWest().getMeta(worldObj))) == 3)
@@ -3904,7 +3904,7 @@ public class Building {
 
 	public void growTree(World world, int i, int j, int k, Random random) {
 		final int meta = world.getBlockMetadata(i, j, k) & 3;
-		MillCommonUtilities.setBlockAndMetadata(worldObj, i,j,k, null, 0, true, false);
+		MillCommonUtilities.setBlockAndMetadata(worldObj, i,j,k, Blocks.air, 0, true, false);
 		WorldGenerator obj = null;
 		if (meta == 1) {
 			obj = new WorldGenTaiga2(true);
@@ -4309,19 +4309,19 @@ public class Building {
 
 		nbNightsMerchant = 0;
 	}
-	
+
 	public int nbGoodAvailable(Block block, boolean forExport, boolean forShop) {
 		return nbGoodAvailable(new InvItem(block),forExport,forShop);
 	}
-	
+
 	public int nbGoodAvailable(Block block, int meta, boolean forExport, boolean forShop) {
 		return nbGoodAvailable(new InvItem(block,meta),forExport,forShop);
 	}
-	
+
 	public int nbGoodAvailable(Item item, boolean forExport, boolean forShop) {
 		return nbGoodAvailable(new InvItem(item),forExport,forShop);
 	}
-	
+
 	public int nbGoodAvailable(Item item, int meta, boolean forExport, boolean forShop) {
 		return nbGoodAvailable(new InvItem(item,meta),forExport,forShop);
 	}
@@ -4593,7 +4593,7 @@ public class Building {
 
 			NBTTagList nbttaglist = nbttagcompound.getTagList("chests", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4609,7 +4609,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("furnaces", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4619,7 +4619,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("brewingStands", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4629,7 +4629,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("signs", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4641,7 +4641,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("netherwartsoils", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4653,7 +4653,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("silkwormblock", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4665,7 +4665,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("sugarcanesoils", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4675,7 +4675,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("fishingspots", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4685,7 +4685,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("healingspots", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4695,7 +4695,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("stalls", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4705,7 +4705,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("woodspawn", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4715,7 +4715,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("brickspot", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4725,7 +4725,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("spawns", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 
 				String spawnType=nbttagcompound1.getString("type");
@@ -4747,7 +4747,7 @@ public class Building {
 				final NBTTagList nbttaglist2 = nbttagcompound1
 						.getTagList("points", Constants.NBT.TAG_COMPOUND);
 				for (int j = 0; j < nbttaglist2.tagCount(); j++) {
-					final NBTTagCompound nbttagcompound2 = (NBTTagCompound) nbttaglist2
+					final NBTTagCompound nbttagcompound2 = nbttaglist2
 							.getCompoundTagAt(j);
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
@@ -4768,7 +4768,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("mobspawns", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 
 				mobSpawnerTypes.add(nbttagcompound1.getString("type"));
@@ -4777,7 +4777,7 @@ public class Building {
 				final NBTTagList nbttaglist2 = nbttagcompound1
 						.getTagList("points", Constants.NBT.TAG_COMPOUND);
 				for (int j = 0; j < nbttaglist2.tagCount(); j++) {
-					final NBTTagCompound nbttagcompound2 = (NBTTagCompound) nbttaglist2
+					final NBTTagCompound nbttagcompound2 = nbttaglist2
 							.getCompoundTagAt(j);
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
@@ -4796,7 +4796,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("sources", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 
 				sourceTypes.add(Block.getBlockById(nbttagcompound1.getInteger("type")));
@@ -4805,7 +4805,7 @@ public class Building {
 				final NBTTagList nbttaglist2 = nbttagcompound1
 						.getTagList("points", Constants.NBT.TAG_COMPOUND);
 				for (int j = 0; j < nbttaglist2.tagCount(); j++) {
-					final NBTTagCompound nbttagcompound2 = (NBTTagCompound) nbttaglist2
+					final NBTTagCompound nbttagcompound2 = nbttaglist2
 							.getCompoundTagAt(j);
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
@@ -4825,7 +4825,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("villagersrecords", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final VillagerRecord vr = VillagerRecord.read(mw,culture,townHallPos,
 						nbttagcompound1, "vr");
@@ -4842,14 +4842,14 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("visitorsList", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				visitorsList.add(nbttagcompound1.getString("visitor"));
 			}
 
 			nbttaglist = nbttagcompound.getTagList("subBuildings", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 				final Point p = Point.read(nbttagcompound1, "pos");
 				if (p != null) {
@@ -4861,7 +4861,7 @@ public class Building {
 
 			nbttaglist = nbttagcompound.getTagList("genericsoils", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 
 				final String type=nbttagcompound1.getString("type");
@@ -4869,7 +4869,7 @@ public class Building {
 				final NBTTagList nbttaglist2 = nbttagcompound1
 						.getTagList("points", Constants.NBT.TAG_COMPOUND);
 				for (int j = 0; j < nbttaglist2.tagCount(); j++) {
-					final NBTTagCompound nbttagcompound2 = (NBTTagCompound) nbttaglist2
+					final NBTTagCompound nbttagcompound2 = nbttaglist2
 							.getCompoundTagAt(j);
 					final Point p = Point.read(nbttagcompound2, "pos");
 					if (p != null) {
@@ -4885,7 +4885,7 @@ public class Building {
 					MLN.minor(this, "read pujas object");
 				}
 			}
-			
+
 			lastGoodsRefresh=nbttagcompound.getLong("lastGoodsRefresh");
 
 			if (location.tags.contains(tagInn) && !isTownhall) {
@@ -4937,7 +4937,7 @@ public class Building {
 
 		NBTTagList nbttaglist = nbttagcompound.getTagList("importedGoods", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound tag = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
 			final InvItem good = new InvItem(Item.getItemById(tag.getInteger("itemid")),
 					tag.getInteger("itemmeta"));
 			imported.put(good, tag.getInteger("quantity"));
@@ -4945,7 +4945,7 @@ public class Building {
 
 		nbttaglist = nbttagcompound.getTagList("exportedGoods", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound tag = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
 			final InvItem good = new InvItem(Item.getItemById(tag.getInteger("itemid")),
 					tag.getInteger("itemmeta"));
 			exported.put(good, tag.getInteger("quantity"));
@@ -4956,7 +4956,7 @@ public class Building {
 	private void readLegacySoilsFromNBT(NBTTagCompound nbttagcompound) {
 		NBTTagList nbttaglist = nbttagcompound.getTagList("soils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
@@ -4966,7 +4966,7 @@ public class Building {
 
 		nbttaglist = nbttagcompound.getTagList("ricesoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
@@ -4976,7 +4976,7 @@ public class Building {
 
 		nbttaglist = nbttagcompound.getTagList("turmericsoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
@@ -4986,7 +4986,7 @@ public class Building {
 
 		nbttaglist = nbttagcompound.getTagList("maizesoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
@@ -4996,7 +4996,7 @@ public class Building {
 
 		nbttaglist = nbttagcompound.getTagList("vinesoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
@@ -5091,7 +5091,7 @@ public class Building {
 		// legacy, to be removed later
 		NBTTagList nbttaglist = nbttagcompound.getTagList("houses", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
@@ -5101,7 +5101,7 @@ public class Building {
 
 		nbttaglist = nbttagcompound.getTagList("buildings", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
@@ -5113,7 +5113,7 @@ public class Building {
 
 		nbttaglist = nbttagcompound.getTagList("locations", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			final BuildingLocation location = BuildingLocation.read(
 					nbttagcompound1, "location", "locations");
@@ -5209,7 +5209,7 @@ public class Building {
 
 		nbttaglist = nbttagcompound.getTagList("buildingsBought", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			buildingsBought.add(nbttagcompound1.getString("key"));
 		}
@@ -5219,7 +5219,7 @@ public class Building {
 		if (nbttagcompound.hasKey("relations")) {
 			nbttaglist = nbttagcompound.getTagList("relations", Constants.NBT.TAG_COMPOUND);
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
-				final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+				final NBTTagCompound nbttagcompound1 = nbttaglist
 						.getCompoundTagAt(i);
 
 				relations.put(Point.read(nbttagcompound1, "pos"), nbttagcompound1.getInteger("value"));
@@ -5237,14 +5237,14 @@ public class Building {
 
 		nbttaglist = nbttagcompound.getTagList("raidsPerformed", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			raidsPerformed.add(nbttagcompound1.getString("raid"));
 		}
 
 		nbttaglist = nbttagcompound.getTagList("raidsTaken", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			raidsSuffered.add(nbttagcompound1.getString("raid"));
 		}
@@ -5834,7 +5834,7 @@ public class Building {
 	}
 
 	public void sendShopPacket(EntityPlayer player) {
-		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
+		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 
@@ -5921,7 +5921,7 @@ public class Building {
 
 		if (worldObj.isRemote)
 			return;
-		
+
 		if (sendChest) {
 			for (final Point p :chests) {
 				final TileEntityMillChest chest=p.getMillChest(worldObj);
@@ -5933,7 +5933,7 @@ public class Building {
 			}
 		}
 
-		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
+		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 
@@ -5982,11 +5982,11 @@ public class Building {
 
 			StreamReadWrite.writeNullableString(name, data);
 			StreamReadWrite.writeNullableString(qualifier, data);
-			
+
 			StreamReadWrite.writeNullablePoint(raidTarget, data);
 			data.writeLong(raidPlanningStart);
 			data.writeLong(raidStart);
-			
+
 		} catch (final IOException e) {
 			MLN.printException(this+": Error in sendUpdatePacket", e);
 		}
@@ -6105,7 +6105,7 @@ public class Building {
 	public int storeGoods(Item item, int toPut) {
 		return storeGoods(item, 0, toPut);
 	}
-	
+
 	public int storeGoods(Block block,int toPut) {
 		return storeGoods(Item.getItemFromBlock(block),0,toPut);
 	}
@@ -6113,7 +6113,7 @@ public class Building {
 	public int storeGoods(Block block, int meta, int toPut) {
 		return storeGoods(Item.getItemFromBlock(block),meta,toPut);
 	}
-	
+
 	public int storeGoods(Item item, int meta, int toPut) {
 
 		int stored = 0;
@@ -6199,11 +6199,11 @@ public class Building {
 	public int takeGoods(Item item, int toTake) {
 		return takeGoods(item, 0, toTake);
 	}
-	
+
 	public int takeGoods(Block block, int toTake) {
 		return takeGoods(Item.getItemFromBlock(block), 0, toTake);
 	}
-	
+
 	public int takeGoods(Block block, int meta, int toTake) {
 		return takeGoods(Item.getItemFromBlock(block), meta, toTake);
 	}
@@ -7146,9 +7146,9 @@ public class Building {
 					} else if (spawnTypes.get(i).equals(Mill.ENTITY_SQUID)) {
 						nb = squid;
 					}
-					
+
 					int multipliyer=1;
-					
+
 					if (spawnTypes.get(i).equals(Mill.ENTITY_SQUID)) {
 						multipliyer=2;
 					}

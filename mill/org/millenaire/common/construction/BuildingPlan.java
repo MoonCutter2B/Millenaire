@@ -108,7 +108,7 @@ public class BuildingPlan {
 			this.meta=(byte) meta;
 			this.special=(byte) special;
 		}
-		
+
 		public BuildingBlock(Point p,int blockID,int meta,int special) {
 			this.p=p;
 			this.block=(Block) Block.blockRegistry.getObjectById(blockID);
@@ -239,7 +239,7 @@ public class BuildingPlan {
 					final Block block=MillCommonUtilities.getBlock(world, p);
 
 					if ((block==Blocks.log) || (block==Blocks.leaves)) {
-						MillCommonUtilities.setBlockAndMetadata(world, p, null, 0, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.air, 0, notifyBlocks, playSound);
 
 						final Block blockBelow=MillCommonUtilities.getBlock(world, p.getBelow());
 
@@ -257,7 +257,7 @@ public class BuildingPlan {
 				} else if (special==BuildingBlock.CLEARGROUND) {
 
 					if (!wandimport || (MillCommonUtilities.getBlock(world, p)!=Blocks.standing_sign)) {
-						MillCommonUtilities.setBlockAndMetadata(world, p, null, 0, notifyBlocks, playSound);
+						MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.air, 0, notifyBlocks, playSound);
 					}
 
 					final Block blockBelow=MillCommonUtilities.getBlock(world, p.getBelow());
@@ -356,7 +356,7 @@ public class BuildingPlan {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.mob_spawner, 0);
 					final TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)p.getTileEntity(world);
 					tileentitymobspawner.func_145881_a().setEntityName("Blaze");
-					
+
 				} else if (special==BuildingBlock.DISPENDERUNKNOWNPOWDER) {
 					MillCommonUtilities.setBlockAndMetadata(world, p, Blocks.dispenser, 0);
 					final TileEntityDispenser dispenser=p.getDispenser(world);
@@ -547,7 +547,7 @@ public class BuildingPlan {
 			this.secondStep=secondStep;
 			name=null;
 		}
-		
+
 		public PointType(char letter,Block block,int meta,boolean secondStep) {
 			this.letter=letter;
 			this.block=block;
@@ -585,7 +585,7 @@ public class BuildingPlan {
 		public boolean isType(String type) {
 			return type.equalsIgnoreCase(name);
 		}
-		
+
 		public Block getBlock() {
 			return block;
 		}
@@ -1016,7 +1016,7 @@ public class BuildingPlan {
 
 
 
-	static public void generateWikiTable() {
+	static public void generateWikiTable() throws MillenaireException {
 
 		HashMap<InvItem,String> picts=new HashMap<InvItem,String>();
 		HashMap<InvItem,String> links=new HashMap<InvItem,String>();
@@ -1622,7 +1622,7 @@ public class BuildingPlan {
 		//First all the "normal" blocks:
 		for (final PointType pt : colourPoints.values()) {
 			if (pt.name==null) {
-				
+
 				Block block=pt.getBlock();
 
 				reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.block, pt.meta), pt);
@@ -2219,18 +2219,37 @@ public class BuildingPlan {
 		addToCost(block,0,nb);
 	}
 	
-	private void addToCost(Item item,int nb) {
-		addToCost(Block.getBlockFromItem(item),0,nb);
+	private void addToCost(Block block,int meta,int nb) {
+		try {
+			final InvItem key=new InvItem(block,meta);
+
+			if (resCost.containsKey(key)) {
+				nb+=resCost.get(key);
+				resCost.put(key, nb);
+			} else {
+				resCost.put(key, nb);
+			}
+		} catch (Exception e) {
+			MLN.printException("Exception when calculating cost of: "+this,e);
+		}
 	}
 
-	private void addToCost(Block block,int meta,int nb) {
-		final InvItem key=new InvItem(block,meta);
+	private void addToCost(Item item,int nb) {
+		addToCost(item,0,nb);
+	}
 
-		if (resCost.containsKey(key)) {
-			nb+=resCost.get(key);
-			resCost.put(key, nb);
-		} else {
-			resCost.put(key, nb);
+	private void addToCost(Item item,int meta,int nb) {
+		try {
+			final InvItem key=new InvItem(item,meta);
+
+			if (resCost.containsKey(key)) {
+				nb+=resCost.get(key);
+				resCost.put(key, nb);
+			} else {
+				resCost.put(key, nb);
+			}
+		} catch (Exception e) {
+			MLN.printException("Exception when calculating cost of: "+this,e);
 		}
 	}
 
@@ -2412,7 +2431,9 @@ public class BuildingPlan {
 					} else if ((p.block==Blocks.wool)) {
 						addToCost(Blocks.wool,1);
 
-
+					} else if (p.block==Blocks.nether_wart) {
+						addToCost(Items.nether_wart,1);
+						
 					} else if (p.block==Blocks.double_stone_slab) {
 						addToCost(Blocks.stone,1);
 					} else if (p.block==Blocks.iron_block) {
@@ -2493,6 +2514,8 @@ public class BuildingPlan {
 						byzBricksHalf++;
 					} else if (p.isType(bbyzantineslab_leftright_inv)) {
 						byzBricksHalf++;
+						
+				
 
 
 					} else if ((p.block != null && p.block!=Blocks.air) && !Goods.freeGoods.contains(new InvItem(p.block,p.meta))
@@ -2791,7 +2814,7 @@ public class BuildingPlan {
 					final PointType pt=plan[ai][j][ak];
 					int m=0;
 					Block b=null;
-					
+
 					final Point p=adjustForOrientation(x, y+ai+firstLevel, z,j-lengthOffset,ak-widthOffset,orientation);
 
 					if ((pt.block != null && pt.block != Blocks.air) && !pt.secondStep) {//standard block
@@ -3167,7 +3190,7 @@ public class BuildingPlan {
 						b=Blocks.wool;
 					} else if (pt.isType(bfreestone)) {
 						b=Blocks.stone;
-						
+
 					} else if (pt.isType(bsquidspawn)) {
 						b=Blocks.water;
 					}

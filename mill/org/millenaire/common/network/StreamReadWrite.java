@@ -1,8 +1,7 @@
 package org.millenaire.common.network;
 
-import io.netty.buffer.ByteBufOutputStream;
-
 import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Random;
@@ -470,7 +469,7 @@ public class StreamReadWrite  {
 		return v;
 	}
 
-	public static void writeBuildingPlanInfo(BuildingPlan plan,ByteBufOutputStream data) throws IOException {
+	public static void writeBuildingPlanInfo(BuildingPlan plan,DataOutput data) throws IOException {
 		data.writeUTF(plan.buildingKey);
 
 		data.writeInt(plan.level);
@@ -490,7 +489,7 @@ public class StreamReadWrite  {
 		StreamReadWrite.writeStringVector(plan.tags, data);
 	}
 
-	public static void writeInventory(HashMap<InvItem,Integer> inventory,ByteBufOutputStream data) throws IOException {
+	public static void writeInventory(HashMap<InvItem,Integer> inventory,DataOutput data) throws IOException {
 		data.writeInt(inventory.size());
 
 		for (final InvItem key : inventory.keySet()) {
@@ -506,21 +505,21 @@ public class StreamReadWrite  {
 	 * 
 	 * Copied from Packet
 	 */
-	private static void writeItemStack(ItemStack par1ItemStack, ByteBufOutputStream par2ByteBufOutputStream) throws IOException
+	private static void writeItemStack(ItemStack par1ItemStack, DataOutput par2DataOutput) throws IOException
 	{
 		if (par1ItemStack == null)
 		{
-			par2ByteBufOutputStream.writeShort(-1);
+			par2DataOutput.writeShort(-1);
 		}
 		else
 		{
-			par2ByteBufOutputStream.writeInt(Item.getIdFromItem(par1ItemStack.getItem()));
-			par2ByteBufOutputStream.writeByte(par1ItemStack.stackSize);
-			par2ByteBufOutputStream.writeShort(par1ItemStack.getItemDamage());
+			par2DataOutput.writeInt(Item.getIdFromItem(par1ItemStack.getItem()));
+			par2DataOutput.writeByte(par1ItemStack.stackSize);
+			par2DataOutput.writeShort(par1ItemStack.getItemDamage());
 
 			if (par1ItemStack.getItem().isDamageable())
 			{
-				writeNBTTagCompound(par1ItemStack.stackTagCompound, par2ByteBufOutputStream);
+				writeNBTTagCompound(par1ItemStack.stackTagCompound, par2DataOutput);
 			}
 		}
 	}
@@ -530,21 +529,21 @@ public class StreamReadWrite  {
 	 * 
 	 * Copied from Packet
 	 */
-	private static void writeNBTTagCompound(NBTTagCompound par1NBTTagCompound, ByteBufOutputStream par2ByteBufOutputStream) throws IOException
+	private static void writeNBTTagCompound(NBTTagCompound par1NBTTagCompound, DataOutput par2DataOutput) throws IOException
 	{
 		if (par1NBTTagCompound == null)
 		{
-			par2ByteBufOutputStream.writeShort(-1);
+			par2DataOutput.writeShort(-1);
 		}
 		else
 		{
 			final byte[] var3 = CompressedStreamTools.compress(par1NBTTagCompound);
-			par2ByteBufOutputStream.writeShort((short)var3.length);
-			par2ByteBufOutputStream.write(var3);
+			par2DataOutput.writeShort((short)var3.length);
+			par2DataOutput.write(var3);
 		}
 	}
 
-	public static void writeNullableBuildingLocation(BuildingLocation bl, ByteBufOutputStream data) throws IOException {
+	public static void writeNullableBuildingLocation(BuildingLocation bl, DataOutput data) throws IOException {
 
 		data.writeBoolean(bl==null);
 
@@ -589,7 +588,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeNullableBuildingProject(BuildingProject bp,ByteBufOutputStream data) throws IOException {
+	public static void writeNullableBuildingProject(BuildingProject bp,DataOutput data) throws IOException {
 
 		data.writeBoolean(bp==null);
 
@@ -599,7 +598,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeNullableItemStack(ItemStack is,ByteBufOutputStream data) throws IOException {
+	public static void writeNullableItemStack(ItemStack is,DataOutput data) throws IOException {
 
 		data.writeBoolean(is==null);
 
@@ -608,7 +607,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeNullablePoint(Point p,ByteBufOutputStream data) throws IOException {
+	public static void writeNullablePoint(Point p,DataOutput data) throws IOException {
 		data.writeBoolean(p==null);
 
 		if (p!=null) {
@@ -618,7 +617,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeNullableGoods(Goods g,ByteBufOutputStream data) throws IOException {
+	public static void writeNullableGoods(Goods g,DataOutput data) throws IOException {
 		data.writeBoolean(g==null);
 
 		if (g!=null) {
@@ -649,7 +648,7 @@ public class StreamReadWrite  {
 		return g;
 	}
 
-	public static void writeNullablePuja(PujaSacrifice puja,ByteBufOutputStream data) throws IOException {
+	public static void writeNullablePuja(PujaSacrifice puja,DataOutput data) throws IOException {
 		data.writeBoolean(puja==null);
 		if (puja!=null) {
 
@@ -666,7 +665,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeNullableQuestInstance(QuestInstance qi,ByteBufOutputStream ds) throws IOException {
+	public static void writeNullableQuestInstance(QuestInstance qi,DataOutput ds) throws IOException {
 		ds.writeBoolean(qi==null);
 
 		if (qi!=null) {
@@ -685,7 +684,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeNullableQuestVillager(QuestInstanceVillager v,ByteBufOutputStream data) throws IOException {
+	public static void writeNullableQuestVillager(QuestInstanceVillager v,DataOutput data) throws IOException {
 		data.writeBoolean(v==null);
 
 		if (v!=null) {
@@ -694,7 +693,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeNullableString(String s,ByteBufOutputStream data) throws IOException {
+	public static void writeNullableString(String s,DataOutput data) throws IOException {
 
 		data.writeBoolean(s==null);
 
@@ -704,7 +703,7 @@ public class StreamReadWrite  {
 	}
 	
 
-	public static void writeNullableResourceLocation(ResourceLocation rs,ByteBufOutputStream data) throws IOException {
+	public static void writeNullableResourceLocation(ResourceLocation rs,DataOutput data) throws IOException {
 
 		data.writeBoolean(rs==null);
 
@@ -713,7 +712,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeNullableVillagerRecord(VillagerRecord vr,ByteBufOutputStream data) throws IOException {
+	public static void writeNullableVillagerRecord(VillagerRecord vr,DataOutput data) throws IOException {
 
 		data.writeBoolean(vr==null);
 
@@ -754,7 +753,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writePointIntegerMap(HashMap<Point,Integer> map,ByteBufOutputStream data) throws IOException {
+	public static void writePointIntegerMap(HashMap<Point,Integer> map,DataOutput data) throws IOException {
 		data.writeInt(map.size());
 
 		for (final Point p : map.keySet()) {
@@ -763,7 +762,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writePointVector(Vector<Point> points,ByteBufOutputStream data) throws IOException {
+	public static void writePointVector(Vector<Point> points,DataOutput data) throws IOException {
 		data.writeInt(points.size());
 
 		for (final Point p : points) {
@@ -771,7 +770,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeProjectVectorVector(Vector<Vector<BuildingProject>> projects,ByteBufOutputStream data) throws IOException {
+	public static void writeProjectVectorVector(Vector<Vector<BuildingProject>> projects,DataOutput data) throws IOException {
 		data.writeInt(projects.size());
 
 		for (final Vector<BuildingProject> vp : projects) {
@@ -782,7 +781,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeStringStringArray(String[][] strings,ByteBufOutputStream data) throws IOException {
+	public static void writeStringStringArray(String[][] strings,DataOutput data) throws IOException {
 		data.writeInt(strings.length);
 
 		for (final String[] array : strings) {
@@ -793,7 +792,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeStringStringMap(HashMap<String,String> strings,ByteBufOutputStream data) throws IOException {
+	public static void writeStringStringMap(HashMap<String,String> strings,DataOutput data) throws IOException {
 
 		if (strings==null) {
 			data.writeInt(0);
@@ -809,7 +808,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeStringStringVectorMap(HashMap<String,Vector<String>> strings,ByteBufOutputStream data) throws IOException {
+	public static void writeStringStringVectorMap(HashMap<String,Vector<String>> strings,DataOutput data) throws IOException {
 
 		if (strings==null) {
 			data.writeInt(0);
@@ -825,7 +824,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeStringVector(Vector<String> strings,ByteBufOutputStream data) throws IOException {
+	public static void writeStringVector(Vector<String> strings,DataOutput data) throws IOException {
 		data.writeInt(strings.size());
 
 		for (final String s : strings) {
@@ -833,7 +832,7 @@ public class StreamReadWrite  {
 		}
 	}
 
-	public static void writeVillagerRecordVector(Vector<VillagerRecord> vrecords,ByteBufOutputStream data) throws IOException {
+	public static void writeVillagerRecordVector(Vector<VillagerRecord> vrecords,DataOutput data) throws IOException {
 		data.writeInt(vrecords.size());
 
 		for (final VillagerRecord vr : vrecords) {

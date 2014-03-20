@@ -78,7 +78,7 @@ public class VillagerRecord implements Cloneable {
 		NBTTagList nbttaglist = nbttagcompound
 				.getTagList(label + "questTags", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+			final NBTTagCompound nbttagcompound1 = nbttaglist
 					.getCompoundTagAt(i);
 			vr.questTags.add(nbttagcompound1.getString("tag"));
 		}
@@ -86,7 +86,7 @@ public class VillagerRecord implements Cloneable {
 		nbttaglist = nbttagcompound.getTagList(label + "_inventory", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++)
 		{
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			vr.inventory.put(new InvItem(Item.getItemById(nbttagcompound1.getInteger("item")),nbttagcompound1.getInteger("meta")), nbttagcompound1.getInteger("amount"));
 		}
 

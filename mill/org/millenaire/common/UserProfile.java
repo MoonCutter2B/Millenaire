@@ -1,10 +1,10 @@
 package org.millenaire.common;
 
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutput;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -812,7 +812,7 @@ public class UserProfile {
 		if (this.mw.world.isRemote)
 			return;
 
-		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
+		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_PROFILE);
@@ -883,7 +883,7 @@ public class UserProfile {
 		if (mw.world.isRemote)
 			return;
 
-		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
+		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_QUESTINSTANCEDELETE);
@@ -910,7 +910,7 @@ public class UserProfile {
 			}
 		}
 
-		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
+		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
 
 		try {

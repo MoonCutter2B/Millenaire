@@ -1,10 +1,8 @@
 package org.millenaire.common;
 
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Vector;
 
@@ -143,7 +141,7 @@ public class MillWorldInfo implements Cloneable {
 		}
 
 		public void sendMapInfoPacket(EntityPlayer player) {
-			final ByteBufOutputStream ds = ServerSender.getNewByteBufOutputStream();
+			final DataOutput ds = ServerSender.getNewByteBufOutputStream();
 
 			try {
 

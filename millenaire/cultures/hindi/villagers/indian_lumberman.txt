@@ -5,10 +5,10 @@ firstNameList=men_names
 hiringcost=16
 tag=raider
 
-texture=/textures/entity/indian/ML_Lumberman0.png
-texture=/textures/entity/indian/ML_Lumberman1.png
-texture=/textures/entity/indian/ML_Lumberman2.png
-texture=/textures/entity/indian/ML_Lumberman3.png
+texture=textures/entity/indian/ML_Lumberman0.png
+texture=textures/entity/indian/ML_Lumberman1.png
+texture=textures/entity/indian/ML_Lumberman2.png
+texture=textures/entity/indian/ML_Lumberman3.png
 
 goal=gosocialise
 goal=chat

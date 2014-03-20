@@ -21,8 +21,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderWallDecoration extends Render
 {
-	public static final ResourceLocation textureTapestries=new ResourceLocation(Mill.modId,"/textures/painting/ML_Tapestry.png");
-	public static final ResourceLocation textureSculptures=new ResourceLocation(Mill.modId,"/textures/painting/ML_Scultures.png");
+	public static final ResourceLocation textureTapestries=new ResourceLocation(Mill.modId,"textures/painting/ML_Tapestry.png");
+	public static final ResourceLocation textureSculptures=new ResourceLocation(Mill.modId,"textures/painting/ML_Scultures.png");
 	
     public void renderThePainting(EntityMillDecoration ent, double par2, double par4, double par6, float par8, float par9)
     {
@@ -45,8 +45,8 @@ public class RenderWallDecoration extends Render
 
     private void func_77010_a(EntityMillDecoration par1EntityPainting, int sizeX, int sizeY, int offsetX, int offsetY)
     {
-        float f = (float)(-sizeX) / 2.0F;
-        float f1 = (float)(-sizeY) / 2.0F;
+        float f = (-sizeX) / 2.0F;
+        float f1 = (-sizeY) / 2.0F;
         float f2 = 0.5F;
         float f3 = 0.75F;
         float f4 = 0.8125F;
@@ -65,47 +65,47 @@ public class RenderWallDecoration extends Render
         {
             for (int j1 = 0; j1 < sizeY / 16; ++j1)
             {
-                float f15 = f + (float)((i1 + 1) * 16);
-                float f16 = f + (float)(i1 * 16);
-                float f17 = f1 + (float)((j1 + 1) * 16);
-                float f18 = f1 + (float)(j1 * 16);
+                float f15 = f + (i1 + 1) * 16;
+                float f16 = f + i1 * 16;
+                float f17 = f1 + (j1 + 1) * 16;
+                float f18 = f1 + j1 * 16;
                 this.func_77008_a(par1EntityPainting, (f15 + f16) / 2.0F, (f17 + f18) / 2.0F);
-                float f19 = (float)(offsetX + sizeX - i1 * 16) / 256.0F;
-                float f20 = (float)(offsetX + sizeX - (i1 + 1) * 16) / 256.0F;
-                float f21 = (float)(offsetY + sizeY - j1 * 16) / 256.0F;
-                float f22 = (float)(offsetY + sizeY - (j1 + 1) * 16) / 256.0F;
+                float f19 = (offsetX + sizeX - i1 * 16) / 256.0F;
+                float f20 = (offsetX + sizeX - (i1 + 1) * 16) / 256.0F;
+                float f21 = (offsetY + sizeY - j1 * 16) / 256.0F;
+                float f22 = (offsetY + sizeY - (j1 + 1) * 16) / 256.0F;
                 Tessellator tessellator = Tessellator.instance;
                 tessellator.startDrawingQuads();
                 tessellator.setNormal(0.0F, 0.0F, -1.0F);
-                tessellator.addVertexWithUV((double)f15, (double)f18, (double)(-f2), (double)f20, (double)f21);
-                tessellator.addVertexWithUV((double)f16, (double)f18, (double)(-f2), (double)f19, (double)f21);
-                tessellator.addVertexWithUV((double)f16, (double)f17, (double)(-f2), (double)f19, (double)f22);
-                tessellator.addVertexWithUV((double)f15, (double)f17, (double)(-f2), (double)f20, (double)f22);
+                tessellator.addVertexWithUV(f15, f18, (-f2), f20, f21);
+                tessellator.addVertexWithUV(f16, f18, (-f2), f19, f21);
+                tessellator.addVertexWithUV(f16, f17, (-f2), f19, f22);
+                tessellator.addVertexWithUV(f15, f17, (-f2), f20, f22);
                 tessellator.setNormal(0.0F, 0.0F, 1.0F);
-                tessellator.addVertexWithUV((double)f15, (double)f17, (double)f2, (double)f3, (double)f5);
-                tessellator.addVertexWithUV((double)f16, (double)f17, (double)f2, (double)f4, (double)f5);
-                tessellator.addVertexWithUV((double)f16, (double)f18, (double)f2, (double)f4, (double)f6);
-                tessellator.addVertexWithUV((double)f15, (double)f18, (double)f2, (double)f3, (double)f6);
+                tessellator.addVertexWithUV(f15, f17, f2, f3, f5);
+                tessellator.addVertexWithUV(f16, f17, f2, f4, f5);
+                tessellator.addVertexWithUV(f16, f18, f2, f4, f6);
+                tessellator.addVertexWithUV(f15, f18, f2, f3, f6);
                 tessellator.setNormal(0.0F, 1.0F, 0.0F);
-                tessellator.addVertexWithUV((double)f15, (double)f17, (double)(-f2), (double)f7, (double)f9);
-                tessellator.addVertexWithUV((double)f16, (double)f17, (double)(-f2), (double)f8, (double)f9);
-                tessellator.addVertexWithUV((double)f16, (double)f17, (double)f2, (double)f8, (double)f10);
-                tessellator.addVertexWithUV((double)f15, (double)f17, (double)f2, (double)f7, (double)f10);
+                tessellator.addVertexWithUV(f15, f17, (-f2), f7, f9);
+                tessellator.addVertexWithUV(f16, f17, (-f2), f8, f9);
+                tessellator.addVertexWithUV(f16, f17, f2, f8, f10);
+                tessellator.addVertexWithUV(f15, f17, f2, f7, f10);
                 tessellator.setNormal(0.0F, -1.0F, 0.0F);
-                tessellator.addVertexWithUV((double)f15, (double)f18, (double)f2, (double)f7, (double)f9);
-                tessellator.addVertexWithUV((double)f16, (double)f18, (double)f2, (double)f8, (double)f9);
-                tessellator.addVertexWithUV((double)f16, (double)f18, (double)(-f2), (double)f8, (double)f10);
-                tessellator.addVertexWithUV((double)f15, (double)f18, (double)(-f2), (double)f7, (double)f10);
+                tessellator.addVertexWithUV(f15, f18, f2, f7, f9);
+                tessellator.addVertexWithUV(f16, f18, f2, f8, f9);
+                tessellator.addVertexWithUV(f16, f18, (-f2), f8, f10);
+                tessellator.addVertexWithUV(f15, f18, (-f2), f7, f10);
                 tessellator.setNormal(-1.0F, 0.0F, 0.0F);
-                tessellator.addVertexWithUV((double)f15, (double)f17, (double)f2, (double)f12, (double)f13);
-                tessellator.addVertexWithUV((double)f15, (double)f18, (double)f2, (double)f12, (double)f14);
-                tessellator.addVertexWithUV((double)f15, (double)f18, (double)(-f2), (double)f11, (double)f14);
-                tessellator.addVertexWithUV((double)f15, (double)f17, (double)(-f2), (double)f11, (double)f13);
+                tessellator.addVertexWithUV(f15, f17, f2, f12, f13);
+                tessellator.addVertexWithUV(f15, f18, f2, f12, f14);
+                tessellator.addVertexWithUV(f15, f18, (-f2), f11, f14);
+                tessellator.addVertexWithUV(f15, f17, (-f2), f11, f13);
                 tessellator.setNormal(1.0F, 0.0F, 0.0F);
-                tessellator.addVertexWithUV((double)f16, (double)f17, (double)(-f2), (double)f12, (double)f13);
-                tessellator.addVertexWithUV((double)f16, (double)f18, (double)(-f2), (double)f12, (double)f14);
-                tessellator.addVertexWithUV((double)f16, (double)f18, (double)f2, (double)f11, (double)f14);
-                tessellator.addVertexWithUV((double)f16, (double)f17, (double)f2, (double)f11, (double)f13);
+                tessellator.addVertexWithUV(f16, f17, (-f2), f12, f13);
+                tessellator.addVertexWithUV(f16, f18, (-f2), f12, f14);
+                tessellator.addVertexWithUV(f16, f18, f2, f11, f14);
+                tessellator.addVertexWithUV(f16, f17, f2, f11, f13);
                 tessellator.draw();
             }
         }
@@ -114,33 +114,33 @@ public class RenderWallDecoration extends Render
     private void func_77008_a(EntityMillDecoration par1EntityPainting, float par2, float par3)
     {
         int i = MathHelper.floor_double(par1EntityPainting.posX);
-        int j = MathHelper.floor_double(par1EntityPainting.posY + (double)(par3 / 16.0F));
+        int j = MathHelper.floor_double(par1EntityPainting.posY + par3 / 16.0F);
         int k = MathHelper.floor_double(par1EntityPainting.posZ);
 
         if (par1EntityPainting.hangingDirection == 2)
         {
-            i = MathHelper.floor_double(par1EntityPainting.posX + (double)(par2 / 16.0F));
+            i = MathHelper.floor_double(par1EntityPainting.posX + par2 / 16.0F);
         }
 
         if (par1EntityPainting.hangingDirection == 1)
         {
-            k = MathHelper.floor_double(par1EntityPainting.posZ - (double)(par2 / 16.0F));
+            k = MathHelper.floor_double(par1EntityPainting.posZ - par2 / 16.0F);
         }
 
         if (par1EntityPainting.hangingDirection == 0)
         {
-            i = MathHelper.floor_double(par1EntityPainting.posX - (double)(par2 / 16.0F));
+            i = MathHelper.floor_double(par1EntityPainting.posX - par2 / 16.0F);
         }
 
         if (par1EntityPainting.hangingDirection == 3)
         {
-            k = MathHelper.floor_double(par1EntityPainting.posZ + (double)(par2 / 16.0F));
+            k = MathHelper.floor_double(par1EntityPainting.posZ + par2 / 16.0F);
         }
 
         int l = this.renderManager.worldObj.getLightBrightnessForSkyBlocks(i, j, k, 0);
         int i1 = l % 65536;
         int j1 = l / 65536;
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)i1, (float)j1);
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, i1, j1);
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
     }
 
@@ -150,7 +150,8 @@ public class RenderWallDecoration extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    @Override
+	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
         this.renderThePainting((EntityMillDecoration)par1Entity, par2, par4, par6, par8, par9);
     }

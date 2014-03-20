@@ -1,12 +1,8 @@
 package org.millenaire.common.network;
 
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Vector;
@@ -205,7 +201,7 @@ public class ServerReceiver {
 				lonebuildings.put(key, v);
 			}
 
-			final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
+			final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
 			data.write(PACKET_SERVER_CONTENT);
 

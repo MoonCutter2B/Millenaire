@@ -19,9 +19,9 @@ public class GoalShearSheep extends Goal {
 
 	public GoalShearSheep() {
 		buildingLimit.put(new InvItem(Blocks.wool,0), 1024);
-		townhallLimit.put(new InvItem(Blocks.wool,0), 1024);
+		townhallLimit.put(new InvItem(Blocks.wool,0), 1024);		
 	}
-	
+
 	@Override
 	public GoalInformation getDestination(MillVillager villager) throws Exception {
 
@@ -55,7 +55,7 @@ public class GoalShearSheep extends Goal {
 	public boolean isFightingGoal() {
 		return true;
 	}
-	
+
 	@Override
 	public int range(MillVillager villager) {
 		return 5;
@@ -72,7 +72,7 @@ public class GoalShearSheep extends Goal {
 
 		if (sheep==null)
 			return false;
-		
+
 		for (final Entity ent : sheep) {
 
 			final EntitySheep asheep=(EntitySheep)ent;
@@ -109,7 +109,7 @@ public class GoalShearSheep extends Goal {
 						if ((MLN.LogCattleFarmer>=MLN.MAJOR) && villager.extraLog) {
 							MLN.major(this, "Shearing: "+ent);
 						}
-						
+
 						villager.swingItem();
 					}
 				}

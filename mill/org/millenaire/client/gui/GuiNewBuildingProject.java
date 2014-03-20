@@ -94,7 +94,7 @@ public class GuiNewBuildingProject extends GuiText {
 		return 19;
 	}
 
-	ResourceLocation background=new ResourceLocation(Mill.modId,"/textures/gui/ML_panel.png");
+	ResourceLocation background=new ResourceLocation(Mill.modId,"textures/gui/ML_panel.png");
 
 	@Override
 	public ResourceLocation getPNGPath() {

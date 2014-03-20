@@ -1,14 +1,10 @@
 package org.millenaire.client.forge;
 
-import java.util.EnumSet;
-
 import net.minecraft.client.Minecraft;
 
 import org.millenaire.client.gui.DisplayActions;
 import org.millenaire.common.forge.Mill;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.IEventListener;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 

@@ -5,16 +5,16 @@ firstNameList=greek_men_names
 tag=chief
 tag=religious
 
-texture=/textures/entity/byzanz/noblemale/byz.religious.A.png
-texture=/textures/entity/byzanz/noblemale/byz.religious.B.png
-texture=/textures/entity/byzanz/noblemale/byz.religious.C.png
-texture=/textures/entity/byzanz/noblemale/byz.religious.D.png
-texture=/textures/entity/byzanz/noblemale/byz.religious.E.png
-texture=/textures/entity/byzanz/noblemale/byz.religious.F.png
+texture=textures/entity/byzanz/noblemale/byz.religious.A.png
+texture=textures/entity/byzanz/noblemale/byz.religious.B.png
+texture=textures/entity/byzanz/noblemale/byz.religious.C.png
+texture=textures/entity/byzanz/noblemale/byz.religious.D.png
+texture=textures/entity/byzanz/noblemale/byz.religious.E.png
+texture=textures/entity/byzanz/noblemale/byz.religious.F.png
 
-clothes=free,/textures/entity/byzanz/noblemale/clothes/byz.patriarch.1.A.png
+clothes=free,textures/entity/byzanz/noblemale/clothes/byz.patriarch.1.A.png
 
-clothes=clothes_byz_silk,/textures/entity/byzanz/noblemale/clothes/byz.patriarch.2.A.png
+clothes=clothes_byz_silk,textures/entity/byzanz/noblemale/clothes/byz.patriarch.2.A.png
 
 toolNeeded=clothes_byz_silk
 

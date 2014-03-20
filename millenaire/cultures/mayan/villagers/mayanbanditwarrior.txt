@@ -9,9 +9,9 @@ tag=raider
 tag=noteleport
 health=30
 
-texture=/textures/entity/mayan/mayanbanditwarrior0.png
-texture=/textures/entity/mayan/mayanbanditwarrior1.png
-texture=/textures/entity/mayan/mayanbanditwarrior2.png
+texture=textures/entity/mayan/mayanbanditwarrior0.png
+texture=textures/entity/mayan/mayanbanditwarrior1.png
+texture=textures/entity/mayan/mayanbanditwarrior2.png
 
 goal=gorest
 goal=goDrink

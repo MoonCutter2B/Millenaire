@@ -6,12 +6,12 @@ baseheight=0.9
 health=20
 model=femalesymmetrical
 
-texture=/textures/entity/byzanz/noblefemale/byz.rich.female.A.png
-texture=/textures/entity/byzanz/noblefemale/byz.rich.female.B.png
-texture=/textures/entity/byzanz/noblefemale/byz.rich.female.C.png
+texture=textures/entity/byzanz/noblefemale/byz.rich.female.A.png
+texture=textures/entity/byzanz/noblefemale/byz.rich.female.B.png
+texture=textures/entity/byzanz/noblefemale/byz.rich.female.C.png
 
-clothes=free,/textures/entity/byzanz/noblefemale/clothes/byz.richf.1.A.png
-clothes=free,/textures/entity/byzanz/noblefemale/clothes/byz.richf.1.B.png
+clothes=free,textures/entity/byzanz/noblefemale/clothes/byz.richf.1.A.png
+clothes=free,textures/entity/byzanz/noblefemale/clothes/byz.richf.1.B.png
 
 toolNeeded=clothes_byz_silk
 

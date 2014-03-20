@@ -2,7 +2,6 @@ package org.millenaire.common;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -679,8 +678,6 @@ public class Quest {
 			return true;
 		}
 	}
-	private static final int TOK_REP_MULTIPLE = 4;
-
 	public static HashMap<String,Quest> quests=new HashMap<String,Quest>();
 	private static final String REL_NEARBYVILLAGE = "nearbyvillage";
 
@@ -691,19 +688,6 @@ public class Quest {
 
 	public static final int[] WORLD_MISSION_NB = new int[]{15,13,10};
 	public static final String[] WORLD_MISSION_KEYS = new String[]{"sadhu","alchemist","fallenking"};
-
-	private static void adjustToKRep(int rep) {
-		try {
-			final Class<?> tokMod=Class.forName("net.minecraft.src.mod_HeroesGuild");
-			final Field field = tokMod.getField("worthy");
-			final float value = field.getFloat(null);
-			field.setFloat(null,value+(rep*TOK_REP_MULTIPLE));
-		} catch (final Exception e) {
-			Mill.proxy.sendChatAdmin("Problem with ToK, please check the log.");
-			MLN.printException("Problem when updating ToK reputation:", e);
-		}
-	}
-
 
 
 	private static Quest loadQuest(File file) {

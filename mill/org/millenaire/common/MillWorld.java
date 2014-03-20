@@ -1,10 +1,10 @@
 package org.millenaire.common;
 
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutput;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,7 +18,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -399,7 +398,7 @@ public class MillWorld {
 
 				final NBTTagList nbttaglist = nbttagcompound.getTagList("buildings", Constants.NBT.TAG_COMPOUND);
 				for(int i = 0; i < nbttaglist.tagCount(); i++) {
-					final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+					final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 					new Building(this,nbttagcompound1);
 				}
 
@@ -920,7 +919,7 @@ public class MillWorld {
 	}
 
 	public void sendVillageListPacket(EntityPlayer player) {
-		final ByteBufOutputStream data = ServerSender.getNewByteBufOutputStream();
+		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_VILLAGELIST);
@@ -945,9 +944,7 @@ public class MillWorld {
 			MLN.printException(this+": Error in sendVillageListPacket", e);
 		}
 
-		S3FPacketCustomPayload packet = ServerSender.createServerPacket(data);
-
-		ServerSender.sendPacketToPlayer(packet, player);
+		ServerSender.sendPacketToPlayer(ServerSender.createServerPacket(data), player);
 	}
 
 	public void setGlobalTag(String tag) {

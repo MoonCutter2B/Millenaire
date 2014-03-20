@@ -2,14 +2,11 @@ package org.millenaire.client.network;
 
 import io.netty.buffer.ByteBufInputStream;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
 
 import org.millenaire.client.MillClientUtilities;
 import org.millenaire.client.gui.DisplayActions;
@@ -30,7 +27,7 @@ import org.millenaire.common.network.StreamReadWrite;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ClientCustomPacketEvent;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class ClientReceiver {
@@ -38,7 +35,7 @@ public class ClientReceiver {
 	 * Only packets sent from a server to this specific client arrive here
 	 */
 	@SubscribeEvent
-	public void onPacketData(ServerCustomPacketEvent event)
+	public void onPacketData(ClientCustomPacketEvent event)
 	{
 
 		if (FMLCommonHandler.instance().getSide().isServer() && (MLN.LogNetwork>=MLN.MAJOR)) {
@@ -62,11 +59,10 @@ public class ClientReceiver {
 			return;
 		}
 
-		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		ByteBufInputStream data = new ByteBufInputStream(event.packet.payload());
 		
 
-		try {
+		try {			
 			final int packettype=data.read();
 
 			Mill.clientWorld.millenaireEnabled=true;
@@ -107,6 +103,8 @@ public class ClientReceiver {
 				readServerContentPacket(data);
 			} else if (packettype==ServerReceiver.PACKET_ANIMALBREED) {
 				readAnimalBreedPacket(data);
+			} else {
+				MLN.error(null, "Received packet with unknown type: "+packettype);
 			}
 
 		} catch (final Exception e) {

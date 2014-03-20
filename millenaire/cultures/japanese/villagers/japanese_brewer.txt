@@ -5,7 +5,7 @@ firstNameList=men_names
 tag=chief
 baseHeight=0.93
 
-texture=/textures/entity/japanese/japanese_Brewer.png
+texture=textures/entity/japanese/japanese_Brewer.png
 
 goal=gorest
 goal=gopray

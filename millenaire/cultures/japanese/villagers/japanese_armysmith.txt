@@ -5,7 +5,7 @@ firstNameList=men_names
 baseHeight=0.9
 tag=raider
 
-texture=/textures/entity/japanese/japanese_ArmySmith0.png
+texture=textures/entity/japanese/japanese_ArmySmith0.png
 
 goal=gorest
 goal=gopray

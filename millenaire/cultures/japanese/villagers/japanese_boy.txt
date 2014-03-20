@@ -6,8 +6,8 @@ tag=child
 familyNameList=low_caste_family_names
 firstNameList=men_names
 
-texture=/textures/entity/japanese/japanese_Boy0.png
-texture=/textures/entity/japanese/japanese_Boy1.png
+texture=textures/entity/japanese/japanese_Boy0.png
+texture=textures/entity/japanese/japanese_Boy1.png
 
 goal=gorest
 goal=gopray

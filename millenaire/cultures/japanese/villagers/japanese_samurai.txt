@@ -8,8 +8,8 @@ tag=archer
 tag=raider
 health=30
 
-texture=/textures/entity/japanese/japanese_Guard.png
-texture=/textures/entity/japanese/japanese_Warrior1.png
+texture=textures/entity/japanese/japanese_Guard.png
+texture=textures/entity/japanese/japanese_Warrior1.png
 
 goal=gorest
 goal=gopray

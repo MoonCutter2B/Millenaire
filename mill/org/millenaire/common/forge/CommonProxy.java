@@ -2,12 +2,14 @@ package org.millenaire.common.forge;
 
 import java.io.File;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumChatFormatting;
 
 import org.millenaire.common.MLN;
+import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.TileEntityMillChest;
 import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.UserProfile;
@@ -68,6 +70,10 @@ public class CommonProxy {
 	}
 
 	public String getItemName(Item item, int meta) {
+		return "";
+	}
+	
+	public String getInvItemName(InvItem iv) {
 		return "";
 	}
 
@@ -170,6 +176,11 @@ public class CommonProxy {
 
 	public void initNetwork() {
 		Mill.millChannel.register(new ServerReceiver());
+	}
+
+	public String getBlockName(Block block, int meta) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

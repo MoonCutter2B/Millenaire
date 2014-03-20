@@ -8,7 +8,7 @@ femalechild=girl
 model=femaleasymmetrical
 tag=seller
 
-texture=/textures/entity/norman/ML_CattleFarmerFemale0_Asymmetric.png
+texture=textures/entity/norman/ML_CattleFarmerFemale0_Asymmetric.png
 
 goal=gorest
 goal=gosocialise

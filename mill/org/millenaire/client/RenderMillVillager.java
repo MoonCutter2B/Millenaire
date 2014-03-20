@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.pathfinding.PathPoint;
@@ -78,17 +79,17 @@ public class RenderMillVillager extends RenderBiped {
 	}
 
 	@Override
-	public void doRender(EntityLivingBase entityliving, double d, double d1, double d2,
+	public void doRender(Entity entity, double d, double d1, double d2,
 			float f, float f1)
 	{
 
-		final MillVillager villager = (MillVillager) entityliving;
+		final MillVillager villager = (MillVillager) entity;
 
 		if (villager.isUsingBow) {
 			modelCloth.aimedBow = modelBipedMain.aimedBow = true;
 		}
 
-		super.doRender(entityliving, d, d1, d2, f, f1);
+		super.doRender(entity, d, d1, d2, f, f1);
 
 		modelCloth.aimedBow = modelBipedMain.aimedBow = false;
 
@@ -355,7 +356,7 @@ public class RenderMillVillager extends RenderBiped {
 	protected int shouldRenderPass(EntityLivingBase entityliving, int i, float f)
 	{
 		
-		final int armourRes=this.inheritRenderPass(entityliving, i, f);
+		final int armourRes=this.shouldRenderPass((EntityLiving)entityliving, i, f);
 		int clothRes=-1;
 
 		if (i==0) {

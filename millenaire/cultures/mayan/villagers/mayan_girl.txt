@@ -6,8 +6,8 @@ tag=child
 familyNameList=low_caste_family_names
 firstNameList=low_caste_women_names
 
-texture=/textures/entity/mayan/mayan_girl0.png
-texture=/textures/entity/mayan/mayan_girl1.png
+texture=textures/entity/mayan/mayan_girl0.png
+texture=textures/entity/mayan/mayan_girl1.png
 
 goal=gorest
 goal=gopray

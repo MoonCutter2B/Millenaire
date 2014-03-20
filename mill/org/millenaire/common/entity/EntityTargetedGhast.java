@@ -14,6 +14,7 @@ public class EntityTargetedGhast extends EntityGhast {
 		super(par1World);
 	}
 
+	@Override
 	protected boolean canDespawn()
 	{
 		return false;
@@ -30,9 +31,9 @@ public class EntityTargetedGhast extends EntityGhast {
 				waypointZ=target.z;
 				courseChangeCooldown=0; 
 			} else if (target.distanceTo(this)<10) {
-				this.waypointX = this.posX + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-				this.waypointY = this.posY + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-				this.waypointZ = this.posZ + (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
+				this.waypointX = this.posX + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
+				this.waypointY = this.posY + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
+				this.waypointZ = this.posZ + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
 				courseChangeCooldown=0; 
 			}
 		}

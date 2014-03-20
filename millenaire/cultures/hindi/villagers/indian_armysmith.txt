@@ -4,7 +4,7 @@ familyNameList=low_caste_family_names
 firstNameList=men_names
 tag=raider
 
-texture=/textures/entity/indian/ML_ArmySmith0.png
+texture=textures/entity/indian/ML_ArmySmith0.png
 
 goal=gosocialise
 goal=chat

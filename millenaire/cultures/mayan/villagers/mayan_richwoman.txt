@@ -6,10 +6,10 @@ baseHeight=0.9
 tag=seller
 model=femaleasymmetrical
 
-texture=/textures/entity/mayan/mayan_Rich_Woman0.png
-texture=/textures/entity/mayan/mayan_Rich_Woman1.png
-texture=/textures/entity/mayan/mayan_Rich_Woman2.png
-texture=/textures/entity/mayan/mayan_Rich_Woman3.png
+texture=textures/entity/mayan/mayan_Rich_Woman0.png
+texture=textures/entity/mayan/mayan_Rich_Woman1.png
+texture=textures/entity/mayan/mayan_Rich_Woman2.png
+texture=textures/entity/mayan/mayan_Rich_Woman3.png
 
 goal=gorest
 goal=gopray

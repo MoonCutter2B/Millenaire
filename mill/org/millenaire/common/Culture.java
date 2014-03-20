@@ -5,7 +5,7 @@ import io.netty.buffer.ByteBufOutputStream;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
+import java.io.DataOutput;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
@@ -2018,7 +2018,7 @@ public class Culture {
 		}
 	}
 
-	public void writeCultureMissingContentPackPacket(ByteBufOutputStream data,
+	public void writeCultureMissingContentPackPacket(DataOutput data,
 			String mainLanguage,String fallbackLanguage,
 			int nbStrings, int nbBuildingNames,int nbSentences,int nbFallbackStrings, int nbFallbackBuildingNames,int nbFallbackSentences,
 			Vector<String> planSetAvailable,Vector<String> villagerAvailable,

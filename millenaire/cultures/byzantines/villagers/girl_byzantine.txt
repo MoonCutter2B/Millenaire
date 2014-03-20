@@ -6,7 +6,7 @@ tag=child
 familyNameList=greek_family_names
 firstNameList=greek_women_names
 
-texture=/textures/entity/byzanz/girl0.png
+texture=textures/entity/byzanz/girl0.png
 
 goal=gorest
 goal=gosocialise

@@ -1,9 +1,9 @@
 package org.millenaire.common;
 
 import io.netty.buffer.ByteBufInputStream;
-import io.netty.buffer.ByteBufOutputStream;
 
 import java.io.BufferedReader;
+import java.io.DataOutput;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -450,7 +450,7 @@ public class VillagerType implements WeightedChoice {
 		return "VT: "+culture.key+"/"+key;
 	}
 
-	public void writeVillagerTypeInfo(ByteBufOutputStream data) throws IOException {
+	public void writeVillagerTypeInfo(DataOutput data) throws IOException {
 		data.writeUTF(key);
 		StreamReadWrite.writeNullableString(name, data);
 		StreamReadWrite.writeNullableString(altkey, data);

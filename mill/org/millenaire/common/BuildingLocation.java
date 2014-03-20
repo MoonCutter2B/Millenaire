@@ -63,13 +63,13 @@ public class BuildingLocation implements Cloneable {
 		//pre 4.3 bugged tag
 		NBTTagList nbttaglist = nbttagcompound.getTagList("maleResidentList", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			maleResident.add(nbttagcompound1.getString("value"));
 		}
 
 		nbttaglist = nbttagcompound.getTagList(label+"_maleResidentList", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			maleResident.add(nbttagcompound1.getString("value"));
 		}
 
@@ -86,13 +86,13 @@ public class BuildingLocation implements Cloneable {
 		//pre 4.3 bugged tag
 		nbttaglist = nbttagcompound.getTagList("femaleResidentList", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			femaleResident.add(nbttagcompound1.getString("value"));
 		}
 
 		nbttaglist = nbttagcompound.getTagList(label+"_femaleResidentList", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			femaleResident.add(nbttagcompound1.getString("value"));
 		}
 
@@ -111,7 +111,7 @@ public class BuildingLocation implements Cloneable {
 		//pre 4.3 bugged tag
 		nbttaglist = nbttagcompound.getTagList("tags", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final String value=nbttagcompound1.getString("value").toLowerCase();
 
 			//Conversion for backward compatibility
@@ -126,7 +126,7 @@ public class BuildingLocation implements Cloneable {
 
 		nbttaglist = nbttagcompound.getTagList(label+"_tags", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final String value=nbttagcompound1.getString("value");
 
 			tags.add(value);
@@ -139,14 +139,14 @@ public class BuildingLocation implements Cloneable {
 		//pre 4.3 bugged tag
 		nbttaglist = nbttagcompound.getTagList("subBuildings", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			subb.add(nbttagcompound1.getString("value"));
 
 		}
 
 		nbttaglist = nbttagcompound.getTagList(label+"_subBuildings", Constants.NBT.TAG_COMPOUND);
 		for(int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = (NBTTagCompound)nbttaglist.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			subb.add(nbttagcompound1.getString("value"));
 
 		}

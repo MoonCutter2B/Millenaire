@@ -14,7 +14,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
@@ -48,6 +50,17 @@ public class BlockMillCrops extends BlockCrops
 		setTickRandomly(true);
 		final float f = 0.5F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
+	}
+	
+	@Override
+	public int getFlammability(IBlockAccess world, int x, int y, int z,
+			ForgeDirection face) {
+		return 150;
+	}
+	@Override
+	public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z,
+			ForgeDirection face) {		
+		return 60;
 	}
 
 	@Override

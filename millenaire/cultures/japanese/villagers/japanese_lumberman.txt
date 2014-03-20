@@ -6,7 +6,7 @@ baseHeight=0.9
 hiringcost=16
 tag=raider
 
-texture=/textures/entity/japanese/japanese_Lumberman0.png
+texture=textures/entity/japanese/japanese_Lumberman0.png
 goal=gorest
 goal=gopray
 goal=chopTrees

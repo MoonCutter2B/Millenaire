@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -35,6 +37,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -1373,6 +1376,10 @@ public class MillCommonUtilities {
 
 			}
 		}
+		
+		if (block==null) {
+			MLN.printException("Trying to set null block", new Exception());
+		}
 
 		if (notify) {
 			world.setBlock(x,y,z, block, metadata,3);
@@ -1529,7 +1536,7 @@ public class MillCommonUtilities {
 			double var6 = random.nextGaussian() * 0.02D;
 			double var8 = random.nextGaussian() * 0.02D;
 
-			ent.worldObj.spawnParticle("heart", ent.posX + (double)(random.nextFloat() * ent.width * 2.0F) - (double)ent.width, ent.posY + 0.5D + (double)(random.nextFloat() * ent.height), ent.posZ + (double)(random.nextFloat() * ent.width * 2.0F) - (double)ent.width, var4, var6, var8);
+			ent.worldObj.spawnParticle("heart", ent.posX + random.nextFloat() * ent.width * 2.0F - ent.width, ent.posY + 0.5D + random.nextFloat() * ent.height, ent.posZ + random.nextFloat() * ent.width * 2.0F - ent.width, var4, var6, var8);
 		}
 	}
 
@@ -1905,9 +1912,11 @@ public class MillCommonUtilities {
 		Multimap multimap = item.getItemAttributeModifiers();
 
 		if (multimap.containsKey(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName())) {
-			if (multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()) instanceof AttributeModifier) {
-				AttributeModifier weaponModifier=(AttributeModifier) multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName());
-				return weaponModifier.getAmount();
+			if (multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()).toArray().length>0 ) {
+				if (multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()).toArray()[0] instanceof AttributeModifier) {
+					AttributeModifier weaponModifier=(AttributeModifier) multimap.get(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()).toArray()[0];
+					return weaponModifier.getAmount();
+				}
 			}
 		}
 		return 0;
@@ -1925,5 +1934,8 @@ public class MillCommonUtilities {
 		return (Item) Item.itemRegistry.getObjectById(id);
 	}
 
+	public static Method getDrawSlotInventoryMethod(GuiContainer gui) {
+		return ReflectionHelper.findMethod(GuiContainer.class, gui, new String[]{"func_146977_a","func_146977_a"}, Slot.class);
+	}
 
 }

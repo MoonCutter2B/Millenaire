@@ -5,7 +5,7 @@ firstNameList=men_names
 tag=religious
 baseHeight=0.9
 
-texture=/textures/entity/japanese/japanese_Monk0.png
+texture=textures/entity/japanese/japanese_Monk0.png
 
 goal=gorest
 goal=gopray

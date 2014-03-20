@@ -3,6 +3,7 @@ package org.millenaire.common.network;
 import static io.netty.buffer.Unpooled.buffer;
 import io.netty.buffer.ByteBufOutputStream;
 
+import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Vector;
 
@@ -35,7 +36,7 @@ public class ServerSender {
 	public static void displayControlledProjectGUI(EntityClientPlayerMP player,Building townHall) {
 		townHall.sendBuildingPacket(player, false);
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -45,9 +46,7 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayControlledProjectGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 	public static void displayControlledMilitaryGUI(EntityPlayer player,Building townHall) {
@@ -65,7 +64,7 @@ public class ServerSender {
 
 		}
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -75,16 +74,14 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayControlledMilitaryGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 	public static void displayHireGUI(EntityPlayer player, MillVillager villager) {
 
 		villager.getTownHall().sendBuildingPacket(player, false);
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -94,14 +91,12 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayHireGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 
 	public static void displayMerchantTradeGUI(EntityPlayer player, MillVillager villager) {
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		final int[] ids=MillCommonUtilities.packLong(villager.villager_id);
 
@@ -114,11 +109,10 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayMerchantTradeGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
 
 		villager.getHouse().sendBuildingPacket(player,true);
 		villager.getTownHall().sendBuildingPacket(player,true);
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 
 		player.openGui(Mill.instance, CommonGuiHandler.GUI_MERCHANT,player.worldObj,ids[0],ids[1],0);
 
@@ -146,7 +140,7 @@ public class ServerSender {
 			chest.sendUpdatePacket(player);
 		}
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -157,9 +151,7 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayMillChest", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 
 		player.openGui(Mill.instance, CommonGuiHandler.GUI_MILL_CHEST, player.worldObj,chestPos.getiX(),chestPos.getiY(),chestPos.getiZ());
 	}
@@ -170,7 +162,7 @@ public class ServerSender {
 
 		townHall.sendBuildingPacket(player, false);
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -180,16 +172,14 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayNegationWandGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 
 	public static void displayNewBuildingProjectGUI(EntityPlayer player,Building townHall, Point pos) {
 		townHall.sendBuildingPacket(player, false);
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -200,26 +190,23 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayNewBuildingProjectGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 
 	public static void displayNewVillageGUI(EntityPlayer player, Point pos) {
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
 			data.write(CommonGuiHandler.GUI_NEWVILLAGE);
 			StreamReadWrite.writeNullablePoint(pos, data);
+			
 		} catch (final IOException e) {
 			MLN.printException(ServerSender.class+": Error in displayNewVillageGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 
@@ -239,7 +226,7 @@ public class ServerSender {
 			}
 		}
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -249,14 +236,12 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayPanel", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 
 	public static void displayQuestGUI(EntityPlayer player, MillVillager villager) {
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -265,9 +250,7 @@ public class ServerSender {
 		} catch (final IOException e) {
 			MLN.printException(ServerSender.class+": Error in displayQuestGUI", e);
 		}
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 
@@ -282,7 +265,7 @@ public class ServerSender {
 
 		th.sendBuildingPacket(player, true);
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -292,9 +275,7 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayQuestGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 
 	}
 
@@ -318,7 +299,7 @@ public class ServerSender {
 
 		}
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -328,9 +309,7 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayVillageChiefGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 
@@ -346,7 +325,7 @@ public class ServerSender {
 			building.getTownHall().sendBuildingPacket(player, false);
 		}
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_OPENGUI);
@@ -356,9 +335,7 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in displayVillageTradeGUI", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 
 		player.openGui(Mill.instance, CommonGuiHandler.GUI_TRADE, player.worldObj,building.getPos().getiX(),building.getPos().getiY(),building.getPos().getiZ());
 	}
@@ -371,7 +348,7 @@ public class ServerSender {
 
 
 	public static void sendLockedChestUpdatePacket(TileEntityMillChest chest,EntityPlayer player) {
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		final Point pos=new Point(chest.xCoord,chest.yCoord,chest.zCoord);
 
@@ -392,13 +369,11 @@ public class ServerSender {
 			MLN.printException(chest+": Error in sendUpdatePacket", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet,player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 	
 	public static void sendAnimalBreeding(EntityAnimal animal) {
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		final Point pos=new Point(animal);
 
@@ -417,7 +392,7 @@ public class ServerSender {
 		sendPacketToPlayersInRange(packet,pos,50);
 	}
 	
-	public static void sendPacketToPlayersInRange(ByteBufOutputStream data,Point p,int range) {
+	public static void sendPacketToPlayersInRange(DataOutput data,Point p,int range) {
 		sendPacketToPlayersInRange(createServerPacket(data),p,range);
 	}
 
@@ -443,7 +418,7 @@ public class ServerSender {
 		if (!(player instanceof EntityPlayerMP))
 			return;
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 		
 		try {
 			data.write(ServerReceiver.PACKET_TRANSLATED_CHAT);
@@ -459,9 +434,7 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in sendTranslatedSentence", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet, player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 	
 	public static void sendVillagerSentence(EntityPlayer player,MillVillager v) {
@@ -472,7 +445,7 @@ public class ServerSender {
 		if (!(player instanceof EntityPlayerMP))
 			return;
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_VILLAGER_SENTENCE);
@@ -482,9 +455,7 @@ public class ServerSender {
 			MLN.printException(ServerSender.class+": Error in sendVillagerSentence", e);
 		}
 
-		S3FPacketCustomPayload packet = createServerPacket(data);
-
-		sendPacketToPlayer(packet, player);
+		sendPacketToPlayer(createServerPacket(data), player);
 	}
 
 	public static void sendTranslatedSentenceInRange(World world,Point p,int range,char colour,String key,String... values) {
@@ -522,7 +493,7 @@ public class ServerSender {
 
 		String key=""+type+";"+buildingPos+";"+villager_id+";";
 
-		final Vector<EntityClientPlayerMP> receivers=new Vector<EntityClientPlayerMP>();
+		final Vector<EntityPlayer> receivers=new Vector<EntityPlayer>();
 
 		for (int i=0;i<lines.length;i++) {
 			for (int j=0;j<lines[i].length;j++) {
@@ -537,7 +508,7 @@ public class ServerSender {
 				final UserProfile profile=MillCommonUtilities.getServerProfile(mw.world,player.getDisplayName());
 
 				if (!profile.panelsSent.containsKey(p) || !profile.panelsSent.get(p).equals(keyHash)) {
-					receivers.add((EntityClientPlayerMP) player);
+					receivers.add(player);
 				}
 			}
 		}
@@ -545,12 +516,12 @@ public class ServerSender {
 		if (receivers.size()==0)
 			return;
 
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
+		final DataOutput data = getNewByteBufOutputStream();
 
 		try {
-			data.writeInt(ServerReceiver.PACKET_PANELUPDATE);
+			data.write(ServerReceiver.PACKET_PANELUPDATE);
 			StreamReadWrite.writeNullablePoint(p, data);
-			data.writeInt(type);
+			data.write(type);
 			StreamReadWrite.writeNullablePoint(buildingPos, data);
 			data.writeLong(villager_id);
 			StreamReadWrite.writeStringStringArray(lines, data);
@@ -560,26 +531,28 @@ public class ServerSender {
 
 		S3FPacketCustomPayload packet = createServerPacket(data);
 		
-		for (final EntityClientPlayerMP player : receivers) {
+		for (final EntityPlayer player : receivers) {
 			sendPacketToPlayer(packet,player);
 			final UserProfile profile=MillCommonUtilities.getServerProfile(player.worldObj,player.getDisplayName());
 			profile.panelsSent.put(p, keyHash);
 		}
 	}
 	
-	public static ByteBufOutputStream getNewByteBufOutputStream() {
-		return new ByteBufOutputStream(buffer());
+	public static DataOutput getNewByteBufOutputStream() {
+		DataOutput data=new ByteBufOutputStream(buffer());
+		return data;
 	}
 	
-	public static S3FPacketCustomPayload createServerPacket(ByteBufOutputStream data) {
-		return new S3FPacketCustomPayload(ServerReceiver.PACKET_CHANNEL, data.buffer());
+	public static S3FPacketCustomPayload createServerPacket(DataOutput data) {
+		return new S3FPacketCustomPayload(ServerReceiver.PACKET_CHANNEL, ((ByteBufOutputStream) data).buffer());
 	}
 	
 	public static void sendPacketToPlayer(Packet packet, EntityPlayer player) {
 		((EntityPlayerMP)player).playerNetServerHandler.sendPacket(packet);
 	}
 	
-	public static void createAndSendPacketToPlayer(ByteBufOutputStream data, EntityPlayer player) {
-		((EntityPlayerMP)player).playerNetServerHandler.sendPacket(createServerPacket(data));
+	public static void createAndSendPacketToPlayer(DataOutput data, EntityPlayer player) {
+		Packet packet=createServerPacket(data);
+		((EntityPlayerMP)player).playerNetServerHandler.sendPacket(packet);
 	}
 }

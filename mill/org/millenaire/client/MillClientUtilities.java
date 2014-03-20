@@ -43,7 +43,7 @@ public class MillClientUtilities {
 	private static long lastPing=0;
 	private static long lastFreeRes=0;
 
-	private static final ResourceLocation textureTest=new ResourceLocation(Mill.modId,"/textures/blocks/blockGold.png");
+	private static final ResourceLocation textureTest=new ResourceLocation(Mill.modId,"textures/blocks/blockGold.png");
 
 	public static void checkTextSize() {
 		final ITextureObject texture=Minecraft.getMinecraft().renderEngine.getTexture(textureTest);

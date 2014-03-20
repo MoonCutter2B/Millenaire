@@ -4,7 +4,7 @@ familyNameList=low_caste_family_names
 firstNameList=men_names
 baseHeight=0.9
 
-texture=/textures/entity/japanese/japanese_Fisherman0.png
+texture=textures/entity/japanese/japanese_Fisherman0.png
 
 goal=gorest
 goal=gopray

@@ -20,8 +20,8 @@ public class GoalIndianGatherBrick extends Goal {
 		maxSimultaneousInBuilding=2;
 		townhallLimit.put(new InvItem(Mill.stone_decoration,1), 4096);
 	}
-	
-	
+
+
 	@Override
 	public int actionDuration(MillVillager villager) {
 		return 1000;
@@ -90,7 +90,7 @@ public class GoalIndianGatherBrick extends Goal {
 		if ((MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Mill.stone_decoration) && (MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint())==1)) {
 			villager.addToInv(Mill.stone_decoration, MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint()), 1);
 			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Blocks.air,0);
-			
+
 			villager.swingItem();
 			return false;
 		} else

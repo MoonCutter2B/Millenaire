@@ -59,7 +59,7 @@ public class GuiConfig extends GuiText {
 		return 19;
 	}
 
-	ResourceLocation background=new ResourceLocation(Mill.modId,"/textures/gui/ML_config.png");
+	ResourceLocation background=new ResourceLocation(Mill.modId,"textures/gui/ML_config.png");
 	
 	@Override
 	public ResourceLocation getPNGPath() {

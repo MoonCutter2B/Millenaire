@@ -2,6 +2,7 @@ package org.millenaire.client.forge;
 
 import java.io.File;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelZombie;
@@ -20,7 +21,6 @@ import org.millenaire.client.ModelFemaleAsymmetrical;
 import org.millenaire.client.ModelFemaleSymmetrical;
 import org.millenaire.client.RenderMillVillager;
 import org.millenaire.client.RenderWallDecoration;
-import org.millenaire.client.TileEntityMillChestRenderer;
 import org.millenaire.client.network.ClientReceiver;
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.client.texture.TextureAmuletAlchemist;
@@ -29,6 +29,7 @@ import org.millenaire.client.texture.TextureAmuletYddrasil;
 import org.millenaire.common.EntityMillDecoration;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
+import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.TileEntityMillChest;
 import org.millenaire.common.TileEntityPanel;
@@ -103,7 +104,7 @@ public class ClientProxy extends CommonProxy
 	public String getItemName(Item item, int meta) {
 		if ((item==null)) {
 			try {
-				throw new MillenaireException("Truing to get the name of a null item.");
+				throw new MillenaireException("Trying to get the name of a null item.");
 			} catch (final Exception e) {
 				MLN.printException(e);
 			}
@@ -113,8 +114,34 @@ public class ClientProxy extends CommonProxy
 		if (meta==-1) {
 			meta=0;
 		}
-		
+
 		return new ItemStack(item,1,meta).getDisplayName();
+	}
+	
+	@Override
+	public String getInvItemName(InvItem iv) {
+		if (iv.block!=null)
+			return getBlockName(iv.block,iv.meta);
+		else
+			return getItemName(iv.item,iv.meta);
+	}
+	
+	@Override
+	public String getBlockName(Block block, int meta) {
+		if ((block==null)) {
+			try {
+				throw new MillenaireException("Trying to get the name of a null block.");
+			} catch (final Exception e) {
+				MLN.printException(e);
+			}
+			return null;
+		}
+
+		if (meta==-1) {
+			meta=0;
+		}
+
+		return new ItemStack(block,1,meta).getDisplayName();
 	}
 
 	@Override
@@ -131,10 +158,13 @@ public class ClientProxy extends CommonProxy
 	public EntityPlayer getTheSinglePlayer() {
 		return Minecraft.getMinecraft().thePlayer;
 	}
-	
+
 	@Override
 	public String getSinglePlayerName() {
-		return Minecraft.getMinecraft().thePlayer.getDisplayName();
+		//TODO Voir quand c'est rempli pour le checkBonusCode
+		if (Minecraft.getMinecraft().thePlayer!=null)
+			return Minecraft.getMinecraft().thePlayer.getDisplayName();
+		return "NULL_PLAYER";
 	}
 
 	@Override
@@ -174,6 +204,7 @@ public class ClientProxy extends CommonProxy
 		return Keyboard.getKeyIndex(value.toUpperCase());
 	}
 
+	@Override
 	public String getKeyString(int value) {
 		return Keyboard.getKeyName(value);
 	}
@@ -209,6 +240,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerForgeClientClasses() {
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler()); 
+		FMLCommonHandler.instance().bus().register(new ClientReceiver()); 
 	}
 
 	@Override
@@ -219,7 +251,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericZombie.class, new RenderBiped(new ModelZombie(),0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMillDecoration.class, new RenderWallDecoration());
 
-		
+
 		//ModLoader.addAnimation(new TextureVishnuAmulet(Minecraft.getMinecraft()));
 		//ModLoader.addAnimation(new TextureAlchemistAmulet(Minecraft.getMinecraft()));
 		//ModLoader.addAnimation(new TextureYddrasilAmulet(Minecraft.getMinecraft()));
@@ -239,7 +271,7 @@ public class ClientProxy extends CommonProxy
 		s=s.trim();
 		Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(s));
 	}
-	
+
 	@Override
 	public void sendChatAdmin(String s, EnumChatFormatting colour) {
 		s=s.trim();
@@ -256,7 +288,7 @@ public class ClientProxy extends CommonProxy
 
 	@Override
 	public void setTextureIds() {
-		
+
 		Mill.normanArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_norman");
 		Mill.japaneseWarriorBlueArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_japanese_warrior_blue");
 		Mill.japaneseWarriorRedArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_japanese_warrior_red");
@@ -273,17 +305,17 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void declareAmuletTextures(IIconRegister iconRegister) {
 		TextureMap textureMap=(TextureMap)iconRegister;
-		
+
 		textureMap.setTextureEntry(Mill.modId+":amulet_alchemist"+MLN.getTextSuffix(), new TextureAmuletAlchemist(Mill.modId+":amulet_alchemist"+MLN.getTextSuffix()));
 		textureMap.setTextureEntry(Mill.modId+":amulet_vishnu"+MLN.getTextSuffix(), new TextureAmuletVishnu(Mill.modId+":amulet_vishnu"+MLN.getTextSuffix()));
 		textureMap.setTextureEntry(Mill.modId+":amulet_yggdrasil"+MLN.getTextSuffix(), new TextureAmuletYddrasil(Mill.modId+":amulet_yggdrasil"+MLN.getTextSuffix()));
-		
+
 	}
-	
+
 	@Override
 	public void initNetwork() {
 		Mill.millChannel.register(new ClientReceiver());
 	}
-	
+
 
 }

@@ -1,7 +1,5 @@
 package org.millenaire.common.network;
 
-import net.minecraft.entity.player.EntityPlayer;
-
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.UserProfile;

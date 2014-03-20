@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 

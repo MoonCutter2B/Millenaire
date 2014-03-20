@@ -6,7 +6,7 @@ tag=visitor
 tag=foreignmerchant
 chanceWeight=20
 health=25
-texture=/textures/entity/norman/ML_Merchant_Weapons0.png
+texture=textures/entity/norman/ML_Merchant_Weapons0.png
 
 goal=gorest
 goal=gopray

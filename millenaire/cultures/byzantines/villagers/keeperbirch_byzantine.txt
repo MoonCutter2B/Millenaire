@@ -5,7 +5,7 @@ firstNameList=greek_men_names
 tag=HelpInAttacks
 tag=seller
 hiringcost=30
-texture=/textures/entity/byzanz/soldier0.png
+texture=textures/entity/byzanz/soldier0.png
 
 goal=gorest
 goal=gopray

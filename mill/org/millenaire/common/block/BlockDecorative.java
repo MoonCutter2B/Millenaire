@@ -1,6 +1,5 @@
 package org.millenaire.common.block;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -15,7 +14,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
@@ -78,6 +79,8 @@ public class BlockDecorative extends Block {
 		setTickRandomly(true);
 		this.setCreativeTab(Mill.tabMillenaire);
 	}
+	
+	
 
 //	@SuppressWarnings("unchecked")
 //	@Override
@@ -90,6 +93,22 @@ public class BlockDecorative extends Block {
 //
 //	}
 
+	@Override
+	public int getFlammability(IBlockAccess world, int x, int y, int z,
+			ForgeDirection face) {
+		if (getMaterial()==Material.wood)
+			return 150;
+		
+		return 0;
+	}
+	@Override
+	public int getFireSpreadSpeed(IBlockAccess world, int x, int y, int z,
+			ForgeDirection face) {
+		if (getMaterial()==Material.wood)
+			return 5;
+		
+		return 0;
+	}
 	@Override
 	public int damageDropped(int i)
 	{

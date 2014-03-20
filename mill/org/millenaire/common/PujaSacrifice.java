@@ -356,11 +356,11 @@ public class PujaSacrifice implements IInventory {
 
 			for (int i = 0; i < enchList.tagCount(); i++)
 			{
-				final short id = ((NBTTagCompound)enchList.getCompoundTagAt(i)).getShort("id");
+				final short id = enchList.getCompoundTagAt(i).getShort("id");
 
 				if (id == currentTarget.enchantment.effectId)
 				{
-					((NBTTagCompound)enchList.getCompoundTagAt(i)).setShort("lvl", (short) (currentlevel+1));
+					enchList.getCompoundTagAt(i).setShort("lvl", (short) (currentlevel+1));
 				}
 			}
 

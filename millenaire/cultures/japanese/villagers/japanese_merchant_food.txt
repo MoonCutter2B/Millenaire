@@ -7,8 +7,8 @@ tag=visitor
 tag=foreignmerchant
 chanceWeight=20
 
-texture=/textures/entity/japanese/japanese_Peasant_Wife0.png
-texture=/textures/entity/japanese/japanese_Peasant_Wife1.png
+texture=textures/entity/japanese/japanese_Peasant_Wife0.png
+texture=textures/entity/japanese/japanese_Peasant_Wife1.png
 
 
 goal=gorest

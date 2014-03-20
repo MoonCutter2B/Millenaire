@@ -5,7 +5,7 @@ firstNameList=men_names
 tag=religious
 tag=seller
 
-texture=/textures/entity/norman/ML_Monk0.png
+texture=textures/entity/norman/ML_Monk0.png
 
 goal=gorest
 goal=gosocialise

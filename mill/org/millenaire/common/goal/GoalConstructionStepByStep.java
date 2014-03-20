@@ -49,7 +49,7 @@ public class GoalConstructionStepByStep extends Goal {
 		final BuildingBlock bblock=villager.getTownHall().getCurrentBlock();
 
 		if (bblock!=null) {
-			if (bblock.block==Blocks.air)
+			if (bblock.block==Blocks.air || Item.getItemFromBlock(bblock.block)==null)
 				return villager.getBestShovelStack();
 			else
 				return new ItemStack[]{new ItemStack(bblock.block, 1, bblock.meta)};

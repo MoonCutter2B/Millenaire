@@ -8,13 +8,13 @@ baseHeight=0.9
 model=femaleasymmetrical
 tag=seller
 
-texture=/textures/entity/indian/ML_Peasant_Wife0.png
-texture=/textures/entity/indian/ML_Peasant_Wife1.png
-texture=/textures/entity/indian/ML_Peasant_Wife2.png
-texture=/textures/entity/indian/ML_Peasant_Wife3.png
-texture=/textures/entity/indian/ML_Peasant_Wife4.png
-texture=/textures/entity/indian/ML_Peasant_Wife5.png
-texture=/textures/entity/indian/ML_Peasant_Wife6.png
+texture=textures/entity/indian/ML_Peasant_Wife0.png
+texture=textures/entity/indian/ML_Peasant_Wife1.png
+texture=textures/entity/indian/ML_Peasant_Wife2.png
+texture=textures/entity/indian/ML_Peasant_Wife3.png
+texture=textures/entity/indian/ML_Peasant_Wife4.png
+texture=textures/entity/indian/ML_Peasant_Wife5.png
+texture=textures/entity/indian/ML_Peasant_Wife6.png
 
 goal=gorest
 goal=gopray

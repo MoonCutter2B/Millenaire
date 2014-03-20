@@ -765,8 +765,8 @@
 </table>
 
 |Zokuto no Bakusha = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:CrackedStoneBricks.png|32px|Cracked Stone Bricks]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
-<tr><th scope="row">Construction</th><td>4</td><td>88</td><td>228</td><td>129</td><td>315</td><td>25</td><td>127</td><td>498</td><td>36</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:CrackedStoneBricks.png|32px|Cracked Stone Bricks]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td>4</td><td>88</td><td>228</td><td>129</td><td>315</td><td>25</td><td>498</td><td>36</td><td>127</td></tr>
 </table>
 </table>
 
@@ -826,14 +826,14 @@
 </table>
 
 |Tansetsu~japanesearmyforge = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:CrackedStoneBricks.png|32px|Cracked Stone Bricks]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td>47</td><td></td><td>11</td><td>7</td><td>34</td><td></td><td>9</td><td></td><td>208</td><td></td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:CrackedStoneBricks.png|32px|Cracked Stone Bricks]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td></td><td>47</td><td></td><td>11</td><td>7</td><td>34</td><td></td><td></td><td>208</td><td></td><td>9</td></tr>
 <tr><th scope="row">Upgrade 1</th><td></td><td>20</td><td>90</td><td></td><td>8</td><td>4</td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 2</th><td></td><td>28</td><td></td><td>7</td><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 3</th><td></td><td>77</td><td></td><td>1</td><td></td><td></td><td></td><td></td><td></td><td></td><td>20</td></tr>
-<tr><th scope="row">Upgrade 4</th><td></td><td>44</td><td>18</td><td>2</td><td>130</td><td></td><td></td><td>9</td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 5</th><td></td><td></td><td></td><td>31</td><td>3</td><td></td><td></td><td></td><td>24</td><td></td><td>2</td></tr>
-<tr><th scope="row">Upgrade 6</th><td>382</td><td></td><td></td><td>1</td><td></td><td>8</td><td>26</td><td></td><td>28</td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 3</th><td></td><td>77</td><td></td><td>1</td><td></td><td></td><td></td><td></td><td></td><td>20</td><td></td></tr>
+<tr><th scope="row">Upgrade 4</th><td></td><td>44</td><td>18</td><td>2</td><td>130</td><td></td><td></td><td></td><td></td><td></td><td>9</td></tr>
+<tr><th scope="row">Upgrade 5</th><td></td><td></td><td></td><td>31</td><td>3</td><td></td><td></td><td>24</td><td></td><td>2</td><td></td></tr>
+<tr><th scope="row">Upgrade 6</th><td>382</td><td></td><td></td><td>1</td><td></td><td>8</td><td>26</td><td>28</td><td></td><td></td><td></td></tr>
 </table>
 </table>
 
@@ -885,12 +885,12 @@
 </table>
 
 |Tansetsu~japaneseforge = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td>42</td><td>30</td><td>7</td><td>5</td><td>26</td><td></td><td></td><td>175</td><td></td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td></td><td>42</td><td>30</td><td>7</td><td>5</td><td>26</td><td></td><td>175</td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 1</th><td></td><td>20</td><td>6</td><td>7</td><td>19</td><td>8</td><td></td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 2</th><td></td><td>12</td><td>14</td><td>1</td><td>5</td><td></td><td>9</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 2</th><td></td><td>12</td><td>14</td><td>1</td><td>5</td><td></td><td></td><td></td><td></td><td>9</td></tr>
 <tr><th scope="row">Upgrade 3</th><td></td><td>6</td><td></td><td>12</td><td>53</td><td>16</td><td></td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 4</th><td>16</td><td></td><td></td><td>1</td><td>1</td><td></td><td></td><td>32</td><td></td><td>6</td></tr>
+<tr><th scope="row">Upgrade 4</th><td>16</td><td></td><td></td><td>1</td><td>1</td><td></td><td>32</td><td></td><td>6</td><td></td></tr>
 </table>
 </table>
 
@@ -962,11 +962,11 @@
 </table>
 
 |Ichiba = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td></td><td>32</td><td>65</td><td>68</td><td>25</td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 1</th><td></td><td></td><td>14</td><td>1</td><td>20</td><td>21</td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 2</th><td>152</td><td></td><td>27</td><td>21</td><td>48</td><td>22</td><td></td><td>57</td><td>2</td></tr>
-<tr><th scope="row">Upgrade 3</th><td>59</td><td>57</td><td>4</td><td></td><td>5</td><td></td><td>9</td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 2</th><td>152</td><td></td><td>27</td><td>21</td><td>48</td><td>22</td><td>57</td><td>2</td><td></td></tr>
+<tr><th scope="row">Upgrade 3</th><td>59</td><td>57</td><td>4</td><td></td><td>5</td><td></td><td></td><td></td><td>9</td></tr>
 </table>
 </table>
 
@@ -1111,21 +1111,21 @@
 </table>
 
 |Buttou = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation A</th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td>6</td><td>22</td><td>137</td><td></td><td></td><td></td><td>285</td><td></td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation A</th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td></td><td>6</td><td>22</td><td>137</td><td></td><td>285</td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 1</th><td></td><td>2</td><td>39</td><td>27</td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 2</th><td></td><td>16</td><td>37</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 3</th><td></td><td>14</td><td>319</td><td>139</td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 4</th><td>472</td><td>36</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 5</th><td></td><td>17</td><td>121</td><td>65</td><td>36</td><td>27</td><td>254</td><td></td><td>62</td></tr>
+<tr><th scope="row">Upgrade 5</th><td></td><td>17</td><td>121</td><td>65</td><td>254</td><td></td><td>62</td><td>36</td><td>27</td></tr>
 </table>
-<table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation B</th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td>6</td><td>22</td><td>137</td><td></td><td></td><td></td><td>285</td><td></td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;">Variation B</th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td></td><td>6</td><td>22</td><td>137</td><td></td><td>285</td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 1</th><td></td><td>2</td><td>39</td><td>27</td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 2</th><td></td><td>16</td><td>37</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 3</th><td></td><td>14</td><td>319</td><td>139</td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 4</th><td>472</td><td>36</td><td>18</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 5</th><td></td><td>17</td><td>121</td><td>65</td><td>36</td><td>27</td><td>254</td><td></td><td>62</td></tr>
+<tr><th scope="row">Upgrade 5</th><td></td><td>17</td><td>121</td><td>65</td><td>254</td><td></td><td>62</td><td>36</td><td>27</td></tr>
 </table>
 </table>
 
@@ -1201,15 +1201,15 @@
 </table>
 
 |Bousai = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
-<tr><th scope="row">Construction</th><td></td><td></td><td></td><td>58</td><td>47</td><td>178</td><td></td><td></td><td></td><td>359</td><td></td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td></td><td></td><td></td><td>58</td><td>47</td><td>178</td><td></td><td></td><td>359</td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 1</th><td></td><td>39</td><td></td><td>8</td><td>7</td><td>2</td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 2</th><td></td><td>19</td><td></td><td>1</td><td>173</td><td>35</td><td></td><td></td><td></td><td>80</td><td>12</td></tr>
-<tr><th scope="row">Upgrade 3</th><td></td><td>112</td><td></td><td>10</td><td>28</td><td>21</td><td></td><td></td><td></td><td>81</td><td>39</td></tr>
-<tr><th scope="row">Upgrade 4</th><td></td><td></td><td></td><td>33</td><td>17</td><td>103</td><td></td><td></td><td></td><td></td><td>6</td></tr>
-<tr><th scope="row">Upgrade 5</th><td></td><td></td><td></td><td>10</td><td>219</td><td>41</td><td>4</td><td></td><td></td><td></td><td>36</td></tr>
-<tr><th scope="row">Upgrade 6</th><td>66</td><td>21</td><td></td><td>23</td><td>25</td><td>21</td><td>2</td><td></td><td>142</td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 7</th><td>1169</td><td>25</td><td>2</td><td>28</td><td></td><td>8</td><td>96</td><td>54</td><td>238</td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 2</th><td></td><td>19</td><td></td><td>1</td><td>173</td><td>35</td><td></td><td></td><td>80</td><td>12</td><td></td></tr>
+<tr><th scope="row">Upgrade 3</th><td></td><td>112</td><td></td><td>10</td><td>28</td><td>21</td><td></td><td></td><td>81</td><td>39</td><td></td></tr>
+<tr><th scope="row">Upgrade 4</th><td></td><td></td><td></td><td>33</td><td>17</td><td>103</td><td></td><td></td><td></td><td>6</td><td></td></tr>
+<tr><th scope="row">Upgrade 5</th><td></td><td></td><td></td><td>10</td><td>219</td><td>41</td><td>4</td><td></td><td></td><td>36</td><td></td></tr>
+<tr><th scope="row">Upgrade 6</th><td>66</td><td>21</td><td></td><td>23</td><td>25</td><td>21</td><td>2</td><td>142</td><td></td><td></td><td></td></tr>
+<tr><th scope="row">Upgrade 7</th><td>1169</td><td>25</td><td>2</td><td>28</td><td></td><td>8</td><td>96</td><td>238</td><td></td><td></td><td>54</td></tr>
 </table>
 </table>
 
@@ -1241,8 +1241,8 @@
 </table>
 
 |Zenshou = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td></tr>
-<tr><th scope="row">Construction</th><td>62</td><td>167</td><td>90</td><td>300</td><td>113</td><td>4</td><td>9</td><td>556</td><td>51</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Wood_Pine.png|32px|Bois de sapin]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:ML_Thatch.png|32px|link=Japanese:Thatch|tile.ml_wood_deco.2.name]]</td><td>[[File:ML_paperwall.png|32px|link=Japanese:Paper Wall|tile.ml_panes.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td>62</td><td>167</td><td>90</td><td>300</td><td>113</td><td>4</td><td>556</td><td>51</td><td>9</td></tr>
 </table>
 </table>
 
@@ -1304,8 +1304,8 @@
 </table>
 
 |Keban Muul~questpyramid = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Lava.png|32px|Lava]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Unknown Pict:49/0|32px|Obsidian]]</td><td>[[File:MossyStoneBricks.png|32px|Mossy Stone Bricks]]</td><td>[[File:CrackedStoneBricks.png|32px|Cracked Stone Bricks]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_Mayan_Gold.png|32px|link=Mayan:Gold Ornament|tile.ml_stone_deco.2.name]]</td></tr>
-<tr><th scope="row">Construction</th><td>6997</td><td>356</td><td>52</td><td>3103</td><td>102</td><td>179</td><td>1</td><td>22</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Lava.png|32px|Lava]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@477b1683/0|32px|Obsidian]]</td><td>[[File:MossyStoneBricks.png|32px|Mossy Stone Bricks]]</td><td>[[File:CrackedStoneBricks.png|32px|Cracked Stone Bricks]]</td><td>[[File:ML_Mayan_Gold.png|32px|link=Mayan:Gold Ornament|tile.ml_stone_deco.2.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td>6997</td><td>356</td><td>52</td><td>3103</td><td>102</td><td>179</td><td>22</td><td>1</td></tr>
 </table>
 </table>
 
@@ -1335,7 +1335,7 @@
 </table>
 
 |Ajaw Cah~mayancamp = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:Unknown Pict:49/0|32px|Obsidian]]</td><td>[[File:Unknown Pict:90/0|32px|Portal]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@477b1683/0|32px|Obsidian]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@4770a4d0/0|32px|Portal]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
 <tr><th scope="row">Construction</th><td>802</td><td>3</td><td>43</td><td>204</td><td>123</td><td>14</td><td>6</td><td>6</td></tr>
 </table>
 </table>
@@ -1907,8 +1907,8 @@
 </table>
 
 |Panthéon = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:Lapis_Lazuli_(Block).png|32px|Lapis Lazuli Block]]</td><td>[[File:Unknown Pict:76/5|32px|Redstone Torch]]</td><td>[[File:Unknown Pict:124/0|32px|Redstone Lamp]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td></tr>
-<tr><th scope="row">Construction</th><td>69023</td><td>153</td><td>570</td><td>292</td><td>136</td><td>136</td><td>37296</td><td>5940</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:Lapis_Lazuli_(Block).png|32px|Lapis Lazuli Block]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@7dabf7cb/5|32px|Redstone Torch]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td>69023</td><td>153</td><td>570</td><td>292</td><td>136</td><td>37296</td><td>5940</td></tr>
 </table>
 </table>
 
@@ -1960,8 +1960,8 @@
 </table>
 
 |Anomalie Deux = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Bedrock.png|32px|Bedrock]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glowstone_(Block).png|32px|Glowstone]]</td><td>[[File:Unknown Pict:115/3|32px|Nether Wart]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
-<tr><th scope="row">Construction</th><td>1578</td><td>3</td><td>33</td><td>10</td><td>14</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Bedrock.png|32px|Bedrock]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glowstone_(Block).png|32px|Glowstone]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemSeeds@1d076683/0|32px|Nether Wart]]</td></tr>
+<tr><th scope="row">Construction</th><td>1578</td><td>3</td><td>33</td><td>14</td><td>10</td></tr>
 </table>
 </table>
 
@@ -1989,11 +1989,11 @@
 </table>
 
 |Taverne = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_colombages_cross.png|32px|link=Norman:Colombages|tile.ml_wood_deco.1.name]]</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_colombages_cross.png|32px|link=Norman:Colombages|tile.ml_wood_deco.1.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
 <tr><th scope="row">Construction</th><td></td><td>16</td><td>108</td><td>6</td><td></td><td></td><td></td></tr>
 <tr><th scope="row">Upgrade 1</th><td>42</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 2</th><td></td><td></td><td></td><td>2</td><td>18</td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 3</th><td></td><td></td><td></td><td></td><td></td><td>46</td><td>37</td></tr>
+<tr><th scope="row">Upgrade 2</th><td></td><td></td><td></td><td>2</td><td></td><td></td><td>18</td></tr>
+<tr><th scope="row">Upgrade 3</th><td></td><td></td><td></td><td></td><td>46</td><td>37</td><td></td></tr>
 </table>
 </table>
 
@@ -2080,8 +2080,8 @@
 </table>
 
 |Atelier d'Alchimie = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_colombages_cross.png|32px|link=Norman:Colombages|tile.ml_wood_deco.1.name]]</td></tr>
-<tr><th scope="row">Construction</th><td>434</td><td>13</td><td>16</td><td>7</td><td>3</td><td>7</td><td>139</td><td>9</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_colombages_cross.png|32px|link=Norman:Colombages|tile.ml_wood_deco.1.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td>434</td><td>13</td><td>16</td><td>7</td><td>3</td><td>139</td><td>9</td><td>7</td></tr>
 </table>
 </table>
 
@@ -2124,8 +2124,8 @@
 </table>
 
 |Château Félon = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_colombages_cross.png|32px|link=Norman:Colombages|tile.ml_wood_deco.1.name]]</td></tr>
-<tr><th scope="row">Construction</th><td>329</td><td>553</td><td>79</td><td>43</td><td>2</td><td>11</td><td>9</td><td>8</td><td>43</td><td>21</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_colombages_cross.png|32px|link=Norman:Colombages|tile.ml_wood_deco.1.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td>329</td><td>553</td><td>79</td><td>43</td><td>2</td><td>11</td><td>9</td><td>43</td><td>21</td><td>8</td></tr>
 </table>
 </table>
 
@@ -2196,10 +2196,10 @@
 </table>
 
 |Armurerie = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_colombages_cross.png|32px|link=Norman:Colombages|tile.ml_wood_deco.1.name]]</td></tr>
-<tr><th scope="row">Construction</th><td>288</td><td>19</td><td>47</td><td>9</td><td></td><td>18</td><td></td><td></td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Cobblestone.png|32px|Cobblestone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood.png|32px|Bois de chêne]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:White_Wool.png|32px|Wool]]</td><td>[[File:ML_colombages_plain.png|32px|link=Norman:Colombages|tile.ml_wood_deco.0.name]]</td><td>[[File:ML_colombages_cross.png|32px|link=Norman:Colombages|tile.ml_wood_deco.1.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td>288</td><td>19</td><td>47</td><td>9</td><td></td><td></td><td></td><td>18</td></tr>
 <tr><th scope="row">Upgrade 1</th><td>30</td><td>2</td><td></td><td></td><td>6</td><td></td><td></td><td></td></tr>
-<tr><th scope="row">Upgrade 2</th><td></td><td></td><td></td><td></td><td></td><td></td><td>35</td><td>4</td></tr>
+<tr><th scope="row">Upgrade 2</th><td></td><td></td><td></td><td></td><td></td><td>35</td><td>4</td><td></td></tr>
 </table>
 </table>
 
@@ -2280,8 +2280,8 @@
 </table>
 
 |Anomalie Trois = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Bedrock.png|32px|Bedrock]]</td><td>[[File:Lava.png|32px|Lava]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Ore_Gold.png|32px|Gold Ore]]</td><td>[[File:Ore_Iron.png|32px|Iron Ore]]</td><td>[[File:Ore_Coal.png|32px|Coal Ore]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:Ore_Lapis_Lazuli.png|32px|Lapis Lazuli Ore]]</td><td>[[File:Redstone_Dust.png|32px|Redstone Dust]]</td><td>[[File:Ore_Diamond.png|32px|Diamond Ore]]</td><td>[[File:Ore_Redstone.png|32px|Redstone Ore]]</td><td>[[File:Stone_Button.png|32px|Button]]</td><td>[[File:Glowstone_(Block).png|32px|Glowstone]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
-<tr><th scope="row">Construction</th><td>315</td><td>4863</td><td>34</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>13</td><td>1</td><td>5</td><td>1</td><td>1</td><td>1</td><td>146</td><td>68</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Bedrock.png|32px|Bedrock]]</td><td>[[File:Lava.png|32px|Lava]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Ore_Gold.png|32px|Gold Ore]]</td><td>[[File:Ore_Iron.png|32px|Iron Ore]]</td><td>[[File:Ore_Coal.png|32px|Coal Ore]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:Ore_Lapis_Lazuli.png|32px|Lapis Lazuli Ore]]</td><td>[[File:Ore_Diamond.png|32px|Diamond Ore]]</td><td>[[File:Ore_Redstone.png|32px|Redstone Ore]]</td><td>[[File:Stone_Button.png|32px|Button]]</td><td>[[File:Glowstone_(Block).png|32px|Glowstone]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<tr><th scope="row">Construction</th><td>315</td><td>4863</td><td>34</td><td>1</td><td>1</td><td>1</td><td>1</td><td>2</td><td>13</td><td>1</td><td>1</td><td>1</td><td>1</td><td>146</td><td>68</td></tr>
 </table>
 </table>
 
