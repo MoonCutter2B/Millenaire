@@ -50,3 +50,5 @@ min_village_lonebuilding_distance=100
 //Distance d'affichage des noms; Distance à laquelle les noms apparaissent. Défaut: 20.
 villagers_names_distance=5
 
+generate_translation_gap=true
+load_all_languages=true

@@ -1304,7 +1304,7 @@
 </table>
 
 |Keban Muul~questpyramid = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Lava.png|32px|Lava]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@477b1683/0|32px|Obsidian]]</td><td>[[File:MossyStoneBricks.png|32px|Mossy Stone Bricks]]</td><td>[[File:CrackedStoneBricks.png|32px|Cracked Stone Bricks]]</td><td>[[File:ML_Mayan_Gold.png|32px|link=Mayan:Gold Ornament|tile.ml_stone_deco.2.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Lava.png|32px|Lava]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@603a9c52/0|32px|Obsidian]]</td><td>[[File:MossyStoneBricks.png|32px|Mossy Stone Bricks]]</td><td>[[File:CrackedStoneBricks.png|32px|Cracked Stone Bricks]]</td><td>[[File:ML_Mayan_Gold.png|32px|link=Mayan:Gold Ornament|tile.ml_stone_deco.2.name]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
 <tr><th scope="row">Construction</th><td>6997</td><td>356</td><td>52</td><td>3103</td><td>102</td><td>179</td><td>22</td><td>1</td></tr>
 </table>
 </table>
@@ -1335,7 +1335,7 @@
 </table>
 
 |Ajaw Cah~mayancamp = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@477b1683/0|32px|Obsidian]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@4770a4d0/0|32px|Portal]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Gravel.png|32px|Gravel]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Wood_Jungle.png|32px|Bois tropical]]</td><td>[[File:TallGrass.png|32px|Grass]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@603a9c52/0|32px|Obsidian]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@51de8adb/0|32px|Portal]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td></tr>
 <tr><th scope="row">Construction</th><td>802</td><td>3</td><td>43</td><td>204</td><td>123</td><td>14</td><td>6</td><td>6</td></tr>
 </table>
 </table>
@@ -1907,7 +1907,7 @@
 </table>
 
 |Panthéon = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:Lapis_Lazuli_(Block).png|32px|Lapis Lazuli Block]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@7dabf7cb/5|32px|Redstone Torch]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Stone.png|32px|Stone]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glass.png|32px|Glass]]</td><td>[[File:Lapis_Lazuli_(Block).png|32px|Lapis Lazuli Block]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemBlock@41ca5b68/5|32px|Redstone Torch]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Golditm.png|32px|Gold Ingot]]</td></tr>
 <tr><th scope="row">Construction</th><td>69023</td><td>153</td><td>570</td><td>292</td><td>136</td><td>37296</td><td>5940</td></tr>
 </table>
 </table>
@@ -1960,7 +1960,7 @@
 </table>
 
 |Anomalie Deux = <table><tr><td style="vertical-align:top;">
-<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Bedrock.png|32px|Bedrock]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glowstone_(Block).png|32px|Glowstone]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemSeeds@1d076683/0|32px|Nether Wart]]</td></tr>
+<table class="reqirements"><tr><th scope="col" style="text-align:center;"></th><td>[[File:Bedrock.png|32px|Bedrock]]</td><td>[[File:Wood_Any.gif|32px|Bois (tous)]]</td><td>[[File:Glowstone_(Block).png|32px|Glowstone]]</td><td>[[File:Ironitm.png|32px|Iron Ingot]]</td><td>[[File:Unknown Pict:net.minecraft.item.ItemSeeds@c566b3e/0|32px|Nether Wart]]</td></tr>
 <tr><th scope="row">Construction</th><td>1578</td><td>3</td><td>33</td><td>14</td><td>10</td></tr>
 </table>
 </table>

@@ -933,6 +933,9 @@ public class Goods {
 							if (block==null) {
 								MLN.error(null, "Could not load good: "+temp[1]);
 							} else {
+								if (Item.getItemFromBlock(block)==null) {
+									MLN.error(null, "Tried to create good from block with no item: "+line);
+								}
 								goodsName.put(temp[0], new InvItem(block,Integer.parseInt(temp[2])));
 							}
 						}

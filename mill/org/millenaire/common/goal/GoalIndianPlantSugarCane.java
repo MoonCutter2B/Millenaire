@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.Building;
@@ -14,7 +15,7 @@ import org.millenaire.common.Point;
 
 public class GoalIndianPlantSugarCane extends Goal {
 
-	private static ItemStack[] sugarcane=new ItemStack[]{new ItemStack(Blocks.reeds, 1)};
+	private static ItemStack[] sugarcane=new ItemStack[]{new ItemStack(Items.reeds, 1)};
 
 	@Override
 	public GoalInformation getDestination(MillVillager villager) {

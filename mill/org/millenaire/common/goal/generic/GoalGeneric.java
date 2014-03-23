@@ -62,6 +62,9 @@ public abstract class GoalGeneric extends Goal {
 			for (int i=0;i<temp2.length;i++) {
 				if (Goods.goodsName.containsKey(temp2[i])) {
 					g.heldItems[i]=Goods.goodsName.get(temp2[i]).getItemStack();
+					if (g.heldItems[i].getItem()==null) {
+						MLN.error(null,"Held item with null item: "+temp2[i]+" in generic goal "+file.getName()+": "+line);
+					}
 				} else {
 					g.heldItems[i]=null;
 					MLN.error(null, "Unknown held item in generic goal "+file.getName()+": "+line);

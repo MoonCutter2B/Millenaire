@@ -3,7 +3,6 @@ package org.millenaire.common.block;
 import java.util.Random;
 
 import net.minecraft.block.BlockSign;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -52,7 +51,7 @@ public class BlockPanel extends BlockSign {
 			return false;
 
 		if ((panel.panelType==TileEntityPanel.controlledProjects) && building.controlledBy(entityplayer.getDisplayName())) {
-			ServerSender.displayControlledProjectGUI((EntityClientPlayerMP) entityplayer,building);
+			ServerSender.displayControlledProjectGUI((EntityPlayer) entityplayer,building);
 			return true;
 		}
 		

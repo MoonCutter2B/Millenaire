@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import org.millenaire.common.Building;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.Point;
-import org.millenaire.common.forge.Mill;
 
 
 
@@ -123,7 +122,7 @@ public class GoalIndianHarvestSugarCane extends Goal {
 
 	@Override
 	public int priority(MillVillager villager) {
-		int p=200-(villager.getTownHall().nbGoodAvailable(Mill.turmeric, 0, false, false)*4);
+		int p=200-(villager.getTownHall().nbGoodAvailable(Items.reeds, 0, false, false)*4);
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {

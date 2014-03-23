@@ -7,7 +7,6 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Vector;
 
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,7 +32,7 @@ import org.millenaire.common.forge.Mill;
 
 public class ServerSender {
 
-	public static void displayControlledProjectGUI(EntityClientPlayerMP player,Building townHall) {
+	public static void displayControlledProjectGUI(EntityPlayer player,Building townHall) {
 		townHall.sendBuildingPacket(player, false);
 
 		final DataOutput data = getNewByteBufOutputStream();

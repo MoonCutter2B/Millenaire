@@ -81,8 +81,8 @@ public class Culture {
 				this.key=null;
 				for (String s : config.split(",")) {
 					if (s.split(":").length>1) {
-						String key=s.split(":")[0];
-						String val=s.split(":")[1];
+						String key=s.split(":")[0].trim();
+						String val=s.split(":")[1].trim();
 
 						if (s.split(":").length>2)
 							val+=":"+s.split(":")[2];
@@ -367,9 +367,10 @@ public class Culture {
 					}
 
 					if (s.startsWith(vtype+":") || s.startsWith(notvtype+":")) {
-						String s2=s.split(":")[1];
+						String s2=s.split(":")[1].trim();
 
 						for (String vtype : s2.split("-")) {
+							vtype=vtype.trim();
 							if (!culture.villagerTypes.containsKey(vtype)) {
 								MLN.error(culture, language+": Unknown villager type in dialogue "+key+": "+s);
 							}
@@ -882,7 +883,7 @@ public class Culture {
 									MLN.error(culture, "In dialogue file "+file.getAbsolutePath()+" dialogue "+dialogue.key+" has no sentences.");
 							}
 
-							String s=line.split(";")[1];
+							String s=line.split(";")[1].trim();
 
 							dialogue=new Dialogue(s);
 
@@ -894,8 +895,8 @@ public class Culture {
 						} else if (dialogue!=null && line.split(";").length==3) {
 							final String[] temp=line.split(";");
 
-							dialogue.speechBy.add(temp[0].equals("v2")?2:1);
-							dialogue.timeDelays.add(Integer.parseInt(temp[1]));
+							dialogue.speechBy.add(temp[0].trim().equals("v2")?2:1);
+							dialogue.timeDelays.add(Integer.parseInt(temp[1].trim()));
 
 							Vector<String> sentence=new Vector<String>();
 							sentence.add(temp[2]);

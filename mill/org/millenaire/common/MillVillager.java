@@ -117,15 +117,19 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			staticStack=new ItemStack(item,1,meta);
 			staticStackArray=new ItemStack[]{staticStack};
 			special=0;
-			checkValidity();
+			try {
+				checkValidity();
+			} catch (MillenaireException e) {
+				MLN.printException("InvItem(Block block,int meta): "+block, e);
+			}
 		}
 
-		private void checkValidity() {
+		private void checkValidity() throws MillenaireException {
 			if (block==Blocks.air) {
-				MLN.printException(new MillenaireException("Attempted to create an InvItem for air blocks."));
+				throw new MillenaireException("Attempted to create an InvItem for air blocks.");
 			}
 			if (item==null && block==null && special==0) {
-				MLN.printException(new MillenaireException("Attempted to create an empty InvItem."));
+				throw new MillenaireException("Attempted to create an empty InvItem.");
 			}
 		}
 
@@ -136,7 +140,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			item=null;
 			block=null;
 			meta=0;
-			checkValidity();
+			try {
+				checkValidity();
+			} catch (MillenaireException e) {
+				MLN.printException("InvItem(int special): "+special, e);
+			}
 		}
 		
 		public InvItem(Item item) {
@@ -144,7 +152,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		}
 		
 		public InvItem(Block block) {
-			this(Item.getItemFromBlock(block),0);
+			this(block,0);
 		}
 
 		public InvItem(Item item,int meta) {
@@ -158,7 +166,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			staticStack=new ItemStack(item,1,meta);
 			staticStackArray=new ItemStack[]{staticStack};
 			special=0;
-			checkValidity();
+			try {
+				checkValidity();
+			} catch (MillenaireException e) {
+				MLN.printException("InvItem(Item item,int meta): "+item, e);
+			}
 		}
 
 		public InvItem(ItemStack is) {
@@ -176,7 +188,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			staticStack=new ItemStack(item,1,meta);
 			staticStackArray=new ItemStack[]{staticStack};
 			special=0;
-			checkValidity();
+			try {
+				checkValidity();
+			} catch (MillenaireException e) {
+				MLN.printException("IInvItem(ItemStack is): "+is, e);
+			}
 		}
 
 		public InvItem(String s) {
@@ -207,7 +223,11 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			}
 
 			staticStackArray=new ItemStack[]{staticStack};
-			checkValidity();
+			try {
+				checkValidity();
+			} catch (MillenaireException e) {
+				MLN.printException("InvItem(String s): "+s, e);
+			}
 		}
 
 		@Override
@@ -2978,7 +2998,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 		
 		for (int i=0;i<5;i++) {
 			if (getEquipmentInSlot(i)!=null && getEquipmentInSlot(i).getItem()==null) {
-				MLN.printException("ItemStack with null item: "+getEquipmentInSlot(i), new Exception());
+				MLN.printException("ItemStack with null item for villager "+this+", goal: "+this.goalKey, new Exception());
 			}
 		}
 
