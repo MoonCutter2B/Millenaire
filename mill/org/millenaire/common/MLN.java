@@ -1149,7 +1149,7 @@ public class MLN {
 		if (MLN.DEV)
 			writeBaseConfigFile();
 
-		Minecraft.getMinecraft().refreshResources();
+		//Mill.proxy.refreshClientResources();
 	}
 
 	public static void major(Object obj, String s) {

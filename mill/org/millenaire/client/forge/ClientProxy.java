@@ -317,5 +317,9 @@ public class ClientProxy extends CommonProxy
 		Mill.millChannel.register(new ClientReceiver());
 	}
 
+	@Override
+	public void refreshClientResources() {
+		Minecraft.getMinecraft().refreshResources();
+	}
 
 }

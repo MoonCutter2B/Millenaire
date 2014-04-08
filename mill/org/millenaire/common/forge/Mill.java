@@ -8,7 +8,6 @@ import java.util.Vector;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.init.Blocks;
@@ -24,6 +23,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.ForgeChunkManager;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -110,7 +110,7 @@ public class Mill
 	} 
 
 
-	public static final String versionNumber = "5.2.0b1";
+	public static final String versionNumber = "5.2.0b5";
 
 	public static final String versionBound = "[5.2.0,6.0)";
 	public static final String modId="millenaire";
@@ -156,7 +156,10 @@ public class Mill
 	public static BlockOrientedSlab byzantine_tile_slab;
 	public static BlockOrientedBrick byzantine_stone_tiles;
 
-	public static BlockMillCrops crops;
+    public static BlockMillCrops cropRice;
+    public static BlockMillCrops cropTurmeric;
+    public static BlockMillCrops cropMaize;
+    public static BlockMillCrops cropVine;
 
 	public static Block paperWall;
 	public static int normanArmourId=0;
@@ -352,7 +355,30 @@ public class Mill
 		path = new BlockDecorativeSlab(Material.ground,true);
 		pathSlab = new BlockDecorativeSlab(Material.ground,false);
 
-		crops = new BlockMillCrops();
+		cropRice = new BlockMillCrops(new String[] {
+	            "rice0", "rice0", "rice0", "rice0", "rice0", "rice0", "rice0", "rice1"
+	        }, true, false);
+	        cropTurmeric = new BlockMillCrops(new String[] {
+	            "turmeric0", "turmeric0", "turmeric0", "turmeric0", "turmeric0", "turmeric0", "turmeric0", "turmeric1"
+	        }, false, false);
+	        cropMaize = new BlockMillCrops(new String[] {
+	            "maize0", "maize0", "maize0", "maize0", "maize0", "maize0", "maize0", "maize1"
+	        }, false, true);
+	        cropVine = new BlockMillCrops(new String[] {
+	            "vine0", "vine0", "vine0", "vine0", "vine0", "vine0", "vine0", "vine1"
+	        }, false, false);
+	        rice = (new ItemMillSeeds("rice", cropRice, "rice")).setUnlocalizedName("ml_rice");
+	        turmeric = (new ItemMillSeeds("turmeric", cropTurmeric, "turmeric")).setUnlocalizedName("ml_turmeric");
+	        maize = (new ItemMillSeeds("maize", cropMaize, "maize")).setUnlocalizedName("ml_maize");
+	        grapes = (new ItemMillSeeds("grapes", cropVine, "vine")).setUnlocalizedName("ml_vine");
+	        cropRice.setSeed((IPlantable)rice);
+	        cropTurmeric.setSeed((IPlantable)turmeric);
+	        cropMaize.setSeed((IPlantable)maize);
+	        cropVine.setSeed((IPlantable)grapes);
+	        cropRice.setBlockName("ml_cropRice");
+	        cropTurmeric.setBlockName("ml_cropTurmeric");
+	        cropMaize.setBlockName("ml_cropMaize");
+	        cropVine.setBlockName("ml_cropVine");
 
 		paperWall = new BlockMLNPane("paperwall", "paperwall", Material.cloth, true).setHardness(0.3F).setStepSound(Block.soundTypeCloth).setBlockName("ml_panes");
 
@@ -419,8 +445,6 @@ public class Mill
 		skoll_hati_amulet = (new ItemAmuletSkollHati("amulet_skollhati")).setCreativeTab(Mill.tabMillenaire).setUnlocalizedName("ml_skoll_hati_amulet").setMaxStackSize(1).setMaxDamage(10);
 		parchmentVillageScroll = new ItemParchment("parchmentvillage",new int[]{ItemParchment.villageBook}).setUnlocalizedName("ml_parchmentVillageScroll");
 
-		rice = (new ItemMillSeeds("rice", crops,0,Mill.CROP_RICE)).setUnlocalizedName("ml_rice");
-		turmeric = (new ItemMillSeeds("turmeric", crops,2,Mill.CROP_TURMERIC)).setUnlocalizedName("ml_turmeric");
 		vegcurry = (new ItemFoodMultiple("curry",0,0,6,0.6f,false,0)).setUnlocalizedName("ml_vegcurry");
 		chickencurry = (new ItemFoodMultiple("currychicken",0,0,8,0.8f,false,0)).setPotionEffect(Potion.fireResistance.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_chickencurry");
 		brickmould = (new ItemBrickMould("brickmould")).setUnlocalizedName("ml_brickmould").setMaxStackSize(1).setMaxDamage(128);
@@ -434,7 +458,6 @@ public class Mill
 
 
 		mayanstatue = (new ItemTapestry("mayanstatue",EntityMillDecoration.MAYAN_STATUE)).setUnlocalizedName("ml_mayanstatue");
-		maize = (new ItemMillSeeds("maize", crops,4,Mill.CROP_MAIZE)).setUnlocalizedName("ml_maize");
 		masa = (new ItemFoodMultiple("masa",0,0,6,0.6f,false,0)).setUnlocalizedName("ml_masa");
 		wah = (new ItemFoodMultiple("wah",0,0,10,1f,false,0)).setPotionEffect(Potion.digSpeed.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wah");
 
@@ -484,7 +507,6 @@ public class Mill
 		parchmentJapaneseComplete = new ItemParchment("parchmentall",new int[]{ItemParchment.japaneseVillagers,ItemParchment.japaneseBuildings,ItemParchment.japaneseItems}).setUnlocalizedName("ml_parchmentJapaneseComplete");
 
 
-		grapes=(new ItemMillSeeds("grapes", crops,6,Mill.CROP_VINE)).setUnlocalizedName("ml_vine");
 		wineFancy = (new ItemFoodMultiple("winefancy",8,30,0,0,true,5)).setPotionEffect(Potion.resistance.id, 8*60, 0, 1f).setAlwaysEdible().setUnlocalizedName("ml_wine");
 		silk=new ItemText("silk").setUnlocalizedName("ml_silk");
 		byzantineiconsmall = (new ItemTapestry("byzantineicon",EntityMillDecoration.BYZANTINE_ICON_SMALL)).setUnlocalizedName("ml_byzantineicon");
@@ -550,9 +572,6 @@ public class Mill
 		pathSlab.registerTexture(4, "pathochretiles","pathbottom","pathochretiles_halfside");
 		pathSlab.registerTexture(5, "pathgravelslabs","pathbottom","pathgravel_halfside");
 
-
-		crops.setBlockName("ml_crops").setHardness(0.0F).setStepSound(Block.soundTypeGrass);
-
 		entityNames=new HashMap<Class,String>();
 
 		entityNames.put(MillVillager.MLEntityGenericMale.class, MillVillager.GENERIC_VILLAGER);
@@ -578,8 +597,7 @@ public class Mill
 		
 		registerBlocksItemsEntities();
 
-		if (event.getSide() == Side.CLIENT)
-			Minecraft.getMinecraft().refreshResources();
+		Mill.proxy.refreshClientResources();
 	}
 	
 	private void registerBlocksItemsEntities() {
@@ -614,6 +632,10 @@ public class Mill
 			GameRegistry.registerBlock(path,ItemDecorativeSlab.class,path.getUnlocalizedName());
 			GameRegistry.registerBlock(pathSlab,ItemDecorativeSlab.class,pathSlab.getUnlocalizedName());
 
+			GameRegistry.registerBlock(cropRice, cropRice.getUnlocalizedName());
+            GameRegistry.registerBlock(cropTurmeric, cropTurmeric.getUnlocalizedName());
+            GameRegistry.registerBlock(cropMaize, cropMaize.getUnlocalizedName());
+            GameRegistry.registerBlock(cropVine, cropVine.getUnlocalizedName());
 
 			//GameRegistry.registerItem(new ItemDecorativeSlab(path, pathSlab, path, true), "ml_path");
 			//GameRegistry.registerItem(new ItemDecorativeSlab(pathSlab, pathSlab, path, false), "ml_path_slab");

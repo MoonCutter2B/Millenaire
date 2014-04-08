@@ -15,8 +15,8 @@ Wool: 15
 Cobblestone: 2578
 Bois de bouleau: 49
 Glass: 14
-tile.byzantine_brick.name: 51
 Sandstone: 147
+tile.byzantine_brick.name: 51
 Bois (tous): 254
 Bricks: 120
 
@@ -31,8 +31,8 @@ Bricks: 182
 Bois de chêne: 896
 Bois de bouleau: 590
 Glass: 62
-tile.byzantine_brick.name: 845
 Sandstone: 2046
+tile.byzantine_brick.name: 845
 Bois (tous): 1006
 
 military resource use: 
@@ -46,8 +46,8 @@ Bricks: 208
 Bois de chêne: 1314
 Bois de bouleau: 479
 Glass: 57
-tile.byzantine_brick.name: 674
 Sandstone: 1782
+tile.byzantine_brick.name: 674
 Bois (tous): 999
 
 ortodox resource use: 
@@ -61,8 +61,8 @@ Bricks: 598
 Bois de chêne: 807
 Bois de bouleau: 511
 Glass: 59
-tile.byzantine_brick.name: 607
 Sandstone: 1972
+tile.byzantine_brick.name: 607
 Bois (tous): 923
 
 
@@ -92,8 +92,8 @@ Bois de chêne: 6
 Wool: 6
 Stone: 70
 Glass: 2
-tile.byzantine_brick.name: 24
 Sandstone: 44
+tile.byzantine_brick.name: 24
 Bois (tous): 48
 
 OakTower resource use: 
@@ -231,25 +231,25 @@ Grass: 263
 Bookshelf: 12
 Gravel: 584
 Bois de chêne: 4785
+tile.ml_panes.name: 682
 Gold Ingot: 54
 Fern: 117
 Iron Ingot: 36
 Bois (tous): 1449
 tile.ml_wood_deco.1.name: 63
-tile.ml_panes.name: 682
 
 japanese_controlled resource use: 
 Bois de chêne: 992
 Stone: 1785
 Wool: 55
 Bois de sapin: 577
+tile.ml_panes.name: 95
 Cobblestone: 129
 tile.ml_wood_deco.2.name: 1733
 tile.ml_wood_deco.0.name: 483
 Gravel: 2
 tile.ml_wood_deco.1.name: 25
 Bois (tous): 266
-tile.ml_panes.name: 95
 
 nogyo resource use: 
 Wool: 182
@@ -263,11 +263,11 @@ Sand: 286
 Bookshelf: 12
 Gravel: 565
 Bois de chêne: 4857
+tile.ml_panes.name: 610
 Fern: 117
 Iron Ingot: 18
 Bois (tous): 1583
 tile.ml_wood_deco.1.name: 63
-tile.ml_panes.name: 610
 
 seiji resource use: 
 Cracked Stone Bricks: 26
@@ -282,12 +282,12 @@ Sand: 286
 Bookshelf: 12
 Gravel: 691
 Bois de chêne: 6657
+tile.ml_panes.name: 864
 Gold Ingot: 54
 Fern: 117
 Iron Ingot: 108
 Bois (tous): 1883
 tile.ml_wood_deco.1.name: 63
-tile.ml_panes.name: 864
 
 trading resource use: 
 Stone: 10041
@@ -301,12 +301,12 @@ tile.ml_wood_deco.0.name: 3087
 Bookshelf: 12
 Gravel: 507
 Bois de chêne: 5617
+tile.ml_panes.name: 655
 Gold Ingot: 54
 Fern: 117
 Iron Ingot: 90
 tile.ml_wood_deco.1.name: 13
 Bois (tous): 1423
-tile.ml_panes.name: 655
 
 
 bandit_cave resource use: 
@@ -322,12 +322,12 @@ banditfort resource use:
 Cracked Stone Bricks: 25
 Bois de chêne: 315
 Stone: 4
+tile.ml_panes.name: 36
 Cobblestone: 88
 tile.ml_wood_deco.2.name: 498
 Iron Ingot: 127
 Gravel: 228
 Bois (tous): 129
-tile.ml_panes.name: 36
 
 hotspringsinn resource use: 
 Bois de chêne: 199
@@ -335,23 +335,23 @@ Stone: 3969
 Wool: 51
 Bois de sapin: 1622
 Moss Stone: 244
+tile.ml_panes.name: 78
 Cobblestone: 972
 tile.ml_wood_deco.0.name: 1196
 Grass: 1086
 Gravel: 1027
 Bois (tous): 142
-tile.ml_panes.name: 78
 
 japaneseoutpost resource use: 
 Bois de chêne: 300
 Bois de sapin: 113
+tile.ml_panes.name: 51
 Cobblestone: 62
 tile.ml_wood_deco.2.name: 556
 Iron Ingot: 9
 Grass: 4
 Gravel: 167
 Bois (tous): 90
-tile.ml_panes.name: 51
 
 kunfun_tomb resource use: 
 Bois de chêne: 95
@@ -386,10 +386,10 @@ woods_shrine resource use:
 Bois de chêne: 15
 Wool: 8
 Bois de sapin: 62
+tile.ml_panes.name: 24
 tile.ml_wood_deco.2.name: 81
 Gravel: 65
 Bois (tous): 3
-tile.ml_panes.name: 24
 
 mayan: 
 agriculture resource use: 
@@ -1028,11 +1028,11 @@ Upgrade 3
 | style="text-align: center; "|Glass
 | style="text-align: center; "|3
 |-
-| style="text-align: center; "|tile.byzantine_brick.name
-| style="text-align: center; "|38
-|-
 | style="text-align: center; "|Sandstone
 | style="text-align: center; "|87
+|-
+| style="text-align: center; "|tile.byzantine_brick.name
+| style="text-align: center; "|38
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|4
@@ -1759,11 +1759,11 @@ Upgrade 2
 | style="text-align: center; "|Glass
 | style="text-align: center; "|2
 |-
-| style="text-align: center; "|tile.byzantine_brick.name
-| style="text-align: center; "|2
-|-
 | style="text-align: center; "|Sandstone
 | style="text-align: center; "|13
+|-
+| style="text-align: center; "|tile.byzantine_brick.name
+| style="text-align: center; "|2
 |}
 
 
@@ -1798,11 +1798,11 @@ Initial Construction
 | style="text-align: center; "|Glass
 | style="text-align: center; "|7
 |-
-| style="text-align: center; "|tile.byzantine_brick.name
-| style="text-align: center; "|173
-|-
 | style="text-align: center; "|Sandstone
 | style="text-align: center; "|258
+|-
+| style="text-align: center; "|tile.byzantine_brick.name
+| style="text-align: center; "|173
 |-
 | style="text-align: center; "|Bookshelf
 | style="text-align: center; "|32
@@ -2352,11 +2352,11 @@ Initial Construction
 | style="text-align: center; "|Glass
 | style="text-align: center; "|1
 |-
-| style="text-align: center; "|tile.byzantine_brick.name
-| style="text-align: center; "|12
-|-
 | style="text-align: center; "|Sandstone
 | style="text-align: center; "|22
+|-
+| style="text-align: center; "|tile.byzantine_brick.name
+| style="text-align: center; "|12
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|24
@@ -2382,11 +2382,11 @@ Initial Construction
 | style="text-align: center; "|Glass
 | style="text-align: center; "|1
 |-
-| style="text-align: center; "|tile.byzantine_brick.name
-| style="text-align: center; "|12
-|-
 | style="text-align: center; "|Sandstone
 | style="text-align: center; "|22
+|-
+| style="text-align: center; "|tile.byzantine_brick.name
+| style="text-align: center; "|12
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|24
@@ -2686,11 +2686,11 @@ Upgrade 4
 | style="text-align: center; "|Glass
 | style="text-align: center; "|1
 |-
-| style="text-align: center; "|tile.byzantine_brick.name
-| style="text-align: center; "|54
-|-
 | style="text-align: center; "|Sandstone
 | style="text-align: center; "|4
+|-
+| style="text-align: center; "|tile.byzantine_brick.name
+| style="text-align: center; "|54
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|28
@@ -2873,11 +2873,11 @@ Upgrade 4
 | style="text-align: center; "|Glass
 | style="text-align: center; "|4
 |-
-| style="text-align: center; "|tile.byzantine_brick.name
-| style="text-align: center; "|31
-|-
 | style="text-align: center; "|Sandstone
 | style="text-align: center; "|25
+|-
+| style="text-align: center; "|tile.byzantine_brick.name
+| style="text-align: center; "|31
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|4
@@ -3363,11 +3363,11 @@ Initial Construction
 | style="text-align: center; "|Glass
 | style="text-align: center; "|8
 |-
-| style="text-align: center; "|tile.byzantine_brick.name
-| style="text-align: center; "|141
-|-
 | style="text-align: center; "|Sandstone
 | style="text-align: center; "|346
+|-
+| style="text-align: center; "|tile.byzantine_brick.name
+| style="text-align: center; "|141
 |-
 | style="text-align: center; "|Smooth Sandstone
 | style="text-align: center; "|759
@@ -6120,6 +6120,9 @@ Initial Construction
 | style="text-align: center; "|Stone
 | style="text-align: center; "|4
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|36
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|88
 |-
@@ -6134,9 +6137,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|129
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|36
 |}
 
 
@@ -6201,11 +6201,11 @@ Upgrade 4
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
-| style="text-align: center; "|tile.ml_wood_deco.1.name
-| style="text-align: center; "|25
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|24
+|-
+| style="text-align: center; "|tile.ml_wood_deco.1.name
+| style="text-align: center; "|25
 |}
 
 
@@ -6442,11 +6442,11 @@ Upgrade 4
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|8
 |-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|6
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|4
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|6
 |}
 
 
@@ -6580,14 +6580,14 @@ Upgrade 3
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|20
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|77
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|1
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|20
 |}
 
 
@@ -6623,14 +6623,14 @@ Upgrade 5
 | style="text-align: center; "|Bois de chêne
 | style="text-align: center; "|3
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|2
+|-
 | style="text-align: center; "|tile.ml_wood_deco.0.name
 | style="text-align: center; "|24
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|31
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|2
 |}
 
 
@@ -6730,11 +6730,11 @@ Upgrade 3
 | style="text-align: center; "|Wool
 | style="text-align: center; "|2
 |-
-| style="text-align: center; "|tile.ml_wood_deco.0.name
-| style="text-align: center; "|98
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|15
+|-
+| style="text-align: center; "|tile.ml_wood_deco.0.name
+| style="text-align: center; "|98
 |}
 
 
@@ -6836,6 +6836,9 @@ Initial Construction
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|62
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|24
+|-
 | style="text-align: center; "|tile.ml_wood_deco.2.name
 | style="text-align: center; "|81
 |-
@@ -6844,9 +6847,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|3
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|24
 |}
 
 
@@ -6869,6 +6869,9 @@ Initial Construction
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|104
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|36
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|17
 |-
@@ -6877,9 +6880,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|15
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|36
 |}
 
 
@@ -7024,14 +7024,14 @@ Upgrade 4
 | style="text-align: center; "|Stone
 | style="text-align: center; "|16
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|6
+|-
 | style="text-align: center; "|tile.ml_wood_deco.0.name
 | style="text-align: center; "|32
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|1
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|6
 |}
 
 
@@ -7233,14 +7233,14 @@ Upgrade 4
 | style="text-align: center; "|Bois de chêne
 | style="text-align: center; "|1
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|82
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|53
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|12
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|82
 |}
 
 
@@ -7262,14 +7262,14 @@ Upgrade 5
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|12
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|10
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|14
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|4
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|10
 |}
 
 
@@ -7389,14 +7389,14 @@ Upgrade 4
 | style="text-align: center; "|Wool
 | style="text-align: center; "|19
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|12
+|-
 | style="text-align: center; "|tile.ml_wood_deco.0.name
 | style="text-align: center; "|48
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|9
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|12
 |}
 
 
@@ -7632,14 +7632,14 @@ Upgrade 2
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|48
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|2
+|-
 | style="text-align: center; "|tile.ml_wood_deco.0.name
 | style="text-align: center; "|57
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|27
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|2
 |}
 
 
@@ -7776,6 +7776,9 @@ Upgrade 6
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|8
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|58
 |-
@@ -7784,9 +7787,6 @@ Upgrade 6
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|28
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|8
 |}
 
 
@@ -7891,11 +7891,11 @@ Upgrade 5
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|12
 |-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|20
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|16
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|20
 |}
 
 
@@ -8019,6 +8019,9 @@ Upgrade 4
 | style="text-align: center; "|Bois de chêne
 | style="text-align: center; "|2
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|7
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|24
 |-
@@ -8027,9 +8030,6 @@ Upgrade 4
 |-
 | style="text-align: center; "|tile.ml_wood_deco.1.name
 | style="text-align: center; "|13
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|7
 |}
 
 
@@ -8120,11 +8120,11 @@ Upgrade 3
 | style="text-align: center; "|Stone
 | style="text-align: center; "|184
 |-
-| style="text-align: center; "|Gravel
-| style="text-align: center; "|9
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|6
+|-
+| style="text-align: center; "|Gravel
+| style="text-align: center; "|9
 |}
 
 
@@ -8193,11 +8193,11 @@ Upgrade 3
 | style="text-align: center; "|Wool
 | style="text-align: center; "|2
 |-
-| style="text-align: center; "|tile.ml_wood_deco.0.name
-| style="text-align: center; "|82
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|12
+|-
+| style="text-align: center; "|tile.ml_wood_deco.0.name
+| style="text-align: center; "|82
 |}
 
 
@@ -8254,6 +8254,9 @@ Upgrade 1
 | style="text-align: center; "|Bois de chêne
 | style="text-align: center; "|9
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|8
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|17
 |-
@@ -8262,9 +8265,6 @@ Upgrade 1
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|9
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|8
 |}
 
 
@@ -8277,11 +8277,11 @@ Upgrade 2
 | style="text-align: center; "|Bois de chêne
 | style="text-align: center; "|10
 |-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|1
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|43
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|1
 |}
 
 
@@ -8297,11 +8297,11 @@ Upgrade 3
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|8
 |-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|15
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|1
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|15
 |}
 
 
@@ -8412,6 +8412,9 @@ Initial Construction
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|1622
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|78
+|-
 | style="text-align: center; "|Moss Stone
 | style="text-align: center; "|244
 |-
@@ -8429,9 +8432,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|142
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|78
 |}
 
 
@@ -8929,11 +8929,11 @@ Upgrade 3
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
-| style="text-align: center; "|tile.ml_wood_deco.0.name
-| style="text-align: center; "|33
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|36
+|-
+| style="text-align: center; "|tile.ml_wood_deco.0.name
+| style="text-align: center; "|33
 |}
 
 
@@ -9035,11 +9035,11 @@ Upgrade 4
 | style="text-align: center; "|Wool
 | style="text-align: center; "|2
 |-
-| style="text-align: center; "|tile.ml_wood_deco.0.name
-| style="text-align: center; "|1
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|6
+|-
+| style="text-align: center; "|tile.ml_wood_deco.0.name
+| style="text-align: center; "|1
 |}
 
 
@@ -9145,6 +9145,9 @@ Upgrade 5
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|65
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|62
+|-
 | style="text-align: center; "|Gold Ingot
 | style="text-align: center; "|27
 |-
@@ -9156,9 +9159,6 @@ Upgrade 5
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|17
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|62
 |}
 
 
@@ -9260,6 +9260,9 @@ Upgrade 5
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|65
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|62
+|-
 | style="text-align: center; "|Gold Ingot
 | style="text-align: center; "|27
 |-
@@ -9271,9 +9274,6 @@ Upgrade 5
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|17
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|62
 |}
 
 
@@ -9344,14 +9344,14 @@ Upgrade 3
 | style="text-align: center; "|Bois de chêne
 | style="text-align: center; "|2
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|24
+|-
 | style="text-align: center; "|tile.ml_wood_deco.0.name
 | style="text-align: center; "|201
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|21
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|24
 |}
 
 
@@ -9367,14 +9367,14 @@ Upgrade 4
 | style="text-align: center; "|Wool
 | style="text-align: center; "|57
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|16
+|-
 | style="text-align: center; "|tile.ml_wood_deco.0.name
 | style="text-align: center; "|67
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|12
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|16
 |}
 
 
@@ -9495,11 +9495,11 @@ Upgrade 3
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
-| style="text-align: center; "|tile.ml_wood_deco.0.name
-| style="text-align: center; "|48
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|12
+|-
+| style="text-align: center; "|tile.ml_wood_deco.0.name
+| style="text-align: center; "|48
 |}
 
 
@@ -9575,14 +9575,14 @@ Upgrade 3
 | style="text-align: center; "|Wool
 | style="text-align: center; "|2
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|6
+|-
 | style="text-align: center; "|tile.ml_wood_deco.0.name
 | style="text-align: center; "|48
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|4
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|6
 |}
 
 
@@ -9730,6 +9730,9 @@ Upgrade 2
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|30
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|15
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|61
 |-
@@ -9738,9 +9741,6 @@ Upgrade 2
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|16
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|15
 |}
 
 
@@ -9770,14 +9770,14 @@ Upgrade 4
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|44
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|18
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|17
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|14
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|18
 |}
 
 
@@ -9880,6 +9880,9 @@ Initial Construction
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|115
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|28
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|180
 |-
@@ -9888,9 +9891,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|18
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|28
 |}
 
 
@@ -10014,6 +10014,9 @@ Upgrade 2
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|35
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|12
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|19
 |-
@@ -10022,9 +10025,6 @@ Upgrade 2
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|1
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|12
 |}
 
 
@@ -10040,6 +10040,9 @@ Upgrade 3
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|21
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|39
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|112
 |-
@@ -10048,9 +10051,6 @@ Upgrade 3
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|10
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|39
 |}
 
 
@@ -10066,11 +10066,11 @@ Upgrade 4
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|103
 |-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|33
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|6
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|33
 |}
 
 
@@ -10089,11 +10089,11 @@ Upgrade 5
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|41
 |-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|10
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|36
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|10
 |}
 
 
@@ -10194,11 +10194,11 @@ Upgrade 1
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|1
 |-
-| style="text-align: center; "|Bois (tous)
-| style="text-align: center; "|11
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|3
+|-
+| style="text-align: center; "|Bois (tous)
+| style="text-align: center; "|11
 |}
 
 
@@ -10222,6 +10222,9 @@ Upgrade 3
 ! scope="col"|Resource
 ! scope="col"|Quantity
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|3
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|33
 |-
@@ -10230,9 +10233,6 @@ Upgrade 3
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|1
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|3
 |}
 
 
@@ -10398,11 +10398,11 @@ Upgrade 3
 | style="text-align: center; "|Wool
 | style="text-align: center; "|2
 |-
-| style="text-align: center; "|tile.ml_wood_deco.0.name
-| style="text-align: center; "|28
-|-
 | style="text-align: center; "|tile.ml_panes.name
 | style="text-align: center; "|4
+|-
+| style="text-align: center; "|tile.ml_wood_deco.0.name
+| style="text-align: center; "|28
 |}
 
 
@@ -10433,6 +10433,9 @@ Initial Construction
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|113
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|51
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|62
 |-
@@ -10450,9 +10453,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|90
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|51
 |}
 
 
@@ -10532,6 +10532,9 @@ Initial Construction
 | style="text-align: center; "|Bois de sapin
 | style="text-align: center; "|242
 |-
+| style="text-align: center; "|tile.ml_panes.name
+| style="text-align: center; "|68
+|-
 | style="text-align: center; "|Cobblestone
 | style="text-align: center; "|129
 |-
@@ -10540,9 +10543,6 @@ Initial Construction
 |-
 | style="text-align: center; "|Bois (tous)
 | style="text-align: center; "|21
-|-
-| style="text-align: center; "|tile.ml_panes.name
-| style="text-align: center; "|68
 |}
 
 

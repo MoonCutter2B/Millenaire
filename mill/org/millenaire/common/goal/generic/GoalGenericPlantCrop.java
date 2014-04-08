@@ -125,25 +125,21 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 		if (cropType.equals(Mill.CROP_POTATO)) {
 			return Blocks.potatoes;
 		}
-		if (cropType.equals(Mill.CROP_RICE) || cropType.equals(Mill.CROP_TURMERIC)
-				|| cropType.equals(Mill.CROP_MAIZE) || cropType.equals(Mill.CROP_VINE)) {
-			return Mill.crops;
-		}
+		if(cropType.equals("rice"))
+            return Mill.cropRice;
+        if(cropType.equals("turmeric"))
+            return Mill.cropTurmeric;
+        if(cropType.equals("maize"))
+            return Mill.cropMaize;
+        if(cropType.equals("vine"))
+            return Mill.cropVine;
 		return null;
 	}
 
-	public static int getCropBlockMeta(String cropType) {
-		if (cropType.equals(Mill.CROP_TURMERIC)) {
-			return 2;
-		}
-		if (cropType.equals(Mill.CROP_MAIZE)) {
-			return 4;
-		}
-		if (cropType.equals(Mill.CROP_VINE)) {
-			return 6;
-		}
-		return 0;
-	}
+	 public static int getCropBlockMeta(String cropType)
+	    {
+	        return 0;
+	    }
 
 
 	public GoalGenericPlantCrop() {

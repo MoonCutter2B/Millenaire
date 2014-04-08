@@ -778,13 +778,13 @@ public class MillCommonUtilities {
 		Block b=world.getBlock(i, j, k);
 		if (b==null)
 			return false;
-		return b.isBlockNormalCube();
+		return isBlockOpaqueCube(b);
 	}
 	
 	static public boolean isBlockOpaqueCube(Block b) {
 		if (b==null)
 			return false;
-		return b.isBlockNormalCube();
+		return b.getMaterial().blocksMovement();
 	}
 	
 	static public int[] getJumpDestination(World world, int x,int y,int z) {
@@ -904,10 +904,10 @@ public class MillCommonUtilities {
 		return null;
 	}
 
-	public static Vector<EntityClientPlayerMP> getServerPlayers(World world) {
+	public static Vector<EntityPlayer> getServerPlayers(World world) {
 		@SuppressWarnings("unchecked")
 		final
-		Vector<EntityClientPlayerMP> players=new Vector<EntityClientPlayerMP>(world.playerEntities);
+		Vector<EntityPlayer> players=new Vector<EntityPlayer>(world.playerEntities);
 		return players;
 	}
 

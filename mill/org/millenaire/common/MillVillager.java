@@ -55,6 +55,7 @@ import net.minecraftforge.common.util.Constants;
 import org.millenaire.common.Culture.CultureLanguage.Dialogue;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.Quest.QuestInstance;
+import org.millenaire.common.block.BlockMillCrops;
 import org.millenaire.common.core.DevModUtilities;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.CommonGuiHandler;
@@ -1380,7 +1381,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 
 	public void detrampleCrops() {
 		if (getPos().sameBlock(prevPoint) &&
-				((previousBlock == Blocks.wheat) || (previousBlock == Mill.crops)) && (getBlock(getPos()) != Blocks.air) && (getBlock(getPos().getBelow()) == Blocks.dirt)) {
+				((previousBlock == Blocks.wheat) || (previousBlock instanceof BlockMillCrops)) && (getBlock(getPos()) != Blocks.air) && (getBlock(getPos().getBelow()) == Blocks.dirt)) {
 			setBlock(getPos(), previousBlock);
 			setBlockMetadata(getPos(), previousBlockMeta);
 			setBlock(getPos().getBelow(),Blocks.farmland);

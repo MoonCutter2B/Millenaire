@@ -165,9 +165,7 @@ public class CommonProxy {
 	}
 	
 	public void declareAmuletTextures(IIconRegister iconRegister) {
-		
-		
-		
+			
 	}
 
 	public String getSinglePlayerName() {
@@ -181,6 +179,11 @@ public class CommonProxy {
 	public String getBlockName(Block block, int meta) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void refreshClientResources() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

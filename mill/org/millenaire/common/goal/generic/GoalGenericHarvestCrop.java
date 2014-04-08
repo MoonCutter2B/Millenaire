@@ -121,28 +121,7 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 	}
 
 	public static int getCropBlockRipeMeta(String cropType) {
-		if (cropType.equals(Mill.CROP_WHEAT)) {
-			return 7;
-		}
-		if (cropType.equals(Mill.CROP_CARROT)) {
-			return 7;
-		}
-		if (cropType.equals(Mill.CROP_POTATO)) {
-			return 7;
-		}
-		if (cropType.equals(Mill.CROP_RICE)) {
-			return 1;
-		}
-		if (cropType.equals(Mill.CROP_TURMERIC)) {
-			return 3;
-		}
-		if (cropType.equals(Mill.CROP_MAIZE)) {
-			return 5;
-		}
-		if (cropType.equals(Mill.CROP_VINE)) {
-			return 7;
-		}
-		return 0;
+		return 7;
 	}
 
 
