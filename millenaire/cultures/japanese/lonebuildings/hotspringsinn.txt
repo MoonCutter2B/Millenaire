@@ -4,10 +4,14 @@ radius:90
 
 mindistancefromspawn:1000
 
-biome:extreme hills
-biome:river
-biome:plains
-biome:forest
+//1.7 biomes
+biome:Extreme Hills
+biome:Extreme Hills+
+biome:Extreme Hills M
+biome:Extreme Hills+ M
+biome:Taiga
+biome:Taiga M
+biome:TaigaHills
 
 //extraBiomes mod
 biome:autumn woods

@@ -1,8 +1,10 @@
 name:Sunsan Saray
 weight:1000
 radius:10
-biome:desert
-biome:deserthills
+
+//1.7 biomes
+biome:Desert
+biome:DesertHills
 
 //extraBiomes mod
 biome:mountain desert

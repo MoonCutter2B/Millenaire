@@ -1,7 +1,11 @@
 name:Abbaye isolée
 weight:10
 radius:15
-biome:forest
+
+//1.7 biomes
+biome:Flower Forest
+biome:Forest
+biome:Sunflower Plains
 
 mindistancefromspawn:1000
 

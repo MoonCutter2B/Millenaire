@@ -4,9 +4,12 @@ radius:15
 
 mindistancefromspawn:1000
 
-biome:forest
-biome:swampland
-biome:foresthills
+//1.7 biomes
+biome:Swampland
+biome:JungleEdge
+biome:Jungle
+biome:Birch Forest
+biome:Birch Forest M
 
 //extraBiomes mod
 

@@ -1,10 +1,11 @@
 name:Yashiro
 weight:5
 radius:10
-biome:extreme hills
-biome:foresthills
-biome:forest
 
+//1.7 biomes
+biome:Taiga
+biome:Taiga M
+biome:TaigaHills
 
 //starting buildings:
 centre:woods_shrine

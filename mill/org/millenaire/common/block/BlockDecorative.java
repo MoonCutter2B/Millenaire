@@ -119,7 +119,7 @@ public class BlockDecorative extends Block {
 	public void alchemistExplosion(World world, int i,
 			int j, int k) {
 
-		MillCommonUtilities.setBlockAndMetadata(world, i, j, k, null, 0, true, false);
+		MillCommonUtilities.setBlockAndMetadata(world, i, j, k, Blocks.air, 0, true, false);
 
 		for (int y=EXPLOSION_RADIUS;y>=-EXPLOSION_RADIUS;y--) {
 			if (((y+j)>=0) && ((y+j)<128)) {
@@ -128,7 +128,7 @@ public class BlockDecorative extends Block {
 						if (((x*x)+(y*y)+(z*z))<=(EXPLOSION_RADIUS*EXPLOSION_RADIUS)) {
 							Block block=world.getBlock(i+x, j+y, k+z);
 							if (block!=Blocks.air) {								
-								MillCommonUtilities.setBlockAndMetadata(world,i+x, j+y, k+z, null, 0, true, false);
+								MillCommonUtilities.setBlockAndMetadata(world,i+x, j+y, k+z, Blocks.air, 0, true, false);
 							}
 						}
 					}

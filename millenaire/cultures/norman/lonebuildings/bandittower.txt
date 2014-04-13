@@ -5,11 +5,15 @@ carriesraid:true
 
 mindistancefromspawn:600
 
-biome:forest
-biome:plains
-biome:taiga
-biome:extreme hills
-biome:foresthills
+//1.7 biomes
+biome:ForestHills
+biome:TaigaHills
+biome:ExtremeHills
+biome:ExtremeHills M
+biome:ExtremeHills+
+biome:ExtremeHills+ M
+biome:Roofed Forest
+biome:Roofed Forest M
 
 //extraBiomes mod
 

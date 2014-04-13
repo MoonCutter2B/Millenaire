@@ -1,10 +1,14 @@
 name:Meunier solitaire
 weight:10
 radius:15
-biome:river
-biome:forest
-biome:plains
-biome:foresthills
+
+//1.7 biomes
+biome:Plains
+biome:Sunflower Plains
+biome:Forest
+biome:Flower Forest
+biome:Extreme Hills+
+biome:Extreme Hills+ M
 
 //extraBiomes mod
 biome:forested hills

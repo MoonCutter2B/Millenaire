@@ -2,11 +2,16 @@ name:Ajaw Cah
 weight:0
 radius:50
 
+//1.7 biomes
+biome:JungleEdge
+biome:JungleEdge M
+biome:Jungle
+biome:Jungle M
+biome:Birch Forest
+biome:Birch Forest Hills
+biome:Birch Forest M
+biome:Birch Forest Hills M
 
-
-biome:forest
-biome:foresthills
-biome:jungle
 //extraBiomes mod
 biome:lush swamplands
 biome:rainforest

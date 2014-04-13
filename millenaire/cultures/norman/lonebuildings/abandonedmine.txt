@@ -1,8 +1,11 @@
 name:Mine abandonnée
 weight:10
 radius:10
-biome:extreme hills
-biome:ice mountains
+
+//1.7 biomes
+biome:Extreme Hills
+biome:Extreme Hills M
+biome:Stone beach
 
 //starting buildings:
 centre:abandonedmine

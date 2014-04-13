@@ -1,9 +1,11 @@
 name:Mono Paratiritio
 weight:5
 radius:10
-biome:desert
-biome:swampland
-biome:jungle
+
+//1.7 biomes:
+biome:Jungle Hills
+biome:Jungle M
+biome:Jungle Edge M
 
 //biome mods:
 biome:badlands
@@ -12,7 +14,6 @@ biome:lush desert
 biome:mountain ridge
 biome:lush swamp
 biome:green swamp
-biome:mesa
 biome:oasis
 biome:tropical rainforest
 biome:tropics

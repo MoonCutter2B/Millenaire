@@ -5,10 +5,13 @@ carriesraid:true
 
 mindistancefromspawn:600
 
-biome:forest
-biome:taiga
-biome:foresthills
-biome:taigahills
+//1.7 biomes
+biome:Forest
+biome:ForestHills
+biome:Taiga
+biome:TaigaHills
+biome:Roofed Forest
+biome:Roofed Forest M
 
 //extraBiomes mod
 biome:snow forest

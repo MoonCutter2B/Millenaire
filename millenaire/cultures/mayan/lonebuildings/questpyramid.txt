@@ -2,11 +2,17 @@ name:Keban Muul
 weight:0
 radius:50
 
-
-biome:forest
-biome:swampland
-biome:foresthills
-biome:jungle
+//1.7 biomes
+biome:Swampland
+biome:Swampland M
+biome:JungleEdge
+biome:JungleEdge M
+biome:Jungle
+biome:Jungle M
+biome:Birch Forest
+biome:Birch Forest Hills
+biome:Birch Forest M
+biome:Birch Forest Hills M
 
 //extraBiomes mod
 biome:lush swamplands

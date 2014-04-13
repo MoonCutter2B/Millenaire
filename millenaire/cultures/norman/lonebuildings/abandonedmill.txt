@@ -2,9 +2,12 @@ name:Moulin abandonné
 weight:10
 radius:10
 
-biome:forest
-biome:plains
-biome:foresthills
+//1.7 biomes
+biome:ForestHills
+biome:Taiga
+biome:TaigaHills
+biome:Extreme Hills
+biome:Extreme Hills M
 
 //extraBiomes mod
 biome:forested hills

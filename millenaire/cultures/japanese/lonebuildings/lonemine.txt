@@ -3,8 +3,11 @@ name:Kouku
 
 weight:10
 radius:20
-biome:forest
-biome:foresthills
+
+//1.7 biomes
+biome:Taiga
+biome:Taiga M
+biome:TaigaHills
 
 
 //starting buildings:

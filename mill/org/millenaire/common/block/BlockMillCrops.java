@@ -63,7 +63,7 @@ public class BlockMillCrops extends BlockCrops
         int irrigation = world.getBlockMetadata(i, j-1, k);
         if(requireIrrigation && irrigation == 0)
             return 0.0F;
-        return !slowGrowth ? 2.0F : 1.0F;
+        return !slowGrowth ? 8.0F : 4.0F;
     }
 
     @Override

@@ -1,8 +1,13 @@
 name:Mono Paratiritio
 weight:5
 radius:10
-biome:taiga
-biome:tundra
+
+//1.7 biomes
+biome:Extreme Hills
+biome:Extreme Hills+
+biome:Extreme Hills M
+biome:Extreme Hills+ M
+biome:TaigaHills
 
 //biome mods:
 biome:wetland

@@ -1,9 +1,18 @@
 name:Ch'en
 weight:10
 radius:15
-biome:forest
-biome:swampland
-biome:foresthills
+
+//1.7 biomes
+biome:Swampland
+biome:Swampland M
+biome:JungleEdge
+biome:JungleEdge M
+biome:Jungle
+biome:Jungle M
+biome:Birch Forest
+biome:Birch Forest Hills
+biome:Birch Forest M
+biome:Birch Forest Hills M
 
 //extraBiomes mod
 biome:lush swamplands

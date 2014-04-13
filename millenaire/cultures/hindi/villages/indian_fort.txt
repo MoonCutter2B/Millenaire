@@ -3,12 +3,20 @@ weight:10
 carriesraid:true
 
 
-biome:plains
-biome:desert
+//1.7 biomes
+biome:Desert
+biome:Desert M
+biome:Mesa
+biome:Mesa M
+biome:Mesa Plateau
+biome:Mesa Plateau M
+biome:Mesa Plateau F
+biome:Mesa Plateau F M
+biome:JungleEdge
+
 
 //extraBiomes mod
 biome:mountain desert
-biome:jungle
 biome:lush swampland
 biome:shrubland
 

@@ -1,7 +1,11 @@
 name:Pharos
 weight:10
 radius:10
-biome:beach
+
+//1.7 biomes
+biome:Beach
+biome:Stone Beach
+biome:Cold Beach
 
 mindistancefromspawn:600
 

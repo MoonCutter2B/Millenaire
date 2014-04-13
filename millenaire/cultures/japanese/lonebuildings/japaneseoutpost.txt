@@ -4,7 +4,15 @@ radius:70
 
 mindistancefromspawn:1000
 
-biome:plains
+//1.7 biomes
+biome:Extreme Hills
+biome:Extreme Hills+
+biome:Extreme Hills M
+biome:Extreme Hills+ M
+biome:Taiga
+biome:TaigaHills
+biome:Taiga M
+
 
 //starting buildings:
 centre:japaneseoutpost

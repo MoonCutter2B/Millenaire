@@ -1,8 +1,13 @@
 name:Bûcheron solitaire
 weight:10
 radius:10
-biome:taiga
-biome:taigahills
+
+//1.7 biomes
+biome:Taiga
+biome:TaigaHills
+biome:Taiga M
+biome:Cold Taiga
+biome:Cold Taiga M
 
 //extraBiomes mod
 biome:taiga mountain

@@ -6,8 +6,12 @@ pathmaterial:pathdirt
 pathmaterial:pathgravel
 pathmaterial:pathgravelslabs
 
-biome:plains
-biome:extreme hills
+//1.7 biomes
+biome:Taiga
+biome:Taiga Hills
+biome:Taiga M
+biome:Extreme Hills
+biome:Extreme Hills+
 
 
 
@@ -15,7 +19,6 @@ biome:extreme hills
 
 biome:green hills
 biome:ice mountains
-biome:birch forest
 biome:autumn woods
 
 //starting buildings:

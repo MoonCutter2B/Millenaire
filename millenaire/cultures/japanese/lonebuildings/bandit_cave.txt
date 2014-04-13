@@ -5,8 +5,15 @@ mindistancefromspawn:600
 
 weight:10
 radius:20
-biome:extreme hills
-biome:foresthills
+
+//1.7 biomes
+biome:Extreme Hills
+biome:Extreme Hills+
+biome:Extreme Hills M
+biome:Extreme Hills+ M
+biome:ForestHills
+biome:TaigaHills
+biome:Roofed Forest M
 
 
 //starting buildings:

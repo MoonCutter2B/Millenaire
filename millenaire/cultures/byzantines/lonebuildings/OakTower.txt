@@ -1,8 +1,11 @@
 name:Mono Paratiritio
 weight:5
 radius:10
-biome:forest
-biome:extremehills
+
+//1.7 biomes
+biome:ForestHills
+biome:Mesa Plateau F
+biome:Mesa Plateau F M
 
 //biomes mods:
 biome:bayou
@@ -23,7 +26,6 @@ biome:orchard
 biome:origin valley
 biome:quagmire
 biome:rainforest
-biome:savanna
 biome:scrubland
 biome:seasonal forest
 biome:shrubland

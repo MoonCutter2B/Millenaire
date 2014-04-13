@@ -5,10 +5,17 @@ mindistancefromspawn:1000
 
 weight:10
 radius:50
-biome:extreme hills
-biome:foresthills
-biome:forest
-biome:taiga
+
+//1.7 biomes
+biome:Extreme Hills
+biome:Extreme Hills+
+biome:Extreme Hills M
+biome:Extreme Hills+ M
+biome:Taiga
+biome:Taiga M
+biome:TaigaHills
+biome:Roofed Forest
+biome:Roofed Forest M
 
 //starting buildings:
 centre:banditfort

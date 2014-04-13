@@ -9,8 +9,13 @@ forestQualifier:la-fôret
 lavaQualifier:le-volcan
 lakeQualifier:le-lac
 oceanQualifier:l'océan
-biome:plains
-biome:river
+
+//1.7 biomes
+biome:River
+biome:Plains
+biome:Sunflower Plains
+biome:Extreme Hills+
+biome:Extreme Hills+ M
 
 //extraBiomes mod
 biome:autumn woods

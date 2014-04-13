@@ -4,8 +4,10 @@ radius:10
 
 mindistancefromspawn:1000
 
-biome:desert
-biome:deserthills
+//1.7 biomes
+biome:Desert
+biome:DesertHills
+biome:Desert M
 
 //extraBiomes mod
 biome:mountain desert

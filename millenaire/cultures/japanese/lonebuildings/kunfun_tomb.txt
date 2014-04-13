@@ -4,8 +4,9 @@ radius:20
 
 mindistancefromspawn:1000
 
-biome:foresthills
-biome:forest
+//1.7 biomes
+biome:TaigaHills
+biome:Taiga
 
 
 //starting buildings:

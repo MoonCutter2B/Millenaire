@@ -1,8 +1,13 @@
 name:Bûcheron solitaire
 weight:10
 radius:10
-biome:forest
-biome:foresthills
+
+//1.7 biomes
+biome:Forest
+biome:ForestHills
+biome:Flower Forest
+biome:Roofed Forest
+biome:Roofed Forest M
 
 //extraBiomes mod
 biome:autumn woods

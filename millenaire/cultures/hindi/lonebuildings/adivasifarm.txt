@@ -1,7 +1,11 @@
 name:Adivasi ka Ghar
 weight:20
 radius:35
-biome:swampland
+
+//1.7 Biomes
+biome:Swampland
+biome:Swampland M
+
 //extraBiomes mod
 biome:lush swamplands
 
