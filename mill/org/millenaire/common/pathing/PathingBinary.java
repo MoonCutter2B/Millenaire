@@ -195,7 +195,7 @@ public class PathingBinary {
 					//} else
 					if ((block==Blocks.flowing_water) || (block==Blocks.water) || (block==Blocks.lava) || (block==Blocks.flowing_lava) || (block==Blocks.fence)) {
 						region[i][j][k]=new PathingPathCalcTile(false, false, new short[]{i,j,k});
-					} else if ((block==Blocks.air) || !block.isBlockNormalCube()) {
+					} else if ((block==Blocks.air) || !block.getMaterial().blocksMovement()) {
 						region[i][j][k]=null;
 					} else {
 						region[i][j][k]=new PathingPathCalcTile(true, false, new short[]{i,j,k});

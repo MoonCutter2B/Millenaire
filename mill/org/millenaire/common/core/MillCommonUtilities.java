@@ -405,7 +405,7 @@ public class MillCommonUtilities {
 			for (int j = y - ry; j <= (y + ry); j++) {
 				for (int k = z - rz; k <= (z + rz); k++) {
 					//if (worldObj.getBlock(i, j, k) != 0 && worldObj.getBlock(i, j, k) != Blocks.snow.blockID)
-					if (world.getBlock(i, j, k)!=null && world.getBlock(i, j, k).isBlockNormalCube()) {
+					if (world.getBlock(i, j, k)!=null && world.getBlock(i, j, k).getMaterial().blocksMovement()) {
 						counter++;
 					}
 				}

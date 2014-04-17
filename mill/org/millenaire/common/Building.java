@@ -1553,7 +1553,7 @@ public class Building {
 						&& ((x != (int) player.posX) || (z != (int) player.posZ))) {
 					final Block block = worldObj.getBlock(x, getSleepingPos().getiY() + 1, z);
 
-					if (block!=Blocks.air && block.isBlockNormalCube()) {
+					if (block!=Blocks.air && block.getMaterial().blocksMovement()) {
 						valid = false;
 					} else {
 						if (x > (int) player.posX) {

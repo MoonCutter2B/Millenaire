@@ -3868,7 +3868,7 @@ public abstract class MillVillager extends EntityCreature  implements IEntityAdd
 			for(flag1 = false; !flag1 && (j > 0);)
 			{
 				final Block block = worldObj.getBlock(i, j - 1, k);
-				if((block == Blocks.air) || !block.isBlockNormalCube())
+				if((block == Blocks.air) || !block.getMaterial().blocksMovement())
 				{
 					posY--;
 					j--;
