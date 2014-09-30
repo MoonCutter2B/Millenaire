@@ -7,6 +7,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerChest;
@@ -191,9 +192,8 @@ public class BlockMillChest extends BlockChest {
 	//Copied from BlockChest
 	private static boolean func_149953_o(World p_149953_0_, int p_149953_1_, int p_149953_2_, int p_149953_3_)
     {
-        @SuppressWarnings("rawtypes")
-		Iterator iterator = p_149953_0_.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getAABBPool().getAABB(p_149953_1_, p_149953_2_ + 1, p_149953_3_, p_149953_1_ + 1, p_149953_2_ + 2, p_149953_3_ + 1)).iterator();
-        EntityOcelot entityocelot1;
+        Iterator iterator = p_149953_0_.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getBoundingBox((double)p_149953_1_, (double)(p_149953_2_ + 1), (double)p_149953_3_, (double)(p_149953_1_ + 1), (double)(p_149953_2_ + 2), (double)(p_149953_3_ + 1))).iterator();
+        EntityOcelot entityocelot;
 
         do
         {
@@ -202,10 +202,10 @@ public class BlockMillChest extends BlockChest {
                 return false;
             }
 
-            EntityOcelot entityocelot = (EntityOcelot)iterator.next();
-            entityocelot1 = entityocelot;
+            Entity entity = (Entity)iterator.next();
+            entityocelot = (EntityOcelot)entity;
         }
-        while (!entityocelot1.isSitting());
+        while (!entityocelot.isSitting());
 
         return true;
     }

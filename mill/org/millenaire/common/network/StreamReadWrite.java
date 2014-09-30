@@ -10,6 +10,7 @@ import java.util.Vector;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
@@ -115,7 +116,7 @@ public class StreamReadWrite  {
 		{
 			final byte[] var3 = new byte[var2];
 			par1DataInput.readFully(var3);
-			return CompressedStreamTools.decompress(var3);
+			return CompressedStreamTools.func_152457_a(var3, new NBTSizeTracker(2097152L));
 		}
 	}
 

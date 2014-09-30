@@ -52,3 +52,6 @@ villagers_names_distance=5
 
 generate_translation_gap=true
 load_all_languages=true
+//logbuildingplan; 
+logbuildingplan=major
+

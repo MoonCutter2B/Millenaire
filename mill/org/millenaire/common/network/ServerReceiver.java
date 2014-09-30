@@ -328,7 +328,7 @@ public class ServerReceiver {
 				
 				EntityPlayerMP playerMP=(EntityPlayerMP)player;
 				
-				if (!Mill.proxy.isTrueServer() || playerMP.mcServer.getConfigurationManager().isPlayerOpped(playerMP.getDisplayName()))
+				if (!Mill.proxy.isTrueServer() || playerMP.mcServer.getConfigurationManager().func_152596_g(playerMP.getGameProfile()))
 					BuildingPlan.importBuilding(player,Mill.serverWorlds.firstElement().world, pos);
 				else
 					ServerSender.sendTranslatedSentence(player,MLN.DARKRED, "ui.serverimportforbidden");
