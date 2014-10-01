@@ -1,6 +1,7 @@
 package org.millenaire.client.gui;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,36 +18,38 @@ import org.millenaire.common.forge.Mill;
 
 public class GuiNewVillage extends GuiText {
 
-	private Vector<VillageType> possibleVillages=new Vector<VillageType>();
+	private List<VillageType> possibleVillages = new ArrayList<VillageType>();
 	private final Point pos;
 	private final EntityPlayer player;
 
-	public GuiNewVillage(EntityPlayer player,Point p) {
-		pos=p;
-		this.player=player;
+	ResourceLocation background = new ResourceLocation(Mill.modId,
+			"textures/gui/ML_panel.png");
+
+	public GuiNewVillage(final EntityPlayer player, final Point p) {
+		pos = p;
+		this.player = player;
 	}
 
-
 	@Override
-	protected void actionPerformed(GuiButton guibutton)
-	{
-		if(!guibutton.enabled)
+	protected void actionPerformed(final GuiButton guibutton) {
+		if (!guibutton.enabled) {
 			return;
+		}
 
-		final VillageType village=possibleVillages.get(guibutton.id);
+		final VillageType village = possibleVillages.get(guibutton.id);
 
-		ClientSender.newVillageCreation(player, pos, village.culture.key, village.key);
+		ClientSender.newVillageCreation(player, pos, village.culture.key,
+				village.key);
 
 		closeWindow();
 	}
 
-
 	@Override
-	protected void customDrawBackground(int i, int j, float f) {
+	protected void customDrawBackground(final int i, final int j, final float f) {
 	}
 
 	@Override
-	protected void customDrawScreen(int i, int j, float f) {
+	protected void customDrawScreen(final int i, final int j, final float f) {
 
 	}
 
@@ -59,8 +62,6 @@ public class GuiNewVillage extends GuiText {
 	public int getPageSize() {
 		return 19;
 	}
-	
-	ResourceLocation background=new ResourceLocation(Mill.modId,"textures/gui/ML_panel.png");
 
 	@Override
 	public ResourceLocation getPNGPath() {
@@ -79,23 +80,25 @@ public class GuiNewVillage extends GuiText {
 
 	@Override
 	public void initData() {
-		final Vector<Line> text=new Vector<Line>();
+		final List<Line> text = new ArrayList<Line>();
 
-		text.add(new Line(MLN.string("ui.selectavillage"),false));
+		text.add(new Line(MLN.string("ui.selectavillage"), false));
 		text.add(new Line(false));
-		text.add(new Line(MLN.string("ui.leadershipstatus")+":"));
+		text.add(new Line(MLN.string("ui.leadershipstatus") + ":"));
 		text.add(new Line());
 
-		boolean notleader=false;
+		boolean notleader = false;
 
-		final UserProfile profile=Mill.proxy.getClientProfile();
+		final UserProfile profile = Mill.proxy.getClientProfile();
 
-		for (final Culture culture : Culture.vectorCultures) {
-			if (profile.isTagSet(MillWorld.CULTURE_CONTROL+culture.key)) {
-				text.add(new Line(MLN.string("ui.leaderin",culture.getCultureGameName())));
+		for (final Culture culture : Culture.ListCultures) {
+			if (profile.isTagSet(MillWorld.CULTURE_CONTROL + culture.key)) {
+				text.add(new Line(MLN.string("ui.leaderin",
+						culture.getCultureGameName())));
 			} else {
-				text.add(new Line(MLN.string("ui.notleaderin",culture.getCultureGameName())));
-				notleader=true;
+				text.add(new Line(MLN.string("ui.notleaderin",
+						culture.getCultureGameName())));
+				notleader = true;
 			}
 		}
 
@@ -107,20 +110,23 @@ public class GuiNewVillage extends GuiText {
 
 		possibleVillages = VillageType.spawnableVillages(player);
 
-		for (int i=0;i<possibleVillages.size();i++) {
-			String  controlled="";
+		for (int i = 0; i < possibleVillages.size(); i++) {
+			String controlled = "";
 			if (possibleVillages.get(i).playerControlled) {
-				controlled=", "+MLN.string("ui.controlled");
+				controlled = ", " + MLN.string("ui.controlled");
 			}
 
-			text.add(new Line(new MillGuiButton(i,0,0,0,0, possibleVillages.get(i).name+" ("+possibleVillages.get(i).culture.getCultureGameName()+controlled+")")));
+			text.add(new Line(new MillGuiButton(i, 0, 0, 0, 0, possibleVillages
+					.get(i).name
+					+ " ("
+					+ possibleVillages.get(i).culture.getCultureGameName()
+					+ controlled + ")")));
 			text.add(new Line(false));
 			text.add(new Line());
 		}
 
-
-		final Vector<Vector<Line>> pages = new Vector<Vector<Line>>();
+		final List<List<Line>> pages = new ArrayList<List<Line>>();
 		pages.add(text);
-		descText=adjustText(pages);
+		descText = adjustText(pages);
 	}
 }

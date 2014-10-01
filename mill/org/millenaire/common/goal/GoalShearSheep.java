@@ -6,42 +6,46 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 
-import org.millenaire.common.Building;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
+import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
-
 
 public class GoalShearSheep extends Goal {
 
 	public GoalShearSheep() {
-		buildingLimit.put(new InvItem(Blocks.wool,0), 1024);
-		townhallLimit.put(new InvItem(Blocks.wool,0), 1024);		
+		buildingLimit.put(new InvItem(Blocks.wool, 0), 1024);
+		townhallLimit.put(new InvItem(Blocks.wool, 0), 1024);
 	}
 
 	@Override
-	public GoalInformation getDestination(MillVillager villager) throws Exception {
+	public GoalInformation getDestination(final MillVillager villager)
+			throws Exception {
 
-		final Point pos=villager.getPos();
-		Entity closestSheep=null;
-		double sheepBestDist=Double.MAX_VALUE;
+		final Point pos = villager.getPos();
+		Entity closestSheep = null;
+		double sheepBestDist = Double.MAX_VALUE;
 
-		final List<Entity> sheep=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, EntitySheep.class, villager.getHouse().getPos(), 30, 10);
+		final List<Entity> sheep = MillCommonUtilities.getEntitiesWithinAABB(
+				villager.worldObj, EntitySheep.class, villager.getHouse()
+						.getPos(), 30, 10);
 
 		for (final Entity ent : sheep) {
-			if (!((EntitySheep)ent).getSheared() && !((EntitySheep)ent).isChild()) {
-				if ((closestSheep==null) || (pos.distanceTo(ent) < sheepBestDist)) {
-					closestSheep=ent;
-					sheepBestDist=pos.distanceTo(ent);
+			if (!((EntitySheep) ent).getSheared()
+					&& !((EntitySheep) ent).isChild()) {
+				if (closestSheep == null || pos.distanceTo(ent) < sheepBestDist) {
+					closestSheep = ent;
+					sheepBestDist = pos.distanceTo(ent);
 				}
 			}
 		}
 
-		if (closestSheep != null)
-			return packDest(null,villager.getHouse(),closestSheep);
+		if (closestSheep != null) {
+			return packDest(null, villager.getHouse(), closestSheep);
+		}
 
 		return null;
 	}
@@ -57,30 +61,30 @@ public class GoalShearSheep extends Goal {
 	}
 
 	@Override
-	public int range(MillVillager villager) {
-		return 5;
-	}
+	public boolean isPossibleSpecific(final MillVillager villager)
+			throws Exception {
 
-	@Override
-	public boolean isPossibleSpecific(MillVillager villager) throws Exception {
-
-		if (!villager.getHouse().location.tags.contains(Building.tagSheeps))
+		if (!villager.getHouse().location.tags.contains(Building.tagSheeps)) {
 			return false;
+		}
 
+		final List<Entity> sheep = MillCommonUtilities.getEntitiesWithinAABB(
+				villager.worldObj, EntitySheep.class, villager.getHouse()
+						.getPos(), 30, 10);
 
-		final List<Entity> sheep=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, EntitySheep.class, villager.getHouse().getPos(), 30, 10);
-
-		if (sheep==null)
+		if (sheep == null) {
 			return false;
+		}
 
 		for (final Entity ent : sheep) {
 
-			final EntitySheep asheep=(EntitySheep)ent;
+			final EntitySheep asheep = (EntitySheep) ent;
 
 			if (!asheep.isChild() && !asheep.isDead) {
 
-				if (((EntitySheep)ent).getSheared()==false)
+				if (((EntitySheep) ent).getSheared() == false) {
 					return true;
+				}
 			}
 		}
 
@@ -93,21 +97,24 @@ public class GoalShearSheep extends Goal {
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) throws Exception {
+	public boolean performAction(final MillVillager villager) throws Exception {
 
-		final List<Entity> sheep=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, EntitySheep.class, villager.getPos(), 4, 4);
+		final List<Entity> sheep = MillCommonUtilities.getEntitiesWithinAABB(
+				villager.worldObj, EntitySheep.class, villager.getPos(), 4, 4);
 
 		for (final Entity ent : sheep) {
 			if (!ent.isDead) {
 
-				final EntitySheep animal=(EntitySheep)ent;
+				final EntitySheep animal = (EntitySheep) ent;
 
 				if (!animal.isChild()) {
 					if (!animal.getSheared()) {
-						villager.addToInv(Blocks.wool,((EntitySheep)ent).getFleeceColor(), 3);
-						((EntitySheep)ent).setSheared(true);
-						if ((MLN.LogCattleFarmer>=MLN.MAJOR) && villager.extraLog) {
-							MLN.major(this, "Shearing: "+ent);
+						villager.addToInv(Blocks.wool,
+								((EntitySheep) ent).getFleeceColor(), 3);
+						((EntitySheep) ent).setSheared(true);
+						if (MLN.LogCattleFarmer >= MLN.MAJOR
+								&& villager.extraLog) {
+							MLN.major(this, "Shearing: " + ent);
 						}
 
 						villager.swingItem();
@@ -120,7 +127,12 @@ public class GoalShearSheep extends Goal {
 	}
 
 	@Override
-	public int priority(MillVillager villager) throws Exception {
+	public int priority(final MillVillager villager) throws Exception {
 		return 50;
+	}
+
+	@Override
+	public int range(final MillVillager villager) {
+		return 5;
 	}
 }

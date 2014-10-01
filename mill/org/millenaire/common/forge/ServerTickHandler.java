@@ -8,14 +8,14 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 public class ServerTickHandler {
 
 	@SubscribeEvent
-	public void tickStart(TickEvent.ServerTickEvent event) {
+	public void tickStart(final TickEvent.ServerTickEvent event) {
 
-		if (Mill.startupError)
+		if (Mill.startupError) {
 			return;
+		}
 
 		for (final MillWorld mw : Mill.serverWorlds) {
 			mw.updateWorldServer();
 		}
 	}
 }
-

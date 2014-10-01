@@ -8,14 +8,15 @@ import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
-
 public class GoalGatherGoods extends Goal {
 
 	@Override
-	public GoalInformation getDestination(MillVillager villager) {
-		final EntityItem item=villager.getClosestItemVertical(villager.getGoodsToCollect(),villager.getGatheringRange(),10);
-		if (item==null)
+	public GoalInformation getDestination(final MillVillager villager) {
+		final EntityItem item = villager.getClosestItemVertical(
+				villager.getGoodsToCollect(), villager.getGatheringRange(), 10);
+		if (item == null) {
 			return null;
+		}
 
 		return packDest(new Point(item));
 	}
@@ -26,20 +27,16 @@ public class GoalGatherGoods extends Goal {
 	}
 
 	@Override
-	public int range(MillVillager villager) {
-		return 5;
-	}
+	public boolean isPossibleSpecific(final MillVillager villager) {
 
-	@Override
-	public boolean isPossibleSpecific(MillVillager villager) {
-
-		if (villager.getGoodsToCollect().length==0)
+		if (villager.getGoodsToCollect().length == 0) {
 			return false;
+		}
 
-		final EntityItem item=villager.getClosestItemVertical(villager.getGoodsToCollect(),villager.getGatheringRange(),10);
-		return (item != null);
+		final EntityItem item = villager.getClosestItemVertical(
+				villager.getGoodsToCollect(), villager.getGatheringRange(), 10);
+		return item != null;
 	}
-
 
 	@Override
 	public boolean lookAtGoal() {
@@ -47,24 +44,32 @@ public class GoalGatherGoods extends Goal {
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) {
+	public boolean performAction(final MillVillager villager) {
 		return true;
 	}
 
 	@Override
-	public int priority(MillVillager villager) {
+	public int priority(final MillVillager villager) {
 		return 100;
 	}
 
 	@Override
-	public boolean stuckAction(MillVillager villager) {
-		final InvItem[] goods=villager.getGoodsToCollect();
+	public int range(final MillVillager villager) {
+		return 5;
+	}
+
+	@Override
+	public boolean stuckAction(final MillVillager villager) {
+		final InvItem[] goods = villager.getGoodsToCollect();
 
 		if (goods != null) {
-			final EntityItem item=MillCommonUtilities.getClosestItemVertical(villager.worldObj, villager.getGoalDestPoint(), goods, 3, 20);
+			final EntityItem item = MillCommonUtilities.getClosestItemVertical(
+					villager.worldObj, villager.getGoalDestPoint(), goods, 3,
+					20);
 			if (item != null) {
 				item.setDead();
-				villager.addToInv(item.getEntityItem().getItem(),item.getEntityItem().getItemDamage(),1);
+				villager.addToInv(item.getEntityItem().getItem(), item
+						.getEntityItem().getItemDamage(), 1);
 				return true;
 			}
 		}

@@ -10,12 +10,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C17PacketCustomPayload;
 
-import org.millenaire.common.Building;
 import org.millenaire.common.Culture;
 import org.millenaire.common.GuiActions;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.Point;
+import org.millenaire.common.building.Building;
 import org.millenaire.common.construction.BuildingProject;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerReceiver;
@@ -23,8 +23,8 @@ import org.millenaire.common.network.StreamReadWrite;
 
 public class ClientSender {
 
-	public static void activateMillChest(EntityPlayer player,
-			Point pos) {
+	public static void activateMillChest(final EntityPlayer player,
+			final Point pos) {
 
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
@@ -39,8 +39,9 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-	public static void controlledBuildingsForgetBuilding(EntityPlayer player,
-			Building townHall, BuildingProject project) {
+	public static void controlledBuildingsForgetBuilding(
+			final EntityPlayer player, final Building townHall,
+			final BuildingProject project) {
 
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
@@ -59,8 +60,9 @@ public class ClientSender {
 		GuiActions.controlledBuildingsForgetBuilding(player, townHall, project);
 	}
 
-	public static void controlledBuildingsToggleUpgrades(EntityPlayer player,
-			Building townHall, BuildingProject project, boolean allow) {
+	public static void controlledBuildingsToggleUpgrades(
+			final EntityPlayer player, final Building townHall,
+			final BuildingProject project, final boolean allow) {
 
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
@@ -77,12 +79,81 @@ public class ClientSender {
 
 		createAndSendServerPacket(data);
 
-		GuiActions.controlledBuildingsToggleUpgrades(player, townHall, project, allow);
+		GuiActions.controlledBuildingsToggleUpgrades(player, townHall, project,
+				allow);
 	}
 
+	public static void controlledMilitaryCancelRaid(final EntityPlayer player,
+			final Building th) {
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
+		try {
+			data.write(ServerReceiver.PACKET_GUIACTION);
+			data.write(ServerReceiver.GUIACTION_MILITARY_CANCEL_RAID);
+			StreamReadWrite.writeNullablePoint(th.getPos(), data);
+		} catch (final IOException e) {
+			MLN.printException("Error in controlledMilitaryCancelRaid", e);
+		}
 
-	public static void devCommand(int devcommand) {
+		createAndSendServerPacket(data);
+
+		// for immediate feedback
+		GuiActions.controlledMilitaryCancelRaid(player, th);
+	}
+
+	public static void controlledMilitaryDiplomacy(final EntityPlayer player,
+			final Building th, final Point target, final int amount) {
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
+
+		try {
+			data.write(ServerReceiver.PACKET_GUIACTION);
+			data.write(ServerReceiver.GUIACTION_MILITARY_RELATIONS);
+			StreamReadWrite.writeNullablePoint(th.getPos(), data);
+			StreamReadWrite.writeNullablePoint(target, data);
+			data.writeInt(amount);
+
+		} catch (final IOException e) {
+			MLN.printException("Error in controlledMilitaryDiplomacy", e);
+		}
+
+		createAndSendServerPacket(data);
+
+		// for immediate feedback
+		GuiActions.controlledMilitaryDiplomacy(player, th, target, amount);
+	}
+
+	public static void controlledMilitaryPlanRaid(final EntityPlayer player,
+			final Building th, final Point target) {
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
+
+		try {
+			data.write(ServerReceiver.PACKET_GUIACTION);
+			data.write(ServerReceiver.GUIACTION_MILITARY_RAID);
+			StreamReadWrite.writeNullablePoint(th.getPos(), data);
+			StreamReadWrite.writeNullablePoint(target, data);
+		} catch (final IOException e) {
+			MLN.printException("Error in controlledMilitaryStartRaid", e);
+		}
+
+		createAndSendServerPacket(data);
+
+		// for immediate feedback
+		GuiActions.controlledMilitaryPlanRaid(player, th,
+				th.mw.getBuilding(target));
+	}
+
+	private static void createAndSendServerPacket(
+			final ByteBufOutputStream bytes) {
+		sendPacketToServer(createServerPacket(bytes));
+	}
+
+	public static C17PacketCustomPayload createServerPacket(
+			final ByteBufOutputStream data) {
+		return new C17PacketCustomPayload(ServerReceiver.PACKET_CHANNEL,
+				data.buffer());
+	}
+
+	public static void devCommand(final int devcommand) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -95,7 +166,7 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-	public static void displayVillageList(boolean loneBuildings) {
+	public static void displayVillageList(final boolean loneBuildings) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -108,8 +179,12 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
+	public static ByteBufOutputStream getNewByteBufOutputStream() {
+		return new ByteBufOutputStream(buffer());
+	}
 
-	public static void hireExtend(EntityPlayer player, MillVillager villager) {
+	public static void hireExtend(final EntityPlayer player,
+			final MillVillager villager) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -125,8 +200,8 @@ public class ClientSender {
 		GuiActions.hireExtend(player, villager);
 	}
 
-
-	public static void hireHire(EntityPlayer player, MillVillager villager) {
+	public static void hireHire(final EntityPlayer player,
+			final MillVillager villager) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -142,8 +217,8 @@ public class ClientSender {
 		GuiActions.hireHire(player, villager);
 	}
 
-
-	public static void hireRelease(EntityPlayer player, MillVillager villager) {
+	public static void hireRelease(final EntityPlayer player,
+			final MillVillager villager) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -159,8 +234,7 @@ public class ClientSender {
 		GuiActions.hireRelease(player, villager);
 	}
 
-
-	public static void importBuilding(EntityPlayer player, Point pos) {
+	public static void importBuilding(final EntityPlayer player, final Point pos) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -174,8 +248,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void negationWand(EntityPlayer player, Building townHall) {
+	public static void negationWand(final EntityPlayer player,
+			final Building townHall) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -189,9 +263,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void newBuilding(EntityPlayer player, Building townHall, Point pos,
-			String planKey) {
+	public static void newBuilding(final EntityPlayer player,
+			final Building townHall, final Point pos, final String planKey) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -207,9 +280,9 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void newVillageCreation(EntityPlayer player, Point pos,
-			String cultureKey, String villageTypeKey) {
+	public static void newVillageCreation(final EntityPlayer player,
+			final Point pos, final String cultureKey,
+			final String villageTypeKey) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -225,9 +298,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void pujasChangeEnchantment(EntityPlayer player, Building temple,
-			int enchantmentId) {
+	public static void pujasChangeEnchantment(final EntityPlayer player,
+			final Building temple, final int enchantmentId) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -242,8 +314,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void questCompleteStep(EntityPlayer player, MillVillager villager) {
+	public static void questCompleteStep(final EntityPlayer player,
+			final MillVillager villager) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -257,8 +329,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void questRefuse(EntityPlayer player, MillVillager villager) {
+	public static void questRefuse(final EntityPlayer player,
+			final MillVillager villager) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -272,20 +344,18 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void requestMapInfo(Building townHall) {
+	public static void requestMapInfo(final Building townHall) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
 			data.write(ServerReceiver.PACKET_MAPINFO_REQUEST);
 			StreamReadWrite.writeNullablePoint(townHall.getPos(), data);
 		} catch (final IOException e) {
-			MLN.printException(townHall+": Error in sendUpdatePacket", e);
+			MLN.printException(townHall + ": Error in sendUpdatePacket", e);
 		}
 
 		createAndSendServerPacket(data);
 	}
-
 
 	public static void sendAvailableContent() {
 
@@ -297,10 +367,9 @@ public class ClientSender {
 			data.writeUTF(MLN.effective_language);
 			data.writeUTF(MLN.fallback_language);
 
+			data.writeShort(Culture.ListCultures.size());
 
-			data.writeShort(Culture.vectorCultures.size());
-
-			for (final Culture culture : Culture.vectorCultures) {
+			for (final Culture culture : Culture.ListCultures) {
 				culture.writeCultureAvailableContentPacket(data);
 			}
 
@@ -309,6 +378,10 @@ public class ClientSender {
 		}
 
 		createAndSendServerPacket(data);
+	}
+
+	public static void sendPacketToServer(final Packet packet) {
+		Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(packet);
 	}
 
 	public static void sendVersionInfo() {
@@ -324,9 +397,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void summoningWandUse(EntityPlayer player,
-			Point pos) {
+	public static void summoningWandUse(final EntityPlayer player,
+			final Point pos) {
 
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
@@ -341,9 +413,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void villageChiefPerformBuilding(EntityPlayer player,
-			MillVillager chief, String planKey) {
+	public static void villageChiefPerformBuilding(final EntityPlayer player,
+			final MillVillager chief, final String planKey) {
 
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
@@ -359,9 +430,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void villageChiefPerformCrop(EntityPlayer player,
-			MillVillager chief, String value) {
+	public static void villageChiefPerformCrop(final EntityPlayer player,
+			final MillVillager chief, final String value) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -376,9 +446,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void villageChiefPerformCultureControl(EntityPlayer player,
-			MillVillager chief) {
+	public static void villageChiefPerformCultureControl(
+			final EntityPlayer player, final MillVillager chief) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -392,9 +461,8 @@ public class ClientSender {
 		createAndSendServerPacket(data);
 	}
 
-
-	public static void villageChiefPerformDiplomacy(EntityPlayer player,
-			MillVillager chief, Point village, boolean praise) {
+	public static void villageChiefPerformDiplomacy(final EntityPlayer player,
+			final MillVillager chief, final Point village, final boolean praise) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -409,12 +477,12 @@ public class ClientSender {
 
 		createAndSendServerPacket(data);
 
-		//also in local for immediate feedback
+		// also in local for immediate feedback
 		GuiActions.villageChiefPerformDiplomacy(player, chief, village, praise);
 	}
 
-	public static void villageChiefPerformVillageScroll(EntityPlayer player,
-			MillVillager chief) {
+	public static void villageChiefPerformVillageScroll(
+			final EntityPlayer player, final MillVillager chief) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -427,69 +495,9 @@ public class ClientSender {
 
 		createAndSendServerPacket(data);
 	}
-	
-	public static void controlledMilitaryDiplomacy(EntityPlayer player,
-			Building th,Point target,int amount) {
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
-		try {
-			data.write(ServerReceiver.PACKET_GUIACTION);
-			data.write(ServerReceiver.GUIACTION_MILITARY_RELATIONS);
-			StreamReadWrite.writeNullablePoint(th.getPos(), data);
-			StreamReadWrite.writeNullablePoint(target, data);
-			data.writeInt(amount);
-			
-			
-			
-		} catch (final IOException e) {
-			MLN.printException("Error in controlledMilitaryDiplomacy", e);
-		}
-
-		createAndSendServerPacket(data);
-		
-		//for immediate feedback
-		GuiActions.controlledMilitaryDiplomacy(player, th, target, amount);
-	}
-	
-	public static void controlledMilitaryPlanRaid(EntityPlayer player,
-			Building th,Point target) {
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
-
-		try {
-			data.write(ServerReceiver.PACKET_GUIACTION);
-			data.write(ServerReceiver.GUIACTION_MILITARY_RAID);
-			StreamReadWrite.writeNullablePoint(th.getPos(), data);
-			StreamReadWrite.writeNullablePoint(target, data);
-		} catch (final IOException e) {
-			MLN.printException("Error in controlledMilitaryStartRaid", e);
-		}
-
-		createAndSendServerPacket(data);
-		
-		//for immediate feedback
-		GuiActions.controlledMilitaryPlanRaid(player, th, th.mw.getBuilding(target));
-	}
-	
-	public static void controlledMilitaryCancelRaid(EntityPlayer player,
-			Building th) {
-		final ByteBufOutputStream data = getNewByteBufOutputStream();
-
-		try {
-			data.write(ServerReceiver.PACKET_GUIACTION);
-			data.write(ServerReceiver.GUIACTION_MILITARY_CANCEL_RAID);
-			StreamReadWrite.writeNullablePoint(th.getPos(), data);
-		} catch (final IOException e) {
-			MLN.printException("Error in controlledMilitaryCancelRaid", e);
-		}
-
-		createAndSendServerPacket(data);
-		
-		//for immediate feedback
-		GuiActions.controlledMilitaryCancelRaid(player, th);
-	}
-
-	public static void villagerInteractSpecial(EntityPlayer player,
-			MillVillager villager) {
+	public static void villagerInteractSpecial(final EntityPlayer player,
+			final MillVillager villager) {
 		final ByteBufOutputStream data = getNewByteBufOutputStream();
 
 		try {
@@ -500,22 +508,5 @@ public class ClientSender {
 		}
 
 		createAndSendServerPacket(data);
-	}
-	
-	public static ByteBufOutputStream getNewByteBufOutputStream() {
-		return new ByteBufOutputStream(buffer());
-	}
-	
-	public static C17PacketCustomPayload createServerPacket(ByteBufOutputStream data) {
-		return new C17PacketCustomPayload(ServerReceiver.PACKET_CHANNEL, data.buffer());
-	}
-	
-	public static void sendPacketToServer(Packet packet) {
-		Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(packet);
-	}
-	
-
-	private static void createAndSendServerPacket(ByteBufOutputStream bytes) {
-		sendPacketToServer(createServerPacket(bytes));
 	}
 }

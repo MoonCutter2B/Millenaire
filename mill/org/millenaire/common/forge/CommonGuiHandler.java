@@ -4,7 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import org.millenaire.common.Building;
 import org.millenaire.common.ContainerPuja;
 import org.millenaire.common.ContainerTrade;
 import org.millenaire.common.MLN;
@@ -12,6 +11,7 @@ import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
 import org.millenaire.common.TileEntityMillChest;
 import org.millenaire.common.block.BlockMillChest;
+import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;
 
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -34,44 +34,46 @@ public class CommonGuiHandler implements IGuiHandler {
 	public static final int GUI_CONTROLLEDMILITARYPANEL = 14;
 
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z) {
+	public Object getClientGuiElement(final int ID, final EntityPlayer player,
+			final World world, final int x, final int y, final int z) {
 
 		return null;
 	}
 
 	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z) {
+	public Object getServerGuiElement(final int ID, final EntityPlayer player,
+			final World world, final int x, final int y, final int z) {
 
-		final MillWorld mw=Mill.getMillWorld(world);
+		final MillWorld mw = Mill.getMillWorld(world);
 
-		if (ID==GUI_MILL_CHEST) {
+		if (ID == GUI_MILL_CHEST) {
 			final TileEntity te = world.getTileEntity(x, y, z);
-			if ((te != null) && (te instanceof TileEntityMillChest))
+			if (te != null && te instanceof TileEntityMillChest) {
 				return BlockMillChest.createContainer(world, x, y, z, player);
-		} else if (ID==GUI_TRADE) {
-			final Building building=mw.getBuilding(new Point(x,y,z));
-
-			if (building != null)
-				return new ContainerTrade(player,building);
-			else {
-				MLN.error(this, "Server-side traiding for unknow building at "+(new Point(x,y,z))+" in world: "+world);
 			}
-		} else if (ID==GUI_MERCHANT) {
-			final long id=MillCommonUtilities.unpackLong(x, y);
-			if (mw.villagers.containsKey(id))
-				return new ContainerTrade(player,mw.villagers.get(id));
-			else {
-				MLN.error(player, "Failed to find merchant: "+id);
-			}
-		} else if (ID==GUI_PUJAS) {
-			final Building building=mw.getBuilding(new Point(x,y,z));
+		} else if (ID == GUI_TRADE) {
+			final Building building = mw.getBuilding(new Point(x, y, z));
 
-			if ((building != null) && (building.pujas != null))
-				return new ContainerPuja(player,building);
+			if (building != null) {
+				return new ContainerTrade(player, building);
+			} else {
+				MLN.error(this, "Server-side traiding for unknow building at "
+						+ new Point(x, y, z) + " in world: " + world);
+			}
+		} else if (ID == GUI_MERCHANT) {
+			final long id = MillCommonUtilities.unpackLong(x, y);
+			if (mw.villagers.containsKey(id)) {
+				return new ContainerTrade(player, mw.villagers.get(id));
+			} else {
+				MLN.error(player, "Failed to find merchant: " + id);
+			}
+		} else if (ID == GUI_PUJAS) {
+			final Building building = mw.getBuilding(new Point(x, y, z));
+
+			if (building != null && building.pujas != null) {
+				return new ContainerPuja(player, building);
+			}
 		}
-
 
 		return null;
 	}

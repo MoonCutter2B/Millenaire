@@ -14,7 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
-import org.millenaire.common.*;
+import org.millenaire.common.MLN;
+import org.millenaire.common.UserProfile;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
@@ -23,67 +24,74 @@ import org.millenaire.common.network.ServerSender;
 // Referenced classes of package org.millenaire.common.item:
 //            Goods
 
-public class ItemMillSeeds extends Goods.ItemText
-    implements IPlantable
-{
+public class ItemMillSeeds extends Goods.ItemText implements IPlantable {
 
-    public ItemMillSeeds(String iconName, Block j, String cropKey)
-    {
-        super(iconName);
-        crop = j;
-        this.cropKey = cropKey;
-        setCreativeTab(Mill.tabMillenaire);
-    }
+	public final Block crop;
 
-    @Override
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l, 
-            float hitX, float hitY, float hitZ)
-    {
-        if(l != 1)
-            return false;
-        if(!entityplayer.canPlayerEdit(i, j, k, l, itemstack) || !entityplayer.canPlayerEdit(i, j + 1, k, l, itemstack))
-            return false;
-        UserProfile profile = Mill.getMillWorld(world).getProfile(entityplayer.getDisplayName());
-        if(!profile.isTagSet((new StringBuilder()).append("cropplanting_").append(cropKey).toString()) && !MLN.DEV)
-        {
-            if(!world.isRemote)
-                ServerSender.sendTranslatedSentence(entityplayer, 'f', "ui.cropplantingknowledge", new String[] {
-                    (new StringBuilder()).append("item.").append(cropKey).toString()
-                });
-            return false;
-        }
-        Block block = world.getBlock(i, j, k);
-        if(block == Blocks.farmland && world.isAirBlock(i, j + 1, k))
-        {
-            MillCommonUtilities.setBlockAndMetadata(world, i, j + 1, k, crop, 0, true, false);
-            itemstack.stackSize--;
-            if(!world.isRemote)
-                entityplayer.addStat(MillAchievements.masterfarmer, 1);
-            return true;
-        } else
-        {
-            return false;
-        }
-    }
+	public final String cropKey;
 
-    @Override
-    public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
-    {
-        return EnumPlantType.Crop;
-    }
+	public ItemMillSeeds(final String iconName, final Block j,
+			final String cropKey) {
+		super(iconName);
+		crop = j;
+		this.cropKey = cropKey;
+		setCreativeTab(Mill.tabMillenaire);
+	}
 
-    @Override
-    public Block getPlant(IBlockAccess world, int x, int y, int z)
-    {
-        return crop;
-    }
+	@Override
+	public Block getPlant(final IBlockAccess world, final int x, final int y,
+			final int z) {
+		return crop;
+	}
 
-    @Override
-    public int getPlantMetadata(IBlockAccess world, int x, int y, int i)
-    {
-        return 0;
-    }
+	@Override
+	public int getPlantMetadata(final IBlockAccess world, final int x,
+			final int y, final int i) {
+		return 0;
+	}
 
-    public final Block crop;
-    public final String cropKey;
+	@Override
+	public EnumPlantType getPlantType(final IBlockAccess world, final int x,
+			final int y, final int z) {
+		return EnumPlantType.Crop;
+	}
+
+	@Override
+	public boolean onItemUse(final ItemStack itemstack,
+			final EntityPlayer entityplayer, final World world, final int i,
+			final int j, final int k, final int l, final float hitX,
+			final float hitY, final float hitZ) {
+		if (l != 1) {
+			return false;
+		}
+		if (!entityplayer.canPlayerEdit(i, j, k, l, itemstack)
+				|| !entityplayer.canPlayerEdit(i, j + 1, k, l, itemstack)) {
+			return false;
+		}
+		final UserProfile profile = Mill.getMillWorld(world).getProfile(
+				entityplayer.getDisplayName());
+		if (!profile.isTagSet(new StringBuilder().append("cropplanting_")
+				.append(cropKey).toString())
+				&& !MLN.DEV) {
+			if (!world.isRemote) {
+				ServerSender.sendTranslatedSentence(entityplayer, 'f',
+						"ui.cropplantingknowledge",
+						new String[] { new StringBuilder().append("item.")
+								.append(cropKey).toString() });
+			}
+			return false;
+		}
+		final Block block = world.getBlock(i, j, k);
+		if (block == Blocks.farmland && world.isAirBlock(i, j + 1, k)) {
+			MillCommonUtilities.setBlockAndMetadata(world, i, j + 1, k, crop,
+					0, true, false);
+			itemstack.stackSize--;
+			if (!world.isRemote) {
+				entityplayer.addStat(MillAchievements.masterfarmer, 1);
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

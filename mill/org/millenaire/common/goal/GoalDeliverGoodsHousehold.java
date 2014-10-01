@@ -1,6 +1,7 @@
 package org.millenaire.common.goal;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.item.ItemStack;
 
@@ -9,22 +10,24 @@ import org.millenaire.common.MillVillager.InvItem;
 
 public class GoalDeliverGoodsHousehold extends Goal {
 
-
 	@Override
-	public GoalInformation getDestination(MillVillager villager) throws Exception {
-		return packDest(villager.getHouse().getSellingPos(),villager.getHouse());
+	public GoalInformation getDestination(final MillVillager villager)
+			throws Exception {
+		return packDest(villager.getHouse().getResManager().getSellingPos(),
+				villager.getHouse());
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(MillVillager villager) throws Exception {
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager)
+			throws Exception {
 
-		final Vector<ItemStack> items=new Vector<ItemStack>();
+		final List<ItemStack> items = new ArrayList<ItemStack>();
 
 		for (final MillVillager v : villager.getHouse().villagers) {
 
 			for (final InvItem key : v.requiresGoods().keySet()) {
-				if (villager.countInv(key.getItem(),key.meta)>0) {
-					items.add(new ItemStack(key.getItem(),1,key.meta));
+				if (villager.countInv(key.getItem(), key.meta) > 0) {
+					items.add(new ItemStack(key.getItem(), 1, key.meta));
 				}
 			}
 
@@ -34,16 +37,18 @@ public class GoalDeliverGoodsHousehold extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager)
+			throws Exception {
 		return false;
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) throws Exception {
+	public boolean performAction(final MillVillager villager) throws Exception {
 
 		for (final MillVillager v : villager.getHouse().villagers) {
 			for (final InvItem key : v.requiresGoods().keySet()) {
-				villager.putInBuilding(villager.getHouse(), key.getItem(),key.meta, 256);
+				villager.putInBuilding(villager.getHouse(), key.getItem(),
+						key.meta, 256);
 			}
 
 		}
@@ -52,7 +57,7 @@ public class GoalDeliverGoodsHousehold extends Goal {
 	}
 
 	@Override
-	public int priority(MillVillager villager) throws Exception {
+	public int priority(final MillVillager villager) throws Exception {
 		return 100;
 	}
 

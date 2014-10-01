@@ -28,25 +28,26 @@ public class CommonProxy {
 	public void checkTextureSize() {
 
 	}
-	
-	public void testTextureSize() {
-		
-	}
-	
-	public boolean isTrueClient() {
-		return Mill.serverWorlds.isEmpty();
-	}
 
 	public IGuiHandler createGuiHandler() {
 		return new CommonGuiHandler();
 	}
 
+	public void declareAmuletTextures(final IIconRegister iconRegister) {
+
+	}
+
 	public File getBaseDir() {
-		if (baseDir==null) {
-			baseDir=new File(new File(new File("."),"mods"), "millenaire");
+		if (baseDir == null) {
+			baseDir = new File(new File(new File("."), "mods"), "millenaire");
 		}
 
 		return baseDir;
+	}
+
+	public String getBlockName(final Block block, final int meta) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public UserProfile getClientProfile() {
@@ -62,18 +63,23 @@ public class CommonProxy {
 	}
 
 	public File getCustomDir() {
-		if (customDir==null) {
-			customDir=new File(new File(new File("."),"mods"), "millenaire-custom");
+		if (customDir == null) {
+			customDir = new File(new File(new File("."), "mods"),
+					"millenaire-custom");
 		}
 
 		return customDir;
 	}
 
-	public String getItemName(Item item, int meta) {
+	public String getInvItemName(final InvItem iv) {
 		return "";
 	}
-	
-	public String getInvItemName(InvItem iv) {
+
+	public String getItemName(final Item item, final int meta) {
+		return "";
+	}
+
+	public String getKeyString(final int value) {
 		return "";
 	}
 
@@ -83,6 +89,10 @@ public class CommonProxy {
 
 	public String getQuestKeyName() {
 		return "";
+	}
+
+	public String getSinglePlayerName() {
+		return null;
 	}
 
 	public EntityPlayer getTheSinglePlayer() {
@@ -97,6 +107,14 @@ public class CommonProxy {
 
 	}
 
+	public void initNetwork() {
+		Mill.millChannel.register(new ServerReceiver());
+	}
+
+	public boolean isTrueClient() {
+		return Mill.serverWorlds.isEmpty();
+	}
+
 	public boolean isTrueServer() {
 		return true;
 	}
@@ -105,20 +123,16 @@ public class CommonProxy {
 
 	}
 
-	public int loadKeySetting(String value) {
+	public int loadKeySetting(final String value) {
 		return 0;
-	}
-	
-	public String getKeyString(int value) {
-		return "";
 	}
 
 	public void loadLanguages() {
 		MLN.loadLanguages(null);
 	}
 
-	public void localTranslatedSentence(EntityPlayer player, char colour, String code,
-			String... values) {
+	public void localTranslatedSentence(final EntityPlayer player,
+			final char colour, final String code, final String... values) {
 
 	}
 
@@ -127,6 +141,11 @@ public class CommonProxy {
 	}
 
 	public void preloadTextures() {
+
+	}
+
+	public void refreshClientResources() {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -139,20 +158,22 @@ public class CommonProxy {
 	}
 
 	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding");
-		GameRegistry.registerTileEntity(TileEntityPanel.class, "ml_TileEntityPanel");
+		GameRegistry.registerTileEntity(TileEntityMillChest.class,
+				"ml_TileEntityBuilding");
+		GameRegistry.registerTileEntity(TileEntityPanel.class,
+				"ml_TileEntityPanel");
 	}
 
-	public void sendChatAdmin(String s) {
-
-	}
-	
-	public void sendChatAdmin(String s, EnumChatFormatting colour) {
+	public void sendChatAdmin(final String s) {
 
 	}
 
-	public void sendLocalChat(EntityPlayer player, char colour, String s) {
+	public void sendChatAdmin(final String s, final EnumChatFormatting colour) {
 
+	}
+
+	public void sendLocalChat(final EntityPlayer player, final char colour,
+			final String s) {
 
 	}
 
@@ -160,30 +181,13 @@ public class CommonProxy {
 
 	}
 
-	public void updateBowIcon(ItemMillenaireBow bow, EntityPlayer entityplayer) {
+	public void testTextureSize() {
 
 	}
-	
-	public void declareAmuletTextures(IIconRegister iconRegister) {
-			
+
+	public void updateBowIcon(final ItemMillenaireBow bow,
+			final EntityPlayer entityplayer) {
+
 	}
 
-	public String getSinglePlayerName() {
-		return null;
-	}
-
-	public void initNetwork() {
-		Mill.millChannel.register(new ServerReceiver());
-	}
-
-	public String getBlockName(Block block, int meta) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void refreshClientResources() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

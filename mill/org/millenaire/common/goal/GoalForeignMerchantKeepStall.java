@@ -3,25 +3,31 @@ package org.millenaire.common.goal;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.core.MillCommonUtilities;
 
-
 public class GoalForeignMerchantKeepStall extends Goal {
 
 	@Override
-	public int actionDuration(MillVillager villager) throws Exception {
+	public int actionDuration(final MillVillager villager) throws Exception {
 		return 60000;
 	}
 
 	@Override
-	public GoalInformation getDestination(MillVillager villager) throws Exception {
+	public GoalInformation getDestination(final MillVillager villager)
+			throws Exception {
 
-		if (villager.foreignMerchantStallId>=villager.getHouse().stalls.size())
+		if (villager.foreignMerchantStallId >= villager.getHouse()
+				.getResManager().stalls.size()) {
 			return null;
+		}
 
-		return packDest(villager.getHouse().stalls.get(villager.foreignMerchantStallId),villager.getHouse());
+		return packDest(
+				villager.getHouse().getResManager().stalls
+						.get(villager.foreignMerchantStallId),
+				villager.getHouse());
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager)
+			throws Exception {
 		return true;
 	}
 
@@ -31,12 +37,12 @@ public class GoalForeignMerchantKeepStall extends Goal {
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) throws Exception {
-		return MillCommonUtilities.chanceOn(20*30);
+	public boolean performAction(final MillVillager villager) throws Exception {
+		return MillCommonUtilities.chanceOn(20 * 30);
 	}
 
 	@Override
-	public int priority(MillVillager villager) throws Exception {
+	public int priority(final MillVillager villager) throws Exception {
 		return MillCommonUtilities.randomInt(50);
 	}
 

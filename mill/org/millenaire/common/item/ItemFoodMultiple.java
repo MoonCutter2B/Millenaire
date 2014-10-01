@@ -13,54 +13,48 @@ import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
 
-
 public class ItemFoodMultiple extends ItemFood {
 
 	private final int healthAmount;
 	private final boolean drink;
-	private final int regenerationDuration,drunkDuration;
+	private final int regenerationDuration, drunkDuration;
 
 	public final String iconName;
 
-	public ItemFoodMultiple(String iconName, int healthAmount, int regenerationDuration,
-			int foodAmount, float saturation, boolean drink, int drunkDuration) {
-		super(foodAmount,saturation,false);
+	public ItemFoodMultiple(final String iconName, final int healthAmount,
+			final int regenerationDuration, final int foodAmount,
+			final float saturation, final boolean drink, final int drunkDuration) {
+		super(foodAmount, saturation, false);
 		this.healthAmount = healthAmount;
-		this.drink=drink;
-		this.regenerationDuration=regenerationDuration;
-		this.drunkDuration=drunkDuration;
+		this.drink = drink;
+		this.regenerationDuration = regenerationDuration;
+		this.drunkDuration = drunkDuration;
 
-		if (healthAmount>0) {
+		if (healthAmount > 0) {
 			setAlwaysEdible();
 		}
 
 		this.setCreativeTab(Mill.tabMillenaire);
 
-		this.iconName=iconName;
+		this.iconName = iconName;
 	}
 
 	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
-	}
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack itemstack)
-	{
-		if (drink)
+	public EnumAction getItemUseAction(final ItemStack itemstack) {
+		if (drink) {
 			return EnumAction.drink;
+		}
 
 		return EnumAction.eat;
 	}
 
-
 	@Override
-	public ItemStack onEaten(ItemStack itemstack, World world, EntityPlayer entityplayer)
-	{
+	public ItemStack onEaten(final ItemStack itemstack, final World world,
+			final EntityPlayer entityplayer) {
 
 		itemstack.stackSize--;
-		world.playSoundAtEntity(entityplayer, "random.burp", 0.5F, (world.rand.nextFloat() * 0.1F) + 0.9F);
+		world.playSoundAtEntity(entityplayer, "random.burp", 0.5F,
+				world.rand.nextFloat() * 0.1F + 0.9F);
 
 		entityplayer.getFoodStats().func_151686_a(this, itemstack);
 		entityplayer.heal(healthAmount);
@@ -68,13 +62,15 @@ public class ItemFoodMultiple extends ItemFood {
 		if (drink) {
 			entityplayer.addStat(MillAchievements.cheers, 1);
 		}
-		
-		if (regenerationDuration>0) {
-			entityplayer.addPotionEffect(new PotionEffect(Potion.regeneration.id, regenerationDuration * 20, 0));
+
+		if (regenerationDuration > 0) {
+			entityplayer.addPotionEffect(new PotionEffect(
+					Potion.regeneration.id, regenerationDuration * 20, 0));
 		}
-		
-		if (drunkDuration>0) {
-			entityplayer.addPotionEffect(new PotionEffect(Potion.confusion.id, drunkDuration * 20, 0));
+
+		if (drunkDuration > 0) {
+			entityplayer.addPotionEffect(new PotionEffect(Potion.confusion.id,
+					drunkDuration * 20, 0));
 		}
 
 		this.onFoodEaten(itemstack, world, entityplayer);
@@ -83,10 +79,15 @@ public class ItemFoodMultiple extends ItemFood {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
-	{
+	public ItemStack onItemRightClick(final ItemStack itemstack,
+			final World world, final EntityPlayer entityplayer) {
 		entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
 
 		return itemstack;
+	}
+
+	@Override
+	public void registerIcons(final IIconRegister iconRegister) {
+		itemIcon = MillCommonUtilities.getIcon(iconRegister, iconName);
 	}
 }

@@ -15,96 +15,33 @@ public class GoalClearOldPath extends Goal {
 
 	public GoalClearOldPath() {
 		super();
-		maxSimultaneousTotal=1;
+		maxSimultaneousTotal = 1;
 	}
 
 	@Override
-	public GoalInformation getDestination(MillVillager villager)
+	public int actionDuration(final MillVillager villager) {
+		final int toolEfficiency = (int) villager.getBestShovel().getDigSpeed(
+				new ItemStack(villager.getBestShovel(), 1), Blocks.dirt, 0);
+
+		return 100 - toolEfficiency * 5;
+	}
+
+	@Override
+	public GoalInformation getDestination(final MillVillager villager)
 			throws Exception {
 
-		Point p=villager.getTownHall().getCurrentClearPathPoint();
+		final Point p = villager.getTownHall().getCurrentClearPathPoint();
 
-		if (p!=null)
+		if (p != null) {
 			return packDest(p);
+		}
 
 		return null;
 	}
-	
-	
-	@Override
-	public int actionDuration(MillVillager villager) {
-		final int toolEfficiency=(int)villager.getBestShovel().getDigSpeed(new ItemStack(villager.getBestShovel(),1), Blocks.dirt,0);
-
-		return 100-(toolEfficiency*5);
-	}
 
 	@Override
-	public boolean performAction(MillVillager villager) throws Exception {
-
-		Point p=villager.getTownHall().getCurrentClearPathPoint();
-
-		if (p==null)
-			return true;
-
-		if (MLN.LogVillagePaths>=MLN.DEBUG)
-			MLN.debug(villager, "Clearing old path block: "+p);
-
-		Block block=p.getBlock(villager.worldObj);
-		int meta=p.getMeta(villager.worldObj);
-
-		if (meta<8) {//8 and above are stable paths
-			if (block==Mill.pathSlab) {
-				p.setBlock(villager.worldObj, Blocks.air, 0, true, false);		
-			} else if (block==Mill.path) {
-
-				Block blockBelow=p.getBelow().getBlock(villager.worldObj);
-				if (MillCommonUtilities.getBlockIdValidGround(blockBelow,true)!=null)
-					p.setBlock(villager.worldObj, MillCommonUtilities.getBlockIdValidGround(blockBelow,true), 0, true, false);
-				else
-					p.setBlock(villager.worldObj, Blocks.dirt, 0, true, false);		
-			}
-		}
-
-		villager.getTownHall().oldPathPointsToClearIndex++;
-
-		p=villager.getTownHall().getCurrentClearPathPoint();
-
-		villager.swingItem();
-		
-		if (p!=null) {
-			villager.setGoalDestPoint(p);
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public int priority(MillVillager villager) throws Exception {
-		return 40;
-	}
-
-	@Override
-	public int range(MillVillager villager) {
-		return ACTIVATION_RANGE+2;
-	}
-
-	@Override
-	public boolean stopMovingWhileWorking() {
-		return false;
-	}
-
-	@Override
-	public boolean unreachableDestination(MillVillager villager) throws Exception {
-
-		performAction(villager);
-
-		return true;
-	}
-
-	@Override
-	public boolean lookAtGoal() {
-		return true;
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) {
+		return villager.getBestShovelStack();
 	}
 
 	@Override
@@ -113,17 +50,90 @@ public class GoalClearOldPath extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) {
-		return MLN.BuildVillagePaths && villager.getTownHall().getCurrentClearPathPoint()!=null;
+	public boolean isPossibleSpecific(final MillVillager villager) {
+		return MLN.BuildVillagePaths
+				&& villager.getTownHall().getCurrentClearPathPoint() != null;
 	}
 
 	@Override
-	public boolean isStillValidSpecific(MillVillager villager) throws Exception {
-		return villager.getTownHall().getCurrentClearPathPoint()!=null;
+	public boolean isStillValidSpecific(final MillVillager villager)
+			throws Exception {
+		return villager.getTownHall().getCurrentClearPathPoint() != null;
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(MillVillager villager) {
-		return  villager.getBestShovelStack();
+	public boolean lookAtGoal() {
+		return true;
+	}
+
+	@Override
+	public boolean performAction(final MillVillager villager) throws Exception {
+
+		Point p = villager.getTownHall().getCurrentClearPathPoint();
+
+		if (p == null) {
+			return true;
+		}
+
+		if (MLN.LogVillagePaths >= MLN.DEBUG) {
+			MLN.debug(villager, "Clearing old path block: " + p);
+		}
+
+		final Block block = p.getBlock(villager.worldObj);
+		final int meta = p.getMeta(villager.worldObj);
+
+		if (meta < 8) {// 8 and above are stable paths
+			if (block == Mill.pathSlab) {
+				p.setBlock(villager.worldObj, Blocks.air, 0, true, false);
+			} else if (block == Mill.path) {
+
+				final Block blockBelow = p.getBelow().getBlock(
+						villager.worldObj);
+				if (MillCommonUtilities.getBlockIdValidGround(blockBelow, true) != null) {
+					p.setBlock(villager.worldObj, MillCommonUtilities
+							.getBlockIdValidGround(blockBelow, true), 0, true,
+							false);
+				} else {
+					p.setBlock(villager.worldObj, Blocks.dirt, 0, true, false);
+				}
+			}
+		}
+
+		villager.getTownHall().oldPathPointsToClearIndex++;
+
+		p = villager.getTownHall().getCurrentClearPathPoint();
+
+		villager.swingItem();
+
+		if (p != null) {
+			villager.setGoalDestPoint(p);
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public int priority(final MillVillager villager) throws Exception {
+		return 40;
+	}
+
+	@Override
+	public int range(final MillVillager villager) {
+		return ACTIVATION_RANGE + 2;
+	}
+
+	@Override
+	public boolean stopMovingWhileWorking() {
+		return false;
+	}
+
+	@Override
+	public boolean unreachableDestination(final MillVillager villager)
+			throws Exception {
+
+		performAction(villager);
+
+		return true;
 	}
 }

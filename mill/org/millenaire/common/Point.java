@@ -21,121 +21,129 @@ import org.millenaire.common.pathing.atomicstryker.AStarStatic;
 
 public class Point {
 
-	public static final Point read(NBTTagCompound nbttagcompound,String label) {
-		double x,y,z;
-		x=nbttagcompound.getDouble(label+"_xCoord");
-		y=nbttagcompound.getDouble(label+"_yCoord");
-		z=nbttagcompound.getDouble(label+"_zCoord");
+	public static final Point read(final NBTTagCompound nbttagcompound,
+			final String label) {
+		double x, y, z;
+		x = nbttagcompound.getDouble(label + "_xCoord");
+		y = nbttagcompound.getDouble(label + "_yCoord");
+		z = nbttagcompound.getDouble(label + "_zCoord");
 
-		if ((x==0) && (y==0) && (z==0))
+		if (x == 0 && y == 0 && z == 0) {
 			return null;
+		}
 
-		return new Point(x,y,z);
+		return new Point(x, y, z);
 	}
 
-	public final double x,y,z;
+	public final double x, y, z;
 
-	public Point(AStarNode node) {
-		x=node.x;
-		y=node.y;
-		z=node.z;
+	public Point(final AStarNode node) {
+		x = node.x;
+		y = node.y;
+		z = node.z;
 	}
 
-	public Point(double i,double j,double k) {
-		x=i;
-		y=j;
-		z=k;
+	public Point(final double i, final double j, final double k) {
+		x = i;
+		y = j;
+		z = k;
 	}
 
-	public Point(Entity ent) {
-		x=ent.posX;
-		y=ent.posY;
-		z=ent.posZ;
+	public Point(final Entity ent) {
+		x = ent.posX;
+		y = ent.posY;
+		z = ent.posZ;
 	}
 
-	public Point(PathPoint pp) {
-		x=pp.xCoord;
-		y=pp.yCoord;
-		z=pp.zCoord;
+	public Point(final PathPoint pp) {
+		x = pp.xCoord;
+		y = pp.yCoord;
+		z = pp.zCoord;
 	}
 
-	public Point(String s) {
-		final String[] scoord=s.split("/");
-		x=Double.parseDouble(scoord[0]);
-		y=Double.parseDouble(scoord[1]);
-		z=Double.parseDouble(scoord[2]);
+	public Point(final String s) {
+		final String[] scoord = s.split("/");
+		x = Double.parseDouble(scoord[0]);
+		y = Double.parseDouble(scoord[1]);
+		z = Double.parseDouble(scoord[2]);
 	}
 
-	public String approximateDistanceLongString(Point p) {
-		int dist=(int) distanceTo(p);
+	public String approximateDistanceLongString(final Point p) {
+		int dist = (int) distanceTo(p);
 
-		if (dist<950)
-			return (Math.round(dist/100)*100)+" "+MLN.string("other.metre");
-		else {
-			dist=Math.round(dist/500);
-			if ((dist%2)==0)
-				return (dist/2)+" "+MLN.string("other.kilometre");
-			else
-				return ((dist-1)/2)+MLN.string("other.andhalf")+" "+MLN.string("other.kilometre");
+		if (dist < 950) {
+			return Math.round(dist / 100) * 100 + " "
+					+ MLN.string("other.metre");
+		} else {
+			dist = Math.round(dist / 500);
+			if (dist % 2 == 0) {
+				return dist / 2 + " " + MLN.string("other.kilometre");
+			} else {
+				return (dist - 1) / 2 + MLN.string("other.andhalf") + " "
+						+ MLN.string("other.kilometre");
+			}
 		}
 	}
 
-	public String approximateDistanceShortString(Point p) {
-		int dist=(int) distanceTo(p);
+	public String approximateDistanceShortString(final Point p) {
+		int dist = (int) distanceTo(p);
 
-		if (dist<950)
-			return (Math.round(dist/100)*100)+"m";
-		else {
-			dist=Math.round(dist/500);
-			if ((dist%2)==0)
-				return (dist/2)+"km";
-			else
-				return ((dist-1)/2)+".5 km";
+		if (dist < 950) {
+			return Math.round(dist / 100) * 100 + "m";
+		} else {
+			dist = Math.round(dist / 500);
+			if (dist % 2 == 0) {
+				return dist / 2 + "km";
+			} else {
+				return (dist - 1) / 2 + ".5 km";
+			}
 		}
 	}
 
-	public String directionTo(Point p) {
-		return directionTo(p,false);
+	public String directionTo(final Point p) {
+		return directionTo(p, false);
 	}
 
-	public String directionTo(Point p,boolean prefixed) {
-		String direction,prefix;
+	public String directionTo(final Point p, final boolean prefixed) {
+		String direction, prefix;
 
 		if (prefixed) {
-			prefix="other.tothe";
+			prefix = "other.tothe";
 		} else {
-			prefix="other.";
+			prefix = "other.";
 		}
 
-		final int xdist=MathHelper.floor_double(p.x-x);
-		final int zdist=MathHelper.floor_double(p.z-z);
+		final int xdist = MathHelper.floor_double(p.x - x);
+		final int zdist = MathHelper.floor_double(p.z - z);
 
-		if (((Math.abs(xdist) > (Math.abs(zdist)*0.6)) && (Math.abs(xdist) < (Math.abs(zdist)*1.4)))
-				|| ((Math.abs(zdist) > (Math.abs(xdist)*0.6)) && (Math.abs(zdist) < (Math.abs(xdist)*1.4)))) {
+		if (Math.abs(xdist) > Math.abs(zdist) * 0.6
+				&& Math.abs(xdist) < Math.abs(zdist) * 1.4
+				|| Math.abs(zdist) > Math.abs(xdist) * 0.6
+				&& Math.abs(zdist) < Math.abs(xdist) * 1.4) {
 
 			if (zdist > 0) {
-				direction=prefix+"south"+"-";
+				direction = prefix + "south" + "-";
 			} else {
-				direction=prefix+"north"+"-";
+				direction = prefix + "north" + "-";
 			}
 
 			if (xdist > 0) {
-				direction+="east";
+				direction += "east";
 			} else {
-				direction+="west";
+				direction += "west";
 			}
 		} else {
 			if (Math.abs(xdist) > Math.abs(zdist)) {
 				if (xdist > 0) {
-					direction=prefix+"east";
+					direction = prefix + "east";
 				} else {
-					direction=prefix+"west";
+					direction = prefix + "west";
 				}
 			} else {
 				if (zdist > 0) {
-					direction=prefix+"south";
+					direction = prefix + "south";
 				} else {
-					direction=prefix+"north";
+					direction = prefix + "north";
 				}
 			}
 		}
@@ -143,38 +151,40 @@ public class Point {
 		return direction;
 	}
 
-	public String directionToShort(Point p) {
+	public String directionToShort(final Point p) {
 		String direction;
 
-		final int xdist=MathHelper.floor_double(p.x-x);
-		final int zdist=MathHelper.floor_double(p.z-z);
+		final int xdist = MathHelper.floor_double(p.x - x);
+		final int zdist = MathHelper.floor_double(p.z - z);
 
-		if (((Math.abs(xdist) > (Math.abs(zdist)*0.6)) && (Math.abs(xdist) < (Math.abs(zdist)*1.4)))
-				|| ((Math.abs(zdist) > (Math.abs(xdist)*0.6)) && (Math.abs(zdist) < (Math.abs(xdist)*1.4)))) {
+		if (Math.abs(xdist) > Math.abs(zdist) * 0.6
+				&& Math.abs(xdist) < Math.abs(zdist) * 1.4
+				|| Math.abs(zdist) > Math.abs(xdist) * 0.6
+				&& Math.abs(zdist) < Math.abs(xdist) * 1.4) {
 
 			if (zdist > 0) {
-				direction=MLN.string("other.south_short");
+				direction = MLN.string("other.south_short");
 			} else {
-				direction=MLN.string("other.north_short");
+				direction = MLN.string("other.north_short");
 			}
 
 			if (xdist > 0) {
-				direction+=MLN.string("other.east_short");
+				direction += MLN.string("other.east_short");
 			} else {
-				direction+=MLN.string("other.west_short");
+				direction += MLN.string("other.west_short");
 			}
 		} else {
 			if (Math.abs(xdist) > Math.abs(zdist)) {
 				if (xdist > 0) {
-					direction=MLN.string("other.east_short");
+					direction = MLN.string("other.east_short");
 				} else {
-					direction=MLN.string("other.west_short");
+					direction = MLN.string("other.west_short");
 				}
 			} else {
 				if (zdist > 0) {
-					direction=MLN.string("other.south_short");
+					direction = MLN.string("other.south_short");
 				} else {
-					direction=MLN.string("other.north_short");
+					direction = MLN.string("other.north_short");
 				}
 			}
 		}
@@ -182,92 +192,99 @@ public class Point {
 		return direction;
 	}
 
-	public String distanceDirectionShort(Point p) {
-		return MLN.string("other.directionshort",directionToShort(p),""+(int)horizontalDistanceTo(p)+"m");
+	public String distanceDirectionShort(final Point p) {
+		return MLN.string("other.directionshort", directionToShort(p), ""
+				+ (int) horizontalDistanceTo(p) + "m");
 	}
 
-	public double distanceTo(double px,double py, double pz)
-	{
+	public double distanceTo(final double px, final double py, final double pz) {
 		final double d = px - x;
 		final double d1 = py - y;
 		final double d2 = pz - z;
-		return MathHelper.sqrt_double((d * d) + (d1 * d1) + (d2 * d2));
+		return MathHelper.sqrt_double(d * d + d1 * d1 + d2 * d2);
 	}
 
-	public double distanceTo(Entity e) {
-		return distanceTo(e.posX,e.posY,e.posZ);
+	public double distanceTo(final Entity e) {
+		return distanceTo(e.posX, e.posY, e.posZ);
 	}
 
-	public double distanceTo(Point p)
-	{
-		if (p==null)
+	public double distanceTo(final Point p) {
+		if (p == null) {
 			return -1;
+		}
 
-		return distanceTo(p.x,p.y,p.z);
+		return distanceTo(p.x, p.y, p.z);
 	}
 
-	public double distanceToSquared(double px,double py, double pz)
-	{
+	public double distanceToSquared(final double px, final double py,
+			final double pz) {
 		final double d = px - x;
 		final double d1 = py - y;
 		final double d2 = pz - z;
-		return ((d * d) + (d1 * d1) + (d2 * d2));
+		return d * d + d1 * d1 + d2 * d2;
 	}
 
-	public double distanceToSquared(Entity e) {
-		return distanceToSquared(e.posX,e.posY,e.posZ);
+	public double distanceToSquared(final Entity e) {
+		return distanceToSquared(e.posX, e.posY, e.posZ);
 	}
 
-	public double distanceToSquared(PathPoint pp) {
-		return distanceToSquared(pp.xCoord,pp.yCoord,pp.zCoord);
+	public double distanceToSquared(final PathPoint pp) {
+		return distanceToSquared(pp.xCoord, pp.yCoord, pp.zCoord);
 	}
 
-	public double distanceToSquared(Point p)
-	{
-		return distanceToSquared(p.x,p.y,p.z);
+	public double distanceToSquared(final Point p) {
+		return distanceToSquared(p.x, p.y, p.z);
 	}
 
 	@Override
-	public boolean equals (Object o) {
-		if (this == o)
+	public boolean equals(final Object o) {
+		if (this == o) {
 			return true;
+		}
 
-		if (!(o instanceof Point))
+		if (!(o instanceof Point)) {
 			return false;
+		}
 
-		final Point p = (Point)o;
+		final Point p = (Point) o;
 
-		return ((p.x==x) && (p.y==y) && (p.z==z));
+		return p.x == x && p.y == y && p.z == z;
 	}
 
 	public Point getAbove() {
-		return new Point(x,y+1,z);
+		return new Point(x, y + 1, z);
 	}
 
 	public Point getBelow() {
-		return new Point(x,y-1,z);
+		return new Point(x, y - 1, z);
 	}
 
-	public TileEntityBrewingStand getBrewingStand(World world) {
-		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
+	public Block getBlock(final World world) {
+		return world.getBlock(getiX(), getiY(), getiZ());
+	}
 
-		if ((ent != null) && (ent instanceof TileEntityBrewingStand))
-			return (TileEntityBrewingStand)ent;
+	public TileEntityBrewingStand getBrewingStand(final World world) {
+		final TileEntity ent = world.getTileEntity(getiX(), getiY(), getiZ());
+
+		if (ent != null && ent instanceof TileEntityBrewingStand) {
+			return (TileEntityBrewingStand) ent;
+		}
 
 		return null;
 	}
 
-	public TileEntityChest getChest(World world) {
-		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
+	public TileEntityChest getChest(final World world) {
+		final TileEntity ent = world.getTileEntity(getiX(), getiY(), getiZ());
 
-		if ((ent != null) && (ent instanceof TileEntityChest))
-			return (TileEntityChest)ent;
+		if (ent != null && ent instanceof TileEntityChest) {
+			return (TileEntityChest) ent;
+		}
 
 		return null;
 	}
 
 	public String getChunkString() {
-		return getChunkX()+"/"+getChunkZ();
+		return getChunkX() + "/" + getChunkZ();
 	}
 
 	public int getChunkX() {
@@ -278,34 +295,32 @@ public class Point {
 		return getiZ() >> 4;
 	}
 
-	public TileEntityDispenser getDispenser(World world) {
-		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
+	public TileEntityDispenser getDispenser(final World world) {
+		final TileEntity ent = world.getTileEntity(getiX(), getiY(), getiZ());
 
-		if ((ent != null) && (ent instanceof TileEntityDispenser))
-			return (TileEntityDispenser)ent;
+		if (ent != null && ent instanceof TileEntityDispenser) {
+			return (TileEntityDispenser) ent;
+		}
 
 		return null;
 	}
 
 	public Point getEast() {
-		return new Point(x,y,z-1);
+		return new Point(x, y, z - 1);
 	}
 
-	public TileEntityFurnace getFurnace(World world) {
-		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
+	public TileEntityFurnace getFurnace(final World world) {
+		final TileEntity ent = world.getTileEntity(getiX(), getiY(), getiZ());
 
-		if ((ent != null) && (ent instanceof TileEntityFurnace))
-			return (TileEntityFurnace)ent;
+		if (ent != null && ent instanceof TileEntityFurnace) {
+			return (TileEntityFurnace) ent;
+		}
 
 		return null;
 	}
 
-	public Block getBlock(World world) {
-		return world.getBlock(getiX(), getiY(), getiZ());
-	}
-
 	public String getIntString() {
-		return getiX()+"/"+getiY()+"/"+getiZ();
+		return getiX() + "/" + getiY() + "/" + getiZ();
 	}
 
 	public int getiX() {
@@ -320,179 +335,190 @@ public class Point {
 		return MathHelper.floor_double(z);
 	}
 
-	public int getMeta(World world) {
+	public int getMeta(final World world) {
 		return world.getBlockMetadata(getiX(), getiY(), getiZ());
 	}
 
-	public TileEntityMillChest getMillChest(World world) {
-		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
+	public TileEntityMillChest getMillChest(final World world) {
+		final TileEntity ent = world.getTileEntity(getiX(), getiY(), getiZ());
 
-		if ((ent != null) && (ent instanceof TileEntityMillChest))
-			return (TileEntityMillChest)ent;
+		if (ent != null && ent instanceof TileEntityMillChest) {
+			return (TileEntityMillChest) ent;
+		}
 
 		return null;
 	}
 
 	public Point getNorth() {
-		return new Point(x-1,y,z);
+		return new Point(x - 1, y, z);
 	}
 
 	public Point2D getP2D() {
-		return new Point2D(getiX(),getiZ());
+		return new Point2D(getiX(), getiZ());
 	}
 
-	public TileEntityPanel getPanel(World world) {
-		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
+	public TileEntityPanel getPanel(final World world) {
+		final TileEntity ent = world.getTileEntity(getiX(), getiY(), getiZ());
 
-		if ((ent != null) && (ent instanceof TileEntityPanel))
-			return (TileEntityPanel)ent;
+		if (ent != null && ent instanceof TileEntityPanel) {
+			return (TileEntityPanel) ent;
+		}
 
 		return null;
 	}
 
-	public short[] getPathingCoord(int xoffset,int yoffset,int zoffset) {
-		return new short[]{(short) (x-xoffset),(short) (y-yoffset),(short) (z-zoffset)};
+	public short[] getPathingCoord(final int xoffset, final int yoffset,
+			final int zoffset) {
+		return new short[] { (short) (x - xoffset), (short) (y - yoffset),
+				(short) (z - zoffset) };
 	}
 
-
 	public PathPoint getPathPoint() {
-		return new PathPoint((int)x,(int)y,(int)z);
+		return new PathPoint((int) x, (int) y, (int) z);
 	}
 
 	public String getPathString() {
-		return getiX()+"_"+getiY()+"_"+getiZ();
+		return getiX() + "_" + getiY() + "_" + getiZ();
 	}
 
-	public Point getRelative(double dx,double dy,double dz) {
-		return new Point(x+dx,y+dy,z+dz);
+	public Point getRelative(final double dx, final double dy, final double dz) {
+		return new Point(x + dx, y + dy, z + dz);
 	}
 
-	public TileEntitySign getSign(World world) {
-		final TileEntity ent=world.getTileEntity(getiX(),getiY() , getiZ());
+	public TileEntitySign getSign(final World world) {
+		final TileEntity ent = world.getTileEntity(getiX(), getiY(), getiZ());
 
-		if ((ent != null) && (ent instanceof TileEntitySign))
-			return (TileEntitySign)ent;
+		if (ent != null && ent instanceof TileEntitySign) {
+			return (TileEntitySign) ent;
+		}
 
 		return null;
 	}
 
 	public Point getSouth() {
-		return new Point(x+1,y,z);
+		return new Point(x + 1, y, z);
 	}
 
-	public TileEntity getTileEntity(World world) {
-		return world.getTileEntity(getiX(),getiY() , getiZ());
+	public TileEntity getTileEntity(final World world) {
+		return world.getTileEntity(getiX(), getiY(), getiZ());
 	}
 
 	public Point getWest() {
-		return new Point(x,y,z+1);
+		return new Point(x, y, z + 1);
 	}
 
 	@Override
 	public int hashCode() {
-		return (int)(x+((int)y<<8)+((int)z<<16));
+		return (int) (x + ((int) y << 8) + ((int) z << 16));
 	}
 
-	public double horizontalDistanceTo(ChunkCoordinates cc) {
-		return horizontalDistanceTo(cc.posX,cc.posZ);
+	public double horizontalDistanceTo(final ChunkCoordinates cc) {
+		return horizontalDistanceTo(cc.posX, cc.posZ);
 	}
 
-	public double horizontalDistanceTo(double px, double pz)
-	{
+	public double horizontalDistanceTo(final double px, final double pz) {
 		final double d = px - x;
 		final double d2 = pz - z;
-		return MathHelper.sqrt_double((d * d) + (d2 * d2));
+		return MathHelper.sqrt_double(d * d + d2 * d2);
 	}
 
-	public double horizontalDistanceTo(Entity e) {
-		return horizontalDistanceTo(e.posX,e.posZ);
+	public double horizontalDistanceTo(final Entity e) {
+		return horizontalDistanceTo(e.posX, e.posZ);
 	}
 
-	public double horizontalDistanceTo(PathPoint p)
-	{
-		if (p==null)
+	public double horizontalDistanceTo(final PathPoint p) {
+		if (p == null) {
 			return 0;
+		}
 
-		return horizontalDistanceTo(p.xCoord,p.zCoord);
+		return horizontalDistanceTo(p.xCoord, p.zCoord);
 	}
 
-	public double horizontalDistanceTo(Point p)
-	{
-		if (p==null)
+	public double horizontalDistanceTo(final Point p) {
+		if (p == null) {
 			return 0;
+		}
 
-		return horizontalDistanceTo(p.x,p.z);
+		return horizontalDistanceTo(p.x, p.z);
 	}
 
-	public double horizontalDistanceToSquared(double px, double pz)
-	{
+	public double horizontalDistanceToSquared(final double px, final double pz) {
 		final double d = px - x;
 		final double d2 = pz - z;
-		return ((d * d) + (d2 * d2));
+		return d * d + d2 * d2;
 	}
 
-	public double horizontalDistanceToSquared(Entity e) {
-		return horizontalDistanceToSquared(e.posX,e.posZ);
+	public double horizontalDistanceToSquared(final Entity e) {
+		return horizontalDistanceToSquared(e.posX, e.posZ);
 	}
 
-	public double horizontalDistanceToSquared(Point p)
-	{
-		return horizontalDistanceTo(p.x,p.z);
+	public double horizontalDistanceToSquared(final Point p) {
+		return horizontalDistanceTo(p.x, p.z);
 	}
 
-	public boolean isBlockPassable(World world) {
-		return AStarStatic.isPassableBlock(world, getiX(), getiY(), getiZ(), MillVillager.DEFAULT_JPS_CONFIG);
+	public boolean isBlockPassable(final World world) {
+		return AStarStatic.isPassableBlock(world, getiX(), getiY(), getiZ(),
+				MillVillager.DEFAULT_JPS_CONFIG);
 	}
 
-	public int manhattanDistance(Point p) {
-		return (int) (Math.abs(x-p.x)+Math.abs(z-p.z));
+	public int manhattanDistance(final Point p) {
+		return (int) (Math.abs(x - p.x) + Math.abs(z - p.z));
 	}
 
-	public boolean sameBlock(PathPoint p) {
-		if (p==null)
+	public boolean sameBlock(final PathPoint p) {
+		if (p == null) {
 			return false;
+		}
 
-		return ((getiX()==p.xCoord) &&  (getiY()==p.yCoord) && (getiZ()==p.zCoord));
+		return getiX() == p.xCoord && getiY() == p.yCoord
+				&& getiZ() == p.zCoord;
 	}
 
-	public boolean sameBlock(Point p) {
-		if (p==null)
+	public boolean sameBlock(final Point p) {
+		if (p == null) {
 			return false;
+		}
 
-		return ((getiX()==p.getiX()) &&  (getiY()==p.getiY()) && (getiZ()==p.getiZ()));
+		return getiX() == p.getiX() && getiY() == p.getiY()
+				&& getiZ() == p.getiZ();
 	}
 
-	public boolean sameHorizontalBlock(PathPoint p) {
-		if (p==null)
+	public boolean sameHorizontalBlock(final PathPoint p) {
+		if (p == null) {
 			return false;
+		}
 
-		return ((getiX()==p.xCoord) && (getiZ()==p.zCoord));
+		return getiX() == p.xCoord && getiZ() == p.zCoord;
 	}
 
-	public boolean sameHorizontalBlock(Point p) {
-		if (p==null)
+	public boolean sameHorizontalBlock(final Point p) {
+		if (p == null) {
 			return false;
+		}
 
-		return ((getiX()==p.getiX()) && (getiZ()==p.getiZ()));
+		return getiX() == p.getiX() && getiZ() == p.getiZ();
 	}
 
-	public void setBlock(World world,Block block,int meta,boolean notify,boolean sound) {
-		MillCommonUtilities.setBlockAndMetadata(world, this, block, meta, notify, sound);
+	public void setBlock(final World world, final Block block, final int meta,
+			final boolean notify, final boolean sound) {
+		MillCommonUtilities.setBlockAndMetadata(world, this, block, meta,
+				notify, sound);
 	}
 
-	public int squareRadiusDistance(Point p) {
-		return (int) (Math.max(Math.abs(x-p.x),Math.abs(z-p.z)));
+	public int squareRadiusDistance(final Point p) {
+		return (int) Math.max(Math.abs(x - p.x), Math.abs(z - p.z));
 	}
 
 	@Override
 	public String toString() {
-		return (Math.round(x*100)/100)+"/"+(Math.round(y*100)/100)+"/"+(Math.round(z*100)/100);
+		return Math.round(x * 100) / 100 + "/" + Math.round(y * 100) / 100
+				+ "/" + Math.round(z * 100) / 100;
 	}
 
-	public void write(NBTTagCompound nbttagcompound,String label) {
-		nbttagcompound.setDouble(label+"_xCoord", x);
-		nbttagcompound.setDouble(label+"_yCoord", y);
-		nbttagcompound.setDouble(label+"_zCoord", z);
+	public void write(final NBTTagCompound nbttagcompound, final String label) {
+		nbttagcompound.setDouble(label + "_xCoord", x);
+		nbttagcompound.setDouble(label + "_yCoord", y);
+		nbttagcompound.setDouble(label + "_zCoord", z);
 	}
 
 }

@@ -14,13 +14,13 @@ import cpw.mods.fml.common.network.FMLNetworkEvent.ServerDisconnectionFromClient
 public class ConnectionEventHandler {
 
 	@SubscribeEvent
-	public void clientLoggedIn(ClientConnectedToServerEvent event) {
+	public void clientLoggedIn(final ClientConnectedToServerEvent event) {
 		Mill.proxy.handleClientLogin();
 	}
 
 	@SubscribeEvent
-	public void connectionClosed(ServerDisconnectionFromClientEvent event) {
-		//can't tell who it is in Forge right now so checking everyone
+	public void connectionClosed(final ServerDisconnectionFromClientEvent event) {
+		// can't tell who it is in Forge right now so checking everyone
 
 		for (final MillWorld mw : Mill.serverWorlds) {
 			mw.checkConnections();
@@ -28,16 +28,18 @@ public class ConnectionEventHandler {
 	}
 
 	@SubscribeEvent
-	public void playerLoggedIn(PlayerLoggedInEvent event) {
+	public void playerLoggedIn(final PlayerLoggedInEvent event) {
 
 		try {
-				final UserProfile profile=MillCommonUtilities.getServerProfile((event.player).worldObj,(event.player).getDisplayName());
-				if (profile!=null) {
-					profile.connectUser();
-				} else {
-					MLN.error(this, "Could not get profile on login for user: "+(event.player).getDisplayName());
-				}
-		} catch (final Exception e ) {
+			final UserProfile profile = MillCommonUtilities.getServerProfile(
+					event.player.worldObj, event.player.getDisplayName());
+			if (profile != null) {
+				profile.connectUser();
+			} else {
+				MLN.error(this, "Could not get profile on login for user: "
+						+ event.player.getDisplayName());
+			}
+		} catch (final Exception e) {
 			MLN.printException("Error in ConnectionHandler.playerLoggedIn:", e);
 		}
 

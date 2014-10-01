@@ -10,18 +10,19 @@ import org.millenaire.common.Point;
 public class GoalPlantNetherWarts extends Goal {
 
 	@Override
-	public GoalInformation getDestination(MillVillager villager) {
-		return packDest(villager.getHouse().getNetherWartsPlantingLocation(),villager.getHouse());
+	public GoalInformation getDestination(final MillVillager villager) {
+		return packDest(villager.getHouse().getResManager()
+				.getNetherWartsPlantingLocation(), villager.getHouse());
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(MillVillager villager) {
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) {
 		return villager.getBestHoeStack();
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) {
-		return getDestination(villager)!=null;
+	public boolean isPossibleSpecific(final MillVillager villager) {
+		return getDestination(villager) != null;
 	}
 
 	@Override
@@ -30,24 +31,24 @@ public class GoalPlantNetherWarts extends Goal {
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) {
+	public boolean performAction(final MillVillager villager) {
 
-		Block block=villager.getBlock(villager.getGoalDestPoint());
+		Block block = villager.getBlock(villager.getGoalDestPoint());
 
-		final Point cropPoint=villager.getGoalDestPoint().getAbove();
+		final Point cropPoint = villager.getGoalDestPoint().getAbove();
 
-		block=villager.getBlock(cropPoint);
+		block = villager.getBlock(cropPoint);
 		if (block == Blocks.air) {
-			villager.setBlockAndMetadata(cropPoint,Blocks.nether_wart,0);
-			
+			villager.setBlockAndMetadata(cropPoint, Blocks.nether_wart, 0);
+
 			villager.swingItem();
 		}
 
 		return true;
 	}
-	
+
 	@Override
-	public int priority(MillVillager villager) {
+	public int priority(final MillVillager villager) {
 		return 100;
 	}
 }

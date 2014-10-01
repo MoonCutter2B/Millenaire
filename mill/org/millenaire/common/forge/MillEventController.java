@@ -1,6 +1,7 @@
 package org.millenaire.common.forge;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -24,50 +25,64 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public class MillEventController {
 
 	@SubscribeEvent
-	public void entityCreated(EntityJoinWorldEvent event) {
+	public void entityCreated(final EntityJoinWorldEvent event) {
 
-		if (Mill.startupError)
+		if (Mill.startupError) {
 			return;
+		}
 
-		if ((event.entity instanceof EntityZombie) ||
-				(event.entity instanceof EntitySkeleton)) {
-			final EntityMob mob=(EntityMob)event.entity;
-			mob.tasks.addTask(3, new EntityAIAttackOnCollide(mob, MillVillager.class,
-					mob.getAIMoveSpeed(), true));
+		if (event.entity instanceof EntityZombie
+				|| event.entity instanceof EntitySkeleton) {
+			final EntityMob mob = (EntityMob) event.entity;
+			mob.tasks.addTask(3, new EntityAIAttackOnCollide(mob,
+					MillVillager.class, mob.getAIMoveSpeed(), true));
 
 			EntityAITasks targetTasks;
 			try {
 				targetTasks = mob.targetTasks;
-				targetTasks.addTask(3, new EntityAINearestAttackableTarget(mob, MillVillager.class, 10, false));
+				targetTasks.addTask(3, new EntityAINearestAttackableTarget(mob,
+						MillVillager.class, 10, false));
 
 			} catch (final Exception e) {
-				MLN.printException("Error when trying to make new mob "+mob+" target villagers:", e);
+				MLN.printException("Error when trying to make new mob " + mob
+						+ " target villagers:", e);
 			}
 		}
 	}
-	
-	
 
 	@SubscribeEvent
-	public void worldLoaded(Load event)
-	{
-		
+	public void worldLoaded(final Load event) {
+
 		Mill.proxy.loadLanguages();
-		
+
 		if (Mill.displayMillenaireLocationError && !Mill.proxy.isTrueServer()) {
-			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKRED, "ERREUR: Impossible de trouver le fichier de configuration "+Mill.proxy.getConfigFile().getAbsolutePath()+". V\u00e9rifiez que le dossier millenaire est bien dans minecraft/mods/");
-			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),MLN.DARKRED, "ERROR: Could not find the config file at "+Mill.proxy.getConfigFile().getAbsolutePath()+". Check that the millenaire directory is in minecraft/mods/");
+			Mill.proxy
+					.sendLocalChat(
+							Mill.proxy.getTheSinglePlayer(),
+							MLN.DARKRED,
+							"ERREUR: Impossible de trouver le fichier de configuration "
+									+ Mill.proxy.getConfigFile()
+											.getAbsolutePath()
+									+ ". V\u00e9rifiez que le dossier millenaire est bien dans minecraft/mods/");
+			Mill.proxy
+					.sendLocalChat(
+							Mill.proxy.getTheSinglePlayer(),
+							MLN.DARKRED,
+							"ERROR: Could not find the config file at "
+									+ Mill.proxy.getConfigFile()
+											.getAbsolutePath()
+									+ ". Check that the millenaire directory is in minecraft/mods/");
 			return;
 		}
-		
+
 		if (!(event.world instanceof WorldServer)) {
 			MLN.temp(event.world, "Loading new client world");
-			Mill.clientWorld=new MillWorld(event.world);
+			Mill.clientWorld = new MillWorld(event.world);
 			Mill.proxy.testTextureSize();
 		} else {
 			if (!(event.world instanceof WorldServerMulti)) {
 				MLN.temp(event.world, "Loading new world");
-				final MillWorld newWorld=new MillWorld(event.world);
+				final MillWorld newWorld = new MillWorld(event.world);
 				Mill.serverWorlds.add(newWorld);
 				newWorld.loadData();
 			}
@@ -75,21 +90,22 @@ public class MillEventController {
 	}
 
 	@SubscribeEvent
-	public void worldSaved(Save event)
-	{
+	public void worldSaved(final Save event) {
 
-		if (Mill.startupError)
+		if (Mill.startupError) {
 			return;
+		}
 
-		if (event.world.getWorldInfo().getVanillaDimension()!=0)
+		if (event.world.getWorldInfo().getVanillaDimension() != 0) {
 			return;
+		}
 
 		if (!(event.world instanceof WorldServer)) {
 			Mill.clientWorld.saveEverything();
 		} else {
 
 			for (final MillWorld mw : Mill.serverWorlds) {
-				if (mw.world==event.world) {
+				if (mw.world == event.world) {
 					mw.saveEverything();
 				}
 			}
@@ -97,28 +113,30 @@ public class MillEventController {
 	}
 
 	@SubscribeEvent
-	public void worldUnloaded(Unload event)
-	{
+	public void worldUnloaded(final Unload event) {
 
-		if (Mill.startupError)
+		if (Mill.startupError) {
 			return;
+		}
 
-		if (event.world.getWorldInfo().getVanillaDimension()!=0)
+		if (event.world.getWorldInfo().getVanillaDimension() != 0) {
 			return;
+		}
 
 		if (!(event.world instanceof WorldServer)) {
-			if (Mill.clientWorld.world==event.world) {
-				Mill.clientWorld=null;
+			if (Mill.clientWorld.world == event.world) {
+				Mill.clientWorld = null;
 				MLN.temp(null, "Unloaded client world.");
 			} else {
-				MLN.temp(null, "Skipped unloading client world as it's not current world.");
+				MLN.temp(null,
+						"Skipped unloading client world as it's not current world.");
 			}
 		} else {
 
-			final Vector<MillWorld> toDelete=new Vector<MillWorld>();
+			final List<MillWorld> toDelete = new ArrayList<MillWorld>();
 
 			for (final MillWorld mw : Mill.serverWorlds) {
-				if (mw.world==event.world) {
+				if (mw.world == event.world) {
 					toDelete.add(mw);
 				}
 			}

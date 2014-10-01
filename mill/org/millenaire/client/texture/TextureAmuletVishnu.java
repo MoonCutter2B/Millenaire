@@ -14,60 +14,62 @@ import org.millenaire.common.core.MillCommonUtilities;
 
 public class TextureAmuletVishnu extends TextureAtlasSprite {
 
-	private static final int radius=20;
-	
-	public TextureAmuletVishnu(String iconName) {
+	private static final int radius = 20;
+
+	public TextureAmuletVishnu(final String iconName) {
 		super(iconName);
 	}
 
-	@Override
-	public void updateAnimation()
-	{
+	private int getScore(final Minecraft mc) {
+		double level = 0;
 
-		int iconPos=getScore(Minecraft.getMinecraft());
-		
-		if (iconPos>15)
-			iconPos=15;
-		if (iconPos<0)
-			iconPos=0;
+		double closestDistance = Double.MAX_VALUE;
 
-		if (iconPos != this.frameCounter)
-        {
-            this.frameCounter = iconPos;
-            TextureUtil.uploadTextureMipmap((int[][])this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
-        }
-	}
-	
-	private int getScore(Minecraft mc) {
-		double level=0;
+		if (mc.theWorld != null && mc.thePlayer != null) {
 
-		double closestDistance=Double.MAX_VALUE;
+			final World world = mc.theWorld;
 
-		if((mc.theWorld != null) && (mc.thePlayer != null)) {
+			final Point p = new Point(mc.thePlayer);
 
-			final World world=mc.theWorld;
-
-			final Point p=new Point(mc.thePlayer);
-
-			final List<Entity> entities=MillCommonUtilities.getEntitiesWithinAABB(world, EntityMob.class, p, 20, 20);
-
-
+			final List<Entity> entities = MillCommonUtilities
+					.getEntitiesWithinAABB(world, EntityMob.class, p, 20, 20);
 
 			for (final Entity ent : entities) {
-				if (p.distanceTo(ent)<closestDistance) {
-					closestDistance=p.distanceTo(ent);
+				if (p.distanceTo(ent) < closestDistance) {
+					closestDistance = p.distanceTo(ent);
 				}
 			}
 		}
 
-		if (closestDistance>radius) {
-			level=0;
+		if (closestDistance > radius) {
+			level = 0;
 		} else {
-			level=((radius-closestDistance)/radius);
+			level = (radius - closestDistance) / radius;
 		}
-		
-		return (int) (level*15);
-		
+
+		return (int) (level * 15);
+
+	}
+
+	@Override
+	public void updateAnimation() {
+
+		int iconPos = getScore(Minecraft.getMinecraft());
+
+		if (iconPos > 15) {
+			iconPos = 15;
+		}
+		if (iconPos < 0) {
+			iconPos = 0;
+		}
+
+		if (iconPos != this.frameCounter) {
+			this.frameCounter = iconPos;
+			TextureUtil.uploadTextureMipmap(
+					(int[][]) this.framesTextureData.get(this.frameCounter),
+					this.width, this.height, this.originX, this.originY, false,
+					false);
+		}
 	}
 
 }

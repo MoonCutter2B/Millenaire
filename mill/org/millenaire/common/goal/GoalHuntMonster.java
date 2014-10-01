@@ -12,36 +12,42 @@ import org.millenaire.common.core.MillCommonUtilities;
 
 public class GoalHuntMonster extends Goal {
 
-
 	@Override
-	public GoalInformation getDestination(MillVillager villager) throws Exception {
-		final List<Entity> mobs=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, EntityMob.class, villager.getTownHall().getPos(), 50, 10);
+	public GoalInformation getDestination(final MillVillager villager)
+			throws Exception {
+		final List<Entity> mobs = MillCommonUtilities.getEntitiesWithinAABB(
+				villager.worldObj, EntityMob.class, villager.getTownHall()
+						.getPos(), 50, 10);
 
-		if (mobs==null)
+		if (mobs == null) {
 			return null;
+		}
 
-		int bestDist=Integer.MAX_VALUE;
-		Entity target=null;
+		int bestDist = Integer.MAX_VALUE;
+		Entity target = null;
 
 		for (final Entity ent : mobs) {
 
 			if (ent instanceof EntityMob) {
-				if ((villager.getPos().distanceToSquared(ent)<bestDist) && (villager.getTownHall().getAltitude((int)ent.posX, (int)ent.posZ) < ent.posY)) {
-					target=ent;
-					bestDist=(int) villager.getPos().distanceToSquared(ent);
+				if (villager.getPos().distanceToSquared(ent) < bestDist
+						&& villager.getTownHall().getAltitude((int) ent.posX,
+								(int) ent.posZ) < ent.posY) {
+					target = ent;
+					bestDist = (int) villager.getPos().distanceToSquared(ent);
 				}
 			}
 		}
 
-		if (target==null)
+		if (target == null) {
 			return null;
+		}
 
-		return packDest(null,null,target);
+		return packDest(null, null, target);
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(MillVillager villager) {
-		return new ItemStack[]{villager.getWeapon()};
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) {
+		return new ItemStack[] { villager.getWeapon() };
 	}
 
 	@Override
@@ -50,29 +56,33 @@ public class GoalHuntMonster extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) throws Exception {
-		return (getDestination(villager)!=null);
+	public boolean isPossibleSpecific(final MillVillager villager)
+			throws Exception {
+		return getDestination(villager) != null;
 	}
 
 	@Override
-	public boolean isStillValidSpecific(MillVillager villager) throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager)
+			throws Exception {
 
-		if ((villager.worldObj.getWorldTime()%10)==0) {
+		if (villager.worldObj.getWorldTime() % 10 == 0) {
 			setVillagerDest(villager);
 		}
 
-		return (villager.getGoalDestPoint()!=null);
+		return villager.getGoalDestPoint() != null;
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) throws Exception {
-		final List<Entity> mobs=MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, EntityMob.class, villager.getPos(), 4, 4);
+	public boolean performAction(final MillVillager villager) throws Exception {
+		final List<Entity> mobs = MillCommonUtilities.getEntitiesWithinAABB(
+				villager.worldObj, EntityMob.class, villager.getPos(), 4, 4);
 
 		for (final Entity ent : mobs) {
-			if (!ent.isDead && (ent instanceof EntityMob) && villager.canEntityBeSeen(ent)) {
+			if (!ent.isDead && ent instanceof EntityMob
+					&& villager.canEntityBeSeen(ent)) {
 				villager.setEntityToAttack(ent);
-				if (MLN.LogGeneralAI>=MLN.MAJOR) {
-					MLN.major(this,"Attacking entity: "+ent);
+				if (MLN.LogGeneralAI >= MLN.MAJOR) {
+					MLN.major(this, "Attacking entity: " + ent);
 				}
 			}
 		}
@@ -81,9 +91,8 @@ public class GoalHuntMonster extends Goal {
 	}
 
 	@Override
-	public int priority(MillVillager villager) throws Exception {
+	public int priority(final MillVillager villager) throws Exception {
 		return 50;
 	}
-
 
 }

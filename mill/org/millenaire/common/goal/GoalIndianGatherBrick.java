@@ -1,81 +1,86 @@
 package org.millenaire.common.goal;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-import org.millenaire.common.Building;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
+import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
-
-
 
 public class GoalIndianGatherBrick extends Goal {
 
 	public GoalIndianGatherBrick() {
-		maxSimultaneousInBuilding=2;
-		townhallLimit.put(new InvItem(Mill.stone_decoration,1), 4096);
+		maxSimultaneousInBuilding = 2;
+		townhallLimit.put(new InvItem(Mill.stone_decoration, 1), 4096);
 	}
 
-
 	@Override
-	public int actionDuration(MillVillager villager) {
+	public int actionDuration(final MillVillager villager) {
 		return 1000;
 	}
 
 	@Override
-	public GoalInformation getDestination(MillVillager villager) {
+	public GoalInformation getDestination(final MillVillager villager) {
 
-		final Vector<Point> vp=new Vector<Point>();
-		final Vector<Point> buildingp=new Vector<Point>();
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagKiln)) {
-			final Point p=kiln.getFullBrickLocation();
-			if (p!=null) {
+		final List<Point> vp = new ArrayList<Point>();
+		final List<Point> buildingp = new ArrayList<Point>();
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
+				Building.tagKiln)) {
+			final Point p = kiln.getResManager().getFullBrickLocation();
+			if (p != null) {
 				vp.add(p);
 				buildingp.add(kiln.getPos());
 			}
 		}
 
-		if (vp.isEmpty())
+		if (vp.isEmpty()) {
 			return null;
+		}
 
-		Point p=vp.firstElement();
-		Point buildingP=buildingp.firstElement();
+		Point p = vp.get(0);
+		Point buildingP = buildingp.get(0);
 
-		for (int i=1;i<vp.size();i++) {
-			if (vp.get(i).horizontalDistanceToSquared(villager) < p.horizontalDistanceToSquared(villager)) {
-				p=vp.get(i);
-				buildingP=buildingp.get(i);
+		for (int i = 1; i < vp.size(); i++) {
+			if (vp.get(i).horizontalDistanceToSquared(villager) < p
+					.horizontalDistanceToSquared(villager)) {
+				p = vp.get(i);
+				buildingP = buildingp.get(i);
 			}
 		}
-		return packDest(p,buildingP);
+		return packDest(p, buildingP);
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(MillVillager villager) {
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) {
 		return villager.getBestPickaxeStack();
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) {
+	public boolean isPossibleSpecific(final MillVillager villager) {
 		boolean delayOver;
 		if (!villager.lastGoalTime.containsKey(this)) {
-			delayOver=true;
+			delayOver = true;
 		} else {
-			delayOver=(villager.worldObj.getWorldTime()>(villager.lastGoalTime.get(this)+STANDARD_DELAY));
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
+					.get(this) + STANDARD_DELAY;
 		}
 
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagKiln)) {
-			final int nb=kiln.getNbFullBrickLocation();
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
+				Building.tagKiln)) {
+			final int nb = kiln.getResManager().getNbFullBrickLocation();
 
-			if ((nb>0) && delayOver)
+			if (nb > 0 && delayOver) {
 				return true;
-			if (nb>4)
+			}
+			if (nb > 4) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -86,26 +91,34 @@ public class GoalIndianGatherBrick extends Goal {
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) {
-		if ((MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint())==Mill.stone_decoration) && (MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint())==1)) {
-			villager.addToInv(Mill.stone_decoration, MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint()), 1);
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),Blocks.air,0);
+	public boolean performAction(final MillVillager villager) {
+		if (MillCommonUtilities.getBlock(villager.worldObj,
+				villager.getGoalDestPoint()) == Mill.stone_decoration
+				&& MillCommonUtilities.getBlockMeta(villager.worldObj,
+						villager.getGoalDestPoint()) == 1) {
+			villager.addToInv(Mill.stone_decoration, MillCommonUtilities
+					.getBlockMeta(villager.worldObj,
+							villager.getGoalDestPoint()), 1);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(),
+					Blocks.air, 0);
 
 			villager.swingItem();
 			return false;
-		} else
+		} else {
 			return true;
+		}
 
 	}
 
 	@Override
-	public int priority(MillVillager villager) {
+	public int priority(final MillVillager villager) {
 
-		int p=100-(villager.getTownHall().nbGoodAvailable(Mill.stone_decoration, 1, false, false)*2);
+		int p = 100 - villager.getTownHall().nbGoodAvailable(
+				Mill.stone_decoration, 1, false, false) * 2;
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {
-				p=p/2;
+				p = p / 2;
 			}
 		}
 
@@ -113,7 +126,7 @@ public class GoalIndianGatherBrick extends Goal {
 	}
 
 	@Override
-	public boolean unreachableDestination(MillVillager villager) {
+	public boolean unreachableDestination(final MillVillager villager) {
 		return false;
 	}
 

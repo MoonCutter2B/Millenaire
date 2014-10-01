@@ -4,17 +4,15 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.goal.Goal;
 
-
-
 public class GoalChildGoPlay extends Goal {
 
 	public GoalChildGoPlay() {
 		super();
-		leasure=true;
+		leasure = true;
 	}
 
 	@Override
-	public int actionDuration(MillVillager villager) {
+	public int actionDuration(final MillVillager villager) {
 		return 10000;
 	}
 
@@ -24,23 +22,22 @@ public class GoalChildGoPlay extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(MillVillager villager) {
+	public GoalInformation getDestination(final MillVillager villager) {
 		return null;
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) {
-		return true;
-	}
-
-
-	@Override
-	public boolean performAction(MillVillager villager) {
+	public boolean isPossibleSpecific(final MillVillager villager) {
 		return true;
 	}
 
 	@Override
-	public int priority(MillVillager villager) {
+	public boolean performAction(final MillVillager villager) {
+		return true;
+	}
+
+	@Override
+	public int priority(final MillVillager villager) {
 		return MillCommonUtilities.randomInt(5);
 	}
 

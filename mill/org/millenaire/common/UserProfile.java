@@ -7,14 +7,16 @@ import java.io.BufferedWriter;
 import java.io.DataOutput;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
+import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumChatFormatting;
 
 import org.millenaire.common.Quest.QuestInstance;
 import org.millenaire.common.Quest.QuestInstanceVillager;
+import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
@@ -26,18 +28,18 @@ public class UserProfile {
 
 	public static final String OLD_PROFILE_SINGLE_PLAYER = "SinglePlayer";
 
-	private static final int CULTURE_MAX_REPUTATION=64*64;
-	private static final int CULTURE_MIN_REPUTATION=-10*64;
+	private static final int CULTURE_MAX_REPUTATION = 64 * 64;
+	private static final int CULTURE_MIN_REPUTATION = -10 * 64;
 
-	public static final int UPDATE_ALL=1;
-	public static final int UPDATE_REPUTATION=2;
-	public static final int UPDATE_DIPLOMACY=3;
-	public static final int UPDATE_ACTIONDATA=4;
-	public static final int UPDATE_TAGS=5;
-	public static final int UPDATE_LANGUAGE=6;
-	public static final int UPDATE_GLOBAL_TAGS=7;
+	public static final int UPDATE_ALL = 1;
+	public static final int UPDATE_REPUTATION = 2;
+	public static final int UPDATE_DIPLOMACY = 3;
+	public static final int UPDATE_ACTIONDATA = 4;
+	public static final int UPDATE_TAGS = 5;
+	public static final int UPDATE_LANGUAGE = 6;
+	public static final int UPDATE_GLOBAL_TAGS = 7;
 
-	public static UserProfile readProfile(MillWorld world, File dir) {
+	public static UserProfile readProfile(final MillWorld world, final File dir) {
 
 		final UserProfile profile = new UserProfile(world, dir.getName(),
 				dir.getName());
@@ -51,64 +53,66 @@ public class UserProfile {
 
 		return profile;
 	}
+
 	private final HashMap<Point, Integer> villageReputations = new HashMap<Point, Integer>();
 	private final HashMap<Point, Byte> villageDiplomacy = new HashMap<Point, Byte>();
 	private final HashMap<String, Integer> cultureReputations = new HashMap<String, Integer>();
 	private final HashMap<String, Integer> cultureLanguages = new HashMap<String, Integer>();
 
-	private final Vector<String> profileTags = new Vector<String>();
+	private final List<String> profileTags = new ArrayList<String>();
 
 	public String key, playerName;
-	public Vector<QuestInstance> questInstances = new Vector<QuestInstance>();
+	public List<QuestInstance> questInstances = new ArrayList<QuestInstance>();
 	public HashMap<Long, QuestInstance> villagersInQuests = new HashMap<Long, QuestInstance>();
 
 	private final HashMap<String, String> actionData = new HashMap<String, String>();
 
 	private final MillWorld mw;
-	boolean connectionActionDone=false;
-	public boolean connected=false;
+	boolean connectionActionDone = false;
+	public boolean connected = false;
 
-	private boolean showNewWorldMessageDone=false;
+	private boolean showNewWorldMessageDone = false;
 
-	public String releaseNumber=null;
+	public String releaseNumber = null;
 
-	public HashMap<Point,Integer> panelsSent=new HashMap<Point,Integer>();
-	public HashMap<Point,Long> buildingsSent=new HashMap<Point,Long>();
+	public HashMap<Point, Integer> panelsSent = new HashMap<Point, Integer>();
+	public HashMap<Point, Long> buildingsSent = new HashMap<Point, Long>();
 
-
-	public UserProfile(MillWorld world, String key, String name) {
+	public UserProfile(final MillWorld world, final String key,
+			final String name) {
 		this.key = key;
 		this.playerName = name;
 		this.mw = world;
 	}
 
-	public void adjustDiplomacyPoint(Building b, int change) {
+	public void adjustDiplomacyPoint(final Building b, final int change) {
 
-		int dp=0;
+		int dp = 0;
 
 		if (villageDiplomacy.containsKey(b.getPos())) {
-			dp=(villageDiplomacy.get(b.getPos()));
+			dp = villageDiplomacy.get(b.getPos());
 		}
 
-		dp+=change;
+		dp += change;
 
-		if (dp>5) {
-			dp=5;
+		if (dp > 5) {
+			dp = 5;
 		}
-		if (dp<0) {
-			dp=0;
+		if (dp < 0) {
+			dp = 0;
 		}
 
-		villageDiplomacy.put(b.getPos(), (byte)dp);
+		villageDiplomacy.put(b.getPos(), (byte) dp);
 
 		saveProfileConfig();
 		sendProfilePacket(UPDATE_DIPLOMACY);
 	}
 
-	public void adjustLanguage(String culture, int change) {
+	public void adjustLanguage(final String culture, final int change) {
 
 		if (cultureLanguages.containsKey(culture)) {
-			cultureLanguages.put(culture, cultureLanguages.get(culture) + change);
+			cultureLanguages.put(culture, cultureLanguages.get(culture)
+					+ change);
 		} else {
 			cultureLanguages.put(culture, change);
 		}
@@ -117,60 +121,60 @@ public class UserProfile {
 		sendProfilePacket(UPDATE_LANGUAGE);
 	}
 
-	public void adjustReputation(Building b, int change) {
+	public void adjustReputation(final Building b, final int change) {
 
-		if (b==null)
+		if (b == null) {
 			return;
+		}
 
 		if (villageReputations.containsKey(b.getPos())) {
-			villageReputations.put(b.getPos(), villageReputations.get(b.getPos()) + change);
+			villageReputations.put(b.getPos(),
+					villageReputations.get(b.getPos()) + change);
 		} else {
 			villageReputations.put(b.getPos(), change);
 		}
 
-		int rep=0;
+		int rep = 0;
 
 		if (cultureReputations.containsKey(b.culture.key)) {
-			rep=cultureReputations.get(b.culture.key);
+			rep = cultureReputations.get(b.culture.key);
 		}
 
-		rep+=change / 10;
+		rep += change / 10;
 
-		rep=Math.max(CULTURE_MIN_REPUTATION, rep);
-		rep=Math.min(CULTURE_MAX_REPUTATION, rep);
+		rep = Math.max(CULTURE_MIN_REPUTATION, rep);
+		rep = Math.min(CULTURE_MAX_REPUTATION, rep);
 
-		cultureReputations.put(b.culture.key,rep);
+		cultureReputations.put(b.culture.key, rep);
 
-		if (rep<=CULTURE_MIN_REPUTATION) {
+		if (rep <= CULTURE_MIN_REPUTATION) {
 
-			int nbAwfulRep=0;
+			int nbAwfulRep = 0;
 
 			for (final int cultureRep : cultureReputations.values()) {
-				if (cultureRep<=CULTURE_MIN_REPUTATION) {
+				if (cultureRep <= CULTURE_MIN_REPUTATION) {
 					nbAwfulRep++;
 				}
 			}
 
-			if (nbAwfulRep>=3) {
+			if (nbAwfulRep >= 3) {
 				getPlayer().addStat(MillAchievements.attila, 1);
 			}
 
 		}
 
-
 		saveProfileConfig();
-
 
 		sendProfilePacket(UPDATE_REPUTATION);
 	}
 
-	public void changeProfileKey(String newKey) {
+	public void changeProfileKey(final String newKey) {
 		MillCommonUtilities.deleteDir(getDir());
-		key=newKey;
+		key = newKey;
 		saveProfile();
 	}
 
-	public void clearActionData(String key) {
+	public void clearActionData(final String key) {
 		if (actionData.containsKey(key)) {
 			actionData.remove(key);
 			saveActionData();
@@ -179,13 +183,12 @@ public class UserProfile {
 	}
 
 	private void clearFarAwayPanels() {
-		final Vector<Point> farAway=new Vector<Point>();
+		final List<Point> farAway = new ArrayList<Point>();
 
-		final EntityPlayer player=getPlayer();
-
+		final EntityPlayer player = getPlayer();
 
 		for (final Point p : panelsSent.keySet()) {
-			if (p.distanceToSquared(player)>(30*30)) {
+			if (p.distanceToSquared(player) > 30 * 30) {
 				farAway.add(p);
 			}
 		}
@@ -195,7 +198,7 @@ public class UserProfile {
 		}
 	}
 
-	public void clearTag(String tag) {
+	public void clearTag(final String tag) {
 		if (profileTags.contains(tag)) {
 			profileTags.remove(tag);
 			saveProfileTags();
@@ -204,14 +207,14 @@ public class UserProfile {
 	}
 
 	public void connectUser() {
-		connected=true;
-		connectionActionDone=false;
+		connected = true;
+		connectionActionDone = false;
 	}
 
-	private void deleteQuestInstances(long id) {
-		final Vector<Long> toDelete=new Vector<Long>();
+	private void deleteQuestInstances(final long id) {
+		final List<Long> toDelete = new ArrayList<Long>();
 		for (final long vid : villagersInQuests.keySet()) {
-			if (villagersInQuests.get(vid).uniqueid==id) {
+			if (villagersInQuests.get(vid).uniqueid == id) {
 				toDelete.add(vid);
 			}
 		}
@@ -220,43 +223,44 @@ public class UserProfile {
 			villagersInQuests.remove(vid);
 		}
 
-		for (int i=questInstances.size()-1;i>=0;i--) {
-			if (questInstances.get(i).uniqueid==id) {
+		for (int i = questInstances.size() - 1; i >= 0; i--) {
+			if (questInstances.get(i).uniqueid == id) {
 				questInstances.remove(i);
 			}
 		}
 	}
 
 	public void disconnectUser() {
-		connected=false;
+		connected = false;
 		panelsSent.clear();
 		buildingsSent.clear();
 
-		if (MLN.LogNetwork>=MLN.MAJOR) {
+		if (MLN.LogNetwork >= MLN.MAJOR) {
 			MLN.major(this, "Disconnected user.");
 		}
 	}
 
-	public String getActionData(String key) {
+	public String getActionData(final String key) {
 		return actionData.get(key);
 	}
 
-
-	public int getCultureLanguageKnowledge(String key) {
-		if (cultureLanguages.containsKey(key))
+	public int getCultureLanguageKnowledge(final String key) {
+		if (cultureLanguages.containsKey(key)) {
 			return cultureLanguages.get(key);
+		}
 
 		return 0;
 	}
 
-	public int getCultureReputation(String key) {
-		if (cultureReputations.containsKey(key))
+	public int getCultureReputation(final String key) {
+		if (cultureReputations.containsKey(key)) {
 			return cultureReputations.get(key);
+		}
 
 		return 0;
 	}
 
-	public int getDiplomacyPoints(Building b) {
+	public int getDiplomacyPoints(final Building b) {
 
 		int dp = 0;
 		if (villageDiplomacy.containsKey(b.getPos())) {
@@ -279,46 +283,50 @@ public class UserProfile {
 		return mw.world.getPlayerEntityByName(key);
 	}
 
-	public int getReputation(Building b) {
+	public int getReputation(final Building b) {
 
 		int rep = 0;
 		if (villageReputations.containsKey(b.getPos())) {
 			rep = villageReputations.get(b.getPos());
 		}
 
-		if ((b.culture!=null) && cultureReputations.containsKey(b.culture.key)) {
+		if (b.culture != null && cultureReputations.containsKey(b.culture.key)) {
 			rep += cultureReputations.get(b.culture.key);
 		}
 
 		return rep;
 	}
 
-	public Vector<String> getWorldQuestStatus() {
+	public List<String> getWorldQuestStatus() {
 
-		final Vector<String> res=new Vector<String>();
+		final List<String> res = new ArrayList<String>();
 
-		boolean remaining=false;
+		boolean remaining = false;
 
-		for (int i=0;i<Quest.WORLD_MISSION_NB.length;i++) {
-			final String status=getActionData(Quest.WORLD_MISSION_KEYS[i]+"queststatus");
-			final String chapterName=MLN.string("quest.cqchapter"+Quest.WORLD_MISSION_KEYS[i]);
+		for (int i = 0; i < Quest.WORLD_MISSION_NB.length; i++) {
+			final String status = getActionData(Quest.WORLD_MISSION_KEYS[i]
+					+ "queststatus");
+			final String chapterName = MLN.string("quest.cqchapter"
+					+ Quest.WORLD_MISSION_KEYS[i]);
 
-			if (status==null) {
-				res.add(MLN.string("quest.cqchapternotstarted",chapterName));
+			if (status == null) {
+				res.add(MLN.string("quest.cqchapternotstarted", chapterName));
 				res.add("");
-				res.add(MLN.string("quest.cq"+Quest.WORLD_MISSION_KEYS[i]+"startexplanation"));
-				remaining=true;
+				res.add(MLN.string("quest.cq" + Quest.WORLD_MISSION_KEYS[i]
+						+ "startexplanation"));
+				remaining = true;
 			} else {
-				final int mission=Integer.parseInt(status);
+				final int mission = Integer.parseInt(status);
 
-				final int nbMission=Quest.WORLD_MISSION_NB[i];
+				final int nbMission = Quest.WORLD_MISSION_NB[i];
 
-				if (mission>=nbMission) {
-					res.add(MLN.string("quest.cqchaptercompleted",chapterName));
+				if (mission >= nbMission) {
+					res.add(MLN.string("quest.cqchaptercompleted", chapterName));
 				} else {
 
-					res.add(MLN.string("quest.cqchapterinprogress",chapterName,""+mission,""+nbMission));
-					remaining=true;
+					res.add(MLN.string("quest.cqchapterinprogress",
+							chapterName, "" + mission, "" + nbMission));
+					remaining = true;
 				}
 			}
 			res.add("");
@@ -334,48 +342,58 @@ public class UserProfile {
 	}
 
 	private String getWorldQuestStatusShort() {
-		String res=MLN.string("quest.creationqueststatusshort")+" ";
-		for (int i=0;i<Quest.WORLD_MISSION_NB.length;i++) {
-			final String status=getActionData(Quest.WORLD_MISSION_KEYS[i]+"queststatus");
-			final String chapterName=MLN.string("quest.cqchapter"+Quest.WORLD_MISSION_KEYS[i]);
+		String res = MLN.string("quest.creationqueststatusshort") + " ";
+		for (int i = 0; i < Quest.WORLD_MISSION_NB.length; i++) {
+			final String status = getActionData(Quest.WORLD_MISSION_KEYS[i]
+					+ "queststatus");
+			final String chapterName = MLN.string("quest.cqchapter"
+					+ Quest.WORLD_MISSION_KEYS[i]);
 
-			if (status==null) {
-				res+=MLN.string("quest.cqchapternotstartedshort",chapterName)+" ";
+			if (status == null) {
+				res += MLN
+						.string("quest.cqchapternotstartedshort", chapterName)
+						+ " ";
 			} else {
-				final int mission=Integer.parseInt(status);
+				final int mission = Integer.parseInt(status);
 
-				final int nbMission=Quest.WORLD_MISSION_NB[i];
+				final int nbMission = Quest.WORLD_MISSION_NB[i];
 
-				if (mission>=nbMission) {
-					res+=MLN.string("quest.cqchaptercompletedshort",chapterName)+" ";
+				if (mission >= nbMission) {
+					res += MLN.string("quest.cqchaptercompletedshort",
+							chapterName) + " ";
 				} else {
-					res+=MLN.string("quest.cqchapterinprogressshort",chapterName,""+mission,""+nbMission)+" ";
+					res += MLN.string("quest.cqchapterinprogressshort",
+							chapterName, "" + mission, "" + nbMission) + " ";
 				}
 			}
 		}
 
-		return res+" "+MLN.string("quest.cqcheckquestlistandhelp",Mill.proxy.getQuestKeyName());
+		return res
+				+ " "
+				+ MLN.string("quest.cqcheckquestlistandhelp",
+						Mill.proxy.getQuestKeyName());
 	}
 
-	public boolean isTagSet(String tag) {
+	public boolean isTagSet(final String tag) {
 		return profileTags.contains(tag);
 	}
 
 	public boolean isWorldQuestFinished() {
-		boolean remaining=false;
+		boolean remaining = false;
 
-		for (int i=0;i<Quest.WORLD_MISSION_NB.length;i++) {
-			final String status=getActionData(Quest.WORLD_MISSION_KEYS[i]+"queststatus");
-			if (status==null) {
-				remaining=true;
+		for (int i = 0; i < Quest.WORLD_MISSION_NB.length; i++) {
+			final String status = getActionData(Quest.WORLD_MISSION_KEYS[i]
+					+ "queststatus");
+			if (status == null) {
+				remaining = true;
 			} else {
-				final int mission=Integer.parseInt(status);
+				final int mission = Integer.parseInt(status);
 
-				final int nbMission=Quest.WORLD_MISSION_NB[i];
+				final int nbMission = Quest.WORLD_MISSION_NB[i];
 
-				if (mission>=nbMission) {
+				if (mission >= nbMission) {
 				} else {
-					remaining=true;
+					remaining = true;
 				}
 			}
 		}
@@ -383,18 +401,18 @@ public class UserProfile {
 		return !remaining;
 	}
 
-	private void loadActionData(File dataFile) {
+	private void loadActionData(final File dataFile) {
 		actionData.clear();
 
 		if (dataFile.exists()) {
 			try {
 
-				final BufferedReader reader = MillCommonUtilities.getReader(dataFile);
+				final BufferedReader reader = MillCommonUtilities
+						.getReader(dataFile);
 				String line = reader.readLine();
 
 				while (line != null) {
-					if ((line.trim().length() > 0)
-							&& (line.split(":").length == 2)) {
+					if (line.trim().length() > 0 && line.split(":").length == 2) {
 						actionData.put(line.split(":")[0], line.split(":")[1]);
 					}
 					line = reader.readLine();
@@ -451,16 +469,17 @@ public class UserProfile {
 		}
 	}
 
-	private void loadProfileConfig(File configFile) {
-		if ((configFile != null) && configFile.exists()) {
+	private void loadProfileConfig(final File configFile) {
+		if (configFile != null && configFile.exists()) {
 			try {
 
-				final BufferedReader reader = MillCommonUtilities.getReader(configFile);
+				final BufferedReader reader = MillCommonUtilities
+						.getReader(configFile);
 
 				String line;
 
 				while ((line = reader.readLine()) != null) {
-					if ((line.trim().length() > 0) && !line.startsWith("//")) {
+					if (line.trim().length() > 0 && !line.startsWith("//")) {
 						final String[] temp = line.split("=");
 						if (temp.length == 2) {
 
@@ -477,16 +496,18 @@ public class UserProfile {
 								final int level = Integer.parseInt(value
 										.split(",")[1]);
 								cultureLanguages.put(c, level);
-							} else if (key.equalsIgnoreCase("village_reputations")) {
+							} else if (key
+									.equalsIgnoreCase("village_reputations")) {
 								final Point p = new Point(value.split(",")[0]);
 								final int level = Integer.parseInt(value
 										.split(",")[1]);
 								villageReputations.put(p, level);
-							} else if (key.equalsIgnoreCase("village_diplomacy")) {
+							} else if (key
+									.equalsIgnoreCase("village_diplomacy")) {
 								final Point p = new Point(value.split(",")[0]);
 								final int level = Integer.parseInt(value
 										.split(",")[1]);
-								villageDiplomacy.put(p, (byte)level);
+								villageDiplomacy.put(p, (byte) level);
 							}
 
 						}
@@ -513,7 +534,8 @@ public class UserProfile {
 		if (tagsFile.exists()) {
 			try {
 
-				final BufferedReader reader = MillCommonUtilities.getReader(tagsFile);
+				final BufferedReader reader = MillCommonUtilities
+						.getReader(tagsFile);
 				String line = reader.readLine();
 
 				while (line != null) {
@@ -534,19 +556,19 @@ public class UserProfile {
 		}
 	}
 
-	private void loadQuestInstances(File questDataFile) {
+	private void loadQuestInstances(final File questDataFile) {
 		questInstances.clear();
 		villagersInQuests.clear();
 
 		try {
-			if ((questDataFile != null) && questDataFile.exists()) {
+			if (questDataFile != null && questDataFile.exists()) {
 				final BufferedReader reader = MillCommonUtilities
 						.getReader(questDataFile);
 
 				String line;
 
 				while ((line = reader.readLine()) != null) {
-					if ((line.trim().length() > 0) && !line.startsWith("//")) {
+					if (line.trim().length() > 0 && !line.startsWith("//")) {
 						final QuestInstance qi = QuestInstance.loadFromString(
 								mw, line, this);
 						if (qi != null) {
@@ -567,12 +589,12 @@ public class UserProfile {
 
 	}
 
-	public void receiveDeclareReleaseNumberPacket(ByteBufInputStream ds) {
+	public void receiveDeclareReleaseNumberPacket(final ByteBufInputStream ds) {
 		try {
-			releaseNumber=ds.readUTF();
+			releaseNumber = ds.readUTF();
 
-			if (MLN.LogNetwork>=MLN.MAJOR) {
-				MLN.major(this, "Declared release number: "+releaseNumber);
+			if (MLN.LogNetwork >= MLN.MAJOR) {
+				MLN.major(this, "Declared release number: " + releaseNumber);
 			}
 
 		} catch (final IOException e) {
@@ -580,84 +602,86 @@ public class UserProfile {
 		}
 	}
 
-	public void receiveProfilePacket(ByteBufInputStream ds) {
+	public void receiveProfilePacket(final ByteBufInputStream ds) {
 
-		if (MLN.LogNetwork>=MLN.MINOR) {
+		if (MLN.LogNetwork >= MLN.MINOR) {
 			MLN.minor(null, "Receiving profile packet");
 		}
 
 		try {
 
-			final int updateType=ds.read();
+			final int updateType = ds.read();
 
 			int nb;
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_REPUTATION)) {
-				nb=ds.readInt();
+			if (updateType == UPDATE_ALL || updateType == UPDATE_REPUTATION) {
+				nb = ds.readInt();
 				villageReputations.clear();
-				for (int i=0;i<nb;i++) {
-					villageReputations.put(StreamReadWrite.readNullablePoint(ds), ds.readInt());
+				for (int i = 0; i < nb; i++) {
+					villageReputations
+							.put(StreamReadWrite.readNullablePoint(ds),
+									ds.readInt());
 				}
 
-				nb=ds.readInt();
+				nb = ds.readInt();
 				cultureReputations.clear();
-				for (int i=0;i<nb;i++) {
-					final String culture=ds.readUTF();
-					final int rep=ds.readInt();
-					cultureReputations.put(culture,rep );
+				for (int i = 0; i < nb; i++) {
+					final String culture = ds.readUTF();
+					final int rep = ds.readInt();
+					cultureReputations.put(culture, rep);
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_LANGUAGE)) {
-				nb=ds.readInt();
+			if (updateType == UPDATE_ALL || updateType == UPDATE_LANGUAGE) {
+				nb = ds.readInt();
 				cultureLanguages.clear();
-				for (int i=0;i<nb;i++) {
+				for (int i = 0; i < nb; i++) {
 					cultureLanguages.put(ds.readUTF(), ds.readInt());
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_DIPLOMACY)) {
-				nb=ds.readInt();
+			if (updateType == UPDATE_ALL || updateType == UPDATE_DIPLOMACY) {
+				nb = ds.readInt();
 				villageDiplomacy.clear();
-				for (int i=0;i<nb;i++) {
-					villageDiplomacy.put(StreamReadWrite.readNullablePoint(ds), ds.readByte());
+				for (int i = 0; i < nb; i++) {
+					villageDiplomacy.put(StreamReadWrite.readNullablePoint(ds),
+							ds.readByte());
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_ACTIONDATA)) {
-				nb=ds.readInt();
+			if (updateType == UPDATE_ALL || updateType == UPDATE_ACTIONDATA) {
+				nb = ds.readInt();
 				actionData.clear();
-				for (int i=0;i<nb;i++) {
-					actionData.put(ds.readUTF(), StreamReadWrite.readNullableString(ds));
+				for (int i = 0; i < nb; i++) {
+					actionData.put(ds.readUTF(),
+							StreamReadWrite.readNullableString(ds));
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_TAGS)) {
-				nb=ds.readInt();
+			if (updateType == UPDATE_ALL || updateType == UPDATE_TAGS) {
+				nb = ds.readInt();
 				profileTags.clear();
-				for (int i=0;i<nb;i++) {
+				for (int i = 0; i < nb; i++) {
 					profileTags.add(ds.readUTF());
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_GLOBAL_TAGS)) {
-				nb=ds.readInt();
+			if (updateType == UPDATE_ALL || updateType == UPDATE_GLOBAL_TAGS) {
+				nb = ds.readInt();
 				mw.globalTags.clear();
-				for (int i=0;i<nb;i++) {
+				for (int i = 0; i < nb; i++) {
 					mw.globalTags.add(ds.readUTF());
 				}
 			}
 
 			showNewWorldMessage();
 
-
-
 		} catch (final IOException e) {
 			MLN.printException("Error in receiveProfilePacket", e);
 		}
 	}
 
-	public void receiveQuestInstanceDeletePacket(ByteBufInputStream ds) {
+	public void receiveQuestInstanceDeletePacket(final ByteBufInputStream ds) {
 		try {
 			deleteQuestInstances(ds.readLong());
 		} catch (final IOException e) {
@@ -665,9 +689,10 @@ public class UserProfile {
 		}
 	}
 
-	public void receiveQuestInstancePacket(ByteBufInputStream ds) {
+	public void receiveQuestInstancePacket(final ByteBufInputStream ds) {
 		try {
-			final QuestInstance qi=StreamReadWrite.readNullableQuestInstance(mw,ds);
+			final QuestInstance qi = StreamReadWrite.readNullableQuestInstance(
+					mw, ds);
 
 			deleteQuestInstances(qi.uniqueid);
 
@@ -683,14 +708,16 @@ public class UserProfile {
 
 	private void saveActionData() {
 
-		if (mw.world.isRemote)
+		if (mw.world.isRemote) {
 			return;
+		}
 
 		final File configFile = new File(getDir(), "actiondata.txt");
 
 		try {
 
-			final BufferedWriter writer = MillCommonUtilities.getWriter(configFile);
+			final BufferedWriter writer = MillCommonUtilities
+					.getWriter(configFile);
 
 			for (final String key : actionData.keySet()) {
 				writer.write(key + ":" + actionData.get(key) + MLN.EOL);
@@ -704,8 +731,9 @@ public class UserProfile {
 
 	public void saveProfile() {
 
-		if (mw.world.isRemote)
+		if (mw.world.isRemote) {
 			return;
+		}
 
 		saveProfileConfig();
 		saveProfileTags();
@@ -715,14 +743,16 @@ public class UserProfile {
 
 	private void saveProfileConfig() {
 
-		if (mw.world.isRemote)
+		if (mw.world.isRemote) {
 			return;
+		}
 
 		final File configFile = new File(getDir(), "config.txt");
 
 		try {
 
-			final BufferedWriter writer = MillCommonUtilities.getWriter(configFile);
+			final BufferedWriter writer = MillCommonUtilities
+					.getWriter(configFile);
 
 			for (final String c : cultureReputations.keySet()) {
 				writer.write("culture_reputation=" + c + ","
@@ -754,14 +784,16 @@ public class UserProfile {
 
 	private void saveProfileTags() {
 
-		if (mw.world.isRemote)
+		if (mw.world.isRemote) {
 			return;
+		}
 
 		final File configFile = new File(getDir(), "tags.txt");
 
 		try {
 
-			final BufferedWriter writer = MillCommonUtilities.getWriter(configFile);
+			final BufferedWriter writer = MillCommonUtilities
+					.getWriter(configFile);
 
 			for (final String tag : profileTags) {
 				writer.write(tag + MLN.EOL);
@@ -775,13 +807,15 @@ public class UserProfile {
 
 	public void saveQuestInstances() {
 
-		if (mw.world.isRemote)
+		if (mw.world.isRemote) {
 			return;
+		}
 
 		final File questDataFile = new File(getDir(), "quests.txt");
 
 		try {
-			final BufferedWriter writer = MillCommonUtilities.getWriter(questDataFile);
+			final BufferedWriter writer = MillCommonUtilities
+					.getWriter(questDataFile);
 			for (final QuestInstance qi : questInstances) {
 				writer.write(qi.writeToString() + MLN.EOL);
 			}
@@ -793,10 +827,9 @@ public class UserProfile {
 
 	public void sendInitialPackets() {
 
-		if (MLN.LogNetwork>=MLN.MAJOR) {
+		if (MLN.LogNetwork >= MLN.MAJOR) {
 			MLN.major(this, "Sending initial packets.");
 		}
-
 
 		sendProfilePacket(UPDATE_ALL);
 
@@ -804,13 +837,14 @@ public class UserProfile {
 			sendQuestInstancePacket(qi);
 		}
 
-		//world.sendVillageListPacket(getPlayer());
+		// world.sendVillageListPacket(getPlayer());
 	}
 
-	public void sendProfilePacket(int updateType) {
+	public void sendProfilePacket(final int updateType) {
 
-		if (this.mw.world.isRemote)
+		if (this.mw.world.isRemote) {
 			return;
+		}
 
 		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
@@ -818,7 +852,7 @@ public class UserProfile {
 			data.write(ServerReceiver.PACKET_PROFILE);
 			data.write(updateType);
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_REPUTATION)) {
+			if (updateType == UPDATE_ALL || updateType == UPDATE_REPUTATION) {
 				data.writeInt(villageReputations.size());
 				for (final Point p : villageReputations.keySet()) {
 					StreamReadWrite.writeNullablePoint(p, data);
@@ -832,7 +866,7 @@ public class UserProfile {
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_LANGUAGE)) {
+			if (updateType == UPDATE_ALL || updateType == UPDATE_LANGUAGE) {
 				data.writeInt(cultureLanguages.size());
 				for (final String culture : cultureLanguages.keySet()) {
 					data.writeUTF(culture);
@@ -840,7 +874,7 @@ public class UserProfile {
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_DIPLOMACY)) {
+			if (updateType == UPDATE_ALL || updateType == UPDATE_DIPLOMACY) {
 				data.writeInt(villageDiplomacy.size());
 				for (final Point p : villageDiplomacy.keySet()) {
 					StreamReadWrite.writeNullablePoint(p, data);
@@ -848,40 +882,41 @@ public class UserProfile {
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_ACTIONDATA)) {
+			if (updateType == UPDATE_ALL || updateType == UPDATE_ACTIONDATA) {
 				data.writeInt(actionData.size());
 				for (final String key : actionData.keySet()) {
 					data.writeUTF(key);
-					StreamReadWrite.writeNullableString(actionData.get(key), data);
+					StreamReadWrite.writeNullableString(actionData.get(key),
+							data);
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_TAGS)) {
+			if (updateType == UPDATE_ALL || updateType == UPDATE_TAGS) {
 				data.writeInt(profileTags.size());
 				for (final String tag : profileTags) {
 					data.writeUTF(tag);
 				}
 			}
 
-			if ((updateType==UPDATE_ALL) || (updateType==UPDATE_GLOBAL_TAGS)) {
+			if (updateType == UPDATE_ALL || updateType == UPDATE_GLOBAL_TAGS) {
 				data.writeInt(mw.globalTags.size());
 				for (final String tag : mw.globalTags) {
 					data.writeUTF(tag);
 				}
 			}
 
-
 		} catch (final IOException e) {
-			MLN.printException(this+": Error in sendProfilePacket", e);
+			MLN.printException(this + ": Error in sendProfilePacket", e);
 		}
 
 		ServerSender.createAndSendPacketToPlayer(data, this.getPlayer());
 	}
 
-	public void sendQuestInstanceDeletePacket(long id) {
+	public void sendQuestInstanceDeletePacket(final long id) {
 
-		if (mw.world.isRemote)
+		if (mw.world.isRemote) {
 			return;
+		}
 
 		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
@@ -889,21 +924,23 @@ public class UserProfile {
 			data.write(ServerReceiver.PACKET_QUESTINSTANCEDELETE);
 			data.writeLong(id);
 		} catch (final IOException e) {
-			MLN.printException(this+": Error in sendQuestInstanceDeletePacket", e);
+			MLN.printException(this
+					+ ": Error in sendQuestInstanceDeletePacket", e);
 		}
 
 		ServerSender.createAndSendPacketToPlayer(data, this.getPlayer());
 	}
 
-	public void sendQuestInstancePacket(QuestInstance qi) {
+	public void sendQuestInstancePacket(final QuestInstance qi) {
 
-		if (mw.world.isRemote)
+		if (mw.world.isRemote) {
 			return;
+		}
 
-		//first step, make sure all the villages involved are sent as well
+		// first step, make sure all the villages involved are sent as well
 		for (final QuestInstanceVillager qiv : qi.villagers.values()) {
-			final Building th=qiv.getTownHall(mw.world);
-			if (th!=null) {
+			final Building th = qiv.getTownHall(mw.world);
+			if (th != null) {
 				if (!buildingsSent.containsKey(th.getPos())) {
 					th.sendBuildingPacket(getPlayer(), false);
 				}
@@ -912,19 +949,18 @@ public class UserProfile {
 
 		final DataOutput data = ServerSender.getNewByteBufOutputStream();
 
-
 		try {
 			data.write(ServerReceiver.PACKET_QUESTINSTANCE);
 			StreamReadWrite.writeNullableQuestInstance(qi, data);
 
 		} catch (final IOException e) {
-			MLN.printException(this+": Error in sendQuestInstancePacket", e);
+			MLN.printException(this + ": Error in sendQuestInstancePacket", e);
 		}
 
 		ServerSender.createAndSendPacketToPlayer(data, this.getPlayer());
 	}
 
-	public void setActionData(String key, String value) {
+	public void setActionData(final String key, final String value) {
 		if (!actionData.containsKey(key) || !actionData.get(key).equals(value)) {
 			actionData.put(key, value);
 			saveActionData();
@@ -932,7 +968,7 @@ public class UserProfile {
 		}
 	}
 
-	public void setTag(String tag) {
+	public void setTag(final String tag) {
 		if (!profileTags.contains(tag)) {
 			profileTags.add(tag);
 			saveProfileTags();
@@ -942,11 +978,11 @@ public class UserProfile {
 
 	public void showNewWorldMessage() {
 		if (!showNewWorldMessageDone) {
-			ServerSender.sendChat(getPlayer(), EnumChatFormatting.YELLOW,getWorldQuestStatusShort());
-			showNewWorldMessageDone=true;
+			ServerSender.sendChat(getPlayer(), EnumChatFormatting.YELLOW,
+					getWorldQuestStatusShort());
+			showNewWorldMessageDone = true;
 		}
 	}
-
 
 	public void testQuests() {
 
@@ -959,10 +995,10 @@ public class UserProfile {
 			}
 
 			for (final Quest q : Quest.quests.values()) {
-				final QuestInstance qi=q.testQuest(mw, this);
-				change = change | (qi!=null);
+				final QuestInstance qi = q.testQuest(mw, this);
+				change = change | qi != null;
 
-				if (qi!=null) {
+				if (qi != null) {
 					sendQuestInstancePacket(qi);
 				}
 			}
@@ -974,37 +1010,40 @@ public class UserProfile {
 
 	@Override
 	public String toString() {
-		return "Profile: "+key+"/"+playerName;
+		return "Profile: " + key + "/" + playerName;
 	}
 
 	public void updateProfile() {
-		EntityPlayer player=getPlayer();
+		final EntityPlayer player = getPlayer();
 
 		if (connected) {
-			if (player!=null) {
+			if (player != null) {
 				clearFarAwayPanels();
 
-				if (player.dimension==0) {
+				if (player.dimension == 0) {
 					if (!connectionActionDone && !mw.world.isRemote) {
 						sendInitialPackets();
-						connectionActionDone=true;
+						connectionActionDone = true;
 					}
 				}
 
+				if (player != null && mw.world.getWorldTime() % 1000 == 0
+						&& mw.world.isDaytime()) {
+					testQuests();
+				}
 
-				if (player!=null && ((mw.world.getWorldTime()%1000)==0) && mw.world.isDaytime()) {
+				if (MLN.DEV && player != null
+						&& mw.world.getWorldTime() % 20 == 0
+						&& mw.world.isDaytime()) {
 					testQuests();
 				}
-				
-				if (MLN.DEV && player!=null && ((mw.world.getWorldTime()%20)==0) && mw.world.isDaytime()) {
-					testQuests();
-				}
-				
+
 			} else {
-				connectionActionDone=false;//so that it gets resent if the player travels back to the overworld
+				connectionActionDone = false;// so that it gets resent if the
+												// player travels back to the
+												// overworld
 			}
 		}
 	}
-	
 
 }

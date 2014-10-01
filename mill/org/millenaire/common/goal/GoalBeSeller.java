@@ -6,42 +6,43 @@ import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.network.ServerSender;
 
-
-
 public class GoalBeSeller extends Goal {
 
 	public static final int sellingRadius = 7;
 
-
-
 	@Override
-	public GoalInformation getDestination(MillVillager villager) {
+	public GoalInformation getDestination(final MillVillager villager) {
 		return packDest(villager.getTownHall().sellingPlace);
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) {
+	public boolean isPossibleSpecific(final MillVillager villager) {
 
-		return false; //only triggered by TownHall
+		return false; // only triggered by TownHall
 	}
 
 	@Override
-	public boolean isStillValidSpecific(MillVillager villager) throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager)
+			throws Exception {
 
-		if (villager.getTownHall().sellingPlace == null)
+		if (villager.getTownHall().sellingPlace == null) {
 			return false;
+		}
 
-		final EntityPlayer player=villager.worldObj.getClosestPlayer(villager.getTownHall().sellingPlace.getiX(),villager.getTownHall().sellingPlace.getiY(),villager.getTownHall().sellingPlace.getiZ(),sellingRadius);
+		final EntityPlayer player = villager.worldObj.getClosestPlayer(
+				villager.getTownHall().sellingPlace.getiX(),
+				villager.getTownHall().sellingPlace.getiY(),
+				villager.getTownHall().sellingPlace.getiZ(), sellingRadius);
 
-		final boolean valid=((player != null) && (villager.getTownHall().sellingPlace.distanceTo(player) < sellingRadius));
+		final boolean valid = player != null
+				&& villager.getTownHall().sellingPlace.distanceTo(player) < sellingRadius;
 
-		if (!valid && (MLN.LogWifeAI>=MLN.MAJOR)) {
+		if (!valid && MLN.LogWifeAI >= MLN.MAJOR) {
 			MLN.major(this, "Selling goal no longer valid.");
 		}
 
 		return valid;
 	}
-
 
 	@Override
 	public boolean lookAtPlayer() {
@@ -49,25 +50,32 @@ public class GoalBeSeller extends Goal {
 	}
 
 	@Override
-	public void onAccept(MillVillager villager) {
-		final EntityPlayer player=villager.worldObj.getClosestPlayer(villager.getTownHall().sellingPlace.getiX(),villager.getTownHall().sellingPlace.getiY(),villager.getTownHall().sellingPlace.getiZ(),sellingRadius);
-		ServerSender.sendTranslatedSentence(player,MLN.WHITE, "ui.sellercoming",villager.getName());
+	public void onAccept(final MillVillager villager) {
+		final EntityPlayer player = villager.worldObj.getClosestPlayer(
+				villager.getTownHall().sellingPlace.getiX(),
+				villager.getTownHall().sellingPlace.getiY(),
+				villager.getTownHall().sellingPlace.getiZ(), sellingRadius);
+		ServerSender.sendTranslatedSentence(player, MLN.WHITE,
+				"ui.sellercoming", villager.getName());
 	}
 
 	@Override
-	public void onComplete(MillVillager villager) {
+	public void onComplete(final MillVillager villager) {
 
-		final EntityPlayer player=villager.worldObj.getClosestPlayer(villager.getTownHall().getSellingPos().getiX(),
-				villager.getTownHall().getSellingPos().getiY(),
-				villager.getTownHall().getSellingPos().getiZ(),sellingRadius+10);
+		final EntityPlayer player = villager.worldObj.getClosestPlayer(villager
+				.getTownHall().getResManager().getSellingPos().getiX(),
+				villager.getTownHall().getResManager().getSellingPos().getiY(),
+				villager.getTownHall().getResManager().getSellingPos().getiZ(),
+				sellingRadius + 10);
 
-		ServerSender.sendTranslatedSentence(player,MLN.WHITE, "ui.tradecomplete",villager.getName());
-		villager.getTownHall().seller=null;
-		villager.getTownHall().sellingPlace=null;
+		ServerSender.sendTranslatedSentence(player, MLN.WHITE,
+				"ui.tradecomplete", villager.getName());
+		villager.getTownHall().seller = null;
+		villager.getTownHall().sellingPlace = null;
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) {
+	public boolean performAction(final MillVillager villager) {
 		if (villager.getTownHall().sellingPlace == null) {
 			MLN.error(this, "villager.townHall.sellingPlace is null.");
 			return true;
@@ -76,12 +84,12 @@ public class GoalBeSeller extends Goal {
 	}
 
 	@Override
-	public int priority(MillVillager villager) {
+	public int priority(final MillVillager villager) {
 		return 0;
 	}
 
 	@Override
-	public int range(MillVillager villager) {
+	public int range(final MillVillager villager) {
 		return 2;
 	}
 }

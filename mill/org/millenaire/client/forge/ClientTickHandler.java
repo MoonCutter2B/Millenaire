@@ -12,21 +12,21 @@ public class ClientTickHandler {
 
 	private boolean startupMessageShow;
 
-
 	@SubscribeEvent
-	public void tickStart(TickEvent.ClientTickEvent event)
-	{
-		if ((Mill.clientWorld==null) || !Mill.clientWorld.millenaireEnabled || (Minecraft.getMinecraft().thePlayer==null))
+	public void tickStart(final TickEvent.ClientTickEvent event) {
+		if (Mill.clientWorld == null || !Mill.clientWorld.millenaireEnabled
+				|| Minecraft.getMinecraft().thePlayer == null) {
 			return;
+		}
 
-		final boolean onSurface=(Minecraft.getMinecraft().thePlayer.dimension==0);
+		final boolean onSurface = Minecraft.getMinecraft().thePlayer.dimension == 0;
 
 		Mill.clientWorld.updateWorldClient(onSurface);
 
-
 		if (!startupMessageShow) {
-			DisplayActions.displayStartupOrError(Minecraft.getMinecraft().thePlayer,Mill.startupError);
-			startupMessageShow=true;
+			DisplayActions.displayStartupOrError(
+					Minecraft.getMinecraft().thePlayer, Mill.startupError);
+			startupMessageShow = true;
 		}
 
 		Mill.proxy.handleClientGameUpdate();

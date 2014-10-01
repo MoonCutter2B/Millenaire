@@ -3,17 +3,15 @@ package org.millenaire.common.goal.leasure;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.goal.Goal;
 
-
-
 public class GoalGoRest extends Goal {
 
 	public GoalGoRest() {
 		super();
-		leasure=true;
+		leasure = true;
 	}
 
 	@Override
-	public int actionDuration(MillVillager villager) {
+	public int actionDuration(final MillVillager villager) {
 		return 10000;
 	}
 
@@ -23,27 +21,27 @@ public class GoalGoRest extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(MillVillager villager) {
-		return packDest(villager.getHouse().getSleepingPos());
+	public GoalInformation getDestination(final MillVillager villager) {
+		return packDest(villager.getHouse().getResManager().getSleepingPos());
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) {
-		return (villager.getHouse().getPos().distanceTo(villager) > 5);
+	public boolean isPossibleSpecific(final MillVillager villager) {
+		return villager.getHouse().getPos().distanceTo(villager) > 5;
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) {
+	public boolean performAction(final MillVillager villager) {
 		return true;
 	}
 
 	@Override
-	public int priority(MillVillager villager) {
+	public int priority(final MillVillager villager) {
 		return 0;
 	}
 
 	@Override
-	public int range(MillVillager villager) {
+	public int range(final MillVillager villager) {
 		return 10;
 	}
 

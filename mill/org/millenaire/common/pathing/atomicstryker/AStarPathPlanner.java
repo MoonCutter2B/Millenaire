@@ -14,11 +14,11 @@ import org.millenaire.common.MLN;
  * @author AtomicStryker
  */
 
-public class AStarPathPlanner
-{
-	
-	private static ExecutorService executorService=Executors.newCachedThreadPool();
-	
+public class AStarPathPlanner {
+
+	private static ExecutorService executorService = Executors
+			.newCachedThreadPool();
+
 	private AStarWorker worker;
 	private final World worldObj;
 	private final IAStarPathedEntity pathedEntity;
@@ -28,8 +28,7 @@ public class AStarPathPlanner
 	private AStarNode lastEnd;
 	public AStarConfig config;
 
-	public AStarPathPlanner(World world, IAStarPathedEntity ent)
-	{
+	public AStarPathPlanner(final World world, final IAStarPathedEntity ent) {
 		worker = new AStarWorker(this);
 		worldObj = world;
 		accesslock = false;
@@ -37,55 +36,53 @@ public class AStarPathPlanner
 		isJPS = true;
 	}
 
-	private void flushWorker()
-	{
+	private void flushWorker() {
 		if (!accesslock) // only flush if we arent starting!
 		{
 			worker = isJPS ? new AStarWorkerJPS(this) : new AStarWorker(this);
 		}
 	}
 
-	public void getPath(AStarNode start, AStarNode end, AStarConfig config)
-	{
-		if (isBusy())
-		{
+	public void getPath(final AStarNode start, final AStarNode end,
+			final AStarConfig config) {
+		if (isBusy()) {
 			stopPathSearch(true);
 		}
 
-		while (accesslock) { Thread.yield(); }
+		while (accesslock) {
+			Thread.yield();
+		}
 		flushWorker();
 		accesslock = true;
 
 		lastStart = start;
 		lastEnd = end;
 
-		this.config=config;
+		this.config = config;
 
 		worker.setup(worldObj, start, end, config.allowDropping);
 		try {
-			worker.isRunning=true;
+			worker.isRunning = true;
 			executorService.submit(worker);
 		} catch (final Exception e) {
 			MLN.printException(e);
-			//DO nothing - pathing occasionaly has threading errors we don't care about
+			// DO nothing - pathing occasionaly has threading errors we don't
+			// care about
 		}
 		accesslock = false;
 	}
 
-	public void getPath(int startx, int starty, int startz,
-			int destx, int desty, int destz, AStarConfig config)
-	{
+	public void getPath(final int startx, int starty, final int startz,
+			final int destx, final int desty, final int destz,
+			final AStarConfig config) {
 
-		if (!AStarStatic.isViable(worldObj, startx, starty, startz, 0, config))
-		{
+		if (!AStarStatic.isViable(worldObj, startx, starty, startz, 0, config)) {
 			starty--;
 		}
-		if (!AStarStatic.isViable(worldObj, startx, starty, startz, 0, config))
-		{
-			starty+=2;
+		if (!AStarStatic.isViable(worldObj, startx, starty, startz, 0, config)) {
+			starty += 2;
 		}
-		if (!AStarStatic.isViable(worldObj, startx, starty, startz, 0, config))
-		{
+		if (!AStarStatic.isViable(worldObj, startx, starty, startz, 0, config)) {
 			starty--;
 		}
 
@@ -95,23 +92,19 @@ public class AStarPathPlanner
 		getPath(starter, finish, config);
 	}
 
-	//Kinniken
-	public boolean isBusy()
-	{
+	// Kinniken
+	public boolean isBusy() {
 		return worker.isBusy();
 	}
 
-	public void onFoundPath(ArrayList<AStarNode> result)
-	{
+	public void onFoundPath(final ArrayList<AStarNode> result) {
 		setJPS(true);
-		if (pathedEntity != null)
-		{
+		if (pathedEntity != null) {
 			pathedEntity.onFoundPath(result);
 		}
 	}
 
-	public void onNoPathAvailable()
-	{
+	public void onNoPathAvailable() {
 		if (isJPS) // in case of JPS failure switch to old best first algorithm
 		{
 			setJPS(false);
@@ -119,23 +112,19 @@ public class AStarPathPlanner
 			return;
 		}
 
-		if (pathedEntity != null)
-		{
+		if (pathedEntity != null) {
 			pathedEntity.onNoPathAvailable();
 		}
 	}
 
-	public void setJPS(boolean b)
-	{
+	public void setJPS(final boolean b) {
 		isJPS = b;
 		flushWorker();
 	}
 
-	public void stopPathSearch(boolean interrupted)
-	{
+	public void stopPathSearch(final boolean interrupted) {
 		flushWorker();
-		if ((pathedEntity != null) && !interrupted)
-		{
+		if (pathedEntity != null && !interrupted) {
 			pathedEntity.onNoPathAvailable();
 		}
 	}

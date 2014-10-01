@@ -2,7 +2,6 @@ package org.millenaire.common.goal;
 
 import org.millenaire.common.MillVillager;
 
-
 public class GoalHide extends Goal {
 
 	@Override
@@ -11,31 +10,37 @@ public class GoalHide extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(MillVillager villager) throws Exception {
-		if (villager.getPos().distanceToSquared(villager.getTownHall().getShelterPos())<=9)
+	public GoalInformation getDestination(final MillVillager villager)
+			throws Exception {
+		if (villager.getPos().distanceToSquared(
+				villager.getTownHall().getResManager().getShelterPos()) <= 9) {
 			return null;
+		}
 
-		return packDest(villager.getTownHall().getShelterPos(),villager.getTownHall());
+		return packDest(villager.getTownHall().getResManager().getShelterPos(),
+				villager.getTownHall());
 	}
 
 	@Override
-	public boolean isPossibleSpecific(MillVillager villager) throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager)
+			throws Exception {
 		return false;
 	}
 
 	@Override
-	public boolean isStillValidSpecific(MillVillager villager) throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager)
+			throws Exception {
 
 		return villager.getTownHall().underAttack;
 	}
 
 	@Override
-	public boolean performAction(MillVillager villager) throws Exception {
+	public boolean performAction(final MillVillager villager) throws Exception {
 		return false;
 	}
 
 	@Override
-	public int priority(MillVillager villager) throws Exception {
+	public int priority(final MillVillager villager) throws Exception {
 		return 0;
 	}
 

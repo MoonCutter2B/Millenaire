@@ -4,15 +4,16 @@ import java.lang.reflect.Field;
 
 import net.minecraft.pathfinding.PathPoint;
 
+import org.millenaire.common.MLN;
+
 /**
  * PathPoint extension for field access.
  * 
  * 
  * @author AtomicStryker
- *
+ * 
  */
-public class AS_PathPoint extends PathPoint
-{
+public class AS_PathPoint extends PathPoint {
 	private static boolean init = false;
 	private static Field fieldIndex;
 	private static Field fieldTotalDistance;
@@ -21,12 +22,10 @@ public class AS_PathPoint extends PathPoint
 	private static Field fieldPrevPathPoint;
 
 	@SuppressWarnings("rawtypes")
-	public AS_PathPoint(int par1, int par2, int par3)
-	{
+	public AS_PathPoint(final int par1, final int par2, final int par3) {
 		super(par1, par2, par3);
 
-		if (!init)
-		{
+		if (!init) {
 			final Class ppClass = getClass().getSuperclass();
 			fieldIndex = ppClass.getDeclaredFields()[4];
 			fieldIndex.setAccessible(true);
@@ -42,40 +41,31 @@ public class AS_PathPoint extends PathPoint
 		}
 	}
 
-	public void setDistanceToNext(float f)
-	{
+	public void setDistanceToNext(final float f) {
 		setFieldValue(fieldDistanceToNext, f);
 	}
 
-	public void setDistanceToTarget(float f)
-	{
+	public void setDistanceToTarget(final float f) {
 		setFieldValue(fieldDistanceToTarget, f);
 	}
 
-	private void setFieldValue(Field f, Object v)
-	{
-		try
-		{
+	private void setFieldValue(final Field f, final Object v) {
+		try {
 			f.set(this, v);
-		}
-		catch (final Exception e)
-		{
-			e.printStackTrace();
+		} catch (final Exception e) {
+			MLN.printException(e);
 		}
 	}
 
-	public void setIndex(int i)
-	{
+	public void setIndex(final int i) {
 		setFieldValue(fieldIndex, i);
 	}
 
-	public void setPrevious(PathPoint pp)
-	{
+	public void setPrevious(final PathPoint pp) {
 		setFieldValue(fieldPrevPathPoint, pp);
 	}
 
-	public void setTotalPathDistance(float f)
-	{
+	public void setTotalPathDistance(final float f) {
 		setFieldValue(fieldTotalDistance, f);
 	}
 }
