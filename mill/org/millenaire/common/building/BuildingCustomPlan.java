@@ -23,110 +23,15 @@ public class BuildingCustomPlan {
 
 	public static enum TypeRes {
 
-		CHEST("chest"), CRAFT("craft"), SIGN("sign"), FIELD("field");
+		CHEST("chest"), CRAFT("craft"), SIGN("sign"), FIELD("field"), SPAWN(
+				"spawn"), SAPLING("sapling"), STALL("stall"), MINING("mining"), FURNACE(
+				"furnace");
 
 		public final String key;
 
 		TypeRes(final String key) {
 			this.key = key;
 		}
-	}
-
-	public Map<TypeRes, List<Point>> findResources(final World world,
-			final Point pos) {
-
-		final Map<TypeRes, List<Point>> resources = new HashMap<TypeRes, List<Point>>();
-
-		int currentRadius = 0;
-
-		while (currentRadius < radius) {
-
-			int y = pos.getiY() - heightRadius + 1;
-
-			while (y < pos.getiY() + heightRadius + 1) {
-				int x, z;
-
-				// First side of square: -x to +x with -z
-				z = pos.getiZ() - currentRadius;
-				for (x = pos.getiX() - currentRadius; x <= pos.getiX()
-						+ currentRadius; x++) {
-					handlePoint(x, y, z,  world, resources);
-				}
-
-				// Second side of square: -z to +z with -x
-				x = pos.getiX() - currentRadius;
-				for (z = pos.getiZ() - currentRadius + 1; z <= pos.getiZ()
-						+ currentRadius - 1; z++) {
-					handlePoint(x, y, z,  world, resources);
-				}
-
-				// Third side of square: -x to +x with +z
-				z = pos.getiZ() + currentRadius;
-				for (x = pos.getiX() - currentRadius; x <= pos.getiX()
-						+ currentRadius; x++) {
-					handlePoint(x, y, z,  world, resources);
-				}
-
-				// Fourth side of square: -z to +z with +x
-				x = pos.getiX() + currentRadius;
-				for (z = pos.getiZ() - currentRadius + 1; z <= pos.getiZ()
-						+ currentRadius - 1; z++) {
-					handlePoint(x, y, z, world, resources);
-				}
-
-				y++;
-			}
-
-			currentRadius++;
-		}
-		return resources;
-	}
-
-	private void handlePoint(final int x, final int y, final int z,
-			final World world,
-			final Map<TypeRes, List<Point>> resources) {
-
-		final Point p = new Point(x, y, z);
-
-		final TypeRes res = identifyRes(world, p);
-
-		/*
-		 * If the resource is needed for this type of custom building we add it
-		 * within limit of max number
-		 */
-		if (res != null && maxResources.containsKey(res)) {
-			if (resources.containsKey(res)
-					&& resources.get(res).size() < maxResources
-							.get(res)) {
-				resources.get(res).add(p);
-			} else if (!resources.containsKey(res)) {
-				final List<Point> points = new ArrayList<Point>();
-				points.add(p);
-				resources.put(res, points);
-			}
-		}
-	}
-
-	private static TypeRes identifyRes(final World world, final Point p) {
-
-		final Block b = p.getBlock(world);
-
-		if (b.equals(Blocks.chest)) {
-			return TypeRes.CHEST;
-		}
-
-		if (b.equals(Blocks.crafting_table)) {
-			return TypeRes.CRAFT;
-		}
-
-		if (b.equals(Blocks.wall_sign)) {
-			return TypeRes.SIGN;
-		}
-		if (b.equals(Blocks.farmland)) {
-			return TypeRes.FIELD;
-		}
-
-		return null;
 	}
 
 	/**
@@ -184,17 +89,20 @@ public class BuildingCustomPlan {
 	public final Culture culture;
 
 	public String nativeName, shop = null, buildingKey, gameNameKey = null;
+
 	public final Map<String, String> names = new HashMap<String, String>();
+
 	public List<String> maleResident = new ArrayList<String>();
+
 	public List<String> femaleResident = new ArrayList<String>();
 	public int priorityMoveIn = 1;
 	public int radius = 5, heightRadius = 4;
-	
 	public List<String> tags = new ArrayList<String>();
-	
 	public String cropType = null;
+	public String spawnType = null;
 
 	public Map<TypeRes, Integer> minResources = new HashMap<TypeRes, Integer>();
+
 	public Map<TypeRes, Integer> maxResources = new HashMap<TypeRes, Integer>();
 
 	/**
@@ -234,6 +142,56 @@ public class BuildingCustomPlan {
 		}
 	}
 
+	public Map<TypeRes, List<Point>> findResources(final World world,
+			final Point pos) {
+
+		final Map<TypeRes, List<Point>> resources = new HashMap<TypeRes, List<Point>>();
+
+		int currentRadius = 0;
+
+		while (currentRadius < radius) {
+
+			int y = pos.getiY() - heightRadius + 1;
+
+			while (y < pos.getiY() + heightRadius + 1) {
+				int x, z;
+
+				// First side of square: -x to +x with -z
+				z = pos.getiZ() - currentRadius;
+				for (x = pos.getiX() - currentRadius; x <= pos.getiX()
+						+ currentRadius; x++) {
+					handlePoint(x, y, z, world, resources);
+				}
+
+				// Second side of square: -z to +z with -x
+				x = pos.getiX() - currentRadius;
+				for (z = pos.getiZ() - currentRadius + 1; z <= pos.getiZ()
+						+ currentRadius - 1; z++) {
+					handlePoint(x, y, z, world, resources);
+				}
+
+				// Third side of square: -x to +x with +z
+				z = pos.getiZ() + currentRadius;
+				for (x = pos.getiX() - currentRadius; x <= pos.getiX()
+						+ currentRadius; x++) {
+					handlePoint(x, y, z, world, resources);
+				}
+
+				// Fourth side of square: -z to +z with +x
+				x = pos.getiX() + currentRadius;
+				for (z = pos.getiZ() - currentRadius + 1; z <= pos.getiZ()
+						+ currentRadius - 1; z++) {
+					handlePoint(x, y, z, world, resources);
+				}
+
+				y++;
+			}
+
+			currentRadius++;
+		}
+		return resources;
+	}
+
 	/**
 	 * Name in native and game language (if readable by player) Ex: Puit (Well)
 	 * 
@@ -257,6 +215,71 @@ public class BuildingCustomPlan {
 			return culture.getCustomBuildingGameName(this);
 		}
 		return "";
+	}
+
+	private void handlePoint(final int x, final int y, final int z,
+			final World world, final Map<TypeRes, List<Point>> resources) {
+
+		final Point p = new Point(x, y, z);
+
+		final TypeRes res = identifyRes(world, p);
+
+		/*
+		 * If the resource is needed for this type of custom building we add it
+		 * within limit of max number
+		 */
+		if (res != null && maxResources.containsKey(res)) {
+			if (resources.containsKey(res)
+					&& resources.get(res).size() < maxResources.get(res)) {
+				resources.get(res).add(p);
+			} else if (!resources.containsKey(res)) {
+				final List<Point> points = new ArrayList<Point>();
+				points.add(p);
+				resources.put(res, points);
+			}
+		}
+	}
+
+	private TypeRes identifyRes(final World world, final Point p) {
+
+		final Block b = p.getBlock(world);
+
+		if (b.equals(Blocks.chest)) {
+			return TypeRes.CHEST;
+		}
+
+		if (b.equals(Blocks.crafting_table)) {
+			return TypeRes.CRAFT;
+		}
+
+		if (b.equals(Blocks.wall_sign)) {
+			return TypeRes.SIGN;
+		}
+		if (b.equals(Blocks.farmland)) {
+			return TypeRes.FIELD;
+		}
+		if (b.equals(Blocks.hay_block)) {
+			return TypeRes.SPAWN;
+		}
+		// Sapling is either a sapling or wood over dirt
+		if (b.equals(Blocks.sapling) || b.equals(Blocks.log)
+				|| b.equals(Blocks.log2)
+				&& p.getBelow().getBlock(world).equals(Blocks.dirt)) {
+			return TypeRes.SAPLING;
+		}
+		if (b.equals(Blocks.wool) && p.getMeta(world) == 4) {
+			return TypeRes.STALL;
+		}
+		if (b.equals(Blocks.stone) || b.equals(Blocks.sandstone)
+				|| b.equals(Blocks.sand) || b.equals(Blocks.gravel)
+				|| b.equals(Blocks.clay)) {
+			return TypeRes.MINING;
+		}
+		if (b.equals(Blocks.furnace)) {
+			return TypeRes.FURNACE;
+		}
+
+		return null;
 	}
 
 	/**
@@ -286,6 +309,8 @@ public class BuildingCustomPlan {
 					gameNameKey = value;
 				} else if (key.equalsIgnoreCase("cropType")) {
 					cropType = value;
+				} else if (key.equalsIgnoreCase("spawnType")) {
+					spawnType = value;
 				} else if (key.startsWith("name_")) {
 					names.put(key, value);
 				} else if (key.equalsIgnoreCase("male")) {
@@ -367,16 +392,19 @@ public class BuildingCustomPlan {
 	 * @param building
 	 * @param location
 	 */
-	public void registerResources(final Building building, final BuildingLocation location) {
-		final Map<TypeRes, List<Point>> resources = findResources(building.worldObj, location.pos);
+	public void registerResources(final Building building,
+			final BuildingLocation location) {
+		final Map<TypeRes, List<Point>> resources = findResources(
+				building.worldObj, location.pos);
 
 		building.getResManager().setSleepingPos(location.pos.getAbove());
+		location.sleepingPos = location.pos.getAbove();
 
 		if (resources.containsKey(TypeRes.CHEST)) {
 			for (final Point chestP : resources.get(TypeRes.CHEST)) {
 				final int meta = chestP.getMeta(building.worldObj);
 
-				//No notifications as will cause issues with large chests
+				// No notifications as will cause issues with large chests
 				chestP.setBlock(building.worldObj, Mill.lockedChest, meta,
 						false, false);
 
@@ -387,6 +415,8 @@ public class BuildingCustomPlan {
 		if (resources.containsKey(TypeRes.CRAFT)
 				&& resources.get(TypeRes.CRAFT).size() > 0) {
 			location.craftingPos = resources.get(TypeRes.CRAFT).get(0);
+			building.getResManager().setCraftingPos(
+					resources.get(TypeRes.CRAFT).get(0));
 		}
 
 		if (resources.containsKey(TypeRes.SIGN)) {
@@ -398,10 +428,38 @@ public class BuildingCustomPlan {
 				building.getResManager().signs.add(signP);
 			}
 		}
-		
-		if (cropType != null  && resources.containsKey(TypeRes.FIELD)) {
+
+		if (cropType != null && resources.containsKey(TypeRes.FIELD)) {
 			for (final Point p : resources.get(TypeRes.FIELD)) {
 				building.getResManager().addSoilPoint(cropType, p);
+			}
+		}
+		if (spawnType != null && resources.containsKey(TypeRes.SPAWN)) {
+			for (final Point p : resources.get(TypeRes.SPAWN)) {
+				p.setBlock(building.worldObj, Blocks.air, 0, true, false);
+				building.getResManager().addSpawnPoint(spawnType, p);
+			}
+		}
+		if (resources.containsKey(TypeRes.SAPLING)) {
+			for (final Point p : resources.get(TypeRes.SAPLING)) {
+				building.getResManager().woodspawn.add(p);
+			}
+		}
+		if (resources.containsKey(TypeRes.STALL)) {
+			for (final Point p : resources.get(TypeRes.STALL)) {
+				p.setBlock(building.worldObj, Blocks.air, 0, true, false);
+				building.getResManager().stalls.add(p);
+			}
+		}
+		if (resources.containsKey(TypeRes.MINING)) {
+			for (final Point p : resources.get(TypeRes.MINING)) {
+				building.getResManager().addSourcePoint(
+						p.getBlock(building.worldObj), p);
+			}
+		}
+		if (resources.containsKey(TypeRes.FURNACE)) {
+			for (final Point p : resources.get(TypeRes.FURNACE)) {
+				building.getResManager().furnaces.add(p);
 			}
 		}
 	}

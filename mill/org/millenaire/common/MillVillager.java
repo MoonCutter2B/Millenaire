@@ -1670,8 +1670,8 @@ public abstract class MillVillager extends EntityCreature implements
 	}
 
 	public int getBasicForeignMerchantPrice(final InvItem item) {
-		
-		if (getTownHall()==null) {
+
+		if (getTownHall() == null) {
 			return 0;
 		}
 

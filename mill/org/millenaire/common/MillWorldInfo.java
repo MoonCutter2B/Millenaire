@@ -17,7 +17,7 @@ import org.millenaire.common.forge.Mill;
  * Server-side object representing what a village knows of the land around it
  * 
  * @author cedricdj
- *
+ * 
  */
 public class MillWorldInfo implements Cloneable {
 

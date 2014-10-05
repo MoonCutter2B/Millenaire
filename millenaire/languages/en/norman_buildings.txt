@@ -48,6 +48,7 @@ anomalyone_A0=
 anomalytwo_A0=
 anomalythree_A0=
 
+custom_chickenfarm=Chicken Farm
 
 lonelumbermanhut_A0=Lumberman's Hut
 lonelumbermantaigahut_A0=Lumberman's Hut

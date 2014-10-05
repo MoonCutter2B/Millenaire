@@ -14,11 +14,11 @@ import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingLocation;
 import org.millenaire.common.building.BuildingPlan;
-import org.millenaire.common.building.BuildingProject;
 import org.millenaire.common.building.BuildingPlan.LocationBuildingPair;
 import org.millenaire.common.building.BuildingPlan.LocationReturn;
-import org.millenaire.common.building.BuildingProject.EnumProjects;
 import org.millenaire.common.building.BuildingPlanSet;
+import org.millenaire.common.building.BuildingProject;
+import org.millenaire.common.building.BuildingProject.EnumProjects;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerSender;
@@ -44,9 +44,10 @@ public class WorldGenVillage implements IWorldGenerator {
 		if (p.horizontalDistanceTo(world.getSpawnPoint()) < MLN.spawnProtectionRadius) {
 			return false;
 		}
-		
-		if (village.centreBuilding==null) {
-			MLN.printException(new MillenaireException("Tried to create a bedrock lone building without a centre."));
+
+		if (village.centreBuilding == null) {
+			MLN.printException(new MillenaireException(
+					"Tried to create a bedrock lone building without a centre."));
 			return false;
 		}
 
@@ -169,6 +170,67 @@ public class WorldGenVillage implements IWorldGenerator {
 		}
 	}
 
+	/**
+	 * Generates a village with a custom TH for a player
+	 * 
+	 * @param p
+	 * @param world
+	 * @param village
+	 * @param player
+	 * @param random
+	 * @return
+	 * @throws MillenaireException
+	 */
+	private boolean generateCustomVillage(final Point p, final World world,
+			final VillageType villageType, final EntityPlayer player,
+			final Random random) throws MillenaireException {
+
+		final long startTime = System.nanoTime();
+
+		final MillWorld mw = Mill.getMillWorld(world);
+
+		final BuildingLocation location = new BuildingLocation(
+				villageType.customCentre, p, true);
+
+		final Building townHall = new Building(mw, villageType.culture,
+				villageType, location, true, true, p, p);
+
+		villageType.customCentre.registerResources(townHall, location);
+
+		townHall.initialise(player, true);
+
+		final BuildingProject project = new BuildingProject(
+				villageType.customCentre, location);
+
+		if (!townHall.buildingProjects
+				.containsKey(EnumProjects.CUSTOMBUILDINGS)) {
+			townHall.buildingProjects.put(EnumProjects.CUSTOMBUILDINGS,
+					new ArrayList<BuildingProject>());
+		}
+
+		townHall.buildingProjects.get(EnumProjects.CUSTOMBUILDINGS)
+				.add(project);
+
+		townHall.initialiseVillage();
+
+		mw.registerVillageLocation(world, townHall.getPos(),
+				townHall.getVillageQualifiedName(), townHall.villageType,
+				townHall.culture, true, player.getDisplayName());
+		townHall.initialiseRelations(null);
+		townHall.updateWorldInfo();
+
+		townHall.storeGoods(Mill.parchmentVillageScroll,
+				mw.villagesList.pos.size() - 1, 1);
+
+		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
+			MLN.major(this, "New custom village generated at " + p + ", took: "
+					+ (System.nanoTime() - startTime));
+		}
+
+		return true;
+
+	}
+
 	private void generateHamlet(final World world, final VillageType hamlet,
 			final Point centralVillage, final String name, final Random random) {
 		boolean generated = false;
@@ -206,65 +268,6 @@ public class WorldGenVillage implements IWorldGenerator {
 		if (!generated && MLN.LogWorldGeneration >= MLN.MAJOR) {
 			MLN.major(this, "Could not generate hamlet " + hamlet);
 		}
-	}
-	
-	/**
-	 * Generates a village with a custom TH for a player
-	 * 
-	 * @param p
-	 * @param world
-	 * @param village
-	 * @param player
-	 * @param random
-	 * @return
-	 * @throws MillenaireException 
-	 */
-	private boolean generateCustomVillage(Point p, final World world,
-			final VillageType villageType, final EntityPlayer player, final Random random) throws MillenaireException {
-		
-		long startTime = System.nanoTime();
-		
-		final MillWorld mw = Mill.getMillWorld(world);
-		
-		final BuildingLocation location = new BuildingLocation(villageType.customCentre,
-				p, true);
-
-		final Building townHall = new Building(mw, villageType.culture, villageType,
-				location, true, true, p, p);
-
-		villageType.customCentre.registerResources(townHall, location);
-
-		townHall.initialise(player, true);
-		
-		final BuildingProject project = new BuildingProject(villageType.customCentre,
-				location);
-
-		if (!townHall.buildingProjects.containsKey(EnumProjects.CUSTOMBUILDINGS)) {
-			townHall.buildingProjects.put(EnumProjects.CUSTOMBUILDINGS,
-					new ArrayList<BuildingProject>());
-		}
-
-		townHall.buildingProjects.get(EnumProjects.CUSTOMBUILDINGS).add(project);
-		
-		townHall.initialiseVillage();
-		
-		mw.registerVillageLocation(world, townHall.getPos(),
-				townHall.getVillageQualifiedName(),
-				townHall.villageType, townHall.culture, true,
-				player.getDisplayName());
-		townHall.initialiseRelations(null);
-		townHall.updateWorldInfo();
-
-		townHall.storeGoods(Mill.parchmentVillageScroll,
-					mw.villagesList.pos.size() - 1, 1);
-		
-		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-			MLN.major(this, "New custom village generated at " + p + ", took: "
-					+ (System.nanoTime() - startTime));
-		}
-		
-		return true;
-		
 	}
 
 	/**
@@ -525,7 +528,8 @@ public class WorldGenVillage implements IWorldGenerator {
 	}
 
 	/**
-	 * Checks whether a village can be generated before handing actual creation to generateVillage
+	 * Checks whether a village can be generated before handing actual creation
+	 * to generateVillage
 	 * 
 	 * Generation of lone buildings also handled here
 	 * 
@@ -722,19 +726,21 @@ public class WorldGenVillage implements IWorldGenerator {
 					}
 
 					if (village != null) {
-						
+
 						boolean result;
-						
-						if (village.customCentre==null) {
-							result=generateVillage(p, world, village,
+
+						if (village.customCentre == null) {
+							result = generateVillage(p, world, village,
 									generatingPlayer, closestPlayer, random,
 									minDistance, name, false, parentVillage);
 						} else {
-							result=generateCustomVillage(p, world, village, generatingPlayer, random);
+							result = generateCustomVillage(p, world, village,
+									generatingPlayer, random);
 						}
-						
-						if (result)
+
+						if (result) {
 							return true;// village generated, stopping
+						}
 					}
 				}
 			}

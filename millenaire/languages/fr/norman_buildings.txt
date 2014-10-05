@@ -50,6 +50,8 @@ anomalyone_A0=
 anomalytwo_A0=
 anomalythree_A0=
 
+custom_chickenfarm=
+
 //Lone buildings
 lonelumbermanhut_A0=
 lonelumbermantaigahut_A0=

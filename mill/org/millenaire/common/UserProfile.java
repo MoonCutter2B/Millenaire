@@ -846,9 +846,10 @@ public class UserProfile {
 		if (this.mw.world.isRemote) {
 			return;
 		}
-		
-		if (this.getPlayer()==null) {
-			MLN.printException(new MillenaireException("Null player while trying to send packet:"));
+
+		if (this.getPlayer() == null) {
+			MLN.printException(new MillenaireException(
+					"Null player while trying to send packet:"));
 			return;
 		}
 

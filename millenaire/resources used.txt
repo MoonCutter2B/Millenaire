@@ -113,8 +113,8 @@ indian_agricole resource use:
 Bois de chêne: 539
 tile.ml_stone_deco.1.name: 5710
 Wool: 85
-item.ml_indianstatue.name: 3
 Stone: 682
+item.ml_indianstatue.name: 3
 tile.ml_stone_deco.0.name: 5882
 Cobblestone: 206
 Sandstone: 1882
@@ -124,16 +124,16 @@ indian_agricole_hamlet resource use:
 Bois de chêne: 534
 tile.ml_stone_deco.1.name: 5223
 Wool: 85
-item.ml_indianstatue.name: 3
 Stone: 682
+item.ml_indianstatue.name: 3
 tile.ml_stone_deco.0.name: 5652
 Cobblestone: 190
 Sandstone: 1882
 Bois (tous): 721
 
 indian_controlled resource use: 
-tile.ml_stone_deco.1.name: 805
 Bois de chêne: 172
+tile.ml_stone_deco.1.name: 805
 item.ml_indianstatue.name: 2
 Stone: 648
 tile.ml_stone_deco.0.name: 1047
@@ -173,14 +173,14 @@ Bois (tous): 691
 
 
 adivasifarm resource use: 
-Bois de chêne: 145
 tile.ml_stone_deco.1.name: 120
+Bois de chêne: 145
 tile.ml_stone_deco.0.name: 120
 Bois (tous): 41
 
 adivasifarmquest resource use: 
-Bois de chêne: 145
 tile.ml_stone_deco.1.name: 120
+Bois de chêne: 145
 tile.ml_stone_deco.0.name: 120
 Bois (tous): 41
 
@@ -225,8 +225,8 @@ Wool: 278
 Bois de sapin: 3071
 Cobblestone: 1472
 tile.ml_wood_deco.2.name: 7306
-tile.ml_wood_deco.0.name: 3107
 Grass: 263
+tile.ml_wood_deco.0.name: 3107
 Sand: 286
 Bookshelf: 12
 Gravel: 584
@@ -257,8 +257,8 @@ Wool: 182
 Bois de sapin: 3395
 Cobblestone: 1390
 tile.ml_wood_deco.2.name: 8833
-tile.ml_wood_deco.0.name: 3063
 Grass: 263
+tile.ml_wood_deco.0.name: 3063
 Sand: 286
 Bookshelf: 12
 Gravel: 565
@@ -276,9 +276,9 @@ Wool: 304
 Bois de sapin: 4350
 Cobblestone: 1986
 tile.ml_wood_deco.2.name: 9180
+Sand: 286
 tile.ml_wood_deco.0.name: 3975
 Grass: 263
-Sand: 286
 Bookshelf: 12
 Gravel: 691
 Bois de chêne: 6657
@@ -295,9 +295,9 @@ Wool: 195
 Bois de sapin: 3512
 Cobblestone: 1271
 tile.ml_wood_deco.2.name: 7538
+tile.ml_wood_deco.0.name: 3087
 Grass: 263
 Sand: 286
-tile.ml_wood_deco.0.name: 3087
 Bookshelf: 12
 Gravel: 507
 Bois de chêne: 5617
@@ -533,9 +533,9 @@ Cracked Stone Bricks: 179
 Stone: 7577
 Obsidian: 3103
 Cobblestone: 136
+Bois tropical: 146
 Mossy Stone Bricks: 102
 tile.ml_stone_deco.2.name: 22
-Bois tropical: 146
 Lava: 356
 Iron Ingot: 1
 Grass: 26

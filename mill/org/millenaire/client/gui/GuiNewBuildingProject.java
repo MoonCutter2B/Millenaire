@@ -2,7 +2,6 @@ package org.millenaire.client.gui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +12,6 @@ import org.millenaire.common.MLN;
 import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingCustomPlan;
-import org.millenaire.common.building.BuildingCustomPlan.TypeRes;
 import org.millenaire.common.building.BuildingPlanSet;
 import org.millenaire.common.forge.Mill;
 

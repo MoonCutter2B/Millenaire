@@ -15,7 +15,6 @@ import org.millenaire.common.GuiActions;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.Point;
-import org.millenaire.common.VillageType;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingProject;
 import org.millenaire.common.forge.Mill;

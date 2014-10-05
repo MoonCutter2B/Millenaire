@@ -1,8 +1,5 @@
 package org.millenaire.common;
 
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -11,12 +8,10 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.world.World;
 
-import org.millenaire.client.gui.DisplayActions;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.Quest.QuestInstance;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingCustomPlan;
-import org.millenaire.common.building.BuildingCustomPlan.TypeRes;
 import org.millenaire.common.building.BuildingPlan;
 import org.millenaire.common.building.BuildingPlan.LocationReturn;
 import org.millenaire.common.building.BuildingPlanSet;
@@ -214,25 +209,6 @@ public class GuiActions {
 		}
 	}
 
-	public static void newCustomBuilding(final EntityPlayer player,
-			final Building townHall, final Point pos, final String planKey) {
-		
-		final BuildingCustomPlan customBuilding = townHall.culture
-				.getBuildingCustom(planKey);
-
-		if (customBuilding != null) {
-
-			try {
-				townHall.addCustomBuilding(customBuilding, pos);
-			} catch (final Exception e) {
-				MLN.printException(
-						"Exception when creation custom building: "
-								+ planKey, e);
-			}
-		}
-		
-	}
-
 	public static void newBuilding(final EntityPlayer player,
 			final Building townHall, final Point pos, final String planKey) {
 
@@ -292,6 +268,24 @@ public class GuiActions {
 			ServerSender.sendTranslatedSentence(player, MLN.DARKGREEN,
 					"ui.projectadded");
 		}
+	}
+
+	public static void newCustomBuilding(final EntityPlayer player,
+			final Building townHall, final Point pos, final String planKey) {
+
+		final BuildingCustomPlan customBuilding = townHall.culture
+				.getBuildingCustom(planKey);
+
+		if (customBuilding != null) {
+
+			try {
+				townHall.addCustomBuilding(customBuilding, pos);
+			} catch (final Exception e) {
+				MLN.printException("Exception when creation custom building: "
+						+ planKey, e);
+			}
+		}
+
 	}
 
 	public static void newVillageCreation(final EntityPlayer player,

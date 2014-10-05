@@ -5,7 +5,12 @@ List of gaps found in strings.txt:
 Key missing in the strings.txt file: custombuilding.chest
 Key missing in the strings.txt file: custombuilding.craft
 Key missing in the strings.txt file: custombuilding.field
+Key missing in the strings.txt file: custombuilding.furnace
+Key missing in the strings.txt file: custombuilding.mining
+Key missing in the strings.txt file: custombuilding.sapling
 Key missing in the strings.txt file: custombuilding.sign
+Key missing in the strings.txt file: custombuilding.spawn
+Key missing in the strings.txt file: custombuilding.stall
 Key missing in the strings.txt file: ui.close
 Key missing in the strings.txt file: ui.confirm
 Key missing in the strings.txt file: ui.controlledcustom
@@ -16,5 +21,9 @@ Key missing in the strings.txt file: ui.custombuilding_resneeded
 Key missing in the strings.txt file: ui.custombuilding_resneededintro
 Key missing in the strings.txt file: ui.selectabuildingproject_custom
 Key missing in the strings.txt file: ui.selectabuildingproject_standard
+
+List of gaps found in culture building names for norman: 
+
+Building name missing for culture norman: custom_chickenfarm
 
 Traduction completness: 99%

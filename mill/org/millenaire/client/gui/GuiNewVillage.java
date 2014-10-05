@@ -39,13 +39,13 @@ public class GuiNewVillage extends GuiText {
 		final VillageType village = possibleVillages.get(guibutton.id);
 
 		closeWindow();
-		
-		if (village.customCentre==null) {
+
+		if (village.customCentre == null) {
 			ClientSender.newVillageCreation(player, pos, village.culture.key,
-					village.key);			
+					village.key);
 		} else {
 			DisplayActions.displayNewCustomBuildingGUI(player, pos, village);
-		}	
+		}
 	}
 
 	@Override
@@ -117,10 +117,11 @@ public class GuiNewVillage extends GuiText {
 		for (int i = 0; i < possibleVillages.size(); i++) {
 			String controlled = "";
 			if (possibleVillages.get(i).playerControlled) {
-				if (possibleVillages.get(i).customCentre!=null)
+				if (possibleVillages.get(i).customCentre != null) {
 					controlled = ", " + MLN.string("ui.controlledcustom");
-				else
+				} else {
 					controlled = ", " + MLN.string("ui.controlled");
+				}
 			}
 
 			text.add(new Line(new MillGuiButton(i, 0, 0, 0, 0, possibleVillages

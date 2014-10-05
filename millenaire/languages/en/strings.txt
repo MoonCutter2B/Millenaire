@@ -181,6 +181,24 @@ ui.relneutral=Neutral
 ui.relbad=Conflict
 ui.raid=Plan a raid
 
+ui.custombuilding_confirm=Confirm the creation of a custom building: <0>
+ui.custombuilding_cantconfirm=Impossible to create custom building: <0>
+ui.custombuilding_resneededintro=Needed resources:
+ui.custombuilding_resneeded=<1> of <3> <0> found (min: <2>)
+ui.custombuilding_newvillageCreation of a new village with a custom central building
+ui.close=Close
+ui.confirm=Continue
+
+custombuilding.chest=chest
+custombuilding.craft=crafting table
+custombuilding.sign=pannel
+custombuilding.field=field
+custombuilding.spawn=hay bale (will be destroyed; shows where animals will spawn)
+custombuilding.sapling=sapling or tree
+custombuilding.stall=yellow wool (will be destroyed; shows where merchants will spawn)
+custombuilding.mining=sandstone, stone, sand, clay or gravel
+custombuilding.furnace=furnance
+
 
 help.tab_1=Generalities on villages
 help.tab_2=Trading

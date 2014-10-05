@@ -19,7 +19,7 @@ import org.millenaire.common.network.StreamReadWrite;
  * (created from data from WorldInfo sent by server)
  * 
  * @author cedricdj
- *
+ * 
  */
 public class MillMapInfo {
 

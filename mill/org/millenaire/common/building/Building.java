@@ -2025,6 +2025,33 @@ public class Building {
 	}
 
 	/**
+	 * Create a new villager with default settings
+	 * 
+	 * @param type
+	 * @return
+	 * @throws MillenaireException
+	 */
+	public MillVillager createNewVillager(final String type)
+			throws MillenaireException {
+		final MillVillager villager = MillVillager.createVillager(culture,
+				type, 0, worldObj, resManager.getSleepingPos(), getPos(),
+				townHallPos, false, null, null);
+		addOrReplaceVillager(villager);
+		final VillagerRecord vr = new VillagerRecord(mw, villager);
+		addOrReplaceRecord(vr);
+		worldObj.spawnEntityInWorld(villager);
+
+		// Children are spawned as teen
+		// Used for custom TH (initial population provided)
+		if (villager.vtype.isChild) {
+			villager.size = MillVillager.MAX_CHILD_SIZE;
+			villager.growSize();
+		}
+
+		return villager;
+	}
+
+	/**
 	 * Creates the initial villagers as defined in the location
 	 * 
 	 * @return
@@ -2041,11 +2068,13 @@ public class Building {
 		// first we create the first male and the first female
 		// as a couple
 		String husbandType = null;
-		if (location.maleResident.size() > 0 && !culture.getVillagerType(location.maleResident.get(0)).isChild) {
+		if (location.maleResident.size() > 0
+				&& !culture.getVillagerType(location.maleResident.get(0)).isChild) {
 			husbandType = location.maleResident.get(0);
 		}
 		String wifeType = null;
-		if (location.femaleResident.size() > 0 && !culture.getVillagerType(location.maleResident.get(0)).isChild) {
+		if (location.femaleResident.size() > 0
+				&& !culture.getVillagerType(location.maleResident.get(0)).isChild) {
 			wifeType = location.femaleResident.get(0);
 		}
 
@@ -2113,35 +2142,10 @@ public class Building {
 
 		return familyName;
 	}
-	
-	/**
-	 * Create a new villager with default settings
-	 * 
-	 * @param type
-	 * @return
-	 * @throws MillenaireException
-	 */
-	public MillVillager createNewVillager(String type) throws MillenaireException {
-		final MillVillager villager = MillVillager.createVillager(culture,
-				type, 0, worldObj,resManager.getSleepingPos(), getPos(), townHallPos, false,null, null);
-		addOrReplaceVillager(villager);
-		final VillagerRecord vr = new VillagerRecord(mw, villager);
-		addOrReplaceRecord(vr);
-		worldObj.spawnEntityInWorld(villager);
-		
-		//Children are spawned as teen
-		//Used for custom TH (initial population provided)
-		if (villager.vtype.isChild) {
-			villager.size = MillVillager.MAX_CHILD_SIZE;
-			villager.growSize();
-		}
-		
-		return villager;
-	}
 
 	public void deleteVillager(final MillVillager villager) {
 		while (villagers.remove(villager)) {
-			
+
 		}
 	}
 
@@ -6613,6 +6617,10 @@ public class Building {
 		}
 
 		if (pos == null || location == null) {
+			return;
+		}
+
+		if (isTownhall || location.showTownHallSigns) {
 			return;
 		}
 

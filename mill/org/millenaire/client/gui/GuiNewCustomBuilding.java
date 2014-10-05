@@ -57,7 +57,7 @@ public class GuiNewCustomBuilding extends GuiText {
 		this.customBuilding = customBuilding;
 		this.resources = customBuilding.findResources(th.worldObj, pos);
 	}
-	
+
 	/**
 	 * Create a GUI to confirm the creation of a new village with a custom TH
 	 * 
@@ -65,8 +65,8 @@ public class GuiNewCustomBuilding extends GuiText {
 	 * @param p
 	 * @param villageType
 	 */
-	public GuiNewCustomBuilding(final EntityPlayer player, 
-			final Point p, final VillageType villageType) {
+	public GuiNewCustomBuilding(final EntityPlayer player, final Point p,
+			final VillageType villageType) {
 
 		townHall = null;
 		this.villageType = villageType;
@@ -83,19 +83,22 @@ public class GuiNewCustomBuilding extends GuiText {
 		}
 
 		if (guibutton.id == BUTTON_CONFIRM) {
-			if (townHall!=null)
+			if (townHall != null) {
 				ClientSender.newCustomBuilding(player, townHall, pos,
 						customBuilding.buildingKey);
-			else {
-				ClientSender.newVillageCreation(player, pos, villageType.culture.key, villageType.key);
+			} else {
+				ClientSender.newVillageCreation(player, pos,
+						villageType.culture.key, villageType.key);
 			}
 			closeWindow();
 		} else {
 			closeWindow();
-			if (townHall!=null)
-				DisplayActions.displayNewBuildingProjectGUI(player, townHall, pos);
-			else
+			if (townHall != null) {
+				DisplayActions.displayNewBuildingProjectGUI(player, townHall,
+						pos);
+			} else {
 				DisplayActions.displayNewVillageGUI(player, pos);
+			}
 		}
 
 	}
@@ -163,12 +166,12 @@ public class GuiNewCustomBuilding extends GuiText {
 		final List<List<Line>> pages = new ArrayList<List<Line>>();
 		final List<Line> text = new ArrayList<Line>();
 
-		if (townHall!=null)
+		if (townHall != null) {
 			text.add(new Line(townHall.getVillageQualifiedName()));
-		else
+		} else {
 			text.add(new Line(MLN.string("ui.custombuilding_newvillage")));
-		
-		
+		}
+
 		text.add(new Line());
 		if (validBuild) {
 			text.add(new Line(MLN.string("ui.custombuilding_confirm",

@@ -121,7 +121,7 @@ public class EntityMillDecoration extends EntityPainting implements
 		return 0;
 	}
 
-	public EnumWallDecoration millArt;
+	public EnumWallDecoration art;
 
 	public double clientX, clientY, clientZ;
 
@@ -162,7 +162,7 @@ public class EntityMillDecoration extends EntityPainting implements
 			if (enumart.type == type) {
 				if (!largestPossible
 						|| enumart.sizeX * enumart.sizeY >= maxSize) {
-					millArt = enumart;
+					art = enumart;
 					setDirection(orientation);
 					if (onValidSurface()) {
 						if (largestPossible
@@ -177,13 +177,13 @@ public class EntityMillDecoration extends EntityPainting implements
 		}
 
 		if (arraylist.size() > 0) {
-			millArt = arraylist.get(rand.nextInt(arraylist.size()));
+			art = arraylist.get(rand.nextInt(arraylist.size()));
 		}
 
 		if (MLN.LogBuildingPlan >= MLN.MAJOR) {
 			MLN.major(this, "Creating wall decoration: " + x + "/" + y + "/"
 					+ z + "/" + orientation + "/" + type + "/"
-					+ largestPossible + ". Result: " + millArt.title
+					+ largestPossible + ". Result: " + art.title
 					+ " picked amoung " + arraylist.size());
 		}
 
@@ -204,7 +204,7 @@ public class EntityMillDecoration extends EntityPainting implements
 			}
 			final EnumWallDecoration enumart = aenumart[j1];
 			if (enumart.title.equals(s)) {
-				millArt = enumart;
+				art = enumart;
 				break;
 			}
 			j1++;
@@ -238,11 +238,11 @@ public class EntityMillDecoration extends EntityPainting implements
 	}
 
 	public int func_82329_d() {
-		return this.millArt.sizeX;
+		return this.art.sizeX;
 	}
 
 	public int func_82330_g() {
-		return this.millArt.sizeY;
+		return this.art.sizeY;
 	}
 
 	@Override
@@ -266,12 +266,12 @@ public class EntityMillDecoration extends EntityPainting implements
 
 		for (final EnumWallDecoration enumart : EnumWallDecoration.values()) {
 			if (enumart.title.equals(s)) {
-				millArt = enumart;
+				art = enumart;
 			}
 		}
 
-		if (millArt == null) {
-			millArt = EnumWallDecoration.Griffon;
+		if (art == null) {
+			art = EnumWallDecoration.Griffon;
 		}
 
 		if (type == 0) {
@@ -317,7 +317,7 @@ public class EntityMillDecoration extends EntityPainting implements
 
 			for (final EnumWallDecoration enumart : EnumWallDecoration.values()) {
 				if (enumart.title.equals(title)) {
-					millArt = enumart;
+					art = enumart;
 				}
 			}
 
@@ -333,13 +333,13 @@ public class EntityMillDecoration extends EntityPainting implements
 
 	@Override
 	public String toString() {
-		return "Tapestry (" + millArt.title + ")";
+		return "Tapestry (" + art.title + ")";
 	}
 
 	@Override
 	public void writeEntityToNBT(final NBTTagCompound nbttagcompound) {
 		nbttagcompound.setInteger("Type", type);
-		nbttagcompound.setString("Motive", this.millArt.title);
+		nbttagcompound.setString("Motive", this.art.title);
 		nbttagcompound.setByte("Direction", (byte) this.hangingDirection);
 		nbttagcompound.setDouble("TileX", this.posX);
 		nbttagcompound.setDouble("TileY", this.posY);
@@ -369,7 +369,7 @@ public class EntityMillDecoration extends EntityPainting implements
 			data.writeDouble(posX);
 			data.writeDouble(posY);
 			data.writeDouble(posZ);
-			data.writeUTF(millArt.title);
+			data.writeUTF(art.title);
 			data.writeDouble(posX);
 			data.writeDouble(posY);
 			data.writeDouble(posZ);

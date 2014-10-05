@@ -17,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 
 public abstract class GuiText extends GuiScreen {
 
@@ -346,7 +347,7 @@ public abstract class GuiText extends GuiScreen {
 
 			final List<Line> adjustedPage = clearEmptyLines(newPage);
 
-			if (newPage != null) {
+			if (adjustedPage != null) {
 				text.add(adjustedPage);
 			}
 		}
@@ -659,6 +660,13 @@ public abstract class GuiText extends GuiScreen {
 				int vpos = 6;
 
 				if (pageNum < descText.size()) {
+
+					if (descText.get(pageNum) == null) {
+						MLN.printException(new MillenaireException(
+								"descText.get(pageNum)==null for pageNum: "
+										+ pageNum + " in GUI: " + this));
+					}
+
 					for (int cp = 0; cp < getPageSize()
 							&& cp < descText.get(pageNum).size(); cp++) {
 

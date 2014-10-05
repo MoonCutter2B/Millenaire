@@ -19,7 +19,6 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;
-import org.millenaire.common.building.BuildingCustomPlan;
 import org.millenaire.common.building.BuildingPlan;
 import org.millenaire.common.building.BuildingProject;
 import org.millenaire.common.core.DevModUtilities;

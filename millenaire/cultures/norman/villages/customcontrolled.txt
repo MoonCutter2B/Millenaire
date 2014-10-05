@@ -41,5 +41,27 @@ core:playerlargehouse
 core:playerestate
 
 //custom building types
+customBuilding:custom_lumbermanhut
+customBuilding:custom_quarry
 customBuilding:custom_farm
+customBuilding:custom_cattlefarm
+customBuilding:custom_chickenfarm
+customBuilding:custom_pigfarm
+customBuilding:custom_sheepfarm
+
 customBuilding:custom_carpenterhouse
+customBuilding:custom_armoury
+customBuilding:custom_forge
+
+customBuilding:custom_guardhouse
+customBuilding:custom_presbytery
+
+customBuilding:custom_grove
+customBuilding:custom_inn
+customBuilding:custom_market
+
+customBuilding:custom_tavern
+customBuilding:custom_bakery
+customBuilding:custom_archives
+customBuilding:custom_church
+customBuilding:custom_watchtower

@@ -1,7 +1,6 @@
 package org.millenaire.client.gui;
 
 import java.util.List;
-import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +13,6 @@ import org.millenaire.common.UserProfile;
 import org.millenaire.common.VillageType;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingCustomPlan;
-import org.millenaire.common.building.BuildingCustomPlan.TypeRes;
 import org.millenaire.common.forge.Mill;
 
 public class DisplayActions {
@@ -78,10 +76,12 @@ public class DisplayActions {
 	public static void displayNewCustomBuildingGUI(final EntityPlayer player,
 			final Building townHall, final Point pos,
 			final BuildingCustomPlan customBuilding) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiNewCustomBuilding(player, townHall, pos, customBuilding));
+		Minecraft.getMinecraft()
+				.displayGuiScreen(
+						new GuiNewCustomBuilding(player, townHall, pos,
+								customBuilding));
 	}
-	
+
 	/**
 	 * Create a GUI to confirm the creation of a new village with a custom TH
 	 * 
@@ -90,8 +90,7 @@ public class DisplayActions {
 	 * @param villageType
 	 */
 	public static void displayNewCustomBuildingGUI(final EntityPlayer player,
-			final Point pos,
-			final VillageType villageType) {
+			final Point pos, final VillageType villageType) {
 		Minecraft.getMinecraft().displayGuiScreen(
 				new GuiNewCustomBuilding(player, pos, villageType));
 	}

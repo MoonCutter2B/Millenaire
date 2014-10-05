@@ -355,8 +355,9 @@ public class VillageType implements WeightedChoice {
 						if (culture.getBuildingCustom(value) != null) {
 							customCentre = culture.getBuildingCustom(value);
 							if (MLN.LogVillage >= MLN.MINOR) {
-								MLN.minor(this, "Loading custom centre building: "
-										+ value);
+								MLN.minor(this,
+										"Loading custom centre building: "
+												+ value);
 							}
 						} else {
 							throw new MillenaireException(
@@ -616,8 +617,9 @@ public class VillageType implements WeightedChoice {
 	public Map<EnumProjects, List<BuildingProject>> getBuildingProjects() {
 
 		final List<BuildingProject> centre = new ArrayList<BuildingProject>();
-		if (centreBuilding!=null)
+		if (centreBuilding != null) {
 			centre.add(centreBuilding.getBuildingProject());
+		}
 
 		final List<BuildingProject> start = new ArrayList<BuildingProject>();
 		for (final BuildingPlanSet set : startBuildings) {

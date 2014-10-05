@@ -195,6 +195,11 @@ custombuilding.chest=coffre
 custombuilding.craft=établi
 custombuilding.sign=panneau
 custombuilding.field=champ
+custombuilding.spawn=paille (sera détruite; indique là où apparaîtront les animaux)
+custombuilding.sapling=arbustre ou arbre
+custombuilding.stall=laine jaune (sera détruite; indique là où les marchants vendront)
+custombuilding.mining=grès, pierre lisse, sable, argile ou gravier
+custombuilding.furnace=four
 
 help.tab_1=Généralité sur les villages
 help.tab_2=Commerce
