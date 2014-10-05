@@ -2,6 +2,7 @@ package org.millenaire.client.gui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,16 +12,28 @@ import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.MLN;
 import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;
-import org.millenaire.common.construction.BuildingPlanSet;
+import org.millenaire.common.building.BuildingCustomPlan;
+import org.millenaire.common.building.BuildingCustomPlan.TypeRes;
+import org.millenaire.common.building.BuildingPlanSet;
 import org.millenaire.common.forge.Mill;
 
 public class GuiNewBuildingProject extends GuiText {
 
-	private static final int NBBUTTONLINE = 6;
-	private final Building townhall;
-	private List<BuildingPlanSet> possibleBuildings = new ArrayList<BuildingPlanSet>();
+	public static class GuiButtonNewBuilding extends MillGuiButton {
+
+		private final String key;
+		private final boolean custom;
+
+		public GuiButtonNewBuilding(final String key, final String label,
+				final boolean custom) {
+			super(0, 0, 0, 0, 0, label);
+			this.key = key;
+			this.custom = custom;
+		}
+	}
+
+	private final Building townHall;
 	private final Point pos;
-	private int nbbuttonpages;
 	private final EntityPlayer player;
 
 	ResourceLocation background = new ResourceLocation(Mill.modId,
@@ -29,7 +42,7 @@ public class GuiNewBuildingProject extends GuiText {
 	public GuiNewBuildingProject(final EntityPlayer player, final Building th,
 			final Point p) {
 
-		townhall = th;
+		townHall = th;
 		pos = p;
 		this.player = player;
 
@@ -41,30 +54,23 @@ public class GuiNewBuildingProject extends GuiText {
 			return;
 		}
 
-		ClientSender.newBuilding(player, townhall, pos,
-				possibleBuildings.get(guibutton.id).key);
-		closeWindow();
-	}
+		final GuiButtonNewBuilding button = (GuiButtonNewBuilding) guibutton;
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public void buttonPagination() {
+		if (!button.custom) {
+			ClientSender.newBuilding(player, townHall, pos, button.key);
+		} else {
 
-		super.buttonPagination();
+			closeWindow();
 
-		final int xStart = (width - getXSize()) / 2;
-		final int yStart = (height - getYSize()) / 2;
+			final BuildingCustomPlan customBuilding = townHall.culture
+					.getBuildingCustom(button.key);
 
-		int line = 0;
-		for (int i = pageNum * NBBUTTONLINE; i < (pageNum + 1) * NBBUTTONLINE
-				&& i < possibleBuildings.size(); i++) {
-
-			buttonList.add(new GuiButton(i, xStart + getXSize() / 2 - 100,
-					yStart + 40 + 25 * line, 200, 20, possibleBuildings.get(i)
-							.getFullName(player)));
-
-			line++;
+			if (customBuilding != null) {
+				DisplayActions.displayNewCustomBuildingGUI(player, townHall,
+						pos, customBuilding);
+			}
 		}
+
 	}
 
 	@Override
@@ -86,11 +92,6 @@ public class GuiNewBuildingProject extends GuiText {
 	@Override
 	public int getLineSizeInPx() {
 		return 195;
-	}
-
-	@Override
-	protected int getNbPage() {
-		return Math.max(descText.size(), nbbuttonpages);
 	}
 
 	@Override
@@ -119,32 +120,45 @@ public class GuiNewBuildingProject extends GuiText {
 		buttonPagination();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void initData() {
 
-		final List<Line> text = new ArrayList<Line>();
+		final List<List<Line>> pages = new ArrayList<List<Line>>();
+		List<Line> text = new ArrayList<Line>();
 
-		text.add(new Line(townhall.getVillageQualifiedName()));
+		text.add(new Line(townHall.getVillageQualifiedName()));
 		text.add(new Line());
 		text.add(new Line(MLN.string("ui.selectabuildingproject")));
 
-		final List<List<Line>> pages = new ArrayList<List<Line>>();
+		text.add(new Line());
+		text.add(new Line(MLN.string("ui.selectabuildingproject_custom")));
+
+		for (final BuildingCustomPlan customBuilding : townHall.villageType.customBuildings) {
+			text.add(new Line(new GuiButtonNewBuilding(
+					customBuilding.buildingKey, customBuilding
+							.getFullDisplayName(), true)));
+			text.add(new Line(false));
+			text.add(new Line());
+		}
+
 		pages.add(text);
-		descText = pages;
+		text = new ArrayList<Line>();
 
-		possibleBuildings = new ArrayList<BuildingPlanSet>();
-		possibleBuildings.addAll(townhall.villageType.coreBuildings);
+		text.add(new Line());
+		text.add(new Line(MLN.string("ui.selectabuildingproject_standard")));
 
-		for (int i = possibleBuildings.size() - 1; i >= 0; i--) {
-			if (!townhall.isValidProject(possibleBuildings.get(i)
-					.getBuildingProject())) {
-				possibleBuildings.remove(i);
+		for (final BuildingPlanSet planSet : townHall.villageType.coreBuildings) {
+			if (townHall.isValidProject(planSet.getBuildingProject())) {
+				text.add(new Line(new GuiButtonNewBuilding(planSet.key, planSet
+						.getFullName(player), false)));
+				text.add(new Line(false));
+				text.add(new Line());
 			}
 		}
 
-		nbbuttonpages = (int) Math.ceil(possibleBuildings.size() * 1.0
-				/ NBBUTTONLINE);
+		pages.add(text);
+
+		descText = adjustText(pages);
 	}
 
 }

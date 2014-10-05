@@ -370,7 +370,7 @@ public class VillagerRecord implements Cloneable {
 	}
 
 	public String getNativeOccupationName() {
-		if (getType().isChild && villagerSize == MillVillager.max_child_size) {
+		if (getType().isChild && villagerSize == MillVillager.MAX_CHILD_SIZE) {
 			return getType().altname;
 		}
 		return getType().name;

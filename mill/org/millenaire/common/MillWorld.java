@@ -1134,10 +1134,10 @@ public class MillWorld {
 
 					if (!buildingsLocation.containsKey(b.getPos())) {
 						MLN.minor(null, "Detected new building: " + b
-								+ " with location key: " + b.location.key);
-						buildingsLocation.put(b.getPos(), b.location.key);
+								+ " with location key: " + b.location.planKey);
+						buildingsLocation.put(b.getPos(), b.location.planKey);
 					} else {
-						if (!b.location.key.equals(buildingsLocation.get(b
+						if (!b.location.planKey.equals(buildingsLocation.get(b
 								.getPos()))) {
 							MLN.warning(null, "Testing locations due to: "
 									+ label);
@@ -1146,8 +1146,9 @@ public class MillWorld {
 									"Location key changed for building: " + b
 											+ ". Was: "
 											+ buildingsLocation.get(b.getPos())
-											+ " now: " + b.location.key);
-							buildingsLocation.put(b.getPos(), b.location.key);
+											+ " now: " + b.location.planKey);
+							buildingsLocation.put(b.getPos(),
+									b.location.planKey);
 						}
 					}
 				}

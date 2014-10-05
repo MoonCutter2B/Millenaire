@@ -55,3 +55,6 @@ load_all_languages=true
 //logbuildingplan; 
 logbuildingplan=major
 
+//Rayon de protection spawn; Rayon autour du point d'apparition dans lequel Millénaire ne génère rien. Défaut: 150.
+spawn_protection_radius=500
+

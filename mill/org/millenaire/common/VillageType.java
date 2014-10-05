@@ -10,13 +10,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager.InvItem;
-import org.millenaire.common.construction.BuildingPlanSet;
-import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.building.BuildingCustomPlan;
+import org.millenaire.common.building.BuildingPlanSet;
+import org.millenaire.common.building.BuildingProject;
+import org.millenaire.common.building.BuildingProject.EnumProjects;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.WeightedChoice;
 import org.millenaire.common.forge.Mill;
@@ -48,18 +51,7 @@ public class VillageType implements WeightedChoice {
 		}
 	}
 
-	public static String[] levelNames;
-
 	public static final String HAMEAU = "hameau";
-
-	public static void loadLevelNames() {
-		levelNames = new String[] { MLN.string("ui.buildingscentre"),
-				MLN.string("ui.buildingsstarting"),
-				MLN.string("ui.buildingsplayer"),
-				MLN.string("ui.buildingskey"),
-				MLN.string("ui.buildingssecondary"),
-				MLN.string("ui.buildingsextra") };
-	}
 
 	public static List<VillageType> loadLoneBuildings(
 			final List<File> culturesDirs, final Culture culture) {
@@ -213,6 +205,7 @@ public class VillageType implements WeightedChoice {
 
 	public String name = null, key = null, type = null;
 	public int weight, radius = MLN.VillageRadius, max = 0;
+	public BuildingCustomPlan customCentre = null;
 	public BuildingPlanSet centreBuilding = null;
 	public List<BuildingPlanSet> startBuildings = new ArrayList<BuildingPlanSet>();
 	public List<BuildingPlanSet> playerBuildings = new ArrayList<BuildingPlanSet>();
@@ -220,6 +213,7 @@ public class VillageType implements WeightedChoice {
 	public List<BuildingPlanSet> secondaryBuildings = new ArrayList<BuildingPlanSet>();
 	public List<BuildingPlanSet> extraBuildings = new ArrayList<BuildingPlanSet>();
 	public List<BuildingPlanSet> excludedBuildings = new ArrayList<BuildingPlanSet>();
+	public List<BuildingCustomPlan> customBuildings = new ArrayList<BuildingCustomPlan>();
 	public List<String> hamlets = new ArrayList<String>();
 	public List<String> qualifiers = new ArrayList<String>();
 	public HashMap<InvItem, Integer> sellingPrices = new HashMap<InvItem, Integer>();
@@ -357,6 +351,20 @@ public class VillageType implements WeightedChoice {
 											+ " could not find centre building type "
 											+ value + ".");
 						}
+					} else if (paramkey.equalsIgnoreCase("customcentre")) {
+						if (culture.getBuildingCustom(value) != null) {
+							customCentre = culture.getBuildingCustom(value);
+							if (MLN.LogVillage >= MLN.MINOR) {
+								MLN.minor(this, "Loading custom centre building: "
+										+ value);
+							}
+						} else {
+							throw new MillenaireException(
+									"When loading village type "
+											+ key
+											+ " could not find custom centre building type "
+											+ value + ".");
+						}
 					} else if (paramkey.equalsIgnoreCase("start")) {
 						if (culture.getBuildingPlanSet(value) != null) {
 							startBuildings.add(culture
@@ -423,6 +431,19 @@ public class VillageType implements WeightedChoice {
 						} else {
 							MLN.error(this, "When loading village type " + key
 									+ " could not find excluded building type "
+									+ value + ".");
+						}
+					} else if (paramkey.equalsIgnoreCase("customBuilding")) {
+						if (culture.getBuildingCustom(value) != null) {
+							customBuildings.add(culture
+									.getBuildingCustom(value));
+							if (MLN.LogVillage >= MLN.MINOR) {
+								MLN.minor(this, "Loading custom building: "
+										+ value);
+							}
+						} else {
+							MLN.error(this, "When loading village type " + key
+									+ " could not find custom building type "
 									+ value + ".");
 						}
 					} else if (paramkey.equalsIgnoreCase("sellingPrice")) {
@@ -523,7 +544,7 @@ public class VillageType implements WeightedChoice {
 		if (name == null) {
 			throw new MillenaireException("No name found for village: " + key);
 		}
-		if (centreBuilding == null) {
+		if (centreBuilding == null && customCentre == null) {
 			throw new MillenaireException(
 					"No central building found for village: " + key);
 		}
@@ -592,10 +613,11 @@ public class VillageType implements WeightedChoice {
 
 	}
 
-	public List<List<BuildingProject>> getBuildingProjects() {
+	public Map<EnumProjects, List<BuildingProject>> getBuildingProjects() {
 
 		final List<BuildingProject> centre = new ArrayList<BuildingProject>();
-		centre.add(centreBuilding.getBuildingProject());
+		if (centreBuilding!=null)
+			centre.add(centreBuilding.getBuildingProject());
 
 		final List<BuildingProject> start = new ArrayList<BuildingProject>();
 		for (final BuildingPlanSet set : startBuildings) {
@@ -632,13 +654,14 @@ public class VillageType implements WeightedChoice {
 			}
 		}
 
-		final List<List<BuildingProject>> v = new ArrayList<List<BuildingProject>>();
-		v.add(centre);
-		v.add(start);
-		v.add(players);
-		v.add(core);
-		v.add(secondary);
-		v.add(extra);
+		final Map<EnumProjects, List<BuildingProject>> v = new HashMap<EnumProjects, List<BuildingProject>>();
+		v.put(EnumProjects.CENTRE, centre);
+		v.put(EnumProjects.START, start);
+		v.put(EnumProjects.PLAYER, players);
+		v.put(EnumProjects.CORE, core);
+		v.put(EnumProjects.SECONDARY, secondary);
+		v.put(EnumProjects.EXTRA, extra);
+		v.put(EnumProjects.CUSTOMBUILDINGS, new ArrayList<BuildingProject>());
 
 		return v;
 	}

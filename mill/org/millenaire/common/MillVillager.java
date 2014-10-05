@@ -700,7 +700,7 @@ public abstract class MillVillager extends EntityCreature implements
 
 	public int heldItemCount = 0, heldItemId = -1;
 
-	public static final int max_child_size = 20;
+	public static final int MAX_CHILD_SIZE = 20;
 	public String speech_key = null;
 	public int speech_variant = 0;
 
@@ -1670,6 +1670,10 @@ public abstract class MillVillager extends EntityCreature implements
 	}
 
 	public int getBasicForeignMerchantPrice(final InvItem item) {
+		
+		if (getTownHall()==null) {
+			return 0;
+		}
 
 		if (getCulture().goodsByItem.containsKey(item)) {
 
@@ -2055,7 +2059,7 @@ public abstract class MillVillager extends EntityCreature implements
 			return "";
 		}
 
-		if (isChild() && size == max_child_size) {
+		if (isChild() && size == MAX_CHILD_SIZE) {
 			return getCulture().getCultureString("villager." + vtype.altkey);
 		}
 		return getCulture().getCultureString("villager." + vtype.key);
@@ -2197,7 +2201,7 @@ public abstract class MillVillager extends EntityCreature implements
 		if (vtype == null) {
 			return "";
 		}
-		if (isChild() && size == max_child_size) {
+		if (isChild() && size == MAX_CHILD_SIZE) {
 			return vtype.altkey;
 		}
 		return vtype.key;
@@ -2208,7 +2212,7 @@ public abstract class MillVillager extends EntityCreature implements
 			return null;
 		}
 
-		if (isChild() && size == max_child_size) {
+		if (isChild() && size == MAX_CHILD_SIZE) {
 			return vtype.altname;
 		}
 		return vtype.name;
@@ -2410,7 +2414,7 @@ public abstract class MillVillager extends EntityCreature implements
 		}
 
 		for (int i = 0; i < foodGrowth.length; i++) {
-			if (growth < 10 && size + growth < max_child_size) {
+			if (growth < 10 && size + growth < MAX_CHILD_SIZE) {
 				nb = getHouse().takeGoods(foodGrowth[i], 1);
 				if (nb == 1) {
 					growth += foodGrowthValues[i]
@@ -2422,8 +2426,8 @@ public abstract class MillVillager extends EntityCreature implements
 
 		size += growth;
 
-		if (size > max_child_size) {
-			size = max_child_size;
+		if (size > MAX_CHILD_SIZE) {
+			size = MAX_CHILD_SIZE;
 		}
 
 		getRecord().villagerSize = size;
@@ -3387,7 +3391,7 @@ public abstract class MillVillager extends EntityCreature implements
 	public boolean performNightAction() {
 
 		if (isChild()) {
-			if (size < max_child_size) {
+			if (size < MAX_CHILD_SIZE) {
 				growSize();
 			} else {
 				teenagerNightAction();
@@ -3730,7 +3734,7 @@ public abstract class MillVillager extends EntityCreature implements
 	}
 
 	public HashMap<InvItem, Integer> requiresGoods() {
-		if (isChild() && size < max_child_size) {
+		if (isChild() && size < MAX_CHILD_SIZE) {
 			return vtype.requiredFoodAndGoods;
 		}
 		if (hasChildren() && getHouse().villagers.size() < 4) {
@@ -3863,10 +3867,6 @@ public abstract class MillVillager extends EntityCreature implements
 		} else {
 			setPathDestPoint(null);
 		}
-	}
-
-	public void setHealth(final int h) {
-		setHealth(h);
 	}
 
 	public void setHousePoint(final Point p) {

@@ -40,7 +40,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.SaveHandler;
@@ -53,8 +52,8 @@ import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
 import org.millenaire.common.UserProfile;
 import org.millenaire.common.building.Building;
+import org.millenaire.common.building.BuildingBlock;
 import org.millenaire.common.building.BuildingLocation;
-import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
 import org.millenaire.common.item.Goods.IItemInitialEnchantmens;
@@ -1110,15 +1109,6 @@ public class MillCommonUtilities {
 			final int rz) {
 		return getClosestBlockMeta(world, blocks, -1, pos, rx, ry, rz);
 
-	}
-
-	public static Point getClosestBlock(final World world,
-			final int[] blockIds, final double x, final double y,
-			final double z, final int rx, final int ry, final int rz) {
-
-		return getClosestBlock(world, blockIds, MathHelper.floor_double(x),
-				MathHelper.floor_double(y), MathHelper.floor_double(z), rx, ry,
-				rz);
 	}
 
 	public static Point getClosestBlockMeta(final World world,

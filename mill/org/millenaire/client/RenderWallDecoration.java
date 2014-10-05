@@ -161,7 +161,7 @@ public class RenderWallDecoration extends Render {
 		} else {
 			bindTexture(textureSculptures);
 		}
-		final EnumWallDecoration enumart = ent.art;
+		final EnumWallDecoration enumart = ent.millArt;
 		final float f2 = 0.0625F;
 		GL11.glScalef(f2, f2, f2);
 		this.func_77010_a(ent, enumart.sizeX, enumart.sizeY, enumart.offsetX,

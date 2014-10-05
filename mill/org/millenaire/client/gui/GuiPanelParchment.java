@@ -15,9 +15,9 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.MLN;
+import org.millenaire.common.MillMapInfo;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillWorld;
-import org.millenaire.common.MillWorldInfo.MillMapInfo;
 import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingLocation;
@@ -98,11 +98,15 @@ public class GuiPanelParchment extends GuiText {
 
 	@Override
 	public void customDrawScreen(final int i, final int j, final float f) {
-		if (mapType == VILLAGE_MAP && pageNum == 0 && townHall != null
-				&& townHall.mapInfo != null) {
-			drawVillageMap(i, j);
-		} else if (mapType == CHUNK_MAP && pageNum == 0) {
-			drawChunkMap(i, j);
+		try {
+			if (mapType == VILLAGE_MAP && pageNum == 0 && townHall != null
+					&& townHall.mapInfo != null) {
+				drawVillageMap(i, j);
+			} else if (mapType == CHUNK_MAP && pageNum == 0) {
+				drawChunkMap(i, j);
+			}
+		} catch (final Exception e) {
+			MLN.printException("Exception while rendering map: ", e);
 		}
 	}
 
@@ -419,25 +423,25 @@ public class GuiPanelParchment extends GuiText {
 
 			if (unreachable) {
 				stringlength = fontRendererObj.getStringWidth(locHover
-						.getPlan().nativeName
+						.getNativeName()
 						+ " - "
 						+ MLN.string("panels.unreachablebuilding"));
-				nativeString = locHover.getPlan().nativeName + " - "
+				nativeString = locHover.getNativeName() + " - "
 						+ MLN.string("panels.unreachablebuilding");
 			} else {
 				stringlength = fontRendererObj.getStringWidth(locHover
-						.getPlan().nativeName);
-				nativeString = locHover.getPlan().nativeName;
+						.getNativeName());
+				nativeString = locHover.getNativeName();
 			}
 
 			int nblines = 1;
 
-			final boolean gameString = locHover.getPlan().getGameName() != null
-					&& locHover.getPlan().getGameName().length() > 0;
+			final boolean gameString = locHover.getGameName() != null
+					&& locHover.getGameName().length() > 0;
 
 			if (gameString) {
-				stringlength = Math.max(stringlength, fontRendererObj
-						.getStringWidth(locHover.getPlan().getGameName()));
+				stringlength = Math.max(stringlength,
+						fontRendererObj.getStringWidth(locHover.getGameName()));
 				nblines++;
 			}
 
@@ -460,8 +464,8 @@ public class GuiPanelParchment extends GuiText {
 			int pos = 1;
 
 			if (gameString) {
-				fontRendererObj.drawString(locHover.getPlan().getGameName(), i
-						- xStart, j - yStart + 11, 0x909090);
+				fontRendererObj.drawString(locHover.getGameName(), i - xStart,
+						j - yStart + 11, 0x909090);
 				pos++;
 			}
 

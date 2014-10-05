@@ -27,8 +27,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Quest.QuestStep;
-import org.millenaire.common.construction.BuildingPlan;
-import org.millenaire.common.construction.BuildingPlanSet;
+import org.millenaire.common.building.BuildingPlan;
+import org.millenaire.common.building.BuildingPlanSet;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.BonusThread;
 import org.millenaire.common.core.MillCommonUtilities.PrefixExtFileFilter;
@@ -1296,8 +1296,6 @@ public class MLN {
 		for (final Culture c : Culture.ListCultures) {
 			c.loadLanguages(languageDirs, effective_language, fallback_language);
 		}
-
-		VillageType.loadLevelNames();
 
 		applyLanguage();
 

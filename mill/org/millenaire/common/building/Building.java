@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -55,11 +56,11 @@ import net.minecraftforge.common.util.Constants;
 import org.millenaire.common.Culture;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
+import org.millenaire.common.MillMapInfo;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.MillWorldInfo;
-import org.millenaire.common.MillWorldInfo.MillMapInfo;
 import org.millenaire.common.Point;
 import org.millenaire.common.PujaSacrifice;
 import org.millenaire.common.TileEntityMillChest;
@@ -68,12 +69,9 @@ import org.millenaire.common.UserProfile;
 import org.millenaire.common.VillageType;
 import org.millenaire.common.VillagerRecord;
 import org.millenaire.common.VillagerType;
-import org.millenaire.common.construction.BuildingPlan;
-import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
-import org.millenaire.common.construction.BuildingPlan.LocationBuildingPair;
-import org.millenaire.common.construction.BuildingPlan.StartingGood;
-import org.millenaire.common.construction.BuildingPlanSet;
-import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.building.BuildingPlan.LocationBuildingPair;
+import org.millenaire.common.building.BuildingPlan.StartingGood;
+import org.millenaire.common.building.BuildingProject.EnumProjects;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.BuildingChunkLoader;
 import org.millenaire.common.forge.Mill;
@@ -234,8 +232,8 @@ public class Building {
 
 			totalTime += time;
 
-			if (goalTime.containsKey(Goal.goals.get(key))) {
-				time = goalTime.get(Goal.goals.get(key)) + time;
+			if (goalTime.containsKey(key)) {
+				time = goalTime.get(key) + time;
 			}
 			goalTime.put(key, time);
 		}
@@ -390,7 +388,7 @@ public class Building {
 
 	public static final String blSheepChickenFarm = "sheepchickenfarm";
 	public static final String blTavern = "tavern";
-	public static final String blTownhall = "townhall";
+	public static final String blTownhall = "townHall";
 	public static final String blWatchtower = "watchtower";
 	private static final int LOCATION_SEARCH_DELAY = 80000;
 	public static final int MIN_REPUTATION_FOR_TRADE = -16 * 64;
@@ -578,7 +576,7 @@ public class Building {
 	public BuildingLocation buildingGoalLocation = null;
 	public int buildingGoalVariation = 0;
 	public BuildingLocation buildingLocationIP = null;
-	public List<List<BuildingProject>> buildingProjects = new ArrayList<List<BuildingProject>>();
+	public Map<BuildingProject.EnumProjects, List<BuildingProject>> buildingProjects = new HashMap<BuildingProject.EnumProjects, List<BuildingProject>>();
 	public List<Point> buildings = new ArrayList<Point>();
 	public List<String> buildingsBought = new ArrayList<String>();
 
@@ -629,6 +627,9 @@ public class Building {
 	private HashMap<Point, Integer> relations = new HashMap<Point, Integer>();
 	public Point parentVillage = null;
 	public MillWorldInfo winfo = new MillWorldInfo();
+	/**
+	 * Client-side only info used for map display (extract from WorldInfo)
+	 */
 	public MillMapInfo mapInfo = null;
 	public MillWorld mw;
 	public World worldObj;
@@ -675,13 +676,28 @@ public class Building {
 
 	public List<Point> subBuildings = new ArrayList<Point>();
 
-	// Client-side only on packet reception
+	/**
+	 * Client-side only on packet reception
+	 * 
+	 * @param mw
+	 */
 	private Building(final MillWorld mw) {
 		this.mw = mw;
 		worldObj = mw.world;
 	}
 
-	// Server-side only, on build
+	/**
+	 * Server-side only, on build
+	 * 
+	 * @param mw
+	 * @param c
+	 * @param villageType
+	 * @param l
+	 * @param townHall
+	 * @param villageCreation
+	 * @param p
+	 * @param townHallPos
+	 */
 	public Building(final MillWorld mw, final Culture c,
 			final VillageType villageType, final BuildingLocation l,
 			final boolean townHall, final boolean villageCreation,
@@ -750,7 +766,12 @@ public class Building {
 		}
 	}
 
-	// Server-side only, on load
+	/**
+	 * Server-side only, on load
+	 * 
+	 * @param mw
+	 * @param nbttagcompound
+	 */
 	public Building(final MillWorld mw, final NBTTagCompound nbttagcompound) {
 
 		this.mw = mw;
@@ -875,6 +896,36 @@ public class Building {
 			merchantCreated();
 		} else {
 			updateHouseSign();
+		}
+	}
+
+	public void addCustomBuilding(final BuildingCustomPlan customBuilding,
+			final Point pos) throws MillenaireException {
+
+		final BuildingLocation location = new BuildingLocation(customBuilding,
+				pos, false);
+
+		final Building building = new Building(mw, culture, villageType,
+				location, false, false, pos, getPos());
+
+		customBuilding.registerResources(building, location);
+
+		building.initialise(null, false);
+		registerBuildingEntity(building);
+
+		final BuildingProject project = new BuildingProject(customBuilding,
+				location);
+
+		if (!buildingProjects.containsKey(EnumProjects.CUSTOMBUILDINGS)) {
+			buildingProjects.put(EnumProjects.CUSTOMBUILDINGS,
+					new ArrayList<BuildingProject>());
+		}
+
+		buildingProjects.get(EnumProjects.CUSTOMBUILDINGS).add(project);
+
+		if (MLN.LogBuildingPlan >= MLN.MAJOR) {
+			MLN.major(this, "Created new Custom Building Entity: "
+					+ customBuilding.buildingKey + " at " + pos);
 		}
 	}
 
@@ -1431,7 +1482,7 @@ public class Building {
 			buildingGoal = null;
 		}
 
-		for (final List<BuildingProject> projects : buildingProjects) {
+		for (final List<BuildingProject> projects : buildingProjects.values()) {
 			for (final BuildingProject project : projects) {
 				if (project.location == location) {
 					projects.remove(project);
@@ -1624,6 +1675,7 @@ public class Building {
 
 	private void checkExploreTag(final EntityPlayer player) {
 		if (player != null
+				&& location.getPlan() != null
 				&& !mw.getProfile(player.getDisplayName()).isTagSet(
 						location.getPlan().exploreTag)) {
 
@@ -1972,6 +2024,12 @@ public class Building {
 		return null;
 	}
 
+	/**
+	 * Creates the initial villagers as defined in the location
+	 * 
+	 * @return
+	 * @throws MillenaireException
+	 */
 	public String createResidents() throws MillenaireException {
 
 		if (location.maleResident.size() + location.femaleResident.size() == 0) {
@@ -1983,11 +2041,11 @@ public class Building {
 		// first we create the first male and the first female
 		// as a couple
 		String husbandType = null;
-		if (location.maleResident.size() > 0) {
+		if (location.maleResident.size() > 0 && !culture.getVillagerType(location.maleResident.get(0)).isChild) {
 			husbandType = location.maleResident.get(0);
 		}
 		String wifeType = null;
-		if (location.femaleResident.size() > 0) {
+		if (location.femaleResident.size() > 0 && !culture.getVillagerType(location.maleResident.get(0)).isChild) {
 			wifeType = location.femaleResident.get(0);
 		}
 
@@ -2037,26 +2095,14 @@ public class Building {
 			husbandRecord.spousesName = wifeRecord.getName();
 		}
 
-		// any other male or female are create independently:
-		for (int i = 1; i < location.maleResident.size(); i++) {
-			final MillVillager extraMale = MillVillager.createVillager(culture,
-					location.maleResident.get(i), MillVillager.MALE, worldObj,
-					resManager.getSleepingPos(), getPos(), townHallPos, false,
-					null, null);
-			addOrReplaceVillager(extraMale);
-			final VillagerRecord vr = new VillagerRecord(mw, extraMale);
-			addOrReplaceRecord(vr);
-			worldObj.spawnEntityInWorld(extraMale);
+		// any other male or female are created independently:
+		int startPos = husbandType == null ? 0 : 1;
+		for (int i = startPos; i < location.maleResident.size(); i++) {
+			createNewVillager(location.maleResident.get(i));
 		}
-		for (int i = 1; i < location.femaleResident.size(); i++) {
-			final MillVillager extraFemale = MillVillager.createVillager(
-					culture, location.femaleResident.get(i),
-					MillVillager.FEMALE, worldObj, resManager.getSleepingPos(),
-					getPos(), townHallPos, false, null, null);
-			addOrReplaceVillager(extraFemale);
-			final VillagerRecord vr = new VillagerRecord(mw, extraFemale);
-			addOrReplaceRecord(vr);
-			worldObj.spawnEntityInWorld(extraFemale);
+		startPos = wifeType == null ? 0 : 1;
+		for (int i = startPos; i < location.femaleResident.size(); i++) {
+			createNewVillager(location.femaleResident.get(i));
 		}
 
 		if (isInn) {
@@ -2067,10 +2113,35 @@ public class Building {
 
 		return familyName;
 	}
+	
+	/**
+	 * Create a new villager with default settings
+	 * 
+	 * @param type
+	 * @return
+	 * @throws MillenaireException
+	 */
+	public MillVillager createNewVillager(String type) throws MillenaireException {
+		final MillVillager villager = MillVillager.createVillager(culture,
+				type, 0, worldObj,resManager.getSleepingPos(), getPos(), townHallPos, false,null, null);
+		addOrReplaceVillager(villager);
+		final VillagerRecord vr = new VillagerRecord(mw, villager);
+		addOrReplaceRecord(vr);
+		worldObj.spawnEntityInWorld(villager);
+		
+		//Children are spawned as teen
+		//Used for custom TH (initial population provided)
+		if (villager.vtype.isChild) {
+			villager.size = MillVillager.MAX_CHILD_SIZE;
+			villager.growSize();
+		}
+		
+		return villager;
+	}
 
 	public void deleteVillager(final MillVillager villager) {
 		while (villagers.remove(villager)) {
-			;
+			
 		}
 	}
 
@@ -2156,7 +2227,7 @@ public class Building {
 			if (!villager.isChild()) {
 				nbAdults++;
 			} else {
-				if (villager.size == MillVillager.max_child_size) {
+				if (villager.size == MillVillager.MAX_CHILD_SIZE) {
 					nbGrownChild++;
 				}
 			}
@@ -2291,7 +2362,7 @@ public class Building {
 			}
 		}
 
-		String s = "LKey: " + location.key + " Shop: " + location.shop
+		String s = "LKey: " + location.planKey + " Shop: " + location.shop
 				+ " special: ";
 		if (isTownhall) {
 			s += "Town Hall ";
@@ -2483,68 +2554,93 @@ public class Building {
 		mw.testLocations("fillinBuildingLocation start");
 
 		boolean registered = false;
-		for (final List<BuildingProject> projectsLevel : buildingProjects) {
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = buildingProjects
+						.get(ep);
 
-			final List<BuildingProject> temp = new ArrayList<BuildingProject>(
-					projectsLevel);// needed to avoid concurrent modifications
-			for (final BuildingProject project : temp) {
-				int pos = 0;
+				final List<BuildingProject> temp = new ArrayList<BuildingProject>(
+						projectsLevel);// needed to avoid concurrent
+										// modifications
+				for (final BuildingProject project : temp) {
+					int pos = 0;
 
-				if (!registered && project.location == null
-						&& location.key.equals(project.key)) {
-					project.location = location;
-					registered = true;
-					if (MLN.LogBuildingPlan >= MLN.MINOR) {
-						MLN.minor(this, "Registered building: " + location
-								+ " (level " + location.level + ", variation: "
-								+ location.getVariation() + ")");
-					}
+					if (!registered && project.location == null
+							&& location.planKey.equals(project.key)) {
+						project.location = location;
+						registered = true;
+						if (MLN.LogBuildingPlan >= MLN.MINOR) {
+							MLN.minor(this, "Registered building: " + location
+									+ " (level " + location.level
+									+ ", variation: " + location.getVariation()
+									+ ")");
+						}
 
-					if (project.location.level >= 0) {
-						for (final String s : project.location.subBuildings) {
-							final BuildingProject newproject = new BuildingProject(
-									culture.getBuildingPlanSet(s));
-							newproject.location = location
-									.createLocationForSubBuilding(s);
-							projectsLevel.add(pos + 1, newproject);
-							if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-								MLN.major(this,
-										"Adding sub-building to project list: "
-												+ newproject + " at pos " + pos
-												+ " in " + projectsLevel);
+						if (project.location.level >= 0) {
+							for (final String s : project.location.subBuildings) {
+								final BuildingProject newproject = new BuildingProject(
+										culture.getBuildingPlanSet(s));
+								newproject.location = location
+										.createLocationForSubBuilding(s);
+								projectsLevel.add(pos + 1, newproject);
+								if (MLN.LogBuildingPlan >= MLN.MAJOR) {
+									MLN.major(this,
+											"Adding sub-building to project list: "
+													+ newproject + " at pos "
+													+ pos + " in "
+													+ projectsLevel);
+								}
 							}
 						}
-					}
-					pos++;
-				} else if (!registered && project.location != null
-						&& project.location.level < 0
-						&& location.key.equals(project.key)) {
-					project.location = location;
-					registered = true;
-					if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-						MLN.major(this, "Registered subbuilding: " + location
-								+ " (level " + location.level + ", variation: "
-								+ location.getVariation() + ")");
+						pos++;
+					} else if (!registered && project.location != null
+							&& project.location.level < 0
+							&& location.planKey.equals(project.key)) {
+						project.location = location;
+						registered = true;
+						if (MLN.LogBuildingPlan >= MLN.MAJOR) {
+							MLN.major(this, "Registered subbuilding: "
+									+ location + " (level " + location.level
+									+ ", variation: " + location.getVariation()
+									+ ")");
+						}
 					}
 				}
 			}
 		}
 
 		if (!registered) {
-			final BuildingProject project = new BuildingProject(
-					culture.getBuildingPlanSet(location.key));
-			project.location = location;
-			if (villageType.playerControlled) {
-				buildingProjects.get(3).add(project);// core projects
+			BuildingProject project;
+			if (location.isCustomBuilding) {
+				project = new BuildingProject(
+						culture.getBuildingCustom(location.planKey), location);
+
+				buildingProjects.get(EnumProjects.CUSTOMBUILDINGS).add(project);
 			} else {
-				buildingProjects.get(buildingProjects.size() - 1).add(project);// extra
+				project = new BuildingProject(
+						culture.getBuildingPlanSet(location.planKey));
+				project.location = location;
+
+				if (villageType.playerControlled) {
+					buildingProjects.get(EnumProjects.CORE).add(project);// core
+																			// projects
+				} else {
+					buildingProjects.get(EnumProjects.EXTRA).add(project);// extra
+				}
 			}
+
 		}
 
 		mw.testLocations("fillinBuildingLocation end");
 	}
 
 	public void fillStartingGoods() {
+
+		// Method won't work with custom buildings
+		if (location.getPlan() == null) {
+			return;
+		}
+
 		for (final Point p : resManager.chests) {
 			final TileEntityMillChest chest = p.getMillChest(worldObj);
 			if (chest != null) {
@@ -2639,18 +2735,22 @@ public class Building {
 
 		BuildingProject goalProject = null;
 
-		for (final List<BuildingProject> projectsLevel : buildingProjects) {
-			for (final BuildingProject project : projectsLevel) {
-				if (buildingGoalLocation != null
-						&& buildingGoalLocation
-								.isSameLocation(project.location)) {
-					goalProject = project;
-				} else if (buildingGoalLocation == null
-						&& project.location == null
-						&& buildingGoal.equals(project.key)) {
-					goalProject = project;
-				}
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = buildingProjects
+						.get(ep);
+				for (final BuildingProject project : projectsLevel) {
+					if (buildingGoalLocation != null
+							&& buildingGoalLocation
+									.isSameLocation(project.location)) {
+						goalProject = project;
+					} else if (buildingGoalLocation == null
+							&& project.location == null
+							&& buildingGoal.equals(project.key)) {
+						goalProject = project;
+					}
 
+				}
 			}
 		}
 
@@ -2802,100 +2902,113 @@ public class Building {
 
 		boolean attemptedConstruction = false;
 
-		for (final List<BuildingProject> projectsLevel : buildingProjects) {
-			for (final BuildingProject project : projectsLevel) {
-				if (goalProject == null || project != goalProject) {
-					if (project.location == null || project.location.level < 0) {
-						final BuildingPlan plan = project.planSet
-								.getRandomStartingPlan();
-						if (isValidProject(project)) {
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = buildingProjects
+						.get(ep);
+				for (final BuildingProject project : projectsLevel) {
+					if (project.planSet != null
+							&& (goalProject == null || project != goalProject)) {
+						if (project.location == null
+								|| project.location.level < 0) {
+							final BuildingPlan plan = project.planSet
+									.getRandomStartingPlan();
+							if (isValidProject(project)) {
 
-							BuildingLocation location = null;
-							if (project.location == null
-									&& System.currentTimeMillis()
-											- lastFailedOtherLocationSearch > LOCATION_SEARCH_DELAY
-									&& canAffordBuildAfterGoal(plan)) {
-								location = plan.findBuildingLocation(winfo,
-										pathing, this.location.pos,
-										villageType.radius,
-										MillCommonUtilities.getRandom(), -1);
-							} else if (project.location != null
-									&& canAffordBuildAfterGoal(plan)) {
-								location = project.location
-										.createLocationForLevel(0);
-							}
-
-							if (location != null) {
-								lastFailedOtherLocationSearch = 0;
-
-								buildingLocationIP = location;
-
-								setBblocks(plan.getBuildingPoints(worldObj,
-										buildingLocationIP, false));
-
-								if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-									MLN.major(this,
-											"New location non-project: Loaded "
-													+ getBblocks().length
-													+ " building blocks for "
-													+ plan.planName);
+								BuildingLocation location = null;
+								if (project.location == null
+										&& System.currentTimeMillis()
+												- lastFailedOtherLocationSearch > LOCATION_SEARCH_DELAY
+										&& canAffordBuildAfterGoal(plan)) {
+									location = plan
+											.findBuildingLocation(winfo,
+													pathing, this.location.pos,
+													villageType.radius,
+													MillCommonUtilities
+															.getRandom(), -1);
+								} else if (project.location != null
+										&& canAffordBuildAfterGoal(plan)) {
+									location = project.location
+											.createLocationForLevel(0);
 								}
 
-								/**
-								 * worldObj.setBlockWithNotify(
-								 * location.pos.getiX(), location.pos.getiY(),
-								 * location.pos.getiZ(),
-								 * Blocks.standing_sign.blockID);
-								 * 
-								 * final TileEntitySign sign = (TileEntitySign)
-								 * worldObj .getTileEntity(
-								 * location.pos.getiX(), location.pos.getiY(),
-								 * location.pos.getiZ());
-								 * 
-								 * if (sign != null) { sign.signText =
-								 * MillCommonUtilities.limitSignText(new
-								 * String[] { MLN.string("ui.inconstruction"),
-								 * "", plan.nativeName, "" }); }
-								 **/
-							} else {
-								attemptedConstruction = true;
-							}
-						}
-					} else {
-						final int level = project.location.level + 1;
-						final int variation = project.location.getVariation();
+								if (location != null) {
+									lastFailedOtherLocationSearch = 0;
 
-						if (level < project.getLevelsNumber(variation)
-								&& project.location.upgradesAllowed
-								&& canAffordBuildAfterGoal(project.getPlan(
-										variation, level))) {
-							buildingLocationIP = project.location
-									.createLocationForLevel(level);
-							setBblocks(project.getPlan(variation, level)
-									.getBuildingPoints(worldObj,
+									buildingLocationIP = location;
+
+									setBblocks(plan.getBuildingPoints(worldObj,
 											buildingLocationIP, false));
-							if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-								MLN.major(
-										this,
-										"Upgrade non-project: Loaded "
-												+ getBblocks().length
-												+ " building blocks for "
-												+ project.getPlan(variation,
-														level).planName
-												+ " upgrade. Old level: "
-												+ project.location.level
-												+ " New level: " + level);
-							}
 
+									if (MLN.LogBuildingPlan >= MLN.MAJOR) {
+										MLN.major(
+												this,
+												"New location non-project: Loaded "
+														+ getBblocks().length
+														+ " building blocks for "
+														+ plan.planName);
+									}
+
+									/**
+									 * worldObj.setBlockWithNotify(
+									 * location.pos.getiX(),
+									 * location.pos.getiY(),
+									 * location.pos.getiZ(),
+									 * Blocks.standing_sign.blockID);
+									 * 
+									 * final TileEntitySign sign =
+									 * (TileEntitySign) worldObj .getTileEntity(
+									 * location.pos.getiX(),
+									 * location.pos.getiY(),
+									 * location.pos.getiZ());
+									 * 
+									 * if (sign != null) { sign.signText =
+									 * MillCommonUtilities.limitSignText(new
+									 * String[] {
+									 * MLN.string("ui.inconstruction"), "",
+									 * plan.nativeName, "" }); }
+									 **/
+								} else {
+									attemptedConstruction = true;
+								}
+							}
+						} else {
+							final int level = project.location.level + 1;
+							final int variation = project.location
+									.getVariation();
+
+							if (level < project.getLevelsNumber(variation)
+									&& project.location.upgradesAllowed
+									&& canAffordBuildAfterGoal(project.getPlan(
+											variation, level))) {
+								buildingLocationIP = project.location
+										.createLocationForLevel(level);
+								setBblocks(project.getPlan(variation, level)
+										.getBuildingPoints(worldObj,
+												buildingLocationIP, false));
+								if (MLN.LogBuildingPlan >= MLN.MAJOR) {
+									MLN.major(
+											this,
+											"Upgrade non-project: Loaded "
+													+ getBblocks().length
+													+ " building blocks for "
+													+ project.getPlan(
+															variation, level).planName
+													+ " upgrade. Old level: "
+													+ project.location.level
+													+ " New level: " + level);
+								}
+
+							}
 						}
+					}
+					if (buildingLocationIP != null) {
+						break;
 					}
 				}
 				if (buildingLocationIP != null) {
 					break;
 				}
-			}
-			if (buildingLocationIP != null) {
-				break;
 			}
 		}
 		if (attemptedConstruction) {
@@ -2924,43 +3037,47 @@ public class Building {
 
 		boolean foundNewBuildingsLevel = false;
 
-		for (final List<BuildingProject> projectLevel : buildingProjects) {
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = buildingProjects
+						.get(ep);
 
-			boolean includedNewBuildings = false;
+				boolean includedNewBuildings = false;
 
-			for (final BuildingProject project : projectLevel) {
+				for (final BuildingProject project : projectsLevel) {
 
-				if ((project.location == null || project.location.level < 0)
-						&& !foundNewBuildingsLevel) {
-					if (isValidProject(project)) {
+					if ((project.location == null || project.location.level < 0)
+							&& !foundNewBuildingsLevel) {
+						if (isValidProject(project)) {
+							possibleProjects.add(project);
+							includedNewBuildings = true;
+							if (MLN.LogBuildingPlan >= MLN.DEBUG) {
+								MLN.debug(this, "Found a new building to add: "
+										+ project);
+							}
+							if (MLN.LogBuildingPlan >= MLN.MINOR
+									&& project.getChoiceWeight(null) < 1) {
+								MLN.minor(
+										this,
+										"Project has null or negative weight: "
+												+ project + ": "
+												+ project.getChoiceWeight(null));
+							}
+						}
+					} else if (project.location != null
+							&& project.location.level >= 0
+							&& project.location.level < project
+									.getLevelsNumber(project.location
+											.getVariation())
+							&& project.location.upgradesAllowed
+							&& project.getChoiceWeight(null) > 0) {
 						possibleProjects.add(project);
-						includedNewBuildings = true;
-						if (MLN.LogBuildingPlan >= MLN.DEBUG) {
-							MLN.debug(this, "Found a new building to add: "
-									+ project);
-						}
-						if (MLN.LogBuildingPlan >= MLN.MINOR
-								&& project.getChoiceWeight(null) < 1) {
-							MLN.minor(
-									this,
-									"Project has null or negative weight: "
-											+ project + ": "
-											+ project.getChoiceWeight(null));
-						}
 					}
-				} else if (project.location != null
-						&& project.location.level >= 0
-						&& project.location.level < project
-								.getLevelsNumber(project.location
-										.getVariation())
-						&& project.location.upgradesAllowed
-						&& project.getChoiceWeight(null) > 0) {
-					possibleProjects.add(project);
 				}
-			}
 
-			if (includedNewBuildings) {
-				foundNewBuildingsLevel = true;
+				if (includedNewBuildings) {
+					foundNewBuildingsLevel = true;
+				}
 			}
 		}
 
@@ -3225,36 +3342,45 @@ public class Building {
 			return null;
 		}
 
-		for (final List<BuildingProject> projectsLevel : buildingProjects) {
-			for (final BuildingProject project : projectsLevel) {
-				if (buildingLocationIP.level == 0
-						&& (project.location == null || project.location.level < 0)
-						&& project.key.equals(buildingLocationIP.key)) {
-					if (MLN.LogBuildingPlan >= MLN.DEBUG) {
-						MLN.debug(
-								this,
-								"Returning building plan for "
-										+ buildingLocationIP
-										+ ": "
-										+ project.getPlan(buildingLocationIP
-												.getVariation(),
-												buildingLocationIP.level));
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = buildingProjects
+						.get(ep);
+				for (final BuildingProject project : projectsLevel) {
+					if (buildingLocationIP.level == 0
+							&& (project.location == null || project.location.level < 0)
+							&& project.key.equals(buildingLocationIP.planKey)) {
+						if (MLN.LogBuildingPlan >= MLN.DEBUG) {
+							MLN.debug(
+									this,
+									"Returning building plan for "
+											+ buildingLocationIP
+											+ ": "
+											+ project.getPlan(
+													buildingLocationIP
+															.getVariation(),
+													buildingLocationIP.level));
+						}
+						return project.getPlan(
+								buildingLocationIP.getVariation(),
+								buildingLocationIP.level);
+					} else if (buildingLocationIP
+							.isSameLocation(project.location)) {
+						if (MLN.LogBuildingPlan >= MLN.DEBUG) {
+							MLN.debug(
+									this,
+									"Returning building plan for "
+											+ buildingLocationIP
+											+ ": "
+											+ project.getPlan(
+													buildingLocationIP
+															.getVariation(),
+													buildingLocationIP.level));
+						}
+						return project.getPlan(
+								buildingLocationIP.getVariation(),
+								buildingLocationIP.level);
 					}
-					return project.getPlan(buildingLocationIP.getVariation(),
-							buildingLocationIP.level);
-				} else if (buildingLocationIP.isSameLocation(project.location)) {
-					if (MLN.LogBuildingPlan >= MLN.DEBUG) {
-						MLN.debug(
-								this,
-								"Returning building plan for "
-										+ buildingLocationIP
-										+ ": "
-										+ project.getPlan(buildingLocationIP
-												.getVariation(),
-												buildingLocationIP.level));
-					}
-					return project.getPlan(buildingLocationIP.getVariation(),
-							buildingLocationIP.level);
 				}
 			}
 		}
@@ -3283,14 +3409,18 @@ public class Building {
 			return null;
 		}
 
-		for (final List<BuildingProject> projectsLevel : buildingProjects) {
-			for (final BuildingProject project : projectsLevel) {
-				if (project.key.equals(buildingGoal)) {
-					if (buildingGoalLocation == null) {
-						return project.getPlan(buildingGoalVariation, 0);
-					} else {
-						return project.getPlan(buildingGoalVariation,
-								buildingGoalLocation.level);
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = buildingProjects
+						.get(ep);
+				for (final BuildingProject project : projectsLevel) {
+					if (project.key.equals(buildingGoal)) {
+						if (buildingGoalLocation == null) {
+							return project.getPlan(buildingGoalVariation, 0);
+						} else {
+							return project.getPlan(buildingGoalVariation,
+									buildingGoalLocation.level);
+						}
 					}
 				}
 			}
@@ -3345,16 +3475,27 @@ public class Building {
 	public List<BuildingProject> getFlatProjectList() {
 		final List<BuildingProject> projects = new ArrayList<BuildingProject>();
 
-		for (final List<BuildingProject> projectLevel : buildingProjects) {
-			for (final BuildingProject project : projectLevel) {
-				projects.add(project);
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = buildingProjects
+						.get(ep);
+				for (final BuildingProject project : projectsLevel) {
+					projects.add(project);
+				}
 			}
 		}
 		return projects;
 	}
 
+	/**
+	 * Name in player's language, if readable by player
+	 * 
+	 * Ex: "well"
+	 * 
+	 * @return
+	 */
 	public String getGameBuildingName() {
-		return location.getPlan().getGameName();
+		return location.getGameName();
 	}
 
 	public HashMap<Goods, Integer> getImportsNeededbyOtherVillages() {
@@ -3408,10 +3549,14 @@ public class Building {
 
 		final List<BuildingLocation> locations = new ArrayList<BuildingLocation>();
 
-		for (final List<BuildingProject> projectsLevel : buildingProjects) {
-			for (final BuildingProject project : projectsLevel) {
-				if (project.location != null) {
-					locations.add(project.location);
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = buildingProjects
+						.get(ep);
+				for (final BuildingProject project : projectsLevel) {
+					if (project.location != null) {
+						locations.add(project.location);
+					}
 				}
 			}
 		}
@@ -3420,18 +3565,21 @@ public class Building {
 
 	}
 
+	/**
+	 * Native name
+	 * 
+	 * Ex: puit
+	 * 
+	 * @return
+	 */
 	public String getNativeBuildingName() {
-		if (location.getPlan() == null) {
-			return "";
-		}
-
-		return location.getPlan().nativeName;
+		return location.getNativeName();
 	}
 
 	public int getNbProjects() {
 		int nb = 0;
 
-		for (final List<BuildingProject> projects : buildingProjects) {
+		for (final List<BuildingProject> projects : buildingProjects.values()) {
 			nb += projects.size();
 		}
 
@@ -4204,7 +4352,7 @@ public class Building {
 		int nb = countGoods(ii.getItem(), ii.meta);
 
 		if (builder != null && buildingLocationIP != null
-				&& buildingLocationIP.key.equals(buildingGoal)) {
+				&& buildingLocationIP.planKey.equals(buildingGoal)) {
 			nb += builder.countInv(ii);
 		}
 
@@ -4243,8 +4391,8 @@ public class Building {
 					}
 				}
 			} else {
-				if (culture.goodsByItem.containsKey(ii.item)) {
-					final Goods good = culture.goodsByItem.get(ii.item);
+				if (culture.goodsByItem.containsKey(ii)) {
+					final Goods good = culture.goodsByItem.get(ii);
 					if (good != null) {
 						if (forExport) {
 							reserveAmount = good.targetQuantity;
@@ -4318,7 +4466,7 @@ public class Building {
 		int nb = countGoods(item, meta);
 
 		if (builder != null && buildingLocationIP != null
-				&& buildingLocationIP.key.equals(buildingGoal)) {
+				&& buildingLocationIP.planKey.equals(buildingGoal)) {
 			nb += builder.countInv(item, meta);
 		}
 
@@ -4468,7 +4616,7 @@ public class Building {
 			if (nbttagcompound.hasKey("isTownhall")) {
 				isTownhall = nbttagcompound.getBoolean("isTownhall");
 			} else {
-				isTownhall = location.key.equals(blTownhall);
+				isTownhall = location.planKey.equals(blTownhall);
 			}
 
 			townHallPos = Point.read(nbttagcompound, "townHallPos");
@@ -4737,7 +4885,7 @@ public class Building {
 		// again by initialiseBuildingProjects()
 		// So must be removed again
 		if (villageType.playerControlled) {
-			for (final List<BuildingProject> level : buildingProjects) {
+			for (final List<BuildingProject> level : buildingProjects.values()) {
 				final List<BuildingProject> toDelete = new ArrayList<BuildingProject>();
 
 				for (final BuildingProject project : level) {
@@ -4784,11 +4932,11 @@ public class Building {
 
 		if (buildingLocationIP != null) {
 
-			if (culture.getBuildingPlanSet(buildingLocationIP.key) == null) {
+			if (culture.getBuildingPlanSet(buildingLocationIP.planKey) == null) {
 				buildingLocationIP = null;
 			} else {
 				final BuildingPlanSet set = culture
-						.getBuildingPlanSet(buildingLocationIP.key);
+						.getBuildingPlanSet(buildingLocationIP.planKey);
 				if (buildingLocationIP.level >= set.plans
 						.get(buildingLocationIP.getVariation()).length) {
 					buildingLocationIP = null;
@@ -5021,41 +5169,50 @@ public class Building {
 		int nbProjects = 0;
 
 		// Projects
-		for (int i = 0; i < buildingProjects.size() && !registered; i++) {
-			for (int j = 0; j < buildingProjects.get(i).size() && !registered; j++) {
-				final BuildingProject project = buildingProjects.get(i).get(j);
-				if (location.level == 0) {
-					if (project.key.equals(location.key)
-							&& (project.location == null || project.location.level < 0
-									&& project.location
-											.isSameLocation(location))) {
-						if (project.location != null) {
-							location.upgradesAllowed = project.location.upgradesAllowed;
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = buildingProjects
+						.get(ep);
+				for (final BuildingProject project : projectsLevel) {
+					if (location.level == 0) {
+						if (project.key.equals(location.planKey)
+								&& (project.location == null || project.location.level < 0
+										&& project.location
+												.isSameLocation(location))) {
+							if (project.location != null) {
+								location.upgradesAllowed = project.location.upgradesAllowed;
+							}
+							project.location = location;
+							registered = true;
+							if (MLN.LogBuildingPlan >= MLN.MAJOR) {
+								MLN.major(this, "Updated building project: "
+										+ project + " with initial location.");
+							}
 						}
-						project.location = location;
-						registered = true;
-						if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-							MLN.major(this, "Updated building project: "
-									+ project + " with initial location.");
+					} else {
+						if (location.isSameLocation(project.location)) {
+							if (MLN.LogBuildingPlan >= MLN.MAJOR) {
+								MLN.major(this, "Updated building project: "
+										+ project + " from level "
+										+ project.location.level + " to "
+										+ location.level);
+							}
+
+							location.upgradesAllowed = project.location.upgradesAllowed;
+							project.location = location;
+							registered = true;
 						}
 					}
-				} else {
-					if (location.isSameLocation(project.location)) {
-						if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-							MLN.major(this, "Updated building project: "
-									+ project + " from level "
-									+ project.location.level + " to "
-									+ location.level);
-						}
+					nbProjects++;
 
-						location.upgradesAllowed = project.location.upgradesAllowed;
-						project.location = location;
-						registered = true;
+					if (registered) {
+						break;
 					}
 				}
-				nbProjects++;
 			}
-
+			if (registered) {
+				break;
+			}
 		}
 
 		if (registered) {
@@ -5071,9 +5228,6 @@ public class Building {
 		if (getCurrentBuildingPlan() != null) {
 			for (final Point p : buildings) {
 				final Building building = mw.getBuilding(p);
-				if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-					MLN.major(this, "Testing building: " + building);
-				}
 				if (building != null && building.location != null
 						&& building.location.isSameLocation(location)) {
 					building.location = location;
@@ -5095,19 +5249,24 @@ public class Building {
 			List<BuildingProject> parentProjectLevel = null;
 			int parentPos = 0;
 
-			for (final List<BuildingProject> projects : buildingProjects) {
-				int pos = 0;
-				for (final BuildingProject project : projects) {
-					if (project.location != null) {
-						if (project.location.isLocationSamePlace(location)
-								&& project.key.equals(s)) {
-							found = true;
-						} else if (project.location.isSameLocation(location)) {
-							parentProjectLevel = projects;
-							parentPos = pos;
+			for (final EnumProjects ep : EnumProjects.values()) {
+				if (buildingProjects.containsKey(ep)) {
+					final List<BuildingProject> projectsLevel = buildingProjects
+							.get(ep);
+					int pos = 0;
+					for (final BuildingProject project : projectsLevel) {
+						if (project.location != null) {
+							if (project.location.isLocationSamePlace(location)
+									&& project.key.equals(s)) {
+								found = true;
+							} else if (project.location
+									.isSameLocation(location)) {
+								parentProjectLevel = projectsLevel;
+								parentPos = pos;
+							}
 						}
+						pos++;
 					}
-					pos++;
 				}
 			}
 			if (!found && parentProjectLevel != null) {
@@ -7152,7 +7311,7 @@ public class Building {
 				resCost.add(goalPlan.resCost.get(key));
 				int has = countGoods(key.getItem(), key.meta);
 				if (builder != null && buildingLocationIP != null
-						&& buildingLocationIP.key.equals(buildingGoal)) {
+						&& buildingLocationIP.planKey.equals(buildingGoal)) {
 					has += builder.countInv(key.getItem(), key.meta);
 				}
 				if (has > goalPlan.resCost.get(key)) {
@@ -7222,7 +7381,7 @@ public class Building {
 
 				String[] status;
 				if (buildingLocationIP != null
-						&& buildingLocationIP.key.equals(buildingGoal)) {
+						&& buildingLocationIP.planKey.equals(buildingGoal)) {
 					if (buildingLocationIP.level == 0) {
 						status = new String[] { "ui.inconstruction" };
 					} else {
@@ -7261,7 +7420,7 @@ public class Building {
 						{ "ui.noconstruction2" }, { "" } };
 			} else {
 				final String planName = culture.getBuildingPlanSet(
-						buildingLocationIP.key).getNativeName();
+						buildingLocationIP.planKey).getNativeName();
 
 				String[] status;
 				if (buildingLocationIP.level == 0) {
@@ -7332,7 +7491,7 @@ public class Building {
 							nbFemale++;
 						}
 					} else {
-						if (vr.villagerSize == MillVillager.max_child_size) {
+						if (vr.villagerSize == MillVillager.MAX_CHILD_SIZE) {
 							if (vr.gender == MillVillager.MALE) {
 								nbGrownBoy++;
 							} else {
@@ -7666,18 +7825,27 @@ public class Building {
 			}
 
 			nbttaglist = new NBTTagList();
-			for (final List<BuildingProject> projectsLevel : buildingProjects) {
-				for (final BuildingProject project : projectsLevel) {
-					if (project.location != null) {
-						final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-						project.location.write(nbttagcompound1, "location",
-								"buildingProjects");
-						nbttaglist.appendTag(nbttagcompound1);
-						if (MLN.LogHybernation >= MLN.MAJOR) {
-							MLN.major(this, "Writing building location: "
-									+ project.location + " (level: "
-									+ project.location.level + ", variation: "
-									+ project.location.getVariation() + ")");
+			for (final EnumProjects ep : EnumProjects.values()) {
+				if (buildingProjects.containsKey(ep)) {
+					final List<BuildingProject> projectsLevel = buildingProjects
+							.get(ep);
+					for (final BuildingProject project : projectsLevel) {
+						if (project.location != null) {
+							final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+							project.location.write(nbttagcompound1, "location",
+									"buildingProjects");
+							nbttaglist.appendTag(nbttagcompound1);
+							if (MLN.LogHybernation >= MLN.MAJOR) {
+								MLN.major(
+										this,
+										"Writing building location: "
+												+ project.location
+												+ " (level: "
+												+ project.location.level
+												+ ", variation: "
+												+ project.location
+														.getVariation() + ")");
+							}
 						}
 					}
 				}

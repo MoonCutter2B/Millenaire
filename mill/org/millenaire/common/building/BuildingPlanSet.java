@@ -1,4 +1,4 @@
-package org.millenaire.common.construction;
+package org.millenaire.common.building;
 
 import io.netty.buffer.ByteBufInputStream;
 
@@ -17,9 +17,7 @@ import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
 import org.millenaire.common.VillageType;
-import org.millenaire.common.building.BuildingLocation;
-import org.millenaire.common.construction.BuildingPlan.LocationBuildingPair;
-import org.millenaire.common.construction.BuildingPlan.PointType;
+import org.millenaire.common.building.BuildingPlan.LocationBuildingPair;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.network.StreamReadWrite;
 
@@ -95,7 +93,7 @@ public class BuildingPlanSet {
 	public String getFullName(final EntityPlayer player) {
 		final BuildingPlan plan = getRandomStartingPlan();
 
-		return plan.getNativeDisplayName(player);
+		return plan.getFullDisplayName();
 	}
 
 	public String getGameName() {

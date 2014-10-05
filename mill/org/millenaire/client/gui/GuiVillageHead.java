@@ -3,6 +3,7 @@ package org.millenaire.client.gui;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +17,9 @@ import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
 import org.millenaire.common.UserProfile;
 import org.millenaire.common.building.Building;
-import org.millenaire.common.construction.BuildingPlan;
-import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.building.BuildingPlan;
+import org.millenaire.common.building.BuildingProject;
+import org.millenaire.common.building.BuildingProject.EnumProjects;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
@@ -199,77 +201,92 @@ public class GuiVillageHead extends GuiText {
 		text.add(new Line());
 		text.add(new Line(MLN.string("ui.possiblehousing") + ":"));
 		text.add(new Line());
-		final List<List<BuildingProject>> projects = chief.getTownHall().buildingProjects;
+		final Map<EnumProjects, List<BuildingProject>> projects = chief
+				.getTownHall().buildingProjects;
 
 		final UserProfile profile = Mill.proxy.getClientProfile();
 
 		final int reputation = chief.getTownHall().getReputation(
 				player.getDisplayName());
 
-		for (final List<BuildingProject> level : projects) {
-			for (final BuildingProject project : level) {
-				final BuildingPlan plan = project.planSet
-						.getRandomStartingPlan();
-				if (plan != null && plan.price > 0 && !plan.isgift) {
-					String status = "";
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (chief.getTownHall().buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = chief.getTownHall().buildingProjects
+						.get(ep);
+				for (final BuildingProject project : projectsLevel) {
+					if (project.planSet != null) {
+						final BuildingPlan plan = project.planSet
+								.getRandomStartingPlan();
+						if (plan != null && plan.price > 0 && !plan.isgift) {
+							String status = "";
 
-					boolean buyButton = false;
+							boolean buyButton = false;
 
-					if (project.location != null) {
-						status = MLN.string("ui.alreadybuilt") + ".";
-					} else if (chief.getTownHall().buildingsBought
-							.contains(project.key)) {
-						status = MLN.string("ui.alreadyrequested") + ".";
-					} else if (plan.reputation > reputation) {
-						status = MLN.string("ui.notavailableyet") + ".";
-					} else if (plan.price > MillCommonUtilities
-							.countMoney(player.inventory)) {
-						status = MLN
-								.string("ui.youaremissing",
-										""
-												+ MillCommonUtilities.getShortPrice(plan.price
-														- MillCommonUtilities
-																.countMoney(player.inventory)));
-					} else {
-						status = MLN.string("ui.available") + ".";
-						buyButton = true;
-					}
-					text.add(new Line(plan.nativeName + ": " + status, false));
+							if (project.location != null) {
+								status = MLN.string("ui.alreadybuilt") + ".";
+							} else if (chief.getTownHall().buildingsBought
+									.contains(project.key)) {
+								status = MLN.string("ui.alreadyrequested")
+										+ ".";
+							} else if (plan.reputation > reputation) {
+								status = MLN.string("ui.notavailableyet") + ".";
+							} else if (plan.price > MillCommonUtilities
+									.countMoney(player.inventory)) {
+								status = MLN
+										.string("ui.youaremissing",
+												""
+														+ MillCommonUtilities.getShortPrice(plan.price
+																- MillCommonUtilities
+																		.countMoney(player.inventory)));
+							} else {
+								status = MLN.string("ui.available") + ".";
+								buyButton = true;
+							}
+							text.add(new Line(plan.nativeName + ": " + status,
+									false));
 
-					if (buyButton) {
-						text.add(new Line(new GuiButtonChief(
-								GuiButtonChief.BUILDING, MLN.string(
-										"ui.buybuilding", plan.nativeName,
-										MillCommonUtilities
-												.getShortPrice(plan.price)),
-								plan.buildingKey)));
-						text.add(new Line(false));
-						text.add(new Line());
-					}
-				} else if (plan.isgift && MLN.bonusEnabled
-						&& !Mill.proxy.isTrueClient()) {
-					String status = "";
+							if (buyButton) {
+								text.add(new Line(
+										new GuiButtonChief(
+												GuiButtonChief.BUILDING,
+												MLN.string(
+														"ui.buybuilding",
+														plan.nativeName,
+														MillCommonUtilities
+																.getShortPrice(plan.price)),
+												plan.buildingKey)));
+								text.add(new Line(false));
+								text.add(new Line());
+							}
+						} else if (plan.isgift && MLN.bonusEnabled
+								&& !Mill.proxy.isTrueClient()) {
+							String status = "";
 
-					boolean buyButton = false;
+							boolean buyButton = false;
 
-					if (project.location != null) {
-						status = MLN.string("ui.alreadybuilt") + ".";
-					} else if (chief.getTownHall().buildingsBought
-							.contains(project.key)) {
-						status = MLN.string("ui.alreadyrequested") + ".";
-					} else {
-						status = MLN.string("ui.bonusavailable") + ".";
-						buyButton = true;
-					}
-					text.add(new Line(plan.nativeName + ": " + status, false));
+							if (project.location != null) {
+								status = MLN.string("ui.alreadybuilt") + ".";
+							} else if (chief.getTownHall().buildingsBought
+									.contains(project.key)) {
+								status = MLN.string("ui.alreadyrequested")
+										+ ".";
+							} else {
+								status = MLN.string("ui.bonusavailable") + ".";
+								buyButton = true;
+							}
+							text.add(new Line(plan.nativeName + ": " + status,
+									false));
 
-					if (buyButton) {
-						text.add(new Line(new GuiButtonChief(
-								GuiButtonChief.BUILDING,
-								MLN.string("ui.buybonusbuilding",
-										plan.nativeName), plan.buildingKey)));
-						text.add(new Line(false));
-						text.add(new Line());
+							if (buyButton) {
+								text.add(new Line(new GuiButtonChief(
+										GuiButtonChief.BUILDING, MLN.string(
+												"ui.buybonusbuilding",
+												plan.nativeName),
+										plan.buildingKey)));
+								text.add(new Line(false));
+								text.add(new Line());
+							}
+						}
 					}
 				}
 			}

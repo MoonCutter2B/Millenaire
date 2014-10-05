@@ -47,7 +47,7 @@ import org.millenaire.common.block.BlockMillCrops;
 import org.millenaire.common.block.BlockOrientedBrick;
 import org.millenaire.common.block.BlockOrientedSlab;
 import org.millenaire.common.block.BlockPanel;
-import org.millenaire.common.construction.BuildingPlan;
+import org.millenaire.common.building.BuildingPlan;
 import org.millenaire.common.entity.EntityTargetedBlaze;
 import org.millenaire.common.entity.EntityTargetedGhast;
 import org.millenaire.common.entity.EntityTargetedWitherSkeleton;

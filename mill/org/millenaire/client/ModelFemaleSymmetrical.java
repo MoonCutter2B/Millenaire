@@ -14,28 +14,11 @@ import net.minecraft.util.MathHelper;
 
 public class ModelFemaleSymmetrical extends ModelBiped {
 
-	public ModelRenderer bipedHead;
-
-	public ModelRenderer bipedHeadwear;
-
 	public ModelRenderer bipedUpperBody;
-
-	public ModelRenderer bipedMidsection;
-
-	public ModelRenderer bipedHips;
-
 	public ModelRenderer bipedBreast;
 
-	public ModelRenderer bipedRightArm;
-
-	public ModelRenderer bipedLeftArm;
-	public ModelRenderer bipedRightLeg;
-	public ModelRenderer bipedLeftLeg;
-	public ModelRenderer bipedEars;
-	public ModelRenderer bipedCloak;
 	public boolean heldItemLeft;
 	public boolean heldItemRight;
-	public boolean isSneak;
 
 	public ModelFemaleSymmetrical() {
 		this(0.0F);
@@ -48,7 +31,6 @@ public class ModelFemaleSymmetrical extends ModelBiped {
 	public ModelFemaleSymmetrical(final float f, final float f1) {
 		heldItemLeft = false;
 		heldItemRight = false;
-		isSneak = false;
 		bipedCloak = new ModelRenderer(this, 0, 0);
 		bipedCloak.addBox(-5F, 0.0F, -1F, 10, 16, 1, f);
 		bipedEars = new ModelRenderer(this, 24, 0);

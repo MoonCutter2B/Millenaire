@@ -252,7 +252,7 @@ public class DevModUtilities {
 							+ " gender: " + villager.gender);
 			if (entityplayer.inventory.getCurrentItem() != null
 					&& entityplayer.inventory.getCurrentItem().getItem() == Mill.summoningWand) {
-				villager.size = 20;
+				villager.size = MillVillager.MAX_CHILD_SIZE;
 				villager.growSize();
 			}
 		}

@@ -26,6 +26,7 @@ import org.millenaire.common.Point;
 import org.millenaire.common.TileEntityMillChest;
 import org.millenaire.common.TileEntityPanel;
 import org.millenaire.common.UserProfile;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.CommonGuiHandler;
@@ -35,6 +36,12 @@ public class ServerSender {
 
 	public static void createAndSendPacketToPlayer(final DataOutput data,
 			final EntityPlayer player) {
+		
+		if (((EntityPlayerMP) player).playerNetServerHandler==null) {
+			MLN.printException(new MillenaireException("Trying to send packet to a player with null playerNetServerHandler"));
+			return;
+		}
+		
 		final Packet packet = createServerPacket(data);
 		((EntityPlayerMP) player).playerNetServerHandler.sendPacket(packet);
 	}

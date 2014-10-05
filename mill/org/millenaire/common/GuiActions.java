@@ -1,5 +1,8 @@
 package org.millenaire.common;
 
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -8,13 +11,17 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.world.World;
 
+import org.millenaire.client.gui.DisplayActions;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.Quest.QuestInstance;
 import org.millenaire.common.building.Building;
-import org.millenaire.common.construction.BuildingPlan;
-import org.millenaire.common.construction.BuildingPlan.LocationReturn;
-import org.millenaire.common.construction.BuildingPlanSet;
-import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.building.BuildingCustomPlan;
+import org.millenaire.common.building.BuildingCustomPlan.TypeRes;
+import org.millenaire.common.building.BuildingPlan;
+import org.millenaire.common.building.BuildingPlan.LocationReturn;
+import org.millenaire.common.building.BuildingPlanSet;
+import org.millenaire.common.building.BuildingProject;
+import org.millenaire.common.building.BuildingProject.EnumProjects;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.forge.MillAchievements;
@@ -207,10 +214,29 @@ public class GuiActions {
 		}
 	}
 
-	public static void newBuilding(final EntityPlayer player,
-			final Building townhall, final Point pos, final String planKey) {
+	public static void newCustomBuilding(final EntityPlayer player,
+			final Building townHall, final Point pos, final String planKey) {
+		
+		final BuildingCustomPlan customBuilding = townHall.culture
+				.getBuildingCustom(planKey);
 
-		final BuildingPlanSet set = townhall.culture
+		if (customBuilding != null) {
+
+			try {
+				townHall.addCustomBuilding(customBuilding, pos);
+			} catch (final Exception e) {
+				MLN.printException(
+						"Exception when creation custom building: "
+								+ planKey, e);
+			}
+		}
+		
+	}
+
+	public static void newBuilding(final EntityPlayer player,
+			final Building townHall, final Point pos, final String planKey) {
+
+		final BuildingPlanSet set = townHall.culture
 				.getBuildingPlanSet(planKey);
 
 		if (set == null) {
@@ -219,10 +245,10 @@ public class GuiActions {
 
 		final BuildingPlan plan = set.getRandomStartingPlan();
 
-		final LocationReturn lr = plan.testSpot(townhall.winfo,
-				townhall.pathing, townhall.getPos(), pos.getiX()
-						- townhall.winfo.mapStartX, pos.getiZ()
-						- townhall.winfo.mapStartZ,
+		final LocationReturn lr = plan.testSpot(townHall.winfo,
+				townHall.pathing, townHall.getPos(), pos.getiX()
+						- townHall.winfo.mapStartX, pos.getiZ()
+						- townHall.winfo.mapStartZ,
 				MillCommonUtilities.getRandom(), -1);
 
 		if (lr.location == null) {
@@ -244,7 +270,7 @@ public class GuiActions {
 			}
 
 			if (MLN.DEV) {
-				MillCommonUtilities.setBlock(townhall.mw.world,
+				MillCommonUtilities.setBlock(townHall.mw.world,
 						lr.errorPos.getRelative(0, 30, 0), Blocks.gravel);
 			}
 
@@ -256,13 +282,13 @@ public class GuiActions {
 			final BuildingProject project = new BuildingProject(set);
 			project.location = lr.location;
 
-			setSign(townhall, lr.location.minx, lr.location.minz, project);
-			setSign(townhall, lr.location.maxx, lr.location.minz, project);
-			setSign(townhall, lr.location.minx, lr.location.maxz, project);
-			setSign(townhall, lr.location.maxx, lr.location.maxz, project);
+			setSign(townHall, lr.location.minx, lr.location.minz, project);
+			setSign(townHall, lr.location.maxx, lr.location.minz, project);
+			setSign(townHall, lr.location.minx, lr.location.maxz, project);
+			setSign(townHall, lr.location.maxx, lr.location.maxz, project);
 
-			townhall.buildingProjects.get(3).add(project);
-			townhall.noProjectsLeft = false;
+			townHall.buildingProjects.get(EnumProjects.CORE).add(project);
+			townHall.noProjectsLeft = false;
 			ServerSender.sendTranslatedSentence(player, MLN.DARKGREEN,
 					"ui.projectadded");
 		}
@@ -295,7 +321,6 @@ public class GuiActions {
 			if (villageType.playerControlled) {
 				player.addStat(MillAchievements.villageleader, 1);
 			}
-
 		}
 
 	}
@@ -338,14 +363,14 @@ public class GuiActions {
 		}
 	}
 
-	private static void setSign(final Building townhall, final int i,
+	private static void setSign(final Building townHall, final int i,
 			final int j, final BuildingProject project) {
-		MillCommonUtilities.setBlockAndMetadata(townhall.worldObj, i,
-				MillCommonUtilities.findTopSoilBlock(townhall.worldObj, i, j),
+		MillCommonUtilities.setBlockAndMetadata(townHall.worldObj, i,
+				MillCommonUtilities.findTopSoilBlock(townHall.worldObj, i, j),
 				j, Blocks.standing_sign, 0, true, false);
-		final TileEntitySign sign = (TileEntitySign) townhall.worldObj
+		final TileEntitySign sign = (TileEntitySign) townHall.worldObj
 				.getTileEntity(i, MillCommonUtilities.findTopSoilBlock(
-						townhall.worldObj, i, j), j);
+						townHall.worldObj, i, j), j);
 		if (sign != null) {
 			sign.signText = new String[] { project.getNativeName(), "",
 					project.getGameName(), "" };

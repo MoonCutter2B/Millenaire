@@ -28,8 +28,9 @@ import org.millenaire.common.UserProfile;
 import org.millenaire.common.VillagerRecord;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingLocation;
-import org.millenaire.common.construction.BuildingPlan;
-import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.building.BuildingPlan;
+import org.millenaire.common.building.BuildingProject;
+import org.millenaire.common.building.BuildingProject.EnumProjects;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.item.Goods;
@@ -133,8 +134,8 @@ public class StreamReadWrite {
 		}
 
 		final BuildingLocation bl = new BuildingLocation();
-
-		bl.key = readNullableString(ds);
+		bl.isCustomBuilding = ds.readBoolean();
+		bl.planKey = readNullableString(ds);
 		bl.shop = readNullableString(ds);
 
 		bl.maleResident = StreamReadWrite.readStringList(ds);
@@ -191,11 +192,15 @@ public class StreamReadWrite {
 		}
 
 		final BuildingProject bp = new BuildingProject();
-
+		bp.isCustomBuilding = ds.readBoolean();
 		bp.key = readNullableString(ds);
 		bp.location = readNullableBuildingLocation(ds);
 		if (culture != null) {
-			bp.planSet = culture.getBuildingPlanSet(bp.key);
+			if (bp.isCustomBuilding) {
+				bp.customBuildingPlan = culture.getBuildingCustom(bp.key);
+			} else {
+				bp.planSet = culture.getBuildingPlanSet(bp.key);
+			}
 		}
 
 		return bp;
@@ -433,10 +438,10 @@ public class StreamReadWrite {
 		return v;
 	}
 
-	public static List<List<BuildingProject>> readProjectListList(
+	public static Map<BuildingProject.EnumProjects, List<BuildingProject>> readProjectListList(
 			final DataInput ds, final Culture culture) throws IOException {
 
-		final List<List<BuildingProject>> v = new ArrayList<List<BuildingProject>>();
+		final Map<BuildingProject.EnumProjects, List<BuildingProject>> v = new HashMap<BuildingProject.EnumProjects, List<BuildingProject>>();
 
 		final int nb = ds.readInt();
 
@@ -446,7 +451,7 @@ public class StreamReadWrite {
 			for (int j = 0; j < nb2; j++) {
 				v2.add(readNullableBuildingProject(ds, culture));
 			}
-			v.add(v2);
+			v.put(BuildingProject.EnumProjects.getById(i), v2);
 		}
 
 		return v;
@@ -605,7 +610,8 @@ public class StreamReadWrite {
 		data.writeBoolean(bl == null);
 
 		if (bl != null) {
-			writeNullableString(bl.key, data);
+			data.writeBoolean(bl.isCustomBuilding);
+			writeNullableString(bl.planKey, data);
 			writeNullableString(bl.shop, data);
 			writeStringList(bl.maleResident, data);
 			writeStringList(bl.femaleResident, data);
@@ -651,6 +657,7 @@ public class StreamReadWrite {
 		data.writeBoolean(bp == null);
 
 		if (bp != null) {
+			data.writeBoolean(bp.isCustomBuilding);
 			writeNullableString(bp.key, data);
 			writeNullableBuildingLocation(bp.location, data);
 		}
@@ -823,16 +830,22 @@ public class StreamReadWrite {
 	}
 
 	public static void writeProjectListList(
-			final List<List<BuildingProject>> projects, final DataOutput data)
-			throws IOException {
-		data.writeInt(projects.size());
+			final Map<EnumProjects, List<BuildingProject>> projects,
+			final DataOutput data) throws IOException {
 
-		for (final List<BuildingProject> vp : projects) {
-			data.writeInt(vp.size());
-			for (final BuildingProject bp : vp) {
-				writeNullableBuildingProject(bp, data);
+		data.writeInt(EnumProjects.values().length);
+
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (projects.containsKey(ep)) {
+				data.writeInt(projects.get(ep).size());
+				for (final BuildingProject bp : projects.get(ep)) {
+					writeNullableBuildingProject(bp, data);
+				}
+			} else {
+				data.writeInt(0);
 			}
 		}
+
 	}
 
 	public static void writeStringList(final List<String> strings,

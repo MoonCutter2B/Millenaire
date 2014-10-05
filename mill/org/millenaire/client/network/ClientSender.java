@@ -15,12 +15,19 @@ import org.millenaire.common.GuiActions;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.Point;
+import org.millenaire.common.VillageType;
 import org.millenaire.common.building.Building;
-import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.building.BuildingProject;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerReceiver;
 import org.millenaire.common.network.StreamReadWrite;
 
+/**
+ * Class dedicate to sending packets from the client to the server
+ * 
+ * @author cedricdj
+ * 
+ */
 public class ClientSender {
 
 	public static void activateMillChest(final EntityPlayer player,
@@ -275,6 +282,23 @@ public class ClientSender {
 			data.writeUTF(planKey);
 		} catch (final IOException e) {
 			MLN.printException("Error in newBuilding", e);
+		}
+
+		createAndSendServerPacket(data);
+	}
+
+	public static void newCustomBuilding(final EntityPlayer player,
+			final Building townHall, final Point pos, final String planKey) {
+		final ByteBufOutputStream data = getNewByteBufOutputStream();
+
+		try {
+			data.write(ServerReceiver.PACKET_GUIACTION);
+			data.write(ServerReceiver.GUIACTION_NEW_CUSTOM_BUILDING_PROJECT);
+			StreamReadWrite.writeNullablePoint(townHall.getPos(), data);
+			StreamReadWrite.writeNullablePoint(pos, data);
+			data.writeUTF(planKey);
+		} catch (final IOException e) {
+			MLN.printException("Error in newCustomBuilding", e);
 		}
 
 		createAndSendServerPacket(data);

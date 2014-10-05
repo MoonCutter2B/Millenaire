@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -19,9 +20,10 @@ import org.millenaire.common.Culture.CultureLanguage.Dialogue;
 import org.millenaire.common.Culture.CultureLanguage.ReputationLevel;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.Building;
+import org.millenaire.common.building.BuildingCustomPlan;
 import org.millenaire.common.building.BuildingLocation;
-import org.millenaire.common.construction.BuildingPlan;
-import org.millenaire.common.construction.BuildingPlanSet;
+import org.millenaire.common.building.BuildingPlan;
+import org.millenaire.common.building.BuildingPlanSet;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.ExtFileFilter;
 import org.millenaire.common.core.MillCommonUtilities.WeightedChoice;
@@ -267,7 +269,7 @@ public class Culture {
 					boolean found = false;
 
 					for (final BuildingLocation bl : townHall.getLocations()) {
-						if (bl.key.equals(s)) {
+						if (bl.planKey.equals(s)) {
 							found = true;
 						}
 					}
@@ -279,7 +281,7 @@ public class Culture {
 
 				for (final String s : not_buildings) {
 					for (final BuildingLocation bl : townHall.getLocations()) {
-						if (bl.key.equals(s)) {
+						if (bl.planKey.equals(s)) {
 							return false;
 						}
 					}
@@ -1377,41 +1379,43 @@ public class Culture {
 	static {
 		oldShopConversion.put("indianarmyforge", "armyforge");
 		oldShopConversion.put("indianforge", "forge");
-		oldShopConversion.put("indiantownhall", "townhall");
+		oldShopConversion.put("indiantownhall", "townHall");
 	}
 
 	public String key;
 
 	public String qualifierSeparator = " ";
 
-	private HashMap<String, BuildingPlanSet> planSet = new HashMap<String, BuildingPlanSet>();
+	private Map<String, BuildingPlanSet> planSet = new HashMap<String, BuildingPlanSet>();
+	private Map<String, BuildingCustomPlan> customBuildings = new HashMap<String, BuildingCustomPlan>();
 
-	private final HashMap<String, BuildingPlanSet> serverPlanSet = new HashMap<String, BuildingPlanSet>();
+	private final Map<String, BuildingPlanSet> serverPlanSet = new HashMap<String, BuildingPlanSet>();
+	private final Map<String, BuildingCustomPlan> serverCustomBuildings = new HashMap<String, BuildingCustomPlan>();
 
 	public List<BuildingPlanSet> ListPlanSets = new ArrayList<BuildingPlanSet>();
 
-	private final HashMap<String, VillageType> villageTypes = new HashMap<String, VillageType>();
+	private final Map<String, VillageType> villageTypes = new HashMap<String, VillageType>();
 
-	private final HashMap<String, VillageType> serverVillageTypes = new HashMap<String, VillageType>();
+	private final Map<String, VillageType> serverVillageTypes = new HashMap<String, VillageType>();
 
 	public List<VillageType> listVillageTypes = new ArrayList<VillageType>();
 
-	private final HashMap<String, VillageType> loneBuildingTypes = new HashMap<String, VillageType>();
-	private final HashMap<String, VillageType> serverLoneBuildingTypes = new HashMap<String, VillageType>();
+	private final Map<String, VillageType> loneBuildingTypes = new HashMap<String, VillageType>();
+	private final Map<String, VillageType> serverLoneBuildingTypes = new HashMap<String, VillageType>();
 	public List<VillageType> listLoneBuildingTypes = new ArrayList<VillageType>();
-	public final HashMap<String, VillagerType> villagerTypes = new HashMap<String, VillagerType>();
-	private final HashMap<String, VillagerType> serverVillagerTypes = new HashMap<String, VillagerType>();
+	public final Map<String, VillagerType> villagerTypes = new HashMap<String, VillagerType>();
+	private final Map<String, VillagerType> serverVillagerTypes = new HashMap<String, VillagerType>();
 	public List<VillagerType> listVillagerTypes = new ArrayList<VillagerType>();
-	private final HashMap<String, List<String>> nameLists = new HashMap<String, List<String>>();
+	private final Map<String, List<String>> nameLists = new HashMap<String, List<String>>();
 
-	public HashMap<String, List<Goods>> shopSells = new HashMap<String, List<Goods>>();
-	public HashMap<String, List<Goods>> shopBuys = new HashMap<String, List<Goods>>();
-	public HashMap<String, List<Goods>> shopBuysOptional = new HashMap<String, List<Goods>>();
-	public HashMap<String, List<InvItem>> shopNeeds = new HashMap<String, List<InvItem>>();
+	public Map<String, List<Goods>> shopSells = new HashMap<String, List<Goods>>();
+	public Map<String, List<Goods>> shopBuys = new HashMap<String, List<Goods>>();
+	public Map<String, List<Goods>> shopBuysOptional = new HashMap<String, List<Goods>>();
+	public Map<String, List<InvItem>> shopNeeds = new HashMap<String, List<InvItem>>();
 
 	public List<Goods> goodsList = new ArrayList<Goods>();
-	public HashMap<String, Goods> goods = new HashMap<String, Goods>();
-	public HashMap<InvItem, Goods> goodsByItem = new HashMap<InvItem, Goods>();
+	public Map<String, Goods> goods = new HashMap<String, Goods>();
+	public Map<InvItem, Goods> goodsByItem = new HashMap<InvItem, Goods>();
 
 	public List<String> knownCrops = new ArrayList<String>();
 
@@ -1478,6 +1482,23 @@ public class Culture {
 		}
 
 		return maincl.compareWithLanguage(refcl, writer);
+	}
+
+	public BuildingCustomPlan getBuildingCustom(final String key) {
+		if (customBuildings.containsKey(key)) {
+			return customBuildings.get(key);
+		}
+
+		if (serverCustomBuildings.containsKey(key)) {
+			return serverCustomBuildings.get(key);
+		}
+
+		if (Mill.isDistantClient()) {
+			final BuildingCustomPlan set = new BuildingCustomPlan(this, key);
+			serverCustomBuildings.put(key, set);
+			return set;
+		}
+		return null;
 	}
 
 	public String getBuildingGameName(final BuildingPlan plan) {
@@ -1554,6 +1575,33 @@ public class Culture {
 			return fallbackLanguageServer.strings.get(key);
 		}
 		return key;
+	}
+
+	public String getCustomBuildingGameName(
+			final BuildingCustomPlan customBuilding) {
+
+		final String planNameLC = customBuilding.buildingKey.toLowerCase();
+
+		if (mainLanguage != null
+				&& mainLanguage.buildingNames.containsKey(planNameLC)) {
+			return mainLanguage.buildingNames.get(planNameLC);
+		} else if (mainLanguageServer != null
+				&& mainLanguageServer.buildingNames.containsKey(planNameLC)) {
+			return mainLanguageServer.buildingNames.get(planNameLC);
+		} else if (fallbackLanguage != null
+				&& fallbackLanguage.buildingNames.containsKey(planNameLC)) {
+			return fallbackLanguage.buildingNames.get(planNameLC);
+		} else if (fallbackLanguageServer != null
+				&& fallbackLanguageServer.buildingNames.containsKey(planNameLC)) {
+			return fallbackLanguageServer.buildingNames.get(planNameLC);
+		}
+
+		if (MLN.LogTranslation >= MLN.MAJOR || MLN.generateTranslationGap) {
+			MLN.major(this, "Could not find the custom building name for :"
+					+ customBuilding.buildingKey);
+		}
+
+		return null;
 	}
 
 	public Dialogue getDialog(final MillVillager v1, final MillVillager v2) {
@@ -1856,6 +1904,13 @@ public class Culture {
 			planSet = BuildingPlan.loadPlans(thisCultureDirs, this);
 
 			if (planSet == null) {
+				return false;
+			}
+
+			customBuildings = BuildingCustomPlan.loadCustomBuildings(
+					thisCultureDirs, this);
+
+			if (customBuildings == null) {
 				return false;
 			}
 

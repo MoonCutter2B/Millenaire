@@ -72,8 +72,7 @@ public class Point {
 		int dist = (int) distanceTo(p);
 
 		if (dist < 950) {
-			return Math.round(dist / 100) * 100 + " "
-					+ MLN.string("other.metre");
+			return dist / 100 * 100 + " " + MLN.string("other.metre");
 		} else {
 			dist = Math.round(dist / 500);
 			if (dist % 2 == 0) {
@@ -89,9 +88,9 @@ public class Point {
 		int dist = (int) distanceTo(p);
 
 		if (dist < 950) {
-			return Math.round(dist / 100) * 100 + "m";
+			return dist / 100 * 100 + "m";
 		} else {
-			dist = Math.round(dist / 500);
+			dist = dist / 500;
 			if (dist % 2 == 0) {
 				return dist / 2 + "km";
 			} else {

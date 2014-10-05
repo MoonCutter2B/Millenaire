@@ -1,6 +1,7 @@
 package org.millenaire.client.gui;
 
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +11,10 @@ import org.millenaire.client.MillClientUtilities;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.Point;
 import org.millenaire.common.UserProfile;
+import org.millenaire.common.VillageType;
 import org.millenaire.common.building.Building;
+import org.millenaire.common.building.BuildingCustomPlan;
+import org.millenaire.common.building.BuildingCustomPlan.TypeRes;
 import org.millenaire.common.forge.Mill;
 
 public class DisplayActions {
@@ -61,6 +65,35 @@ public class DisplayActions {
 			final Building townHall, final Point pos) {
 		Minecraft.getMinecraft().displayGuiScreen(
 				new GuiNewBuildingProject(player, townHall, pos));
+	}
+
+	/**
+	 * Create a GUI to confirm the creation of a custom building
+	 * 
+	 * @param player
+	 * @param townHall
+	 * @param pos
+	 * @param customBuilding
+	 */
+	public static void displayNewCustomBuildingGUI(final EntityPlayer player,
+			final Building townHall, final Point pos,
+			final BuildingCustomPlan customBuilding) {
+		Minecraft.getMinecraft().displayGuiScreen(
+				new GuiNewCustomBuilding(player, townHall, pos, customBuilding));
+	}
+	
+	/**
+	 * Create a GUI to confirm the creation of a new village with a custom TH
+	 * 
+	 * @param player
+	 * @param pos
+	 * @param villageType
+	 */
+	public static void displayNewCustomBuildingGUI(final EntityPlayer player,
+			final Point pos,
+			final VillageType villageType) {
+		Minecraft.getMinecraft().displayGuiScreen(
+				new GuiNewCustomBuilding(player, pos, villageType));
 	}
 
 	public static void displayNewVillageGUI(final EntityPlayer player,

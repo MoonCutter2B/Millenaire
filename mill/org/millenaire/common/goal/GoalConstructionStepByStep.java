@@ -9,8 +9,8 @@ import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
-import org.millenaire.common.construction.BuildingPlan;
-import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
+import org.millenaire.common.building.BuildingBlock;
+import org.millenaire.common.building.BuildingPlan;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
@@ -214,7 +214,7 @@ public class GoalConstructionStepByStep extends Goal {
 		if (!villager.getTownHall().areBlocksLeft()) {
 			if (MLN.LogBuildingPlan >= MLN.MAJOR) {
 				MLN.major(this, "Villager " + villager + " laid last block in "
-						+ villager.getTownHall().buildingLocationIP.key
+						+ villager.getTownHall().buildingLocationIP.planKey
 						+ " at " + bblock.p);
 			}
 			villager.getTownHall().setBblocks(null);

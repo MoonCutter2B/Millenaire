@@ -19,8 +19,9 @@ import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillVillager.InvItemAlphabeticalComparator;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingLocation;
-import org.millenaire.common.construction.BuildingPlan;
-import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.building.BuildingPlan;
+import org.millenaire.common.building.BuildingProject;
+import org.millenaire.common.building.BuildingProject.EnumProjects;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.goal.Goal;
@@ -69,46 +70,49 @@ public class TileEntityPanel extends TileEntitySign {
 			final BuildingProject project, final Building townHall,
 			final List<String> page) {
 
-		if (project.location == null || project.location.level < 0) {
-			final BuildingPlan plan = project.planSet.getRandomStartingPlan();
+		if (project.planSet != null) {
+			if (project.location == null || project.location.level < 0) {
+				final BuildingPlan plan = project.planSet
+						.getRandomStartingPlan();
 
-			page.add(plan.getNativeDisplayName(player) + ": "
-					+ MLN.string("panels.notyetbuilt") + ".");
-		} else {
-			if (project.location.level + 1 < project
-					.getLevelsNumber(project.location.getVariation())) {
-
-				final BuildingPlan plan = project.getPlan(
-						project.location.getVariation(),
-						project.location.level + 1);
-
-				final BuildingLocation l = project.location;
-				page.add(plan.getNativeDisplayName(player)
-						+ " ("
-						+ MathHelper.floor_double(l.pos.distanceTo(townHall
-								.getPos()))
-						+ "m "
-						+ townHall.getPos().directionToShort(l.pos)
-						+ "): "
-						+ MLN.string(
-								"panels.nbupgradesleft",
-								""
-										+ (project
-												.getLevelsNumber(project.location
-														.getVariation())
-												- project.location.level - 1)));
+				page.add(plan.getFullDisplayName() + ": "
+						+ MLN.string("panels.notyetbuilt") + ".");
 			} else {
-				final BuildingPlan plan = project
-						.getPlan(project.location.getVariation(),
-								project.location.level);
+				if (project.location.level + 1 < project
+						.getLevelsNumber(project.location.getVariation())) {
 
-				final BuildingLocation l = project.location;
-				page.add(plan.getNativeDisplayName(player)
-						+ " ("
-						+ MathHelper.floor_double(l.pos.distanceTo(townHall
-								.getPos())) + "m "
-						+ townHall.getPos().directionToShort(l.pos) + "): "
-						+ MLN.string("panels.finished") + ".");
+					final BuildingPlan plan = project.getPlan(
+							project.location.getVariation(),
+							project.location.level + 1);
+
+					final BuildingLocation l = project.location;
+					page.add(plan.getFullDisplayName()
+							+ " ("
+							+ MathHelper.floor_double(l.pos.distanceTo(townHall
+									.getPos()))
+							+ "m "
+							+ townHall.getPos().directionToShort(l.pos)
+							+ "): "
+							+ MLN.string(
+									"panels.nbupgradesleft",
+									""
+											+ (project
+													.getLevelsNumber(project.location
+															.getVariation())
+													- project.location.level - 1)));
+				} else {
+					final BuildingPlan plan = project.getPlan(
+							project.location.getVariation(),
+							project.location.level);
+
+					final BuildingLocation l = project.location;
+					page.add(plan.getFullDisplayName()
+							+ " ("
+							+ MathHelper.floor_double(l.pos.distanceTo(townHall
+									.getPos())) + "m "
+							+ townHall.getPos().directionToShort(l.pos) + "): "
+							+ MLN.string("panels.finished") + ".");
+				}
 			}
 		}
 	}
@@ -195,47 +199,50 @@ public class TileEntityPanel extends TileEntitySign {
 
 		page.add("");
 
-		for (final List<BuildingProject> projectsLevel : townHall.buildingProjects) {
-			for (final BuildingProject project : projectsLevel) {
-				if (project.location != null) {
-					String level = null;
-					if (project.location.level < 0) {
-						level = MLN.string("ui.notyetbuilt");
-					}
-					if (project.location.level > 0) {
-						level = MLN.string("panels.upgrade") + " "
-								+ project.location.level;
-					}
-
-					final List<String> effects = project.location
-							.getBuildingEffects(townHall.worldObj);
-
-					String effect = null;
-					if (effects.size() > 0) {
-						effect = "";
-						for (final String s : effects) {
-							if (effect.length() > 0) {
-								effect += ", ";
-							}
-							effect += s;
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (townHall.buildingProjects.containsKey(ep)) {
+				final List<BuildingProject> projectsLevel = townHall.buildingProjects
+						.get(ep);
+				for (final BuildingProject project : projectsLevel) {
+					if (project.location != null) {
+						String level = null;
+						if (project.location.level < 0) {
+							level = MLN.string("ui.notyetbuilt");
 						}
-					}
+						if (project.location.level > 0) {
+							level = MLN.string("panels.upgrade") + " "
+									+ project.location.level;
+						}
 
-					page.add(project.location.getPlan().getNativeDisplayName(
-							player)
-							+ ": "
-							+ MathHelper.floor_double(project.location.pos
-									.distanceTo(townHall.getPos()))
-							+ "m "
-							+ townHall.getPos().directionToShort(
-									project.location.pos));
-					if (level != null) {
-						page.add(level);
+						final List<String> effects = project.location
+								.getBuildingEffects(townHall.worldObj);
+
+						String effect = null;
+						if (effects.size() > 0) {
+							effect = "";
+							for (final String s : effects) {
+								if (effect.length() > 0) {
+									effect += ", ";
+								}
+								effect += s;
+							}
+						}
+
+						page.add(project.location.getFullDisplayName()
+								+ ": "
+								+ MathHelper.floor_double(project.location.pos
+										.distanceTo(townHall.getPos()))
+								+ "m "
+								+ townHall.getPos().directionToShort(
+										project.location.pos));
+						if (level != null) {
+							page.add(level);
+						}
+						if (effect != null) {
+							page.add(effect);
+						}
+						page.add("");
 					}
-					if (effect != null) {
-						page.add(effect);
-					}
-					page.add("");
 				}
 			}
 		}
@@ -853,21 +860,29 @@ public class TileEntityPanel extends TileEntitySign {
 
 		page.add("");
 
-		for (int i = 0; i < townHall.buildingProjects.size(); i++) {
-			if (!townHall.villageType.playerControlled || i == 0 || i == 1
-					|| i == 3) {// for controlled villages, only centre, start
-								// and core
-				final List<BuildingProject> projectsLevel = townHall.buildingProjects
-						.get(i);
-				page.add(VillageType.levelNames[i] + ":");
-				page.add("");
+		for (final EnumProjects ep : EnumProjects.values()) {
+			if (townHall.buildingProjects.containsKey(ep)) {
+				if (!townHall.villageType.playerControlled
+						|| ep == EnumProjects.CENTRE
+						|| ep == EnumProjects.START || ep == EnumProjects.CORE) {// for
+																					// controlled
+																					// villages,
+																					// only
+																					// centre,
+																					// start
+					// and core
+					final List<BuildingProject> projectsLevel = townHall.buildingProjects
+							.get(ep);
+					page.add(MLN.string(ep.labelKey) + ":");
+					page.add("");
 
-				for (final BuildingProject project : projectsLevel) {
-					if (townHall.isDisplayableProject(project)) {
-						addProjectToList(player, project, townHall, page);
+					for (final BuildingProject project : projectsLevel) {
+						if (townHall.isDisplayableProject(project)) {
+							addProjectToList(player, project, townHall, page);
+						}
 					}
+					page.add("");
 				}
-				page.add("");
 			}
 		}
 
@@ -902,7 +917,7 @@ public class TileEntityPanel extends TileEntitySign {
 				int has = house.countGoods(key.getItem(), key.meta);
 				if (house.builder != null
 						&& house.buildingLocationIP != null
-						&& house.buildingLocationIP.key
+						&& house.buildingLocationIP.planKey
 								.equals(house.buildingGoal)) {
 					has += house.builder.countInv(key.getItem(), key.meta);
 				}
@@ -932,7 +947,8 @@ public class TileEntityPanel extends TileEntitySign {
 
 			String status = "";
 			if (house.buildingLocationIP != null
-					&& house.buildingLocationIP.key.equals(house.buildingGoal)) {
+					&& house.buildingLocationIP.planKey
+							.equals(house.buildingGoal)) {
 				if (house.buildingLocationIP.level == 0) {
 					status = MLN.string("ui.inconstruction");
 				} else {
@@ -1005,7 +1021,7 @@ public class TileEntityPanel extends TileEntitySign {
 						nbFemale++;
 					}
 				} else {
-					if (vr.villagerSize == MillVillager.max_child_size) {
+					if (vr.villagerSize == MillVillager.MAX_CHILD_SIZE) {
 						if (vr.gender == MillVillager.MALE) {
 							nbGrownBoy++;
 						} else {
@@ -1045,7 +1061,7 @@ public class TileEntityPanel extends TileEntitySign {
 
 			String status;
 			if (townHall.buildingLocationIP != null
-					&& townHall.buildingLocationIP.key
+					&& townHall.buildingLocationIP.planKey
 							.equals(townHall.buildingGoal)) {
 				if (townHall.buildingLocationIP.level == 0) {
 					status = MLN.string("ui.inconstruction");
@@ -1070,7 +1086,7 @@ public class TileEntityPanel extends TileEntitySign {
 				int has = townHall.countGoods(key.getItem(), key.meta);
 				if (townHall.builder != null
 						&& townHall.buildingLocationIP != null
-						&& townHall.buildingLocationIP.key
+						&& townHall.buildingLocationIP.planKey
 								.equals(townHall.buildingGoal)) {
 					has += townHall.builder.countInv(key.getItem(), key.meta);
 				}
@@ -1100,7 +1116,7 @@ public class TileEntityPanel extends TileEntitySign {
 					+ MLN.string("ui.noconstruction2"));
 		} else {
 			final String planName = townHall.culture.getBuildingPlanSet(
-					townHall.buildingLocationIP.key).getNativeName();
+					townHall.buildingLocationIP.planKey).getNativeName();
 
 			String status;
 			if (townHall.buildingLocationIP.level == 0) {

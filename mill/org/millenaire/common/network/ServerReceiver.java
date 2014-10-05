@@ -19,8 +19,9 @@ import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;
-import org.millenaire.common.construction.BuildingPlan;
-import org.millenaire.common.construction.BuildingProject;
+import org.millenaire.common.building.BuildingCustomPlan;
+import org.millenaire.common.building.BuildingPlan;
+import org.millenaire.common.building.BuildingProject;
 import org.millenaire.common.core.DevModUtilities;
 import org.millenaire.common.forge.Mill;
 
@@ -74,6 +75,7 @@ public class ServerReceiver {
 	public static final int GUIACTION_NEGATION_WAND = 40;
 
 	public static final int GUIACTION_NEW_BUILDING_PROJECT = 50;
+	public static final int GUIACTION_NEW_CUSTOM_BUILDING_PROJECT = 51;
 
 	public static final int GUIACTION_PUJAS_CHANGE_ENCHANTMENT = 60;
 
@@ -382,6 +384,16 @@ public class ServerReceiver {
 					GuiActions.newBuilding(player, th, pos, planKey);
 				}
 
+			} else if (guiActionId == GUIACTION_NEW_CUSTOM_BUILDING_PROJECT) {
+				final Point thPos = StreamReadWrite.readNullablePoint(data);
+				final Point pos = StreamReadWrite.readNullablePoint(data);
+				final String planKey = data.readUTF();
+				final Building th = mw.getBuilding(thPos);
+
+				if (th != null) {
+					GuiActions.newCustomBuilding(player, th, pos, planKey);
+				}
+
 			} else if (guiActionId == GUIACTION_CONTROLLEDBUILDING_TOGGLEALLOWED) {
 				final Point thPos = StreamReadWrite.readNullablePoint(data);
 				final String projectKey = data.readUTF();
@@ -494,10 +506,10 @@ public class ServerReceiver {
 		try {
 			final Point p = StreamReadWrite.readNullablePoint(data);
 
-			final Building townhall = mw.getBuilding(p);
+			final Building townHall = mw.getBuilding(p);
 
-			if (townhall != null) {
-				townhall.sendMapInfo(player);
+			if (townHall != null) {
+				townHall.sendMapInfo(player);
 			}
 
 		} catch (final IOException e) {

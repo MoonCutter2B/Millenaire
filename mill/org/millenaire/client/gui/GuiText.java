@@ -246,6 +246,13 @@ public abstract class GuiText extends GuiScreen {
 
 	}
 
+	/**
+	 * Utility method that splits lines that are longer than screen width and
+	 * pages long than screen height
+	 * 
+	 * @param baseText
+	 * @return
+	 */
 	public List<List<Line>> adjustText(final List<List<Line>> baseText) {
 		final List<List<Line>> text = new ArrayList<List<Line>>();
 
@@ -350,83 +357,89 @@ public abstract class GuiText extends GuiScreen {
 	@SuppressWarnings("unchecked")
 	public void buttonPagination() {
 
-		if (descText == null) {
-			return;
-		}
+		try {
 
-		final int xStart = (width - getXSize()) / 2;
-		final int yStart = (height - getYSize()) / 2;
-
-		buttonList.clear();
-		textFields.clear();
-
-		int vpos = 6;
-
-		if (pageNum < descText.size()) {
-			for (int cp = 0; cp < getPageSize()
-					&& cp < descText.get(pageNum).size(); cp++) {
-
-				final Line line = descText.get(pageNum).get(cp);
-				if (line.buttons != null) {
-
-					if (line.buttons.length == 1) {
-						if (line.buttons[0] != null) {
-							line.buttons[0].xPosition = xStart + getXSize() / 2
-									- 100;
-							line.buttons[0].setWidth(200);
-						}
-					} else if (line.buttons.length == 2) {
-						if (line.buttons[0] != null) {
-							line.buttons[0].xPosition = xStart + getXSize() / 2
-									- 100;
-							line.buttons[0].setWidth(95);
-						}
-						if (line.buttons[1] != null) {
-							line.buttons[1].xPosition = xStart + getXSize() / 2
-									+ 5;
-							line.buttons[1].setWidth(95);
-						}
-					} else if (line.buttons.length == 3) {
-						if (line.buttons[0] != null) {
-							line.buttons[0].xPosition = xStart + getXSize() / 2
-									- 100;
-							line.buttons[0].setWidth(60);
-						}
-						if (line.buttons[1] != null) {
-							line.buttons[1].xPosition = xStart + getXSize() / 2
-									- 30;
-							line.buttons[1].setWidth(60);
-						}
-						if (line.buttons[2] != null) {
-							line.buttons[2].xPosition = xStart + getXSize() / 2
-									+ 40;
-							line.buttons[2].setWidth(60);
-						}
-					}
-
-					for (int i = 0; i < line.buttons.length; i++) {
-						if (line.buttons[i] != null) {
-							line.buttons[i].yPosition = yStart + vpos;
-							line.buttons[i].setHeight(20);
-							buttonList.add(line.buttons[i]);
-						}
-					}
-				} else if (line.textField != null) {
-					final MillGuiTextField textField = new MillGuiTextField(
-							fontRendererObj, xStart + getXSize() / 2 + 40,
-							yStart + vpos, 95, 20, line.textField.fieldKey);
-					textField.setText(line.textField.getText());
-					textField.setMaxStringLength(line.textField
-							.getMaxStringLength());
-					textField.setTextColor(-1);
-					line.textField = textField;
-					line.textField.setTextColor(-1);
-					line.textField.setEnableBackgroundDrawing(false);
-
-					textFields.add(textField);
-				}
-				vpos += 10;
+			if (descText == null) {
+				return;
 			}
+
+			final int xStart = (width - getXSize()) / 2;
+			final int yStart = (height - getYSize()) / 2;
+
+			buttonList.clear();
+			textFields.clear();
+
+			int vpos = 6;
+
+			if (pageNum < descText.size()) {
+				for (int cp = 0; cp < getPageSize()
+						&& cp < descText.get(pageNum).size(); cp++) {
+
+					final Line line = descText.get(pageNum).get(cp);
+					if (line.buttons != null) {
+
+						if (line.buttons.length == 1) {
+							if (line.buttons[0] != null) {
+								line.buttons[0].xPosition = xStart + getXSize()
+										/ 2 - 100;
+								line.buttons[0].setWidth(200);
+							}
+						} else if (line.buttons.length == 2) {
+							if (line.buttons[0] != null) {
+								line.buttons[0].xPosition = xStart + getXSize()
+										/ 2 - 100;
+								line.buttons[0].setWidth(95);
+							}
+							if (line.buttons[1] != null) {
+								line.buttons[1].xPosition = xStart + getXSize()
+										/ 2 + 5;
+								line.buttons[1].setWidth(95);
+							}
+						} else if (line.buttons.length == 3) {
+							if (line.buttons[0] != null) {
+								line.buttons[0].xPosition = xStart + getXSize()
+										/ 2 - 100;
+								line.buttons[0].setWidth(60);
+							}
+							if (line.buttons[1] != null) {
+								line.buttons[1].xPosition = xStart + getXSize()
+										/ 2 - 30;
+								line.buttons[1].setWidth(60);
+							}
+							if (line.buttons[2] != null) {
+								line.buttons[2].xPosition = xStart + getXSize()
+										/ 2 + 40;
+								line.buttons[2].setWidth(60);
+							}
+						}
+
+						for (int i = 0; i < line.buttons.length; i++) {
+							if (line.buttons[i] != null) {
+								line.buttons[i].yPosition = yStart + vpos;
+								line.buttons[i].setHeight(20);
+								buttonList.add(line.buttons[i]);
+							}
+						}
+					} else if (line.textField != null) {
+						final MillGuiTextField textField = new MillGuiTextField(
+								fontRendererObj, xStart + getXSize() / 2 + 40,
+								yStart + vpos, 95, 20, line.textField.fieldKey);
+						textField.setText(line.textField.getText());
+						textField.setMaxStringLength(line.textField
+								.getMaxStringLength());
+						textField.setTextColor(-1);
+						line.textField = textField;
+						line.textField.setTextColor(-1);
+						line.textField.setEnableBackgroundDrawing(false);
+
+						textFields.add(textField);
+					}
+					vpos += 10;
+				}
+			}
+		} catch (final Exception e) {
+			MLN.printException(
+					"Exception while doing button pagination in GUI " + this, e);
 		}
 	}
 
@@ -619,123 +632,129 @@ public abstract class GuiText extends GuiScreen {
 	@Override
 	public void drawScreen(final int i, final int j, final float f) {
 
-		drawDefaultBackground();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(getPNGPath());
-		final int xStart = (width - getXSize()) / 2;
-		final int yStart = (height - getYSize()) / 2;
-		drawTexturedModalRect(xStart, yStart, 0, 0, getXSize(), getYSize());
+		try {
 
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			drawDefaultBackground();
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			this.mc.renderEngine.bindTexture(getPNGPath());
+			final int xStart = (width - getXSize()) / 2;
+			final int yStart = (height - getYSize()) / 2;
+			drawTexturedModalRect(xStart, yStart, 0, 0, getXSize(), getYSize());
 
-		customDrawBackground(i, j, f);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		GL11.glPushMatrix();
-		GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
-		RenderHelper.enableStandardItemLighting();
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glTranslatef(xStart, yStart, 0.0F);
-		RenderHelper.disableStandardItemLighting();
-		GL11.glDisable(2896 /* GL_LIGHTING */);
-		GL11.glDisable(2929 /* GL_DEPTH_TEST */);
+			customDrawBackground(i, j, f);
 
-		if (descText != null) {
-			int vpos = 6;
+			GL11.glPushMatrix();
+			GL11.glRotatef(180F, 1.0F, 0.0F, 0.0F);
+			RenderHelper.enableStandardItemLighting();
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+			GL11.glTranslatef(xStart, yStart, 0.0F);
+			RenderHelper.disableStandardItemLighting();
+			GL11.glDisable(2896 /* GL_LIGHTING */);
+			GL11.glDisable(2929 /* GL_DEPTH_TEST */);
 
-			if (pageNum < descText.size()) {
-				for (int cp = 0; cp < getPageSize()
-						&& cp < descText.get(pageNum).size(); cp++) {
+			if (descText != null) {
+				int vpos = 6;
 
-					if (descText.get(pageNum).get(cp).shadow) {
-						fontRendererObj.drawStringWithShadow(
-								descText.get(pageNum).get(cp).text,
-								getTextXStart()
-										+ descText.get(pageNum).get(cp).margin,
-								vpos, 0x101010);
-					} else {
-						fontRendererObj.drawString(descText.get(pageNum)
-								.get(cp).text,
-								getTextXStart()
-										+ descText.get(pageNum).get(cp).margin,
-								vpos, 0x101010);
+				if (pageNum < descText.size()) {
+					for (int cp = 0; cp < getPageSize()
+							&& cp < descText.get(pageNum).size(); cp++) {
+
+						if (descText.get(pageNum).get(cp).shadow) {
+							fontRendererObj
+									.drawStringWithShadow(
+											descText.get(pageNum).get(cp).text,
+											getTextXStart()
+													+ descText.get(pageNum)
+															.get(cp).margin,
+											vpos, 0x101010);
+						} else {
+							fontRendererObj.drawString(descText.get(pageNum)
+									.get(cp).text, getTextXStart()
+									+ descText.get(pageNum).get(cp).margin,
+									vpos, 0x101010);
+						}
+
+						vpos += 10;
 					}
-
-					vpos += 10;
 				}
-			}
 
-			fontRendererObj.drawString(pageNum + 1 + "/" + getNbPage(),
-					getXSize() / 2 - 10, getYSize() - 10, 0x101010);
+				fontRendererObj.drawString(pageNum + 1 + "/" + getNbPage(),
+						getXSize() / 2 - 10, getYSize() - 10, 0x101010);
 
-			vpos = 6;
+				vpos = 6;
 
-			this.zLevel = 100.0F;
-			itemRenderer.zLevel = 100.0F;
+				this.zLevel = 100.0F;
+				itemRenderer.zLevel = 100.0F;
 
-			ItemStack hoverIcon = null;
-			String extraLegend = null;
+				ItemStack hoverIcon = null;
+				String extraLegend = null;
 
-			if (pageNum < descText.size()) {
-				for (int cp = 0; cp < getPageSize()
-						&& cp < descText.get(pageNum).size(); cp++) {
-					if (descText.get(pageNum).get(cp).icons != null) {
-						for (int ic = 0; ic < descText.get(pageNum).get(cp).icons
-								.size(); ic++) {
-							final ItemStack icon = descText.get(pageNum)
-									.get(cp).icons.get(ic);
+				if (pageNum < descText.size()) {
+					for (int cp = 0; cp < getPageSize()
+							&& cp < descText.get(pageNum).size(); cp++) {
+						if (descText.get(pageNum).get(cp).icons != null) {
+							for (int ic = 0; ic < descText.get(pageNum).get(cp).icons
+									.size(); ic++) {
+								final ItemStack icon = descText.get(pageNum)
+										.get(cp).icons.get(ic);
 
-							if (descText.get(pageNum).get(cp).iconExtraLegends == null) {
-								MLN.error(null, "Null legends!");
-							}
+								if (descText.get(pageNum).get(cp).iconExtraLegends == null) {
+									MLN.error(null, "Null legends!");
+								}
 
-							final String legend = descText.get(pageNum).get(cp).iconExtraLegends
-									.get(ic);
+								final String legend = descText.get(pageNum)
+										.get(cp).iconExtraLegends.get(ic);
 
-							GL11.glEnable(GL11.GL_DEPTH_TEST);
-							itemRenderer.renderItemAndEffectIntoGUI(
-									this.fontRendererObj, this.mc.renderEngine,
-									icon, getTextXStart() + 18 * ic, vpos);
-							itemRenderer
-									.renderItemOverlayIntoGUI(
-											this.fontRendererObj,
-											this.mc.renderEngine, icon,
-											getTextXStart() + 18 * ic, vpos,
-											null);
+								GL11.glEnable(GL11.GL_DEPTH_TEST);
+								itemRenderer.renderItemAndEffectIntoGUI(
+										this.fontRendererObj,
+										this.mc.renderEngine, icon,
+										getTextXStart() + 18 * ic, vpos);
+								itemRenderer.renderItemOverlayIntoGUI(
+										this.fontRendererObj,
+										this.mc.renderEngine, icon,
+										getTextXStart() + 18 * ic, vpos, null);
 
-							if (xStart + getTextXStart() + 18 * ic < i
-									&& yStart + vpos < j
-									&& xStart + getTextXStart() + 18 * ic + 16 > i
-									&& yStart + vpos + 16 > j) {
-								hoverIcon = icon;
-								extraLegend = legend;
+								if (xStart + getTextXStart() + 18 * ic < i
+										&& yStart + vpos < j
+										&& xStart + getTextXStart() + 18 * ic
+												+ 16 > i
+										&& yStart + vpos + 16 > j) {
+									hoverIcon = icon;
+									extraLegend = legend;
+								}
 							}
 						}
+						vpos += 10;
 					}
-					vpos += 10;
 				}
+
+				if (hoverIcon != null) {
+					drawItemStackTooltip(hoverIcon, i - xStart, j - yStart,
+							extraLegend);
+				}
+
+				itemRenderer.zLevel = 0.0F;
+				this.zLevel = 0.0F;
+
+				customDrawScreen(i, j, f);
 			}
 
-			if (hoverIcon != null) {
-				drawItemStackTooltip(hoverIcon, i - xStart, j - yStart,
-						extraLegend);
+			GL11.glPopMatrix();
+			super.drawScreen(i, j, f);
+			GL11.glEnable(2896 /* GL_LIGHTING */);
+			GL11.glEnable(2929 /* GL_DEPTH_TEST */);
+
+			GL11.glDisable(GL11.GL_LIGHTING);
+
+			for (final MillGuiTextField textField : textFields) {
+				textField.drawTextBox();
 			}
-
-			itemRenderer.zLevel = 0.0F;
-			this.zLevel = 0.0F;
-
-			customDrawScreen(i, j, f);
-		}
-
-		GL11.glPopMatrix();
-		super.drawScreen(i, j, f);
-		GL11.glEnable(2896 /* GL_LIGHTING */);
-		GL11.glEnable(2929 /* GL_DEPTH_TEST */);
-
-		GL11.glDisable(GL11.GL_LIGHTING);
-
-		for (final MillGuiTextField textField : textFields) {
-			textField.drawTextBox();
+		} catch (final Exception e) {
+			MLN.printException("Exception in drawScreen of GUI: " + this, e);
 		}
 	}
 

@@ -14,6 +14,7 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumChatFormatting;
 
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.Quest.QuestInstance;
 import org.millenaire.common.Quest.QuestInstanceVillager;
 import org.millenaire.common.building.Building;
@@ -843,6 +844,11 @@ public class UserProfile {
 	public void sendProfilePacket(final int updateType) {
 
 		if (this.mw.world.isRemote) {
+			return;
+		}
+		
+		if (this.getPlayer()==null) {
+			MLN.printException(new MillenaireException("Null player while trying to send packet:"));
 			return;
 		}
 

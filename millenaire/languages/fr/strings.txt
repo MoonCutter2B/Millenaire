@@ -116,6 +116,8 @@ ui.woodjungle=Bois tropical
 ui.anyenchanted=Objet enchanté
 ui.enchantedsword=Epée enchantée
 ui.selectabuildingproject=Choisissez un bâtiment
+ui.selectabuildingproject_custom=Bâtiments déjà construit par vous:
+ui.selectabuildingproject_standard=Bâtiments Millénaire à construire:
 ui.projectadded=Le projet a été ajouté à la liste
 ui.problemat=Problème à <0>: <1>
 ui.constructionforbidden=construction interdite
@@ -145,6 +147,7 @@ ui.notleaderin=Vous n'êtes pas encore un chef dans la culture <0>.
 ui.leaderinstruction=Pour devenir chef dans une culture, vous devez atteindre le rang de "chef naturel" dans un village et demander le rang au chef, ou compléter le chapitre de la Quête de la Création pour cette culture (si disponble)
 ui.wandinstruction=Utilisez la baguette sur on bloc d'obsidienne pour générer un village aléatoire ou sur un bloc d'or pour choisir le type à générer.
 ui.controlled=contrôlé
+ui.controlledcustom=perso, contrôlé
 ui.villagerelations=<0> (<1>, <2>): <3>
 ui.relationlist=Relations avec les autre villages
 ui.relationpraise=Dire du bien
@@ -180,7 +183,18 @@ ui.relneutral=Neutres
 ui.relbad=Conflit
 ui.raid=Planifier un raid
 
+ui.custombuilding_confirm=Confirmer la création d'un bâtiment personalisé: <0>
+ui.custombuilding_cantconfirm=Impossible de créer un bâtiment personalisé: <0>
+ui.custombuilding_resneededintro=Resources nécessaires:
+ui.custombuilding_resneeded=<1> sur <3> <0> trouvé (min: <2>)
+ui.custombuilding_newvillage=Création d'un nouveau village avec bâtiment central personalisé
+ui.close=Fermer
+ui.confirm=Confirmer
 
+custombuilding.chest=coffre
+custombuilding.craft=établi
+custombuilding.sign=panneau
+custombuilding.field=champ
 
 help.tab_1=Généralité sur les villages
 help.tab_2=Commerce
@@ -231,6 +245,7 @@ quest.cqchapternotstartedshort=Chapitre "<0>": pas commençé.
 quest.cqchapterinprogressshort=Chapitre "<0>": <1>/<2>.
 quest.cqchaptercompletedshort=Chapitre "<0>": terminé.
 quest.cqcheckquestlistandhelp=Pressez '<0>' pour plus d'information ou pour accéder à l'aide Millénaire.
+
 
 
 //Item names

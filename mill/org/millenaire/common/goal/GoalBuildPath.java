@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.construction.BuildingPlan.BuildingBlock;
+import org.millenaire.common.building.BuildingBlock;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
 public class GoalBuildPath extends Goal {

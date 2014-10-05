@@ -10,14 +10,7 @@ oceanQualifier:l'océan
 carriesraid:true
 
 //starting buildings:
-centre:playerfort
-start:lumbermanhut
-start:lumbermanhut
-start:grove
-
-pathmaterial:pathdirt
-pathmaterial:pathgravel
-pathmaterial:pathslabs
+customcentre:custom_villagecentre
 
 //just a list for the new building screen
 core:lumbermanhut

@@ -43,7 +43,7 @@ import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;
-import org.millenaire.common.construction.BuildingPlan;
+import org.millenaire.common.building.BuildingPlan;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.VillageList;
 import org.millenaire.common.forge.Mill;

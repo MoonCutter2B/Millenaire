@@ -22,8 +22,6 @@ public class ModelFemaleAsymmetrical extends ModelBiped {
 
 	public boolean heldItemRight;
 
-	public boolean isSneak;
-
 	public ModelFemaleAsymmetrical() {
 		this(0.0F);
 	}

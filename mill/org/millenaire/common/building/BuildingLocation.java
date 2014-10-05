@@ -11,7 +11,6 @@ import net.minecraftforge.common.util.Constants;
 import org.millenaire.common.Culture;
 import org.millenaire.common.MLN;
 import org.millenaire.common.Point;
-import org.millenaire.common.construction.BuildingPlan;
 import org.millenaire.common.forge.Mill;
 
 public class BuildingLocation implements Cloneable {
@@ -27,6 +26,12 @@ public class BuildingLocation implements Cloneable {
 
 		bl.pos = Point.read(nbttagcompound, label + "_pos");
 
+		// pre-6.0 this tag did not exist
+		if (nbttagcompound.hasKey(label + "_isCustomBuilding")) {
+			bl.isCustomBuilding = nbttagcompound.getBoolean(label
+					+ "_isCustomBuilding");
+		}
+
 		final Culture culture = Culture.getCultureByName(nbttagcompound
 				.getString(label + "_culture"));
 		bl.culture = culture;
@@ -36,7 +41,7 @@ public class BuildingLocation implements Cloneable {
 		bl.width = nbttagcompound.getInteger(label + "_width");
 		bl.areaToClear = nbttagcompound.getInteger(label + "_areaToClear");
 		bl.level = nbttagcompound.getInteger(label + "_level");
-		bl.key = nbttagcompound.getString(label + "_key");
+		bl.planKey = nbttagcompound.getString(label + "_key");
 
 		// MLN.temp(bl, "Reading key "+debug+": "+bl.key);
 
@@ -183,8 +188,9 @@ public class BuildingLocation implements Cloneable {
 					+ "_upgradesAllowed");
 		}
 
-		if (bl.getPlan() == null) {
-			MLN.error(bl, "Unknown building type. Cancelling load.");
+		if (bl.getPlan() == null && bl.getCustomPlan() == null) {
+			MLN.error(bl, "Unknown building type: " + bl.planKey
+					+ " Cancelling load.");
 			return null;
 		}
 
@@ -193,7 +199,7 @@ public class BuildingLocation implements Cloneable {
 		return bl;
 	}
 
-	public String key, shop;
+	public String planKey, shop;
 	public List<String> maleResident;
 	public List<String> femaleResident;
 	public int priorityMoveIn = 10;
@@ -202,6 +208,8 @@ public class BuildingLocation implements Cloneable {
 	public int orientation, length, width, areaToClear, level, reputation,
 			price;
 	private int variation;
+
+	public boolean isCustomBuilding = false;
 
 	public Point pos, chestPos = null, sleepingPos = null;
 	public Point sellingPos = null, craftingPos = null, shelterPos = null,
@@ -218,6 +226,45 @@ public class BuildingLocation implements Cloneable {
 
 	}
 
+	/**
+	 * Creates a location based on a custom plan and a position
+	 * 
+	 * @param customBuilding
+	 * @param pos
+	 */
+	public BuildingLocation(final BuildingCustomPlan customBuilding,
+			final Point pos, final boolean isTownHall) {
+		this.pos = pos;
+		this.chestPos = pos;
+		orientation = 0;
+
+		length = customBuilding.radius * 2;
+		width = customBuilding.radius * 2;
+		planKey = customBuilding.buildingKey;
+		isCustomBuilding = true;
+		level = 0;
+		tags = customBuilding.tags;
+		subBuildings = new ArrayList<String>();
+		setVariation(0);
+		maleResident = customBuilding.maleResident;
+		femaleResident = customBuilding.femaleResident;
+		shop = customBuilding.shop;
+		reputation = 0;
+		price = 0;
+		showTownHallSigns = isTownHall;
+		culture = customBuilding.culture;
+		priorityMoveIn = customBuilding.priorityMoveIn;
+
+		initialise();
+	}
+
+	/**
+	 * Creates a location based on a plan, a position and an orientation
+	 * 
+	 * @param plan
+	 * @param ppos
+	 * @param porientation
+	 */
 	public BuildingLocation(final BuildingPlan plan, final Point ppos,
 			final int porientation) {
 		pos = ppos;
@@ -230,7 +277,7 @@ public class BuildingLocation implements Cloneable {
 		orientation = porientation;
 		length = plan.length;
 		width = plan.width;
-		key = plan.buildingKey;
+		planKey = plan.buildingKey;
 		level = plan.level;
 		tags = plan.tags;
 		subBuildings = plan.subBuildings;
@@ -260,7 +307,7 @@ public class BuildingLocation implements Cloneable {
 	}
 
 	public BuildingLocation createLocationForLevel(final int plevel) {
-		final BuildingPlan plan = culture.getBuildingPlanSet(key).plans
+		final BuildingPlan plan = culture.getBuildingPlanSet(planKey).plans
 				.get(getVariation())[plevel];
 
 		final BuildingLocation bl = clone();
@@ -284,7 +331,7 @@ public class BuildingLocation implements Cloneable {
 				.getRandomStartingPlan();
 
 		final BuildingLocation bl = clone();
-		bl.key = subkey;
+		bl.planKey = subkey;
 		bl.level = -1;
 		bl.tags = plan.tags;
 		bl.subBuildings = plan.subBuildings;
@@ -306,8 +353,8 @@ public class BuildingLocation implements Cloneable {
 
 		final BuildingLocation bl = (BuildingLocation) obj;
 
-		return key.equals(bl.key) && level == bl.level && pos.equals(bl.pos)
-				&& orientation == bl.orientation
+		return planKey.equals(bl.planKey) && level == bl.level
+				&& pos.equals(bl.pos) && orientation == bl.orientation
 				&& getVariation() == bl.getVariation();
 
 	}
@@ -369,20 +416,78 @@ public class BuildingLocation implements Cloneable {
 		return corners;
 	}
 
+	public BuildingCustomPlan getCustomPlan() {
+		if (culture == null) {
+			MLN.error(this, "null culture");
+			return null;
+		}
+
+		if (culture.getBuildingCustom(planKey) != null) {
+			return culture.getBuildingCustom(planKey);
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Native name plus name in player's language, if readable.
+	 * 
+	 * Ex: "puit (well)"
+	 * 
+	 * @return
+	 */
+	public String getFullDisplayName() {
+		if (isCustomBuilding) {
+			return getCustomPlan().getFullDisplayName();
+		} else {
+			return getPlan().getFullDisplayName();
+		}
+	}
+
+	/**
+	 * Name in player's language, if readable by player
+	 * 
+	 * Ex: "well"
+	 * 
+	 * @return
+	 */
+	public String getGameName() {
+		if (isCustomBuilding) {
+			return getCustomPlan().getGameName();
+		} else {
+			return getPlan().getGameName();
+		}
+	}
+
+	/**
+	 * Native name
+	 * 
+	 * Ex: puit
+	 * 
+	 * @return
+	 */
+	public String getNativeName() {
+		if (isCustomBuilding) {
+			return getCustomPlan().nativeName;
+		} else {
+			return getPlan().nativeName;
+		}
+	}
+
 	public BuildingPlan getPlan() {
 		if (culture == null) {
 			MLN.error(this, "null culture");
 			return null;
 		}
 
-		if (culture.getBuildingPlanSet(key) != null
-				&& culture.getBuildingPlanSet(key).plans.size() > getVariation()) {
+		if (culture.getBuildingPlanSet(planKey) != null
+				&& culture.getBuildingPlanSet(planKey).plans.size() > getVariation()) {
 			if (level < 0) {
-				return culture.getBuildingPlanSet(key).plans
+				return culture.getBuildingPlanSet(planKey).plans
 						.get(getVariation())[0];
 			}
-			if (culture.getBuildingPlanSet(key).plans.get(getVariation()).length > level) {
-				return culture.getBuildingPlanSet(key).plans
+			if (culture.getBuildingPlanSet(planKey).plans.get(getVariation()).length > level) {
+				return culture.getBuildingPlanSet(planKey).plans
 						.get(getVariation())[level];
 			}
 			return null;
@@ -405,7 +510,7 @@ public class BuildingLocation implements Cloneable {
 
 	@Override
 	public int hashCode() {
-		return (key + "_" + level + " at " + pos + "/" + orientation + "/" + getVariation())
+		return (planKey + "_" + level + " at " + pos + "/" + orientation + "/" + getVariation())
 				.hashCode();
 	}
 
@@ -480,7 +585,7 @@ public class BuildingLocation implements Cloneable {
 			return false;
 		}
 
-		return pos.equals(l.pos) && key.equals(l.key)
+		return pos.equals(l.pos) && planKey.equals(l.planKey)
 				&& orientation == l.orientation
 				&& getVariation() == l.getVariation();
 	}
@@ -495,7 +600,7 @@ public class BuildingLocation implements Cloneable {
 
 	@Override
 	public String toString() {
-		return key + "_" + level + " at " + pos + "/" + orientation + "/"
+		return planKey + "_" + level + " at " + pos + "/" + orientation + "/"
 				+ getVariation();
 	}
 
@@ -504,13 +609,15 @@ public class BuildingLocation implements Cloneable {
 
 		pos.write(nbttagcompound, label + "_pos");
 
+		nbttagcompound
+				.setBoolean(label + "_isCustomBuilding", isCustomBuilding);
 		nbttagcompound.setString(label + "_culture", culture.key);
 		nbttagcompound.setInteger(label + "_orientation", orientation);
 		nbttagcompound.setInteger(label + "_length", length);
 		nbttagcompound.setInteger(label + "_width", width);
 		nbttagcompound.setInteger(label + "_areaToClear", areaToClear);
 		nbttagcompound.setInteger(label + "_level", level);
-		nbttagcompound.setString(label + "_key", key);
+		nbttagcompound.setString(label + "_key", planKey);
 
 		// MLN.temp(this,
 		// "Writing key "+oldHashCode()+"-"+debug+": "+key+"_"+level);
