@@ -11,8 +11,7 @@ public class GoalHarvestWarts extends Goal {
 
 	@Override
 	public GoalInformation getDestination(final MillVillager villager) {
-		return packDest(villager.getHouse().getResManager()
-				.getNetherWartsHarvestLocation(), villager.getHouse());
+		return packDest(villager.getHouse().getResManager().getNetherWartsHarvestLocation(), villager.getHouse());
 	}
 
 	@Override
@@ -35,8 +34,7 @@ public class GoalHarvestWarts extends Goal {
 
 		final Point cropPoint = villager.getGoalDestPoint().getAbove();
 
-		if (villager.getBlock(cropPoint) == Blocks.nether_wart
-				&& villager.getBlockMeta(cropPoint) == 3) {
+		if (villager.getBlock(cropPoint) == Blocks.nether_wart && villager.getBlockMeta(cropPoint) == 3) {
 			villager.setBlockAndMetadata(cropPoint, Blocks.air, 0);
 			villager.getHouse().storeGoods(Items.nether_wart, 1);
 

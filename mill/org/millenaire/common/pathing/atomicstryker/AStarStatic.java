@@ -22,17 +22,11 @@ public class AStarStatic {
 	 * Array of standard 3D neighbour Block offsets and their 'reach cost' as
 	 * fourth value
 	 */
-	final static int candidates[][] = { { 0, 0, -1, 1 }, { 0, 0, 1, 1 },
-			{ 0, 1, 0, 1 }, { 1, 0, 0, 1 }, { -1, 0, 0, 1 }, { 1, 1, 0, 2 },
-			{ -1, 1, 0, 2 }, { 0, 1, 1, 2 }, { 0, 1, -1, 2 }, { 1, -1, 0, 1 },
-			{ -1, -1, 0, 1 }, { 0, -1, 1, 1 }, { 0, -1, -1, 1 } };
+	final static int candidates[][] = { { 0, 0, -1, 1 }, { 0, 0, 1, 1 }, { 0, 1, 0, 1 }, { 1, 0, 0, 1 }, { -1, 0, 0, 1 }, { 1, 1, 0, 2 }, { -1, 1, 0, 2 }, { 0, 1, 1, 2 }, { 0, 1, -1, 2 },
+			{ 1, -1, 0, 1 }, { -1, -1, 0, 1 }, { 0, -1, 1, 1 }, { 0, -1, -1, 1 } };
 
-	final static int candidates_allowdrops[][] = { { 0, 0, -1, 1 },
-			{ 0, 0, 1, 1 }, { 1, 0, 0, 1 }, { -1, 0, 0, 1 }, { 1, 1, 0, 2 },
-			{ -1, 1, 0, 2 }, { 0, 1, 1, 2 }, { 0, 1, -1, 2 }, { 1, -1, 0, 1 },
-			{ -1, -1, 0, 1 }, { 0, -1, 1, 1 }, { 0, -1, -1, 1 },
-			{ 1, -2, 0, 1 }, { -1, -2, 0, 1 }, { 0, -2, 1, 1 },
-			{ 0, -2, -1, 1 } };
+	final static int candidates_allowdrops[][] = { { 0, 0, -1, 1 }, { 0, 0, 1, 1 }, { 1, 0, 0, 1 }, { -1, 0, 0, 1 }, { 1, 1, 0, 2 }, { -1, 1, 0, 2 }, { 0, 1, 1, 2 }, { 0, 1, -1, 2 }, { 1, -1, 0, 1 },
+			{ -1, -1, 0, 1 }, { 0, -1, 1, 1 }, { 0, -1, -1, 1 }, { 1, -2, 0, 1 }, { -1, -2, 0, 1 }, { 0, -2, 1, 1 }, { 0, -2, -1, 1 } };
 
 	/**
 	 * Computes the Array of AStarNodes around a target from which the target is
@@ -59,9 +53,7 @@ public class AStarStatic {
 	 *         coordinates
 	 */
 	@SuppressWarnings("unchecked")
-	public static AStarNode[] getAccessNodesSorted(final World worldObj,
-			final int workerX, final int workerY, final int workerZ,
-			final int posX, final int posY, final int posZ,
+	public static AStarNode[] getAccessNodesSorted(final World worldObj, final int workerX, final int workerY, final int workerZ, final int posX, final int posY, final int posZ,
 			final AStarConfig config) {
 		final ArrayList<AStarNode> resultList = new ArrayList<AStarNode>();
 
@@ -69,8 +61,7 @@ public class AStarStatic {
 		for (int xIter = -2; xIter <= 2; xIter++) {
 			for (int zIter = -2; zIter <= 2; zIter++) {
 				for (int yIter = -3; yIter <= 2; yIter++) {
-					check = new AStarNode(posX + xIter, posY + yIter, posZ
-							+ zIter, Math.abs(xIter) + Math.abs(yIter), null);
+					check = new AStarNode(posX + xIter, posY + yIter, posZ + zIter, Math.abs(xIter) + Math.abs(yIter), null);
 					if (AStarStatic.isViable(worldObj, check, 1, config)) {
 						resultList.add(check);
 					}
@@ -91,10 +82,8 @@ public class AStarStatic {
 		return returnVal;
 	}
 
-	public static double getDistanceBetweenCoords(final int x, final int y,
-			final int z, final int posX, final int posY, final int posZ) {
-		return Math.sqrt(Math.pow(x - posX, 2) + Math.pow(y - posY, 2)
-				+ Math.pow(z - posZ, 2));
+	public static double getDistanceBetweenCoords(final int x, final int y, final int z, final int posX, final int posY, final int posZ) {
+		return Math.sqrt(Math.pow(x - posX, 2) + Math.pow(y - posY, 2) + Math.pow(z - posZ, 2));
 	}
 
 	/**
@@ -106,10 +95,8 @@ public class AStarStatic {
 	 *            Node
 	 * @return Euclidian Distance between the 2 given Nodes
 	 */
-	public static double getDistanceBetweenNodes(final AStarNode a,
-			final AStarNode b) {
-		return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2)
-				+ Math.pow(a.z - b.z, 2));
+	public static double getDistanceBetweenNodes(final AStarNode a, final AStarNode b) {
+		return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2) + Math.pow(a.z - b.z, 2));
 	}
 
 	/**
@@ -120,16 +107,14 @@ public class AStarStatic {
 	 * @return euclidian List length of Entity movement List
 	 */
 	public static double getEntityLandSpeed(final EntityLiving entLiving) {
-		return Math.sqrt(entLiving.motionX * entLiving.motionX
-				+ entLiving.motionZ * entLiving.motionZ);
+		return Math.sqrt(entLiving.motionX * entLiving.motionX + entLiving.motionZ * entLiving.motionZ);
 	}
 
 	public static int getIntCoordFromDoubleCoord(final double input) {
 		return MathHelper.floor_double(input);
 	}
 
-	public static boolean isLadder(final World world, final Block b,
-			final int x, final int y, final int z) {
+	public static boolean isLadder(final World world, final Block b, final int x, final int y, final int z) {
 		if (b != null) {
 			return b.isLadder(world, x, y, z, null);
 		}
@@ -149,8 +134,7 @@ public class AStarStatic {
 	 *            coordinate
 	 * @return true if the Block is passable, false otherwise
 	 */
-	public static boolean isPassableBlock(final World worldObj, final int ix,
-			final int iy, final int iz, final AStarConfig config) {
+	public static boolean isPassableBlock(final World worldObj, final int ix, final int iy, final int iz, final AStarConfig config) {
 		// Kinniken
 		// Added test for fences
 		// Note that test isn't perfect (entities can walk on the top of fences,
@@ -158,8 +142,7 @@ public class AStarStatic {
 		if (iy > 0) {
 			final Block block = worldObj.getBlock(ix, iy - 1, iz);
 
-			if (block == Blocks.fence || block == Blocks.iron_bars
-					|| block == Blocks.nether_brick_fence) {
+			if (block == Blocks.fence || block == Blocks.iron_bars || block == Blocks.nether_brick_fence) {
 				return false;
 			}
 		}
@@ -183,8 +166,7 @@ public class AStarStatic {
 	/**
 	 * AStarNode wrapper for isViable
 	 */
-	public static boolean isViable(final World worldObj,
-			final AStarNode target, final int yoffset, final AStarConfig config) {
+	public static boolean isViable(final World worldObj, final AStarNode target, final int yoffset, final AStarConfig config) {
 		return isViable(worldObj, target.x, target.y, target.z, yoffset, config);
 	}
 
@@ -207,24 +189,19 @@ public class AStarStatic {
 	 * @return true if the target coordinates can be passed as 2 block high
 	 *         entity, false otherwise
 	 */
-	public static boolean isViable(final World worldObj, final int x,
-			final int y, final int z, int yoffset, final AStarConfig config) {
+	public static boolean isViable(final World worldObj, final int x, final int y, final int z, int yoffset, final AStarConfig config) {
 		final Block block = worldObj.getBlock(x, y, z);
 
-		if (block == Blocks.ladder
-				&& isPassableBlock(worldObj, x, y + 1, z, config)) {
+		if (block == Blocks.ladder && isPassableBlock(worldObj, x, y + 1, z, config)) {
 			return true;
 		}
 
-		if (!isPassableBlock(worldObj, x, y, z, config)
-				|| !isPassableBlock(worldObj, x, y + 1, z, config)
-				|| isPassableBlock(worldObj, x, y - 1, z, config)
+		if (!isPassableBlock(worldObj, x, y, z, config) || !isPassableBlock(worldObj, x, y + 1, z, config) || isPassableBlock(worldObj, x, y - 1, z, config)
 				&& (block != Blocks.water || block != Blocks.flowing_water)) {
 			return false;
 		}
 
-		if (!config.canSwim
-				&& (block == Blocks.water || block == Blocks.flowing_water)) {
+		if (!config.canSwim && (block == Blocks.water || block == Blocks.flowing_water)) {
 			return false;
 		}
 
@@ -249,36 +226,24 @@ public class AStarStatic {
 	 *            List of AStarNodes
 	 * @return MC pathing compatible PathEntity
 	 */
-	public static AS_PathEntity translateAStarPathtoPathEntity(
-			final World world, List<AStarNode> input, final AStarConfig config) {
+	public static AS_PathEntity translateAStarPathtoPathEntity(final World world, List<AStarNode> input, final AStarConfig config) {
 		if (!config.canTakeDiagonals) {
 			final List<AStarNode> oldInput = input;
 			input = new ArrayList<AStarNode>();
 			for (int i = 0; i < oldInput.size() - 1; i++) {
 				input.add(oldInput.get(i));
-				if (oldInput.get(i).x != oldInput.get(i + 1).x
-						&& oldInput.get(i).z != oldInput.get(i + 1).z) {// diagonal
+				if (oldInput.get(i).x != oldInput.get(i + 1).x && oldInput.get(i).z != oldInput.get(i + 1).z) {// diagonal
 					if (oldInput.get(i).y == oldInput.get(i + 1).y) {// only
 																		// "flat"
 																		// diagonals
-						if (!isPassableBlock(world, oldInput.get(i).x,
-								oldInput.get(i).y - 1, oldInput.get(i + 1).z,
-								config)
-								&& isPassableBlock(world, oldInput.get(i).x,
-										oldInput.get(i).y,
-										oldInput.get(i + 1).z, config)
-								&& isPassableBlock(world, oldInput.get(i).x,
-										oldInput.get(i).y + 1,
-										oldInput.get(i + 1).z, config)) {
-							final AStarNode newNode = new AStarNode(
-									oldInput.get(i).x, oldInput.get(i).y,
-									oldInput.get(i + 1).z, 0, null);
+						if (!isPassableBlock(world, oldInput.get(i).x, oldInput.get(i).y - 1, oldInput.get(i + 1).z, config)
+								&& isPassableBlock(world, oldInput.get(i).x, oldInput.get(i).y, oldInput.get(i + 1).z, config)
+								&& isPassableBlock(world, oldInput.get(i).x, oldInput.get(i).y + 1, oldInput.get(i + 1).z, config)) {
+							final AStarNode newNode = new AStarNode(oldInput.get(i).x, oldInput.get(i).y, oldInput.get(i + 1).z, 0, null);
 							input.add(newNode);
 						} else {// if it didn't work one way assume it does the
 								// other
-							final AStarNode newNode = new AStarNode(
-									oldInput.get(i + 1).x, oldInput.get(i).y,
-									oldInput.get(i).z, 0, null);
+							final AStarNode newNode = new AStarNode(oldInput.get(i + 1).x, oldInput.get(i).y, oldInput.get(i).z, 0, null);
 							input.add(newNode);
 						}
 					}

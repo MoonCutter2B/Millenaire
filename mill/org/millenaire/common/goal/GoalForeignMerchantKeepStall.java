@@ -11,23 +11,17 @@ public class GoalForeignMerchantKeepStall extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
-		if (villager.foreignMerchantStallId >= villager.getHouse()
-				.getResManager().stalls.size()) {
+		if (villager.foreignMerchantStallId >= villager.getHouse().getResManager().stalls.size()) {
 			return null;
 		}
 
-		return packDest(
-				villager.getHouse().getResManager().stalls
-						.get(villager.foreignMerchantStallId),
-				villager.getHouse());
+		return packDest(villager.getHouse().getResManager().stalls.get(villager.foreignMerchantStallId), villager.getHouse());
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 		return true;
 	}
 

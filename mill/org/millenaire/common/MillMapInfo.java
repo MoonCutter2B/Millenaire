@@ -128,13 +128,11 @@ public class MillMapInfo {
 					data[x][y] = TREE;
 				} else if (winfo.path[x][y]) {
 					data[x][y] = PATH;
-				} else if (townHall.pathing != null
-						&& townHall.pathing.regions[x][y] != thRegionId) {
+				} else if (townHall.pathing != null && townHall.pathing.regions[x][y] != thRegionId) {
 					data[x][y] = UNREACHABLE;
 				} else if (!winfo.canBuild[x][y]) {
 					data[x][y] = UNBUILDABLE;
-				} else if (Math.abs(relcentreX - x) > townHall.villageType.radius
-						|| Math.abs(relcentreZ - y) > townHall.villageType.radius) {
+				} else if (Math.abs(relcentreX - x) > townHall.villageType.radius || Math.abs(relcentreZ - y) > townHall.villageType.radius) {
 					data[x][y] = OUTOFRANGE;
 				} else {
 					data[x][y] = OTHER;

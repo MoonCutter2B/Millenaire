@@ -21,15 +21,11 @@ public class BlockOrientedBrick extends Block {
 		return par0 & 1;
 	}
 
-	String topTextureId, topTextureRotateId, bottomTextureId,
-			bottomTextureRotateId, frontbackTextureId, sideTextureId;
-	IIcon topTexture, topTextureRotate, bottomTexture, bottomTextureRotate,
-			frontbackTexture, sideTexture;
+	String topTextureId, topTextureRotateId, bottomTextureId, bottomTextureRotateId, frontbackTextureId, sideTextureId;
+	IIcon topTexture, topTextureRotate, bottomTexture, bottomTextureRotate, frontbackTexture, sideTexture;
 
-	public BlockOrientedBrick(final String topTextureId,
-			final String topTextureRotateId, final String bottomTextureId,
-			final String bottomTextureRotateId,
-			final String frontbackTextureId, final String sideTextureId) {
+	public BlockOrientedBrick(final String topTextureId, final String topTextureRotateId, final String bottomTextureId, final String bottomTextureRotateId, final String frontbackTextureId,
+			final String sideTextureId) {
 		super(Material.rock);
 		this.setCreativeTab(Mill.tabMillenaire);
 
@@ -107,46 +103,34 @@ public class BlockOrientedBrick extends Block {
 	 * Called when the block is placed in the world.
 	 */
 	@Override
-	public void onBlockPlacedBy(final World world, final int par2,
-			final int par3, final int par4,
-			final EntityLivingBase par5EntityLiving,
-			final ItemStack par6ItemStack) {
+	public void onBlockPlacedBy(final World world, final int par2, final int par3, final int par4, final EntityLivingBase par5EntityLiving, final ItemStack par6ItemStack) {
 
-		final int var6 = MathHelper
-				.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		final int var6 = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 		if (var6 == 0) {
-			MillCommonUtilities.setBlockMetadata(world, par2, par3, par4, 0,
-					true);
+			MillCommonUtilities.setBlockMetadata(world, par2, par3, par4, 0, true);
 		}
 
 		if (var6 == 1) {
-			MillCommonUtilities.setBlockMetadata(world, par2, par3, par4, 1,
-					true);
+			MillCommonUtilities.setBlockMetadata(world, par2, par3, par4, 1, true);
 		}
 
 		if (var6 == 2) {
-			MillCommonUtilities.setBlockMetadata(world, par2, par3, par4, 0,
-					true);
+			MillCommonUtilities.setBlockMetadata(world, par2, par3, par4, 0, true);
 		}
 
 		if (var6 == 3) {
-			MillCommonUtilities.setBlockMetadata(world, par2, par3, par4, 1,
-					true);
+			MillCommonUtilities.setBlockMetadata(world, par2, par3, par4, 1, true);
 		}
 	}
 
 	@Override
 	public void registerBlockIcons(final IIconRegister iconRegister) {
 		topTexture = MillCommonUtilities.getIcon(iconRegister, topTextureId);
-		topTextureRotate = MillCommonUtilities.getIcon(iconRegister,
-				topTextureRotateId);
-		bottomTexture = MillCommonUtilities.getIcon(iconRegister,
-				bottomTextureId);
-		bottomTextureRotate = MillCommonUtilities.getIcon(iconRegister,
-				bottomTextureRotateId);
-		frontbackTexture = MillCommonUtilities.getIcon(iconRegister,
-				frontbackTextureId);
+		topTextureRotate = MillCommonUtilities.getIcon(iconRegister, topTextureRotateId);
+		bottomTexture = MillCommonUtilities.getIcon(iconRegister, bottomTextureId);
+		bottomTextureRotate = MillCommonUtilities.getIcon(iconRegister, bottomTextureRotateId);
+		frontbackTexture = MillCommonUtilities.getIcon(iconRegister, frontbackTextureId);
 		sideTexture = MillCommonUtilities.getIcon(iconRegister, sideTextureId);
 	}
 }

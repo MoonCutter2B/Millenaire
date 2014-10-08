@@ -45,8 +45,7 @@ public class GoalGoSocialise extends Goal {
 			return null;
 		}
 
-		destB = possibleDests.get(MillCommonUtilities.randomInt(possibleDests
-				.size()));
+		destB = possibleDests.get(MillCommonUtilities.randomInt(possibleDests.size()));
 		dest = destB.getResManager().getLeasurePos();
 
 		if (dest == null) {

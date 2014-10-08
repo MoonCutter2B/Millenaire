@@ -17,10 +17,8 @@ public class GoalIndianHarvestSugarCane extends Goal {
 	public GoalInformation getDestination(final MillVillager villager) {
 		final List<Point> vp = new ArrayList<Point>();
 		final List<Point> buildingp = new ArrayList<Point>();
-		for (final Building plantation : villager.getTownHall()
-				.getBuildingsWithTag(Building.tagSugarPlantation)) {
-			final Point p = plantation.getResManager()
-					.getSugarCaneHarvestLocation();
+		for (final Building plantation : villager.getTownHall().getBuildingsWithTag(Building.tagSugarPlantation)) {
+			final Point p = plantation.getResManager().getSugarCaneHarvestLocation();
 			if (p != null) {
 				vp.add(p);
 				buildingp.add(plantation.getPos());
@@ -35,8 +33,7 @@ public class GoalIndianHarvestSugarCane extends Goal {
 		Point buildingP = buildingp.get(0);
 
 		for (int i = 1; i < vp.size(); i++) {
-			if (vp.get(i).horizontalDistanceToSquared(villager) < p
-					.horizontalDistanceToSquared(villager)) {
+			if (vp.get(i).horizontalDistanceToSquared(villager) < p.horizontalDistanceToSquared(villager)) {
 				p = vp.get(i);
 				buildingP = buildingp.get(i);
 			}
@@ -66,12 +63,10 @@ public class GoalIndianHarvestSugarCane extends Goal {
 		if (!villager.lastGoalTime.containsKey(this)) {
 			delayOver = true;
 		} else {
-			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
-					.get(this) + STANDARD_DELAY;
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime.get(this) + STANDARD_DELAY;
 		}
 
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
-				Building.tagSugarPlantation)) {
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagSugarPlantation)) {
 			final int nb = kiln.getResManager().getNbSugarCaneHarvestLocation();
 
 			if (nb > 0 && delayOver) {
@@ -98,8 +93,7 @@ public class GoalIndianHarvestSugarCane extends Goal {
 			villager.setBlockAndMetadata(cropPoint, Blocks.air, 0);
 
 			int nbcrop = 1;
-			final float irrigation = villager.getTownHall()
-					.getVillageIrrigation();
+			final float irrigation = villager.getTownHall().getVillageIrrigation();
 			final double rand = Math.random();
 			if (rand < irrigation / 100) {
 				nbcrop++;
@@ -114,8 +108,7 @@ public class GoalIndianHarvestSugarCane extends Goal {
 			villager.setBlockAndMetadata(cropPoint, Blocks.air, 0);
 
 			int nbcrop = 1;
-			final float irrigation = villager.getTownHall()
-					.getVillageIrrigation();
+			final float irrigation = villager.getTownHall().getVillageIrrigation();
 			final double rand = Math.random();
 			if (rand < irrigation / 100) {
 				nbcrop++;
@@ -131,8 +124,7 @@ public class GoalIndianHarvestSugarCane extends Goal {
 
 	@Override
 	public int priority(final MillVillager villager) {
-		int p = 200 - villager.getTownHall().nbGoodAvailable(Items.reeds, 0,
-				false, false) * 4;
+		int p = 200 - villager.getTownHall().nbGoodAvailable(Items.reeds, 0, false, false) * 4;
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {

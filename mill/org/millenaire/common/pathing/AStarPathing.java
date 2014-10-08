@@ -98,8 +98,7 @@ public class AStarPathing {
 			age = System.currentTimeMillis();
 		}
 
-		private List<Point2D> fillPoints(final Point2D p1, final Point2D p2)
-				throws Exception {
+		private List<Point2D> fillPoints(final Point2D p1, final Point2D p2) throws Exception {
 
 			final List<Point2D> v = new ArrayList<Point2D>();
 
@@ -132,9 +131,7 @@ public class AStarPathing {
 
 			while (x != p2.x || z != p2.z) {
 				int nx, nz;
-				if (zdone != zdist
-						&& (xdist == 0 || zdone * 1.0f / zdist < xdone * 1.0f
-								/ xdist)) {
+				if (zdone != zdist && (xdist == 0 || zdone * 1.0f / zdist < xdone * 1.0f / xdist)) {
 					nz = z + zsign;
 					nx = x;
 					zdone += zsign;
@@ -143,9 +140,7 @@ public class AStarPathing {
 					nz = z;
 					xdone += xsign;
 				} else {
-					throw new MillenaireException("Error in fillPoints: from "
-							+ p1 + " to " + p2 + " did " + xdone + "/" + zdone
-							+ " and could find nothing else to do.");
+					throw new MillenaireException("Error in fillPoints: from " + p1 + " to " + p2 + " did " + xdone + "/" + zdone + " and could find nothing else to do.");
 				}
 
 				x = nx;
@@ -205,8 +200,7 @@ public class AStarPathing {
 			costs = new HashMap<Node, Integer>();
 		}
 
-		public Node(final Point2D p, final int pid, final int cornerSide,
-				final boolean ptemp) {
+		public Node(final Point2D p, final int pid, final int cornerSide, final boolean ptemp) {
 			pos = p;
 			id = pid;
 			temp = ptemp;
@@ -234,9 +228,7 @@ public class AStarPathing {
 
 		@Override
 		public String toString() {
-			return "Node " + id + ": " + pos + " group: " + region
-					+ " neighbours: " + neighbours.size() + "(fromDist: "
-					+ fromDist + ", toDist: " + toDist + ")";
+			return "Node " + id + ": " + pos + " group: " + region + " neighbours: " + neighbours.size() + "(fromDist: " + fromDist + ", toDist: " + toDist + ")";
 		}
 	}
 
@@ -265,8 +257,7 @@ public class AStarPathing {
 		int pStartX, pStartZ, pDestX, pDestZ, updateCounterStart;
 		Point villagerPosStart;
 
-		private PathingWorker(final MillVillager villager, final int pStartX,
-				final int pStartZ, final int pDestX, final int pDestZ) {
+		private PathingWorker(final MillVillager villager, final int pStartX, final int pStartZ, final int pDestX, final int pDestZ) {
 
 			this.villager = villager;
 			this.pStartX = pStartX;
@@ -278,9 +269,7 @@ public class AStarPathing {
 			villagerPosStart = villager.getPos();
 		}
 
-		public List<PathPoint> getPathViaNodes(final MillVillager villager,
-				final int pStartX, final int pStartZ, final int pDestX,
-				final int pDestZ) throws Exception {
+		public List<PathPoint> getPathViaNodes(final MillVillager villager, final int pStartX, final int pStartZ, final int pDestX, final int pDestZ) throws Exception {
 
 			final long startTime = System.nanoTime();
 			final long currentAge = System.currentTimeMillis();
@@ -296,8 +285,7 @@ public class AStarPathing {
 			final Point2D originalDest = new Point2D(destX, destZ);
 
 			final PathKey key = new PathKey(start.pos, end.pos);
-			if (cache.containsKey(key)
-					&& currentAge - cache.get(key).age < 30000) {
+			if (cache.containsKey(key) && currentAge - cache.get(key).age < 30000) {
 				if (MLN.DEV && villager != null) {
 					villager.getTownHall().monitor.nbPathing++;
 					villager.getTownHall().monitor.nbCached++;
@@ -365,9 +353,7 @@ public class AStarPathing {
 
 			if (start.region != end.region) {
 				if (MLN.LogGetPath >= MLN.MAJOR && villager.extraLog) {
-					MLN.major(villager,
-							"Start and end nodes in different groups: " + start
-									+ "/" + end);
+					MLN.major(villager, "Start and end nodes in different groups: " + start + "/" + end);
 				}
 				end.neighbours.clear();
 			}
@@ -379,36 +365,24 @@ public class AStarPathing {
 				for (int i = -1; i < 2 && !foundStartNode; i++) {
 					for (int j = -1; j < 2 && !foundStartNode; j++) {
 						if (i == 0 || j == 0) {// no diagonals
-							if (startX + i >= 0 && startZ + j >= 0
-									&& startX + i < winfo.length
-									&& startZ + j < winfo.width) {
-								if (winfo.topGround[startX][startZ]
-										- winfo.topGround[startX + i][startZ
-												+ j] < 3
-										&& winfo.topGround[startX][startZ]
-												- winfo.topGround[startX + i][startZ
-														+ j] > -3) {
-									start = new Node(new Point2D(startX + i,
-											startZ + j), 0, true);
+							if (startX + i >= 0 && startZ + j >= 0 && startX + i < winfo.length && startZ + j < winfo.width) {
+								if (winfo.topGround[startX][startZ] - winfo.topGround[startX + i][startZ + j] < 3 && winfo.topGround[startX][startZ] - winfo.topGround[startX + i][startZ + j] > -3) {
+									start = new Node(new Point2D(startX + i, startZ + j), 0, true);
 
 									for (final Node n : nodes) {
 										if (canSee(n.pos, start.pos)) {
 											start.neighbours.add(n);
 											start.region = n.region;
 											n.neighbours.add(start);
-											final int dist = start.pos
-													.distanceTo(n.pos);
+											final int dist = start.pos.distanceTo(n.pos);
 											n.costs.put(start, dist);
 											start.costs.put(n, dist);
 										}
 									}
 									if (start.neighbours.size() > 0) {
 										foundStartNode = true;
-										if (MLN.LogGetPath >= MLN.MINOR
-												&& villager.extraLog) {
-											MLN.minor(this,
-													"Found alternative start: "
-															+ start);
+										if (MLN.LogGetPath >= MLN.MINOR && villager.extraLog) {
+											MLN.minor(this, "Found alternative start: " + start);
 										}
 									}
 								}
@@ -422,8 +396,7 @@ public class AStarPathing {
 
 				if (!foundStartNode) {
 					if (MLN.LogGetPath >= MLN.MINOR && villager.extraLog) {
-						MLN.minor(villager, "Start node " + start
-								+ " unreachable.");
+						MLN.minor(villager, "Start node " + start + " unreachable.");
 					}
 
 					cache.put(new PathKey(start.pos, end.pos), new CachedPath());
@@ -439,9 +412,7 @@ public class AStarPathing {
 						firstDemand.add(new PathKey(start.pos, end.pos));
 						firstDemandOutcome.add("No start node");
 					}
-					throw new PathingException("Start node " + start
-							+ " unreachable.",
-							PathingException.UNREACHABLE_START);
+					throw new PathingException("Start node " + start + " unreachable.", PathingException.UNREACHABLE_START);
 				}
 			}
 			if (end.neighbours.size() == 0) {
@@ -459,29 +430,21 @@ public class AStarPathing {
 						if (i == 0 || j == 0) {
 							for (int cpt = 0; cpt < 8; cpt++) {
 								if (cpt == 0) {
-									end = new Node(new Point2D(destX + i, destZ
-											+ j), 0, true);
+									end = new Node(new Point2D(destX + i, destZ + j), 0, true);
 								} else if (cpt == 1) {
-									end = new Node(new Point2D(destX - i, destZ
-											+ j), 0, true);
+									end = new Node(new Point2D(destX - i, destZ + j), 0, true);
 								} else if (cpt == 2) {
-									end = new Node(new Point2D(destX + i, destZ
-											- j), 0, true);
+									end = new Node(new Point2D(destX + i, destZ - j), 0, true);
 								} else if (cpt == 3) {
-									end = new Node(new Point2D(destX - i, destZ
-											- j), 0, true);
+									end = new Node(new Point2D(destX - i, destZ - j), 0, true);
 								} else if (cpt == 4) {
-									end = new Node(new Point2D(destX + j, destZ
-											+ i), 0, true);
+									end = new Node(new Point2D(destX + j, destZ + i), 0, true);
 								} else if (cpt == 5) {
-									end = new Node(new Point2D(destX - j, destZ
-											+ i), 0, true);
+									end = new Node(new Point2D(destX - j, destZ + i), 0, true);
 								} else if (cpt == 6) {
-									end = new Node(new Point2D(destX + j, destZ
-											- i), 0, true);
+									end = new Node(new Point2D(destX + j, destZ - i), 0, true);
 								} else if (cpt == 7) {
-									end = new Node(new Point2D(destX + j, destZ
-											- i), 0, true);
+									end = new Node(new Point2D(destX + j, destZ - i), 0, true);
 								}
 
 								if (!testedNodes.contains(end)) {
@@ -491,20 +454,15 @@ public class AStarPathing {
 											end.neighbours.add(n);
 											end.region = n.region;
 											n.neighbours.add(end);
-											final int dist = end.pos
-													.distanceTo(n.pos);
+											final int dist = end.pos.distanceTo(n.pos);
 											n.costs.put(end, dist);
 											end.costs.put(n, dist);
 										}
 									}
-									if (end.neighbours.size() > 0
-											&& end.neighbours.get(0).region == start.region) {
+									if (end.neighbours.size() > 0 && end.neighbours.get(0).region == start.region) {
 										foundEndNode = true;
-										if (MLN.LogGetPath >= MLN.MINOR
-												&& villager.extraLog) {
-											MLN.minor(villager,
-													"Found alternative end: "
-															+ end);
+										if (MLN.LogGetPath >= MLN.MINOR && villager.extraLog) {
+											MLN.minor(villager, "Found alternative end: " + end);
 										}
 									} else if (end.neighbours.size() > 0) {
 										foundEndNodeInOtherGroup = true;
@@ -539,9 +497,7 @@ public class AStarPathing {
 					if (foundEndNodeInOtherGroup) {
 						return null;
 					} else {
-						throw new PathingException(
-								"End pos not connected to any node",
-								PathingException.INVALID_GOAL);
+						throw new PathingException("End pos not connected to any node", PathingException.INVALID_GOAL);
 					}
 				}
 			}
@@ -576,18 +532,14 @@ public class AStarPathing {
 
 				if (nbNodesVisited > MAX_NODE_VISIT) {
 					if (MLN.LogGetPath >= MLN.MINOR && villager.extraLog) {
-						MLN.minor(villager, "Aborting after :" + nbNodesVisited
-								+ ", " + startX + "/" + startZ + " - " + destX
-								+ "/" + destZ + ". Stopping at: " + closest);
+						MLN.minor(villager, "Aborting after :" + nbNodesVisited + ", " + startX + "/" + startZ + " - " + destX + "/" + destZ + ". Stopping at: " + closest);
 					}
 
 					if (MLN.LogGetPath >= MLN.DEBUG && villager.extraLog) {
-						MLN.debug(villager,
-								"closest.equals(end): " + closest.equals(end));
+						MLN.debug(villager, "closest.equals(end): " + closest.equals(end));
 						MLN.debug(villager, "start.toDist: " + start.toDist);
 					}
-					final CachedPath cpath = new CachedPath(
-							buildPointsNode(closest));
+					final CachedPath cpath = new CachedPath(buildPointsNode(closest));
 
 					storeInCache(cpath, originalDest);
 
@@ -599,17 +551,10 @@ public class AStarPathing {
 						villager.pathingTime += timeInMl;
 						villager.nbPathsCalculated++;
 						villager.nbPathAborted++;
-						villager.abortedKeys
-								.add(new PathKey(start.pos, end.pos));
+						villager.abortedKeys.add(new PathKey(start.pos, end.pos));
 						if (MLN.LogGetPath >= MLN.MAJOR) {
-							MLN.major(villager, "Caching aborted path: "
-									+ cpath.getKey()
-									+ " and "
-									+ new PathKey(cpath.getStart(),
-											originalDest) + ", failing took "
-									+ timeInMl + " ms. " + "Regions: "
-									+ regions[start.pos.x][start.pos.z] + " - "
-									+ regions[end.pos.x][end.pos.z]);
+							MLN.major(villager, "Caching aborted path: " + cpath.getKey() + " and " + new PathKey(cpath.getStart(), originalDest) + ", failing took " + timeInMl + " ms. "
+									+ "Regions: " + regions[start.pos.x][start.pos.z] + " - " + regions[end.pos.x][end.pos.z]);
 						}
 						firstDemand.add(new PathKey(start.pos, end.pos));
 						firstDemandOutcome.add("Aborted");
@@ -635,33 +580,21 @@ public class AStarPathing {
 					}
 					if (n.equals(end)) {
 
-						final CachedPath cpath = new CachedPath(
-								buildPointsNode(n));
+						final CachedPath cpath = new CachedPath(buildPointsNode(n));
 
 						storeInCache(cpath, originalDest);
 						cache.put(new PathKey(start.pos, end.pos), cpath);
-						cache.put(new PathKey(new Point2D(startX, startZ),
-								new Point2D(destX, destZ)), cpath);
+						cache.put(new PathKey(new Point2D(startX, startZ), new Point2D(destX, destZ)), cpath);
 
 						if (MLN.DEV && villager != null) {
 							villager.getTownHall().monitor.nbPathing++;
 
 							final double timeInMl = (double) (System.nanoTime() - startTime) / 1000000;
 
-							if (nbNodesVisited > NODE_WARNING_LEVEL
-									&& MLN.LogGetPath >= MLN.MAJOR) {
-								MLN.major(villager, "Success after: "
-										+ nbNodesVisited + " time: " + timeInMl
-										+ " ms between " + start.pos + " and "
-										+ end.pos + " goal: "
-										+ villager.goalKey);
-							} else if (MLN.LogGetPath >= MLN.DEBUG
-									&& villager.extraLog) {
-								MLN.debug(villager, "Success after: "
-										+ nbNodesVisited + " time: " + timeInMl
-										+ " ms between " + start.pos + " and "
-										+ end.pos + " goal: "
-										+ villager.goalKey);
+							if (nbNodesVisited > NODE_WARNING_LEVEL && MLN.LogGetPath >= MLN.MAJOR) {
+								MLN.major(villager, "Success after: " + nbNodesVisited + " time: " + timeInMl + " ms between " + start.pos + " and " + end.pos + " goal: " + villager.goalKey);
+							} else if (MLN.LogGetPath >= MLN.DEBUG && villager.extraLog) {
+								MLN.debug(villager, "Success after: " + nbNodesVisited + " time: " + timeInMl + " ms between " + start.pos + " and " + end.pos + " goal: " + villager.goalKey);
 							}
 
 							villager.getTownHall().monitor.pathingTime += timeInMl;
@@ -672,13 +605,8 @@ public class AStarPathing {
 						}
 
 						if (MLN.LogGetPath >= MLN.MINOR) {
-							MLN.minor(
-									villager,
-									"Path calculation took "
-											+ (villager.updateCounter - updateCounterStart)
-											+ " update cycles. Start pos: "
-											+ villagerPosStart + " and pos: "
-											+ villager.getPos());
+							MLN.minor(villager,
+									"Path calculation took " + (villager.updateCounter - updateCounterStart) + " update cycles. Start pos: " + villagerPosStart + " and pos: " + villager.getPos());
 						}
 
 						return buildFinalPath(villager, cpath);
@@ -694,12 +622,9 @@ public class AStarPathing {
 					}
 				}
 
-				if (closest.toDist == 0 && MLN.LogGetPath >= MLN.MAJOR
-						&& villager.extraLog) {
-					MLN.major(this, "Picked: " + cn + " " + "cn.equals(end): "
-							+ cn.equals(end));
-					MLN.major(this, "Should have reached: " + closest + " "
-							+ "closest.equals(end): " + closest.equals(end));
+				if (closest.toDist == 0 && MLN.LogGetPath >= MLN.MAJOR && villager.extraLog) {
+					MLN.major(this, "Picked: " + cn + " " + "cn.equals(end): " + cn.equals(end));
+					MLN.major(this, "Should have reached: " + closest + " " + "closest.equals(end): " + closest.equals(end));
 
 				}
 
@@ -732,13 +657,11 @@ public class AStarPathing {
 			}
 
 			if (MLN.LogGetPath >= MLN.MAJOR && villager.extraLog) {
-				MLN.major(villager, "Failure after :" + nbNodesVisited + ", "
-						+ startX + "/" + startZ + " - " + destX + "/" + destZ);
+				MLN.major(villager, "Failure after :" + nbNodesVisited + ", " + startX + "/" + startZ + " - " + destX + "/" + destZ);
 			}
 
 			cache.put(new PathKey(start.pos, end.pos), new CachedPath());
-			cache.put(new PathKey(new Point2D(startX, startZ), new Point2D(
-					destX, destZ)), new CachedPath());
+			cache.put(new PathKey(new Point2D(startX, startZ), new Point2D(destX, destZ)), new CachedPath());
 
 			if (MLN.DEV && villager != null) {
 				villager.getTownHall().monitor.nbPathing++;
@@ -762,8 +685,7 @@ public class AStarPathing {
 			synchronized (AStarPathing.this) {
 				try {
 
-					final List<PathPoint> result = getPathViaNodes(villager,
-							pStartX, pStartZ, pDestX, pDestZ);
+					final List<PathPoint> result = getPathViaNodes(villager, pStartX, pStartZ, pDestX, pDestZ);
 					villager.registerNewPath(result);
 				} catch (final InterruptedException e) {
 					villager.registerNewPathInterrupt(this);
@@ -900,8 +822,7 @@ public class AStarPathing {
 
 	}
 
-	private int boolDisplay(final boolean a, final boolean b, final boolean c,
-			final boolean d) {
+	private int boolDisplay(final boolean a, final boolean b, final boolean c, final boolean d) {
 		int i = a ? 1 : 0;
 		i += b ? 2 : 0;
 		i += c ? 4 : 0;
@@ -910,8 +831,7 @@ public class AStarPathing {
 
 	}
 
-	private List<PathPoint> buildFinalPath(final MillVillager villager,
-			final CachedPath path) throws Exception {
+	private List<PathPoint> buildFinalPath(final MillVillager villager, final CachedPath path) throws Exception {
 
 		final List<PathPoint> ppoints = new ArrayList<PathPoint>();
 
@@ -926,17 +846,13 @@ public class AStarPathing {
 				oldGround = newGround;
 			}
 
-			final PathPoint np = new PathPoint(p.x + winfo.mapStartX,
-					oldGround, p.z + winfo.mapStartZ);
+			final PathPoint np = new PathPoint(p.x + winfo.mapStartX, oldGround, p.z + winfo.mapStartZ);
 			ppoints.add(np);
 
 		}
 
-		if (villager.extraLog && MLN.LogPathing >= MLN.MAJOR
-				&& path.points.length > 1 && ppoints.size() < 2) {
-			MLN.major(this,
-					"buildFinalPath returned a path of size " + ppoints.size()
-							+ " from " + path.points.length);
+		if (villager.extraLog && MLN.LogPathing >= MLN.MAJOR && path.points.length > 1 && ppoints.size() < 2) {
+			MLN.major(this, "buildFinalPath returned a path of size " + ppoints.size() + " from " + path.points.length);
 		}
 
 		return ppoints;
@@ -950,38 +866,33 @@ public class AStarPathing {
 				int cornerSide = 0;
 
 				if (i > 0 && j > 0) {
-					if (top[i][j] && left[i][j]
-							&& (!left[i - 1][j] || !top[i][j - 1])) {
+					if (top[i][j] && left[i][j] && (!left[i - 1][j] || !top[i][j - 1])) {
 						isNode = true;
 						cornerSide = cornerSide | 1;
 					}
 				}
 				if (i < winfo.length - 1 && j > 0) {
-					if (bottom[i][j] && left[i][j]
-							&& (!left[i + 1][j] || !bottom[i][j - 1])) {
+					if (bottom[i][j] && left[i][j] && (!left[i + 1][j] || !bottom[i][j - 1])) {
 						isNode = true;
 						cornerSide += 2;
 						cornerSide = cornerSide | 2;
 					}
 				}
 				if (i > 0 && j < winfo.width - 1) {
-					if (top[i][j] && right[i][j]
-							&& (!right[i - 1][j] || !top[i][j + 1])) {
+					if (top[i][j] && right[i][j] && (!right[i - 1][j] || !top[i][j + 1])) {
 						isNode = true;
 						cornerSide = cornerSide | 4;
 					}
 				}
 				if (i < winfo.length - 1 && j < winfo.width - 1) {
-					if (bottom[i][j] && right[i][j]
-							&& (!right[i + 1][j] || !bottom[i][j + 1])) {
+					if (bottom[i][j] && right[i][j] && (!right[i + 1][j] || !bottom[i][j + 1])) {
 						isNode = true;
 						cornerSide = cornerSide | 8;
 					}
 				}
 
 				if (isNode) {
-					nodes.add(new Node(new Point2D(i, j), nodes.size(),
-							cornerSide, false));
+					nodes.add(new Node(new Point2D(i, j), nodes.size(), cornerSide, false));
 				}
 			}
 		}
@@ -990,53 +901,44 @@ public class AStarPathing {
 		// Lessens units bumping into them
 		for (final Node n : nodes) {
 			// "Simple" corners:
-			if (n.cornerSide == 1 && n.pos.x < winfo.length - 1
-					&& n.pos.z < winfo.width - 1) {
-				if (bottom[n.pos.x][n.pos.z] && right[n.pos.x][n.pos.z]
-						&& bottom[n.pos.x][n.pos.z + 1]
-						&& right[n.pos.x + 1][n.pos.z]) {// next diagonal
-															// available
+			if (n.cornerSide == 1 && n.pos.x < winfo.length - 1 && n.pos.z < winfo.width - 1) {
+				if (bottom[n.pos.x][n.pos.z] && right[n.pos.x][n.pos.z] && bottom[n.pos.x][n.pos.z + 1] && right[n.pos.x + 1][n.pos.z]) {// next
+																																			// diagonal
+																																			// available
 					final int tx = n.pos.x + 1;
 					final int tz = n.pos.z + 1;
-					if (tx < winfo.length - 1 && tz < winfo.width - 1
-							&& bottom[tx][tz] && right[tx][tz]) {
+					if (tx < winfo.length - 1 && tz < winfo.width - 1 && bottom[tx][tz] && right[tx][tz]) {
 						n.pos.x = tx;
 						n.pos.z = tz;
 					}
 				}
 			}
 			if (n.cornerSide == 2 && n.pos.x > 0 && n.pos.z < winfo.width - 1) {
-				if (top[n.pos.x][n.pos.z] && right[n.pos.x][n.pos.z]
-						&& top[n.pos.x][n.pos.z + 1]
-						&& right[n.pos.x - 1][n.pos.z]) {
+				if (top[n.pos.x][n.pos.z] && right[n.pos.x][n.pos.z] && top[n.pos.x][n.pos.z + 1] && right[n.pos.x - 1][n.pos.z]) {
 					final int tx = n.pos.x - 1;
 					final int tz = n.pos.z + 1;
-					if (tx > 0 && tz < winfo.width - 1 && top[tx][tz]
-							&& right[tx][tz]) {
+					if (tx > 0 && tz < winfo.width - 1 && top[tx][tz] && right[tx][tz]) {
 						n.pos.x = tx;
 						n.pos.z = tz;
 					}
 				}
 			}
 			if (n.cornerSide == 4 && n.pos.x < winfo.length - 1 && n.pos.z > 0) {
-				if (bottom[n.pos.x][n.pos.z] && left[n.pos.x][n.pos.z]
-						&& bottom[n.pos.x][n.pos.z - 1]
-						&& left[n.pos.x + 1][n.pos.z]) {// next diagonal
-														// available
+				if (bottom[n.pos.x][n.pos.z] && left[n.pos.x][n.pos.z] && bottom[n.pos.x][n.pos.z - 1] && left[n.pos.x + 1][n.pos.z]) {// next
+																																		// diagonal
+																																		// available
 					final int tx = n.pos.x + 1;
 					final int tz = n.pos.z - 1;
-					if (tx < winfo.length - 1 && tz > 0 && bottom[tx][tz]
-							&& left[tx][tz]) {
+					if (tx < winfo.length - 1 && tz > 0 && bottom[tx][tz] && left[tx][tz]) {
 						n.pos.x = tx;
 						n.pos.z = tz;
 					}
 				}
 			}
 			if (n.cornerSide == 8 && n.pos.x > 0 && n.pos.z > 0) {
-				if (top[n.pos.x][n.pos.z] && left[n.pos.x][n.pos.z]
-						&& top[n.pos.x][n.pos.z - 1]
-						&& left[n.pos.x - 1][n.pos.z]) {// next diagonal
-														// available
+				if (top[n.pos.x][n.pos.z] && left[n.pos.x][n.pos.z] && top[n.pos.x][n.pos.z - 1] && left[n.pos.x - 1][n.pos.z]) {// next
+																																	// diagonal
+																																	// available
 					final int tx = n.pos.x - 1;
 					final int tz = n.pos.z - 1;
 					if (tx > 0 && tz > 0 && top[tx][tz] && left[tx][tz]) {
@@ -1051,8 +953,7 @@ public class AStarPathing {
 				if (right[n.pos.x][n.pos.z]) {
 					final int tx = n.pos.x;
 					final int tz = n.pos.z + 1;
-					if (tz < winfo.width - 1 && bottom[tx][tz] && right[tx][tz]
-							&& top[tx][tz]) {
+					if (tz < winfo.width - 1 && bottom[tx][tz] && right[tx][tz] && top[tx][tz]) {
 						n.pos.x = tx;
 						n.pos.z = tz;
 					}
@@ -1062,8 +963,7 @@ public class AStarPathing {
 				if (bottom[n.pos.x][n.pos.z]) {
 					final int tx = n.pos.x + 1;
 					final int tz = n.pos.z;
-					if (tx < winfo.length - 1 && bottom[tx][tz]
-							&& right[tx][tz] && left[tx][tz]) {
+					if (tx < winfo.length - 1 && bottom[tx][tz] && right[tx][tz] && left[tx][tz]) {
 						n.pos.x = tx;
 						n.pos.z = tz;
 					}
@@ -1134,8 +1034,7 @@ public class AStarPathing {
 		while (x != p2.x || z != p2.z) {
 			int nx, nz;
 
-			if (xdist == 0 || zdist != 0
-					&& xdone * 1000 / xdist > zdone * 1000 / zdist) {
+			if (xdist == 0 || zdist != 0 && xdone * 1000 / xdist > zdone * 1000 / zdist) {
 				nz = z + zsign;
 				nx = x;
 				zdone += zsign;
@@ -1168,8 +1067,7 @@ public class AStarPathing {
 		return true;
 	}
 
-	public boolean createConnectionsTable(final MillWorldInfo winfo,
-			final Point thStanding) throws MillenaireException {
+	public boolean createConnectionsTable(final MillWorldInfo winfo, final Point thStanding) throws MillenaireException {
 
 		long startTime = System.nanoTime();
 		final long totalStartTime = startTime;
@@ -1246,19 +1144,14 @@ public class AStarPathing {
 		}
 
 		if (MLN.LogConnections >= MLN.MINOR) {
-			MLN.minor(this, "Time taken for connection building: "
-					+ (double) (System.nanoTime() - startTime) / 1000000);
+			MLN.minor(this, "Time taken for connection building: " + (double) (System.nanoTime() - startTime) / 1000000);
 		}
 
 		startTime = System.nanoTime();
 
 		buildNodes();
 		if (MLN.LogConnections >= MLN.MINOR) {
-			MLN.minor(
-					this,
-					"Time taken for nodes finding: "
-							+ (double) (System.nanoTime() - startTime)
-							/ 1000000);
+			MLN.minor(this, "Time taken for nodes finding: " + (double) (System.nanoTime() - startTime) / 1000000);
 		}
 
 		startTime = System.nanoTime();
@@ -1278,28 +1171,18 @@ public class AStarPathing {
 		}
 
 		if (MLN.LogConnections >= MLN.MINOR) {
-			MLN.minor(
-					this,
-					"Time taken for nodes linking: "
-							+ (double) (System.nanoTime() - startTime)
-							/ 1000000);
+			MLN.minor(this, "Time taken for nodes linking: " + (double) (System.nanoTime() - startTime) / 1000000);
 		}
 
 		startTime = System.nanoTime();
 
 		findRegions(thStanding);
 		if (MLN.LogConnections >= MLN.MINOR) {
-			MLN.minor(
-					this,
-					"Time taken for group finding: "
-							+ (double) (System.nanoTime() - startTime)
-							/ 1000000);
+			MLN.minor(this, "Time taken for group finding: " + (double) (System.nanoTime() - startTime) / 1000000);
 		}
 
 		if (MLN.LogConnections >= MLN.MAJOR) {
-			MLN.major(this, "Node graph complete. Size: " + nodes.size()
-					+ " Time taken: "
-					+ (double) (System.nanoTime() - totalStartTime) / 1000000);
+			MLN.major(this, "Node graph complete. Size: " + nodes.size() + " Time taken: " + (double) (System.nanoTime() - totalStartTime) / 1000000);
 		}
 
 		if (MLN.LogConnections >= MLN.DEBUG && MLN.DEV) {
@@ -1310,11 +1193,8 @@ public class AStarPathing {
 		return true;
 	}
 
-	public PathingWorker createWorkerForPath(final MillVillager villager,
-			final int pStartX, final int pStartZ, final int pDestX,
-			final int pDestZ) {
-		final PathingWorker worker = new PathingWorker(villager, pStartX,
-				pStartZ, pDestX, pDestZ);
+	public PathingWorker createWorkerForPath(final MillVillager villager, final int pStartX, final int pStartZ, final int pDestX, final int pDestZ) {
+		final PathingWorker worker = new PathingWorker(villager, pStartX, pStartZ, pDestX, pDestZ);
 		worker.start();
 		return worker;
 	}
@@ -1346,8 +1226,7 @@ public class AStarPathing {
 				s = i + " ";
 			}
 			for (int j = 0; j < winfo.width; j++) {
-				s += Integer.toHexString(boolDisplay(top[i][j], left[i][j],
-						bottom[i][j], right[i][j]));
+				s += Integer.toHexString(boolDisplay(top[i][j], left[i][j], bottom[i][j], right[i][j]));
 			}
 			if (i < 10) {
 				s += "   " + i;
@@ -1453,11 +1332,9 @@ public class AStarPathing {
 
 				}
 				if (!found) {
-					if (!top[i][j] && !bottom[i][j] && !left[i][j]
-							&& !right[i][j]) {
+					if (!top[i][j] && !bottom[i][j] && !left[i][j] && !right[i][j]) {
 						s += "#";
-					} else if (!top[i][j] || !bottom[i][j] || !left[i][j]
-							|| !right[i][j]) {
+					} else if (!top[i][j] || !bottom[i][j] || !left[i][j] || !right[i][j]) {
 						s += ".";
 					} else {
 						s += " ";
@@ -1474,8 +1351,7 @@ public class AStarPathing {
 			MLN.minor(this, s);
 		}
 
-		MLN.minor(this, "Displaying connections finished. Time taken: "
-				+ (double) (System.nanoTime() - startTime) / 1000000);
+		MLN.minor(this, "Displaying connections finished. Time taken: " + (double) (System.nanoTime() - startTime) / 1000000);
 
 		//
 		// for (int i=0;i<length;i++) {
@@ -1527,8 +1403,7 @@ public class AStarPathing {
 						toVisit.add(n);
 						nodesMarked++;
 					} else if (n.region != nodeGroup) {
-						throw new MillenaireException("Node belongs to group "
-								+ n.region + " but reached from " + nodeGroup);
+						throw new MillenaireException("Node belongs to group " + n.region + " but reached from " + nodeGroup);
 					}
 				}
 				toVisit.remove(0);
@@ -1560,8 +1435,7 @@ public class AStarPathing {
 							spreaddone = true;
 						}
 						x = i;
-						while (x < winfo.length - 1 && bottom[x][j]
-								&& regions[x + 1][j] == -1) {
+						while (x < winfo.length - 1 && bottom[x][j] && regions[x + 1][j] == -1) {
 							x++;
 							regions[x][j] = regionid;
 							spreaddone = true;
@@ -1573,8 +1447,7 @@ public class AStarPathing {
 							spreaddone = true;
 						}
 						x = j;
-						while (x < winfo.width - 1 && right[i][x]
-								&& regions[i][x + 1] == -1) {
+						while (x < winfo.width - 1 && right[i][x] && regions[i][x + 1] == -1) {
 							x++;
 							regions[i][x] = regionid;
 							spreaddone = true;
@@ -1585,8 +1458,7 @@ public class AStarPathing {
 			}
 		}
 
-		thRegion = regions[thStanding.getiX() - winfo.mapStartX][thStanding
-				.getiZ() - winfo.mapStartZ];
+		thRegion = regions[thStanding.getiX() - winfo.mapStartX][thStanding.getiZ() - winfo.mapStartZ];
 
 		if (MLN.LogConnections >= MLN.MINOR) {
 			MLN.minor(this, nodeGroup + " node groups found.");
@@ -1595,9 +1467,7 @@ public class AStarPathing {
 	}
 
 	public boolean isInArea(final Point p) {
-		return !(p.x < winfo.mapStartX || p.x >= winfo.mapStartX + winfo.length
-				|| p.z < winfo.mapStartZ || p.z >= winfo.mapStartZ
-				+ winfo.width);
+		return !(p.x < winfo.mapStartX || p.x >= winfo.mapStartX + winfo.length || p.z < winfo.mapStartZ || p.z >= winfo.mapStartZ + winfo.width);
 	}
 
 	public boolean isValidPoint(final Point p) {
@@ -1606,13 +1476,11 @@ public class AStarPathing {
 			return false;
 		}
 
-		return winfo.spaceAbove[p.getiX() - winfo.mapStartX][p.getiZ()
-				- winfo.mapStartZ] > 1;
+		return winfo.spaceAbove[p.getiX() - winfo.mapStartX][p.getiZ() - winfo.mapStartZ] > 1;
 
 	}
 
-	private void storeInCache(final CachedPath path, final Point2D dest)
-			throws Exception {
+	private void storeInCache(final CachedPath path, final Point2D dest) throws Exception {
 
 		for (final Point2D p : path.points) {
 			if (p == null) {

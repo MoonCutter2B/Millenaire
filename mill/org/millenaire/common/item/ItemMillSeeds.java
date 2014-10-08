@@ -30,8 +30,7 @@ public class ItemMillSeeds extends Goods.ItemText implements IPlantable {
 
 	public final String cropKey;
 
-	public ItemMillSeeds(final String iconName, final Block j,
-			final String cropKey) {
+	public ItemMillSeeds(final String iconName, final Block j, final String cropKey) {
 		super(iconName);
 		crop = j;
 		this.cropKey = cropKey;
@@ -39,52 +38,39 @@ public class ItemMillSeeds extends Goods.ItemText implements IPlantable {
 	}
 
 	@Override
-	public Block getPlant(final IBlockAccess world, final int x, final int y,
-			final int z) {
+	public Block getPlant(final IBlockAccess world, final int x, final int y, final int z) {
 		return crop;
 	}
 
 	@Override
-	public int getPlantMetadata(final IBlockAccess world, final int x,
-			final int y, final int i) {
+	public int getPlantMetadata(final IBlockAccess world, final int x, final int y, final int i) {
 		return 0;
 	}
 
 	@Override
-	public EnumPlantType getPlantType(final IBlockAccess world, final int x,
-			final int y, final int z) {
+	public EnumPlantType getPlantType(final IBlockAccess world, final int x, final int y, final int z) {
 		return EnumPlantType.Crop;
 	}
 
 	@Override
-	public boolean onItemUse(final ItemStack itemstack,
-			final EntityPlayer entityplayer, final World world, final int i,
-			final int j, final int k, final int l, final float hitX,
-			final float hitY, final float hitZ) {
+	public boolean onItemUse(final ItemStack itemstack, final EntityPlayer entityplayer, final World world, final int i, final int j, final int k, final int l, final float hitX, final float hitY,
+			final float hitZ) {
 		if (l != 1) {
 			return false;
 		}
-		if (!entityplayer.canPlayerEdit(i, j, k, l, itemstack)
-				|| !entityplayer.canPlayerEdit(i, j + 1, k, l, itemstack)) {
+		if (!entityplayer.canPlayerEdit(i, j, k, l, itemstack) || !entityplayer.canPlayerEdit(i, j + 1, k, l, itemstack)) {
 			return false;
 		}
-		final UserProfile profile = Mill.getMillWorld(world).getProfile(
-				entityplayer.getDisplayName());
-		if (!profile.isTagSet(new StringBuilder().append("cropplanting_")
-				.append(cropKey).toString())
-				&& !MLN.DEV) {
+		final UserProfile profile = Mill.getMillWorld(world).getProfile(entityplayer.getDisplayName());
+		if (!profile.isTagSet(new StringBuilder().append("cropplanting_").append(cropKey).toString()) && !MLN.DEV) {
 			if (!world.isRemote) {
-				ServerSender.sendTranslatedSentence(entityplayer, 'f',
-						"ui.cropplantingknowledge",
-						new String[] { new StringBuilder().append("item.")
-								.append(cropKey).toString() });
+				ServerSender.sendTranslatedSentence(entityplayer, 'f', "ui.cropplantingknowledge", new String[] { new StringBuilder().append("item.").append(cropKey).toString() });
 			}
 			return false;
 		}
 		final Block block = world.getBlock(i, j, k);
 		if (block == Blocks.farmland && world.isAirBlock(i, j + 1, k)) {
-			MillCommonUtilities.setBlockAndMetadata(world, i, j + 1, k, crop,
-					0, true, false);
+			MillCommonUtilities.setBlockAndMetadata(world, i, j + 1, k, crop, 0, true, false);
 			itemstack.stackSize--;
 			if (!world.isRemote) {
 				entityplayer.addStat(MillAchievements.masterfarmer, 1);

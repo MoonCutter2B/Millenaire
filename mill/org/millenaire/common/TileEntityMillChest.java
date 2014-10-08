@@ -18,26 +18,21 @@ import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerSender;
 import org.millenaire.common.network.StreamReadWrite;
 
-public class TileEntityMillChest extends TileEntityChest implements
-		ISidedInventory {
+public class TileEntityMillChest extends TileEntityChest implements ISidedInventory {
 
-	public static class InventoryMillLargeChest extends InventoryLargeChest
-			implements ISidedInventory {
+	public static class InventoryMillLargeChest extends InventoryLargeChest implements ISidedInventory {
 
-		public InventoryMillLargeChest(final String par1Str,
-				final IInventory par2iInventory, final IInventory par3iInventory) {
+		public InventoryMillLargeChest(final String par1Str, final IInventory par2iInventory, final IInventory par3iInventory) {
 			super(par1Str, par2iInventory, par3iInventory);
 		}
 
 		@Override
-		public boolean canExtractItem(final int i, final ItemStack itemstack,
-				final int j) {
+		public boolean canExtractItem(final int i, final ItemStack itemstack, final int j) {
 			return false;
 		}
 
 		@Override
-		public boolean canInsertItem(final int i, final ItemStack itemstack,
-				final int j) {
+		public boolean canInsertItem(final int i, final ItemStack itemstack, final int j) {
 			return false;
 		}
 
@@ -48,8 +43,7 @@ public class TileEntityMillChest extends TileEntityChest implements
 
 	}
 
-	public static void readUpdatePacket(final ByteBufInputStream ds,
-			final World world) {
+	public static void readUpdatePacket(final ByteBufInputStream ds, final World world) {
 
 		Point pos = null;
 		try {
@@ -68,8 +62,7 @@ public class TileEntityMillChest extends TileEntityChest implements
 
 				final byte nb = ds.readByte();
 				for (int i = 0; i < nb; i++) {
-					te.setInventorySlotContents(i,
-							StreamReadWrite.readNullableItemStack(ds));
+					te.setInventorySlotContents(i, StreamReadWrite.readNullableItemStack(ds));
 				}
 
 				te.loaded = true;
@@ -87,14 +80,12 @@ public class TileEntityMillChest extends TileEntityChest implements
 	public boolean serverDevMode = false;
 
 	@Override
-	public boolean canExtractItem(final int i, final ItemStack itemstack,
-			final int j) {
+	public boolean canExtractItem(final int i, final ItemStack itemstack, final int j) {
 		return false;
 	}
 
 	@Override
-	public boolean canInsertItem(final int i, final ItemStack itemstack,
-			final int j) {
+	public boolean canInsertItem(final int i, final ItemStack itemstack, final int j) {
 		return false;
 	}
 

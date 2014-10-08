@@ -27,8 +27,7 @@ public abstract class Goal {
 		private Point dest, destBuildingPos;
 		private Entity targetEnt;
 
-		public GoalInformation(final Point dest, final Point buildingPos,
-				final Entity targetEnt) {
+		public GoalInformation(final Point dest, final Point buildingPos, final Entity targetEnt) {
 			this.dest = dest;
 			this.destBuildingPos = buildingPos;
 			this.targetEnt = targetEnt;
@@ -73,17 +72,12 @@ public abstract class Goal {
 	public static Goal gettool;
 
 	public static Goal gosocialise;
-	public static final AStarConfig JPS_CONFIG_TIGHT = new AStarConfig(true,
-			false, false, true);
-	public static final AStarConfig JPS_CONFIG_WIDE = new AStarConfig(true,
-			false, false, true, 2, 10);
-	public static final AStarConfig JPS_CONFIG_BUILDING = new AStarConfig(true,
-			false, false, true, 2, 20);
-	public static final AStarConfig JPS_CONFIG_CHOPLUMBER = new AStarConfig(
-			true, false, false, true, 4, 20);
+	public static final AStarConfig JPS_CONFIG_TIGHT = new AStarConfig(true, false, false, true);
+	public static final AStarConfig JPS_CONFIG_WIDE = new AStarConfig(true, false, false, true, 2, 10);
+	public static final AStarConfig JPS_CONFIG_BUILDING = new AStarConfig(true, false, false, true, 2, 20);
+	public static final AStarConfig JPS_CONFIG_CHOPLUMBER = new AStarConfig(true, false, false, true, 4, 20);
 
-	public static final AStarConfig JPS_CONFIG_SLAUGHTERSQUIDS = new AStarConfig(
-			true, false, false, true, 6, 4);
+	public static final AStarConfig JPS_CONFIG_SLAUGHTERSQUIDS = new AStarConfig(true, false, false, true, 6, 4);
 
 	protected static final Point[] EMPTY_DEST = new Point[] { null, null };
 
@@ -204,10 +198,7 @@ public abstract class Goal {
 
 	public String gameName(final MillVillager villager) {
 
-		if (villager != null
-				&& getCurrentGoalTarget(villager) != null
-				&& getCurrentGoalTarget(villager)
-						.horizontalDistanceTo(villager) > range(villager)) {
+		if (villager != null && getCurrentGoalTarget(villager) != null && getCurrentGoalTarget(villager).horizontalDistanceTo(villager) > range(villager)) {
 			return MLN.string("goal." + labelKeyWhileTravelling(villager));
 		}
 
@@ -224,16 +215,13 @@ public abstract class Goal {
 
 	}
 
-	public abstract GoalInformation getDestination(MillVillager villager)
-			throws Exception;
+	public abstract GoalInformation getDestination(MillVillager villager) throws Exception;
 
-	public ItemStack[] getHeldItemsDestination(final MillVillager villager)
-			throws Exception {
+	public ItemStack[] getHeldItemsDestination(final MillVillager villager) throws Exception {
 		return getHeldItemsTravelling(villager);
 	}
 
-	public ItemStack[] getHeldItemsTravelling(final MillVillager villager)
-			throws Exception {
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) throws Exception {
 		return null;
 	}
 
@@ -249,8 +237,7 @@ public abstract class Goal {
 		return false;
 	}
 
-	public final boolean isPossible(final MillVillager villager)
-			throws Exception {
+	public final boolean isPossible(final MillVillager villager) throws Exception {
 
 		if (villager.worldObj.isDaytime() && !canBeDoneInDayTime()) {
 			return false;
@@ -261,18 +248,14 @@ public abstract class Goal {
 		}
 
 		for (final InvItem item : townhallLimit.keySet()) {
-			if (villager.getTownHall().countGoods(item) > townhallLimit
-					.get(item)) {
+			if (villager.getTownHall().countGoods(item) > townhallLimit.get(item)) {
 				return false;
 			}
 		}
 
 		if (balanceOutput1 != null) {
-			if (villager.getTownHall().nbGoodAvailable(
-					new InvItem(balanceOutput1.item, balanceOutput1.meta),
-					false, false) < villager.getTownHall().nbGoodAvailable(
-					new InvItem(balanceOutput2.item, balanceOutput2.meta),
-					false, false)) {
+			if (villager.getTownHall().nbGoodAvailable(new InvItem(balanceOutput1.item, balanceOutput1.meta), false, false) < villager.getTownHall().nbGoodAvailable(
+					new InvItem(balanceOutput2.item, balanceOutput2.meta), false, false)) {
 				return false;
 			}
 		}
@@ -295,13 +278,11 @@ public abstract class Goal {
 		return isPossibleSpecific(villager);
 	}
 
-	protected boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	protected boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 		return true;
 	}
 
-	public final boolean isStillValid(final MillVillager villager)
-			throws Exception {
+	public final boolean isStillValid(final MillVillager villager) throws Exception {
 
 		if (villager.worldObj.isDaytime() && !canBeDoneInDayTime()) {
 			return false;
@@ -320,16 +301,14 @@ public abstract class Goal {
 
 		}
 
-		if (villager.getGoalDestPoint() == null
-				&& villager.getGoalDestEntity() == null) {
+		if (villager.getGoalDestPoint() == null && villager.getGoalDestEntity() == null) {
 			return false;
 		}
 
 		return isStillValidSpecific(villager);
 	}
 
-	protected boolean isStillValidSpecific(final MillVillager villager)
-			throws Exception {
+	protected boolean isStillValidSpecific(final MillVillager villager) throws Exception {
 		return true;
 	}
 
@@ -367,8 +346,7 @@ public abstract class Goal {
 		return new GoalInformation(p, b.getPos(), null);
 	}
 
-	protected GoalInformation packDest(final Point p, final Building b,
-			final Entity ent) {
+	protected GoalInformation packDest(final Point p, final Building b, final Entity ent) {
 		if (b == null) {
 			return new GoalInformation(p, null, ent);
 		}
@@ -380,8 +358,7 @@ public abstract class Goal {
 		return new GoalInformation(p, p2, null);
 	}
 
-	public abstract boolean performAction(MillVillager villager)
-			throws Exception;
+	public abstract boolean performAction(MillVillager villager) throws Exception;
 
 	public abstract int priority(MillVillager villager) throws Exception;
 
@@ -419,10 +396,7 @@ public abstract class Goal {
 
 	public boolean swingArms(final MillVillager villager) {
 
-		if (villager != null
-				&& getCurrentGoalTarget(villager) != null
-				&& getCurrentGoalTarget(villager)
-						.horizontalDistanceTo(villager) > range(villager)) {
+		if (villager != null && getCurrentGoalTarget(villager) != null && getCurrentGoalTarget(villager).horizontalDistanceTo(villager) > range(villager)) {
 			return this.swingArmsWhileTravelling();
 		}
 
@@ -438,38 +412,25 @@ public abstract class Goal {
 		return "goal:" + key;
 	}
 
-	public boolean unreachableDestination(final MillVillager villager)
-			throws Exception {
+	public boolean unreachableDestination(final MillVillager villager) throws Exception {
 
-		if (villager.getGoalDestPoint() == null
-				&& villager.getGoalDestEntity() == null) {
+		if (villager.getGoalDestPoint() == null && villager.getGoalDestEntity() == null) {
 			return false;
 		}
 
-		final int[] jumpTo = MillCommonUtilities.getJumpDestination(
-				villager.worldObj,
-				villager.getPathDestPoint().getiX(),
-				villager.getTownHall().getAltitude(
-						villager.getPathDestPoint().getiX(),
-						villager.getPathDestPoint().getiZ()), villager
-						.getPathDestPoint().getiZ());
+		final int[] jumpTo = MillCommonUtilities.getJumpDestination(villager.worldObj, villager.getPathDestPoint().getiX(),
+				villager.getTownHall().getAltitude(villager.getPathDestPoint().getiX(), villager.getPathDestPoint().getiZ()), villager.getPathDestPoint().getiZ());
 
 		if (jumpTo != null) {
 			if (MLN.LogPathing >= MLN.MINOR && villager.extraLog) {
-				MLN.minor(this, "Dest unreachable. Jumping " + villager
-						+ " from " + villager.getPos() + " to " + jumpTo[0]
-						+ "/" + jumpTo[1] + "/" + jumpTo[2]);
+				MLN.minor(this, "Dest unreachable. Jumping " + villager + " from " + villager.getPos() + " to " + jumpTo[0] + "/" + jumpTo[1] + "/" + jumpTo[2]);
 			}
-			villager.setPosition(jumpTo[0] + 0.5, jumpTo[1] + 0.5,
-					jumpTo[2] + 0.5);
+			villager.setPosition(jumpTo[0] + 0.5, jumpTo[1] + 0.5, jumpTo[2] + 0.5);
 			return true;
 
 		} else {
 			if (MLN.LogPathing >= MLN.MINOR && villager.extraLog) {
-				MLN.minor(this,
-						"Dest unreachable. Couldn't jump " + villager
-								+ " from " + villager.getPos() + " to "
-								+ villager.getPathDestPoint());
+				MLN.minor(this, "Dest unreachable. Couldn't jump " + villager + " from " + villager.getPos() + " to " + villager.getPathDestPoint());
 			}
 			return false;
 		}

@@ -42,15 +42,13 @@ public class GuiVillageHead extends GuiText {
 			this.key = key;
 		}
 
-		public GuiButtonChief(final String key, final String label,
-				final Point v) {
+		public GuiButtonChief(final String key, final String label, final Point v) {
 			super(0, 0, 0, 0, 0, label);
 			village = v;
 			this.key = key;
 		}
 
-		public GuiButtonChief(final String key, final String label,
-				final String plan) {
+		public GuiButtonChief(final String key, final String label, final String plan) {
 			super(0, 0, 0, 0, 0, label);
 			this.key = key;
 			this.value = plan;
@@ -96,8 +94,7 @@ public class GuiVillageHead extends GuiText {
 
 	private final EntityPlayer player;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_village_chief.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_village_chief.png");
 
 	public GuiVillageHead(final EntityPlayer player, final MillVillager chief) {
 		this.chief = chief;
@@ -115,11 +112,9 @@ public class GuiVillageHead extends GuiText {
 			boolean close = false;
 
 			if (gb.key == GuiButtonChief.PRAISE) {
-				ClientSender.villageChiefPerformDiplomacy(player, chief,
-						gb.village, true);
+				ClientSender.villageChiefPerformDiplomacy(player, chief, gb.village, true);
 			} else if (gb.key == GuiButtonChief.SLANDER) {
-				ClientSender.villageChiefPerformDiplomacy(player, chief,
-						gb.village, false);
+				ClientSender.villageChiefPerformDiplomacy(player, chief, gb.village, false);
 			} else if (gb.key == GuiButtonChief.VILLAGE_SCROLL) {
 				ClientSender.villageChiefPerformVillageScroll(player, chief);
 				close = true;
@@ -127,8 +122,7 @@ public class GuiVillageHead extends GuiText {
 				ClientSender.villageChiefPerformCultureControl(player, chief);
 				close = true;
 			} else if (gb.key == GuiButtonChief.BUILDING) {
-				ClientSender.villageChiefPerformBuilding(player, chief,
-						gb.value);
+				ClientSender.villageChiefPerformBuilding(player, chief, gb.value);
 				close = true;
 			} else if (gb.key == GuiButtonChief.CROP) {
 				ClientSender.villageChiefPerformCrop(player, chief, gb.value);
@@ -167,14 +161,11 @@ public class GuiVillageHead extends GuiText {
 
 		String game = "";
 		if (chief.getGameOccupationName(player.getDisplayName()).length() > 0) {
-			game = " (" + chief.getGameOccupationName(player.getDisplayName())
-					+ ")";
+			game = " (" + chief.getGameOccupationName(player.getDisplayName()) + ")";
 		}
 
-		text.add(new Line(chief.getName() + ", "
-				+ chief.getNativeOccupationName() + game, false));
-		text.add(new Line(MLN.string("ui.villagechief").replace("<0>",
-				chief.getTownHall().getVillageQualifiedName())));
+		text.add(new Line(chief.getName() + ", " + chief.getNativeOccupationName() + game, false));
+		text.add(new Line(MLN.string("ui.villagechief").replace("<0>", chief.getTownHall().getVillageQualifiedName())));
 		text.add(new Line());
 
 		String col = "";
@@ -189,34 +180,23 @@ public class GuiVillageHead extends GuiText {
 			col = LIGHTRED;
 		}
 
-		text.add(new Line(col
-				+ MLN.string("ui.yourstatus")
-				+ ": "
-				+ chief.getTownHall().getReputationLevelLabel(
-						player.getDisplayName()), false));
-		text.add(new Line(col
-				+ chief.getTownHall()
-						.getReputationLevelDesc(player.getDisplayName())
-						.replaceAll("\\$name", player.getDisplayName())));
+		text.add(new Line(col + MLN.string("ui.yourstatus") + ": " + chief.getTownHall().getReputationLevelLabel(player.getDisplayName()), false));
+		text.add(new Line(col + chief.getTownHall().getReputationLevelDesc(player.getDisplayName()).replaceAll("\\$name", player.getDisplayName())));
 		text.add(new Line());
 		text.add(new Line(MLN.string("ui.possiblehousing") + ":"));
 		text.add(new Line());
-		final Map<EnumProjects, List<BuildingProject>> projects = chief
-				.getTownHall().buildingProjects;
+		final Map<EnumProjects, List<BuildingProject>> projects = chief.getTownHall().buildingProjects;
 
 		final UserProfile profile = Mill.proxy.getClientProfile();
 
-		final int reputation = chief.getTownHall().getReputation(
-				player.getDisplayName());
+		final int reputation = chief.getTownHall().getReputation(player.getDisplayName());
 
 		for (final EnumProjects ep : EnumProjects.values()) {
 			if (chief.getTownHall().buildingProjects.containsKey(ep)) {
-				final List<BuildingProject> projectsLevel = chief.getTownHall().buildingProjects
-						.get(ep);
+				final List<BuildingProject> projectsLevel = chief.getTownHall().buildingProjects.get(ep);
 				for (final BuildingProject project : projectsLevel) {
 					if (project.planSet != null) {
-						final BuildingPlan plan = project.planSet
-								.getRandomStartingPlan();
+						final BuildingPlan plan = project.planSet.getRandomStartingPlan();
 						if (plan != null && plan.price > 0 && !plan.isgift) {
 							String status = "";
 
@@ -224,65 +204,41 @@ public class GuiVillageHead extends GuiText {
 
 							if (project.location != null) {
 								status = MLN.string("ui.alreadybuilt") + ".";
-							} else if (chief.getTownHall().buildingsBought
-									.contains(project.key)) {
-								status = MLN.string("ui.alreadyrequested")
-										+ ".";
+							} else if (chief.getTownHall().buildingsBought.contains(project.key)) {
+								status = MLN.string("ui.alreadyrequested") + ".";
 							} else if (plan.reputation > reputation) {
 								status = MLN.string("ui.notavailableyet") + ".";
-							} else if (plan.price > MillCommonUtilities
-									.countMoney(player.inventory)) {
-								status = MLN
-										.string("ui.youaremissing",
-												""
-														+ MillCommonUtilities.getShortPrice(plan.price
-																- MillCommonUtilities
-																		.countMoney(player.inventory)));
+							} else if (plan.price > MillCommonUtilities.countMoney(player.inventory)) {
+								status = MLN.string("ui.youaremissing", "" + MillCommonUtilities.getShortPrice(plan.price - MillCommonUtilities.countMoney(player.inventory)));
 							} else {
 								status = MLN.string("ui.available") + ".";
 								buyButton = true;
 							}
-							text.add(new Line(plan.nativeName + ": " + status,
-									false));
+							text.add(new Line(plan.nativeName + ": " + status, false));
 
 							if (buyButton) {
-								text.add(new Line(
-										new GuiButtonChief(
-												GuiButtonChief.BUILDING,
-												MLN.string(
-														"ui.buybuilding",
-														plan.nativeName,
-														MillCommonUtilities
-																.getShortPrice(plan.price)),
-												plan.buildingKey)));
+								text.add(new Line(new GuiButtonChief(GuiButtonChief.BUILDING, MLN.string("ui.buybuilding", plan.nativeName, MillCommonUtilities.getShortPrice(plan.price)),
+										plan.buildingKey)));
 								text.add(new Line(false));
 								text.add(new Line());
 							}
-						} else if (plan.isgift && MLN.bonusEnabled
-								&& !Mill.proxy.isTrueClient()) {
+						} else if (plan.isgift && MLN.bonusEnabled && !Mill.proxy.isTrueClient()) {
 							String status = "";
 
 							boolean buyButton = false;
 
 							if (project.location != null) {
 								status = MLN.string("ui.alreadybuilt") + ".";
-							} else if (chief.getTownHall().buildingsBought
-									.contains(project.key)) {
-								status = MLN.string("ui.alreadyrequested")
-										+ ".";
+							} else if (chief.getTownHall().buildingsBought.contains(project.key)) {
+								status = MLN.string("ui.alreadyrequested") + ".";
 							} else {
 								status = MLN.string("ui.bonusavailable") + ".";
 								buyButton = true;
 							}
-							text.add(new Line(plan.nativeName + ": " + status,
-									false));
+							text.add(new Line(plan.nativeName + ": " + status, false));
 
 							if (buyButton) {
-								text.add(new Line(new GuiButtonChief(
-										GuiButtonChief.BUILDING, MLN.string(
-												"ui.buybonusbuilding",
-												plan.nativeName),
-										plan.buildingKey)));
+								text.add(new Line(new GuiButtonChief(GuiButtonChief.BUILDING, MLN.string("ui.buybonusbuilding", plan.nativeName), plan.buildingKey)));
 								text.add(new Line(false));
 								text.add(new Line());
 							}
@@ -294,20 +250,11 @@ public class GuiVillageHead extends GuiText {
 
 		if (GuiActions.VILLAGE_SCROLL_REPUTATION > reputation) {
 			text.add(new Line(MLN.string("ui.scrollsnoreputation")));
-		} else if (GuiActions.VILLAGE_SCROLL_PRICE > MillCommonUtilities
-				.countMoney(player.inventory)) {
-			text.add(new Line(
-					MLN.string(
-							"ui.scrollsnotenoughmoney",
-							""
-									+ MillCommonUtilities.getShortPrice(GuiActions.VILLAGE_SCROLL_PRICE
-											- MillCommonUtilities
-													.countMoney(player.inventory)))));
+		} else if (GuiActions.VILLAGE_SCROLL_PRICE > MillCommonUtilities.countMoney(player.inventory)) {
+			text.add(new Line(MLN.string("ui.scrollsnotenoughmoney", "" + MillCommonUtilities.getShortPrice(GuiActions.VILLAGE_SCROLL_PRICE - MillCommonUtilities.countMoney(player.inventory)))));
 		} else {
 			text.add(new Line(MLN.string("ui.scrollsok"), false));
-			text.add(new Line(new GuiButtonChief(GuiButtonChief.VILLAGE_SCROLL,
-					MLN.string("ui.buyscroll"), MillCommonUtilities
-							.getShortPrice(GuiActions.VILLAGE_SCROLL_PRICE))));
+			text.add(new Line(new GuiButtonChief(GuiButtonChief.VILLAGE_SCROLL, MLN.string("ui.buyscroll"), MillCommonUtilities.getShortPrice(GuiActions.VILLAGE_SCROLL_PRICE))));
 			text.add(new Line());
 			text.add(new Line());
 		}
@@ -318,34 +265,15 @@ public class GuiVillageHead extends GuiText {
 
 			for (final String crop : chief.getCulture().knownCrops) {
 				if (profile.isTagSet(MillWorld.CROP_PLANTING + crop)) {
-					text.add(new Line(MLN.string("ui.cropknown",
-							MLN.string("item." + crop))));
+					text.add(new Line(MLN.string("ui.cropknown", MLN.string("item." + crop))));
 				} else if (GuiActions.CROP_REPUTATION > reputation) {
-					text.add(new Line(MLN.string(
-							"ui.cropinsufficientreputation",
-							MLN.string("item." + crop))));
-				} else if (GuiActions.CROP_PRICE > MillCommonUtilities
-						.countMoney(player.inventory)) {
-					text.add(new Line(
-							MLN.string(
-									"ui.cropnotenoughmoney",
-									MLN.string("item." + crop),
-									""
-											+ MillCommonUtilities.getShortPrice(GuiActions.CROP_PRICE
-													- MillCommonUtilities
-															.countMoney(player.inventory)))));
+					text.add(new Line(MLN.string("ui.cropinsufficientreputation", MLN.string("item." + crop))));
+				} else if (GuiActions.CROP_PRICE > MillCommonUtilities.countMoney(player.inventory)) {
+					text.add(new Line(MLN.string("ui.cropnotenoughmoney", MLN.string("item." + crop),
+							"" + MillCommonUtilities.getShortPrice(GuiActions.CROP_PRICE - MillCommonUtilities.countMoney(player.inventory)))));
 				} else {
-					text.add(new Line(MLN.string("ui.cropoktolearn",
-							MLN.string("item." + crop)), false));
-					text.add(new Line(
-							new GuiButtonChief(
-									GuiButtonChief.CROP,
-									MLN.string(
-											"ui.croplearn",
-											""
-													+ MillCommonUtilities
-															.getShortPrice(GuiActions.CROP_PRICE)),
-									crop)));
+					text.add(new Line(MLN.string("ui.cropoktolearn", MLN.string("item." + crop)), false));
+					text.add(new Line(new GuiButtonChief(GuiButtonChief.CROP, MLN.string("ui.croplearn", "" + MillCommonUtilities.getShortPrice(GuiActions.CROP_PRICE)), crop)));
 					text.add(new Line(false));
 					text.add(new Line());
 				}
@@ -354,19 +282,13 @@ public class GuiVillageHead extends GuiText {
 			text.add(new Line());
 		}
 
-		if (profile
-				.isTagSet(MillWorld.CULTURE_CONTROL + chief.getCulture().key)) {
-			text.add(new Line(MLN.string("ui.control_alreadydone", chief
-					.getCulture().getCultureGameName())));
+		if (profile.isTagSet(MillWorld.CULTURE_CONTROL + chief.getCulture().key)) {
+			text.add(new Line(MLN.string("ui.control_alreadydone", chief.getCulture().getCultureGameName())));
 		} else if (GuiActions.CULTURE_CONTROL_REPUTATION > reputation) {
-			text.add(new Line(MLN.string("ui.control_noreputation", chief
-					.getCulture().getCultureGameName())));
+			text.add(new Line(MLN.string("ui.control_noreputation", chief.getCulture().getCultureGameName())));
 		} else {
-			text.add(new Line(MLN.string("ui.control_ok", chief.getCulture()
-					.getCultureGameName()), false));
-			text.add(new Line(new GuiButtonChief(
-					GuiButtonChief.CULTURE_CONTROL, MLN
-							.string("ui.control_get"))));
+			text.add(new Line(MLN.string("ui.control_ok", chief.getCulture().getCultureGameName()), false));
+			text.add(new Line(new GuiButtonChief(GuiButtonChief.CULTURE_CONTROL, MLN.string("ui.control_get"))));
 			text.add(new Line(false));
 			text.add(new Line());
 		}
@@ -378,8 +300,7 @@ public class GuiVillageHead extends GuiText {
 
 		text.add(new Line(MLN.string("ui.relationlist")));
 		text.add(new Line());
-		text.add(new Line(MLN.string("ui.relationpoints",
-				"" + profile.getDiplomacyPoints(chief.getTownHall()))));
+		text.add(new Line(MLN.string("ui.relationpoints", "" + profile.getDiplomacyPoints(chief.getTownHall()))));
 		text.add(new Line());
 
 		final List<VillageRelation> relations = new ArrayList<VillageRelation>();
@@ -387,10 +308,7 @@ public class GuiVillageHead extends GuiText {
 		for (final Point p : chief.getTownHall().getKnownVillages()) {
 			final Building b = chief.getTownHall().mw.getBuilding(p);
 			if (b != null) {
-				relations
-						.add(new VillageRelation(p, chief.getTownHall()
-								.getRelationWithVillage(p), b
-								.getVillageQualifiedName()));
+				relations.add(new VillageRelation(p, chief.getTownHall().getRelationWithVillage(p), b.getVillageQualifiedName()));
 			}
 		}
 
@@ -412,36 +330,25 @@ public class GuiVillageHead extends GuiText {
 				}
 
 				text.add(new Line(col
-						+ MLN.string(
-								"ui.villagerelations",
-								b.getVillageQualifiedName(),
-								b.villageType.name,
-								b.culture.getCultureGameName(),
-								MLN.string(MillCommonUtilities
-										.getRelationName(vr.relation))
-										+ " ("
-										+ vr.relation + ")"), false));
+						+ MLN.string("ui.villagerelations", b.getVillageQualifiedName(), b.villageType.name, b.culture.getCultureGameName(),
+								MLN.string(MillCommonUtilities.getRelationName(vr.relation)) + " (" + vr.relation + ")"), false));
 
 				GuiButtonChief praise = null;
 				GuiButtonChief slander = null;
 
-				if (profile.getDiplomacyPoints(chief.getTownHall()) > 0
-						&& reputation > 0) {
+				if (profile.getDiplomacyPoints(chief.getTownHall()) > 0 && reputation > 0) {
 					if (vr.relation < Building.RELATION_MAX) {
-						praise = new GuiButtonChief(GuiButtonChief.PRAISE,
-								MLN.string("ui.relationpraise"), vr.pos);
+						praise = new GuiButtonChief(GuiButtonChief.PRAISE, MLN.string("ui.relationpraise"), vr.pos);
 					}
 					if (vr.relation > Building.RELATION_MIN) {
-						slander = new GuiButtonChief(GuiButtonChief.SLANDER,
-								MLN.string("ui.relationslander"), vr.pos);
+						slander = new GuiButtonChief(GuiButtonChief.SLANDER, MLN.string("ui.relationslander"), vr.pos);
 					}
 					text.add(new Line(praise, slander));
 					text.add(new Line(false));
 					text.add(new Line());
 					text.add(new Line());
 				} else {
-					text.add(new Line(DARKRED
-							+ MLN.string("ui.villagerelationsnobutton")));
+					text.add(new Line(DARKRED + MLN.string("ui.villagerelationsnobutton")));
 					text.add(new Line());
 				}
 			}

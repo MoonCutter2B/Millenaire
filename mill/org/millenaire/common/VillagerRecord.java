@@ -20,20 +20,16 @@ import org.millenaire.common.forge.Mill;
 
 public class VillagerRecord implements Cloneable {
 
-	public static VillagerRecord read(final MillWorld mw,
-			final Culture thCulture, final Point th,
-			final NBTTagCompound nbttagcompound, final String label) {
+	public static VillagerRecord read(final MillWorld mw, final Culture thCulture, final Point th, final NBTTagCompound nbttagcompound, final String label) {
 
-		if (!nbttagcompound.hasKey(label + "_id")
-				&& !nbttagcompound.hasKey(label + "_lid")) {
+		if (!nbttagcompound.hasKey(label + "_id") && !nbttagcompound.hasKey(label + "_lid")) {
 			return null;
 		}
 
 		VillagerRecord vr;
 
 		if (nbttagcompound.hasKey(label + "_culture")) {
-			vr = new VillagerRecord(mw, Culture.getCultureByName(nbttagcompound
-					.getString(label + "_culture")));
+			vr = new VillagerRecord(mw, Culture.getCultureByName(nbttagcompound.getString(label + "_culture")));
 		} else {
 			vr = new VillagerRecord(mw, thCulture);// for pre-2.3, when culture
 													// was assumed to match the
@@ -62,12 +58,10 @@ public class VillagerRecord implements Cloneable {
 		vr.familyName = nbttagcompound.getString(label + "_familyName");
 		vr.nameKey = nbttagcompound.getString(label + "_propertype");
 		vr.occupation = nbttagcompound.getString(label + "_occupation");
-		vr.texture = new ResourceLocation(Mill.modId,
-				nbttagcompound.getString(label + "_texture"));
+		vr.texture = new ResourceLocation(Mill.modId, nbttagcompound.getString(label + "_texture"));
 		vr.housePos = Point.read(nbttagcompound, label + "_housePos");
 		vr.townHallPos = Point.read(nbttagcompound, label + "_townHallPos");
-		vr.originalVillagePos = Point.read(nbttagcompound, label
-				+ "_originalVillagePos");
+		vr.originalVillagePos = Point.read(nbttagcompound, label + "_originalVillagePos");
 
 		if (vr.townHallPos == null) {
 			vr.townHallPos = th;
@@ -80,34 +74,24 @@ public class VillagerRecord implements Cloneable {
 		vr.maidenName = nbttagcompound.getString(label + "_maidenName");
 		vr.spousesName = nbttagcompound.getString(label + "_spousesName");
 		vr.killed = nbttagcompound.getBoolean(label + "_killed");
-		vr.raidingVillage = nbttagcompound
-				.getBoolean(label + "_raidingVillage");
+		vr.raidingVillage = nbttagcompound.getBoolean(label + "_raidingVillage");
 		vr.awayraiding = nbttagcompound.getBoolean(label + "_awayraiding");
 		vr.awayhired = nbttagcompound.getBoolean(label + "_awayhired");
 
-		NBTTagList nbttaglist = nbttagcompound.getTagList(label + "questTags",
-				Constants.NBT.TAG_COMPOUND);
+		NBTTagList nbttaglist = nbttagcompound.getTagList(label + "questTags", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			vr.questTags.add(nbttagcompound1.getString("tag"));
 		}
 
-		nbttaglist = nbttagcompound.getTagList(label + "_inventory",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList(label + "_inventory", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
-			vr.inventory.put(
-					new InvItem(Item.getItemById(nbttagcompound1
-							.getInteger("item")), nbttagcompound1
-							.getInteger("meta")), nbttagcompound1
-							.getInteger("amount"));
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			vr.inventory.put(new InvItem(Item.getItemById(nbttagcompound1.getInteger("item")), nbttagcompound1.getInteger("meta")), nbttagcompound1.getInteger("amount"));
 		}
 
 		if (vr.getType() == null) {
-			MLN.error(vr, "Could not find type " + vr.type
-					+ " for VR. Skipping.");
+			MLN.error(vr, "Could not find type " + vr.type + " for VR. Skipping.");
 			return null;
 		}
 
@@ -116,8 +100,7 @@ public class VillagerRecord implements Cloneable {
 
 	public Culture culture;
 
-	public String fathersName = "", mothersName = "", spousesName = "",
-			maidenName = "";
+	public String fathersName = "", mothersName = "", spousesName = "", maidenName = "";
 
 	public boolean flawedRecord = false;
 	public boolean killed = false;
@@ -175,8 +158,7 @@ public class VillagerRecord implements Cloneable {
 		}
 
 		if (housePos == null) {
-			MLN.error(this,
-					"Creation constructor: House position in record is null.");
+			MLN.error(this, "Creation constructor: House position in record is null.");
 			flawedRecord = true;
 		}
 	}
@@ -271,13 +253,10 @@ public class VillagerRecord implements Cloneable {
 		for (final InvItem item : inventory.keySet()) {
 			if (inventory.get(item) > 0) {
 				if (item.getItem() == null) {
-					MLN.error(this,
-							"Attempting to check null melee weapon with id: "
-									+ inventory.get(item));
+					MLN.error(this, "Attempting to check null melee weapon with id: " + inventory.get(item));
 				} else {
 					if (MillCommonUtilities.getItemWeaponDamage(item.getItem()) > max) {
-						max = MillCommonUtilities.getItemWeaponDamage(item
-								.getItem());
+						max = MillCommonUtilities.getItemWeaponDamage(item.getItem());
 						best = item.getItem();
 					}
 				}
@@ -285,10 +264,8 @@ public class VillagerRecord implements Cloneable {
 		}
 
 		if (getType() != null && getType().startingWeapon != null) {
-			if (MillCommonUtilities
-					.getItemWeaponDamage(getType().startingWeapon.getItem()) > max) {
-				max = MillCommonUtilities
-						.getItemWeaponDamage(getType().startingWeapon.getItem());
+			if (MillCommonUtilities.getItemWeaponDamage(getType().startingWeapon.getItem()) > max) {
+				max = MillCommonUtilities.getItemWeaponDamage(getType().startingWeapon.getItem());
 				best = getType().startingWeapon.getItem();
 			}
 		}
@@ -355,8 +332,7 @@ public class VillagerRecord implements Cloneable {
 
 		strength += attack * 2;
 
-		if (getType().isArcher && countInv(Items.bow) > 0
-				|| countInv(Mill.yumiBow) > 0) {
+		if (getType().isArcher && countInv(Items.bow) > 0 || countInv(Mill.yumiBow) > 0) {
 			strength += 10;
 		}
 
@@ -420,9 +396,7 @@ public class VillagerRecord implements Cloneable {
 		if (culture.getVillagerType(type) == null) {
 			for (final Culture c : Culture.ListCultures) {
 				if (c.getVillagerType(type) != null) {
-					MLN.error(this, "Could not find villager type " + type
-							+ " in culture " + culture.key + " but could in "
-							+ c.key + " so switching.");
+					MLN.error(this, "Could not find villager type " + type + " in culture " + culture.key + " but could in " + c.key + " so switching.");
 					culture = c;
 				}
 			}
@@ -442,8 +416,7 @@ public class VillagerRecord implements Cloneable {
 
 	@Override
 	public String toString() {
-		return firstName + " " + familyName + "/" + type + "/" + nameKey + "/"
-				+ texture + "/" + id;
+		return firstName + " " + familyName + "/" + type + "/" + nameKey + "/" + texture + "/" + id;
 	}
 
 	public void updateRecord(final MillVillager v) {
@@ -511,8 +484,7 @@ public class VillagerRecord implements Cloneable {
 			townHallPos.write(nbttagcompound, label + "_townHallPos");
 		}
 		if (originalVillagePos != null) {
-			originalVillagePos.write(nbttagcompound, label
-					+ "_originalVillagePos");
+			originalVillagePos.write(nbttagcompound, label + "_originalVillagePos");
 		}
 		nbttagcompound.setInteger(label + "_size", villagerSize);
 
@@ -528,8 +500,7 @@ public class VillagerRecord implements Cloneable {
 		for (final InvItem key : inventory.keySet()) {
 
 			final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-			nbttagcompound1.setInteger("item",
-					Item.getIdFromItem(key.getItem()));
+			nbttagcompound1.setInteger("item", Item.getIdFromItem(key.getItem()));
 			nbttagcompound1.setInteger("meta", key.meta);
 			nbttagcompound1.setInteger("amount", inventory.get(key));
 			nbttaglist.appendTag(nbttagcompound1);

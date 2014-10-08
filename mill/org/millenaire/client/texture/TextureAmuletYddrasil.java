@@ -45,10 +45,7 @@ public class TextureAmuletYddrasil extends TextureAtlasSprite {
 
 		if (iconPos != this.frameCounter) {
 			this.frameCounter = iconPos;
-			TextureUtil.uploadTextureMipmap(
-					(int[][]) this.framesTextureData.get(this.frameCounter),
-					this.width, this.height, this.originX, this.originY, false,
-					false);
+			TextureUtil.uploadTextureMipmap((int[][]) this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
 		}
 	}
 

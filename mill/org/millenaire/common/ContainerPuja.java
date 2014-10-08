@@ -21,24 +21,20 @@ public class ContainerPuja extends Container {
 
 		PujaSacrifice shrine;
 
-		public MoneySlot(final PujaSacrifice shrine, final int par2,
-				final int par3, final int par4) {
+		public MoneySlot(final PujaSacrifice shrine, final int par2, final int par3, final int par4) {
 			super(shrine, par2, par3, par4);
 			this.shrine = shrine;
 		}
 
 		@Override
 		public boolean isItemValid(final ItemStack is) {
-			return is.getItem() == Mill.denier
-					|| is.getItem() == Mill.denier_or
-					|| is.getItem() == Mill.denier_argent;
+			return is.getItem() == Mill.denier || is.getItem() == Mill.denier_or || is.getItem() == Mill.denier_argent;
 		}
 
 		@Override
 		public void onSlotChanged() {
 			if (!shrine.temple.worldObj.isRemote) {
-				shrine.temple.getTownHall().requestSave(
-						"Puja money slot changed");
+				shrine.temple.getTownHall().requestSave("Puja money slot changed");
 			}
 			super.onSlotChanged();
 		}
@@ -49,8 +45,7 @@ public class ContainerPuja extends Container {
 
 		PujaSacrifice shrine;
 
-		public OfferingSlot(final PujaSacrifice shrine, final int par2,
-				final int par3, final int par4) {
+		public OfferingSlot(final PujaSacrifice shrine, final int par2, final int par3, final int par4) {
 			super(shrine, par2, par3, par4);
 			this.shrine = shrine;
 		}
@@ -63,8 +58,7 @@ public class ContainerPuja extends Container {
 		@Override
 		public void onSlotChanged() {
 			if (!shrine.temple.worldObj.isRemote) {
-				shrine.temple.getTownHall().requestSave(
-						"Puja offering slot changed");
+				shrine.temple.getTownHall().requestSave("Puja offering slot changed");
 			}
 			super.onSlotChanged();
 		}
@@ -74,8 +68,7 @@ public class ContainerPuja extends Container {
 
 		PujaSacrifice shrine;
 
-		public ToolSlot(final PujaSacrifice shrine, final int par2,
-				final int par3, final int par4) {
+		public ToolSlot(final PujaSacrifice shrine, final int par2, final int par3, final int par4) {
 			super(shrine, par2, par3, par4);
 			this.shrine = shrine;
 		}
@@ -85,12 +78,10 @@ public class ContainerPuja extends Container {
 			final Item item = is.getItem();
 
 			if (shrine.type == PujaSacrifice.MAYAN) {
-				return item instanceof ItemSword || item instanceof ItemArmor
-						|| item instanceof ItemBow || item instanceof ItemAxe;
+				return item instanceof ItemSword || item instanceof ItemArmor || item instanceof ItemBow || item instanceof ItemAxe;
 			}
 
-			return item instanceof ItemSpade || item instanceof ItemAxe
-					|| item instanceof ItemPickaxe;
+			return item instanceof ItemSpade || item instanceof ItemAxe || item instanceof ItemPickaxe;
 		}
 
 		@Override
@@ -99,8 +90,7 @@ public class ContainerPuja extends Container {
 			shrine.calculateOfferingsNeeded();
 
 			if (!shrine.temple.worldObj.isRemote) {
-				shrine.temple.getTownHall().requestSave(
-						"Puja tool slot changed");
+				shrine.temple.getTownHall().requestSave("Puja tool slot changed");
 			}
 
 			super.onSlotChanged();
@@ -132,14 +122,12 @@ public class ContainerPuja extends Container {
 
 			for (int i = 0; i < 3; i++) {
 				for (int k = 0; k < 9; k++) {
-					addSlotToContainer(new Slot(player.inventory,
-							k + i * 9 + 9, 8 + k * 18, 106 + i * 18));
+					addSlotToContainer(new Slot(player.inventory, k + i * 9 + 9, 8 + k * 18, 106 + i * 18));
 				}
 			}
 
 			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(player.inventory, j, 8 + j * 18,
-						164));
+				addSlotToContainer(new Slot(player.inventory, j, 8 + j * 18, 164));
 			}
 		} catch (final Exception e) {
 			MLN.printException("Exception in ContainerPuja(): ", e);
@@ -157,8 +145,7 @@ public class ContainerPuja extends Container {
 	 * you will crash when someone does that.
 	 */
 	@Override
-	public ItemStack transferStackInSlot(final EntityPlayer par1EntityPlayer,
-			final int stackID) {
+	public ItemStack transferStackInSlot(final EntityPlayer par1EntityPlayer, final int stackID) {
 		ItemStack itemstack = null;
 		final Slot slot = (Slot) this.inventorySlots.get(stackID);
 
@@ -175,9 +162,7 @@ public class ContainerPuja extends Container {
 				slot.onSlotChange(itemstack1, itemstack);
 			} else if (stackID > 4)// normal inv
 			{
-				if (itemstack1.getItem() == Mill.denier
-						|| itemstack1.getItem() == Mill.denier_argent
-						|| itemstack1.getItem() == Mill.denier_or) {
+				if (itemstack1.getItem() == Mill.denier || itemstack1.getItem() == Mill.denier_argent || itemstack1.getItem() == Mill.denier_or) {
 					if (!this.mergeItemStack(itemstack1, 1, 4, false)) {
 						return null;
 					}
@@ -193,8 +178,7 @@ public class ContainerPuja extends Container {
 					if (!this.mergeItemStack(itemstack1, 30, 39, false)) {
 						return null;
 					}
-				} else if (stackID >= 32 && stackID < 41
-						&& !this.mergeItemStack(itemstack1, 5, 32, false)) {
+				} else if (stackID >= 32 && stackID < 41 && !this.mergeItemStack(itemstack1, 5, 32, false)) {
 					return null;
 				}
 			} else if (!this.mergeItemStack(itemstack1, 5, 41, false)) {

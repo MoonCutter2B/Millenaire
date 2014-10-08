@@ -18,8 +18,7 @@ import org.millenaire.common.forge.Mill;
 public class ClientGuiHandler extends CommonGuiHandler {
 
 	@Override
-	public Object getClientGuiElement(final int ID, final EntityPlayer player,
-			final World world, final int x, final int y, final int z) {
+	public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
 
 		if (ID == GUI_MILL_CHEST) {
 			final TileEntity te = world.getTileEntity(x, y, z);
@@ -27,8 +26,7 @@ public class ClientGuiHandler extends CommonGuiHandler {
 				return GuiMillChest.createGUI(world, x, y, z, player);
 			}
 		} else if (ID == GUI_TRADE) {
-			final Building building = Mill.clientWorld.getBuilding(new Point(x,
-					y, z));
+			final Building building = Mill.clientWorld.getBuilding(new Point(x, y, z));
 
 			if (building != null && building.getTownHall() != null) {
 				return new GuiTrade(player, building);
@@ -41,8 +39,7 @@ public class ClientGuiHandler extends CommonGuiHandler {
 				MLN.error(player, "Failed to find merchant: " + id);
 			}
 		} else if (ID == GUI_PUJAS) {
-			final Building building = Mill.clientWorld.getBuilding(new Point(x,
-					y, z));
+			final Building building = Mill.clientWorld.getBuilding(new Point(x, y, z));
 
 			if (building != null && building.pujas != null) {
 				return new GuiPujas(player, building);

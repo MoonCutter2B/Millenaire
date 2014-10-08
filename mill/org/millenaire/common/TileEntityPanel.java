@@ -36,9 +36,7 @@ public class TileEntityPanel extends TileEntitySign {
 		long villager_id;
 		int panelType;
 
-		public PanelPacketInfo(final Point pos, final String[][] lines,
-				final Point buildingPos, final int panelType,
-				final long village_id) {
+		public PanelPacketInfo(final Point pos, final String[][] lines, final Point buildingPos, final int panelType, final long village_id) {
 			this.pos = pos;
 			this.lines = lines;
 			this.buildingPos = buildingPos;
@@ -66,60 +64,33 @@ public class TileEntityPanel extends TileEntitySign {
 
 	public static final int controlledMilitary = 13;
 
-	private static void addProjectToList(final EntityPlayer player,
-			final BuildingProject project, final Building townHall,
-			final List<String> page) {
+	private static void addProjectToList(final EntityPlayer player, final BuildingProject project, final Building townHall, final List<String> page) {
 
 		if (project.planSet != null) {
 			if (project.location == null || project.location.level < 0) {
-				final BuildingPlan plan = project.planSet
-						.getRandomStartingPlan();
+				final BuildingPlan plan = project.planSet.getRandomStartingPlan();
 
-				page.add(plan.getFullDisplayName() + ": "
-						+ MLN.string("panels.notyetbuilt") + ".");
+				page.add(plan.getFullDisplayName() + ": " + MLN.string("panels.notyetbuilt") + ".");
 			} else {
-				if (project.location.level + 1 < project
-						.getLevelsNumber(project.location.getVariation())) {
+				if (project.location.level + 1 < project.getLevelsNumber(project.location.getVariation())) {
 
-					final BuildingPlan plan = project.getPlan(
-							project.location.getVariation(),
-							project.location.level + 1);
+					final BuildingPlan plan = project.getPlan(project.location.getVariation(), project.location.level + 1);
 
 					final BuildingLocation l = project.location;
-					page.add(plan.getFullDisplayName()
-							+ " ("
-							+ MathHelper.floor_double(l.pos.distanceTo(townHall
-									.getPos()))
-							+ "m "
-							+ townHall.getPos().directionToShort(l.pos)
-							+ "): "
-							+ MLN.string(
-									"panels.nbupgradesleft",
-									""
-											+ (project
-													.getLevelsNumber(project.location
-															.getVariation())
-													- project.location.level - 1)));
+					page.add(plan.getFullDisplayName() + " (" + MathHelper.floor_double(l.pos.distanceTo(townHall.getPos())) + "m " + townHall.getPos().directionToShort(l.pos) + "): "
+							+ MLN.string("panels.nbupgradesleft", "" + (project.getLevelsNumber(project.location.getVariation()) - project.location.level - 1)));
 				} else {
-					final BuildingPlan plan = project.getPlan(
-							project.location.getVariation(),
-							project.location.level);
+					final BuildingPlan plan = project.getPlan(project.location.getVariation(), project.location.level);
 
 					final BuildingLocation l = project.location;
-					page.add(plan.getFullDisplayName()
-							+ " ("
-							+ MathHelper.floor_double(l.pos.distanceTo(townHall
-									.getPos())) + "m "
-							+ townHall.getPos().directionToShort(l.pos) + "): "
+					page.add(plan.getFullDisplayName() + " (" + MathHelper.floor_double(l.pos.distanceTo(townHall.getPos())) + "m " + townHall.getPos().directionToShort(l.pos) + "): "
 							+ MLN.string("panels.finished") + ".");
 				}
 			}
 		}
 	}
 
-	public static List<List<String>> generateArchives(
-			final EntityPlayer player, final Building townHall,
-			final long villager_id) {
+	public static List<List<String>> generateArchives(final EntityPlayer player, final Building townHall, final long villager_id) {
 
 		if (townHall == null) {
 			return null;
@@ -167,9 +138,7 @@ public class TileEntityPanel extends TileEntitySign {
 				page.add(MLN.string("panels.awayraiding"));
 			} else if (vr.awayraiding) {
 				page.add(MLN.string("panels.awayhired"));
-			} else if (vr.raidingVillage
-					&& townHall.worldObj.getWorldTime() < vr.raiderSpawn
-							+ Building.INVADER_SPAWNING_DELAY) {
+			} else if (vr.raidingVillage && townHall.worldObj.getWorldTime() < vr.raiderSpawn + Building.INVADER_SPAWNING_DELAY) {
 				page.add(MLN.string("panels.invaderincoming"));
 			} else {
 				page.add(MLN.string("panels.missing"));
@@ -177,10 +146,8 @@ public class TileEntityPanel extends TileEntitySign {
 		} else {
 			String occupation = "";
 
-			if (villager.goalKey != null
-					&& Goal.goals.containsKey(villager.goalKey)) {
-				occupation = Goal.goals.get(villager.goalKey)
-						.gameName(villager);
+			if (villager.goalKey != null && Goal.goals.containsKey(villager.goalKey)) {
+				occupation = Goal.goals.get(villager.goalKey).gameName(villager);
 			}
 			page.add(MLN.string("panels.currentoccupation") + ": " + occupation);
 		}
@@ -189,20 +156,17 @@ public class TileEntityPanel extends TileEntitySign {
 		return text;
 	}
 
-	public static List<List<String>> generateConstructions(
-			final EntityPlayer player, final Building townHall) {
+	public static List<List<String>> generateConstructions(final EntityPlayer player, final Building townHall) {
 
 		final List<String> page = new ArrayList<String>();
 
-		page.add(MLN.string("panels.constructions") + " : "
-				+ townHall.getVillageQualifiedName());
+		page.add(MLN.string("panels.constructions") + " : " + townHall.getVillageQualifiedName());
 
 		page.add("");
 
 		for (final EnumProjects ep : EnumProjects.values()) {
 			if (townHall.buildingProjects.containsKey(ep)) {
-				final List<BuildingProject> projectsLevel = townHall.buildingProjects
-						.get(ep);
+				final List<BuildingProject> projectsLevel = townHall.buildingProjects.get(ep);
 				for (final BuildingProject project : projectsLevel) {
 					if (project.location != null) {
 						String level = null;
@@ -210,12 +174,10 @@ public class TileEntityPanel extends TileEntitySign {
 							level = MLN.string("ui.notyetbuilt");
 						}
 						if (project.location.level > 0) {
-							level = MLN.string("panels.upgrade") + " "
-									+ project.location.level;
+							level = MLN.string("panels.upgrade") + " " + project.location.level;
 						}
 
-						final List<String> effects = project.location
-								.getBuildingEffects(townHall.worldObj);
+						final List<String> effects = project.location.getBuildingEffects(townHall.worldObj);
 
 						String effect = null;
 						if (effects.size() > 0) {
@@ -228,13 +190,8 @@ public class TileEntityPanel extends TileEntitySign {
 							}
 						}
 
-						page.add(project.location.getFullDisplayName()
-								+ ": "
-								+ MathHelper.floor_double(project.location.pos
-										.distanceTo(townHall.getPos()))
-								+ "m "
-								+ townHall.getPos().directionToShort(
-										project.location.pos));
+						page.add(project.location.getFullDisplayName() + ": " + MathHelper.floor_double(project.location.pos.distanceTo(townHall.getPos())) + "m "
+								+ townHall.getPos().directionToShort(project.location.pos));
 						if (level != null) {
 							page.add(level);
 						}
@@ -253,8 +210,7 @@ public class TileEntityPanel extends TileEntitySign {
 		return text;
 	}
 
-	public static List<List<String>> generateEtatCivil(
-			final EntityPlayer player, final Building townHall) {
+	public static List<List<String>> generateEtatCivil(final EntityPlayer player, final Building townHall) {
 
 		if (townHall == null) {
 			return null;
@@ -264,8 +220,7 @@ public class TileEntityPanel extends TileEntitySign {
 		final List<String> page = new ArrayList<String>();
 		final List<String> visitorsPage = new ArrayList<String>();
 
-		page.add(MLN.string("ui.population") + " "
-				+ townHall.getVillageQualifiedName());
+		page.add(MLN.string("ui.population") + " " + townHall.getVillageQualifiedName());
 		page.add("");
 
 		visitorsPage.add(MLN.string("panels.visitors") + ":");
@@ -286,33 +241,22 @@ public class TileEntityPanel extends TileEntitySign {
 
 			if (nbFound == 0) {
 				if (vr.killed) {
-					error = " (" + MLN.string("panels.dead").toLowerCase()
-							+ ")";
+					error = " (" + MLN.string("panels.dead").toLowerCase() + ")";
 				} else if (vr.awayraiding) {
-					error = " ("
-							+ MLN.string("panels.awayraiding").toLowerCase()
-							+ ")";
+					error = " (" + MLN.string("panels.awayraiding").toLowerCase() + ")";
 				} else if (vr.awayhired) {
-					error = " (" + MLN.string("panels.awayhired").toLowerCase()
-							+ ")";
-				} else if (vr.raidingVillage
-						&& townHall.worldObj.getWorldTime() < vr.raiderSpawn
-								+ Building.INVADER_SPAWNING_DELAY) {
-					error = " ("
-							+ MLN.string("panels.invaderincoming")
-									.toLowerCase() + ")";
+					error = " (" + MLN.string("panels.awayhired").toLowerCase() + ")";
+				} else if (vr.raidingVillage && townHall.worldObj.getWorldTime() < vr.raiderSpawn + Building.INVADER_SPAWNING_DELAY) {
+					error = " (" + MLN.string("panels.invaderincoming").toLowerCase() + ")";
 				} else if (vr.raidingVillage) {
-					error = " (" + MLN.string("panels.raider").toLowerCase()
-							+ ")";
+					error = " (" + MLN.string("panels.raider").toLowerCase() + ")";
 				} else {
-					error = " (" + MLN.string("panels.missing").toLowerCase()
-							+ ")";
+					error = " (" + MLN.string("panels.missing").toLowerCase() + ")";
 				}
 
 				if (MLN.DEV && Mill.serverWorlds.size() > 0) {
 
-					final Building thServer = Mill.serverWorlds.get(0)
-							.getBuilding(townHall.getPos());
+					final Building thServer = Mill.serverWorlds.get(0).getBuilding(townHall.getPos());
 
 					if (thServer != null) {
 						int nbOnServer = 0;
@@ -327,34 +271,21 @@ public class TileEntityPanel extends TileEntitySign {
 				}
 
 			} else if (nbFound > 1) {
-				error = " ("
-						+ MLN.string("panels.multiple", "" + nbFound)
-								.toLowerCase() + ")";
+				error = " (" + MLN.string("panels.multiple", "" + nbFound).toLowerCase() + ")";
 			}
 
 			if (belongsToVillage) {
-				page.add(vr.getName()
-						+ ", "
-						+ vr.getGameOccupation(player.getDisplayName())
-								.toLowerCase() + error);
+				page.add(vr.getName() + ", " + vr.getGameOccupation(player.getDisplayName()).toLowerCase() + error);
 			} else {
-				visitorsPage.add(vr.getName()
-						+ ", "
-						+ vr.getGameOccupation(player.getDisplayName())
-								.toLowerCase() + error);
+				visitorsPage.add(vr.getName() + ", " + vr.getGameOccupation(player.getDisplayName()).toLowerCase() + error);
 			}
 
 		}
 
 		if (MLN.DEV && Mill.serverWorlds.size() > 0) {
-			final int nbClient = MillCommonUtilities.getEntitiesWithinAABB(
-					townHall.worldObj, MillVillager.class, townHall.getPos(),
-					64, 16).size();
-			final Building thServer = Mill.serverWorlds.get(0).getBuilding(
-					townHall.getPos());
-			final int nbServer = MillCommonUtilities.getEntitiesWithinAABB(
-					thServer.worldObj, MillVillager.class, townHall.getPos(),
-					64, 16).size();
+			final int nbClient = MillCommonUtilities.getEntitiesWithinAABB(townHall.worldObj, MillVillager.class, townHall.getPos(), 64, 16).size();
+			final Building thServer = Mill.serverWorlds.get(0).getBuilding(townHall.getPos());
+			final int nbServer = MillCommonUtilities.getEntitiesWithinAABB(thServer.worldObj, MillVillager.class, townHall.getPos(), 64, 16).size();
 
 			page.add("Client: " + nbClient + ", server: " + nbServer);
 
@@ -365,8 +296,7 @@ public class TileEntityPanel extends TileEntitySign {
 		return text;
 	}
 
-	public static List<List<String>> generateHouse(final EntityPlayer player,
-			final Building house) {
+	public static List<List<String>> generateHouse(final EntityPlayer player, final Building house) {
 
 		final List<String> page = new ArrayList<String>();
 
@@ -389,8 +319,7 @@ public class TileEntityPanel extends TileEntitySign {
 			page.add(MLN.string("panels.houseunoccupied"));
 		} else if (wife == null) {
 
-			page.add(MLN.string("panels.man") + ": " + husband.getName() + ", "
-					+ husband.getGameOccupation(player.getDisplayName()));
+			page.add(MLN.string("panels.man") + ": " + husband.getName() + ", " + husband.getGameOccupation(player.getDisplayName()));
 			page.add("");
 			if (house.location.femaleResident.size() == 0) {
 				page.add(MLN.string("panels.nofemaleresident"));
@@ -399,30 +328,18 @@ public class TileEntityPanel extends TileEntitySign {
 			}
 		} else if (husband == null) {
 
-			page.add(MLN.string("panels.woman") + ": " + wife.getName() + ", "
-					+ wife.getGameOccupation(player.getDisplayName()));
+			page.add(MLN.string("panels.woman") + ": " + wife.getName() + ", " + wife.getGameOccupation(player.getDisplayName()));
 			page.add("");
-			if (house.location.maleResident == null
-					|| house.location.maleResident.size() == 0) {
+			if (house.location.maleResident == null || house.location.maleResident.size() == 0) {
 				page.add(MLN.string("panels.nomaleresident"));
 			} else {
 				page.add(MLN.string("panels.spinster"));
 			}
 		} else {
 
-			page.add(MLN.string("panels.woman")
-					+ ": "
-					+ wife.getName()
-					+ ", "
-					+ wife.getGameOccupation(player.getDisplayName())
-							.toLowerCase());
+			page.add(MLN.string("panels.woman") + ": " + wife.getName() + ", " + wife.getGameOccupation(player.getDisplayName()).toLowerCase());
 
-			page.add(MLN.string("panels.man")
-					+ ": "
-					+ husband.getName()
-					+ ", "
-					+ husband.getGameOccupation(player.getDisplayName())
-							.toLowerCase());
+			page.add(MLN.string("panels.man") + ": " + husband.getName() + ", " + husband.getGameOccupation(player.getDisplayName()).toLowerCase());
 
 			if (house.vrecords.size() > 2) {
 				page.add("");
@@ -431,10 +348,7 @@ public class TileEntityPanel extends TileEntitySign {
 				for (final VillagerRecord vr : house.vrecords) {
 					if (vr.getType().isChild) {
 
-						page.add(vr.getName()
-								+ ", "
-								+ vr.getGameOccupation(player.getDisplayName())
-										.toLowerCase());
+						page.add(vr.getName() + ", " + vr.getGameOccupation(player.getDisplayName()).toLowerCase());
 					}
 				}
 			}
@@ -451,8 +365,7 @@ public class TileEntityPanel extends TileEntitySign {
 
 		final List<String> page = new ArrayList<String>();
 
-		page.add(MLN.string("panels.innvisitors", house.getNativeBuildingName())
-				+ ":");
+		page.add(MLN.string("panels.innvisitors", house.getNativeBuildingName()) + ":");
 
 		page.add("");
 		for (int i = house.visitorsList.size() - 1; i > -1; i--) {
@@ -534,8 +447,7 @@ public class TileEntityPanel extends TileEntitySign {
 		return text;
 	}
 
-	public static List<List<String>> generateMarketMerchants(
-			final Building market) {
+	public static List<List<String>> generateMarketMerchants(final Building market) {
 
 		if (market == null) {
 			return null;
@@ -545,8 +457,7 @@ public class TileEntityPanel extends TileEntitySign {
 		final List<String> page = new ArrayList<String>();
 
 		page.add(MLN.string("panels.merchantlist") + ": ");
-		page.add("(" + MLN.string("panels.capacity") + ": "
-				+ market.getResManager().stalls.size() + ")");
+		page.add("(" + MLN.string("panels.capacity") + ": " + market.getResManager().stalls.size() + ")");
 		page.add("");
 
 		for (final VillagerRecord vr : market.vrecords) {
@@ -565,8 +476,7 @@ public class TileEntityPanel extends TileEntitySign {
 				}
 			} else {
 				page.add(v.getNativeOccupationName());
-				page.add(MLN.string("panels.nbnightsin", ""
-						+ v.foreignMerchantNbNights));
+				page.add(MLN.string("panels.nbnightsin", "" + v.foreignMerchantNbNights));
 				page.add("");
 			}
 		}
@@ -575,38 +485,25 @@ public class TileEntityPanel extends TileEntitySign {
 		return text;
 	}
 
-	public static List<List<String>> generateMilitary(
-			final EntityPlayer player, final Building townHall) {
+	public static List<List<String>> generateMilitary(final EntityPlayer player, final Building townHall) {
 
 		final List<List<String>> text = new ArrayList<List<String>>();
 		List<String> page = new ArrayList<String>();
 
-		page.add(MLN.string("panels.military") + " : "
-				+ townHall.getVillageQualifiedName());
+		page.add(MLN.string("panels.military") + " : " + townHall.getVillageQualifiedName());
 		page.add("");
 
 		int nbAttackers = 0;
 		Point attackingVillagePos = null;
 
 		if (townHall.raidTarget != null) {
-			final Building target = Mill.clientWorld
-					.getBuilding(townHall.raidTarget);
+			final Building target = Mill.clientWorld.getBuilding(townHall.raidTarget);
 
 			if (target != null) {
 				if (townHall.raidStart > 0) {
-					page.add(MLN.string(
-							"panels.raidinprogresslong",
-							target.getVillageQualifiedName(),
-							""
-									+ Math.round((townHall.worldObj
-											.getWorldTime() - townHall.raidStart) / 1000)));
+					page.add(MLN.string("panels.raidinprogresslong", target.getVillageQualifiedName(), "" + Math.round((townHall.worldObj.getWorldTime() - townHall.raidStart) / 1000)));
 				} else {
-					page.add(MLN.string(
-							"panels.planningraidlong",
-							target.getVillageQualifiedName(),
-							""
-									+ Math.round((townHall.worldObj
-											.getWorldTime() - townHall.raidPlanningStart) / 1000)));
+					page.add(MLN.string("panels.planningraidlong", target.getVillageQualifiedName(), "" + Math.round((townHall.worldObj.getWorldTime() - townHall.raidPlanningStart) / 1000)));
 				}
 
 				page.add("");
@@ -620,8 +517,7 @@ public class TileEntityPanel extends TileEntitySign {
 				}
 			}
 			if (nbAttackers > 0) {
-				final Building attackingVillage = Mill.clientWorld
-						.getBuilding(attackingVillagePos);
+				final Building attackingVillage = Mill.clientWorld.getBuilding(attackingVillagePos);
 
 				String attackedBy;
 				if (attackingVillage != null) {
@@ -630,16 +526,13 @@ public class TileEntityPanel extends TileEntitySign {
 					attackedBy = MLN.string("panels.unknownattacker");
 				}
 
-				page.add(MLN.string("panels.underattacklong", "" + nbAttackers,
-						"" + townHall.getVillageAttackerStrength(), attackedBy));
+				page.add(MLN.string("panels.underattacklong", "" + nbAttackers, "" + townHall.getVillageAttackerStrength(), attackedBy));
 				page.add("");
 			}
 		}
 
-		page.add(MLN.string("panels.offenselong",
-				"" + townHall.getVillageRaidingStrength()));
-		page.add(MLN.string("panels.defenselong",
-				"" + townHall.getVillageDefendingStrength()));
+		page.add(MLN.string("panels.offenselong", "" + townHall.getVillageRaidingStrength()));
+		page.add(MLN.string("panels.defenselong", "" + townHall.getVillageDefendingStrength()));
 
 		text.add(page);
 
@@ -649,8 +542,7 @@ public class TileEntityPanel extends TileEntitySign {
 		page.add("");
 
 		for (final VillagerRecord vr : townHall.vrecords) {
-			if ((vr.getType().isRaider || vr.getType().helpInAttacks)
-					&& !vr.raidingVillage) {
+			if ((vr.getType().isRaider || vr.getType().helpInAttacks) && !vr.raidingVillage) {
 				String status = "";
 
 				if (vr.getType().helpInAttacks) {
@@ -668,9 +560,7 @@ public class TileEntityPanel extends TileEntitySign {
 					status += ", " + MLN.string("panels.awayraiding");
 				} else if (vr.awayhired) {
 					status += ", " + MLN.string("panels.awayhired");
-				} else if (vr.raidingVillage
-						&& townHall.worldObj.getWorldTime() < vr.raiderSpawn
-								+ Building.INVADER_SPAWNING_DELAY) {
+				} else if (vr.raidingVillage && townHall.worldObj.getWorldTime() < vr.raiderSpawn + Building.INVADER_SPAWNING_DELAY) {
 					status += ", " + MLN.string("panels.invaderincoming");
 				} else if (vr.killed) {
 					status += ", " + MLN.string("panels.dead");
@@ -690,15 +580,10 @@ public class TileEntityPanel extends TileEntitySign {
 					weapon += Mill.proxy.getItemName(Items.bow, 0);
 				}
 
-				page.add(vr.getName() + ", "
-						+ vr.getGameOccupation(player.getDisplayName()));
+				page.add(vr.getName() + ", " + vr.getGameOccupation(player.getDisplayName()));
 				page.add(status);
-				page.add(MLN.string("panels.health") + ": " + vr.getMaxHealth()
-						+ ", " + MLN.string("panels.armour") + ": "
-						+ vr.getTotalArmorValue() + ", "
-						+ MLN.string("panels.weapons") + ": " + weapon + ", "
-						+ MLN.string("panels.militarystrength") + ": "
-						+ vr.getMilitaryStrength());
+				page.add(MLN.string("panels.health") + ": " + vr.getMaxHealth() + ", " + MLN.string("panels.armour") + ": " + vr.getTotalArmorValue() + ", " + MLN.string("panels.weapons") + ": "
+						+ weapon + ", " + MLN.string("panels.militarystrength") + ": " + vr.getMilitaryStrength());
 				page.add("");
 			}
 
@@ -733,16 +618,10 @@ public class TileEntityPanel extends TileEntitySign {
 						weapon += Mill.proxy.getItemName(Items.bow, 0);
 					}
 
-					page.add(vr.getName() + ", "
-							+ vr.getGameOccupation(player.getDisplayName()));
+					page.add(vr.getName() + ", " + vr.getGameOccupation(player.getDisplayName()));
 					page.add(status);
-					page.add(MLN.string("panels.health") + ": "
-							+ vr.getMaxHealth() + ", "
-							+ MLN.string("panels.armour") + ": "
-							+ vr.getTotalArmorValue() + ", "
-							+ MLN.string("panels.weapons") + ": " + weapon
-							+ ", " + MLN.string("panels.militarystrength")
-							+ ": " + vr.getMilitaryStrength());
+					page.add(MLN.string("panels.health") + ": " + vr.getMaxHealth() + ", " + MLN.string("panels.armour") + ": " + vr.getTotalArmorValue() + ", " + MLN.string("panels.weapons") + ": "
+							+ weapon + ", " + MLN.string("panels.militarystrength") + ": " + vr.getMilitaryStrength());
 					page.add("");
 				}
 			}
@@ -761,8 +640,7 @@ public class TileEntityPanel extends TileEntitySign {
 
 				if (s.split(";").length > 1) {
 					if (s.split(";")[0].equals("failure")) {
-						page.add(MLN.string("raid.historyfailure",
-								s.split(";")[1]));
+						page.add(MLN.string("raid.historyfailure", s.split(";")[1]));
 					} else {
 
 						final String[] v = s.split(";");
@@ -782,8 +660,7 @@ public class TileEntityPanel extends TileEntitySign {
 							taken = MLN.string("raid.nothing");
 						}
 
-						page.add(MLN.string("raid.historysuccess",
-								s.split(";")[1], taken));
+						page.add(MLN.string("raid.historysuccess", s.split(";")[1], taken));
 					}
 
 				} else {// old system, already prepared sentence
@@ -808,8 +685,7 @@ public class TileEntityPanel extends TileEntitySign {
 
 				if (s.split(";").length > 1) {
 					if (s.split(";")[0].equals("failure")) {
-						page.add(MLN.string("raid.historydefended",
-								s.split(";")[1]));
+						page.add(MLN.string("raid.historydefended", s.split(";")[1]));
 					} else {
 
 						final String[] v = s.split(";");
@@ -829,8 +705,7 @@ public class TileEntityPanel extends TileEntitySign {
 							taken = MLN.string("raid.nothing");
 						}
 
-						page.add(MLN.string("raid.historyraided",
-								s.split(";")[1], taken));
+						page.add(MLN.string("raid.historyraided", s.split(";")[1], taken));
 					}
 
 				} else {// old system, already prepared sentence
@@ -846,8 +721,7 @@ public class TileEntityPanel extends TileEntitySign {
 		return text;
 	}
 
-	public static List<List<String>> generateProjects(
-			final EntityPlayer player, final Building townHall) {
+	public static List<List<String>> generateProjects(final EntityPlayer player, final Building townHall) {
 
 		if (townHall.villageType == null) {
 			return null;
@@ -855,24 +729,20 @@ public class TileEntityPanel extends TileEntitySign {
 
 		final List<String> page = new ArrayList<String>();
 
-		page.add(MLN.string("panels.buildingprojects") + " : "
-				+ townHall.getVillageQualifiedName());
+		page.add(MLN.string("panels.buildingprojects") + " : " + townHall.getVillageQualifiedName());
 
 		page.add("");
 
 		for (final EnumProjects ep : EnumProjects.values()) {
 			if (townHall.buildingProjects.containsKey(ep)) {
-				if (!townHall.villageType.playerControlled
-						|| ep == EnumProjects.CENTRE
-						|| ep == EnumProjects.START || ep == EnumProjects.CORE) {// for
-																					// controlled
-																					// villages,
-																					// only
-																					// centre,
-																					// start
+				if (!townHall.villageType.playerControlled || ep == EnumProjects.CENTRE || ep == EnumProjects.START || ep == EnumProjects.CORE) {// for
+																																					// controlled
+																																					// villages,
+																																					// only
+																																					// centre,
+																																					// start
 					// and core
-					final List<BuildingProject> projectsLevel = townHall.buildingProjects
-							.get(ep);
+					final List<BuildingProject> projectsLevel = townHall.buildingProjects.get(ep);
 					page.add(MLN.string(ep.labelKey) + ":");
 					page.add("");
 
@@ -892,15 +762,13 @@ public class TileEntityPanel extends TileEntitySign {
 		return text;
 	}
 
-	public static List<List<String>> generateResources(
-			final EntityPlayer player, final Building house) {
+	public static List<List<String>> generateResources(final EntityPlayer player, final Building house) {
 
 		List<String> page = new ArrayList<String>();
 
 		final List<List<String>> text = new ArrayList<List<String>>();
 
-		page.add(MLN.string("panels.resources") + ": "
-				+ house.getNativeBuildingName());
+		page.add(MLN.string("panels.resources") + ": " + house.getNativeBuildingName());
 
 		page.add("");
 
@@ -915,10 +783,7 @@ public class TileEntityPanel extends TileEntitySign {
 				res.add(key);
 				resCost.put(key, goalPlan.resCost.get(key));
 				int has = house.countGoods(key.getItem(), key.meta);
-				if (house.builder != null
-						&& house.buildingLocationIP != null
-						&& house.buildingLocationIP.planKey
-								.equals(house.buildingGoal)) {
+				if (house.builder != null && house.buildingLocationIP != null && house.buildingLocationIP.planKey.equals(house.buildingGoal)) {
 					has += house.builder.countInv(key.getItem(), key.meta);
 				}
 				if (has > goalPlan.resCost.get(key)) {
@@ -933,8 +798,7 @@ public class TileEntityPanel extends TileEntitySign {
 			String name, gameName = goalPlan.getGameName();
 			if (goalPlan.nativeName != null && goalPlan.nativeName.length() > 0) {
 				name = goalPlan.nativeName;
-			} else if (goalPlan.getGameName() != null
-					&& goalPlan.getGameName().length() > 0) {
+			} else if (goalPlan.getGameName() != null && goalPlan.getGameName().length() > 0) {
 				name = goalPlan.getGameName();
 				gameName = "";
 			} else {
@@ -946,14 +810,11 @@ public class TileEntityPanel extends TileEntitySign {
 			}
 
 			String status = "";
-			if (house.buildingLocationIP != null
-					&& house.buildingLocationIP.planKey
-							.equals(house.buildingGoal)) {
+			if (house.buildingLocationIP != null && house.buildingLocationIP.planKey.equals(house.buildingGoal)) {
 				if (house.buildingLocationIP.level == 0) {
 					status = MLN.string("ui.inconstruction");
 				} else {
-					status = MLN.string("ui.upgrading") + " ("
-							+ house.buildingLocationIP.level + ")";
+					status = MLN.string("ui.upgrading") + " (" + house.buildingLocationIP.level + ")";
 				}
 			} else {
 				status = MLN.string(house.buildingGoalIssue);
@@ -966,8 +827,7 @@ public class TileEntityPanel extends TileEntitySign {
 			Collections.sort(res, new InvItemAlphabeticalComparator());
 
 			for (int i = 0; i < res.size(); i++) {
-				page.add(res.get(i).getName() + ": " + resHas.get(res.get(i))
-						+ "/" + resCost.get(res.get(i)));
+				page.add(res.get(i).getName() + ": " + resHas.get(res.get(i)) + "/" + resCost.get(res.get(i)));
 			}
 
 			text.add(page);
@@ -980,8 +840,7 @@ public class TileEntityPanel extends TileEntitySign {
 
 		page.add("");
 
-		final HashMap<InvItem, Integer> contents = house.getResManager()
-				.getChestsContent();
+		final HashMap<InvItem, Integer> contents = house.getResManager().getChestsContent();
 
 		final List<InvItem> keys = new ArrayList<InvItem>(contents.keySet());
 
@@ -996,21 +855,18 @@ public class TileEntityPanel extends TileEntitySign {
 		return text;
 	}
 
-	public static List<List<String>> generateSummary(final EntityPlayer player,
-			final Building townHall) {
+	public static List<List<String>> generateSummary(final EntityPlayer player, final Building townHall) {
 		final List<String> page = new ArrayList<String>();
 
 		final List<List<String>> text = new ArrayList<List<String>>();
 
-		page.add(MLN.string("panels.villagesummary") + ": "
-				+ townHall.getVillageQualifiedName());
+		page.add(MLN.string("panels.villagesummary") + ": " + townHall.getVillageQualifiedName());
 		page.add("");
 
 		int nbMen = 0, nbFemale = 0, nbGrownBoy = 0, nbGrownGirl = 0, nbBoy = 0, nbGirl = 0;
 
 		for (final VillagerRecord vr : townHall.vrecords) {
-			final boolean belongsToVillage = vr.getType() != null
-					&& !vr.getType().visitor && !vr.raidingVillage;
+			final boolean belongsToVillage = vr.getType() != null && !vr.getType().visitor && !vr.raidingVillage;
 
 			if (belongsToVillage) {
 
@@ -1039,42 +895,29 @@ public class TileEntityPanel extends TileEntitySign {
 			}
 		}
 
-		page.add(MLN
-				.string("ui.populationnumber",
-						""
-								+ (nbMen + nbFemale + nbGrownBoy + nbGrownGirl
-										+ nbBoy + nbGirl)));
-		page.add(MLN.string("ui.adults", "" + (nbMen + nbFemale), "" + nbMen,
-				"" + nbFemale));
-		page.add(MLN.string("ui.teens", "" + (nbGrownBoy + nbGrownGirl), ""
-				+ nbGrownBoy, "" + nbGrownGirl));
-		page.add(MLN.string("ui.children", "" + (nbBoy + nbGirl), "" + nbBoy,
-				"" + nbGirl));
+		page.add(MLN.string("ui.populationnumber", "" + (nbMen + nbFemale + nbGrownBoy + nbGrownGirl + nbBoy + nbGirl)));
+		page.add(MLN.string("ui.adults", "" + (nbMen + nbFemale), "" + nbMen, "" + nbFemale));
+		page.add(MLN.string("ui.teens", "" + (nbGrownBoy + nbGrownGirl), "" + nbGrownBoy, "" + nbGrownGirl));
+		page.add(MLN.string("ui.children", "" + (nbBoy + nbGirl), "" + nbBoy, "" + nbGirl));
 
 		page.add("");
 
 		if (townHall.buildingGoal == null) {
-			page.add(MLN.string("ui.goalscompleted1") + " "
-					+ MLN.string("ui.goalscompleted2"));
+			page.add(MLN.string("ui.goalscompleted1") + " " + MLN.string("ui.goalscompleted2"));
 		} else {
 			final BuildingPlan goal = townHall.getCurrentGoalBuildingPlan();
 
 			String status;
-			if (townHall.buildingLocationIP != null
-					&& townHall.buildingLocationIP.planKey
-							.equals(townHall.buildingGoal)) {
+			if (townHall.buildingLocationIP != null && townHall.buildingLocationIP.planKey.equals(townHall.buildingGoal)) {
 				if (townHall.buildingLocationIP.level == 0) {
 					status = MLN.string("ui.inconstruction");
 				} else {
-					status = MLN.string("ui.upgrading", ""
-							+ townHall.buildingLocationIP.level);
+					status = MLN.string("ui.upgrading", "" + townHall.buildingLocationIP.level);
 				}
 			} else {
 				status = MLN.string(townHall.buildingGoalIssue);
 			}
-			page.add(MLN.string("panels.buildingproject") + " "
-					+ goal.nativeName + " " + goal.getGameName() + ": "
-					+ status);
+			page.add(MLN.string("panels.buildingproject") + " " + goal.nativeName + " " + goal.getGameName() + ": " + status);
 
 			final List<InvItem> res = new ArrayList<InvItem>();
 			final HashMap<InvItem, Integer> resCost = new HashMap<InvItem, Integer>();
@@ -1084,10 +927,7 @@ public class TileEntityPanel extends TileEntitySign {
 				res.add(key);
 				resCost.put(key, goal.resCost.get(key));
 				int has = townHall.countGoods(key.getItem(), key.meta);
-				if (townHall.builder != null
-						&& townHall.buildingLocationIP != null
-						&& townHall.buildingLocationIP.planKey
-								.equals(townHall.buildingGoal)) {
+				if (townHall.builder != null && townHall.buildingLocationIP != null && townHall.buildingLocationIP.planKey.equals(townHall.buildingGoal)) {
 					has += townHall.builder.countInv(key.getItem(), key.meta);
 				}
 				if (has > goal.resCost.get(key)) {
@@ -1103,8 +943,7 @@ public class TileEntityPanel extends TileEntitySign {
 			Collections.sort(res, new InvItemAlphabeticalComparator());
 
 			for (int i = 0; i < res.size(); i++) {
-				page.add(res.get(i).getName() + ": " + resHas.get(res.get(i))
-						+ "/" + resCost.get(res.get(i)));
+				page.add(res.get(i).getName() + ": " + resHas.get(res.get(i)) + "/" + resCost.get(res.get(i)));
 			}
 
 		}
@@ -1112,32 +951,26 @@ public class TileEntityPanel extends TileEntitySign {
 		page.add(MLN.string("panels.currentconstruction"));
 
 		if (townHall.buildingLocationIP == null) {
-			page.add(MLN.string("ui.noconstruction1") + " "
-					+ MLN.string("ui.noconstruction2"));
+			page.add(MLN.string("ui.noconstruction1") + " " + MLN.string("ui.noconstruction2"));
 		} else {
-			final String planName = townHall.culture.getBuildingPlanSet(
-					townHall.buildingLocationIP.planKey).getNativeName();
+			final String planName = townHall.culture.getBuildingPlanSet(townHall.buildingLocationIP.planKey).getNativeName();
 
 			String status;
 			if (townHall.buildingLocationIP.level == 0) {
 				status = MLN.string("ui.inconstruction");
 			} else {
-				status = MLN.string("ui.upgrading", ""
-						+ townHall.buildingLocationIP.level);
+				status = MLN.string("ui.upgrading", "" + townHall.buildingLocationIP.level);
 			}
 
 			String loc;
 
 			if (townHall.buildingLocationIP != null) {
 
-				final int distance = MathHelper.floor_double(townHall.getPos()
-						.distanceTo(townHall.buildingLocationIP.pos));
+				final int distance = MathHelper.floor_double(townHall.getPos().distanceTo(townHall.buildingLocationIP.pos));
 
-				final String direction = MLN.string(townHall.getPos()
-						.directionTo(townHall.buildingLocationIP.pos));
+				final String direction = MLN.string(townHall.getPos().directionTo(townHall.buildingLocationIP.pos));
 
-				loc = MLN.string("other.shortdistancedirection", "" + distance,
-						"" + direction);
+				loc = MLN.string("other.shortdistancedirection", "" + distance, "" + direction);
 			} else {
 				loc = "";
 			}
@@ -1156,8 +989,7 @@ public class TileEntityPanel extends TileEntitySign {
 
 		List<String> page = new ArrayList<String>();
 
-		page.add(MLN.string("ui.villagemap") + ": "
-				+ house.getNativeBuildingName());
+		page.add(MLN.string("ui.villagemap") + ": " + house.getNativeBuildingName());
 
 		text.add(page);
 		page = new ArrayList<String>();
@@ -1186,8 +1018,7 @@ public class TileEntityPanel extends TileEntitySign {
 			final long villager_id = ds.readLong();
 			final String[][] lines = StreamReadWrite.readStringStringArray(ds);
 
-			MillClientUtilities.updatePanel(pos, lines, panelType, buildingPos,
-					villager_id);
+			MillClientUtilities.updatePanel(pos, lines, panelType, buildingPos, villager_id);
 
 			if (MLN.LogNetwork >= MLN.DEBUG) {
 				MLN.debug(null, "Receiving panel packet.");

@@ -14,8 +14,7 @@ public class ClientTickHandler {
 
 	@SubscribeEvent
 	public void tickStart(final TickEvent.ClientTickEvent event) {
-		if (Mill.clientWorld == null || !Mill.clientWorld.millenaireEnabled
-				|| Minecraft.getMinecraft().thePlayer == null) {
+		if (Mill.clientWorld == null || !Mill.clientWorld.millenaireEnabled || Minecraft.getMinecraft().thePlayer == null) {
 			return;
 		}
 
@@ -24,8 +23,7 @@ public class ClientTickHandler {
 		Mill.clientWorld.updateWorldClient(onSurface);
 
 		if (!startupMessageShow) {
-			DisplayActions.displayStartupOrError(
-					Minecraft.getMinecraft().thePlayer, Mill.startupError);
+			DisplayActions.displayStartupOrError(Minecraft.getMinecraft().thePlayer, Mill.startupError);
 			startupMessageShow = true;
 		}
 

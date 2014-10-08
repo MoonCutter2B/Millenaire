@@ -12,15 +12,12 @@ public class GoalDefendVillage extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
-		if (villager.getPos().distanceToSquared(
-				villager.getTownHall().getResManager().getDefendingPos()) <= 9) {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
+		if (villager.getPos().distanceToSquared(villager.getTownHall().getResManager().getDefendingPos()) <= 9) {
 			return null;
 		}
 
-		return packDest(villager.getTownHall().getResManager()
-				.getDefendingPos(), villager.getTownHall());
+		return packDest(villager.getTownHall().getResManager().getDefendingPos(), villager.getTownHall());
 	}
 
 	@Override
@@ -34,14 +31,12 @@ public class GoalDefendVillage extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 		return true;
 	}
 
 	@Override
-	public boolean isStillValidSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager) throws Exception {
 
 		return villager.getTownHall().underAttack;
 	}

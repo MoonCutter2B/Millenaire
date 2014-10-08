@@ -18,10 +18,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderWallDecoration extends Render {
-	public static final ResourceLocation textureTapestries = new ResourceLocation(
-			Mill.modId, "textures/painting/ML_Tapestry.png");
-	public static final ResourceLocation textureSculptures = new ResourceLocation(
-			Mill.modId, "textures/painting/ML_Scultures.png");
+	public static final ResourceLocation textureTapestries = new ResourceLocation(Mill.modId, "textures/painting/ML_Tapestry.png");
+	public static final ResourceLocation textureSculptures = new ResourceLocation(Mill.modId, "textures/painting/ML_Scultures.png");
 
 	/**
 	 * Actually renders the given argument. This is a synthetic bridge method,
@@ -32,18 +30,13 @@ public class RenderWallDecoration extends Render {
 	 * f1). But JAD is pre 1.5 so doesn't do that.
 	 */
 	@Override
-	public void doRender(final Entity par1Entity, final double par2,
-			final double par4, final double par6, final float par8,
-			final float par9) {
-		this.renderThePainting((EntityMillDecoration) par1Entity, par2, par4,
-				par6, par8, par9);
+	public void doRender(final Entity par1Entity, final double par2, final double par4, final double par6, final float par8, final float par9) {
+		this.renderThePainting((EntityMillDecoration) par1Entity, par2, par4, par6, par8, par9);
 	}
 
-	private void func_77008_a(final EntityMillDecoration par1EntityPainting,
-			final float par2, final float par3) {
+	private void func_77008_a(final EntityMillDecoration par1EntityPainting, final float par2, final float par3) {
 		int i = MathHelper.floor_double(par1EntityPainting.posX);
-		final int j = MathHelper.floor_double(par1EntityPainting.posY + par3
-				/ 16.0F);
+		final int j = MathHelper.floor_double(par1EntityPainting.posY + par3 / 16.0F);
 		int k = MathHelper.floor_double(par1EntityPainting.posZ);
 
 		if (par1EntityPainting.hangingDirection == 2) {
@@ -62,18 +55,14 @@ public class RenderWallDecoration extends Render {
 			k = MathHelper.floor_double(par1EntityPainting.posZ + par2 / 16.0F);
 		}
 
-		final int l = this.renderManager.worldObj
-				.getLightBrightnessForSkyBlocks(i, j, k, 0);
+		final int l = this.renderManager.worldObj.getLightBrightnessForSkyBlocks(i, j, k, 0);
 		final int i1 = l % 65536;
 		final int j1 = l / 65536;
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, i1,
-				j1);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, i1, j1);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 	}
 
-	private void func_77010_a(final EntityMillDecoration par1EntityPainting,
-			final int sizeX, final int sizeY, final int offsetX,
-			final int offsetY) {
+	private void func_77010_a(final EntityMillDecoration par1EntityPainting, final int sizeX, final int sizeY, final int offsetX, final int offsetY) {
 		final float f = -sizeX / 2.0F;
 		final float f1 = -sizeY / 2.0F;
 		final float f2 = 0.5F;
@@ -96,8 +85,7 @@ public class RenderWallDecoration extends Render {
 				final float f16 = f + i1 * 16;
 				final float f17 = f1 + (j1 + 1) * 16;
 				final float f18 = f1 + j1 * 16;
-				this.func_77008_a(par1EntityPainting, (f15 + f16) / 2.0F,
-						(f17 + f18) / 2.0F);
+				this.func_77008_a(par1EntityPainting, (f15 + f16) / 2.0F, (f17 + f18) / 2.0F);
 				final float f19 = (offsetX + sizeX - i1 * 16) / 256.0F;
 				final float f20 = (offsetX + sizeX - (i1 + 1) * 16) / 256.0F;
 				final float f21 = (offsetY + sizeY - j1 * 16) / 256.0F;
@@ -149,9 +137,7 @@ public class RenderWallDecoration extends Render {
 		}
 	}
 
-	public void renderThePainting(final EntityMillDecoration ent,
-			final double par2, final double par4, final double par6,
-			final float par8, final float par9) {
+	public void renderThePainting(final EntityMillDecoration ent, final double par2, final double par4, final double par6, final float par8, final float par9) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) par2, (float) par4, (float) par6);
 		GL11.glRotatef(par8, 0.0F, 1.0F, 0.0F);
@@ -164,8 +150,7 @@ public class RenderWallDecoration extends Render {
 		final EnumWallDecoration enumart = ent.art;
 		final float f2 = 0.0625F;
 		GL11.glScalef(f2, f2, f2);
-		this.func_77010_a(ent, enumart.sizeX, enumart.sizeY, enumart.offsetX,
-				enumart.offsetY);
+		this.func_77010_a(ent, enumart.sizeX, enumart.sizeY, enumart.offsetX, enumart.offsetY);
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		GL11.glPopMatrix();
 	}

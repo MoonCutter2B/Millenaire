@@ -30,8 +30,7 @@ public class Quest {
 
 		private static final int QUEST_LANGUAGE_BONUS = 50;
 
-		public static QuestInstance loadFromString(final MillWorld mw,
-				final String line, final UserProfile profile) {
+		public static QuestInstance loadFromString(final MillWorld mw, final String line, final UserProfile profile) {
 			Quest q = null;
 			int step = 0;
 			long startTime = 0, stepStartTime = 0;
@@ -47,8 +46,7 @@ public class Quest {
 						if (quests.containsKey(value)) {
 							q = quests.get(value);
 						} else {
-							MLN.error(null, "Could not find quest '" + value
-									+ "'.");
+							MLN.error(null, "Could not find quest '" + value + "'.");
 						}
 					} else if (key.equals("startTime")) {
 						startTime = Long.parseLong(value);
@@ -58,16 +56,14 @@ public class Quest {
 						step = Integer.parseInt(value);
 					} else if (key.equals("villager")) {
 						final String[] vals = value.split(",");
-						final QuestInstanceVillager qiv = new QuestInstanceVillager(
-								mw, new Point(vals[2]), Long.parseLong(vals[1]));
+						final QuestInstanceVillager qiv = new QuestInstanceVillager(mw, new Point(vals[2]), Long.parseLong(vals[1]));
 						villagers.put(vals[0], qiv);
 					}
 				}
 			}
 
 			if (q != null && villagers.size() > 0) {
-				return new QuestInstance(mw, q, profile, villagers, startTime,
-						step, stepStartTime);
+				return new QuestInstance(mw, q, profile, villagers, startTime, step, stepStartTime);
 			}
 			return null;
 		}
@@ -83,17 +79,12 @@ public class Quest {
 		// for networked exchange only
 		public long uniqueid;
 
-		public QuestInstance(final MillWorld mw, final Quest quest,
-				final UserProfile profile,
-				final HashMap<String, QuestInstanceVillager> villagers,
-				final long startTime) {
+		public QuestInstance(final MillWorld mw, final Quest quest, final UserProfile profile, final HashMap<String, QuestInstanceVillager> villagers, final long startTime) {
 			this(mw, quest, profile, villagers, startTime, 0, startTime);
 		}
 
-		public QuestInstance(final MillWorld mw, final Quest quest,
-				final UserProfile profile,
-				final HashMap<String, QuestInstanceVillager> villagers,
-				final long startTime, final int step, final long stepStartTime) {
+		public QuestInstance(final MillWorld mw, final Quest quest, final UserProfile profile, final HashMap<String, QuestInstanceVillager> villagers, final long startTime, final int step,
+				final long stepStartTime) {
 			this.mw = mw;
 			world = mw.world;
 			this.villagers = villagers;
@@ -111,12 +102,9 @@ public class Quest {
 			}
 		}
 
-		private void applyGlobalTags(final List<String> set,
-				final List<String> clear) {
+		private void applyGlobalTags(final List<String> set, final List<String> clear) {
 			if (MLN.LogQuest >= MLN.DEBUG) {
-				MLN.debug(this, "Applying " + set.size()
-						+ " global tags, clearing " + clear.size()
-						+ " global tags.");
+				MLN.debug(this, "Applying " + set.size() + " global tags, clearing " + clear.size() + " global tags.");
 			}
 			for (final String val : set) {
 				mw.setGlobalTag(val);
@@ -126,12 +114,9 @@ public class Quest {
 			}
 		}
 
-		private void applyPlayerTags(final List<String> set,
-				final List<String> clear) {
+		private void applyPlayerTags(final List<String> set, final List<String> clear) {
 			if (MLN.LogQuest >= MLN.DEBUG) {
-				MLN.debug(this, "Applying " + set.size()
-						+ " player tags, clearing " + clear.size()
-						+ " player tags.");
+				MLN.debug(this, "Applying " + set.size() + " player tags, clearing " + clear.size() + " player tags.");
 			}
 			for (final String val : set) {
 				profile.setTag(val);
@@ -141,11 +126,9 @@ public class Quest {
 			}
 		}
 
-		private void applyTags(final List<String[]> set,
-				final List<String[]> clear) {
+		private void applyTags(final List<String[]> set, final List<String[]> clear) {
 			if (MLN.LogQuest >= MLN.DEBUG) {
-				MLN.debug(this, "Applying " + set.size() + " tags, clearing "
-						+ clear.size() + " tags.");
+				MLN.debug(this, "Applying " + set.size() + " tags, clearing " + clear.size() + " tags.");
 			}
 			for (final String[] val : set) {
 
@@ -154,27 +137,12 @@ public class Quest {
 				if (MLN.LogQuest >= MLN.DEBUG) {
 					MLN.debug(this, "Applying tag: " + val[0] + "/" + tag);
 				}
-				if (!villagers.get(val[0]).getVillagerRecord(world).questTags
-						.contains(tag)) {
-					villagers.get(val[0]).getVillagerRecord(world).questTags
-							.add(tag);
-					villagers.get(val[0]).getVillagerRecord(world)
-							.getTownHall().requestSave("quest tag");
+				if (!villagers.get(val[0]).getVillagerRecord(world).questTags.contains(tag)) {
+					villagers.get(val[0]).getVillagerRecord(world).questTags.add(tag);
+					villagers.get(val[0]).getVillagerRecord(world).getTownHall().requestSave("quest tag");
 					if (MLN.LogQuest >= MLN.MINOR) {
-						MLN.minor(
-								this,
-								"Setting tag: "
-										+ tag
-										+ " on villager: "
-										+ val[0]
-										+ " ("
-										+ villagers.get(val[0])
-												.getVillagerRecord(world)
-												.getName()
-										+ ") Now present: "
-										+ villagers.get(val[0])
-												.getVillagerRecord(world).questTags
-												.size());
+						MLN.minor(this, "Setting tag: " + tag + " on villager: " + val[0] + " (" + villagers.get(val[0]).getVillagerRecord(world).getName() + ") Now present: "
+								+ villagers.get(val[0]).getVillagerRecord(world).questTags.size());
 					}
 
 				}
@@ -185,46 +153,29 @@ public class Quest {
 				if (MLN.LogQuest >= MLN.DEBUG) {
 					MLN.debug(this, "Clearing tag: " + val[0] + "/" + tag);
 				}
-				villagers.get(val[0]).getVillagerRecord(world).questTags
-						.remove(tag);
-				villagers.get(val[0]).getVillagerRecord(world).getTownHall()
-						.requestSave("quest tag");
+				villagers.get(val[0]).getVillagerRecord(world).questTags.remove(tag);
+				villagers.get(val[0]).getVillagerRecord(world).getTownHall().requestSave("quest tag");
 				if (MLN.LogQuest >= MLN.MINOR) {
-					MLN.minor(this, "Clearing tag: "
-							+ tag
-							+ " on villager: "
-							+ val[0]
-							+ " ("
-							+ villagers.get(val[0]).getVillagerRecord(world)
-									.getName() + ")");
+					MLN.minor(this, "Clearing tag: " + tag + " on villager: " + val[0] + " (" + villagers.get(val[0]).getVillagerRecord(world).getName() + ")");
 				}
 			}
 		}
 
 		public boolean checkStatus(final World world) {
 
-			if (currentStepStart + getCurrentStep().duration * 1000 <= world
-					.getWorldTime()) {
+			if (currentStepStart + getCurrentStep().duration * 1000 <= world.getWorldTime()) {
 				final MillVillager cv = getCurrentVillager().getVillager(world);
 				if (cv != null && getCurrentStep().penaltyReputation > 0) {
-					profile.adjustReputation(cv.getTownHall(),
-							-getCurrentStep().penaltyReputation);
+					profile.adjustReputation(cv.getTownHall(), -getCurrentStep().penaltyReputation);
 				}
 
-				applyTags(getCurrentStep().setVillagerTagsFailure,
-						getCurrentStep().clearTagsFailure);
-				applyGlobalTags(getCurrentStep().setGlobalTagsFailure,
-						getCurrentStep().clearGlobalTagsFailure);
-				applyPlayerTags(getCurrentStep().setPlayerTagsFailure,
-						getCurrentStep().clearPlayerTagsFailure);
+				applyTags(getCurrentStep().setVillagerTagsFailure, getCurrentStep().clearTagsFailure);
+				applyGlobalTags(getCurrentStep().setGlobalTagsFailure, getCurrentStep().clearGlobalTagsFailure);
+				applyPlayerTags(getCurrentStep().setPlayerTagsFailure, getCurrentStep().clearPlayerTagsFailure);
 
 				if (getCurrentStep().getDescriptionTimeUp() != null) {
-					ServerSender.sendChat(
-							profile.getPlayer(),
-							EnumChatFormatting.RED,
-							getDescriptionTimeUp(profile) + " ("
-									+ MLN.string("quest.reputationlost") + ": "
-									+ getCurrentStep().penaltyReputation + ")");
+					ServerSender.sendChat(profile.getPlayer(), EnumChatFormatting.RED, getDescriptionTimeUp(profile) + " (" + MLN.string("quest.reputationlost") + ": "
+							+ getCurrentStep().penaltyReputation + ")");
 				}
 
 				destroySelf();
@@ -234,56 +185,40 @@ public class Quest {
 			return false;
 		}
 
-		public String completeStep(final EntityPlayer player,
-				final MillVillager villager) {
+		public String completeStep(final EntityPlayer player, final MillVillager villager) {
 
 			String reward = "";
 
 			for (final InvItem item : getCurrentStep().requiredGood.keySet()) {
 				if (item.special == 0) {
-					villager.addToInv(item.getItem(), item.meta,
-							getCurrentStep().requiredGood.get(item));
-					MillCommonUtilities.getItemsFromChest(player.inventory,
-							item.getItem(), item.meta,
-							getCurrentStep().requiredGood.get(item));
+					villager.addToInv(item.getItem(), item.meta, getCurrentStep().requiredGood.get(item));
+					MillCommonUtilities.getItemsFromChest(player.inventory, item.getItem(), item.meta, getCurrentStep().requiredGood.get(item));
 				}
 			}
 
 			for (final InvItem item : getCurrentStep().rewardGoods.keySet()) {
-				final int nbLeft = getCurrentStep().rewardGoods.get(item)
-						- MillCommonUtilities.putItemsInChest(player.inventory,
-								item.getItem(), item.meta,
-								getCurrentStep().rewardGoods.get(item));
+				final int nbLeft = getCurrentStep().rewardGoods.get(item) - MillCommonUtilities.putItemsInChest(player.inventory, item.getItem(), item.meta, getCurrentStep().rewardGoods.get(item));
 
 				if (nbLeft > 0) {// couldn't fit in inventory
-					final EntityItem entItem = MillCommonUtilities
-							.spawnItem(world, villager.getPos(), new ItemStack(
-									item.getItem(), nbLeft, item.meta), 0);
+					final EntityItem entItem = MillCommonUtilities.spawnItem(world, villager.getPos(), new ItemStack(item.getItem(), nbLeft, item.meta), 0);
 
 					if (entItem.getEntityItem().getItem() instanceof IItemInitialEnchantmens) {
-						((IItemInitialEnchantmens) entItem.getEntityItem()
-								.getItem()).applyEnchantments(entItem
-								.getEntityItem());
+						((IItemInitialEnchantmens) entItem.getEntityItem().getItem()).applyEnchantments(entItem.getEntityItem());
 					}
 				}
 
-				reward += " " + getCurrentStep().rewardGoods.get(item) + " "
-						+ item.getName();
+				reward += " " + getCurrentStep().rewardGoods.get(item) + " " + item.getName();
 			}
 
 			if (getCurrentStep().rewardMoney > 0) {
-				MillCommonUtilities.changeMoney(player.inventory,
-						getCurrentStep().rewardMoney, player);
+				MillCommonUtilities.changeMoney(player.inventory, getCurrentStep().rewardMoney, player);
 				reward += " " + getCurrentStep().rewardMoney + " deniers";
 			}
 
 			if (getCurrentStep().rewardReputation > 0) {
-				mw.getProfile(player.getDisplayName()).adjustReputation(
-						villager.getTownHall(),
-						getCurrentStep().rewardReputation);
+				mw.getProfile(player.getDisplayName()).adjustReputation(villager.getTownHall(), getCurrentStep().rewardReputation);
 
-				reward += " " + getCurrentStep().rewardReputation
-						+ " reputation";
+				reward += " " + getCurrentStep().rewardReputation + " reputation";
 
 				int experience = getCurrentStep().rewardReputation / 32;
 
@@ -293,55 +228,44 @@ public class Quest {
 
 				if (experience > 0) {
 					reward += " " + experience + " experience";
-					MillCommonUtilities.spawnExp(world, villager.getPos()
-							.getRelative(0, 2, 0), experience);
+					MillCommonUtilities.spawnExp(world, villager.getPos().getRelative(0, 2, 0), experience);
 				}
 			}
 
-			mw.getProfile(player.getDisplayName()).adjustLanguage(
-					villager.getCulture().key, QUEST_LANGUAGE_BONUS);
+			mw.getProfile(player.getDisplayName()).adjustLanguage(villager.getCulture().key, QUEST_LANGUAGE_BONUS);
 
 			if (!world.isRemote) {
 
-				applyTags(getCurrentStep().setVillagerTagsSuccess,
-						getCurrentStep().clearTagsSuccess);
-				applyGlobalTags(getCurrentStep().setGlobalTagsSuccess,
-						getCurrentStep().clearGlobalTagsSuccess);
-				applyPlayerTags(getCurrentStep().setPlayerTagsSuccess,
-						getCurrentStep().clearPlayerTagsSuccess);
+				applyTags(getCurrentStep().setVillagerTagsSuccess, getCurrentStep().clearTagsSuccess);
+				applyGlobalTags(getCurrentStep().setGlobalTagsSuccess, getCurrentStep().clearGlobalTagsSuccess);
+				applyPlayerTags(getCurrentStep().setPlayerTagsSuccess, getCurrentStep().clearPlayerTagsSuccess);
 				applyActionData(getCurrentStep().setActionDataSuccess);
 
 				for (final String s : getCurrentStep().bedrockbuildings) {
 					final String culture = s.split(",")[0];
 					final String village = s.split(",")[1];
 
-					final VillageType vt = Culture.getCultureByName(culture)
-							.getLoneBuildingType(village);
+					final VillageType vt = Culture.getCultureByName(culture).getLoneBuildingType(village);
 
 					try {
-						WorldGenVillage.generateBedrockLoneBuilding(new Point(
-								player), world, vt, MillCommonUtilities.random,
-								50, 120, player);
+						WorldGenVillage.generateBedrockLoneBuilding(new Point(player), world, vt, MillCommonUtilities.random, 50, 120, player);
 					} catch (final MillenaireException e) {
 						MLN.printException(e);
 					}
 				}
 			}
 
-			String res = getDescriptionSuccess(mw.getProfile(player
-					.getDisplayName()));
+			String res = getDescriptionSuccess(mw.getProfile(player.getDisplayName()));
 
 			if (reward.length() > 0) {
-				res += "<ret><ret>" + MLN.string("quest.obtained") + ":"
-						+ reward;
+				res += "<ret><ret>" + MLN.string("quest.obtained") + ":" + reward;
 			}
 
 			currentStep++;
 			if (currentStep >= quest.steps.size()) {
 				player.addStat(MillAchievements.thequest, 1);
 
-				if (mw.getProfile(player.getDisplayName())
-						.isWorldQuestFinished()) {
+				if (mw.getProfile(player.getDisplayName()).isWorldQuestFinished()) {
 					player.addStat(MillAchievements.forbiddenknwoledge, 1);
 				}
 
@@ -376,18 +300,15 @@ public class Quest {
 		}
 
 		public String getDescriptionRefuse(final UserProfile profile) {
-			return handleString(profile, getCurrentStep()
-					.getDescriptionRefuse());
+			return handleString(profile, getCurrentStep().getDescriptionRefuse());
 		}
 
 		public String getDescriptionSuccess(final UserProfile profile) {
-			return handleString(profile, getCurrentStep()
-					.getDescriptionSuccess());
+			return handleString(profile, getCurrentStep().getDescriptionSuccess());
 		}
 
 		public String getDescriptionTimeUp(final UserProfile profile) {
-			return handleString(profile, getCurrentStep()
-					.getDescriptionTimeUp());
+			return handleString(profile, getCurrentStep().getDescriptionTimeUp());
 		}
 
 		public String getLabel(final UserProfile profile) {
@@ -418,8 +339,7 @@ public class Quest {
 				return null;
 			}
 
-			final Building giverTH = villagers.get(getCurrentStep().villager)
-					.getTownHall(world);
+			final Building giverTH = villagers.get(getCurrentStep().villager).getTownHall(world);
 
 			if (giverTH == null) {
 				return s;
@@ -430,36 +350,18 @@ public class Quest {
 				final Building th = qiv.getTownHall(world);
 
 				if (th != null) {
-					s = s.replaceAll("\\$" + key + "_villagename\\$",
-							th.getVillageQualifiedName());
-					s = s.replaceAll("\\$" + key + "_direction\\$", MLN
-							.string(giverTH.getPos().directionTo(th.getPos())));
-					s = s.replaceAll(
-							"\\$" + key + "_tothedirection\\$",
-							MLN.string(giverTH.getPos().directionTo(
-									th.getPos(), true)));
-					s = s.replaceAll(
-							"\\$" + key + "_directionshort\\$",
-							MLN.string(giverTH.getPos().directionToShort(
-									th.getPos())));
-					s = s.replaceAll(
-							"\\$" + key + "_distance\\$",
-							MLN.string(giverTH.getPos()
-									.approximateDistanceLongString(th.getPos())));
-					s = s.replaceAll(
-							"\\$" + key + "_distanceshort\\$",
-							MLN.string(giverTH
-									.getPos()
-									.approximateDistanceShortString(th.getPos())));
+					s = s.replaceAll("\\$" + key + "_villagename\\$", th.getVillageQualifiedName());
+					s = s.replaceAll("\\$" + key + "_direction\\$", MLN.string(giverTH.getPos().directionTo(th.getPos())));
+					s = s.replaceAll("\\$" + key + "_tothedirection\\$", MLN.string(giverTH.getPos().directionTo(th.getPos(), true)));
+					s = s.replaceAll("\\$" + key + "_directionshort\\$", MLN.string(giverTH.getPos().directionToShort(th.getPos())));
+					s = s.replaceAll("\\$" + key + "_distance\\$", MLN.string(giverTH.getPos().approximateDistanceLongString(th.getPos())));
+					s = s.replaceAll("\\$" + key + "_distanceshort\\$", MLN.string(giverTH.getPos().approximateDistanceShortString(th.getPos())));
 
-					final VillagerRecord villager = qiv
-							.getVillagerRecord(world);
+					final VillagerRecord villager = qiv.getVillagerRecord(world);
 
 					if (villager != null) {
-						s = s.replaceAll("\\$" + key + "_villagername\\$",
-								villager.getName());
-						s = s.replaceAll("\\$" + key + "_villagerrole\\$",
-								villager.getGameOccupation(profile.key));
+						s = s.replaceAll("\\$" + key + "_villagername\\$", villager.getName());
+						s = s.replaceAll("\\$" + key + "_villagerrole\\$", villager.getGameOccupation(profile.key));
 					}
 
 					for (final String key2 : villagers.keySet()) {
@@ -467,33 +369,15 @@ public class Quest {
 						final Building th2 = qiv2.getTownHall(world);
 
 						if (th2 != null) {
-							s = s.replaceAll(
-									"\\$" + key + "_" + key2 + "_direction\\$",
-									MLN.string(th.getPos().directionTo(
-											th2.getPos())));
-							s = s.replaceAll(
-									"\\$" + key + "_" + key2
-											+ "_directionshort\\$",
-									MLN.string(th.getPos().directionToShort(
-											th2.getPos())));
-							s = s.replaceAll("\\$" + key + "_" + key2
-									+ "_distance\\$",
-									MLN.string(th.getPos()
-											.approximateDistanceLongString(
-													th2.getPos())));
-							s = s.replaceAll("\\$" + key + "_" + key2
-									+ "_distanceshort\\$", MLN.string(th
-									.getPos().approximateDistanceShortString(
-											th2.getPos())));
+							s = s.replaceAll("\\$" + key + "_" + key2 + "_direction\\$", MLN.string(th.getPos().directionTo(th2.getPos())));
+							s = s.replaceAll("\\$" + key + "_" + key2 + "_directionshort\\$", MLN.string(th.getPos().directionToShort(th2.getPos())));
+							s = s.replaceAll("\\$" + key + "_" + key2 + "_distance\\$", MLN.string(th.getPos().approximateDistanceLongString(th2.getPos())));
+							s = s.replaceAll("\\$" + key + "_" + key2 + "_distanceshort\\$", MLN.string(th.getPos().approximateDistanceShortString(th2.getPos())));
 						} else {// can happen in MP
-							s = s.replaceAll("\\$" + key + "_" + key2
-									+ "_direction\\$", "");
-							s = s.replaceAll("\\$" + key + "_" + key2
-									+ "_directionshort\\$", "");
-							s = s.replaceAll("\\$" + key + "_" + key2
-									+ "_distance\\$", "");
-							s = s.replaceAll("\\$" + key + "_" + key2
-									+ "_distanceshort\\$", "");
+							s = s.replaceAll("\\$" + key + "_" + key2 + "_direction\\$", "");
+							s = s.replaceAll("\\$" + key + "_" + key2 + "_directionshort\\$", "");
+							s = s.replaceAll("\\$" + key + "_" + key2 + "_distance\\$", "");
+							s = s.replaceAll("\\$" + key + "_" + key2 + "_distanceshort\\$", "");
 						}
 					}
 				}
@@ -504,28 +388,21 @@ public class Quest {
 			return s;
 		}
 
-		public String refuseQuest(final EntityPlayer player,
-				final MillVillager villager) {
+		public String refuseQuest(final EntityPlayer player, final MillVillager villager) {
 
 			String replost = "";
 
 			final MillVillager cv = getCurrentVillager().getVillager(world);
 			if (cv != null && getCurrentStep().penaltyReputation > 0) {
-				mw.getProfile(player.getDisplayName()).adjustReputation(
-						cv.getTownHall(), -getCurrentStep().penaltyReputation);
-				replost = " (Reputation lost: "
-						+ getCurrentStep().penaltyReputation + ")";
+				mw.getProfile(player.getDisplayName()).adjustReputation(cv.getTownHall(), -getCurrentStep().penaltyReputation);
+				replost = " (Reputation lost: " + getCurrentStep().penaltyReputation + ")";
 			}
 
-			applyTags(getCurrentStep().setVillagerTagsFailure,
-					getCurrentStep().clearTagsFailure);
-			applyPlayerTags(getCurrentStep().setPlayerTagsFailure,
-					getCurrentStep().clearPlayerTagsFailure);
-			applyGlobalTags(getCurrentStep().setGlobalTagsFailure,
-					getCurrentStep().clearGlobalTagsFailure);
+			applyTags(getCurrentStep().setVillagerTagsFailure, getCurrentStep().clearTagsFailure);
+			applyPlayerTags(getCurrentStep().setPlayerTagsFailure, getCurrentStep().clearPlayerTagsFailure);
+			applyGlobalTags(getCurrentStep().setGlobalTagsFailure, getCurrentStep().clearGlobalTagsFailure);
 
-			final String s = getDescriptionRefuse(mw.getProfile(player
-					.getDisplayName())) + replost;
+			final String s = getDescriptionRefuse(mw.getProfile(player.getDisplayName())) + replost;
 
 			destroySelf();
 
@@ -538,9 +415,7 @@ public class Quest {
 		}
 
 		public String writeToString() {
-			String s = "quest:" + quest.key + ";step:" + this.currentStep
-					+ ";startTime:" + startTime + ";currentStepStartTime:"
-					+ currentStepStart;
+			String s = "quest:" + quest.key + ";step:" + this.currentStep + ";startTime:" + startTime + ";currentStepStartTime:" + currentStepStart;
 
 			for (final String key : villagers.keySet()) {
 				final QuestInstanceVillager qiv = villagers.get(key);
@@ -559,23 +434,20 @@ public class Quest {
 		private VillagerRecord vr = null;
 		public MillWorld mw;
 
-		public QuestInstanceVillager(final MillWorld mw, final Point p,
-				final long vid) {
+		public QuestInstanceVillager(final MillWorld mw, final Point p, final long vid) {
 			townHall = p;
 			id = vid;
 			this.mw = mw;
 		}
 
-		public QuestInstanceVillager(final MillWorld mw, final Point p,
-				final long vid, final MillVillager v) {
+		public QuestInstanceVillager(final MillWorld mw, final Point p, final long vid, final MillVillager v) {
 			townHall = p;
 			id = vid;
 			villager = v;
 			this.mw = mw;
 		}
 
-		public QuestInstanceVillager(final MillWorld mw, final Point p,
-				final long vid, final VillagerRecord v) {
+		public QuestInstanceVillager(final MillWorld mw, final Point p, final long vid, final VillagerRecord v) {
 			townHall = p;
 			id = vid;
 			vr = v;
@@ -666,13 +538,11 @@ public class Quest {
 		}
 
 		public String getDescriptionSuccess() {
-			return MLN
-					.questString(getStringKey() + "description_success", true);
+			return MLN.questString(getStringKey() + "description_success", true);
 		}
 
 		public String getDescriptionTimeUp() {
-			return MLN
-					.questString(getStringKey() + "description_timeup", false);
+			return MLN.questString(getStringKey() + "description_timeup", false);
 		}
 
 		public String getLabel() {
@@ -702,8 +572,7 @@ public class Quest {
 					int nbenchanted = 0;
 
 					for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-						final ItemStack stack = player.inventory
-								.getStackInSlot(i);
+						final ItemStack stack = player.inventory.getStackInSlot(i);
 
 						if (stack != null && stack.isItemEnchanted()) {
 							nbenchanted++;
@@ -714,20 +583,15 @@ public class Quest {
 					int nbenchanted = 0;
 
 					for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-						final ItemStack stack = player.inventory
-								.getStackInSlot(i);
+						final ItemStack stack = player.inventory.getStackInSlot(i);
 
-						if (stack != null && stack.isItemEnchanted()
-								&& stack.getItem() instanceof ItemSword) {
+						if (stack != null && stack.isItemEnchanted() && stack.getItem() instanceof ItemSword) {
 							nbenchanted++;
 						}
 					}
 					diff = requiredGood.get(item) - nbenchanted;
 				} else {
-					diff = requiredGood.get(item)
-							- MillCommonUtilities
-									.countChestItems(player.inventory,
-											item.getItem(), item.meta);
+					diff = requiredGood.get(item) - MillCommonUtilities.countChestItems(player.inventory, item.getItem(), item.meta);
 				}
 
 				if (diff > 0) {
@@ -741,8 +605,7 @@ public class Quest {
 			}
 			if (lackingGoods != null) {
 				if (showRequiredGoods) {
-					lackingGoods = MLN.string("quest.lackingcondition") + " "
-							+ lackingGoods;
+					lackingGoods = MLN.string("quest.lackingcondition") + " " + lackingGoods;
 				} else {
 					lackingGoods = MLN.string("quest.lackinghiddengoods");
 				}
@@ -789,8 +652,7 @@ public class Quest {
 		List<String> requiredTags = new ArrayList<String>();
 		List<String> types = new ArrayList<String>();
 
-		public boolean testVillager(final UserProfile profile,
-				final VillagerRecord vr) {
+		public boolean testVillager(final UserProfile profile, final VillagerRecord vr) {
 
 			if (profile.villagersInQuests.containsKey(vr.id)) {
 				return false;
@@ -838,8 +700,7 @@ public class Quest {
 	private static final String REL_SAMEVILLAGE = "samevillage";
 
 	public static final int[] WORLD_MISSION_NB = new int[] { 15, 13, 10 };
-	public static final String[] WORLD_MISSION_KEYS = new String[] { "sadhu",
-			"alchemist", "fallenking" };
+	public static final String[] WORLD_MISSION_KEYS = new String[] { "sadhu", "alchemist", "fallenking" };
 
 	private static Quest loadQuest(final File file) {
 
@@ -857,8 +718,7 @@ public class Quest {
 				if (line.trim().length() > 0 && !line.startsWith("//")) {
 					final String[] temp = line.split(":");
 					if (temp.length != 2) {
-						MLN.error(null, "Invalid line when loading quest "
-								+ file.getName() + ": " + line);
+						MLN.error(null, "Invalid line when loading quest " + file.getName() + ": " + line);
 					} else {
 						final String key = temp[0].toLowerCase();
 						final String value = temp[1];
@@ -866,13 +726,11 @@ public class Quest {
 							step = q.new QuestStep(q.steps.size());
 							q.steps.add(step);
 						} else if (key.equals("minreputation")) {
-							q.minreputation = MillCommonUtilities
-									.readInteger(value);
+							q.minreputation = MillCommonUtilities.readInteger(value);
 						} else if (key.equals("chanceperhour")) {
 							q.chanceperhour = Double.parseDouble(value);
 						} else if (key.equals("maxsimultaneous")) {
-							q.maxsimultaneous = MillCommonUtilities
-									.readInteger(value);
+							q.maxsimultaneous = MillCommonUtilities.readInteger(value);
 						} else if (key.equals("definevillager")) {
 							final QuestVillager v = q.loadQVillager(value);
 							if (v != null) {
@@ -880,28 +738,21 @@ public class Quest {
 								q.villagersOrdered.add(v);
 							}
 						} else if (key.equals("requiredglobaltag")) {
-							q.globalTagsRequired
-									.add(value.trim().toLowerCase());
+							q.globalTagsRequired.add(value.trim().toLowerCase());
 						} else if (key.equals("forbiddenglobaltag")) {
-							q.globalTagsForbidden.add(value.trim()
-									.toLowerCase());
+							q.globalTagsForbidden.add(value.trim().toLowerCase());
 						} else if (key.equals("requiredplayertag")) {
-							q.profileTagsRequired.add(value.trim()
-									.toLowerCase());
+							q.profileTagsRequired.add(value.trim().toLowerCase());
 						} else if (key.equals("forbiddenplayertag")) {
-							q.profileTagsForbidden.add(value.trim()
-									.toLowerCase());
+							q.profileTagsForbidden.add(value.trim().toLowerCase());
 						} else if (step == null) {
-							MLN.error(q, "Reached line while not in a step: "
-									+ line);
+							MLN.error(q, "Reached line while not in a step: " + line);
 						} else if (key.equals("villager")) {
 							step.villager = value;
 						} else if (key.equals("duration")) {
-							step.duration = MillCommonUtilities
-									.readInteger(value);
+							step.duration = MillCommonUtilities.readInteger(value);
 						} else if (key.equals("showrequiredgoods")) {
-							step.showRequiredGoods = Boolean
-									.parseBoolean(value);
+							step.showRequiredGoods = Boolean.parseBoolean(value);
 						} else if (key.startsWith("label_")) {
 							step.labels.put(key, value);
 						} else if (key.startsWith("description_success_")) {
@@ -915,38 +766,25 @@ public class Quest {
 						} else if (key.startsWith("listing_")) {
 							step.listings.put(key, value);
 						} else if (key.equals("requiredgood")) {
-							if (Goods.goodsName.containsKey(value.split(",")[0]
-									.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.split(",")[0].toLowerCase());
-								step.requiredGood.put(iv, MillCommonUtilities
-										.readInteger(value.split(",")[1]));
+							if (Goods.goodsName.containsKey(value.split(",")[0].toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.split(",")[0].toLowerCase());
+								step.requiredGood.put(iv, MillCommonUtilities.readInteger(value.split(",")[1]));
 							} else {
-								MLN.error(null,
-										"Unknown requiredgood found when loading quest "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown requiredgood found when loading quest " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("rewardgood")) {
-							if (Goods.goodsName.containsKey(value.split(",")[0]
-									.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.split(",")[0].toLowerCase());
-								step.rewardGoods.put(iv, MillCommonUtilities
-										.readInteger(value.split(",")[1]));
+							if (Goods.goodsName.containsKey(value.split(",")[0].toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.split(",")[0].toLowerCase());
+								step.rewardGoods.put(iv, MillCommonUtilities.readInteger(value.split(",")[1]));
 							} else {
-								MLN.error(null,
-										"Unknown rewardGood found when loading quest "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown rewardGood found when loading quest " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("rewardmoney")) {
-							step.rewardMoney = MillCommonUtilities
-									.readInteger(value);
+							step.rewardMoney = MillCommonUtilities.readInteger(value);
 						} else if (key.equals("rewardreputation")) {
-							step.rewardReputation = MillCommonUtilities
-									.readInteger(value);
+							step.rewardReputation = MillCommonUtilities.readInteger(value);
 						} else if (key.equals("penaltyreputation")) {
-							step.penaltyReputation = MillCommonUtilities
-									.readInteger(value);
+							step.penaltyReputation = MillCommonUtilities.readInteger(value);
 						} else if (key.equals("setactiondatasuccess")) {
 							step.setActionDataSuccess.add(value.split(","));
 
@@ -987,12 +825,9 @@ public class Quest {
 							step.forbiddenPlayerTag.add(value);
 
 						} else if (key.equals("bedrockbuilding")) {
-							step.bedrockbuildings.add(value.trim()
-									.toLowerCase());
+							step.bedrockbuildings.add(value.trim().toLowerCase());
 						} else {
-							MLN.error(null,
-									"Unknow parameter when loading quest "
-											+ file.getName() + ": " + line);
+							MLN.error(null, "Unknow parameter when loading quest " + file.getName() + ": " + line);
 						}
 					}
 				}
@@ -1033,8 +868,7 @@ public class Quest {
 			}
 		}
 
-		final File customQuestDir = new File(Mill.proxy.getCustomDir(),
-				"quests");
+		final File customQuestDir = new File(Mill.proxy.getCustomDir(), "quests");
 
 		if (customQuestDir.exists()) {
 			questDirs.add(customQuestDir);
@@ -1044,8 +878,7 @@ public class Quest {
 
 			for (final File dir : questdir.listFiles()) {
 				if (dir.isDirectory()) {
-					for (final File file : dir.listFiles(new ExtFileFilter(
-							"txt"))) {
+					for (final File file : dir.listFiles(new ExtFileFilter("txt"))) {
 
 						final Quest quest = loadQuest(file);
 
@@ -1093,17 +926,12 @@ public class Quest {
 			} else if (key.equals("type")) {
 				final Culture c = Culture.getCultureByName(val.split("/")[0]);
 				if (c == null) {
-					MLN.error(this,
-							"Unknow culture when loading definevillager: "
-									+ line);
+					MLN.error(this, "Unknow culture when loading definevillager: " + line);
 					return null;
 				} else {
-					final VillagerType vtype = c
-							.getVillagerType(val.split("/")[1]);
+					final VillagerType vtype = c.getVillagerType(val.split("/")[1]);
 					if (vtype == null) {
-						MLN.error(this,
-								"Unknow vilager type when loading definevillager: "
-										+ line);
+						MLN.error(this, "Unknow vilager type when loading definevillager: " + line);
 						return null;
 					} else {
 						v.types.add(vtype.key);
@@ -1180,42 +1008,31 @@ public class Quest {
 
 		for (final Point p : mw.getCombinedVillagesLoneBuildings()) {
 			final Building th = mw.getBuilding(p);
-			if (th != null && th.isActive
-					&& th.getReputation(profile.key) >= minreputation) {
+			if (th != null && th.isActive && th.getReputation(profile.key) >= minreputation) {
 
 				if (MLN.LogQuest >= MLN.DEBUG) {
-					MLN.debug(
-							this,
-							"Loooking for starting villager in: "
-									+ th.getVillageQualifiedName());
+					MLN.debug(this, "Loooking for starting villager in: " + th.getVillageQualifiedName());
 				}
 
 				for (final VillagerRecord vr : th.vrecords) {
 					if (startingVillager.testVillager(profile, vr)) {
 						final HashMap<String, QuestInstanceVillager> villagers = new HashMap<String, QuestInstanceVillager>();
-						villagers.put(startingVillager.key,
-								new QuestInstanceVillager(mw, p, vr.id, vr));
+						villagers.put(startingVillager.key, new QuestInstanceVillager(mw, p, vr.id, vr));
 
 						boolean error = false;
 
 						if (MLN.LogQuest >= MLN.DEBUG) {
-							MLN.debug(this,
-									"Found possible starting villager: " + vr);
+							MLN.debug(this, "Found possible starting villager: " + vr);
 						}
 
 						for (final QuestVillager qv : villagersOrdered) {
 							if (!error && qv != startingVillager) {
 
 								if (MLN.LogQuest >= MLN.DEBUG) {
-									MLN.debug(this,
-											"Trying to find villager type: "
-													+ qv.relation + "/"
-													+ qv.relatedto);
+									MLN.debug(this, "Trying to find villager type: " + qv.relation + "/" + qv.relatedto);
 								}
 
-								final VillagerRecord relatedVillager = villagers
-										.get(qv.relatedto).getVillagerRecord(
-												mw.world);
+								final VillagerRecord relatedVillager = villagers.get(qv.relatedto).getVillagerRecord(mw.world);
 
 								if (relatedVillager == null) {
 									error = true;
@@ -1224,103 +1041,63 @@ public class Quest {
 
 								if (REL_SAMEVILLAGE.equals(qv.relation)) {
 									final List<VillagerRecord> newVillagers = new ArrayList<VillagerRecord>();
-									for (final VillagerRecord vr2 : mw
-											.getBuilding(relatedVillager.townHallPos).vrecords) {
-										if (!vr2.housePos
-												.equals(relatedVillager.housePos)
-												&& qv.testVillager(profile, vr2)) {
+									for (final VillagerRecord vr2 : mw.getBuilding(relatedVillager.townHallPos).vrecords) {
+										if (!vr2.housePos.equals(relatedVillager.housePos) && qv.testVillager(profile, vr2)) {
 											newVillagers.add(vr2);
 										}
 									}
 
 									if (newVillagers.size() > 0) {
-										final VillagerRecord chosen = newVillagers
-												.get(MillCommonUtilities
-														.randomInt(newVillagers
-																.size()));
-										villagers.put(qv.key,
-												new QuestInstanceVillager(mw,
-														p, chosen.id, chosen));
+										final VillagerRecord chosen = newVillagers.get(MillCommonUtilities.randomInt(newVillagers.size()));
+										villagers.put(qv.key, new QuestInstanceVillager(mw, p, chosen.id, chosen));
 									} else {
 										error = true;
 									}
-								} else if (REL_NEARBYVILLAGE
-										.equals(qv.relation)
-										|| REL_ANYVILLAGE.equals(qv.relation)) {
+								} else if (REL_NEARBYVILLAGE.equals(qv.relation) || REL_ANYVILLAGE.equals(qv.relation)) {
 									final List<QuestInstanceVillager> newVillagers = new ArrayList<QuestInstanceVillager>();
 
-									for (final Point p2 : mw
-											.getCombinedVillagesLoneBuildings()) {
+									for (final Point p2 : mw.getCombinedVillagesLoneBuildings()) {
 										final Building th2 = mw.getBuilding(p2);
-										if (th2 != null
-												&& th2 != th
-												&& (REL_ANYVILLAGE
-														.equals(qv.relation) || th
-														.getPos().distanceTo(
-																th2.getPos()) < 2000)) {
+										if (th2 != null && th2 != th && (REL_ANYVILLAGE.equals(qv.relation) || th.getPos().distanceTo(th2.getPos()) < 2000)) {
 
 											if (MLN.LogQuest >= MLN.DEBUG) {
-												MLN.debug(
-														this,
-														"Trying to find villager type: "
-																+ qv.relation
-																+ "/"
-																+ qv.relatedto
-																+ " in "
-																+ th2.getVillageQualifiedName());
+												MLN.debug(this, "Trying to find villager type: " + qv.relation + "/" + qv.relatedto + " in " + th2.getVillageQualifiedName());
 											}
 
 											for (final VillagerRecord vr2 : th2.vrecords) {
 
 												if (MLN.LogQuest >= MLN.DEBUG) {
-													MLN.debug(this, "Testing: "
-															+ vr2);
+													MLN.debug(this, "Testing: " + vr2);
 												}
 
-												if (qv.testVillager(profile,
-														vr2)) {
-													newVillagers
-															.add(new QuestInstanceVillager(
-																	mw, p2,
-																	vr2.id, vr2));
+												if (qv.testVillager(profile, vr2)) {
+													newVillagers.add(new QuestInstanceVillager(mw, p2, vr2.id, vr2));
 												}
 											}
 										}
 									}
 
 									if (newVillagers.size() > 0) {
-										villagers.put(qv.key, newVillagers
-												.get(MillCommonUtilities
-														.randomInt(newVillagers
-																.size())));
+										villagers.put(qv.key, newVillagers.get(MillCommonUtilities.randomInt(newVillagers.size())));
 									} else {
 										error = true;
 									}
 								} else if (REL_SAMEHOUSE.equals(qv.relation)) {
 									final List<VillagerRecord> newVillagers = new ArrayList<VillagerRecord>();
-									for (final VillagerRecord vr2 : mw
-											.getBuilding(relatedVillager.townHallPos).vrecords) {
-										if (vr2.housePos
-												.equals(relatedVillager.housePos)
-												&& qv.testVillager(profile, vr2)) {
+									for (final VillagerRecord vr2 : mw.getBuilding(relatedVillager.townHallPos).vrecords) {
+										if (vr2.housePos.equals(relatedVillager.housePos) && qv.testVillager(profile, vr2)) {
 											newVillagers.add(vr2);
 										}
 									}
 
 									if (newVillagers.size() > 0) {
-										final VillagerRecord chosen = newVillagers
-												.get(MillCommonUtilities
-														.randomInt(newVillagers
-																.size()));
-										villagers.put(qv.key,
-												new QuestInstanceVillager(mw,
-														p, chosen.id, chosen));
+										final VillagerRecord chosen = newVillagers.get(MillCommonUtilities.randomInt(newVillagers.size()));
+										villagers.put(qv.key, new QuestInstanceVillager(mw, p, chosen.id, chosen));
 									} else {
 										error = true;
 									}
 								} else {
-									MLN.error(this, "Unknown relation: "
-											+ qv.relation);
+									MLN.error(this, "Unknown relation: " + qv.relation);
 								}
 							}
 						}
@@ -1328,9 +1105,7 @@ public class Quest {
 						if (!error) {
 							possibleVillagers.add(villagers);
 							if (MLN.LogQuest >= MLN.DEBUG) {
-								MLN.debug(this,
-										"Found all the villagers needed: "
-												+ villagers.size());
+								MLN.debug(this, "Found all the villagers needed: " + villagers.size());
 							}
 						}
 					}
@@ -1342,11 +1117,9 @@ public class Quest {
 			return null;
 		}
 
-		final HashMap<String, QuestInstanceVillager> selectedOption = possibleVillagers
-				.get(MillCommonUtilities.randomInt(possibleVillagers.size()));
+		final HashMap<String, QuestInstanceVillager> selectedOption = possibleVillagers.get(MillCommonUtilities.randomInt(possibleVillagers.size()));
 
-		final QuestInstance qi = new QuestInstance(mw, this, profile,
-				selectedOption, mw.world.getWorldTime());
+		final QuestInstance qi = new QuestInstance(mw, this, profile, selectedOption, mw.world.getWorldTime());
 
 		profile.questInstances.add(qi);
 

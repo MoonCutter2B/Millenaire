@@ -50,8 +50,7 @@ public class AStarNode implements Comparable {
 	 * @param p
 	 *            parent Node
 	 */
-	public AStarNode(final int ix, final int iy, final int iz, final int dist,
-			final AStarNode p) {
+	public AStarNode(final int ix, final int iy, final int iz, final int dist, final AStarNode p) {
 		x = ix;
 		y = iy;
 		z = iz;
@@ -60,8 +59,7 @@ public class AStarNode implements Comparable {
 		target = null;
 	}
 
-	public AStarNode(final int ix, final int iy, final int iz, final int dist,
-			final AStarNode p, final AStarNode t) {
+	public AStarNode(final int ix, final int iy, final int iz, final int dist, final AStarNode p, final AStarNode t) {
 		x = ix;
 		y = iy;
 		z = iz;
@@ -118,12 +116,9 @@ public class AStarNode implements Comparable {
 	@Override
 	public String toString() {
 		if (parent == null) {
-			return String.format("[%d|%d|%d], dist %d, F: %f", x, y, z, g,
-					getF());
+			return String.format("[%d|%d|%d], dist %d, F: %f", x, y, z, g, getF());
 		} else {
-			return String.format(
-					"[%d|%d|%d], dist %d, parent [%d|%d|%d], F: %f", x, y, z,
-					g, parent.x, parent.y, parent.z, getF());
+			return String.format("[%d|%d|%d], dist %d, parent [%d|%d|%d], F: %f", x, y, z, g, parent.x, parent.y, parent.z, getF());
 		}
 	}
 
@@ -138,8 +133,7 @@ public class AStarNode implements Comparable {
 	 * @return true if the new cost is lower and the update was accepted, false
 	 *         otherwise
 	 */
-	public boolean updateDistance(final int checkingDistance,
-			final AStarNode parentOtherNode) {
+	public boolean updateDistance(final int checkingDistance, final AStarNode parentOtherNode) {
 		if (checkingDistance < g) {
 			g = checkingDistance;
 			parent = parentOtherNode;

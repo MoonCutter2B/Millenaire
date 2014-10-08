@@ -27,10 +27,8 @@ public class BuildingProject implements WeightedChoice {
 	 * 
 	 */
 	public static enum EnumProjects {
-		CENTRE(0, "ui.buildingscentre"), START(1, "ui.buildingsstarting"), PLAYER(
-				2, "ui.buildingsplayer"), CORE(3, "ui.buildingskey"), SECONDARY(
-				4, "ui.buildingssecondary"), EXTRA(5, "ui.buildingsextra"), CUSTOMBUILDINGS(
-				6, "ui.buildingcustom");
+		CENTRE(0, "ui.buildingscentre"), START(1, "ui.buildingsstarting"), PLAYER(2, "ui.buildingsplayer"), CORE(3, "ui.buildingskey"), SECONDARY(4, "ui.buildingssecondary"), EXTRA(5,
+				"ui.buildingsextra"), CUSTOMBUILDINGS(6, "ui.buildingcustom");
 
 		public static EnumProjects getById(final int id) {
 			for (final EnumProjects ep : EnumProjects.values()) {
@@ -51,10 +49,8 @@ public class BuildingProject implements WeightedChoice {
 
 	}
 
-	public static BuildingProject getRandomProject(
-			final List<BuildingProject> possibleProjects) {
-		return (BuildingProject) MillCommonUtilities.getWeightedChoice(
-				possibleProjects, null);
+	public static BuildingProject getRandomProject(final List<BuildingProject> possibleProjects) {
+		return (BuildingProject) MillCommonUtilities.getWeightedChoice(possibleProjects, null);
 	}
 
 	public BuildingPlanSet planSet = null;
@@ -77,8 +73,7 @@ public class BuildingProject implements WeightedChoice {
 	 * @param customPlan
 	 * @param location
 	 */
-	public BuildingProject(final BuildingCustomPlan customPlan,
-			final BuildingLocation location) {
+	public BuildingProject(final BuildingCustomPlan customPlan, final BuildingLocation location) {
 		this.customBuildingPlan = customPlan;
 		this.key = customBuildingPlan.buildingKey;
 		this.location = location;
@@ -97,8 +92,7 @@ public class BuildingProject implements WeightedChoice {
 		try {
 			this.key = planSet.plans.get(0)[0].buildingKey;
 		} catch (final Exception e) {
-			MLN.printException("Error when getting projet for " + key + ", "
-					+ planSet + ":", e);
+			MLN.printException("Error when getting projet for " + key + ", " + planSet + ":", e);
 		}
 	}
 

@@ -30,28 +30,33 @@ public class GuiNewCustomBuilding extends GuiText {
 
 	private static final int BUTTON_CONFIRM = 1;
 	private final Building townHall;
+	private final Building existingBuilding;
 	private final Point pos;
 	private final VillageType villageType;
 	private final BuildingCustomPlan customBuilding;
 	private final EntityPlayer player;
 	private final Map<TypeRes, List<Point>> resources;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_panel.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_panel.png");
+
+	public GuiNewCustomBuilding(final EntityPlayer player, final Building building) {
+		this.townHall = building.getTownHall();
+		existingBuilding = building;
+		villageType = null;
+		pos = building.getPos();
+		this.player = player;
+		this.customBuilding = building.location.getCustomPlan();
+		this.resources = customBuilding.findResources(townHall.worldObj, pos);
+	}
 
 	/**
 	 * Create a GUI to confirm the creation of a custom building
-	 * 
-	 * @param player
-	 * @param th
-	 * @param p
-	 * @param customBuilding
 	 */
-	public GuiNewCustomBuilding(final EntityPlayer player, final Building th,
-			final Point p, final BuildingCustomPlan customBuilding) {
+	public GuiNewCustomBuilding(final EntityPlayer player, final Building th, final Point p, final BuildingCustomPlan customBuilding) {
 
 		townHall = th;
 		villageType = null;
+		existingBuilding = null;
 		pos = p;
 		this.player = player;
 		this.customBuilding = customBuilding;
@@ -60,15 +65,11 @@ public class GuiNewCustomBuilding extends GuiText {
 
 	/**
 	 * Create a GUI to confirm the creation of a new village with a custom TH
-	 * 
-	 * @param player
-	 * @param p
-	 * @param villageType
 	 */
-	public GuiNewCustomBuilding(final EntityPlayer player, final Point p,
-			final VillageType villageType) {
+	public GuiNewCustomBuilding(final EntityPlayer player, final Point p, final VillageType villageType) {
 
 		townHall = null;
+		existingBuilding = null;
 		this.villageType = villageType;
 		pos = p;
 		this.player = player;
@@ -84,18 +85,19 @@ public class GuiNewCustomBuilding extends GuiText {
 
 		if (guibutton.id == BUTTON_CONFIRM) {
 			if (townHall != null) {
-				ClientSender.newCustomBuilding(player, townHall, pos,
-						customBuilding.buildingKey);
+				if (existingBuilding == null) {
+					ClientSender.newCustomBuilding(player, townHall, pos, customBuilding.buildingKey);
+				} else {
+					ClientSender.updateCustomBuilding(player, existingBuilding);
+				}
 			} else {
-				ClientSender.newVillageCreation(player, pos,
-						villageType.culture.key, villageType.key);
+				ClientSender.newVillageCreation(player, pos, villageType.culture.key, villageType.key);
 			}
 			closeWindow();
 		} else {
 			closeWindow();
 			if (townHall != null) {
-				DisplayActions.displayNewBuildingProjectGUI(player, townHall,
-						pos);
+				DisplayActions.displayNewBuildingProjectGUI(player, townHall, pos);
 			} else {
 				DisplayActions.displayNewVillageGUI(player, pos);
 			}
@@ -156,9 +158,7 @@ public class GuiNewCustomBuilding extends GuiText {
 		boolean validBuild = true;
 
 		for (final TypeRes res : customBuilding.minResources.keySet()) {
-			if (!resources.containsKey(res)
-					|| resources.get(res).size() < customBuilding.minResources
-							.get(res)) {
+			if (!resources.containsKey(res) || resources.get(res).size() < customBuilding.minResources.get(res)) {
 				validBuild = false;
 			}
 		}
@@ -173,35 +173,37 @@ public class GuiNewCustomBuilding extends GuiText {
 		}
 
 		text.add(new Line());
-		if (validBuild) {
-			text.add(new Line(MLN.string("ui.custombuilding_confirm",
-					customBuilding.getFullDisplayName())));
+		if (existingBuilding != null) {
+			text.add(new Line(MLN.string("ui.custombuilding_edit", customBuilding.getFullDisplayName())));
+		} else if (validBuild) {
+			text.add(new Line(MLN.string("ui.custombuilding_confirm", customBuilding.getFullDisplayName())));
 		} else {
-			text.add(new Line(MLN.string("ui.custombuilding_cantconfirm",
-					customBuilding.getFullDisplayName())));
+			text.add(new Line(MLN.string("ui.custombuilding_cantconfirm", customBuilding.getFullDisplayName())));
+		}
+
+		if (resources.containsKey(TypeRes.SIGN) && resources.get(TypeRes.SIGN).size() > 1) {
+			text.add(new Line());
+			text.add(new Line(MLN.string("ui.custombuilding_signnumber", "" + resources.get(TypeRes.SIGN).size())));
 		}
 
 		text.add(new Line());
 		text.add(new Line(MLN.string("ui.custombuilding_resneededintro")));
-
+		text.add(new Line());
 		for (final TypeRes res : customBuilding.minResources.keySet()) {
-			text.add(new Line());
+
 			int resFound = 0;
 			if (resources.containsKey(res)) {
 				resFound = resources.get(res).size();
 			}
 
-			text.add(new Line(MLN.string("ui.custombuilding_resneeded",
-					MLN.string("custombuilding." + res.key), "" + resFound, ""
-							+ customBuilding.minResources.get(res), ""
-							+ customBuilding.maxResources.get(res))));
+			text.add(new Line(MLN.string("ui.custombuilding_resneeded", MLN.string("custombuilding." + res.key), "" + resFound, "" + customBuilding.minResources.get(res), ""
+					+ customBuilding.maxResources.get(res))));
 		}
 
 		text.add(new Line());
 
 		if (validBuild) {
-			text.add(new Line(new MillGuiButton(MLN.string("ui.close"), 0),
-					new MillGuiButton(MLN.string("ui.confirm"), BUTTON_CONFIRM)));
+			text.add(new Line(new MillGuiButton(MLN.string("ui.close"), 0), new MillGuiButton(MLN.string("ui.confirm"), BUTTON_CONFIRM)));
 		} else {
 			text.add(new Line(new MillGuiButton(MLN.string("ui.close"), 0)));
 		}

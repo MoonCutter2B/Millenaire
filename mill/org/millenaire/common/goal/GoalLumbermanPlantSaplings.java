@@ -30,8 +30,7 @@ public class GoalLumbermanPlantSaplings extends Goal {
 
 		final List<Point> vp = new ArrayList<Point>();
 		final List<Point> buildingp = new ArrayList<Point>();
-		for (final Building grove : villager.getTownHall().getBuildingsWithTag(
-				Building.tagGrove)) {
+		for (final Building grove : villager.getTownHall().getBuildingsWithTag(Building.tagGrove)) {
 			final Point p = grove.getResManager().getPlantingLocation();
 			if (p != null) {
 				vp.add(p);
@@ -47,8 +46,7 @@ public class GoalLumbermanPlantSaplings extends Goal {
 		Point buildingP = buildingp.get(0);
 
 		for (int i = 1; i < vp.size(); i++) {
-			if (vp.get(i).horizontalDistanceToSquared(villager) < p
-					.horizontalDistanceToSquared(villager)) {
+			if (vp.get(i).horizontalDistanceToSquared(villager) < p.horizontalDistanceToSquared(villager)) {
 				p = vp.get(i);
 				buildingP = buildingp.get(i);
 			}
@@ -81,8 +79,7 @@ public class GoalLumbermanPlantSaplings extends Goal {
 	@Override
 	public boolean isPossibleSpecific(final MillVillager villager) {
 
-		for (final Building grove : villager.getTownHall().getBuildingsWithTag(
-				Building.tagGrove)) {
+		for (final Building grove : villager.getTownHall().getBuildingsWithTag(Building.tagGrove)) {
 			final Point p = grove.getResManager().getPlantingLocation();
 			if (p != null) {
 				return true;
@@ -100,8 +97,7 @@ public class GoalLumbermanPlantSaplings extends Goal {
 	@Override
 	public boolean performAction(final MillVillager villager) {
 
-		final Block block = MillCommonUtilities.getBlock(villager.worldObj,
-				villager.getGoalDestPoint());
+		final Block block = MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint());
 		if (block == Blocks.air || block == Blocks.snow) {
 
 			final int metaStart = MillCommonUtilities.randomInt(4);
@@ -123,8 +119,7 @@ public class GoalLumbermanPlantSaplings extends Goal {
 				chosenMeta = 0;
 			}
 
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),
-					Blocks.sapling, chosenMeta);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(), Blocks.sapling, chosenMeta);
 
 			villager.swingItem();
 
@@ -132,8 +127,7 @@ public class GoalLumbermanPlantSaplings extends Goal {
 				MLN.debug(this, "Planted at: " + villager.getGoalDestPoint());
 			}
 		} else if (MLN.LogLumberman >= MLN.DEBUG && villager.extraLog) {
-			MLN.debug(this,
-					"Failed to plant at: " + villager.getGoalDestPoint());
+			MLN.debug(this, "Failed to plant at: " + villager.getGoalDestPoint());
 		}
 
 		return true;

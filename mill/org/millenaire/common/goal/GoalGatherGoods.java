@@ -12,8 +12,7 @@ public class GoalGatherGoods extends Goal {
 
 	@Override
 	public GoalInformation getDestination(final MillVillager villager) {
-		final EntityItem item = villager.getClosestItemVertical(
-				villager.getGoodsToCollect(), villager.getGatheringRange(), 10);
+		final EntityItem item = villager.getClosestItemVertical(villager.getGoodsToCollect(), villager.getGatheringRange(), 10);
 		if (item == null) {
 			return null;
 		}
@@ -33,8 +32,7 @@ public class GoalGatherGoods extends Goal {
 			return false;
 		}
 
-		final EntityItem item = villager.getClosestItemVertical(
-				villager.getGoodsToCollect(), villager.getGatheringRange(), 10);
+		final EntityItem item = villager.getClosestItemVertical(villager.getGoodsToCollect(), villager.getGatheringRange(), 10);
 		return item != null;
 	}
 
@@ -63,13 +61,10 @@ public class GoalGatherGoods extends Goal {
 		final InvItem[] goods = villager.getGoodsToCollect();
 
 		if (goods != null) {
-			final EntityItem item = MillCommonUtilities.getClosestItemVertical(
-					villager.worldObj, villager.getGoalDestPoint(), goods, 3,
-					20);
+			final EntityItem item = MillCommonUtilities.getClosestItemVertical(villager.worldObj, villager.getGoalDestPoint(), goods, 3, 20);
 			if (item != null) {
 				item.setDead();
-				villager.addToInv(item.getEntityItem().getItem(), item
-						.getEntityItem().getItemDamage(), 1);
+				villager.addToInv(item.getEntityItem().getItem(), item.getEntityItem().getItemDamage(), 1);
 				return true;
 			}
 		}

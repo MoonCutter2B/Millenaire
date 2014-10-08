@@ -18,8 +18,7 @@ public class BlockOrientedSlab extends BlockSlab {
 	public final String textureTopVertName, textureTopHorName, textureSideName;
 	public IIcon textureTopVert, textureTopHor, textureSide;
 
-	public BlockOrientedSlab(final String textureTopVertName,
-			final String textureTopHorName, final String textureSideName) {
+	public BlockOrientedSlab(final String textureTopVertName, final String textureTopHorName, final String textureSideName) {
 		super(false, Material.rock);
 		this.setCreativeTab(Mill.tabMillenaire);
 		setLightOpacity(0);
@@ -83,55 +82,43 @@ public class BlockOrientedSlab extends BlockSlab {
 	 * Called when the block is placed in the world.
 	 */
 	@Override
-	public void onBlockPlacedBy(final World world, final int x, final int y,
-			final int z, final EntityLivingBase par5EntityLiving,
-			final ItemStack par6ItemStack) {
+	public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLivingBase par5EntityLiving, final ItemStack par6ItemStack) {
 
 		if (world.getBlock(x, y - 1, z) == this) {
 
 			final int meta = world.getBlockMetadata(x, y - 1, z);
 
-			MillCommonUtilities.setBlockAndMetadata(world, x, y - 1, z,
-					Mill.byzantine_tiles, meta & 1, true, false);
-			MillCommonUtilities.setBlockAndMetadata(world, x, y, z, Blocks.air,
-					0, true, false);
+			MillCommonUtilities.setBlockAndMetadata(world, x, y - 1, z, Mill.byzantine_tiles, meta & 1, true, false);
+			MillCommonUtilities.setBlockAndMetadata(world, x, y, z, Blocks.air, 0, true, false);
 
 		} else {
 
-			final int var6 = MathHelper
-					.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+			final int var6 = MathHelper.floor_double(par5EntityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
 			final int meta = world.getBlockMetadata(x, y, z);
 
 			if (var6 == 0) {
-				MillCommonUtilities.setBlockMetadata(world, x, y, z, 0 | meta,
-						true);
+				MillCommonUtilities.setBlockMetadata(world, x, y, z, 0 | meta, true);
 			}
 
 			if (var6 == 1) {
-				MillCommonUtilities.setBlockMetadata(world, x, y, z, 1 | meta,
-						true);
+				MillCommonUtilities.setBlockMetadata(world, x, y, z, 1 | meta, true);
 			}
 
 			if (var6 == 2) {
-				MillCommonUtilities.setBlockMetadata(world, x, y, z, 0 | meta,
-						true);
+				MillCommonUtilities.setBlockMetadata(world, x, y, z, 0 | meta, true);
 			}
 
 			if (var6 == 3) {
-				MillCommonUtilities.setBlockMetadata(world, x, y, z, 1 | meta,
-						true);
+				MillCommonUtilities.setBlockMetadata(world, x, y, z, 1 | meta, true);
 			}
 		}
 	}
 
 	@Override
 	public void registerBlockIcons(final IIconRegister iconRegister) {
-		textureTopVert = MillCommonUtilities.getIcon(iconRegister,
-				textureTopVertName);
-		textureTopHor = MillCommonUtilities.getIcon(iconRegister,
-				textureTopHorName);
-		textureSide = MillCommonUtilities
-				.getIcon(iconRegister, textureSideName);
+		textureTopVert = MillCommonUtilities.getIcon(iconRegister, textureTopVertName);
+		textureTopHor = MillCommonUtilities.getIcon(iconRegister, textureTopHorName);
+		textureSide = MillCommonUtilities.getIcon(iconRegister, textureSideName);
 	}
 }

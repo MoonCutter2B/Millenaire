@@ -11,8 +11,7 @@ public class GoalPlantNetherWarts extends Goal {
 
 	@Override
 	public GoalInformation getDestination(final MillVillager villager) {
-		return packDest(villager.getHouse().getResManager()
-				.getNetherWartsPlantingLocation(), villager.getHouse());
+		return packDest(villager.getHouse().getResManager().getNetherWartsPlantingLocation(), villager.getHouse());
 	}
 
 	@Override

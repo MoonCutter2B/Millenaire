@@ -13,35 +13,25 @@ public class PointType {
 		final String[] params = s.split(";", -1);
 
 		if (params.length != 5) {
-			throw new MillenaireException("Line " + s
-					+ " in blocklist.txt does not have five fields.");
+			throw new MillenaireException("Line " + s + " in blocklist.txt does not have five fields.");
 		}
 
 		final String[] rgb = params[4].split("/", -1);
 
 		if (rgb.length != 3) {
-			throw new MillenaireException("Colour in line " + s
-					+ " does not have three values.");
+			throw new MillenaireException("Colour in line " + s + " does not have three values.");
 		}
 
-		final int colour = (Integer.parseInt(rgb[0]) << 16)
-				+ (Integer.parseInt(rgb[1]) << 8)
-				+ (Integer.parseInt(rgb[2]) << 0);
+		final int colour = (Integer.parseInt(rgb[0]) << 16) + (Integer.parseInt(rgb[1]) << 8) + (Integer.parseInt(rgb[2]) << 0);
 
 		if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-			MLN.major(
-					null,
-					"Loading colour point: "
-							+ BuildingPlan.getColourString(colour) + ", "
-							+ params[0]);
+			MLN.major(null, "Loading colour point: " + BuildingPlan.getColourString(colour) + ", " + params[0]);
 		}
 
 		if (params[1].length() == 0) {
 			return new PointType(colour, params[0]);
 		} else {
-			return new PointType(colour, params[1],
-					Integer.parseInt(params[2]),
-					Boolean.parseBoolean(params[3]));
+			return new PointType(colour, params[1], Integer.parseInt(params[2]), Boolean.parseBoolean(params[3]));
 		}
 
 	}
@@ -53,8 +43,7 @@ public class PointType {
 
 	boolean secondStep = false;
 
-	public PointType(final char letter, final Block block, final int meta,
-			final boolean secondStep) {
+	public PointType(final char letter, final Block block, final int meta, final boolean secondStep) {
 		this.letter = letter;
 		this.block = block;
 		this.meta = meta;
@@ -68,8 +57,7 @@ public class PointType {
 		block = null;
 	}
 
-	public PointType(final char letter, final String minecraftBlockName,
-			final int meta, final boolean secondStep) {
+	public PointType(final char letter, final String minecraftBlockName, final int meta, final boolean secondStep) {
 		this.letter = letter;
 		this.block = Block.getBlockFromName(minecraftBlockName);
 		this.meta = meta;
@@ -83,8 +71,7 @@ public class PointType {
 		block = null;
 	}
 
-	public PointType(final int colour, final String minecraftBlockName,
-			final int meta, final boolean secondStep) {
+	public PointType(final int colour, final String minecraftBlockName, final int meta, final boolean secondStep) {
 		this.colour = colour;
 		this.block = Block.getBlockFromName(minecraftBlockName);
 		this.meta = meta;
@@ -109,7 +96,6 @@ public class PointType {
 
 	@Override
 	public String toString() {
-		return name + "/" + colour + "/" + block + "/" + meta + "/"
-				+ MillCommonUtilities.getPointHash(block, meta);
+		return name + "/" + colour + "/" + block + "/" + meta + "/" + MillCommonUtilities.getPointHash(block, meta);
 	}
 }

@@ -13,11 +13,8 @@ import org.millenaire.common.core.MillCommonUtilities;
 public class GoalHuntMonster extends Goal {
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
-		final List<Entity> mobs = MillCommonUtilities.getEntitiesWithinAABB(
-				villager.worldObj, EntityMob.class, villager.getTownHall()
-						.getPos(), 50, 10);
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
+		final List<Entity> mobs = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, EntityMob.class, villager.getTownHall().getPos(), 50, 10);
 
 		if (mobs == null) {
 			return null;
@@ -29,9 +26,7 @@ public class GoalHuntMonster extends Goal {
 		for (final Entity ent : mobs) {
 
 			if (ent instanceof EntityMob) {
-				if (villager.getPos().distanceToSquared(ent) < bestDist
-						&& villager.getTownHall().getAltitude((int) ent.posX,
-								(int) ent.posZ) < ent.posY) {
+				if (villager.getPos().distanceToSquared(ent) < bestDist && villager.getTownHall().getAltitude((int) ent.posX, (int) ent.posZ) < ent.posY) {
 					target = ent;
 					bestDist = (int) villager.getPos().distanceToSquared(ent);
 				}
@@ -56,14 +51,12 @@ public class GoalHuntMonster extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 		return getDestination(villager) != null;
 	}
 
 	@Override
-	public boolean isStillValidSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager) throws Exception {
 
 		if (villager.worldObj.getWorldTime() % 10 == 0) {
 			setVillagerDest(villager);
@@ -74,12 +67,10 @@ public class GoalHuntMonster extends Goal {
 
 	@Override
 	public boolean performAction(final MillVillager villager) throws Exception {
-		final List<Entity> mobs = MillCommonUtilities.getEntitiesWithinAABB(
-				villager.worldObj, EntityMob.class, villager.getPos(), 4, 4);
+		final List<Entity> mobs = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, EntityMob.class, villager.getPos(), 4, 4);
 
 		for (final Entity ent : mobs) {
-			if (!ent.isDead && ent instanceof EntityMob
-					&& villager.canEntityBeSeen(ent)) {
+			if (!ent.isDead && ent instanceof EntityMob && villager.canEntityBeSeen(ent)) {
 				villager.setEntityToAttack(ent);
 				if (MLN.LogGeneralAI >= MLN.MAJOR) {
 					MLN.major(this, "Attacking entity: " + ent);

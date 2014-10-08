@@ -34,15 +34,13 @@ public class CommonGuiHandler implements IGuiHandler {
 	public static final int GUI_CONTROLLEDMILITARYPANEL = 14;
 
 	@Override
-	public Object getClientGuiElement(final int ID, final EntityPlayer player,
-			final World world, final int x, final int y, final int z) {
+	public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
 
 		return null;
 	}
 
 	@Override
-	public Object getServerGuiElement(final int ID, final EntityPlayer player,
-			final World world, final int x, final int y, final int z) {
+	public Object getServerGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
 
 		final MillWorld mw = Mill.getMillWorld(world);
 
@@ -57,8 +55,7 @@ public class CommonGuiHandler implements IGuiHandler {
 			if (building != null) {
 				return new ContainerTrade(player, building);
 			} else {
-				MLN.error(this, "Server-side traiding for unknow building at "
-						+ new Point(x, y, z) + " in world: " + world);
+				MLN.error(this, "Server-side traiding for unknow building at " + new Point(x, y, z) + " in world: " + world);
 			}
 		} else if (ID == GUI_MERCHANT) {
 			final long id = MillCommonUtilities.unpackLong(x, y);

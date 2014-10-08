@@ -37,8 +37,7 @@ public class ClientReceiver {
 	@SubscribeEvent
 	public void onPacketData(final ClientCustomPacketEvent event) {
 
-		if (FMLCommonHandler.instance().getSide().isServer()
-				&& MLN.LogNetwork >= MLN.MAJOR) {
+		if (FMLCommonHandler.instance().getSide().isServer() && MLN.LogNetwork >= MLN.MAJOR) {
 			MLN.major(this, "Received a packet despite being server.");
 			return;
 		}
@@ -49,8 +48,7 @@ public class ClientReceiver {
 		}
 
 		if (event.packet.payload() == null) {
-			MLN.error(this, "Received a packet with null data on channel: "
-					+ event.packet.channel());
+			MLN.error(this, "Received a packet with null data on channel: " + event.packet.channel());
 			return;
 		}
 
@@ -59,8 +57,7 @@ public class ClientReceiver {
 			return;
 		}
 
-		final ByteBufInputStream data = new ByteBufInputStream(
-				event.packet.payload());
+		final ByteBufInputStream data = new ByteBufInputStream(event.packet.payload());
 
 		try {
 			final int packettype = data.read();
@@ -84,8 +81,7 @@ public class ClientReceiver {
 			} else if (packettype == ServerReceiver.PACKET_VILLAGER_SENTENCE) {
 				readVillagerSentencePackage(data);
 			} else if (packettype == ServerReceiver.PACKET_MILLCHEST) {
-				TileEntityMillChest.readUpdatePacket(data,
-						Mill.clientWorld.world);
+				TileEntityMillChest.readUpdatePacket(data, Mill.clientWorld.world);
 			} else if (packettype == ServerReceiver.PACKET_PROFILE) {
 				profile.receiveProfilePacket(data);
 			} else if (packettype == ServerReceiver.PACKET_QUESTINSTANCE) {
@@ -105,8 +101,7 @@ public class ClientReceiver {
 			} else if (packettype == ServerReceiver.PACKET_ANIMALBREED) {
 				readAnimalBreedPacket(data);
 			} else {
-				MLN.error(null, "Received packet with unknown type: "
-						+ packettype);
+				MLN.error(null, "Received packet with unknown type: " + packettype);
 			}
 
 		} catch (final Exception e) {
@@ -120,17 +115,14 @@ public class ClientReceiver {
 			final Point p = StreamReadWrite.readNullablePoint(data);
 			final int endId = data.readInt();
 
-			final List<Entity> animals = MillCommonUtilities
-					.getEntitiesWithinAABB(Mill.clientWorld.world,
-							EntityAnimal.class, p, 5, 5);
+			final List<Entity> animals = MillCommonUtilities.getEntitiesWithinAABB(Mill.clientWorld.world, EntityAnimal.class, p, 5, 5);
 
 			for (final Entity ent : animals) {
 
 				final EntityAnimal animal = (EntityAnimal) ent;
 
 				if (animal.getEntityId() == endId) {
-					ReflectionHelper.setPrivateValue(EntityAnimal.class,
-							animal, 600, 0);
+					ReflectionHelper.setPrivateValue(EntityAnimal.class, animal, 600, 0);
 					MillCommonUtilities.generateHearts(animal);
 				}
 			}
@@ -146,44 +138,34 @@ public class ClientReceiver {
 			final int guiId = data.read();
 
 			if (guiId == CommonGuiHandler.GUI_QUEST) {
-				final MillVillager v = Mill.clientWorld.villagers.get(data
-						.readLong());
+				final MillVillager v = Mill.clientWorld.villagers.get(data.readLong());
 
 				if (v != null) {
-					DisplayActions.displayQuestGUI(
-							Mill.proxy.getTheSinglePlayer(), v);
+					DisplayActions.displayQuestGUI(Mill.proxy.getTheSinglePlayer(), v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ guiId);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + guiId);
 				}
 			} else if (guiId == CommonGuiHandler.GUI_HIRE) {
-				final MillVillager v = Mill.clientWorld.villagers.get(data
-						.readLong());
+				final MillVillager v = Mill.clientWorld.villagers.get(data.readLong());
 
 				if (v != null) {
-					DisplayActions.displayHireGUI(
-							Mill.proxy.getTheSinglePlayer(), v);
+					DisplayActions.displayHireGUI(Mill.proxy.getTheSinglePlayer(), v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ guiId);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + guiId);
 				}
 			} else if (guiId == CommonGuiHandler.GUI_VILLAGECHIEF) {
-				final MillVillager v = Mill.clientWorld.villagers.get(data
-						.readLong());
+				final MillVillager v = Mill.clientWorld.villagers.get(data.readLong());
 
 				if (v != null) {
-					DisplayActions.displayVillageChiefGUI(
-							Mill.proxy.getTheSinglePlayer(), v);
+					DisplayActions.displayVillageChiefGUI(Mill.proxy.getTheSinglePlayer(), v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ guiId);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + guiId);
 				}
 			} else if (guiId == CommonGuiHandler.GUI_VILLAGEBOOK) {
 				final Point p = StreamReadWrite.readNullablePoint(data);
 
 				if (p != null) {
-					DisplayActions.displayVillageBookGUI(
-							Mill.proxy.getTheSinglePlayer(), p);
+					DisplayActions.displayVillageBookGUI(Mill.proxy.getTheSinglePlayer(), p);
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: " + guiId);
 				}
@@ -193,8 +175,7 @@ public class ClientReceiver {
 				if (p != null) {
 					final Building building = Mill.clientWorld.getBuilding(p);
 					if (building != null) {
-						DisplayActions.displayNegationWandGUI(
-								Mill.proxy.getTheSinglePlayer(), building);
+						DisplayActions.displayNegationWandGUI(Mill.proxy.getTheSinglePlayer(), building);
 					}
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: " + guiId);
@@ -204,11 +185,14 @@ public class ClientReceiver {
 				final Point pos = StreamReadWrite.readNullablePoint(data);
 
 				if (thPos != null && pos != null) {
-					final Building building = Mill.clientWorld
-							.getBuilding(thPos);
-					if (building != null) {
-						DisplayActions.displayNewBuildingProjectGUI(
-								Mill.proxy.getTheSinglePlayer(), building, pos);
+					final Building townHall = Mill.clientWorld.getBuilding(thPos);
+					if (townHall != null) {
+						final Building building = townHall.getBuildingAtCoord(pos);
+						if (building == null || !building.location.isCustomBuilding) {
+							DisplayActions.displayNewBuildingProjectGUI(Mill.proxy.getTheSinglePlayer(), townHall, pos);
+						} else {
+							DisplayActions.displayEditCustomBuildingGUI(Mill.proxy.getTheSinglePlayer(), building);
+						}
 					}
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: " + guiId);
@@ -217,8 +201,7 @@ public class ClientReceiver {
 				final Point pos = StreamReadWrite.readNullablePoint(data);
 
 				if (pos != null) {
-					DisplayActions.displayNewVillageGUI(
-							Mill.proxy.getTheSinglePlayer(), pos);
+					DisplayActions.displayNewVillageGUI(Mill.proxy.getTheSinglePlayer(), pos);
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: " + guiId);
 				}
@@ -226,11 +209,9 @@ public class ClientReceiver {
 				final Point thPos = StreamReadWrite.readNullablePoint(data);
 
 				if (thPos != null) {
-					final Building building = Mill.clientWorld
-							.getBuilding(thPos);
+					final Building building = Mill.clientWorld.getBuilding(thPos);
 					if (building != null) {
-						DisplayActions.displayControlledProjectGUI(
-								Mill.proxy.getTheSinglePlayer(), building);
+						DisplayActions.displayControlledProjectGUI(Mill.proxy.getTheSinglePlayer(), building);
 					}
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: " + guiId);
@@ -239,11 +220,9 @@ public class ClientReceiver {
 				final Point thPos = StreamReadWrite.readNullablePoint(data);
 
 				if (thPos != null) {
-					final Building building = Mill.clientWorld
-							.getBuilding(thPos);
+					final Building building = Mill.clientWorld.getBuilding(thPos);
 					if (building != null) {
-						DisplayActions.displayControlledMilitaryGUI(
-								Mill.proxy.getTheSinglePlayer(), building);
+						DisplayActions.displayControlledMilitaryGUI(Mill.proxy.getTheSinglePlayer(), building);
 					}
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: " + guiId);
@@ -252,8 +231,7 @@ public class ClientReceiver {
 				final Point p = StreamReadWrite.readNullablePoint(data);
 
 				if (p != null) {
-					MillClientUtilities.displayPanel(Mill.clientWorld.world,
-							Mill.proxy.getTheSinglePlayer(), p);
+					MillClientUtilities.displayPanel(Mill.clientWorld.world, Mill.proxy.getTheSinglePlayer(), p);
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: " + guiId);
 				}
@@ -261,29 +239,21 @@ public class ClientReceiver {
 				final Point p = StreamReadWrite.readNullablePoint(data);
 
 				if (p != null) {
-					Mill.proxy.getTheSinglePlayer().openGui(Mill.instance,
-							CommonGuiHandler.GUI_TRADE, Mill.clientWorld.world,
-							p.getiX(), p.getiY(), p.getiZ());
+					Mill.proxy.getTheSinglePlayer().openGui(Mill.instance, CommonGuiHandler.GUI_TRADE, Mill.clientWorld.world, p.getiX(), p.getiY(), p.getiZ());
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: " + guiId);
 				}
 			} else if (guiId == CommonGuiHandler.GUI_MERCHANT) {
 				final int id1 = data.readInt();
 				final int id2 = data.readInt();
-				Mill.proxy.getTheSinglePlayer().openGui(Mill.instance,
-						CommonGuiHandler.GUI_MERCHANT, Mill.clientWorld.world,
-						id1, id2, 0);
+				Mill.proxy.getTheSinglePlayer().openGui(Mill.instance, CommonGuiHandler.GUI_MERCHANT, Mill.clientWorld.world, id1, id2, 0);
 			} else if (guiId == CommonGuiHandler.GUI_MILL_CHEST) {
 				final Point p = StreamReadWrite.readNullablePoint(data);
 
 				if (p != null) {
-					final TileEntityMillChest chest = p
-							.getMillChest(Mill.clientWorld.world);
+					final TileEntityMillChest chest = p.getMillChest(Mill.clientWorld.world);
 					if (chest != null && chest.loaded) {
-						Mill.proxy.getTheSinglePlayer().openGui(Mill.instance,
-								CommonGuiHandler.GUI_MILL_CHEST,
-								Mill.clientWorld.world, p.getiX(), p.getiY(),
-								p.getiZ());
+						Mill.proxy.getTheSinglePlayer().openGui(Mill.instance, CommonGuiHandler.GUI_MILL_CHEST, Mill.clientWorld.world, p.getiX(), p.getiY(), p.getiZ());
 					}
 				} else {
 					MLN.error(this, "Unknown point in readGUIPacket: " + guiId);
@@ -323,14 +293,12 @@ public class ClientReceiver {
 			final String[] values = new String[data.read()];
 
 			for (int i = 0; i < values.length; i++) {
-				values[i] = MLN.unknownString(StreamReadWrite
-						.readNullableString(data));
+				values[i] = MLN.unknownString(StreamReadWrite.readNullableString(data));
 			}
 
 			s = MLN.string(s, values);
 
-			Mill.proxy
-					.sendLocalChat(Mill.proxy.getTheSinglePlayer(), colour, s);
+			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(), colour, s);
 		} catch (final IOException e) {
 			MLN.printException(e);
 		}
@@ -339,8 +307,7 @@ public class ClientReceiver {
 	private void readVillagerSentencePackage(final ByteBufInputStream data) {
 		try {
 
-			final MillVillager v = Mill.clientWorld.villagers.get(data
-					.readLong());
+			final MillVillager v = Mill.clientWorld.villagers.get(data.readLong());
 
 			if (v != null) {
 				MillClientUtilities.putVillagerSentenceInChat(v);

@@ -22,48 +22,40 @@ public class BlockPanel extends BlockSign {
 	}
 
 	@Override
-	public int getFireSpreadSpeed(final IBlockAccess world, final int x,
-			final int y, final int z, final ForgeDirection face) {
+	public int getFireSpreadSpeed(final IBlockAccess world, final int x, final int y, final int z, final ForgeDirection face) {
 		return 60;
 	}
 
 	@Override
-	public int getFlammability(final IBlockAccess world, final int x,
-			final int y, final int z, final ForgeDirection face) {
+	public int getFlammability(final IBlockAccess world, final int x, final int y, final int z, final ForgeDirection face) {
 		return 200;
 	}
 
 	@Override
-	public boolean onBlockActivated(final World world, final int i,
-			final int j, final int k, final EntityPlayer entityplayer,
-			final int par6, final float par7, final float par8, final float par9) {
+	public boolean onBlockActivated(final World world, final int i, final int j, final int k, final EntityPlayer entityplayer, final int par6, final float par7, final float par8, final float par9) {
 
 		if (world.isRemote) {
 			return true;
 		}
 
-		final TileEntityPanel panel = (TileEntityPanel) world.getTileEntity(i,
-				j, k);
+		final TileEntityPanel panel = (TileEntityPanel) world.getTileEntity(i, j, k);
 
 		if (panel == null || panel.panelType == 0) {
 			return false;
 		}
 
-		final Building building = Mill.getMillWorld(world).getBuilding(
-				panel.buildingPos);
+		final Building building = Mill.getMillWorld(world).getBuilding(panel.buildingPos);
 
 		if (building == null) {
 			return false;
 		}
 
-		if (panel.panelType == TileEntityPanel.controlledProjects
-				&& building.controlledBy(entityplayer.getDisplayName())) {
+		if (panel.panelType == TileEntityPanel.controlledProjects && building.controlledBy(entityplayer.getDisplayName())) {
 			ServerSender.displayControlledProjectGUI(entityplayer, building);
 			return true;
 		}
 
-		if (panel.panelType == TileEntityPanel.controlledMilitary
-				&& building.controlledBy(entityplayer.getDisplayName())) {
+		if (panel.panelType == TileEntityPanel.controlledMilitary && building.controlledBy(entityplayer.getDisplayName())) {
 			ServerSender.displayControlledMilitaryGUI(entityplayer, building);
 			return true;
 		}

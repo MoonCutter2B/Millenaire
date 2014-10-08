@@ -20,15 +20,13 @@ public class GoalClearOldPath extends Goal {
 
 	@Override
 	public int actionDuration(final MillVillager villager) {
-		final int toolEfficiency = (int) villager.getBestShovel().getDigSpeed(
-				new ItemStack(villager.getBestShovel(), 1), Blocks.dirt, 0);
+		final int toolEfficiency = (int) villager.getBestShovel().getDigSpeed(new ItemStack(villager.getBestShovel(), 1), Blocks.dirt, 0);
 
 		return 100 - toolEfficiency * 5;
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
 		final Point p = villager.getTownHall().getCurrentClearPathPoint();
 
@@ -51,13 +49,11 @@ public class GoalClearOldPath extends Goal {
 
 	@Override
 	public boolean isPossibleSpecific(final MillVillager villager) {
-		return MLN.BuildVillagePaths
-				&& villager.getTownHall().getCurrentClearPathPoint() != null;
+		return MLN.BuildVillagePaths && villager.getTownHall().getCurrentClearPathPoint() != null;
 	}
 
 	@Override
-	public boolean isStillValidSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager) throws Exception {
 		return villager.getTownHall().getCurrentClearPathPoint() != null;
 	}
 
@@ -87,12 +83,9 @@ public class GoalClearOldPath extends Goal {
 				p.setBlock(villager.worldObj, Blocks.air, 0, true, false);
 			} else if (block == Mill.path) {
 
-				final Block blockBelow = p.getBelow().getBlock(
-						villager.worldObj);
+				final Block blockBelow = p.getBelow().getBlock(villager.worldObj);
 				if (MillCommonUtilities.getBlockIdValidGround(blockBelow, true) != null) {
-					p.setBlock(villager.worldObj, MillCommonUtilities
-							.getBlockIdValidGround(blockBelow, true), 0, true,
-							false);
+					p.setBlock(villager.worldObj, MillCommonUtilities.getBlockIdValidGround(blockBelow, true), 0, true, false);
 				} else {
 					p.setBlock(villager.worldObj, Blocks.dirt, 0, true, false);
 				}
@@ -129,8 +122,7 @@ public class GoalClearOldPath extends Goal {
 	}
 
 	@Override
-	public boolean unreachableDestination(final MillVillager villager)
-			throws Exception {
+	public boolean unreachableDestination(final MillVillager villager) throws Exception {
 
 		performAction(villager);
 

@@ -26,18 +26,13 @@ public class AStarConfig {
 	// along the y axis:
 	public int toleranceVertical = 0;
 
-	public AStarConfig(final boolean canUseDoors,
-			final boolean makePathDiagonals, final boolean allowDropping,
-			final boolean canSwim) {
+	public AStarConfig(final boolean canUseDoors, final boolean makePathDiagonals, final boolean allowDropping, final boolean canSwim) {
 		this.canUseDoors = canUseDoors;
 		this.canTakeDiagonals = makePathDiagonals;
 		this.allowDropping = allowDropping;
 	}
 
-	public AStarConfig(final boolean canUseDoors,
-			final boolean makePathDiagonals, final boolean allowDropping,
-			final boolean canSwim, final int toleranceHorizontal,
-			final int toleranceVertical) {
+	public AStarConfig(final boolean canUseDoors, final boolean makePathDiagonals, final boolean allowDropping, final boolean canSwim, final int toleranceHorizontal, final int toleranceVertical) {
 		this.canUseDoors = canUseDoors;
 		this.canTakeDiagonals = makePathDiagonals;
 		this.allowDropping = allowDropping;

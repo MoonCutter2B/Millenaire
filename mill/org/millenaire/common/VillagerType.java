@@ -46,8 +46,7 @@ public class VillagerType implements WeightedChoice {
 
 	public static VillagerType loadVillagerType(final File file, final Culture c) {
 
-		final VillagerType v = new VillagerType(c,
-				file.getName().split("\\.")[0]);
+		final VillagerType v = new VillagerType(c, file.getName().split("\\.")[0]);
 
 		try {
 			final BufferedReader reader = MillCommonUtilities.getReader(file);
@@ -64,9 +63,7 @@ public class VillagerType implements WeightedChoice {
 				if (line.trim().length() > 0 && !line.startsWith("//")) {
 					final String[] temp = line.split("=");
 					if (temp.length != 2) {
-						MLN.error(null,
-								"Invalid line when loading villager type "
-										+ file.getName() + ": " + line);
+						MLN.error(null, "Invalid line when loading villager type " + file.getName() + ": " + line);
 					} else {
 
 						final String key = temp[0].toLowerCase();
@@ -83,76 +80,46 @@ public class VillagerType implements WeightedChoice {
 							if (Goal.goals.containsKey(value.toLowerCase())) {
 								goals.add(Goal.goals.get(value.toLowerCase()));
 							} else {
-								MLN.error(
-										null,
-										"Unknown goal found when loading villager type "
-												+ file.getName() + ": " + value
-												+ " amoung "
-												+ Goal.goals.size());
+								MLN.error(null, "Unknown goal found when loading villager type " + file.getName() + ": " + value + " amoung " + Goal.goals.size());
 							}
 						} else if (key.equals("texture")) {
 							textures.add(value);
 						} else if (key.equals("requiredgood")) {
 
-							if (Goods.goodsName.containsKey(value.split(",")[0]
-									.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.split(",")[0].toLowerCase());
-								v.requiredGoods.put(iv,
-										Integer.parseInt(value.split(",")[1]));
-								v.requiredFoodAndGoods.put(iv,
-										Integer.parseInt(value.split(",")[1]));
+							if (Goods.goodsName.containsKey(value.split(",")[0].toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.split(",")[0].toLowerCase());
+								v.requiredGoods.put(iv, Integer.parseInt(value.split(",")[1]));
+								v.requiredFoodAndGoods.put(iv, Integer.parseInt(value.split(",")[1]));
 							} else {
-								MLN.error(null,
-										"Unknown required good found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown required good found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("requiredfood")) {
-							if (Goods.goodsName.containsKey(value.split(",")[0]
-									.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.split(",")[0].toLowerCase());
-								v.requiredFoodAndGoods.put(iv,
-										Integer.parseInt(value.split(",")[1]));
+							if (Goods.goodsName.containsKey(value.split(",")[0].toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.split(",")[0].toLowerCase());
+								v.requiredFoodAndGoods.put(iv, Integer.parseInt(value.split(",")[1]));
 							} else {
-								MLN.error(null,
-										"Unknown required good found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown required good found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("startinginv")) {
-							if (Goods.goodsName.containsKey(value.split(",")[0]
-									.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.split(",")[0].toLowerCase());
-								v.startingInv.put(iv,
-										Integer.parseInt(value.split(",")[1]));
+							if (Goods.goodsName.containsKey(value.split(",")[0].toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.split(",")[0].toLowerCase());
+								v.startingInv.put(iv, Integer.parseInt(value.split(",")[1]));
 							} else {
-								MLN.error(null,
-										"Unknown starting inv found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown starting inv found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("merchantstock")) {
-							if (Goods.goodsName.containsKey(value.split(",")[0]
-									.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.split(",")[0].toLowerCase());
-								v.foreignMerchantStock.put(iv,
-										Integer.parseInt(value.split(",")[1]));
+							if (Goods.goodsName.containsKey(value.split(",")[0].toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.split(",")[0].toLowerCase());
+								v.foreignMerchantStock.put(iv, Integer.parseInt(value.split(",")[1]));
 							} else {
-								MLN.error(null,
-										"Unknown merchantstock found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown merchantstock found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("toolneeded")) {
-							if (Goods.goodsName
-									.containsKey(value.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.toLowerCase());
+							if (Goods.goodsName.containsKey(value.toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.toLowerCase());
 								toolsNeeded.add(iv);
 							} else {
-								MLN.error(null,
-										"Unknown tool needed found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown tool needed found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("toolneededclass")) {
 							if (value.equalsIgnoreCase("meleeweapons")) {
@@ -193,42 +160,28 @@ public class VillagerType implements WeightedChoice {
 									toolsNeeded.add(new InvItem(item, 0));
 								}
 							} else {
-								MLN.error(null,
-										"Unknown tool class found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown tool class found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("defaultweapon")) {
-							if (Goods.goodsName
-									.containsKey(value.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.toLowerCase());
+							if (Goods.goodsName.containsKey(value.toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.toLowerCase());
 								v.startingWeapon = iv;
 							} else {
-								MLN.error(null,
-										"Unknown default weapon found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown default weapon found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("bringbackhomegood")) {
-							if (Goods.goodsName
-									.containsKey(value.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.toLowerCase());
+							if (Goods.goodsName.containsKey(value.toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.toLowerCase());
 								bringBackHomeGoods.add(iv);
 							} else {
-								MLN.error(null,
-										"Unknown bring back home good found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown bring back home good found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("collectgood")) {
-							if (Goods.goodsName
-									.containsKey(value.toLowerCase())) {
-								final InvItem iv = Goods.goodsName.get(value
-										.toLowerCase());
+							if (Goods.goodsName.containsKey(value.toLowerCase())) {
+								final InvItem iv = Goods.goodsName.get(value.toLowerCase());
 								collectGoods.add(iv);
 							} else {
-								MLN.error(null,
-										"Unknown collect good found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown collect good found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("gender")) {
 							if (value.equals("male")) {
@@ -236,9 +189,7 @@ public class VillagerType implements WeightedChoice {
 							} else if (value.equals("female")) {
 								v.gender = MillVillager.FEMALE;
 							} else {
-								MLN.error(null,
-										"Unknown gender found when loading villager type "
-												+ file.getName() + ": " + value);
+								MLN.error(null, "Unknown gender found when loading villager type " + file.getName() + ": " + value);
 							}
 						} else if (key.equals("baseattackstrength")) {
 							v.baseAttackStrength = Integer.parseInt(value);
@@ -264,24 +215,20 @@ public class VillagerType implements WeightedChoice {
 							v.chanceWeight = Integer.parseInt(value);
 						} else if (key.equals("clothes")) {
 							if (value.split(",").length < 2) {
-								MLN.error(null,
-										"Two values are required for all clothes tag (cloth name, then texture file).");
+								MLN.error(null, "Two values are required for all clothes tag (cloth name, then texture file).");
 							} else {
 								final String clothname = value.split(",")[0];
 								final String textpath = value.split(",")[1];
 
 								if (!v.clothes.containsKey(clothname)) {
-									v.clothes.put(clothname,
-											new ArrayList<String>());
+									v.clothes.put(clothname, new ArrayList<String>());
 								}
 
 								v.clothes.get(clothname).add(textpath);
 							}
 
 						} else {
-							MLN.error(null,
-									"Could not understand parameter when loading villager type "
-											+ file.getName() + ": " + line);
+							MLN.error(null, "Could not understand parameter when loading villager type " + file.getName() + ": " + line);
 						}
 					}
 				}
@@ -352,20 +299,15 @@ public class VillagerType implements WeightedChoice {
 			for (final InvItem item : v.foreignMerchantStock.keySet()) {
 
 				if (!c.goodsByItem.containsKey(item)) {
-					MLN.warning(v,
-							"Starting inv of foreign merchant countains non-tradeable good: "
-									+ item);
+					MLN.warning(v, "Starting inv of foreign merchant countains non-tradeable good: " + item);
 				} else if (c.goodsByItem.get(item).foreignMerchantPrice < 1) {
-					MLN.warning(v,
-							"Starting inv of foreign merchant countains good with null tradeable price: "
-									+ item);
+					MLN.warning(v, "Starting inv of foreign merchant countains good with null tradeable price: " + item);
 				}
 
 			}
 
 			if (MLN.LogVillager >= MLN.MAJOR) {
-				MLN.major(v, "Loaded villager type: " + v.key + " "
-						+ v.helpInAttacks);
+				MLN.major(v, "Loaded villager type: " + v.key + " " + v.helpInAttacks);
 			}
 
 			return v;
@@ -458,9 +400,7 @@ public class VillagerType implements WeightedChoice {
 
 	public String getRandomClothTexture(final String clothType) {
 		if (clothes.containsKey(clothType)) {
-			return clothes.get(clothType).get(
-					MillCommonUtilities
-							.randomInt(clothes.get(clothType).size()));
+			return clothes.get(clothType).get(MillCommonUtilities.randomInt(clothes.get(clothType).size()));
 		}
 		return null;
 	}
@@ -498,8 +438,7 @@ public class VillagerType implements WeightedChoice {
 		return false;
 	}
 
-	public void readVillagerTypeInfoPacket(final ByteBufInputStream ds)
-			throws IOException {
+	public void readVillagerTypeInfoPacket(final ByteBufInputStream ds) throws IOException {
 		name = StreamReadWrite.readNullableString(ds);
 		altkey = StreamReadWrite.readNullableString(ds);
 		altname = StreamReadWrite.readNullableString(ds);

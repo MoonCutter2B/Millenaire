@@ -22,8 +22,7 @@ public class GuiNewBuildingProject extends GuiText {
 		private final String key;
 		private final boolean custom;
 
-		public GuiButtonNewBuilding(final String key, final String label,
-				final boolean custom) {
+		public GuiButtonNewBuilding(final String key, final String label, final boolean custom) {
 			super(0, 0, 0, 0, 0, label);
 			this.key = key;
 			this.custom = custom;
@@ -34,16 +33,13 @@ public class GuiNewBuildingProject extends GuiText {
 	private final Point pos;
 	private final EntityPlayer player;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_panel.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_panel.png");
 
-	public GuiNewBuildingProject(final EntityPlayer player, final Building th,
-			final Point p) {
+	public GuiNewBuildingProject(final EntityPlayer player, final Building th, final Point p) {
 
 		townHall = th;
 		pos = p;
 		this.player = player;
-
 	}
 
 	@Override
@@ -60,12 +56,10 @@ public class GuiNewBuildingProject extends GuiText {
 
 			closeWindow();
 
-			final BuildingCustomPlan customBuilding = townHall.culture
-					.getBuildingCustom(button.key);
+			final BuildingCustomPlan customBuilding = townHall.culture.getBuildingCustom(button.key);
 
 			if (customBuilding != null) {
-				DisplayActions.displayNewCustomBuildingGUI(player, townHall,
-						pos, customBuilding);
+				DisplayActions.displayNewCustomBuildingGUI(player, townHall, pos, customBuilding);
 			}
 		}
 
@@ -132,9 +126,7 @@ public class GuiNewBuildingProject extends GuiText {
 		text.add(new Line(MLN.string("ui.selectabuildingproject_custom")));
 
 		for (final BuildingCustomPlan customBuilding : townHall.villageType.customBuildings) {
-			text.add(new Line(new GuiButtonNewBuilding(
-					customBuilding.buildingKey, customBuilding
-							.getFullDisplayName(), true)));
+			text.add(new Line(new GuiButtonNewBuilding(customBuilding.buildingKey, customBuilding.getFullDisplayName(), true)));
 			text.add(new Line(false));
 			text.add(new Line());
 		}
@@ -147,8 +139,7 @@ public class GuiNewBuildingProject extends GuiText {
 
 		for (final BuildingPlanSet planSet : townHall.villageType.coreBuildings) {
 			if (townHall.isValidProject(planSet.getBuildingProject())) {
-				text.add(new Line(new GuiButtonNewBuilding(planSet.key, planSet
-						.getFullName(player), false)));
+				text.add(new Line(new GuiButtonNewBuilding(planSet.key, planSet.getFullName(player), false)));
 				text.add(new Line(false));
 				text.add(new Line());
 			}

@@ -31,10 +31,8 @@ public class GuiPujas extends GuiContainer {
 	private final EntityPlayer player;
 	private final Method drawSlotInventory;
 
-	private static final ResourceLocation texturePujas = new ResourceLocation(
-			Mill.modId, "textures/gui/ML_pujas.png");
-	private static final ResourceLocation textureSacrifices = new ResourceLocation(
-			Mill.modId, "textures/gui/ML_mayansacrifices.png");
+	private static final ResourceLocation texturePujas = new ResourceLocation(Mill.modId, "textures/gui/ML_pujas.png");
+	private static final ResourceLocation textureSacrifices = new ResourceLocation(Mill.modId, "textures/gui/ML_mayansacrifices.png");
 
 	public GuiPujas(final EntityPlayer player, final Building temple) {
 		super(new ContainerPuja(player, temple));
@@ -48,15 +46,13 @@ public class GuiPujas extends GuiContainer {
 			MLN.debug(this, "Opening shrine GUI");
 		}
 
-		drawSlotInventory = MillCommonUtilities
-				.getDrawSlotInventoryMethod(this);
+		drawSlotInventory = MillCommonUtilities.getDrawSlotInventoryMethod(this);
 	}
 
 	/*
 	 * Method extracted from code in GuiContainer, MC 1.2.5
 	 */
-	public void displayItemOverlay(final ItemStack stack,
-			final List<String> list, final int posx, final int posy) {
+	public void displayItemOverlay(final ItemStack stack, final List<String> list, final int posx, final int posy) {
 		if (list != null && list.size() > 0) {
 			int l1 = 0;
 
@@ -81,34 +77,25 @@ public class GuiPujas extends GuiContainer {
 			itemRender.zLevel = 300F;
 			final int k3 = 0xf0100010;
 			drawGradientRect(j2 - 3, l2 - 4, j2 + i3 + 3, l2 - 3, k3, k3);
-			drawGradientRect(j2 - 3, l2 + j3 + 3, j2 + i3 + 3, l2 + j3 + 4, k3,
-					k3);
+			drawGradientRect(j2 - 3, l2 + j3 + 3, j2 + i3 + 3, l2 + j3 + 4, k3, k3);
 			drawGradientRect(j2 - 3, l2 - 3, j2 + i3 + 3, l2 + j3 + 3, k3, k3);
 			drawGradientRect(j2 - 4, l2 - 3, j2 - 3, l2 + j3 + 3, k3, k3);
-			drawGradientRect(j2 + i3 + 3, l2 - 3, j2 + i3 + 4, l2 + j3 + 3, k3,
-					k3);
+			drawGradientRect(j2 + i3 + 3, l2 - 3, j2 + i3 + 4, l2 + j3 + 3, k3, k3);
 			final int l3 = 0x505000ff;
 			final int i4 = (l3 & 0xfefefe) >> 1 | l3 & 0xff000000;
-			drawGradientRect(j2 - 3, l2 - 3 + 1, j2 - 3 + 1, l2 + j3 + 3 - 1,
-					l3, i4);
-			drawGradientRect(j2 + i3 + 2, l2 - 3 + 1, j2 + i3 + 3, l2 + j3 + 3
-					- 1, l3, i4);
+			drawGradientRect(j2 - 3, l2 - 3 + 1, j2 - 3 + 1, l2 + j3 + 3 - 1, l3, i4);
+			drawGradientRect(j2 + i3 + 2, l2 - 3 + 1, j2 + i3 + 3, l2 + j3 + 3 - 1, l3, i4);
 			drawGradientRect(j2 - 3, l2 - 3, j2 + i3 + 3, l2 - 3 + 1, l3, l3);
-			drawGradientRect(j2 - 3, l2 + j3 + 2, j2 + i3 + 3, l2 + j3 + 3, i4,
-					i4);
+			drawGradientRect(j2 - 3, l2 + j3 + 2, j2 + i3 + 3, l2 + j3 + 3, i4, i4);
 
 			for (int j4 = 0; j4 < list.size(); j4++) {
 				String s = list.get(j4);
 
 				if (j4 == 0 && stack != null) {
-					s = new StringBuilder()
-							.append("\247")
-							.append(Integer.toHexString(stack.getRarity().rarityColor
-									.getFormattingCode())).append(s).toString();
+					s = new StringBuilder().append("\247").append(Integer.toHexString(stack.getRarity().rarityColor.getFormattingCode())).append(s).toString();
 
 				} else {
-					s = new StringBuilder().append("\2477").append(s)
-							.toString();
+					s = new StringBuilder().append("\2477").append(s).toString();
 				}
 
 				fontRendererObj.drawStringWithShadow(s, j2, l2, -1);
@@ -130,13 +117,11 @@ public class GuiPujas extends GuiContainer {
 	 * items)
 	 */
 	@Override
-	protected void drawGuiContainerBackgroundLayer(final float par1,
-			final int par2, final int par3) {
+	protected void drawGuiContainerBackgroundLayer(final float par1, final int par2, final int par3) {
 
 		try {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			if (temple.pujas != null
-					&& temple.pujas.type == PujaSacrifice.MAYAN) {
+			if (temple.pujas != null && temple.pujas.type == PujaSacrifice.MAYAN) {
 				mc.renderEngine.bindTexture(textureSacrifices);
 			} else {
 				mc.renderEngine.bindTexture(texturePujas);
@@ -151,21 +136,12 @@ public class GuiPujas extends GuiContainer {
 				int colPos = 0;
 
 				for (int cp = 0; cp < temple.pujas.getTargets().size(); cp++) {
-					if (temple.pujas.currentTarget == temple.pujas.getTargets()
-							.get(cp)) {
-						drawTexturedModalRect(j + getTargetXStart() + colPos
-								* getButtonWidth(), k + getTargetYStart()
-								+ getButtonHeight() * linePos, temple.pujas
-								.getTargets().get(cp).startXact, temple.pujas
-								.getTargets().get(cp).startYact,
-								getButtonWidth(), getButtonHeight());
+					if (temple.pujas.currentTarget == temple.pujas.getTargets().get(cp)) {
+						drawTexturedModalRect(j + getTargetXStart() + colPos * getButtonWidth(), k + getTargetYStart() + getButtonHeight() * linePos, temple.pujas.getTargets().get(cp).startXact,
+								temple.pujas.getTargets().get(cp).startYact, getButtonWidth(), getButtonHeight());
 					} else {
-						drawTexturedModalRect(j + getTargetXStart() + colPos
-								* getButtonWidth(), k + getTargetYStart()
-								+ getButtonHeight() * linePos, temple.pujas
-								.getTargets().get(cp).startX, temple.pujas
-								.getTargets().get(cp).startY, getButtonWidth(),
-								getButtonHeight());
+						drawTexturedModalRect(j + getTargetXStart() + colPos * getButtonWidth(), k + getTargetYStart() + getButtonHeight() * linePos, temple.pujas.getTargets().get(cp).startX,
+								temple.pujas.getTargets().get(cp).startY, getButtonWidth(), getButtonHeight());
 					}
 
 					colPos++;
@@ -177,12 +153,10 @@ public class GuiPujas extends GuiContainer {
 
 				}
 				int progress = temple.pujas.getPujaProgressScaled(13);
-				drawTexturedModalRect(j + 27, k + 39 + 13 - progress, 176,
-						13 - progress, 15, progress);
+				drawTexturedModalRect(j + 27, k + 39 + 13 - progress, 176, 13 - progress, 15, progress);
 
 				progress = temple.pujas.getOfferingProgressScaled(16);
-				drawTexturedModalRect(j + 84, k + 63 + 16 - progress, 176,
-						31 + 16 - progress, 19, progress);
+				drawTexturedModalRect(j + 84, k + 63 + 16 - progress, 176, 31 + 16 - progress, 19, progress);
 			}
 		} catch (final Exception e) {
 			MLN.printException("Exception in drawScreen: ", e);
@@ -194,23 +168,16 @@ public class GuiPujas extends GuiContainer {
 	 * the items)
 	 */
 	@Override
-	protected void drawGuiContainerForegroundLayer(final int par1,
-			final int par2) {
+	protected void drawGuiContainerForegroundLayer(final int par1, final int par2) {
 		if (temple.pujas.type == PujaSacrifice.MAYAN) {
-			fontRendererObj.drawString(MLN.string("sacrifices.offering"), 8, 6,
-					0x404040);
-			fontRendererObj.drawString(MLN.string("sacrifices.panditfee"), 8,
-					75, 0x404040);
+			fontRendererObj.drawString(MLN.string("sacrifices.offering"), 8, 6, 0x404040);
+			fontRendererObj.drawString(MLN.string("sacrifices.panditfee"), 8, 75, 0x404040);
 		} else {
-			fontRendererObj.drawString(MLN.string("pujas.offering"), 8, 6,
-					0x404040);
-			fontRendererObj.drawString(MLN.string("pujas.panditfee"), 8, 75,
-					0x404040);
+			fontRendererObj.drawString(MLN.string("pujas.offering"), 8, 6, 0x404040);
+			fontRendererObj.drawString(MLN.string("pujas.panditfee"), 8, 75, 0x404040);
 		}
 
-		fontRendererObj.drawString(
-				StatCollector.translateToLocal("container.inventory"), 8,
-				ySize - 104 + 2, 0x404040);
+		fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 104 + 2, 0x404040);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -241,8 +208,7 @@ public class GuiPujas extends GuiContainer {
 				GL11.glDisable(2929 /* GL_DEPTH_TEST */);
 				final int j1 = slot1.xDisplayPosition;
 				final int l1 = slot1.yDisplayPosition;
-				drawGradientRect(j1, l1, j1 + 16, l1 + 16, 0x80ffffff,
-						0x80ffffff);
+				drawGradientRect(j1, l1, j1 + 16, l1 + 16, 0x80ffffff, 0x80ffffff);
 				GL11.glEnable(2896 /* GL_LIGHTING */);
 				GL11.glEnable(2929 /* GL_DEPTH_TEST */);
 			}
@@ -251,11 +217,8 @@ public class GuiPujas extends GuiContainer {
 		final InventoryPlayer inventoryplayer = mc.thePlayer.inventory;
 		if (inventoryplayer.getItemStack() != null) {
 			GL11.glTranslatef(0.0F, 0.0F, 32F);
-			itemRender.renderItemIntoGUI(fontRendererObj, mc.renderEngine,
-					inventoryplayer.getItemStack(), x - k - 8, y - l - 8);
-			itemRender.renderItemOverlayIntoGUI(fontRendererObj,
-					mc.renderEngine, inventoryplayer.getItemStack(), x - k - 8,
-					y - l - 8);
+			itemRender.renderItemIntoGUI(fontRendererObj, mc.renderEngine, inventoryplayer.getItemStack(), x - k - 8, y - l - 8);
+			itemRender.renderItemOverlayIntoGUI(fontRendererObj, mc.renderEngine, inventoryplayer.getItemStack(), x - k - 8, y - l - 8);
 		}
 		GL11.glDisable(32826 /* GL_RESCALE_NORMAL_EXT */);
 		RenderHelper.disableStandardItemLighting();
@@ -268,8 +231,7 @@ public class GuiPujas extends GuiContainer {
 
 			if (slot.getHasStack()) {
 				itemstack = slot.getStack();
-				list = itemstack.getTooltip(this.mc.thePlayer,
-						this.mc.gameSettings.advancedItemTooltips);
+				list = itemstack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
 			} else if (slot instanceof OfferingSlot) {
 				list = new ArrayList<String>();
 				list.add("\2476" + MLN.string("pujas.offeringslot"));
@@ -296,22 +258,13 @@ public class GuiPujas extends GuiContainer {
 
 			for (int cp = 0; cp < temple.pujas.getTargets().size(); cp++) {
 
-				if (x > startx + getTargetXStart() + colPos * getButtonWidth()
-						&& x < startx + getTargetXStart() + (colPos + 1)
-								* getButtonWidth()
-						&& y > starty + getTargetYStart() + getButtonHeight()
-								* linePos
-						&& y < starty + getTargetYStart() + getButtonHeight()
-								* (linePos + 1)) {
-					final String s = MLN.string(temple.pujas.getTargets().get(
-							cp).mouseOver);
+				if (x > startx + getTargetXStart() + colPos * getButtonWidth() && x < startx + getTargetXStart() + (colPos + 1) * getButtonWidth()
+						&& y > starty + getTargetYStart() + getButtonHeight() * linePos && y < starty + getTargetYStart() + getButtonHeight() * (linePos + 1)) {
+					final String s = MLN.string(temple.pujas.getTargets().get(cp).mouseOver);
 					final int stringlength = fontRendererObj.getStringWidth(s);
 
-					drawGradientRect(x - startx + 5, y - starty - 3, x - startx
-							+ stringlength + 3, y - starty + 8 + 3, 0xc0000000,
-							0xc0000000);
-					fontRendererObj.drawString(s, x + 8 - startx, y - starty,
-							0xA0A0A0);
+					drawGradientRect(x - startx + 5, y - starty - 3, x - startx + stringlength + 3, y - starty + 8 + 3, 0xc0000000, 0xc0000000);
+					fontRendererObj.drawString(s, x + 8 - startx, y - starty, 0xA0A0A0);
 				}
 
 				colPos++;
@@ -347,8 +300,7 @@ public class GuiPujas extends GuiContainer {
 		try {
 			drawSlotInventory.invoke(this, slot);
 		} catch (final Exception e) {
-			MLN.printException(
-					"Exception when trying to access drawSlotInventory", e);
+			MLN.printException("Exception when trying to access drawSlotInventory", e);
 		}
 	}
 
@@ -389,10 +341,7 @@ public class GuiPujas extends GuiContainer {
 		final int l = (height - ySize) / 2;
 		i -= k;
 		j -= l;
-		return i >= slot.xDisplayPosition - 1
-				&& i < slot.xDisplayPosition + 16 + 1
-				&& j >= slot.yDisplayPosition - 1
-				&& j < slot.yDisplayPosition + 16 + 1;
+		return i >= slot.xDisplayPosition - 1 && i < slot.xDisplayPosition + 16 + 1 && j >= slot.yDisplayPosition - 1 && j < slot.yDisplayPosition + 16 + 1;
 	}
 
 	private int getNbPerLines() {
@@ -458,13 +407,8 @@ public class GuiPujas extends GuiContainer {
 
 			for (int cp = 0; cp < temple.pujas.getTargets().size(); cp++) {
 
-				if (x > startx + getTargetXStart() + colPos * getButtonWidth()
-						&& x < startx + getTargetXStart() + (colPos + 1)
-								* getButtonWidth()
-						&& y > starty + getTargetYStart() + getButtonHeight()
-								* linePos
-						&& y < starty + getTargetYStart() + getButtonHeight()
-								* (linePos + 1)) {
+				if (x > startx + getTargetXStart() + colPos * getButtonWidth() && x < startx + getTargetXStart() + (colPos + 1) * getButtonWidth()
+						&& y > starty + getTargetYStart() + getButtonHeight() * linePos && y < starty + getTargetYStart() + getButtonHeight() * (linePos + 1)) {
 					ClientSender.pujasChangeEnchantment(player, temple, cp);
 				}
 

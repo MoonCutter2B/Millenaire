@@ -18,8 +18,7 @@ public class AStarWorkerJPS extends AStarWorker {
 	 * Array of neighbouring XZ coordinates to any given coordinate Order: N,
 	 * NE, E, SE, S, SW, W, NW
 	 */
-	private final static int[][] neighbourOffsets = { { 1, 0 }, { 1, 1 },
-			{ 0, 1 }, { -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
+	private final static int[][] neighbourOffsets = { { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 }, { -1, 0 }, { -1, -1 }, { 0, -1 }, { 1, -1 } };
 
 	private final PriorityQueue<AStarNode> openQueue;
 	private AStarNode currentNode;
@@ -149,19 +148,16 @@ public class AStarWorkerJPS extends AStarWorker {
 					r.add(new AStarNode(x + dx, nY, z, dist + 1, node));
 				}
 				if (left != 0 || right != 0) {
-					r.add(new AStarNode(x + dx, Math.max(left, right), z + dz,
-							dist + 2, node));
+					r.add(new AStarNode(x + dx, Math.max(left, right), z + dz, dist + 2, node));
 				}
 				if (left != 0) {
 					if (getGroundNodeHeight(x - dx, py, z) == 0) {
-						r.add(new AStarNode(x - dx, left, z + dz, dist + 2,
-								node));
+						r.add(new AStarNode(x - dx, left, z + dz, dist + 2, node));
 					}
 				}
 				if (right != 0) {
 					if (getGroundNodeHeight(x, py, z - dz) == 0) {
-						r.add(new AStarNode(x + dx, right, z - dz, dist + 2,
-								node));
+						r.add(new AStarNode(x + dx, right, z - dz, dist + 2, node));
 					}
 				}
 			} else // prune straight
@@ -173,22 +169,18 @@ public class AStarWorkerJPS extends AStarWorker {
 					{
 						r.add(new AStarNode(x, nY, z + dz, dist + 1, node));
 						if (stairs) {
-							r.add(new AStarNode(x + 1, nY, z + dz, dist + 2,
-									node));
-							r.add(new AStarNode(x - 1, nY, z + dz, dist + 2,
-									node));
+							r.add(new AStarNode(x + 1, nY, z + dz, dist + 2, node));
+							r.add(new AStarNode(x - 1, nY, z + dz, dist + 2, node));
 						} else {
 							int nnY = getGroundNodeHeight(x + 1, nY, z);
 							if (nnY == 0) // top blocked or stairs?
 							{
-								r.add(new AStarNode(x + 1, nY, z + dz,
-										dist + 2, node));
+								r.add(new AStarNode(x + 1, nY, z + dz, dist + 2, node));
 							}
 							nnY = getGroundNodeHeight(x - 1, nY, z);
 							if (nnY == 0) // below blocked or stairs?
 							{
-								r.add(new AStarNode(x - 1, nY, z + dz,
-										dist + 2, node));
+								r.add(new AStarNode(x - 1, nY, z + dz, dist + 2, node));
 							}
 						}
 					}
@@ -199,22 +191,18 @@ public class AStarWorkerJPS extends AStarWorker {
 					{
 						r.add(new AStarNode(x + dx, nY, z, dist + 1, node));
 						if (stairs) {
-							r.add(new AStarNode(x + dx, nY, z + 1, dist + 2,
-									node));
-							r.add(new AStarNode(x + dx, nY, z - 1, dist + 2,
-									node));
+							r.add(new AStarNode(x + dx, nY, z + 1, dist + 2, node));
+							r.add(new AStarNode(x + dx, nY, z - 1, dist + 2, node));
 						} else {
 							int nnY = getGroundNodeHeight(x, nY, z + 1);
 							if (nnY == 0) // right blocked?
 							{
-								r.add(new AStarNode(x + dx, nY, z + 1,
-										dist + 2, node));
+								r.add(new AStarNode(x + dx, nY, z + 1, dist + 2, node));
 							}
 							nnY = getGroundNodeHeight(x, nY, z - 1);
 							if (nnY == 0) // left blocked?
 							{
-								r.add(new AStarNode(x + dx, nY, z - 1,
-										dist + 2, node));
+								r.add(new AStarNode(x + dx, nY, z - 1, dist + 2, node));
 							}
 						}
 					}
@@ -224,11 +212,9 @@ public class AStarWorkerJPS extends AStarWorker {
 			for (final int[] offset : neighbourOffsets) // try all neighbours,
 														// ding dong!
 			{
-				final int nY = getGroundNodeHeight(x + offset[0], y, z
-						+ offset[1]);
+				final int nY = getGroundNodeHeight(x + offset[0], y, z + offset[1]);
 				if (nY > 0) {
-					r.add(new AStarNode(x + offset[0], nY, z + offset[1], nY,
-							node));
+					r.add(new AStarNode(x + offset[0], nY, z + offset[1], nY, node));
 				}
 			}
 		}
@@ -255,9 +241,7 @@ public class AStarWorkerJPS extends AStarWorker {
 	 *            AStarNode we jumped from
 	 * @return
 	 */
-	private ArrayList<AStarNode> getAllNeighborsWithoutParent(final int x,
-			final int y, final int z, final int dx, final int dz,
-			final AStarNode node) {
+	private ArrayList<AStarNode> getAllNeighborsWithoutParent(final int x, final int y, final int z, final int dx, final int dz, final AStarNode node) {
 		final ArrayList<AStarNode> r = new ArrayList<AStarNode>();
 		for (final int[] offset : neighbourOffsets) {
 			if (offset[0] == -dx && offset[1] == -dz) // disregard neighbor we
@@ -303,8 +287,7 @@ public class AStarWorkerJPS extends AStarWorker {
 	}
 
 	@Override
-	public ArrayList<AStarNode> getPath(final AStarNode start,
-			final AStarNode end, final boolean searchMode) {
+	public ArrayList<AStarNode> getPath(final AStarNode start, final AStarNode end, final boolean searchMode) {
 		openQueue.offer(start);
 		targetNode = end;
 		currentNode = start;
@@ -367,15 +350,13 @@ public class AStarWorkerJPS extends AStarWorker {
 	 * @param pz
 	 * @return AStarNode of Jumping Point found, or null if none encountered
 	 */
-	private AStarNode jump(final int nextX, final int nextY, final int nextZ,
-			final int px, int py, final int pz) {
+	private AStarNode jump(final int nextX, final int nextY, final int nextZ, final int px, int py, final int pz) {
 		// System.out.printf("jump landed on [%d|%d|%d] from [%d|%d|%d], dir [%d|%d] \n",
 		// nextX, nextY, nextZ, px, py, pz, nextX-px, nextZ-pz);
 		final int x = nextX;
 		int y = nextY;
 		final int z = nextZ;
-		final int dist = currentNode.getG() + Math.abs(x - currentNode.x)
-				+ Math.abs(y - currentNode.y) + Math.abs(z - currentNode.z);
+		final int dist = currentNode.getG() + Math.abs(x - currentNode.x) + Math.abs(y - currentNode.y) + Math.abs(z - currentNode.z);
 
 		final int dx = x - px;
 		final int dz = z - pz;
@@ -384,8 +365,7 @@ public class AStarWorkerJPS extends AStarWorker {
 
 		if (y == 0) {
 			return null;
-		} else if (isCoordsEnd(x, y, z, targetNode)
-				|| dist >= MAX_SKIP_DISTANCE) {
+		} else if (isCoordsEnd(x, y, z, targetNode) || dist >= MAX_SKIP_DISTANCE) {
 			return new AStarNode(x, y, z, dist, currentNode, targetNode);
 		}
 
@@ -395,26 +375,19 @@ public class AStarWorkerJPS extends AStarWorker {
 
 		// check for forced neighbors along the diagonal
 		if (dx != 0 && dz != 0) {
-			if (getGroundNodeHeight(x - dx, y, z + dz) != 0
-					&& getGroundNodeHeight(x - dx, py, z) == 0
-					|| getGroundNodeHeight(x + dx, y, z - dz) != 0
-					&& getGroundNodeHeight(x, py, z - dz) == 0) {
+			if (getGroundNodeHeight(x - dx, y, z + dz) != 0 && getGroundNodeHeight(x - dx, py, z) == 0 || getGroundNodeHeight(x + dx, y, z - dz) != 0 && getGroundNodeHeight(x, py, z - dz) == 0) {
 				return new AStarNode(x, y, z, dist, currentNode, targetNode);
 			}
 		}
 		// horizontally/vertically
 		else {
 			if (dx != 0) { // moving along x
-				if (nxY != y || getGroundNodeHeight(x, y, z + 1) == 0
-						&& getGroundNodeHeight(x + dx, nxY, z + 1) != 0
-						|| getGroundNodeHeight(x, y, z - 1) == 0
+				if (nxY != y || getGroundNodeHeight(x, y, z + 1) == 0 && getGroundNodeHeight(x + dx, nxY, z + 1) != 0 || getGroundNodeHeight(x, y, z - 1) == 0
 						&& getGroundNodeHeight(x + dx, nxY, z - 1) != 0) {
 					return new AStarNode(x, y, z, dist, currentNode, targetNode);
 				}
 			} else { // moving along z
-				if (nzY != y || getGroundNodeHeight(x + 1, y, z) == 0
-						&& getGroundNodeHeight(x + 1, nzY, z + dz) != 0
-						|| getGroundNodeHeight(x - 1, y, z) == 0
+				if (nzY != y || getGroundNodeHeight(x + 1, y, z) == 0 && getGroundNodeHeight(x + 1, nzY, z + dz) != 0 || getGroundNodeHeight(x - 1, y, z) == 0
 						&& getGroundNodeHeight(x - 1, nzY, z + dz) != 0) {
 					return new AStarNode(x, y, z, dist, currentNode, targetNode);
 				}

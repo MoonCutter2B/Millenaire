@@ -15,8 +15,7 @@ import org.millenaire.common.forge.Mill;
 
 public class BuildingLocation implements Cloneable {
 
-	public static BuildingLocation read(final NBTTagCompound nbttagcompound,
-			final String label, final String debug) {
+	public static BuildingLocation read(final NBTTagCompound nbttagcompound, final String label, final String debug) {
 
 		if (!nbttagcompound.hasKey(label + "_key")) {
 			return null;
@@ -28,12 +27,10 @@ public class BuildingLocation implements Cloneable {
 
 		// pre-6.0 this tag did not exist
 		if (nbttagcompound.hasKey(label + "_isCustomBuilding")) {
-			bl.isCustomBuilding = nbttagcompound.getBoolean(label
-					+ "_isCustomBuilding");
+			bl.isCustomBuilding = nbttagcompound.getBoolean(label + "_isCustomBuilding");
 		}
 
-		final Culture culture = Culture.getCultureByName(nbttagcompound
-				.getString(label + "_culture"));
+		final Culture culture = Culture.getCultureByName(nbttagcompound.getString(label + "_culture"));
 		bl.culture = culture;
 
 		bl.orientation = nbttagcompound.getInteger(label + "_orientation");
@@ -55,8 +52,7 @@ public class BuildingLocation implements Cloneable {
 		// MLN.temp(bl, "Reading variation "+debug+": "+bl.getVariation());
 
 		bl.reputation = nbttagcompound.getInteger(label + "_reputation");
-		bl.priorityMoveIn = nbttagcompound
-				.getInteger(label + "_priorityMoveIn");
+		bl.priorityMoveIn = nbttagcompound.getInteger(label + "_priorityMoveIn");
 		bl.price = nbttagcompound.getInteger(label + "_price");
 
 		if (bl.pos == null) {
@@ -73,19 +69,15 @@ public class BuildingLocation implements Cloneable {
 		final List<String> maleResident = new ArrayList<String>();
 
 		// pre 4.3 bugged tag
-		NBTTagList nbttaglist = nbttagcompound.getTagList("maleResidentList",
-				Constants.NBT.TAG_COMPOUND);
+		NBTTagList nbttaglist = nbttagcompound.getTagList("maleResidentList", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			maleResident.add(nbttagcompound1.getString("value"));
 		}
 
-		nbttaglist = nbttagcompound.getTagList(label + "_maleResidentList",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList(label + "_maleResidentList", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			maleResident.add(nbttagcompound1.getString("value"));
 		}
 
@@ -100,19 +92,15 @@ public class BuildingLocation implements Cloneable {
 		final List<String> femaleResident = new ArrayList<String>();
 
 		// pre 4.3 bugged tag
-		nbttaglist = nbttagcompound.getTagList("femaleResidentList",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("femaleResidentList", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			femaleResident.add(nbttagcompound1.getString("value"));
 		}
 
-		nbttaglist = nbttagcompound.getTagList(label + "_femaleResidentList",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList(label + "_femaleResidentList", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			femaleResident.add(nbttagcompound1.getString("value"));
 		}
 
@@ -127,17 +115,13 @@ public class BuildingLocation implements Cloneable {
 		final List<String> tags = new ArrayList<String>();
 
 		// pre 4.3 bugged tag
-		nbttaglist = nbttagcompound.getTagList("tags",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("tags", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
-			final String value = nbttagcompound1.getString("value")
-					.toLowerCase();
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			final String value = nbttagcompound1.getString("value").toLowerCase();
 
 			// Conversion for backward compatibility
-			if (value.equals("market1") || value.equals("market2")
-					|| value.equals("market3")) {
+			if (value.equals("market1") || value.equals("market2") || value.equals("market3")) {
 				tags.add("market");
 			} else {
 				tags.add(value);
@@ -145,11 +129,9 @@ public class BuildingLocation implements Cloneable {
 
 		}
 
-		nbttaglist = nbttagcompound.getTagList(label + "_tags",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList(label + "_tags", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final String value = nbttagcompound1.getString("value");
 
 			tags.add(value);
@@ -160,37 +142,30 @@ public class BuildingLocation implements Cloneable {
 		final List<String> subb = new ArrayList<String>();
 
 		// pre 4.3 bugged tag
-		nbttaglist = nbttagcompound.getTagList("subBuildings",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("subBuildings", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			subb.add(nbttagcompound1.getString("value"));
 
 		}
 
-		nbttaglist = nbttagcompound.getTagList(label + "_subBuildings",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList(label + "_subBuildings", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			subb.add(nbttagcompound1.getString("value"));
 
 		}
 
 		bl.subBuildings = subb;
 
-		bl.showTownHallSigns = nbttagcompound.getBoolean(label
-				+ "_showTownHallSigns");
+		bl.showTownHallSigns = nbttagcompound.getBoolean(label + "_showTownHallSigns");
 
 		if (nbttagcompound.hasKey(label + "_upgradesAllowed")) {
-			bl.upgradesAllowed = nbttagcompound.getBoolean(label
-					+ "_upgradesAllowed");
+			bl.upgradesAllowed = nbttagcompound.getBoolean(label + "_upgradesAllowed");
 		}
 
 		if (bl.getPlan() == null && bl.getCustomPlan() == null) {
-			MLN.error(bl, "Unknown building type: " + bl.planKey
-					+ " Cancelling load.");
+			MLN.error(bl, "Unknown building type: " + bl.planKey + " Cancelling load.");
 			return null;
 		}
 
@@ -205,15 +180,13 @@ public class BuildingLocation implements Cloneable {
 	public int priorityMoveIn = 10;
 	public int minx, maxx, minz, maxz;
 	public int minxMargin, maxxMargin, minzMargin, maxzMargin;
-	public int orientation, length, width, areaToClear, level, reputation,
-			price;
+	public int orientation, length, width, areaToClear, level, reputation, price;
 	private int variation;
 
 	public boolean isCustomBuilding = false;
 
 	public Point pos, chestPos = null, sleepingPos = null;
-	public Point sellingPos = null, craftingPos = null, shelterPos = null,
-			defendingPos = null;
+	public Point sellingPos = null, craftingPos = null, shelterPos = null, defendingPos = null;
 	public Culture culture;
 	public List<String> tags;
 	public List<String> subBuildings;
@@ -232,14 +205,11 @@ public class BuildingLocation implements Cloneable {
 	 * @param customBuilding
 	 * @param pos
 	 */
-	public BuildingLocation(final BuildingCustomPlan customBuilding,
-			final Point pos, final boolean isTownHall) {
+	public BuildingLocation(final BuildingCustomPlan customBuilding, final Point pos, final boolean isTownHall) {
 		this.pos = pos;
 		this.chestPos = pos;
 		orientation = 0;
 
-		length = customBuilding.radius * 2;
-		width = customBuilding.radius * 2;
 		planKey = customBuilding.buildingKey;
 		isCustomBuilding = true;
 		level = 0;
@@ -254,8 +224,6 @@ public class BuildingLocation implements Cloneable {
 		showTownHallSigns = isTownHall;
 		culture = customBuilding.culture;
 		priorityMoveIn = customBuilding.priorityMoveIn;
-
-		initialise();
 	}
 
 	/**
@@ -265,13 +233,11 @@ public class BuildingLocation implements Cloneable {
 	 * @param ppos
 	 * @param porientation
 	 */
-	public BuildingLocation(final BuildingPlan plan, final Point ppos,
-			final int porientation) {
+	public BuildingLocation(final BuildingPlan plan, final Point ppos, final int porientation) {
 		pos = ppos;
 
 		if (pos == null) {
-			MLN.error(this,
-					"Attempting to create a location with a null position.");
+			MLN.error(this, "Attempting to create a location with a null position.");
 		}
 
 		orientation = porientation;
@@ -306,9 +272,18 @@ public class BuildingLocation implements Cloneable {
 		}
 	}
 
+	/**
+	 * Computes margins around building
+	 */
+	public void computeMargins() {
+		minxMargin = minx - (areaToClear + MLN.minDistanceBetweenBuildings);
+		minzMargin = minz - (areaToClear + MLN.minDistanceBetweenBuildings);
+		maxxMargin = maxx + areaToClear + MLN.minDistanceBetweenBuildings;
+		maxzMargin = maxz + areaToClear + MLN.minDistanceBetweenBuildings;
+	}
+
 	public BuildingLocation createLocationForLevel(final int plevel) {
-		final BuildingPlan plan = culture.getBuildingPlanSet(planKey).plans
-				.get(getVariation())[plevel];
+		final BuildingPlan plan = culture.getBuildingPlanSet(planKey).plans.get(getVariation())[plevel];
 
 		final BuildingLocation bl = clone();
 		bl.level = plevel;
@@ -318,8 +293,7 @@ public class BuildingLocation implements Cloneable {
 		return bl;
 	}
 
-	public BuildingLocation createLocationForStartingSubBuilding(
-			final String subkey) {
+	public BuildingLocation createLocationForStartingSubBuilding(final String subkey) {
 		final BuildingLocation bl = createLocationForSubBuilding(subkey);
 		bl.level = 0;
 
@@ -327,8 +301,7 @@ public class BuildingLocation implements Cloneable {
 	}
 
 	public BuildingLocation createLocationForSubBuilding(final String subkey) {
-		final BuildingPlan plan = culture.getBuildingPlanSet(subkey)
-				.getRandomStartingPlan();
+		final BuildingPlan plan = culture.getBuildingPlanSet(subkey).getRandomStartingPlan();
 
 		final BuildingLocation bl = clone();
 		bl.planKey = subkey;
@@ -353,9 +326,7 @@ public class BuildingLocation implements Cloneable {
 
 		final BuildingLocation bl = (BuildingLocation) obj;
 
-		return planKey.equals(bl.planKey) && level == bl.level
-				&& pos.equals(bl.pos) && orientation == bl.orientation
-				&& getVariation() == bl.getVariation();
+		return planKey.equals(bl.planKey) && level == bl.level && pos.equals(bl.pos) && orientation == bl.orientation && getVariation() == bl.getVariation();
 
 	}
 
@@ -375,8 +346,7 @@ public class BuildingLocation implements Cloneable {
 		}
 
 		if (shop != null && shop.length() > 0) {
-			effects.add(MLN.string("effect.shop",
-					culture.getCultureString("shop." + shop)));
+			effects.add(MLN.string("effect.shop", culture.getCultureString("shop." + shop)));
 		}
 
 		if (tags.contains(Building.tagPujas)) {
@@ -391,8 +361,7 @@ public class BuildingLocation implements Cloneable {
 
 		if (plan != null) {
 			if (plan.irrigation > 0) {
-				effects.add(MLN.string("effect.irrigation", ""
-						+ plan.irrigation));
+				effects.add(MLN.string("effect.irrigation", "" + plan.irrigation));
 			}
 		}
 
@@ -480,15 +449,12 @@ public class BuildingLocation implements Cloneable {
 			return null;
 		}
 
-		if (culture.getBuildingPlanSet(planKey) != null
-				&& culture.getBuildingPlanSet(planKey).plans.size() > getVariation()) {
+		if (culture.getBuildingPlanSet(planKey) != null && culture.getBuildingPlanSet(planKey).plans.size() > getVariation()) {
 			if (level < 0) {
-				return culture.getBuildingPlanSet(planKey).plans
-						.get(getVariation())[0];
+				return culture.getBuildingPlanSet(planKey).plans.get(getVariation())[0];
 			}
 			if (culture.getBuildingPlanSet(planKey).plans.get(getVariation()).length > level) {
-				return culture.getBuildingPlanSet(planKey).plans
-						.get(getVariation())[level];
+				return culture.getBuildingPlanSet(planKey).plans.get(getVariation())[level];
 			}
 			return null;
 		} else {
@@ -510,15 +476,16 @@ public class BuildingLocation implements Cloneable {
 
 	@Override
 	public int hashCode() {
-		return (planKey + "_" + level + " at " + pos + "/" + orientation + "/" + getVariation())
-				.hashCode();
+		return (planKey + "_" + level + " at " + pos + "/" + orientation + "/" + getVariation()).hashCode();
 	}
 
+	/**
+	 * Computes X & Z min & max values for plan-based locations from length and
+	 * width and orientation
+	 */
 	private void initialise() {
-		final Point op1 = BuildingPlan.adjustForOrientation(pos.getiX(),
-				pos.getiY(), pos.getiZ(), length / 2, width / 2, orientation);
-		final Point op2 = BuildingPlan.adjustForOrientation(pos.getiX(),
-				pos.getiY(), pos.getiZ(), -length / 2, -width / 2, orientation);
+		final Point op1 = BuildingPlan.adjustForOrientation(pos.getiX(), pos.getiY(), pos.getiZ(), length / 2, width / 2, orientation);
+		final Point op2 = BuildingPlan.adjustForOrientation(pos.getiX(), pos.getiY(), pos.getiZ(), -length / 2, -width / 2, orientation);
 
 		if (op1.getiX() > op2.getiX()) {
 			minx = op2.getiX();
@@ -536,16 +503,12 @@ public class BuildingLocation implements Cloneable {
 			maxz = op2.getiZ();
 		}
 
-		minxMargin = minx - (areaToClear + MLN.minDistanceBetweenBuildings);
-		minzMargin = minz - (areaToClear + MLN.minDistanceBetweenBuildings);
-		maxxMargin = maxx + areaToClear + MLN.minDistanceBetweenBuildings;
-		maxzMargin = maxz + areaToClear + MLN.minDistanceBetweenBuildings;
+		computeMargins();
 	}
 
 	public boolean intersectWith(final BuildingLocation b) {
 
-		if (minxMargin > b.maxxMargin || maxxMargin < b.minxMargin
-				|| minzMargin > b.maxzMargin || maxzMargin < b.minzMargin) {
+		if (minxMargin > b.maxxMargin || maxxMargin < b.minxMargin || minzMargin > b.maxzMargin || maxzMargin < b.minzMargin) {
 			return false;
 		}
 
@@ -553,8 +516,7 @@ public class BuildingLocation implements Cloneable {
 	}
 
 	public boolean isInside(final Point p) {
-		if (minx < p.getiX() && p.getiX() <= maxx && minz < p.getiZ()
-				&& p.getiZ() <= maxz) {
+		if (minx < p.getiX() && p.getiX() <= maxx && minz < p.getiZ() && p.getiZ() <= maxz) {
 			return true;
 		}
 		// Log.debug(this, Log.WorldGeneration, "Outside!");
@@ -563,8 +525,7 @@ public class BuildingLocation implements Cloneable {
 
 	public boolean isInsideZone(final Point p) {
 
-		if (minxMargin <= p.getiX() && p.getiX() <= maxxMargin
-				&& minzMargin <= p.getiZ() && p.getiZ() <= maxzMargin) {
+		if (minxMargin <= p.getiX() && p.getiX() <= maxxMargin && minzMargin <= p.getiZ() && p.getiZ() <= maxzMargin) {
 			return true;
 		}
 		// Log.debug(this, Log.WorldGeneration, "Outside!");
@@ -576,8 +537,7 @@ public class BuildingLocation implements Cloneable {
 			return false;
 		}
 
-		return pos.equals(l.pos) && orientation == l.orientation
-				&& getVariation() == l.getVariation();
+		return pos.equals(l.pos) && orientation == l.orientation && getVariation() == l.getVariation();
 	}
 
 	public boolean isSameLocation(final BuildingLocation l) {
@@ -585,9 +545,7 @@ public class BuildingLocation implements Cloneable {
 			return false;
 		}
 
-		return pos.equals(l.pos) && planKey.equals(l.planKey)
-				&& orientation == l.orientation
-				&& getVariation() == l.getVariation();
+		return pos.equals(l.pos) && planKey.equals(l.planKey) && orientation == l.orientation && getVariation() == l.getVariation();
 	}
 
 	public int oldHashCode() {
@@ -600,17 +558,14 @@ public class BuildingLocation implements Cloneable {
 
 	@Override
 	public String toString() {
-		return planKey + "_" + level + " at " + pos + "/" + orientation + "/"
-				+ getVariation();
+		return planKey + "_" + level + " at " + pos + "/" + orientation + "/" + getVariation();
 	}
 
-	public void write(final NBTTagCompound nbttagcompound, final String label,
-			final String debug) {
+	public void write(final NBTTagCompound nbttagcompound, final String label, final String debug) {
 
 		pos.write(nbttagcompound, label + "_pos");
 
-		nbttagcompound
-				.setBoolean(label + "_isCustomBuilding", isCustomBuilding);
+		nbttagcompound.setBoolean(label + "_isCustomBuilding", isCustomBuilding);
 		nbttagcompound.setString(label + "_culture", culture.key);
 		nbttagcompound.setInteger(label + "_orientation", orientation);
 		nbttagcompound.setInteger(label + "_length", length);
@@ -690,8 +645,7 @@ public class BuildingLocation implements Cloneable {
 			chestPos.write(nbttagcompound, label + "_chestPos");
 		}
 
-		nbttagcompound.setBoolean(label + "_showTownHallSigns",
-				showTownHallSigns);
+		nbttagcompound.setBoolean(label + "_showTownHallSigns", showTownHallSigns);
 		nbttagcompound.setBoolean(label + "_upgradesAllowed", upgradesAllowed);
 
 	}

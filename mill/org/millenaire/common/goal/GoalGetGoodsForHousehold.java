@@ -10,13 +10,11 @@ import org.millenaire.common.building.Building;
 public class GoalGetGoodsForHousehold extends Goal {
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 		return getDestination(villager, false);
 	}
 
-	public GoalInformation getDestination(final MillVillager villager,
-			final boolean test) throws Exception {
+	public GoalInformation getDestination(final MillVillager villager, final boolean test) throws Exception {
 		List<Building> buildings = null;
 
 		boolean delayOver;
@@ -26,8 +24,7 @@ public class GoalGetGoodsForHousehold extends Goal {
 		} else if (!villager.lastGoalTime.containsKey(this)) {
 			delayOver = true;
 		} else {
-			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
-					.get(this) + STANDARD_DELAY;
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime.get(this) + STANDARD_DELAY;
 		}
 
 		for (final MillVillager v : villager.getHouse().villagers) {
@@ -37,21 +34,18 @@ public class GoalGetGoodsForHousehold extends Goal {
 			int nb = 0;
 
 			for (final InvItem key : goods.keySet()) {
-				if (villager.getHouse().countGoods(key.getItem(), key.meta) < goods
-						.get(key) / 2) {
+				if (villager.getHouse().countGoods(key.getItem(), key.meta) < goods.get(key) / 2) {
 					if (buildings == null) {
 						buildings = villager.getTownHall().getBuildings();
 					}
 
 					for (final Building building : buildings) {
-						final int nbav = building.nbGoodAvailable(key, false,
-								false);
+						final int nbav = building.nbGoodAvailable(key, false, false);
 						if (nbav > 0 && building != villager.getHouse()) {
 							nb += nbav;
 
 							if (delayOver || nb > 16) {
-								return packDest(building.getResManager()
-										.getSellingPos(), building);
+								return packDest(building.getResManager().getSellingPos(), building);
 							}
 						}
 					}
@@ -63,8 +57,7 @@ public class GoalGetGoodsForHousehold extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 
 		return getDestination(villager, true) != null;
 	}
@@ -93,12 +86,9 @@ public class GoalGetGoodsForHousehold extends Goal {
 			final HashMap<InvItem, Integer> goods = v.requiresGoods();
 
 			for (final InvItem key : goods.keySet()) {
-				if (villager.getHouse().countGoods(key.getItem(), key.meta) < goods
-						.get(key)) {
+				if (villager.getHouse().countGoods(key.getItem(), key.meta) < goods.get(key)) {
 
-					final int nb = Math.min(
-							shop.nbGoodAvailable(key, false, false),
-							goods.get(key));
+					final int nb = Math.min(shop.nbGoodAvailable(key, false, false), goods.get(key));
 
 					villager.takeFromBuilding(shop, key.getItem(), key.meta, nb);
 				}
@@ -121,11 +111,9 @@ public class GoalGetGoodsForHousehold extends Goal {
 			final HashMap<InvItem, Integer> goods = v.requiresGoods();
 
 			for (final InvItem key : goods.keySet()) {
-				if (villager.getHouse().countGoods(key.getItem(), key.meta) < goods
-						.get(key) / 2) {
+				if (villager.getHouse().countGoods(key.getItem(), key.meta) < goods.get(key) / 2) {
 					for (final Building shop : shops) {
-						final int nbav = shop
-								.nbGoodAvailable(key, false, false);
+						final int nbav = shop.nbGoodAvailable(key, false, false);
 						if (nbav > 0 && shop != villager.getHouse()) {
 							nb += nbav;
 						}

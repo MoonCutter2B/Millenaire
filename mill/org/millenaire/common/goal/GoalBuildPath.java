@@ -18,18 +18,15 @@ public class GoalBuildPath extends Goal {
 
 	@Override
 	public int actionDuration(final MillVillager villager) {
-		final int toolEfficiency = (int) villager.getBestShovel().getDigSpeed(
-				new ItemStack(villager.getBestShovel(), 1), Blocks.dirt, 0);
+		final int toolEfficiency = (int) villager.getBestShovel().getDigSpeed(new ItemStack(villager.getBestShovel(), 1), Blocks.dirt, 0);
 
 		return 100 - toolEfficiency * 5;
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
-		final BuildingBlock b = villager.getTownHall()
-				.getCurrentPathBuildingBlock();
+		final BuildingBlock b = villager.getTownHall().getCurrentPathBuildingBlock();
 
 		if (b != null) {
 			return packDest(b.p);
@@ -41,15 +38,13 @@ public class GoalBuildPath extends Goal {
 	@Override
 	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) {
 
-		final BuildingBlock bblock = villager.getTownHall()
-				.getCurrentPathBuildingBlock();
+		final BuildingBlock bblock = villager.getTownHall().getCurrentPathBuildingBlock();
 
 		if (bblock != null) {
 			if (bblock.block == Blocks.air) {
 				return villager.getBestShovelStack();
 			} else {
-				return new ItemStack[] { new ItemStack(
-						Item.getItemFromBlock(bblock.block), 1, bblock.meta) };
+				return new ItemStack[] { new ItemStack(Item.getItemFromBlock(bblock.block), 1, bblock.meta) };
 			}
 		} else {
 			return villager.getBestShovelStack();
@@ -63,13 +58,11 @@ public class GoalBuildPath extends Goal {
 
 	@Override
 	public boolean isPossibleSpecific(final MillVillager villager) {
-		return MLN.BuildVillagePaths
-				&& villager.getTownHall().getCurrentPathBuildingBlock() != null;
+		return MLN.BuildVillagePaths && villager.getTownHall().getCurrentPathBuildingBlock() != null;
 	}
 
 	@Override
-	public boolean isStillValidSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager) throws Exception {
 		return villager.getTownHall().getCurrentPathBuildingBlock() != null;
 	}
 
@@ -81,8 +74,7 @@ public class GoalBuildPath extends Goal {
 	@Override
 	public boolean performAction(final MillVillager villager) throws Exception {
 
-		final BuildingBlock bblock = villager.getTownHall()
-				.getCurrentPathBuildingBlock();
+		final BuildingBlock bblock = villager.getTownHall().getCurrentPathBuildingBlock();
 
 		if (bblock == null) {
 			return true;
@@ -96,8 +88,7 @@ public class GoalBuildPath extends Goal {
 
 		villager.getTownHall().pathsToBuildPathIndex++;
 
-		final BuildingBlock b = villager.getTownHall()
-				.getCurrentPathBuildingBlock();
+		final BuildingBlock b = villager.getTownHall().getCurrentPathBuildingBlock();
 
 		villager.swingItem();
 
@@ -125,8 +116,7 @@ public class GoalBuildPath extends Goal {
 	}
 
 	@Override
-	public boolean unreachableDestination(final MillVillager villager)
-			throws Exception {
+	public boolean unreachableDestination(final MillVillager villager) throws Exception {
 
 		performAction(villager);
 

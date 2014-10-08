@@ -39,15 +39,13 @@ public class StreamReadWrite {
 
 	static public Random random;
 
-	public static BuildingPlan readBuildingPlanInfo(final DataInput ds,
-			final Culture culture) throws IOException {
+	public static BuildingPlan readBuildingPlanInfo(final DataInput ds, final Culture culture) throws IOException {
 
 		final String key = ds.readUTF();
 		final int level = ds.readInt();
 		final int variation = ds.readInt();
 
-		final BuildingPlan plan = new BuildingPlan(key, level, variation,
-				culture);
+		final BuildingPlan plan = new BuildingPlan(key, level, variation, culture);
 
 		plan.planName = StreamReadWrite.readNullableString(ds);
 		plan.nativeName = StreamReadWrite.readNullableString(ds);
@@ -65,16 +63,14 @@ public class StreamReadWrite {
 		return plan;
 	}
 
-	public static HashMap<InvItem, Integer> readInventory(final DataInput ds)
-			throws IOException {
+	public static HashMap<InvItem, Integer> readInventory(final DataInput ds) throws IOException {
 
 		final HashMap<InvItem, Integer> inv = new HashMap<InvItem, Integer>();
 
 		final int nb = ds.readInt();
 
 		for (int i = 0; i < nb; i++) {
-			final InvItem item = new InvItem(Item.getItemById(ds.readInt()),
-					ds.readInt());
+			final InvItem item = new InvItem(Item.getItemById(ds.readInt()), ds.readInt());
 
 			inv.put(item, ds.readInt());
 		}
@@ -87,8 +83,7 @@ public class StreamReadWrite {
 	 * 
 	 * Copied from Packet
 	 */
-	private static ItemStack readItemStack(final DataInput par1DataInput)
-			throws IOException {
+	private static ItemStack readItemStack(final DataInput par1DataInput) throws IOException {
 		ItemStack is = null;
 		final int id = par1DataInput.readInt();
 
@@ -110,8 +105,7 @@ public class StreamReadWrite {
 	 * 
 	 * Copied from Packet
 	 */
-	private static NBTTagCompound readNBTTagCompound(
-			final DataInput par1DataInput) throws IOException {
+	private static NBTTagCompound readNBTTagCompound(final DataInput par1DataInput) throws IOException {
 		final short var2 = par1DataInput.readShort();
 
 		if (var2 < 0) {
@@ -119,13 +113,11 @@ public class StreamReadWrite {
 		} else {
 			final byte[] var3 = new byte[var2];
 			par1DataInput.readFully(var3);
-			return CompressedStreamTools.func_152457_a(var3,
-					new NBTSizeTracker(2097152L));
+			return CompressedStreamTools.func_152457_a(var3, new NBTSizeTracker(2097152L));
 		}
 	}
 
-	public static BuildingLocation readNullableBuildingLocation(
-			final DataInput ds) throws IOException {
+	public static BuildingLocation readNullableBuildingLocation(final DataInput ds) throws IOException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -182,8 +174,7 @@ public class StreamReadWrite {
 		return bl;
 	}
 
-	public static BuildingProject readNullableBuildingProject(
-			final DataInput ds, final Culture culture) throws IOException {
+	public static BuildingProject readNullableBuildingProject(final DataInput ds, final Culture culture) throws IOException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -206,8 +197,7 @@ public class StreamReadWrite {
 		return bp;
 	}
 
-	public static Goods readNullableGoods(final DataInput ds)
-			throws IOException {
+	public static Goods readNullableGoods(final DataInput ds) throws IOException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -215,8 +205,7 @@ public class StreamReadWrite {
 			return null;
 		}
 
-		final InvItem iv = new InvItem(MillCommonUtilities.getItemById(ds
-				.readInt()), ds.readByte());
+		final InvItem iv = new InvItem(MillCommonUtilities.getItemById(ds.readInt()), ds.readByte());
 		final Goods g = new Goods(iv);
 
 		g.requiredTag = readNullableString(ds);
@@ -227,8 +216,7 @@ public class StreamReadWrite {
 		return g;
 	}
 
-	public static ItemStack readNullableItemStack(final DataInput ds)
-			throws IOException {
+	public static ItemStack readNullableItemStack(final DataInput ds) throws IOException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -239,8 +227,7 @@ public class StreamReadWrite {
 		return readItemStack(ds);
 	}
 
-	public static Point readNullablePoint(final DataInput ds)
-			throws IOException {
+	public static Point readNullablePoint(final DataInput ds) throws IOException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -255,8 +242,7 @@ public class StreamReadWrite {
 		return new Point(x, y, z);
 	}
 
-	public static QuestInstance readNullableQuestInstance(final MillWorld mw,
-			final DataInput ds) throws IOException {
+	public static QuestInstance readNullableQuestInstance(final MillWorld mw, final DataInput ds) throws IOException {
 		final boolean isnull = ds.readBoolean();
 
 		if (isnull) {
@@ -284,32 +270,27 @@ public class StreamReadWrite {
 
 		for (int i = 0; i < nb; i++) {
 			final String key = ds.readUTF();
-			villagers.put(key,
-					StreamReadWrite.readNullableQuestVillager(mw, ds));
+			villagers.put(key, StreamReadWrite.readNullableQuestVillager(mw, ds));
 		}
 
-		final QuestInstance qi = new QuestInstance(mw, quest, profile,
-				villagers, startTime, currentStep, currentStepStart);
+		final QuestInstance qi = new QuestInstance(mw, quest, profile, villagers, startTime, currentStep, currentStepStart);
 
 		qi.uniqueid = id;
 
 		return qi;
 	}
 
-	public static QuestInstanceVillager readNullableQuestVillager(
-			final MillWorld mw, final DataInput ds) throws IOException {
+	public static QuestInstanceVillager readNullableQuestVillager(final MillWorld mw, final DataInput ds) throws IOException {
 		final boolean isnull = ds.readBoolean();
 
 		if (isnull) {
 			return null;
 		}
 
-		return new QuestInstanceVillager(mw,
-				StreamReadWrite.readNullablePoint(ds), ds.readLong());
+		return new QuestInstanceVillager(mw, StreamReadWrite.readNullablePoint(ds), ds.readLong());
 	}
 
-	public static ResourceLocation readNullableResourceLocation(
-			final DataInput ds) throws IOException {
+	public static ResourceLocation readNullableResourceLocation(final DataInput ds) throws IOException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -320,8 +301,7 @@ public class StreamReadWrite {
 		return new ResourceLocation(Mill.modId, ds.readUTF());
 	}
 
-	public static String readNullableString(final DataInput ds)
-			throws IOException {
+	public static String readNullableString(final DataInput ds) throws IOException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -332,8 +312,7 @@ public class StreamReadWrite {
 		return ds.readUTF();
 	}
 
-	public static VillagerRecord readNullableVillagerRecord(final MillWorld mw,
-			final DataInput ds) throws IOException {
+	public static VillagerRecord readNullableVillagerRecord(final MillWorld mw, final DataInput ds) throws IOException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -379,8 +358,7 @@ public class StreamReadWrite {
 		return vr;
 	}
 
-	public static PujaSacrifice readOrUpdateNullablePuja(final DataInput ds,
-			final Building b, PujaSacrifice puja) throws IOException {
+	public static PujaSacrifice readOrUpdateNullablePuja(final DataInput ds, final Building b, PujaSacrifice puja) throws IOException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -409,8 +387,7 @@ public class StreamReadWrite {
 		return puja;
 	}
 
-	public static HashMap<Point, Integer> readPointIntegerMap(final DataInput ds)
-			throws IOException {
+	public static HashMap<Point, Integer> readPointIntegerMap(final DataInput ds) throws IOException {
 
 		final HashMap<Point, Integer> map = new HashMap<Point, Integer>();
 
@@ -424,8 +401,7 @@ public class StreamReadWrite {
 		return map;
 	}
 
-	public static List<Point> readPointList(final DataInput ds)
-			throws IOException {
+	public static List<Point> readPointList(final DataInput ds) throws IOException {
 
 		final List<Point> v = new ArrayList<Point>();
 
@@ -438,8 +414,7 @@ public class StreamReadWrite {
 		return v;
 	}
 
-	public static Map<BuildingProject.EnumProjects, List<BuildingProject>> readProjectListList(
-			final DataInput ds, final Culture culture) throws IOException {
+	public static Map<BuildingProject.EnumProjects, List<BuildingProject>> readProjectListList(final DataInput ds, final Culture culture) throws IOException {
 
 		final Map<BuildingProject.EnumProjects, List<BuildingProject>> v = new HashMap<BuildingProject.EnumProjects, List<BuildingProject>>();
 
@@ -457,8 +432,7 @@ public class StreamReadWrite {
 		return v;
 	}
 
-	public static List<String> readStringList(final DataInput ds)
-			throws IOException {
+	public static List<String> readStringList(final DataInput ds) throws IOException {
 
 		final List<String> v = new ArrayList<String>();
 
@@ -471,8 +445,7 @@ public class StreamReadWrite {
 		return v;
 	}
 
-	public static String[][] readStringStringArray(final DataInput ds)
-			throws IOException {
+	public static String[][] readStringStringArray(final DataInput ds) throws IOException {
 
 		final String[][] strings = new String[ds.readInt()][];
 
@@ -487,8 +460,7 @@ public class StreamReadWrite {
 		return strings;
 	}
 
-	public static HashMap<String, List<String>> readStringStringListMap(
-			final DataInput ds) throws IOException {
+	public static HashMap<String, List<String>> readStringStringListMap(final DataInput ds) throws IOException {
 
 		final HashMap<String, List<String>> v = new HashMap<String, List<String>>();
 
@@ -502,8 +474,7 @@ public class StreamReadWrite {
 		return v;
 	}
 
-	public static HashMap<String, String> readStringStringMap(final DataInput ds)
-			throws IOException {
+	public static HashMap<String, String> readStringStringMap(final DataInput ds) throws IOException {
 
 		final HashMap<String, String> v = new HashMap<String, String>();
 
@@ -517,8 +488,7 @@ public class StreamReadWrite {
 		return v;
 	}
 
-	public static List<VillagerRecord> readVillagerRecordList(
-			final MillWorld mw, final DataInput ds) throws IOException {
+	public static List<VillagerRecord> readVillagerRecordList(final MillWorld mw, final DataInput ds) throws IOException {
 
 		final List<VillagerRecord> v = new ArrayList<VillagerRecord>();
 
@@ -531,8 +501,7 @@ public class StreamReadWrite {
 		return v;
 	}
 
-	public static void writeBuildingPlanInfo(final BuildingPlan plan,
-			final DataOutput data) throws IOException {
+	public static void writeBuildingPlanInfo(final BuildingPlan plan, final DataOutput data) throws IOException {
 		data.writeUTF(plan.buildingKey);
 
 		data.writeInt(plan.level);
@@ -552,9 +521,7 @@ public class StreamReadWrite {
 		StreamReadWrite.writeStringList(plan.tags, data);
 	}
 
-	public static void writeInventory(
-			final HashMap<InvItem, Integer> inventory, final DataOutput data)
-			throws IOException {
+	public static void writeInventory(final HashMap<InvItem, Integer> inventory, final DataOutput data) throws IOException {
 		data.writeInt(inventory.size());
 
 		for (final InvItem key : inventory.keySet()) {
@@ -569,19 +536,16 @@ public class StreamReadWrite {
 	 * 
 	 * Copied from Packet
 	 */
-	private static void writeItemStack(final ItemStack par1ItemStack,
-			final DataOutput par2DataOutput) throws IOException {
+	private static void writeItemStack(final ItemStack par1ItemStack, final DataOutput par2DataOutput) throws IOException {
 		if (par1ItemStack == null) {
 			par2DataOutput.writeShort(-1);
 		} else {
-			par2DataOutput
-					.writeInt(Item.getIdFromItem(par1ItemStack.getItem()));
+			par2DataOutput.writeInt(Item.getIdFromItem(par1ItemStack.getItem()));
 			par2DataOutput.writeByte(par1ItemStack.stackSize);
 			par2DataOutput.writeShort(par1ItemStack.getItemDamage());
 
 			if (par1ItemStack.getItem().isDamageable()) {
-				writeNBTTagCompound(par1ItemStack.stackTagCompound,
-						par2DataOutput);
+				writeNBTTagCompound(par1ItemStack.stackTagCompound, par2DataOutput);
 			}
 		}
 	}
@@ -591,21 +555,17 @@ public class StreamReadWrite {
 	 * 
 	 * Copied from Packet
 	 */
-	private static void writeNBTTagCompound(
-			final NBTTagCompound par1NBTTagCompound,
-			final DataOutput par2DataOutput) throws IOException {
+	private static void writeNBTTagCompound(final NBTTagCompound par1NBTTagCompound, final DataOutput par2DataOutput) throws IOException {
 		if (par1NBTTagCompound == null) {
 			par2DataOutput.writeShort(-1);
 		} else {
-			final byte[] var3 = CompressedStreamTools
-					.compress(par1NBTTagCompound);
+			final byte[] var3 = CompressedStreamTools.compress(par1NBTTagCompound);
 			par2DataOutput.writeShort((short) var3.length);
 			par2DataOutput.write(var3);
 		}
 	}
 
-	public static void writeNullableBuildingLocation(final BuildingLocation bl,
-			final DataOutput data) throws IOException {
+	public static void writeNullableBuildingLocation(final BuildingLocation bl, final DataOutput data) throws IOException {
 
 		data.writeBoolean(bl == null);
 
@@ -651,8 +611,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeNullableBuildingProject(final BuildingProject bp,
-			final DataOutput data) throws IOException {
+	public static void writeNullableBuildingProject(final BuildingProject bp, final DataOutput data) throws IOException {
 
 		data.writeBoolean(bp == null);
 
@@ -663,8 +622,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeNullableGoods(final Goods g, final DataOutput data)
-			throws IOException {
+	public static void writeNullableGoods(final Goods g, final DataOutput data) throws IOException {
 		data.writeBoolean(g == null);
 
 		if (g != null) {
@@ -677,8 +635,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeNullableItemStack(final ItemStack is,
-			final DataOutput data) throws IOException {
+	public static void writeNullableItemStack(final ItemStack is, final DataOutput data) throws IOException {
 
 		data.writeBoolean(is == null);
 
@@ -687,8 +644,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeNullablePoint(final Point p, final DataOutput data)
-			throws IOException {
+	public static void writeNullablePoint(final Point p, final DataOutput data) throws IOException {
 		data.writeBoolean(p == null);
 
 		if (p != null) {
@@ -698,8 +654,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeNullablePuja(final PujaSacrifice puja,
-			final DataOutput data) throws IOException {
+	public static void writeNullablePuja(final PujaSacrifice puja, final DataOutput data) throws IOException {
 		data.writeBoolean(puja == null);
 		if (puja != null) {
 
@@ -716,8 +671,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeNullableQuestInstance(final QuestInstance qi,
-			final DataOutput ds) throws IOException {
+	public static void writeNullableQuestInstance(final QuestInstance qi, final DataOutput ds) throws IOException {
 		ds.writeBoolean(qi == null);
 
 		if (qi != null) {
@@ -731,15 +685,12 @@ public class StreamReadWrite {
 			ds.writeByte(qi.villagers.size());
 			for (final String key : qi.villagers.keySet()) {
 				ds.writeUTF(key);
-				StreamReadWrite.writeNullableQuestVillager(
-						qi.villagers.get(key), ds);
+				StreamReadWrite.writeNullableQuestVillager(qi.villagers.get(key), ds);
 			}
 		}
 	}
 
-	public static void writeNullableQuestVillager(
-			final QuestInstanceVillager v, final DataOutput data)
-			throws IOException {
+	public static void writeNullableQuestVillager(final QuestInstanceVillager v, final DataOutput data) throws IOException {
 		data.writeBoolean(v == null);
 
 		if (v != null) {
@@ -748,8 +699,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeNullableResourceLocation(final ResourceLocation rs,
-			final DataOutput data) throws IOException {
+	public static void writeNullableResourceLocation(final ResourceLocation rs, final DataOutput data) throws IOException {
 
 		data.writeBoolean(rs == null);
 
@@ -758,8 +708,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeNullableString(final String s, final DataOutput data)
-			throws IOException {
+	public static void writeNullableString(final String s, final DataOutput data) throws IOException {
 
 		data.writeBoolean(s == null);
 
@@ -768,8 +717,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeNullableVillagerRecord(final VillagerRecord vr,
-			final DataOutput data) throws IOException {
+	public static void writeNullableVillagerRecord(final VillagerRecord vr, final DataOutput data) throws IOException {
 
 		data.writeBoolean(vr == null);
 
@@ -810,8 +758,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writePointIntegerMap(final HashMap<Point, Integer> map,
-			final DataOutput data) throws IOException {
+	public static void writePointIntegerMap(final HashMap<Point, Integer> map, final DataOutput data) throws IOException {
 		data.writeInt(map.size());
 
 		for (final Point p : map.keySet()) {
@@ -820,8 +767,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writePointList(final List<Point> points,
-			final DataOutput data) throws IOException {
+	public static void writePointList(final List<Point> points, final DataOutput data) throws IOException {
 		data.writeInt(points.size());
 
 		for (final Point p : points) {
@@ -829,9 +775,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeProjectListList(
-			final Map<EnumProjects, List<BuildingProject>> projects,
-			final DataOutput data) throws IOException {
+	public static void writeProjectListList(final Map<EnumProjects, List<BuildingProject>> projects, final DataOutput data) throws IOException {
 
 		data.writeInt(EnumProjects.values().length);
 
@@ -848,8 +792,7 @@ public class StreamReadWrite {
 
 	}
 
-	public static void writeStringList(final List<String> strings,
-			final DataOutput data) throws IOException {
+	public static void writeStringList(final List<String> strings, final DataOutput data) throws IOException {
 		data.writeInt(strings.size());
 
 		for (final String s : strings) {
@@ -857,8 +800,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeStringStringArray(final String[][] strings,
-			final DataOutput data) throws IOException {
+	public static void writeStringStringArray(final String[][] strings, final DataOutput data) throws IOException {
 		data.writeInt(strings.length);
 
 		for (final String[] array : strings) {
@@ -869,9 +811,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeStringStringListMap(
-			final Map<String, List<String>> strings, final DataOutput data)
-			throws IOException {
+	public static void writeStringStringListMap(final Map<String, List<String>> strings, final DataOutput data) throws IOException {
 
 		if (strings == null) {
 			data.writeInt(0);
@@ -886,8 +826,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeStringStringMap(final Map<String, String> strings,
-			final DataOutput data) throws IOException {
+	public static void writeStringStringMap(final Map<String, String> strings, final DataOutput data) throws IOException {
 
 		if (strings == null) {
 			data.writeInt(0);
@@ -902,9 +841,7 @@ public class StreamReadWrite {
 		}
 	}
 
-	public static void writeVillagerRecordList(
-			final List<VillagerRecord> vrecords, final DataOutput data)
-			throws IOException {
+	public static void writeVillagerRecordList(final List<VillagerRecord> vrecords, final DataOutput data) throws IOException {
 		data.writeInt(vrecords.size());
 
 		for (final VillagerRecord vr : vrecords) {

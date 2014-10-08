@@ -13,8 +13,7 @@ public class PathingPathCalcTile {
 	public short[] position;
 
 	// constructor for a chunk
-	public PathingPathCalcTile(final boolean walkable, final boolean lad,
-			final short[] pos) {
+	public PathingPathCalcTile(final boolean walkable, final boolean lad, final short[] pos) {
 		this.ladder = lad;
 		// securing that no tile is ladder and walkable at the same time
 		if (this.ladder == true) {

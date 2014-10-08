@@ -20,8 +20,7 @@ public class EntityTargetedBlaze extends EntityBlaze {
 		return false;
 	}
 
-	private boolean isCourseTraversable(final double par1, final double par3,
-			final double par5, final double par7) {
+	private boolean isCourseTraversable(final double par1, final double par3, final double par5, final double par7) {
 		final double d4 = (this.target.x - this.posX) / par7;
 		final double d5 = (this.target.y - this.posY) / par7;
 		final double d6 = (this.target.z - this.posZ) / par7;
@@ -30,8 +29,7 @@ public class EntityTargetedBlaze extends EntityBlaze {
 		for (int i = 1; i < par7; ++i) {
 			axisalignedbb.offset(d4, d5, d6);
 
-			if (!this.worldObj.getCollidingBoundingBoxes(this, axisalignedbb)
-					.isEmpty()) {
+			if (!this.worldObj.getCollidingBoundingBoxes(this, axisalignedbb).isEmpty()) {
 				return false;
 			}
 		}

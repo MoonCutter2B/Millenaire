@@ -44,8 +44,7 @@ public class RenderMillVillager extends RenderBiped {
 		}
 	}
 
-	private void displayText(final String text, final float scale,
-			final int colour, final float x, final float y, final float z) {
+	private void displayText(final String text, final float scale, final int colour, final float x, final float y, final float z) {
 		final FontRenderer fontrenderer = getFontRendererFromRenderManager();
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, z);
@@ -69,8 +68,7 @@ public class RenderMillVillager extends RenderBiped {
 		tessellator.addVertex(textWidth + 1, -1, 0.0D);
 		tessellator.draw();
 		GL11.glEnable(3553 /* GL_TEXTURE_2D */);
-		fontrenderer.drawString(text, -fontrenderer.getStringWidth(text) / 2,
-				0, colour);
+		fontrenderer.drawString(text, -fontrenderer.getStringWidth(text) / 2, 0, colour);
 		GL11.glEnable(2929 /* GL_DEPTH_TEST */);
 		GL11.glDepthMask(true);
 		// fontrenderer.drawString(text, -fontrenderer.getStringWidth(text) / 2,
@@ -82,8 +80,7 @@ public class RenderMillVillager extends RenderBiped {
 	}
 
 	@Override
-	public void doRender(final Entity entity, final double d, final double d1,
-			final double d2, final float f, final float f1) {
+	public void doRender(final Entity entity, final double d, final double d1, final double d2, final float f, final float f1) {
 
 		final MillVillager villager = (MillVillager) entity;
 
@@ -98,15 +95,13 @@ public class RenderMillVillager extends RenderBiped {
 		doRenderVillagerName(villager, d, d1, d2);
 	}
 
-	public void doRenderVillagerName(final MillVillager villager, double x,
-			final double y, double z) {
+	public void doRenderVillagerName(final MillVillager villager, double x, final double y, double z) {
 
 		float villagerSize = villager.scale * 2;
 
 		if (villager.shouldLieDown) {
 
-			final double height = villager.boundingBox.maxY
-					- villager.boundingBox.minY;
+			final double height = villager.boundingBox.maxY - villager.boundingBox.minY;
 
 			final float angle = villager.getBedOrientationInDegrees();
 
@@ -128,17 +123,13 @@ public class RenderMillVillager extends RenderBiped {
 			villagerSize = 0.5f;
 		}
 
-		final UserProfile profile = Mill.clientWorld.getProfile(Mill.proxy
-				.getTheSinglePlayer().getDisplayName());
+		final UserProfile profile = Mill.clientWorld.getProfile(Mill.proxy.getTheSinglePlayer().getDisplayName());
 
-		final float f4 = villager
-				.getDistanceToEntity(renderManager.livingPlayer);
+		final float f4 = villager.getDistanceToEntity(renderManager.livingPlayer);
 
 		if (f4 < MLN.VillagersNamesDistance) {
-			final String gameSpeech = villager.getGameSpeech(Mill.proxy
-					.getTheSinglePlayer().getDisplayName());
-			final String nativeSpeech = villager.getNativeSpeech(Mill.proxy
-					.getTheSinglePlayer().getDisplayName());
+			final String gameSpeech = villager.getGameSpeech(Mill.proxy.getTheSinglePlayer().getDisplayName());
+			final String nativeSpeech = villager.getNativeSpeech(Mill.proxy.getTheSinglePlayer().getDisplayName());
 
 			// gameSpeech=villager.speech_key+"_"+villager.speech_variant;
 			// nativeSpeech=""
@@ -146,13 +137,9 @@ public class RenderMillVillager extends RenderBiped {
 
 			float height = LINE_HEIGHT;
 
-			if (MLN.DEV
-					&& Mill.serverWorlds.size() > 0
-					&& Mill.serverWorlds.get(0).villagers
-							.containsKey(villager.villager_id) && !MLN.DEV) {
+			if (MLN.DEV && Mill.serverWorlds.size() > 0 && Mill.serverWorlds.get(0).villagers.containsKey(villager.villager_id) && !MLN.DEV) {
 
-				final MillVillager dv = Mill.serverWorlds.get(0).villagers
-						.get(villager.villager_id);
+				final MillVillager dv = Mill.serverWorlds.get(0).villagers.get(villager.villager_id);
 
 				final AS_PathEntity pe = dv.pathEntity;
 
@@ -163,13 +150,10 @@ public class RenderMillVillager extends RenderBiped {
 						if (pp.length > 0) {
 
 							String s = "";
-							for (int i = pe.getCurrentPathIndex(); i < pp.length
-									&& i < pe.getCurrentPathIndex() + 5; i++) {
+							for (int i = pe.getCurrentPathIndex(); i < pp.length && i < pe.getCurrentPathIndex() + 5; i++) {
 								s += "(" + pp[i] + ") ";
 							}
-							displayText(s, SCALE, 0xa0ffffff, (float) x,
-									(float) y + villagerSize + height,
-									(float) z);
+							displayText(s, SCALE, 0xa0ffffff, (float) x, (float) y + villagerSize + height, (float) z);
 							height += LINE_HEIGHT;
 						}
 					}
@@ -178,74 +162,29 @@ public class RenderMillVillager extends RenderBiped {
 						if (pe.getCurrentPathLength() > 0) {
 
 							displayText(
-									"Path: "
-											+ pe.getCurrentPathLength()
-											+ " end: "
-											+ pe.getCurrentTargetPathPoint()
-											+ " dist: "
-											+ Math.round(villager
-													.getPos()
-													.horizontalDistanceTo(
-															pe.getFinalPathPoint()) * 10)
-											/ 10 + " index: "
-											+ pe.getCurrentPathIndex() + " "
-											+ dv.hasPath() + " PF: "
-											+ dv.pathfailure + ", stuck: "
-											+ dv.longDistanceStuck, SCALE,
-									0xa0ffffff, (float) x, (float) y
-											+ villagerSize + height, (float) z);
+									"Path: " + pe.getCurrentPathLength() + " end: " + pe.getCurrentTargetPathPoint() + " dist: "
+											+ Math.round(villager.getPos().horizontalDistanceTo(pe.getFinalPathPoint()) * 10) / 10 + " index: " + pe.getCurrentPathIndex() + " " + dv.hasPath()
+											+ " PF: " + dv.pathfailure + ", stuck: " + dv.longDistanceStuck, SCALE, 0xa0ffffff, (float) x, (float) y + villagerSize + height, (float) z);
 						} else {
-							displayText("Empty path" + " PF: " + dv.pathfailure
-									+ ", stuck: " + dv.longDistanceStuck,
-									SCALE, 0xa0ffffff, (float) x, (float) y
-											+ villagerSize + height, (float) z);
+							displayText("Empty path" + " PF: " + dv.pathfailure + ", stuck: " + dv.longDistanceStuck, SCALE, 0xa0ffffff, (float) x, (float) y + villagerSize + height, (float) z);
 						}
 						height += LINE_HEIGHT;
 					}
 
 				} else {
-					displayText("Null path entity, PF: " + dv.pathfailure
-							+ ", stuck: " + dv.longDistanceStuck, SCALE,
-							0xa0ffffff, (float) x, (float) y + villagerSize
-									+ height, (float) z);
+					displayText("Null path entity, PF: " + dv.pathfailure + ", stuck: " + dv.longDistanceStuck, SCALE, 0xa0ffffff, (float) x, (float) y + villagerSize + height, (float) z);
 					height += LINE_HEIGHT;
 				}
 				if (dv.getEntityToAttack() == null) {
 					displayText(
-							"Pos: "
-									+ dv.getPos()
-									+ " Path dest: "
-									+ dv.getPathDestPoint()
-									+ " Goal dest: "
-									+ dv.getGoalDestPoint()
-									+ " dist: "
-									+ Math.round(dv.getPos()
-											.horizontalDistanceTo(
-													dv.getPathDestPoint()) * 10)
-									/ 10 + " sm: " + dv.stopMoving
-									+ " jps busy: "
-									+ dv.jpsPathPlanner.isBusy(), SCALE,
-							0xa0ffffff, (float) x, (float) y + villagerSize
-									+ height, (float) z);
+							"Pos: " + dv.getPos() + " Path dest: " + dv.getPathDestPoint() + " Goal dest: " + dv.getGoalDestPoint() + " dist: "
+									+ Math.round(dv.getPos().horizontalDistanceTo(dv.getPathDestPoint()) * 10) / 10 + " sm: " + dv.stopMoving + " jps busy: " + dv.jpsPathPlanner.isBusy(), SCALE,
+							0xa0ffffff, (float) x, (float) y + villagerSize + height, (float) z);
 				} else {
 					displayText(
-							"Pos: "
-									+ dv.getPos()
-									+ " Entity: "
-									+ dv.getEntityToAttack()
-									+ " dest: "
-									+ new Point(dv.getEntityToAttack())
-									+ " dist: "
-									+ Math.round(dv
-											.getPos()
-											.horizontalDistanceTo(
-													new Point(
-															dv.getEntityToAttack())) * 10)
-									/ 10 + " sm: " + dv.stopMoving
-									+ " jps busy: "
-									+ dv.jpsPathPlanner.isBusy(), SCALE,
-							0xa0ffffff, (float) x, (float) y + villagerSize
-									+ height, (float) z);
+							"Pos: " + dv.getPos() + " Entity: " + dv.getEntityToAttack() + " dest: " + new Point(dv.getEntityToAttack()) + " dist: "
+									+ Math.round(dv.getPos().horizontalDistanceTo(new Point(dv.getEntityToAttack())) * 10) / 10 + " sm: " + dv.stopMoving + " jps busy: " + dv.jpsPathPlanner.isBusy(),
+							SCALE, 0xa0ffffff, (float) x, (float) y + villagerSize + height, (float) z);
 				}
 
 				height += LINE_HEIGHT;
@@ -256,16 +195,14 @@ public class RenderMillVillager extends RenderBiped {
 					final List<String> lines = new ArrayList<String>();
 					String line = gameSpeech;
 					while (line.length() > LINE_SIZE) {
-						final String subLine = line.substring(0,
-								line.lastIndexOf(' ', LINE_SIZE));
+						final String subLine = line.substring(0, line.lastIndexOf(' ', LINE_SIZE));
 						line = line.substring(subLine.length()).trim();
 						lines.add(subLine);
 					}
 					lines.add(line);
 
 					for (int i = lines.size() - 1; i >= 0; i--) {
-						displayText(lines.get(i), SCALE, 0xa0DC6E7B, (float) x,
-								(float) y + villagerSize + height, (float) z);
+						displayText(lines.get(i), SCALE, 0xa0DC6E7B, (float) x, (float) y + villagerSize + height, (float) z);
 						height += LINE_HEIGHT;
 					}
 				}
@@ -273,61 +210,45 @@ public class RenderMillVillager extends RenderBiped {
 					final List<String> lines = new ArrayList<String>();
 					String line = nativeSpeech;
 					while (line.length() > LINE_SIZE) {
-						final String subLine = line.substring(0,
-								line.lastIndexOf(' ', LINE_SIZE));
+						final String subLine = line.substring(0, line.lastIndexOf(' ', LINE_SIZE));
 						line = line.substring(subLine.length()).trim();
 						lines.add(subLine);
 					}
 					lines.add(line);
 
 					for (int i = lines.size() - 1; i >= 0; i--) {
-						displayText(lines.get(i), SCALE, 0xa0706EDC, (float) x,
-								(float) y + villagerSize + height, (float) z);
+						displayText(lines.get(i), SCALE, 0xa0706EDC, (float) x, (float) y + villagerSize + height, (float) z);
 						height += LINE_HEIGHT;
 					}
 				}
 
-				if (MLN.displayNames
-						&& Goal.goals.containsKey(villager.goalKey)) {
-					displayText(
-							Goal.goals.get(villager.goalKey).gameName(villager),
-							SCALE, 0xa0DCCA6E, (float) x, (float) y
-									+ villagerSize + height, (float) z);
+				if (MLN.displayNames && Goal.goals.containsKey(villager.goalKey)) {
+					displayText(Goal.goals.get(villager.goalKey).gameName(villager), SCALE, 0xa0DCCA6E, (float) x, (float) y + villagerSize + height, (float) z);
 					height += LINE_HEIGHT;
 				}
 
 				if (profile.villagersInQuests.containsKey(villager.villager_id)) {
-					final QuestInstance qi = profile.villagersInQuests
-							.get(villager.villager_id);
+					final QuestInstance qi = profile.villagersInQuests.get(villager.villager_id);
 					if (qi.getCurrentVillager().id == villager.villager_id) {
-						displayText("[" + qi.getLabel(profile) + "]", SCALE,
-								0xa0dddddd, (float) x, (float) y + villagerSize
-										+ height, (float) z);
+						displayText("[" + qi.getLabel(profile) + "]", SCALE, 0xa0dddddd, (float) x, (float) y + villagerSize + height, (float) z);
 						height += LINE_HEIGHT;
 					}
 				}
 
 				if (villager.isRaider) {
-					displayText(MLN.string("ui.raider"), SCALE, 0xa0FF6E7B,
-							(float) x, (float) y + villagerSize + height,
-							(float) z);
+					displayText(MLN.string("ui.raider"), SCALE, 0xa0FF6E7B, (float) x, (float) y + villagerSize + height, (float) z);
 					height += LINE_HEIGHT;
 				}
 
 				if (villager.vtype.showHealth) {
-					displayText(
-							MLN.string("hire.health") + ": "
-									+ villager.getHealth() * 0.5 + "/"
-									+ villager.getMaxHealth() * 0.5, SCALE,
-							0xa0dddddd, (float) x, (float) y + villagerSize
-									+ height, (float) z);
+					displayText(MLN.string("hire.health") + ": " + villager.getHealth() * 0.5 + "/" + villager.getMaxHealth() * 0.5, SCALE, 0xa0dddddd, (float) x, (float) y + villagerSize + height,
+							(float) z);
 					height += LINE_HEIGHT;
 				}
 
 			} else if (villager.hiredBy.equals(profile.playerName)) {
 				String s;
-				s = MLN.string("hire.health") + ": " + villager.getHealth()
-						* 0.5 + "/" + villager.getMaxHealth() * 0.5;
+				s = MLN.string("hire.health") + ": " + villager.getHealth() * 0.5 + "/" + villager.getMaxHealth() * 0.5;
 
 				if (villager.aggressiveStance) {
 					s = s + " - " + MLN.string("hire.aggressive");
@@ -335,49 +256,36 @@ public class RenderMillVillager extends RenderBiped {
 					s = s + " - " + MLN.string("hire.passive");
 				}
 
-				displayText(s, SCALE, 0xa0DCCA6E, (float) x, (float) y
-						+ villagerSize + height, (float) z);
+				displayText(s, SCALE, 0xa0DCCA6E, (float) x, (float) y + villagerSize + height, (float) z);
 				height += LINE_HEIGHT;
 
-				s = MLN.string(
-						"hire.timeleft",
-						""
-								+ Math.round((villager.hiredUntil - villager.worldObj
-										.getWorldTime()) / 1000));
+				s = MLN.string("hire.timeleft", "" + Math.round((villager.hiredUntil - villager.worldObj.getWorldTime()) / 1000));
 
-				displayText(s, SCALE, 0xa0dddddd, (float) x, (float) y
-						+ villagerSize + height, (float) z);
+				displayText(s, SCALE, 0xa0dddddd, (float) x, (float) y + villagerSize + height, (float) z);
 				height += LINE_HEIGHT;
 			} else {
 				final String s = MLN.string("hire.hiredby", villager.hiredBy);
 
-				displayText(s, SCALE, 0xa0dddddd, (float) x, (float) y
-						+ villagerSize + height, (float) z);
+				displayText(s, SCALE, 0xa0dddddd, (float) x, (float) y + villagerSize + height, (float) z);
 				height += LINE_HEIGHT;
 			}
 
 			if (MLN.displayNames && !villager.vtype.hideName) {
-				displayText(
-						villager.getName() + ", "
-								+ villager.getNativeOccupationName(), SCALE,
-						0xa0ffffff, (float) x, (float) y + villagerSize
-								+ height, (float) z);
+				displayText(villager.getName() + ", " + villager.getNativeOccupationName(), SCALE, 0xa0ffffff, (float) x, (float) y + villagerSize + height, (float) z);
 			}
 
 		}
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(
-			final EntityLiving par1EntityLiving) {
+	protected ResourceLocation getEntityTexture(final EntityLiving par1EntityLiving) {
 		final MillVillager villager = (MillVillager) par1EntityLiving;
 
 		return villager.texture;
 	}
 
 	@Override
-	protected void preRenderCallback(final EntityLivingBase entityliving,
-			final float f) {
+	protected void preRenderCallback(final EntityLivingBase entityliving, final float f) {
 		preRenderScale((MillVillager) entityliving, f);
 	}
 
@@ -386,8 +294,7 @@ public class RenderMillVillager extends RenderBiped {
 	}
 
 	@Override
-	protected void rotateCorpse(final EntityLivingBase par1EntityLiving,
-			final float par2, final float par3, final float par4) {
+	protected void rotateCorpse(final EntityLivingBase par1EntityLiving, final float par2, final float par3, final float par4) {
 
 		final MillVillager v = (MillVillager) par1EntityLiving;
 
@@ -401,12 +308,10 @@ public class RenderMillVillager extends RenderBiped {
 		}
 	}
 
-	protected int setClothModel(final MillVillager villager,
-			final int clothPartID, final float f) {
+	protected int setClothModel(final MillVillager villager, final int clothPartID, final float f) {
 
 		try {
-			final ResourceLocation clothTexture = villager
-					.getClothTexturePath();
+			final ResourceLocation clothTexture = villager.getClothTexturePath();
 
 			if (clothTexture == null) {
 				modelCloth.bipedHead.showModel = false;
@@ -446,11 +351,9 @@ public class RenderMillVillager extends RenderBiped {
 	}
 
 	@Override
-	protected int shouldRenderPass(final EntityLivingBase entityliving,
-			final int i, final float f) {
+	protected int shouldRenderPass(final EntityLivingBase entityliving, final int i, final float f) {
 
-		final int armourRes = this.shouldRenderPass(
-				(EntityLiving) entityliving, i, f);
+		final int armourRes = this.shouldRenderPass((EntityLiving) entityliving, i, f);
 		int clothRes = -1;
 
 		if (i == 0) {

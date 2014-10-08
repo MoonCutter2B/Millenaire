@@ -100,14 +100,11 @@ public class PathingBinary {
 		cache = new HashMap<PathKey, CachedPath>();
 	}
 
-	public List<PathPoint> calculatePath(final Building building,
-			final MillVillager villager, final Point start, final Point dest,
-			final boolean extraLog) throws Exception {
+	public List<PathPoint> calculatePath(final Building building, final MillVillager villager, final Point start, final Point dest, final boolean extraLog) throws Exception {
 
 		long startTime = System.nanoTime();
 
-		final PathKey key = new PathKey(start.getPathPoint(),
-				dest.getPathPoint());
+		final PathKey key = new PathKey(start.getPathPoint(), dest.getPathPoint());
 
 		if (cache.containsKey(key)) {
 			if (cache.get(key) == null) {
@@ -116,26 +113,14 @@ public class PathingBinary {
 			return cache.get(key).path;
 		}
 
-		short[] startCoord = new short[] {
-				(short) (start.getiX() - surfaceXstart),
-				(short) (building.getAltitude(start.getiX(), start.getiZ())
-						- surfaceYstart - 1),
+		short[] startCoord = new short[] { (short) (start.getiX() - surfaceXstart), (short) (building.getAltitude(start.getiX(), start.getiZ()) - surfaceYstart - 1),
 				(short) (start.getiZ() - surfaceZstart) };
-		short[] endCoord = new short[] {
-				(short) (dest.getiX() - surfaceXstart),
-				(short) (building.getAltitude(dest.getiX(), dest.getiZ())
-						- surfaceYstart - 1),
-				(short) (dest.getiZ() - surfaceZstart) };
+		short[] endCoord = new short[] { (short) (dest.getiX() - surfaceXstart), (short) (building.getAltitude(dest.getiX(), dest.getiZ()) - surfaceYstart - 1), (short) (dest.getiZ() - surfaceZstart) };
 
 		startCoord = validatePoint(startCoord);
 		if (startCoord == null) {
 			if (MLN.LogConnections >= MLN.MAJOR) {
-				MLN.major(
-						this,
-						"No valid start found from " + start + " to " + dest
-								+ " for " + villager + ": "
-								+ (double) (System.nanoTime() - startTime)
-								/ 1000000);
+				MLN.major(this, "No valid start found from " + start + " to " + dest + " for " + villager + ": " + (double) (System.nanoTime() - startTime) / 1000000);
 			}
 			cache.put(key, null);
 			return null;
@@ -144,33 +129,21 @@ public class PathingBinary {
 		endCoord = validatePoint(endCoord);
 		if (endCoord == null) {
 			if (MLN.LogConnections >= MLN.MAJOR) {
-				MLN.major(
-						this,
-						"No valid dest found from " + start + " to " + dest
-								+ " for " + villager + ": "
-								+ (double) (System.nanoTime() - startTime)
-								/ 1000000);
+				MLN.major(this, "No valid dest found from " + start + " to " + dest + " for " + villager + ": " + (double) (System.nanoTime() - startTime) / 1000000);
 			}
 			cache.put(key, null);
 			return null;
 		}
 
 		if (MLN.LogConnections >= MLN.MAJOR) {
-			MLN.major(
-					this,
-					"Time to find start and end: "
-							+ (double) (System.nanoTime() - startTime)
-							/ 1000000);
+			MLN.major(this, "Time to find start and end: " + (double) (System.nanoTime() - startTime) / 1000000);
 		}
 		startTime = System.nanoTime();
 
 		if (MLN.DEV) {
-			final File file = new File(Mill.proxy.getBaseDir(), "paths_"
-					+ this.hashCode() + ".txt");
+			final File file = new File(Mill.proxy.getBaseDir(), "paths_" + this.hashCode() + ".txt");
 			final FileWriter writer = new FileWriter(file, true);
-			writer.write(startCoord[0] + "/" + startCoord[1] + "/"
-					+ startCoord[2] + ";" + endCoord[0] + "/" + endCoord[1]
-					+ "/" + endCoord[2] + EOL);
+			writer.write(startCoord[0] + "/" + startCoord[1] + "/" + startCoord[2] + ";" + endCoord[0] + "/" + endCoord[1] + "/" + endCoord[2] + EOL);
 			writer.flush();
 			writer.close();
 		}
@@ -178,22 +151,15 @@ public class PathingBinary {
 		final List<short[]> binaryPath = surface.getPath(startCoord, endCoord);
 
 		if (MLN.DEV) {
-			final File file = new File(Mill.proxy.getBaseDir(), "paths_"
-					+ this.hashCode() + ".txt");
+			final File file = new File(Mill.proxy.getBaseDir(), "paths_" + this.hashCode() + ".txt");
 			final FileWriter writer = new FileWriter(file, true);
-			writer.write("//result of getPath: "
-					+ (binaryPath == null ? "null" : binaryPath.size())
-					+ " time: " + (double) (System.nanoTime() - startTime)
-					/ 1000000 + EOL);
+			writer.write("//result of getPath: " + (binaryPath == null ? "null" : binaryPath.size()) + " time: " + (double) (System.nanoTime() - startTime) / 1000000 + EOL);
 			writer.flush();
 			writer.close();
 		}
 
 		if (MLN.LogConnections >= MLN.MAJOR) {
-			MLN.major(this, "Time to calculate path from " + start + " to "
-					+ dest + " for " + villager
-					+ " with binary pathing (result: "
-					+ (binaryPath == null ? "null" : binaryPath.size()) + "): "
+			MLN.major(this, "Time to calculate path from " + start + " to " + dest + " for " + villager + " with binary pathing (result: " + (binaryPath == null ? "null" : binaryPath.size()) + "): "
 					+ (double) (System.nanoTime() - startTime) / 1000000);
 		}
 
@@ -205,15 +171,13 @@ public class PathingBinary {
 		final List<PathPoint> path = new ArrayList<PathPoint>();
 
 		for (final short[] p : binaryPath) {
-			path.add(new PathPoint(p[0] + surfaceXstart, p[1] + surfaceYstart
-					+ 1, p[2] + surfaceZstart));
+			path.add(new PathPoint(p[0] + surfaceXstart, p[1] + surfaceYstart + 1, p[2] + surfaceZstart));
 		}
 
 		cache.put(key, new CachedPath(path));
 
 		for (int i = 0; i < path.size() - 1; i++) {
-			cache.put(new PathKey(path.get(i), path.get(path.size() - 1)),
-					new CachedPath(path.subList(i, path.size())));
+			cache.put(new PathKey(path.get(i), path.get(path.size() - 1)), new CachedPath(path.subList(i, path.size())));
 		}
 
 		return path;
@@ -223,8 +187,7 @@ public class PathingBinary {
 		return surface != null;
 	}
 
-	public void updatePathing(final Point centre, final int hradius,
-			final int vradius) {
+	public void updatePathing(final Point centre, final int hradius, final int vradius) {
 		long startTime = System.nanoTime();
 
 		final PathingPathCalcTile[][][] region = new PathingPathCalcTile[hradius * 2][vradius * 2][hradius * 2];
@@ -236,34 +199,24 @@ public class PathingBinary {
 		for (short i = 0; i < region.length; i++) {
 			for (short j = 0; j < region[0].length; j++) {
 				for (short k = 0; k < region[0][0].length; k++) {
-					final Block block = world.getBlock(surfaceXstart + i,
-							surfaceYstart + j, surfaceZstart + k);
+					final Block block = world.getBlock(surfaceXstart + i, surfaceYstart + j, surfaceZstart + k);
 					// if (bid==Blocks.ladder.blockID) {
 					// region[i][j][k]=new MLPathingPathCalcTile(true, true, new
 					// short[]{i,j,k});
 					// } else
-					if (block == Blocks.flowing_water || block == Blocks.water
-							|| block == Blocks.lava
-							|| block == Blocks.flowing_lava
-							|| block == Blocks.fence) {
-						region[i][j][k] = new PathingPathCalcTile(false, false,
-								new short[] { i, j, k });
-					} else if (block == Blocks.air
-							|| !block.getMaterial().blocksMovement()) {
+					if (block == Blocks.flowing_water || block == Blocks.water || block == Blocks.lava || block == Blocks.flowing_lava || block == Blocks.fence) {
+						region[i][j][k] = new PathingPathCalcTile(false, false, new short[] { i, j, k });
+					} else if (block == Blocks.air || !block.getMaterial().blocksMovement()) {
 						region[i][j][k] = null;
 					} else {
-						region[i][j][k] = new PathingPathCalcTile(true, false,
-								new short[] { i, j, k });
+						region[i][j][k] = new PathingPathCalcTile(true, false, new short[] { i, j, k });
 					}
 				}
 			}
 		}
 
 		if (MLN.LogConnections >= MLN.MAJOR) {
-			MLN.major(this,
-					"Time to generate region: "
-							+ (double) (System.nanoTime() - startTime)
-							/ 1000000);
+			MLN.major(this, "Time to generate region: " + (double) (System.nanoTime() - startTime) / 1000000);
 		}
 
 		startTime = System.nanoTime();
@@ -271,20 +224,16 @@ public class PathingBinary {
 		surface = new PathingSurface(region, region[hradius][vradius][hradius]);
 
 		if (MLN.LogConnections >= MLN.MAJOR) {
-			MLN.major(this, "Time taken to compute surface: "
-					+ (double) (System.nanoTime() - startTime) / 1000000);
+			MLN.major(this, "Time taken to compute surface: " + (double) (System.nanoTime() - startTime) / 1000000);
 		}
 
 		if (MLN.DEV) {
 
-			final File file = new File(Mill.proxy.getBaseDir(), "region_"
-					+ this.hashCode() + ".txt");
+			final File file = new File(Mill.proxy.getBaseDir(), "region_" + this.hashCode() + ".txt");
 
 			try {
-				final BufferedWriter writer = MillCommonUtilities
-						.getWriter(file);
-				writer.write(region.length + "/" + region[0].length + "/"
-						+ region[0][0].length + EOL);
+				final BufferedWriter writer = MillCommonUtilities.getWriter(file);
+				writer.write(region.length + "/" + region[0].length + "/" + region[0][0].length + EOL);
 
 				for (short j = 0; j < region[0].length; j++) {
 					writer.write(EOL);
@@ -317,8 +266,7 @@ public class PathingBinary {
 	private short[] validatePoint(final short[] p) {
 
 		if (MLN.LogConnections >= MLN.MAJOR) {
-			MLN.major(this, "Validating point: " + p[0] + "/" + p[1] + "/"
-					+ p[2]);
+			MLN.major(this, "Validating point: " + p[0] + "/" + p[1] + "/" + p[2]);
 		}
 
 		writeLine(p[0] + "/" + p[1] + "/" + p[2]);
@@ -354,29 +302,19 @@ public class PathingBinary {
 					for (short k = 10; k > -10; k--) {
 						// let's check that the block is solid and the two above
 						// are not:
-						if (MillCommonUtilities.isBlockIdSolid(world.getBlock(
-								p[0] + i, p[1] + k, p[2] + j))
-								&& !MillCommonUtilities.isBlockIdSolid(world
-										.getBlock(p[0] + i, p[1] + k + 1, p[2]
-												+ j))
-								&& !MillCommonUtilities.isBlockIdSolid(world
-										.getBlock(p[0] + i, p[1] + k + 2, p[2]
-												+ j))) {
+						if (MillCommonUtilities.isBlockIdSolid(world.getBlock(p[0] + i, p[1] + k, p[2] + j)) && !MillCommonUtilities.isBlockIdSolid(world.getBlock(p[0] + i, p[1] + k + 1, p[2] + j))
+								&& !MillCommonUtilities.isBlockIdSolid(world.getBlock(p[0] + i, p[1] + k + 2, p[2] + j))) {
 
 							newP[1] = (short) (p[1] + k);
 							if (MLN.DEV) {
-								writeLine(newP[0] + "/" + newP[1] + "/"
-										+ newP[2]);
+								writeLine(newP[0] + "/" + newP[1] + "/" + newP[2]);
 								res = surface.contains(newP);
-								writeLine("//result of surface.contains: "
-										+ res);
+								writeLine("//result of surface.contains: " + res);
 							}
 
 							if (res) {
 								if (MLN.LogConnections >= MLN.MAJOR) {
-									MLN.major(this,
-											"Found valid point. offset: " + i
-													+ "/" + k + "/" + j);
+									MLN.major(this, "Found valid point. offset: " + i + "/" + k + "/" + j);
 								}
 								return newP;
 							}
@@ -391,8 +329,7 @@ public class PathingBinary {
 
 	private void writeLine(final String s) {
 		try {
-			final File file = new File(Mill.proxy.getBaseDir(), "paths_"
-					+ this.hashCode() + ".txt");
+			final File file = new File(Mill.proxy.getBaseDir(), "paths_" + this.hashCode() + ".txt");
 			final FileWriter writer = new FileWriter(file, true);
 			writer.write(s + EOL);
 			writer.flush();

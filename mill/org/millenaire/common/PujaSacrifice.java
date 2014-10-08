@@ -35,9 +35,7 @@ public class PujaSacrifice implements IInventory {
 		final public int startX, startY, startXact, startYact;
 		final public int toolType;
 
-		public PrayerTarget(final Enchantment enchantment,
-				final String mouseOver, final int startX, final int startY,
-				final int startXact, final int startYact, final int toolType) {
+		public PrayerTarget(final Enchantment enchantment, final String mouseOver, final int startX, final int startY, final int startXact, final int startYact, final int toolType) {
 			this.enchantment = enchantment;
 			this.mouseOver = mouseOver;
 			this.startX = startX;
@@ -62,76 +60,40 @@ public class PujaSacrifice implements IInventory {
 
 	public static final int UNBREAKABLE = 8;
 
-	public static PrayerTarget[] PUJA_TARGETS = new PrayerTarget[] {
-			new PrayerTarget(Enchantment.efficiency, "pujas.god0", 0, 188, 46,
-					188, TOOL),
-			new PrayerTarget(Enchantment.unbreaking, "pujas.god1", 0, 205, 46,
-					205, TOOL),
-			new PrayerTarget(Enchantment.fortune, "pujas.god2", 0, 222, 46,
-					222, TOOL),
-			new PrayerTarget(Enchantment.silkTouch, "pujas.god3", 0, 239, 46,
-					239, TOOL) };
+	public static PrayerTarget[] PUJA_TARGETS = new PrayerTarget[] { new PrayerTarget(Enchantment.efficiency, "pujas.god0", 0, 188, 46, 188, TOOL),
+			new PrayerTarget(Enchantment.unbreaking, "pujas.god1", 0, 205, 46, 205, TOOL), new PrayerTarget(Enchantment.fortune, "pujas.god2", 0, 222, 46, 222, TOOL),
+			new PrayerTarget(Enchantment.silkTouch, "pujas.god3", 0, 239, 46, 239, TOOL) };
 
-	public static PrayerTarget[] MAYAN_TARGETS = new PrayerTarget[] {
-			new PrayerTarget(Enchantment.protection, "mayan.god0", 0, 188, 120,
-					188, ARMOUR),
-			new PrayerTarget(Enchantment.fireProtection, "mayan.god1", 20, 188,
-					140, 188, ARMOUR),
-			new PrayerTarget(Enchantment.blastProtection, "mayan.god2", 40,
-					188, 160, 188, ARMOUR),
-			new PrayerTarget(Enchantment.projectileProtection, "mayan.god3",
-					60, 188, 180, 188, ARMOUR),
-			new PrayerTarget(Enchantment.thorns, "mayan.god4", 80, 188, 200,
-					188, ARMOUR),
+	public static PrayerTarget[] MAYAN_TARGETS = new PrayerTarget[] { new PrayerTarget(Enchantment.protection, "mayan.god0", 0, 188, 120, 188, ARMOUR),
+			new PrayerTarget(Enchantment.fireProtection, "mayan.god1", 20, 188, 140, 188, ARMOUR), new PrayerTarget(Enchantment.blastProtection, "mayan.god2", 40, 188, 160, 188, ARMOUR),
+			new PrayerTarget(Enchantment.projectileProtection, "mayan.god3", 60, 188, 180, 188, ARMOUR), new PrayerTarget(Enchantment.thorns, "mayan.god4", 80, 188, 200, 188, ARMOUR),
 
-			new PrayerTarget(Enchantment.respiration, "mayan.god5", 100, 188,
-					120, 188, HELMET),
-			new PrayerTarget(Enchantment.aquaAffinity, "mayan.god6", 0, 208,
-					120, 208, HELMET),
+			new PrayerTarget(Enchantment.respiration, "mayan.god5", 100, 188, 120, 188, HELMET), new PrayerTarget(Enchantment.aquaAffinity, "mayan.god6", 0, 208, 120, 208, HELMET),
 
-			new PrayerTarget(Enchantment.featherFalling, "mayan.god7", 20, 208,
-					140, 208, BOOTS),
+			new PrayerTarget(Enchantment.featherFalling, "mayan.god7", 20, 208, 140, 208, BOOTS),
 
-			new PrayerTarget(Enchantment.sharpness, "mayan.god8", 40, 208, 160,
-					208, SWORD_AXE),
-			new PrayerTarget(Enchantment.smite, "mayan.god9", 0, 188, 120, 188,
-					SWORD_AXE),
-			new PrayerTarget(Enchantment.baneOfArthropods, "mayan.god10", 80,
-					188, 200, 188, SWORD_AXE),
+			new PrayerTarget(Enchantment.sharpness, "mayan.god8", 40, 208, 160, 208, SWORD_AXE), new PrayerTarget(Enchantment.smite, "mayan.god9", 0, 188, 120, 188, SWORD_AXE),
+			new PrayerTarget(Enchantment.baneOfArthropods, "mayan.god10", 80, 188, 200, 188, SWORD_AXE),
 
-			new PrayerTarget(Enchantment.knockback, "mayan.god11", 60, 208,
-					180, 208, SWORD),
-			new PrayerTarget(Enchantment.fireAspect, "mayan.god12", 20, 188,
-					140, 188, SWORD),
-			new PrayerTarget(Enchantment.looting, "mayan.god13", 80, 208, 200,
-					208, SWORD),
+			new PrayerTarget(Enchantment.knockback, "mayan.god11", 60, 208, 180, 208, SWORD), new PrayerTarget(Enchantment.fireAspect, "mayan.god12", 20, 188, 140, 188, SWORD),
+			new PrayerTarget(Enchantment.looting, "mayan.god13", 80, 208, 200, 208, SWORD),
 
-			new PrayerTarget(Enchantment.power, "mayan.god14", 40, 208, 160,
-					208, BOW),
-			new PrayerTarget(Enchantment.punch, "mayan.god15", 60, 208, 180,
-					208, BOW),
-			new PrayerTarget(Enchantment.flame, "mayan.god16", 20, 188, 140,
-					188, BOW),
-			new PrayerTarget(Enchantment.infinity, "mayan.god17", 80, 208, 200,
-					208, BOW),
+			new PrayerTarget(Enchantment.power, "mayan.god14", 40, 208, 160, 208, BOW), new PrayerTarget(Enchantment.punch, "mayan.god15", 60, 208, 180, 208, BOW),
+			new PrayerTarget(Enchantment.flame, "mayan.god16", 20, 188, 140, 188, BOW), new PrayerTarget(Enchantment.infinity, "mayan.god17", 80, 208, 200, 208, BOW),
 
-			new PrayerTarget(Enchantment.unbreaking, "mayan.god18", 100, 208,
-					220, 208, UNBREAKABLE) };
+			new PrayerTarget(Enchantment.unbreaking, "mayan.god18", 100, 208, 220, 208, UNBREAKABLE) };
 
 	public static int PUJA_DURATION = 30;
 
 	public static boolean validForItem(final int type, final Item item) {
 		if (type == TOOL) {
-			return item instanceof ItemSpade || item instanceof ItemAxe
-					|| item instanceof ItemPickaxe;
+			return item instanceof ItemSpade || item instanceof ItemAxe || item instanceof ItemPickaxe;
 		} else if (type == ARMOUR) {
 			return item instanceof ItemArmor;
 		} else if (type == HELMET) {
-			return item instanceof ItemArmor
-					&& ((ItemArmor) item).armorType == 0;
+			return item instanceof ItemArmor && ((ItemArmor) item).armorType == 0;
 		} else if (type == BOOTS) {
-			return item instanceof ItemArmor
-					&& ((ItemArmor) item).armorType == 3;
+			return item instanceof ItemArmor && ((ItemArmor) item).armorType == 3;
 		} else if (type == SWORD_AXE) {
 			return item instanceof ItemSword || item instanceof ItemAxe;
 		} else if (type == SWORD) {
@@ -139,8 +101,7 @@ public class PujaSacrifice implements IInventory {
 		} else if (type == BOW) {
 			return item instanceof ItemBow;
 		} else if (type == UNBREAKABLE) {
-			return item instanceof ItemSword || item instanceof ItemArmor
-					|| item instanceof ItemBow;
+			return item instanceof ItemSword || item instanceof ItemArmor || item instanceof ItemBow;
 		}
 		return false;
 	}
@@ -186,9 +147,7 @@ public class PujaSacrifice implements IInventory {
 
 		final ItemStack tool = items[4];
 
-		if (EnchantmentHelper.getEnchantmentLevel(
-				currentTarget.enchantment.effectId, tool) >= currentTarget.enchantment
-				.getMaxLevel()) {
+		if (EnchantmentHelper.getEnchantmentLevel(currentTarget.enchantment.effectId, tool) >= currentTarget.enchantment.getMaxLevel()) {
 			return;
 		}
 
@@ -202,27 +161,22 @@ public class PujaSacrifice implements IInventory {
 			nbother = nbttaglist.tagCount();
 
 			@SuppressWarnings("unchecked")
-			final Map<Integer, Integer> existingEnchantments = EnchantmentHelper
-					.getEnchantments(tool);
+			final Map<Integer, Integer> existingEnchantments = EnchantmentHelper.getEnchantments(tool);
 
 			for (final int enchId : existingEnchantments.keySet()) {
-				if (enchId != currentTarget.enchantment.effectId
-						&& !Enchantment.enchantmentsList[enchId]
-								.canApplyTogether(currentTarget.enchantment)) {
+				if (enchId != currentTarget.enchantment.effectId && !Enchantment.enchantmentsList[enchId].canApplyTogether(currentTarget.enchantment)) {
 					return;
 				}
 			}
 		}
 
-		final int currentLevel = EnchantmentHelper.getEnchantmentLevel(
-				currentTarget.enchantment.effectId, tool);
+		final int currentLevel = EnchantmentHelper.getEnchantmentLevel(currentTarget.enchantment.effectId, tool);
 
 		if (currentLevel > 0) {
 			nbother--;
 		}
 
-		int cost = 50 + currentTarget.enchantment
-				.getMinEnchantability(currentLevel + 1) * 10;
+		int cost = 50 + currentTarget.enchantment.getMinEnchantability(currentLevel + 1) * 10;
 
 		cost = cost * (nbother / 2 + 1);
 
@@ -264,8 +218,7 @@ public class PujaSacrifice implements IInventory {
 
 	private void completeOffering() {
 
-		final int currentlevel = EnchantmentHelper.getEnchantmentLevel(
-				currentTarget.enchantment.effectId, items[4]);
+		final int currentlevel = EnchantmentHelper.getEnchantmentLevel(currentTarget.enchantment.effectId, items[4]);
 
 		if (currentlevel == 0) {
 			items[4].addEnchantment(currentTarget.enchantment, 1);
@@ -276,8 +229,7 @@ public class PujaSacrifice implements IInventory {
 				final short id = enchList.getCompoundTagAt(i).getShort("id");
 
 				if (id == currentTarget.enchantment.effectId) {
-					enchList.getCompoundTagAt(i).setShort("lvl",
-							(short) (currentlevel + 1));
+					enchList.getCompoundTagAt(i).setShort("lvl", (short) (currentlevel + 1));
 				}
 			}
 
@@ -470,18 +422,15 @@ public class PujaSacrifice implements IInventory {
 			return 64;
 		}
 
-		if (is.getItem() == Item.getItemFromBlock(Blocks.red_flower)
-				|| is.getItem() == Item.getItemFromBlock(Blocks.yellow_flower)) {
+		if (is.getItem() == Item.getItemFromBlock(Blocks.red_flower) || is.getItem() == Item.getItemFromBlock(Blocks.yellow_flower)) {
 			return 16;
 		}
 
-		if (is.getItem() == Item.getItemFromBlock(Blocks.tallgrass)
-				|| is.getItem() == Items.apple) {
+		if (is.getItem() == Item.getItemFromBlock(Blocks.tallgrass) || is.getItem() == Items.apple) {
 			return 8;
 		}
 
-		if (is.getItem() == Item.getItemFromBlock(Blocks.wool)
-				&& is.getItemDamage() == 0) {
+		if (is.getItem() == Item.getItemFromBlock(Blocks.wool) && is.getItemDamage() == 0) {
 			return 8;
 		}
 
@@ -618,13 +567,11 @@ public class PujaSacrifice implements IInventory {
 
 	public void readFromNBT(final NBTTagCompound par1NBTTagCompound) {
 
-		final NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items",
-				Constants.NBT.TAG_COMPOUND);
+		final NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		items = new ItemStack[getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
 			final byte byte0 = nbttagcompound.getByte("Slot");
 
 			if (byte0 >= 0 && byte0 < items.length) {
@@ -644,8 +591,7 @@ public class PujaSacrifice implements IInventory {
 		}
 
 		if (MLN.LogPujas >= MLN.MINOR) {
-			MLN.minor(this, "Reading enchantmentTarget: " + enchId + ", "
-					+ currentTarget);
+			MLN.minor(this, "Reading enchantmentTarget: " + enchId + ", " + currentTarget);
 		}
 
 		offeringProgress = par1NBTTagCompound.getShort("offeringProgress");
@@ -659,12 +605,10 @@ public class PujaSacrifice implements IInventory {
 	 * crafting or armor sections).
 	 */
 	@Override
-	public void setInventorySlotContents(final int par1,
-			final ItemStack par2ItemStack) {
+	public void setInventorySlotContents(final int par1, final ItemStack par2ItemStack) {
 		items[par1] = par2ItemStack;
 
-		if (par2ItemStack != null
-				&& par2ItemStack.stackSize > getInventoryStackLimit()) {
+		if (par2ItemStack != null && par2ItemStack.stackSize > getInventoryStackLimit()) {
 			par2ItemStack.stackSize = getInventoryStackLimit();
 		}
 	}
@@ -713,18 +657,14 @@ public class PujaSacrifice implements IInventory {
 
 	public void writeToNBT(final NBTTagCompound par1NBTTagCompound) {
 		if (currentTarget != null) {
-			par1NBTTagCompound.setShort("enchantmentTarget",
-					(short) currentTarget.enchantment.effectId);
+			par1NBTTagCompound.setShort("enchantmentTarget", (short) currentTarget.enchantment.effectId);
 
 			if (MLN.LogPujas >= MLN.MINOR) {
-				MLN.minor(this, "Writing enchantmentTarget: "
-						+ currentTarget.enchantment.effectId + ", "
-						+ currentTarget);
+				MLN.minor(this, "Writing enchantmentTarget: " + currentTarget.enchantment.effectId + ", " + currentTarget);
 			}
 		}
 
-		par1NBTTagCompound.setShort("offeringProgress",
-				(short) offeringProgress);
+		par1NBTTagCompound.setShort("offeringProgress", (short) offeringProgress);
 		par1NBTTagCompound.setShort("pujaProgress", pujaProgress);
 		final NBTTagList nbttaglist = new NBTTagList();
 

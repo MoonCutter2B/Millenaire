@@ -39,15 +39,13 @@ public class GuiTrade extends GuiContainer {
 
 	private static RenderItem itemRenderer = new RenderItem();
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_trade.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_trade.png");
 
 	public GuiTrade(final EntityPlayer player, final Building building) {
 
 		super(new ContainerTrade(player, building));
 
-		drawSlotInventory = MillCommonUtilities
-				.getDrawSlotInventoryMethod(this);
+		drawSlotInventory = MillCommonUtilities.getDrawSlotInventoryMethod(this);
 
 		container = (ContainerTrade) this.inventorySlots;
 
@@ -63,8 +61,7 @@ public class GuiTrade extends GuiContainer {
 	public GuiTrade(final EntityPlayer player, final MillVillager merchant) {
 		super(new ContainerTrade(player, merchant));
 
-		drawSlotInventory = MillCommonUtilities
-				.getDrawSlotInventoryMethod(this);
+		drawSlotInventory = MillCommonUtilities.getDrawSlotInventoryMethod(this);
 
 		container = (ContainerTrade) this.inventorySlots;
 
@@ -91,8 +88,7 @@ public class GuiTrade extends GuiContainer {
 	/*
 	 * Method extracted from code in GuiContainer, MC 1.2.5
 	 */
-	public void displayItemOverlay(final ItemStack stack,
-			final List<String> list, final int posx, final int posy) {
+	public void displayItemOverlay(final ItemStack stack, final List<String> list, final int posx, final int posy) {
 		if (list.size() > 0) {
 			int l1 = 0;
 
@@ -117,32 +113,24 @@ public class GuiTrade extends GuiContainer {
 			itemRenderer.zLevel = 300F;
 			final int k3 = 0xf0100010;
 			drawGradientRect(j2 - 3, l2 - 4, j2 + i3 + 3, l2 - 3, k3, k3);
-			drawGradientRect(j2 - 3, l2 + j3 + 3, j2 + i3 + 3, l2 + j3 + 4, k3,
-					k3);
+			drawGradientRect(j2 - 3, l2 + j3 + 3, j2 + i3 + 3, l2 + j3 + 4, k3, k3);
 			drawGradientRect(j2 - 3, l2 - 3, j2 + i3 + 3, l2 + j3 + 3, k3, k3);
 			drawGradientRect(j2 - 4, l2 - 3, j2 - 3, l2 + j3 + 3, k3, k3);
-			drawGradientRect(j2 + i3 + 3, l2 - 3, j2 + i3 + 4, l2 + j3 + 3, k3,
-					k3);
+			drawGradientRect(j2 + i3 + 3, l2 - 3, j2 + i3 + 4, l2 + j3 + 3, k3, k3);
 			final int l3 = 0x505000ff;
 			final int i4 = (l3 & 0xfefefe) >> 1 | l3 & 0xff000000;
-			drawGradientRect(j2 - 3, l2 - 3 + 1, j2 - 3 + 1, l2 + j3 + 3 - 1,
-					l3, i4);
-			drawGradientRect(j2 + i3 + 2, l2 - 3 + 1, j2 + i3 + 3, l2 + j3 + 3
-					- 1, l3, i4);
+			drawGradientRect(j2 - 3, l2 - 3 + 1, j2 - 3 + 1, l2 + j3 + 3 - 1, l3, i4);
+			drawGradientRect(j2 + i3 + 2, l2 - 3 + 1, j2 + i3 + 3, l2 + j3 + 3 - 1, l3, i4);
 			drawGradientRect(j2 - 3, l2 - 3, j2 + i3 + 3, l2 - 3 + 1, l3, l3);
-			drawGradientRect(j2 - 3, l2 + j3 + 2, j2 + i3 + 3, l2 + j3 + 3, i4,
-					i4);
+			drawGradientRect(j2 - 3, l2 + j3 + 2, j2 + i3 + 3, l2 + j3 + 3, i4, i4);
 
 			for (int j4 = 0; j4 < list.size(); j4++) {
 				String s = list.get(j4);
 
 				if (j4 == 0) {
-					s = new StringBuilder()
-							.append(stack.getRarity().rarityColor).append(s)
-							.toString();
+					s = new StringBuilder().append(stack.getRarity().rarityColor).append(s).toString();
 				} else {
-					s = new StringBuilder().append("\2477").append(s)
-							.toString();
+					s = new StringBuilder().append("\2477").append(s).toString();
 				}
 
 				fontRendererObj.drawStringWithShadow(s, j2, l2, -1);
@@ -160,8 +148,7 @@ public class GuiTrade extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(final float f, final int i,
-			final int j) {
+	protected void drawGuiContainerBackgroundLayer(final float f, final int i, final int j) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.renderEngine.bindTexture(background);
 		final int x = (width - xSize) / 2;
@@ -188,23 +175,15 @@ public class GuiTrade extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(final int x, final int y) {
 		if (building != null) {
-			fontRendererObj.drawString(building.getNativeBuildingName(), 8, 6,
-					0x404040);
-			fontRendererObj.drawString(MLN.string("ui.wesell") + ":", 8, 22,
-					0x404040);
-			fontRendererObj.drawString(MLN.string("ui.webuy") + ":", 8, 76,
-					0x404040);
+			fontRendererObj.drawString(building.getNativeBuildingName(), 8, 6, 0x404040);
+			fontRendererObj.drawString(MLN.string("ui.wesell") + ":", 8, 22, 0x404040);
+			fontRendererObj.drawString(MLN.string("ui.webuy") + ":", 8, 76, 0x404040);
 		} else {
-			fontRendererObj.drawString(
-					merchant.getName() + ": "
-							+ merchant.getNativeOccupationName(), 8, 6,
-					0x404040);
-			fontRendererObj.drawString(MLN.string("ui.isell") + ":", 8, 22,
-					0x404040);
+			fontRendererObj.drawString(merchant.getName() + ": " + merchant.getNativeOccupationName(), 8, 6, 0x404040);
+			fontRendererObj.drawString(MLN.string("ui.isell") + ":", 8, 22, 0x404040);
 		}
 
-		fontRendererObj.drawString(MLN.string("ui.inventory"), 8 + 36,
-				ySize - 96 + 2, 0x404040);
+		fontRendererObj.drawString(MLN.string("ui.inventory"), 8 + 36, ySize - 96 + 2, 0x404040);
 
 		@SuppressWarnings("rawtypes")
 		final Iterator iterator = this.buttonList.iterator();
@@ -243,8 +222,7 @@ public class GuiTrade extends GuiContainer {
 			try {
 				drawSlotInventory.invoke(this, slot1);
 			} catch (final Exception e) {
-				MLN.printException(
-						"Exception when trying to access drawSlotInventory", e);
+				MLN.printException("Exception when trying to access drawSlotInventory", e);
 			}
 
 			String problem = null;
@@ -259,8 +237,7 @@ public class GuiTrade extends GuiContainer {
 					GL11.glDisable(2929 /* GL_DEPTH_TEST */);
 					final int j1 = slot1.xDisplayPosition;
 					final int l1 = slot1.yDisplayPosition;
-					drawGradientRect(j1, l1, j1 + 16, l1 + 16, 0x80000000,
-							0x80000000);
+					drawGradientRect(j1, l1, j1 + 16, l1 + 16, 0x80000000, 0x80000000);
 					GL11.glEnable(2896 /* GL_LIGHTING */);
 					GL11.glEnable(2929 /* GL_DEPTH_TEST */);
 				}
@@ -274,8 +251,7 @@ public class GuiTrade extends GuiContainer {
 					GL11.glDisable(2929 /* GL_DEPTH_TEST */);
 					final int j1 = slot1.xDisplayPosition;
 					final int l1 = slot1.yDisplayPosition;
-					drawGradientRect(j1, l1, j1 + 16, l1 + 16, 0x80000000,
-							0x80000000);
+					drawGradientRect(j1, l1, j1 + 16, l1 + 16, 0x80000000, 0x80000000);
 					GL11.glEnable(2896 /* GL_LIGHTING */);
 					GL11.glEnable(2929 /* GL_DEPTH_TEST */);
 				}
@@ -291,8 +267,7 @@ public class GuiTrade extends GuiContainer {
 				final int j1 = slot1.xDisplayPosition;
 				final int l1 = slot1.yDisplayPosition;
 				if (problem == null) {
-					drawGradientRect(j1, l1, j1 + 16, l1 + 16, 0x80ffffff,
-							0x80ffffff);
+					drawGradientRect(j1, l1, j1 + 16, l1 + 16, 0x80ffffff, 0x80ffffff);
 				}
 				GL11.glEnable(2896 /* GL_LIGHTING */);
 				GL11.glEnable(2929 /* GL_DEPTH_TEST */);
@@ -302,19 +277,15 @@ public class GuiTrade extends GuiContainer {
 		final InventoryPlayer inventoryplayer = mc.thePlayer.inventory;
 		if (inventoryplayer.getItemStack() != null) {
 			GL11.glTranslatef(0.0F, 0.0F, 32F);
-			itemRenderer.renderItemIntoGUI(fontRendererObj, mc.renderEngine,
-					inventoryplayer.getItemStack(), i - k - 8, j - l - 8);
-			itemRenderer.renderItemOverlayIntoGUI(fontRendererObj,
-					mc.renderEngine, inventoryplayer.getItemStack(), i - k - 8,
-					j - l - 8);
+			itemRenderer.renderItemIntoGUI(fontRendererObj, mc.renderEngine, inventoryplayer.getItemStack(), i - k - 8, j - l - 8);
+			itemRenderer.renderItemOverlayIntoGUI(fontRendererObj, mc.renderEngine, inventoryplayer.getItemStack(), i - k - 8, j - l - 8);
 		}
 		GL11.glDisable(32826 /* GL_RESCALE_NORMAL_EXT */);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glDisable(2896 /* GL_LIGHTING */);
 		GL11.glDisable(2929 /* GL_DEPTH_TEST */);
 		drawGuiContainerForegroundLayer(i, j);
-		if (inventoryplayer.getItemStack() == null && slot != null
-				&& slot.getHasStack()) {
+		if (inventoryplayer.getItemStack() == null && slot != null && slot.getHasStack()) {
 			if (slot instanceof TradeSlot) {
 
 				final TradeSlot tslot = (TradeSlot) slot;
@@ -323,25 +294,17 @@ public class GuiTrade extends GuiContainer {
 				int priceColour;
 
 				if (tslot.sellingSlot) {
-					price = MillCommonUtilities.getShortPrice(tslot.good
-							.getCalculatedSellingPrice(building, player));
-					priceColour = MillCommonUtilities
-							.getPriceColourMC(tslot.good
-									.getCalculatedSellingPrice(building, player));
+					price = MillCommonUtilities.getShortPrice(tslot.good.getCalculatedSellingPrice(building, player));
+					priceColour = MillCommonUtilities.getPriceColourMC(tslot.good.getCalculatedSellingPrice(building, player));
 				} else {
-					price = MillCommonUtilities.getShortPrice(tslot.good
-							.getCalculatedBuyingPrice(building, player));
-					priceColour = MillCommonUtilities
-							.getPriceColourMC(tslot.good
-									.getCalculatedBuyingPrice(building, player));
+					price = MillCommonUtilities.getShortPrice(tslot.good.getCalculatedBuyingPrice(building, player));
+					priceColour = MillCommonUtilities.getPriceColourMC(tslot.good.getCalculatedBuyingPrice(building, player));
 				}
 
 				final ItemStack itemstack = slot.getStack();
 
 				try {
-					final List<String> list = itemstack.getTooltip(
-							this.mc.thePlayer,
-							this.mc.gameSettings.advancedItemTooltips);
+					final List<String> list = itemstack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
 
 					list.add("\247" + Integer.toHexString(priceColour) + price);
 					if (currentProblemString != null) {
@@ -351,9 +314,7 @@ public class GuiTrade extends GuiContainer {
 					displayItemOverlay(itemstack, list, i - k, j - l);
 
 				} catch (final Exception e) {
-					MLN.printException(
-							"Exception when rendering tooltip for stack: "
-									+ itemstack, e);
+					MLN.printException("Exception when rendering tooltip for stack: " + itemstack, e);
 				}
 
 			} else if (slot instanceof MerchantSlot) {
@@ -363,15 +324,11 @@ public class GuiTrade extends GuiContainer {
 				String price;
 				int priceColour;
 
-				price = MillCommonUtilities.getShortPrice(tslot.good
-						.getCalculatedSellingPrice(merchant));
-				priceColour = MillCommonUtilities.getPriceColourMC(tslot.good
-						.getCalculatedSellingPrice(merchant));
+				price = MillCommonUtilities.getShortPrice(tslot.good.getCalculatedSellingPrice(merchant));
+				priceColour = MillCommonUtilities.getPriceColourMC(tslot.good.getCalculatedSellingPrice(merchant));
 
 				final ItemStack itemstack = slot.getStack();
-				final List<String> list = itemstack.getTooltip(
-						this.mc.thePlayer,
-						this.mc.gameSettings.advancedItemTooltips);
+				final List<String> list = itemstack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
 
 				list.add("\247" + Integer.toHexString(priceColour) + price);
 				if (currentProblemString != null) {
@@ -382,10 +339,7 @@ public class GuiTrade extends GuiContainer {
 
 			} else {
 				final ItemStack itemstack = slot.getStack();
-				displayItemOverlay(itemstack, itemstack.getTooltip(
-						this.mc.thePlayer,
-						this.mc.gameSettings.advancedItemTooltips), i - k, j
-						- l);
+				displayItemOverlay(itemstack, itemstack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips), i - k, j - l);
 			}
 		}
 		GL11.glPopMatrix();
@@ -407,10 +361,7 @@ public class GuiTrade extends GuiContainer {
 		final int l = (height - ySize) / 2;
 		i -= k;
 		j -= l;
-		return i >= slot.xDisplayPosition - 1
-				&& i < slot.xDisplayPosition + 16 + 1
-				&& j >= slot.yDisplayPosition - 1
-				&& j < slot.yDisplayPosition + 16 + 1;
+		return i >= slot.xDisplayPosition - 1 && i < slot.xDisplayPosition + 16 + 1 && j >= slot.yDisplayPosition - 1 && j < slot.yDisplayPosition + 16 + 1;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -422,8 +373,7 @@ public class GuiTrade extends GuiContainer {
 			final int xStart = (width - xSize) / 2;
 			final int yStart = (height - ySize) / 2;
 
-			this.buttonList.add(new MillGuiButton(0, xStart + xSize - 21,
-					yStart + 5, 15, 20, "?"));
+			this.buttonList.add(new MillGuiButton(0, xStart + xSize - 21, yStart + 5, 15, 20, "?"));
 		}
 	}
 
@@ -470,8 +420,7 @@ public class GuiTrade extends GuiContainer {
 		super.mouseClicked(x, y, clickType);
 	}
 
-	private void updateRows(final boolean selling, final int change,
-			final int row) {
+	private void updateRows(final boolean selling, final int change, final int row) {
 
 		int pos = 0;
 

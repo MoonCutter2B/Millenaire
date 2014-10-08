@@ -6,11 +6,9 @@ import org.millenaire.common.forge.Mill;
 
 public class MillConfig {
 
-	private static final Object[] BOOLEAN_VALS = new Object[] { Boolean.TRUE,
-			Boolean.FALSE };
+	private static final Object[] BOOLEAN_VALS = new Object[] { Boolean.TRUE, Boolean.FALSE };
 
-	public static final int LANGUAGE = 1, EDITABLE_STRING = 2, KEY = 3,
-			EDITABLE_INTEGER = 4, LOG = 5, BONUS_KEY = 6;
+	public static final int LANGUAGE = 1, EDITABLE_STRING = 2, KEY = 3, EDITABLE_INTEGER = 4, LOG = 5, BONUS_KEY = 6;
 
 	private static String getBooleanString(final boolean b) {
 		if (b) {
@@ -40,8 +38,7 @@ public class MillConfig {
 
 	}
 
-	public MillConfig(final Field field, final String key,
-			final Object... possibleVals) {
+	public MillConfig(final Field field, final String key, final Object... possibleVals) {
 		this.field = field;
 		this.possibleVals = possibleVals;
 		this.key = key.toLowerCase();
@@ -49,9 +46,7 @@ public class MillConfig {
 		if (isBoolean()) {
 			this.possibleVals = BOOLEAN_VALS;
 		} else if (possibleVals.length == 0) {
-			MLN.error(null,
-					"No possible values specified for non-boolean config: "
-							+ field.getName());
+			MLN.error(null, "No possible values specified for non-boolean config: " + field.getName());
 		}
 	}
 
@@ -82,8 +77,7 @@ public class MillConfig {
 			return "";
 		}
 
-		return MLN.string("config." + key + ".desc",
-				getStringFromValue(defaultVal));
+		return MLN.string("config." + key + ".desc", getStringFromValue(defaultVal));
 	}
 
 	public String getLabel() {
@@ -98,8 +92,7 @@ public class MillConfig {
 	public Object[] getPossibleVals() {
 
 		if (special == LANGUAGE) {
-			return new Object[] { MLN.loadedLanguages.get("fr"),
-					MLN.loadedLanguages.get("en") };
+			return new Object[] { MLN.loadedLanguages.get("fr"), MLN.loadedLanguages.get("en") };
 		} else if (special == LOG) {
 			return new Object[] { 0, 1, 2, 3 };
 		}
@@ -203,18 +196,15 @@ public class MillConfig {
 	}
 
 	public boolean hasTextField() {
-		return special == EDITABLE_STRING || special == KEY
-				|| special == EDITABLE_INTEGER || special == BONUS_KEY;
+		return special == EDITABLE_STRING || special == KEY || special == EDITABLE_INTEGER || special == BONUS_KEY;
 	}
 
 	public boolean isBoolean() {
-		return field.getType().equals(Boolean.class)
-				|| field.getType().equals(boolean.class);
+		return field.getType().equals(Boolean.class) || field.getType().equals(boolean.class);
 	}
 
 	public boolean isInteger() {
-		return field.getType().equals(Integer.class)
-				|| field.getType().equals(int.class);
+		return field.getType().equals(Integer.class) || field.getType().equals(int.class);
 	}
 
 	public boolean isString() {

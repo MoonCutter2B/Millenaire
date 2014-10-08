@@ -26,8 +26,7 @@ public class GoalLumbermanChopTrees extends Goal {
 
 	@Override
 	public int actionDuration(final MillVillager villager) {
-		final int toolEfficiency = (int) villager.getBestAxe().getDigSpeed(
-				new ItemStack(villager.getBestAxe(), 1), Blocks.log, 0);
+		final int toolEfficiency = (int) villager.getBestAxe().getDigSpeed(new ItemStack(villager.getBestAxe(), 1), Blocks.log, 0);
 		;
 		return 1000 - toolEfficiency * 40;
 	}
@@ -37,8 +36,7 @@ public class GoalLumbermanChopTrees extends Goal {
 
 		final List<Point> vp = new ArrayList<Point>();
 		final List<Point> buildingp = new ArrayList<Point>();
-		for (final Building grove : villager.getTownHall().getBuildingsWithTag(
-				Building.tagGrove)) {
+		for (final Building grove : villager.getTownHall().getBuildingsWithTag(Building.tagGrove)) {
 			if (grove.getWoodCount() > 4) {
 				final Point p = grove.getWoodLocation();
 				if (p != null) {
@@ -55,8 +53,7 @@ public class GoalLumbermanChopTrees extends Goal {
 		Point p = vp.get(0);
 		Point buildingP = buildingp.get(0);
 		for (int i = 1; i < vp.size(); i++) {
-			if (vp.get(i).horizontalDistanceToSquared(villager) < p
-					.horizontalDistanceToSquared(villager)) {
+			if (vp.get(i).horizontalDistanceToSquared(villager) < p.horizontalDistanceToSquared(villager)) {
 				p = vp.get(i);
 				buildingP = buildingp.get(i);
 			}
@@ -98,10 +95,7 @@ public class GoalLumbermanChopTrees extends Goal {
 		boolean woodFound = false;
 
 		if (MLN.LogLumberman >= MLN.DEBUG) {
-			MLN.debug(
-					this,
-					"Attempting to gather wood at: "
-							+ villager.getGoalDestPoint());
+			MLN.debug(this, "Attempting to gather wood at: " + villager.getGoalDestPoint());
 		}
 
 		final MillWorldInfo winfo = villager.getTownHall().winfo;
@@ -109,8 +103,7 @@ public class GoalLumbermanChopTrees extends Goal {
 		for (int i = 12; i > -12; i--) {
 			for (int j = -3; j < 4; j++) {
 				for (int k = -3; k < 4; k++) {
-					final Point p = villager.getGoalDestPoint().getRelative(j,
-							i, k);
+					final Point p = villager.getGoalDestPoint().getRelative(j, i, k);
 
 					if (!winfo.isConstructionOrLoggingForbiddenHere(p)) {
 
@@ -128,37 +121,27 @@ public class GoalLumbermanChopTrees extends Goal {
 									woodFound = true;
 
 									if (MLN.LogLumberman >= MLN.DEBUG) {
-										MLN.debug(this, "Gathered wood at: "
-												+ villager.getGoalDestPoint());
+										MLN.debug(this, "Gathered wood at: " + villager.getGoalDestPoint());
 									}
 								} else {
 
 									if (MillCommonUtilities.randomInt(4) == 0) {
-										villager.addToInv(
-												Blocks.sapling,
-												MillCommonUtilities
-														.getBlockMeta(
-																villager.worldObj,
-																p) & 3, 1);
+										villager.addToInv(Blocks.sapling, MillCommonUtilities.getBlockMeta(villager.worldObj, p) & 3, 1);
 									}
 									villager.setBlock(p, Blocks.air);
 
 									villager.swingItem();
 
-									if (villager.gathersApples()
-											&& MillCommonUtilities.chanceOn(16)) {
+									if (villager.gathersApples() && MillCommonUtilities.chanceOn(16)) {
 										villager.addToInv(Mill.ciderapple, 1);
 									}
 
-									if (MLN.LogLumberman >= MLN.DEBUG
-											&& villager.extraLog) {
-										MLN.debug(this, "Destroyed leaves at: "
-												+ villager.getGoalDestPoint());
+									if (MLN.LogLumberman >= MLN.DEBUG && villager.extraLog) {
+										MLN.debug(this, "Destroyed leaves at: " + villager.getGoalDestPoint());
 									}
 								}
 							} else {
-								if (MLN.LogLumberman >= MLN.DEBUG
-										&& villager.extraLog) {
+								if (MLN.LogLumberman >= MLN.DEBUG && villager.extraLog) {
 									MLN.debug(this, "More wood found.");
 								}
 								return false;// still more wood to cut

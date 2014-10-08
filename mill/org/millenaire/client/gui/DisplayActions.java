@@ -17,8 +17,7 @@ import org.millenaire.common.forge.Mill;
 
 public class DisplayActions {
 
-	public static void displayChunkGUI(final EntityPlayer player,
-			final World world) {
+	public static void displayChunkGUI(final EntityPlayer player, final World world) {
 		MillClientUtilities.displayChunkPanel(world, player);
 	}
 
@@ -26,114 +25,80 @@ public class DisplayActions {
 		Minecraft.getMinecraft().displayGuiScreen(new GuiConfig());
 	}
 
-	public static void displayControlledMilitaryGUI(final EntityPlayer player,
-			final Building townHall) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiControlledMilitary(player, townHall));
+	public static void displayControlledMilitaryGUI(final EntityPlayer player, final Building townHall) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiControlledMilitary(player, townHall));
 	}
 
-	public static void displayControlledProjectGUI(final EntityPlayer player,
-			final Building townHall) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiControlledProjects(player, townHall));
+	public static void displayControlledProjectGUI(final EntityPlayer player, final Building townHall) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiControlledProjects(player, townHall));
+	}
+
+	/**
+	 * Create a GUI to edit an existing custom building
+	 */
+	public static void displayEditCustomBuildingGUI(final EntityPlayer player, final Building building) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiNewCustomBuilding(player, building));
 	}
 
 	public static void displayHelpGUI() {
 		Minecraft.getMinecraft().displayGuiScreen(new GuiHelp());
 	}
 
-	public static void displayHireGUI(final EntityPlayer player,
-			final MillVillager villager) {
-		Minecraft.getMinecraft()
-				.displayGuiScreen(new GuiHire(player, villager));
+	public static void displayHireGUI(final EntityPlayer player, final MillVillager villager) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiHire(player, villager));
 	}
 
-	public static void displayInfoPanel(final EntityPlayer player,
-			final World world) {
+	public static void displayInfoPanel(final EntityPlayer player, final World world) {
 		MillClientUtilities.displayInfoPanel(world, player);
 	}
 
-	public static void displayNegationWandGUI(final EntityPlayer player,
-			final Building townHall) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiNegationWand(player, townHall));
+	public static void displayNegationWandGUI(final EntityPlayer player, final Building townHall) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiNegationWand(player, townHall));
 	}
 
-	public static void displayNewBuildingProjectGUI(final EntityPlayer player,
-			final Building townHall, final Point pos) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiNewBuildingProject(player, townHall, pos));
+	public static void displayNewBuildingProjectGUI(final EntityPlayer player, final Building townHall, final Point pos) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiNewBuildingProject(player, townHall, pos));
 	}
 
 	/**
 	 * Create a GUI to confirm the creation of a custom building
-	 * 
-	 * @param player
-	 * @param townHall
-	 * @param pos
-	 * @param customBuilding
 	 */
-	public static void displayNewCustomBuildingGUI(final EntityPlayer player,
-			final Building townHall, final Point pos,
-			final BuildingCustomPlan customBuilding) {
-		Minecraft.getMinecraft()
-				.displayGuiScreen(
-						new GuiNewCustomBuilding(player, townHall, pos,
-								customBuilding));
+	public static void displayNewCustomBuildingGUI(final EntityPlayer player, final Building townHall, final Point pos, final BuildingCustomPlan customBuilding) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiNewCustomBuilding(player, townHall, pos, customBuilding));
 	}
 
 	/**
 	 * Create a GUI to confirm the creation of a new village with a custom TH
-	 * 
-	 * @param player
-	 * @param pos
-	 * @param villageType
 	 */
-	public static void displayNewCustomBuildingGUI(final EntityPlayer player,
-			final Point pos, final VillageType villageType) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiNewCustomBuilding(player, pos, villageType));
+	public static void displayNewCustomBuildingGUI(final EntityPlayer player, final Point pos, final VillageType villageType) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiNewCustomBuilding(player, pos, villageType));
 	}
 
-	public static void displayNewVillageGUI(final EntityPlayer player,
-			final Point pos) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiNewVillage(player, pos));
+	public static void displayNewVillageGUI(final EntityPlayer player, final Point pos) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiNewVillage(player, pos));
 	}
 
-	public static void displayParchmentPanelGUI(final EntityPlayer player,
-			final List<List<String>> pages, final Building building,
-			final int mapType, final boolean isParchment) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiPanelParchment(player, pages, building, mapType,
-						isParchment));
+	public static void displayParchmentPanelGUI(final EntityPlayer player, final List<List<String>> pages, final Building building, final int mapType, final boolean isParchment) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiPanelParchment(player, pages, building, mapType, isParchment));
 
 	}
 
-	public static void displayQuestGUI(final EntityPlayer player,
-			final MillVillager villager) {
-		final UserProfile profile = Mill.clientWorld.getProfile(player
-				.getDisplayName());
+	public static void displayQuestGUI(final EntityPlayer player, final MillVillager villager) {
+		final UserProfile profile = Mill.clientWorld.getProfile(player.getDisplayName());
 		if (profile.villagersInQuests.containsKey(villager.villager_id)) {
-			Minecraft.getMinecraft().displayGuiScreen(
-					new GuiQuest(player, villager));
+			Minecraft.getMinecraft().displayGuiScreen(new GuiQuest(player, villager));
 		}
 	}
 
-	public static void displayStartupOrError(final EntityPlayer player,
-			final boolean error) {
+	public static void displayStartupOrError(final EntityPlayer player, final boolean error) {
 		MillClientUtilities.displayStartupText(error);
 	}
 
-	public static void displayVillageBookGUI(final EntityPlayer player,
-			final Point p) {
-		MillClientUtilities.displayVillageBook(Mill.clientWorld.world, player,
-				p);
+	public static void displayVillageBookGUI(final EntityPlayer player, final Point p) {
+		MillClientUtilities.displayVillageBook(Mill.clientWorld.world, player, p);
 	}
 
-	public static void displayVillageChiefGUI(final EntityPlayer player,
-			final MillVillager chief) {
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiVillageHead(player, chief));
+	public static void displayVillageChiefGUI(final EntityPlayer player, final MillVillager chief) {
+		Minecraft.getMinecraft().displayGuiScreen(new GuiVillageHead(player, chief));
 	}
 }

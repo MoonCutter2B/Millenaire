@@ -10,17 +10,14 @@ import org.millenaire.common.block.BlockMillChest;
 
 public class GuiMillChest extends GuiChest {
 
-	public static GuiMillChest createGUI(final World world, final int i,
-			final int j, final int k, final EntityPlayer entityplayer) {
-		final TileEntityMillChest lockedchest = (TileEntityMillChest) world
-				.getTileEntity(i, j, k);
+	public static GuiMillChest createGUI(final World world, final int i, final int j, final int k, final EntityPlayer entityplayer) {
+		final TileEntityMillChest lockedchest = (TileEntityMillChest) world.getTileEntity(i, j, k);
 
 		if (lockedchest == null || world.isRemote && !lockedchest.loaded) {
 			return null;
 		}
 
-		final IInventory chest = BlockMillChest.getInventory(lockedchest,
-				world, i, j, k);
+		final IInventory chest = BlockMillChest.getInventory(lockedchest, world, i, j, k);
 
 		return new GuiMillChest(entityplayer, chest, lockedchest);
 	}
@@ -29,8 +26,7 @@ public class GuiMillChest extends GuiChest {
 
 	boolean locked = true;
 
-	private GuiMillChest(final EntityPlayer player,
-			final IInventory iinventory1, final TileEntityMillChest lockedchest) {
+	private GuiMillChest(final EntityPlayer player, final IInventory iinventory1, final TileEntityMillChest lockedchest) {
 		super(player.inventory, iinventory1);
 		this.player = player;
 
@@ -42,9 +38,7 @@ public class GuiMillChest extends GuiChest {
 		if (!locked) {
 			super.keyTyped(par1, par2);
 		} else {
-			if (par2 == 1
-					|| par2 == this.mc.gameSettings.keyBindInventory
-							.getKeyCode()) {
+			if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.getKeyCode()) {
 				this.mc.thePlayer.closeScreen();
 			}
 		}

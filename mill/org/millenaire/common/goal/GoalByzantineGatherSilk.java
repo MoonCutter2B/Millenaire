@@ -33,8 +33,7 @@ public class GoalByzantineGatherSilk extends Goal {
 
 		final List<Point> vp = new ArrayList<Point>();
 		final List<Point> buildingp = new ArrayList<Point>();
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
-				Building.tagSilkwormFarm)) {
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagSilkwormFarm)) {
 			final Point p = kiln.getResManager().getSilkwormHarvestLocation();
 			if (p != null) {
 				vp.add(p);
@@ -50,8 +49,7 @@ public class GoalByzantineGatherSilk extends Goal {
 		Point buildingP = buildingp.get(0);
 
 		for (int i = 1; i < vp.size(); i++) {
-			if (vp.get(i).horizontalDistanceToSquared(villager) < p
-					.horizontalDistanceToSquared(villager)) {
+			if (vp.get(i).horizontalDistanceToSquared(villager) < p.horizontalDistanceToSquared(villager)) {
 				p = vp.get(i);
 				buildingP = buildingp.get(i);
 			}
@@ -71,12 +69,10 @@ public class GoalByzantineGatherSilk extends Goal {
 		if (!villager.lastGoalTime.containsKey(this)) {
 			delayOver = true;
 		} else {
-			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
-					.get(this) + STANDARD_DELAY;
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime.get(this) + STANDARD_DELAY;
 		}
 
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
-				Building.tagSilkwormFarm)) {
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagSilkwormFarm)) {
 			final int nb = kiln.getResManager().getNbSilkWormHarvestLocation();
 
 			if (nb > 0 && delayOver) {
@@ -96,13 +92,10 @@ public class GoalByzantineGatherSilk extends Goal {
 
 	@Override
 	public boolean performAction(final MillVillager villager) {
-		if (MillCommonUtilities.getBlock(villager.worldObj,
-				villager.getGoalDestPoint()) == Mill.wood_decoration
-				&& MillCommonUtilities.getBlockMeta(villager.worldObj,
-						villager.getGoalDestPoint()) == 4) {
+		if (MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint()) == Mill.wood_decoration
+				&& MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint()) == 4) {
 			villager.addToInv(Mill.silk, 0, 1);
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),
-					Mill.wood_decoration, 3);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(), Mill.wood_decoration, 3);
 
 			villager.swingItem();
 
@@ -115,8 +108,7 @@ public class GoalByzantineGatherSilk extends Goal {
 
 	@Override
 	public int priority(final MillVillager villager) {
-		int p = 100 - villager.getTownHall().nbGoodAvailable(
-				new InvItem(Mill.stone_decoration, 1), false, false) * 2;
+		int p = 100 - villager.getTownHall().nbGoodAvailable(new InvItem(Mill.stone_decoration, 1), false, false) * 2;
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {
 				p = p / 2;

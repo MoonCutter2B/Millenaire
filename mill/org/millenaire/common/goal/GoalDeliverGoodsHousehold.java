@@ -11,15 +11,12 @@ import org.millenaire.common.MillVillager.InvItem;
 public class GoalDeliverGoodsHousehold extends Goal {
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
-		return packDest(villager.getHouse().getResManager().getSellingPos(),
-				villager.getHouse());
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
+		return packDest(villager.getHouse().getResManager().getSellingPos(), villager.getHouse());
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(final MillVillager villager)
-			throws Exception {
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) throws Exception {
 
 		final List<ItemStack> items = new ArrayList<ItemStack>();
 
@@ -37,8 +34,7 @@ public class GoalDeliverGoodsHousehold extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 		return false;
 	}
 
@@ -47,8 +43,7 @@ public class GoalDeliverGoodsHousehold extends Goal {
 
 		for (final MillVillager v : villager.getHouse().villagers) {
 			for (final InvItem key : v.requiresGoods().keySet()) {
-				villager.putInBuilding(villager.getHouse(), key.getItem(),
-						key.meta, 256);
+				villager.putInBuilding(villager.getHouse(), key.getItem(), key.meta, 256);
 			}
 
 		}

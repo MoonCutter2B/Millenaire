@@ -31,21 +31,17 @@ public class MillEventController {
 			return;
 		}
 
-		if (event.entity instanceof EntityZombie
-				|| event.entity instanceof EntitySkeleton) {
+		if (event.entity instanceof EntityZombie || event.entity instanceof EntitySkeleton) {
 			final EntityMob mob = (EntityMob) event.entity;
-			mob.tasks.addTask(3, new EntityAIAttackOnCollide(mob,
-					MillVillager.class, mob.getAIMoveSpeed(), true));
+			mob.tasks.addTask(3, new EntityAIAttackOnCollide(mob, MillVillager.class, mob.getAIMoveSpeed(), true));
 
 			EntityAITasks targetTasks;
 			try {
 				targetTasks = mob.targetTasks;
-				targetTasks.addTask(3, new EntityAINearestAttackableTarget(mob,
-						MillVillager.class, 10, false));
+				targetTasks.addTask(3, new EntityAINearestAttackableTarget(mob, MillVillager.class, 10, false));
 
 			} catch (final Exception e) {
-				MLN.printException("Error when trying to make new mob " + mob
-						+ " target villagers:", e);
+				MLN.printException("Error when trying to make new mob " + mob + " target villagers:", e);
 			}
 		}
 	}
@@ -56,22 +52,10 @@ public class MillEventController {
 		Mill.proxy.loadLanguages();
 
 		if (Mill.displayMillenaireLocationError && !Mill.proxy.isTrueServer()) {
-			Mill.proxy
-					.sendLocalChat(
-							Mill.proxy.getTheSinglePlayer(),
-							MLN.DARKRED,
-							"ERREUR: Impossible de trouver le fichier de configuration "
-									+ Mill.proxy.getConfigFile()
-											.getAbsolutePath()
-									+ ". V\u00e9rifiez que le dossier millenaire est bien dans minecraft/mods/");
-			Mill.proxy
-					.sendLocalChat(
-							Mill.proxy.getTheSinglePlayer(),
-							MLN.DARKRED,
-							"ERROR: Could not find the config file at "
-									+ Mill.proxy.getConfigFile()
-											.getAbsolutePath()
-									+ ". Check that the millenaire directory is in minecraft/mods/");
+			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(), MLN.DARKRED, "ERREUR: Impossible de trouver le fichier de configuration " + Mill.proxy.getConfigFile().getAbsolutePath()
+					+ ". V\u00e9rifiez que le dossier millenaire est bien dans minecraft/mods/");
+			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(), MLN.DARKRED, "ERROR: Could not find the config file at " + Mill.proxy.getConfigFile().getAbsolutePath()
+					+ ". Check that the millenaire directory is in minecraft/mods/");
 			return;
 		}
 
@@ -128,8 +112,7 @@ public class MillEventController {
 				Mill.clientWorld = null;
 				MLN.temp(null, "Unloaded client world.");
 			} else {
-				MLN.temp(null,
-						"Skipped unloading client world as it's not current world.");
+				MLN.temp(null, "Skipped unloading client world as it's not current world.");
 			}
 		} else {
 

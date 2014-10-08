@@ -13,10 +13,8 @@ import org.millenaire.common.item.Goods;
 public class GoalMerchantVisitInn extends Goal {
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
-		return packDest(villager.getHouse().getResManager().getSellingPos(),
-				villager.getHouse());
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
+		return packDest(villager.getHouse().getResManager().getSellingPos(), villager.getHouse());
 	}
 
 	@Override
@@ -34,25 +32,21 @@ public class GoalMerchantVisitInn extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 
 		boolean delayOver;
 
 		if (!villager.lastGoalTime.containsKey(this)) {
 			delayOver = true;
 		} else {
-			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
-					.get(this) + STANDARD_DELAY;
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime.get(this) + STANDARD_DELAY;
 		}
 
 		int nb = 0;
 
 		for (final InvItem good : villager.getInventoryKeys()) {
 			final int nbcount = villager.countInv(good.getItem(), good.meta);
-			if (nbcount > 0
-					&& villager.getTownHall().nbGoodNeeded(good.getItem(),
-							good.meta) == 0) {
+			if (nbcount > 0 && villager.getTownHall().nbGoodNeeded(good.getItem(), good.meta) == 0) {
 
 				nb += nbcount;
 
@@ -66,11 +60,8 @@ public class GoalMerchantVisitInn extends Goal {
 		}
 
 		for (final Goods good : villager.getTownHall().culture.goodsList) {
-			if (villager.getHouse().countGoods(good.item.getItem(),
-					good.item.meta) > 0
-					&& villager.countInv(good.item.getItem(), good.item.meta) < villager
-							.getTownHall().nbGoodNeeded(good.item.getItem(),
-									good.item.meta)) {
+			if (villager.getHouse().countGoods(good.item.getItem(), good.item.meta) > 0
+					&& villager.countInv(good.item.getItem(), good.item.meta) < villager.getTownHall().nbGoodNeeded(good.item.getItem(), good.item.meta)) {
 				if (MLN.LogMerchant >= MLN.MAJOR) {
 					MLN.major(this, "Visiting the Inn to take imports");
 				}
@@ -87,11 +78,8 @@ public class GoalMerchantVisitInn extends Goal {
 		String s = "";
 
 		for (final InvItem good : villager.getInventoryKeys()) {
-			if (villager.countInv(good.getItem(), good.meta) > 0
-					&& villager.getTownHall().nbGoodNeeded(good.getItem(),
-							good.meta) == 0) {
-				final int nb = villager.putInBuilding(villager.getHouse(),
-						good.getItem(), good.meta, 99999999);
+			if (villager.countInv(good.getItem(), good.meta) > 0 && villager.getTownHall().nbGoodNeeded(good.getItem(), good.meta) == 0) {
+				final int nb = villager.putInBuilding(villager.getHouse(), good.getItem(), good.meta, 99999999);
 
 				if (nb > 0) {
 					s += ";" + good.getItem() + "/" + good.meta + "/" + nb;
@@ -99,34 +87,24 @@ public class GoalMerchantVisitInn extends Goal {
 			}
 		}
 		if (s.length() > 0) {
-			villager.getHouse().visitorsList.add("storedexports;"
-					+ villager.getName() + s);
+			villager.getHouse().visitorsList.add("storedexports;" + villager.getName() + s);
 		}
 
 		s = "";
 
 		for (final Goods good : villager.getTownHall().culture.goodsList) {
-			final int nbNeeded = villager.getTownHall().nbGoodNeeded(
-					good.item.getItem(), good.item.meta);
+			final int nbNeeded = villager.getTownHall().nbGoodNeeded(good.item.getItem(), good.item.meta);
 			if (villager.countInv(good.item.getItem(), good.item.meta) < nbNeeded) {
-				final int nb = villager.takeFromBuilding(
-						villager.getHouse(),
-						good.item.getItem(),
-						good.item.meta,
-						nbNeeded
-								- villager.countInv(good.item.getItem(),
-										good.item.meta));
+				final int nb = villager.takeFromBuilding(villager.getHouse(), good.item.getItem(), good.item.meta, nbNeeded - villager.countInv(good.item.getItem(), good.item.meta));
 
 				if (nb > 0) {
-					s += ";" + good.item.getItem() + "/" + good.item.meta + "/"
-							+ nb;
+					s += ";" + good.item.getItem() + "/" + good.item.meta + "/" + nb;
 				}
 			}
 		}
 
 		if (s.length() > 0) {
-			villager.getHouse().visitorsList.add("broughtimport;"
-					+ villager.getName() + s);
+			villager.getHouse().visitorsList.add("broughtimport;" + villager.getName() + s);
 		}
 
 		return true;

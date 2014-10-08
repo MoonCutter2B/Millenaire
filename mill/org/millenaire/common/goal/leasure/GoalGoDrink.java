@@ -24,8 +24,7 @@ public class GoalGoDrink extends Goal {
 
 	@Override
 	public GoalInformation getDestination(final MillVillager villager) {
-		return packDest(villager.getTownHall().getRandomLocationWithTag(
-				Building.tagDrinking));
+		return packDest(villager.getTownHall().getRandomLocationWithTag(Building.tagDrinking));
 	}
 
 	@Override
@@ -39,8 +38,7 @@ public class GoalGoDrink extends Goal {
 			return false;
 		}
 
-		final Point p = villager.getTownHall().getRandomLocationWithTag(
-				Building.tagDrinking);
+		final Point p = villager.getTownHall().getRandomLocationWithTag(Building.tagDrinking);
 
 		if (p == null) {
 			return false;

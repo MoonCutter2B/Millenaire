@@ -15,23 +15,17 @@ public class GoalPerformPuja extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
 		Building temple = null;
 
 		if (villager.canMeditate()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagPujas);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
 		} else if (villager.canPerformSacrifices()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagSacrifices);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 		}
 
-		if (temple != null
-				&& temple.pujas != null
-				&& (temple.pujas.priest == null || temple.pujas.priest == villager)
-				&& temple.pujas.canPray()) {
+		if (temple != null && temple.pujas != null && (temple.pujas.priest == null || temple.pujas.priest == villager) && temple.pujas.canPray()) {
 			return packDest(temple.getResManager().getCraftingPos(), temple);
 		}
 
@@ -44,11 +38,9 @@ public class GoalPerformPuja extends Goal {
 		Building temple = null;
 
 		if (villager.canMeditate()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagPujas);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
 		} else if (villager.canPerformSacrifices()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagSacrifices);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 		}
 
 		if (temple.pujas.getStackInSlot(0) != null) {
@@ -59,8 +51,7 @@ public class GoalPerformPuja extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 
 		if (villager.canMeditate()) {
 			if (!villager.mw.isGlobalTagSet(MillWorld.PUJAS)) {
@@ -104,17 +95,14 @@ public class GoalPerformPuja extends Goal {
 		Building temple = null;
 
 		if (villager.canMeditate()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagPujas);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
 		} else if (villager.canPerformSacrifices()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagSacrifices);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 		}
 
 		final boolean canContinue = temple.pujas.performPuja(villager);
 
-		final EntityPlayer player = villager.worldObj.getClosestPlayerToEntity(
-				villager, 16);
+		final EntityPlayer player = villager.worldObj.getClosestPlayerToEntity(villager, 16);
 
 		if (player != null) {
 			temple.sendBuildingPacket(player, false);

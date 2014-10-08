@@ -73,13 +73,11 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer {
 	}
 
 	@Override
-	public void renderTileEntityAt(final TileEntity tileentity, final double d,
-			final double d1, final double d2, final float f) {
+	public void renderTileEntityAt(final TileEntity tileentity, final double d, final double d1, final double d2, final float f) {
 		renderTileEntityChestAt((TileEntityChest) tileentity, d, d1, d2, f);
 	}
 
-	public void renderTileEntityChestAt(final TileEntityChest tileentitychest,
-			final double d, final double d1, final double d2, final float f) {
+	public void renderTileEntityChestAt(final TileEntityChest tileentitychest, final double d, final double d1, final double d2, final float f) {
 		int i;
 		if (tileentitychest.getWorldObj() == null) {
 			i = 0;
@@ -87,20 +85,16 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer {
 			final Block block = tileentitychest.getBlockType();
 			i = tileentitychest.getBlockMetadata();
 			if (block != null && i == 0 && block instanceof BlockMillChest) {
-				((BlockMillChest) block).unifyMillChests(
-						tileentitychest.getWorldObj(), tileentitychest.xCoord,
-						tileentitychest.yCoord, tileentitychest.zCoord);
+				((BlockMillChest) block).unifyMillChests(tileentitychest.getWorldObj(), tileentitychest.xCoord, tileentitychest.yCoord, tileentitychest.zCoord);
 				i = tileentitychest.getBlockMetadata();
 			}
 			tileentitychest.checkForAdjacentChests();
 		}
-		if (tileentitychest.adjacentChestZNeg != null
-				|| tileentitychest.adjacentChestXNeg != null) {
+		if (tileentitychest.adjacentChestZNeg != null || tileentitychest.adjacentChestXNeg != null) {
 			return;
 		}
 		ModelLockedChest modelchest;
-		if (tileentitychest.adjacentChestXPos != null
-				|| tileentitychest.adjacentChestZPos != null) {
+		if (tileentitychest.adjacentChestXPos != null || tileentitychest.adjacentChestZPos != null) {
 			modelchest = field_35378_c;
 			bindTexture(MLN.getLargeLockedChestTexture());
 		} else {
@@ -134,20 +128,15 @@ public class TileEntityMillChestRenderer extends TileEntitySpecialRenderer {
 		}
 		GL11.glRotatef(j, 0.0F, 1.0F, 0.0F);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		float f1 = tileentitychest.prevLidAngle
-				+ (tileentitychest.lidAngle - tileentitychest.prevLidAngle) * f;
+		float f1 = tileentitychest.prevLidAngle + (tileentitychest.lidAngle - tileentitychest.prevLidAngle) * f;
 		if (tileentitychest.adjacentChestZNeg != null) {
-			final float f2 = tileentitychest.adjacentChestZNeg.prevLidAngle
-					+ (tileentitychest.adjacentChestZNeg.lidAngle - tileentitychest.adjacentChestZNeg.prevLidAngle)
-					* f;
+			final float f2 = tileentitychest.adjacentChestZNeg.prevLidAngle + (tileentitychest.adjacentChestZNeg.lidAngle - tileentitychest.adjacentChestZNeg.prevLidAngle) * f;
 			if (f2 > f1) {
 				f1 = f2;
 			}
 		}
 		if (tileentitychest.adjacentChestXNeg != null) {
-			final float f3 = tileentitychest.adjacentChestXNeg.prevLidAngle
-					+ (tileentitychest.adjacentChestXNeg.lidAngle - tileentitychest.adjacentChestXNeg.prevLidAngle)
-					* f;
+			final float f3 = tileentitychest.adjacentChestXNeg.prevLidAngle + (tileentitychest.adjacentChestXNeg.lidAngle - tileentitychest.adjacentChestXNeg.prevLidAngle) * f;
 			if (f3 > f1) {
 				f1 = f3;
 			}

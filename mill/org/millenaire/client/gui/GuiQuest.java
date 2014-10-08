@@ -24,8 +24,7 @@ public class GuiQuest extends GuiText {
 	private int type;
 	private boolean firstStep;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_quest.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_quest.png");
 
 	public GuiQuest(final EntityPlayer player, final MillVillager villager) {
 		this.villager = villager;
@@ -41,15 +40,13 @@ public class GuiQuest extends GuiText {
 		final UserProfile profile = Mill.proxy.getClientProfile();
 
 		if (guibutton.id == 0) {
-			final QuestInstance qi = profile.villagersInQuests
-					.get(villager.villager_id);
+			final QuestInstance qi = profile.villagersInQuests.get(villager.villager_id);
 			final boolean firstStep = qi.currentStep == 0;
 			final String res = qi.completeStep(player, villager);
 			ClientSender.questCompleteStep(player, villager);
 			initStatus(1, res, firstStep);
 		} else if (guibutton.id == 1) {
-			final QuestInstance qi = profile.villagersInQuests
-					.get(villager.villager_id);
+			final QuestInstance qi = profile.villagersInQuests.get(villager.villager_id);
 			final boolean firstStep = qi.currentStep == 0;
 			final String res = qi.refuseQuest(player, villager);
 			ClientSender.questRefuse(player, villager);
@@ -73,34 +70,21 @@ public class GuiQuest extends GuiText {
 		if (type == 0) {
 			if (firstStep) {
 				if (showOk) {
-					buttonList.add(new GuiButton(1, xStart + getXSize() / 2
-							- 100, yStart + getYSize() - 40, 95, 20, MLN
-							.string("quest.refuse")));
-					buttonList.add(new GuiButton(0,
-							xStart + getXSize() / 2 + 5, yStart + getYSize()
-									- 40, 95, 20, MLN.string("quest.accept")));
+					buttonList.add(new GuiButton(1, xStart + getXSize() / 2 - 100, yStart + getYSize() - 40, 95, 20, MLN.string("quest.refuse")));
+					buttonList.add(new GuiButton(0, xStart + getXSize() / 2 + 5, yStart + getYSize() - 40, 95, 20, MLN.string("quest.accept")));
 				} else {
-					buttonList.add(new GuiButton(1, xStart + getXSize() / 2
-							- 100, yStart + getYSize() - 40, 95, 20, MLN
-							.string("quest.refuse")));
-					buttonList.add(new GuiButton(2,
-							xStart + getXSize() / 2 + 5, yStart + getYSize()
-									- 40, 95, 20, MLN.string("quest.close")));
+					buttonList.add(new GuiButton(1, xStart + getXSize() / 2 - 100, yStart + getYSize() - 40, 95, 20, MLN.string("quest.refuse")));
+					buttonList.add(new GuiButton(2, xStart + getXSize() / 2 + 5, yStart + getYSize() - 40, 95, 20, MLN.string("quest.close")));
 				}
 			} else {
 				if (showOk) {
-					buttonList.add(new GuiButton(0, xStart + getXSize() / 2
-							- 100, yStart + getYSize() - 40, MLN
-							.string("quest.continue")));
+					buttonList.add(new GuiButton(0, xStart + getXSize() / 2 - 100, yStart + getYSize() - 40, MLN.string("quest.continue")));
 				} else {
-					buttonList.add(new GuiButton(2, xStart + getXSize() / 2
-							- 100, yStart + getYSize() - 40, MLN
-							.string("quest.close")));
+					buttonList.add(new GuiButton(2, xStart + getXSize() / 2 - 100, yStart + getYSize() - 40, MLN.string("quest.close")));
 				}
 			}
 		} else {
-			buttonList.add(new GuiButton(2, xStart + getXSize() / 2 - 100,
-					yStart + getYSize() - 40, MLN.string("quest.close")));
+			buttonList.add(new GuiButton(2, xStart + getXSize() / 2 - 100, yStart + getYSize() - 40, MLN.string("quest.close")));
 		}
 
 	}
@@ -126,22 +110,17 @@ public class GuiQuest extends GuiText {
 
 		String game = "";
 		if (villager.getGameOccupationName(player.getDisplayName()).length() > 0) {
-			game = " ("
-					+ villager.getGameOccupationName(player.getDisplayName())
-					+ ")";
+			game = " (" + villager.getGameOccupationName(player.getDisplayName()) + ")";
 		}
 
-		text.add(new Line(villager.getName() + ", "
-				+ villager.getNativeOccupationName() + game));
+		text.add(new Line(villager.getName() + ", " + villager.getNativeOccupationName() + game));
 		text.add(new Line());
-		text.add(new Line(baseText.replaceAll("\\$name",
-				player.getDisplayName())));
+		text.add(new Line(baseText.replaceAll("\\$name", player.getDisplayName())));
 
 		final UserProfile profile = Mill.proxy.getClientProfile();
 
 		if (type == 0) {
-			final QuestStep step = profile.villagersInQuests.get(
-					villager.villager_id).getCurrentStep();
+			final QuestStep step = profile.villagersInQuests.get(villager.villager_id).getCurrentStep();
 
 			final String error = step.lackingConditions(player);
 
@@ -189,16 +168,13 @@ public class GuiQuest extends GuiText {
 	public void initData() {
 		final UserProfile profile = Mill.proxy.getClientProfile();
 
-		final String baseText = profile.villagersInQuests.get(
-				villager.villager_id).getDescription(profile);
-		final boolean firstStep = profile.villagersInQuests
-				.get(villager.villager_id).currentStep == 0;
+		final String baseText = profile.villagersInQuests.get(villager.villager_id).getDescription(profile);
+		final boolean firstStep = profile.villagersInQuests.get(villager.villager_id).currentStep == 0;
 
 		initStatus(0, baseText, firstStep);
 	}
 
-	private void initStatus(final int type, final String baseText,
-			final boolean firstStep) {
+	private void initStatus(final int type, final String baseText, final boolean firstStep) {
 
 		pageNum = 0;
 		this.type = type;

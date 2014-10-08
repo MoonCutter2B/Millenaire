@@ -21,8 +21,7 @@ import org.millenaire.common.pathing.atomicstryker.AStarStatic;
 
 public class Point {
 
-	public static final Point read(final NBTTagCompound nbttagcompound,
-			final String label) {
+	public static final Point read(final NBTTagCompound nbttagcompound, final String label) {
 		double x, y, z;
 		x = nbttagcompound.getDouble(label + "_xCoord");
 		y = nbttagcompound.getDouble(label + "_yCoord");
@@ -78,8 +77,7 @@ public class Point {
 			if (dist % 2 == 0) {
 				return dist / 2 + " " + MLN.string("other.kilometre");
 			} else {
-				return (dist - 1) / 2 + MLN.string("other.andhalf") + " "
-						+ MLN.string("other.kilometre");
+				return (dist - 1) / 2 + MLN.string("other.andhalf") + " " + MLN.string("other.kilometre");
 			}
 		}
 	}
@@ -115,10 +113,7 @@ public class Point {
 		final int xdist = MathHelper.floor_double(p.x - x);
 		final int zdist = MathHelper.floor_double(p.z - z);
 
-		if (Math.abs(xdist) > Math.abs(zdist) * 0.6
-				&& Math.abs(xdist) < Math.abs(zdist) * 1.4
-				|| Math.abs(zdist) > Math.abs(xdist) * 0.6
-				&& Math.abs(zdist) < Math.abs(xdist) * 1.4) {
+		if (Math.abs(xdist) > Math.abs(zdist) * 0.6 && Math.abs(xdist) < Math.abs(zdist) * 1.4 || Math.abs(zdist) > Math.abs(xdist) * 0.6 && Math.abs(zdist) < Math.abs(xdist) * 1.4) {
 
 			if (zdist > 0) {
 				direction = prefix + "south" + "-";
@@ -156,10 +151,7 @@ public class Point {
 		final int xdist = MathHelper.floor_double(p.x - x);
 		final int zdist = MathHelper.floor_double(p.z - z);
 
-		if (Math.abs(xdist) > Math.abs(zdist) * 0.6
-				&& Math.abs(xdist) < Math.abs(zdist) * 1.4
-				|| Math.abs(zdist) > Math.abs(xdist) * 0.6
-				&& Math.abs(zdist) < Math.abs(xdist) * 1.4) {
+		if (Math.abs(xdist) > Math.abs(zdist) * 0.6 && Math.abs(xdist) < Math.abs(zdist) * 1.4 || Math.abs(zdist) > Math.abs(xdist) * 0.6 && Math.abs(zdist) < Math.abs(xdist) * 1.4) {
 
 			if (zdist > 0) {
 				direction = MLN.string("other.south_short");
@@ -192,8 +184,7 @@ public class Point {
 	}
 
 	public String distanceDirectionShort(final Point p) {
-		return MLN.string("other.directionshort", directionToShort(p), ""
-				+ (int) horizontalDistanceTo(p) + "m");
+		return MLN.string("other.directionshort", directionToShort(p), "" + (int) horizontalDistanceTo(p) + "m");
 	}
 
 	public double distanceTo(final double px, final double py, final double pz) {
@@ -215,8 +206,7 @@ public class Point {
 		return distanceTo(p.x, p.y, p.z);
 	}
 
-	public double distanceToSquared(final double px, final double py,
-			final double pz) {
+	public double distanceToSquared(final double px, final double py, final double pz) {
 		final double d = px - x;
 		final double d1 = py - y;
 		final double d2 = pz - z;
@@ -366,10 +356,8 @@ public class Point {
 		return null;
 	}
 
-	public short[] getPathingCoord(final int xoffset, final int yoffset,
-			final int zoffset) {
-		return new short[] { (short) (x - xoffset), (short) (y - yoffset),
-				(short) (z - zoffset) };
+	public short[] getPathingCoord(final int xoffset, final int yoffset, final int zoffset) {
+		return new short[] { (short) (x - xoffset), (short) (y - yoffset), (short) (z - zoffset) };
 	}
 
 	public PathPoint getPathPoint() {
@@ -456,8 +444,7 @@ public class Point {
 	}
 
 	public boolean isBlockPassable(final World world) {
-		return AStarStatic.isPassableBlock(world, getiX(), getiY(), getiZ(),
-				MillVillager.DEFAULT_JPS_CONFIG);
+		return AStarStatic.isPassableBlock(world, getiX(), getiY(), getiZ(), MillVillager.DEFAULT_JPS_CONFIG);
 	}
 
 	public int manhattanDistance(final Point p) {
@@ -469,8 +456,7 @@ public class Point {
 			return false;
 		}
 
-		return getiX() == p.xCoord && getiY() == p.yCoord
-				&& getiZ() == p.zCoord;
+		return getiX() == p.xCoord && getiY() == p.yCoord && getiZ() == p.zCoord;
 	}
 
 	public boolean sameBlock(final Point p) {
@@ -478,8 +464,7 @@ public class Point {
 			return false;
 		}
 
-		return getiX() == p.getiX() && getiY() == p.getiY()
-				&& getiZ() == p.getiZ();
+		return getiX() == p.getiX() && getiY() == p.getiY() && getiZ() == p.getiZ();
 	}
 
 	public boolean sameHorizontalBlock(final PathPoint p) {
@@ -498,10 +483,8 @@ public class Point {
 		return getiX() == p.getiX() && getiZ() == p.getiZ();
 	}
 
-	public void setBlock(final World world, final Block block, final int meta,
-			final boolean notify, final boolean sound) {
-		MillCommonUtilities.setBlockAndMetadata(world, this, block, meta,
-				notify, sound);
+	public void setBlock(final World world, final Block block, final int meta, final boolean notify, final boolean sound) {
+		MillCommonUtilities.setBlockAndMetadata(world, this, block, meta, notify, sound);
 	}
 
 	public int squareRadiusDistance(final Point p) {
@@ -510,8 +493,7 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return Math.round(x * 100) / 100 + "/" + Math.round(y * 100) / 100
-				+ "/" + Math.round(z * 100) / 100;
+		return Math.round(x * 100) / 100 + "/" + Math.round(y * 100) / 100 + "/" + Math.round(z * 100) / 100;
 	}
 
 	public void write(final NBTTagCompound nbttagcompound, final String label) {

@@ -12,8 +12,7 @@ import org.millenaire.common.core.MillCommonUtilities;
 
 public class GoalFish extends Goal {
 
-	private static ItemStack[] fishingRod = new ItemStack[] { new ItemStack(
-			Items.fishing_rod, 1) };
+	private static ItemStack[] fishingRod = new ItemStack[] { new ItemStack(Items.fishing_rod, 1) };
 
 	public GoalFish() {
 		buildingLimit.put(new InvItem(Items.fish, 0), 512);
@@ -27,20 +26,15 @@ public class GoalFish extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
-		final List<Building> vb = villager.getTownHall().getBuildingsWithTag(
-				Building.tagFishingSpot);
+		final List<Building> vb = villager.getTownHall().getBuildingsWithTag(Building.tagFishingSpot);
 
 		Building closest = null;
 
 		for (final Building b : vb) {
 			if (closest == null
-					|| villager.getPos().horizontalDistanceToSquared(
-							b.getResManager().getSleepingPos()) < villager
-							.getPos().horizontalDistanceToSquared(
-									closest.getResManager().getSleepingPos())) {
+					|| villager.getPos().horizontalDistanceToSquared(b.getResManager().getSleepingPos()) < villager.getPos().horizontalDistanceToSquared(closest.getResManager().getSleepingPos())) {
 				closest = b;
 			}
 		}
@@ -49,22 +43,16 @@ public class GoalFish extends Goal {
 			return null;
 		}
 
-		return packDest(
-				closest.getResManager().fishingspots
-						.get(MillCommonUtilities.randomInt(closest
-								.getResManager().fishingspots.size())),
-				closest);
+		return packDest(closest.getResManager().fishingspots.get(MillCommonUtilities.randomInt(closest.getResManager().fishingspots.size())), closest);
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(final MillVillager villager)
-			throws Exception {
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) throws Exception {
 		return fishingRod;
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 
 		for (final Building b : villager.getTownHall().getBuildings()) {
 			if (b.getResManager().fishingspots.size() > 0) {

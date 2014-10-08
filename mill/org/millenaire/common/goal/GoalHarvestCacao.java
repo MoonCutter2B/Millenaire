@@ -12,8 +12,7 @@ public class GoalHarvestCacao extends Goal {
 
 	@Override
 	public GoalInformation getDestination(final MillVillager villager) {
-		final Point p = villager.getHouse().getResManager()
-				.getCocoaHarvestLocation();
+		final Point p = villager.getHouse().getResManager().getCocoaHarvestLocation();
 
 		return packDest(p, villager.getHouse());
 	}
@@ -46,8 +45,7 @@ public class GoalHarvestCacao extends Goal {
 				villager.setBlockAndMetadata(cropPoint, Blocks.air, 0);
 
 				int nbcrop = 2;
-				final float irrigation = villager.getTownHall()
-						.getVillageIrrigation();
+				final float irrigation = villager.getTownHall().getVillageIrrigation();
 				final double rand = Math.random();
 				if (rand < irrigation / 100) {
 					nbcrop++;

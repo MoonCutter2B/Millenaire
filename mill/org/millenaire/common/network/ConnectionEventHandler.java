@@ -31,13 +31,11 @@ public class ConnectionEventHandler {
 	public void playerLoggedIn(final PlayerLoggedInEvent event) {
 
 		try {
-			final UserProfile profile = MillCommonUtilities.getServerProfile(
-					event.player.worldObj, event.player.getDisplayName());
+			final UserProfile profile = MillCommonUtilities.getServerProfile(event.player.worldObj, event.player.getDisplayName());
 			if (profile != null) {
 				profile.connectUser();
 			} else {
-				MLN.error(this, "Could not get profile on login for user: "
-						+ event.player.getDisplayName());
+				MLN.error(this, "Could not get profile on login for user: " + event.player.getDisplayName());
 			}
 		} catch (final Exception e) {
 			MLN.printException("Error in ConnectionHandler.playerLoggedIn:", e);

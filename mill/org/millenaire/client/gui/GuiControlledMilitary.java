@@ -30,8 +30,7 @@ public class GuiControlledMilitary extends GuiText {
 		public Point targetVillage;
 		public int data = 0;
 
-		public GuiButtonDiplomacy(final Point targetVillage, final int id,
-				final int data, final String s) {
+		public GuiButtonDiplomacy(final Point targetVillage, final int id, final int data, final String s) {
 			super(id, 0, 0, 0, 0, s);
 			this.targetVillage = targetVillage;
 			this.data = data;
@@ -73,12 +72,9 @@ public class GuiControlledMilitary extends GuiText {
 	private final Building townHall;
 	private final EntityPlayer player;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_panel.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_panel.png");
 
-	public GuiControlledMilitary(
-			final net.minecraft.entity.player.EntityPlayer player,
-			final Building th) {
+	public GuiControlledMilitary(final net.minecraft.entity.player.EntityPlayer player, final Building th) {
 
 		townHall = th;
 		this.player = player;
@@ -93,11 +89,9 @@ public class GuiControlledMilitary extends GuiText {
 		final GuiButtonDiplomacy gbp = (GuiButtonDiplomacy) guibutton;
 
 		if (gbp.id == GuiButtonDiplomacy.REL) {
-			ClientSender.controlledMilitaryDiplomacy(player, townHall,
-					gbp.targetVillage, gbp.data);
+			ClientSender.controlledMilitaryDiplomacy(player, townHall, gbp.targetVillage, gbp.data);
 		} else if (gbp.id == GuiButtonDiplomacy.RAID) {
-			ClientSender.controlledMilitaryPlanRaid(player, townHall,
-					gbp.targetVillage);
+			ClientSender.controlledMilitaryPlanRaid(player, townHall, gbp.targetVillage);
 		} else if (gbp.id == GuiButtonDiplomacy.RAIDCANCEL) {
 			ClientSender.controlledMilitaryCancelRaid(player, townHall);
 		}
@@ -129,10 +123,7 @@ public class GuiControlledMilitary extends GuiText {
 		for (final Point p : townHall.getKnownVillages()) {
 			final Building b = townHall.mw.getBuilding(p);
 			if (b != null) {
-				relations
-						.add(new VillageRelation(p, townHall
-								.getRelationWithVillage(p), b
-								.getVillageQualifiedName()));
+				relations.add(new VillageRelation(p, townHall.getRelationWithVillage(p), b.getVillageQualifiedName()));
 			}
 		}
 
@@ -154,64 +145,39 @@ public class GuiControlledMilitary extends GuiText {
 				}
 
 				text.add(new Line(col
-						+ MLN.string(
-								"ui.villagerelations",
-								b.getVillageQualifiedName(),
-								b.villageType.name,
-								b.culture.getCultureGameName(),
-								MLN.string(MillCommonUtilities
-										.getRelationName(vr.relation))
-										+ " ("
-										+ vr.relation + ")"), false));
+						+ MLN.string("ui.villagerelations", b.getVillageQualifiedName(), b.villageType.name, b.culture.getCultureGameName(),
+								MLN.string(MillCommonUtilities.getRelationName(vr.relation)) + " (" + vr.relation + ")"), false));
 
-				final GuiButtonDiplomacy relGood = new GuiButtonDiplomacy(
-						vr.pos, GuiButtonDiplomacy.REL,
-						GuiButtonDiplomacy.REL_GOOD, MLN.string("ui.relgood"));
-				final GuiButtonDiplomacy relNeutral = new GuiButtonDiplomacy(
-						vr.pos, GuiButtonDiplomacy.REL,
-						GuiButtonDiplomacy.REL_NEUTRAL,
-						MLN.string("ui.relneutral"));
-				final GuiButtonDiplomacy relBad = new GuiButtonDiplomacy(
-						vr.pos, GuiButtonDiplomacy.REL,
-						GuiButtonDiplomacy.REL_BAD, MLN.string("ui.relbad"));
+				final GuiButtonDiplomacy relGood = new GuiButtonDiplomacy(vr.pos, GuiButtonDiplomacy.REL, GuiButtonDiplomacy.REL_GOOD, MLN.string("ui.relgood"));
+				final GuiButtonDiplomacy relNeutral = new GuiButtonDiplomacy(vr.pos, GuiButtonDiplomacy.REL, GuiButtonDiplomacy.REL_NEUTRAL, MLN.string("ui.relneutral"));
+				final GuiButtonDiplomacy relBad = new GuiButtonDiplomacy(vr.pos, GuiButtonDiplomacy.REL, GuiButtonDiplomacy.REL_BAD, MLN.string("ui.relbad"));
 
 				text.add(new Line(relGood, relNeutral, relBad));
 				text.add(new Line(false));
 
 				if (townHall.raidTarget == null) {
-					final GuiButtonDiplomacy raid = new GuiButtonDiplomacy(
-							vr.pos, GuiButtonDiplomacy.RAID,
-							GuiButtonDiplomacy.REL_BAD, MLN.string("ui.raid"));
+					final GuiButtonDiplomacy raid = new GuiButtonDiplomacy(vr.pos, GuiButtonDiplomacy.RAID, GuiButtonDiplomacy.REL_BAD, MLN.string("ui.raid"));
 					text.add(new Line(raid));
 					text.add(new Line(false));
 				} else {
 					if (townHall.raidStart > 0) {
 						if (townHall.raidTarget.equals(vr.pos)) {
-							text.add(new Line(DARKRED
-									+ MLN.string("ui.raidinprogress")));
+							text.add(new Line(DARKRED + MLN.string("ui.raidinprogress")));
 						} else {
-							text.add(new Line(DARKRED
-									+ MLN.string("ui.otherraidinprogress")));
+							text.add(new Line(DARKRED + MLN.string("ui.otherraidinprogress")));
 						}
 					} else {
 						if (townHall.raidTarget.equals(vr.pos)) {
-							final GuiButtonDiplomacy raid = new GuiButtonDiplomacy(
-									vr.pos, GuiButtonDiplomacy.RAIDCANCEL, 0,
-									MLN.string("ui.raidcancel"));
+							final GuiButtonDiplomacy raid = new GuiButtonDiplomacy(vr.pos, GuiButtonDiplomacy.RAIDCANCEL, 0, MLN.string("ui.raidcancel"));
 							text.add(new Line(raid));
 							text.add(new Line(false));
-							text.add(new Line(LIGHTRED
-									+ MLN.string("ui.raidplanned")));
+							text.add(new Line(LIGHTRED + MLN.string("ui.raidplanned")));
 
 						} else {
-							final GuiButtonDiplomacy raid = new GuiButtonDiplomacy(
-									vr.pos, GuiButtonDiplomacy.RAID,
-									GuiButtonDiplomacy.REL_BAD,
-									MLN.string("ui.raid"));
+							final GuiButtonDiplomacy raid = new GuiButtonDiplomacy(vr.pos, GuiButtonDiplomacy.RAID, GuiButtonDiplomacy.REL_BAD, MLN.string("ui.raid"));
 							text.add(new Line(raid));
 							text.add(new Line(false));
-							text.add(new Line(LIGHTRED
-									+ MLN.string("ui.otherraidplanned")));
+							text.add(new Line(LIGHTRED + MLN.string("ui.otherraidplanned")));
 						}
 					}
 				}
@@ -222,8 +188,7 @@ public class GuiControlledMilitary extends GuiText {
 		final List<List<Line>> pages = new ArrayList<List<Line>>();
 		pages.add(text);
 
-		final List<List<String>> milpages = TileEntityPanel.generateMilitary(
-				player, townHall);
+		final List<List<String>> milpages = TileEntityPanel.generateMilitary(player, townHall);
 
 		for (final List<String> textPage : milpages) {
 			final List<Line> page = new ArrayList<Line>();

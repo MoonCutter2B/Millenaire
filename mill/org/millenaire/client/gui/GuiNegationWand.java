@@ -18,8 +18,7 @@ public class GuiNegationWand extends GuiText {
 	private final Building th;
 	private final EntityPlayer player;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_quest.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_quest.png");
 
 	public GuiNegationWand(final EntityPlayer player, final Building th) {
 		this.th = th;
@@ -49,10 +48,8 @@ public class GuiNegationWand extends GuiText {
 		final int xStart = (width - getXSize()) / 2;
 		final int yStart = (height - getYSize()) / 2;
 
-		buttonList.add(new GuiButton(1, xStart + getXSize() / 2 - 100, yStart
-				+ getYSize() - 40, 95, 20, MLN.string("negationwand.cancel")));
-		buttonList.add(new GuiButton(0, xStart + getXSize() / 2 + 5, yStart
-				+ getYSize() - 40, 95, 20, MLN.string("negationwand.confirm")));
+		buttonList.add(new GuiButton(1, xStart + getXSize() / 2 - 100, yStart + getYSize() - 40, 95, 20, MLN.string("negationwand.cancel")));
+		buttonList.add(new GuiButton(0, xStart + getXSize() / 2 + 5, yStart + getYSize() - 40, 95, 20, MLN.string("negationwand.confirm")));
 
 	}
 
@@ -102,8 +99,7 @@ public class GuiNegationWand extends GuiText {
 		descText = new ArrayList<List<Line>>();
 
 		final List<Line> page = new ArrayList<Line>();
-		page.add(new Line(MLN.string("negationwand.confirmmessage",
-				th.villageType.name)));
+		page.add(new Line(MLN.string("negationwand.confirmmessage", th.villageType.name)));
 		descText.add(page);
 
 		descText = adjustText(descText);

@@ -43,13 +43,10 @@ public class BuildingChunkLoader {
 			}
 		}
 
-		final Ticket ticket = ForgeChunkManager.requestTicket(Mill.instance,
-				townHall.worldObj, Type.NORMAL);
+		final Ticket ticket = ForgeChunkManager.requestTicket(Mill.instance, townHall.worldObj, Type.NORMAL);
 
 		if (ticket == null) {
-			MLN.warning(
-					townHall,
-					"Couldn't get ticket in BuildingChunkLoader. Your Forge chunk loading settings must be interfearing.");
+			MLN.warning(townHall, "Couldn't get ticket in BuildingChunkLoader. Your Forge chunk loading settings must be interfearing.");
 			return null;
 		} else {
 			tickets.add(ticket);
@@ -60,15 +57,12 @@ public class BuildingChunkLoader {
 
 	public void loadChunks() {
 		if (townHall.winfo != null) {
-			for (int cx = townHall.winfo.chunkStartX - 1; cx < townHall.winfo.chunkStartX
-					+ townHall.winfo.length / 16 + 1; cx++) {
-				for (int cz = townHall.winfo.chunkStartZ - 1; cz < townHall.winfo.chunkStartZ
-						+ townHall.winfo.width / 16 + 1; cz++) {
+			for (int cx = townHall.winfo.chunkStartX - 1; cx < townHall.winfo.chunkStartX + townHall.winfo.length / 16 + 1; cx++) {
+				for (int cz = townHall.winfo.chunkStartZ - 1; cz < townHall.winfo.chunkStartZ + townHall.winfo.width / 16 + 1; cz++) {
 					final Ticket ticket = getTicket();
 
 					if (ticket != null) {
-						final ChunkCoordIntPair chunkCoords = new ChunkCoordIntPair(
-								cx, cz);
+						final ChunkCoordIntPair chunkCoords = new ChunkCoordIntPair(cx, cz);
 						ForgeChunkManager.forceChunk(ticket, chunkCoords);
 					}
 				}

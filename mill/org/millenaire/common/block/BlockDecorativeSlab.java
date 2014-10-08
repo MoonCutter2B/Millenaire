@@ -48,9 +48,7 @@ public class BlockDecorativeSlab extends BlockSlab {
 			this.isFullBlockDec = b.isOpaqueCube();
 		}
 
-		public ItemDecorativeSlab(final BlockDecorativeSlab b,
-				final BlockDecorativeSlab halfSlab,
-				final BlockDecorativeSlab fullBlock, final boolean full) {
+		public ItemDecorativeSlab(final BlockDecorativeSlab b, final BlockDecorativeSlab halfSlab, final BlockDecorativeSlab fullBlock, final boolean full) {
 			super(b, halfSlab, fullBlock, full);
 
 			block = b;
@@ -62,9 +60,7 @@ public class BlockDecorativeSlab extends BlockSlab {
 			this.isFullBlockDec = full;
 		}
 
-		private boolean func_77888_a(final ItemStack par1ItemStack,
-				final EntityPlayer par2EntityPlayer, final World par3World,
-				int par4, int par5, int par6, final int par7) {
+		private boolean func_77888_a(final ItemStack par1ItemStack, final EntityPlayer par2EntityPlayer, final World par3World, int par4, int par5, int par6, final int par7) {
 			if (par7 == 0) {
 				--par5;
 			}
@@ -93,21 +89,10 @@ public class BlockDecorativeSlab extends BlockSlab {
 			final int j1 = par3World.getBlockMetadata(par4, par5, par6);
 			final int k1 = j1 & 7;
 
-			if (block == this.theHalfSlabDec
-					&& k1 == par1ItemStack.getItemDamage()) {
-				if (par3World.checkBlockCollision(this.doubleSlabDec
-						.getCollisionBoundingBoxFromPool(par3World, par4, par5,
-								par6))
-						&& par3World.setBlock(par4, par5, par6,
-								this.doubleSlabDec, k1, 3)) {
-					par3World
-							.playSoundEffect(
-									par4 + 0.5F,
-									par5 + 0.5F,
-									par6 + 0.5F,
-									this.doubleSlabDec.stepSound.soundName,
-									(this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F,
-									this.doubleSlabDec.stepSound.getPitch() * 0.8F);
+			if (block == this.theHalfSlabDec && k1 == par1ItemStack.getItemDamage()) {
+				if (par3World.checkBlockCollision(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6)) && par3World.setBlock(par4, par5, par6, this.doubleSlabDec, k1, 3)) {
+					par3World.playSoundEffect(par4 + 0.5F, par5 + 0.5F, par6 + 0.5F, this.doubleSlabDec.stepSound.soundName, (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F,
+							this.doubleSlabDec.stepSound.getPitch() * 0.8F);
 					--par1ItemStack.stackSize;
 				}
 
@@ -129,53 +114,34 @@ public class BlockDecorativeSlab extends BlockSlab {
 
 		@Override
 		public String getUnlocalizedName(final ItemStack itemstack) {
-			return new StringBuilder().append(super.getUnlocalizedName())
-					.append(".").append(itemstack.getItemDamage()).toString();
+			return new StringBuilder().append(super.getUnlocalizedName()).append(".").append(itemstack.getItemDamage()).toString();
 		}
 
 		@Override
-		public boolean onItemUse(final ItemStack par1ItemStack,
-				final EntityPlayer par2EntityPlayer, final World par3World,
-				final int par4, final int par5, final int par6, final int par7,
+		public boolean onItemUse(final ItemStack par1ItemStack, final EntityPlayer par2EntityPlayer, final World par3World, final int par4, final int par5, final int par6, final int par7,
 				final float par8, final float par9, final float par10) {
 			if (this.isFullBlockDec) {
-				return super.onItemUse(par1ItemStack, par2EntityPlayer,
-						par3World, par4, par5, par6, par7, par8, par9, par10);
+				return super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
 			} else if (par1ItemStack.stackSize == 0) {
 				return false;
-			} else if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7,
-					par1ItemStack)) {
+			} else if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack)) {
 				return false;
 			} else {
 				final Block block = par3World.getBlock(par4, par5, par6);
 				final int j1 = par3World.getBlockMetadata(par4, par5, par6);
 
-				if (par7 == 1 && block == this.theHalfSlabDec
-						&& j1 == par1ItemStack.getItemDamage()) {
-					if (par3World.checkBlockCollision(this.doubleSlabDec
-							.getCollisionBoundingBoxFromPool(par3World, par4,
-									par5, par6))
-							&& par3World.setBlock(par4, par5, par6,
-									this.doubleSlabDec, j1, 3)) {
-						par3World
-								.playSoundEffect(
-										par4 + 0.5F,
-										par5 + 0.5F,
-										par6 + 0.5F,
-										this.doubleSlabDec.stepSound.soundName,
-										(this.doubleSlabDec.stepSound
-												.getVolume() + 1.0F) / 2.0F,
-										this.doubleSlabDec.stepSound.getPitch() * 0.8F);
+				if (par7 == 1 && block == this.theHalfSlabDec && j1 == par1ItemStack.getItemDamage()) {
+					if (par3World.checkBlockCollision(this.doubleSlabDec.getCollisionBoundingBoxFromPool(par3World, par4, par5, par6))
+							&& par3World.setBlock(par4, par5, par6, this.doubleSlabDec, j1, 3)) {
+						par3World.playSoundEffect(par4 + 0.5F, par5 + 0.5F, par6 + 0.5F, this.doubleSlabDec.stepSound.soundName, (this.doubleSlabDec.stepSound.getVolume() + 1.0F) / 2.0F,
+								this.doubleSlabDec.stepSound.getPitch() * 0.8F);
 						--par1ItemStack.stackSize;
 					}
 
 					return true;
 				} else {
-					return this.func_77888_a(par1ItemStack, par2EntityPlayer,
-							par3World, par4, par5, par6, par7) ? true : super
-							.onItemUse(par1ItemStack, par2EntityPlayer,
-									par3World, par4, par5, par6, par7, par8,
-									par9, par10);
+					return this.func_77888_a(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7) ? true : super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6,
+							par7, par8, par9, par10);
 				}
 			}
 		}
@@ -241,8 +207,7 @@ public class BlockDecorativeSlab extends BlockSlab {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void getSubBlocks(final Item item,
-			final CreativeTabs par2CreativeTabs, final List par3List) {
+	public void getSubBlocks(final Item item, final CreativeTabs par2CreativeTabs, final List par3List) {
 		for (final int meta : texturesSide.keySet()) {
 			if (meta >= 8) {
 				par3List.add(new ItemStack(item, 1, meta));
@@ -251,9 +216,7 @@ public class BlockDecorativeSlab extends BlockSlab {
 	}
 
 	@Override
-	public int onBlockPlaced(final World par1World, final int par2,
-			final int par3, final int par4, final int par5, final float par6,
-			final float par7, final float par8, final int meta) {
+	public int onBlockPlaced(final World par1World, final int par2, final int par3, final int par4, final int par5, final float par6, final float par7, final float par8, final int meta) {
 		return meta;
 	}
 
@@ -266,20 +229,13 @@ public class BlockDecorativeSlab extends BlockSlab {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(final IIconRegister iconRegister) {
 		for (final int meta : textureTopNames.keySet()) {
-			texturesTop.put(
-					meta,
-					MillCommonUtilities.getIcon(iconRegister,
-							textureTopNames.get(meta)));
+			texturesTop.put(meta, MillCommonUtilities.getIcon(iconRegister, textureTopNames.get(meta)));
 		}
 		for (final int meta : textureBottomNames.keySet()) {
-			texturesBottom.put(meta, MillCommonUtilities.getIcon(iconRegister,
-					textureBottomNames.get(meta)));
+			texturesBottom.put(meta, MillCommonUtilities.getIcon(iconRegister, textureBottomNames.get(meta)));
 		}
 		for (final int meta : textureSideNames.keySet()) {
-			texturesSide.put(
-					meta,
-					MillCommonUtilities.getIcon(iconRegister,
-							textureSideNames.get(meta)));
+			texturesSide.put(meta, MillCommonUtilities.getIcon(iconRegister, textureSideNames.get(meta)));
 		}
 	}
 
@@ -293,8 +249,7 @@ public class BlockDecorativeSlab extends BlockSlab {
 		textureSideNames.put(meta | 8, name);
 	}
 
-	public void registerTexture(final int meta, final String top,
-			final String bottom, final String side) {
+	public void registerTexture(final int meta, final String top, final String bottom, final String side) {
 		textureTopNames.put(meta, top);
 		textureBottomNames.put(meta, bottom);
 		textureSideNames.put(meta, side);
@@ -305,8 +260,7 @@ public class BlockDecorativeSlab extends BlockSlab {
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(final IBlockAccess par1IBlockAccess,
-			final int par2, final int par3, final int par4) {
+	public void setBlockBoundsBasedOnState(final IBlockAccess par1IBlockAccess, final int par2, final int par3, final int par4) {
 		if (this.opaque) {
 			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		} else {
@@ -315,15 +269,10 @@ public class BlockDecorativeSlab extends BlockSlab {
 	}
 
 	@Override
-	public boolean shouldSideBeRendered(final IBlockAccess par1IBlockAccess,
-			final int par2, final int par3, final int par4, final int par5) {
+	public boolean shouldSideBeRendered(final IBlockAccess par1IBlockAccess, final int par2, final int par3, final int par4, final int par5) {
 		if (this.opaque) {
-			return super.shouldSideBeRendered(par1IBlockAccess, par2, par3,
-					par4, par5);
-		} else if (par5 != 1
-				&& par5 != 0
-				&& !super.shouldSideBeRendered(par1IBlockAccess, par2, par3,
-						par4, par5)) {
+			return super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
+		} else if (par5 != 1 && par5 != 0 && !super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5)) {
 			return false;
 		} else {
 			return true;

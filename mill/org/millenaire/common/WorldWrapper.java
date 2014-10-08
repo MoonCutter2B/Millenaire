@@ -23,8 +23,7 @@ public class WorldWrapper {
 
 		int y = findTopSoilBlock(x, z);
 
-		while (y < 127
-				&& MillCommonUtilities.isBlockIdSolid(world.getBlock(x, y, z))) {
+		while (y < 127 && MillCommonUtilities.isBlockIdSolid(world.getBlock(x, y, z))) {
 			y++;
 		}
 
@@ -39,8 +38,7 @@ public class WorldWrapper {
 		return world.getBlock(x, y, z);
 	}
 
-	public EntityPlayer getClosestPlayer(final int i, final int j, final int k,
-			final int l) {
+	public EntityPlayer getClosestPlayer(final int i, final int j, final int k, final int l) {
 		return world.getClosestPlayer(i, j, k, l);
 	}
 

@@ -21,8 +21,7 @@ public class GoalDeliverResourcesShop extends Goal {
 		return getDestination(villager, false);
 	}
 
-	public GoalInformation getDestination(final MillVillager villager,
-			final boolean test) {
+	public GoalInformation getDestination(final MillVillager villager, final boolean test) {
 
 		boolean delayOver;
 
@@ -31,8 +30,7 @@ public class GoalDeliverResourcesShop extends Goal {
 		} else if (!villager.lastGoalTime.containsKey(this)) {
 			delayOver = true;
 		} else {
-			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
-					.get(this) + STANDARD_DELAY;
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime.get(this) + STANDARD_DELAY;
 		}
 
 		for (final Building shop : villager.getTownHall().getShops()) {
@@ -40,19 +38,15 @@ public class GoalDeliverResourcesShop extends Goal {
 			int nb = 0;
 
 			if (villager.getCulture().shopNeeds.containsKey(shop.location.shop)) {
-				for (final InvItem item : villager.getCulture().shopNeeds
-						.get(shop.location.shop)) {
-					final int nbcount = villager.countInv(item.getItem(),
-							item.meta);
+				for (final InvItem item : villager.getCulture().shopNeeds.get(shop.location.shop)) {
+					final int nbcount = villager.countInv(item.getItem(), item.meta);
 					if (nbcount > 0) {
 						nb += nbcount;
 						if (delayOver) {
-							return packDest(shop.getResManager()
-									.getSellingPos(), shop);
+							return packDest(shop.getResManager().getSellingPos(), shop);
 						}
 						if (nb > 16) {
-							return packDest(shop.getResManager()
-									.getSellingPos(), shop);
+							return packDest(shop.getResManager().getSellingPos(), shop);
 						}
 					}
 				}
@@ -70,8 +64,7 @@ public class GoalDeliverResourcesShop extends Goal {
 
 		if (shop != null) {
 			if (villager.getCulture().shopNeeds.containsKey(shop.location.shop)) {
-				for (final InvItem item : villager.getCulture().shopNeeds
-						.get(shop.location.shop)) {
+				for (final InvItem item : villager.getCulture().shopNeeds.get(shop.location.shop)) {
 					if (villager.countInv(item.getItem(), item.meta) > 0) {
 						items.add(new ItemStack(item.getItem(), 1, item.meta));
 					}
@@ -96,8 +89,7 @@ public class GoalDeliverResourcesShop extends Goal {
 
 		if (shop != null) {
 			if (villager.getCulture().shopNeeds.containsKey(shop.location.shop)) {
-				for (final InvItem item : villager.getCulture().shopNeeds
-						.get(shop.location.shop)) {
+				for (final InvItem item : villager.getCulture().shopNeeds.get(shop.location.shop)) {
 					villager.putInBuilding(shop, item.getItem(), item.meta, 256);
 				}
 			}
@@ -112,8 +104,7 @@ public class GoalDeliverResourcesShop extends Goal {
 
 		for (final Building shop : villager.getTownHall().getShops()) {
 			if (villager.getCulture().shopNeeds.containsKey(shop.location.shop)) {
-				for (final InvItem item : villager.getCulture().shopNeeds
-						.get(shop.location.shop)) {
+				for (final InvItem item : villager.getCulture().shopNeeds.get(shop.location.shop)) {
 					priority += villager.countInv(item.getItem(), item.meta) * 10;
 				}
 			}

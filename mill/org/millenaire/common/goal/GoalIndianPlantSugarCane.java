@@ -14,17 +14,14 @@ import org.millenaire.common.building.Building;
 
 public class GoalIndianPlantSugarCane extends Goal {
 
-	private static ItemStack[] sugarcane = new ItemStack[] { new ItemStack(
-			Items.reeds, 1) };
+	private static ItemStack[] sugarcane = new ItemStack[] { new ItemStack(Items.reeds, 1) };
 
 	@Override
 	public GoalInformation getDestination(final MillVillager villager) {
 		final List<Point> vp = new ArrayList<Point>();
 		final List<Point> buildingp = new ArrayList<Point>();
-		for (final Building plantation : villager.getTownHall()
-				.getBuildingsWithTag(Building.tagSugarPlantation)) {
-			final Point p = plantation.getResManager()
-					.getSugarCanePlantingLocation();
+		for (final Building plantation : villager.getTownHall().getBuildingsWithTag(Building.tagSugarPlantation)) {
+			final Point p = plantation.getResManager().getSugarCanePlantingLocation();
 			if (p != null) {
 				vp.add(p);
 				buildingp.add(plantation.getPos());
@@ -39,8 +36,7 @@ public class GoalIndianPlantSugarCane extends Goal {
 		Point buildingP = buildingp.get(0);
 
 		for (int i = 1; i < vp.size(); i++) {
-			if (vp.get(i).horizontalDistanceToSquared(villager) < p
-					.horizontalDistanceToSquared(villager)) {
+			if (vp.get(i).horizontalDistanceToSquared(villager) < p.horizontalDistanceToSquared(villager)) {
 				p = vp.get(i);
 				buildingP = buildingp.get(i);
 			}
@@ -70,14 +66,11 @@ public class GoalIndianPlantSugarCane extends Goal {
 		if (!villager.lastGoalTime.containsKey(this)) {
 			delayOver = true;
 		} else {
-			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
-					.get(this) + STANDARD_DELAY;
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime.get(this) + STANDARD_DELAY;
 		}
 
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
-				Building.tagSugarPlantation)) {
-			final int nb = kiln.getResManager()
-					.getNbSugarCanePlantingLocation();
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagSugarPlantation)) {
+			final int nb = kiln.getResManager().getNbSugarCanePlantingLocation();
 
 			if (nb > 0 && delayOver) {
 				return true;

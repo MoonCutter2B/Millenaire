@@ -23,8 +23,7 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 		return 7;
 	}
 
-	public static GoalGenericHarvestCrop loadGenericHarvestCropGoal(
-			final File file) {
+	public static GoalGenericHarvestCrop loadGenericHarvestCropGoal(final File file) {
 
 		final GoalGenericHarvestCrop g = new GoalGenericHarvestCrop();
 
@@ -39,15 +38,12 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 				if (line.trim().length() > 0 && !line.startsWith("//")) {
 					final String[] temp = line.split("=");
 					if (temp.length != 2) {
-						MLN.error(null,
-								"Invalid line when loading generic harvest goal "
-										+ file.getName() + ": " + line);
+						MLN.error(null, "Invalid line when loading generic harvest goal " + file.getName() + ": " + line);
 					} else {
 						final String key = temp[0].trim().toLowerCase();
 						String value = temp[1].trim();
 
-						if (!GoalGeneric.readGenericGoalConfigLine(g, key,
-								value, file, line)) {
+						if (!GoalGeneric.readGenericGoalConfigLine(g, key, value, file, line)) {
 							if (key.equals("soilname")) {
 								g.soilName = value.trim().toLowerCase();
 							} else if (key.equals("croptype")) {
@@ -55,41 +51,25 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 							} else if (key.equals("irrigationbonuscrop")) {
 								value = value.trim().toLowerCase();
 								if (Goods.goodsName.containsKey(value)) {
-									g.irrigationBonusCrop = Goods.goodsName
-											.get(value);
+									g.irrigationBonusCrop = Goods.goodsName.get(value);
 								} else {
-									MLN.error(null,
-											"Unknown irrigationbonuscrop in generic harvest goal "
-													+ file.getName() + ": "
-													+ line);
+									MLN.error(null, "Unknown irrigationbonuscrop in generic harvest goal " + file.getName() + ": " + line);
 								}
 							} else if (key.equals("harvestitem")) {
 								final String[] temp2 = value.split(",");
 
 								if (temp2.length != 2) {
-									MLN.error(
-											null,
-											"harvestitem must take the form of harvestitem=goodname,chanceon100 (ex: wheat,50) in generic harbest goal "
-													+ file.getName()
-													+ ": "
-													+ line);
+									MLN.error(null, "harvestitem must take the form of harvestitem=goodname,chanceon100 (ex: wheat,50) in generic harbest goal " + file.getName() + ": " + line);
 								} else {
 									if (Goods.goodsName.containsKey(temp2[0])) {
-										g.harvestItems.add(Goods.goodsName
-												.get(temp2[0]));
-										g.harvestItemsChance.add(Integer
-												.parseInt(temp2[1]));
+										g.harvestItems.add(Goods.goodsName.get(temp2[0]));
+										g.harvestItemsChance.add(Integer.parseInt(temp2[1]));
 									} else {
-										MLN.error(null,
-												"Unknown harvestitem item in generic harvest goal "
-														+ file.getName() + ": "
-														+ line);
+										MLN.error(null, "Unknown harvestitem item in generic harvest goal " + file.getName() + ": " + line);
 									}
 								}
 							} else {
-								MLN.error(null,
-										"Unknown line in generic harvest goal "
-												+ file.getName() + ": " + line);
+								MLN.error(null, "Unknown line in generic harvest goal " + file.getName() + ": " + line);
 							}
 						}
 					}
@@ -97,15 +77,11 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 			}
 
 			if (g.soilName == null) {
-				MLN.error(null,
-						"The soilname is mandatory in custom harvest goals "
-								+ file.getName());
+				MLN.error(null, "The soilname is mandatory in custom harvest goals " + file.getName());
 				return null;
 			}
 			if (g.cropType == null) {
-				MLN.error(null,
-						"The croptype is mandatory in custom harvest goals "
-								+ file.getName());
+				MLN.error(null, "The croptype is mandatory in custom harvest goals " + file.getName());
 				return null;
 			}
 
@@ -143,15 +119,12 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 		for (final Building buildingDest : buildings) {
 
 			if (isDestPossible(villager, buildingDest)) {
-				final List<Point> soils = buildingDest.getResManager()
-						.getSoilPoints(soilName);
+				final List<Point> soils = buildingDest.getResManager().getSoilPoints(soilName);
 
 				if (soils != null) {
 					for (final Point p : soils) {
 						if (isValidHarvestSoil(villager.worldObj, p)) {
-							if (dest == null
-									|| p.distanceTo(villager) < dest
-											.distanceTo(villager)) {
+							if (dest == null || p.distanceTo(villager) < dest.distanceTo(villager)) {
 								dest = p;
 								destBuilding = buildingDest;
 							}
@@ -170,8 +143,7 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(final MillVillager villager)
-			throws Exception {
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) throws Exception {
 		if (heldItems != null) {
 			return heldItems;
 		}
@@ -180,21 +152,17 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 	}
 
 	@Override
-	public boolean isDestPossibleSpecific(final MillVillager villager,
-			final Building b) {
+	public boolean isDestPossibleSpecific(final MillVillager villager, final Building b) {
 		return true;
 	}
 
 	@Override
-	public boolean isPossibleGenericGoal(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleGenericGoal(final MillVillager villager) throws Exception {
 		return getDestination(villager) != null;
 	}
 
 	private boolean isValidHarvestSoil(final World world, final Point p) {
-		return p.getAbove().getBlock(world) == GoalGenericPlantCrop
-				.getCropBlock(cropType)
-				&& p.getAbove().getMeta(world) == getCropBlockRipeMeta(cropType);
+		return p.getAbove().getBlock(world) == GoalGenericPlantCrop.getCropBlock(cropType) && p.getAbove().getMeta(world) == getCropBlockRipeMeta(cropType);
 	}
 
 	@Override
@@ -208,8 +176,7 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 		if (isValidHarvestSoil(villager.worldObj, villager.getGoalDestPoint())) {
 
 			if (irrigationBonusCrop != null) {
-				final float irrigation = villager.getTownHall()
-						.getVillageIrrigation();
+				final float irrigation = villager.getTownHall().getVillageIrrigation();
 				final double rand = Math.random();
 				if (rand < irrigation / 100) {
 					villager.addToInv(irrigationBonusCrop, 1);
@@ -217,14 +184,12 @@ public class GoalGenericHarvestCrop extends GoalGeneric {
 			}
 
 			for (int i = 0; i < harvestItems.size(); i++) {
-				if (MillCommonUtilities.randomInt(100) < harvestItemsChance
-						.get(i)) {
+				if (MillCommonUtilities.randomInt(100) < harvestItemsChance.get(i)) {
 					villager.addToInv(harvestItems.get(i), 1);
 				}
 			}
 
-			villager.setBlockAndMetadata(
-					villager.getGoalDestPoint().getAbove(), Blocks.air, 0);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint().getAbove(), Blocks.air, 0);
 
 			villager.swingItem();
 		}

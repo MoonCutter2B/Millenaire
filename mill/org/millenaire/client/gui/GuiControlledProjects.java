@@ -24,8 +24,7 @@ public class GuiControlledProjects extends GuiText {
 
 		public BuildingProject project;
 
-		public GuiButtonProject(final BuildingProject project, final int i,
-				final String s) {
+		public GuiButtonProject(final BuildingProject project, final int i, final String s) {
 			super(i, 0, 0, 0, 0, s);
 			this.project = project;
 		}
@@ -35,12 +34,9 @@ public class GuiControlledProjects extends GuiText {
 	private List<BuildingProject> projects;
 	private final EntityPlayer player;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_panel.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_panel.png");
 
-	public GuiControlledProjects(
-			final net.minecraft.entity.player.EntityPlayer player,
-			final Building th) {
+	public GuiControlledProjects(final net.minecraft.entity.player.EntityPlayer player, final Building th) {
 
 		townHall = th;
 		projects = townHall.getFlatProjectList();
@@ -56,14 +52,11 @@ public class GuiControlledProjects extends GuiText {
 		final GuiButtonProject gbp = (GuiButtonProject) guibutton;
 
 		if (gbp.id == GuiButtonProject.ALLOW_UPGRADES) {
-			ClientSender.controlledBuildingsToggleUpgrades(player, townHall,
-					gbp.project, true);
+			ClientSender.controlledBuildingsToggleUpgrades(player, townHall, gbp.project, true);
 		} else if (gbp.id == GuiButtonProject.FORBID_UPGRADES) {
-			ClientSender.controlledBuildingsToggleUpgrades(player, townHall,
-					gbp.project, false);
+			ClientSender.controlledBuildingsToggleUpgrades(player, townHall, gbp.project, false);
 		} else if (gbp.id == GuiButtonProject.CANCEL_BUILDING) {
-			ClientSender.controlledBuildingsForgetBuilding(player, townHall,
-					gbp.project);
+			ClientSender.controlledBuildingsForgetBuilding(player, townHall, gbp.project);
 
 			projects = townHall.getFlatProjectList();
 		}
@@ -99,28 +92,15 @@ public class GuiControlledProjects extends GuiText {
 				if (project.location.level < 0) {
 					status = MLN.string("ui.notyetbuilt");
 				} else {
-					status = MLN.string("ui.level")
-							+ ": "
-							+ (project.location.level + 1)
-							+ "/"
-							+ project.planSet.plans.get(project.location
-									.getVariation()).length;
+					status = MLN.string("ui.level") + ": " + (project.location.level + 1) + "/" + project.planSet.plans.get(project.location.getVariation()).length;
 				}
 
-				text.add(new Line(
-						project.getFullName(player)
-								+ " ("
-								+ (char) ('A' + project.location.getVariation())
-								+ "):", false));
-				text.add(new Line(status
-						+ ", "
-						+ townHall.getPos().distanceDirectionShort(
-								project.location.pos), false));
+				text.add(new Line(project.getFullName(player) + " (" + (char) ('A' + project.location.getVariation()) + "):", false));
+				text.add(new Line(status + ", " + townHall.getPos().distanceDirectionShort(project.location.pos), false));
 
 				int nbInhabitants = 0;
 
-				if (project.location != null
-						&& project.location.chestPos != null) {
+				if (project.location != null && project.location.chestPos != null) {
 					for (final VillagerRecord vr : townHall.vrecords) {
 						if (project.location.chestPos.equals(vr.housePos)) {
 							nbInhabitants++;
@@ -128,41 +108,29 @@ public class GuiControlledProjects extends GuiText {
 					}
 				}
 
-				text.add(new Line(MLN.string("ui.nbinhabitants", ""
-						+ nbInhabitants)));
+				text.add(new Line(MLN.string("ui.nbinhabitants", "" + nbInhabitants)));
 
 				MillGuiButton firstButton = null;
 				MillGuiButton secondButton = null;
 
-				if (project.location.level < project.planSet.plans
-						.get(project.location.getVariation()).length - 1
-						&& project.planSet.plans.get(project.location
-								.getVariation()).length > 1) {
+				if (project.location.level < project.planSet.plans.get(project.location.getVariation()).length - 1 && project.planSet.plans.get(project.location.getVariation()).length > 1) {
 					if (project.location.upgradesAllowed) {
-						firstButton = new GuiButtonProject(project,
-								GuiButtonProject.FORBID_UPGRADES,
-								MLN.string("ui.forbidupgrades"));
+						firstButton = new GuiButtonProject(project, GuiButtonProject.FORBID_UPGRADES, MLN.string("ui.forbidupgrades"));
 					} else {
-						firstButton = new GuiButtonProject(project,
-								GuiButtonProject.ALLOW_UPGRADES,
-								MLN.string("ui.allowupgrades"));
+						firstButton = new GuiButtonProject(project, GuiButtonProject.ALLOW_UPGRADES, MLN.string("ui.allowupgrades"));
 					}
 				}
 
 				boolean canForget;
 
-				if (project.location == null
-						|| project.location.getBuilding(townHall.worldObj) != null
-						&& project.location.getBuilding(townHall.worldObj).isTownhall) {
+				if (project.location == null || project.location.getBuilding(townHall.worldObj) != null && project.location.getBuilding(townHall.worldObj).isTownhall) {
 					canForget = false;
 				} else {
 					canForget = nbInhabitants == 0;
 				}
 
 				if (canForget) {
-					secondButton = new GuiButtonProject(project,
-							GuiButtonProject.CANCEL_BUILDING,
-							MLN.string("ui.cancelbuilding"));
+					secondButton = new GuiButtonProject(project, GuiButtonProject.CANCEL_BUILDING, MLN.string("ui.cancelbuilding"));
 				}
 
 				text.add(new Line(firstButton, secondButton));

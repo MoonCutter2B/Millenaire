@@ -35,22 +35,16 @@ public class BuildingPlanSet {
 		this.dir = dir;
 	};
 
-	public List<LocationBuildingPair> buildLocation(final MillWorld mw,
-			final VillageType villageType, final BuildingLocation location,
-			final boolean worldGeneration, final boolean townHall,
-			final Point townHallPos, final boolean wandimport,
-			final EntityPlayer owner) {
-		return plans.get(location.getVariation())[location.level].build(mw,
-				villageType, location, worldGeneration, townHall, townHallPos,
-				wandimport, owner, false);
+	public List<LocationBuildingPair> buildLocation(final MillWorld mw, final VillageType villageType, final BuildingLocation location, final boolean worldGeneration, final boolean townHall,
+			final Point townHallPos, final boolean wandimport, final EntityPlayer owner) {
+		return plans.get(location.getVariation())[location.level].build(mw, villageType, location, worldGeneration, townHall, townHallPos, wandimport, owner, false);
 	}
 
 	public BuildingProject getBuildingProject() {
 		return new BuildingProject(this);
 	}
 
-	public PointType[][][] getConsolidatedPlan(final int variation,
-			final int level) {
+	public PointType[][][] getConsolidatedPlan(final int variation, final int level) {
 
 		final int minLevel = getMinLevel(variation, level);
 		final int maxLevel = getMaxLevel(variation, level);
@@ -58,8 +52,7 @@ public class BuildingPlanSet {
 		final int length = plans.get(variation)[0].plan[0].length;
 		final int width = plans.get(variation)[0].plan[0][0].length;
 
-		final PointType[][][] consolidatedPlan = new PointType[maxLevel
-				- minLevel][length][width];
+		final PointType[][][] consolidatedPlan = new PointType[maxLevel - minLevel][length][width];
 
 		for (int lid = 0; lid <= level; lid++) {
 			final BuildingPlan plan = plans.get(variation)[lid];
@@ -159,19 +152,16 @@ public class BuildingPlanSet {
 			int level = 0;
 			prevPlan = null;
 
-			final BufferedReader reader = MillCommonUtilities
-					.getReader(new File(dir, key + "_" + varChar + ".txt"));
+			final BufferedReader reader = MillCommonUtilities.getReader(new File(dir, key + "_" + varChar + ".txt"));
 
 			while (new File(dir, key + "_" + varChar + level + ".png").exists()) {
 				final String line = reader.readLine();
-				prevPlan = new BuildingPlan(dir, key, level, variation,
-						prevPlan, line, culture, importPlan);
+				prevPlan = new BuildingPlan(dir, key, level, variation, prevPlan, line, culture, importPlan);
 				vplans.get(variation).add(prevPlan);
 				level++;
 			}
 			if (vplans.get(variation).size() == 0) {
-				throw new MillenaireException("No file found for building "
-						+ key + varChar);
+				throw new MillenaireException("No file found for building " + key + varChar);
 			}
 			varChar++;
 			variation++;
@@ -185,20 +175,15 @@ public class BuildingPlanSet {
 
 			for (final BuildingPlan plan : varPlans) {
 				if (plan.width != width) {
-					throw new MillenaireException("Width of upgrade "
-							+ plan.level + " of building " + plan.buildingKey
-							+ " is " + plan.width + " instead of " + width);
+					throw new MillenaireException("Width of upgrade " + plan.level + " of building " + plan.buildingKey + " is " + plan.width + " instead of " + width);
 				}
 
 				if (plan.length != length) {
-					throw new MillenaireException("Length of upgrade "
-							+ plan.level + " of building " + plan.buildingKey
-							+ " is " + plan.length + " instead of " + length);
+					throw new MillenaireException("Length of upgrade " + plan.level + " of building " + plan.buildingKey + " is " + plan.length + " instead of " + length);
 				}
 			}
 
-			final BuildingPlan[] varplansarray = new BuildingPlan[varPlans
-					.size()];
+			final BuildingPlan[] varplansarray = new BuildingPlan[varPlans.size()];
 
 			for (int i = 0; i < varPlans.size(); i++) {
 				varplansarray[i] = varPlans.get(i);
@@ -208,8 +193,7 @@ public class BuildingPlanSet {
 		}
 	}
 
-	public void loadPlans(final Culture culture, final boolean importPlan)
-			throws Exception {
+	public void loadPlans(final Culture culture, final boolean importPlan) throws Exception {
 
 		final List<List<BuildingPlan>> vplans = new ArrayList<List<BuildingPlan>>();
 
@@ -223,15 +207,13 @@ public class BuildingPlanSet {
 			int level = 0;
 			prevPlan = null;
 			while (new File(dir, key + "_" + varChar + level + ".txt").exists()) {
-				prevPlan = new BuildingPlan(dir, key, level, variation,
-						prevPlan, culture, importPlan);
+				prevPlan = new BuildingPlan(dir, key, level, variation, prevPlan, culture, importPlan);
 				vplans.get(variation).add(prevPlan);
 				level++;
 
 			}
 			if (vplans.get(variation).size() == 0) {
-				throw new MillenaireException("No file found for building "
-						+ key + varChar);
+				throw new MillenaireException("No file found for building " + key + varChar);
 			}
 			varChar++;
 			variation++;
@@ -245,20 +227,15 @@ public class BuildingPlanSet {
 
 			for (final BuildingPlan plan : varPlans) {
 				if (plan.width != width) {
-					throw new MillenaireException("Width of upgrade "
-							+ plan.level + " of building " + plan.buildingKey
-							+ " is " + plan.width + " instead of " + width);
+					throw new MillenaireException("Width of upgrade " + plan.level + " of building " + plan.buildingKey + " is " + plan.width + " instead of " + width);
 				}
 
 				if (plan.length != length) {
-					throw new MillenaireException("Length of upgrade "
-							+ plan.level + " of building " + plan.buildingKey
-							+ " is " + plan.length + " instead of " + length);
+					throw new MillenaireException("Length of upgrade " + plan.level + " of building " + plan.buildingKey + " is " + plan.length + " instead of " + length);
 				}
 			}
 
-			final BuildingPlan[] varplansarray = new BuildingPlan[varPlans
-					.size()];
+			final BuildingPlan[] varplansarray = new BuildingPlan[varPlans.size()];
 
 			for (int i = 0; i < varPlans.size(); i++) {
 				varplansarray[i] = varPlans.get(i);
@@ -268,8 +245,7 @@ public class BuildingPlanSet {
 		}
 	}
 
-	public void readBuildingPlanSetInfoPacket(final ByteBufInputStream ds)
-			throws IOException {
+	public void readBuildingPlanSetInfoPacket(final ByteBufInputStream ds) throws IOException {
 
 		final int nb = ds.readInt();
 
@@ -290,12 +266,10 @@ public class BuildingPlanSet {
 
 	@Override
 	public String toString() {
-		return key + " (" + plans.size() + " / " + max + "/"
-				+ plans.get(0)[0].nativeName + ")";
+		return key + " (" + plans.size() + " / " + max + "/" + plans.get(0)[0].nativeName + ")";
 	}
 
-	public void writeBuildingPlanSetInfo(final DataOutput data)
-			throws IOException {
+	public void writeBuildingPlanSetInfo(final DataOutput data) throws IOException {
 		data.writeUTF(key);
 		data.writeInt(plans.size());
 

@@ -25,8 +25,7 @@ public class GoalConstructionStepByStep extends Goal {
 			return 0;
 		}
 
-		final int toolEfficiency = (int) villager.getBestShovel().getDigSpeed(
-				new ItemStack(villager.getBestShovel(), 1), Blocks.dirt, 0);
+		final int toolEfficiency = (int) villager.getBestShovel().getDigSpeed(new ItemStack(villager.getBestShovel(), 1), Blocks.dirt, 0);
 
 		if (bblock.block == Blocks.air || bblock.block == Blocks.dirt) {
 			return 100 - toolEfficiency * 5;
@@ -53,12 +52,10 @@ public class GoalConstructionStepByStep extends Goal {
 		final BuildingBlock bblock = villager.getTownHall().getCurrentBlock();
 
 		if (bblock != null) {
-			if (bblock.block == Blocks.air
-					|| Item.getItemFromBlock(bblock.block) == null) {
+			if (bblock.block == Blocks.air || Item.getItemFromBlock(bblock.block) == null) {
 				return villager.getBestShovelStack();
 			} else {
-				return new ItemStack[] { new ItemStack(bblock.block, 1,
-						bblock.meta) };
+				return new ItemStack[] { new ItemStack(bblock.block, 1, bblock.meta) };
 			}
 		} else {
 			return villager.getBestShovelStack();
@@ -72,23 +69,18 @@ public class GoalConstructionStepByStep extends Goal {
 
 	@Override
 	public boolean isPossibleSpecific(final MillVillager villager) {
-		if (!(villager.getTownHall().builder == null
-				&& villager.getTownHall().buildingLocationIP != null && villager
-				.getTownHall().getBblocks() != null)) {
+		if (!(villager.getTownHall().builder == null && villager.getTownHall().buildingLocationIP != null && villager.getTownHall().getBblocks() != null)) {
 			return false;
 		}
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
-			if (Goal.getResourcesForBuild.key.equals(v.goalKey)
-					|| Goal.construction.key.equals(v.goalKey)) {
+			if (Goal.getResourcesForBuild.key.equals(v.goalKey) || Goal.construction.key.equals(v.goalKey)) {
 				return false;
 			}
 		}
 
-		for (final InvItem key : villager.getTownHall()
-				.getCurrentBuildingPlan().resCost.keySet()) {
-			if (villager.countInv(key) < villager.getTownHall()
-					.getCurrentBuildingPlan().resCost.get(key)) {
+		for (final InvItem key : villager.getTownHall().getCurrentBuildingPlan().resCost.keySet()) {
+			if (villager.countInv(key) < villager.getTownHall().getCurrentBuildingPlan().resCost.get(key)) {
 				return false;
 			}
 		}
@@ -97,11 +89,9 @@ public class GoalConstructionStepByStep extends Goal {
 	}
 
 	@Override
-	public boolean isStillValidSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager) throws Exception {
 
-		if (!(villager.getTownHall().builder == null)
-				&& villager.getTownHall().builder != villager) {
+		if (!(villager.getTownHall().builder == null) && villager.getTownHall().builder != villager) {
 			return false;
 		}
 		return true;
@@ -118,8 +108,7 @@ public class GoalConstructionStepByStep extends Goal {
 	}
 
 	@Override
-	public boolean performAction(final MillVillager villager)
-			throws MillenaireException {
+	public boolean performAction(final MillVillager villager) throws MillenaireException {
 
 		final BuildingBlock bblock = villager.getTownHall().getCurrentBlock();
 
@@ -128,70 +117,38 @@ public class GoalConstructionStepByStep extends Goal {
 		}
 
 		if (MLN.LogWifeAI >= MLN.MINOR) {
-			MLN.minor(villager,
-					"Setting block at " + bblock.p + " type: " + bblock.block
-							+ " replacing: " + villager.getBlock(bblock.p)
-							+ " distance: " + bblock.p.distanceTo(villager));
+			MLN.minor(villager, "Setting block at " + bblock.p + " type: " + bblock.block + " replacing: " + villager.getBlock(bblock.p) + " distance: " + bblock.p.distanceTo(villager));
 		}
 
-		if (bblock.p.horizontalDistanceTo(villager) < 1
-				&& bblock.p.getiY() > villager.posY
-				&& bblock.p.getiY() < villager.posY + 2) {
+		if (bblock.p.horizontalDistanceTo(villager) < 1 && bblock.p.getiY() > villager.posY && bblock.p.getiY() < villager.posY + 2) {
 			boolean jumped = false;
 			final World world = villager.worldObj;
-			if (!MillCommonUtilities.isBlockOpaqueCube(world, villager.getPos()
-					.getiX() + 1, villager.getPos().getiY() + 1, villager
-					.getPos().getiZ())
-					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager
-							.getPos().getiX() + 1,
-							villager.getPos().getiY() + 2, villager.getPos()
-									.getiZ())) {
+			if (!MillCommonUtilities.isBlockOpaqueCube(world, villager.getPos().getiX() + 1, villager.getPos().getiY() + 1, villager.getPos().getiZ())
+					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager.getPos().getiX() + 1, villager.getPos().getiY() + 2, villager.getPos().getiZ())) {
 
-				villager.setPosition(villager.getPos().getiX() + 1, villager
-						.getPos().getiY() + 1, villager.getPos().getiZ());
+				villager.setPosition(villager.getPos().getiX() + 1, villager.getPos().getiY() + 1, villager.getPos().getiZ());
 				jumped = true;
 			}
-			if (!jumped
-					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager
-							.getPos().getiX() - 1,
-							villager.getPos().getiY() + 1, villager.getPos()
-									.getiZ())
-					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager
-							.getPos().getiX() - 1,
-							villager.getPos().getiY() + 2, villager.getPos()
-									.getiZ())) {
+			if (!jumped && !MillCommonUtilities.isBlockOpaqueCube(world, villager.getPos().getiX() - 1, villager.getPos().getiY() + 1, villager.getPos().getiZ())
+					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager.getPos().getiX() - 1, villager.getPos().getiY() + 2, villager.getPos().getiZ())) {
 
-				villager.setPosition(villager.getPos().getiX() - 1, villager
-						.getPos().getiY() + 1, villager.getPos().getiZ());
+				villager.setPosition(villager.getPos().getiX() - 1, villager.getPos().getiY() + 1, villager.getPos().getiZ());
 				jumped = true;
 			}
-			if (!jumped
-					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager
-							.getPos().getiX(), villager.getPos().getiY(),
-							villager.getPos().getiZ() + 1)
-					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager
-							.getPos().getiX(), villager.getPos().getiY() + 2,
-							villager.getPos().getiZ() + 1)) {
+			if (!jumped && !MillCommonUtilities.isBlockOpaqueCube(world, villager.getPos().getiX(), villager.getPos().getiY(), villager.getPos().getiZ() + 1)
+					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager.getPos().getiX(), villager.getPos().getiY() + 2, villager.getPos().getiZ() + 1)) {
 
-				villager.setPosition(villager.getPos().getiX(), villager
-						.getPos().getiY() + 1, villager.getPos().getiZ() + 1);
+				villager.setPosition(villager.getPos().getiX(), villager.getPos().getiY() + 1, villager.getPos().getiZ() + 1);
 				jumped = true;
 			}
-			if (!jumped
-					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager
-							.getPos().getiX(), villager.getPos().getiY() + 1,
-							villager.getPos().getiZ() - 1)
-					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager
-							.getPos().getiX(), villager.getPos().getiY() + 2,
-							villager.getPos().getiZ() - 1)) {
+			if (!jumped && !MillCommonUtilities.isBlockOpaqueCube(world, villager.getPos().getiX(), villager.getPos().getiY() + 1, villager.getPos().getiZ() - 1)
+					&& !MillCommonUtilities.isBlockOpaqueCube(world, villager.getPos().getiX(), villager.getPos().getiY() + 2, villager.getPos().getiZ() - 1)) {
 
-				villager.setPosition(villager.getPos().getiX(), villager
-						.getPos().getiY() + 1, villager.getPos().getiZ() - 1);
+				villager.setPosition(villager.getPos().getiX(), villager.getPos().getiY() + 1, villager.getPos().getiZ() - 1);
 				jumped = true;
 			}
 			if (!jumped && MLN.LogWifeAI >= MLN.MAJOR) {
-				MLN.major(villager,
-						"Tried jumping in construction but couldn't");
+				MLN.major(villager, "Tried jumping in construction but couldn't");
 			}
 		}
 
@@ -213,21 +170,16 @@ public class GoalConstructionStepByStep extends Goal {
 
 		if (!villager.getTownHall().areBlocksLeft()) {
 			if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-				MLN.major(this, "Villager " + villager + " laid last block in "
-						+ villager.getTownHall().buildingLocationIP.planKey
-						+ " at " + bblock.p);
+				MLN.major(this, "Villager " + villager + " laid last block in " + villager.getTownHall().buildingLocationIP.planKey + " at " + bblock.p);
 			}
 			villager.getTownHall().setBblocks(null);
-			final BuildingPlan plan = villager.getTownHall()
-					.getCurrentBuildingPlan();
+			final BuildingPlan plan = villager.getTownHall().getCurrentBuildingPlan();
 
 			for (final InvItem key : plan.resCost.keySet()) {
-				villager.takeFromInv(key.getItem(), key.meta,
-						plan.resCost.get(key));
+				villager.takeFromInv(key.getItem(), key.meta, plan.resCost.get(key));
 			}
 
-			if (villager.getTownHall().buildingLocationIP != null
-					&& villager.getTownHall().buildingLocationIP.level == 0) {
+			if (villager.getTownHall().buildingLocationIP != null && villager.getTownHall().buildingLocationIP.level == 0) {
 				villager.getTownHall().initialiseCurrentConstruction(bblock.p);
 			}
 		}
@@ -237,10 +189,7 @@ public class GoalConstructionStepByStep extends Goal {
 		}
 
 		if (MLN.LogWifeAI >= MLN.MINOR && villager.extraLog) {
-			MLN.minor(
-					villager,
-					"Reseting actionStart after "
-							+ (System.currentTimeMillis() - villager.actionStart));
+			MLN.minor(villager, "Reseting actionStart after " + (System.currentTimeMillis() - villager.actionStart));
 		}
 
 		villager.actionStart = 0;
@@ -264,12 +213,10 @@ public class GoalConstructionStepByStep extends Goal {
 	}
 
 	@Override
-	public boolean stuckAction(final MillVillager villager)
-			throws MillenaireException {
+	public boolean stuckAction(final MillVillager villager) throws MillenaireException {
 		if (villager.getGoalDestPoint().distanceTo(villager) < 30) {
 			if (MLN.LogWifeAI >= MLN.MINOR) {
-				MLN.major(villager, "Putting block at a distance: "
-						+ villager.getGoalDestPoint().distanceTo(villager));
+				MLN.major(villager, "Putting block at a distance: " + villager.getGoalDestPoint().distanceTo(villager));
 			}
 			performAction(villager);
 
@@ -279,8 +226,7 @@ public class GoalConstructionStepByStep extends Goal {
 	}
 
 	@Override
-	public boolean unreachableDestination(final MillVillager villager)
-			throws Exception {
+	public boolean unreachableDestination(final MillVillager villager) throws Exception {
 
 		performAction(villager);
 

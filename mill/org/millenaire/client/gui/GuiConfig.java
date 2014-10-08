@@ -25,8 +25,7 @@ public class GuiConfig extends GuiText {
 		}
 
 		public void refreshLabel() {
-			this.displayString = config.getLabel() + ": "
-					+ config.getStringValue();
+			this.displayString = config.getLabel() + ": " + config.getStringValue();
 		}
 	}
 
@@ -41,8 +40,7 @@ public class GuiConfig extends GuiText {
 
 	int pageId = -1;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_config.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_config.png");
 
 	@Override
 	protected void actionPerformed(final GuiButton guibutton) {
@@ -64,8 +62,7 @@ public class GuiConfig extends GuiText {
 				valPos = 0;
 			}
 
-			configButton.config
-					.setValue(configButton.config.getPossibleVals()[valPos]);
+			configButton.config.setValue(configButton.config.getPossibleVals()[valPos]);
 
 			configButton.refreshLabel();
 
@@ -135,8 +132,7 @@ public class GuiConfig extends GuiText {
 
 		final List<Line> text = new ArrayList<Line>();
 
-		text.add(new Line(DARKBLUE
-				+ MLN.string(MLN.configPageTitles.get(pageId)), false));
+		text.add(new Line(DARKBLUE + MLN.string(MLN.configPageTitles.get(pageId)), false));
 		text.add(new Line());
 
 		if (MLN.configPageDesc.get(pageId) != null) {
@@ -155,8 +151,7 @@ public class GuiConfig extends GuiText {
 				}
 
 				if (config.hasTextField()) {
-					final MillGuiTextField textField = new MillGuiTextField(
-							fontRendererObj, 0, 0, 0, 0, config.key);
+					final MillGuiTextField textField = new MillGuiTextField(fontRendererObj, 0, 0, 0, 0, config.key);
 					textField.setText(config.getStringValue());
 					textField.setMaxStringLength(config.strLimit);
 					textField.setTextColor(-1);

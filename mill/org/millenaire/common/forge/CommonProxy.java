@@ -64,8 +64,7 @@ public class CommonProxy {
 
 	public File getCustomDir() {
 		if (customDir == null) {
-			customDir = new File(new File(new File("."), "mods"),
-					"millenaire-custom");
+			customDir = new File(new File(new File("."), "mods"), "millenaire-custom");
 		}
 
 		return customDir;
@@ -131,8 +130,7 @@ public class CommonProxy {
 		MLN.loadLanguages(null);
 	}
 
-	public void localTranslatedSentence(final EntityPlayer player,
-			final char colour, final String code, final String... values) {
+	public void localTranslatedSentence(final EntityPlayer player, final char colour, final String code, final String... values) {
 
 	}
 
@@ -158,10 +156,8 @@ public class CommonProxy {
 	}
 
 	public void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityMillChest.class,
-				"ml_TileEntityBuilding");
-		GameRegistry.registerTileEntity(TileEntityPanel.class,
-				"ml_TileEntityPanel");
+		GameRegistry.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding");
+		GameRegistry.registerTileEntity(TileEntityPanel.class, "ml_TileEntityPanel");
 	}
 
 	public void sendChatAdmin(final String s) {
@@ -172,8 +168,7 @@ public class CommonProxy {
 
 	}
 
-	public void sendLocalChat(final EntityPlayer player, final char colour,
-			final String s) {
+	public void sendLocalChat(final EntityPlayer player, final char colour, final String s) {
 
 	}
 
@@ -185,8 +180,7 @@ public class CommonProxy {
 
 	}
 
-	public void updateBowIcon(final ItemMillenaireBow bow,
-			final EntityPlayer entityplayer) {
+	public void updateBowIcon(final ItemMillenaireBow bow, final EntityPlayer entityplayer) {
 
 	}
 

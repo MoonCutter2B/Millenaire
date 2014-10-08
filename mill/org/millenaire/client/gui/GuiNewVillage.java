@@ -22,8 +22,7 @@ public class GuiNewVillage extends GuiText {
 	private final Point pos;
 	private final EntityPlayer player;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_panel.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_panel.png");
 
 	public GuiNewVillage(final EntityPlayer player, final Point p) {
 		pos = p;
@@ -41,8 +40,7 @@ public class GuiNewVillage extends GuiText {
 		closeWindow();
 
 		if (village.customCentre == null) {
-			ClientSender.newVillageCreation(player, pos, village.culture.key,
-					village.key);
+			ClientSender.newVillageCreation(player, pos, village.culture.key, village.key);
 		} else {
 			DisplayActions.displayNewCustomBuildingGUI(player, pos, village);
 		}
@@ -97,11 +95,9 @@ public class GuiNewVillage extends GuiText {
 
 		for (final Culture culture : Culture.ListCultures) {
 			if (profile.isTagSet(MillWorld.CULTURE_CONTROL + culture.key)) {
-				text.add(new Line(MLN.string("ui.leaderin",
-						culture.getCultureGameName())));
+				text.add(new Line(MLN.string("ui.leaderin", culture.getCultureGameName())));
 			} else {
-				text.add(new Line(MLN.string("ui.notleaderin",
-						culture.getCultureGameName())));
+				text.add(new Line(MLN.string("ui.notleaderin", culture.getCultureGameName())));
 				notleader = true;
 			}
 		}
@@ -124,11 +120,7 @@ public class GuiNewVillage extends GuiText {
 				}
 			}
 
-			text.add(new Line(new MillGuiButton(i, 0, 0, 0, 0, possibleVillages
-					.get(i).name
-					+ " ("
-					+ possibleVillages.get(i).culture.getCultureGameName()
-					+ controlled + ")")));
+			text.add(new Line(new MillGuiButton(i, 0, 0, 0, 0, possibleVillages.get(i).name + " (" + possibleVillages.get(i).culture.getCultureGameName() + controlled + ")")));
 			text.add(new Line(false));
 			text.add(new Line());
 		}

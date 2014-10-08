@@ -25,11 +25,9 @@ import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class GoalBreedAnimals extends Goal {
 
-	static private final Item[] CEREALS = new Item[] { Items.wheat, Mill.rice,
-			Mill.maize };
+	static private final Item[] CEREALS = new Item[] { Items.wheat, Mill.rice, Mill.maize };
 
-	static private final Item[] SEEDS = new Item[] { Items.wheat_seeds,
-			Mill.rice, Mill.maize };
+	static private final Item[] SEEDS = new Item[] { Items.wheat_seeds, Mill.rice, Mill.maize };
 
 	static private final Item[] CARROTS = new Item[] { Items.carrot };
 
@@ -50,8 +48,7 @@ public class GoalBreedAnimals extends Goal {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
 		final List<Class> validAnimals = getValidAnimalClasses(villager);
 
@@ -65,8 +62,7 @@ public class GoalBreedAnimals extends Goal {
 				available = true;
 			} else {
 				for (final Item breedingItem : breedingItems) {
-					if (!available
-							&& villager.getHouse().countGoods(breedingItem) > 0) {
+					if (!available && villager.getHouse().countGoods(breedingItem) > 0) {
 						available = true;
 					}
 				}
@@ -76,19 +72,13 @@ public class GoalBreedAnimals extends Goal {
 
 				int targetAnimals = 0;
 
-				for (int i = 0; i < villager.getHouse().getResManager().spawns
-						.size(); i++) {
-					if (villager.getHouse().getResManager().spawnTypes.get(i)
-							.equals(EntityList.classToStringMapping
-									.get(animalClass))) {
-						targetAnimals = villager.getHouse().getResManager().spawns
-								.get(i).size();
+				for (int i = 0; i < villager.getHouse().getResManager().spawns.size(); i++) {
+					if (villager.getHouse().getResManager().spawnTypes.get(i).equals(EntityList.classToStringMapping.get(animalClass))) {
+						targetAnimals = villager.getHouse().getResManager().spawns.get(i).size();
 					}
 				}
 
-				final List<Entity> animals = MillCommonUtilities
-						.getEntitiesWithinAABB(villager.worldObj, animalClass,
-								villager.getHouse().getPos(), 30, 10);
+				final List<Entity> animals = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, animalClass, villager.getHouse().getPos(), 30, 10);
 
 				int nbAdultAnimal = 0, nbAnimal = 0;
 
@@ -118,11 +108,9 @@ public class GoalBreedAnimals extends Goal {
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(final MillVillager villager)
-			throws Exception {
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) throws Exception {
 
-		if (villager.getGoalDestEntity() == null
-				|| !(villager.getGoalDestEntity() instanceof EntityAnimal)) {
+		if (villager.getGoalDestEntity() == null || !(villager.getGoalDestEntity() instanceof EntityAnimal)) {
 			return null;
 		}
 
@@ -173,8 +161,7 @@ public class GoalBreedAnimals extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 		return getDestination(villager) != null;
 	}
 
@@ -191,9 +178,7 @@ public class GoalBreedAnimals extends Goal {
 
 		for (final Class animalClass : validAnimals) {
 
-			final List<Entity> animals = MillCommonUtilities
-					.getEntitiesWithinAABB(villager.worldObj, animalClass,
-							villager.getPos(), 4, 2);
+			final List<Entity> animals = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, animalClass, villager.getPos(), 4, 2);
 
 			for (final Entity ent : animals) {
 
@@ -201,8 +186,7 @@ public class GoalBreedAnimals extends Goal {
 
 					final EntityAnimal animal = (EntityAnimal) ent;
 
-					final Item[] breedingItems = getBreedingItems(animal
-							.getClass());
+					final Item[] breedingItems = getBreedingItems(animal.getClass());
 
 					boolean available = false;
 					Item foundBreedingItem = null;
@@ -211,9 +195,7 @@ public class GoalBreedAnimals extends Goal {
 						available = true;
 					} else {
 						for (final Item breedingItem : breedingItems) {
-							if (!available
-									&& villager.getHouse().countGoods(
-											breedingItem) > 0) {
+							if (!available && villager.getHouse().countGoods(breedingItem) > 0) {
 								available = true;
 								foundBreedingItem = breedingItem;
 							}
@@ -222,15 +204,12 @@ public class GoalBreedAnimals extends Goal {
 
 					if (available) {
 
-						if (!animal.isChild() && !animal.isInLove()
-								&& animal.getGrowingAge() == 0) {
-							ReflectionHelper.setPrivateValue(
-									EntityAnimal.class, animal, 600, 0);
+						if (!animal.isChild() && !animal.isInLove() && animal.getGrowingAge() == 0) {
+							ReflectionHelper.setPrivateValue(EntityAnimal.class, animal, 600, 0);
 							animal.setTarget(null);
 
 							if (foundBreedingItem != null) {
-								villager.getHouse().takeGoods(
-										foundBreedingItem, 1);
+								villager.getHouse().takeGoods(foundBreedingItem, 1);
 							}
 
 							villager.swingItem();

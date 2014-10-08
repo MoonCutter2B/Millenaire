@@ -63,15 +63,12 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 				if (line.trim().length() > 0 && !line.startsWith("//")) {
 					final String[] temp = line.split("=");
 					if (temp.length != 2) {
-						MLN.error(null,
-								"Invalid line when loading generic plating goal "
-										+ file.getName() + ": " + line);
+						MLN.error(null, "Invalid line when loading generic plating goal " + file.getName() + ": " + line);
 					} else {
 						final String key = temp[0].trim().toLowerCase();
 						String value = temp[1].trim();
 
-						if (!GoalGeneric.readGenericGoalConfigLine(g, key,
-								value, file, line)) {
+						if (!GoalGeneric.readGenericGoalConfigLine(g, key, value, file, line)) {
 							if (key.equals("soilname")) {
 								g.soilName = value.trim().toLowerCase();
 							} else if (key.equals("croptype")) {
@@ -81,15 +78,10 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 								if (Goods.goodsName.containsKey(value)) {
 									g.seedItem = Goods.goodsName.get(value);
 								} else {
-									MLN.error(null,
-											"Unknown seed in generic planting goal "
-													+ file.getName() + ": "
-													+ line);
+									MLN.error(null, "Unknown seed in generic planting goal " + file.getName() + ": " + line);
 								}
 							} else {
-								MLN.error(null,
-										"Unknown line in generic planting goal "
-												+ file.getName() + ": " + line);
+								MLN.error(null, "Unknown line in generic planting goal " + file.getName() + ": " + line);
 							}
 						}
 					}
@@ -97,15 +89,11 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 			}
 
 			if (g.soilName == null) {
-				MLN.error(null,
-						"The soilname is mandatory in custom planting goals "
-								+ file.getName());
+				MLN.error(null, "The soilname is mandatory in custom planting goals " + file.getName());
 				return null;
 			}
 			if (g.cropType == null) {
-				MLN.error(null,
-						"The croptype is mandatory in custom planting goals "
-								+ file.getName());
+				MLN.error(null, "The croptype is mandatory in custom planting goals " + file.getName());
 				return null;
 			}
 
@@ -140,15 +128,12 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 
 			if (isDestPossible(villager, buildingDest)) {
 
-				final List<Point> soils = buildingDest.getResManager()
-						.getSoilPoints(soilName);
+				final List<Point> soils = buildingDest.getResManager().getSoilPoints(soilName);
 
 				if (soils != null) {
 					for (final Point p : soils) {
 						if (isValidPlantingLocation(villager.worldObj, p)) {
-							if (dest == null
-									|| p.distanceTo(villager) < dest
-											.distanceTo(villager)) {
+							if (dest == null || p.distanceTo(villager) < dest.distanceTo(villager)) {
 								dest = p;
 								destBuilding = buildingDest;
 							}
@@ -165,28 +150,21 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 	}
 
 	@Override
-	public boolean isDestPossibleSpecific(final MillVillager villager,
-			final Building b) {
-		if (seedItem != null
-				&& b.countGoods(seedItem) + villager.countInv(seedItem) == 0) {
+	public boolean isDestPossibleSpecific(final MillVillager villager, final Building b) {
+		if (seedItem != null && b.countGoods(seedItem) + villager.countInv(seedItem) == 0) {
 			return false;
 		}
 		return true;
 	}
 
 	@Override
-	public boolean isPossibleGenericGoal(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleGenericGoal(final MillVillager villager) throws Exception {
 		return getDestination(villager) != null;
 	}
 
 	private boolean isValidPlantingLocation(final World world, final Point p) {
-		if ((p.getAbove().getBlock(world) == Blocks.air
-				|| p.getAbove().getBlock(world) == Blocks.snow || p.getAbove()
-				.getBlock(world) == Blocks.leaves)
-				&& (p.getBlock(world) == Blocks.grass
-						|| p.getBlock(world) == Blocks.dirt || p
-						.getBlock(world) == Blocks.farmland)) {
+		if ((p.getAbove().getBlock(world) == Blocks.air || p.getAbove().getBlock(world) == Blocks.snow || p.getAbove().getBlock(world) == Blocks.leaves)
+				&& (p.getBlock(world) == Blocks.grass || p.getBlock(world) == Blocks.dirt || p.getBlock(world) == Blocks.farmland)) {
 			return true;
 		}
 		return false;
@@ -206,8 +184,7 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 			return true;
 		}
 
-		if (!isValidPlantingLocation(villager.worldObj,
-				villager.getGoalDestPoint())) {
+		if (!isValidPlantingLocation(villager.worldObj, villager.getGoalDestPoint())) {
 			return true;
 		}
 
@@ -219,12 +196,10 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 		}
 
 		if (villager.getGoalDestPoint().getBlock(villager.worldObj) != Blocks.farmland) {
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),
-					Blocks.farmland, 0);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(), Blocks.farmland, 0);
 		}
 
-		villager.setBlockAndMetadata(villager.getGoalDestPoint().getAbove(),
-				getCropBlock(cropType), getCropBlockMeta(cropType));
+		villager.setBlockAndMetadata(villager.getGoalDestPoint().getAbove(), getCropBlock(cropType), getCropBlockMeta(cropType));
 
 		villager.swingItem();
 

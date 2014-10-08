@@ -10,8 +10,7 @@ import org.millenaire.common.Point;
 
 public class GoalPlantCacao extends Goal {
 
-	private static ItemStack[] cacao = new ItemStack[] { new ItemStack(
-			Blocks.cocoa, 1) };
+	private static ItemStack[] cacao = new ItemStack[] { new ItemStack(Blocks.cocoa, 1) };
 
 	private int getCocoaMeta(final World world, final Point p) {
 
@@ -43,8 +42,7 @@ public class GoalPlantCacao extends Goal {
 	@Override
 	public GoalInformation getDestination(final MillVillager villager) {
 
-		final Point p = villager.getHouse().getResManager()
-				.getCocoaPlantingLocation();
+		final Point p = villager.getHouse().getResManager().getCocoaPlantingLocation();
 
 		return packDest(p, villager.getHouse());
 	}
@@ -74,8 +72,7 @@ public class GoalPlantCacao extends Goal {
 
 		block = villager.getBlock(cropPoint);
 		if (block == Blocks.air) {
-			villager.setBlockAndMetadata(cropPoint, Blocks.cocoa,
-					getCocoaMeta(villager.worldObj, cropPoint));
+			villager.setBlockAndMetadata(cropPoint, Blocks.cocoa, getCocoaMeta(villager.worldObj, cropPoint));
 
 			villager.swingItem();
 		}

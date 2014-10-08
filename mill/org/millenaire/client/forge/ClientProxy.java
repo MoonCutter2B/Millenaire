@@ -58,18 +58,9 @@ public class ClientProxy extends CommonProxy {
 	public void declareAmuletTextures(final IIconRegister iconRegister) {
 		final TextureMap textureMap = (TextureMap) iconRegister;
 
-		textureMap.setTextureEntry(
-				Mill.modId + ":amulet_alchemist" + MLN.getTextSuffix(),
-				new TextureAmuletAlchemist(Mill.modId + ":amulet_alchemist"
-						+ MLN.getTextSuffix()));
-		textureMap.setTextureEntry(
-				Mill.modId + ":amulet_vishnu" + MLN.getTextSuffix(),
-				new TextureAmuletVishnu(Mill.modId + ":amulet_vishnu"
-						+ MLN.getTextSuffix()));
-		textureMap.setTextureEntry(
-				Mill.modId + ":amulet_yggdrasil" + MLN.getTextSuffix(),
-				new TextureAmuletYddrasil(Mill.modId + ":amulet_yggdrasil"
-						+ MLN.getTextSuffix()));
+		textureMap.setTextureEntry(Mill.modId + ":amulet_alchemist" + MLN.getTextSuffix(), new TextureAmuletAlchemist(Mill.modId + ":amulet_alchemist" + MLN.getTextSuffix()));
+		textureMap.setTextureEntry(Mill.modId + ":amulet_vishnu" + MLN.getTextSuffix(), new TextureAmuletVishnu(Mill.modId + ":amulet_vishnu" + MLN.getTextSuffix()));
+		textureMap.setTextureEntry(Mill.modId + ":amulet_yggdrasil" + MLN.getTextSuffix(), new TextureAmuletYddrasil(Mill.modId + ":amulet_yggdrasil" + MLN.getTextSuffix()));
 
 	}
 
@@ -77,8 +68,7 @@ public class ClientProxy extends CommonProxy {
 	public File getBaseDir() {
 
 		if (baseDir == null) {
-			baseDir = new File(new File(Minecraft.getMinecraft().mcDataDir,
-					"mods"), "millenaire");
+			baseDir = new File(new File(Minecraft.getMinecraft().mcDataDir, "mods"), "millenaire");
 		}
 
 		return baseDir;
@@ -87,12 +77,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public String getBlockName(final Block block, int meta) {
 		if (block == null) {
-			try {
-				throw new MillenaireException(
-						"Trying to get the name of a null block.");
-			} catch (final Exception e) {
-				MLN.printException(e);
-			}
+			MLN.printException(new MillenaireException("Trying to get the name of a null block."));
 			return null;
 		}
 
@@ -105,15 +90,11 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public UserProfile getClientProfile() {
-		if (Mill.clientWorld.profiles.containsKey(Mill.proxy
-				.getTheSinglePlayer().getDisplayName())) {
-			return Mill.clientWorld.profiles.get(Mill.proxy
-					.getTheSinglePlayer().getDisplayName());
+		if (Mill.clientWorld.profiles.containsKey(Mill.proxy.getTheSinglePlayer().getDisplayName())) {
+			return Mill.clientWorld.profiles.get(Mill.proxy.getTheSinglePlayer().getDisplayName());
 		}
 
-		final UserProfile profile = new UserProfile(Mill.clientWorld,
-				Mill.proxy.getTheSinglePlayer().getDisplayName(), Mill.proxy
-						.getTheSinglePlayer().getDisplayName());
+		final UserProfile profile = new UserProfile(Mill.clientWorld, Mill.proxy.getTheSinglePlayer().getDisplayName(), Mill.proxy.getTheSinglePlayer().getDisplayName());
 		Mill.clientWorld.profiles.put(profile.key, profile);
 		return profile;
 	}
@@ -132,8 +113,7 @@ public class ClientProxy extends CommonProxy {
 	public File getCustomDir() {
 
 		if (customDir == null) {
-			customDir = new File(new File(Minecraft.getMinecraft().mcDataDir,
-					"mods"), "millenaire-custom");
+			customDir = new File(new File(Minecraft.getMinecraft().mcDataDir, "mods"), "millenaire-custom");
 		}
 
 		return customDir;
@@ -151,12 +131,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public String getItemName(final Item item, int meta) {
 		if (item == null) {
-			try {
-				throw new MillenaireException(
-						"Trying to get the name of a null item.");
-			} catch (final Exception e) {
-				MLN.printException(e);
-			}
+			MLN.printException(new MillenaireException("Trying to get the name of a null item."));
 			return null;
 		}
 
@@ -245,8 +220,7 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void localTranslatedSentence(final EntityPlayer player,
-			final char colour, final String code, final String... values) {
+	public void localTranslatedSentence(final EntityPlayer player, final char colour, final String code, final String... values) {
 
 		for (int i = 0; i < values.length; i++) {
 			values[i] = MLN.unknownString(values[i]);
@@ -278,20 +252,11 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerGraphics() {
-		RenderingRegistry.registerEntityRenderingHandler(
-				MillVillager.MLEntityGenericMale.class, new RenderMillVillager(
-						new ModelBiped(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(
-				MillVillager.MLEntityGenericAsymmFemale.class,
-				new RenderMillVillager(new ModelFemaleAsymmetrical(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(
-				MillVillager.MLEntityGenericSymmFemale.class,
-				new RenderMillVillager(new ModelFemaleSymmetrical(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(
-				MillVillager.MLEntityGenericZombie.class, new RenderBiped(
-						new ModelZombie(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(
-				EntityMillDecoration.class, new RenderWallDecoration());
+		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericMale.class, new RenderMillVillager(new ModelBiped(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericAsymmFemale.class, new RenderMillVillager(new ModelFemaleAsymmetrical(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericSymmFemale.class, new RenderMillVillager(new ModelFemaleSymmetrical(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(MillVillager.MLEntityGenericZombie.class, new RenderBiped(new ModelZombie(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityMillDecoration.class, new RenderWallDecoration());
 
 		// ModLoader.addAnimation(new
 		// TextureVishnuAmulet(Minecraft.getMinecraft()));
@@ -306,17 +271,14 @@ public class ClientProxy extends CommonProxy {
 	public void registerTileEntities() {
 		// GameRegistry.registerTileEntity(TileEntityMillChest.class,
 		// "ml_TileEntityBuilding", new TileEntityMillChestRenderer());
-		GameRegistry.registerTileEntity(TileEntityMillChest.class,
-				"ml_TileEntityBuilding");
-		GameRegistry.registerTileEntity(TileEntityPanel.class,
-				"ml_TileEntityPanel");
+		GameRegistry.registerTileEntity(TileEntityMillChest.class, "ml_TileEntityBuilding");
+		GameRegistry.registerTileEntity(TileEntityPanel.class, "ml_TileEntityPanel");
 	}
 
 	@Override
 	public void sendChatAdmin(String s) {
 		s = s.trim();
-		Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(
-				new ChatComponentText(s));
+		Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(s));
 	}
 
 	@Override
@@ -328,28 +290,20 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void sendLocalChat(final EntityPlayer player, final char colour,
-			String s) {
+	public void sendLocalChat(final EntityPlayer player, final char colour, String s) {
 		s = s.trim();
-		Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(
-				new ChatComponentText("\247" + colour + s));
+		Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("\247" + colour + s));
 	}
 
 	@Override
 	public void setTextureIds() {
 
-		Mill.normanArmourId = RenderingRegistry
-				.addNewArmourRendererPrefix("ML_norman");
-		Mill.japaneseWarriorBlueArmourId = RenderingRegistry
-				.addNewArmourRendererPrefix("ML_japanese_warrior_blue");
-		Mill.japaneseWarriorRedArmourId = RenderingRegistry
-				.addNewArmourRendererPrefix("ML_japanese_warrior_red");
-		Mill.japaneseGuardArmourId = RenderingRegistry
-				.addNewArmourRendererPrefix("ML_japanese_guard");
-		Mill.byzantineArmourId = RenderingRegistry
-				.addNewArmourRendererPrefix("ML_byzantine");
-		Mill.mayanQuestArmourId = RenderingRegistry
-				.addNewArmourRendererPrefix("ML_mayan_quest");
+		Mill.normanArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_norman");
+		Mill.japaneseWarriorBlueArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_japanese_warrior_blue");
+		Mill.japaneseWarriorRedArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_japanese_warrior_red");
+		Mill.japaneseGuardArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_japanese_guard");
+		Mill.byzantineArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_byzantine");
+		Mill.mayanQuestArmourId = RenderingRegistry.addNewArmourRendererPrefix("ML_mayan_quest");
 	}
 
 	@Override
@@ -358,8 +312,7 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void updateBowIcon(final ItemMillenaireBow bow,
-			final EntityPlayer entityplayer) {
+	public void updateBowIcon(final ItemMillenaireBow bow, final EntityPlayer entityplayer) {
 		MillClientUtilities.updateBowIcon(bow, entityplayer);
 	}
 

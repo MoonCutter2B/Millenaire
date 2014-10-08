@@ -43,20 +43,17 @@ public class MillClientUtilities {
 	private static long lastPing = 0;
 	private static long lastFreeRes = 0;
 
-	private static final ResourceLocation textureTest = new ResourceLocation(
-			Mill.modId, "textures/blocks/blockGold.png");
+	private static final ResourceLocation textureTest = new ResourceLocation(Mill.modId, "textures/blocks/blockGold.png");
 
 	public static void checkTextSize() {
-		final ITextureObject texture = Minecraft.getMinecraft().renderEngine
-				.getTexture(textureTest);
+		final ITextureObject texture = Minecraft.getMinecraft().renderEngine.getTexture(textureTest);
 
 		if (texture == null) {
 			return;
 		}
 
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getGlTextureId());
-		final int textSize = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D,
-				0, GL11.GL_TEXTURE_WIDTH);
+		final int textSize = GL11.glGetTexLevelParameteri(GL11.GL_TEXTURE_2D, 0, GL11.GL_TEXTURE_WIDTH);
 
 		if (textSize != MLN.textureSize) {
 			MLN.textureSize = textSize;
@@ -64,8 +61,7 @@ public class MillClientUtilities {
 		}
 	}
 
-	public static void displayChunkPanel(final World world,
-			final EntityPlayer player) {
+	public static void displayChunkPanel(final World world, final EntityPlayer player) {
 
 		final List<List<String>> pages = new ArrayList<List<String>>();
 
@@ -86,23 +82,18 @@ public class MillClientUtilities {
 		page.add(MLN.string("chunk.captionpurple"));
 		page.add(MLN.string("chunk.captionwhite"));
 		page.add(MLN.string(""));
-		page.add(MLN.string("chunk.playerposition", (int) player.posX + "/"
-				+ (int) player.posZ));
+		page.add(MLN.string("chunk.playerposition", (int) player.posX + "/" + (int) player.posZ));
 		page.add(MLN.string(""));
-		page.add(MLN.string("chunk.settings", "" + MLN.KeepActiveRadius, ""
-				+ ForgeChunkManager.getMaxTicketLengthFor(Mill.modId)));
+		page.add(MLN.string("chunk.settings", "" + MLN.KeepActiveRadius, "" + ForgeChunkManager.getMaxTicketLengthFor(Mill.modId)));
 		page.add(MLN.string(""));
 		page.add(MLN.string("chunk.explanations"));
 
 		pages.add(page);
 
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiPanelParchment(player, pages, null,
-						GuiPanelParchment.CHUNK_MAP, true));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiPanelParchment(player, pages, null, GuiPanelParchment.CHUNK_MAP, true));
 	}
 
-	public static void displayInfoPanel(final World world,
-			final EntityPlayer player) {
+	public static void displayInfoPanel(final World world, final EntityPlayer player) {
 
 		final List<List<String>> pages = new ArrayList<List<String>>();
 		List<String> page = new ArrayList<String>();
@@ -127,11 +118,9 @@ public class MillClientUtilities {
 		for (final Culture culture : Culture.ListCultures) {
 
 			page.add(MLN.string("info.culture", culture.getCultureGameName()));
-			page.add(MLN.string("info.culturereputation",
-					culture.getReputationString()));
+			page.add(MLN.string("info.culturereputation", culture.getReputationString()));
 			if (MLN.languageLearning) {
-				page.add(MLN.string("info.culturelanguage",
-						culture.getLanguageLevelString()));
+				page.add(MLN.string("info.culturelanguage", culture.getLanguageLevelString()));
 			}
 			page.add("");
 		}
@@ -142,8 +131,7 @@ public class MillClientUtilities {
 		page.add(MLN.string("quest.creationqueststatus"));
 		page.add("");
 
-		for (final String s : Mill.proxy.getClientProfile()
-				.getWorldQuestStatus()) {
+		for (final String s : Mill.proxy.getClientProfile().getWorldQuestStatus()) {
 			page.add(s);
 		}
 
@@ -163,16 +151,13 @@ public class MillClientUtilities {
 
 				page.add(s);
 
-				long timeLeft = qi.currentStepStart
-						+ qi.getCurrentStep().duration * 1000
-						- world.getWorldTime();
+				long timeLeft = qi.currentStepStart + qi.getCurrentStep().duration * 1000 - world.getWorldTime();
 				timeLeft = Math.round(timeLeft / 1000);
 
 				if (timeLeft == 0) {
 					page.add(MLN.string("quest.lessthananhourleft"));
 				} else {
-					page.add(MLN.string("quest.timeremaining") + ": "
-							+ timeLeft + " " + MLN.string("quest.hours"));
+					page.add(MLN.string("quest.timeremaining") + ": " + timeLeft + " " + MLN.string("quest.hours"));
 				}
 			}
 		}
@@ -183,12 +168,10 @@ public class MillClientUtilities {
 
 		pages.add(page);
 
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiPanelParchment(player, pages, null, 0, true));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiPanelParchment(player, pages, null, 0, true));
 	}
 
-	public static void displayPanel(final World world,
-			final EntityPlayer player, final Point p) {
+	public static void displayPanel(final World world, final EntityPlayer player, final Point p) {
 
 		final TileEntityPanel panel = p.getPanel(world);
 
@@ -196,8 +179,7 @@ public class MillClientUtilities {
 			return;
 		}
 
-		final Building building = Mill.clientWorld
-				.getBuilding(panel.buildingPos);
+		final Building building = Mill.clientWorld.getBuilding(panel.buildingPos);
 
 		if (building == null) {
 			return;
@@ -206,18 +188,15 @@ public class MillClientUtilities {
 		final List<List<String>> fullText = panel.getFullText(player);
 
 		if (fullText != null) {
-			DisplayActions.displayParchmentPanelGUI(player, fullText, building,
-					panel.getMapType(), false);
+			DisplayActions.displayParchmentPanelGUI(player, fullText, building, panel.getMapType(), false);
 		}
 	}
 
 	public static void displayStartupText(final boolean error) {
 		if (error) {
-			Mill.proxy.sendChatAdmin(MLN.string("startup.loadproblem",
-					Mill.version));
+			Mill.proxy.sendChatAdmin(MLN.string("startup.loadproblem", Mill.version));
 			Mill.proxy.sendChatAdmin(MLN.string("startup.checkload"));
-			MLN.error(null, "There was an error when trying to load "
-					+ Mill.version + ".");
+			MLN.error(null, "There was an error when trying to load " + Mill.version + ".");
 		} else {
 			if (MLN.displayStart) {
 
@@ -227,11 +206,8 @@ public class MillClientUtilities {
 					bonus = " " + MLN.string("startup.bonus");
 				}
 
-				Mill.proxy.sendChatAdmin(MLN.string("startup.millenaireloaded",
-						Mill.version, Keyboard.getKeyName(MLN.keyVillageList)));
-				Mill.proxy.sendChatAdmin(
-						MLN.string("startup.bonus", Mill.version, bonus),
-						EnumChatFormatting.BLUE);
+				Mill.proxy.sendChatAdmin(MLN.string("startup.millenaireloaded", Mill.version, Keyboard.getKeyName(MLN.keyVillageList)));
+				Mill.proxy.sendChatAdmin(MLN.string("startup.bonus", Mill.version, bonus), EnumChatFormatting.BLUE);
 			}
 			if (MLN.VillageRadius > 70) {
 				Mill.proxy.sendChatAdmin(MLN.string("startup.radiuswarning"));
@@ -239,14 +215,12 @@ public class MillClientUtilities {
 		}
 	}
 
-	public static void displayTradeHelp(final Building shop,
-			final EntityPlayer player) {
+	public static void displayTradeHelp(final Building shop, final EntityPlayer player) {
 
 		final List<List<Line>> pages = new ArrayList<List<Line>>();
 		List<Line> page = new ArrayList<Line>();
 
-		page.add(new Line(GuiText.DARKBLUE
-				+ MLN.string("tradehelp.title", shop.getNativeBuildingName())));
+		page.add(new Line(GuiText.DARKBLUE + MLN.string("tradehelp.title", shop.getNativeBuildingName())));
 		page.add(new Line(""));
 
 		page.add(new Line(GuiText.DARKBLUE + MLN.string("tradehelp.goodssold")));
@@ -263,12 +237,10 @@ public class MillClientUtilities {
 					final List<String> vprices = new ArrayList<String>();
 
 					for (final int p : prices) {
-						vprices.add(MLN.string("tradehelp.sellingprice") + " "
-								+ MillCommonUtilities.getShortPrice(p));
+						vprices.add(MLN.string("tradehelp.sellingprice") + " " + MillCommonUtilities.getShortPrice(p));
 					}
 
-					page.add(new Line(stacks, vprices, MLN.string(lastDesc),
-							4 * 18));
+					page.add(new Line(stacks, vprices, MLN.string(lastDesc), 4 * 18));
 					page.add(new Line());
 					stacks = new ArrayList<ItemStack>();
 					prices = new ArrayList<Integer>();
@@ -286,8 +258,7 @@ public class MillClientUtilities {
 				final List<String> vprices = new ArrayList<String>();
 
 				for (final int p : prices) {
-					vprices.add(MLN.string("tradehelp.sellingprice") + " "
-							+ MillCommonUtilities.getShortPrice(p));
+					vprices.add(MLN.string("tradehelp.sellingprice") + " " + MillCommonUtilities.getShortPrice(p));
 				}
 
 				page.add(new Line(stacks, vprices, MLN.string(lastDesc), 4 * 18));
@@ -295,8 +266,7 @@ public class MillClientUtilities {
 			}
 		}
 
-		page.add(new Line(GuiText.DARKBLUE
-				+ MLN.string("tradehelp.goodsbought")));
+		page.add(new Line(GuiText.DARKBLUE + MLN.string("tradehelp.goodsbought")));
 		page.add(new Line(""));
 
 		goods = shop.calculateBuyingGoods(null);
@@ -310,12 +280,10 @@ public class MillClientUtilities {
 					final List<String> vprices = new ArrayList<String>();
 
 					for (final int p : prices) {
-						vprices.add(MLN.string("tradehelp.buyingprice") + " "
-								+ MillCommonUtilities.getShortPrice(p));
+						vprices.add(MLN.string("tradehelp.buyingprice") + " " + MillCommonUtilities.getShortPrice(p));
 					}
 
-					page.add(new Line(stacks, vprices, MLN.string(lastDesc),
-							4 * 18));
+					page.add(new Line(stacks, vprices, MLN.string(lastDesc), 4 * 18));
 					page.add(new Line());
 					stacks = new ArrayList<ItemStack>();
 					prices = new ArrayList<Integer>();
@@ -332,8 +300,7 @@ public class MillClientUtilities {
 				final List<String> vprices = new ArrayList<String>();
 
 				for (final int p : prices) {
-					vprices.add(MLN.string("tradehelp.buyingprice") + " "
-							+ MillCommonUtilities.getShortPrice(p));
+					vprices.add(MLN.string("tradehelp.buyingprice") + " " + MillCommonUtilities.getShortPrice(p));
 				}
 
 				page.add(new Line(stacks, vprices, MLN.string(lastDesc), 4 * 18));
@@ -351,12 +318,10 @@ public class MillClientUtilities {
 
 		pages.add(page);
 
-		Minecraft.getMinecraft().displayGuiScreen(
-				new GuiPanelParchment(player, null, pages, 0, true));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiPanelParchment(player, null, pages, 0, true));
 	}
 
-	public static void displayVillageBook(final World world,
-			final EntityPlayer player, final Point p) {
+	public static void displayVillageBook(final World world, final EntityPlayer player, final Point p) {
 
 		final Building townHall = Mill.clientWorld.getBuilding(p);
 
@@ -367,13 +332,11 @@ public class MillClientUtilities {
 		final List<List<String>> pages = new ArrayList<List<String>>();
 		final List<String> page = new ArrayList<String>();
 
-		page.add(MLN.string("panels.villagescroll") + ": "
-				+ townHall.getVillageQualifiedName());
+		page.add(MLN.string("panels.villagescroll") + ": " + townHall.getVillageQualifiedName());
 		page.add("");
 		pages.add(page);
 
-		List<List<String>> newPages = TileEntityPanel.generateSummary(player,
-				townHall);
+		List<List<String>> newPages = TileEntityPanel.generateSummary(player, townHall);
 
 		for (final List<String> newPage : newPages) {
 			pages.add(newPage);
@@ -405,8 +368,7 @@ public class MillClientUtilities {
 			pages.add(newPage);
 		}
 
-		DisplayActions.displayParchmentPanelGUI(player, pages, townHall,
-				TileEntityPanel.VILLAGE_MAP, true);
+		DisplayActions.displayParchmentPanelGUI(player, pages, townHall, TileEntityPanel.VILLAGE_MAP, true);
 	}
 
 	public static void handleKeyPress(final World world) {
@@ -446,31 +408,23 @@ public class MillClientUtilities {
 				// lastPing=System.currentTimeMillis();
 				// }
 
-				if (!world.isRemote && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)
-						&& Keyboard.isKeyDown(Keyboard.KEY_P)) {
+				if (!world.isRemote && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && Keyboard.isKeyDown(Keyboard.KEY_P)) {
 					if (!MillVillager.usingCustomPathing) {
 						MillVillager.usingCustomPathing = true;
-						Mill.proxy.sendChatAdmin(MLN
-								.string("command.astarpathing"));
+						Mill.proxy.sendChatAdmin(MLN.string("command.astarpathing"));
 					} else {
 						MillVillager.usingCustomPathing = false;
-						Mill.proxy.sendChatAdmin(MLN
-								.string("command.minecraftpathing"));
+						Mill.proxy.sendChatAdmin(MLN.string("command.minecraftpathing"));
 					}
 					lastPing = System.currentTimeMillis();
 				}
 
 				if (Keyboard.isKeyDown(MLN.keyAggressiveEscorts)) {
-					final boolean stance = !Keyboard
-							.isKeyDown(Keyboard.KEY_LSHIFT);
+					final boolean stance = !Keyboard.isKeyDown(Keyboard.KEY_LSHIFT);
 
 					@SuppressWarnings("rawtypes")
-					final List list = world.getEntitiesWithinAABB(
-							MillVillager.class,
-							AxisAlignedBB.getBoundingBox(player.posX,
-									player.posY, player.posZ,
-									player.posX + 1.0D, player.posY + 1.0D,
-									player.posZ + 1.0D).expand(16D, 8D, 16D));
+					final List list = world.getEntitiesWithinAABB(MillVillager.class,
+							AxisAlignedBB.getBoundingBox(player.posX, player.posY, player.posZ, player.posX + 1.0D, player.posY + 1.0D, player.posZ + 1.0D).expand(16D, 8D, 16D));
 
 					for (final Object o : list) {
 						final MillVillager villager = (MillVillager) o;
@@ -493,33 +447,26 @@ public class MillClientUtilities {
 					if (MLN.jpsPathing) {
 						Mill.proxy.sendChatAdmin("Chemins JPS / JPS pathing");
 					} else {
-						Mill.proxy
-								.sendChatAdmin("Chemins classiques / classic pathing");
+						Mill.proxy.sendChatAdmin("Chemins classiques / classic pathing");
 					}
 					lastPing = System.currentTimeMillis();
 				}
 
 				if (MLN.DEV) {
 
-					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)
-							&& Keyboard.isKeyDown(Keyboard.KEY_R)
-							&& System.currentTimeMillis() - lastFreeRes > 5000) {
+					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && Keyboard.isKeyDown(Keyboard.KEY_R) && System.currentTimeMillis() - lastFreeRes > 5000) {
 						DevModUtilities.fillInFreeGoods(player);
 						lastFreeRes = System.currentTimeMillis();
 					}
 
-					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)
-							&& Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-						player.setPosition(player.posX + 10000,
-								player.posY + 10, player.posZ);
+					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+						player.setPosition(player.posX + 10000, player.posY + 10, player.posZ);
 
 						lastPing = System.currentTimeMillis();
 					}
 
-					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)
-							&& Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-						player.setPosition(player.posX - 10000,
-								player.posY + 10, player.posZ);
+					if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+						player.setPosition(player.posX - 10000, player.posY + 10, player.posZ);
 
 						lastPing = System.currentTimeMillis();
 					}
@@ -529,18 +476,14 @@ public class MillClientUtilities {
 						lastPing = System.currentTimeMillis();
 					}
 
-					if (Keyboard.isKeyDown(Keyboard.KEY_M)
-							&& Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-						ClientSender
-								.devCommand(ServerReceiver.DEV_COMMAND_TOGGLE_AUTO_MOVE);
+					if (Keyboard.isKeyDown(Keyboard.KEY_M) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+						ClientSender.devCommand(ServerReceiver.DEV_COMMAND_TOGGLE_AUTO_MOVE);
 						lastPing = System.currentTimeMillis();
 					}
 
-					if (Keyboard.isKeyDown(Keyboard.KEY_Y)
-							&& Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+					if (Keyboard.isKeyDown(Keyboard.KEY_Y) && Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 						Mill.proxy.sendChatAdmin("Sending test path request.");
-						ClientSender
-								.devCommand(ServerReceiver.DEV_COMMAND_TEST_PATH);
+						ClientSender.devCommand(ServerReceiver.DEV_COMMAND_TEST_PATH);
 						lastPing = System.currentTimeMillis();
 					}
 
@@ -581,19 +524,14 @@ public class MillClientUtilities {
 			return;
 		}
 
-		final String gameSpeech = MillCommonUtilities.getVillagerSentence(v,
-				player.getDisplayName(), false);
-		final String nativeSpeech = MillCommonUtilities.getVillagerSentence(v,
-				player.getDisplayName(), true);
+		final String gameSpeech = MillCommonUtilities.getVillagerSentence(v, player.getDisplayName(), false);
+		final String nativeSpeech = MillCommonUtilities.getVillagerSentence(v, player.getDisplayName(), true);
 
 		if (nativeSpeech != null || gameSpeech != null) {
 
 			String s;
 			if (v.dialogueTargetFirstName != null) {
-				s = MLN.string("other.chattosomeone", v.getName(),
-						v.dialogueTargetFirstName + " "
-								+ v.dialogueTargetLastName)
-						+ ": ";
+				s = MLN.string("other.chattosomeone", v.getName(), v.dialogueTargetFirstName + " " + v.dialogueTargetLastName) + ": ";
 			} else {
 				s = v.getName() + ": ";
 			}
@@ -610,18 +548,15 @@ public class MillClientUtilities {
 				s += "\247" + MLN.DARKRED + gameSpeech;
 			}
 
-			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(),
-					v.dialogueColour, s);
+			Mill.proxy.sendLocalChat(Mill.proxy.getTheSinglePlayer(), v.dialogueColour, s);
 		}
 
 	}
 
-	public static void updateBowIcon(final ItemMillenaireBow bow,
-			final EntityPlayer entityplayer) {
+	public static void updateBowIcon(final ItemMillenaireBow bow, final EntityPlayer entityplayer) {
 		final ItemStack itemstack1 = entityplayer.inventory.getCurrentItem();
 		if (entityplayer.isUsingItem() && itemstack1.getItem() == bow) {
-			final int k = itemstack1.getMaxItemUseDuration()
-					- entityplayer.getItemInUseCount();
+			final int k = itemstack1.getMaxItemUseDuration() - entityplayer.getItemInUseCount();
 			if (k >= 18) {
 				bow.setBowIcon(3);
 			} else if (k > 13) {
@@ -636,8 +571,7 @@ public class MillClientUtilities {
 		}
 	}
 
-	public static void updatePanel(final Point p, final String[][] lines,
-			final int type, final Point buildingPos, final long villager_id) {
+	public static void updatePanel(final Point p, final String[][] lines, final int type, final Point buildingPos, final long villager_id) {
 
 		if (lines == null) {
 			return;
@@ -646,8 +580,7 @@ public class MillClientUtilities {
 		final TileEntityPanel panel = p.getPanel(Mill.clientWorld.world);
 
 		if (panel == null) {// panel is probably not loaded
-			final PanelPacketInfo pinfo = new PanelPacketInfo(p, lines,
-					buildingPos, type, villager_id);
+			final PanelPacketInfo pinfo = new PanelPacketInfo(p, lines, buildingPos, type, villager_id);
 			Mill.clientWorld.panelPacketInfos.add(pinfo);
 			return;
 		}

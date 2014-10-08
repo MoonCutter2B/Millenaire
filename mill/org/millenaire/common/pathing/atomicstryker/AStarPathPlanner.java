@@ -16,8 +16,7 @@ import org.millenaire.common.MLN;
 
 public class AStarPathPlanner {
 
-	private static ExecutorService executorService = Executors
-			.newCachedThreadPool();
+	private static ExecutorService executorService = Executors.newCachedThreadPool();
 
 	private AStarWorker worker;
 	private final World worldObj;
@@ -43,8 +42,7 @@ public class AStarPathPlanner {
 		}
 	}
 
-	public void getPath(final AStarNode start, final AStarNode end,
-			final AStarConfig config) {
+	public void getPath(final AStarNode start, final AStarNode end, final AStarConfig config) {
 		if (isBusy()) {
 			stopPathSearch(true);
 		}
@@ -72,9 +70,7 @@ public class AStarPathPlanner {
 		accesslock = false;
 	}
 
-	public void getPath(final int startx, int starty, final int startz,
-			final int destx, final int desty, final int destz,
-			final AStarConfig config) {
+	public void getPath(final int startx, int starty, final int startz, final int destx, final int desty, final int destz, final AStarConfig config) {
 
 		if (!AStarStatic.isViable(worldObj, startx, starty, startz, 0, config)) {
 			starty--;

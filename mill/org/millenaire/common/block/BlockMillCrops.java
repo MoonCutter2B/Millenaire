@@ -28,8 +28,7 @@ public class BlockMillCrops extends BlockCrops implements IGrowable {
 
 	private IPlantable seed;
 
-	public BlockMillCrops(final String textureNames[],
-			final boolean requireIrrigation, final boolean slowGrowth) {
+	public BlockMillCrops(final String textureNames[], final boolean requireIrrigation, final boolean slowGrowth) {
 		textures = new IIcon[8];
 		this.textureNames = textureNames;
 		this.requireIrrigation = requireIrrigation;
@@ -50,8 +49,7 @@ public class BlockMillCrops extends BlockCrops implements IGrowable {
 	}
 
 	@Override
-	public ArrayList getDrops(final World world, final int x, final int y,
-			final int z, final int metadata, final int fortune) {
+	public ArrayList getDrops(final World world, final int x, final int y, final int z, final int metadata, final int fortune) {
 		final ArrayList ret = new ArrayList();
 		ret.add(new ItemStack(func_149865_P(), 1, 0));
 		if (metadata == 7) {
@@ -66,19 +64,16 @@ public class BlockMillCrops extends BlockCrops implements IGrowable {
 	}
 
 	@Override
-	public int getFireSpreadSpeed(final IBlockAccess world, final int x,
-			final int y, final int z, final ForgeDirection face) {
+	public int getFireSpreadSpeed(final IBlockAccess world, final int x, final int y, final int z, final ForgeDirection face) {
 		return 60;
 	}
 
 	@Override
-	public int getFlammability(final IBlockAccess world, final int x,
-			final int y, final int z, final ForgeDirection face) {
+	public int getFlammability(final IBlockAccess world, final int x, final int y, final int z, final ForgeDirection face) {
 		return 150;
 	}
 
-	protected float getGrowthRate(final World world, final int i, final int j,
-			final int k) {
+	protected float getGrowthRate(final World world, final int i, final int j, final int k) {
 		final int irrigation = world.getBlockMetadata(i, j - 1, k);
 		if (requireIrrigation && irrigation == 0) {
 			return 0.0F;
@@ -95,8 +90,7 @@ public class BlockMillCrops extends BlockCrops implements IGrowable {
 	}
 
 	@Override
-	public Item getItemDropped(final int par1, final Random par2Random,
-			final int par3) {
+	public Item getItemDropped(final int par1, final Random par2Random, final int par3) {
 		return (Item) seed;
 	}
 
@@ -117,8 +111,7 @@ public class BlockMillCrops extends BlockCrops implements IGrowable {
 	@Override
 	public void registerBlockIcons(final IIconRegister iconRegister) {
 		for (int i = 0; i < 8; i++) {
-			textures[i] = MillCommonUtilities.getIcon(iconRegister,
-					textureNames[i]);
+			textures[i] = MillCommonUtilities.getIcon(iconRegister, textureNames[i]);
 		}
 
 	}
@@ -128,16 +121,14 @@ public class BlockMillCrops extends BlockCrops implements IGrowable {
 	}
 
 	@Override
-	public void updateTick(final World world, final int i, final int j,
-			final int k, final Random random) {
+	public void updateTick(final World world, final int i, final int j, final int k, final Random random) {
 		checkAndDropBlock(world, i, j, k);
 		if (world.getBlockLightValue(i, j + 1, k) >= 9) {
 			final int l = world.getBlockMetadata(i, j, k);
 			if (l < 7) {
 				final float f = getGrowthRate(world, i, j, k);
 				if (f > 0.0F && random.nextInt((int) (100F / f)) == 0) {
-					MillCommonUtilities.setBlockMetadata(world, i, j, k, l + 1,
-							true);
+					MillCommonUtilities.setBlockMetadata(world, i, j, k, l + 1, true);
 				}
 			}
 		}

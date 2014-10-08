@@ -21,8 +21,7 @@ public class GoalGuardPatrol extends Goal {
 
 	@Override
 	public GoalInformation getDestination(final MillVillager villager) {
-		return packDest(villager.getTownHall().getRandomLocationWithTag(
-				Building.tagPatrol));
+		return packDest(villager.getTownHall().getRandomLocationWithTag(Building.tagPatrol));
 	}
 
 	@Override
@@ -33,14 +32,11 @@ public class GoalGuardPatrol extends Goal {
 	@Override
 	public boolean isPossibleSpecific(final MillVillager villager) {
 
-		if (villager.lastGoalTime.containsKey(this)
-				&& villager.lastGoalTime.get(this) > villager.worldObj
-						.getWorldTime() + STANDARD_DELAY) {
+		if (villager.lastGoalTime.containsKey(this) && villager.lastGoalTime.get(this) > villager.worldObj.getWorldTime() + STANDARD_DELAY) {
 			return false;
 		}
 
-		final Point p = villager.getTownHall().getRandomLocationWithTag(
-				Building.tagPatrol);
+		final Point p = villager.getTownHall().getRandomLocationWithTag(Building.tagPatrol);
 
 		if (p == null) {
 			return false;

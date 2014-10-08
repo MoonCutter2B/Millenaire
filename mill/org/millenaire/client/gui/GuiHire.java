@@ -25,8 +25,7 @@ public class GuiHire extends GuiText {
 	private final MillVillager villager;
 	private final EntityPlayer player;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_quest.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_quest.png");
 
 	public GuiHire(final EntityPlayer player, final MillVillager villager) {
 		this.villager = villager;
@@ -64,30 +63,17 @@ public class GuiHire extends GuiText {
 		final int yStart = (height - getYSize()) / 2;
 
 		if (villager.hiredBy != null) {
-			if (MillCommonUtilities.countMoney(player.inventory) >= villager
-					.getHireCost(player)) {
-				buttonList.add(new GuiButton(BUTTON_EXTEND, xStart + getXSize()
-						/ 2 - 100, yStart + getYSize() - 40, 63, 20, MLN
-						.string("hire.extend")));
+			if (MillCommonUtilities.countMoney(player.inventory) >= villager.getHireCost(player)) {
+				buttonList.add(new GuiButton(BUTTON_EXTEND, xStart + getXSize() / 2 - 100, yStart + getYSize() - 40, 63, 20, MLN.string("hire.extend")));
 			}
-			buttonList.add(new GuiButton(BUTTON_RELEASE, xStart + getXSize()
-					/ 2 - 32, yStart + getYSize() - 40, 64, 20, MLN
-					.string("hire.release")));
-			buttonList.add(new GuiButton(BUTTON_CLOSE, xStart + getXSize() / 2
-					+ 37, yStart + getYSize() - 40, 63, 20, MLN
-					.string("hire.close")));
+			buttonList.add(new GuiButton(BUTTON_RELEASE, xStart + getXSize() / 2 - 32, yStart + getYSize() - 40, 64, 20, MLN.string("hire.release")));
+			buttonList.add(new GuiButton(BUTTON_CLOSE, xStart + getXSize() / 2 + 37, yStart + getYSize() - 40, 63, 20, MLN.string("hire.close")));
 
 		} else {
-			if (villager.getTownHall().getReputation(player.getDisplayName()) >= REPUTATION_NEEDED
-					&& MillCommonUtilities.countMoney(player.inventory) >= villager
-							.getHireCost(player)) {
-				buttonList.add(new GuiButton(BUTTON_HIRE, xStart + getXSize()
-						/ 2 - 100, yStart + getYSize() - 40, 95, 20, MLN
-						.string("hire.hire")));
+			if (villager.getTownHall().getReputation(player.getDisplayName()) >= REPUTATION_NEEDED && MillCommonUtilities.countMoney(player.inventory) >= villager.getHireCost(player)) {
+				buttonList.add(new GuiButton(BUTTON_HIRE, xStart + getXSize() / 2 - 100, yStart + getYSize() - 40, 95, 20, MLN.string("hire.hire")));
 			}
-			buttonList.add(new GuiButton(BUTTON_CLOSE, xStart + getXSize() / 2
-					+ 5, yStart + getYSize() - 40, 95, 20, MLN
-					.string("hire.close")));
+			buttonList.add(new GuiButton(BUTTON_CLOSE, xStart + getXSize() / 2 + 5, yStart + getYSize() - 40, 95, 20, MLN.string("hire.close")));
 		}
 
 	}
@@ -109,34 +95,20 @@ public class GuiHire extends GuiText {
 
 		final List<Line> text = new ArrayList<Line>();
 
-		text.add(new Line(villager.getName() + ", "
-				+ villager.getNativeOccupationName()));
+		text.add(new Line(villager.getName() + ", " + villager.getNativeOccupationName()));
 		text.add(new Line());
 
 		if (villager.hiredBy != null) {
-			text.add(new Line(
-					MLN.string(
-							"hire.hiredvillager",
-							""
-									+ Math.round((villager.hiredUntil - villager.worldObj
-											.getWorldTime()) / 1000), Keyboard
-									.getKeyName(MLN.keyAggressiveEscorts))));
-		} else if (villager.getTownHall()
-				.getReputation(player.getDisplayName()) >= REPUTATION_NEEDED) {
+			text.add(new Line(MLN.string("hire.hiredvillager", "" + Math.round((villager.hiredUntil - villager.worldObj.getWorldTime()) / 1000), Keyboard.getKeyName(MLN.keyAggressiveEscorts))));
+		} else if (villager.getTownHall().getReputation(player.getDisplayName()) >= REPUTATION_NEEDED) {
 			text.add(new Line(MLN.string("hire.hireablevillager")));
 		} else {
 			text.add(new Line(MLN.string("hire.hireablevillagernoreputation")));
 		}
 		text.add(new Line());
-		text.add(new Line(MLN.string("hire.health") + ": "
-				+ villager.getHealth() * 0.5 + "/" + villager.getMaxHealth()
-				* 0.5));
-		text.add(new Line(MLN.string("hire.strength") + ": "
-				+ villager.getAttackStrength()));
-		text.add(new Line(MLN.string("hire.cost")
-				+ ": "
-				+ MillCommonUtilities.getShortPrice(villager
-						.getHireCost(player))));
+		text.add(new Line(MLN.string("hire.health") + ": " + villager.getHealth() * 0.5 + "/" + villager.getMaxHealth() * 0.5));
+		text.add(new Line(MLN.string("hire.strength") + ": " + villager.getAttackStrength()));
+		text.add(new Line(MLN.string("hire.cost") + ": " + MillCommonUtilities.getShortPrice(villager.getHireCost(player))));
 
 		final List<List<Line>> ftext = new ArrayList<List<Line>>();
 		ftext.add(text);

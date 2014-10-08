@@ -37,16 +37,11 @@ public class Culture {
 
 		public static class Dialogue implements WeightedChoice {
 
-			private static String adult = "adult", child = "child",
-					male = "male", female = "female", hasspouse = "hasspouse",
-					nospouse = "nospouse", vtype = "vtype",
-					notvtype = "notvtype";
+			private static String adult = "adult", child = "child", male = "male", female = "female", hasspouse = "hasspouse", nospouse = "nospouse", vtype = "vtype", notvtype = "notvtype";
 
-			private static String rel_spouse = "spouse", rel_parent = "parent",
-					rel_child = "child", rel_sibling = "sibling";
+			private static String rel_spouse = "spouse", rel_parent = "parent", rel_child = "child", rel_sibling = "sibling";
 
-			private static String tag_raining = "raining",
-					tag_notraining = "notraining";
+			private static String tag_raining = "raining", tag_notraining = "notraining";
 
 			public String key = null;
 			private int weight = 10;
@@ -97,8 +92,7 @@ public class Culture {
 						} else if (key.equals("tag")) {
 							tags.add(val);
 						} else {
-							MLN.error(this, "Could not recognise key " + key
-									+ " in dialogue declaration " + config);
+							MLN.error(this, "Could not recognise key " + key + " in dialogue declaration " + config);
 						}
 
 					}
@@ -108,97 +102,66 @@ public class Culture {
 			public void checkData(final Culture culture, final String language) {
 
 				for (final String s : villager1) {
-					if (!s.equals(adult) && !s.equals(child) && !s.equals(male)
-							&& !s.equals(female) && !s.equals(hasspouse)
-							&& !s.equals(nospouse)
-							&& !s.startsWith(vtype + ":")
+					if (!s.equals(adult) && !s.equals(child) && !s.equals(male) && !s.equals(female) && !s.equals(hasspouse) && !s.equals(nospouse) && !s.startsWith(vtype + ":")
 							&& !s.startsWith(notvtype + ":")) {
-						MLN.error(culture, language
-								+ ": Unknown v1 setting in dialogue " + key
-								+ ": " + s);
+						MLN.error(culture, language + ": Unknown v1 setting in dialogue " + key + ": " + s);
 					}
 
-					if (s.startsWith(vtype + ":")
-							|| s.startsWith(notvtype + ":")) {
+					if (s.startsWith(vtype + ":") || s.startsWith(notvtype + ":")) {
 						final String s2 = s.split(":")[1].trim();
 
 						for (String vtype : s2.split("-")) {
 							vtype = vtype.trim();
 							if (!culture.villagerTypes.containsKey(vtype)) {
-								MLN.error(
-										culture,
-										language
-												+ ": Unknown villager type in dialogue "
-												+ key + ": " + s);
+								MLN.error(culture, language + ": Unknown villager type in dialogue " + key + ": " + s);
 							}
 						}
 					}
 				}
 				for (final String s : villager2) {
-					if (!s.equals(adult) && !s.equals(child) && !s.equals(male)
-							&& !s.equals(female) && !s.equals(hasspouse)
-							&& !s.equals(nospouse)
-							&& !s.startsWith(vtype + ":")
+					if (!s.equals(adult) && !s.equals(child) && !s.equals(male) && !s.equals(female) && !s.equals(hasspouse) && !s.equals(nospouse) && !s.startsWith(vtype + ":")
 							&& !s.startsWith(notvtype + ":")) {
-						MLN.error(culture, language
-								+ ": Unknown v2 setting in dialogue " + key
-								+ ": " + s);
+						MLN.error(culture, language + ": Unknown v2 setting in dialogue " + key + ": " + s);
 					}
 				}
 				for (final String s : relations) {
-					if (!s.equals(rel_spouse) && !s.equals(rel_parent)
-							&& !s.equals(rel_child) && !s.equals(rel_sibling)) {
-						MLN.error(culture, language
-								+ ": Unknown rel setting in dialogue " + key
-								+ ": " + s);
+					if (!s.equals(rel_spouse) && !s.equals(rel_parent) && !s.equals(rel_child) && !s.equals(rel_sibling)) {
+						MLN.error(culture, language + ": Unknown rel setting in dialogue " + key + ": " + s);
 					}
 				}
 				for (final String s : not_relations) {
-					if (!s.equals(rel_spouse) && !s.equals(rel_parent)
-							&& !s.equals(rel_child) && !s.equals(rel_sibling)) {
-						MLN.error(culture, language
-								+ ": Unknown notrel setting in dialogue " + key
-								+ ": " + s);
+					if (!s.equals(rel_spouse) && !s.equals(rel_parent) && !s.equals(rel_child) && !s.equals(rel_sibling)) {
+						MLN.error(culture, language + ": Unknown notrel setting in dialogue " + key + ": " + s);
 					}
 				}
 				for (final String s : tags) {
 					if (!s.equals(tag_raining) && !s.equals(tag_notraining)) {
-						MLN.error(culture, language
-								+ ": Unknown tag in dialogue " + key + ": " + s);
+						MLN.error(culture, language + ": Unknown tag in dialogue " + key + ": " + s);
 					}
 				}
 				for (final String s : buildings) {
 					if (!culture.planSet.containsKey(s)) {
-						MLN.error(culture, language
-								+ ": Unknown building in dialogue " + key
-								+ ": " + s);
+						MLN.error(culture, language + ": Unknown building in dialogue " + key + ": " + s);
 					}
 				}
 				for (final String s : not_buildings) {
 					if (!culture.planSet.containsKey(s)) {
-						MLN.error(culture, language
-								+ ": Unknown notbuilding in dialogue " + key
-								+ ": " + s);
+						MLN.error(culture, language + ": Unknown notbuilding in dialogue " + key + ": " + s);
 					}
 				}
 				for (final String s : villagers) {
 					if (!culture.villagerTypes.containsKey(s)) {
-						MLN.error(culture, language
-								+ ": Unknown villager in dialogue " + key
-								+ ": " + s);
+						MLN.error(culture, language + ": Unknown villager in dialogue " + key + ": " + s);
 					}
 				}
 				for (final String s : not_villagers) {
 					if (!culture.villagerTypes.containsKey(s)) {
-						MLN.error(culture, language
-								+ ": Unknown notvillager in dialogue " + key
-								+ ": " + s);
+						MLN.error(culture, language + ": Unknown notvillager in dialogue " + key + ": " + s);
 					}
 				}
 			}
 
-			public boolean compareWith(final Dialogue d,
-					final List<String> errors) throws IOException {
+			public boolean compareWith(final Dialogue d, final List<String> errors) throws IOException {
 
 				boolean differentConfig = false;
 
@@ -242,15 +205,12 @@ public class Culture {
 
 				if (timeDelays.size() != d.timeDelays.size()) {
 					differentSentences = true;
-					errors.add("Dialogue has different sentence numbers: "
-							+ key);
+					errors.add("Dialogue has different sentence numbers: " + key);
 				} else {
-					differentSentences = !sameLists(timeDelays, d.timeDelays)
-							|| !sameLists(speechBy, d.speechBy);
+					differentSentences = !sameLists(timeDelays, d.timeDelays) || !sameLists(speechBy, d.speechBy);
 
 					if (differentSentences) {
-						errors.add("Dialogue has different sentence settings: "
-								+ key);
+						errors.add("Dialogue has different sentence settings: " + key);
 					}
 				}
 
@@ -290,8 +250,7 @@ public class Culture {
 				return true;
 			}
 
-			private boolean isCompatible(final List<String> req,
-					final MillVillager v) {
+			private boolean isCompatible(final List<String> req, final MillVillager v) {
 
 				if (v.getRecord() == null) {
 					return false;
@@ -339,12 +298,10 @@ public class Culture {
 							}
 						}
 					} else if (key.equals(hasspouse)) {
-						if (v.getRecord().spousesName == null
-								|| v.getRecord().spousesName.equals("")) {
+						if (v.getRecord().spousesName == null || v.getRecord().spousesName.equals("")) {
 							return false;
 						}
-					} else if (v.getRecord().spousesName != null
-							&& key.equals(nospouse)) {
+					} else if (v.getRecord().spousesName != null && key.equals(nospouse)) {
 						if (!v.getRecord().spousesName.equals("")) {
 							return false;
 						}
@@ -357,8 +314,7 @@ public class Culture {
 				return true;
 			}
 
-			private boolean isRelCompatible(final MillVillager v1,
-					final MillVillager v2) {
+			private boolean isRelCompatible(final MillVillager v1, final MillVillager v2) {
 
 				for (final String s : relations) {
 
@@ -369,20 +325,15 @@ public class Culture {
 							return false;
 						}
 					} else if (key.equals(rel_parent)) {
-						if (!v1.getRecord().fathersName.equals(v2.getName())
-								&& !v1.getRecord().mothersName.equals(v2
-										.getName())) {
+						if (!v1.getRecord().fathersName.equals(v2.getName()) && !v1.getRecord().mothersName.equals(v2.getName())) {
 							return false;
 						}
 					} else if (key.equals(rel_child)) {
-						if (!v2.getRecord().fathersName.equals(v1.getName())
-								&& !v2.getRecord().mothersName.equals(v1
-										.getName())) {
+						if (!v2.getRecord().fathersName.equals(v1.getName()) && !v2.getRecord().mothersName.equals(v1.getName())) {
 							return false;
 						}
 					} else if (key.equals(rel_sibling)) {
-						if (!v2.getRecord().mothersName
-								.equals(v1.getRecord().mothersName)) {
+						if (!v2.getRecord().mothersName.equals(v1.getRecord().mothersName)) {
 							return false;
 						}
 					}
@@ -397,20 +348,15 @@ public class Culture {
 							return false;
 						}
 					} else if (key.equals(rel_parent)) {
-						if (v1.getRecord().fathersName.equals(v2.getName())
-								|| v1.getRecord().mothersName.equals(v2
-										.getName())) {
+						if (v1.getRecord().fathersName.equals(v2.getName()) || v1.getRecord().mothersName.equals(v2.getName())) {
 							return false;
 						}
 					} else if (key.equals(rel_child)) {
-						if (v2.getRecord().fathersName.equals(v1.getName())
-								|| v2.getRecord().mothersName.equals(v1
-										.getName())) {
+						if (v2.getRecord().fathersName.equals(v1.getName()) || v2.getRecord().mothersName.equals(v1.getName())) {
 							return false;
 						}
 					} else if (key.equals(rel_sibling)) {
-						if (v2.getRecord().mothersName
-								.equals(v1.getRecord().mothersName)) {
+						if (v2.getRecord().mothersName.equals(v1.getRecord().mothersName)) {
 							return false;
 						}
 					}
@@ -436,13 +382,8 @@ public class Culture {
 				return true;
 			}
 
-			public boolean isValidFor(final MillVillager v1,
-					final MillVillager v2) {
-				return isCompatible(villager1, v1)
-						&& isCompatible(villager2, v2)
-						&& isRelCompatible(v1, v2)
-						&& isBuildingCompatible(v1.getTownHall())
-						&& isVillagersCompatible(v1.getTownHall())
+			public boolean isValidFor(final MillVillager v1, final MillVillager v2) {
+				return isCompatible(villager1, v1) && isCompatible(villager2, v2) && isRelCompatible(v1, v2) && isBuildingCompatible(v1.getTownHall()) && isVillagersCompatible(v1.getTownHall())
 						&& isTagCompatible(v1.getTownHall());
 			}
 
@@ -502,8 +443,7 @@ public class Culture {
 
 		}
 
-		public static class ReputationLevel implements
-				Comparable<ReputationLevel> {
+		public static class ReputationLevel implements Comparable<ReputationLevel> {
 			private final String label, desc;
 			public int level;
 
@@ -512,10 +452,7 @@ public class Culture {
 					level = MillCommonUtilities.readInteger(line.split(";")[0]);
 				} catch (final Exception e) {
 					level = 0;
-					MLN.error(null,
-							"Error when reading reputation line in file "
-									+ file.getAbsolutePath() + ": " + line
-									+ " : " + e.getMessage());
+					MLN.error(null, "Error when reading reputation line in file " + file.getAbsolutePath() + ": " + line + " : " + e.getMessage());
 				}
 				label = line.split(";")[1];
 				desc = line.split(";")[2];
@@ -548,15 +485,13 @@ public class Culture {
 
 		public List<ReputationLevel> reputationLevels = new ArrayList<ReputationLevel>();
 
-		public CultureLanguage(final Culture c, final String l,
-				final boolean serverContent) {
+		public CultureLanguage(final Culture c, final String l, final boolean serverContent) {
 			culture = c;
 			language = l;
 			this.serverContent = serverContent;
 		}
 
-		public int[] compareWithLanguage(final CultureLanguage ref,
-				final BufferedWriter writer) throws Exception {
+		public int[] compareWithLanguage(final CultureLanguage ref, final BufferedWriter writer) throws Exception {
 
 			int translationsDone = 0, translationsMissing = 0;
 
@@ -566,8 +501,7 @@ public class Culture {
 
 			for (final String key : keys) {
 				if (!strings.containsKey(key)) {
-					errors.add("String missing for culture " + culture.key
-							+ ": " + key);
+					errors.add("String missing for culture " + culture.key + ": " + key);
 					translationsMissing++;
 				} else {
 					translationsDone++;
@@ -575,8 +509,7 @@ public class Culture {
 			}
 
 			if (errors.size() > 0) {
-				writer.write("List of gaps found in culture strings for "
-						+ culture.key + ": " + MLN.EOL + MLN.EOL);
+				writer.write("List of gaps found in culture strings for " + culture.key + ": " + MLN.EOL + MLN.EOL);
 
 				for (final String s : errors) {
 					writer.write(s + MLN.EOL);
@@ -585,10 +518,8 @@ public class Culture {
 			}
 
 			for (final Goods g : culture.goodsList) {
-				if (g.desc != null && !strings.containsKey(g.desc)
-						&& !ref.strings.containsKey(g.desc)) {
-					errors.add("Trading good desc missing in both languages for item: "
-							+ g.name + ", desc key: " + g.desc);
+				if (g.desc != null && !strings.containsKey(g.desc) && !ref.strings.containsKey(g.desc)) {
+					errors.add("Trading good desc missing in both languages for item: " + g.name + ", desc key: " + g.desc);
 				}
 			}
 
@@ -601,13 +532,10 @@ public class Culture {
 														// are handled
 														// seperately
 					if (!sentences.containsKey(key)) {
-						errors.add("Sentences missing for culture "
-								+ culture.key + ": " + key);
+						errors.add("Sentences missing for culture " + culture.key + ": " + key);
 						translationsMissing++;
-					} else if (sentences.get(key).size() != ref.sentences.get(
-							key).size()) {
-						errors.add("Different number of sentences for culture "
-								+ culture.key + ": " + key);
+					} else if (sentences.get(key).size() != ref.sentences.get(key).size()) {
+						errors.add("Different number of sentences for culture " + culture.key + ": " + key);
 						translationsMissing++;
 					} else {
 						translationsDone++;
@@ -616,8 +544,7 @@ public class Culture {
 			}
 
 			if (errors.size() > 0) {
-				writer.write("List of gaps found in culture sentences for "
-						+ culture.key + ": " + MLN.EOL + MLN.EOL);
+				writer.write("List of gaps found in culture sentences for " + culture.key + ": " + MLN.EOL + MLN.EOL);
 
 				for (final String s : errors) {
 					writer.write(s + MLN.EOL);
@@ -633,12 +560,10 @@ public class Culture {
 			for (final String key : keys) {
 
 				if (!dialogues.containsKey(key)) {
-					errors.add("Dialogue missing for culture " + culture.key
-							+ ": " + key);
+					errors.add("Dialogue missing for culture " + culture.key + ": " + key);
 					translationsMissing++;
 				} else {
-					final boolean matches = dialogues.get(key).compareWith(
-							ref.dialogues.get(key), errors);
+					final boolean matches = dialogues.get(key).compareWith(ref.dialogues.get(key), errors);
 
 					if (matches) {
 						translationsDone++;
@@ -649,8 +574,7 @@ public class Culture {
 			}
 
 			if (errors.size() > 0) {
-				writer.write("List of gaps found in culture dialogues for "
-						+ culture.key + ": " + MLN.EOL + MLN.EOL);
+				writer.write("List of gaps found in culture dialogues for " + culture.key + ": " + MLN.EOL + MLN.EOL);
 
 				for (final String s : errors) {
 					writer.write(s + MLN.EOL);
@@ -664,8 +588,7 @@ public class Culture {
 
 			for (final String key : keys) {
 				if (!buildingNames.containsKey(key)) {
-					errors.add("Building name missing for culture "
-							+ culture.key + ": " + key);
+					errors.add("Building name missing for culture " + culture.key + ": " + key);
 					translationsMissing++;
 				} else {
 					translationsDone++;
@@ -675,20 +598,12 @@ public class Culture {
 			for (final BuildingPlanSet set : culture.planSet.values()) {
 				for (final BuildingPlan[] plans : set.plans) {
 					final String planNameLC = plans[0].planName.toLowerCase();
-					if (!buildingNames.containsKey(planNameLC)
-							&& !ref.buildingNames.containsKey(planNameLC)) {
-						errors.add("Building name missing for culture "
-								+ culture.key + " in both languages: "
-								+ planNameLC);
+					if (!buildingNames.containsKey(planNameLC) && !ref.buildingNames.containsKey(planNameLC)) {
+						errors.add("Building name missing for culture " + culture.key + " in both languages: " + planNameLC);
 					}
 
-					if (plans[0].shop != null
-							&& !strings.containsKey("shop." + plans[0].shop)
-							&& !ref.strings
-									.containsKey("shop." + plans[0].shop)) {
-						errors.add("Shop name missing for culture "
-								+ culture.key + " in both languages: "
-								+ "shop." + plans[0].shop);
+					if (plans[0].shop != null && !strings.containsKey("shop." + plans[0].shop) && !ref.strings.containsKey("shop." + plans[0].shop)) {
+						errors.add("Shop name missing for culture " + culture.key + " in both languages: " + "shop." + plans[0].shop);
 					}
 
 				}
@@ -696,18 +611,14 @@ public class Culture {
 
 			for (final VillagerType vt : culture.listVillagerTypes) {
 
-				if (!strings.containsKey("villager." + vt.key)
-						&& !ref.strings.containsKey("villager." + vt.key)) {
-					errors.add("Villager name missing for culture "
-							+ culture.key + " in both languages: "
-							+ "villager." + vt.key);
+				if (!strings.containsKey("villager." + vt.key) && !ref.strings.containsKey("villager." + vt.key)) {
+					errors.add("Villager name missing for culture " + culture.key + " in both languages: " + "villager." + vt.key);
 				}
 
 			}
 
 			if (errors.size() > 0) {
-				writer.write("List of gaps found in culture building names for "
-						+ culture.key + ": " + MLN.EOL + MLN.EOL);
+				writer.write("List of gaps found in culture building names for " + culture.key + ": " + MLN.EOL + MLN.EOL);
 
 				for (final String s : errors) {
 					writer.write(s + MLN.EOL);
@@ -716,17 +627,9 @@ public class Culture {
 			}
 
 			if (reputationLevels.size() != ref.reputationLevels.size()) {
-				translationsMissing += ref.reputationLevels.size()
-						- reputationLevels.size();
-				writer.write("Different number of reputation levels for culture "
-						+ culture.key
-						+ ": "
-						+ reputationLevels.size()
-						+ " in "
-						+ language
-						+ ", "
-						+ ref.reputationLevels.size()
-						+ " in " + ref.language + "." + MLN.EOL + MLN.EOL);
+				translationsMissing += ref.reputationLevels.size() - reputationLevels.size();
+				writer.write("Different number of reputation levels for culture " + culture.key + ": " + reputationLevels.size() + " in " + language + ", " + ref.reputationLevels.size() + " in "
+						+ ref.language + "." + MLN.EOL + MLN.EOL);
 			} else {
 				translationsDone += ref.reputationLevels.size();
 			}
@@ -750,8 +653,7 @@ public class Culture {
 				return null;
 			}
 
-			final WeightedChoice wc = MillCommonUtilities.getWeightedChoice(
-					possibleDialogues, null);
+			final WeightedChoice wc = MillCommonUtilities.getWeightedChoice(possibleDialogues, null);
 
 			return (Dialogue) wc;
 		}
@@ -773,13 +675,10 @@ public class Culture {
 
 			for (final File languageDir : languageDirs) {
 
-				File file = new File(new File(languageDir, language),
-						culture.key + "_buildings.txt");
+				File file = new File(new File(languageDir, language), culture.key + "_buildings.txt");
 
 				if (!file.exists()) {
-					file = new File(new File(languageDir,
-							language.split("_")[0]), culture.key
-							+ "_buildings.txt");
+					file = new File(new File(languageDir, language.split("_")[0]), culture.key + "_buildings.txt");
 				}
 
 				if (file.exists()) {
@@ -805,9 +704,7 @@ public class Culture {
 					if (language.equals("en")) {
 						buildingNames.put(planNameLC, plan.names.get(key));
 					}
-				} else if (key.startsWith("name_")
-						&& (key.endsWith("_" + language) || key.endsWith("_"
-								+ language.split("_")[0]))) {
+				} else if (key.startsWith("name_") && (key.endsWith("_" + language) || key.endsWith("_" + language.split("_")[0]))) {
 					buildingNames.put(planNameLC, plan.names.get(key));
 				}
 			}
@@ -817,13 +714,10 @@ public class Culture {
 
 			for (final File languageDir : languageDirs) {
 
-				File file = new File(new File(languageDir, language),
-						culture.key + "_strings.txt");
+				File file = new File(new File(languageDir, language), culture.key + "_strings.txt");
 
 				if (!file.exists()) {
-					file = new File(new File(languageDir,
-							language.split("_")[0]), culture.key
-							+ "_strings.txt");
+					file = new File(new File(languageDir, language.split("_")[0]), culture.key + "_strings.txt");
 				}
 
 				if (file.exists()) {
@@ -836,13 +730,10 @@ public class Culture {
 
 			for (final File languageDir : languageDirs) {
 
-				File file = new File(new File(languageDir, language),
-						culture.key + "_dialogues.txt");
+				File file = new File(new File(languageDir, language), culture.key + "_dialogues.txt");
 
 				if (!file.exists()) {
-					file = new File(new File(languageDir,
-							language.split("_")[0]), culture.key
-							+ "_dialogues.txt");
+					file = new File(new File(languageDir, language.split("_")[0]), culture.key + "_dialogues.txt");
 				}
 
 				if (file.exists()) {
@@ -867,8 +758,7 @@ public class Culture {
 		private void loadReputationFile(final File file) {
 
 			try {
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(file);
+				final BufferedReader reader = MillCommonUtilities.getReader(file);
 				String line;
 				while ((line = reader.readLine()) != null) {
 					if (line.split(";").length > 2) {
@@ -885,13 +775,10 @@ public class Culture {
 
 			for (final File languageDir : languageDirs) {
 
-				File file = new File(new File(languageDir, language),
-						culture.key + "_reputation.txt");
+				File file = new File(new File(languageDir, language), culture.key + "_reputation.txt");
 
 				if (!file.exists()) {
-					file = new File(new File(languageDir,
-							language.split("_")[0]), culture.key
-							+ "_reputation.txt");
+					file = new File(new File(languageDir, language.split("_")[0]), culture.key + "_reputation.txt");
 				}
 
 				if (file.exists()) {
@@ -904,13 +791,10 @@ public class Culture {
 
 			for (final File languageDir : languageDirs) {
 
-				File file = new File(new File(languageDir, language),
-						culture.key + "_sentences.txt");
+				File file = new File(new File(languageDir, language), culture.key + "_sentences.txt");
 
 				if (!file.exists()) {
-					file = new File(new File(languageDir,
-							language.split("_")[0]), culture.key
-							+ "_sentences.txt");
+					file = new File(new File(languageDir, language.split("_")[0]), culture.key + "_sentences.txt");
 				}
 
 				if (file.exists()) {
@@ -921,8 +805,7 @@ public class Culture {
 
 		private void readBuildingNameFile(final File file) {
 			try {
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(file);
+				final BufferedReader reader = MillCommonUtilities.getReader(file);
 
 				String line;
 
@@ -937,8 +820,7 @@ public class Culture {
 							buildingNames.put(key, value);
 
 							if (MLN.LogTranslation >= MLN.MINOR) {
-								MLN.minor(this, "Loading name: " + value
-										+ " for " + key);
+								MLN.minor(this, "Loading name: " + value + " for " + key);
 							}
 						} else if (temp.length == 1) {
 							final String key = temp[0].toLowerCase();
@@ -960,8 +842,7 @@ public class Culture {
 		private void readCultureStringFile(final File file) {
 
 			try {
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(file);
+				final BufferedReader reader = MillCommonUtilities.getReader(file);
 
 				String line;
 
@@ -975,8 +856,7 @@ public class Culture {
 
 							strings.put(key, value);
 							if (MLN.LogTranslation >= MLN.MINOR) {
-								MLN.minor(this, "Loading name: " + value
-										+ " for " + key);
+								MLN.minor(this, "Loading name: " + value + " for " + key);
 							}
 						} else if (temp.length == 1) {
 							final String key = temp[0].toLowerCase();
@@ -997,8 +877,7 @@ public class Culture {
 		private boolean readDialoguesFile(final File file) {
 
 			try {
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(file);
+				final BufferedReader reader = MillCommonUtilities.getReader(file);
 
 				String line;
 
@@ -1009,27 +888,19 @@ public class Culture {
 
 						line = line.trim();
 
-						if (line.startsWith("newchat;")
-								&& line.split(";").length == 2) {
+						if (line.startsWith("newchat;") && line.split(";").length == 2) {
 
 							if (dialogue != null) {
 								if (dialogue.speechBy.size() > 0) {
 									if (dialogues.containsKey(dialogue.key)) {
-										MLN.error(
-												culture,
-												language
-														+ ": Trying to register two dialogues with the same key: "
-														+ dialogue.key);
+										MLN.error(culture, language + ": Trying to register two dialogues with the same key: " + dialogue.key);
 									} else {
 										dialogue.checkData(culture, language);
 										dialogues.put(dialogue.key, dialogue);
 									}
 
 								} else {
-									MLN.error(culture, "In dialogue file "
-											+ file.getAbsolutePath()
-											+ " dialogue " + dialogue.key
-											+ " has no sentences.");
+									MLN.error(culture, "In dialogue file " + file.getAbsolutePath() + " dialogue " + dialogue.key + " has no sentences.");
 								}
 							}
 
@@ -1038,53 +909,37 @@ public class Culture {
 							dialogue = new Dialogue(s);
 
 							if (dialogue.key == null) {
-								MLN.error(culture, language
-										+ ": Could not read dialogue line: "
-										+ line);
+								MLN.error(culture, language + ": Could not read dialogue line: " + line);
 								dialogue = null;
 							}
 
-						} else if (dialogue != null
-								&& line.split(";").length == 3) {
+						} else if (dialogue != null && line.split(";").length == 3) {
 							final String[] temp = line.split(";");
 
-							dialogue.speechBy
-									.add(temp[0].trim().equals("v2") ? 2 : 1);
-							dialogue.timeDelays.add(Integer.parseInt(temp[1]
-									.trim()));
+							dialogue.speechBy.add(temp[0].trim().equals("v2") ? 2 : 1);
+							dialogue.timeDelays.add(Integer.parseInt(temp[1].trim()));
 
 							final List<String> sentence = new ArrayList<String>();
 							sentence.add(temp[2]);
 
-							sentences.put("villager.chat_" + dialogue.key + "_"
-									+ (dialogue.speechBy.size() - 1), sentence);
+							sentences.put("villager.chat_" + dialogue.key + "_" + (dialogue.speechBy.size() - 1), sentence);
 
 						} else if (line.trim().length() > 0) {
-							MLN.error(culture, language + ": In dialogue file "
-									+ file.getAbsolutePath()
-									+ " the following line is invalid: " + line);
+							MLN.error(culture, language + ": In dialogue file " + file.getAbsolutePath() + " the following line is invalid: " + line);
 						}
 					}
 				}
 
 				if (dialogue.speechBy.size() > 0) {
 					if (dialogues.containsKey(dialogue.key)) {
-						MLN.error(
-								culture,
-								language
-										+ ": Trying to register two dialogues with the same key: "
-										+ dialogue.key);
+						MLN.error(culture, language + ": Trying to register two dialogues with the same key: " + dialogue.key);
 					} else {
 						dialogue.checkData(culture, language);
 						dialogues.put(dialogue.key, dialogue);
 					}
 
 				} else {
-					MLN.error(
-							culture,
-							language + ": In dialogue file "
-									+ file.getAbsolutePath() + " dialogue "
-									+ dialogue.key + " has no sentences.");
+					MLN.error(culture, language + ": In dialogue file " + file.getAbsolutePath() + " dialogue " + dialogue.key + " has no sentences.");
 				}
 
 				reader.close();
@@ -1099,8 +954,7 @@ public class Culture {
 		private boolean readSentenceFile(final File file) {
 
 			try {
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(file);
+				final BufferedReader reader = MillCommonUtilities.getReader(file);
 
 				String line;
 
@@ -1161,8 +1015,7 @@ public class Culture {
 	}
 
 	public static Culture getRandomCulture() {
-		return (Culture) MillCommonUtilities.getWeightedChoice(ListCultures,
-				null);
+		return (Culture) MillCommonUtilities.getWeightedChoice(ListCultures, null);
 	}
 
 	public static boolean loadCultures() {
@@ -1177,26 +1030,21 @@ public class Culture {
 			}
 		}
 
-		final File customcultureDir = new File(Mill.proxy.getCustomDir(),
-				"custom cultures");
+		final File customcultureDir = new File(Mill.proxy.getCustomDir(), "custom cultures");
 
 		if (customcultureDir.exists()) {
 			culturesDirs.add(customcultureDir);
 		}
 
 		@SuppressWarnings("unchecked")
-		final List<File> culturesDirsBis = (ArrayList<File>) culturesDirs
-				.clone();
+		final List<File> culturesDirsBis = (ArrayList<File>) culturesDirs.clone();
 
 		for (final File culturesDir : culturesDirsBis) {
 			for (final File cultureDir : culturesDir.listFiles()) {
-				if (cultureDir.exists() && cultureDir.isDirectory()
-						&& !cultureDir.getName().startsWith(".")
-						&& !cultures.containsKey(cultureDir.getName())) {
+				if (cultureDir.exists() && cultureDir.isDirectory() && !cultureDir.getName().startsWith(".") && !cultures.containsKey(cultureDir.getName())) {
 
 					if (MLN.LogCulture >= MLN.MAJOR) {
-						MLN.major(cultureDir,
-								"Loading culture: " + cultureDir.getName());
+						MLN.major(cultureDir, "Loading culture: " + cultureDir.getName());
 					}
 
 					final Culture culture = new Culture(cultureDir.getName());
@@ -1214,49 +1062,38 @@ public class Culture {
 		return false;
 	}
 
-	public static void readCultureMissingContentPacket(
-			final ByteBufInputStream data) {
+	public static void readCultureMissingContentPacket(final ByteBufInputStream data) {
 		String key;
 		try {
 			key = data.readUTF();
 			final Culture culture = getCultureByName(key);
 
-			final CultureLanguage main = new CultureLanguage(culture,
-					MLN.effective_language, true);
-			final CultureLanguage fallback = new CultureLanguage(culture,
-					MLN.fallback_language, true);
+			final CultureLanguage main = new CultureLanguage(culture, MLN.effective_language, true);
+			final CultureLanguage fallback = new CultureLanguage(culture, MLN.fallback_language, true);
 
 			culture.mainLanguageServer = main;
 			culture.fallbackLanguageServer = fallback;
 
-			final String playerName = Mill.proxy.getTheSinglePlayer()
-					.getDisplayName();
+			final String playerName = Mill.proxy.getTheSinglePlayer().getDisplayName();
 
-			final CultureLanguage[] langs = new CultureLanguage[] { main,
-					fallback };
+			final CultureLanguage[] langs = new CultureLanguage[] { main, fallback };
 
 			for (final CultureLanguage lang : langs) {
-				HashMap<String, String> strings = StreamReadWrite
-						.readStringStringMap(data);
+				HashMap<String, String> strings = StreamReadWrite.readStringStringMap(data);
 				for (final String k : strings.keySet()) {
 					if (!lang.strings.containsKey(k)) {
-						lang.strings.put(k,
-								strings.get(k)
-										.replaceAll("\\$name", playerName));
+						lang.strings.put(k, strings.get(k).replaceAll("\\$name", playerName));
 					}
 				}
 
 				strings = StreamReadWrite.readStringStringMap(data);
 				for (final String k : strings.keySet()) {
 					if (!lang.buildingNames.containsKey(k)) {
-						lang.buildingNames.put(k,
-								strings.get(k)
-										.replaceAll("\\$name", playerName));
+						lang.buildingNames.put(k, strings.get(k).replaceAll("\\$name", playerName));
 					}
 				}
 
-				final HashMap<String, List<String>> sentences = StreamReadWrite
-						.readStringStringListMap(data);
+				final HashMap<String, List<String>> sentences = StreamReadWrite.readStringStringListMap(data);
 				for (final String k : sentences.keySet()) {
 					if (!lang.sentences.containsKey(k)) {
 						final List<String> v = new ArrayList<String>();
@@ -1429,9 +1266,7 @@ public class Culture {
 			return true;
 		}
 
-		return !MLN.languageLearning
-				|| Mill.proxy.getClientProfile().getCultureLanguageKnowledge(
-						key) >= LANGUAGE_BEGINNER;
+		return !MLN.languageLearning || Mill.proxy.getClientProfile().getCultureLanguageKnowledge(key) >= LANGUAGE_BEGINNER;
 	}
 
 	public boolean canReadDialogues(final String username) {
@@ -1439,9 +1274,7 @@ public class Culture {
 			return true;
 		}
 
-		return !MLN.languageLearning
-				|| Mill.proxy.getClientProfile().getCultureLanguageKnowledge(
-						key) >= LANGUAGE_FLUENT;
+		return !MLN.languageLearning || Mill.proxy.getClientProfile().getCultureLanguageKnowledge(key) >= LANGUAGE_FLUENT;
 	}
 
 	public boolean canReadVillagerNames(final String username) {
@@ -1449,13 +1282,10 @@ public class Culture {
 			return true;
 		}
 
-		return !MLN.languageLearning
-				|| Mill.proxy.getClientProfile().getCultureLanguageKnowledge(
-						key) >= LANGUAGE_MODERATE;
+		return !MLN.languageLearning || Mill.proxy.getClientProfile().getCultureLanguageKnowledge(key) >= LANGUAGE_MODERATE;
 	}
 
-	public int[] compareCultureLanguages(final String main, final String ref,
-			final BufferedWriter writer) throws Exception {
+	public int[] compareCultureLanguages(final String main, final String ref, final BufferedWriter writer) throws Exception {
 
 		CultureLanguage maincl = null, refcl = null;
 
@@ -1472,13 +1302,9 @@ public class Culture {
 		}
 
 		if (maincl == null) {
-			writer.write("Data for culture " + key + " is missing." + MLN.EOL
-					+ MLN.EOL);
+			writer.write("Data for culture " + key + " is missing." + MLN.EOL + MLN.EOL);
 
-			return new int[] {
-					0,
-					refcl.buildingNames.size() + refcl.reputationLevels.size()
-							+ refcl.sentences.size() + refcl.strings.size() };
+			return new int[] { 0, refcl.buildingNames.size() + refcl.reputationLevels.size() + refcl.sentences.size() + refcl.strings.size() };
 		}
 
 		return maincl.compareWithLanguage(refcl, writer);
@@ -1505,17 +1331,13 @@ public class Culture {
 
 		final String planNameLC = plan.planName.toLowerCase();
 
-		if (mainLanguage != null
-				&& mainLanguage.buildingNames.containsKey(planNameLC)) {
+		if (mainLanguage != null && mainLanguage.buildingNames.containsKey(planNameLC)) {
 			return mainLanguage.buildingNames.get(planNameLC);
-		} else if (mainLanguageServer != null
-				&& mainLanguageServer.buildingNames.containsKey(planNameLC)) {
+		} else if (mainLanguageServer != null && mainLanguageServer.buildingNames.containsKey(planNameLC)) {
 			return mainLanguageServer.buildingNames.get(planNameLC);
-		} else if (fallbackLanguage != null
-				&& fallbackLanguage.buildingNames.containsKey(planNameLC)) {
+		} else if (fallbackLanguage != null && fallbackLanguage.buildingNames.containsKey(planNameLC)) {
 			return fallbackLanguage.buildingNames.get(planNameLC);
-		} else if (fallbackLanguageServer != null
-				&& fallbackLanguageServer.buildingNames.containsKey(planNameLC)) {
+		} else if (fallbackLanguageServer != null && fallbackLanguageServer.buildingNames.containsKey(planNameLC)) {
 			return fallbackLanguageServer.buildingNames.get(planNameLC);
 		}
 
@@ -1524,8 +1346,7 @@ public class Culture {
 		}
 
 		if (MLN.LogTranslation >= MLN.MAJOR || MLN.generateTranslationGap) {
-			MLN.major(this, "Could not find the building name for :"
-					+ plan.planName);
+			MLN.major(this, "Could not find the building name for :" + plan.planName);
 		}
 
 		return null;
@@ -1562,43 +1383,40 @@ public class Culture {
 			return mainLanguage.strings.get(key);
 		} else if (MLN.getRawStringMainOnly(key, false) != null) {
 			return MLN.getRawStringMainOnly(key, false);
-		} else if (mainLanguageServer != null
-				&& mainLanguageServer.strings.containsKey(key)) {
+		} else if (mainLanguageServer != null && mainLanguageServer.strings.containsKey(key)) {
 			return mainLanguageServer.strings.get(key);
-		} else if (fallbackLanguage != null
-				&& fallbackLanguage.strings.containsKey(key)) {
+		} else if (fallbackLanguage != null && fallbackLanguage.strings.containsKey(key)) {
 			return fallbackLanguage.strings.get(key);
 		} else if (MLN.getRawStringFallbackOnly(key, false) != null) {
 			return MLN.getRawStringFallbackOnly(key, false);
-		} else if (fallbackLanguageServer != null
-				&& fallbackLanguageServer.strings.containsKey(key)) {
+		} else if (fallbackLanguageServer != null && fallbackLanguageServer.strings.containsKey(key)) {
 			return fallbackLanguageServer.strings.get(key);
 		}
 		return key;
 	}
 
-	public String getCustomBuildingGameName(
-			final BuildingCustomPlan customBuilding) {
+	public String getCustomBuildingGameName(final BuildingCustomPlan customBuilding) {
 
-		final String planNameLC = customBuilding.buildingKey.toLowerCase();
+		final String planNameLC;
 
-		if (mainLanguage != null
-				&& mainLanguage.buildingNames.containsKey(planNameLC)) {
+		if (customBuilding.gameNameKey != null) {
+			planNameLC = customBuilding.gameNameKey.toLowerCase();
+		} else {
+			planNameLC = customBuilding.buildingKey.toLowerCase();
+		}
+
+		if (mainLanguage != null && mainLanguage.buildingNames.containsKey(planNameLC)) {
 			return mainLanguage.buildingNames.get(planNameLC);
-		} else if (mainLanguageServer != null
-				&& mainLanguageServer.buildingNames.containsKey(planNameLC)) {
+		} else if (mainLanguageServer != null && mainLanguageServer.buildingNames.containsKey(planNameLC)) {
 			return mainLanguageServer.buildingNames.get(planNameLC);
-		} else if (fallbackLanguage != null
-				&& fallbackLanguage.buildingNames.containsKey(planNameLC)) {
+		} else if (fallbackLanguage != null && fallbackLanguage.buildingNames.containsKey(planNameLC)) {
 			return fallbackLanguage.buildingNames.get(planNameLC);
-		} else if (fallbackLanguageServer != null
-				&& fallbackLanguageServer.buildingNames.containsKey(planNameLC)) {
+		} else if (fallbackLanguageServer != null && fallbackLanguageServer.buildingNames.containsKey(planNameLC)) {
 			return fallbackLanguageServer.buildingNames.get(planNameLC);
 		}
 
 		if (MLN.LogTranslation >= MLN.MAJOR || MLN.generateTranslationGap) {
-			MLN.major(this, "Could not find the custom building name for :"
-					+ customBuilding.buildingKey);
+			MLN.major(this, "Could not find the custom building name for :" + customBuilding.buildingKey);
 		}
 
 		return null;
@@ -1645,18 +1463,15 @@ public class Culture {
 			return mainLanguage.dialogues.get(key);
 		}
 
-		if (mainLanguageServer != null
-				&& mainLanguageServer.dialogues.containsKey(key)) {
+		if (mainLanguageServer != null && mainLanguageServer.dialogues.containsKey(key)) {
 			return mainLanguageServer.dialogues.get(key);
 		}
 
-		if (fallbackLanguage != null
-				&& fallbackLanguage.dialogues.containsKey(key)) {
+		if (fallbackLanguage != null && fallbackLanguage.dialogues.containsKey(key)) {
 			return fallbackLanguage.dialogues.get(key);
 		}
 
-		if (fallbackLanguageServer != null
-				&& fallbackLanguageServer.dialogues.containsKey(key)) {
+		if (fallbackLanguageServer != null && fallbackLanguageServer.dialogues.containsKey(key)) {
 			return fallbackLanguageServer.dialogues.get(key);
 		}
 
@@ -1724,8 +1539,7 @@ public class Culture {
 			return null;
 		}
 
-		return (VillagerType) MillCommonUtilities.getWeightedChoice(
-				foreignMerchants, null);
+		return (VillagerType) MillCommonUtilities.getWeightedChoice(foreignMerchants, null);
 	}
 
 	public String getRandomNameFromList(final String listName) {
@@ -1738,8 +1552,7 @@ public class Culture {
 	}
 
 	public VillageType getRandomVillage() {
-		return (VillageType) MillCommonUtilities.getWeightedChoice(
-				listVillageTypes, null);
+		return (VillageType) MillCommonUtilities.getWeightedChoice(listVillageTypes, null);
 	}
 
 	public ReputationLevel getReputationLevel(final int reputation) {
@@ -1787,8 +1600,7 @@ public class Culture {
 			return MLN.string("culturereputation.neutral");
 		}
 
-		final int reputation = Mill.proxy.getClientProfile()
-				.getCultureReputation(key);
+		final int reputation = Mill.proxy.getClientProfile().getCultureReputation(key);
 
 		if (reputation < 0) {
 			if (reputation <= -10 * 64) {
@@ -1822,18 +1634,15 @@ public class Culture {
 			return mainLanguage.sentences.get(key);
 		}
 
-		if (mainLanguageServer != null
-				&& mainLanguageServer.sentences.containsKey(key)) {
+		if (mainLanguageServer != null && mainLanguageServer.sentences.containsKey(key)) {
 			return mainLanguageServer.sentences.get(key);
 		}
 
-		if (fallbackLanguage != null
-				&& fallbackLanguage.sentences.containsKey(key)) {
+		if (fallbackLanguage != null && fallbackLanguage.sentences.containsKey(key)) {
 			return fallbackLanguage.sentences.get(key);
 		}
 
-		if (fallbackLanguageServer != null
-				&& fallbackLanguageServer.sentences.containsKey(key)) {
+		if (fallbackLanguageServer != null && fallbackLanguageServer.sentences.containsKey(key)) {
 			return fallbackLanguageServer.sentences.get(key);
 		}
 
@@ -1907,8 +1716,7 @@ public class Culture {
 				return false;
 			}
 
-			customBuildings = BuildingCustomPlan.loadCustomBuildings(
-					thisCultureDirs, this);
+			customBuildings = BuildingCustomPlan.loadCustomBuildings(thisCultureDirs, this);
 
 			if (customBuildings == null) {
 				return false;
@@ -1932,8 +1740,7 @@ public class Culture {
 				villageTypes.put(v.key, v);
 			}
 
-			listLoneBuildingTypes = VillageType.loadLoneBuildings(
-					thisCultureDirs, this);
+			listLoneBuildingTypes = VillageType.loadLoneBuildings(thisCultureDirs, this);
 
 			for (final VillageType v : listLoneBuildingTypes) {
 				loneBuildingTypes.put(v.key, v);
@@ -1964,8 +1771,7 @@ public class Culture {
 			}
 		}
 
-		final File dir = new File(new File(new File(Mill.proxy.getCustomDir(),
-				"cultures"), key), "traded_goods.txt");
+		final File dir = new File(new File(new File(Mill.proxy.getCustomDir(), "cultures"), key), "traded_goods.txt");
 
 		if (dir.exists()) {
 			files.add(dir);
@@ -1978,8 +1784,7 @@ public class Culture {
 					file.createNewFile();
 				}
 
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(file);
+				final BufferedReader reader = MillCommonUtilities.getReader(file);
 
 				String line;
 
@@ -1994,48 +1799,20 @@ public class Culture {
 
 							if (Goods.goodsName.containsKey(name)) {
 								final InvItem item = Goods.goodsName.get(name);
-								final int sellingPrice = values.length > 1
-										&& !values[1].isEmpty() ? MillCommonUtilities
-										.readInteger(values[1]) : 0;
-								final int buyingPrice = values.length > 2
-										&& !values[2].isEmpty() ? MillCommonUtilities
-										.readInteger(values[2]) : 0;
-								final int reservedQuantity = values.length > 3
-										&& !values[3].isEmpty() ? MillCommonUtilities
-										.readInteger(values[3]) : 0;
-								final int targetQuantity = values.length > 4
-										&& !values[4].isEmpty() ? MillCommonUtilities
-										.readInteger(values[4]) : 0;
-								final int foreignMerchantPrice = values.length > 5
-										&& !values[5].isEmpty() ? MillCommonUtilities
-										.readInteger(values[5]) : 0;
-								final boolean autoGenerate = values.length > 6
-										&& !values[6].isEmpty() ? Boolean
-										.parseBoolean(values[6]) : false;
-								final String tag = values.length > 7
-										&& !values[7].isEmpty() ? values[7]
-										: null;
-								final int minReputation = values.length > 8
-										&& !values[8].isEmpty() ? MillCommonUtilities
-										.readInteger(values[8])
-										: Integer.MIN_VALUE;
-								final String desc = values.length > 9
-										&& !values[9].isEmpty() ? values[9]
-										: null;
+								final int sellingPrice = values.length > 1 && !values[1].isEmpty() ? MillCommonUtilities.readInteger(values[1]) : 0;
+								final int buyingPrice = values.length > 2 && !values[2].isEmpty() ? MillCommonUtilities.readInteger(values[2]) : 0;
+								final int reservedQuantity = values.length > 3 && !values[3].isEmpty() ? MillCommonUtilities.readInteger(values[3]) : 0;
+								final int targetQuantity = values.length > 4 && !values[4].isEmpty() ? MillCommonUtilities.readInteger(values[4]) : 0;
+								final int foreignMerchantPrice = values.length > 5 && !values[5].isEmpty() ? MillCommonUtilities.readInteger(values[5]) : 0;
+								final boolean autoGenerate = values.length > 6 && !values[6].isEmpty() ? Boolean.parseBoolean(values[6]) : false;
+								final String tag = values.length > 7 && !values[7].isEmpty() ? values[7] : null;
+								final int minReputation = values.length > 8 && !values[8].isEmpty() ? MillCommonUtilities.readInteger(values[8]) : Integer.MIN_VALUE;
+								final String desc = values.length > 9 && !values[9].isEmpty() ? values[9] : null;
 
-								final Goods good = new Goods(name, item,
-										sellingPrice, buyingPrice,
-										reservedQuantity, targetQuantity,
-										foreignMerchantPrice, autoGenerate,
-										tag, minReputation, desc);
+								final Goods good = new Goods(name, item, sellingPrice, buyingPrice, reservedQuantity, targetQuantity, foreignMerchantPrice, autoGenerate, tag, minReputation, desc);
 
-								if (goods.containsKey(name)
-										|| goodsByItem.containsKey(good.item)) {
-									MLN.error(
-											this,
-											"Good "
-													+ name
-													+ " is present twice in the goods list.");
+								if (goods.containsKey(name) || goodsByItem.containsKey(good.item)) {
+									MLN.error(this, "Good " + name + " is present twice in the goods list.");
 								}
 
 								goods.put(name, good);
@@ -2044,18 +1821,14 @@ public class Culture {
 								goodsList.add(good);
 
 								if (MLN.LogCulture >= MLN.MINOR) {
-									MLN.minor(this, "Loaded traded good: "
-											+ name + " prices: " + sellingPrice
-											+ "/" + buyingPrice);
+									MLN.minor(this, "Loaded traded good: " + name + " prices: " + sellingPrice + "/" + buyingPrice);
 								}
 
 							} else {
 								MLN.error(this, "Unknown good on line: " + line);
 							}
 						} catch (final Exception e) {
-							MLN.printException(
-									"Exception when trying to read trade good on line: "
-											+ line, e);
+							MLN.printException("Exception when trying to read trade good on line: " + line, e);
 						}
 					}
 				}
@@ -2067,8 +1840,7 @@ public class Culture {
 		}
 	}
 
-	private CultureLanguage loadLanguage(final List<File> languageDirs,
-			final String key) {
+	private CultureLanguage loadLanguage(final List<File> languageDirs, final String key) {
 
 		if (loadedLanguages.containsKey(key)) {
 			return loadedLanguages.get(key);
@@ -2076,12 +1848,9 @@ public class Culture {
 
 		final CultureLanguage lang = new CultureLanguage(this, key, false);
 
-		final List<File> languageDirsWithCusto = new ArrayList<File>(
-				languageDirs);
+		final List<File> languageDirsWithCusto = new ArrayList<File>(languageDirs);
 
-		final File dircusto = new File(new File(new File(
-				Mill.proxy.getCustomDir(), "custom cultures"), key),
-				"languages");
+		final File dircusto = new File(new File(new File(Mill.proxy.getCustomDir(), "custom cultures"), key), "languages");
 
 		if (dircusto.exists()) {
 			languageDirsWithCusto.add(dircusto);
@@ -2092,8 +1861,7 @@ public class Culture {
 		return lang;
 	}
 
-	public void loadLanguages(final List<File> languageDirs,
-			final String effective_language, final String fallback_language) {
+	public void loadLanguages(final List<File> languageDirs, final String effective_language, final String fallback_language) {
 
 		mainLanguage = loadLanguage(languageDirs, effective_language);
 		if (!effective_language.equals(fallback_language)) {
@@ -2127,8 +1895,7 @@ public class Culture {
 			}
 		}
 
-		final File dir = new File(new File(new File(Mill.proxy.getCustomDir(),
-				"cultures"), key), "custom namelists");
+		final File dir = new File(new File(new File(Mill.proxy.getCustomDir(), "cultures"), key), "custom namelists");
 
 		if (dir.exists()) {
 			listDirs.add(dir);
@@ -2136,13 +1903,11 @@ public class Culture {
 
 		for (final File lists : listDirs) {
 			try {
-				for (final File file : lists
-						.listFiles(new ExtFileFilter("txt"))) {
+				for (final File file : lists.listFiles(new ExtFileFilter("txt"))) {
 
 					final List<String> list = new ArrayList<String>();
 
-					final BufferedReader reader = MillCommonUtilities
-							.getReader(file);
+					final BufferedReader reader = MillCommonUtilities.getReader(file);
 					String line;
 					while ((line = reader.readLine()) != null) {
 						line = line.trim();
@@ -2170,8 +1935,7 @@ public class Culture {
 				if (line.trim().length() > 0 && !line.startsWith("//")) {
 					final String[] temp = line.split("=");
 					if (temp.length != 2) {
-						MLN.error(null, "Invalid line when loading shop "
-								+ file.getName() + ": " + line);
+						MLN.error(null, "Invalid line when loading shop " + file.getName() + ": " + line);
 					} else {
 
 						final String key = temp[0].toLowerCase();
@@ -2184,17 +1948,10 @@ public class Culture {
 								if (goods.containsKey(name)) {
 									buys.add(goods.get(name));
 									if (MLN.LogSelling >= MLN.MINOR) {
-										MLN.minor(
-												this,
-												"Loaded buying good " + name
-														+ " for shop "
-														+ file.getName());
+										MLN.minor(this, "Loaded buying good " + name + " for shop " + file.getName());
 									}
 								} else {
-									MLN.error(this,
-											"Unknown good when loading shop "
-													+ file.getName() + ": "
-													+ name);
+									MLN.error(this, "Unknown good when loading shop " + file.getName() + ": " + name);
 								}
 							}
 							shopBuys.put(file.getName().split("\\.")[0], buys);
@@ -2205,20 +1962,13 @@ public class Culture {
 								if (goods.containsKey(name)) {
 									buys.add(goods.get(name));
 									if (MLN.LogSelling >= MLN.MINOR) {
-										MLN.minor(this,
-												"Loaded optional buying good "
-														+ name + " for shop "
-														+ file.getName());
+										MLN.minor(this, "Loaded optional buying good " + name + " for shop " + file.getName());
 									}
 								} else {
-									MLN.error(this,
-											"Unknown good when loading shop "
-													+ file.getName() + ": "
-													+ name);
+									MLN.error(this, "Unknown good when loading shop " + file.getName() + ": " + name);
 								}
 							}
-							shopBuysOptional.put(
-									file.getName().split("\\.")[0], buys);
+							shopBuysOptional.put(file.getName().split("\\.")[0], buys);
 						} else if (key.equals("sells")) {
 							final List<Goods> sells = new ArrayList<Goods>();
 
@@ -2226,14 +1976,10 @@ public class Culture {
 								if (goods.containsKey(name)) {
 									sells.add(goods.get(name));
 								} else {
-									MLN.error(this,
-											"Unknown good when loading shop "
-													+ file.getName() + ": "
-													+ name);
+									MLN.error(this, "Unknown good when loading shop " + file.getName() + ": " + name);
 								}
 							}
-							shopSells
-									.put(file.getName().split("\\.")[0], sells);
+							shopSells.put(file.getName().split("\\.")[0], sells);
 						} else if (key.equals("deliverto")) {
 							final List<InvItem> needs = new ArrayList<InvItem>();
 
@@ -2241,18 +1987,12 @@ public class Culture {
 								if (Goods.goodsName.containsKey(name)) {
 									needs.add(Goods.goodsName.get(name));
 								} else {
-									MLN.error(this,
-											"Unknown good when loading shop "
-													+ file.getName() + ": "
-													+ name);
+									MLN.error(this, "Unknown good when loading shop " + file.getName() + ": " + name);
 								}
 							}
-							shopNeeds
-									.put(file.getName().split("\\.")[0], needs);
+							shopNeeds.put(file.getName().split("\\.")[0], needs);
 						} else {
-							MLN.error(this,
-									"Unknown parameter when loading shop "
-											+ file.getName() + ": " + line);
+							MLN.error(this, "Unknown parameter when loading shop " + file.getName() + ": " + line);
 						}
 
 					}
@@ -2277,8 +2017,7 @@ public class Culture {
 			}
 		}
 
-		final File dircusto = new File(new File(new File(
-				Mill.proxy.getCustomDir(), "cultures"), key), "shops");
+		final File dircusto = new File(new File(new File(Mill.proxy.getCustomDir(), "cultures"), key), "shops");
 
 		if (dircusto.exists()) {
 			dirs.add(dircusto);
@@ -2311,9 +2050,7 @@ public class Culture {
 			}
 		}
 
-		final File dircusto = new File(new File(new File(
-				Mill.proxy.getCustomDir(), "cultures"), key),
-				"custom villagers");
+		final File dircusto = new File(new File(new File(Mill.proxy.getCustomDir(), "cultures"), key), "custom villagers");
 
 		if (dircusto.exists()) {
 			dirs.add(dircusto);
@@ -2323,8 +2060,7 @@ public class Culture {
 			try {
 				for (final File file : dir.listFiles(new ExtFileFilter("txt"))) {
 
-					final VillagerType vtype = VillagerType.loadVillagerType(
-							file, this);
+					final VillagerType vtype = VillagerType.loadVillagerType(file, this);
 
 					if (vtype != null) {
 						villagerTypes.put(vtype.key, vtype);
@@ -2347,8 +2083,7 @@ public class Culture {
 
 				if (file.exists()) {
 
-					final BufferedReader reader = MillCommonUtilities
-							.getReader(file);
+					final BufferedReader reader = MillCommonUtilities.getReader(file);
 
 					String line;
 
@@ -2381,8 +2116,7 @@ public class Culture {
 		return "Culture: " + key;
 	}
 
-	public void writeCultureAvailableContentPacket(
-			final ByteBufOutputStream data) throws IOException {
+	public void writeCultureAvailableContentPacket(final ByteBufOutputStream data) throws IOException {
 
 		data.writeUTF(key);
 
@@ -2418,15 +2152,9 @@ public class Culture {
 		}
 	}
 
-	public void writeCultureMissingContentPackPacket(final DataOutput data,
-			final String mainLanguage, final String fallbackLanguage,
-			final int nbStrings, final int nbBuildingNames,
-			final int nbSentences, final int nbFallbackStrings,
-			final int nbFallbackBuildingNames, final int nbFallbackSentences,
-			final List<String> planSetAvailable,
-			final List<String> villagerAvailable,
-			final List<String> villagesAvailable,
-			final List<String> loneBuildingsAvailable) throws IOException {
+	public void writeCultureMissingContentPackPacket(final DataOutput data, final String mainLanguage, final String fallbackLanguage, final int nbStrings, final int nbBuildingNames,
+			final int nbSentences, final int nbFallbackStrings, final int nbFallbackBuildingNames, final int nbFallbackSentences, final List<String> planSetAvailable,
+			final List<String> villagerAvailable, final List<String> villagesAvailable, final List<String> loneBuildingsAvailable) throws IOException {
 		data.writeUTF(key);
 
 		CultureLanguage clientMain = null, clientFallback = null;
@@ -2440,8 +2168,7 @@ public class Culture {
 		if (loadedLanguages.containsKey(fallbackLanguage)) {
 			clientFallback = loadedLanguages.get(fallbackLanguage);
 		} else if (loadedLanguages.containsKey(fallbackLanguage.split("_")[0])) {
-			clientFallback = loadedLanguages
-					.get(fallbackLanguage.split("_")[0]);
+			clientFallback = loadedLanguages.get(fallbackLanguage.split("_")[0]);
 		}
 
 		if (clientMain != null && clientMain.strings.size() > nbStrings) {
@@ -2449,37 +2176,29 @@ public class Culture {
 		} else {
 			StreamReadWrite.writeStringStringMap(null, data);
 		}
-		if (clientMain != null
-				&& clientMain.buildingNames.size() > nbBuildingNames) {
-			StreamReadWrite
-					.writeStringStringMap(clientMain.buildingNames, data);
+		if (clientMain != null && clientMain.buildingNames.size() > nbBuildingNames) {
+			StreamReadWrite.writeStringStringMap(clientMain.buildingNames, data);
 		} else {
 			StreamReadWrite.writeStringStringMap(null, data);
 		}
 		if (clientMain != null && clientMain.sentences.size() > nbSentences) {
-			StreamReadWrite
-					.writeStringStringListMap(clientMain.sentences, data);
+			StreamReadWrite.writeStringStringListMap(clientMain.sentences, data);
 		} else {
 			StreamReadWrite.writeStringStringMap(null, data);
 		}
 
-		if (clientFallback != null
-				&& clientFallback.strings.size() > nbFallbackStrings) {
+		if (clientFallback != null && clientFallback.strings.size() > nbFallbackStrings) {
 			StreamReadWrite.writeStringStringMap(clientFallback.strings, data);
 		} else {
 			StreamReadWrite.writeStringStringMap(null, data);
 		}
-		if (clientFallback != null
-				&& clientFallback.buildingNames.size() > nbFallbackBuildingNames) {
-			StreamReadWrite.writeStringStringMap(clientFallback.buildingNames,
-					data);
+		if (clientFallback != null && clientFallback.buildingNames.size() > nbFallbackBuildingNames) {
+			StreamReadWrite.writeStringStringMap(clientFallback.buildingNames, data);
 		} else {
 			StreamReadWrite.writeStringStringMap(null, data);
 		}
-		if (clientFallback != null
-				&& clientFallback.sentences.size() > nbFallbackSentences) {
-			StreamReadWrite.writeStringStringListMap(clientFallback.sentences,
-					data);
+		if (clientFallback != null && clientFallback.sentences.size() > nbFallbackSentences) {
+			StreamReadWrite.writeStringStringListMap(clientFallback.sentences, data);
 		} else {
 			StreamReadWrite.writeStringStringMap(null, data);
 		}
@@ -2530,16 +2249,14 @@ public class Culture {
 		}
 		nbToWrite = 0;
 		for (final String key : loneBuildingTypes.keySet()) {
-			if (loneBuildingsAvailable == null
-					|| !loneBuildingsAvailable.contains(key)) {
+			if (loneBuildingsAvailable == null || !loneBuildingsAvailable.contains(key)) {
 				nbToWrite++;
 			}
 		}
 
 		data.writeShort(nbToWrite);
 		for (final String key : loneBuildingTypes.keySet()) {
-			if (loneBuildingsAvailable == null
-					|| !loneBuildingsAvailable.contains(key)) {
+			if (loneBuildingsAvailable == null || !loneBuildingsAvailable.contains(key)) {
 				final VillageType vtype = loneBuildingTypes.get(key);
 				vtype.writeVillageTypeInfo(data);
 			}

@@ -29,63 +29,38 @@ public class GoalGenericCrafting extends GoalGeneric {
 				if (line.trim().length() > 0 && !line.startsWith("//")) {
 					final String[] temp = line.split("=");
 					if (temp.length != 2) {
-						MLN.error(null,
-								"Invalid line when loading generic crafting goal "
-										+ file.getName() + ": " + line);
+						MLN.error(null, "Invalid line when loading generic crafting goal " + file.getName() + ": " + line);
 					} else {
 						final String key = temp[0].toLowerCase();
 						final String value = temp[1];
 
-						if (!GoalGeneric.readGenericGoalConfigLine(g, key,
-								value, file, line)) {
+						if (!GoalGeneric.readGenericGoalConfigLine(g, key, value, file, line)) {
 							if (key.equals("input")) {
 								final String[] temp2 = value.split(",");
 
 								if (temp2.length != 2) {
-									MLN.error(
-											null,
-											"Inputs must take the form of input=goodname,goodquatity in generic crafting goal "
-													+ file.getName()
-													+ ": "
-													+ line);
+									MLN.error(null, "Inputs must take the form of input=goodname,goodquatity in generic crafting goal " + file.getName() + ": " + line);
 								} else {
 									if (Goods.goodsName.containsKey(temp2[0])) {
-										g.inputs.put(
-												Goods.goodsName.get(temp2[0]),
-												Integer.parseInt(temp2[1]));
+										g.inputs.put(Goods.goodsName.get(temp2[0]), Integer.parseInt(temp2[1]));
 									} else {
-										MLN.error(null,
-												"Unknown input item in generic crafting goal "
-														+ file.getName() + ": "
-														+ line);
+										MLN.error(null, "Unknown input item in generic crafting goal " + file.getName() + ": " + line);
 									}
 								}
 							} else if (key.equals("output")) {
 								final String[] temp2 = value.split(",");
 
 								if (temp2.length != 2) {
-									MLN.error(
-											null,
-											"Outputs must take the form of input=goodname,goodquatity in generic crafting goal "
-													+ file.getName()
-													+ ": "
-													+ line);
+									MLN.error(null, "Outputs must take the form of input=goodname,goodquatity in generic crafting goal " + file.getName() + ": " + line);
 								} else {
 									if (Goods.goodsName.containsKey(temp2[0])) {
-										g.outputs.put(
-												Goods.goodsName.get(temp2[0]),
-												Integer.parseInt(temp2[1]));
+										g.outputs.put(Goods.goodsName.get(temp2[0]), Integer.parseInt(temp2[1]));
 									} else {
-										MLN.error(null,
-												"Unknown output item in generic crafting goal "
-														+ file.getName() + ": "
-														+ line);
+										MLN.error(null, "Unknown output item in generic crafting goal " + file.getName() + ": " + line);
 									}
 								}
 							} else {
-								MLN.error(null,
-										"Unknown line in generic crafting goal "
-												+ file.getName() + ": " + line);
+								MLN.error(null, "Unknown line in generic crafting goal " + file.getName() + ": " + line);
 							}
 						}
 					}
@@ -112,8 +87,7 @@ public class GoalGenericCrafting extends GoalGeneric {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 		final List<Building> buildings = getBuildings(villager);
 
 		for (final Building dest : buildings) {
@@ -127,8 +101,7 @@ public class GoalGenericCrafting extends GoalGeneric {
 	}
 
 	@Override
-	public boolean isDestPossibleSpecific(final MillVillager villager,
-			final Building b) {
+	public boolean isDestPossibleSpecific(final MillVillager villager, final Building b) {
 		for (final InvItem item : inputs.keySet()) {
 			if (villager.countInv(item) + b.countGoods(item) < inputs.get(item)) {
 				return false;
@@ -138,8 +111,7 @@ public class GoalGenericCrafting extends GoalGeneric {
 	}
 
 	@Override
-	public boolean isPossibleGenericGoal(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleGenericGoal(final MillVillager villager) throws Exception {
 		return true;
 	}
 
@@ -154,8 +126,7 @@ public class GoalGenericCrafting extends GoalGeneric {
 
 		// check again that all the inputs are there
 		for (final InvItem item : inputs.keySet()) {
-			if (villager.countInv(item) + dest.countGoods(item) < inputs
-					.get(item)) {
+			if (villager.countInv(item) + dest.countGoods(item) < inputs.get(item)) {
 				return true;
 			}
 		}
@@ -172,8 +143,7 @@ public class GoalGenericCrafting extends GoalGeneric {
 		}
 
 		if (sound != null) {
-			MillCommonUtilities.playSoundByMillName(villager.worldObj,
-					villager.getPos(), sound, 10f);
+			MillCommonUtilities.playSoundByMillName(villager.worldObj, villager.getPos(), sound, 10f);
 		}
 
 		return true;

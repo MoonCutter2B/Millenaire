@@ -39,20 +39,14 @@ public abstract class GuiText extends GuiScreen {
 			this.canCutAfter = canCutAfter;
 		}
 
-		public Line(final List<ItemStack> icons,
-				final List<String> iconExtraLegends, final String s,
-				final int margin) {
+		public Line(final List<ItemStack> icons, final List<String> iconExtraLegends, final String s, final int margin) {
 			this.icons = icons;
 			this.iconExtraLegends = iconExtraLegends;
 
 			if (icons != null && iconExtraLegends == null) {
-				MLN.printException("iconExtraLegends is null but icons isn't.",
-						new Exception());
-			} else if (icons != null && iconExtraLegends != null
-					&& icons.size() != iconExtraLegends.size()) {
-				MLN.printException("iconExtraLegends has a size of "
-						+ iconExtraLegends.size() + " but icons has a size of "
-						+ icons.size(), new Exception());
+				MLN.printException("iconExtraLegends is null but icons isn't.", new Exception());
+			} else if (icons != null && iconExtraLegends != null && icons.size() != iconExtraLegends.size()) {
+				MLN.printException("iconExtraLegends has a size of " + iconExtraLegends.size() + " but icons has a size of " + icons.size(), new Exception());
 			}
 
 			text = s;
@@ -71,8 +65,7 @@ public abstract class GuiText extends GuiScreen {
 			canCutAfter = false;
 		}
 
-		public Line(final MillGuiButton b, final MillGuiButton b2,
-				final MillGuiButton b3) {
+		public Line(final MillGuiButton b, final MillGuiButton b2, final MillGuiButton b3) {
 			buttons = new MillGuiButton[] { b, b2, b3 };
 			canCutAfter = false;
 		}
@@ -109,8 +102,7 @@ public abstract class GuiText extends GuiScreen {
 				icons = new ArrayList<ItemStack>();
 				iconExtraLegends = new ArrayList<String>();
 
-				for (int i = lnicon * 4; i < model.icons.size()
-						&& i < (lnicon + 1) * 4; i++) {
+				for (int i = lnicon * 4; i < model.icons.size() && i < (lnicon + 1) * 4; i++) {
 					icons.add(model.icons.get(i));
 					iconExtraLegends.add(model.iconExtraLegends.get(i));
 				}
@@ -138,8 +130,7 @@ public abstract class GuiText extends GuiScreen {
 		}
 
 		public boolean empty() {
-			return (text == null || text.length() == 0) && buttons == null
-					&& textField == null;
+			return (text == null || text.length() == 0) && buttons == null && textField == null;
 		}
 
 		private void interpretTags() {
@@ -173,8 +164,7 @@ public abstract class GuiText extends GuiScreen {
 		public static final int CHUNKBUTTON = 3000;
 		public static final int CONFIGBUTTON = 4000;
 
-		public MillGuiButton(final int par1, final int par2, final int par3,
-				final int par4, final int par5, final String par6Str) {
+		public MillGuiButton(final int par1, final int par2, final int par3, final int par4, final int par5, final String par6Str) {
 			super(par1, par2, par3, par4, par5, par6Str);
 		}
 
@@ -204,9 +194,7 @@ public abstract class GuiText extends GuiScreen {
 
 		public final String fieldKey;
 
-		public MillGuiTextField(final FontRenderer par1FontRenderer,
-				final int par2, final int par3, final int par4, final int par5,
-				final String fieldKey) {
+		public MillGuiTextField(final FontRenderer par1FontRenderer, final int par2, final int par3, final int par4, final int par5, final String fieldKey) {
 			super(par1FontRenderer, par2, par3, par4, par5);
 			this.fieldKey = fieldKey;
 		}
@@ -373,43 +361,36 @@ public abstract class GuiText extends GuiScreen {
 			int vpos = 6;
 
 			if (pageNum < descText.size()) {
-				for (int cp = 0; cp < getPageSize()
-						&& cp < descText.get(pageNum).size(); cp++) {
+				for (int cp = 0; cp < getPageSize() && cp < descText.get(pageNum).size(); cp++) {
 
 					final Line line = descText.get(pageNum).get(cp);
 					if (line.buttons != null) {
 
 						if (line.buttons.length == 1) {
 							if (line.buttons[0] != null) {
-								line.buttons[0].xPosition = xStart + getXSize()
-										/ 2 - 100;
+								line.buttons[0].xPosition = xStart + getXSize() / 2 - 100;
 								line.buttons[0].setWidth(200);
 							}
 						} else if (line.buttons.length == 2) {
 							if (line.buttons[0] != null) {
-								line.buttons[0].xPosition = xStart + getXSize()
-										/ 2 - 100;
+								line.buttons[0].xPosition = xStart + getXSize() / 2 - 100;
 								line.buttons[0].setWidth(95);
 							}
 							if (line.buttons[1] != null) {
-								line.buttons[1].xPosition = xStart + getXSize()
-										/ 2 + 5;
+								line.buttons[1].xPosition = xStart + getXSize() / 2 + 5;
 								line.buttons[1].setWidth(95);
 							}
 						} else if (line.buttons.length == 3) {
 							if (line.buttons[0] != null) {
-								line.buttons[0].xPosition = xStart + getXSize()
-										/ 2 - 100;
+								line.buttons[0].xPosition = xStart + getXSize() / 2 - 100;
 								line.buttons[0].setWidth(60);
 							}
 							if (line.buttons[1] != null) {
-								line.buttons[1].xPosition = xStart + getXSize()
-										/ 2 - 30;
+								line.buttons[1].xPosition = xStart + getXSize() / 2 - 30;
 								line.buttons[1].setWidth(60);
 							}
 							if (line.buttons[2] != null) {
-								line.buttons[2].xPosition = xStart + getXSize()
-										/ 2 + 40;
+								line.buttons[2].xPosition = xStart + getXSize() / 2 + 40;
 								line.buttons[2].setWidth(60);
 							}
 						}
@@ -422,12 +403,9 @@ public abstract class GuiText extends GuiScreen {
 							}
 						}
 					} else if (line.textField != null) {
-						final MillGuiTextField textField = new MillGuiTextField(
-								fontRendererObj, xStart + getXSize() / 2 + 40,
-								yStart + vpos, 95, 20, line.textField.fieldKey);
+						final MillGuiTextField textField = new MillGuiTextField(fontRendererObj, xStart + getXSize() / 2 + 40, yStart + vpos, 95, 20, line.textField.fieldKey);
 						textField.setText(line.textField.getText());
-						textField.setMaxStringLength(line.textField
-								.getMaxStringLength());
+						textField.setMaxStringLength(line.textField.getMaxStringLength());
 						textField.setTextColor(-1);
 						line.textField = textField;
 						line.textField.setTextColor(-1);
@@ -439,8 +417,7 @@ public abstract class GuiText extends GuiScreen {
 				}
 			}
 		} catch (final Exception e) {
-			MLN.printException(
-					"Exception while doing button pagination in GUI " + this, e);
+			MLN.printException("Exception while doing button pagination in GUI " + this, e);
 		}
 	}
 
@@ -483,17 +460,11 @@ public abstract class GuiText extends GuiScreen {
 
 			for (final String s : page) {
 				if (s.equals(LINE_HELP_GUI_BUTTON)) {
-					newPage.add(new Line(new MillGuiButton(
-							MillGuiButton.HELPBUTTON, 0, 0, 0, 0, MLN
-									.string("ui.helpbutton"))));
+					newPage.add(new Line(new MillGuiButton(MillGuiButton.HELPBUTTON, 0, 0, 0, 0, MLN.string("ui.helpbutton"))));
 				} else if (s.equals(LINE_CHUNK_GUI_BUTTON)) {
-					newPage.add(new Line(new MillGuiButton(
-							MillGuiButton.CHUNKBUTTON, 0, 0, 0, 0, MLN
-									.string("ui.chunkbutton"))));
+					newPage.add(new Line(new MillGuiButton(MillGuiButton.CHUNKBUTTON, 0, 0, 0, 0, MLN.string("ui.chunkbutton"))));
 				} else if (s.equals(LINE_CONFIG_GUI_BUTTON)) {
-					newPage.add(new Line(new MillGuiButton(
-							MillGuiButton.CONFIGBUTTON, 0, 0, 0, 0, MLN
-									.string("ui.configbutton"))));
+					newPage.add(new Line(new MillGuiButton(MillGuiButton.CONFIGBUTTON, 0, 0, 0, 0, MLN.string("ui.configbutton"))));
 				} else {
 					newPage.add(new Line(s, true));
 				}
@@ -528,8 +499,7 @@ public abstract class GuiText extends GuiScreen {
 
 	@Override
 	@SuppressWarnings({ "rawtypes" })
-	protected void drawHoveringText(final List par1List, final int par2,
-			final int par3, final FontRenderer font) {
+	protected void drawHoveringText(final List par1List, final int par2, final int par3, final FontRenderer font) {
 		if (!par1List.isEmpty()) {
 			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 			RenderHelper.disableStandardItemLighting();
@@ -567,23 +537,16 @@ public abstract class GuiText extends GuiScreen {
 			itemRenderer.zLevel = 300.0F;
 			final int l1 = -267386864;
 			this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
-			this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4,
-					l1, l1);
-			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1,
-					l1);
+			this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
+			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
 			this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
-			this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3,
-					l1, l1);
+			this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
 			final int i2 = 1347420415;
 			final int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
-			this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3
-					- 1, i2, j2);
-			this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1
-					+ 3 - 1, i2, j2);
-			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2,
-					i2);
-			this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3,
-					j2, j2);
+			this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3 - 1, i2, j2);
+			this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1 + 3 - 1, i2, j2);
+			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
+			this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
 
 			for (int k2 = 0; k2 < par1List.size(); ++k2) {
 				final String s1 = (String) par1List.get(k2);
@@ -606,10 +569,8 @@ public abstract class GuiText extends GuiScreen {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected void drawItemStackTooltip(final ItemStack par1ItemStack,
-			final int par2, final int par3, final String extraLegend) {
-		final List list = par1ItemStack.getTooltip(this.mc.thePlayer,
-				this.mc.gameSettings.advancedItemTooltips);
+	protected void drawItemStackTooltip(final ItemStack par1ItemStack, final int par2, final int par3, final String extraLegend) {
+		final List list = par1ItemStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
 
 		if (extraLegend != null) {
 			list.add(extraLegend);
@@ -617,17 +578,14 @@ public abstract class GuiText extends GuiScreen {
 
 		for (int k = 0; k < list.size(); ++k) {
 			if (k == 0) {
-				list.set(k, par1ItemStack.getRarity().rarityColor
-						+ (String) list.get(k));
+				list.set(k, par1ItemStack.getRarity().rarityColor + (String) list.get(k));
 			} else {
 				list.set(k, EnumChatFormatting.GRAY + (String) list.get(k));
 			}
 		}
 
-		final FontRenderer font = par1ItemStack.getItem().getFontRenderer(
-				par1ItemStack);
-		drawHoveringText(list, par2, par3, font == null ? fontRendererObj
-				: font);
+		final FontRenderer font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
+		drawHoveringText(list, par2, par3, font == null ? fontRendererObj : font);
 	}
 
 	@Override
@@ -662,35 +620,22 @@ public abstract class GuiText extends GuiScreen {
 				if (pageNum < descText.size()) {
 
 					if (descText.get(pageNum) == null) {
-						MLN.printException(new MillenaireException(
-								"descText.get(pageNum)==null for pageNum: "
-										+ pageNum + " in GUI: " + this));
+						MLN.printException(new MillenaireException("descText.get(pageNum)==null for pageNum: " + pageNum + " in GUI: " + this));
 					}
 
-					for (int cp = 0; cp < getPageSize()
-							&& cp < descText.get(pageNum).size(); cp++) {
+					for (int cp = 0; cp < getPageSize() && cp < descText.get(pageNum).size(); cp++) {
 
 						if (descText.get(pageNum).get(cp).shadow) {
-							fontRendererObj
-									.drawStringWithShadow(
-											descText.get(pageNum).get(cp).text,
-											getTextXStart()
-													+ descText.get(pageNum)
-															.get(cp).margin,
-											vpos, 0x101010);
+							fontRendererObj.drawStringWithShadow(descText.get(pageNum).get(cp).text, getTextXStart() + descText.get(pageNum).get(cp).margin, vpos, 0x101010);
 						} else {
-							fontRendererObj.drawString(descText.get(pageNum)
-									.get(cp).text, getTextXStart()
-									+ descText.get(pageNum).get(cp).margin,
-									vpos, 0x101010);
+							fontRendererObj.drawString(descText.get(pageNum).get(cp).text, getTextXStart() + descText.get(pageNum).get(cp).margin, vpos, 0x101010);
 						}
 
 						vpos += 10;
 					}
 				}
 
-				fontRendererObj.drawString(pageNum + 1 + "/" + getNbPage(),
-						getXSize() / 2 - 10, getYSize() - 10, 0x101010);
+				fontRendererObj.drawString(pageNum + 1 + "/" + getNbPage(), getXSize() / 2 - 10, getYSize() - 10, 0x101010);
 
 				vpos = 6;
 
@@ -701,36 +646,22 @@ public abstract class GuiText extends GuiScreen {
 				String extraLegend = null;
 
 				if (pageNum < descText.size()) {
-					for (int cp = 0; cp < getPageSize()
-							&& cp < descText.get(pageNum).size(); cp++) {
+					for (int cp = 0; cp < getPageSize() && cp < descText.get(pageNum).size(); cp++) {
 						if (descText.get(pageNum).get(cp).icons != null) {
-							for (int ic = 0; ic < descText.get(pageNum).get(cp).icons
-									.size(); ic++) {
-								final ItemStack icon = descText.get(pageNum)
-										.get(cp).icons.get(ic);
+							for (int ic = 0; ic < descText.get(pageNum).get(cp).icons.size(); ic++) {
+								final ItemStack icon = descText.get(pageNum).get(cp).icons.get(ic);
 
 								if (descText.get(pageNum).get(cp).iconExtraLegends == null) {
 									MLN.error(null, "Null legends!");
 								}
 
-								final String legend = descText.get(pageNum)
-										.get(cp).iconExtraLegends.get(ic);
+								final String legend = descText.get(pageNum).get(cp).iconExtraLegends.get(ic);
 
 								GL11.glEnable(GL11.GL_DEPTH_TEST);
-								itemRenderer.renderItemAndEffectIntoGUI(
-										this.fontRendererObj,
-										this.mc.renderEngine, icon,
-										getTextXStart() + 18 * ic, vpos);
-								itemRenderer.renderItemOverlayIntoGUI(
-										this.fontRendererObj,
-										this.mc.renderEngine, icon,
-										getTextXStart() + 18 * ic, vpos, null);
+								itemRenderer.renderItemAndEffectIntoGUI(this.fontRendererObj, this.mc.renderEngine, icon, getTextXStart() + 18 * ic, vpos);
+								itemRenderer.renderItemOverlayIntoGUI(this.fontRendererObj, this.mc.renderEngine, icon, getTextXStart() + 18 * ic, vpos, null);
 
-								if (xStart + getTextXStart() + 18 * ic < i
-										&& yStart + vpos < j
-										&& xStart + getTextXStart() + 18 * ic
-												+ 16 > i
-										&& yStart + vpos + 16 > j) {
+								if (xStart + getTextXStart() + 18 * ic < i && yStart + vpos < j && xStart + getTextXStart() + 18 * ic + 16 > i && yStart + vpos + 16 > j) {
 									hoverIcon = icon;
 									extraLegend = legend;
 								}
@@ -741,8 +672,7 @@ public abstract class GuiText extends GuiScreen {
 				}
 
 				if (hoverIcon != null) {
-					drawItemStackTooltip(hoverIcon, i - xStart, j - yStart,
-							extraLegend);
+					drawItemStackTooltip(hoverIcon, i - xStart, j - yStart, extraLegend);
 				}
 
 				itemRenderer.zLevel = 0.0F;

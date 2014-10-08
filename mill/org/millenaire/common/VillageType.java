@@ -53,8 +53,7 @@ public class VillageType implements WeightedChoice {
 
 	public static final String HAMEAU = "hameau";
 
-	public static List<VillageType> loadLoneBuildings(
-			final List<File> culturesDirs, final Culture culture) {
+	public static List<VillageType> loadLoneBuildings(final List<File> culturesDirs, final Culture culture) {
 
 		final List<File> dirs = new ArrayList<File>();
 
@@ -66,9 +65,7 @@ public class VillageType implements WeightedChoice {
 			}
 		}
 
-		final File dircusto = new File(new File(new File(
-				Mill.proxy.getCustomDir(), "cultures"), culture.key),
-				"custom lonebuildings");
+		final File dircusto = new File(new File(new File(Mill.proxy.getCustomDir(), "cultures"), culture.key), "custom lonebuildings");
 
 		if (dircusto.exists()) {
 			dirs.add(dircusto);
@@ -86,14 +83,10 @@ public class VillageType implements WeightedChoice {
 				try {
 
 					if (MLN.LogVillage >= MLN.MAJOR) {
-						MLN.major(
-								file,
-								"Loading lone building: "
-										+ file.getAbsolutePath());
+						MLN.major(file, "Loading lone building: " + file.getAbsolutePath());
 					}
 
-					final VillageType village = new VillageType(culture, file,
-							true);
+					final VillageType village = new VillageType(culture, file, true);
 					village.lonebuilding = true;
 
 					v.remove(village);
@@ -112,8 +105,7 @@ public class VillageType implements WeightedChoice {
 		return v;
 	}
 
-	public static List<VillageType> loadVillages(final List<File> culturesDirs,
-			final Culture culture) {
+	public static List<VillageType> loadVillages(final List<File> culturesDirs, final Culture culture) {
 
 		final List<File> dirs = new ArrayList<File>();
 
@@ -125,9 +117,7 @@ public class VillageType implements WeightedChoice {
 			}
 		}
 
-		final File dircusto = new File(new File(new File(
-				Mill.proxy.getCustomDir(), "cultures"), culture.key),
-				"custom villages");
+		final File dircusto = new File(new File(new File(Mill.proxy.getCustomDir(), "cultures"), culture.key), "custom villages");
 
 		if (dircusto.exists()) {
 			dirs.add(dircusto);
@@ -145,12 +135,10 @@ public class VillageType implements WeightedChoice {
 				try {
 
 					if (MLN.LogVillage >= MLN.MAJOR) {
-						MLN.major(file,
-								"Loading village: " + file.getAbsolutePath());
+						MLN.major(file, "Loading village: " + file.getAbsolutePath());
 					}
 
-					final VillageType village = new VillageType(culture, file,
-							false);
+					final VillageType village = new VillageType(culture, file, false);
 
 					v.remove(village);
 					v.add(village);
@@ -172,16 +160,11 @@ public class VillageType implements WeightedChoice {
 
 		final List<VillageType> villages = new ArrayList<VillageType>();
 
-		final UserProfile profile = Mill.getMillWorld(player.worldObj)
-				.getProfile(player.getDisplayName());
+		final UserProfile profile = Mill.getMillWorld(player.worldObj).getProfile(player.getDisplayName());
 
 		for (final Culture culture : Culture.ListCultures) {
 			for (final VillageType village : culture.listVillageTypes) {
-				if (village.spawnable
-						&& village.playerControlled
-						&& (MLN.DEV || profile
-								.isTagSet(MillWorld.CULTURE_CONTROL
-										+ village.culture.key))) {
+				if (village.spawnable && village.playerControlled && (MLN.DEV || profile.isTagSet(MillWorld.CULTURE_CONTROL + village.culture.key))) {
 					villages.add(village);
 				}
 			}
@@ -191,10 +174,7 @@ public class VillageType implements WeightedChoice {
 				}
 			}
 			for (final VillageType village : culture.listLoneBuildingTypes) {
-				if (village.spawnable
-						&& !(!MLN.DEV && village.playerControlled && !profile
-								.isTagSet(MillWorld.CULTURE_CONTROL
-										+ village.culture.key))) {
+				if (village.spawnable && !(!MLN.DEV && village.playerControlled && !profile.isTagSet(MillWorld.CULTURE_CONTROL + village.culture.key))) {
 					villages.add(village);
 				}
 			}
@@ -250,8 +230,7 @@ public class VillageType implements WeightedChoice {
 
 	public boolean generatedForPlayer = false;
 
-	public VillageType(final Culture c, final File file, final boolean lone)
-			throws Exception {
+	public VillageType(final Culture c, final File file, final boolean lone) throws Exception {
 		lonebuilding = lone;
 		spawnable = !lonebuilding;
 		culture = c;
@@ -286,8 +265,7 @@ public class VillageType implements WeightedChoice {
 						carriesRaid = Boolean.parseBoolean(value);
 					} else if (paramkey.equalsIgnoreCase("keyLoneBuilding")) {
 						keyLonebuilding = Boolean.parseBoolean(value);
-					} else if (paramkey
-							.equalsIgnoreCase("keyLoneBuildingGenerateTag")) {
+					} else if (paramkey.equalsIgnoreCase("keyLoneBuildingGenerateTag")) {
 						keyLoneBuildingGenerateTag = value;
 					} else if (paramkey.equalsIgnoreCase("playerControlled")) {
 						playerControlled = Boolean.parseBoolean(value);
@@ -297,8 +275,7 @@ public class VillageType implements WeightedChoice {
 						max = Integer.parseInt(value);
 					} else if (paramkey.equalsIgnoreCase("radius")) {
 						radius = Integer.parseInt(value);
-					} else if (paramkey
-							.equalsIgnoreCase("minDistanceFromSpawn")) {
+					} else if (paramkey.equalsIgnoreCase("minDistanceFromSpawn")) {
 						minDistanceFromSpawn = Integer.parseInt(value);
 					} else if (paramkey.equalsIgnoreCase("qualifier")) {
 						qualifiers.add(value);
@@ -330,127 +307,85 @@ public class VillageType implements WeightedChoice {
 						oceanQualifier = value;
 					} else if (paramkey.equalsIgnoreCase("pathMaterial")) {
 						if (Goods.goodsName.containsKey(value.toLowerCase())) {
-							pathMaterial.add(Goods.goodsName.get(value
-									.toLowerCase()));
+							pathMaterial.add(Goods.goodsName.get(value.toLowerCase()));
 						} else {
-							MLN.error(this, "When loading village type " + key
-									+ " could not recognise path material: "
-									+ value);
+							MLN.error(this, "When loading village type " + key + " could not recognise path material: " + value);
 						}
 					} else if (paramkey.equalsIgnoreCase("centre")) {
 						if (culture.getBuildingPlanSet(value) != null) {
 							centreBuilding = culture.getBuildingPlanSet(value);
 							if (MLN.LogVillage >= MLN.MINOR) {
-								MLN.minor(this, "Loading centre building: "
-										+ value);
+								MLN.minor(this, "Loading centre building: " + value);
 							}
 						} else {
-							throw new MillenaireException(
-									"When loading village type "
-											+ key
-											+ " could not find centre building type "
-											+ value + ".");
+							throw new MillenaireException("When loading village type " + key + " could not find centre building type " + value + ".");
 						}
 					} else if (paramkey.equalsIgnoreCase("customcentre")) {
 						if (culture.getBuildingCustom(value) != null) {
 							customCentre = culture.getBuildingCustom(value);
 							if (MLN.LogVillage >= MLN.MINOR) {
-								MLN.minor(this,
-										"Loading custom centre building: "
-												+ value);
+								MLN.minor(this, "Loading custom centre building: " + value);
 							}
 						} else {
-							throw new MillenaireException(
-									"When loading village type "
-											+ key
-											+ " could not find custom centre building type "
-											+ value + ".");
+							throw new MillenaireException("When loading village type " + key + " could not find custom centre building type " + value + ".");
 						}
 					} else if (paramkey.equalsIgnoreCase("start")) {
 						if (culture.getBuildingPlanSet(value) != null) {
-							startBuildings.add(culture
-									.getBuildingPlanSet(value));
+							startBuildings.add(culture.getBuildingPlanSet(value));
 							if (MLN.LogVillage >= MLN.MINOR) {
-								MLN.minor(this, "Loading start building: "
-										+ value);
+								MLN.minor(this, "Loading start building: " + value);
 							}
 						} else {
-							MLN.error(this, "When loading village type " + key
-									+ " could not find start building type "
-									+ value + ".");
+							MLN.error(this, "When loading village type " + key + " could not find start building type " + value + ".");
 						}
 					} else if (paramkey.equalsIgnoreCase("player")) {
 						if (culture.getBuildingPlanSet(value) != null) {
-							playerBuildings.add(culture
-									.getBuildingPlanSet(value));
+							playerBuildings.add(culture.getBuildingPlanSet(value));
 							if (MLN.LogVillage >= MLN.MINOR) {
-								MLN.minor(this, "Loading player building: "
-										+ value);
+								MLN.minor(this, "Loading player building: " + value);
 							}
 						} else {
-							MLN.error(this, "When loading village type " + key
-									+ " could not find player building type "
-									+ value + ".");
+							MLN.error(this, "When loading village type " + key + " could not find player building type " + value + ".");
 						}
 					} else if (paramkey.equalsIgnoreCase("core")) {
 						if (culture.getBuildingPlanSet(value) != null) {
-							coreBuildings
-									.add(culture.getBuildingPlanSet(value));
+							coreBuildings.add(culture.getBuildingPlanSet(value));
 							if (MLN.LogVillage >= MLN.MINOR) {
-								MLN.minor(this, "Loading core building: "
-										+ value);
+								MLN.minor(this, "Loading core building: " + value);
 							}
 						} else {
-							MLN.error(this, "When loading village type " + key
-									+ " could not find core building type "
-									+ value + ".");
+							MLN.error(this, "When loading village type " + key + " could not find core building type " + value + ".");
 						}
 					} else if (paramkey.equalsIgnoreCase("secondary")) {
 						if (culture.getBuildingPlanSet(value) != null) {
-							secondaryBuildings.add(culture
-									.getBuildingPlanSet(value));
+							secondaryBuildings.add(culture.getBuildingPlanSet(value));
 							if (MLN.LogVillage >= MLN.MINOR) {
-								MLN.minor(this, "Loading secondary building: "
-										+ value);
+								MLN.minor(this, "Loading secondary building: " + value);
 							}
 						} else {
-							MLN.error(
-									this,
-									"When loading village type "
-											+ key
-											+ " could not find secondary building type "
-											+ value + ".");
+							MLN.error(this, "When loading village type " + key + " could not find secondary building type " + value + ".");
 						}
 					} else if (paramkey.equalsIgnoreCase("never")) {
 						if (culture.getBuildingPlanSet(value) != null) {
-							excludedBuildings.add(culture
-									.getBuildingPlanSet(value));
+							excludedBuildings.add(culture.getBuildingPlanSet(value));
 							if (MLN.LogVillage >= MLN.MINOR) {
-								MLN.minor(this, "Loading excluded building: "
-										+ value);
+								MLN.minor(this, "Loading excluded building: " + value);
 							}
 						} else {
-							MLN.error(this, "When loading village type " + key
-									+ " could not find excluded building type "
-									+ value + ".");
+							MLN.error(this, "When loading village type " + key + " could not find excluded building type " + value + ".");
 						}
 					} else if (paramkey.equalsIgnoreCase("customBuilding")) {
 						if (culture.getBuildingCustom(value) != null) {
-							customBuildings.add(culture
-									.getBuildingCustom(value));
+							customBuildings.add(culture.getBuildingCustom(value));
 							if (MLN.LogVillage >= MLN.MINOR) {
-								MLN.minor(this, "Loading custom building: "
-										+ value);
+								MLN.minor(this, "Loading custom building: " + value);
 							}
 						} else {
-							MLN.error(this, "When loading village type " + key
-									+ " could not find custom building type "
-									+ value + ".");
+							MLN.error(this, "When loading village type " + key + " could not find custom building type " + value + ".");
 						}
 					} else if (paramkey.equalsIgnoreCase("sellingPrice")) {
 
-						final String goodstr = value.split(",")[0]
-								.toLowerCase();
+						final String goodstr = value.split(",")[0].toLowerCase();
 
 						if (Goods.goodsName.containsKey(goodstr)) {
 
@@ -458,40 +393,28 @@ public class VillageType implements WeightedChoice {
 
 							int price = 0;
 							try {
-								final String[] pricestr = value.split(",")[1]
-										.split("/");
+								final String[] pricestr = value.split(",")[1].split("/");
 								if (pricestr.length == 1) {
 									price = Integer.parseInt(pricestr[0]);
 								} else if (pricestr.length == 2) {
-									price = Integer.parseInt(pricestr[0]) * 64
-											+ Integer.parseInt(pricestr[1]);
+									price = Integer.parseInt(pricestr[0]) * 64 + Integer.parseInt(pricestr[1]);
 								} else if (pricestr.length == 3) {
-									price = Integer.parseInt(pricestr[0]) * 64
-											* 64
-											+ Integer.parseInt(pricestr[1])
-											* 64
-											+ Integer.parseInt(pricestr[2]);
+									price = Integer.parseInt(pricestr[0]) * 64 * 64 + Integer.parseInt(pricestr[1]) * 64 + Integer.parseInt(pricestr[2]);
 								} else {
-									MLN.error(this,
-											"Could not parse the price in line: "
-													+ line);
+									MLN.error(this, "Could not parse the price in line: " + line);
 								}
 							} catch (final Exception e) {
-								MLN.error(this,
-										"Exception when parsing the price in line: "
-												+ line);
+								MLN.error(this, "Exception when parsing the price in line: " + line);
 							}
 							if (price > 0) {
 								sellingPrices.put(item, price);
 							}
 						} else {
-							MLN.error(this, "Could not find the good in line: "
-									+ line);
+							MLN.error(this, "Could not find the good in line: " + line);
 						}
 					} else if (paramkey.equalsIgnoreCase("buyingPrice")) {
 
-						final String goodstr = value.split(",")[0]
-								.toLowerCase();
+						final String goodstr = value.split(",")[0].toLowerCase();
 
 						if (Goods.goodsName.containsKey(goodstr)) {
 
@@ -499,41 +422,29 @@ public class VillageType implements WeightedChoice {
 							try {
 								int price = 0;
 
-								final String[] pricestr = value.split(",")[1]
-										.split("/");
+								final String[] pricestr = value.split(",")[1].split("/");
 								if (pricestr.length == 1) {
 									price = Integer.parseInt(pricestr[0]);
 								} else if (pricestr.length == 2) {
-									price = Integer.parseInt(pricestr[0]) * 64
-											+ Integer.parseInt(pricestr[1]);
+									price = Integer.parseInt(pricestr[0]) * 64 + Integer.parseInt(pricestr[1]);
 								} else if (pricestr.length == 3) {
-									price = Integer.parseInt(pricestr[0]) * 64
-											* 64
-											+ Integer.parseInt(pricestr[1])
-											* 64
-											+ Integer.parseInt(pricestr[2]);
+									price = Integer.parseInt(pricestr[0]) * 64 * 64 + Integer.parseInt(pricestr[1]) * 64 + Integer.parseInt(pricestr[2]);
 								} else {
-									MLN.error(this,
-											"Could not parse the price in line: "
-													+ line);
+									MLN.error(this, "Could not parse the price in line: " + line);
 								}
 
 								if (price > 0) {
 									buyingPrices.put(item, price);
 								}
 							} catch (final Exception e) {
-								MLN.error(this,
-										"Exception when parsing the price in line: "
-												+ line);
+								MLN.error(this, "Exception when parsing the price in line: " + line);
 							}
 						} else {
-							MLN.error(this, "Could not find the good in line: "
-									+ line);
+							MLN.error(this, "Could not find the good in line: " + line);
 						}
 
 					} else {
-						MLN.error(this, "Could not recognise parameter "
-								+ paramkey + ": " + line);
+						MLN.error(this, "Could not recognise parameter " + paramkey + ": " + line);
 					}
 
 				} else {
@@ -546,8 +457,7 @@ public class VillageType implements WeightedChoice {
 			throw new MillenaireException("No name found for village: " + key);
 		}
 		if (centreBuilding == null && customCentre == null) {
-			throw new MillenaireException(
-					"No central building found for village: " + key);
+			throw new MillenaireException("No central building found for village: " + key);
 		}
 
 		for (final BuildingPlanSet set : culture.ListPlanSets) {
@@ -585,8 +495,7 @@ public class VillageType implements WeightedChoice {
 		}
 
 		if (MLN.LogVillage >= MLN.MAJOR) {
-			MLN.major(this, "Loaded village type " + name + ". NameList: "
-					+ nameList);
+			MLN.major(this, "Loaded village type " + name + ". NameList: " + nameList);
 		}
 
 	}
@@ -648,9 +557,7 @@ public class VillageType implements WeightedChoice {
 		}
 
 		final List<BuildingProject> extra = new ArrayList<BuildingProject>();
-		if (!playerControlled
-				&& (type == null || !type.equalsIgnoreCase(HAMEAU))
-				&& !lonebuilding) {
+		if (!playerControlled && (type == null || !type.equalsIgnoreCase(HAMEAU)) && !lonebuilding) {
 			for (final BuildingPlanSet set : extraBuildings) {
 				extra.add(set.getBuildingProject());
 			}
@@ -688,11 +595,9 @@ public class VillageType implements WeightedChoice {
 		}
 
 		if (player != null) {
-			final UserProfile profile = Mill.getMillWorld(player.worldObj)
-					.getProfile(player.getDisplayName());
+			final UserProfile profile = Mill.getMillWorld(player.worldObj).getProfile(player.getDisplayName());
 
-			if (keyLoneBuildingGenerateTag != null
-					&& profile.isTagSet(keyLoneBuildingGenerateTag)) {
+			if (keyLoneBuildingGenerateTag != null && profile.isTagSet(keyLoneBuildingGenerateTag)) {
 				return true;
 			}
 		}
@@ -700,17 +605,14 @@ public class VillageType implements WeightedChoice {
 		return false;
 	}
 
-	public boolean isValidForGeneration(final MillWorld mw,
-			final EntityPlayer player,
-			final HashMap<String, Integer> nbVillages, final Point pos,
-			final String biome, final boolean keyLoneBuildingsOnly) {
+	public boolean isValidForGeneration(final MillWorld mw, final EntityPlayer player, final HashMap<String, Integer> nbVillages, final Point pos, final String biome,
+			final boolean keyLoneBuildingsOnly) {
 
 		if (!generateOnServer && Mill.proxy.isTrueServer()) {
 			return false;
 		}
 
-		if (minDistanceFromSpawn > 0
-				&& pos.horizontalDistanceTo(mw.world.getSpawnPoint()) <= minDistanceFromSpawn) {
+		if (minDistanceFromSpawn > 0 && pos.horizontalDistanceTo(mw.world.getSpawnPoint()) <= minDistanceFromSpawn) {
 			return false;
 		}
 
@@ -735,8 +637,7 @@ public class VillageType implements WeightedChoice {
 		}
 
 		if (!isKeyLoneBuildingForGeneration(player)) {
-			if (max != 0 && nbVillages.containsKey(key)
-					&& nbVillages.get(key) >= max) {
+			if (max != 0 && nbVillages.containsKey(key) && nbVillages.get(key) >= max) {
 				return false;
 			}
 		} else {
@@ -744,8 +645,7 @@ public class VillageType implements WeightedChoice {
 
 			for (int i = 0; i < mw.loneBuildingsList.pos.size(); i++) {
 				if (mw.loneBuildingsList.types.get(i).equals(key)) {
-					if (pos.horizontalDistanceTo(mw.loneBuildingsList.pos
-							.get(i)) < 2000) {
+					if (pos.horizontalDistanceTo(mw.loneBuildingsList.pos.get(i)) < 2000) {
 						existingOneInRange = true;
 					}
 				}
@@ -759,8 +659,7 @@ public class VillageType implements WeightedChoice {
 		return true;
 	}
 
-	public void readVillageTypeInfoPacket(final ByteBufInputStream ds)
-			throws IOException {
+	public void readVillageTypeInfoPacket(final ByteBufInputStream ds) throws IOException {
 		playerControlled = ds.readBoolean();
 		spawnable = ds.readBoolean();
 		name = StreamReadWrite.readNullableString(ds);

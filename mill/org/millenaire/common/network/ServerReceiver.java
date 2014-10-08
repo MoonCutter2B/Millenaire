@@ -75,6 +75,7 @@ public class ServerReceiver {
 
 	public static final int GUIACTION_NEW_BUILDING_PROJECT = 50;
 	public static final int GUIACTION_NEW_CUSTOM_BUILDING_PROJECT = 51;
+	public static final int GUIACTION_UPDATE_CUSTOM_BUILDING_PROJECT = 52;
 
 	public static final int GUIACTION_PUJAS_CHANGE_ENCHANTMENT = 60;
 
@@ -99,8 +100,7 @@ public class ServerReceiver {
 			return;
 		}
 
-		final ByteBufInputStream dataStream = new ByteBufInputStream(
-				event.packet.payload());
+		final ByteBufInputStream dataStream = new ByteBufInputStream(event.packet.payload());
 		final EntityPlayerMP sender = ((NetHandlerPlayServer) event.handler).playerEntity;
 		MillWorld mw = Mill.getMillWorld(sender.worldObj);
 
@@ -110,8 +110,7 @@ public class ServerReceiver {
 		}
 
 		if (mw == null) {
-			MLN.error(this,
-					"ServerReceiver.onPacketData: could not find MillWorld.");
+			MLN.error(this, "ServerReceiver.onPacketData: could not find MillWorld.");
 		}
 
 		try {
@@ -128,8 +127,7 @@ public class ServerReceiver {
 			} else if (packettype == PACKET_VILLAGELIST_REQUEST) {
 				mw.displayVillageList(sender, dataStream.readBoolean());
 			} else if (packettype == PACKET_DECLARERELEASENUMBER) {
-				mw.getProfile(sender.getDisplayName())
-						.receiveDeclareReleaseNumberPacket(dataStream);
+				mw.getProfile(sender.getDisplayName()).receiveDeclareReleaseNumberPacket(dataStream);
 			} else if (packettype == PACKET_VILLAGERINTERACT_REQUEST) {
 				readVillagerInteractRequestPacket(sender, dataStream);
 			} else if (packettype == PACKET_AVAILABLECONTENT) {
@@ -143,8 +141,7 @@ public class ServerReceiver {
 		}
 	}
 
-	private void readAvailableContentPacket(final EntityPlayer player,
-			final ByteBufInputStream ds) {
+	private void readAvailableContentPacket(final EntityPlayer player, final ByteBufInputStream ds) {
 
 		final HashMap<String, Integer> nbStrings = new HashMap<String, Integer>();
 		final HashMap<String, Integer> nbBuildingNames = new HashMap<String, Integer>();
@@ -214,22 +211,11 @@ public class ServerReceiver {
 
 			for (final Culture culture : Culture.ListCultures) {
 				if (!nbStrings.containsKey(culture.key)) {
-					culture.writeCultureMissingContentPackPacket(data,
-							clientMainLanguage, clientFallbackLanguage, 0, 0,
-							0, 0, 0, 0, null, null, null, null);
+					culture.writeCultureMissingContentPackPacket(data, clientMainLanguage, clientFallbackLanguage, 0, 0, 0, 0, 0, 0, null, null, null, null);
 				} else {
-					culture.writeCultureMissingContentPackPacket(data,
-							clientMainLanguage, clientFallbackLanguage,
-							nbStrings.get(culture.key),
-							nbBuildingNames.get(culture.key),
-							nbSentences.get(culture.key),
-							nbFallbackStrings.get(culture.key),
-							nbFallbackBuildingNames.get(culture.key),
-							nbFallbackSentences.get(culture.key),
-							planSets.get(culture.key),
-							villagers.get(culture.key),
-							villages.get(culture.key),
-							lonebuildings.get(culture.key));
+					culture.writeCultureMissingContentPackPacket(data, clientMainLanguage, clientFallbackLanguage, nbStrings.get(culture.key), nbBuildingNames.get(culture.key),
+							nbSentences.get(culture.key), nbFallbackStrings.get(culture.key), nbFallbackBuildingNames.get(culture.key), nbFallbackSentences.get(culture.key),
+							planSets.get(culture.key), villagers.get(culture.key), villages.get(culture.key), lonebuildings.get(culture.key));
 				}
 			}
 
@@ -240,8 +226,7 @@ public class ServerReceiver {
 		}
 	}
 
-	private void readDevCommandPacket(final EntityPlayer player,
-			final ByteBufInputStream data) {
+	private void readDevCommandPacket(final EntityPlayer player, final ByteBufInputStream data) {
 
 		try {
 			final int commandId = data.read();
@@ -258,8 +243,7 @@ public class ServerReceiver {
 
 	}
 
-	private void readGuiActionPacket(final EntityPlayer player,
-			final ByteBufInputStream data) {
+	private void readGuiActionPacket(final EntityPlayer player, final ByteBufInputStream data) {
 
 		final MillWorld mw = Mill.getMillWorld(player.worldObj);
 
@@ -269,38 +253,30 @@ public class ServerReceiver {
 			if (guiActionId == GUIACTION_CHIEF_BUILDING) {
 				final MillVillager v = mw.villagers.get(data.readLong());
 				if (v != null) {
-					GuiActions.villageChiefPerformBuilding(player, v,
-							data.readUTF());
+					GuiActions.villageChiefPerformBuilding(player, v, data.readUTF());
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ guiActionId);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + guiActionId);
 				}
 			} else if (guiActionId == GUIACTION_CHIEF_CROP) {
 				final MillVillager v = mw.villagers.get(data.readLong());
 				if (v != null) {
-					GuiActions.villageChiefPerformCrop(player, v,
-							data.readUTF());
+					GuiActions.villageChiefPerformCrop(player, v, data.readUTF());
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ guiActionId);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + guiActionId);
 				}
 			} else if (guiActionId == GUIACTION_CHIEF_CONTROL) {
 				final MillVillager v = mw.villagers.get(data.readLong());
 				if (v != null) {
 					GuiActions.villageChiefPerformCultureControl(player, v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ guiActionId);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + guiActionId);
 				}
 			} else if (guiActionId == GUIACTION_CHIEF_DIPLOMACY) {
 				final MillVillager v = mw.villagers.get(data.readLong());
 				if (v != null) {
-					GuiActions.villageChiefPerformDiplomacy(player, v,
-							StreamReadWrite.readNullablePoint(data),
-							data.readBoolean());
+					GuiActions.villageChiefPerformDiplomacy(player, v, StreamReadWrite.readNullablePoint(data), data.readBoolean());
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ guiActionId);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + guiActionId);
 				}
 			} else if (guiActionId == GUIACTION_CHIEF_SCROLL) {
 				final long vid = data.readLong();
@@ -308,8 +284,7 @@ public class ServerReceiver {
 				if (v != null) {
 					GuiActions.villageChiefPerformVillageScroll(player, v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ vid);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + vid);
 				}
 			} else if (guiActionId == GUIACTION_QUEST_COMPLETESTEP) {
 				final long vid = data.readLong();
@@ -317,8 +292,7 @@ public class ServerReceiver {
 				if (v != null) {
 					GuiActions.questCompleteStep(player, v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ vid);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + vid);
 				}
 			} else if (guiActionId == GUIACTION_QUEST_REFUSE) {
 				final long vid = data.readLong();
@@ -326,15 +300,13 @@ public class ServerReceiver {
 				if (v != null) {
 					GuiActions.questRefuse(player, v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ vid);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + vid);
 				}
 			} else if (guiActionId == GUIACTION_NEWVILLAGE) {
 				final String cultureKey = data.readUTF();
 				final String villageType = data.readUTF();
 				final Point pos = StreamReadWrite.readNullablePoint(data);
-				GuiActions.newVillageCreation(player, pos, cultureKey,
-						villageType);
+				GuiActions.newVillageCreation(player, pos, cultureKey, villageType);
 
 			} else if (guiActionId == GUIACTION_NEGATION_WAND) {
 				final Point pos = StreamReadWrite.readNullablePoint(data);
@@ -352,14 +324,10 @@ public class ServerReceiver {
 
 				final EntityPlayerMP playerMP = (EntityPlayerMP) player;
 
-				if (!Mill.proxy.isTrueServer()
-						|| playerMP.mcServer.getConfigurationManager()
-								.func_152596_g(playerMP.getGameProfile())) {
-					BuildingPlan.importBuilding(player,
-							Mill.serverWorlds.get(0).world, pos);
+				if (!Mill.proxy.isTrueServer() || playerMP.mcServer.getConfigurationManager().func_152596_g(playerMP.getGameProfile())) {
+					BuildingPlan.importBuilding(player, Mill.serverWorlds.get(0).world, pos);
 				} else {
-					ServerSender.sendTranslatedSentence(player, MLN.DARKRED,
-							"ui.serverimportforbidden");
+					ServerSender.sendTranslatedSentence(player, MLN.DARKRED, "ui.serverimportforbidden");
 				}
 
 			} else if (guiActionId == GUIACTION_MILLCHESTACTIVATE) {
@@ -370,8 +338,7 @@ public class ServerReceiver {
 				final Point pos = StreamReadWrite.readNullablePoint(data);
 				final Building temple = mw.getBuilding(pos);
 				if (temple != null && temple.pujas != null) {
-					GuiActions.pujasChangeEnchantment(player, temple,
-							data.readShort());
+					GuiActions.pujasChangeEnchantment(player, temple, data.readShort());
 				}
 
 			} else if (guiActionId == GUIACTION_NEW_BUILDING_PROJECT) {
@@ -393,48 +360,50 @@ public class ServerReceiver {
 					GuiActions.newCustomBuilding(player, th, pos, planKey);
 				}
 
+			} else if (guiActionId == GUIACTION_UPDATE_CUSTOM_BUILDING_PROJECT) {
+				final Point pos = StreamReadWrite.readNullablePoint(data);
+				final Building building = mw.getBuilding(pos);
+
+				if (building != null) {
+					GuiActions.updateCustomBuilding(player, building);
+				}
+
 			} else if (guiActionId == GUIACTION_CONTROLLEDBUILDING_TOGGLEALLOWED) {
 				final Point thPos = StreamReadWrite.readNullablePoint(data);
 				final String projectKey = data.readUTF();
-				final Point projectPos = StreamReadWrite
-						.readNullablePoint(data);
+				final Point projectPos = StreamReadWrite.readNullablePoint(data);
 				final boolean allow = data.readBoolean();
 				final Building th = mw.getBuilding(thPos);
 				if (th != null) {
 					BuildingProject project = null;
 
 					for (final BuildingProject p : th.getFlatProjectList()) {
-						if (p.key.equals(projectKey) && p.location != null
-								&& p.location.pos.equals(projectPos)) {
+						if (p.key.equals(projectKey) && p.location != null && p.location.pos.equals(projectPos)) {
 							project = p;
 						}
 					}
 
 					if (project != null) {
-						GuiActions.controlledBuildingsToggleUpgrades(player,
-								th, project, allow);
+						GuiActions.controlledBuildingsToggleUpgrades(player, th, project, allow);
 					}
 				}
 
 			} else if (guiActionId == GUIACTION_CONTROLLEDBUILDING_FORGET) {
 				final Point thPos = StreamReadWrite.readNullablePoint(data);
 				final String projectKey = data.readUTF();
-				final Point projectPos = StreamReadWrite
-						.readNullablePoint(data);
+				final Point projectPos = StreamReadWrite.readNullablePoint(data);
 				final Building th = mw.getBuilding(thPos);
 				if (th != null) {
 					BuildingProject project = null;
 
 					for (final BuildingProject p : th.getFlatProjectList()) {
-						if (p.key.equals(projectKey) && p.location != null
-								&& p.location.pos.equals(projectPos)) {
+						if (p.key.equals(projectKey) && p.location != null && p.location.pos.equals(projectPos)) {
 							project = p;
 						}
 					}
 
 					if (project != null) {
-						GuiActions.controlledBuildingsForgetBuilding(player,
-								th, project);
+						GuiActions.controlledBuildingsForgetBuilding(player, th, project);
 					}
 				}
 
@@ -444,8 +413,7 @@ public class ServerReceiver {
 				if (v != null) {
 					GuiActions.hireHire(player, v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ vid);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + vid);
 				}
 			} else if (guiActionId == GUIACTION_HIRE_EXTEND) {
 				final long vid = data.readLong();
@@ -453,8 +421,7 @@ public class ServerReceiver {
 				if (v != null) {
 					GuiActions.hireExtend(player, v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ vid);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + vid);
 				}
 			} else if (guiActionId == GUIACTION_HIRE_RELEASE) {
 				final long vid = data.readLong();
@@ -462,8 +429,7 @@ public class ServerReceiver {
 				if (v != null) {
 					GuiActions.hireRelease(player, v);
 				} else {
-					MLN.error(this, "Unknown villager id in readGUIPacket: "
-							+ vid);
+					MLN.error(this, "Unknown villager id in readGUIPacket: " + vid);
 				}
 			} else if (guiActionId == GUIACTION_MILITARY_RELATIONS) {
 				final Point thPos = StreamReadWrite.readNullablePoint(data);
@@ -471,8 +437,7 @@ public class ServerReceiver {
 				final int amount = data.readInt();
 				final Building th = mw.getBuilding(thPos);
 				if (th != null) {
-					GuiActions.controlledMilitaryDiplomacy(player, th,
-							targetpos, amount);
+					GuiActions.controlledMilitaryDiplomacy(player, th, targetpos, amount);
 				}
 			} else if (guiActionId == GUIACTION_MILITARY_RAID) {
 				final Point thPos = StreamReadWrite.readNullablePoint(data);
@@ -497,8 +462,7 @@ public class ServerReceiver {
 		}
 	}
 
-	private void readMapInfoRequestPacket(final EntityPlayer player,
-			final ByteBufInputStream data) {
+	private void readMapInfoRequestPacket(final EntityPlayer player, final ByteBufInputStream data) {
 
 		final MillWorld mw = Mill.getMillWorld(player.worldObj);
 
@@ -516,8 +480,7 @@ public class ServerReceiver {
 		}
 	}
 
-	private void readVillagerInteractRequestPacket(final EntityPlayer player,
-			final ByteBufInputStream data) {
+	private void readVillagerInteractRequestPacket(final EntityPlayer player, final ByteBufInputStream data) {
 
 		final MillWorld mw = Mill.getMillWorld(player.worldObj);
 

@@ -13,8 +13,7 @@ public class BlockMLNPane extends BlockPane {
 	private IIcon sideTexture;
 	private final String textureName, sideTextureName;
 
-	public BlockMLNPane(final String textureName, final String sideTexture,
-			final Material material, final boolean flag) {
+	public BlockMLNPane(final String textureName, final String sideTexture, final Material material, final boolean flag) {
 		super(textureName, sideTexture, material, flag);
 		this.textureName = textureName;
 		this.sideTextureName = sideTexture;
@@ -30,7 +29,6 @@ public class BlockMLNPane extends BlockPane {
 	@Override
 	public void registerBlockIcons(final IIconRegister iconRegister) {
 		this.blockIcon = MillCommonUtilities.getIcon(iconRegister, textureName);
-		this.sideTexture = MillCommonUtilities.getIcon(iconRegister,
-				sideTextureName);
+		this.sideTexture = MillCommonUtilities.getIcon(iconRegister, sideTextureName);
 	}
 }

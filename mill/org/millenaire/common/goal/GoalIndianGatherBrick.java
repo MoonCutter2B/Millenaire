@@ -30,8 +30,7 @@ public class GoalIndianGatherBrick extends Goal {
 
 		final List<Point> vp = new ArrayList<Point>();
 		final List<Point> buildingp = new ArrayList<Point>();
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
-				Building.tagKiln)) {
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagKiln)) {
 			final Point p = kiln.getResManager().getFullBrickLocation();
 			if (p != null) {
 				vp.add(p);
@@ -47,8 +46,7 @@ public class GoalIndianGatherBrick extends Goal {
 		Point buildingP = buildingp.get(0);
 
 		for (int i = 1; i < vp.size(); i++) {
-			if (vp.get(i).horizontalDistanceToSquared(villager) < p
-					.horizontalDistanceToSquared(villager)) {
+			if (vp.get(i).horizontalDistanceToSquared(villager) < p.horizontalDistanceToSquared(villager)) {
 				p = vp.get(i);
 				buildingP = buildingp.get(i);
 			}
@@ -67,12 +65,10 @@ public class GoalIndianGatherBrick extends Goal {
 		if (!villager.lastGoalTime.containsKey(this)) {
 			delayOver = true;
 		} else {
-			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
-					.get(this) + STANDARD_DELAY;
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime.get(this) + STANDARD_DELAY;
 		}
 
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
-				Building.tagKiln)) {
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagKiln)) {
 			final int nb = kiln.getResManager().getNbFullBrickLocation();
 
 			if (nb > 0 && delayOver) {
@@ -92,15 +88,10 @@ public class GoalIndianGatherBrick extends Goal {
 
 	@Override
 	public boolean performAction(final MillVillager villager) {
-		if (MillCommonUtilities.getBlock(villager.worldObj,
-				villager.getGoalDestPoint()) == Mill.stone_decoration
-				&& MillCommonUtilities.getBlockMeta(villager.worldObj,
-						villager.getGoalDestPoint()) == 1) {
-			villager.addToInv(Mill.stone_decoration, MillCommonUtilities
-					.getBlockMeta(villager.worldObj,
-							villager.getGoalDestPoint()), 1);
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),
-					Blocks.air, 0);
+		if (MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint()) == Mill.stone_decoration
+				&& MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint()) == 1) {
+			villager.addToInv(Mill.stone_decoration, MillCommonUtilities.getBlockMeta(villager.worldObj, villager.getGoalDestPoint()), 1);
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(), Blocks.air, 0);
 
 			villager.swingItem();
 			return false;
@@ -113,8 +104,7 @@ public class GoalIndianGatherBrick extends Goal {
 	@Override
 	public int priority(final MillVillager villager) {
 
-		int p = 100 - villager.getTownHall().nbGoodAvailable(
-				Mill.stone_decoration, 1, false, false) * 2;
+		int p = 100 - villager.getTownHall().nbGoodAvailable(Mill.stone_decoration, 1, false, false) * 2;
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {

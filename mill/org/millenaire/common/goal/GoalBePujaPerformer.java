@@ -17,20 +17,15 @@ public class GoalBePujaPerformer extends Goal {
 		Building temple = null;
 
 		if (villager.canMeditate()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagPujas);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
 		} else if (villager.canPerformSacrifices()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagSacrifices);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 		}
 
-		if (temple != null
-				&& temple.pujas != null
-				&& (temple.pujas.priest == null || temple.pujas.priest == villager)) {
+		if (temple != null && temple.pujas != null && (temple.pujas.priest == null || temple.pujas.priest == villager)) {
 
 			if (MLN.LogPujas >= MLN.DEBUG) {
-				MLN.debug(villager, "Destination for bepujaperformer: "
-						+ temple);
+				MLN.debug(villager, "Destination for bepujaperformer: " + temple);
 			}
 
 			return packDest(temple.getResManager().getCraftingPos(), temple);
@@ -49,28 +44,23 @@ public class GoalBePujaPerformer extends Goal {
 				return false;
 			}
 
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagPujas);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
 		} else if (villager.canPerformSacrifices()) {
 			if (!villager.mw.isGlobalTagSet(MillWorld.MAYANSACRIFICES)) {
 				return false;
 			}
 
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagSacrifices);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 		}
 
 		if (temple == null) {
 			return false;
 		}
 
-		final EntityPlayer player = villager.worldObj.getClosestPlayer(temple
-				.getResManager().getCraftingPos().getiX(), temple
-				.getResManager().getCraftingPos().getiY(), temple
-				.getResManager().getCraftingPos().getiZ(), sellingRadius);
+		final EntityPlayer player = villager.worldObj.getClosestPlayer(temple.getResManager().getCraftingPos().getiX(), temple.getResManager().getCraftingPos().getiY(), temple.getResManager()
+				.getCraftingPos().getiZ(), sellingRadius);
 
-		final boolean valid = player != null
-				&& temple.getResManager().getCraftingPos().distanceTo(player) < sellingRadius;
+		final boolean valid = player != null && temple.getResManager().getCraftingPos().distanceTo(player) < sellingRadius;
 
 		if (!valid) {
 			return false;
@@ -80,30 +70,24 @@ public class GoalBePujaPerformer extends Goal {
 	}
 
 	@Override
-	public boolean isStillValidSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager) throws Exception {
 
 		Building temple = null;
 
 		if (villager.canMeditate()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagPujas);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
 		} else if (villager.canPerformSacrifices()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagSacrifices);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 		}
 
 		if (temple == null) {
 			return false;
 		}
 
-		final EntityPlayer player = villager.worldObj.getClosestPlayer(temple
-				.getResManager().getCraftingPos().getiX(), temple
-				.getResManager().getCraftingPos().getiY(), temple
-				.getResManager().getCraftingPos().getiZ(), sellingRadius);
+		final EntityPlayer player = villager.worldObj.getClosestPlayer(temple.getResManager().getCraftingPos().getiX(), temple.getResManager().getCraftingPos().getiY(), temple.getResManager()
+				.getCraftingPos().getiZ(), sellingRadius);
 
-		final boolean valid = player != null
-				&& temple.getResManager().getCraftingPos().distanceTo(player) < sellingRadius;
+		final boolean valid = player != null && temple.getResManager().getCraftingPos().distanceTo(player) < sellingRadius;
 
 		if (!valid && MLN.LogPujas >= MLN.MAJOR) {
 			MLN.major(this, "Be Puja Performer no longer valid.");
@@ -142,28 +126,22 @@ public class GoalBePujaPerformer extends Goal {
 		Building temple = null;
 
 		if (villager.canMeditate()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagPujas);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
 		} else if (villager.canPerformSacrifices()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagSacrifices);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 		}
 
 		if (temple == null) {
 			return;
 		}
 
-		final EntityPlayer player = villager.worldObj.getClosestPlayer(temple
-				.getResManager().getCraftingPos().getiX(), temple
-				.getResManager().getCraftingPos().getiY(), temple
-				.getResManager().getCraftingPos().getiZ(), sellingRadius);
+		final EntityPlayer player = villager.worldObj.getClosestPlayer(temple.getResManager().getCraftingPos().getiX(), temple.getResManager().getCraftingPos().getiY(), temple.getResManager()
+				.getCraftingPos().getiZ(), sellingRadius);
 
 		if (villager.canMeditate()) {
-			ServerSender.sendTranslatedSentence(player, MLN.WHITE,
-					"pujas.priestcoming", villager.getName());
+			ServerSender.sendTranslatedSentence(player, MLN.WHITE, "pujas.priestcoming", villager.getName());
 		} else if (villager.canPerformSacrifices()) {
-			ServerSender.sendTranslatedSentence(player, MLN.WHITE,
-					"sacrifices.priestcoming", villager.getName());
+			ServerSender.sendTranslatedSentence(player, MLN.WHITE, "sacrifices.priestcoming", villager.getName());
 		}
 
 	}
@@ -174,11 +152,9 @@ public class GoalBePujaPerformer extends Goal {
 		Building temple = null;
 
 		if (villager.canMeditate()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagPujas);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagPujas);
 		} else if (villager.canPerformSacrifices()) {
-			temple = villager.getTownHall().getFirstBuildingWithTag(
-					Building.tagSacrifices);
+			temple = villager.getTownHall().getFirstBuildingWithTag(Building.tagSacrifices);
 		}
 
 		if (temple == null) {

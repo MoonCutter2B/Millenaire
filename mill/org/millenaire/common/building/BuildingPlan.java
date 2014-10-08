@@ -84,8 +84,7 @@ public class BuildingPlan {
 		public double probability;
 		public int fixedNumber, randomNumber;
 
-		StartingGood(final InvItem item, final double probability,
-				final int fixedNumber, final int randomNumber) {
+		StartingGood(final InvItem item, final double probability, final int fixedNumber, final int randomNumber) {
 			this.item = item;
 			this.probability = probability;
 			this.fixedNumber = fixedNumber;
@@ -93,145 +92,60 @@ public class BuildingPlan {
 		}
 	}
 
-	public static final String bempty = "empty",
-			bpreserveground = "preserveground", ballbuttrees = "allbuttrees",
-			bgrass = "grass", bsoil = "soil", bricesoil = "ricesoil",
-			bturmericsoil = "turmericsoil", bmaizesoil = "maizesoil",
-			bcarrotsoil = "carrotsoil", bpotatosoil = "potatosoil",
-			bsugarcanesoil = "sugarcanesoil",
-			bnetherwartsoil = "netherwartsoil", bvinesoil = "vinesoil",
-			bsilkwormblock = "silkwormblock", bcacaospot = "cacaospot",
-			blockedchest = "lockedchest", bmainchest = "mainchest",
-			bsleepingPos = "sleepingPos", bsellingPos = "sellingPos",
-			bcraftingPos = "craftingPos", bdefendingPos = "defendingPos",
-			bshelterPos = "shelterPos", bpathStartPos = "pathStartPos",
-			bleasurePos = "leasurePos",
+	public static final String bempty = "empty", bpreserveground = "preserveground", ballbuttrees = "allbuttrees", bgrass = "grass", bsoil = "soil", bricesoil = "ricesoil",
+			bturmericsoil = "turmericsoil", bmaizesoil = "maizesoil", bcarrotsoil = "carrotsoil", bpotatosoil = "potatosoil", bsugarcanesoil = "sugarcanesoil", bnetherwartsoil = "netherwartsoil",
+			bvinesoil = "vinesoil", bsilkwormblock = "silkwormblock", bcacaospot = "cacaospot", blockedchest = "lockedchest", bmainchest = "mainchest", bsleepingPos = "sleepingPos",
+			bsellingPos = "sellingPos", bcraftingPos = "craftingPos", bdefendingPos = "defendingPos", bshelterPos = "shelterPos", bpathStartPos = "pathStartPos", bleasurePos = "leasurePos",
 
-			blogoakvert = "logoakvert", blogoakhor = "logoakhor",
-			blogpinevert = "logpinevert", blogpinehor = "logpinehor",
-			blogbirchvert = "logbirchvert", blogbirchhor = "logbirchhor",
+			blogoakvert = "logoakvert", blogoakhor = "logoakhor", blogpinevert = "logpinevert", blogpinehor = "logpinehor", blogbirchvert = "logbirchvert", blogbirchhor = "logbirchhor",
 			blogjunglevert = "logjunglevert", blogjunglehor = "logjunglehor",
 
-			bstonestairGuess = "stonestairGuess", bladderGuess = "ladderGuess",
-			bsignwallGuess = "signwallGuess",
+			bstonestairGuess = "stonestairGuess", bladderGuess = "ladderGuess", bsignwallGuess = "signwallGuess",
 
 			bwoodstairsOakGuess = "woodstairsOakGuess",
 
-			bwoodstairsOakTop = "woodstairsOakTop",
-			bwoodstairsOakBottom = "woodstairsOakBottom",
-			bwoodstairsOakLeft = "woodstairsOakLeft",
-			bwoodstairsOakRight = "woodstairsOakRight",
-			bwoodstairsPineTop = "woodstairsPineTop",
-			bwoodstairsPineBottom = "woodstairsPineBottom",
-			bwoodstairsPineLeft = "woodstairsPineLeft",
-			bwoodstairsPineRight = "woodstairsPineRight",
-			bwoodstairsBirchTop = "woodstairsBirchTop",
-			bwoodstairsBirchBottom = "woodstairsBirchBottom",
-			bwoodstairsBirchLeft = "woodstairsBirchLeft",
-			bwoodstairsBirchRight = "woodstairsBirchRight",
-			bwoodstairsJungleTop = "woodstairsJungleTop",
-			bwoodstairsJungleBottom = "woodstairsJungleBottom",
-			bwoodstairsJungleLeft = "woodstairsJungleLeft",
+			bwoodstairsOakTop = "woodstairsOakTop", bwoodstairsOakBottom = "woodstairsOakBottom", bwoodstairsOakLeft = "woodstairsOakLeft", bwoodstairsOakRight = "woodstairsOakRight",
+			bwoodstairsPineTop = "woodstairsPineTop", bwoodstairsPineBottom = "woodstairsPineBottom", bwoodstairsPineLeft = "woodstairsPineLeft", bwoodstairsPineRight = "woodstairsPineRight",
+			bwoodstairsBirchTop = "woodstairsBirchTop", bwoodstairsBirchBottom = "woodstairsBirchBottom", bwoodstairsBirchLeft = "woodstairsBirchLeft", bwoodstairsBirchRight = "woodstairsBirchRight",
+			bwoodstairsJungleTop = "woodstairsJungleTop", bwoodstairsJungleBottom = "woodstairsJungleBottom", bwoodstairsJungleLeft = "woodstairsJungleLeft",
 			bwoodstairsJungleRight = "woodstairsJungleRight",
 
-			bstonestairsTop = "stonestairsTop",
-			bstonestairsBottom = "stonestairsBottom",
-			bstonestairsLeft = "stonestairsLeft",
-			bstonestairsRight = "stonestairsRight",
-			bstonebrickstairsTop = "stonebrickstairsTop",
-			bstonebrickstairsBottom = "stonebrickstairsBottom",
-			bstonebrickstairsLeft = "stonebrickstairsLeft",
-			bstonebrickstairsRight = "stonebrickstairsRight",
-			bbrickstairsTop = "brickstairsTop",
-			bbrickstairsBottom = "brickstairsBottom",
-			bbrickstairsLeft = "brickstairsLeft",
-			bbrickstairsRight = "brickstairsRight",
-			bsandstonestairsTop = "sandstonestairsTop",
-			bsandstonestairsBottom = "sandstonestairsBottom",
-			bsandstonestairsLeft = "sandstonestairsLeft",
+			bstonestairsTop = "stonestairsTop", bstonestairsBottom = "stonestairsBottom", bstonestairsLeft = "stonestairsLeft", bstonestairsRight = "stonestairsRight",
+			bstonebrickstairsTop = "stonebrickstairsTop", bstonebrickstairsBottom = "stonebrickstairsBottom", bstonebrickstairsLeft = "stonebrickstairsLeft",
+			bstonebrickstairsRight = "stonebrickstairsRight", bbrickstairsTop = "brickstairsTop", bbrickstairsBottom = "brickstairsBottom", bbrickstairsLeft = "brickstairsLeft",
+			bbrickstairsRight = "brickstairsRight", bsandstonestairsTop = "sandstonestairsTop", bsandstonestairsBottom = "sandstonestairsBottom", bsandstonestairsLeft = "sandstonestairsLeft",
 			bsandstonestairsRight = "sandstonestairsRight",
 
-			bwoodstairsOakInvTop = "woodstairsOakInvTop",
-			bwoodstairsOakInvBottom = "woodstairsOakInvBottom",
-			bwoodstairsOakInvLeft = "woodstairsOakInvLeft",
-			bwoodstairsOakInvRight = "woodstairsOakInvRight",
-			bwoodstairsPineInvTop = "woodstairsPineInvTop",
-			bwoodstairsPineInvBottom = "woodstairsPineInvBottom",
-			bwoodstairsPineInvLeft = "woodstairsPineInvLeft",
-			bwoodstairsPineInvRight = "woodstairsPineInvRight",
-			bwoodstairsBirchInvTop = "woodstairsBirchInvTop",
-			bwoodstairsBirchInvBottom = "woodstairsBirchInvBottom",
-			bwoodstairsBirchInvLeft = "woodstairsBirchInvLeft",
-			bwoodstairsBirchInvRight = "woodstairsBirchInvRight",
-			bwoodstairsJungleInvTop = "woodstairsJungleInvTop",
-			bwoodstairsJungleInvBottom = "woodstairsJungleInvBottom",
-			bwoodstairsJungleInvLeft = "woodstairsJungleInvLeft",
+			bwoodstairsOakInvTop = "woodstairsOakInvTop", bwoodstairsOakInvBottom = "woodstairsOakInvBottom", bwoodstairsOakInvLeft = "woodstairsOakInvLeft",
+			bwoodstairsOakInvRight = "woodstairsOakInvRight", bwoodstairsPineInvTop = "woodstairsPineInvTop", bwoodstairsPineInvBottom = "woodstairsPineInvBottom",
+			bwoodstairsPineInvLeft = "woodstairsPineInvLeft", bwoodstairsPineInvRight = "woodstairsPineInvRight", bwoodstairsBirchInvTop = "woodstairsBirchInvTop",
+			bwoodstairsBirchInvBottom = "woodstairsBirchInvBottom", bwoodstairsBirchInvLeft = "woodstairsBirchInvLeft", bwoodstairsBirchInvRight = "woodstairsBirchInvRight",
+			bwoodstairsJungleInvTop = "woodstairsJungleInvTop", bwoodstairsJungleInvBottom = "woodstairsJungleInvBottom", bwoodstairsJungleInvLeft = "woodstairsJungleInvLeft",
 			bwoodstairsJungleInvRight = "woodstairsJungleInvRight",
 
-			bstonestairsInvTop = "stonestairsInvTop",
-			bstonestairsInvBottom = "stonestairsInvBottom",
-			bstonestairsInvLeft = "stonestairsInvLeft",
-			bstonestairsInvRight = "stonestairsInvRight",
-			bstonebrickstairsInvTop = "stonebrickstairsInvTop",
-			bstonebrickstairsInvBottom = "stonebrickstairsInvBottom",
-			bstonebrickstairsInvLeft = "stonebrickstairsInvLeft",
-			bstonebrickstairsInvRight = "stonebrickstairsInvRight",
-			bbrickstairsInvTop = "brickstairsInvTop",
-			bbrickstairsInvBottom = "brickstairsInvBottom",
-			bbrickstairsInvLeft = "brickstairsInvLeft",
-			bbrickstairsInvRight = "brickstairsInvRight",
-			bsandstonestairsInvTop = "sandstonestairsInvTop",
-			bsandstonestairsInvBottom = "sandstonestairsInvBottom",
-			bsandstonestairsInvLeft = "sandstonestairsInvLeft",
-			bsandstonestairsInvRight = "sandstonestairsInvRight",
+			bstonestairsInvTop = "stonestairsInvTop", bstonestairsInvBottom = "stonestairsInvBottom", bstonestairsInvLeft = "stonestairsInvLeft", bstonestairsInvRight = "stonestairsInvRight",
+			bstonebrickstairsInvTop = "stonebrickstairsInvTop", bstonebrickstairsInvBottom = "stonebrickstairsInvBottom", bstonebrickstairsInvLeft = "stonebrickstairsInvLeft",
+			bstonebrickstairsInvRight = "stonebrickstairsInvRight", bbrickstairsInvTop = "brickstairsInvTop", bbrickstairsInvBottom = "brickstairsInvBottom",
+			bbrickstairsInvLeft = "brickstairsInvLeft", bbrickstairsInvRight = "brickstairsInvRight", bsandstonestairsInvTop = "sandstonestairsInvTop",
+			bsandstonestairsInvBottom = "sandstonestairsInvBottom", bsandstonestairsInvLeft = "sandstonestairsInvLeft", bsandstonestairsInvRight = "sandstonestairsInvRight",
 
-			bbyzantinetiles_bottomtop = "byzantinetiles_bottomtop",
-			bbyzantinetiles_leftright = "byzantinetiles_leftright",
-			bbyzantinestonetiles_bottomtop = "byzantinestonetiles_bottomtop",
-			bbyzantinestonetiles_leftright = "byzantinestonetiles_leftright",
-			bbyzantineslab_bottomtop = "byzantinetileslab_bottomtop",
-			bbyzantineslab_leftright = "byzantinetileslab_leftright",
-			bbyzantineslab_bottomtop_inv = "byzantinetileslab_bottomtop_inv",
-			bbyzantineslab_leftright_inv = "byzantinetileslab_leftright_inv",
+			bbyzantinetiles_bottomtop = "byzantinetiles_bottomtop", bbyzantinetiles_leftright = "byzantinetiles_leftright", bbyzantinestonetiles_bottomtop = "byzantinestonetiles_bottomtop",
+			bbyzantinestonetiles_leftright = "byzantinestonetiles_leftright", bbyzantineslab_bottomtop = "byzantinetileslab_bottomtop", bbyzantineslab_leftright = "byzantinetileslab_leftright",
+			bbyzantineslab_bottomtop_inv = "byzantinetileslab_bottomtop_inv", bbyzantineslab_leftright_inv = "byzantinetileslab_leftright_inv",
 
-			bsignpostTop = "signpostTop", bsignpostBottom = "signpostBottom",
-			bsignpostLeft = "signpostLeft", bsignpostRight = "signpostRight",
-			bsignwallTop = "signwallTop", bsignwallBottom = "signwallBottom",
-			bsignwallLeft = "signwallLeft", bsignwallRight = "signwallRight",
-			bladderTop = "ladderTop", bladderBottom = "ladderBottom",
-			bladderLeft = "ladderLeft", bladderRight = "ladderRight",
-			bcowspawn = "cowspawn", bsheepspawn = "sheepspawn",
-			bchickenspawn = "chickenspawn", bpigspawn = "pigspawn",
-			bsquidspawn = "squidspawn", bwolfspawn = "wolfspawn",
-			bstonesource = "stonesource", bsandsource = "sandsource",
-			bsandstonesource = "sandstonesource", bclaysource = "claysource",
-			bgravelsource = "gravelsource", bfurnace = "furnace",
-			bfreestone = "freestone", bfreesand = "freesand",
-			bfreesandstone = "freesandstone", bfreegravel = "freegravel",
-			btapestry = "tapestry", bstall = "stall", bfreewool = "freewool",
-			bdoorTop = "doorTop", bdoorBottom = "doorBottom",
-			bdoorRight = "doorRight", bdoorLeft = "doorLeft",
-			birondoorTop = "irondoorTop", birondoorBottom = "irondoorBottom",
-			birondoorRight = "irondoorRight", birondoorLeft = "irondoorLeft",
-			btrapdoorTop = "trapdoorTop", btrapdoorBottom = "trapdoorBottom",
-			btrapdoorRight = "trapdoorRight", btrapdoorLeft = "trapdoorLeft",
-			bfenceGateHorizontal = "fencegateHorizontal",
-			bfenceGateVertical = "fencegateVertical", bbedTop = "bedTop",
-			bbedBottom = "bedBottom", bbedRight = "bedRight",
-			bbedLeft = "bedLeft", boakspawn = "oakspawn",
-			bpinespawn = "pinespawn", bbirchspawn = "birchspawn",
-			bjunglespawn = "junglespawn", bbrickspot = "brickspot",
-			bindianstatue = "indianstatue", bmayanstatue = "mayanstatue",
-			bbyzantineiconsmall = "byzantineiconsmall",
-			bbyzantineiconmedium = "byzantineiconmedium",
-			bbyzantineiconlarge = "byzantineiconlarge",
-			bfishingspot = "fishingspot", bspawnerskeleton = "spawnerskeleton",
-			bspawnerzombie = "spawnerzombie", bspawnerspider = "spawnerspider",
-			bspawnercavespider = "spawnercavespider",
-			bspawnercreeper = "spawnercreeper", bspawnerblaze = "spawnerblaze",
-			bdispenserunknownpowder = "dispenserunknownpowder",
-			bhealingspot = "healingspot", bplainSignGuess = "plainSignGuess",
-			bbrewingstand = "brewingstand";
+			bsignpostTop = "signpostTop", bsignpostBottom = "signpostBottom", bsignpostLeft = "signpostLeft", bsignpostRight = "signpostRight", bsignwallTop = "signwallTop",
+			bsignwallBottom = "signwallBottom", bsignwallLeft = "signwallLeft", bsignwallRight = "signwallRight", bladderTop = "ladderTop", bladderBottom = "ladderBottom", bladderLeft = "ladderLeft",
+			bladderRight = "ladderRight", bcowspawn = "cowspawn", bsheepspawn = "sheepspawn", bchickenspawn = "chickenspawn", bpigspawn = "pigspawn", bsquidspawn = "squidspawn",
+			bwolfspawn = "wolfspawn", bstonesource = "stonesource", bsandsource = "sandsource", bsandstonesource = "sandstonesource", bclaysource = "claysource", bgravelsource = "gravelsource",
+			bfurnace = "furnace", bfreestone = "freestone", bfreesand = "freesand", bfreesandstone = "freesandstone", bfreegravel = "freegravel", btapestry = "tapestry", bstall = "stall",
+			bfreewool = "freewool", bdoorTop = "doorTop", bdoorBottom = "doorBottom", bdoorRight = "doorRight", bdoorLeft = "doorLeft", birondoorTop = "irondoorTop",
+			birondoorBottom = "irondoorBottom", birondoorRight = "irondoorRight", birondoorLeft = "irondoorLeft", btrapdoorTop = "trapdoorTop", btrapdoorBottom = "trapdoorBottom",
+			btrapdoorRight = "trapdoorRight", btrapdoorLeft = "trapdoorLeft", bfenceGateHorizontal = "fencegateHorizontal", bfenceGateVertical = "fencegateVertical", bbedTop = "bedTop",
+			bbedBottom = "bedBottom", bbedRight = "bedRight", bbedLeft = "bedLeft", boakspawn = "oakspawn", bpinespawn = "pinespawn", bbirchspawn = "birchspawn", bjunglespawn = "junglespawn",
+			bbrickspot = "brickspot", bindianstatue = "indianstatue", bmayanstatue = "mayanstatue", bbyzantineiconsmall = "byzantineiconsmall", bbyzantineiconmedium = "byzantineiconmedium",
+			bbyzantineiconlarge = "byzantineiconlarge", bfishingspot = "fishingspot", bspawnerskeleton = "spawnerskeleton", bspawnerzombie = "spawnerzombie", bspawnerspider = "spawnerspider",
+			bspawnercavespider = "spawnercavespider", bspawnercreeper = "spawnercreeper", bspawnerblaze = "spawnerblaze", bdispenserunknownpowder = "dispenserunknownpowder",
+			bhealingspot = "healingspot", bplainSignGuess = "plainSignGuess", bbrewingstand = "brewingstand";
 
 	public static HashMap<Character, PointType> charPoints;
 
@@ -247,23 +161,15 @@ public class BuildingPlan {
 
 	public static final int NORTH_FACING = 0;
 
-	private static final String prefixWoodstairOak = "woodstairsOak",
-			prefixWoodstairPine = "woodstairsPine",
-			prefixWoodstairBirch = "woodstairsBirch",
-			prefixWoodstairJungle = "woodstairsJungle",
-			prefixStonestair = "stonestair", prefixBrickstair = "brickstairs",
-			prefixBrickStonestair = "stonebrickstairs",
-			prefixSandStoneStair = "standstonestairs", prefixLadder = "ladder",
-			prefixSign = "sign", prefixDoor = "door",
-			prefixTrapdoor = "trapdoor", prefixBed = "bed";
+	private static final String prefixWoodstairOak = "woodstairsOak", prefixWoodstairPine = "woodstairsPine", prefixWoodstairBirch = "woodstairsBirch", prefixWoodstairJungle = "woodstairsJungle",
+			prefixStonestair = "stonestair", prefixBrickstair = "brickstairs", prefixBrickStonestair = "stonebrickstairs", prefixSandStoneStair = "standstonestairs", prefixLadder = "ladder",
+			prefixSign = "sign", prefixDoor = "door", prefixTrapdoor = "trapdoor", prefixBed = "bed";
 
 	public static final int SOUTH_FACING = 2;
 	public static final int WEST_FACING = 1;
 	public static String TYPE_SUBBUILDING = "subbuilding";
 
-	public static Point adjustForOrientation(final int x, final int y,
-			final int z, final int xoffset, final int zoffset,
-			final int orientation) {
+	public static Point adjustForOrientation(final int x, final int y, final int z, final int xoffset, final int zoffset, final int orientation) {
 		Point pos = null;
 		if (orientation == 0) {
 			pos = new Point(x + xoffset, y, z + zoffset);
@@ -279,8 +185,7 @@ public class BuildingPlan {
 	}
 
 	// client-side method
-	public static void exportBuilding(final EntityPlayer player,
-			final World world, final Point startPoint) {
+	public static void exportBuilding(final EntityPlayer player, final World world, final Point startPoint) {
 
 		try {
 
@@ -291,9 +196,7 @@ public class BuildingPlan {
 			}
 
 			if (sign.signText[0] == null || sign.signText[0].length() == 0) {
-				Mill.proxy.localTranslatedSentence(
-						Mill.proxy.getTheSinglePlayer(), MLN.ORANGE,
-						"export.errornoname");
+				Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(), MLN.ORANGE, "export.errornoname");
 				return;
 			}
 
@@ -302,8 +205,7 @@ public class BuildingPlan {
 			int xEnd = startPoint.getiX() + 1;
 			boolean found = false;
 			while (!found && xEnd < startPoint.getiX() + 257) {
-				final Block block = world.getBlock(xEnd, startPoint.getiY(),
-						startPoint.getiZ());
+				final Block block = world.getBlock(xEnd, startPoint.getiY(), startPoint.getiZ());
 
 				if (block == Blocks.standing_sign) {
 					found = true;
@@ -313,17 +215,14 @@ public class BuildingPlan {
 			}
 
 			if (!found) {
-				Mill.proxy.localTranslatedSentence(
-						Mill.proxy.getTheSinglePlayer(), MLN.ORANGE,
-						"export.errornoendsigneast");
+				Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(), MLN.ORANGE, "export.errornoendsigneast");
 				return;
 			}
 
 			int zEnd = startPoint.getiZ() + 1;
 			found = false;
 			while (!found && zEnd < startPoint.getiZ() + 257) {
-				final Block block = world.getBlock(startPoint.getiX(),
-						startPoint.getiY(), zEnd);
+				final Block block = world.getBlock(startPoint.getiX(), startPoint.getiY(), zEnd);
 
 				if (block == Blocks.standing_sign) {
 					found = true;
@@ -333,17 +232,14 @@ public class BuildingPlan {
 			}
 
 			if (!found) {
-				Mill.proxy.localTranslatedSentence(
-						Mill.proxy.getTheSinglePlayer(), MLN.ORANGE,
-						"export.errornoendsignsouth");
+				Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(), MLN.ORANGE, "export.errornoendsignsouth");
 				return;
 			}
 
 			final int length = xEnd - startPoint.getiX() - 1;
 			final int width = zEnd - startPoint.getiZ() - 1;
 
-			final File exportDir = new File(Mill.proxy.getCustomDir(),
-					"exports");
+			final File exportDir = new File(Mill.proxy.getCustomDir(), "exports");
 			if (!exportDir.exists()) {
 				exportDir.mkdirs();
 			}
@@ -356,30 +252,20 @@ public class BuildingPlan {
 
 			if (buildingFile.exists()) {
 
-				final BuildingPlanSet existingSet = new BuildingPlanSet(null,
-						buildingFile.getName().substring(0,
-								buildingFile.getName().length() - 6), exportDir);
+				final BuildingPlanSet existingSet = new BuildingPlanSet(null, buildingFile.getName().substring(0, buildingFile.getName().length() - 6), exportDir);
 				existingSet.loadPictPlans(true);
 
 				if (existingSet.plans.get(0)[0].length != length) {
-					Mill.proxy.localTranslatedSentence(
-							Mill.proxy.getTheSinglePlayer(), MLN.ORANGE,
-							"export.errorlength", "" + length, ""
-									+ existingSet.plans.get(0)[0].length);
+					Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(), MLN.ORANGE, "export.errorlength", "" + length, "" + existingSet.plans.get(0)[0].length);
 					return;
 				}
 				if (existingSet.plans.get(0)[0].width != width) {
-					Mill.proxy.localTranslatedSentence(
-							Mill.proxy.getTheSinglePlayer(), MLN.ORANGE,
-							"export.errorwidth", "" + width, ""
-									+ existingSet.plans.get(0)[0].width);
+					Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(), MLN.ORANGE, "export.errorwidth", "" + width, "" + existingSet.plans.get(0)[0].width);
 					return;
 				}
 
-				existingPoints = existingSet.getConsolidatedPlan(0,
-						existingSet.plans.get(0).length - 1);
-				existingMinLevel = existingSet.getMinLevel(0,
-						existingSet.plans.get(0).length - 1);
+				existingPoints = existingSet.getConsolidatedPlan(0, existingSet.plans.get(0).length - 1);
+				existingMinLevel = existingSet.getMinLevel(0, existingSet.plans.get(0).length - 1);
 				upgradeLevel = existingSet.plans.get(0).length;
 			}
 
@@ -389,14 +275,10 @@ public class BuildingPlan {
 				try {
 					startLevel = Integer.parseInt(sign.signText[2]);
 				} catch (final Exception e) {
-					Mill.proxy.localTranslatedSentence(
-							Mill.proxy.getTheSinglePlayer(), MLN.ORANGE,
-							"export.errorstartinglevel");
+					Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(), MLN.ORANGE, "export.errorstartinglevel");
 				}
 			} else {
-				Mill.proxy.localTranslatedSentence(
-						Mill.proxy.getTheSinglePlayer(), MLN.WHITE,
-						"export.defaultstartinglevel");
+				Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(), MLN.WHITE, "export.defaultstartinglevel");
 			}
 
 			boolean exportSnow = false;
@@ -418,22 +300,14 @@ public class BuildingPlan {
 					for (int k = 0; k < width; k++) {
 						level[i][k] = null;
 
-						final Block block = world.getBlock(
-								i + startPoint.getiX() + 1,
-								j + startPoint.getiY() + startLevel, k
-										+ startPoint.getiZ() + 1);
-						final int meta = world.getBlockMetadata(
-								i + startPoint.getiX() + 1,
-								j + startPoint.getiY() + startLevel, k
-										+ startPoint.getiZ() + 1);
+						final Block block = world.getBlock(i + startPoint.getiX() + 1, j + startPoint.getiY() + startLevel, k + startPoint.getiZ() + 1);
+						final int meta = world.getBlockMetadata(i + startPoint.getiX() + 1, j + startPoint.getiY() + startLevel, k + startPoint.getiZ() + 1);
 
 						if (block != Blocks.air) {
 							blockFound = true;
 						}
 
-						final PointType pt = reverseColourPoints
-								.get(MillCommonUtilities.getPointHash(block,
-										meta));
+						final PointType pt = reverseColourPoints.get(MillCommonUtilities.getPointHash(block, meta));
 
 						if (pt != null) {
 
@@ -456,43 +330,26 @@ public class BuildingPlan {
 								// does the block exist in an earlier upgrade?
 								PointType existing = null;
 
-								if (existingPoints != null
-										&& j + startLevel >= existingMinLevel
-										&& j + startLevel < existingMinLevel
-												+ existingPoints.length) {
-									existing = existingPoints[j + startLevel
-											- existingMinLevel][i][k];
+								if (existingPoints != null && j + startLevel >= existingMinLevel && j + startLevel < existingMinLevel + existingPoints.length) {
+									existing = existingPoints[j + startLevel - existingMinLevel][i][k];
 									if (existing == null) {
-										MLN.major(null,
-												"Existing pixel is null");
+										MLN.major(null, "Existing pixel is null");
 									}
 								}
 
 								if (existing == null) {
-									if (pt.name != null
-											|| pt.block != Blocks.air
-											|| upgradeLevel != 0) {
+									if (pt.name != null || pt.block != Blocks.air || upgradeLevel != 0) {
 										level[i][k] = pt;
 									}
 								} else {
-									if (existing != pt
-											&& !(existing.isType(bempty) && pt.block != Blocks.air)) {
+									if (existing != pt && !(existing.isType(bempty) && pt.block != Blocks.air)) {
 										level[i][k] = pt;
 									}
 								}
 							}
 						} else {
-							Mill.proxy.localTranslatedSentence(
-									Mill.proxy.getTheSinglePlayer(),
-									MLN.ORANGE,
-									"export.errorunknownblockid",
-									""
-											+ block
-											+ "/"
-											+ meta
-											+ "/"
-											+ MillCommonUtilities.getPointHash(
-													block, meta));
+							Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(), MLN.ORANGE, "export.errorunknownblockid",
+									"" + block + "/" + meta + "/" + MillCommonUtilities.getPointHash(block, meta));
 						}
 					}
 				}
@@ -510,8 +367,7 @@ public class BuildingPlan {
 				}
 			}
 
-			final BufferedImage pict = new BufferedImage(export.size() * width
-					+ export.size() - 1, length, BufferedImage.TYPE_INT_RGB);
+			final BufferedImage pict = new BufferedImage(export.size() * width + export.size() - 1, length, BufferedImage.TYPE_INT_RGB);
 			final Graphics2D graphics = pict.createGraphics();
 
 			graphics.setColor(new Color(0xB2FFB1));
@@ -528,8 +384,7 @@ public class BuildingPlan {
 						}
 
 						graphics.setColor(new Color(colour));
-						graphics.fillRect(j * width + j + width - k - 1, i, 1,
-								1);
+						graphics.fillRect(j * width + j + width - k - 1, i, 1, 1);
 					}
 				}
 			}
@@ -539,18 +394,12 @@ public class BuildingPlan {
 			ImageIO.write(pict, "png", new File(exportDir, fileName));
 
 			if (upgradeLevel == 0) {
-				final BufferedWriter writer = MillCommonUtilities
-						.getWriter(new File(exportDir, planName + "_A.txt"));
+				final BufferedWriter writer = MillCommonUtilities.getWriter(new File(exportDir, planName + "_A.txt"));
 
-				writer.write("native:nameinvillagelangue;name_en:inenglish;name_fr:enfrancais;around:4;startLevel:"
-						+ startLevel
-						+ ";orientation:3;width:"
-						+ width
-						+ ";length:" + length);
+				writer.write("native:nameinvillagelangue;name_en:inenglish;name_fr:enfrancais;around:4;startLevel:" + startLevel + ";orientation:3;width:" + width + ";length:" + length);
 				writer.close();
 			} else {
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(new File(exportDir, planName + "_A.txt"));
+				final BufferedReader reader = MillCommonUtilities.getReader(new File(exportDir, planName + "_A.txt"));
 
 				final List<String> existing = new ArrayList<String>();
 				String line = reader.readLine();
@@ -567,8 +416,7 @@ public class BuildingPlan {
 
 				existing.add(upgradeLevel, "startLevel:" + startLevel);
 
-				final BufferedWriter writer = MillCommonUtilities
-						.getWriter(new File(exportDir, planName + "_A.txt"));
+				final BufferedWriter writer = MillCommonUtilities.getWriter(new File(exportDir, planName + "_A.txt"));
 
 				for (final String s : existing) {
 					writer.write(s + MLN.EOL);
@@ -577,8 +425,7 @@ public class BuildingPlan {
 				writer.close();
 			}
 
-			Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(),
-					MLN.WHITE, "export.buildingexported", planName);
+			Mill.proxy.localTranslatedSentence(Mill.proxy.getTheSinglePlayer(), MLN.WHITE, "export.buildingexported", planName);
 
 		} catch (final Exception e) {
 			MLN.printException("Error when trying to store a building: ", e);
@@ -586,8 +433,7 @@ public class BuildingPlan {
 	}
 
 	static public void generateBuildingRes() {
-		final File file = new File(Mill.proxy.getBaseDir(),
-				"resources used.txt");
+		final File file = new File(Mill.proxy.getBaseDir(), "resources used.txt");
 
 		try {
 			final BufferedWriter writer = MillCommonUtilities.getWriter(file);
@@ -600,8 +446,7 @@ public class BuildingPlan {
 				writer.write(culture.key + ": " + EOL);
 				generateVillageTypeListing(writer, culture.listVillageTypes);
 				writer.write(EOL);
-				generateVillageTypeListing(writer,
-						culture.listLoneBuildingTypes);
+				generateVillageTypeListing(writer, culture.listLoneBuildingTypes);
 			}
 
 			writer.write(EOL);
@@ -611,35 +456,28 @@ public class BuildingPlan {
 
 				for (final BuildingPlanSet set : culture.ListPlanSets) {
 
-					writer.write(set.plans.get(0)[0].nativeName + EOL
-							+ set.plans.get(0)[0].buildingKey + EOL + EOL);
+					writer.write(set.plans.get(0)[0].nativeName + EOL + set.plans.get(0)[0].buildingKey + EOL + EOL);
 					writer.write("==Requirements==" + EOL);
 
 					for (final BuildingPlan[] plans : set.plans) {
 						if (set.plans.size() > 1) {
-							writer.write("===Variation "
-									+ (char) ('A' + plans[0].variation) + "==="
-									+ EOL);
+							writer.write("===Variation " + (char) ('A' + plans[0].variation) + "===" + EOL);
 						}
 
 						for (final BuildingPlan plan : plans) {
 							if (plan.level == 0) {
 								writer.write("Initial Construction" + EOL + EOL);
 							} else {
-								writer.write("Upgrade " + plan.level + EOL
-										+ EOL);
+								writer.write("Upgrade " + plan.level + EOL + EOL);
 							}
 
-							writer.write("{| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 300px;\""
-									+ EOL);
+							writer.write("{| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 300px;\"" + EOL);
 							writer.write("! scope=\"col\"|Resource" + EOL);
 							writer.write("! scope=\"col\"|Quantity" + EOL);
 							for (final InvItem key : plan.resCost.keySet()) {
 								writer.write("|-" + EOL);
-								writer.write("| style=\"text-align: center; \"|"
-										+ key.getName() + EOL);
-								writer.write("| style=\"text-align: center; \"|"
-										+ plan.resCost.get(key) + EOL);
+								writer.write("| style=\"text-align: center; \"|" + key.getName() + EOL);
+								writer.write("| style=\"text-align: center; \"|" + plan.resCost.get(key) + EOL);
 							}
 							writer.write("|}" + EOL + EOL + EOL);
 						}
@@ -664,8 +502,7 @@ public class BuildingPlan {
 			MLN.major(null, "Generating colour sheet.");
 		}
 
-		final BufferedImage pict = new BufferedImage(200,
-				colourPoints.size() * 20 + 25, BufferedImage.TYPE_INT_RGB);
+		final BufferedImage pict = new BufferedImage(200, colourPoints.size() * 20 + 25, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D graphics = pict.createGraphics();
 
 		graphics.setColor(new Color(0xffffff));
@@ -686,8 +523,7 @@ public class BuildingPlan {
 		}
 
 		try {
-			ImageIO.write(pict, "png", new File(Mill.proxy.getBaseDir(),
-					"Colour Sheet.png"));
+			ImageIO.write(pict, "png", new File(Mill.proxy.getBaseDir(), "Colour Sheet.png"));
 
 		} catch (final Exception e) {
 			MLN.printException(e);
@@ -698,8 +534,7 @@ public class BuildingPlan {
 		}
 	}
 
-	static private int generateColourSheetHandleFile(final Graphics2D graphics,
-			int pos, final File file) {
+	static private int generateColourSheetHandleFile(final Graphics2D graphics, int pos, final File file) {
 
 		BufferedReader reader;
 		try {
@@ -713,9 +548,7 @@ public class BuildingPlan {
 					final String[] params = line.split(";", -1);
 					final String[] rgb = params[4].split("/", -1);
 
-					final int colour = (Integer.parseInt(rgb[0]) << 16)
-							+ (Integer.parseInt(rgb[1]) << 8)
-							+ (Integer.parseInt(rgb[2]) << 0);
+					final int colour = (Integer.parseInt(rgb[0]) << 16) + (Integer.parseInt(rgb[1]) << 8) + (Integer.parseInt(rgb[2]) << 0);
 
 					graphics.setColor(new Color(0));
 					graphics.drawString(params[0], 20, 17 + 20 * pos);
@@ -735,11 +568,9 @@ public class BuildingPlan {
 		return pos;
 	}
 
-	private static void generateSignBuildings(final BufferedWriter writer)
-			throws Exception {
+	private static void generateSignBuildings(final BufferedWriter writer) throws Exception {
 
-		writer.write(EOL + EOL + EOL + "Buildings with signs (not panels):"
-				+ EOL + EOL + EOL);
+		writer.write(EOL + EOL + EOL + "Buildings with signs (not panels):" + EOL + EOL + EOL);
 
 		for (final Culture culture : Culture.ListCultures) {
 
@@ -750,12 +581,8 @@ public class BuildingPlan {
 							for (final PointType[][] level : plan.plan) {
 								for (final PointType[] row : level) {
 									for (final PointType pt : row) {
-										if (pt != null
-												&& pt.name != null
-												&& pt.name
-														.startsWith(bplainSignGuess)) {
-											writer.write("Sign in "
-													+ plan.toString() + EOL);
+										if (pt != null && pt.name != null && pt.name.startsWith(bplainSignGuess)) {
+											writer.write("Sign in " + plan.toString() + EOL);
 										}
 									}
 								}
@@ -768,25 +595,21 @@ public class BuildingPlan {
 		writer.write(EOL + EOL + EOL);
 	}
 
-	static private void generateVillageTypeListing(final BufferedWriter writer,
-			final List<VillageType> villages) throws IOException {
+	static private void generateVillageTypeListing(final BufferedWriter writer, final List<VillageType> villages) throws IOException {
 		for (final VillageType villageType : villages) {
 
 			final HashMap<InvItem, Integer> cultureRes = new HashMap<InvItem, Integer>();
 
-			for (final List<BuildingProject> projects : villageType
-					.getBuildingProjects().values()) {
+			for (final List<BuildingProject> projects : villageType.getBuildingProjects().values()) {
 				for (final BuildingProject project : projects) {
 					if (project.planSet != null) {
 						for (final BuildingPlan[] plans : project.planSet.plans) {
 							for (final BuildingPlan plan : plans) {
 								for (final InvItem key : plan.resCost.keySet()) {
 									if (cultureRes.containsKey(key)) {
-										cultureRes.put(key, cultureRes.get(key)
-												+ plan.resCost.get(key));
+										cultureRes.put(key, cultureRes.get(key) + plan.resCost.get(key));
 									} else {
-										cultureRes.put(key,
-												plan.resCost.get(key));
+										cultureRes.put(key, plan.resCost.get(key));
 									}
 								}
 							}
@@ -829,8 +652,7 @@ public class BuildingPlan {
 		picts.put(new InvItem(Blocks.stonebrick, 2), "CrackedStoneBricks.png");
 		picts.put(new InvItem(Blocks.tallgrass, 1), "TallGrass.png");
 		picts.put(new InvItem(Blocks.tallgrass, 2), "Fern.png");
-		picts.put(new InvItem(Blocks.mossy_cobblestone, 0),
-				"MossyCobblestone.png");
+		picts.put(new InvItem(Blocks.mossy_cobblestone, 0), "MossyCobblestone.png");
 		picts.put(new InvItem(Blocks.stonebrick, 1), "MossyStoneBricks.png");
 		picts.put(new InvItem(Blocks.iron_ore, 0), "Ore_Iron.png");
 		picts.put(new InvItem(Blocks.coal_ore, 0), "Ore_Coal.png");
@@ -840,10 +662,8 @@ public class BuildingPlan {
 		picts.put(new InvItem(Blocks.diamond_ore, 0), "Ore_Diamond.png");
 		picts.put(new InvItem(Blocks.lit_pumpkin, 0), "Jack-O-Lantern.png");
 		picts.put(new InvItem(Blocks.melon_block, 0), "Melon (Block).png");
-		picts.put(new InvItem(Blocks.lapis_block, 0),
-				"Lapis_Lazuli_(Block).png");
-		picts.put(new InvItem(Blocks.unlit_redstone_torch, 0),
-				"Redstone_Torch.png");
+		picts.put(new InvItem(Blocks.lapis_block, 0), "Lapis_Lazuli_(Block).png");
+		picts.put(new InvItem(Blocks.unlit_redstone_torch, 0), "Redstone_Torch.png");
 		picts.put(new InvItem(Blocks.bedrock, 0), "Bedrock.png");
 		picts.put(new InvItem(Blocks.nether_wart, 0), "Nether_Wart.png");
 		picts.put(new InvItem(Blocks.lava, 0), "Lava.png");
@@ -855,27 +675,19 @@ public class BuildingPlan {
 		picts.put(new InvItem(Items.iron_ingot, 0), "Ironitm.png");
 		picts.put(new InvItem(Items.gold_ingot, 0), "Golditm.png");
 
-		picts.put(new InvItem(Mill.wood_decoration, 0),
-				"ML_colombages_plain.png");
-		links.put(new InvItem(Mill.wood_decoration, 0),
-				"|link=Norman:Colombages");
-		picts.put(new InvItem(Mill.wood_decoration, 1),
-				"ML_colombages_cross.png");
-		links.put(new InvItem(Mill.wood_decoration, 1),
-				"|link=Norman:Colombages");
+		picts.put(new InvItem(Mill.wood_decoration, 0), "ML_colombages_plain.png");
+		links.put(new InvItem(Mill.wood_decoration, 0), "|link=Norman:Colombages");
+		picts.put(new InvItem(Mill.wood_decoration, 1), "ML_colombages_cross.png");
+		links.put(new InvItem(Mill.wood_decoration, 1), "|link=Norman:Colombages");
 		picts.put(new InvItem(Mill.wood_decoration, 2), "ML_Thatch.png");
 		links.put(new InvItem(Mill.wood_decoration, 2), "|link=Japanese:Thatch");
 
-		picts.put(new InvItem(Mill.stone_decoration, 0),
-				"ML_whitewashedbricks.png");
-		links.put(new InvItem(Mill.stone_decoration, 0),
-				"|link=Hindi:Cooked brick");
+		picts.put(new InvItem(Mill.stone_decoration, 0), "ML_whitewashedbricks.png");
+		links.put(new InvItem(Mill.stone_decoration, 0), "|link=Hindi:Cooked brick");
 		picts.put(new InvItem(Mill.stone_decoration, 1), "ML_mudbrick.png");
-		links.put(new InvItem(Mill.stone_decoration, 1),
-				"|link=Hindi:Mud brick");
+		links.put(new InvItem(Mill.stone_decoration, 1), "|link=Hindi:Mud brick");
 		picts.put(new InvItem(Mill.stone_decoration, 2), "ML_Mayan_Gold.png");
-		links.put(new InvItem(Mill.stone_decoration, 2),
-				"|link=Mayan:Gold Ornament");
+		links.put(new InvItem(Mill.stone_decoration, 2), "|link=Mayan:Gold Ornament");
 
 		picts.put(new InvItem(Mill.paperWall, 0), "ML_paperwall.png");
 		links.put(new InvItem(Mill.paperWall, 0), "|link=Japanese:Paper Wall");
@@ -889,22 +701,15 @@ public class BuildingPlan {
 		picts.put(new InvItem(Mill.mayanstatue, 0), "ML_MayanStatue.png");
 		links.put(new InvItem(Mill.mayanstatue, 0), "|link=Mayan:Carving");
 
-		picts.put(new InvItem(Mill.byzantineiconsmall, 0),
-				"ML_ByzantineIconSmall.png");
-		links.put(new InvItem(Mill.byzantineiconsmall, 0),
-				"|link=Byzantine:IIcon");
-		picts.put(new InvItem(Mill.byzantineiconmedium, 0),
-				"ML_ByzantineIconMedium.png");
-		links.put(new InvItem(Mill.byzantineiconmedium, 0),
-				"|link=Byzantine:IIcon");
-		picts.put(new InvItem(Mill.byzantineiconlarge, 0),
-				"ML_ByzantineIconLarge.png");
-		links.put(new InvItem(Mill.byzantineiconlarge, 0),
-				"|link=Byzantine:IIcon");
+		picts.put(new InvItem(Mill.byzantineiconsmall, 0), "ML_ByzantineIconSmall.png");
+		links.put(new InvItem(Mill.byzantineiconsmall, 0), "|link=Byzantine:IIcon");
+		picts.put(new InvItem(Mill.byzantineiconmedium, 0), "ML_ByzantineIconMedium.png");
+		links.put(new InvItem(Mill.byzantineiconmedium, 0), "|link=Byzantine:IIcon");
+		picts.put(new InvItem(Mill.byzantineiconlarge, 0), "ML_ByzantineIconLarge.png");
+		links.put(new InvItem(Mill.byzantineiconlarge, 0), "|link=Byzantine:IIcon");
 
 		picts.put(new InvItem(Mill.byzantine_tiles, 0), "ML_byzSlab.png");
-		links.put(new InvItem(Mill.byzantine_tiles, 0),
-				"|link=Blocks#Byzantine");
+		links.put(new InvItem(Mill.byzantine_tiles, 0), "|link=Blocks#Byzantine");
 
 		try {
 
@@ -925,16 +730,14 @@ public class BuildingPlan {
 			for (final Culture culture : Culture.ListCultures) {
 				for (final BuildingPlanSet set : culture.ListPlanSets) {
 					if (nameCount.get(set.plans.get(0)[0].nativeName) > 1) {
-						uniqueNames.put(set, set.plans.get(0)[0].nativeName
-								+ "~" + set.key);
+						uniqueNames.put(set, set.plans.get(0)[0].nativeName + "~" + set.key);
 					} else {
 						uniqueNames.put(set, set.plans.get(0)[0].nativeName);
 					}
 				}
 			}
 
-			File file = new File(Mill.proxy.getBaseDir(),
-					"resources used wiki building list.txt");
+			File file = new File(Mill.proxy.getBaseDir(), "resources used wiki building list.txt");
 			BufferedWriter writer = MillCommonUtilities.getWriter(file);
 
 			writer.write("{| class=\"wikitable\"" + EOL);
@@ -961,16 +764,11 @@ public class BuildingPlan {
 			for (final Culture culture : Culture.ListCultures) {
 				for (final BuildingPlanSet set : culture.ListPlanSets) {
 
-					writer.write("|"
-							+ uniqueNames.get(set)
-							+ " = <table><tr><td style=\"vertical-align:top;\">"
-							+ EOL);
+					writer.write("|" + uniqueNames.get(set) + " = <table><tr><td style=\"vertical-align:top;\">" + EOL);
 
 					for (final BuildingPlan[] plans : set.plans) {
 						if (set.plans.size() > 1) {
-							writer.write("<table class=\"reqirements\"><tr><th scope=\"col\" style=\"text-align:center;\">Variation "
-									+ (char) ('A' + plans[0].variation)
-									+ "</th>");
+							writer.write("<table class=\"reqirements\"><tr><th scope=\"col\" style=\"text-align:center;\">Variation " + (char) ('A' + plans[0].variation) + "</th>");
 						} else {
 							writer.write("<table class=\"reqirements\"><tr><th scope=\"col\" style=\"text-align:center;\"></th>");
 						}
@@ -988,8 +786,7 @@ public class BuildingPlan {
 						Collections.sort(items);
 
 						for (final InvItem key : items) {
-							String pict = "Unknown Pict:" + key.item + "/"
-									+ key.meta;
+							String pict = "Unknown Pict:" + key.item + "/" + key.meta;
 							String link = "";
 
 							if (picts.containsKey(key)) {
@@ -1000,8 +797,7 @@ public class BuildingPlan {
 								link = links.get(key);
 							}
 
-							writer.write("<td>[[File:" + pict + "|32px" + link
-									+ "|" + key.getName() + "]]</td>");
+							writer.write("<td>[[File:" + pict + "|32px" + link + "|" + key.getName() + "]]</td>");
 						}
 
 						writer.write("</tr>" + EOL);
@@ -1010,13 +806,11 @@ public class BuildingPlan {
 							if (plan.level == 0) {
 								writer.write("<tr><th scope=\"row\">Construction</th>");
 							} else {
-								writer.write("<tr><th scope=\"row\">Upgrade "
-										+ plan.level + "</th>");
+								writer.write("<tr><th scope=\"row\">Upgrade " + plan.level + "</th>");
 							}
 							for (final InvItem key : items) {
 								if (plan.resCost.containsKey(key)) {
-									writer.write("<td>" + plan.resCost.get(key)
-											+ "</td>");
+									writer.write("<td>" + plan.resCost.get(key) + "</td>");
 								} else {
 									writer.write("<td></td>");
 								}
@@ -1045,13 +839,10 @@ public class BuildingPlan {
 	}
 
 	static String getColourString(final int colour) {
-		return ((colour & 0xff0000) >> 16) + "/" + ((colour & 0x00ff00) >> 8)
-				+ "/" + ((colour & 0x0000ff) >> 0) + "/"
-				+ Integer.toHexString(colour);
+		return ((colour & 0xff0000) >> 16) + "/" + ((colour & 0x00ff00) >> 8) + "/" + ((colour & 0x0000ff) >> 0) + "/" + Integer.toHexString(colour);
 	}
 
-	public static void importBuilding(final EntityPlayer player,
-			final World world, final Point startPoint) {
+	public static void importBuilding(final EntityPlayer player, final World world, final Point startPoint) {
 
 		try {
 
@@ -1062,15 +853,13 @@ public class BuildingPlan {
 			}
 
 			if (sign.signText[0] == null || sign.signText[0].length() == 0) {
-				ServerSender.sendTranslatedSentence(player, MLN.ORANGE,
-						"import.errornoname");
+				ServerSender.sendTranslatedSentence(player, MLN.ORANGE, "import.errornoname");
 				return;
 			}
 
 			final String planName = sign.signText[0];
 
-			final File exportDir = new File(Mill.proxy.getCustomDir(),
-					"exports");
+			final File exportDir = new File(Mill.proxy.getCustomDir(), "exports");
 			if (!exportDir.exists()) {
 				exportDir.mkdirs();
 			}
@@ -1078,14 +867,11 @@ public class BuildingPlan {
 			final File buildingFile = new File(exportDir, planName + "_A.txt");
 
 			if (!buildingFile.exists()) {
-				ServerSender.sendTranslatedSentence(player, MLN.ORANGE,
-						"import.errornotfound");
+				ServerSender.sendTranslatedSentence(player, MLN.ORANGE, "import.errornotfound");
 				return;
 			}
 
-			final BuildingPlanSet existingSet = new BuildingPlanSet(null,
-					buildingFile.getName().substring(0,
-							buildingFile.getName().length() - 6), exportDir);
+			final BuildingPlanSet existingSet = new BuildingPlanSet(null, buildingFile.getName().substring(0, buildingFile.getName().length() - 6), exportDir);
 			existingSet.loadPictPlans(true);
 
 			int upgradeLevel = 0;
@@ -1093,21 +879,17 @@ public class BuildingPlan {
 			if (sign.signText[1] != null && sign.signText[1].length() > 0) {
 				try {
 					upgradeLevel = Integer.parseInt(sign.signText[1]);
-					ServerSender.sendTranslatedSentence(player, MLN.WHITE,
-							"import.buildingupto", "" + upgradeLevel);
+					ServerSender.sendTranslatedSentence(player, MLN.WHITE, "import.buildingupto", "" + upgradeLevel);
 				} catch (final Exception e) {
-					ServerSender.sendTranslatedSentence(player, MLN.ORANGE,
-							"import.errorinvalidupgradelevel");
+					ServerSender.sendTranslatedSentence(player, MLN.ORANGE, "import.errorinvalidupgradelevel");
 					return;
 				}
 			} else {
-				ServerSender.sendTranslatedSentence(player, MLN.WHITE,
-						"import.buildinginitialphase");
+				ServerSender.sendTranslatedSentence(player, MLN.WHITE, "import.buildinginitialphase");
 			}
 
 			if (upgradeLevel >= existingSet.plans.get(0).length) {
-				ServerSender.sendTranslatedSentence(player, MLN.ORANGE,
-						"import.errorupgradeleveltoohigh");
+				ServerSender.sendTranslatedSentence(player, MLN.ORANGE, "import.errorupgradeleveltoohigh");
 				return;
 			}
 
@@ -1129,22 +911,16 @@ public class BuildingPlan {
 						plan.nbfloors *= 2;
 					}
 				}
-				ServerSender.sendTranslatedSentence(player, MLN.WHITE,
-						"import.doublevertical");
-				MLN.major(null, "Building height: "
-						+ existingSet.plans.get(0)[0].plan.length);
+				ServerSender.sendTranslatedSentence(player, MLN.WHITE, "import.doublevertical");
+				MLN.major(null, "Building height: " + existingSet.plans.get(0)[0].plan.length);
 			}
 
 			final BuildingPlan plan = existingSet.plans.get(0)[0];
-			final BuildingLocation location = new BuildingLocation(plan,
-					startPoint.getRelative(plan.length / 2 + 1, 0,
-							plan.width / 2 + 1), 0);
+			final BuildingLocation location = new BuildingLocation(plan, startPoint.getRelative(plan.length / 2 + 1, 0, plan.width / 2 + 1), 0);
 
 			for (int i = 0; i <= upgradeLevel; i++) {
-				ServerSender.sendTranslatedSentence(player, MLN.WHITE,
-						"import.buildinglevel", "" + i);
-				existingSet.buildLocation(Mill.getMillWorld(world), null,
-						location, true, false, null, true, null);
+				ServerSender.sendTranslatedSentence(player, MLN.WHITE, "import.buildinglevel", "" + i);
+				existingSet.buildLocation(Mill.getMillWorld(world), null, location, true, false, null, true, null);
 				location.level++;
 			}
 
@@ -1188,9 +964,7 @@ public class BuildingPlan {
 					final PointType cp = PointType.readColourPoint(line);
 					for (final PointType cp2 : colourPoints.values()) {
 						if (cp2.colour == cp.colour) {
-							throw new MillenaireException("Colour "
-									+ getColourString(cp.colour) + " in line <"
-									+ line + "> is already taken.");
+							throw new MillenaireException("Colour " + getColourString(cp.colour) + " in line <" + line + "> is already taken.");
 						}
 					}
 					colourPoints.put(cp.colour, cp);
@@ -1218,8 +992,7 @@ public class BuildingPlan {
 		charPoints.put('p', new PointType('p', Blocks.planks, 0, false));
 		charPoints.put('g', new PointType('g', Blocks.glass, 0, false));
 		charPoints.put('c', new PointType('c', Blocks.cobblestone, 0, false));
-		charPoints
-				.put('C', new PointType('C', Blocks.crafting_table, 0, false));
+		charPoints.put('C', new PointType('C', Blocks.crafting_table, 0, false));
 		charPoints.put('F', new PointType('F', Blocks.furnace, 0, false));
 		charPoints.put('W', new PointType('W', Blocks.wool, 0, false));
 		charPoints.put('o', new PointType('o', Blocks.stone, 0, false));
@@ -1232,8 +1005,7 @@ public class BuildingPlan {
 		return false;
 	}
 
-	public static HashMap<String, BuildingPlanSet> loadPlans(
-			final List<File> culturesDirs, final Culture culture) {
+	public static HashMap<String, BuildingPlanSet> loadPlans(final List<File> culturesDirs, final Culture culture) {
 
 		final HashMap<String, BuildingPlanSet> plans = new HashMap<String, BuildingPlanSet>();
 
@@ -1265,9 +1037,7 @@ public class BuildingPlan {
 
 		}
 
-		final File customDir = new File(new File(new File(
-				Mill.proxy.getCustomDir(), "cultures"), culture.key),
-				"custom buildings");
+		final File customDir = new File(new File(new File(Mill.proxy.getCustomDir(), "cultures"), culture.key), "custom buildings");
 
 		if (customDir.exists()) {
 			dirs.add(customDir);
@@ -1283,45 +1053,34 @@ public class BuildingPlan {
 
 				try {
 					if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-						MLN.major(file,
-								"Loading building: " + file.getAbsolutePath());
+						MLN.major(file, "Loading building: " + file.getAbsolutePath());
 					}
 
-					final BuildingPlanSet set = new BuildingPlanSet(culture,
-							file.getName().split("_")[0], dirs.get(i));
+					final BuildingPlanSet set = new BuildingPlanSet(culture, file.getName().split("_")[0], dirs.get(i));
 					set.loadPlans(culture, false);
 					if (isolatedDirs.get(i)) {
 						set.max = 0;
 					}
 					plans.put(set.key, set);
 				} catch (final Exception e) {
-					MLN.printException(
-							"Error when loading " + file.getAbsolutePath(), e);
+					MLN.printException("Error when loading " + file.getAbsolutePath(), e);
 				}
 			}
 
 			for (final File file : dirs.get(i).listFiles(pictPlans)) {
 				try {
 					if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-						MLN.major(
-								file,
-								"Loading pict building: "
-										+ file.getAbsolutePath());
+						MLN.major(file, "Loading pict building: " + file.getAbsolutePath());
 					}
 
-					final BuildingPlanSet set = new BuildingPlanSet(culture,
-							file.getName().substring(0,
-									file.getName().length() - 6), dirs.get(i));
+					final BuildingPlanSet set = new BuildingPlanSet(culture, file.getName().substring(0, file.getName().length() - 6), dirs.get(i));
 					set.loadPictPlans(false);
 					if (isolatedDirs.get(i)) {
 						set.max = 0;
 					}
 					plans.put(set.key, set);
 				} catch (final Exception e) {
-					MLN.printException(
-							"Exception when loading " + file.getName()
-									+ " plan set in culture " + culture.key
-									+ ":", e);
+					MLN.printException("Exception when loading " + file.getName() + " plan set in culture " + culture.key + ":", e);
 				}
 			}
 
@@ -1330,8 +1089,7 @@ public class BuildingPlan {
 		return plans;
 	}
 
-	public static HashMap<String, BuildingPlanSet> loadPlanSetMap(
-			final List<BuildingPlanSet> planSets) {
+	public static HashMap<String, BuildingPlanSet> loadPlanSetMap(final List<BuildingPlanSet> planSets) {
 
 		final HashMap<String, BuildingPlanSet> map = new HashMap<String, BuildingPlanSet>();
 
@@ -1350,21 +1108,14 @@ public class BuildingPlan {
 
 				final Block block = pt.getBlock();
 
-				reverseColourPoints
-						.put(MillCommonUtilities
-								.getPointHash(pt.block, pt.meta), pt);
+				reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.block, pt.meta), pt);
 
-				if (block == Blocks.torch
-						|| block == Blocks.unlit_redstone_torch
-						|| block == Blocks.leaves) {
+				if (block == Blocks.torch || block == Blocks.unlit_redstone_torch || block == Blocks.leaves) {
 					for (int i = 0; i < 16; i++) {
-						reverseColourPoints.put(
-								MillCommonUtilities.getPointHash(pt.block, i),
-								pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.block, i), pt);
 					}
 				} else if (block == Mill.path || block == Mill.pathSlab) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							pt.block, pt.meta & 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(pt.block, pt.meta & 7), pt);
 				}
 
 			}
@@ -1374,443 +1125,293 @@ public class BuildingPlan {
 		for (final PointType pt : colourPoints.values()) {
 			if (pt.name != null) {
 				if (pt.name.equals(bpreserveground)) {
-					reverseColourPoints.put(
-							MillCommonUtilities.getPointHash(Blocks.dirt, 0),
-							pt);
-					reverseColourPoints.put(
-							MillCommonUtilities.getPointHash(Blocks.grass, 0),
-							pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.dirt, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.grass, 0), pt);
 				} else if (pt.name.equals(blockedchest)) {
 					for (int i = 0; i < 16; i++) {
-						reverseColourPoints.put(MillCommonUtilities
-								.getPointHash(Blocks.chest, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.chest, i), pt);
 					}
 					for (int i = 0; i < 16; i++) {
-						reverseColourPoints.put(MillCommonUtilities
-								.getPointHash(Mill.lockedChest, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.lockedChest, i), pt);
 					}
 
 				} else if (pt.name.equals(blogoakhor)) {
-					reverseColourPoints
-							.put(MillCommonUtilities
-									.getPointHash(Blocks.log, 8), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 8), pt);
 				} else if (pt.name.equals(blogoakvert)) {
-					reverseColourPoints
-							.put(MillCommonUtilities
-									.getPointHash(Blocks.log, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 4), pt);
 
 				} else if (pt.name.equals(blogpinehor)) {
-					reverseColourPoints
-							.put(MillCommonUtilities.getPointHash(Blocks.log,
-									8 + 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 8 + 1), pt);
 				} else if (pt.name.equals(blogpinevert)) {
-					reverseColourPoints
-							.put(MillCommonUtilities.getPointHash(Blocks.log,
-									4 + 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 4 + 1), pt);
 
 				} else if (pt.name.equals(blogbirchhor)) {
-					reverseColourPoints
-							.put(MillCommonUtilities.getPointHash(Blocks.log,
-									8 + 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 8 + 2), pt);
 				} else if (pt.name.equals(blogbirchvert)) {
-					reverseColourPoints
-							.put(MillCommonUtilities.getPointHash(Blocks.log,
-									4 + 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 4 + 2), pt);
 
 				} else if (pt.name.equals(blogjunglehor)) {
-					reverseColourPoints
-							.put(MillCommonUtilities.getPointHash(Blocks.log,
-									8 + 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 8 + 3), pt);
 				} else if (pt.name.equals(blogjunglevert)) {
-					reverseColourPoints
-							.put(MillCommonUtilities.getPointHash(Blocks.log,
-									4 + 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.log, 4 + 3), pt);
 
 					// Regular stairs:
 				} else if (pt.name.equals(bwoodstairsOakTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.oak_stairs, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 1), pt);
 				} else if (pt.name.equals(bwoodstairsOakBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.oak_stairs, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 0), pt);
 				} else if (pt.name.equals(bwoodstairsOakLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.oak_stairs, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 2), pt);
 				} else if (pt.name.equals(bwoodstairsOakRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.oak_stairs, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 3), pt);
 				} else if (pt.name.equals(bwoodstairsPineTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.spruce_stairs, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 1), pt);
 				} else if (pt.name.equals(bwoodstairsPineBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.spruce_stairs, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 0), pt);
 				} else if (pt.name.equals(bwoodstairsPineLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.spruce_stairs, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 2), pt);
 				} else if (pt.name.equals(bwoodstairsPineRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.spruce_stairs, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 3), pt);
 
 				} else if (pt.name.equals(bwoodstairsBirchTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.birch_stairs, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 1), pt);
 				} else if (pt.name.equals(bwoodstairsBirchBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.birch_stairs, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 0), pt);
 				} else if (pt.name.equals(bwoodstairsBirchLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.birch_stairs, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 2), pt);
 				} else if (pt.name.equals(bwoodstairsBirchRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.birch_stairs, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 3), pt);
 
 				} else if (pt.name.equals(bwoodstairsJungleTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.jungle_stairs, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 1), pt);
 				} else if (pt.name.equals(bwoodstairsJungleBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.jungle_stairs, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 0), pt);
 				} else if (pt.name.equals(bwoodstairsJungleLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.jungle_stairs, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 2), pt);
 				} else if (pt.name.equals(bwoodstairsJungleRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.jungle_stairs, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 3), pt);
 
 				} else if (pt.name.equals(bstonestairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_stairs, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 1), pt);
 				} else if (pt.name.equals(bstonestairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_stairs, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 0), pt);
 				} else if (pt.name.equals(bstonestairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_stairs, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 2), pt);
 				} else if (pt.name.equals(bstonestairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_stairs, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 3), pt);
 
 				} else if (pt.name.equals(bstonebrickstairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_brick_stairs, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 1), pt);
 				} else if (pt.name.equals(bstonebrickstairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_brick_stairs, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 0), pt);
 				} else if (pt.name.equals(bstonebrickstairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_brick_stairs, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 2), pt);
 				} else if (pt.name.equals(bstonebrickstairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_brick_stairs, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 3), pt);
 
 				} else if (pt.name.equals(bbrickstairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.brick_stairs, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 1), pt);
 				} else if (pt.name.equals(bbrickstairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.brick_stairs, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 0), pt);
 				} else if (pt.name.equals(bbrickstairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.brick_stairs, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 2), pt);
 				} else if (pt.name.equals(bbrickstairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.brick_stairs, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 3), pt);
 
 				} else if (pt.name.equals(bsandstonestairsTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.sandstone_stairs, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 1), pt);
 				} else if (pt.name.equals(bsandstonestairsBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.sandstone_stairs, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 0), pt);
 				} else if (pt.name.equals(bsandstonestairsLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.sandstone_stairs, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 2), pt);
 				} else if (pt.name.equals(bsandstonestairsRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.sandstone_stairs, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 3), pt);
 
 					// Inversed stairs:
 				} else if (pt.name.equals(bwoodstairsOakInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.oak_stairs, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 5), pt);
 				} else if (pt.name.equals(bwoodstairsOakInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.oak_stairs, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 4), pt);
 				} else if (pt.name.equals(bwoodstairsOakInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.oak_stairs, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 6), pt);
 				} else if (pt.name.equals(bwoodstairsOakInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.oak_stairs, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.oak_stairs, 7), pt);
 
 				} else if (pt.name.equals(bwoodstairsPineInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.spruce_stairs, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 5), pt);
 				} else if (pt.name.equals(bwoodstairsPineInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.spruce_stairs, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 4), pt);
 				} else if (pt.name.equals(bwoodstairsPineInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.spruce_stairs, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 6), pt);
 				} else if (pt.name.equals(bwoodstairsPineInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.spruce_stairs, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.spruce_stairs, 7), pt);
 
 				} else if (pt.name.equals(bwoodstairsBirchInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.birch_stairs, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 5), pt);
 				} else if (pt.name.equals(bwoodstairsBirchInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.birch_stairs, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 4), pt);
 				} else if (pt.name.equals(bwoodstairsBirchInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.birch_stairs, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 6), pt);
 				} else if (pt.name.equals(bwoodstairsBirchInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.birch_stairs, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.birch_stairs, 7), pt);
 
 				} else if (pt.name.equals(bwoodstairsJungleInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.jungle_stairs, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 5), pt);
 				} else if (pt.name.equals(bwoodstairsJungleInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.jungle_stairs, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 4), pt);
 				} else if (pt.name.equals(bwoodstairsJungleInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.jungle_stairs, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 6), pt);
 				} else if (pt.name.equals(bwoodstairsJungleInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.jungle_stairs, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.jungle_stairs, 7), pt);
 
 				} else if (pt.name.equals(bstonestairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_stairs, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 5), pt);
 				} else if (pt.name.equals(bstonestairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_stairs, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 4), pt);
 				} else if (pt.name.equals(bstonestairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_stairs, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 6), pt);
 				} else if (pt.name.equals(bstonestairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_stairs, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_stairs, 7), pt);
 
 				} else if (pt.name.equals(bstonebrickstairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_brick_stairs, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 5), pt);
 				} else if (pt.name.equals(bstonebrickstairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_brick_stairs, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 4), pt);
 				} else if (pt.name.equals(bstonebrickstairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_brick_stairs, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 6), pt);
 				} else if (pt.name.equals(bstonebrickstairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.stone_brick_stairs, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.stone_brick_stairs, 7), pt);
 
 				} else if (pt.name.equals(bbrickstairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.brick_stairs, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 5), pt);
 				} else if (pt.name.equals(bbrickstairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.brick_stairs, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 4), pt);
 				} else if (pt.name.equals(bbrickstairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.brick_stairs, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 6), pt);
 				} else if (pt.name.equals(bbrickstairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.brick_stairs, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brick_stairs, 7), pt);
 
 				} else if (pt.name.equals(bsandstonestairsInvTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.sandstone_stairs, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 5), pt);
 				} else if (pt.name.equals(bsandstonestairsInvBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.sandstone_stairs, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 4), pt);
 				} else if (pt.name.equals(bsandstonestairsInvLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.sandstone_stairs, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 6), pt);
 				} else if (pt.name.equals(bsandstonestairsInvRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.sandstone_stairs, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.sandstone_stairs, 7), pt);
 
 				} else if (pt.name.equals(bbyzantinetiles_bottomtop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Mill.byzantine_tiles, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tiles, 1), pt);
 				} else if (pt.name.equals(bbyzantinetiles_leftright)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Mill.byzantine_tiles, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tiles, 0), pt);
 				} else if (pt.name.equals(bbyzantinestonetiles_bottomtop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Mill.byzantine_stone_tiles, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_stone_tiles, 1), pt);
 				} else if (pt.name.equals(bbyzantinestonetiles_leftright)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Mill.byzantine_stone_tiles, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_stone_tiles, 0), pt);
 
 				} else if (pt.name.equals(bbyzantineslab_bottomtop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Mill.byzantine_tile_slab, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab, 1), pt);
 				} else if (pt.name.equals(bbyzantineslab_leftright)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Mill.byzantine_tile_slab, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab, 0), pt);
 				} else if (pt.name.equals(bbyzantineslab_bottomtop_inv)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Mill.byzantine_tile_slab, 9), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab, 9), pt);
 				} else if (pt.name.equals(bbyzantineslab_leftright_inv)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Mill.byzantine_tile_slab, 8), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Mill.byzantine_tile_slab, 8), pt);
 
 				} else if (pt.name.equals(bsignpostTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.standing_sign, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.standing_sign, 5), pt);
 				} else if (pt.name.equals(bsignpostBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.standing_sign, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.standing_sign, 4), pt);
 				} else if (pt.name.equals(bsignpostLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.standing_sign, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.standing_sign, 2), pt);
 				} else if (pt.name.equals(bsignpostRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.standing_sign, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.standing_sign, 3), pt);
 
 				} else if (pt.name.equals(bsignwallTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wall_sign, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, 5), pt);
 				} else if (pt.name.equals(bsignwallBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wall_sign, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, 4), pt);
 				} else if (pt.name.equals(bsignwallLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wall_sign, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, 2), pt);
 				} else if (pt.name.equals(bsignwallRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wall_sign, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, 3), pt);
 
 				} else if (pt.name.equals(bladderTop)) {
-					reverseColourPoints.put(
-							MillCommonUtilities.getPointHash(Blocks.ladder, 5),
-							pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.ladder, 5), pt);
 				} else if (pt.name.equals(bladderBottom)) {
-					reverseColourPoints.put(
-							MillCommonUtilities.getPointHash(Blocks.ladder, 4),
-							pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.ladder, 4), pt);
 				} else if (pt.name.equals(bladderLeft)) {
-					reverseColourPoints.put(
-							MillCommonUtilities.getPointHash(Blocks.ladder, 2),
-							pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.ladder, 2), pt);
 				} else if (pt.name.equals(bladderRight)) {
-					reverseColourPoints.put(
-							MillCommonUtilities.getPointHash(Blocks.ladder, 3),
-							pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.ladder, 3), pt);
 
 				} else if (pt.name.equals(bfurnace)) {
 					for (int i = 0; i < 16; i++) {
-						reverseColourPoints.put(MillCommonUtilities
-								.getPointHash(Blocks.furnace, i), pt);
-						reverseColourPoints.put(MillCommonUtilities
-								.getPointHash(Blocks.lit_furnace, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.furnace, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.lit_furnace, i), pt);
 					}
 				} else if (pt.name.equals(bbrewingstand)) {
 					for (int i = 0; i < 16; i++) {
-						reverseColourPoints.put(MillCommonUtilities
-								.getPointHash(Blocks.brewing_stand, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.brewing_stand, i), pt);
 					}
 				} else if (pt.name.equals(bdoorTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wooden_door, 0), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wooden_door, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 7), pt);
 				} else if (pt.name.equals(bdoorBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wooden_door, 2), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wooden_door, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 5), pt);
 				} else if (pt.name.equals(bdoorLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wooden_door, 3), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wooden_door, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 6), pt);
 				} else if (pt.name.equals(bdoorRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wooden_door, 1), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.wooden_door, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wooden_door, 4), pt);
 
 				} else if (pt.name.equals(birondoorTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.iron_door, 0), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.iron_door, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 7), pt);
 				} else if (pt.name.equals(birondoorBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.iron_door, 2), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.iron_door, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 5), pt);
 				} else if (pt.name.equals(birondoorLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.iron_door, 3), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.iron_door, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 6), pt);
 				} else if (pt.name.equals(birondoorRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.iron_door, 1), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.iron_door, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.iron_door, 4), pt);
 
 				} else if (pt.name.equals(btrapdoorTop)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.trapdoor, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.trapdoor, 1), pt);
 				} else if (pt.name.equals(btrapdoorBottom)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.trapdoor, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.trapdoor, 0), pt);
 				} else if (pt.name.equals(btrapdoorLeft)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.trapdoor, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.trapdoor, 3), pt);
 				} else if (pt.name.equals(btrapdoorRight)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.trapdoor, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.trapdoor, 2), pt);
 
 				} else if (pt.name.equals(bfenceGateHorizontal)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.fence_gate, 1), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.fence_gate, 3), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.fence_gate, 5), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.fence_gate, 7), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 1), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 3), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 5), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 7), pt);
 				} else if (pt.name.equals(bfenceGateVertical)) {
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.fence_gate, 0), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.fence_gate, 2), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.fence_gate, 4), pt);
-					reverseColourPoints.put(MillCommonUtilities.getPointHash(
-							Blocks.fence_gate, 6), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 0), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 2), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 4), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.fence_gate, 6), pt);
 
 				} else if (pt.name.equals(bbedTop)) {
-					reverseColourPoints
-							.put(MillCommonUtilities
-									.getPointHash(Blocks.bed, 8), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.bed, 8), pt);
 				} else if (pt.name.equals(bbedBottom)) {
-					reverseColourPoints.put(
-							MillCommonUtilities.getPointHash(Blocks.bed, 10),
-							pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.bed, 10), pt);
 				} else if (pt.name.equals(bbedLeft)) {
-					reverseColourPoints
-							.put(MillCommonUtilities
-									.getPointHash(Blocks.bed, 9), pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.bed, 9), pt);
 				} else if (pt.name.equals(bbedRight)) {
-					reverseColourPoints.put(
-							MillCommonUtilities.getPointHash(Blocks.bed, 11),
-							pt);
+					reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.bed, 11), pt);
 
 				} else if (pt.name.equals(bplainSignGuess)) {
 					for (int i = 0; i < 16; i++) {
-						reverseColourPoints.put(MillCommonUtilities
-								.getPointHash(Blocks.wall_sign, i), pt);
+						reverseColourPoints.put(MillCommonUtilities.getPointHash(Blocks.wall_sign, i), pt);
 					}
 				}
 			}
@@ -1818,8 +1419,7 @@ public class BuildingPlan {
 
 	}
 
-	public int areaToClear, firstLevel, length, width, nbfloors, lengthOffset,
-			widthOffset, buildingOrientation;
+	public int areaToClear, firstLevel, length, width, nbfloors, lengthOffset, widthOffset, buildingOrientation;
 	public String nativeName, shop;
 	public final HashMap<String, String> names = new HashMap<String, String>();
 	public List<String> maleResident = new ArrayList<String>();
@@ -1862,9 +1462,7 @@ public class BuildingPlan {
 	 * @param importPlan
 	 * @throws Exception
 	 */
-	public BuildingPlan(final File dir, final String buildingKey,
-			final int level, final int variation, final BuildingPlan parent,
-			final Culture c, final boolean importPlan) throws Exception {
+	public BuildingPlan(final File dir, final String buildingKey, final int level, final int variation, final BuildingPlan parent, final Culture c, final boolean importPlan) throws Exception {
 
 		char varChar = 'A';
 		varChar += variation;
@@ -1912,18 +1510,14 @@ public class BuildingPlan {
 		int i = 0;
 		for (final List<String> floor : textPlan) {
 			if (floor.size() != length) {
-				throw new MillenaireException(planName + ": " + "Floor " + i
-						+ " is " + floor.size() + " long, " + length
-						+ " expected.");
+				throw new MillenaireException(planName + ": " + "Floor " + i + " is " + floor.size() + " long, " + length + " expected.");
 			}
 
 			int j = 0;
 			for (final String s : floor) {
 
 				if (s.length() != width) {
-					throw new MillenaireException(planName + ": " + "Line " + j
-							+ " in floor " + i + " is " + s.length()
-							+ " wide, " + width + " expected.");
+					throw new MillenaireException(planName + ": " + "Line " + j + " in floor " + i + " is " + s.length() + " wide, " + width + " expected.");
 				}
 
 				j++;
@@ -1938,20 +1532,12 @@ public class BuildingPlan {
 		for (i = 0; i < textPlan.size(); i++) {
 			for (int j = 0; j < length; j++) {
 				for (int k = 0; k < width; k++) {
-					if (!charPoints.containsKey(textPlan.get(i).get(j)
-							.charAt(width - k - 1))) {
-						throw new MillenaireException(planName + ": In floor "
-								+ i + " line " + j + " char " + (width - k - 1)
-								+ " unknow character: "
-								+ textPlan.get(i).get(j).charAt(width - k - 1));
+					if (!charPoints.containsKey(textPlan.get(i).get(j).charAt(width - k - 1))) {
+						throw new MillenaireException(planName + ": In floor " + i + " line " + j + " char " + (width - k - 1) + " unknow character: " + textPlan.get(i).get(j).charAt(width - k - 1));
 					}
-					plan[i][j][k] = charPoints.get(textPlan.get(i).get(j)
-							.charAt(width - k - 1));
+					plan[i][j][k] = charPoints.get(textPlan.get(i).get(j).charAt(width - k - 1));
 					if (plan[i][j][k] == null) {
-						throw new MillenaireException(planName + ": In floor "
-								+ i + " line " + j + " char " + (width - k - 1)
-								+ " null PointType for: "
-								+ textPlan.get(i).get(j).charAt(width - k - 1));
+						throw new MillenaireException(planName + ": In floor " + i + " line " + j + " char " + (width - k - 1) + " null PointType for: " + textPlan.get(i).get(j).charAt(width - k - 1));
 					}
 				}
 			}
@@ -1960,9 +1546,7 @@ public class BuildingPlan {
 		computeCost();
 
 		if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-			MLN.major(this, "Loaded plan " + buildingKey + "_" + level + ": "
-					+ nativeName + " pop: " + maleResident + "/"
-					+ femaleResident + " / priority: " + priority);
+			MLN.major(this, "Loaded plan " + buildingKey + "_" + level + ": " + nativeName + " pop: " + maleResident + "/" + femaleResident + " / priority: " + priority);
 		}
 	}
 
@@ -1979,9 +1563,7 @@ public class BuildingPlan {
 	 * @param importPlan
 	 * @throws Exception
 	 */
-	public BuildingPlan(final File dir, final String buildingKey,
-			final int level, final int variation, final BuildingPlan parent,
-			final String configLine, final Culture c, final boolean importPlan)
+	public BuildingPlan(final File dir, final String buildingKey, final int level, final int variation, final BuildingPlan parent, final String configLine, final Culture c, final boolean importPlan)
 			throws Exception {
 
 		char varChar = 'A';
@@ -2003,8 +1585,7 @@ public class BuildingPlan {
 
 		final BufferedImage PNGFile = ImageIO.read(file);
 
-		final BufferedImage pictPlan = new BufferedImage(PNGFile.getWidth(),
-				PNGFile.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+		final BufferedImage pictPlan = new BufferedImage(PNGFile.getWidth(), PNGFile.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 		final Graphics2D fig = pictPlan.createGraphics();
 		fig.drawImage(PNGFile, 0, 0, null);
 		fig.dispose();
@@ -2014,31 +1595,21 @@ public class BuildingPlan {
 		widthOffset = (int) Math.floor(width * 0.5);
 
 		if (pictPlan.getHeight() != length) {
-			throw new MillenaireException(planName + ": "
-					+ "Expected length is " + length + " but file height is "
-					+ pictPlan.getHeight());
+			throw new MillenaireException(planName + ": " + "Expected length is " + length + " but file height is " + pictPlan.getHeight());
 		}
 
 		final float fnbfloors = (pictPlan.getWidth() + 1f) / (width + 1f);
 
 		if (Math.round(fnbfloors) != fnbfloors) {
-			throw new MillenaireException(planName + ": With a width of "
-					+ width + ", getting non-integer floor number: "
-					+ fnbfloors);
+			throw new MillenaireException(planName + ": With a width of " + width + ", getting non-integer floor number: " + fnbfloors);
 		}
 
 		nbfloors = (int) fnbfloors;
 
 		plan = new PointType[nbfloors][length][width];
 
-		if (pictPlan.getType() != BufferedImage.TYPE_3BYTE_BGR
-				&& pictPlan.getType() != BufferedImage.TYPE_4BYTE_ABGR) {
-			MLN.error(
-					this,
-					"Picture "
-							+ planName
-							+ ".png could not be loaded as type TYPE_3BYTE_BGR or TYPE_4BYTE_ABGR but instead as: "
-							+ pictPlan.getType());
+		if (pictPlan.getType() != BufferedImage.TYPE_3BYTE_BGR && pictPlan.getType() != BufferedImage.TYPE_4BYTE_ABGR) {
+			MLN.error(this, "Picture " + planName + ".png could not be loaded as type TYPE_3BYTE_BGR or TYPE_4BYTE_ABGR but instead as: " + pictPlan.getType());
 		}
 
 		boolean alphaLayer = false;
@@ -2053,8 +1624,7 @@ public class BuildingPlan {
 			for (int j = 0; j < length; j++) {
 				for (int k = 0; k < width; k++) {
 
-					int colour = pictPlan.getRGB(i * width + i + width - k - 1,
-							j);
+					int colour = pictPlan.getRGB(i * width + i + width - k - 1, j);
 
 					if (alphaLayer) {
 						if ((colour & 0xFF000000) != 0xff000000) {
@@ -2070,10 +1640,7 @@ public class BuildingPlan {
 					}
 
 					if (!colourPoints.containsKey(colour)) {
-						MLN.error(this, planName + ": Unknown colour "
-								+ getColourString(colour) + " at: "
-								+ (i * width + i + width - k - 1) + "/" + j
-								+ ", skipping it.");
+						MLN.error(this, planName + ": Unknown colour " + getColourString(colour) + " at: " + (i * width + i + width - k - 1) + "/" + j + ", skipping it.");
 						colour = 0x00FFFFFF;// white, empty pixel
 					}
 
@@ -2083,12 +1650,8 @@ public class BuildingPlan {
 						sleepingPos = true;
 					}
 
-					if (plan[i][j][k].name != null
-							&& plan[i][j][k].name.equals(bmainchest)
-							&& level > 0) {
-						MLN.error(this, "Main chest detected at "
-								+ (i * width + i + width - k - 1) + "/" + j
-								+ " but we are in an upgrade. Removing it.");
+					if (plan[i][j][k].name != null && plan[i][j][k].name.equals(bmainchest) && level > 0) {
+						MLN.error(this, "Main chest detected at " + (i * width + i + width - k - 1) + "/" + j + " but we are in an upgrade. Removing it.");
 						plan[i][j][k] = colourPoints.get(0x00FFFFFF);
 					}
 				}
@@ -2098,13 +1661,10 @@ public class BuildingPlan {
 		computeCost();
 
 		if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-			MLN.major(this, "Loaded plan " + buildingKey + "_" + level + ": "
-					+ nativeName + " pop: " + maleResident + "/"
-					+ femaleResident + "/priority:" + priority);
+			MLN.major(this, "Loaded plan " + buildingKey + "_" + level + ": " + nativeName + " pop: " + maleResident + "/" + femaleResident + "/priority:" + priority);
 		}
 
-		if (maleResident.size() > 0 && femaleResident.size() > 0 && level == 0
-				&& !sleepingPos) {
+		if (maleResident.size() > 0 && femaleResident.size() > 0 && level == 0 && !sleepingPos) {
 			MLN.error(this, "Has residents but the sleeping pos is missing!");
 		}
 
@@ -2113,26 +1673,16 @@ public class BuildingPlan {
 		for (int i = 0; i < nbfloors; i++) {
 			for (int j = 0; j < length; j++) {
 				for (int k = 0; k < width; k++) {
-					if (plan[i][j][k].isType(bchickenspawn)
-							&& !tags.contains("chicken")) {
-						MLN.warning(this,
-								"Building has chicken spawn but no chicken tag.");
-					} else if (plan[i][j][k].isType(bcowspawn)
-							&& !tags.contains("cattle")) {
-						MLN.warning(this,
-								"Building has cattle spawn but no cattle tag.");
-					} else if (plan[i][j][k].isType(bsheepspawn)
-							&& !tags.contains("sheeps")) {
-						MLN.warning(this,
-								"Building has sheeps spawn but no sheeps tag.");
-					} else if (plan[i][j][k].isType(bpigspawn)
-							&& !tags.contains("pigs")) {
-						MLN.warning(this,
-								"Building has pig spawn but no pig tag.");
-					} else if (plan[i][j][k].isType(bsquidspawn)
-							&& !tags.contains("squids")) {
-						MLN.warning(this,
-								"Building has squid spawn but no squid tag.");
+					if (plan[i][j][k].isType(bchickenspawn) && !tags.contains("chicken")) {
+						MLN.warning(this, "Building has chicken spawn but no chicken tag.");
+					} else if (plan[i][j][k].isType(bcowspawn) && !tags.contains("cattle")) {
+						MLN.warning(this, "Building has cattle spawn but no cattle tag.");
+					} else if (plan[i][j][k].isType(bsheepspawn) && !tags.contains("sheeps")) {
+						MLN.warning(this, "Building has sheeps spawn but no sheeps tag.");
+					} else if (plan[i][j][k].isType(bpigspawn) && !tags.contains("pigs")) {
+						MLN.warning(this, "Building has pig spawn but no pig tag.");
+					} else if (plan[i][j][k].isType(bsquidspawn) && !tags.contains("squids")) {
+						MLN.warning(this, "Building has squid spawn but no squid tag.");
 					}
 					if (plan[i][j][k].isType(bchickenspawn)) {
 						chicken++;
@@ -2170,8 +1720,7 @@ public class BuildingPlan {
 	 * @param variation
 	 * @param c
 	 */
-	public BuildingPlan(final String buildingKey, final int level,
-			final int variation, final Culture c) {
+	public BuildingPlan(final String buildingKey, final int level, final int variation, final Culture c) {
 		this.buildingKey = buildingKey;
 		this.isUpdate = level > 0;
 		this.level = level;
@@ -2217,23 +1766,18 @@ public class BuildingPlan {
 		}
 	}
 
-	public List<LocationBuildingPair> build(final MillWorld mw,
-			final VillageType villageType, final BuildingLocation location,
-			final boolean villageGeneration, final boolean townHall,
-			Point townHallPos, final boolean wandimport,
-			final EntityPlayer owner, final boolean rushBuilding) {
+	public List<LocationBuildingPair> build(final MillWorld mw, final VillageType villageType, final BuildingLocation location, final boolean villageGeneration, final boolean townHall,
+			Point townHallPos, final boolean wandimport, final EntityPlayer owner, final boolean rushBuilding) {
 
 		if (!townHall && townHallPos == null && !wandimport) {
-			MLN.error(this,
-					"Building is not TH and does not have TH's position.");
+			MLN.error(this, "Building is not TH and does not have TH's position.");
 		}
 
 		final World worldObj = mw.world;
 
 		final List<LocationBuildingPair> buildings = new ArrayList<LocationBuildingPair>();
 
-		final BuildingBlock[] bblocks = getBuildingPoints(worldObj, location,
-				villageGeneration);
+		final BuildingBlock[] bblocks = getBuildingPoints(worldObj, location, villageGeneration);
 
 		for (final BuildingBlock bblock : bblocks) {
 			bblock.build(worldObj, villageGeneration, wandimport);
@@ -2244,29 +1788,22 @@ public class BuildingPlan {
 			int signNb = 0;
 			final List<String> hofData = MLN.getHoFData();
 
-			for (int z = location.pos.getiZ() - width / 2; z < location.pos
-					.getiZ() + width / 2; z++) {
-				for (int x = location.pos.getiX() + length / 2; x >= location.pos
-						.getiX() - length / 2; x--) {
+			for (int z = location.pos.getiZ() - width / 2; z < location.pos.getiZ() + width / 2; z++) {
+				for (int x = location.pos.getiX() + length / 2; x >= location.pos.getiX() - length / 2; x--) {
 
-					for (int y = location.pos.getiY() + plan.length; y >= location.pos
-							.getiY(); y--) {
+					for (int y = location.pos.getiY() + plan.length; y >= location.pos.getiY(); y--) {
 						if (worldObj.getBlock(x, y, z) == Blocks.wall_sign) {
-							final TileEntitySign sign = new Point(x, y, z)
-									.getSign(worldObj);
+							final TileEntitySign sign = new Point(x, y, z).getSign(worldObj);
 							if (sign != null) {
 								if (signNb < hofData.size()) {
-									final String[] lines = hofData.get(signNb)
-											.split(";");
-									for (int i = 0; i < Math.min(4,
-											lines.length); i++) {
+									final String[] lines = hofData.get(signNb).split(";");
+									for (int i = 0; i < Math.min(4, lines.length); i++) {
 										// first line is guy's name, so not
 										// translated
 										if (i == 0 || lines[i].length() == 0) {
 											sign.signText[i] = lines[i];
 										} else {
-											sign.signText[i] = MLN
-													.string(lines[i]);
+											sign.signText[i] = MLN.string(lines[i]);
 										}
 
 									}
@@ -2281,9 +1818,7 @@ public class BuildingPlan {
 
 		if (bblocks.length > 0 && !wandimport && location.level == 0) {
 
-			final Building building = new Building(mw, culture, villageType,
-					location, townHall, villageGeneration,
-					bblocks[bblocks.length - 1].p, townHallPos);
+			final Building building = new Building(mw, culture, villageType, location, townHall, villageGeneration, bblocks[bblocks.length - 1].p, townHallPos);
 
 			if (MLN.LogWorldGeneration >= MLN.MINOR) {
 				MLN.minor(this, "Building " + planName + " at " + location);
@@ -2305,13 +1840,9 @@ public class BuildingPlan {
 		if (culture != null) {
 
 			for (final String sb : startingSubBuildings) {
-				final BuildingPlan plan = culture.getBuildingPlanSet(sb)
-						.getRandomStartingPlan();
-				final BuildingLocation l = location
-						.createLocationForStartingSubBuilding(sb);
-				final List<LocationBuildingPair> vb = plan.build(mw,
-						villageType, l, villageGeneration, false, townHallPos,
-						false, owner, rushBuilding);
+				final BuildingPlan plan = culture.getBuildingPlanSet(sb).getRandomStartingPlan();
+				final BuildingLocation l = location.createLocationForStartingSubBuilding(sb);
+				final List<LocationBuildingPair> vb = plan.build(mw, villageType, l, villageGeneration, false, townHallPos, false, owner, rushBuilding);
 				location.subBuildings.add(sb);
 
 				for (final LocationBuildingPair p : vb) {
@@ -2320,11 +1851,8 @@ public class BuildingPlan {
 			}
 		}
 
-		worldObj.markBlockRangeForRenderUpdate(location.pos.getiX() - length
-				/ 2 - 5, location.pos.getiY() - plan.length - 5,
-				location.pos.getiZ() - width / 2 - 5, location.pos.getiX()
-						+ length / 2 + 5, location.pos.getiY() - 5,
-				location.pos.getiZ() + width / 2 + 5);
+		worldObj.markBlockRangeForRenderUpdate(location.pos.getiX() - length / 2 - 5, location.pos.getiY() - plan.length - 5, location.pos.getiZ() - width / 2 - 5, location.pos.getiX() + length / 2
+				+ 5, location.pos.getiY() - 5, location.pos.getiZ() + width / 2 + 5);
 
 		return buildings;
 
@@ -2342,8 +1870,7 @@ public class BuildingPlan {
 					final PointType p = plan[i][j][k];
 
 					if (p == null) {
-						throw new MillenaireException("PointType null at " + i
-								+ "/" + j + "/" + k);
+						throw new MillenaireException("PointType null at " + i + "/" + j + "/" + k);
 					}
 
 					if (p.block == Blocks.log && (p.meta & 3) == 0) {
@@ -2398,36 +1925,26 @@ public class BuildingPlan {
 																				// from
 																				// stone
 						addToCost(Blocks.stone, 1);
-					} else if (p.block == Blocks.stone_slab
-							&& (p.meta & 7) == 0) {
+					} else if (p.block == Blocks.stone_slab && (p.meta & 7) == 0) {
 						addToCost(Blocks.stone, 1);
-					} else if (p.block == Blocks.stone_slab
-							&& (p.meta & 7) == 1) {
+					} else if (p.block == Blocks.stone_slab && (p.meta & 7) == 1) {
 						addToCost(Blocks.sandstone, 1);
-					} else if (p.block == Blocks.stone_slab
-							&& (p.meta & 7) == 2) {
+					} else if (p.block == Blocks.stone_slab && (p.meta & 7) == 2) {
 						plankCost++;
-					} else if (p.block == Blocks.stone_slab
-							&& (p.meta & 7) == 3) {
+					} else if (p.block == Blocks.stone_slab && (p.meta & 7) == 3) {
 						addToCost(Blocks.cobblestone, 1);
-					} else if (p.block == Blocks.stone_slab
-							&& (p.meta & 7) == 4) {
+					} else if (p.block == Blocks.stone_slab && (p.meta & 7) == 4) {
 						addToCost(Blocks.brick_block, 1);
-					} else if (p.block == Blocks.stone_slab
-							&& (p.meta & 7) == 5) {
+					} else if (p.block == Blocks.stone_slab && (p.meta & 7) == 5) {
 						addToCost(Blocks.stone, 1);
 
-					} else if (p.block == Blocks.wooden_slab
-							&& (p.meta & 7) == 0) {
+					} else if (p.block == Blocks.wooden_slab && (p.meta & 7) == 0) {
 						plankOakCost++;
-					} else if (p.block == Blocks.wooden_slab
-							&& (p.meta & 7) == 1) {
+					} else if (p.block == Blocks.wooden_slab && (p.meta & 7) == 1) {
 						plankPineCost++;
-					} else if (p.block == Blocks.wooden_slab
-							&& (p.meta & 7) == 2) {
+					} else if (p.block == Blocks.wooden_slab && (p.meta & 7) == 2) {
 						plankBirchCost++;
-					} else if (p.block == Blocks.wooden_slab
-							&& (p.meta & 7) == 3) {
+					} else if (p.block == Blocks.wooden_slab && (p.meta & 7) == 3) {
 						plankJungleCost++;
 
 					} else if (p.block == Blocks.wool) {
@@ -2517,12 +2034,7 @@ public class BuildingPlan {
 					} else if (p.isType(bbyzantineslab_leftright_inv)) {
 						byzBricksHalf++;
 
-					} else if (p.block != null
-							&& p.block != Blocks.air
-							&& !Goods.freeGoods.contains(new InvItem(p.block,
-									p.meta))
-							&& !Goods.freeGoods.contains(new InvItem(p.block,
-									-1))) {
+					} else if (p.block != null && p.block != Blocks.air && !Goods.freeGoods.contains(new InvItem(p.block, p.meta)) && !Goods.freeGoods.contains(new InvItem(p.block, -1))) {
 						addToCost(p.block, p.meta, 1);
 					}
 				}
@@ -2530,38 +2042,31 @@ public class BuildingPlan {
 		}
 
 		if (plankCost > 0) {
-			addToCost(Blocks.log, -1,
-					(int) Math.max(Math.ceil(plankCost * 1.0 / 4), 1));
+			addToCost(Blocks.log, -1, (int) Math.max(Math.ceil(plankCost * 1.0 / 4), 1));
 		}
 
 		if (plankOakCost > 0) {
-			addToCost(Blocks.log, 0,
-					(int) Math.max(Math.ceil(plankOakCost * 1.0 / 4), 1));
+			addToCost(Blocks.log, 0, (int) Math.max(Math.ceil(plankOakCost * 1.0 / 4), 1));
 		}
 
 		if (plankPineCost > 0) {
-			addToCost(Blocks.log, 1,
-					(int) Math.max(Math.ceil(plankPineCost * 1.0 / 4), 1));
+			addToCost(Blocks.log, 1, (int) Math.max(Math.ceil(plankPineCost * 1.0 / 4), 1));
 		}
 
 		if (plankBirchCost > 0) {
-			addToCost(Blocks.log, 2,
-					(int) Math.max(Math.ceil(plankBirchCost * 1.0 / 4), 1));
+			addToCost(Blocks.log, 2, (int) Math.max(Math.ceil(plankBirchCost * 1.0 / 4), 1));
 		}
 
 		if (plankJungleCost > 0) {
-			addToCost(Blocks.log, 3,
-					(int) Math.max(Math.ceil(plankJungleCost * 1.0 / 4), 1));
+			addToCost(Blocks.log, 3, (int) Math.max(Math.ceil(plankJungleCost * 1.0 / 4), 1));
 		}
 
 		if (glassPaneCost > 0) {
-			addToCost(Blocks.glass, 0,
-					(int) Math.max(Math.ceil(glassPaneCost * 6.0 / 16), 1));
+			addToCost(Blocks.glass, 0, (int) Math.max(Math.ceil(glassPaneCost * 6.0 / 16), 1));
 		}
 
 		if (byzBricksHalf > 0) {
-			addToCost(Mill.byzantine_tiles, 0,
-					(int) Math.max(Math.ceil(byzBricksHalf / 2), 1));
+			addToCost(Mill.byzantine_tiles, 0, (int) Math.max(Math.ceil(byzBricksHalf / 2), 1));
 		}
 
 		if (MLN.LogBuildingPlan >= MLN.MAJOR) {
@@ -2570,9 +2075,7 @@ public class BuildingPlan {
 
 	}
 
-	public BuildingLocation findBuildingLocation(final MillWorldInfo winfo,
-			final AStarPathing pathing, final Point centre, int maxRadius,
-			final Random random, final int porientation) {
+	public BuildingLocation findBuildingLocation(final MillWorldInfo winfo, final AStarPathing pathing, final Point centre, int maxRadius, final Random random, final int porientation) {
 
 		final long startTime = System.nanoTime();
 
@@ -2583,10 +2086,7 @@ public class BuildingPlan {
 		maxRadius = (int) (maxRadius * maxDistance);
 
 		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-			MLN.major(this, "testBuildWorldInfo: Called to test for building "
-					+ planName + " around " + centre + "(" + ci + "/" + cj
-					+ "), start radius: " + radius + ", max radius: "
-					+ maxRadius);
+			MLN.major(this, "testBuildWorldInfo: Called to test for building " + planName + " around " + centre + "(" + ci + "/" + cj + "), start radius: " + radius + ", max radius: " + maxRadius);
 		}
 
 		for (int i = 0; i < winfo.length; i++) {
@@ -2603,32 +2103,25 @@ public class BuildingPlan {
 			final int maxj = Math.min(winfo.width - 1, cj + radius);
 
 			if (MLN.LogWorldGeneration >= MLN.DEBUG) {
-				MLN.debug(this, "Testing square: " + mini + "/" + minj + " to "
-						+ maxi + "/" + maxj);
+				MLN.debug(this, "Testing square: " + mini + "/" + minj + " to " + maxi + "/" + maxj);
 			}
 
 			for (int i = mini; i < maxi; i++) {
 				if (cj - radius == minj) {
-					final LocationReturn lr = testSpot(winfo, pathing, centre,
-							i, minj, random, porientation);
+					final LocationReturn lr = testSpot(winfo, pathing, centre, i, minj, random, porientation);
 
 					if (lr.location != null) {
 						if (MLN.LogBuildingPlan >= MLN.MINOR) {
-							MLN.minor(this, "Time taken for location search: "
-									+ (double) (System.nanoTime() - startTime)
-									/ 1000000);
+							MLN.minor(this, "Time taken for location search: " + (double) (System.nanoTime() - startTime) / 1000000);
 						}
 						return lr.location;
 					}
 				}
 				if (cj + radius == maxj) {
-					final LocationReturn lr = testSpot(winfo, pathing, centre,
-							i, maxj, random, porientation);
+					final LocationReturn lr = testSpot(winfo, pathing, centre, i, maxj, random, porientation);
 					if (lr.location != null) {
 						if (MLN.LogBuildingPlan >= MLN.MINOR) {
-							MLN.minor(this, "Time taken for location search: "
-									+ (double) (System.nanoTime() - startTime)
-									/ 1000000);
+							MLN.minor(this, "Time taken for location search: " + (double) (System.nanoTime() - startTime) / 1000000);
 						}
 						return lr.location;
 					}
@@ -2637,25 +2130,19 @@ public class BuildingPlan {
 
 			for (int j = minj; j < maxj; j++) {
 				if (ci - radius == mini) {
-					final LocationReturn lr = testSpot(winfo, pathing, centre,
-							mini, j, random, porientation);
+					final LocationReturn lr = testSpot(winfo, pathing, centre, mini, j, random, porientation);
 					if (lr.location != null) {
 						if (MLN.LogBuildingPlan >= MLN.MINOR) {
-							MLN.minor(this, "Time taken for location search: "
-									+ (double) (System.nanoTime() - startTime)
-									/ 1000000);
+							MLN.minor(this, "Time taken for location search: " + (double) (System.nanoTime() - startTime) / 1000000);
 						}
 						return lr.location;
 					}
 				}
 				if (ci + radius == maxi) {
-					final LocationReturn lr = testSpot(winfo, pathing, centre,
-							maxi, j, random, porientation);
+					final LocationReturn lr = testSpot(winfo, pathing, centre, maxi, j, random, porientation);
 					if (lr.location != null) {
 						if (MLN.LogBuildingPlan >= MLN.MINOR) {
-							MLN.minor(this, "Time taken for location search: "
-									+ (double) (System.nanoTime() - startTime)
-									/ 1000000);
+							MLN.minor(this, "Time taken for location search: " + (double) (System.nanoTime() - startTime) / 1000000);
 						}
 						return lr.location;
 					}
@@ -2666,13 +2153,11 @@ public class BuildingPlan {
 		}
 
 		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-			MLN.major(this, "Could not find acceptable location (radius: "
-					+ radius + ")");
+			MLN.major(this, "Could not find acceptable location (radius: " + radius + ")");
 		}
 
 		if (MLN.LogBuildingPlan >= MLN.MINOR) {
-			MLN.minor(this, "Time taken for unsuccessful location search: "
-					+ (double) (System.nanoTime() - startTime) / 1000000);
+			MLN.minor(this, "Time taken for unsuccessful location search: " + (double) (System.nanoTime() - startTime) / 1000000);
 		}
 
 		return null;
@@ -2696,8 +2181,7 @@ public class BuildingPlan {
 		return MillCommonUtilities.getBlock(worldObj, p);
 	}
 
-	public BuildingBlock[] getBuildingPoints(final World world,
-			final BuildingLocation location, final boolean villageGeneration) {
+	public BuildingBlock[] getBuildingPoints(final World world, final BuildingLocation location, final boolean villageGeneration) {
 
 		final int x = location.pos.getiX();
 		final int y = location.pos.getiY();
@@ -2707,15 +2191,12 @@ public class BuildingPlan {
 		nbBlocksToPut = 0;
 
 		// "guess" of the size needed
-		final int approximateBlocks = (length + areaToClear * 2)
-				* (width + areaToClear * 2) * (nbfloors + 50);
+		final int approximateBlocks = (length + areaToClear * 2) * (width + areaToClear * 2) * (nbfloors + 50);
 
-		final List<BuildingBlock> bblocks = new ArrayList<BuildingBlock>(
-				approximateBlocks + 100);
+		final List<BuildingBlock> bblocks = new ArrayList<BuildingBlock>(approximateBlocks + 100);
 
 		if (MLN.LogWorldGeneration >= MLN.MINOR) {
-			MLN.minor(this, "Getting blocks for " + planName + " at " + x + "/"
-					+ y + "/" + z + "/" + orientation);
+			MLN.minor(this, "Getting blocks for " + planName + " at " + x + "/" + y + "/" + z + "/" + orientation);
 		}
 
 		if (!isUpdate && !isSubBuilding() && !location.bedrocklevel) {
@@ -2746,17 +2227,11 @@ public class BuildingPlan {
 						if (i >= offset - 1) {// for each block away from
 												// building, one extra height
 												// allowed
-							final Point p = adjustForOrientation(x, y + i, z, j
-									- lengthOffset, ak - widthOffset,
-									orientation);
-							bblocks.add(new BuildingBlock(p, 0, 0,
-									BuildingBlock.CLEARGROUND));
+							final Point p = adjustForOrientation(x, y + i, z, j - lengthOffset, ak - widthOffset, orientation);
+							bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.CLEARGROUND));
 						} else {
-							final Point p = adjustForOrientation(x, y + i, z, j
-									- lengthOffset, k - widthOffset,
-									orientation);
-							bblocks.add(new BuildingBlock(p, 0, 0,
-									BuildingBlock.CLEARTREE));
+							final Point p = adjustForOrientation(x, y + i, z, j - lengthOffset, k - widthOffset, orientation);
+							bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.CLEARTREE));
 						}
 					}
 				}
@@ -2787,25 +2262,16 @@ public class BuildingPlan {
 						offset--;
 
 						if (-i > offset) {
-							final Point p = adjustForOrientation(x, y + i, z, j
-									- lengthOffset, k - widthOffset,
-									orientation);
-							bblocks.add(new BuildingBlock(p, 0, 0,
-									BuildingBlock.PRESERVEGROUNDDEPTH));
+							final Point p = adjustForOrientation(x, y + i, z, j - lengthOffset, k - widthOffset, orientation);
+							bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.PRESERVEGROUNDDEPTH));
 							nbBlocksToPut++;
 						} else if (-i == offset) {
-							final Point p = adjustForOrientation(x, y + i, z, j
-									- lengthOffset, k - widthOffset,
-									orientation);
-							bblocks.add(new BuildingBlock(p, 0, 0,
-									BuildingBlock.PRESERVEGROUNDSURFACE));
+							final Point p = adjustForOrientation(x, y + i, z, j - lengthOffset, k - widthOffset, orientation);
+							bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.PRESERVEGROUNDSURFACE));
 							nbBlocksToPut++;
 						} else {
-							final Point p = adjustForOrientation(x, y + i, z, j
-									- lengthOffset, k - widthOffset,
-									orientation);
-							bblocks.add(new BuildingBlock(p, 0, 0,
-									BuildingBlock.CLEARTREE));
+							final Point p = adjustForOrientation(x, y + i, z, j - lengthOffset, k - widthOffset, orientation);
+							bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.CLEARTREE));
 						}
 					}
 				}
@@ -2817,18 +2283,12 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 					final PointType pt = plan[i][j][k];
 					if (pt.isType(bpreserveground)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.PRESERVEGROUNDSURFACE));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.PRESERVEGROUNDSURFACE));
 						nbBlocksToPut++;
 					} else if (pt.isType(ballbuttrees)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.CLEARTREE));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.CLEARTREE));
 						nbBlocksToPut++;
 					}
 				}
@@ -2843,8 +2303,7 @@ public class BuildingPlan {
 
 					final PointType pt = plan[i][j][ak];
 
-					final Point p = adjustForOrientation(x, y + i + firstLevel,
-							z, j - lengthOffset, ak - widthOffset, orientation);
+					final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, ak - widthOffset, orientation);
 
 					if (pt.block == Blocks.air) {
 						bblocks.add(new BuildingBlock(p, Blocks.air, 0));
@@ -2865,16 +2324,13 @@ public class BuildingPlan {
 					int m = 0;
 					Block b = null;
 
-					final Point p = adjustForOrientation(x,
-							y + ai + firstLevel, z, j - lengthOffset, ak
-									- widthOffset, orientation);
+					final Point p = adjustForOrientation(x, y + ai + firstLevel, z, j - lengthOffset, ak - widthOffset, orientation);
 
-					if (pt.block != null && pt.block != Blocks.air
-							&& !pt.secondStep) {// standard block
+					if (pt.block != null && pt.block != Blocks.air && !pt.secondStep) {// standard
+																						// block
 						b = pt.block;
 						m = pt.meta;
-					} else if (pt.isType(bempty) && !isUpdate
-							&& !TYPE_SUBBUILDING.equals(type)) {
+					} else if (pt.isType(bempty) && !isUpdate && !TYPE_SUBBUILDING.equals(type)) {
 						b = Blocks.air;
 					} else if (pt.isType(bgrass) && villageGeneration) {
 						b = Blocks.grass;
@@ -3255,9 +2711,7 @@ public class BuildingPlan {
 					final PointType pt = plan[ai][j][ak];
 					int m = 0;
 					Block b = null;
-					final Point p = adjustForOrientation(x,
-							y + ai + firstLevel, z, j - lengthOffset, ak
-									- widthOffset, orientation);
+					final Point p = adjustForOrientation(x, y + ai + firstLevel, z, j - lengthOffset, ak - widthOffset, orientation);
 
 					if (pt.block != null && pt.secondStep) {// standard block
 						b = pt.block;
@@ -3374,123 +2828,72 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 					final PointType pt = plan[i][j][k];
 					if (pt.isType(btapestry)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.TAPESTRY));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.TAPESTRY));
 						nbBlocksToPut++;
 					} else if (pt.isType(bindianstatue)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.INDIANSTATUE));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.INDIANSTATUE));
 						nbBlocksToPut++;
 					} else if (pt.isType(bmayanstatue)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.MAYANSTATUE));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.MAYANSTATUE));
 						nbBlocksToPut++;
 					} else if (pt.isType(bbyzantineiconsmall)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.BYZANTINEICONSMALL));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.BYZANTINEICONSMALL));
 						nbBlocksToPut++;
 					} else if (pt.isType(bbyzantineiconmedium)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.BYZANTINEICONMEDIUM));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.BYZANTINEICONMEDIUM));
 						nbBlocksToPut++;
 					} else if (pt.isType(bbyzantineiconlarge)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.BYZANTINEICONLARGE));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.BYZANTINEICONLARGE));
 						nbBlocksToPut++;
 					} else if (pt.isType(boakspawn)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.OAKSPAWN));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.OAKSPAWN));
 						nbBlocksToPut++;
 					} else if (pt.isType(bpinespawn)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.PINESPAWN));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.PINESPAWN));
 						nbBlocksToPut++;
 					} else if (pt.isType(bbirchspawn)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.BIRCHSPAWN));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.BIRCHSPAWN));
 						nbBlocksToPut++;
 					} else if (pt.isType(bjunglespawn)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.JUNGLESPAWN));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.JUNGLESPAWN));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnerskeleton)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.SPAWNERSKELETON));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERSKELETON));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnerzombie)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.SPAWNERZOMBIE));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERZOMBIE));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnerspider)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.SPAWNERSPIDER));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERSPIDER));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnercavespider)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.SPAWNERCAVESPIDER));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERCAVESPIDER));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnercreeper)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.SPAWNERCREEPER));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERCREEPER));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnerblaze)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.SPAWNERBLAZE));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERBLAZE));
 						nbBlocksToPut++;
 					} else if (pt.isType(bdispenserunknownpowder)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
-						bblocks.add(new BuildingBlock(p, 0, 0,
-								BuildingBlock.DISPENDERUNKNOWNPOWDER));
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.DISPENDERUNKNOWNPOWDER));
 						nbBlocksToPut++;
 					}
 				}
@@ -3502,9 +2905,7 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 					final PointType pt = plan[i][j][k];
 					if (pt.isType(bmainchest)) {
-						final Point p = adjustForOrientation(x, y + i
-								+ firstLevel, z, j - lengthOffset, k
-								- widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						location.chestPos = p;
 						bblocks.add(new BuildingBlock(p, Mill.lockedChest, 1));
 						nbBlocksToPut++;
@@ -3544,21 +2945,15 @@ public class BuildingPlan {
 				special = 0;
 			}
 
-			if ((block == bb.block && bmeta == bb.meta && special == 0 || block == Blocks.grass
-					&& bb.block == Blocks.dirt)
-					&& bb.special == 0) {
+			if ((block == bb.block && bmeta == bb.meta && special == 0 || block == Blocks.grass && bb.block == Blocks.dirt) && bb.special == 0) {
 				toDelete[i] = true;
-			} else if (bb.special == BuildingBlock.CLEARTREE
-					&& block != Blocks.log && block != Blocks.leaves) {
+			} else if (bb.special == BuildingBlock.CLEARTREE && block != Blocks.log && block != Blocks.leaves) {
 				toDelete[i] = true;
-			} else if (bb.special == BuildingBlock.CLEARGROUND
-					&& (block == null || block == Blocks.air)) {
+			} else if (bb.special == BuildingBlock.CLEARGROUND && (block == null || block == Blocks.air)) {
 				toDelete[i] = true;
-			} else if (bb.special == BuildingBlock.PRESERVEGROUNDDEPTH
-					&& MillCommonUtilities.getBlockIdValidGround(block, false) == block) {
+			} else if (bb.special == BuildingBlock.PRESERVEGROUNDDEPTH && MillCommonUtilities.getBlockIdValidGround(block, false) == block) {
 				toDelete[i] = true;
-			} else if (bb.special == BuildingBlock.PRESERVEGROUNDSURFACE
-					&& MillCommonUtilities.getBlockIdValidGround(block, true) == block) {
+			} else if (bb.special == BuildingBlock.PRESERVEGROUNDSURFACE && MillCommonUtilities.getBlockIdValidGround(block, true) == block) {
 				toDelete[i] = true;
 			} else {
 				bbmap.put(bb.p, bb);
@@ -3629,8 +3024,7 @@ public class BuildingPlan {
 	}
 
 	public String getGameNameKey() {
-		return "_buildingGame:" + culture.key + ":" + buildingKey + ":"
-				+ variation + ":" + level;
+		return "_buildingGame:" + culture.key + ":" + buildingKey + ":" + variation + ":" + level;
 	}
 
 	private int getOrientedBlockMeta(final int direction, final int orientation) {
@@ -3720,14 +3114,11 @@ public class BuildingPlan {
 
 			if (block.p.sameBlock(west) && isBlockOpaqueCube(block.block)) {
 				westOpen = false;
-			} else if (block.p.sameBlock(east)
-					&& isBlockOpaqueCube(block.block)) {
+			} else if (block.p.sameBlock(east) && isBlockOpaqueCube(block.block)) {
 				eastOpen = false;
-			} else if (block.p.sameBlock(south)
-					&& isBlockOpaqueCube(block.block)) {
+			} else if (block.p.sameBlock(south) && isBlockOpaqueCube(block.block)) {
 				southOpen = false;
-			} else if (block.p.sameBlock(north)
-					&& isBlockOpaqueCube(block.block)) {
+			} else if (block.p.sameBlock(north) && isBlockOpaqueCube(block.block)) {
 				northOpen = false;
 			}
 		}
@@ -3828,9 +3219,7 @@ public class BuildingPlan {
 	}
 
 	public boolean isBuildable(final Block block) {
-		return block == Blocks.air || block == Blocks.leaves
-				|| block == Blocks.log || block == Blocks.brown_mushroom
-				|| block == Blocks.red_mushroom || block == Blocks.red_flower
+		return block == Blocks.air || block == Blocks.leaves || block == Blocks.log || block == Blocks.brown_mushroom || block == Blocks.red_mushroom || block == Blocks.red_flower
 				|| block == Blocks.yellow_flower;
 	}
 
@@ -3838,13 +3227,11 @@ public class BuildingPlan {
 		return TYPE_SUBBUILDING.equals(type);
 	}
 
-	public boolean mapIsOpaqueBlock(final Map<Point, BuildingBlock> map,
-			final Point p) {
+	public boolean mapIsOpaqueBlock(final Map<Point, BuildingBlock> map, final Point p) {
 		return map.containsKey(p) && isBlockOpaqueCube(map.get(p).block);
 	}
 
-	public boolean mapIsStairBlock(final Map<Point, BuildingBlock> map,
-			final Point p) {
+	public boolean mapIsStairBlock(final Map<Point, BuildingBlock> map, final Point p) {
 		if (!map.containsKey(p)) {
 			return false;
 		}
@@ -3854,8 +3241,7 @@ public class BuildingPlan {
 		return block == Blocks.stone_stairs || block == Blocks.oak_stairs;
 	}
 
-	private void readConfigLine(final File file, final String line,
-			final boolean importPlan) {
+	private void readConfigLine(final File file, final String line, final boolean importPlan) {
 
 		final String[] configs = line.split(";", -1);
 
@@ -3870,11 +3256,9 @@ public class BuildingPlan {
 					priority = Integer.parseInt(value);
 				} else if (key.equalsIgnoreCase("moveinpriority")) {
 					priorityMoveIn = Integer.parseInt(value);
-				} else if (key.equalsIgnoreCase("french")
-						|| key.equalsIgnoreCase("native")) {
+				} else if (key.equalsIgnoreCase("french") || key.equalsIgnoreCase("native")) {
 					nativeName = value;
-				} else if (key.equalsIgnoreCase("english")
-						|| key.startsWith("name_")) {
+				} else if (key.equalsIgnoreCase("english") || key.startsWith("name_")) {
 					names.put(key, value);
 				} else if (key.equalsIgnoreCase("around")) {
 					areaToClear = Integer.parseInt(value);
@@ -3896,46 +3280,30 @@ public class BuildingPlan {
 						reputation = MillCommonUtilities.readInteger(value);
 					} catch (final Exception e) {
 						reputation = 0;
-						MLN.error(
-								null,
-								"Error when reading reputation line in "
-										+ file.getName() + ": " + line + " : "
-										+ e.getMessage());
+						MLN.error(null, "Error when reading reputation line in " + file.getName() + ": " + line + " : " + e.getMessage());
 					}
 				} else if (key.equalsIgnoreCase("price")) {
 					try {
 						price = MillCommonUtilities.readInteger(value);
 					} catch (final Exception e) {
 						price = 0;
-						MLN.error(
-								this,
-								"Error when reading reputation line in "
-										+ file.getName() + ": " + line + " : "
-										+ e.getMessage());
+						MLN.error(this, "Error when reading reputation line in " + file.getName() + ": " + line + " : " + e.getMessage());
 					}
 				} else if (key.equalsIgnoreCase("length")) {
 					length = Integer.parseInt(value);
 				} else if (key.equalsIgnoreCase("width")) {
 					width = Integer.parseInt(value);
 				} else if (!importPlan && key.equalsIgnoreCase("male")) {
-					if (culture.villagerTypes.containsKey(value.toLowerCase())
-							|| MillVillager.oldVillagers.containsKey(value
-									.toLowerCase())) {
+					if (culture.villagerTypes.containsKey(value.toLowerCase()) || MillVillager.oldVillagers.containsKey(value.toLowerCase())) {
 						maleResident.add(value.toLowerCase());
 					} else {
-						MLN.error(this,
-								"Attempted to load unknown male villager: "
-										+ value);
+						MLN.error(this, "Attempted to load unknown male villager: " + value);
 					}
 				} else if (!importPlan && key.equalsIgnoreCase("female")) {
-					if (culture.villagerTypes.containsKey(value.toLowerCase())
-							|| MillVillager.oldVillagers.containsKey(value
-									.toLowerCase())) {
+					if (culture.villagerTypes.containsKey(value.toLowerCase()) || MillVillager.oldVillagers.containsKey(value.toLowerCase())) {
 						femaleResident.add(value.toLowerCase());
 					} else {
-						MLN.error(this,
-								"Attempted to load unknown female villager: "
-										+ value);
+						MLN.error(this, "Attempted to load unknown female villager: " + value);
 					}
 				} else if (key.equalsIgnoreCase("exploretag")) {
 					exploreTag = value.toLowerCase();
@@ -3946,9 +3314,7 @@ public class BuildingPlan {
 				} else if (!importPlan && key.equalsIgnoreCase("shop")) {
 					if (culture != null) {// culture is null only when using the
 											// import feature
-						if (culture.shopBuys.containsKey(value)
-								|| culture.shopSells.containsKey(value)
-								|| culture.shopBuysOptional.containsKey(value)) {
+						if (culture.shopBuys.containsKey(value) || culture.shopSells.containsKey(value) || culture.shopBuysOptional.containsKey(value)) {
 							shop = value;
 						} else {
 							MLN.error(this, "Undefined shop type: " + value);
@@ -3975,22 +3341,14 @@ public class BuildingPlan {
 				} else if (!importPlan && key.equalsIgnoreCase("startinggood")) {
 					final String[] temp = value.split(",");
 					if (temp.length != 4) {
-						MLN.error(this,
-								"Error when reading starting good: expected four fields, found "
-										+ temp.length + ": " + value);
+						MLN.error(this, "Error when reading starting good: expected four fields, found " + temp.length + ": " + value);
 					} else {
 
 						final String s = temp[0];
 						if (!Goods.goodsName.containsKey(s)) {
-							MLN.error(this,
-									"Error when reading starting good: unknown good: "
-											+ s);
+							MLN.error(this, "Error when reading starting good: unknown good: " + s);
 						} else {
-							final StartingGood sg = new StartingGood(
-									Goods.goodsName.get(s),
-									Double.parseDouble(temp[1]),
-									Integer.parseInt(temp[2]),
-									Integer.parseInt(temp[3]));
+							final StartingGood sg = new StartingGood(Goods.goodsName.get(s), Double.parseDouble(temp[1]), Integer.parseInt(temp[2]), Integer.parseInt(temp[3]));
 							startingGoods.add(sg);
 						}
 
@@ -4001,8 +3359,7 @@ public class BuildingPlan {
 				} else if (key.equalsIgnoreCase("showtownhallsigns")) {
 					showTownHallSigns = Boolean.parseBoolean(value);
 				} else if (!importPlan) {
-					MLN.error(this, "Could not recognise key on line: "
-							+ config);
+					MLN.error(this, "Could not recognise key on line: " + config);
 				}
 			}
 		}
@@ -4026,8 +3383,7 @@ public class BuildingPlan {
 		}
 	}
 
-	public void referenceBuildingPoints(final World worldObj,
-			final Building building, final BuildingLocation location) {
+	public void referenceBuildingPoints(final World worldObj, final Building building, final BuildingLocation location) {
 
 		final int x = location.pos.getiX();
 		final int y = location.pos.getiY();
@@ -4044,43 +3400,32 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 					final PointType pt = plan[i][j][k];
 
-					final Point p = adjustForOrientation(x, y + i + firstLevel,
-							z, j - lengthOffset, k - widthOffset, orientation);
+					final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
 
 					if (pt.isType(bsoil)) {
-						building.getResManager().addSoilPoint(Mill.CROP_WHEAT,
-								p);
+						building.getResManager().addSoilPoint(Mill.CROP_WHEAT, p);
 					} else if (pt.isType(bricesoil)) {
-						building.getResManager()
-								.addSoilPoint(Mill.CROP_RICE, p);
+						building.getResManager().addSoilPoint(Mill.CROP_RICE, p);
 					} else if (pt.isType(bturmericsoil)) {
-						building.getResManager().addSoilPoint(
-								Mill.CROP_TURMERIC, p);
+						building.getResManager().addSoilPoint(Mill.CROP_TURMERIC, p);
 					} else if (pt.isType(bmaizesoil)) {
-						building.getResManager().addSoilPoint(Mill.CROP_MAIZE,
-								p);
+						building.getResManager().addSoilPoint(Mill.CROP_MAIZE, p);
 					} else if (pt.isType(bcarrotsoil)) {
-						building.getResManager().addSoilPoint(Mill.CROP_CARROT,
-								p);
+						building.getResManager().addSoilPoint(Mill.CROP_CARROT, p);
 					} else if (pt.isType(bpotatosoil)) {
-						building.getResManager().addSoilPoint(Mill.CROP_POTATO,
-								p);
+						building.getResManager().addSoilPoint(Mill.CROP_POTATO, p);
 					} else if (pt.isType(bsugarcanesoil)) {
-						if (!building.getResManager().sugarcanesoils
-								.contains(p)) {
+						if (!building.getResManager().sugarcanesoils.contains(p)) {
 							building.getResManager().sugarcanesoils.add(p);
 						}
 					} else if (pt.isType(bnetherwartsoil)) {
-						if (!building.getResManager().netherwartsoils
-								.contains(p)) {
+						if (!building.getResManager().netherwartsoils.contains(p)) {
 							building.getResManager().netherwartsoils.add(p);
 						}
 					} else if (pt.isType(bvinesoil)) {
-						building.getResManager()
-								.addSoilPoint(Mill.CROP_VINE, p);
+						building.getResManager().addSoilPoint(Mill.CROP_VINE, p);
 					} else if (pt.isType(bcacaospot)) {
-						building.getResManager().addSoilPoint(Mill.CROP_CACAO,
-								p);
+						building.getResManager().addSoilPoint(Mill.CROP_CACAO, p);
 					} else if (pt.isType(bsilkwormblock)) {
 						if (!building.getResManager().silkwormblock.contains(p)) {
 							building.getResManager().silkwormblock.add(p);
@@ -4110,56 +3455,40 @@ public class BuildingPlan {
 							building.getResManager().brickspot.add(p);
 						}
 					} else if (pt.isType(bchickenspawn)) {
-						building.getResManager().addSpawnPoint(
-								Mill.ENTITY_CHICKEN, p);
+						building.getResManager().addSpawnPoint(Mill.ENTITY_CHICKEN, p);
 					} else if (pt.isType(bcowspawn)) {
-						building.getResManager().addSpawnPoint(Mill.ENTITY_COW,
-								p);
+						building.getResManager().addSpawnPoint(Mill.ENTITY_COW, p);
 					} else if (pt.isType(bpigspawn)) {
-						building.getResManager().addSpawnPoint(Mill.ENTITY_PIG,
-								p);
+						building.getResManager().addSpawnPoint(Mill.ENTITY_PIG, p);
 					} else if (pt.isType(bsquidspawn)) {
-						building.getResManager().addSpawnPoint(
-								Mill.ENTITY_SQUID, p);
+						building.getResManager().addSpawnPoint(Mill.ENTITY_SQUID, p);
 					} else if (pt.isType(bsheepspawn)) {
-						building.getResManager().addSpawnPoint(
-								Mill.ENTITY_SHEEP, p);
+						building.getResManager().addSpawnPoint(Mill.ENTITY_SHEEP, p);
 					} else if (pt.isType(bwolfspawn)) {
-						building.getResManager().addSpawnPoint(
-								Mill.ENTITY_WOLF, p);
+						building.getResManager().addSpawnPoint(Mill.ENTITY_WOLF, p);
 					} else if (pt.isType(bstonesource)) {
-						building.getResManager()
-								.addSourcePoint(Blocks.stone, p);
+						building.getResManager().addSourcePoint(Blocks.stone, p);
 					} else if (pt.isType(bsandsource)) {
 						building.getResManager().addSourcePoint(Blocks.sand, p);
 					} else if (pt.isType(bsandstonesource)) {
-						building.getResManager().addSourcePoint(
-								Blocks.sandstone, p);
+						building.getResManager().addSourcePoint(Blocks.sandstone, p);
 					} else if (pt.isType(bclaysource)) {
 						building.getResManager().addSourcePoint(Blocks.clay, p);
 					} else if (pt.isType(bgravelsource)) {
-						building.getResManager().addSourcePoint(Blocks.gravel,
-								p);
+						building.getResManager().addSourcePoint(Blocks.gravel, p);
 					} else if (pt.isType(bspawnerskeleton)) {
-						building.getResManager().addMobSpawnerPoint(
-								Mill.ENTITY_SKELETON, p);
+						building.getResManager().addMobSpawnerPoint(Mill.ENTITY_SKELETON, p);
 					} else if (pt.isType(bspawnerzombie)) {
-						building.getResManager().addMobSpawnerPoint(
-								Mill.ENTITY_ZOMBIE, p);
+						building.getResManager().addMobSpawnerPoint(Mill.ENTITY_ZOMBIE, p);
 					} else if (pt.isType(bspawnerspider)) {
-						building.getResManager().addMobSpawnerPoint(
-								Mill.ENTITY_SPIDER, p);
+						building.getResManager().addMobSpawnerPoint(Mill.ENTITY_SPIDER, p);
 					} else if (pt.isType(bspawnercavespider)) {
-						building.getResManager().addMobSpawnerPoint(
-								Mill.ENTITY_CAVESPIDER, p);
+						building.getResManager().addMobSpawnerPoint(Mill.ENTITY_CAVESPIDER, p);
 					} else if (pt.isType(bspawnercreeper)) {
-						building.getResManager().addMobSpawnerPoint(
-								Mill.ENTITY_CREEPER, p);
+						building.getResManager().addMobSpawnerPoint(Mill.ENTITY_CREEPER, p);
 					} else if (pt.isType(bdispenserunknownpowder)) {
-						if (!building.getResManager().dispenderUnknownPowder
-								.contains(p)) {
-							building.getResManager().dispenderUnknownPowder
-									.add(p);
+						if (!building.getResManager().dispenderUnknownPowder.contains(p)) {
+							building.getResManager().dispenderUnknownPowder.add(p);
 						}
 					} else if (pt.isType(bfishingspot)) {
 						if (!building.getResManager().fishingspots.contains(p)) {
@@ -4195,13 +3524,8 @@ public class BuildingPlan {
 						building.getResManager().setPathStartPos(p);
 					} else if (pt.isType(bleasurePos)) {
 						building.getResManager().setLeasurePos(p);
-					} else if (pt.isType(bsignwallGuess)
-							|| pt.isType(bsignwallTop)
-							|| pt.isType(bsignwallBottom)
-							|| pt.isType(bsignwallLeft)
-							|| pt.isType(bsignwallRight)) {
-						building.getResManager().signs
-								.set(signOrder[signNb], p);
+					} else if (pt.isType(bsignwallGuess) || pt.isType(bsignwallTop) || pt.isType(bsignwallBottom) || pt.isType(bsignwallLeft) || pt.isType(bsignwallRight)) {
+						building.getResManager().signs.set(signOrder[signNb], p);
 						signNb++;
 					}
 				}
@@ -4222,8 +3546,7 @@ public class BuildingPlan {
 				ladders.add(block);
 			} else if (block.block == Blocks.wooden_door) {
 				doors.add(block);
-			} else if ((block.block == Blocks.stone_stairs || block.block == Blocks.oak_stairs)
-					&& block.meta == -1) {
+			} else if ((block.block == Blocks.stone_stairs || block.block == Blocks.oak_stairs) && block.meta == -1) {
 				block.meta = -1;
 				stairs.add(block);
 			}
@@ -4243,20 +3566,16 @@ public class BuildingPlan {
 
 			// Starting by setting the meta for ladders with only one
 			// possibility
-			if (northValid[i] && !southValid[i] && !westValid[i]
-					&& !eastValid[i]) {
+			if (northValid[i] && !southValid[i] && !westValid[i] && !eastValid[i]) {
 				ladder.meta = 5;
 			}
-			if (!northValid[i] && southValid[i] && !westValid[i]
-					&& !eastValid[i]) {
+			if (!northValid[i] && southValid[i] && !westValid[i] && !eastValid[i]) {
 				ladder.meta = 4;
 			}
-			if (!northValid[i] && !southValid[i] && westValid[i]
-					&& !eastValid[i]) {
+			if (!northValid[i] && !southValid[i] && westValid[i] && !eastValid[i]) {
 				ladder.meta = 2;
 			}
-			if (!northValid[i] && !southValid[i] && !westValid[i]
-					&& eastValid[i]) {
+			if (!northValid[i] && !southValid[i] && !westValid[i] && eastValid[i]) {
 				ladder.meta = 3;
 			}
 			i++;
@@ -4270,20 +3589,13 @@ public class BuildingPlan {
 			for (final BuildingBlock ladder : ladders) {
 				if (ladder.meta == 0) {
 					if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-						MLN.major(this, buildingKey + ": ladder " + ladder
-								+ " has no metada, trying to find neighbours.");
+						MLN.major(this, buildingKey + ": ladder " + ladder + " has no metada, trying to find neighbours.");
 						if (map.containsKey(ladder.p.getAbove())) {
-							MLN.major(
-									this,
-									buildingKey + ": Above: "
-											+ map.get(ladder.p.getAbove()));
+							MLN.major(this, buildingKey + ": Above: " + map.get(ladder.p.getAbove()));
 						}
 
 						if (map.containsKey(ladder.p.getBelow())) {
-							MLN.major(
-									this,
-									buildingKey + ": Below: "
-											+ map.get(ladder.p.getBelow()));
+							MLN.major(this, buildingKey + ": Below: " + map.get(ladder.p.getBelow()));
 						}
 					}
 
@@ -4305,41 +3617,33 @@ public class BuildingPlan {
 							}
 						}
 					}
-					if (ladder.meta == 0
-							&& map.containsKey(ladder.p.getBelow())) {
+					if (ladder.meta == 0 && map.containsKey(ladder.p.getBelow())) {
 						if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-							MLN.major(this, buildingKey
-									+ ": trying ladder below. " + northValid[i]
-									+ "/" + southValid[i] + "/" + westValid[i]
-									+ "/" + eastValid[i]);
+							MLN.major(this, buildingKey + ": trying ladder below. " + northValid[i] + "/" + southValid[i] + "/" + westValid[i] + "/" + eastValid[i]);
 						}
 						final BuildingBlock b = map.get(ladder.p.getBelow());
 						if (b.block == Blocks.ladder && b.meta != 0) {
 							if (b.meta == 5 && northValid[i]) {
 								if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-									MLN.major(this, buildingKey
-											+ ": copying blow: north");
+									MLN.major(this, buildingKey + ": copying blow: north");
 								}
 								ladder.meta = b.meta;
 								goOn = true;
 							} else if (b.meta == 4 && southValid[i]) {
 								if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-									MLN.major(this, buildingKey
-											+ ": copying blow: south");
+									MLN.major(this, buildingKey + ": copying blow: south");
 								}
 								ladder.meta = b.meta;
 								goOn = true;
 							} else if (b.meta == 3 && westValid[i]) {
 								if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-									MLN.major(this, buildingKey
-											+ ": copying blow: west");
+									MLN.major(this, buildingKey + ": copying blow: west");
 								}
 								ladder.meta = b.meta;
 								goOn = true;
 							} else if (b.meta == 2 && eastValid[i]) {
 								if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-									MLN.major(this, buildingKey
-											+ ": copying blow: east");
+									MLN.major(this, buildingKey + ": copying blow: east");
 								}
 								ladder.meta = b.meta;
 								goOn = true;
@@ -4359,18 +3663,10 @@ public class BuildingPlan {
 
 		i = 0;
 		for (final BuildingBlock stair : stairs) {
-			northValid[i] = !mapIsOpaqueBlock(map, stair.p.getSouth())
-					&& (!mapIsOpaqueBlock(map, stair.p.getNorth().getAbove()) || mapIsOpaqueBlock(
-							map, stair.p.getNorth().getAbove()));
-			southValid[i] = !mapIsOpaqueBlock(map, stair.p.getNorth())
-					&& (!mapIsOpaqueBlock(map, stair.p.getSouth().getAbove()) || mapIsOpaqueBlock(
-							map, stair.p.getSouth().getAbove()));
-			westValid[i] = !mapIsOpaqueBlock(map, stair.p.getEast())
-					&& (!mapIsOpaqueBlock(map, stair.p.getWest().getAbove()) || mapIsOpaqueBlock(
-							map, stair.p.getWest().getAbove()));
-			eastValid[i] = !mapIsOpaqueBlock(map, stair.p.getWest())
-					&& (!mapIsOpaqueBlock(map, stair.p.getEast().getAbove()) || mapIsOpaqueBlock(
-							map, stair.p.getEast().getAbove()));
+			northValid[i] = !mapIsOpaqueBlock(map, stair.p.getSouth()) && (!mapIsOpaqueBlock(map, stair.p.getNorth().getAbove()) || mapIsOpaqueBlock(map, stair.p.getNorth().getAbove()));
+			southValid[i] = !mapIsOpaqueBlock(map, stair.p.getNorth()) && (!mapIsOpaqueBlock(map, stair.p.getSouth().getAbove()) || mapIsOpaqueBlock(map, stair.p.getSouth().getAbove()));
+			westValid[i] = !mapIsOpaqueBlock(map, stair.p.getEast()) && (!mapIsOpaqueBlock(map, stair.p.getWest().getAbove()) || mapIsOpaqueBlock(map, stair.p.getWest().getAbove()));
+			eastValid[i] = !mapIsOpaqueBlock(map, stair.p.getWest()) && (!mapIsOpaqueBlock(map, stair.p.getEast().getAbove()) || mapIsOpaqueBlock(map, stair.p.getEast().getAbove()));
 
 			if (MLN.LogBuildingPlan >= MLN.MAJOR) {
 				if (northValid[i]) {
@@ -4403,30 +3699,20 @@ public class BuildingPlan {
 		for (final BuildingBlock door : doors) {
 			final int orientation = door.meta & 3;
 			if (orientation == 2) {
-				if ((!map.containsKey(door.p.getWest())
-						|| map.get(door.p.getWest()).block == Blocks.air || map
-						.get(door.p.getWest()).block == Blocks.wooden_door)
-						&& map.containsKey(door.p.getEast())) {
+				if ((!map.containsKey(door.p.getWest()) || map.get(door.p.getWest()).block == Blocks.air || map.get(door.p.getWest()).block == Blocks.wooden_door) && map.containsKey(door.p.getEast())) {
 					door.special = BuildingBlock.INVERTEDDOOR;
 				}
 			} else if (orientation == 3) {
-				if ((!map.containsKey(door.p.getNorth())
-						|| map.get(door.p.getNorth()).block == Blocks.air || map
-						.get(door.p.getNorth()).block == Blocks.wooden_door)
+				if ((!map.containsKey(door.p.getNorth()) || map.get(door.p.getNorth()).block == Blocks.air || map.get(door.p.getNorth()).block == Blocks.wooden_door)
 						&& map.containsKey(door.p.getSouth())) {
 					door.special = BuildingBlock.INVERTEDDOOR;
 				}
 			} else if (orientation == 0) {
-				if ((!map.containsKey(door.p.getEast())
-						|| map.get(door.p.getEast()).block == Blocks.air || map
-						.get(door.p.getEast()).block == Blocks.wooden_door)
-						&& map.containsKey(door.p.getWest())) {
+				if ((!map.containsKey(door.p.getEast()) || map.get(door.p.getEast()).block == Blocks.air || map.get(door.p.getEast()).block == Blocks.wooden_door) && map.containsKey(door.p.getWest())) {
 					door.special = BuildingBlock.INVERTEDDOOR;
 				}
 			} else if (orientation == 1) {
-				if ((!map.containsKey(door.p.getSouth())
-						|| map.get(door.p.getSouth()).block == Blocks.air || map
-						.get(door.p.getSouth()).block == Blocks.wooden_door)
+				if ((!map.containsKey(door.p.getSouth()) || map.get(door.p.getSouth()).block == Blocks.air || map.get(door.p.getSouth()).block == Blocks.wooden_door)
 						&& map.containsKey(door.p.getNorth())) {
 					door.special = BuildingBlock.INVERTEDDOOR;
 				}
@@ -4434,9 +3720,7 @@ public class BuildingPlan {
 		}
 	}
 
-	public LocationReturn testSpot(final MillWorldInfo winfo,
-			final AStarPathing pathing, final Point centre, final int x,
-			final int z, final Random random, final int porientation) {
+	public LocationReturn testSpot(final MillWorldInfo winfo, final AStarPathing pathing, final Point centre, final int x, final int z, final Random random, final int porientation) {
 
 		int orientation;
 
@@ -4514,40 +3798,32 @@ public class BuildingPlan {
 						cj = z - j;
 					}
 
-					if (ci < 0 || cj < 0 || ci >= winfo.length
-							|| cj >= winfo.width) {
-						final Point p = new Point(ci + winfo.mapStartX, 64, cj
-								+ winfo.mapStartZ);
+					if (ci < 0 || cj < 0 || ci >= winfo.length || cj >= winfo.width) {
+						final Point p = new Point(ci + winfo.mapStartX, 64, cj + winfo.mapStartZ);
 
-						return new LocationReturn(
-								LocationReturn.OUTSIDE_RADIUS, p);
+						return new LocationReturn(LocationReturn.OUTSIDE_RADIUS, p);
 					}
 
 					if (winfo.buildingLoc[ci][cj]) {
 						if (nbError > allowedErrors) {
-							final Point p = new Point(ci + winfo.mapStartX, 64,
-									cj + winfo.mapStartZ);
+							final Point p = new Point(ci + winfo.mapStartX, 64, cj + winfo.mapStartZ);
 
-							return new LocationReturn(
-									LocationReturn.LOCATION_CLASH, p);
+							return new LocationReturn(LocationReturn.LOCATION_CLASH, p);
 						} else {
 							nbError += 5;
 						}
 					} else if (winfo.buildingForbidden[ci][cj]) {
 						if (!hugeBuilding || nbError > allowedErrors) {
 
-							final Point p = new Point(ci + winfo.mapStartX, 64,
-									cj + winfo.mapStartZ);
+							final Point p = new Point(ci + winfo.mapStartX, 64, cj + winfo.mapStartZ);
 
-							return new LocationReturn(
-									LocationReturn.CONSTRUCTION_FORBIDEN, p);
+							return new LocationReturn(LocationReturn.CONSTRUCTION_FORBIDEN, p);
 						} else {
 							nbError++;
 						}
 					} else if (winfo.danger[ci][cj]) {
 						if (nbError > allowedErrors) {
-							final Point p = new Point(ci + winfo.mapStartX, 64,
-									cj + winfo.mapStartZ);
+							final Point p = new Point(ci + winfo.mapStartX, 64, cj + winfo.mapStartZ);
 
 							return new LocationReturn(LocationReturn.DANGER, p);
 						} else {
@@ -4555,18 +3831,15 @@ public class BuildingPlan {
 						}
 					} else if (!winfo.canBuild[ci][cj]) {
 						if (nbError > allowedErrors) {
-							final Point p = new Point(ci + winfo.mapStartX, 64,
-									cj + winfo.mapStartZ);
+							final Point p = new Point(ci + winfo.mapStartX, 64, cj + winfo.mapStartZ);
 
-							return new LocationReturn(
-									LocationReturn.WRONG_ALTITUDE, p);
+							return new LocationReturn(LocationReturn.WRONG_ALTITUDE, p);
 						} else {
 							nbError++;
 						}
 					}
 
-					if (pathing != null
-							&& pathing.regions[ci][cj] != pathing.thRegion) {
+					if (pathing != null && pathing.regions[ci][cj] != pathing.thRegion) {
 						reachable = false;
 					} else {
 						reachable = true;
@@ -4584,36 +3857,26 @@ public class BuildingPlan {
 
 		final int altitude = (int) (altitudeTotal * 1.0f / nbPoints);
 
-		final BuildingLocation l = new BuildingLocation(this, new Point(x
-				+ winfo.mapStartX, altitude, z + winfo.mapStartZ), orientation);
+		final BuildingLocation l = new BuildingLocation(this, new Point(x + winfo.mapStartX, altitude, z + winfo.mapStartZ), orientation);
 
 		return new LocationReturn(l);
 	}
 
-	public LocationReturn testSpotBedrock(final World world, final int cx,
-			final int cz) {
+	public LocationReturn testSpotBedrock(final World world, final int cx, final int cz) {
 		for (int x = cx - width - 2; x < cx + width + 2; x++) {
 			for (int z = cz - length - 2; z < cz + length + 2; z++) {
 				for (int y = 0; y < plan.length + 2; y++) {
 					final Block block = world.getBlock(x, y, z);
 
-					if (block != Blocks.bedrock && block != Blocks.stone
-							&& block != Blocks.dirt && block != Blocks.gravel
-							&& block != Blocks.coal_ore
-							&& block != Blocks.diamond_ore
-							&& block != Blocks.gold_ore
-							&& block != Blocks.iron_ore
-							&& block != Blocks.lapis_ore
-							&& block != Blocks.redstone_ore) {
-						return new LocationReturn(
-								LocationReturn.CONSTRUCTION_FORBIDEN, null);
+					if (block != Blocks.bedrock && block != Blocks.stone && block != Blocks.dirt && block != Blocks.gravel && block != Blocks.coal_ore && block != Blocks.diamond_ore
+							&& block != Blocks.gold_ore && block != Blocks.iron_ore && block != Blocks.lapis_ore && block != Blocks.redstone_ore) {
+						return new LocationReturn(LocationReturn.CONSTRUCTION_FORBIDEN, null);
 					}
 				}
 			}
 		}
 
-		final BuildingLocation l = new BuildingLocation(this, new Point(cx, 2,
-				cz), 0);
+		final BuildingLocation l = new BuildingLocation(this, new Point(cx, 2, cz), 0);
 		l.bedrocklevel = true;
 		return new LocationReturn(l);
 	}

@@ -56,9 +56,7 @@ public class BuildingResManager {
 	public List<Point> silkwormblock = new ArrayList<Point>();
 	public List<Point> dispenderUnknownPowder = new ArrayList<Point>();
 
-	private Point sleepingPos = null, sellingPos = null, craftingPos = null,
-			defendingPos = null, shelterPos = null, pathStartPos = null,
-			leasurePos = null;
+	private Point sleepingPos = null, sellingPos = null, craftingPos = null, defendingPos = null, shelterPos = null, pathStartPos = null, leasurePos = null;
 
 	private final Building building;
 
@@ -147,8 +145,7 @@ public class BuildingResManager {
 						final InvItem key = new InvItem(stack);
 						if (stack != null) {
 							if (contents.containsKey(key)) {
-								contents.put(key,
-										stack.stackSize + contents.get(key));
+								contents.put(key, stack.stackSize + contents.get(key));
 							} else {
 								contents.put(key, stack.stackSize);
 							}
@@ -184,24 +181,16 @@ public class BuildingResManager {
 			if (soilTypes.get(i).equals(Mill.CROP_CACAO)) {
 				for (final Point p : soils.get(i)) {
 					if (p.getBlock(building.worldObj) == Blocks.air) {
-						if (p.getNorth().getBlock(building.worldObj) == Blocks.log
-								&& BlockLog.func_150165_c(p.getNorth().getMeta(
-										building.worldObj)) == 3) {
+						if (p.getNorth().getBlock(building.worldObj) == Blocks.log && BlockLog.func_150165_c(p.getNorth().getMeta(building.worldObj)) == 3) {
 							return p;
 						}
-						if (p.getEast().getBlock(building.worldObj) == Blocks.log
-								&& BlockLog.func_150165_c(p.getEast().getMeta(
-										building.worldObj)) == 3) {
+						if (p.getEast().getBlock(building.worldObj) == Blocks.log && BlockLog.func_150165_c(p.getEast().getMeta(building.worldObj)) == 3) {
 							return p;
 						}
-						if (p.getSouth().getBlock(building.worldObj) == Blocks.log
-								&& BlockLog.func_150165_c(p.getSouth().getMeta(
-										building.worldObj)) == 3) {
+						if (p.getSouth().getBlock(building.worldObj) == Blocks.log && BlockLog.func_150165_c(p.getSouth().getMeta(building.worldObj)) == 3) {
 							return p;
 						}
-						if (p.getWest().getBlock(building.worldObj) == Blocks.log
-								&& BlockLog.func_150165_c(p.getWest().getMeta(
-										building.worldObj)) == 3) {
+						if (p.getWest().getBlock(building.worldObj) == Blocks.log && BlockLog.func_150165_c(p.getWest().getMeta(building.worldObj)) == 3) {
 							return p;
 						}
 					}
@@ -269,16 +258,14 @@ public class BuildingResManager {
 		final int start = MillCommonUtilities.randomInt(brickspot.size());
 		for (int i = start; i < brickspot.size(); i++) {
 			final Point p = brickspot.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.stone_decoration
-					&& MillCommonUtilities.getBlockMeta(building.worldObj, p) == 1) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.stone_decoration && MillCommonUtilities.getBlockMeta(building.worldObj, p) == 1) {
 				return p;
 			}
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = brickspot.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.stone_decoration
-					&& MillCommonUtilities.getBlockMeta(building.worldObj, p) == 1) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.stone_decoration && MillCommonUtilities.getBlockMeta(building.worldObj, p) == 1) {
 				return p;
 			}
 		}
@@ -321,8 +308,7 @@ public class BuildingResManager {
 
 		for (int i = 0; i < brickspot.size(); i++) {
 			final Point p = brickspot.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.stone_decoration
-					&& MillCommonUtilities.getBlockMeta(building.worldObj, p) == 1) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.stone_decoration && MillCommonUtilities.getBlockMeta(building.worldObj, p) == 1) {
 				nb++;
 			}
 		}
@@ -338,9 +324,7 @@ public class BuildingResManager {
 		int nb = 0;
 		for (int i = 0; i < netherwartsoils.size(); i++) {
 			final Point p = netherwartsoils.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.nether_wart
-					&& MillCommonUtilities.getBlockMeta(building.worldObj,
-							p.getAbove()) >= 3) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.nether_wart && MillCommonUtilities.getBlockMeta(building.worldObj, p.getAbove()) >= 3) {
 				nb++;
 			}
 		}
@@ -372,8 +356,7 @@ public class BuildingResManager {
 		int nb = 0;
 		for (int i = 0; i < silkwormblock.size(); i++) {
 			final Point p = silkwormblock.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.wood_decoration
-					&& MillCommonUtilities.getBlockMeta(building.worldObj, p) == 4) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.wood_decoration && MillCommonUtilities.getBlockMeta(building.worldObj, p) == 4) {
 				nb++;
 			}
 		}
@@ -389,8 +372,7 @@ public class BuildingResManager {
 		int nb = 0;
 		for (int i = 0; i < sugarcanesoils.size(); i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj,
-					p.getRelative(0, 2, 0)) == Blocks.reeds) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p.getRelative(0, 2, 0)) == Blocks.reeds) {
 				nb++;
 			}
 		}
@@ -422,18 +404,14 @@ public class BuildingResManager {
 		final int start = MillCommonUtilities.randomInt(netherwartsoils.size());
 		for (int i = start; i < netherwartsoils.size(); i++) {
 			final Point p = netherwartsoils.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.nether_wart
-					&& MillCommonUtilities.getBlockMeta(building.worldObj,
-							p.getAbove()) == 3) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.nether_wart && MillCommonUtilities.getBlockMeta(building.worldObj, p.getAbove()) == 3) {
 				return p;
 			}
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = netherwartsoils.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.nether_wart
-					&& MillCommonUtilities.getBlockMeta(building.worldObj,
-							p.getAbove()) == 3) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.nether_wart && MillCommonUtilities.getBlockMeta(building.worldObj, p.getAbove()) == 3) {
 				return p;
 			}
 		}
@@ -449,16 +427,14 @@ public class BuildingResManager {
 		final int start = MillCommonUtilities.randomInt(netherwartsoils.size());
 		for (int i = start; i < netherwartsoils.size(); i++) {
 			final Point p = netherwartsoils.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.air
-					&& MillCommonUtilities.getBlock(building.worldObj, p) == Blocks.soul_sand) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.air && MillCommonUtilities.getBlock(building.worldObj, p) == Blocks.soul_sand) {
 				return p;
 			}
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = netherwartsoils.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.air
-					&& MillCommonUtilities.getBlock(building.worldObj, p) == Blocks.soul_sand) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p.getAbove()) == Blocks.air && MillCommonUtilities.getBlock(building.worldObj, p) == Blocks.soul_sand) {
 				return p;
 			}
 		}
@@ -477,8 +453,7 @@ public class BuildingResManager {
 
 	public Point getPlantingLocation() {
 		for (final Point p : woodspawn) {
-			final Block block = MillCommonUtilities.getBlock(building.worldObj,
-					p);
+			final Block block = MillCommonUtilities.getBlock(building.worldObj, p);
 			if (block == Blocks.air || block == Blocks.snow) {
 				return p;
 			}
@@ -512,16 +487,14 @@ public class BuildingResManager {
 		final int start = MillCommonUtilities.randomInt(silkwormblock.size());
 		for (int i = start; i < silkwormblock.size(); i++) {
 			final Point p = silkwormblock.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.wood_decoration
-					&& MillCommonUtilities.getBlockMeta(building.worldObj, p) == 4) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.wood_decoration && MillCommonUtilities.getBlockMeta(building.worldObj, p) == 4) {
 				return p;
 			}
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = silkwormblock.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.wood_decoration
-					&& MillCommonUtilities.getBlockMeta(building.worldObj, p) == 4) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p) == Mill.wood_decoration && MillCommonUtilities.getBlockMeta(building.worldObj, p) == 4) {
 				return p;
 			}
 		}
@@ -552,16 +525,14 @@ public class BuildingResManager {
 		final int start = MillCommonUtilities.randomInt(sugarcanesoils.size());
 		for (int i = start; i < sugarcanesoils.size(); i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj,
-					p.getRelative(0, 2, 0)) == Blocks.reeds) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p.getRelative(0, 2, 0)) == Blocks.reeds) {
 				return p;
 			}
 		}
 
 		for (int i = 0; i < start; i++) {
 			final Point p = sugarcanesoils.get(i);
-			if (MillCommonUtilities.getBlock(building.worldObj,
-					p.getRelative(0, 2, 0)) == Blocks.reeds) {
+			if (MillCommonUtilities.getBlock(building.worldObj, p.getRelative(0, 2, 0)) == Blocks.reeds) {
 				return p;
 			}
 		}
@@ -618,11 +589,9 @@ public class BuildingResManager {
 			sleepingPos = building.getPos().getAbove();
 		}
 
-		NBTTagList nbttaglist = nbttagcompound.getTagList("chests",
-				Constants.NBT.TAG_COMPOUND);
+		NBTTagList nbttaglist = nbttagcompound.getTagList("chests", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				if (!chests.contains(p)) {
@@ -635,132 +604,108 @@ public class BuildingResManager {
 			chests.add(0, building.getPos());
 		}
 
-		nbttaglist = nbttagcompound.getTagList("furnaces",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("furnaces", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				furnaces.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("brewingStands",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("brewingStands", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				brewingStands.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("signs",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("signs", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				signs.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("netherwartsoils",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("netherwartsoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				netherwartsoils.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("silkwormblock",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("silkwormblock", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				silkwormblock.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("sugarcanesoils",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("sugarcanesoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				sugarcanesoils.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("fishingspots",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("fishingspots", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				fishingspots.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("healingspots",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("healingspots", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				healingspots.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("stalls",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("stalls", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				stalls.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("woodspawn",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("woodspawn", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				woodspawn.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("brickspot",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("brickspot", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			final Point p = Point.read(nbttagcompound1, "pos");
 			if (p != null) {
 				brickspot.add(p);
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("spawns",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("spawns", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 
 			String spawnType = nbttagcompound1.getString("type");
 
@@ -778,11 +723,9 @@ public class BuildingResManager {
 			spawnTypes.add(spawnType);
 			final List<Point> v = new ArrayList<Point>();
 
-			final NBTTagList nbttaglist2 = nbttagcompound1.getTagList("points",
-					Constants.NBT.TAG_COMPOUND);
+			final NBTTagList nbttaglist2 = nbttagcompound1.getTagList("points", Constants.NBT.TAG_COMPOUND);
 			for (int j = 0; j < nbttaglist2.tagCount(); j++) {
-				final NBTTagCompound nbttagcompound2 = nbttaglist2
-						.getCompoundTagAt(j);
+				final NBTTagCompound nbttagcompound2 = nbttaglist2.getCompoundTagAt(j);
 				final Point p = Point.read(nbttagcompound2, "pos");
 				if (p != null) {
 					v.add(p);
@@ -793,25 +736,20 @@ public class BuildingResManager {
 			}
 			spawns.add(v);
 			if (MLN.LogHybernation >= MLN.MINOR) {
-				MLN.minor(this, "Loaded " + v.size() + " spawn points for "
-						+ spawnTypes.get(i));
+				MLN.minor(this, "Loaded " + v.size() + " spawn points for " + spawnTypes.get(i));
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("mobspawns",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("mobspawns", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 
 			mobSpawnerTypes.add(nbttagcompound1.getString("type"));
 			final List<Point> v = new ArrayList<Point>();
 
-			final NBTTagList nbttaglist2 = nbttagcompound1.getTagList("points",
-					Constants.NBT.TAG_COMPOUND);
+			final NBTTagList nbttaglist2 = nbttagcompound1.getTagList("points", Constants.NBT.TAG_COMPOUND);
 			for (int j = 0; j < nbttaglist2.tagCount(); j++) {
-				final NBTTagCompound nbttagcompound2 = nbttaglist2
-						.getCompoundTagAt(j);
+				final NBTTagCompound nbttagcompound2 = nbttaglist2.getCompoundTagAt(j);
 				final Point p = Point.read(nbttagcompound2, "pos");
 				if (p != null) {
 					v.add(p);
@@ -822,26 +760,20 @@ public class BuildingResManager {
 			}
 			mobSpawners.add(v);
 			if (MLN.LogHybernation >= MLN.MINOR) {
-				MLN.minor(this, "Loaded " + v.size() + " mob spawn points for "
-						+ spawnTypes.get(i));
+				MLN.minor(this, "Loaded " + v.size() + " mob spawn points for " + spawnTypes.get(i));
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("sources",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("sources", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 
-			sourceTypes.add(Block.getBlockById(nbttagcompound1
-					.getInteger("type")));
+			sourceTypes.add(Block.getBlockById(nbttagcompound1.getInteger("type")));
 			final List<Point> v = new ArrayList<Point>();
 
-			final NBTTagList nbttaglist2 = nbttagcompound1.getTagList("points",
-					Constants.NBT.TAG_COMPOUND);
+			final NBTTagList nbttaglist2 = nbttagcompound1.getTagList("points", Constants.NBT.TAG_COMPOUND);
 			for (int j = 0; j < nbttaglist2.tagCount(); j++) {
-				final NBTTagCompound nbttagcompound2 = nbttaglist2
-						.getCompoundTagAt(j);
+				final NBTTagCompound nbttagcompound2 = nbttaglist2.getCompoundTagAt(j);
 				final Point p = Point.read(nbttagcompound2, "pos");
 				if (p != null) {
 					v.add(p);
@@ -852,24 +784,19 @@ public class BuildingResManager {
 			}
 			sources.add(v);
 			if (MLN.LogHybernation >= MLN.MAJOR) {
-				MLN.debug(this, "Loaded " + v.size() + " sources points for "
-						+ sourceTypes.get(i).getUnlocalizedName());
+				MLN.debug(this, "Loaded " + v.size() + " sources points for " + sourceTypes.get(i).getUnlocalizedName());
 			}
 		}
 
-		nbttaglist = nbttagcompound.getTagList("genericsoils",
-				Constants.NBT.TAG_COMPOUND);
+		nbttaglist = nbttagcompound.getTagList("genericsoils", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			final NBTTagCompound nbttagcompound1 = nbttaglist
-					.getCompoundTagAt(i);
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 
 			final String type = nbttagcompound1.getString("type");
 
-			final NBTTagList nbttaglist2 = nbttagcompound1.getTagList("points",
-					Constants.NBT.TAG_COMPOUND);
+			final NBTTagList nbttaglist2 = nbttagcompound1.getTagList("points", Constants.NBT.TAG_COMPOUND);
 			for (int j = 0; j < nbttaglist2.tagCount(); j++) {
-				final NBTTagCompound nbttagcompound2 = nbttaglist2
-						.getCompoundTagAt(j);
+				final NBTTagCompound nbttagcompound2 = nbttaglist2.getCompoundTagAt(j);
 				final Point p = Point.read(nbttagcompound2, "pos");
 				if (p != null) {
 					addSoilPoint(type, p);
@@ -878,10 +805,8 @@ public class BuildingResManager {
 		}
 
 		for (final Point p : chests) {
-			if (building.worldObj.blockExists(p.getiX(), p.getiY(), p.getiZ())
-					&& p.getMillChest(building.worldObj) != null) {
-				p.getMillChest(building.worldObj).buildingPos = building
-						.getPos();
+			if (building.worldObj.blockExists(p.getiX(), p.getiY(), p.getiZ()) && p.getMillChest(building.worldObj) != null) {
+				p.getMillChest(building.worldObj).buildingPos = building.getPos();
 			}
 		}
 
@@ -1076,8 +1001,7 @@ public class BuildingResManager {
 		nbttaglist = new NBTTagList();
 		for (int i = 0; i < sources.size(); i++) {
 			final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-			nbttagcompound1.setInteger("type",
-					Block.getIdFromBlock(sourceTypes.get(i)));
+			nbttagcompound1.setInteger("type", Block.getIdFromBlock(sourceTypes.get(i)));
 			final NBTTagList nbttaglist2 = new NBTTagList();
 			for (final Point p : sources.get(i)) {
 				final NBTTagCompound nbttagcompound2 = new NBTTagCompound();

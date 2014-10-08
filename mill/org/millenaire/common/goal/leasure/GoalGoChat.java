@@ -12,8 +12,7 @@ import org.millenaire.common.goal.Goal;
 
 public class GoalGoChat extends Goal {
 
-	private final char[] chatColours = new char[] { MLN.WHITE, MLN.LIGHTBLUE,
-			MLN.LIGHTGREEN, MLN.LIGHTGREY, MLN.LIGHTRED };
+	private final char[] chatColours = new char[] { MLN.WHITE, MLN.LIGHTBLUE, MLN.LIGHTGREEN, MLN.LIGHTGREY, MLN.LIGHTRED };
 
 	public GoalGoChat() {
 		leasure = true;
@@ -25,12 +24,10 @@ public class GoalGoChat extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
 		for (final MillVillager v : villager.getTownHall().villagers) {
-			if (v != villager && Goal.gosocialise.key.equals(v.goalKey)
-					&& v.getPos().distanceToSquared(villager) < 25) {
+			if (v != villager && Goal.gosocialise.key.equals(v.goalKey) && v.getPos().distanceToSquared(villager) < 25) {
 				return packDest(null, null, v);
 			}
 		}
@@ -39,8 +36,7 @@ public class GoalGoChat extends Goal {
 	}
 
 	@Override
-	protected boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	protected boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 		return getDestination(villager) != null;
 	}
 
@@ -62,8 +58,7 @@ public class GoalGoChat extends Goal {
 			target.goalKey = key;
 			target.setGoalDestEntity(villager);
 
-			final Dialogue dialog = villager.getCulture().getDialog(villager,
-					target);
+			final Dialogue dialog = villager.getCulture().getDialog(villager, target);
 
 			if (dialog != null) {
 
@@ -72,16 +67,13 @@ public class GoalGoChat extends Goal {
 				villager.setGoalInformation(null);
 				villager.setGoalDestEntity(target);
 
-				char col = chatColours[MillCommonUtilities
-						.randomInt(chatColours.length)];
+				char col = chatColours[MillCommonUtilities.randomInt(chatColours.length)];
 
 				col = MLN.WHITE;
 
 				if (dialog != null) {
 
-					final List<Entity> entities = MillCommonUtilities
-							.getEntitiesWithinAABB(villager.worldObj,
-									MillVillager.class, villager.getPos(), 5, 5);
+					final List<Entity> entities = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, MillVillager.class, villager.getPos(), 5, 5);
 
 					boolean dialogueChat = true;
 

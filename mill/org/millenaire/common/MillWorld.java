@@ -141,8 +141,7 @@ public class MillWorld {
 				panel.buildingPos = pinfo.buildingPos;
 				panel.villager_id = pinfo.villager_id;
 
-				for (int i = 0; i < pinfo.lines.length
-						&& i < panel.signText.length; i++) {
+				for (int i = 0; i < pinfo.lines.length && i < panel.signText.length; i++) {
 					panel.signText[i] = MLN.string(pinfo.lines[i]);
 				}
 
@@ -162,17 +161,12 @@ public class MillWorld {
 		}
 		ServerSender.sendChat(player, EnumChatFormatting.GREEN, "Tags: " + s);
 
-		ServerSender.sendChat(player, EnumChatFormatting.GREEN, "ActionData: "
-				+ s);
-		final String biomeName = world.getWorldChunkManager().getBiomeGenAt(
-				(int) player.posX, (int) player.posZ).biomeName.toLowerCase();
-		ServerSender.sendChat(player, EnumChatFormatting.GREEN, "Biome: "
-				+ biomeName + ", time: " + world.getWorldTime() % 24000 + " / "
-				+ world.getWorldTime());
+		ServerSender.sendChat(player, EnumChatFormatting.GREEN, "ActionData: " + s);
+		final String biomeName = world.getWorldChunkManager().getBiomeGenAt((int) player.posX, (int) player.posZ).biomeName.toLowerCase();
+		ServerSender.sendChat(player, EnumChatFormatting.GREEN, "Biome: " + biomeName + ", time: " + world.getWorldTime() % 24000 + " / " + world.getWorldTime());
 	}
 
-	public void displayVillageList(final EntityPlayer player,
-			final boolean loneBuildings) {
+	public void displayVillageList(final EntityPlayer player, final boolean loneBuildings) {
 
 		VillageList list;
 
@@ -188,8 +182,7 @@ public class MillWorld {
 
 			final Point p = list.pos.get(i);
 
-			final int distance = MathHelper.floor_double(p
-					.horizontalDistanceTo(player));
+			final int distance = MathHelper.floor_double(p.horizontalDistanceTo(player));
 
 			if (distance <= MLN.BackgroundRadius) {
 				final String direction = new Point(player).directionTo(p, true);
@@ -213,13 +206,9 @@ public class MillWorld {
 				VillageType villageType;
 
 				if (loneBuildings) {
-					villageType = Culture
-							.getCultureByName(list.cultures.get(i))
-							.getLoneBuildingType(list.types.get(i));
+					villageType = Culture.getCultureByName(list.cultures.get(i)).getLoneBuildingType(list.types.get(i));
 				} else {
-					villageType = Culture
-							.getCultureByName(list.cultures.get(i))
-							.getVillageType(list.types.get(i));
+					villageType = Culture.getCultureByName(list.cultures.get(i)).getVillageType(list.types.get(i));
 				}
 
 				final VillageInfo vi = new VillageInfo();
@@ -227,8 +216,7 @@ public class MillWorld {
 
 				if (villageType != null) {
 					vi.textKey = "command.villagelist";
-					vi.values = new String[] { list.names.get(i), loaded,
-							"" + distance, direction, villageType.name };
+					vi.values = new String[] { list.names.get(i), loaded, "" + distance, direction, villageType.name };
 				}
 				villageList.add(vi);
 			}
@@ -237,33 +225,25 @@ public class MillWorld {
 		if (!loneBuildings) {// we need to add "quest" lone buildings
 			for (int i = 0; i < loneBuildingsList.names.size(); i++) {
 
-				final VillageType village = Culture.getCultureByName(
-						loneBuildingsList.cultures.get(i)).getLoneBuildingType(
-						loneBuildingsList.types.get(i));
+				final VillageType village = Culture.getCultureByName(loneBuildingsList.cultures.get(i)).getLoneBuildingType(loneBuildingsList.types.get(i));
 
-				if (village.keyLonebuilding
-						|| village.keyLoneBuildingGenerateTag != null) {
+				if (village.keyLonebuilding || village.keyLoneBuildingGenerateTag != null) {
 
-					if (!village.generatedForPlayer
-							|| player.getDisplayName().equalsIgnoreCase(
-									loneBuildingsList.generatedFor.get(i))) {
+					if (!village.generatedForPlayer || player.getDisplayName().equalsIgnoreCase(loneBuildingsList.generatedFor.get(i))) {
 
 						final Point p = loneBuildingsList.pos.get(i);
 
-						final int distance = MathHelper.floor_double(p
-								.horizontalDistanceTo(player));
+						final int distance = MathHelper.floor_double(p.horizontalDistanceTo(player));
 
 						if (distance <= 2000) {
-							final String direction = new Point(player)
-									.directionTo(p, true);
+							final String direction = new Point(player).directionTo(p, true);
 
 							final VillageInfo vi = new VillageInfo();
 							vi.distance = distance;
 
 							if (village != null) {
 								vi.textKey = "command.villagelistkeylonebuilding";
-								vi.values = new String[] { village.name,
-										"" + distance, direction };
+								vi.values = new String[] { village.name, "" + distance, direction };
 							}
 							villageList.add(vi);
 						}
@@ -273,15 +253,13 @@ public class MillWorld {
 		}
 
 		if (villageList.size() == 0) {
-			ServerSender.sendTranslatedSentence(player, MLN.LIGHTGREY,
-					"command.noknowvillage");
+			ServerSender.sendTranslatedSentence(player, MLN.LIGHTGREY, "command.noknowvillage");
 		} else {
 
 			Collections.sort(villageList);
 
 			for (final VillageInfo vi : villageList) {
-				ServerSender.sendTranslatedSentence(player, MLN.LIGHTGREY,
-						vi.textKey, vi.values);
+				ServerSender.sendTranslatedSentence(player, MLN.LIGHTGREY, vi.textKey, vi.values);
 			}
 		}
 	}
@@ -317,21 +295,14 @@ public class MillWorld {
 		int nbGenerated = 0;
 
 		for (int radius = 1; radius < MLN.forcePreload; radius++) {
-			for (int i = -MLN.forcePreload; i < MLN.forcePreload
-					&& nbGenerated < 100; i++) {
-				for (int j = -MLN.forcePreload; j < MLN.forcePreload
-						&& nbGenerated < 100; j++) {
+			for (int i = -MLN.forcePreload; i < MLN.forcePreload && nbGenerated < 100; i++) {
+				for (int j = -MLN.forcePreload; j < MLN.forcePreload && nbGenerated < 100; j++) {
 					if (i * i + j * j < radius * radius) {
-						if (!world.getChunkProvider().chunkExists(i + centreX,
-								j + centreZ)) {
-							world.getChunkProvider().loadChunk(i + centreX,
-									j + centreZ);
-							final Block block = world.getBlock(
-									(i + centreX) * 16, 60, (j + centreZ) * 16);
+						if (!world.getChunkProvider().chunkExists(i + centreX, j + centreZ)) {
+							world.getChunkProvider().loadChunk(i + centreX, j + centreZ);
+							final Block block = world.getBlock((i + centreX) * 16, 60, (j + centreZ) * 16);
 							world.getChunkProvider().saveChunks(false, null);
-							MLN.minor(this, "Forcing population of chunk "
-									+ (i + centreX) + "/" + (j + centreZ)
-									+ ", block: " + block);
+							MLN.minor(this, "Forcing population of chunk " + (i + centreX) + "/" + (j + centreZ) + ", block: " + block);
 							nbGenerated++;
 						}
 					}
@@ -347,16 +318,14 @@ public class MillWorld {
 			if (buildings.get(p) == null) {
 				MLN.error(this, "Building record for " + p + " is null.");
 			} else if (buildings.get(p).location == null) {
-				MLN.printException("Building location for " + p + " is null.",
-						new Exception());
+				MLN.printException("Building location for " + p + " is null.", new Exception());
 			}
 
 			return buildings.get(p);
 		}
 
 		if (MLN.LogWorldInfo >= MLN.MINOR) {
-			MLN.minor(this, "Could not find a building at location " + p
-					+ " amoung " + buildings.size() + " records.");
+			MLN.minor(this, "Could not find a building at location " + p + " amoung " + buildings.size() + " records.");
 		}
 
 		return null;
@@ -395,8 +364,7 @@ public class MillWorld {
 		// 3.0 "single player" profile
 		if (profiles.containsKey(UserProfile.OLD_PROFILE_SINGLE_PLAYER)) {
 
-			final UserProfile profile = profiles
-					.get(UserProfile.OLD_PROFILE_SINGLE_PLAYER);
+			final UserProfile profile = profiles.get(UserProfile.OLD_PROFILE_SINGLE_PLAYER);
 			profile.changeProfileKey(name);
 
 			return profile;
@@ -424,23 +392,17 @@ public class MillWorld {
 
 		for (final File file : buildingsDir.listFiles(new ExtFileFilter("gz"))) {
 			try {
-				final FileInputStream fileinputstream = new FileInputStream(
-						file);
-				final NBTTagCompound nbttagcompound = CompressedStreamTools
-						.readCompressed(fileinputstream);
+				final FileInputStream fileinputstream = new FileInputStream(file);
+				final NBTTagCompound nbttagcompound = CompressedStreamTools.readCompressed(fileinputstream);
 
-				final NBTTagList nbttaglist = nbttagcompound.getTagList(
-						"buildings", Constants.NBT.TAG_COMPOUND);
+				final NBTTagList nbttaglist = nbttagcompound.getTagList("buildings", Constants.NBT.TAG_COMPOUND);
 				for (int i = 0; i < nbttaglist.tagCount(); i++) {
-					final NBTTagCompound nbttagcompound1 = nbttaglist
-							.getCompoundTagAt(i);
+					final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 					new Building(this, nbttagcompound1);
 				}
 
 			} catch (final Exception e) {
-				MLN.printException(
-						"Error when attempting to load building file "
-								+ file.getAbsolutePath() + ":", e);
+				MLN.printException("Error when attempting to load building file " + file.getAbsolutePath() + ":", e);
 			}
 		}
 
@@ -449,10 +411,7 @@ public class MillWorld {
 				MLN.major(null, b + " - " + b.culture);
 			}
 
-			MLN.major(
-					this,
-					"Loaded " + buildings.size() + " in "
-							+ (System.currentTimeMillis() - startTime) + " ms.");
+			MLN.major(this, "Loaded " + buildings.size() + " in " + (System.currentTimeMillis() - startTime) + " ms.");
 		}
 
 	}
@@ -480,8 +439,7 @@ public class MillWorld {
 		if (tagsFile.exists()) {
 			try {
 
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(tagsFile);
+				final BufferedReader reader = MillCommonUtilities.getReader(tagsFile);
 				String line = reader.readLine();
 
 				while (line != null) {
@@ -512,8 +470,7 @@ public class MillWorld {
 
 		for (final File profileDir : profilesDir.listFiles()) {
 			if (profileDir.isDirectory() && !profileDir.isHidden()) {
-				final UserProfile profile = UserProfile.readProfile(this,
-						profileDir);
+				final UserProfile profile = UserProfile.readProfile(this, profileDir);
 
 				if (profile != null) {
 					profiles.put(profile.key, profile);
@@ -528,8 +485,7 @@ public class MillWorld {
 		if (villageLog.exists()) {
 			try {
 
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(villageLog);
+				final BufferedReader reader = MillCommonUtilities.getReader(villageLog);
 				String line = reader.readLine();
 
 				while (line != null) {
@@ -555,20 +511,15 @@ public class MillWorld {
 							generatedFor = line.split(";")[4];
 						}
 
-						registerVillageLocation(
-								world,
-								new Point(Integer.parseInt(p[0]), Integer
-										.parseInt(p[1]), Integer.parseInt(p[2])),
-								line.split(";")[0], c.getVillageType(type), c,
-								false, generatedFor);
+						registerVillageLocation(world, new Point(Integer.parseInt(p[0]), Integer.parseInt(p[1]), Integer.parseInt(p[2])), line.split(";")[0], c.getVillageType(type), c, false,
+								generatedFor);
 					}
 
 					line = reader.readLine();
 				}
 
 				if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-					MLN.major(null, "Loaded " + villagesList.names.size()
-							+ " village positions.");
+					MLN.major(null, "Loaded " + villagesList.names.size() + " village positions.");
 				}
 
 			} catch (final Exception e) {
@@ -581,8 +532,7 @@ public class MillWorld {
 		if (villageLog.exists()) {
 			try {
 
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(villageLog);
+				final BufferedReader reader = MillCommonUtilities.getReader(villageLog);
 				String line = reader.readLine();
 
 				while (line != null) {
@@ -608,21 +558,15 @@ public class MillWorld {
 							generatedFor = line.split(";")[4];
 						}
 
-						registerLoneBuildingsLocation(
-								world,
-								new Point(Integer.parseInt(p[0]), Integer
-										.parseInt(p[1]), Integer.parseInt(p[2])),
-								line.split(";")[0],
-								c.getLoneBuildingType(type), c, false,
-								generatedFor);
+						registerLoneBuildingsLocation(world, new Point(Integer.parseInt(p[0]), Integer.parseInt(p[1]), Integer.parseInt(p[2])), line.split(";")[0], c.getLoneBuildingType(type), c,
+								false, generatedFor);
 					}
 
 					line = reader.readLine();
 				}
 
 				if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-					MLN.major(null, "Loaded " + loneBuildingsList.names.size()
-							+ " lone buildings positions.");
+					MLN.major(null, "Loaded " + loneBuildingsList.names.size() + " lone buildings positions.");
 				}
 
 			} catch (final Exception e) {
@@ -643,8 +587,7 @@ public class MillWorld {
 		if (configFile != null && configFile.exists()) {
 			try {
 
-				final BufferedReader reader = MillCommonUtilities
-						.getReader(configFile);
+				final BufferedReader reader = MillCommonUtilities.getReader(configFile);
 
 				String line;
 
@@ -657,16 +600,14 @@ public class MillWorld {
 							final String value = temp[1];
 
 							if (key.equalsIgnoreCase("generate_villages")) {
-								MLN.generateVillages = Boolean
-										.parseBoolean(value);
+								MLN.generateVillages = Boolean.parseBoolean(value);
 							} else if (key.equalsIgnoreCase("rename_name")) {
 								final Point p = new Point(value.split(",")[0]);
 								renameNames.put(p, value.split(",")[1]);
 							} else if (key.equalsIgnoreCase("rename_qualifier")) {
 								final Point p = new Point(value.split(",")[0]);
 								if (value.split(",").length > 1) {
-									renameQualifiers
-											.put(p, value.split(",")[1]);
+									renameQualifiers.put(p, value.split(",")[1]);
 								} else {
 									renameQualifiers.put(p, "");
 								}
@@ -682,8 +623,7 @@ public class MillWorld {
 		}
 
 		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-			MLN.major(null, "Config loaded. generateVillages: "
-					+ MLN.generateVillages);
+			MLN.major(null, "Config loaded. generateVillages: " + MLN.generateVillages);
 		}
 	}
 
@@ -714,21 +654,16 @@ public class MillWorld {
 			for (int i = 0; i < nb; i++) {
 				villagesList.pos.add(StreamReadWrite.readNullablePoint(ds));
 				villagesList.names.add(StreamReadWrite.readNullableString(ds));
-				villagesList.cultures.add(StreamReadWrite
-						.readNullableString(ds));
+				villagesList.cultures.add(StreamReadWrite.readNullableString(ds));
 				villagesList.types.add(StreamReadWrite.readNullableString(ds));
 			}
 
 			nb = ds.readInt();
 			for (int i = 0; i < nb; i++) {
-				loneBuildingsList.pos
-						.add(StreamReadWrite.readNullablePoint(ds));
-				loneBuildingsList.names.add(StreamReadWrite
-						.readNullableString(ds));
-				loneBuildingsList.cultures.add(StreamReadWrite
-						.readNullableString(ds));
-				loneBuildingsList.types.add(StreamReadWrite
-						.readNullableString(ds));
+				loneBuildingsList.pos.add(StreamReadWrite.readNullablePoint(ds));
+				loneBuildingsList.names.add(StreamReadWrite.readNullableString(ds));
+				loneBuildingsList.cultures.add(StreamReadWrite.readNullableString(ds));
+				loneBuildingsList.types.add(StreamReadWrite.readNullableString(ds));
 			}
 
 		} catch (final IOException e) {
@@ -736,9 +671,7 @@ public class MillWorld {
 		}
 	}
 
-	public void registerLoneBuildingsLocation(final World world,
-			final Point pos, final String name, final VillageType type,
-			final Culture culture, final boolean newVillage, String playerName) {
+	public void registerLoneBuildingsLocation(final World world, final Point pos, final String name, final VillageType type, final Culture culture, final boolean newVillage, String playerName) {
 
 		boolean found = false;
 
@@ -756,26 +689,19 @@ public class MillWorld {
 			playerName = null;
 		}
 
-		loneBuildingsList.addVillage(pos, name, type.key, culture.key,
-				playerName);
+		loneBuildingsList.addVillage(pos, name, type.key, culture.key, playerName);
 
 		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-			MLN.major(null, "Registering lone buildings: " + name + " / "
-					+ type + " / " + culture + " / " + pos);
+			MLN.major(null, "Registering lone buildings: " + name + " / " + type + " / " + culture + " / " + pos);
 		}
 		for (final Object o : world.playerEntities) {
 			final EntityPlayer player = (EntityPlayer) o;
-			if (newVillage
-					&& (type.keyLonebuilding || type.keyLoneBuildingGenerateTag != null)) {
-				final int distance = MathHelper.floor_double(pos
-						.horizontalDistanceTo(player));
+			if (newVillage && (type.keyLonebuilding || type.keyLoneBuildingGenerateTag != null)) {
+				final int distance = MathHelper.floor_double(pos.horizontalDistanceTo(player));
 
 				if (distance <= 2000) {
-					final String direction = new Point(player).directionTo(pos,
-							true);
-					ServerSender.sendTranslatedSentence(player, MLN.YELLOW,
-							"command.newlonebuildingfound", type.name, ""
-									+ distance, direction);
+					final String direction = new Point(player).directionTo(pos, true);
+					ServerSender.sendTranslatedSentence(player, MLN.YELLOW, "command.newlonebuildingfound", type.name, "" + distance, direction);
 				}
 			}
 			// sendVillageListPacket(player);
@@ -785,22 +711,17 @@ public class MillWorld {
 
 	}
 
-	public void registerVillageLocation(final World world, final Point pos,
-			final String name, final VillageType type, final Culture culture,
-			final boolean newVillage, String playerName) {
+	public void registerVillageLocation(final World world, final Point pos, final String name, final VillageType type, final Culture culture, final boolean newVillage, String playerName) {
 
 		boolean found = false;
 
 		if (type == null) {
-			MLN.error(null, "Attempting to register village with null type: "
-					+ pos + "/" + culture + "/" + name + "/" + newVillage);
+			MLN.error(null, "Attempting to register village with null type: " + pos + "/" + culture + "/" + name + "/" + newVillage);
 			return;
 		}
 
 		if (culture == null) {
-			MLN.error(null,
-					"Attempting to register village with null culture: " + pos
-							+ "/" + type + "/" + name + "/" + newVillage);
+			MLN.error(null, "Attempting to register village with null culture: " + pos + "/" + type + "/" + name + "/" + newVillage);
 			return;
 		}
 
@@ -821,23 +742,18 @@ public class MillWorld {
 		villagesList.addVillage(pos, name, type.key, culture.key, playerName);
 
 		if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-			MLN.major(null, "Registering village: " + name + " / " + type
-					+ " / " + culture + " / " + pos);
+			MLN.major(null, "Registering village: " + name + " / " + type + " / " + culture + " / " + pos);
 		}
 
 		if (newVillage) {
 			for (final Object o : world.playerEntities) {
 				final EntityPlayer player = (EntityPlayer) o;
 
-				final int distance = MathHelper.floor_double(pos
-						.horizontalDistanceTo(player));
+				final int distance = MathHelper.floor_double(pos.horizontalDistanceTo(player));
 
 				if (distance <= 2000 && !world.isRemote) {
-					final String direction = new Point(player).directionTo(pos,
-							true);
-					ServerSender.sendTranslatedSentence(player, MLN.YELLOW,
-							"command.newvillagefound", name, type.name,
-							"culture." + culture.key, "" + distance, direction);
+					final String direction = new Point(player).directionTo(pos, true);
+					ServerSender.sendTranslatedSentence(player, MLN.YELLOW, "command.newvillagefound", name, type.name, "culture." + culture.key, "" + distance, direction);
 				}
 
 				// sendVillageListPacket(player);
@@ -894,8 +810,7 @@ public class MillWorld {
 		final File configFile = new File(millenaireDir, "tags.txt");
 
 		try {
-			final BufferedWriter writer = MillCommonUtilities
-					.getWriter(configFile);
+			final BufferedWriter writer = MillCommonUtilities.getWriter(configFile);
 
 			for (final String tag : globalTags) {
 				writer.write(tag + MLN.EOL);
@@ -923,8 +838,7 @@ public class MillWorld {
 
 		try {
 
-			final BufferedWriter writer = MillCommonUtilities
-					.getWriter(villageLog);
+			final BufferedWriter writer = MillCommonUtilities.getWriter(villageLog);
 
 			for (int i = 0; i < loneBuildingsList.pos.size(); i++) {
 				final Point p = loneBuildingsList.pos.get(i);
@@ -935,16 +849,12 @@ public class MillWorld {
 					generatedFor = "";
 				}
 
-				writer.write(loneBuildingsList.names.get(i) + ";" + p.getiX()
-						+ "/" + p.getiY() + "/" + p.getiZ() + ";"
-						+ loneBuildingsList.types.get(i) + ";"
-						+ loneBuildingsList.cultures.get(i) + ";"
-						+ generatedFor + System.getProperty("line.separator"));
+				writer.write(loneBuildingsList.names.get(i) + ";" + p.getiX() + "/" + p.getiY() + "/" + p.getiZ() + ";" + loneBuildingsList.types.get(i) + ";" + loneBuildingsList.cultures.get(i)
+						+ ";" + generatedFor + System.getProperty("line.separator"));
 			}
 			writer.flush();
 			if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-				MLN.major(null, "Saved " + loneBuildingsList.names.size()
-						+ " lone buildings.txt positions.");
+				MLN.major(null, "Saved " + loneBuildingsList.names.size() + " lone buildings.txt positions.");
 			}
 
 		} catch (final IOException e) {
@@ -969,8 +879,7 @@ public class MillWorld {
 
 		try {
 
-			final BufferedWriter writer = MillCommonUtilities
-					.getWriter(villageLog);
+			final BufferedWriter writer = MillCommonUtilities.getWriter(villageLog);
 
 			for (int i = 0; i < villagesList.pos.size(); i++) {
 				final Point p = villagesList.pos.get(i);
@@ -981,16 +890,12 @@ public class MillWorld {
 					generatedFor = "";
 				}
 
-				writer.write(villagesList.names.get(i) + ";" + p.getiX() + "/"
-						+ p.getiY() + "/" + p.getiZ() + ";"
-						+ villagesList.types.get(i) + ";"
-						+ villagesList.cultures.get(i) + ";" + generatedFor
-						+ System.getProperty("line.separator"));
+				writer.write(villagesList.names.get(i) + ";" + p.getiX() + "/" + p.getiY() + "/" + p.getiZ() + ";" + villagesList.types.get(i) + ";" + villagesList.cultures.get(i) + ";"
+						+ generatedFor + System.getProperty("line.separator"));
 			}
 			writer.flush();
 			if (MLN.LogWorldGeneration >= MLN.MAJOR) {
-				MLN.major(null, "Saved " + villagesList.names.size()
-						+ " village positions.");
+				MLN.major(null, "Saved " + villagesList.names.size() + " village positions.");
 			}
 
 		} catch (final IOException e) {
@@ -1008,8 +913,7 @@ public class MillWorld {
 
 		try {
 
-			final BufferedWriter writer = MillCommonUtilities
-					.getWriter(configFile);
+			final BufferedWriter writer = MillCommonUtilities.getWriter(configFile);
 
 			writer.write("generate_villages=" + MLN.generateVillages + MLN.EOL);
 
@@ -1028,34 +932,25 @@ public class MillWorld {
 
 			data.writeInt(villagesList.pos.size());
 			for (int i = 0; i < villagesList.pos.size(); i++) {
-				StreamReadWrite.writeNullablePoint(villagesList.pos.get(i),
-						data);
-				StreamReadWrite.writeNullableString(villagesList.names.get(i),
-						data);
-				StreamReadWrite.writeNullableString(
-						villagesList.cultures.get(i), data);
-				StreamReadWrite.writeNullableString(villagesList.types.get(i),
-						data);
+				StreamReadWrite.writeNullablePoint(villagesList.pos.get(i), data);
+				StreamReadWrite.writeNullableString(villagesList.names.get(i), data);
+				StreamReadWrite.writeNullableString(villagesList.cultures.get(i), data);
+				StreamReadWrite.writeNullableString(villagesList.types.get(i), data);
 			}
 
 			data.writeInt(loneBuildingsList.pos.size());
 			for (int i = 0; i < loneBuildingsList.pos.size(); i++) {
-				StreamReadWrite.writeNullablePoint(
-						loneBuildingsList.pos.get(i), data);
-				StreamReadWrite.writeNullableString(
-						loneBuildingsList.names.get(i), data);
-				StreamReadWrite.writeNullableString(
-						loneBuildingsList.cultures.get(i), data);
-				StreamReadWrite.writeNullableString(
-						loneBuildingsList.types.get(i), data);
+				StreamReadWrite.writeNullablePoint(loneBuildingsList.pos.get(i), data);
+				StreamReadWrite.writeNullableString(loneBuildingsList.names.get(i), data);
+				StreamReadWrite.writeNullableString(loneBuildingsList.cultures.get(i), data);
+				StreamReadWrite.writeNullableString(loneBuildingsList.types.get(i), data);
 			}
 
 		} catch (final IOException e) {
 			MLN.printException(this + ": Error in sendVillageListPacket", e);
 		}
 
-		ServerSender.sendPacketToPlayer(ServerSender.createServerPacket(data),
-				player);
+		ServerSender.sendPacketToPlayer(ServerSender.createServerPacket(data), player);
 	}
 
 	public void setGlobalTag(final String tag) {
@@ -1092,69 +987,40 @@ public class MillWorld {
 					}
 
 					if (!buildingsTags.containsKey(b.getPos())) {
-						MLN.minor(null, "Detected new building: " + b
-								+ " with tags: " + tags);
+						MLN.minor(null, "Detected new building: " + b + " with tags: " + tags);
 						buildingsTags.put(b.getPos(), tags);
 					} else {
 						if (!tags.equals(buildingsTags.get(b.getPos()))) {
-							MLN.warning(null, "Testing locations due to: "
-									+ label);
-							MLN.warning(null, "Tags changed for building: " + b
-									+ ". Was: " + buildingsTags.get(b.getPos())
-									+ " now: " + tags);
+							MLN.warning(null, "Testing locations due to: " + label);
+							MLN.warning(null, "Tags changed for building: " + b + ". Was: " + buildingsTags.get(b.getPos()) + " now: " + tags);
 							buildingsTags.put(b.getPos(), tags);
 						}
 					}
 
 					if (!buildingsVariation.containsKey(b.getPos())) {
-						MLN.minor(
-								null,
-								"Detected new building: " + b
-										+ " with variation: "
-										+ b.location.getVariation());
-						buildingsVariation.put(b.getPos(),
-								b.location.getVariation());
+						MLN.minor(null, "Detected new building: " + b + " with variation: " + b.location.getVariation());
+						buildingsVariation.put(b.getPos(), b.location.getVariation());
 					} else {
-						if (!buildingsVariation.get(b.getPos()).equals(
-								b.location.getVariation())) {
-							MLN.warning(null, "Testing locations due to: "
-									+ label);
-							MLN.warning(
-									null,
-									"Variation changed for building: "
-											+ b
-											+ ". Was: "
-											+ buildingsVariation.get(b.getPos())
-											+ " now: "
-											+ b.location.getVariation());
-							buildingsVariation.put(b.getPos(),
-									b.location.getVariation());
+						if (!buildingsVariation.get(b.getPos()).equals(b.location.getVariation())) {
+							MLN.warning(null, "Testing locations due to: " + label);
+							MLN.warning(null, "Variation changed for building: " + b + ". Was: " + buildingsVariation.get(b.getPos()) + " now: " + b.location.getVariation());
+							buildingsVariation.put(b.getPos(), b.location.getVariation());
 						}
 					}
 
 					if (!buildingsLocation.containsKey(b.getPos())) {
-						MLN.minor(null, "Detected new building: " + b
-								+ " with location key: " + b.location.planKey);
+						MLN.minor(null, "Detected new building: " + b + " with location key: " + b.location.planKey);
 						buildingsLocation.put(b.getPos(), b.location.planKey);
 					} else {
-						if (!b.location.planKey.equals(buildingsLocation.get(b
-								.getPos()))) {
-							MLN.warning(null, "Testing locations due to: "
-									+ label);
-							MLN.warning(
-									null,
-									"Location key changed for building: " + b
-											+ ". Was: "
-											+ buildingsLocation.get(b.getPos())
-											+ " now: " + b.location.planKey);
-							buildingsLocation.put(b.getPos(),
-									b.location.planKey);
+						if (!b.location.planKey.equals(buildingsLocation.get(b.getPos()))) {
+							MLN.warning(null, "Testing locations due to: " + label);
+							MLN.warning(null, "Location key changed for building: " + b + ". Was: " + buildingsLocation.get(b.getPos()) + " now: " + b.location.planKey);
+							buildingsLocation.put(b.getPos(), b.location.planKey);
 						}
 					}
 				}
 			} catch (final Exception e) {
-				MLN.printException(
-						"Error in dev monitoring of a building building: ", e);
+				MLN.printException("Error in dev monitoring of a building building: ", e);
 			}
 		}
 
@@ -1177,13 +1043,9 @@ public class MillWorld {
 
 	public void updateWorldClient(final boolean surfaceLoaded) {
 
-		if (!Mill.checkedMillenaireDir
-				&& (!Mill.proxy.getBaseDir().exists() || !new File(
-						Mill.proxy.getBaseDir(), "config.txt").exists())) {
-			Mill.proxy
-					.sendChatAdmin("The millenaire directory could not be found. It should be inside the minecraft directory, alongside \"bin\".");
-			Mill.proxy
-					.sendChatAdmin("Le dossier millenaire est introuvable. Il devrait \u00eatre dans le dossier minecraft, \u00e0 c\u00f4t\u00e9 de \"bin\".");
+		if (!Mill.checkedMillenaireDir && (!Mill.proxy.getBaseDir().exists() || !new File(Mill.proxy.getBaseDir(), "config.txt").exists())) {
+			Mill.proxy.sendChatAdmin("The millenaire directory could not be found. It should be inside the minecraft directory, alongside \"bin\".");
+			Mill.proxy.sendChatAdmin("Le dossier millenaire est introuvable. Il devrait \u00eatre dans le dossier minecraft, \u00e0 c\u00f4t\u00e9 de \"bin\".");
 
 		}
 		Mill.checkedMillenaireDir = true;
@@ -1244,8 +1106,7 @@ public class MillWorld {
 				}
 				for (int i = 0; i < loneBuildingsList.pos.size(); i++) {
 					if (loneBuildingsList.pos.get(i).equals(p)) {
-						loneBuildingsList.names.add(i,
-								b.getVillageQualifiedName());
+						loneBuildingsList.names.add(i, b.getVillageQualifiedName());
 					}
 				}
 			}
@@ -1261,8 +1122,7 @@ public class MillWorld {
 				}
 				for (int i = 0; i < loneBuildingsList.pos.size(); i++) {
 					if (loneBuildingsList.pos.get(i).equals(p)) {
-						loneBuildingsList.names.add(i,
-								b.getVillageQualifiedName());
+						loneBuildingsList.names.add(i, b.getVillageQualifiedName());
 					}
 				}
 			}

@@ -12,10 +12,8 @@ public class GoalRaidVillage extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
-		return packDest(villager.getTownHall().getResManager()
-				.getDefendingPos(), villager.getTownHall());
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
+		return packDest(villager.getTownHall().getResManager().getDefendingPos(), villager.getTownHall());
 	}
 
 	@Override
@@ -29,8 +27,7 @@ public class GoalRaidVillage extends Goal {
 	}
 
 	@Override
-	public boolean isStillValidSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager) throws Exception {
 		return villager.getTownHall().underAttack;
 	}
 

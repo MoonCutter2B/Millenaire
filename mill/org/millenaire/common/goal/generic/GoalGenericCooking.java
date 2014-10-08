@@ -34,30 +34,22 @@ public class GoalGenericCooking extends GoalGeneric {
 				if (line.trim().length() > 0 && !line.startsWith("//")) {
 					final String[] temp = line.split("=");
 					if (temp.length != 2) {
-						MLN.error(null,
-								"Invalid line when loading generic cooking goal "
-										+ file.getName() + ": " + line);
+						MLN.error(null, "Invalid line when loading generic cooking goal " + file.getName() + ": " + line);
 					} else {
 						final String key = temp[0].trim().toLowerCase();
 						final String value = temp[1].trim();
 
-						if (!GoalGeneric.readGenericGoalConfigLine(g, key,
-								value, file, line)) {
+						if (!GoalGeneric.readGenericGoalConfigLine(g, key, value, file, line)) {
 							if (key.equals("itemtocook")) {
 								if (Goods.goodsName.containsKey(value)) {
 									g.itemToCook = Goods.goodsName.get(value);
 								} else {
-									MLN.error(null,
-											"Unknown itemToCook item in generic cooking goal "
-													+ file.getName() + ": "
-													+ line);
+									MLN.error(null, "Unknown itemToCook item in generic cooking goal " + file.getName() + ": " + line);
 								}
 							} else if (key.equals("minimumtocook")) {
 								g.minimumToCook = Integer.parseInt(value);
 							} else {
-								MLN.error(null,
-										"Unknown line in generic cooking goal "
-												+ file.getName() + ": " + line);
+								MLN.error(null, "Unknown line in generic cooking goal " + file.getName() + ": " + line);
 							}
 						}
 					}
@@ -65,9 +57,7 @@ public class GoalGenericCooking extends GoalGeneric {
 			}
 
 			if (g.itemToCook == null) {
-				MLN.error(null,
-						"The itemtocook id is mandatory in custom cooking goals "
-								+ file.getName());
+				MLN.error(null, "The itemtocook id is mandatory in custom cooking goals " + file.getName());
 				return null;
 			}
 
@@ -87,8 +77,7 @@ public class GoalGenericCooking extends GoalGeneric {
 	public int minimumToCook = 16;
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
 		final List<Building> buildings = getBuildings(villager);
 
@@ -98,31 +87,23 @@ public class GoalGenericCooking extends GoalGeneric {
 
 				for (final Point p : dest.getResManager().furnaces) {
 
-					final TileEntityFurnace furnace = p
-							.getFurnace(villager.worldObj);
+					final TileEntityFurnace furnace = p.getFurnace(villager.worldObj);
 
 					if (furnace != null) {
 						// check for fuel addition
-						if ((furnace.getStackInSlot(1) == null || furnace
-								.getStackInSlot(1).stackSize < 32)
-								&& dest.countGoods(Blocks.log, -1) > 4) {
+						if ((furnace.getStackInSlot(1) == null || furnace.getStackInSlot(1).stackSize < 32) && dest.countGoods(Blocks.log, -1) > 4) {
 							return packDest(p, dest);
 						}
 
 						// check for item addition
 						if (dest.countGoods(itemToCook) >= minimumToCook
-								&& (furnace.getStackInSlot(0) == null || furnace
-										.getStackInSlot(0).getItem() == itemToCook
-										.getItem()
-										&& furnace.getStackInSlot(0)
-												.getItemDamage() == itemToCook.meta
+								&& (furnace.getStackInSlot(0) == null || furnace.getStackInSlot(0).getItem() == itemToCook.getItem() && furnace.getStackInSlot(0).getItemDamage() == itemToCook.meta
 										&& furnace.getStackInSlot(0).stackSize < 32)) {
 							return packDest(p, dest);
 						}
 
 						// check items for removal
-						if (furnace.getStackInSlot(2) != null
-								&& furnace.getStackInSlot(2).stackSize >= minimumToCook) {
+						if (furnace.getStackInSlot(2) != null && furnace.getStackInSlot(2).stackSize >= minimumToCook) {
 							return packDest(p, dest);
 						}
 
@@ -135,14 +116,12 @@ public class GoalGenericCooking extends GoalGeneric {
 	}
 
 	@Override
-	public boolean isDestPossibleSpecific(final MillVillager villager,
-			final Building b) {
+	public boolean isDestPossibleSpecific(final MillVillager villager, final Building b) {
 		return true;
 	}
 
 	@Override
-	public boolean isPossibleGenericGoal(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleGenericGoal(final MillVillager villager) throws Exception {
 		if (getDestination(villager) == null) {
 			return false;
 		}
@@ -152,32 +131,22 @@ public class GoalGenericCooking extends GoalGeneric {
 	@Override
 	public boolean performAction(final MillVillager villager) throws Exception {
 
-		final TileEntityFurnace furnace = villager.getGoalDestPoint()
-				.getFurnace(villager.worldObj);
+		final TileEntityFurnace furnace = villager.getGoalDestPoint().getFurnace(villager.worldObj);
 
 		final Building dest = villager.getGoalBuildingDest();
 
 		if (furnace != null && dest != null) {
-			if (furnace.getStackInSlot(0) == null
-					&& dest.countGoods(itemToCook) >= minimumToCook
-					|| furnace.getStackInSlot(0) != null
-					&& furnace.getStackInSlot(0).getItem() == itemToCook
-							.getItem()
-					&& furnace.getStackInSlot(0).getItemDamage() == itemToCook.meta
-					&& furnace.getStackInSlot(0).stackSize < 64
-					&& dest.countGoods(itemToCook) > 0) {
+			if (furnace.getStackInSlot(0) == null && dest.countGoods(itemToCook) >= minimumToCook || furnace.getStackInSlot(0) != null && furnace.getStackInSlot(0).getItem() == itemToCook.getItem()
+					&& furnace.getStackInSlot(0).getItemDamage() == itemToCook.meta && furnace.getStackInSlot(0).stackSize < 64 && dest.countGoods(itemToCook) > 0) {
 				int nb;
 				if (furnace.getStackInSlot(0) == null) {
 					nb = Math.min(64, dest.countGoods(itemToCook));
 
-					furnace.setInventorySlotContents(0, new ItemStack(
-							itemToCook.getItem(), nb, itemToCook.meta));
+					furnace.setInventorySlotContents(0, new ItemStack(itemToCook.getItem(), nb, itemToCook.meta));
 					dest.takeGoods(itemToCook, nb);
 				} else {
-					nb = Math.min(64 - furnace.getStackInSlot(0).stackSize,
-							villager.getHouse().countGoods(itemToCook));
-					furnace.getStackInSlot(0).stackSize = furnace
-							.getStackInSlot(0).stackSize + nb;
+					nb = Math.min(64 - furnace.getStackInSlot(0).stackSize, villager.getHouse().countGoods(itemToCook));
+					furnace.getStackInSlot(0).stackSize = furnace.getStackInSlot(0).stackSize + nb;
 					dest.takeGoods(itemToCook, nb);
 				}
 			}
@@ -193,22 +162,16 @@ public class GoalGenericCooking extends GoalGeneric {
 
 		if (dest.countGoods(Blocks.log, -1) > 0) {
 			if (furnace.getStackInSlot(1) == null) {
-				final int nbplanks = Math.min(64,
-						dest.countGoods(Blocks.log, -1) * 4);
+				final int nbplanks = Math.min(64, dest.countGoods(Blocks.log, -1) * 4);
 
-				furnace.setInventorySlotContents(1, new ItemStack(
-						Blocks.planks, nbplanks));
+				furnace.setInventorySlotContents(1, new ItemStack(Blocks.planks, nbplanks));
 				dest.takeGoods(Blocks.log, -1, nbplanks / 4);
 
 			} else if (furnace.getStackInSlot(1).stackSize < 64) {
 
-				final int nbplanks = Math.min(
-						64 - furnace.getStackInSlot(1).stackSize,
-						dest.countGoods(Blocks.log, -1) * 4);
+				final int nbplanks = Math.min(64 - furnace.getStackInSlot(1).stackSize, dest.countGoods(Blocks.log, -1) * 4);
 
-				furnace.setInventorySlotContents(1, new ItemStack(
-						Blocks.planks, furnace.getStackInSlot(1).stackSize
-								+ nbplanks));
+				furnace.setInventorySlotContents(1, new ItemStack(Blocks.planks, furnace.getStackInSlot(1).stackSize + nbplanks));
 				dest.takeGoods(Blocks.log, -1, nbplanks / 4);
 
 			}

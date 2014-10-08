@@ -15,8 +15,7 @@ public class PathingSurface {
 	// all other tiles(which were null in the array) are not saved. Furthermore
 	// are all tiles lost which are not reachable from the administration
 	// building.
-	public class ExtendedPathTile extends PathingPathCalcTile implements
-			Comparable<ExtendedPathTile> {
+	public class ExtendedPathTile extends PathingPathCalcTile implements Comparable<ExtendedPathTile> {
 		// saving all neighbors
 		public LinkedList<ExtendedPathTile> neighbors;
 		// we use this field later in the calculation of the path
@@ -24,8 +23,7 @@ public class PathingSurface {
 		// we use this key to effectively find tiles we search
 		public int key;
 
-		public ExtendedPathTile(final boolean walkable, final boolean lad,
-				final short[] pos) {
+		public ExtendedPathTile(final boolean walkable, final boolean lad, final short[] pos) {
 			super(walkable, lad, pos);
 			this.neighbors = new LinkedList<ExtendedPathTile>();
 			this.key = pos[0] + (pos[1] << 10) + (pos[2] << 20);
@@ -35,8 +33,7 @@ public class PathingSurface {
 		public ExtendedPathTile(final PathingPathCalcTile c) {
 			super(c);
 			this.neighbors = new LinkedList<ExtendedPathTile>();
-			this.key = c.position[0] + (c.position[1] << 10)
-					+ (c.position[2] << 20);
+			this.key = c.position[0] + (c.position[1] << 10) + (c.position[2] << 20);
 			this.distance = Short.MAX_VALUE;
 		}
 
@@ -79,8 +76,7 @@ public class PathingSurface {
 	// IMPORTANT: An entry of the array has to be null if the tile is passable
 	// (air,grass,flowers...)!
 	//
-	public PathingSurface(final PathingPathCalcTile[][][] region,
-			final PathingPathCalcTile ct) {
+	public PathingSurface(final PathingPathCalcTile[][][] region, final PathingPathCalcTile ct) {
 		// Array used to save the surface of the region used for creation.
 		// A tile get's part of the surface if a player is able to be standing
 		// on it(every solid tile above
@@ -105,9 +101,7 @@ public class PathingSurface {
 													// part?
 													// HD note: you are right,
 													// there was a () missing.
-							(j + 2 < region[0].length
-									&& region[i][j + 1][k] == null
-									&& region[i][j + 2][k] == null || region[i][j][k].ladder
+							(j + 2 < region[0].length && region[i][j + 1][k] == null && region[i][j + 2][k] == null || region[i][j][k].ladder
 									&& (region[i][j + 1][k] == null || region[i][j + 1][k].ladder))) {
 						surface[i][j][k] = new ExtendedPathTile(region[i][j][k]);
 					} else {
@@ -126,8 +120,7 @@ public class PathingSurface {
 		final LinkedList<ExtendedPathTile> toprocess = new LinkedList<ExtendedPathTile>();
 
 		if (surface[centraltile.position[0]][centraltile.position[1]][centraltile.position[2]] != null) {
-			toprocess
-					.add(surface[centraltile.position[0]][centraltile.position[1]][centraltile.position[2]]);
+			toprocess.add(surface[centraltile.position[0]][centraltile.position[1]][centraltile.position[2]]);
 			surface[centraltile.position[0]][centraltile.position[1]][centraltile.position[2]].distance -= 1;
 		}
 
@@ -173,16 +166,12 @@ public class PathingSurface {
 								// we've already checked that above any viewed
 								// ladder field is at least 1 field empty
 								if (surface[i + 1][j + t][k].ladder) {
-									if (t == 1
-											|| t == 0
-											&& surface[i + 1][j + t + 2][k] == null) {
+									if (t == 1 || t == 0 && surface[i + 1][j + t + 2][k] == null) {
 										if (surface[i + 1][j + t][k].distance == Short.MAX_VALUE) {
-											toprocess
-													.add(surface[i + 1][j + t][k]);
+											toprocess.add(surface[i + 1][j + t][k]);
 											surface[i + 1][j + t][k].distance -= 1;
 										}
-										current.neighbors.add(surface[i + 1][j
-												+ t][k]);
+										current.neighbors.add(surface[i + 1][j + t][k]);
 									}
 								} else {
 									if (surface[i + 1][j + t][k].distance == Short.MAX_VALUE) {
@@ -192,16 +181,11 @@ public class PathingSurface {
 									// checking when adding neighbors if 3 tiles
 									// are empty if we change height
 									if (t == 0) {
-										current.neighbors.add(surface[i + 1][j
-												+ t][k]);
-									} else if (t == 1
-											&& surface[i][j + 3][k] == null) {
-										current.neighbors.add(surface[i + 1][j
-												+ t][k]);
-									} else if (t == -1
-											&& surface[i + 1][j + t + 3][k] == null) {
-										current.neighbors.add(surface[i + 1][j
-												+ t][k]);
+										current.neighbors.add(surface[i + 1][j + t][k]);
+									} else if (t == 1 && surface[i][j + 3][k] == null) {
+										current.neighbors.add(surface[i + 1][j + t][k]);
+									} else if (t == -1 && surface[i + 1][j + t + 3][k] == null) {
+										current.neighbors.add(surface[i + 1][j + t][k]);
 									}
 								}
 							}
@@ -210,16 +194,12 @@ public class PathingSurface {
 						if (i - 1 >= 0) {
 							if (surface[i - 1][j + t][k] != null) {
 								if (surface[i - 1][j + t][k].ladder) {
-									if (t == 1
-											|| t == 0
-											&& surface[i - 1][j + t + 2][k] == null) {
+									if (t == 1 || t == 0 && surface[i - 1][j + t + 2][k] == null) {
 										if (surface[i - 1][j + t][k].distance == Short.MAX_VALUE) {
-											toprocess
-													.add(surface[i - 1][j + t][k]);
+											toprocess.add(surface[i - 1][j + t][k]);
 											surface[i - 1][j + t][k].distance -= 1;
 										}
-										current.neighbors.add(surface[i - 1][j
-												+ t][k]);
+										current.neighbors.add(surface[i - 1][j + t][k]);
 									}
 								} else {
 									if (surface[i - 1][j + t][k].distance == Short.MAX_VALUE) {
@@ -227,16 +207,11 @@ public class PathingSurface {
 										surface[i - 1][j + t][k].distance -= 1;
 									}
 									if (t == 0) {
-										current.neighbors.add(surface[i - 1][j
-												+ t][k]);
-									} else if (t == 1
-											&& surface[i][j + 3][k] == null) {
-										current.neighbors.add(surface[i - 1][j
-												+ t][k]);
-									} else if (t == -1
-											&& surface[i - 1][j + t + 3][k] == null) {
-										current.neighbors.add(surface[i - 1][j
-												+ t][k]);
+										current.neighbors.add(surface[i - 1][j + t][k]);
+									} else if (t == 1 && surface[i][j + 3][k] == null) {
+										current.neighbors.add(surface[i - 1][j + t][k]);
+									} else if (t == -1 && surface[i - 1][j + t + 3][k] == null) {
+										current.neighbors.add(surface[i - 1][j + t][k]);
 									}
 								}
 							}
@@ -245,16 +220,12 @@ public class PathingSurface {
 						if (k - 1 >= 0) {
 							if (surface[i][j + t][k - 1] != null) {
 								if (surface[i][j + t][k - 1].ladder) {
-									if (t == 1
-											|| t == 0
-											&& surface[i][j + t + 2][k - 1] == null) {
+									if (t == 1 || t == 0 && surface[i][j + t + 2][k - 1] == null) {
 										if (surface[i][j + t][k - 1].distance == Short.MAX_VALUE) {
-											toprocess
-													.add(surface[i][j + t][k - 1]);
+											toprocess.add(surface[i][j + t][k - 1]);
 											surface[i][j + t][k - 1].distance -= 1;
 										}
-										current.neighbors
-												.add(surface[i][j + t][k - 1]);
+										current.neighbors.add(surface[i][j + t][k - 1]);
 									}
 								} else {
 									if (surface[i][j + t][k - 1].distance == Short.MAX_VALUE) {
@@ -262,16 +233,11 @@ public class PathingSurface {
 										surface[i][j + t][k - 1].distance -= 1;
 									}
 									if (t == 0) {
-										current.neighbors
-												.add(surface[i][j + t][k - 1]);
-									} else if (t == 1
-											&& surface[i][j + 3][k] == null) {
-										current.neighbors
-												.add(surface[i][j + t][k - 1]);
-									} else if (t == -1
-											&& surface[i][j + t + 3][k - 1] == null) {
-										current.neighbors
-												.add(surface[i][j + t][k - 1]);
+										current.neighbors.add(surface[i][j + t][k - 1]);
+									} else if (t == 1 && surface[i][j + 3][k] == null) {
+										current.neighbors.add(surface[i][j + t][k - 1]);
+									} else if (t == -1 && surface[i][j + t + 3][k - 1] == null) {
+										current.neighbors.add(surface[i][j + t][k - 1]);
 									}
 								}
 							}
@@ -280,16 +246,12 @@ public class PathingSurface {
 						if (k + 1 < surface[0][0].length) {
 							if (surface[i][j + t][k + 1] != null) {
 								if (surface[i][j + t][k + 1].ladder) {
-									if (t == 1
-											|| t == 0
-											&& surface[i][j + t + 2][k + 1] == null) {
+									if (t == 1 || t == 0 && surface[i][j + t + 2][k + 1] == null) {
 										if (surface[i][j + t][k + 1].distance == Short.MAX_VALUE) {
-											toprocess
-													.add(surface[i][j + t][k + 1]);
+											toprocess.add(surface[i][j + t][k + 1]);
 											surface[i][j + t][k + 1].distance -= 1;
 										}
-										current.neighbors
-												.add(surface[i][j + t][k + 1]);
+										current.neighbors.add(surface[i][j + t][k + 1]);
 									}
 								} else {
 									if (surface[i][j + t][k + 1].distance == Short.MAX_VALUE) {
@@ -297,16 +259,11 @@ public class PathingSurface {
 										surface[i][j + t][k + 1].distance -= 1;
 									}
 									if (t == 0) {
-										current.neighbors
-												.add(surface[i][j + t][k + 1]);
-									} else if (t == 1
-											&& surface[i][j + 3][k] == null) {
-										current.neighbors
-												.add(surface[i][j + t][k + 1]);
-									} else if (t == -1
-											&& surface[i][j + t + 3][k + 1] == null) {
-										current.neighbors
-												.add(surface[i][j + t][k + 1]);
+										current.neighbors.add(surface[i][j + t][k + 1]);
+									} else if (t == 1 && surface[i][j + 3][k] == null) {
+										current.neighbors.add(surface[i][j + t][k + 1]);
+									} else if (t == -1 && surface[i][j + t + 3][k + 1] == null) {
+										current.neighbors.add(surface[i][j + t][k + 1]);
 									}
 								}
 							}
@@ -348,8 +305,7 @@ public class PathingSurface {
 
 		}
 
-		if (current.position[0] == pos[0] && current.position[1] == pos[1]
-				&& current.position[2] == pos[2]) {
+		if (current.position[0] == pos[0] && current.position[1] == pos[1] && current.position[2] == pos[2]) {
 			contains = true;
 		}
 		return contains;
@@ -357,8 +313,7 @@ public class PathingSurface {
 
 	public boolean containsSimple(final short[] pos) {
 		for (final ExtendedPathTile tile : alltiles) {
-			if (tile.position[0] == pos[0] && tile.position[1] == pos[1]
-					&& tile.position[2] == pos[2]) {
+			if (tile.position[0] == pos[0] && tile.position[1] == pos[1] && tile.position[2] == pos[2]) {
 				return true;
 			}
 		}
@@ -414,9 +369,7 @@ public class PathingSurface {
 		final LinkedList<ExtendedPathTile> processing2 = new LinkedList<ExtendedPathTile>();
 
 		Boolean wayfound = false;
-		if (current.position[0] == target[0]
-				&& current.position[1] == target[1]
-				&& current.position[2] == target[2]) {
+		if (current.position[0] == target[0] && current.position[1] == target[1] && current.position[2] == target[2]) {
 			processing.add(current);
 			processing2.add(current);
 			current.distance = 0;
@@ -435,9 +388,7 @@ public class PathingSurface {
 				}
 			}
 			// breaking if we reached the target
-			if (current.position[0] == start[0]
-					&& current.position[1] == start[1]
-					&& current.position[2] == start[2]) {
+			if (current.position[0] == start[0] && current.position[1] == start[1] && current.position[2] == start[2]) {
 				wayfound = true;
 				break;
 			}

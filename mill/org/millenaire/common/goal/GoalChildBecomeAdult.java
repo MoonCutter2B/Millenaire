@@ -34,12 +34,9 @@ public class GoalChildBecomeAdult extends Goal {
 
 		for (final Building house : villager.getTownHall().getBuildings()) {
 
-			if (house != null && !house.equals(villager.getHouse())
-					&& house.isHouse()) {
+			if (house != null && !house.equals(villager.getHouse()) && house.isHouse()) {
 
-				if (house.canChildMoveIn(villager.gender, villager.familyName)
-						&& house.location.priorityMoveIn >= maxPriority
-						&& validateDest(villager, house)) {
+				if (house.canChildMoveIn(villager.gender, villager.familyName) && house.location.priorityMoveIn >= maxPriority && validateDest(villager, house)) {
 					if (house.location.priorityMoveIn > maxPriority) {
 						possibleDest.clear();
 						possibleDestBuilding.clear();
@@ -55,8 +52,7 @@ public class GoalChildBecomeAdult extends Goal {
 
 			final int rand = MillCommonUtilities.randomInt(possibleDest.size());
 
-			return packDest(possibleDest.get(rand),
-					possibleDestBuilding.get(rand));
+			return packDest(possibleDest.get(rand), possibleDestBuilding.get(rand));
 
 		}
 
@@ -69,16 +65,14 @@ public class GoalChildBecomeAdult extends Goal {
 	}
 
 	@Override
-	public boolean performAction(final MillVillager villager)
-			throws MillenaireException {
+	public boolean performAction(final MillVillager villager) throws MillenaireException {
 
 		final Building house = villager.getGoalBuildingDest();
 
 		if (house != null) {
 			if (house.canChildMoveIn(villager.gender, villager.familyName)) {
 				if (MLN.LogChildren >= MLN.MAJOR) {
-					MLN.major(this, "Adding new adult to house of type "
-							+ house.location + ". Gender: " + villager.gender);
+					MLN.major(this, "Adding new adult to house of type " + house.location + ". Gender: " + villager.gender);
 				}
 				house.addAdult(villager);
 			}

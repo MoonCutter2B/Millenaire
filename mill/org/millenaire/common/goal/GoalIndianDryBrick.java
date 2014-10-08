@@ -24,8 +24,7 @@ public class GoalIndianDryBrick extends Goal {
 
 		final List<Point> vp = new ArrayList<Point>();
 		final List<Point> buildingp = new ArrayList<Point>();
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
-				Building.tagKiln)) {
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagKiln)) {
 			final Point p = kiln.getResManager().getEmptyBrickLocation();
 			if (p != null) {
 				vp.add(p);
@@ -41,8 +40,7 @@ public class GoalIndianDryBrick extends Goal {
 		Point buildingP = buildingp.get(0);
 
 		for (int i = 1; i < vp.size(); i++) {
-			if (vp.get(i).horizontalDistanceToSquared(villager) < p
-					.horizontalDistanceToSquared(villager)) {
+			if (vp.get(i).horizontalDistanceToSquared(villager) < p.horizontalDistanceToSquared(villager)) {
 				p = vp.get(i);
 				buildingP = buildingp.get(i);
 			}
@@ -72,12 +70,10 @@ public class GoalIndianDryBrick extends Goal {
 		if (!villager.lastGoalTime.containsKey(this)) {
 			delayOver = true;
 		} else {
-			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
-					.get(this) + STANDARD_DELAY;
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime.get(this) + STANDARD_DELAY;
 		}
 
-		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(
-				Building.tagKiln)) {
+		for (final Building kiln : villager.getTownHall().getBuildingsWithTag(Building.tagKiln)) {
 			final int nb = kiln.getResManager().getNbEmptyBrickLocation();
 
 			if (nb > 0 && delayOver) {
@@ -97,10 +93,8 @@ public class GoalIndianDryBrick extends Goal {
 
 	@Override
 	public boolean performAction(final MillVillager villager) {
-		if (MillCommonUtilities.getBlock(villager.worldObj,
-				villager.getGoalDestPoint()) == Blocks.air) {
-			villager.setBlockAndMetadata(villager.getGoalDestPoint(),
-					Mill.earth_decoration, 0);
+		if (MillCommonUtilities.getBlock(villager.worldObj, villager.getGoalDestPoint()) == Blocks.air) {
+			villager.setBlockAndMetadata(villager.getGoalDestPoint(), Mill.earth_decoration, 0);
 
 			villager.swingItem();
 		}

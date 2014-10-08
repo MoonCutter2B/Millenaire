@@ -21,9 +21,7 @@ public class ItemFoodMultiple extends ItemFood {
 
 	public final String iconName;
 
-	public ItemFoodMultiple(final String iconName, final int healthAmount,
-			final int regenerationDuration, final int foodAmount,
-			final float saturation, final boolean drink, final int drunkDuration) {
+	public ItemFoodMultiple(final String iconName, final int healthAmount, final int regenerationDuration, final int foodAmount, final float saturation, final boolean drink, final int drunkDuration) {
 		super(foodAmount, saturation, false);
 		this.healthAmount = healthAmount;
 		this.drink = drink;
@@ -49,12 +47,10 @@ public class ItemFoodMultiple extends ItemFood {
 	}
 
 	@Override
-	public ItemStack onEaten(final ItemStack itemstack, final World world,
-			final EntityPlayer entityplayer) {
+	public ItemStack onEaten(final ItemStack itemstack, final World world, final EntityPlayer entityplayer) {
 
 		itemstack.stackSize--;
-		world.playSoundAtEntity(entityplayer, "random.burp", 0.5F,
-				world.rand.nextFloat() * 0.1F + 0.9F);
+		world.playSoundAtEntity(entityplayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
 
 		entityplayer.getFoodStats().func_151686_a(this, itemstack);
 		entityplayer.heal(healthAmount);
@@ -64,13 +60,11 @@ public class ItemFoodMultiple extends ItemFood {
 		}
 
 		if (regenerationDuration > 0) {
-			entityplayer.addPotionEffect(new PotionEffect(
-					Potion.regeneration.id, regenerationDuration * 20, 0));
+			entityplayer.addPotionEffect(new PotionEffect(Potion.regeneration.id, regenerationDuration * 20, 0));
 		}
 
 		if (drunkDuration > 0) {
-			entityplayer.addPotionEffect(new PotionEffect(Potion.confusion.id,
-					drunkDuration * 20, 0));
+			entityplayer.addPotionEffect(new PotionEffect(Potion.confusion.id, drunkDuration * 20, 0));
 		}
 
 		this.onFoodEaten(itemstack, world, entityplayer);
@@ -79,8 +73,7 @@ public class ItemFoodMultiple extends ItemFood {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(final ItemStack itemstack,
-			final World world, final EntityPlayer entityplayer) {
+	public ItemStack onItemRightClick(final ItemStack itemstack, final World world, final EntityPlayer entityplayer) {
 		entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
 
 		return itemstack;

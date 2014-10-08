@@ -47,44 +47,35 @@ public class ItemParchment extends ItemText {
 		maxStackSize = 1;
 	}
 
-	private void displayVillageBook(final EntityPlayer player,
-			final ItemStack is) {
+	private void displayVillageBook(final EntityPlayer player, final ItemStack is) {
 
 		if (player.worldObj.isRemote) {
 			return;
 		}
 
-		if (is.getItemDamage() >= Mill.getMillWorld(player.worldObj).villagesList.pos
-				.size()) {
-			ServerSender.sendTranslatedSentence(player, MLN.ORANGE,
-					"panels.invalidid");
+		if (is.getItemDamage() >= Mill.getMillWorld(player.worldObj).villagesList.pos.size()) {
+			ServerSender.sendTranslatedSentence(player, MLN.ORANGE, "panels.invalidid");
 			return;
 		}
 
-		final Point p = Mill.getMillWorld(player.worldObj).villagesList.pos
-				.get(is.getItemDamage());
+		final Point p = Mill.getMillWorld(player.worldObj).villagesList.pos.get(is.getItemDamage());
 
-		final Chunk chunk = player.worldObj.getChunkFromChunkCoords(
-				p.getChunkX(), p.getChunkZ());
+		final Chunk chunk = player.worldObj.getChunkFromChunkCoords(p.getChunkX(), p.getChunkZ());
 
 		if (!chunk.isChunkLoaded) {
-			ServerSender.sendTranslatedSentence(player, MLN.ORANGE,
-					"panels.toofar");
+			ServerSender.sendTranslatedSentence(player, MLN.ORANGE, "panels.toofar");
 			return;
 		}
 
-		final Building townHall = Mill.getMillWorld(player.worldObj)
-				.getBuilding(p);
+		final Building townHall = Mill.getMillWorld(player.worldObj).getBuilding(p);
 
 		if (townHall == null) {
-			ServerSender.sendTranslatedSentence(player, MLN.ORANGE,
-					"panels.recordsnotloaded");
+			ServerSender.sendTranslatedSentence(player, MLN.ORANGE, "panels.recordsnotloaded");
 			return;
 		}
 
 		if (!townHall.isActive) {
-			ServerSender.sendTranslatedSentence(player, MLN.ORANGE,
-					"panels.toofar");
+			ServerSender.sendTranslatedSentence(player, MLN.ORANGE, "panels.toofar");
 			return;
 		}
 
@@ -93,8 +84,7 @@ public class ItemParchment extends ItemText {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(final ItemStack itemstack,
-			final World world, final EntityPlayer entityplayer) {
+	public ItemStack onItemRightClick(final ItemStack itemstack, final World world, final EntityPlayer entityplayer) {
 
 		if (textsId[0] == villageBook) {
 			if (!world.isRemote && textsId[0] == villageBook) {
@@ -108,30 +98,25 @@ public class ItemParchment extends ItemText {
 
 		if (world.isRemote) {
 			if (textsId.length == 1) {
-				final List<List<String>> parchment = MLN
-						.getParchment(textsId[0]);
+				final List<List<String>> parchment = MLN.getParchment(textsId[0]);
 				if (parchment != null) {
-					DisplayActions.displayParchmentPanelGUI(entityplayer,
-							parchment, null, 0, true);
+					DisplayActions.displayParchmentPanelGUI(entityplayer, parchment, null, 0, true);
 				} else {
-					Mill.proxy.localTranslatedSentence(entityplayer,
-							MLN.ORANGE, "panels.notextfound", "" + textsId[0]);
+					Mill.proxy.localTranslatedSentence(entityplayer, MLN.ORANGE, "panels.notextfound", "" + textsId[0]);
 				}
 			} else {
 
 				final List<List<String>> combinedText = new ArrayList<List<String>>();
 
 				for (int i = 0; i < textsId.length; i++) {
-					final List<List<String>> parchment = MLN
-							.getParchment(textsId[i]);
+					final List<List<String>> parchment = MLN.getParchment(textsId[i]);
 					if (parchment != null) {
 						for (final List<String> page : parchment) {
 							combinedText.add(page);
 						}
 					}
 				}
-				DisplayActions.displayParchmentPanelGUI(entityplayer,
-						combinedText, null, 0, true);
+				DisplayActions.displayParchmentPanelGUI(entityplayer, combinedText, null, 0, true);
 			}
 		}
 

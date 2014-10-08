@@ -35,13 +35,11 @@ public class GoalSleep extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
 		final World world = villager.worldObj;
 
-		final Point sleepPos = villager.getHouse().getResManager()
-				.getSleepingPos();
+		final Point sleepPos = villager.getHouse().getResManager().getSleepingPos();
 
 		final List<Point> beds = new ArrayList<Point>();
 
@@ -49,24 +47,19 @@ public class GoalSleep extends Goal {
 			for (int j = 0; j < 6; j++) {
 				for (int k = 0; k < 6; k++) {
 					for (int l = 0; l < 8; l++) {
-						final Point p = sleepPos.getRelative(i
-								* (1 - (l & 1) * 2), j * (1 - (l & 2)), k
-								* (1 - (l & 4) / 2));
+						final Point p = sleepPos.getRelative(i * (1 - (l & 1) * 2), j * (1 - (l & 2)), k * (1 - (l & 4) / 2));
 
-						final Block block = MillCommonUtilities.getBlock(world,
-								p);
+						final Block block = MillCommonUtilities.getBlock(world, p);
 
 						if (block == Blocks.bed) {
-							final int meta = MillCommonUtilities.getBlockMeta(
-									world, p);
+							final int meta = MillCommonUtilities.getBlockMeta(world, p);
 
 							if (!BlockBed.isBlockHeadOfBed(meta)) {
 
 								boolean alreadyTaken = false;
 
 								for (final MillVillager v : villager.getHouse().villagers) {
-									if (v != villager
-											&& v.getGoalDestPoint() != null) {
+									if (v != villager && v.getGoalDestPoint() != null) {
 										if (v.getGoalDestPoint().equals(p)) {
 											alreadyTaken = true;
 										}
@@ -93,25 +86,18 @@ public class GoalSleep extends Goal {
 			for (int j = 0; j < 6; j++) {
 				for (int k = 0; k < 6; k++) {
 					for (int l = 0; l < 8; l++) {
-						Point p = sleepPos.getRelative(i * (1 - (l & 1) * 2), j
-								* (1 - (l & 2)), k * (1 - (l & 4) / 2));
+						Point p = sleepPos.getRelative(i * (1 - (l & 1) * 2), j * (1 - (l & 2)), k * (1 - (l & 4) / 2));
 
 						// must be non-passable with two passable above
-						if (!p.isBlockPassable(world)
-								&& p.getAbove().isBlockPassable(world)
-								&& p.getRelative(0, 2, 0)
-										.isBlockPassable(world)) {
+						if (!p.isBlockPassable(world) && p.getAbove().isBlockPassable(world) && p.getRelative(0, 2, 0).isBlockPassable(world)) {
 
-							Point topBlock = MillCommonUtilities
-									.findTopNonPassableBlock(world, p.getiX(),
-											p.getiZ());
+							Point topBlock = MillCommonUtilities.findTopNonPassableBlock(world, p.getiX(), p.getiZ());
 
 							// must be a roof above (to avoid villagers sleeping
 							// outdoor)
 							if (topBlock != null && topBlock.y > p.y + 1) {
 
-								final float angle = villager
-										.getBedOrientationInDegrees();
+								final float angle = villager.getBedOrientationInDegrees();
 
 								int dx = 0, dz = 0;
 
@@ -127,48 +113,31 @@ public class GoalSleep extends Goal {
 
 								final Point p2 = p.getRelative(dx, 0, dz);
 
-								if (!p2.isBlockPassable(world)
-										&& p2.getAbove().isBlockPassable(world)
-										&& p2.getRelative(0, 2, 0)
-												.isBlockPassable(world)) {
+								if (!p2.isBlockPassable(world) && p2.getAbove().isBlockPassable(world) && p2.getRelative(0, 2, 0).isBlockPassable(world)) {
 
-									topBlock = MillCommonUtilities
-											.findTopNonPassableBlock(world,
-													p2.getiX(), p2.getiZ());
+									topBlock = MillCommonUtilities.findTopNonPassableBlock(world, p2.getiX(), p2.getiZ());
 
-									if (topBlock != null
-											&& topBlock.y > p2.y + 1) {
+									if (topBlock != null && topBlock.y > p2.y + 1) {
 
 										p = p.getAbove();
 
 										boolean alreadyTaken = false;
 
-										for (final MillVillager v : villager
-												.getHouse().villagers) {
-											if (v != villager
-													&& v.getGoalDestPoint() != null) {
-												if (v.getGoalDestPoint()
-														.equals(p)) {
+										for (final MillVillager v : villager.getHouse().villagers) {
+											if (v != villager && v.getGoalDestPoint() != null) {
+												if (v.getGoalDestPoint().equals(p)) {
 													alreadyTaken = true;
 												}
-												if (v.getGoalDestPoint()
-														.equals(p.getRelative(
-																1, 0, 0))) {
+												if (v.getGoalDestPoint().equals(p.getRelative(1, 0, 0))) {
 													alreadyTaken = true;
 												}
-												if (v.getGoalDestPoint()
-														.equals(p.getRelative(
-																0, 0, 1))) {
+												if (v.getGoalDestPoint().equals(p.getRelative(0, 0, 1))) {
 													alreadyTaken = true;
 												}
-												if (v.getGoalDestPoint()
-														.equals(p.getRelative(
-																-1, 0, 0))) {
+												if (v.getGoalDestPoint().equals(p.getRelative(-1, 0, 0))) {
 													alreadyTaken = true;
 												}
-												if (v.getGoalDestPoint()
-														.equals(p.getRelative(
-																0, 0, -1))) {
+												if (v.getGoalDestPoint().equals(p.getRelative(0, 0, -1))) {
 													alreadyTaken = true;
 												}
 											}
@@ -242,9 +211,7 @@ public class GoalSleep extends Goal {
 			floatingHeight = 0.2f;
 		}
 
-		villager.setPosition(villager.getGoalDestPoint().x + dx,
-				villager.getGoalDestPoint().y + floatingHeight,
-				villager.getGoalDestPoint().z + dz);
+		villager.setPosition(villager.getGoalDestPoint().x + dx, villager.getGoalDestPoint().y + floatingHeight, villager.getGoalDestPoint().z + dz);
 		villager.facePoint(villager.getPos().getRelative(fdx, 1, fdz), 100, 100);
 
 		return false;

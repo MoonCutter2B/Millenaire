@@ -31,8 +31,7 @@ public class TextureAmuletVishnu extends TextureAtlasSprite {
 
 			final Point p = new Point(mc.thePlayer);
 
-			final List<Entity> entities = MillCommonUtilities
-					.getEntitiesWithinAABB(world, EntityMob.class, p, 20, 20);
+			final List<Entity> entities = MillCommonUtilities.getEntitiesWithinAABB(world, EntityMob.class, p, 20, 20);
 
 			for (final Entity ent : entities) {
 				if (p.distanceTo(ent) < closestDistance) {
@@ -65,10 +64,7 @@ public class TextureAmuletVishnu extends TextureAtlasSprite {
 
 		if (iconPos != this.frameCounter) {
 			this.frameCounter = iconPos;
-			TextureUtil.uploadTextureMipmap(
-					(int[][]) this.framesTextureData.get(this.frameCounter),
-					this.width, this.height, this.originX, this.originY, false,
-					false);
+			TextureUtil.uploadTextureMipmap((int[][]) this.framesTextureData.get(this.frameCounter), this.width, this.height, this.originX, this.originY, false, false);
 		}
 	}
 

@@ -73,8 +73,7 @@ public class Goods {
 		@Override
 		public void registerIcons(final IIconRegister iconRegister) {
 			Mill.proxy.declareAmuletTextures(iconRegister);
-			itemIcon = iconRegister.registerIcon(Mill.modId + ":"
-					+ baseIconName + MLN.getTextSuffix());
+			itemIcon = iconRegister.registerIcon(Mill.modId + ":" + baseIconName + MLN.getTextSuffix());
 		}
 	}
 
@@ -85,8 +84,7 @@ public class Goods {
 		}
 
 		@Override
-		public ItemStack onItemRightClick(final ItemStack itemstack,
-				final World world, final EntityPlayer entityplayer) {
+		public ItemStack onItemRightClick(final ItemStack itemstack, final World world, final EntityPlayer entityplayer) {
 
 			if (MLN.LogOther >= MLN.DEBUG) {
 				MLN.debug(this, "Using skoll amulet.");
@@ -126,8 +124,7 @@ public class Goods {
 		public void registerIcons(final IIconRegister iconRegister) {
 
 			Mill.proxy.declareAmuletTextures(iconRegister);
-			itemIcon = iconRegister.registerIcon(Mill.modId + ":"
-					+ baseIconName + MLN.getTextSuffix());
+			itemIcon = iconRegister.registerIcon(Mill.modId + ":" + baseIconName + MLN.getTextSuffix());
 		}
 
 	}
@@ -145,8 +142,7 @@ public class Goods {
 		@Override
 		public void registerIcons(final IIconRegister iconRegister) {
 			Mill.proxy.declareAmuletTextures(iconRegister);
-			itemIcon = iconRegister.registerIcon(Mill.modId + ":"
-					+ baseIconName + MLN.getTextSuffix());
+			itemIcon = iconRegister.registerIcon(Mill.modId + ":" + baseIconName + MLN.getTextSuffix());
 		}
 	}
 
@@ -158,10 +154,7 @@ public class Goods {
 		}
 
 		@Override
-		public boolean onItemUseFirst(final ItemStack itemstack,
-				final EntityPlayer entityplayer, final World world, int i,
-				int j, int k, int l, final float hitX, final float hitY,
-				final float hitZ) {
+		public boolean onItemUseFirst(final ItemStack itemstack, final EntityPlayer entityplayer, final World world, int i, int j, int k, int l, final float hitX, final float hitY, final float hitZ) {
 			if (world.getBlock(i, j, k) == Blocks.snow) {
 				l = 0;
 			} else {
@@ -189,25 +182,18 @@ public class Goods {
 				return false;
 			}
 
-			if (MillCommonUtilities.countChestItems(entityplayer.inventory,
-					Blocks.dirt, 0) == 0
-					|| MillCommonUtilities.countChestItems(
-							entityplayer.inventory, Blocks.sand, 0) == 0) {
+			if (MillCommonUtilities.countChestItems(entityplayer.inventory, Blocks.dirt, 0) == 0 || MillCommonUtilities.countChestItems(entityplayer.inventory, Blocks.sand, 0) == 0) {
 
 				if (!world.isRemote) {
-					ServerSender.sendTranslatedSentence(entityplayer,
-							MLN.WHITE, "ui.brickinstructions");
+					ServerSender.sendTranslatedSentence(entityplayer, MLN.WHITE, "ui.brickinstructions");
 				}
 				return false;
 			}
 
-			MillCommonUtilities.getItemsFromChest(entityplayer.inventory,
-					Blocks.dirt, 0, 1);
-			MillCommonUtilities.getItemsFromChest(entityplayer.inventory,
-					Blocks.sand, 0, 1);
+			MillCommonUtilities.getItemsFromChest(entityplayer.inventory, Blocks.dirt, 0, 1);
+			MillCommonUtilities.getItemsFromChest(entityplayer.inventory, Blocks.sand, 0, 1);
 
-			MillCommonUtilities.setBlockAndMetadata(world, i, j, k,
-					Mill.earth_decoration, 0, true, false);
+			MillCommonUtilities.setBlockAndMetadata(world, i, j, k, Mill.earth_decoration, 0, true, false);
 
 			itemstack.damageItem(1, entityplayer);
 
@@ -258,8 +244,7 @@ public class Goods {
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		@SideOnly(Side.CLIENT)
 		@Override
-		public void getSubItems(final Item item,
-				final CreativeTabs par2CreativeTabs, final List par3List) {
+		public void getSubItems(final Item item, final CreativeTabs par2CreativeTabs, final List par3List) {
 			for (int var4 = 0; var4 < 2; ++var4) {
 				par3List.add(new ItemStack(item, 1, var4));
 			}
@@ -267,8 +252,7 @@ public class Goods {
 
 		@Override
 		public String getUnlocalizedName(final ItemStack par1ItemStack) {
-			final int meta = MathHelper.clamp_int(
-					par1ItemStack.getItemDamage(), 0, 15);
+			final int meta = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
 
 			return "item." + getClothName(meta);
 
@@ -279,23 +263,19 @@ public class Goods {
 			icons = new IIcon[iconNames.length];
 
 			for (int i = 0; i < iconNames.length; i++) {
-				icons[i] = MillCommonUtilities.getIcon(iconRegister,
-						iconNames[i]);
+				icons[i] = MillCommonUtilities.getIcon(iconRegister, iconNames[i]);
 			}
 			itemIcon = MillCommonUtilities.getIcon(iconRegister, iconNames[0]);
 		}
 	}
 
-	public static class ItemMayanQuestCrown extends ItemArmor implements
-			IItemInitialEnchantmens {
+	public static class ItemMayanQuestCrown extends ItemArmor implements IItemInitialEnchantmens {
 
-		private static final ResourceLocation mayan1 = new ResourceLocation(
-				Mill.modId, "textures/models/armor/ML_mayan_quest_1.png");
+		private static final ResourceLocation mayan1 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_mayan_quest_1.png");
 
 		public final String iconName;
 
-		public ItemMayanQuestCrown(final String iconName, final int armourId,
-				final int type) {
+		public ItemMayanQuestCrown(final String iconName, final int armourId, final int type) {
 			super(ArmorMaterial.DIAMOND, armourId, type);
 			setMaxDamage(0);
 			this.iconName = iconName;
@@ -304,52 +284,40 @@ public class Goods {
 
 		@Override
 		public void applyEnchantments(final ItemStack stack) {
-			if (EnchantmentHelper.getEnchantmentLevel(
-					Enchantment.respiration.effectId, stack) == 0) {
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.respiration.effectId, stack) == 0) {
 				stack.addEnchantment(Enchantment.respiration, 3);
 			}
-			if (EnchantmentHelper.getEnchantmentLevel(
-					Enchantment.aquaAffinity.effectId, stack) == 0) {
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.aquaAffinity.effectId, stack) == 0) {
 				stack.addEnchantment(Enchantment.aquaAffinity, 1);
 			}
-			if (EnchantmentHelper.getEnchantmentLevel(
-					Enchantment.protection.effectId, stack) == 0) {
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.protection.effectId, stack) == 0) {
 				stack.addEnchantment(Enchantment.protection, 4);
 			}
 		}
 
 		@Override
-		public String getArmorTexture(final ItemStack par1,
-				final Entity entity, final int slot, final String type) {
+		public String getArmorTexture(final ItemStack par1, final Entity entity, final int slot, final String type) {
 			return mayan1.toString();
 		}
 
 		@Override
-		public boolean onItemUse(final ItemStack stack,
-				final EntityPlayer par2EntityPlayer, final World par3World,
-				final int par4, final int par5, final int par6, final int par7,
-				final float par8, final float par9, final float par10) {
+		public boolean onItemUse(final ItemStack stack, final EntityPlayer par2EntityPlayer, final World par3World, final int par4, final int par5, final int par6, final int par7, final float par8,
+				final float par9, final float par10) {
 
 			applyEnchantments(stack);
 
-			return super.onItemUse(stack, par2EntityPlayer, par3World, par4,
-					par5, par6, par7, par8, par9, par10);
+			return super.onItemUse(stack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
 		}
 
 		@Override
-		public boolean onItemUseFirst(final ItemStack stack,
-				final EntityPlayer player, final World world, final int x,
-				final int y, final int z, final int side, final float hitX,
-				final float hitY, final float hitZ) {
+		public boolean onItemUseFirst(final ItemStack stack, final EntityPlayer player, final World world, final int x, final int y, final int z, final int side, final float hitX, final float hitY,
+				final float hitZ) {
 			applyEnchantments(stack);
-			return super.onItemUseFirst(stack, player, world, x, y, z, side,
-					hitX, hitY, hitZ);
+			return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
 		}
 
 		@Override
-		public void onUpdate(final ItemStack par1ItemStack,
-				final World par2World, final Entity par3Entity, final int par4,
-				final boolean par5) {
+		public void onUpdate(final ItemStack par1ItemStack, final World par2World, final Entity par3Entity, final int par4, final boolean par5) {
 			applyEnchantments(par1ItemStack);
 			super.onUpdate(par1ItemStack, par2World, par3Entity, par4, par5);
 		}
@@ -363,86 +331,60 @@ public class Goods {
 
 	public static class ItemMillenaireArmour extends ItemArmor {
 
-		private static final ResourceLocation norman1 = new ResourceLocation(
-				Mill.modId, "textures/models/armor/ML_norman_1.png");
-		private static final ResourceLocation norman2 = new ResourceLocation(
-				Mill.modId, "textures/models/armor/ML_norman_2.png");
+		private static final ResourceLocation norman1 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_norman_1.png");
+		private static final ResourceLocation norman2 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_norman_2.png");
 
-		private static final ResourceLocation japaneseGuard1 = new ResourceLocation(
-				Mill.modId, "textures/models/armor/ML_japanese_guard_1.png");
-		private static final ResourceLocation japaneseGuard2 = new ResourceLocation(
-				Mill.modId, "textures/models/armor/ML_japanese_guard_2.png");
+		private static final ResourceLocation japaneseGuard1 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_japanese_guard_1.png");
+		private static final ResourceLocation japaneseGuard2 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_japanese_guard_2.png");
 
-		private static final ResourceLocation japaneseWarriorBlue1 = new ResourceLocation(
-				Mill.modId,
-				"textures/models/armor/ML_japanese_warrior_blue_1.png");
-		private static final ResourceLocation japaneseWarriorBlue2 = new ResourceLocation(
-				Mill.modId,
-				"textures/models/armor/ML_japanese_warrior_blue_2.png");
+		private static final ResourceLocation japaneseWarriorBlue1 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_japanese_warrior_blue_1.png");
+		private static final ResourceLocation japaneseWarriorBlue2 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_japanese_warrior_blue_2.png");
 
-		private static final ResourceLocation japaneseWarriorRed1 = new ResourceLocation(
-				Mill.modId,
-				"textures/models/armor/ML_japanese_warrior_red_1.png");
-		private static final ResourceLocation japaneseWarriorRed2 = new ResourceLocation(
-				Mill.modId,
-				"textures/models/armor/ML_japanese_warrior_red_2.png");
+		private static final ResourceLocation japaneseWarriorRed1 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_japanese_warrior_red_1.png");
+		private static final ResourceLocation japaneseWarriorRed2 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_japanese_warrior_red_2.png");
 
-		private static final ResourceLocation byzantine1 = new ResourceLocation(
-				Mill.modId, "textures/models/armor/ML_byzantine_1.png");
-		private static final ResourceLocation byzantine2 = new ResourceLocation(
-				Mill.modId, "textures/models/armor/ML_byzantine_2.png");
+		private static final ResourceLocation byzantine1 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_byzantine_1.png");
+		private static final ResourceLocation byzantine2 = new ResourceLocation(Mill.modId, "textures/models/armor/ML_byzantine_2.png");
 
 		public final String iconName;
 
-		public ItemMillenaireArmour(final String iconName,
-				final ArmorMaterial material, final int armourId, final int type) {
+		public ItemMillenaireArmour(final String iconName, final ArmorMaterial material, final int armourId, final int type) {
 			super(material, armourId, type);
 			this.iconName = iconName;
 			setCreativeTab(Mill.tabMillenaire);
 		}
 
 		@Override
-		public String getArmorTexture(final ItemStack par1,
-				final Entity entity, final int slot, final String type) {
-			if (par1.getItem() == Mill.normanHelmet
-					|| par1.getItem() == Mill.normanPlate
-					|| par1.getItem() == Mill.normanBoots) {
+		public String getArmorTexture(final ItemStack par1, final Entity entity, final int slot, final String type) {
+			if (par1.getItem() == Mill.normanHelmet || par1.getItem() == Mill.normanPlate || par1.getItem() == Mill.normanBoots) {
 				return norman1.toString();
 			}
 			if (par1.getItem() == Mill.normanLegs) {
 				return norman2.toString();
 			}
 
-			if (par1.getItem() == Mill.japaneseGuardHelmet
-					|| par1.getItem() == Mill.japaneseGuardPlate
-					|| par1.getItem() == Mill.japaneseGuardBoots) {
+			if (par1.getItem() == Mill.japaneseGuardHelmet || par1.getItem() == Mill.japaneseGuardPlate || par1.getItem() == Mill.japaneseGuardBoots) {
 				return japaneseGuard1.toString();
 			}
 			if (par1.getItem() == Mill.japaneseGuardLegs) {
 				return japaneseGuard2.toString();
 			}
 
-			if (par1.getItem() == Mill.japaneseWarriorBlueHelmet
-					|| par1.getItem() == Mill.japaneseWarriorBluePlate
-					|| par1.getItem() == Mill.japaneseWarriorBlueBoots) {
+			if (par1.getItem() == Mill.japaneseWarriorBlueHelmet || par1.getItem() == Mill.japaneseWarriorBluePlate || par1.getItem() == Mill.japaneseWarriorBlueBoots) {
 				return japaneseWarriorBlue1.toString();
 			}
 			if (par1.getItem() == Mill.japaneseWarriorBlueLegs) {
 				return japaneseWarriorBlue2.toString();
 			}
 
-			if (par1.getItem() == Mill.japaneseWarriorRedHelmet
-					|| par1.getItem() == Mill.japaneseWarriorRedPlate
-					|| par1.getItem() == Mill.japaneseWarriorRedBoots) {
+			if (par1.getItem() == Mill.japaneseWarriorRedHelmet || par1.getItem() == Mill.japaneseWarriorRedPlate || par1.getItem() == Mill.japaneseWarriorRedBoots) {
 				return japaneseWarriorRed1.toString();
 			}
 			if (par1.getItem() == Mill.japaneseWarriorRedLegs) {
 				return japaneseWarriorRed2.toString();
 			}
 
-			if (par1.getItem() == Mill.byzantineHelmet
-					|| par1.getItem() == Mill.byzantinePlate
-					|| par1.getItem() == Mill.byzantineBoots) {
+			if (par1.getItem() == Mill.byzantineHelmet || par1.getItem() == Mill.byzantinePlate || par1.getItem() == Mill.byzantineBoots) {
 				return byzantine1.toString();
 			}
 			if (par1.getItem() == Mill.byzantineLegs) {
@@ -462,8 +404,7 @@ public class Goods {
 
 		public final String iconName;
 
-		public ItemMillenaireAxe(final String iconName,
-				final ToolMaterial material) {
+		public ItemMillenaireAxe(final String iconName, final ToolMaterial material) {
 			super(material);
 			this.iconName = iconName;
 			setCreativeTab(Mill.tabMillenaire);
@@ -483,8 +424,7 @@ public class Goods {
 		public final String[] iconNames;
 		public IIcon[] icons;
 
-		public ItemMillenaireBow(final float speedFactor,
-				final float damageBonus, final String... iconNames) {
+		public ItemMillenaireBow(final float speedFactor, final float damageBonus, final String... iconNames) {
 			super();
 			this.speedFactor = speedFactor;
 			this.damageBonus = damageBonus;
@@ -505,22 +445,17 @@ public class Goods {
 		 */
 
 		@Override
-		public void onPlayerStoppedUsing(final ItemStack par1ItemStack,
-				final World par2World, final EntityPlayer par3EntityPlayer,
-				final int par4) {
+		public void onPlayerStoppedUsing(final ItemStack par1ItemStack, final World par2World, final EntityPlayer par3EntityPlayer, final int par4) {
 			int var6 = this.getMaxItemUseDuration(par1ItemStack) - par4;
 
-			final ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer,
-					par1ItemStack, var6);
+			final ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer, par1ItemStack, var6);
 			MinecraftForge.EVENT_BUS.post(event);
 			if (event.isCanceled()) {
 				return;
 			}
 			var6 = event.charge;
 
-			final boolean var5 = par3EntityPlayer.capabilities.isCreativeMode
-					|| EnchantmentHelper.getEnchantmentLevel(
-							Enchantment.infinity.effectId, par1ItemStack) > 0;
+			final boolean var5 = par3EntityPlayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, par1ItemStack) > 0;
 
 			if (var5 || par3EntityPlayer.inventory.hasItem(Items.arrow)) {
 				float var7 = var6 / 20.0F;
@@ -534,42 +469,35 @@ public class Goods {
 					var7 = 1.0F;
 				}
 
-				final EntityArrow var8 = new EntityArrow(par2World,
-						par3EntityPlayer, var7 * 2.0F);
+				final EntityArrow var8 = new EntityArrow(par2World, par3EntityPlayer, var7 * 2.0F);
 
 				if (var7 == 1.0F) {
 					var8.setIsCritical(true);
 				}
 
-				final int var9 = EnchantmentHelper.getEnchantmentLevel(
-						Enchantment.power.effectId, par1ItemStack);
+				final int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, par1ItemStack);
 
 				if (var9 > 0) {
 					var8.setDamage(var8.getDamage() + var9 * 0.5D + 0.5D);
 				}
 
-				final int var10 = EnchantmentHelper.getEnchantmentLevel(
-						Enchantment.punch.effectId, par1ItemStack);
+				final int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, par1ItemStack);
 
 				if (var10 > 0) {
 					var8.setKnockbackStrength(var10);
 				}
 
-				if (EnchantmentHelper.getEnchantmentLevel(
-						Enchantment.flame.effectId, par1ItemStack) > 0) {
+				if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, par1ItemStack) > 0) {
 					var8.setFire(100);
 				}
 
 				par1ItemStack.damageItem(1, par3EntityPlayer);
-				par2World.playSoundAtEntity(par3EntityPlayer, "random.bow",
-						1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F)
-								+ var7 * 0.5F);
+				par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
 
 				if (var5) {
 					var8.canBePickedUp = 2;
 				} else {
-					par3EntityPlayer.inventory
-							.consumeInventoryItem(Items.arrow);
+					par3EntityPlayer.inventory.consumeInventoryItem(Items.arrow);
 				}
 
 				// faster MLN arrows
@@ -587,8 +515,7 @@ public class Goods {
 		}
 
 		@Override
-		public void onUpdate(final ItemStack itemstack, final World world,
-				final Entity entity, final int i, final boolean flag) {
+		public void onUpdate(final ItemStack itemstack, final World world, final Entity entity, final int i, final boolean flag) {
 			final EntityPlayer entityplayer = (EntityPlayer) entity;
 			Mill.proxy.updateBowIcon(this, entityplayer);
 		}
@@ -600,8 +527,7 @@ public class Goods {
 			icons = new IIcon[iconNames.length];
 
 			for (int i = 0; i < iconNames.length; i++) {
-				icons[i] = MillCommonUtilities.getIcon(iconRegister,
-						iconNames[i]);
+				icons[i] = MillCommonUtilities.getIcon(iconRegister, iconNames[i]);
 			}
 		}
 
@@ -614,8 +540,7 @@ public class Goods {
 
 		public final String iconName;
 
-		public ItemMillenaireHoe(final String iconName,
-				final ToolMaterial material) {
+		public ItemMillenaireHoe(final String iconName, final ToolMaterial material) {
 			super(material);
 			setCreativeTab(Mill.tabMillenaire);
 			this.iconName = iconName;
@@ -631,8 +556,7 @@ public class Goods {
 
 		public final String iconName;
 
-		public ItemMillenairePickaxe(final String iconName,
-				final ToolMaterial material) {
+		public ItemMillenairePickaxe(final String iconName, final ToolMaterial material) {
 			super(material);
 			this.iconName = iconName;
 			setCreativeTab(Mill.tabMillenaire);
@@ -648,8 +572,7 @@ public class Goods {
 
 		public final String iconName;
 
-		public ItemMillenaireShovel(final String iconName,
-				final ToolMaterial material) {
+		public ItemMillenaireShovel(final String iconName, final ToolMaterial material) {
 			super(material);
 
 			this.iconName = iconName;
@@ -663,8 +586,7 @@ public class Goods {
 		}
 	}
 
-	public static class ItemMillenaireSword extends ItemSword implements
-			IItemInitialEnchantmens {
+	public static class ItemMillenaireSword extends ItemSword implements IItemInitialEnchantmens {
 
 		float criticalChance;
 		int criticalMultiple;
@@ -673,9 +595,7 @@ public class Goods {
 
 		boolean knockback;
 
-		public ItemMillenaireSword(final String iconName,
-				final ToolMaterial material, final float criticalChance,
-				final int criticalMultiple, final boolean knockback) {
+		public ItemMillenaireSword(final String iconName, final ToolMaterial material, final float criticalChance, final int criticalMultiple, final boolean knockback) {
 			super(material);
 			this.criticalChance = criticalChance;
 			this.criticalMultiple = criticalMultiple;
@@ -701,45 +621,36 @@ public class Goods {
 		@Override
 		public void applyEnchantments(final ItemStack stack) {
 			if (knockback) {
-				if (EnchantmentHelper.getEnchantmentLevel(
-						Enchantment.knockback.effectId, stack) == 0) {
+				if (EnchantmentHelper.getEnchantmentLevel(Enchantment.knockback.effectId, stack) == 0) {
 					stack.addEnchantment(Enchantment.knockback, 2);
 				}
 			}
 		}
 
 		@Override
-		public void onCreated(final ItemStack stack, final World par2World,
-				final EntityPlayer par3EntityPlayer) {
+		public void onCreated(final ItemStack stack, final World par2World, final EntityPlayer par3EntityPlayer) {
 
 			applyEnchantments(stack);
 		}
 
 		@Override
-		public boolean onItemUse(final ItemStack par1ItemStack,
-				final EntityPlayer par2EntityPlayer, final World par3World,
-				final int par4, final int par5, final int par6, final int par7,
+		public boolean onItemUse(final ItemStack par1ItemStack, final EntityPlayer par2EntityPlayer, final World par3World, final int par4, final int par5, final int par6, final int par7,
 				final float par8, final float par9, final float par10) {
 
 			applyEnchantments(par1ItemStack);
-			return super.onItemUse(par1ItemStack, par2EntityPlayer, par3World,
-					par4, par5, par6, par7, par8, par9, par10);
+			return super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
 		}
 
 		@Override
-		public boolean onItemUseFirst(final ItemStack stack,
-				final EntityPlayer player, final World world, final int x,
-				final int y, final int z, final int side, final float hitX,
-				final float hitY, final float hitZ) {
+		public boolean onItemUseFirst(final ItemStack stack, final EntityPlayer player, final World world, final int x, final int y, final int z, final int side, final float hitX, final float hitY,
+				final float hitZ) {
 
 			applyEnchantments(stack);
-			return super.onItemUseFirst(stack, player, world, x, y, z, side,
-					hitX, hitY, hitZ);
+			return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
 		}
 
 		@Override
-		public boolean onLeftClickEntity(final ItemStack stack,
-				final EntityPlayer player, final Entity entity) {
+		public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
 			applyEnchantments(stack);
 			return super.onLeftClickEntity(stack, player, entity);
 		}
@@ -759,10 +670,8 @@ public class Goods {
 		}
 
 		@Override
-		public boolean onItemUseFirst(final ItemStack itemstack,
-				final EntityPlayer entityplayer, final World world,
-				final int x, final int y, final int z, final int l,
-				final float hitX, final float hitY, final float hitZ) {
+		public boolean onItemUseFirst(final ItemStack itemstack, final EntityPlayer entityplayer, final World world, final int x, final int y, final int z, final int l, final float hitX,
+				final float hitY, final float hitZ) {
 
 			final Point pos = new Point(x, y, z);
 
@@ -793,8 +702,7 @@ public class Goods {
 
 					final Point p = list.pos.get(j);
 
-					final int distance = MathHelper.floor_double(p
-							.horizontalDistanceTo(pos));
+					final int distance = MathHelper.floor_double(p.horizontalDistanceTo(pos));
 
 					if (distance <= 30) {
 
@@ -802,14 +710,10 @@ public class Goods {
 
 						if (th != null && th.isTownhall) {
 							if (th.chestLocked) {
-								ServerSender.sendTranslatedSentence(
-										entityplayer, MLN.ORANGE,
-										"negationwand.villagelocked",
-										th.villageType.name);
+								ServerSender.sendTranslatedSentence(entityplayer, MLN.ORANGE, "negationwand.villagelocked", th.villageType.name);
 								return true;
 							}
-							ServerSender.displayNegationWandGUI(entityplayer,
-									th);
+							ServerSender.displayNegationWandGUI(entityplayer, th);
 
 						}
 					}
@@ -830,10 +734,8 @@ public class Goods {
 		}
 
 		@Override
-		public boolean onItemUseFirst(final ItemStack itemstack,
-				final EntityPlayer entityplayer, final World world,
-				final int i, final int j, final int k, final int l,
-				final float hitX, final float hitY, final float hitZ) {// client-side
+		public boolean onItemUseFirst(final ItemStack itemstack, final EntityPlayer entityplayer, final World world, final int i, final int j, final int k, final int l, final float hitX,
+				final float hitY, final float hitZ) {// client-side
 
 			final Point pos = new Point(i, j, k);
 
@@ -864,10 +766,8 @@ public class Goods {
 		}
 
 		@Override
-		public boolean onItemUse(final ItemStack itemstack,
-				final EntityPlayer entityplayer, final World world,
-				final int i, final int j, final int k, final int side,
-				final float par8, final float par9, final float par10) {
+		public boolean onItemUse(final ItemStack itemstack, final EntityPlayer entityplayer, final World world, final int i, final int j, final int k, final int side, final float par8,
+				final float par9, final float par10) {
 			if (side == 0) {
 				return false;
 			}
@@ -877,8 +777,7 @@ public class Goods {
 
 			final int orientation = Direction.facingToDirection[side];
 
-			final EntityMillDecoration entitypainting = new EntityMillDecoration(
-					world, i, j, k, orientation, type, false);
+			final EntityMillDecoration entitypainting = new EntityMillDecoration(world, i, j, k, orientation, type, false);
 			if (entitypainting.onValidSurface()) {
 				if (!world.isRemote) {
 					world.spawnEntityInWorld(entitypainting);
@@ -931,19 +830,15 @@ public class Goods {
 
 		try {
 			final BufferedWriter writer = MillCommonUtilities.getWriter(file);
-			writer.write("//Item key;item id;item meta;label (indicative only)"
-					+ MLN.EOL);
-			writer.write("//This file is auto-generated and indicative only. Don't edit it."
-					+ MLN.EOL + MLN.EOL);
+			writer.write("//Item key;item id;item meta;label (indicative only)" + MLN.EOL);
+			writer.write("//This file is auto-generated and indicative only. Don't edit it." + MLN.EOL + MLN.EOL);
 
 			final List<String> names = new ArrayList<String>(goodsName.keySet());
 			Collections.sort(names);
 
 			for (final String name : names) {
 				final InvItem iv = goodsName.get(name);
-				writer.write(name + ";"
-						+ Item.itemRegistry.getNameForObject(iv.item) + ";"
-						+ iv.meta + ";" + iv.getName() + MLN.EOL);
+				writer.write(name + ";" + Item.itemRegistry.getNameForObject(iv.item) + ";" + iv.meta + ";" + iv.getName() + MLN.EOL);
 			}
 			writer.close();
 
@@ -965,29 +860,20 @@ public class Goods {
 					final String[] temp = line.trim().split(";");
 
 					if (temp.length > 2) {
-						final Item item = (Item) Item.itemRegistry
-								.getObject(temp[1]);
+						final Item item = (Item) Item.itemRegistry.getObject(temp[1]);
 
 						if (item != null) {
-							goodsName
-									.put(temp[0],
-											new InvItem(item, Integer
-													.parseInt(temp[2])));
+							goodsName.put(temp[0], new InvItem(item, Integer.parseInt(temp[2])));
 						} else {
-							final Block block = (Block) Block.blockRegistry
-									.getObject(temp[1]);
+							final Block block = (Block) Block.blockRegistry.getObject(temp[1]);
 
 							if (block == null) {
-								MLN.error(null, "Could not load good: "
-										+ temp[1]);
+								MLN.error(null, "Could not load good: " + temp[1]);
 							} else {
 								if (Item.getItemFromBlock(block) == null) {
-									MLN.error(null,
-											"Tried to create good from block with no item: "
-													+ line);
+									MLN.error(null, "Tried to create good from block with no item: " + line);
 								}
-								goodsName.put(temp[0], new InvItem(block,
-										Integer.parseInt(temp[2])));
+								goodsName.put(temp[0], new InvItem(block, Integer.parseInt(temp[2])));
 							}
 						}
 					}
@@ -1423,11 +1309,8 @@ public class Goods {
 		requiredTag = null;
 	}
 
-	public Goods(final String name, final InvItem item, final int sellingPrice,
-			final int buyingPrice, final int reservedQuantity,
-			final int targetQuantity, final int foreignMerchantPrice,
-			final boolean autoGenerate, final String tag,
-			final int minReputation, final String desc) {
+	public Goods(final String name, final InvItem item, final int sellingPrice, final int buyingPrice, final int reservedQuantity, final int targetQuantity, final int foreignMerchantPrice,
+			final boolean autoGenerate, final String tag, final int minReputation, final String desc) {
 		this.name = name;
 		this.item = item;
 		this.sellingPrice = sellingPrice;
@@ -1483,8 +1366,7 @@ public class Goods {
 		return sellingPrice;
 	}
 
-	public int getCalculatedBuyingPrice(final Building shop,
-			final EntityPlayer player) {
+	public int getCalculatedBuyingPrice(final Building shop, final EntityPlayer player) {
 
 		if (shop == null) {
 			return buyingPrice;
@@ -1493,8 +1375,7 @@ public class Goods {
 		return shop.getBuyingPrice(this, player);
 	}
 
-	public int getCalculatedSellingPrice(final Building shop,
-			final EntityPlayer player) {
+	public int getCalculatedSellingPrice(final Building shop, final EntityPlayer player) {
 
 		if (shop == null) {
 			return sellingPrice;

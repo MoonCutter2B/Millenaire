@@ -21,8 +21,7 @@ import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 
 public class GoalGenericSlaughterAnimal extends GoalGeneric {
 
-	public static GoalGenericSlaughterAnimal loadGenericSlaughterAnimalGoal(
-			final File file) {
+	public static GoalGenericSlaughterAnimal loadGenericSlaughterAnimalGoal(final File file) {
 
 		final GoalGenericSlaughterAnimal g = new GoalGenericSlaughterAnimal();
 
@@ -37,62 +36,41 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 				if (line.trim().length() > 0 && !line.startsWith("//")) {
 					final String[] temp = line.split("=");
 					if (temp.length != 2) {
-						MLN.error(null,
-								"Invalid line when loading generic slaughter goal "
-										+ file.getName() + ": " + line);
+						MLN.error(null, "Invalid line when loading generic slaughter goal " + file.getName() + ": " + line);
 					} else {
 						final String key = temp[0].trim().toLowerCase();
 						final String value = temp[1].trim();
 
-						if (!GoalGeneric.readGenericGoalConfigLine(g, key,
-								value, file, line)) {
+						if (!GoalGeneric.readGenericGoalConfigLine(g, key, value, file, line)) {
 							if (key.equals("animalkey")) {
-								if (EntityList.stringToClassMapping
-										.containsKey(value)) {
+								if (EntityList.stringToClassMapping.containsKey(value)) {
 									g.animalKey = value;
 								} else {
-									MLN.error(
-											null,
-											"Unknown animalkey in generic slaughter goal "
-													+ file.getName()
-													+ ": "
-													+ line
-													+ ". Careful, it is case-sensitive.");
+									MLN.error(null, "Unknown animalkey in generic slaughter goal " + file.getName() + ": " + line + ". Careful, it is case-sensitive.");
 								}
 							} else if (key.equals("bonusitem")) {
 								final String[] temp2 = value.split(",");
 
 								if (temp2.length != 3 && temp2.length != 2) {
-									MLN.error(
-											null,
+									MLN.error(null,
 											"bonusitem must take the form of bonusitem=goodname,chanceon100 or bonusitem=goodname,chanceon100,requiredtag (ex: leather,50 or tripes,10,oven) in generic slaughter goal "
-													+ file.getName()
-													+ ": "
-													+ line);
+													+ file.getName() + ": " + line);
 								} else {
 									if (Goods.goodsName.containsKey(temp2[0])) {
-										g.extraItems.add(Goods.goodsName
-												.get(temp2[0]));
-										g.extraItemsChance.add(Integer
-												.parseInt(temp2[1]));
+										g.extraItems.add(Goods.goodsName.get(temp2[0]));
+										g.extraItemsChance.add(Integer.parseInt(temp2[1]));
 										if (temp2.length == 3) {
-											g.extraItemsTag
-													.add(temp2[2].trim());
+											g.extraItemsTag.add(temp2[2].trim());
 										} else {
 											g.extraItemsTag.add(null);
 										}
 									} else {
-										MLN.error(null,
-												"Unknown bonusitem item in generic slaughter goal "
-														+ file.getName() + ": "
-														+ line);
+										MLN.error(null, "Unknown bonusitem item in generic slaughter goal " + file.getName() + ": " + line);
 									}
 								}
 
 							} else {
-								MLN.error(null,
-										"Unknown line in generic slaughter goal "
-												+ file.getName() + ": " + line);
+								MLN.error(null, "Unknown line in generic slaughter goal " + file.getName() + ": " + line);
 							}
 						}
 					}
@@ -100,9 +78,7 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 			}
 
 			if (g.animalKey == null) {
-				MLN.error(null,
-						"The animalKey is mandatory in custom slaughter goals "
-								+ file.getName());
+				MLN.error(null, "The animalKey is mandatory in custom slaughter goals " + file.getName());
 				return null;
 			}
 
@@ -130,8 +106,7 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
 		final Point pos = villager.getPos();
 		Entity closest = null;
@@ -144,10 +119,7 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 
 			if (isDestPossible(villager, dest)) {
 
-				final List<Entity> animals = MillCommonUtilities
-						.getEntitiesWithinAABB(villager.worldObj,
-								(Class) EntityList.stringToClassMapping
-										.get(animalKey), dest.getPos(), 15, 10);
+				final List<Entity> animals = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, (Class) EntityList.stringToClassMapping.get(animalKey), dest.getPos(), 15, 10);
 
 				for (final Entity ent : animals) {
 					if (!ent.isDead && !isEntityChild(ent)) {
@@ -179,12 +151,8 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public boolean isDestPossibleSpecific(final MillVillager villager,
-			final Building b) {
-		final List<Entity> animals = MillCommonUtilities.getEntitiesWithinAABB(
-				villager.worldObj,
-				(Class) EntityList.stringToClassMapping.get(animalKey),
-				b.getPos(), 15, 10);
+	public boolean isDestPossibleSpecific(final MillVillager villager, final Building b) {
+		final List<Entity> animals = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, (Class) EntityList.stringToClassMapping.get(animalKey), b.getPos(), 15, 10);
 
 		if (animals == null) {
 			return false;
@@ -226,8 +194,7 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 	}
 
 	@Override
-	public boolean isPossibleGenericGoal(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleGenericGoal(final MillVillager villager) throws Exception {
 		return getDestination(villager) != null;
 	}
 
@@ -246,10 +213,7 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 			return true;
 		}
 
-		List<Entity> animals = MillCommonUtilities.getEntitiesWithinAABB(
-				villager.worldObj,
-				(Class) EntityList.stringToClassMapping.get(animalKey),
-				villager.getPos(), 2, 5);
+		List<Entity> animals = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, (Class) EntityList.stringToClassMapping.get(animalKey), villager.getPos(), 2, 5);
 
 		for (final Entity ent : animals) {
 			if (!ent.isDead) {
@@ -258,11 +222,8 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 						villager.setEntityToAttack(ent);
 
 						for (int i = 0; i < extraItems.size(); i++) {
-							if (extraItemsTag.get(i) == null
-									|| dest.location.tags
-											.contains(extraItemsTag.get(i))) {
-								if (MillCommonUtilities.randomInt(100) < extraItemsChance
-										.get(i)) {
+							if (extraItemsTag.get(i) == null || dest.location.tags.contains(extraItemsTag.get(i))) {
+								if (MillCommonUtilities.randomInt(100) < extraItemsChance.get(i)) {
 									villager.addToInv(extraItems.get(i), 1);
 								}
 							}
@@ -276,9 +237,7 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 			}
 		}
 
-		animals = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj,
-				(Class) EntityList.stringToClassMapping.get(animalKey),
-				villager.getPos(), 2, 5);
+		animals = MillCommonUtilities.getEntitiesWithinAABB(villager.worldObj, (Class) EntityList.stringToClassMapping.get(animalKey), villager.getPos(), 2, 5);
 
 		for (final Entity ent : animals) {
 			if (!ent.isDead) {
@@ -287,11 +246,8 @@ public class GoalGenericSlaughterAnimal extends GoalGeneric {
 						villager.setEntityToAttack(ent);
 
 						for (int i = 0; i < extraItems.size(); i++) {
-							if (extraItemsTag.get(i) == null
-									|| dest.location.tags
-											.contains(extraItemsTag.get(i))) {
-								if (MillCommonUtilities.randomInt(100) < extraItemsChance
-										.get(i)) {
+							if (extraItemsTag.get(i) == null || dest.location.tags.contains(extraItemsTag.get(i))) {
+								if (MillCommonUtilities.randomInt(100) < extraItemsChance.get(i)) {
 									villager.addToInv(extraItems.get(i), 1);
 								}
 							}

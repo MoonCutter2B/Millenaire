@@ -1,1 +1,1 @@
-native:Bosquet;gameNameKey=grove_A0;tag:grove;sapling:4-10
+native:Bosquet;gameNameKey:grove_A0;tag:grove;sapling:4-10

@@ -37,8 +37,7 @@ public abstract class GoalGeneric extends Goal {
 	public static void loadGenericGoals() {
 		for (final File file : getGenericGoalFiles("genericcrafting")) {
 			try {
-				final GoalGenericCrafting goal = GoalGenericCrafting
-						.loadGenericCraftingGoal(file);
+				final GoalGenericCrafting goal = GoalGenericCrafting.loadGenericCraftingGoal(file);
 				if (goal != null) {
 					if (MLN.LogGeneralAI >= MLN.MAJOR) {
 						MLN.major(goal, "loaded crafting goal");
@@ -52,8 +51,7 @@ public abstract class GoalGeneric extends Goal {
 
 		for (final File file : getGenericGoalFiles("genericcooking")) {
 			try {
-				final GoalGenericCooking goal = GoalGenericCooking
-						.loadGenericCookingGoal(file);
+				final GoalGenericCooking goal = GoalGenericCooking.loadGenericCookingGoal(file);
 				if (goal != null) {
 					if (MLN.LogGeneralAI >= MLN.MAJOR) {
 						MLN.major(goal, "loaded cooking goal");
@@ -67,8 +65,7 @@ public abstract class GoalGeneric extends Goal {
 
 		for (final File file : getGenericGoalFiles("genericslaughteranimal")) {
 			try {
-				final GoalGenericSlaughterAnimal goal = GoalGenericSlaughterAnimal
-						.loadGenericSlaughterAnimalGoal(file);
+				final GoalGenericSlaughterAnimal goal = GoalGenericSlaughterAnimal.loadGenericSlaughterAnimalGoal(file);
 				if (goal != null) {
 					if (MLN.LogGeneralAI >= MLN.MAJOR) {
 						MLN.major(goal, "loaded slaughtering goal");
@@ -82,8 +79,7 @@ public abstract class GoalGeneric extends Goal {
 
 		for (final File file : getGenericGoalFiles("genericplanting")) {
 			try {
-				final GoalGenericPlantCrop goal = GoalGenericPlantCrop
-						.loadGenericPlantCropGoal(file);
+				final GoalGenericPlantCrop goal = GoalGenericPlantCrop.loadGenericPlantCropGoal(file);
 				if (goal != null) {
 					if (MLN.LogGeneralAI >= MLN.MAJOR) {
 						MLN.major(goal, "loaded planting goal");
@@ -97,8 +93,7 @@ public abstract class GoalGeneric extends Goal {
 
 		for (final File file : getGenericGoalFiles("genericharvesting")) {
 			try {
-				final GoalGenericHarvestCrop goal = GoalGenericHarvestCrop
-						.loadGenericHarvestCropGoal(file);
+				final GoalGenericHarvestCrop goal = GoalGenericHarvestCrop.loadGenericHarvestCropGoal(file);
 				if (goal != null) {
 					if (MLN.LogGeneralAI >= MLN.MAJOR) {
 						MLN.major(goal, "loaded harvesting goal");
@@ -111,9 +106,7 @@ public abstract class GoalGeneric extends Goal {
 		}
 	}
 
-	public static boolean readGenericGoalConfigLine(final GoalGeneric g,
-			final String key, final String value, final File file,
-			final String line) {
+	public static boolean readGenericGoalConfigLine(final GoalGeneric g, final String key, final String value, final File file, final String line) {
 		if (key.equals("buildingtag")) {
 			g.buildingTag = value.toLowerCase();
 		} else if (key.equals("townhallgoal")) {
@@ -141,19 +134,13 @@ public abstract class GoalGeneric extends Goal {
 
 			for (int i = 0; i < temp2.length; i++) {
 				if (Goods.goodsName.containsKey(temp2[i])) {
-					g.heldItems[i] = Goods.goodsName.get(temp2[i])
-							.getItemStack();
+					g.heldItems[i] = Goods.goodsName.get(temp2[i]).getItemStack();
 					if (g.heldItems[i].getItem() == null) {
-						MLN.error(null, "Held item with null item: " + temp2[i]
-								+ " in generic goal " + file.getName() + ": "
-								+ line);
+						MLN.error(null, "Held item with null item: " + temp2[i] + " in generic goal " + file.getName() + ": " + line);
 					}
 				} else {
 					g.heldItems[i] = null;
-					MLN.error(
-							null,
-							"Unknown held item in generic goal "
-									+ file.getName() + ": " + line);
+					MLN.error(null, "Unknown held item in generic goal " + file.getName() + ": " + line);
 				}
 			}
 
@@ -161,36 +148,24 @@ public abstract class GoalGeneric extends Goal {
 			final String[] temp2 = value.split(",");
 
 			if (temp2.length != 2) {
-				MLN.error(
-						null,
-						"buildinglimits must take the form of buildinglimit=goodname,goodquatity in generic goal "
-								+ file.getName() + ": " + line);
+				MLN.error(null, "buildinglimits must take the form of buildinglimit=goodname,goodquatity in generic goal " + file.getName() + ": " + line);
 			} else {
 				if (Goods.goodsName.containsKey(temp2[0])) {
-					g.buildingLimit.put(Goods.goodsName.get(temp2[0]),
-							Integer.parseInt(temp2[1]));
+					g.buildingLimit.put(Goods.goodsName.get(temp2[0]), Integer.parseInt(temp2[1]));
 				} else {
-					MLN.error(null,
-							"Unknown buildinglimits item in generic goal "
-									+ file.getName() + ": " + line);
+					MLN.error(null, "Unknown buildinglimits item in generic goal " + file.getName() + ": " + line);
 				}
 			}
 		} else if (key.equals("townhalllimit")) {
 			final String[] temp2 = value.split(",");
 
 			if (temp2.length != 2) {
-				MLN.error(
-						null,
-						"townhalllimits must take the form of townhalllimit=goodname,goodquatity in generic goal "
-								+ file.getName() + ": " + line);
+				MLN.error(null, "townhalllimits must take the form of townhalllimit=goodname,goodquatity in generic goal " + file.getName() + ": " + line);
 			} else {
 				if (Goods.goodsName.containsKey(temp2[0])) {
-					g.townhallLimit.put(Goods.goodsName.get(temp2[0]),
-							Integer.parseInt(temp2[1]));
+					g.townhallLimit.put(Goods.goodsName.get(temp2[0]), Integer.parseInt(temp2[1]));
 				} else {
-					MLN.error(null,
-							"Unknown townhalllimits item in generic goal "
-									+ file.getName() + ": " + line);
+					MLN.error(null, "Unknown townhalllimits item in generic goal " + file.getName() + ": " + line);
 				}
 			}
 		} else if (key.equals("itemsbalance")) {
@@ -198,20 +173,13 @@ public abstract class GoalGeneric extends Goal {
 			final String[] temp2 = value.split(",");
 
 			if (temp2.length != 2) {
-				MLN.error(
-						null,
-						"itemsbalance must take the form of itemsbalance=firstgood,secondgood in generic goal "
-								+ file.getName() + ": " + line);
+				MLN.error(null, "itemsbalance must take the form of itemsbalance=firstgood,secondgood in generic goal " + file.getName() + ": " + line);
 			} else {
-				if (Goods.goodsName.containsKey(temp2[0])
-						|| Goods.goodsName.containsKey(temp2[1])) {
+				if (Goods.goodsName.containsKey(temp2[0]) || Goods.goodsName.containsKey(temp2[1])) {
 					g.balanceOutput1 = Goods.goodsName.get(temp2[0]);
 					g.balanceOutput2 = Goods.goodsName.get(temp2[1]);
 				} else {
-					MLN.error(
-							null,
-							"Unknown itemsbalance item in generic goal "
-									+ file.getName() + ": " + line);
+					MLN.error(null, "Unknown itemsbalance item in generic goal " + file.getName() + ": " + line);
 				}
 			}
 		} else {
@@ -244,22 +212,17 @@ public abstract class GoalGeneric extends Goal {
 		final List<Building> buildings = new ArrayList<Building>();
 
 		if (townHallGoal) {
-			if (requiredTag == null
-					|| villager.getTownHall().location.tags
-							.contains(requiredTag)) {
+			if (requiredTag == null || villager.getTownHall().location.tags.contains(requiredTag)) {
 				buildings.add(villager.getTownHall());
 			}
 		} else if (buildingTag == null) {
-			if (requiredTag == null
-					|| villager.getHouse().location.tags.contains(requiredTag)) {
+			if (requiredTag == null || villager.getHouse().location.tags.contains(requiredTag)) {
 				buildings.add(villager.getHouse());
 			}
 		} else {
 
-			for (final Building b : villager.getTownHall().getBuildingsWithTag(
-					buildingTag)) {
-				if (requiredTag == null
-						|| b.location.tags.contains(requiredTag)) {
+			for (final Building b : villager.getTownHall().getBuildingsWithTag(buildingTag)) {
+				if (requiredTag == null || b.location.tags.contains(requiredTag)) {
 					buildings.add(b);
 				}
 			}
@@ -269,26 +232,20 @@ public abstract class GoalGeneric extends Goal {
 	}
 
 	@Override
-	public ItemStack[] getHeldItemsTravelling(final MillVillager villager)
-			throws Exception {
+	public ItemStack[] getHeldItemsTravelling(final MillVillager villager) throws Exception {
 		return heldItems;
 	}
 
-	public final boolean isDestPossible(final MillVillager villager,
-			final Building dest) {
-		return validateDest(villager, dest)
-				&& isDestPossibleSpecific(villager, dest);
+	public final boolean isDestPossible(final MillVillager villager, final Building dest) {
+		return validateDest(villager, dest) && isDestPossibleSpecific(villager, dest);
 	}
 
-	public abstract boolean isDestPossibleSpecific(MillVillager villager,
-			Building b);
+	public abstract boolean isDestPossibleSpecific(MillVillager villager, Building b);
 
-	public abstract boolean isPossibleGenericGoal(MillVillager villager)
-			throws Exception;
+	public abstract boolean isPossibleGenericGoal(MillVillager villager) throws Exception;
 
 	@Override
-	public final boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public final boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 
 		if (!isPossibleGenericGoal(villager)) {
 			return false;

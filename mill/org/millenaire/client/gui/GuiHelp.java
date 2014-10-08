@@ -16,8 +16,7 @@ public class GuiHelp extends GuiText {
 
 	int helpDisplayed = 1;
 
-	ResourceLocation background = new ResourceLocation(Mill.modId,
-			"textures/gui/ML_help.png");
+	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_help.png");
 
 	public GuiHelp() {
 	}
@@ -28,8 +27,7 @@ public class GuiHelp extends GuiText {
 	}
 
 	@Override
-	protected void customDrawBackground(final int mouseX, final int mouseY,
-			final float f) {
+	protected void customDrawBackground(final int mouseX, final int mouseY, final float f) {
 
 		final int xStart = (width - getXSize()) / 2;
 		final int yStart = (height - getYSize()) / 2;
@@ -40,15 +38,11 @@ public class GuiHelp extends GuiText {
 		for (int i = 0; i < 7; i++) {
 			if (helpDisplayed - 1 != i) {
 				final int extraFirstRow = i == 0 ? 1 : 0;
-				drawGradientRect(xStart, yStart - extraFirstRow + 32 * i + 1,
-						xStart + 32, yStart + 32 * i + 32, 0xa0000000,
-						0xa0000000);
+				drawGradientRect(xStart, yStart - extraFirstRow + 32 * i + 1, xStart + 32, yStart + 32 * i + 32, 0xa0000000, 0xa0000000);
 			}
 			if (helpDisplayed - 8 != i) {
 				final int extraFirstRow = i == 0 ? 1 : 0;
-				drawGradientRect(xStart + 224, yStart - extraFirstRow + 32 * i
-						+ 1, xStart + 32 + 224, yStart + 32 * i + 32,
-						0xa0000000, 0xa0000000);
+				drawGradientRect(xStart + 224, yStart - extraFirstRow + 32 * i + 1, xStart + 32 + 224, yStart + 32 * i + 32, 0xa0000000, 0xa0000000);
 			}
 		}
 
@@ -72,26 +66,18 @@ public class GuiHelp extends GuiText {
 		if (mouseX > 0 && mouseX < 32) {
 			final int pos = mouseY / 32;
 			if (pos >= 0 && pos < NB_CHAPTERS) {
-				final int stringlength = fontRendererObj.getStringWidth(MLN
-						.string("help.tab_" + (pos + 1)));
-				drawGradientRect(mouseX + 10 - 3, mouseY + 10 - 3, mouseX + 10
-						+ stringlength + 3, mouseY + 10 + 14, 0xc0000000,
-						0xc0000000);
-				fontRendererObj.drawString(MLN.string("help.tab_" + (pos + 1)),
-						mouseX + 10, mouseY + 10, 0x909090);
+				final int stringlength = fontRendererObj.getStringWidth(MLN.string("help.tab_" + (pos + 1)));
+				drawGradientRect(mouseX + 10 - 3, mouseY + 10 - 3, mouseX + 10 + stringlength + 3, mouseY + 10 + 14, 0xc0000000, 0xc0000000);
+				fontRendererObj.drawString(MLN.string("help.tab_" + (pos + 1)), mouseX + 10, mouseY + 10, 0x909090);
 			}
 		}
 
 		if (mouseX > 224 && mouseX < 256) {
 			final int pos = mouseY / 32;
 			if (pos >= 0 && pos < NB_CHAPTERS - 7) {
-				final int stringlength = fontRendererObj.getStringWidth(MLN
-						.string("help.tab_" + (pos + 8)));
-				drawGradientRect(mouseX + 10 - 3, mouseY + 10 - 3, mouseX + 10
-						+ stringlength + 3, mouseY + 10 + 14, 0xc0000000,
-						0xc0000000);
-				fontRendererObj.drawString(MLN.string("help.tab_" + (pos + 8)),
-						mouseX + 10, mouseY + 10, 0x909090);
+				final int stringlength = fontRendererObj.getStringWidth(MLN.string("help.tab_" + (pos + 8)));
+				drawGradientRect(mouseX + 10 - 3, mouseY + 10 - 3, mouseX + 10 + stringlength + 3, mouseY + 10 + 14, 0xc0000000, 0xc0000000);
+				fontRendererObj.drawString(MLN.string("help.tab_" + (pos + 8)), mouseX + 10, mouseY + 10, 0x909090);
 			}
 		}
 
@@ -146,11 +132,9 @@ public class GuiHelp extends GuiText {
 			descText = new ArrayList<List<Line>>();
 
 			final List<Line> page = new ArrayList<Line>();
-			page.add(new Line(
-					"Il n'y a malheuresement pas d'aide disponible dans votre langue."));
+			page.add(new Line("Il n'y a malheuresement pas d'aide disponible dans votre langue."));
 			page.add(new Line(""));
-			page.add(new Line(
-					"Unfortunately there is no help available in your language."));
+			page.add(new Line("Unfortunately there is no help available in your language."));
 			descText.add(page);
 			descText = adjustText(descText);
 		}

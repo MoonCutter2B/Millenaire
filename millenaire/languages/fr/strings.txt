@@ -92,6 +92,8 @@ ui.nbbuildings=<0> bâtiments
 ui.wandwrongblock=Cette baguette ne marche que sur un bloc d'obsidienne pour un village aléatoire ou sur les blocs suivants:
 ui.wandblocklist=<0> pour un <1>
 ui.wandblocklistcontrolled=<0> pour un <1> (nécessite d'être chef dans cette culture)
+ui.wand_locationinuse=Cet emplacement est déjà pris.
+ui.wand_invillagerange=Vous êtes trop proche du village: <0>
 ui.brickinstructions=Un bloc de terre et un de sable sont nécessaires pour créer une brique
 ui.buildingscentre=Centre
 ui.buildingsstarting=Bâtiments initiaux
@@ -185,9 +187,11 @@ ui.raid=Planifier un raid
 
 ui.custombuilding_confirm=Confirmer la création d'un bâtiment personalisé: <0>
 ui.custombuilding_cantconfirm=Impossible de créer un bâtiment personalisé: <0>
+ui.custombuilding_edit=Mettre à jour le bâtiment personalisé: <0>
 ui.custombuilding_resneededintro=Resources nécessaires:
 ui.custombuilding_resneeded=<1> sur <3> <0> trouvé (min: <2>)
 ui.custombuilding_newvillage=Création d'un nouveau village avec bâtiment central personalisé
+ui.custombuilding_signnumber=Note: vous pouvez indiquer l'ordre dans lequel utiliser les panneaux en mettant un numéro de 1 à <0> dans la première ligne.
 ui.close=Fermer
 ui.confirm=Confirmer
 

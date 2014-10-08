@@ -8,26 +8,19 @@ import org.millenaire.common.building.Building;
 
 public class GoalGetTool extends Goal {
 
-	private static final Item[][] classes = new Item[][] { MillVillager.axes,
-			MillVillager.pickaxes, MillVillager.shovels, MillVillager.hoes,
-			MillVillager.helmets, MillVillager.chestplates, MillVillager.legs,
-			MillVillager.boots, MillVillager.weaponsSwords,
-			MillVillager.weaponsRanged };
+	private static final Item[][] classes = new Item[][] { MillVillager.axes, MillVillager.pickaxes, MillVillager.shovels, MillVillager.hoes, MillVillager.helmets, MillVillager.chestplates,
+			MillVillager.legs, MillVillager.boots, MillVillager.weaponsSwords, MillVillager.weaponsRanged };
 
 	public GoalGetTool() {
 		maxSimultaneousInBuilding = 2;
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager)
-			throws Exception {
+	public GoalInformation getDestination(final MillVillager villager) throws Exception {
 
 		for (final Building shop : villager.getTownHall().getShops()) {
 			for (final InvItem key : villager.getToolsNeeded()) {
-				if (villager.countInv(key.getItem(), key.meta) == 0
-						&& shop.countGoods(key.getItem(), key.meta) > 0
-						&& !hasBetterTool(villager, key)
-						&& validateDest(villager, shop)) {
+				if (villager.countInv(key.getItem(), key.meta) == 0 && shop.countGoods(key.getItem(), key.meta) > 0 && !hasBetterTool(villager, key) && validateDest(villager, shop)) {
 					return packDest(shop.getResManager().getSellingPos(), shop);
 				}
 			}
@@ -64,8 +57,7 @@ public class GoalGetTool extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isPossibleSpecific(final MillVillager villager) throws Exception {
 
 		if (villager.getToolsNeeded().length == 0) {
 			return false;
@@ -73,10 +65,7 @@ public class GoalGetTool extends Goal {
 
 		for (final Building shop : villager.getTownHall().getShops()) {
 			for (final InvItem key : villager.getToolsNeeded()) {
-				if (villager.countInv(key.getItem(), key.meta) == 0
-						&& shop.countGoods(key.getItem(), key.meta) > 0
-						&& !hasBetterTool(villager, key)
-						&& validateDest(villager, shop)) {
+				if (villager.countInv(key.getItem(), key.meta) == 0 && shop.countGoods(key.getItem(), key.meta) > 0 && !hasBetterTool(villager, key) && validateDest(villager, shop)) {
 					return true;
 				}
 			}
@@ -100,9 +89,7 @@ public class GoalGetTool extends Goal {
 		}
 
 		for (final InvItem key : villager.getToolsNeeded()) {
-			if (villager.countInv(key.getItem(), key.meta) == 0
-					&& shop.countGoods(key.getItem(), key.meta) > 0
-					&& !hasBetterTool(villager, key)) {
+			if (villager.countInv(key.getItem(), key.meta) == 0 && shop.countGoods(key.getItem(), key.meta) > 0 && !hasBetterTool(villager, key)) {
 				villager.takeFromBuilding(shop, key.getItem(), key.meta, 1);
 			}
 		}

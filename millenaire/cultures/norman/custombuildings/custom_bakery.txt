@@ -1,1 +1,1 @@
-native:Boulangerie;gameNameKey=bakery_A0;shop:bakery;tag:bakery;tag:leasure
+native:Boulangerie;gameNameKey:bakery_A0;shop:bakery;tag:bakery;tag:leasure

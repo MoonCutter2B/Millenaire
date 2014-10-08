@@ -22,20 +22,16 @@ public class GoalBeSeller extends Goal {
 	}
 
 	@Override
-	public boolean isStillValidSpecific(final MillVillager villager)
-			throws Exception {
+	public boolean isStillValidSpecific(final MillVillager villager) throws Exception {
 
 		if (villager.getTownHall().sellingPlace == null) {
 			return false;
 		}
 
-		final EntityPlayer player = villager.worldObj.getClosestPlayer(
-				villager.getTownHall().sellingPlace.getiX(),
-				villager.getTownHall().sellingPlace.getiY(),
+		final EntityPlayer player = villager.worldObj.getClosestPlayer(villager.getTownHall().sellingPlace.getiX(), villager.getTownHall().sellingPlace.getiY(),
 				villager.getTownHall().sellingPlace.getiZ(), sellingRadius);
 
-		final boolean valid = player != null
-				&& villager.getTownHall().sellingPlace.distanceTo(player) < sellingRadius;
+		final boolean valid = player != null && villager.getTownHall().sellingPlace.distanceTo(player) < sellingRadius;
 
 		if (!valid && MLN.LogWifeAI >= MLN.MAJOR) {
 			MLN.major(this, "Selling goal no longer valid.");
@@ -51,25 +47,18 @@ public class GoalBeSeller extends Goal {
 
 	@Override
 	public void onAccept(final MillVillager villager) {
-		final EntityPlayer player = villager.worldObj.getClosestPlayer(
-				villager.getTownHall().sellingPlace.getiX(),
-				villager.getTownHall().sellingPlace.getiY(),
+		final EntityPlayer player = villager.worldObj.getClosestPlayer(villager.getTownHall().sellingPlace.getiX(), villager.getTownHall().sellingPlace.getiY(),
 				villager.getTownHall().sellingPlace.getiZ(), sellingRadius);
-		ServerSender.sendTranslatedSentence(player, MLN.WHITE,
-				"ui.sellercoming", villager.getName());
+		ServerSender.sendTranslatedSentence(player, MLN.WHITE, "ui.sellercoming", villager.getName());
 	}
 
 	@Override
 	public void onComplete(final MillVillager villager) {
 
-		final EntityPlayer player = villager.worldObj.getClosestPlayer(villager
-				.getTownHall().getResManager().getSellingPos().getiX(),
-				villager.getTownHall().getResManager().getSellingPos().getiY(),
-				villager.getTownHall().getResManager().getSellingPos().getiZ(),
-				sellingRadius + 10);
+		final EntityPlayer player = villager.worldObj.getClosestPlayer(villager.getTownHall().getResManager().getSellingPos().getiX(), villager.getTownHall().getResManager().getSellingPos().getiY(),
+				villager.getTownHall().getResManager().getSellingPos().getiZ(), sellingRadius + 10);
 
-		ServerSender.sendTranslatedSentence(player, MLN.WHITE,
-				"ui.tradecomplete", villager.getName());
+		ServerSender.sendTranslatedSentence(player, MLN.WHITE, "ui.tradecomplete", villager.getName());
 		villager.getTownHall().seller = null;
 		villager.getTownHall().sellingPlace = null;
 	}

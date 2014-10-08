@@ -66,8 +66,7 @@ public class ModelFemaleAsymmetrical extends ModelBiped {
 	}
 
 	@Override
-	public void render(final Entity par1Entity, final float f, final float f1,
-			final float f2, final float f3, final float f4, final float f5) {
+	public void render(final Entity par1Entity, final float f, final float f1, final float f2, final float f3, final float f4, final float f5) {
 		setRotationAngles(f, f1, f2, f3, f4, f5, par1Entity);
 		bipedHead.render(f5);
 		bipedBody.render(f5);
@@ -94,22 +93,17 @@ public class ModelFemaleAsymmetrical extends ModelBiped {
 	}
 
 	@Override
-	public void setRotationAngles(final float f, final float f1,
-			final float f2, final float f3, final float f4, final float f5,
-			final Entity par7Entity) {
+	public void setRotationAngles(final float f, final float f1, final float f2, final float f3, final float f4, final float f5, final Entity par7Entity) {
 		bipedHead.rotateAngleY = f3 / 57.29578F;
 		bipedHead.rotateAngleX = f4 / 57.29578F;
 		bipedHeadwear.rotateAngleY = bipedHead.rotateAngleY;
 		bipedHeadwear.rotateAngleX = bipedHead.rotateAngleX;
-		bipedRightArm.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F)
-				* 2.0F * f1 * 0.5F;
-		bipedLeftArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1
-				* 0.5F;
+		bipedRightArm.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F) * 2.0F * f1 * 0.5F;
+		bipedLeftArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
 		bipedRightArm.rotateAngleZ = 0.0F;
 		bipedLeftArm.rotateAngleZ = 0.0F;
 		bipedRightLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-		bipedLeftLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F)
-				* 1.4F * f1;
+		bipedLeftLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F) * 1.4F * f1;
 		bipedRightLeg.rotateAngleY = 0.0F;
 		bipedLeftLeg.rotateAngleY = 0.0F;
 		if (isRiding) {
@@ -130,16 +124,11 @@ public class ModelFemaleAsymmetrical extends ModelBiped {
 		bipedLeftArm.rotateAngleY = 0.0F;
 		if (onGround > -9990F) {
 			float f6 = onGround;
-			bipedBody.rotateAngleY = MathHelper
-					.sin(MathHelper.sqrt_float(f6) * 3.141593F * 2.0F) * 0.2F;
-			bipedRightArm.rotationPointZ = MathHelper
-					.sin(bipedBody.rotateAngleY) * 5F;
-			bipedRightArm.rotationPointX = -MathHelper
-					.cos(bipedBody.rotateAngleY) * 5F;
-			bipedLeftArm.rotationPointZ = -MathHelper
-					.sin(bipedBody.rotateAngleY) * 5F;
-			bipedLeftArm.rotationPointX = MathHelper
-					.cos(bipedBody.rotateAngleY) * 5F;
+			bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * 3.141593F * 2.0F) * 0.2F;
+			bipedRightArm.rotationPointZ = MathHelper.sin(bipedBody.rotateAngleY) * 5F;
+			bipedRightArm.rotationPointX = -MathHelper.cos(bipedBody.rotateAngleY) * 5F;
+			bipedLeftArm.rotationPointZ = -MathHelper.sin(bipedBody.rotateAngleY) * 5F;
+			bipedLeftArm.rotationPointX = MathHelper.cos(bipedBody.rotateAngleY) * 5F;
 			bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
 			bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
 			bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
@@ -148,12 +137,10 @@ public class ModelFemaleAsymmetrical extends ModelBiped {
 			f6 *= f6;
 			f6 = 1.0F - f6;
 			final float f7 = MathHelper.sin(f6 * 3.141593F);
-			final float f8 = MathHelper.sin(onGround * 3.141593F)
-					* -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+			final float f8 = MathHelper.sin(onGround * 3.141593F) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
 			bipedRightArm.rotateAngleX -= f7 * 1.2D + f8;
 			bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-			bipedRightArm.rotateAngleZ = MathHelper.sin(onGround * 3.141593F)
-					* -0.4F;
+			bipedRightArm.rotateAngleZ = MathHelper.sin(onGround * 3.141593F) * -0.4F;
 		}
 		if (isSneak) {
 			bipedBody.rotateAngleX = 0.5F;

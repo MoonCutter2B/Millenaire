@@ -17,8 +17,7 @@ public class GoalBringBackResourcesHome extends Goal {
 
 	@Override
 	public GoalInformation getDestination(final MillVillager villager) {
-		return packDest(villager.getHouse().getResManager().getSellingPos(),
-				villager.getHouse());
+		return packDest(villager.getHouse().getResManager().getSellingPos(), villager.getHouse());
 	}
 
 	@Override
@@ -51,8 +50,7 @@ public class GoalBringBackResourcesHome extends Goal {
 		if (!villager.lastGoalTime.containsKey(this)) {
 			delayOver = true;
 		} else {
-			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime
-					.get(this) + STANDARD_DELAY;
+			delayOver = villager.worldObj.getWorldTime() > villager.lastGoalTime.get(this) + STANDARD_DELAY;
 		}
 
 		for (final InvItem key : villager.getInventoryKeys()) {
@@ -85,8 +83,7 @@ public class GoalBringBackResourcesHome extends Goal {
 		for (final InvItem key : villager.getInventoryKeys()) {
 			for (final InvItem key2 : villager.getGoodsToBringBackHome()) {
 				if (key2.matches(key)) {
-					villager.putInBuilding(villager.getHouse(), key.getItem(),
-							key.meta, 256);
+					villager.putInBuilding(villager.getHouse(), key.getItem(), key.meta, 256);
 				}
 			}
 		}
