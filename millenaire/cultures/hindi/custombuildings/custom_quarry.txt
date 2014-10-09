@@ -1,0 +1,1 @@
+native:Sikaar;gameNameKey:quarry_A0;male:ml_IndianMiner;female:ml_IndianPeasantWife;moveinpriority:10;chest:2-5;sign:1;mining:4-8;furnace:1-2

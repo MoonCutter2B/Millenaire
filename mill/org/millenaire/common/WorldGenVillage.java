@@ -676,7 +676,7 @@ public class WorldGenVillage implements IWorldGenerator {
 							nx = tx;
 							nz = tz;
 							areaLoaded = true;
-							p = new Point(nx * 16 + 8, 0, (z >> 4) * 16 + 8);
+							p = new Point((nx >> 4) * 16 + 8, 0, (nz >> 4) * 16 + 8);
 						}
 					}
 				}

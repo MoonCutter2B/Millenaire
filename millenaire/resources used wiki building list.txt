@@ -114,7 +114,7 @@
 |-
 ! Sunsan har
 |-
-! Inta bhatta
+! Int bhatta
 |-
 ! Tandurust
 |-
@@ -162,7 +162,7 @@
 |-
 ! Saray
 |-
-! Masaalaa udyaana
+! Masaalaa udyaan
 |-
 ! Qila
 |-

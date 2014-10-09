@@ -181,6 +181,10 @@ public class GuiNewCustomBuilding extends GuiText {
 			text.add(new Line(MLN.string("ui.custombuilding_cantconfirm", customBuilding.getFullDisplayName())));
 		}
 
+		text.add(new Line());
+		text.add(new Line(MLN.string("ui.custombuilding_radius",""+customBuilding.radius,""+customBuilding.heightRadius)));
+		
+		
 		if (resources.containsKey(TypeRes.SIGN) && resources.get(TypeRes.SIGN).size() > 1) {
 			text.add(new Line());
 			text.add(new Line(MLN.string("ui.custombuilding_signnumber", "" + resources.get(TypeRes.SIGN).size())));

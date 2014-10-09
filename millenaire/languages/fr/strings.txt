@@ -192,6 +192,7 @@ ui.custombuilding_resneededintro=Resources nécessaires:
 ui.custombuilding_resneeded=<1> sur <3> <0> trouvé (min: <2>)
 ui.custombuilding_newvillage=Création d'un nouveau village avec bâtiment central personalisé
 ui.custombuilding_signnumber=Note: vous pouvez indiquer l'ordre dans lequel utiliser les panneaux en mettant un numéro de 1 à <0> dans la première ligne.
+ui.custombuilding_radius=Les resources sont identifiées dans un rayon de <0> blocs (<1> verticalement).
 ui.close=Fermer
 ui.confirm=Confirmer
 
@@ -204,6 +205,8 @@ custombuilding.sapling=arbustre ou arbre
 custombuilding.stall=laine jaune (sera détruite; indique là où les marchants vendront)
 custombuilding.mining=grès, pierre lisse, sable, argile ou gravier
 custombuilding.furnace=four
+custombuilding.mudbrick=brique humide
+custombuilding.sugar=canne à sucre
 
 help.tab_1=Généralité sur les villages
 help.tab_2=Commerce

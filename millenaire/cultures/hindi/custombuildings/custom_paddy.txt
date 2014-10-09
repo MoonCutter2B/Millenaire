@@ -1,0 +1,1 @@
+native:Dhaan;gameNameKey:paddy_A0;cropType:rice;tag:paddy;field:10-30

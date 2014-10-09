@@ -24,7 +24,8 @@ public class BuildingCustomPlan {
 
 	public static enum TypeRes {
 
-		CHEST("chest"), CRAFT("craft"), SIGN("sign"), FIELD("field"), SPAWN("spawn"), SAPLING("sapling"), STALL("stall"), MINING("mining"), FURNACE("furnace");
+		CHEST("chest"), CRAFT("craft"), SIGN("sign"), FIELD("field"), SPAWN("spawn"), SAPLING("sapling"), STALL("stall"), MINING("mining"), 
+		FURNACE("furnace"), MUDBRICK("mudbrick"), SUGAR("sugar");
 
 		public final String key;
 
@@ -270,6 +271,7 @@ public class BuildingCustomPlan {
 	private TypeRes identifyRes(final World world, final Point p) {
 
 		final Block b = p.getBlock(world);
+		final int meta = p.getMeta(world);
 
 		if (b.equals(Blocks.chest) || b.equals(Mill.lockedChest)) {
 			return TypeRes.CHEST;
@@ -305,6 +307,14 @@ public class BuildingCustomPlan {
 		}
 		if (b.equals(Blocks.furnace)) {
 			return TypeRes.FURNACE;
+		}
+		
+		if (b.equals(Mill.earth_decoration) && meta==0) {
+			return TypeRes.MUDBRICK;
+		}
+		
+		if (b.equals(Blocks.reeds) && !p.getBelow().equals(Blocks.reeds)) {
+			return TypeRes.SUGAR;
 		}
 
 		return null;
@@ -465,6 +475,18 @@ public class BuildingCustomPlan {
 			building.getResManager().furnaces.clear();
 			for (final Point p : resources.get(TypeRes.FURNACE)) {
 				building.getResManager().furnaces.add(p);
+			}
+		}
+		if (resources.containsKey(TypeRes.MUDBRICK)) {
+			building.getResManager().brickspot.clear();
+			for (final Point p : resources.get(TypeRes.MUDBRICK)) {
+				building.getResManager().brickspot.add(p);
+			}
+		}
+		if (resources.containsKey(TypeRes.SUGAR)) {
+			building.getResManager().sugarcanesoils.clear();
+			for (final Point p : resources.get(TypeRes.SUGAR)) {
+				building.getResManager().sugarcanesoils.add(p);
 			}
 		}
 	}

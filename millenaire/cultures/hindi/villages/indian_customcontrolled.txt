@@ -8,11 +8,7 @@ pathmaterial:pathdirt
 pathmaterial:pathsandstone
 
 //starting buildings:
-centre:playerpalace
-start:peasanthouse
-start:lumbermanhouse
-start:grove
-start:brickkiln
+customcentre:custom_villagecentre
 
 //just a list for the new building screen
 core:peasanthouse
@@ -59,3 +55,4 @@ customBuilding:custom_inn
 customBuilding:custom_market
 customBuilding:custom_villagetemple
 customBuilding:custom_archives
+
