@@ -1,0 +1,1 @@
+native:Technites Spiti;gameNameKey:architectbyzantine_A0;male:architect_byzantine;female:wife_byzantine;moveinpriority:20;chest:1-5;sign:1

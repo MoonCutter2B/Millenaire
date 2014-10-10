@@ -2,7 +2,10 @@ Translation comparison between en and fr
 
 List of gaps found in strings.txt: 
 
+Key missing in the strings.txt file: custombuilding.fishing
 Key missing in the strings.txt file: custombuilding.mudbrick
+Key missing in the strings.txt file: custombuilding.silk
+Key missing in the strings.txt file: custombuilding.sugar
 Key missing in the strings.txt file: ui.controlledcustom
 Key missing in the strings.txt file: ui.custombuilding_edit
 Key missing in the strings.txt file: ui.custombuilding_newvillage

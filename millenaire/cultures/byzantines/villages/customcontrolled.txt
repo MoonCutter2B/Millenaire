@@ -11,10 +11,7 @@ pathmaterial:pathgravel
 pathmaterial:pathochretiles
 
 //starting buildings:
-centre:playerfortbyzantine
-start:grovebyzantine
-start:lumberbyzantine
-start:architectbyzantine
+customcentre:custom_villagecentre
 
 //buildings:
 core:architectbyzantine
@@ -63,6 +60,3 @@ customBuilding:custom_basilkabyzantine
 customBuilding:custom_chapelbyzantine
 customBuilding:custom_watchtowerbyzantine
 customBuilding:custom_archives
-
-
-

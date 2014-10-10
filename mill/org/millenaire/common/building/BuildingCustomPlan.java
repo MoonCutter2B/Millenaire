@@ -25,7 +25,7 @@ public class BuildingCustomPlan {
 	public static enum TypeRes {
 
 		CHEST("chest"), CRAFT("craft"), SIGN("sign"), FIELD("field"), SPAWN("spawn"), SAPLING("sapling"), STALL("stall"), MINING("mining"), 
-		FURNACE("furnace"), MUDBRICK("mudbrick"), SUGAR("sugar");
+		FURNACE("furnace"), MUDBRICK("mudbrick"), SUGAR("sugar"), FISHING("fishing"), SILK("silk");
 
 		public final String key;
 
@@ -313,10 +313,15 @@ public class BuildingCustomPlan {
 			return TypeRes.MUDBRICK;
 		}
 		
-		if (b.equals(Blocks.reeds) && !p.getBelow().equals(Blocks.reeds)) {
+		if (b.equals(Blocks.reeds) && !p.getBelow().getBlock(world).equals(Blocks.reeds)) {
 			return TypeRes.SUGAR;
 		}
-
+		if (b.equals(Blocks.wool) && p.getMeta(world) == 11) {
+			return TypeRes.FISHING;
+		}
+		if (b.equals(Blocks.wool) && p.getMeta(world) == 0) {
+			return TypeRes.SILK;
+		}
 		return null;
 	}
 
@@ -487,6 +492,20 @@ public class BuildingCustomPlan {
 			building.getResManager().sugarcanesoils.clear();
 			for (final Point p : resources.get(TypeRes.SUGAR)) {
 				building.getResManager().sugarcanesoils.add(p);
+			}
+		}
+		if (resources.containsKey(TypeRes.FISHING)) {
+			building.getResManager().fishingspots.clear();
+			for (final Point p : resources.get(TypeRes.FISHING)) {
+				p.setBlock(building.worldObj, Blocks.air, 0, true, false);
+				building.getResManager().fishingspots.add(p);
+			}
+		}
+		if (resources.containsKey(TypeRes.SILK)) {
+			building.getResManager().silkwormblock.clear();
+			for (final Point p : resources.get(TypeRes.SILK)) {
+				p.setBlock(building.worldObj, Mill.wood_decoration, 3, true, false);
+				building.getResManager().silkwormblock.add(p);
 			}
 		}
 	}

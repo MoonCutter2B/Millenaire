@@ -207,6 +207,8 @@ custombuilding.mining=grès, pierre lisse, sable, argile ou gravier
 custombuilding.furnace=four
 custombuilding.mudbrick=brique humide
 custombuilding.sugar=canne à sucre
+custombuilding.fishing=laine bleue (sera détruite; indique là où les villageois pêcheront)
+custombuilding.silk=laine blanche (sera détruite; indique là où les vers à soie seront)
 
 help.tab_1=Généralité sur les villages
 help.tab_2=Commerce

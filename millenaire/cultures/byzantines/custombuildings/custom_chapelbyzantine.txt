@@ -1,0 +1,1 @@
+native:Parekklesi;gameNameKey:chapelbyzantine_A0;tag:Praying

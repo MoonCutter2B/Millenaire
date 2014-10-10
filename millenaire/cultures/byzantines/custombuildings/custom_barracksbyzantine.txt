@@ -1,0 +1,1 @@
+native:Stratones;gameNameKey:barracksbyzantine_A0;male:soldier_byzantine;chest:1-5;sign:1;moveinpriority:10;tag:patrol
