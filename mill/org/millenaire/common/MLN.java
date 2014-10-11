@@ -646,9 +646,13 @@ public class MLN {
 
 		if (!Mill.proxy.isTrueServer()) {
 
-			final InvItem iv = new InvItem(Mill.summoningWand, 1);
-
-			MLN.major(null, "Language loaded: " + effective_language + ". Wand name: " + MLN.string("item.villagewand") + " Wand invitem name: " + iv.getName());
+			InvItem iv;
+			try {
+				iv = new InvItem(Mill.summoningWand, 1);
+				MLN.major(null, "Language loaded: " + effective_language + ". Wand name: " + MLN.string("item.villagewand") + " Wand invitem name: " + iv.getName());
+			} catch (final MillenaireException e) {
+				MLN.printException(e);
+			}
 
 			if (MLN.generateBuildingRes) {// Doing it now because it requires
 											// item names
@@ -1835,8 +1839,15 @@ public class MLN {
 		if (key.startsWith("_item:")) {
 			final int id = Integer.parseInt(key.split(":")[1]);
 			final int meta = Integer.parseInt(key.split(":")[2]);
-			final InvItem item = new InvItem(MillCommonUtilities.getItemById(id), meta);
-			return item.getName();
+			InvItem item;
+			try {
+				item = new InvItem(MillCommonUtilities.getItemById(id), meta);
+				return item.getName();
+			} catch (final MillenaireException e) {
+				MLN.printException(e);
+				return "";
+			}
+
 		}
 
 		if (key.startsWith("_buildingGame:")) {

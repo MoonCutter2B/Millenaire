@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
@@ -117,7 +118,7 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager) {
+	public GoalInformation getDestination(final MillVillager villager) throws MillenaireException {
 
 		Point dest = null;
 		Building destBuilding = null;
@@ -207,7 +208,7 @@ public class GoalGenericPlantCrop extends GoalGeneric {
 	}
 
 	@Override
-	public int priority(final MillVillager villager) {
+	public int priority(final MillVillager villager) throws MillenaireException {
 
 		final GoalInformation info = getDestination(villager);
 

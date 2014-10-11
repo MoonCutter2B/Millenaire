@@ -5,6 +5,8 @@ import java.util.List;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.Building;
@@ -15,8 +17,12 @@ public class GoalFish extends Goal {
 	private static ItemStack[] fishingRod = new ItemStack[] { new ItemStack(Items.fishing_rod, 1) };
 
 	public GoalFish() {
-		buildingLimit.put(new InvItem(Items.fish, 0), 512);
-		buildingLimit.put(new InvItem(Items.cooked_fished, 0), 512);
+		try {
+			buildingLimit.put(new InvItem(Items.fish, 0), 512);
+			buildingLimit.put(new InvItem(Items.cooked_fished, 0), 512);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+		}
 	}
 
 	@Override

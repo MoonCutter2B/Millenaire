@@ -99,43 +99,37 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 		final public int meta;
 		final public int special;
 
-		public InvItem(final Block block) {
+		public InvItem(final Block block) throws MillenaireException {
 			this(block, 0);
 		}
 
-		public InvItem(final Block block, final int meta) {
+		public InvItem(final Block block, final int meta) throws MillenaireException {
 			this.block = block;
 			this.item = Item.getItemFromBlock(block);
 			this.meta = meta;
 			staticStack = new ItemStack(item, 1, meta);
 			staticStackArray = new ItemStack[] { staticStack };
 			special = 0;
-			try {
-				checkValidity();
-			} catch (final MillenaireException e) {
-				MLN.printException("InvItem(Block block,int meta): " + block, e);
-			}
+
+			checkValidity();
 		}
 
-		public InvItem(final int special) {
+		public InvItem(final int special) throws MillenaireException {
 			this.special = special;
 			staticStack = null;
 			staticStackArray = new ItemStack[] { staticStack };
 			item = null;
 			block = null;
 			meta = 0;
-			try {
-				checkValidity();
-			} catch (final MillenaireException e) {
-				MLN.printException("InvItem(int special): " + special, e);
-			}
+
+			checkValidity();
 		}
 
-		public InvItem(final Item item) {
+		public InvItem(final Item item) throws MillenaireException {
 			this(item, 0);
 		}
 
-		public InvItem(final Item item, final int meta) {
+		public InvItem(final Item item, final int meta) throws MillenaireException {
 			this.item = item;
 			if (Block.getBlockFromItem(item) != Blocks.air) {
 				block = Block.getBlockFromItem(item);
@@ -146,14 +140,11 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 			staticStack = new ItemStack(item, 1, meta);
 			staticStackArray = new ItemStack[] { staticStack };
 			special = 0;
-			try {
-				checkValidity();
-			} catch (final MillenaireException e) {
-				MLN.printException("InvItem(Item item,int meta): " + item, e);
-			}
+
+			checkValidity();
 		}
 
-		public InvItem(final ItemStack is) {
+		public InvItem(final ItemStack is) throws MillenaireException {
 			item = is.getItem();
 			if (Block.getBlockFromItem(item) != Blocks.air) {
 				block = Block.getBlockFromItem(item);
@@ -168,14 +159,11 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 			staticStack = new ItemStack(item, 1, meta);
 			staticStackArray = new ItemStack[] { staticStack };
 			special = 0;
-			try {
-				checkValidity();
-			} catch (final MillenaireException e) {
-				MLN.printException("IInvItem(ItemStack is): " + is, e);
-			}
+
+			checkValidity();
 		}
 
-		public InvItem(final String s) {
+		public InvItem(final String s) throws MillenaireException {
 			special = 0;
 			if (s.split("/").length > 2) {
 				final int id = Integer.parseInt(s.split("/")[0]);
@@ -203,11 +191,8 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 			}
 
 			staticStackArray = new ItemStack[] { staticStack };
-			try {
-				checkValidity();
-			} catch (final MillenaireException e) {
-				MLN.printException("InvItem(String s): " + s, e);
-			}
+
+			checkValidity();
 		}
 
 		private void checkValidity() throws MillenaireException {
@@ -700,18 +685,25 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 	}
 
 	public void addToInv(final Item item, final int meta, final int nb) {
-		final InvItem key = new InvItem(item, meta);
-		if (inventory.containsKey(key)) {
-			inventory.put(key, inventory.get(key) + nb);
-		} else {
-			inventory.put(key, nb);
+		InvItem key;
+		try {
+			key = new InvItem(item, meta);
+
+			if (inventory.containsKey(key)) {
+				inventory.put(key, inventory.get(key) + nb);
+			} else {
+				inventory.put(key, nb);
+			}
+			if (getTownHall() != null) {
+				getTownHall().updateVillagerRecord(this);
+			} else {
+				MLN.error(this, "Wanted to update VR after an addToInv but TH is null.");
+			}
+			updateClothTexturePath();
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
 		}
-		if (getTownHall() != null) {
-			getTownHall().updateVillagerRecord(this);
-		} else {
-			MLN.error(this, "Wanted to update VR after an addToInv but TH is null.");
-		}
-		updateClothTexturePath();
+
 	}
 
 	public void adjustSize() {
@@ -1254,7 +1246,12 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 	}
 
 	public int countInv(final Block block, final int meta) {
-		return countInv(new InvItem(Item.getItemFromBlock(block), meta));
+		try {
+			return countInv(new InvItem(Item.getItemFromBlock(block), meta));
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+			return 0;
+		}
 	}
 
 	public int countInv(final InvItem key) {
@@ -1262,10 +1259,16 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 		if (key.meta == -1) {// undefined, so has to try the 16 possible values
 			int nb = 0;
 			for (int i = 0; i < 16; i++) {
-				final InvItem tkey = new InvItem(key.item, i);
-				if (inventory.containsKey(tkey)) {
-					nb += inventory.get(tkey);
+				InvItem tkey;
+				try {
+					tkey = new InvItem(key.item, i);
+					if (inventory.containsKey(tkey)) {
+						nb += inventory.get(tkey);
+					}
+				} catch (final MillenaireException e) {
+					MLN.printException(e);
 				}
+
 			}
 			return nb;
 		}
@@ -1282,7 +1285,12 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 	}
 
 	public int countInv(final Item item, final int meta) {
-		return countInv(new InvItem(item, meta));
+		try {
+			return countInv(new InvItem(item, meta));
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+			return 0;
+		}
 	}
 
 	public int countItemsAround(final Item item, final int radius) {
@@ -3185,7 +3193,11 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 				itemMeta = itemMeta & 3;
 			}
 
-			inventory.put(new InvItem(Item.getItemById(itemID), itemMeta), nbttagcompound1.getInteger("amount"));
+			try {
+				inventory.put(new InvItem(Item.getItemById(itemID), itemMeta), nbttagcompound1.getInteger("amount"));
+			} catch (final MillenaireException e) {
+				MLN.printException(e);
+			}
 		}
 
 		previousBlock = Block.getBlockById(nbttagcompound.getInteger("previousBlock"));
@@ -3282,8 +3294,13 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 			merchantSells.clear();
 
 			for (int i = 0; i < nbMerchantSells; i++) {
-				final Goods g = StreamReadWrite.readNullableGoods(data);
-				merchantSells.put(g, data.readInt());
+				Goods g;
+				try {
+					g = StreamReadWrite.readNullableGoods(data);
+					merchantSells.put(g, data.readInt());
+				} catch (final MillenaireException e) {
+					MLN.printException(e);
+				}
 			}
 		}
 
@@ -3531,7 +3548,11 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 	}
 
 	public void setInv(final Item item, final int meta, final int nb) {
-		inventory.put(new InvItem(item, meta), nb);
+		try {
+			inventory.put(new InvItem(item, meta), nb);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+		}
 		if (getTownHall() != null) {
 			getTownHall().updateVillagerRecord(this);
 		}
@@ -3696,43 +3717,46 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 
 		if (item == Item.getItemFromBlock(Blocks.log) && meta == -1) {
 			int total = 0, nb2;
-			InvItem key = new InvItem(item, 0);
-			if (inventory.containsKey(key)) {
-				nb2 = Math.min(nb, inventory.get(key));
-				inventory.put(key, inventory.get(key) - nb2);
-				total += nb2;
-			}
-			key = new InvItem(item, 1);
-			if (inventory.containsKey(key)) {
-				nb2 = Math.min(nb - total, inventory.get(key));
-				inventory.put(key, inventory.get(key) - nb2);
-				total += nb2;
-			}
-			key = new InvItem(item, 2);
-			if (inventory.containsKey(key)) {
-				nb2 = Math.min(nb - total, inventory.get(key));
-				inventory.put(key, inventory.get(key) - nb2);
-				total += nb2;
-			}
-			if (getTownHall() != null) {
-				getTownHall().updateVillagerRecord(this);
-			}
-			return total;
-		} else {
-			final InvItem key = new InvItem(item, meta);
-			if (inventory.containsKey(key)) {
-				nb = Math.min(nb, inventory.get(key));
-				inventory.put(key, inventory.get(key) - nb);
+			InvItem key;
+			try {
+				for (int i = 0; i < 16; i++) {
+					key = new InvItem(item, i);
+					if (inventory.containsKey(key)) {
+						nb2 = Math.min(nb, inventory.get(key));
+						inventory.put(key, inventory.get(key) - nb2);
+						total += nb2;
+					}
+				}
 				if (getTownHall() != null) {
 					getTownHall().updateVillagerRecord(this);
 				}
+			} catch (final MillenaireException e) {
+				MLN.printException(e);
+			}
 
-				updateClothTexturePath();
+			return total;
+		} else {
+			InvItem key;
+			try {
+				key = new InvItem(item, meta);
+				if (inventory.containsKey(key)) {
+					nb = Math.min(nb, inventory.get(key));
+					inventory.put(key, inventory.get(key) - nb);
+					if (getTownHall() != null) {
+						getTownHall().updateVillagerRecord(this);
+					}
 
-				return nb;
-			} else {
+					updateClothTexturePath();
+
+					return nb;
+				} else {
+					return 0;
+				}
+			} catch (final MillenaireException e) {
+				MLN.printException(e);
 				return 0;
 			}
+
 		}
 
 	}

@@ -17,6 +17,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
 import org.millenaire.common.Culture;
+import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
@@ -70,9 +72,13 @@ public class StreamReadWrite {
 		final int nb = ds.readInt();
 
 		for (int i = 0; i < nb; i++) {
-			final InvItem item = new InvItem(Item.getItemById(ds.readInt()), ds.readInt());
-
-			inv.put(item, ds.readInt());
+			InvItem item;
+			try {
+				item = new InvItem(Item.getItemById(ds.readInt()), ds.readInt());
+				inv.put(item, ds.readInt());
+			} catch (final MillenaireException e) {
+				MLN.printException(e);
+			}
 		}
 
 		return inv;
@@ -197,7 +203,7 @@ public class StreamReadWrite {
 		return bp;
 	}
 
-	public static Goods readNullableGoods(final DataInput ds) throws IOException {
+	public static Goods readNullableGoods(final DataInput ds) throws IOException, MillenaireException {
 
 		final boolean isnull = ds.readBoolean();
 
@@ -205,9 +211,9 @@ public class StreamReadWrite {
 			return null;
 		}
 
-		final InvItem iv = new InvItem(MillCommonUtilities.getItemById(ds.readInt()), ds.readByte());
+		InvItem iv;
+		iv = new InvItem(MillCommonUtilities.getItemById(ds.readInt()), ds.readByte());
 		final Goods g = new Goods(iv);
-
 		g.requiredTag = readNullableString(ds);
 		g.desc = readNullableString(ds);
 		g.autoGenerate = ds.readBoolean();

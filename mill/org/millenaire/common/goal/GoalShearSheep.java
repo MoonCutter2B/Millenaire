@@ -7,6 +7,7 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 
 import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
@@ -17,8 +18,12 @@ import org.millenaire.common.pathing.atomicstryker.AStarConfig;
 public class GoalShearSheep extends Goal {
 
 	public GoalShearSheep() {
-		buildingLimit.put(new InvItem(Blocks.wool, 0), 1024);
-		townhallLimit.put(new InvItem(Blocks.wool, 0), 1024);
+		try {
+			buildingLimit.put(new InvItem(Blocks.wool, 0), 1024);
+			townhallLimit.put(new InvItem(Blocks.wool, 0), 1024);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+		}
 	}
 
 	@Override

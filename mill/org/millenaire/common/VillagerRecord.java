@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.Constants;
 
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;
@@ -87,7 +88,11 @@ public class VillagerRecord implements Cloneable {
 		nbttaglist = nbttagcompound.getTagList(label + "_inventory", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			vr.inventory.put(new InvItem(Item.getItemById(nbttagcompound1.getInteger("item")), nbttagcompound1.getInteger("meta")), nbttagcompound1.getInteger("amount"));
+			try {
+				vr.inventory.put(new InvItem(Item.getItemById(nbttagcompound1.getInteger("item")), nbttagcompound1.getInteger("meta")), nbttagcompound1.getInteger("amount"));
+			} catch (final MillenaireException e) {
+				MLN.printException(e);
+			}
 		}
 
 		if (vr.getType() == null) {
@@ -186,12 +191,21 @@ public class VillagerRecord implements Cloneable {
 	}
 
 	public int countInv(final Item item, final int meta) {
-		final InvItem key = new InvItem(item, meta);
-		if (inventory.containsKey(key)) {
-			return inventory.get(key);
-		} else {
+		InvItem key;
+		try {
+			key = new InvItem(item, meta);
+
+			if (inventory.containsKey(key)) {
+				return inventory.get(key);
+			} else {
+				return 0;
+			}
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+
 			return 0;
 		}
+
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.MathHelper;
 
 import org.millenaire.client.MillClientUtilities;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillVillager.InvItemAlphabeticalComparator;
 import org.millenaire.common.building.Building;
@@ -378,13 +379,19 @@ public class TileEntityPanel extends TileEntitySign {
 					String taken = "";
 
 					for (int j = 2; j < v.length; j++) {
-						final InvItem iv = new InvItem(v[j]);
+						InvItem iv;
+						try {
+							iv = new InvItem(v[j]);
 
-						if (taken.length() > 0) {
-							taken += ", ";
+							if (taken.length() > 0) {
+								taken += ", ";
+							}
+
+							taken += iv.getName() + ": " + v[j].split("/")[2];
+						} catch (final MillenaireException e) {
+							MLN.printException(e);
 						}
 
-						taken += iv.getName() + ": " + v[j].split("/")[2];
 					}
 
 					page.add(MLN.string("panels.storedexports", v[1], taken));
@@ -395,13 +402,19 @@ public class TileEntityPanel extends TileEntitySign {
 					String taken = "";
 
 					for (int j = 2; j < v.length; j++) {
-						final InvItem iv = new InvItem(v[j]);
+						InvItem iv;
+						try {
+							iv = new InvItem(v[j]);
 
-						if (taken.length() > 0) {
-							taken += ", ";
+							if (taken.length() > 0) {
+								taken += ", ";
+							}
+
+							taken += iv.getName() + ": " + v[j].split("/")[2];
+						} catch (final MillenaireException e) {
+							MLN.printException(e);
 						}
 
-						taken += iv.getName() + ": " + v[j].split("/")[2];
 					}
 
 					page.add(MLN.string("panels.broughtimport", v[1], taken));
@@ -647,13 +660,19 @@ public class TileEntityPanel extends TileEntitySign {
 						String taken = "";
 
 						for (int j = 2; j < v.length; j++) {
-							final InvItem iv = new InvItem(v[j]);
+							InvItem iv;
+							try {
+								iv = new InvItem(v[j]);
 
-							if (taken.length() > 0) {
-								taken += ", ";
+								if (taken.length() > 0) {
+									taken += ", ";
+								}
+
+								taken += iv.getName() + ": " + v[j].split("/")[2];
+							} catch (final MillenaireException e) {
+								MLN.printException(e);
 							}
 
-							taken += iv.getName() + ": " + v[j].split("/")[2];
 						}
 
 						if (taken.length() == 0) {
@@ -692,13 +711,19 @@ public class TileEntityPanel extends TileEntitySign {
 						String taken = "";
 
 						for (int j = 2; j < v.length; j++) {
-							final InvItem iv = new InvItem(v[j]);
+							InvItem iv;
+							try {
+								iv = new InvItem(v[j]);
 
-							if (taken.length() > 0) {
-								taken += ", ";
+								if (taken.length() > 0) {
+									taken += ", ";
+								}
+
+								taken += iv.getName() + ": " + v[j].split("/")[2];
+							} catch (final MillenaireException e) {
+								MLN.printException(e);
 							}
 
-							taken += iv.getName() + ": " + v[j].split("/")[2];
 						}
 
 						if (taken.length() == 0) {

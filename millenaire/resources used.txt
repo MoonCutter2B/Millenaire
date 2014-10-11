@@ -229,8 +229,8 @@ Stone: 9970
 Bois de sapin: 3071
 Cobblestone: 1472
 tile.ml_wood_deco.2.name: 7306
-Sand: 286
 Grass: 263
+Sand: 286
 tile.ml_wood_deco.0.name: 3107
 Bookshelf: 12
 Gravel: 584

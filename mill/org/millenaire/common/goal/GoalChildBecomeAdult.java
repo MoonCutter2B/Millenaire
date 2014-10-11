@@ -22,7 +22,7 @@ public class GoalChildBecomeAdult extends Goal {
 	}
 
 	@Override
-	public GoalInformation getDestination(final MillVillager villager) {
+	public GoalInformation getDestination(final MillVillager villager) throws MillenaireException {
 
 		if (villager.size < 20) {
 			return null;
@@ -60,7 +60,7 @@ public class GoalChildBecomeAdult extends Goal {
 	}
 
 	@Override
-	public boolean isPossibleSpecific(final MillVillager villager) {
+	public boolean isPossibleSpecific(final MillVillager villager) throws MillenaireException {
 		return getDestination(villager) != null;
 	}
 

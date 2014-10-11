@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorldInfo;
@@ -21,7 +22,11 @@ public class GoalLumbermanChopTrees extends Goal {
 
 	public GoalLumbermanChopTrees() {
 		this.maxSimultaneousInBuilding = 1;
-		this.townhallLimit.put(new InvItem(Blocks.log, -1), 4096);
+		try {
+			this.townhallLimit.put(new InvItem(Blocks.log, -1), 4096);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+		}
 	}
 
 	@Override

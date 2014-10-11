@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities.ExtFileFilter;
@@ -236,7 +237,7 @@ public abstract class GoalGeneric extends Goal {
 		return heldItems;
 	}
 
-	public final boolean isDestPossible(final MillVillager villager, final Building dest) {
+	public final boolean isDestPossible(final MillVillager villager, final Building dest) throws MillenaireException {
 		return validateDest(villager, dest) && isDestPossibleSpecific(villager, dest);
 	}
 

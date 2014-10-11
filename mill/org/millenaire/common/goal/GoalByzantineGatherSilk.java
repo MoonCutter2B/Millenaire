@@ -6,6 +6,8 @@ import java.util.List;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
@@ -19,8 +21,13 @@ public class GoalByzantineGatherSilk extends Goal {
 
 	public GoalByzantineGatherSilk() {
 		maxSimultaneousInBuilding = 2;
-		buildingLimit.put(new InvItem(Mill.silk), 128);
-		townhallLimit.put(new InvItem(Mill.silk), 128);
+		try {
+			buildingLimit.put(new InvItem(Mill.silk), 128);
+			townhallLimit.put(new InvItem(Mill.silk), 128);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+		}
+
 	}
 
 	@Override
@@ -108,7 +115,13 @@ public class GoalByzantineGatherSilk extends Goal {
 
 	@Override
 	public int priority(final MillVillager villager) {
-		int p = 100 - villager.getTownHall().nbGoodAvailable(new InvItem(Mill.stone_decoration, 1), false, false) * 2;
+		int p;
+		try {
+			p = 100 - villager.getTownHall().nbGoodAvailable(new InvItem(Mill.silk, 1), false, false) * 2;
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+			p = 0;
+		}
 		for (final MillVillager v : villager.getTownHall().villagers) {
 			if (this.key.equals(v.goalKey)) {
 				p = p / 2;

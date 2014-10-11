@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 
 import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
@@ -237,45 +238,52 @@ public abstract class Goal {
 		return false;
 	}
 
-	public final boolean isPossible(final MillVillager villager) throws Exception {
+	public final boolean isPossible(final MillVillager villager) {
 
-		if (villager.worldObj.isDaytime() && !canBeDoneInDayTime()) {
-			return false;
-		}
+		try {
 
-		if (!villager.worldObj.isDaytime() && !canBeDoneAtNight()) {
-			return false;
-		}
-
-		for (final InvItem item : townhallLimit.keySet()) {
-			if (villager.getTownHall().countGoods(item) > townhallLimit.get(item)) {
+			if (villager.worldObj.isDaytime() && !canBeDoneInDayTime()) {
 				return false;
 			}
-		}
 
-		if (balanceOutput1 != null) {
-			if (villager.getTownHall().nbGoodAvailable(new InvItem(balanceOutput1.item, balanceOutput1.meta), false, false) < villager.getTownHall().nbGoodAvailable(
-					new InvItem(balanceOutput2.item, balanceOutput2.meta), false, false)) {
+			if (!villager.worldObj.isDaytime() && !canBeDoneAtNight()) {
 				return false;
 			}
-		}
 
-		if (maxSimultaneousTotal > 0) {// 0=no limit
-
-			int nbSame = 0;
-
-			for (final MillVillager v : villager.getTownHall().villagers) {
-				if (v != villager && this.key.equals(v.goalKey)) {
-					nbSame++;
+			for (final InvItem item : townhallLimit.keySet()) {
+				if (villager.getTownHall().countGoods(item) > townhallLimit.get(item)) {
+					return false;
 				}
 			}
 
-			if (nbSame >= maxSimultaneousTotal) {
-				return false;
+			if (balanceOutput1 != null) {
+				if (villager.getTownHall().nbGoodAvailable(new InvItem(balanceOutput1.item, balanceOutput1.meta), false, false) < villager.getTownHall().nbGoodAvailable(
+						new InvItem(balanceOutput2.item, balanceOutput2.meta), false, false)) {
+					return false;
+				}
 			}
-		}
 
-		return isPossibleSpecific(villager);
+			if (maxSimultaneousTotal > 0) {// 0=no limit
+
+				int nbSame = 0;
+
+				for (final MillVillager v : villager.getTownHall().villagers) {
+					if (v != villager && this.key.equals(v.goalKey)) {
+						nbSame++;
+					}
+				}
+
+				if (nbSame >= maxSimultaneousTotal) {
+					return false;
+				}
+			}
+
+			return isPossibleSpecific(villager);
+
+		} catch (final Exception e) {
+			MLN.printException("Exception in isPossible() for goal: " + this.key + " and villager: " + villager, e);
+			return false;
+		}
 	}
 
 	protected boolean isPossibleSpecific(final MillVillager villager) throws Exception {
@@ -436,7 +444,12 @@ public abstract class Goal {
 		}
 	}
 
-	public boolean validateDest(final MillVillager villager, final Building dest) {
+	public boolean validateDest(final MillVillager villager, final Building dest) throws MillenaireException {
+
+		if (dest == null) {
+			throw new MillenaireException("Given null dest in validateDest for goal: " + this.key);
+		}
+
 		for (final InvItem item : buildingLimit.keySet()) {
 			if (dest.countGoods(item) > buildingLimit.get(item)) {
 				return false;

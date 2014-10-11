@@ -19,6 +19,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraftforge.common.util.Constants;
 
 import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
 import org.millenaire.common.TileEntityMillChest;
@@ -142,13 +143,18 @@ public class BuildingResManager {
 				for (int i = 0; i < chest.getSizeInventory(); i++) {
 					final ItemStack stack = chest.getStackInSlot(i);
 					if (stack != null) {
-						final InvItem key = new InvItem(stack);
-						if (stack != null) {
-							if (contents.containsKey(key)) {
-								contents.put(key, stack.stackSize + contents.get(key));
-							} else {
-								contents.put(key, stack.stackSize);
+						InvItem key;
+						try {
+							key = new InvItem(stack);
+							if (stack != null) {
+								if (contents.containsKey(key)) {
+									contents.put(key, stack.stackSize + contents.get(key));
+								} else {
+									contents.put(key, stack.stackSize);
+								}
 							}
+						} catch (final MillenaireException e) {
+							MLN.printException(e);
 						}
 					}
 				}

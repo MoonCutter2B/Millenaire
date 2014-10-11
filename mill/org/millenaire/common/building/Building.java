@@ -524,6 +524,8 @@ public class Building {
 
 		} catch (final IOException e) {
 			MLN.printException(e);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
 		}
 	}
 
@@ -3842,11 +3844,21 @@ public class Building {
 	}
 
 	public int nbGoodAvailable(final Block block, final boolean forExport, final boolean forShop) {
-		return nbGoodAvailable(new InvItem(block), forExport, forShop);
+		try {
+			return nbGoodAvailable(new InvItem(block), forExport, forShop);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+			return 0;
+		}
 	}
 
 	public int nbGoodAvailable(final Block block, final int meta, final boolean forExport, final boolean forShop) {
-		return nbGoodAvailable(new InvItem(block, meta), forExport, forShop);
+		try {
+			return nbGoodAvailable(new InvItem(block, meta), forExport, forShop);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+			return 0;
+		}
 	}
 
 	public int nbGoodAvailable(final InvItem ii, final boolean forExport, final boolean forShop) {
@@ -3891,17 +3903,25 @@ public class Building {
 		if (isTownhall || tradedHere || forExport) {
 			if (ii.meta == -1) {
 				for (int i = 0; i < 16; i++) {
-					final InvItem nitem = new InvItem(ii.item, i);
-					if (culture.goodsByItem.containsKey(nitem)) {
-						final Goods good = culture.goodsByItem.get(nitem);
-						if (good != null) {
-							if (forExport) {
-								reserveAmount = good.targetQuantity;
-							} else {
-								reserveAmount = good.reservedQuantity;
+					InvItem nitem;
+					try {
+						nitem = new InvItem(ii.item, i);
+
+						if (culture.goodsByItem.containsKey(nitem)) {
+							final Goods good = culture.goodsByItem.get(nitem);
+							if (good != null) {
+								if (forExport) {
+									reserveAmount = good.targetQuantity;
+								} else {
+									reserveAmount = good.reservedQuantity;
+								}
 							}
 						}
+					} catch (final MillenaireException e) {
+						MLN.printException(e);
+						return 0;
 					}
+
 				}
 			} else {
 				if (culture.goodsByItem.containsKey(ii)) {
@@ -3960,11 +3980,21 @@ public class Building {
 	}
 
 	public int nbGoodAvailable(final Item item, final boolean forExport, final boolean forShop) {
-		return nbGoodAvailable(new InvItem(item), forExport, forShop);
+		try {
+			return nbGoodAvailable(new InvItem(item), forExport, forShop);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+			return 0;
+		}
 	}
 
 	public int nbGoodAvailable(final Item item, final int meta, final boolean forExport, final boolean forShop) {
-		return nbGoodAvailable(new InvItem(item, meta), forExport, forShop);
+		try {
+			return nbGoodAvailable(new InvItem(item, meta), forExport, forShop);
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+			return 0;
+		}
 	}
 
 	public int nbGoodNeeded(final Item item, final int meta) {
@@ -3976,24 +4006,30 @@ public class Building {
 		}
 
 		int targetAmount = 0;
-		final InvItem invitem = new InvItem(item, meta);
+		InvItem invitem;
+		try {
+			invitem = new InvItem(item, meta);
 
-		if (meta == -1) {
-			for (int i = 0; i < 16; i++) {
+			if (meta == -1) {
+				for (int i = 0; i < 16; i++) {
+					if (culture.goodsByItem.containsKey(invitem)) {
+						final Goods good = culture.goodsByItem.get(new InvItem(item, i));
+						if (good != null) {
+							targetAmount += good.targetQuantity;
+						}
+					}
+				}
+			} else {
 				if (culture.goodsByItem.containsKey(invitem)) {
-					final Goods good = culture.goodsByItem.get(new InvItem(item, i));
+					final Goods good = culture.goodsByItem.get(invitem);
 					if (good != null) {
-						targetAmount += good.targetQuantity;
+						targetAmount = good.targetQuantity;
 					}
 				}
 			}
-		} else {
-			if (culture.goodsByItem.containsKey(invitem)) {
-				final Goods good = culture.goodsByItem.get(invitem);
-				if (good != null) {
-					targetAmount = good.targetQuantity;
-				}
-			}
+		} catch (final MillenaireException e) {
+			MLN.printException(e);
+			return 0;
 		}
 
 		final BuildingPlan project = this.getCurrentGoalBuildingPlan();

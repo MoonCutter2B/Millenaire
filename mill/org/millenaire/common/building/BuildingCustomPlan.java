@@ -24,8 +24,8 @@ public class BuildingCustomPlan {
 
 	public static enum TypeRes {
 
-		CHEST("chest"), CRAFT("craft"), SIGN("sign"), FIELD("field"), SPAWN("spawn"), SAPLING("sapling"), STALL("stall"), MINING("mining"), 
-		FURNACE("furnace"), MUDBRICK("mudbrick"), SUGAR("sugar"), FISHING("fishing"), SILK("silk");
+		CHEST("chest"), CRAFT("craft"), SIGN("sign"), FIELD("field"), SPAWN("spawn"), SAPLING("sapling"), STALL("stall"), MINING("mining"), FURNACE("furnace"), MUDBRICK("mudbrick"), SUGAR("sugar"), FISHING(
+				"fishing"), SILK("silk");
 
 		public final String key;
 
@@ -291,7 +291,7 @@ public class BuildingCustomPlan {
 			return TypeRes.SPAWN;
 		}
 		// Sapling is either a sapling or wood over dirt
-		if (b.equals(Blocks.sapling) || ((b.equals(Blocks.log) || b.equals(Blocks.log2)) && p.getBelow().getBlock(world).equals(Blocks.dirt))) {
+		if (b.equals(Blocks.sapling) || (b.equals(Blocks.log) || b.equals(Blocks.log2)) && p.getBelow().getBlock(world).equals(Blocks.dirt)) {
 			return TypeRes.SAPLING;
 		}
 		if (b.equals(Blocks.wool) && p.getMeta(world) == 4) {
@@ -308,11 +308,11 @@ public class BuildingCustomPlan {
 		if (b.equals(Blocks.furnace)) {
 			return TypeRes.FURNACE;
 		}
-		
-		if (b.equals(Mill.earth_decoration) && meta==0) {
+
+		if (b.equals(Mill.earth_decoration) && meta == 0) {
 			return TypeRes.MUDBRICK;
 		}
-		
+
 		if (b.equals(Blocks.reeds) && !p.getBelow().getBlock(world).equals(Blocks.reeds)) {
 			return TypeRes.SUGAR;
 		}
