@@ -477,11 +477,10 @@ public class WorldGenVillage implements IWorldGenerator {
 			}
 
 			MillCommonUtilities.random = random;
-			final boolean areaLoaded = false;
 			long startTime;
 
 			if (checkForUnloaded) {
-				p = generateVillageAtPoint_checkForUnloaded(world, x, y, z, generatingPlayer, p, areaLoaded);
+				p = generateVillageAtPoint_checkForUnloaded(world, x, y, z, generatingPlayer, p);
 
 				if (p == null) {
 					return false;
@@ -658,25 +657,24 @@ public class WorldGenVillage implements IWorldGenerator {
 		return canAttemptVillage;
 	}
 
-	private Point generateVillageAtPoint_checkForUnloaded(final World world, final int x, final int y, final int z, final EntityPlayer generatingPlayer, Point p, boolean areaLoaded) {
+	private Point generateVillageAtPoint_checkForUnloaded(final World world, final int x, final int y, final int z, final EntityPlayer generatingPlayer, Point p) {
+
+		boolean areaLoaded = false;
+
 		if (!world.checkChunksExist(x - 16 * 5, y, z - 16 * 5, x + 16 * 5, y, z + 16 * 5)) {// this
 																							// area
 																							// isn't
 																							// ready
 
-			int nx = x;
-			int nz = z;
-
 			// let us test other chunks close by:
 			for (int i = -6; i < 7 && !areaLoaded; i++) {
 				for (int j = -6; j < 7 && !areaLoaded; j++) {
-					final int tx = nx + i * 16, tz = nz + j * 16;
+					final int tx = x + i * 16;
+					final int tz = z + j * 16;
 					if (!coordsTried.contains(tx + (tz << 16))) {
 						if (world.checkChunksExist(tx - 16 * 5, y, tz - 16 * 5, tx + 16 * 5, y, tz + 16 * 5)) {
-							nx = tx;
-							nz = tz;
 							areaLoaded = true;
-							p = new Point((nx >> 4) * 16 + 8, 0, (nz >> 4) * 16 + 8);
+							p = new Point((tx >> 4) * 16 + 8, 0, (tz >> 4) * 16 + 8);
 						}
 					}
 				}

@@ -91,22 +91,6 @@ public class GuiActions {
 			}
 		}
 
-		if (MillCommonUtilities.isBlockOpaqueCube(world, p.getiX(), p.getiY() + 1, p.getiZ())) {
-			return;
-		}
-		if (world.getBlock(p.getiX() - 1, p.getiY(), p.getiZ()) == Mill.lockedChest && MillCommonUtilities.isBlockOpaqueCube(world, p.getiX() - 1, p.getiY() + 1, p.getiZ())) {
-			return;
-		}
-		if (world.getBlock(p.getiX() + 1, p.getiY(), p.getiZ()) == Mill.lockedChest && MillCommonUtilities.isBlockOpaqueCube(world, p.getiX() + 1, p.getiY() + 1, p.getiZ())) {
-			return;
-		}
-		if (world.getBlock(p.getiX(), p.getiY(), p.getiZ() - 1) == Mill.lockedChest && MillCommonUtilities.isBlockOpaqueCube(world, p.getiX(), p.getiY() + 1, p.getiZ() - 1)) {
-			return;
-		}
-		if (world.getBlock(p.getiX(), p.getiY(), p.getiZ() + 1) == Mill.lockedChest && MillCommonUtilities.isBlockOpaqueCube(world, p.getiX(), p.getiY() + 1, p.getiZ() + 1)) {
-			return;
-		}
-
 		ServerSender.displayMillChest(player, p);
 
 	}

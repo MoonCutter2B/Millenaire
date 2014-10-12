@@ -250,7 +250,7 @@ public abstract class Goal {
 				return false;
 			}
 
-			MLN.validateResourceMap(townhallLimit);
+			// MLN.validateResourceMap(townhallLimit);
 			for (final InvItem item : townhallLimit.keySet()) {
 				if (villager.getTownHall().countGoods(item) > townhallLimit.get(item)) {
 					return false;

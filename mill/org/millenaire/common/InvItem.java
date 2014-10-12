@@ -137,7 +137,11 @@ public class InvItem implements Comparable<InvItem> {
 			return special - ii.special;
 		}
 
-		return Item.getIdFromItem(item) * 20 + meta - Item.getIdFromItem(ii.getItem()) * 20 - ii.meta;
+		if (item == null || ii.item == null) {
+			return special - ii.special;
+		}
+
+		return item.getUnlocalizedName().compareTo(ii.item.getUnlocalizedName()) + meta - ii.meta;
 	}
 
 	@Override
@@ -201,7 +205,11 @@ public class InvItem implements Comparable<InvItem> {
 
 	@Override
 	public int hashCode() {
-		return Item.getIdFromItem(item) + (meta << 8) + (special << 12);
+		if (item == null) {
+			return (meta << 8) + (special << 12);
+		} else {
+			return item.hashCode() + (meta << 8) + (special << 12);
+		}
 	}
 
 	public boolean matches(final InvItem ii) {

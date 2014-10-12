@@ -7,8 +7,11 @@ import io.netty.buffer.ByteBufOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityPainting;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -18,7 +21,7 @@ import org.millenaire.common.forge.Mill;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 
-public class EntityMillDecoration extends EntityPainting implements IEntityAdditionalSpawnData {
+public class EntityMillDecoration extends EntityHanging implements IEntityAdditionalSpawnData {
 
 	public static enum EnumWallDecoration {
 		Griffon("Griffon", 16, 16, 0, 0, NORMAN_TAPESTRY), Oiseau("Oiseau", 16, 16, 16, 0, NORMAN_TAPESTRY), CorbeauRenard("CorbeauRenard", 2 * 16, 16, 2 * 16, 0, NORMAN_TAPESTRY), Serment("Serment",
@@ -97,7 +100,7 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 		return 0;
 	}
 
-	public EnumWallDecoration art;
+	public EnumWallDecoration millArt;
 
 	public double clientX, clientY, clientZ;
 
@@ -113,10 +116,7 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 	}
 
 	public EntityMillDecoration(final World par1World, final int par2, final int par3, final int par4, final int par5) {
-		this(par1World);
-		this.posX = par2;
-		this.posY = par3;
-		this.posZ = par4;
+		super(par1World, par2, par3, par4, par5);
 	}
 
 	public EntityMillDecoration(final World world, final int x, final int y, final int z, final int orientation, final int type, final boolean largestPossible) {
@@ -124,17 +124,13 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 
 		this.type = type;
 
-		posX = x;
-		posY = y;
-		posZ = z;
-
 		final ArrayList<EnumWallDecoration> arraylist = new ArrayList<EnumWallDecoration>();
 		final EnumWallDecoration aenumart[] = EnumWallDecoration.values();
 		int maxSize = 0;
 		for (final EnumWallDecoration enumart : aenumart) {
 			if (enumart.type == type) {
 				if (!largestPossible || enumart.sizeX * enumart.sizeY >= maxSize) {
-					art = enumart;
+					millArt = enumart;
 					setDirection(orientation);
 					if (onValidSurface()) {
 						if (largestPossible && enumart.sizeX * enumart.sizeY > maxSize) {
@@ -148,12 +144,12 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 		}
 
 		if (arraylist.size() > 0) {
-			art = arraylist.get(rand.nextInt(arraylist.size()));
+			millArt = arraylist.get(rand.nextInt(arraylist.size()));
 		}
 
 		if (MLN.LogBuildingPlan >= MLN.MAJOR) {
-			MLN.major(this,
-					"Creating wall decoration: " + x + "/" + y + "/" + z + "/" + orientation + "/" + type + "/" + largestPossible + ". Result: " + art.title + " picked amoung " + arraylist.size());
+			MLN.major(this, "Creating wall decoration: " + x + "/" + y + "/" + z + "/" + orientation + "/" + type + "/" + largestPossible + ". Result: " + millArt.title + " picked amoung "
+					+ arraylist.size());
 		}
 
 		setDirection(orientation);
@@ -172,7 +168,7 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 			}
 			final EnumWallDecoration enumart = aenumart[j1];
 			if (enumart.title.equals(s)) {
-				art = enumart;
+				millArt = enumart;
 				break;
 			}
 			j1++;
@@ -199,12 +195,30 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 		}
 	}
 
-	public int func_82329_d() {
-		return this.art.sizeX;
+	@Override
+	public int getHeightPixels() {
+		return this.millArt.sizeY;
 	}
 
-	public int func_82330_g() {
-		return this.art.sizeY;
+	@Override
+	public int getWidthPixels() {
+		return this.millArt.sizeX;
+	}
+
+	/**
+	 * Called when this entity is broken. Entity parameter may be null.
+	 */
+	@Override
+	public void onBroken(final Entity p_110128_1_) {
+		if (p_110128_1_ instanceof EntityPlayer) {
+			final EntityPlayer entityplayer = (EntityPlayer) p_110128_1_;
+
+			if (entityplayer.capabilities.isCreativeMode) {
+				return;
+			}
+		}
+
+		this.entityDropItem(new ItemStack(Items.painting), 0.0F);
 	}
 
 	@Override
@@ -228,12 +242,12 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 
 		for (final EnumWallDecoration enumart : EnumWallDecoration.values()) {
 			if (enumart.title.equals(s)) {
-				art = enumart;
+				millArt = enumart;
 			}
 		}
 
-		if (art == null) {
-			art = EnumWallDecoration.Griffon;
+		if (millArt == null) {
+			millArt = EnumWallDecoration.Griffon;
 		}
 
 		if (type == 0) {
@@ -279,7 +293,7 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 
 			for (final EnumWallDecoration enumart : EnumWallDecoration.values()) {
 				if (enumart.title.equals(title)) {
-					art = enumart;
+					millArt = enumart;
 				}
 			}
 
@@ -295,13 +309,13 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 
 	@Override
 	public String toString() {
-		return "Tapestry (" + art.title + ")";
+		return "Tapestry (" + millArt.title + ")";
 	}
 
 	@Override
 	public void writeEntityToNBT(final NBTTagCompound nbttagcompound) {
 		nbttagcompound.setInteger("Type", type);
-		nbttagcompound.setString("Motive", this.art.title);
+		nbttagcompound.setString("Motive", this.millArt.title);
 		nbttagcompound.setByte("Direction", (byte) this.hangingDirection);
 		nbttagcompound.setDouble("TileX", this.posX);
 		nbttagcompound.setDouble("TileY", this.posY);
@@ -331,7 +345,7 @@ public class EntityMillDecoration extends EntityPainting implements IEntityAddit
 			data.writeDouble(posX);
 			data.writeDouble(posY);
 			data.writeDouble(posZ);
-			data.writeUTF(art.title);
+			data.writeUTF(millArt.title);
 			data.writeDouble(posX);
 			data.writeDouble(posY);
 			data.writeDouble(posZ);

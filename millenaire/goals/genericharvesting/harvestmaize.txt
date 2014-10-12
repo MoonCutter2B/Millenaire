@@ -23,6 +23,6 @@ irrigationbonuscrop=maize
 
 //Objets obtenus lors de la requête, avec % de chance
 //Items gained during harvest, with the chance %
-harvestitem=turmeric,100
+harvestitem=maize,100
 
 maxsimultaneousinbuilding=2

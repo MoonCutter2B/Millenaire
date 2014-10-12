@@ -764,14 +764,7 @@ public class Building {
 			residents = location.femaleResident;
 		}
 
-		for (String s : residents) {
-			if (MillVillager.oldVillagers.containsKey(type.toLowerCase())) {
-				if (child.gender == MillVillager.MALE) {
-					s = MillVillager.oldVillagers.get(type.toLowerCase())[0];
-				} else {
-					s = MillVillager.oldVillagers.get(type.toLowerCase())[1];
-				}
-			}
+		for (final String s : residents) {
 			if (residentCount.containsKey(s)) {
 				residentCount.put(s, residentCount.get(s) + 1);
 			} else {
@@ -3473,8 +3466,8 @@ public class Building {
 		if (isHouse()) {
 			try {
 				initialiseHouse(villageCreation);
-			} catch (final MillenaireException e) {
-				MLN.printException("Error when trying to create a building: ", e);
+			} catch (final Exception e) {
+				MLN.printException("Error when trying to create a building: " + this.name, e);
 			}
 			updateHouseSign();
 		}
@@ -4225,6 +4218,9 @@ public class Building {
 
 	public void readInn(final NBTTagCompound nbttagcompound) throws MillenaireException {
 
+		/**
+		 * Pre-6.0 compatibility
+		 */
 		NBTTagList nbttaglist = nbttagcompound.getTagList("importedGoods", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
@@ -4232,12 +4228,21 @@ public class Building {
 			imported.put(good, tag.getInteger("quantity"));
 		}
 
+		/**
+		 * Pre-6.0 compatibility
+		 */
 		nbttaglist = nbttagcompound.getTagList("exportedGoods", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
 			final InvItem good = new InvItem(Item.getItemById(tag.getInteger("itemid")), tag.getInteger("itemmeta"));
 			exported.put(good, tag.getInteger("quantity"));
 		}
+
+		nbttaglist = nbttagcompound.getTagList("importedGoodsNew", Constants.NBT.TAG_COMPOUND);
+		MillCommonUtilities.readInventory(nbttaglist, imported);
+
+		nbttaglist = nbttagcompound.getTagList("exportedGoodsNew", Constants.NBT.TAG_COMPOUND);
+		MillCommonUtilities.readInventory(nbttaglist, exported);
 	}
 
 	private void readPaths() {
@@ -6394,13 +6399,16 @@ public class Building {
 		}
 
 		if (villageType.playerControlled && worldObj.getWorldTime() % 1000 == 0 && countGoods(Mill.parchmentVillageScroll, -1) == 0) {
-
 			for (int i = 0; i < mw.villagesList.pos.size(); i++) {
 				final Point p = mw.villagesList.pos.get(i);
 				if (getPos().sameBlock(p)) {
 					storeGoods(Mill.parchmentVillageScroll, i, 1);
 				}
 			}
+		}
+
+		if (villageType.playerControlled && worldObj.getWorldTime() % 1000 == 0 && countGoods(Mill.negationWand) == 0) {
+			storeGoods(Mill.negationWand, 1);
 		}
 
 		if (controlledBy != null && controlledBy.length() > 0 && controlledByName == null) {
@@ -6486,7 +6494,7 @@ public class Building {
 		final List<Integer> resHas = new ArrayList<Integer>();
 
 		if (goalPlan != null) {
-			MLN.validateResourceMap(goalPlan.resCost);
+			// MLN.validateResourceMap(goalPlan.resCost);
 			for (final InvItem key : goalPlan.resCost.keySet()) {
 				res.add(key);
 				resCost.add(goalPlan.resCost.get(key));
@@ -7070,25 +7078,11 @@ public class Building {
 				parentVillage.write(nbttagcompound, "parentVillage");
 			}
 
-			nbttaglist = new NBTTagList();
-			for (final InvItem good : imported.keySet()) {
-				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("itemid", Item.getIdFromItem(good.getItem()));
-				nbttagcompound1.setInteger("itemmeta", good.meta);
-				nbttagcompound1.setInteger("quantity", imported.get(good));
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-			nbttagcompound.setTag("importedGoods", nbttaglist);
+			nbttaglist = MillCommonUtilities.writeInventory(imported);
+			nbttagcompound.setTag("importedGoodsNew", nbttaglist);
 
-			nbttaglist = new NBTTagList();
-			for (final InvItem good : exported.keySet()) {
-				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("itemid", Item.getIdFromItem(good.getItem()));
-				nbttagcompound1.setInteger("itemmeta", good.meta);
-				nbttagcompound1.setInteger("quantity", exported.get(good));
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-			nbttagcompound.setTag("exportedGoods", nbttaglist);
+			nbttaglist = MillCommonUtilities.writeInventory(exported);
+			nbttagcompound.setTag("exportedGoodsNew", nbttaglist);
 
 			if (MLN.LogTileEntityBuilding >= MLN.DEBUG) {
 				MLN.debug(this, "Saving building. Location: " + location + ", pos: " + getPos());

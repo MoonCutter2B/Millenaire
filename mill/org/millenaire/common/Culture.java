@@ -1662,6 +1662,9 @@ public class Culture {
 			serverVillagerTypes.put(key, vtype);
 			return vtype;
 		}
+
+		MLN.error(this, "Could not find villager type: " + key);
+
 		return null;
 	}
 

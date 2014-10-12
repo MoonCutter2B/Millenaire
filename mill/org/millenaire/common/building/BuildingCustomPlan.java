@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 
 import org.millenaire.common.Culture;
 import org.millenaire.common.MLN;
-import org.millenaire.common.MillVillager;
 import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
@@ -25,7 +24,7 @@ public class BuildingCustomPlan {
 	public static enum TypeRes {
 
 		CHEST("chest"), CRAFT("craft"), SIGN("sign"), FIELD("field"), SPAWN("spawn"), SAPLING("sapling"), STALL("stall"), MINING("mining"), FURNACE("furnace"), MUDBRICK("mudbrick"), SUGAR("sugar"), FISHING(
-				"fishing"), SILK("silk");
+				"fishing"), SILK("silk"), SQUID("squid"), CACAO("cacao");
 
 		public final String key;
 
@@ -164,10 +163,10 @@ public class BuildingCustomPlan {
 			}
 		}
 
-		location.minx = startX;
-		location.maxx = endX;
-		location.minz = startZ;
-		location.maxz = endZ;
+		location.minx = startX - 1;
+		location.maxx = endX + 1;
+		location.minz = startZ - 1;
+		location.maxz = endZ + 1;
 
 		location.length = location.maxx - location.minx + 1;
 		location.width = location.maxz - location.minz + 1;
@@ -294,7 +293,7 @@ public class BuildingCustomPlan {
 		if (b.equals(Blocks.sapling) || (b.equals(Blocks.log) || b.equals(Blocks.log2)) && p.getBelow().getBlock(world).equals(Blocks.dirt)) {
 			return TypeRes.SAPLING;
 		}
-		if (b.equals(Blocks.wool) && p.getMeta(world) == 4) {
+		if (b.equals(Blocks.wool) && p.getMeta(world) == 4) {// yellow
 			return TypeRes.STALL;
 		}
 		// Mining blocks must have at least one side open
@@ -316,11 +315,28 @@ public class BuildingCustomPlan {
 		if (b.equals(Blocks.reeds) && !p.getBelow().getBlock(world).equals(Blocks.reeds)) {
 			return TypeRes.SUGAR;
 		}
-		if (b.equals(Blocks.wool) && p.getMeta(world) == 11) {
+		if (b.equals(Blocks.wool) && p.getMeta(world) == 3) {// light blue
 			return TypeRes.FISHING;
 		}
-		if (b.equals(Blocks.wool) && p.getMeta(world) == 0) {
+		if (b.equals(Blocks.wool) && p.getMeta(world) == 0) {// white
 			return TypeRes.SILK;
+		}
+		if (b.equals(Blocks.wool) && p.getMeta(world) == 11) {// blue
+			final Point[] neighbours = new Point[] { p.getRelative(1, 0, 0), p.getRelative(-1, 0, 0), p.getRelative(0, 0, 1), p.getRelative(0, 0, -1) };
+			boolean waterAround = true;
+
+			for (final Point p2 : neighbours) {
+				if (!p2.getBlock(world).equals(Blocks.water)) {
+					waterAround = false;
+				}
+			}
+
+			if (waterAround) {
+				return TypeRes.SQUID;
+			}
+		}
+		if (b.equals(Blocks.cocoa)) {
+			return TypeRes.CACAO;
 		}
 		return null;
 	}
@@ -357,13 +373,13 @@ public class BuildingCustomPlan {
 				} else if (key.startsWith("name_")) {
 					names.put(key, value);
 				} else if (key.equalsIgnoreCase("male")) {
-					if (culture.villagerTypes.containsKey(value.toLowerCase()) || MillVillager.oldVillagers.containsKey(value.toLowerCase())) {
+					if (culture.villagerTypes.containsKey(value.toLowerCase())) {
 						maleResident.add(value.toLowerCase());
 					} else {
 						MLN.error(this, "Attempted to load unknown male villager: " + value);
 					}
 				} else if (key.equalsIgnoreCase("female")) {
-					if (culture.villagerTypes.containsKey(value.toLowerCase()) || MillVillager.oldVillagers.containsKey(value.toLowerCase())) {
+					if (culture.villagerTypes.containsKey(value.toLowerCase())) {
 						femaleResident.add(value.toLowerCase());
 					} else {
 						MLN.error(this, "Attempted to load unknown female villager: " + value);
@@ -506,6 +522,37 @@ public class BuildingCustomPlan {
 			for (final Point p : resources.get(TypeRes.SILK)) {
 				p.setBlock(building.worldObj, Mill.wood_decoration, 3, true, false);
 				building.getResManager().silkwormblock.add(p);
+			}
+		}
+		if (resources.containsKey(TypeRes.SQUID)) {
+			int squidSpawnPos = -1;
+			for (int i = 0; i < building.getResManager().spawnTypes.size(); i++) {
+				if (building.getResManager().spawnTypes.get(i).equals("Squid")) {
+					squidSpawnPos = i;
+				}
+			}
+			if (squidSpawnPos > -1) {
+				building.getResManager().spawns.get(squidSpawnPos).clear();
+			}
+
+			for (final Point p : resources.get(TypeRes.SQUID)) {
+				p.setBlock(building.worldObj, Blocks.water, 0, true, false);
+				building.getResManager().addSpawnPoint("Squid", p);
+			}
+		}
+		if (resources.containsKey(TypeRes.CACAO)) {
+			int cocoaSoilPos = -1;
+			for (int i = 0; i < building.getResManager().soilTypes.size(); i++) {
+				if (building.getResManager().soilTypes.get(i).equals(Mill.CROP_CACAO)) {
+					cocoaSoilPos = i;
+				}
+			}
+			if (cocoaSoilPos > -1) {
+				building.getResManager().soils.get(cocoaSoilPos).clear();
+			}
+
+			for (final Point p : resources.get(TypeRes.CACAO)) {
+				building.getResManager().addSoilPoint(Mill.CROP_CACAO, p);
 			}
 		}
 	}

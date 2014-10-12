@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -38,6 +39,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -47,6 +50,7 @@ import net.minecraft.world.storage.SaveHandler;
 import org.millenaire.common.Culture;
 import org.millenaire.common.InvItem;
 import org.millenaire.common.MLN;
+import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
@@ -62,6 +66,7 @@ import org.millenaire.common.pathing.atomicstryker.AStarStatic;
 
 import com.google.common.collect.Multimap;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class MillCommonUtilities {
@@ -1778,6 +1783,28 @@ public class MillCommonUtilities {
 		return res;
 	}
 
+	/**
+	 * Reads an inventory written with writeInventory.
+	 * 
+	 * Uses UniqueIdentifier not item ids to avoid issues with other mods
+	 * changing item ids.
+	 */
+	public static void readInventory(final NBTTagList nbttaglist, final Map<InvItem, Integer> inventory) {
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+
+			final String itemName = nbttagcompound1.getString("item");
+			final String itemMod = nbttagcompound1.getString("itemmod");
+			final int itemMeta = nbttagcompound1.getInteger("meta");
+
+			try {
+				inventory.put(new InvItem(GameRegistry.findItem(itemMod, itemName), itemMeta), nbttagcompound1.getInteger("amount"));
+			} catch (final MillenaireException e) {
+				MLN.printException(e);
+			}
+		}
+	}
+
 	public static boolean setBlock(final World world, final Point p, final Block block) {
 		return setBlock(world, p, block, true, false);
 	}
@@ -1992,4 +2019,27 @@ public class MillCommonUtilities {
 		return (long) nb1 << 32 | nb2 & 0xFFFFFFFFL;
 	}
 
+	/**
+	 * Writes an inventory in a NBTTagList for reading with readInventory.
+	 * 
+	 * Uses UniqueIdentifier not item ids to avoid issues with other mods
+	 * changing item ids.
+	 */
+	public static NBTTagList writeInventory(final Map<InvItem, Integer> inventory) {
+		final NBTTagList nbttaglist = new NBTTagList();
+		for (final InvItem key : inventory.keySet()) {
+
+			final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+
+			if (key.getItem() != null) {
+				nbttagcompound1.setString("item", GameRegistry.findUniqueIdentifierFor(key.getItem()).name);
+				nbttagcompound1.setString("itemmod", GameRegistry.findUniqueIdentifierFor(key.getItem()).modId);
+			}
+			nbttagcompound1.setInteger("meta", key.meta);
+			nbttagcompound1.setInteger("amount", inventory.get(key));
+			nbttaglist.appendTag(nbttagcompound1);
+
+		}
+		return nbttaglist;
+	}
 }

@@ -109,9 +109,9 @@ public class Mill {
 		}
 	}
 
-	public static final String versionNumber = "6.0.0b4";
+	public static final String versionNumber = "6.0.0b6";
 
-	public static final String versionBound = "[6.0.0b2,7.0)";
+	public static final String versionBound = "[6.0.0,7.0)";
 	public static final String modId = "millenaire";
 	public static final String name = "Mill\u00e9naire";
 

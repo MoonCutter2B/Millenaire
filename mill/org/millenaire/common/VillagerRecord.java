@@ -44,15 +44,6 @@ public class VillagerRecord implements Cloneable {
 		vr.gender = nbttagcompound.getInteger(label + "_gender");
 		vr.type = nbttagcompound.getString(label + "_type").toLowerCase();
 
-		// Conversion code for old buildings/villagers
-		if (vr.gender > 0 && MillVillager.oldVillagers.containsKey(vr.type)) {
-			if (vr.gender == MillVillager.MALE) {
-				vr.type = MillVillager.oldVillagers.get(vr.type)[0];
-			} else {
-				vr.type = MillVillager.oldVillagers.get(vr.type)[1];
-			}
-		}
-
 		vr.raiderSpawn = nbttagcompound.getLong(label + "_raiderSpawn");
 		vr.firstName = nbttagcompound.getString(label + "_firstName");
 		vr.familyName = nbttagcompound.getString(label + "_familyName");
@@ -84,6 +75,9 @@ public class VillagerRecord implements Cloneable {
 			vr.questTags.add(nbttagcompound1.getString("tag"));
 		}
 
+		/**
+		 * Pre-6.0 read kept for compatibility purpose
+		 */
 		nbttaglist = nbttagcompound.getTagList(label + "_inventory", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
@@ -93,6 +87,9 @@ public class VillagerRecord implements Cloneable {
 				MLN.printException(e);
 			}
 		}
+
+		nbttaglist = nbttagcompound.getTagList(label + "_inventoryNew", Constants.NBT.TAG_COMPOUND);
+		MillCommonUtilities.readInventory(nbttaglist, vr.inventory);
 
 		if (vr.getType() == null) {
 			MLN.error(vr, "Could not find type " + vr.type + " for VR. Skipping.");
@@ -509,17 +506,8 @@ public class VillagerRecord implements Cloneable {
 		}
 		nbttagcompound.setTag(label + "questTags", nbttaglist);
 
-		nbttaglist = new NBTTagList();
-		for (final InvItem key : inventory.keySet()) {
-
-			final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-			nbttagcompound1.setInteger("item", Item.getIdFromItem(key.getItem()));
-			nbttagcompound1.setInteger("meta", key.meta);
-			nbttagcompound1.setInteger("amount", inventory.get(key));
-			nbttaglist.appendTag(nbttagcompound1);
-
-		}
-		nbttagcompound.setTag(label + "_inventory", nbttaglist);
+		nbttaglist = MillCommonUtilities.writeInventory(inventory);
+		nbttagcompound.setTag(label + "_inventoryNew", nbttaglist);
 
 		nbttagcompound.setString(label + "_culture", culture.key);
 	}

@@ -171,7 +171,6 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 	public static ItemStack[] swordMayan = new ItemStack[] { new ItemStack(Mill.mayanMace, 1) };
 	public static ItemStack[] swordByzantine = new ItemStack[] { new ItemStack(Mill.byzantineMace, 1) };
 
-	public static final HashMap<String, String[]> oldVillagers = new HashMap<String, String[]>();
 	// In descending order of priority:
 	public static final Item[] weapons = new Item[] { Mill.normanBroadsword, Mill.tachiSword, Mill.byzantineMace, Items.diamond_sword, Mill.mayanMace, Items.iron_sword, Items.stone_sword,
 			Mill.yumiBow, Items.bow, Mill.normanAxe, Mill.mayanAxe, Items.iron_axe, Items.stone_axe, Mill.normanPickaxe, Mill.mayanPickaxe, Items.iron_pickaxe, Items.stone_pickaxe, Mill.normanHoe,
@@ -223,41 +222,6 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 
 	private static final int[] foodConceptionChanceOn = new int[] { 2, 2, 2, 2, 2, 3, 3, 3, 3, 4 };
 
-	static {
-		oldVillagers.put("ml_carpenter", new String[] { "carpenter", "" });
-		oldVillagers.put("ml_cattlefarmer", new String[] { "cattlefarmermale", "cattlefarmerfemale" });
-		oldVillagers.put("ml_child", new String[] { "boy", "girl" });
-		oldVillagers.put("ml_farmer", new String[] { "farmer", "" });
-		oldVillagers.put("ml_guard", new String[] { "guard", "" });
-		oldVillagers.put("ml_guildmaster", new String[] { "guildmaster", "" });
-		oldVillagers.put("ml_knight", new String[] { "knight", "" });
-		oldVillagers.put("ml_lady", new String[] { "", "lady" });
-		oldVillagers.put("ml_lumberman", new String[] { "lumberman", "" });
-		oldVillagers.put("ml_merchant", new String[] { "merchant", "" });
-		oldVillagers.put("ml_miner", new String[] { "miner", "" });
-		oldVillagers.put("ml_monk", new String[] { "monk", "" });
-		oldVillagers.put("ml_priest", new String[] { "priest", "" });
-		oldVillagers.put("ml_seneschal", new String[] { "seneschal", "" });
-		oldVillagers.put("ml_smith", new String[] { "smith", "" });
-		oldVillagers.put("ml_wife", new String[] { "", "wife" });
-		oldVillagers.put("ml_foreignmerchant", new String[] { "merchant_weapons", "" });
-
-		oldVillagers.put("ml_indianpeasant", new String[] { "indian_peasant", "" });
-		oldVillagers.put("ml_indianchild", new String[] { "indian_boy", "indian_girl" });
-		oldVillagers.put("ml_indianarmysmith", new String[] { "indian_armysmith", "" });
-		oldVillagers.put("ml_indianlumberman", new String[] { "indian_lumberman", "" });
-		oldVillagers.put("ml_indianmerchant", new String[] { "indian_merchant", "" });
-		oldVillagers.put("ml_indianminer", new String[] { "indian_miner", "" });
-		oldVillagers.put("ml_indianpandit", new String[] { "indian_pandit", "" });
-		oldVillagers.put("ml_indianpeasantwife", new String[] { "", "indian_peasantwife" });
-		oldVillagers.put("ml_indianraja", new String[] { "indian_raja", "" });
-		oldVillagers.put("ml_indianrajputgeneral", new String[] { "indian_rajputgeneral", "" });
-		oldVillagers.put("ml_indianvillagechief", new String[] { "indian_villagechief", "" });
-		oldVillagers.put("ml_indianrichwoman", new String[] { "", "indian_richwoman" });
-		oldVillagers.put("ml_indianscultor", new String[] { "indian_sculptor", "" });
-		oldVillagers.put("ml_indiansmith", new String[] { "indian_smith", "" });
-		oldVillagers.put("ml_indiansoldier", new String[] { "indian_soldier", "" });
-	}
 	static final int GATHER_RANGE = 20;// how far a villager will travel to
 	// gather a good from getGoodsToGather()
 
@@ -267,7 +231,7 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 	static public boolean usingCustomPathing = true;
 	static public boolean usingBinaryPathing = false;
 
-	public static MillVillager createVillager(Culture c, String type, final int gender, final World world, final Point spawnPos, final Point housePos, final Point thPos, final boolean respawn,
+	public static MillVillager createVillager(Culture c, final String type, final int gender, final World world, final Point spawnPos, final Point housePos, final Point thPos, final boolean respawn,
 			final String firstName, String familyName) {
 
 		if (world.isRemote || !(world instanceof WorldServer)) {
@@ -279,15 +243,6 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 
 		if (type == null || type.length() == 0) {
 			MLN.error(null, "Tried creating child of null type: " + type);
-		}
-
-		// Conversion code for old buildings/villagers
-		if (gender > 0 && oldVillagers.containsKey(type.toLowerCase())) {
-			if (gender == MALE) {
-				type = oldVillagers.get(type.toLowerCase())[0];
-			} else {
-				type = oldVillagers.get(type.toLowerCase())[1];
-			}
 		}
 
 		if (c.getVillagerType(type.toLowerCase()) == null) {
@@ -2984,7 +2939,10 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 			texture = getNewTexture();
 		}
 
-		final NBTTagList nbttaglist = nbttagcompound.getTagList("inventory", Constants.NBT.TAG_COMPOUND);
+		/**
+		 * Pre-6.0 inventory based on item id (dangerous if other mods conflict)
+		 */
+		NBTTagList nbttaglist = nbttagcompound.getTagList("inventory", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
 			final NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 
@@ -3002,6 +2960,12 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 				MLN.printException(e);
 			}
 		}
+
+		/**
+		 * Post-6.0 inventory based on item name (normally safe from other mods)
+		 */
+		nbttaglist = nbttagcompound.getTagList("inventoryNew", Constants.NBT.TAG_COMPOUND);
+		MillCommonUtilities.readInventory(nbttaglist, inventory);
 
 		previousBlock = Block.getBlockById(nbttagcompound.getInteger("previousBlock"));
 		previousBlockMeta = nbttagcompound.getInteger("previousBlockMeta");
@@ -4022,17 +3986,9 @@ public abstract class MillVillager extends EntityCreature implements IEntityAddi
 				nbttagcompound.setBoolean("dialogueChat", dialogueChat);
 			}
 
-			final NBTTagList nbttaglist = new NBTTagList();
-			for (final InvItem key : inventory.keySet()) {
-
-				final NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setInteger("item", Item.getIdFromItem(key.getItem()));
-				nbttagcompound1.setInteger("meta", key.meta);
-				nbttagcompound1.setInteger("amount", inventory.get(key));
-				nbttaglist.appendTag(nbttagcompound1);
-
-			}
-			nbttagcompound.setTag("inventory", nbttaglist);
+			// Starting 6.0 changed tag due to storage of item name not item key
+			final NBTTagList nbttaglist = MillCommonUtilities.writeInventory(inventory);
+			nbttagcompound.setTag("inventoryNew", nbttaglist);
 
 			nbttagcompound.setInteger("previousBlock", Block.getIdFromBlock(previousBlock));
 			nbttagcompound.setInteger("previousBlockMeta", previousBlockMeta);

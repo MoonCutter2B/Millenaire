@@ -92,6 +92,8 @@ ui.nbbuildings=<0> buildings
 ui.wandwrongblock=This wand only works on an obsidian block for a random village or on the following blocks:
 ui.wandblocklist=<0> for a <1>
 ui.wandblocklistcontrolled=<0> for a <1> (requires leadership in this culture)
+ui.wand_locationinuse=This place is already taken.
+ui.wand_invillagerange=You are too close to village: <0>
 ui.brickinstructions=One dirt and one sand are needed to create bricks.
 ui.buildingscentre=Centre
 ui.buildingsstarting=Starting buildings
@@ -116,6 +118,8 @@ ui.woodjungle=Tropical Wood
 ui.anyenchanted=Enchanted object
 ui.enchantedsword=Enchanted sword
 ui.selectabuildingproject=Select a building project
+ui.selectabuildingproject_custom=Register a building you have already built:
+ui.selectabuildingproject_standard=Millénaire building for construction:
 ui.projectadded=The project has been added to the list
 ui.problemat=Problem at <0>: <1>
 ui.constructionforbidden=construction forbidden
@@ -145,6 +149,7 @@ ui.notleaderin=You are not yet a leader in the <0> culture.
 ui.leaderinstruction=To become a leader in a culture, you need to either reach "Natural leader" level in a village and ask the village leader, or complete the Creation Quest chapter for that culture (if available).
 ui.wandinstruction=Use the wand on an obsidian block to generate a random village or on a gold block to select the village type you want
 ui.controlled=controlled
+ui.controlledcustom=custom, controlled
 ui.villagerelations=<0> (<1>, <2>): <3>
 ui.relationlist=Relations with other villages
 ui.relationpraise=Praise
@@ -183,9 +188,12 @@ ui.raid=Plan a raid
 
 ui.custombuilding_confirm=Confirm the creation of a custom building: <0>
 ui.custombuilding_cantconfirm=Impossible to create custom building: <0>
+ui.custombuilding_edit=Update the custom building: <0>
 ui.custombuilding_resneededintro=Needed resources:
 ui.custombuilding_resneeded=<1> of <3> <0> found (min: <2>)
-ui.custombuilding_newvillageCreation of a new village with a custom central building
+ui.custombuilding_newvillage=Creation of a new village with a custom central building
+ui.custombuilding_signnumber=Note: you can specify the order in which the signs should be used by putting a number between 1 and <0> on the first line.
+ui.custombuilding_radius=Resources are identify within a radius of <0> blocks (<1> blocks vertically)
 ui.close=Close
 ui.confirm=Continue
 
@@ -197,7 +205,13 @@ custombuilding.spawn=hay bale (will be destroyed; shows where animals will spawn
 custombuilding.sapling=sapling or tree
 custombuilding.stall=yellow wool (will be destroyed; shows where merchants will spawn)
 custombuilding.mining=sandstone, stone, sand, clay or gravel
-custombuilding.furnace=furnance
+custombuilding.furnace=furnace
+custombuilding.mudbrick=mud brick
+custombuilding.sugar=sugar cane
+custombuilding.fishing=light blue wool (will be destroyed; shows where villagers will fish)
+custombuilding.silk=white wool (will be destroyed; shows where silk worm blocks will be)
+custombuilding.squid=blue wool (will be destroyed; shows where squids will spawn; must be surrounded by water)
+custombuilding.cacao=cocoa pod
 
 
 help.tab_1=Generalities on villages
