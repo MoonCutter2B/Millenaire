@@ -112,8 +112,8 @@ Bois (tous): 31
 
 hindi: 
 indian_agricole resource use: 
-Bois de chêne: 539
 tile.ml_stone_deco.1.name: 5710
+Bois de chêne: 539
 Wool: 85
 Stone: 682
 item.ml_indianstatue.name: 3
@@ -123,8 +123,8 @@ Sandstone: 1882
 Bois (tous): 772
 
 indian_agricole_hamlet resource use: 
-Bois de chêne: 534
 tile.ml_stone_deco.1.name: 5223
+Bois de chêne: 534
 Wool: 85
 Stone: 682
 item.ml_indianstatue.name: 3
@@ -146,11 +146,11 @@ Bois (tous): 270
 indian_customcontrolled resource use: 
 
 indian_fort resource use: 
-Bois de chêne: 590
 tile.ml_stone_deco.1.name: 6628
-Stone: 1031
+Bois de chêne: 590
 item.ml_indianstatue.name: 3
 Wool: 85
+Stone: 1031
 tile.ml_stone_deco.0.name: 4958
 Cobblestone: 212
 Sandstone: 3191
@@ -166,8 +166,8 @@ Sandstone: 2990
 Bois (tous): 755
 
 indian_palace resource use: 
-Bois de chêne: 259
 tile.ml_stone_deco.1.name: 2738
+Bois de chêne: 259
 item.ml_indianstatue.name: 2
 Stone: 648
 tile.ml_stone_deco.0.name: 4018
@@ -229,9 +229,9 @@ Stone: 9970
 Bois de sapin: 3071
 Cobblestone: 1472
 tile.ml_wood_deco.2.name: 7306
+tile.ml_wood_deco.0.name: 3107
 Grass: 263
 Sand: 286
-tile.ml_wood_deco.0.name: 3107
 Bookshelf: 12
 Gravel: 584
 Bois de chêne: 4785
@@ -262,16 +262,16 @@ Bois de sapin: 3395
 Cobblestone: 1390
 tile.ml_wood_deco.2.name: 8833
 Grass: 263
-Sand: 286
 tile.ml_wood_deco.0.name: 3063
+Sand: 286
 Bookshelf: 12
 Gravel: 565
 Bois de chêne: 4857
 tile.ml_panes.name: 610
 Fern: 117
 Iron Ingot: 18
-tile.ml_wood_deco.1.name: 63
 Bois (tous): 1583
+tile.ml_wood_deco.1.name: 63
 
 seiji resource use: 
 Cracked Stone Bricks: 26
@@ -280,8 +280,8 @@ Stone: 12254
 Bois de sapin: 4350
 Cobblestone: 1986
 tile.ml_wood_deco.2.name: 9180
-Grass: 263
 tile.ml_wood_deco.0.name: 3975
+Grass: 263
 Sand: 286
 Bookshelf: 12
 Gravel: 691
@@ -290,8 +290,8 @@ tile.ml_panes.name: 864
 Gold Ingot: 54
 Fern: 117
 Iron Ingot: 108
-tile.ml_wood_deco.1.name: 63
 Bois (tous): 1883
+tile.ml_wood_deco.1.name: 63
 
 trading resource use: 
 Wool: 195
@@ -299,9 +299,9 @@ Stone: 10041
 Bois de sapin: 3512
 Cobblestone: 1271
 tile.ml_wood_deco.2.name: 7538
-Grass: 263
-tile.ml_wood_deco.0.name: 3087
 Sand: 286
+tile.ml_wood_deco.0.name: 3087
+Grass: 263
 Bookshelf: 12
 Gravel: 507
 Bois de chêne: 5617
@@ -402,8 +402,8 @@ Wool: 27
 Stone: 11243
 item.ml_mayanstatue.name: 8
 Cobblestone: 15598
-Bois tropical: 278
 tile.ml_stone_deco.2.name: 147
+Bois tropical: 278
 Sandstone: 13
 Bookshelf: 48
 Bois (tous): 1011
@@ -423,8 +423,8 @@ Wool: 21
 Stone: 11000
 item.ml_mayanstatue.name: 3
 Cobblestone: 16315
-Bois tropical: 136
 tile.ml_stone_deco.2.name: 144
+Bois tropical: 136
 Sandstone: 5
 Bookshelf: 48
 Bois (tous): 1074
@@ -435,8 +435,8 @@ Wool: 21
 Stone: 11262
 item.ml_mayanstatue.name: 6
 Cobblestone: 14992
-Bois tropical: 178
 tile.ml_stone_deco.2.name: 157
+Bois tropical: 178
 Sandstone: 136
 Bookshelf: 48
 Bois (tous): 961
@@ -609,8 +609,8 @@ Bois (tous): 1088
 
 grosbourg resource use: 
 Bois de chêne: 1374
-Wool: 116
 Stone: 4586
+Wool: 116
 Cobblestone: 7265
 Glass: 242
 item.ml_tapestry.name: 5

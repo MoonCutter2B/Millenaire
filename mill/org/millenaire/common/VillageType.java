@@ -15,7 +15,6 @@ import java.util.Map;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.millenaire.common.MLN.MillenaireException;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.BuildingCustomPlan;
 import org.millenaire.common.building.BuildingPlanSet;
 import org.millenaire.common.building.BuildingProject;

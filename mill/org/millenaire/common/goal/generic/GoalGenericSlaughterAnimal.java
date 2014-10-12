@@ -9,9 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;

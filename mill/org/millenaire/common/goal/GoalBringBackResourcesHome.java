@@ -5,8 +5,8 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 
 public class GoalBringBackResourcesHome extends Goal {
 

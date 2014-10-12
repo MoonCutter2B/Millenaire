@@ -26,7 +26,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Quest.QuestStep;
 import org.millenaire.common.building.BuildingPlan;
 import org.millenaire.common.building.BuildingPlanSet;
@@ -1876,6 +1875,29 @@ public class MLN {
 		}
 
 		return key;
+	}
+
+	/**
+	 * Temporary (?) method to check validity of resource map in order to track
+	 * bugs due to other mods doing weird things to items
+	 */
+	public static void validateResourceMap(final Map<InvItem, Integer> map) {
+		int errors = 0;
+		for (final InvItem item : map.keySet()) {
+			if (item == null) {
+				MLN.printException(new MillenaireException("Found a null InvItem in map!"));
+				errors++;
+			} else if (!map.containsKey(item)) {
+				MLN.printException(new MillenaireException("Key: " + item + " not present in map???"));
+				errors++;
+			} else if (map.get(item) == null) {
+				MLN.printException(new MillenaireException("Key: " + item + " has null value in map."));
+				errors++;
+			}
+		}
+		if (map.size() > 0) {
+			MLN.error(null, "Validated map. Found " + errors + " amoung " + map.size() + " keys.");
+		}
 	}
 
 	public static void warning(final Object obj, final String s) {

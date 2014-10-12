@@ -38,10 +38,10 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
 import org.millenaire.client.network.ClientSender;
 import org.millenaire.common.EntityMillDecoration;
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;

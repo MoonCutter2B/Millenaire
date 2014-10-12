@@ -5,10 +5,10 @@ import java.util.List;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;
 

@@ -2,8 +2,8 @@ package org.millenaire.common.goal;
 
 import net.minecraft.entity.item.EntityItem;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.pathing.atomicstryker.AStarConfig;

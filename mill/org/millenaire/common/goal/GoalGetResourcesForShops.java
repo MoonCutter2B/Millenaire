@@ -1,8 +1,8 @@
 package org.millenaire.common.goal;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.Building;
 
 public class GoalGetResourcesForShops extends Goal {

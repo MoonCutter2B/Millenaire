@@ -5,10 +5,10 @@ import java.util.HashMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;
@@ -250,6 +250,7 @@ public abstract class Goal {
 				return false;
 			}
 
+			MLN.validateResourceMap(townhallLimit);
 			for (final InvItem item : townhallLimit.keySet()) {
 				if (villager.getTownHall().countGoods(item) > townhallLimit.get(item)) {
 					return false;

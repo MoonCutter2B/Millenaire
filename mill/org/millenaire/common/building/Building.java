@@ -54,11 +54,11 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.util.Constants;
 
 import org.millenaire.common.Culture;
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MLN.MillenaireException;
 import org.millenaire.common.MillMapInfo;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillWorld;
 import org.millenaire.common.MillWorldInfo;
 import org.millenaire.common.Point;
@@ -6486,6 +6486,7 @@ public class Building {
 		final List<Integer> resHas = new ArrayList<Integer>();
 
 		if (goalPlan != null) {
+			MLN.validateResourceMap(goalPlan.resCost);
 			for (final InvItem key : goalPlan.resCost.keySet()) {
 				res.add(key);
 				resCost.add(goalPlan.resCost.get(key));

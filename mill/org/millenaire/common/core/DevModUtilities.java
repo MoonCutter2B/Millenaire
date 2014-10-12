@@ -13,9 +13,9 @@ import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MLN;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.Point;
 import org.millenaire.common.forge.Mill;
 import org.millenaire.common.network.ServerSender;

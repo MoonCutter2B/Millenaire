@@ -3,8 +3,8 @@ package org.millenaire.common.goal;
 import java.util.HashMap;
 import java.util.List;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.Building;
 
 public class GoalGetGoodsForHousehold extends Goal {

@@ -18,7 +18,6 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import org.millenaire.common.Culture.CultureLanguage.Dialogue;
 import org.millenaire.common.Culture.CultureLanguage.ReputationLevel;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingCustomPlan;
 import org.millenaire.common.building.BuildingLocation;

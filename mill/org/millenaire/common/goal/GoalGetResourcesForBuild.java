@@ -1,7 +1,7 @@
 package org.millenaire.common.goal;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.BuildingPlan;
 
 public class GoalGetResourcesForBuild extends Goal {

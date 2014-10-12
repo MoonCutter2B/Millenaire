@@ -14,7 +14,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import org.millenaire.common.MLN.MillenaireException;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.ExtFileFilter;

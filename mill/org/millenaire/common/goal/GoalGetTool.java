@@ -2,8 +2,8 @@ package org.millenaire.common.goal;
 
 import net.minecraft.item.Item;
 
+import org.millenaire.common.InvItem;
 import org.millenaire.common.MillVillager;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.building.Building;
 
 public class GoalGetTool extends Goal {

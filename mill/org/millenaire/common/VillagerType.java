@@ -13,7 +13,6 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.core.MillCommonUtilities.WeightedChoice;
 import org.millenaire.common.goal.Goal;

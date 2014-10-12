@@ -16,7 +16,6 @@ import net.minecraft.util.MathHelper;
 
 import org.millenaire.client.MillClientUtilities;
 import org.millenaire.common.MLN.MillenaireException;
-import org.millenaire.common.MillVillager.InvItem;
 import org.millenaire.common.MillVillager.InvItemAlphabeticalComparator;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingLocation;

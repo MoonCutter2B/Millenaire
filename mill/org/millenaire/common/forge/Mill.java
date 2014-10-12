@@ -640,16 +640,6 @@ public class Mill {
 		MLN.checkBonusCode(false);
 
 		proxy.loadLanguages();
-
-		for (final Object o : Block.blockRegistry) {
-			final Block b = (Block) o;
-
-			if (Item.getItemFromBlock(b) == null) {
-				MLN.major(null, "Block without item: " + b);
-			}
-
-		}
-
 	}
 
 	@EventHandler
