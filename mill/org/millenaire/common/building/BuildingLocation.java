@@ -190,10 +190,17 @@ public class BuildingLocation implements Cloneable {
 	public Culture culture;
 	public List<String> tags;
 	public List<String> subBuildings;
-	public boolean showTownHallSigns;
+
 	public boolean upgradesAllowed = true;
 
 	public boolean bedrocklevel = false;
+
+	/**
+	 * Whether to use TH panels IF THE BUILDING IS A TH
+	 * 
+	 * (otherwise not used)
+	 */
+	public boolean showTownHallSigns;
 
 	public BuildingLocation() {
 

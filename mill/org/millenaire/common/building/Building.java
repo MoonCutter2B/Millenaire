@@ -92,6 +92,10 @@ import org.millenaire.common.pathing.atomicstryker.IAStarPathedEntity;
 
 public class Building {
 
+	public static enum EnumSignType {
+		DEFAULT, HOUSE, TOWNHALL, INN, MARKET, ARCHIVES;
+	}
+
 	private class PathCreator implements IAStarPathedEntity {
 
 		final PathCreatorInfo info;
@@ -337,17 +341,17 @@ public class Building {
 	public static final AStarConfig PATH_BUILDER_JPS_CONFIG = new AStarConfig(true, false, false, false);
 	public static final int INVADER_SPAWNING_DELAY = 500;
 	public static final int RELATION_FAIR = 10;
-	public static final int RELATION_DECENT = 30;
 
+	public static final int RELATION_DECENT = 30;
 	public static final int RELATION_GOOD = 50;
 	public static final int RELATION_VERYGOOD = 70;
 	public static final int RELATION_EXCELLENT = 90;
 	public static final int RELATION_CHILLY = -10;
+
 	public static final int RELATION_BAD = -30;
-
 	public static final int RELATION_VERYBAD = -50;
-	public static final int RELATION_ATROCIOUS = -70;
 
+	public static final int RELATION_ATROCIOUS = -70;
 	public static final int RELATION_OPENCONFLICT = -90;
 	public static final int RELATION_MAX = 100;
 	public static final int RELATION_MIN = -100;
@@ -360,8 +364,8 @@ public class Building {
 	public static final String blLumbermanhut = "lumbermanhut";
 	public static final String blMarket = "market";
 	public static final String blPigFarm = "pigfarm";
-	public static final String blPresbytery = "presbytery";
 
+	public static final String blPresbytery = "presbytery";
 	public static final String blSheepChickenFarm = "sheepchickenfarm";
 	public static final String blTavern = "tavern";
 	public static final String blTownhall = "townHall";
@@ -398,6 +402,7 @@ public class Building {
 	public static final String tagSilkwormFarm = "silkwormfarm";
 	public static final String tagDespawnAllMobs = "despawnallmobs";
 	public static final String tagLeasure = "leasure";
+
 	public static final String tagNoPaths = "nopaths";
 
 	public static final String versionCompatibility = "1.0";
@@ -530,11 +535,10 @@ public class Building {
 	}
 
 	private BuildingBlock[] bblocks = null;
-
 	public int bblocksPos = 0;
 	private boolean bblocksChanged = false, pathsChanged = false;
-	private PathingBinary binaryPathing = null;
 
+	private PathingBinary binaryPathing = null;
 	public MillVillager builder = null;
 	public String buildingGoal, buildingGoalIssue;
 	public int buildingGoalLevel = 0;
@@ -543,12 +547,12 @@ public class Building {
 	public BuildingLocation buildingLocationIP = null;
 	public Map<BuildingProject.EnumProjects, List<BuildingProject>> buildingProjects = new HashMap<BuildingProject.EnumProjects, List<BuildingProject>>();
 	public List<Point> buildings = new ArrayList<Point>();
-	public List<String> buildingsBought = new ArrayList<String>();
 
+	public List<String> buildingsBought = new ArrayList<String>();
 	public Culture culture;
 	private boolean declaredPos = false;
-	public HashMap<InvItem, Integer> exported = new HashMap<InvItem, Integer>();
 
+	public HashMap<InvItem, Integer> exported = new HashMap<InvItem, Integer>();
 	public HashMap<InvItem, Integer> imported = new HashMap<InvItem, Integer>();
 	public boolean isActive = false, isAreaLoaded = false, chestLocked;
 	public boolean isTownhall = false, isInn = false, isMarket = false;
@@ -556,8 +560,8 @@ public class Building {
 	private long lastFailedProjectLocationSearch = 0;
 	public long lastPathingUpdate;
 	public long lastPing;
-	private long lastSaved = 0;
 
+	private long lastSaved = 0;
 	public long lastVillagerRecordsRepair = 0;
 	public long lastWoodLocations = 0, lastPlantingLocations = 0, lastSignUpdate = 0;
 	public BuildingLocation location;
@@ -575,19 +579,19 @@ public class Building {
 	private Point pos = null;
 	private boolean rebuildingPathing = false;
 	private boolean saveNeeded = false;
+
 	private String saveReason = null;
-
 	public MillVillager seller = null;
-	public Point sellingPlace = null;
 
+	public Point sellingPlace = null;
 	private Point townHallPos = null;
+
 	public List<MillVillager> villagers = new ArrayList<MillVillager>();
 
 	public List<String> visitorsList = new ArrayList<String>();
-
 	public List<VillagerRecord> vrecords = new ArrayList<VillagerRecord>();
-	public VillageType villageType = null;
 
+	public VillageType villageType = null;
 	private HashMap<Point, Integer> relations = new HashMap<Point, Integer>();
 	public Point parentVillage = null;
 	public MillWorldInfo winfo = new MillWorldInfo();
@@ -596,23 +600,24 @@ public class Building {
 	 */
 	public MillMapInfo mapInfo = null;
 	public MillWorld mw;
+
 	public World worldObj;
-
 	private boolean nightBackgroundActionPerformed;
-	private boolean updateRaidPerformed;
 
+	private boolean updateRaidPerformed;
 	public List<String> raidsPerformed = new ArrayList<String>();
 	public List<String> raidsSuffered = new ArrayList<String>();
 	public Point raidTarget;
+
 	public long raidStart = 0;
-
 	public long raidPlanningStart;
+
 	public boolean underAttack = false;
-
 	private int nbAnimalsRespawned;
-	public PujaSacrifice pujas = null;
 
+	public PujaSacrifice pujas = null;
 	public String controlledBy = null;
+
 	public String controlledByName = null;
 
 	private SaveWorker saveWorker = null;
@@ -630,8 +635,8 @@ public class Building {
 	public List<Point> oldPathPointsToClear = null;
 
 	public int oldPathPointsToClearIndex = 0;
-
 	private boolean autobuildPaths = false;
+
 	private final HashMap<String, LinkedHashMap<Goods, Integer>> shopBuys = new HashMap<String, LinkedHashMap<Goods, Integer>>();
 
 	private final HashMap<String, LinkedHashMap<Goods, Integer>> shopSells = new HashMap<String, LinkedHashMap<Goods, Integer>>();
@@ -639,6 +644,8 @@ public class Building {
 	private final BuildingResManager resManager = new BuildingResManager(this);
 
 	public List<Point> subBuildings = new ArrayList<Point>();
+
+	public EnumSignType signType = EnumSignType.DEFAULT;
 
 	/**
 	 * Client-side only on packet reception
@@ -842,7 +849,7 @@ public class Building {
 		if (isInn) {
 			merchantCreated();
 		} else {
-			updateHouseSign();
+			updateSigns();
 		}
 	}
 
@@ -1935,7 +1942,7 @@ public class Building {
 		if (isInn) {
 			merchantCreated();
 		} else {
-			updateHouseSign();
+			updateSigns();
 		}
 
 		return familyName;
@@ -3284,6 +3291,33 @@ public class Building {
 		return shops;
 	}
 
+	/**
+	 * Returns type of signs to display based on location & building
+	 */
+	private EnumSignType getSignType() {
+		if (isTownhall) {
+			if (location.showTownHallSigns) {
+				return EnumSignType.TOWNHALL;
+			} else if (location.maleResident.size() > 0 || location.femaleResident.size() > 0) {
+				return EnumSignType.HOUSE;
+			} else {
+				return EnumSignType.DEFAULT;
+			}
+		} else {
+			if (isMarket) {
+				return EnumSignType.MARKET;
+			} else if (isInn) {
+				return EnumSignType.INN;
+			} else if (location.tags.contains(tagArchives)) {
+				return EnumSignType.ARCHIVES;
+			} else if (location.maleResident.size() > 0 || location.femaleResident.size() > 0) {
+				return EnumSignType.HOUSE;
+			} else {
+				return EnumSignType.DEFAULT;
+			}
+		}
+	}
+
 	public Building getTownHall() {
 		if (townHallPos == null) {
 			return null;
@@ -3469,7 +3503,7 @@ public class Building {
 			} catch (final Exception e) {
 				MLN.printException("Error when trying to create a building: " + this.name, e);
 			}
-			updateHouseSign();
+			updateSigns();
 		}
 
 		if (isTownhall) {
@@ -5609,8 +5643,6 @@ public class Building {
 				if (meta > 0) {
 					MillCommonUtilities.setBlockAndMetadata(worldObj, p, Mill.panel, meta);
 				}
-			} else if (p == null) {
-				MLN.error(this, "The pos of sign " + i + " is null.");
 			}
 		}
 
@@ -5664,12 +5696,14 @@ public class Building {
 		}
 
 		for (int i = signId; i < resManager.signs.size(); i++) {
-			final TileEntityPanel sign = resManager.signs.get(i).getPanel(worldObj);
+			if (resManager.signs.get(i) != null) {
+				final TileEntityPanel sign = resManager.signs.get(i).getPanel(worldObj);
 
-			if (sign != null) {
+				if (sign != null) {
 
-				final String[][] lines = new String[][] { { "ui.reservedforvillager1" }, { "ui.reservedforvillager2" }, { "" }, { "#" + (i + 1) } };
-				ServerSender.updatePanel(mw, resManager.signs.get(i), lines, 0, townHallPos, 0);
+					final String[][] lines = new String[][] { { "ui.reservedforvillager1" }, { "ui.reservedforvillager2" }, { "" }, { "#" + (i + 1) } };
+					ServerSender.updatePanel(mw, resManager.signs.get(i), lines, 0, townHallPos, 0);
+				}
 			}
 		}
 
@@ -5794,10 +5828,6 @@ public class Building {
 				updateTownHall();
 			}
 
-			if (location.tags.contains(tagArchives)) {
-				updateArchiveSigns();
-			}
-
 			if (location.tags.contains(tagGrove)) {
 				updateGrove();
 			}
@@ -5826,10 +5856,6 @@ public class Building {
 				updateNetherWartSoils();
 			}
 
-			if (isHouse() && (!isTownhall || !location.showTownHallSigns)) {
-				updateHouseSign();
-			}
-
 			if (isInn) {
 				updateInn();
 			}
@@ -5837,6 +5863,8 @@ public class Building {
 			if (isMarket) {
 				updateMarket(false);
 			}
+
+			updateSigns();
 
 			if (isTownhall) {
 				if (saveNeeded) {
@@ -5867,6 +5895,61 @@ public class Building {
 			MLN.error(this, "Exception in TileEntityBuilding.onUpdate(): ");
 			MLN.printException(e);
 		}
+	}
+
+	private void updateDefaultSign() {
+
+		if (worldObj.isRemote) {
+			return;
+		}
+
+		if (resManager.signs.size() == 0) {
+			return;
+		}
+
+		if (pos == null || location == null) {
+			return;
+		}
+
+		final EntityPlayer player = worldObj.getClosestPlayer(pos.getiX(), pos.getiY(), pos.getiZ(), 16);
+
+		if (player == null) {
+			return;// nobody to see the signs anyway
+		}
+
+		if (System.currentTimeMillis() - lastSignUpdate < 10000) {
+			return;
+		}
+
+		final Point p = resManager.signs.get(0);
+
+		if (p == null) {
+			return;
+		}
+
+		if (worldObj.getBlock(p.getiX(), p.getiY(), p.getiZ()) != Mill.panel) {
+
+			final int meta = MillCommonUtilities.guessSignMetaData(worldObj, p);
+
+			if (meta > 0) {
+				MillCommonUtilities.setBlockAndMetadata(worldObj, p, Mill.panel, meta);
+			}
+		}
+
+		final TileEntityPanel panel = p.getPanel(worldObj);
+
+		if (panel == null) {
+			MLN.error(this, "No TileEntitySign at: " + p);
+		} else {
+
+			String[][] lines = null;
+
+			lines = new String[][] { { "" }, { this.getNativeBuildingName() }, { "" }, { "" } };
+
+			ServerSender.updatePanel(mw, p, lines, 0, getPos(), 0);
+		}
+
+		lastSignUpdate = System.currentTimeMillis();
 	}
 
 	private void updateDispensers() {
@@ -5924,7 +6007,7 @@ public class Building {
 			return;
 		}
 
-		if (isTownhall || location.showTownHallSigns) {
+		if (isTownhall && location.showTownHallSigns) {
 			return;
 		}
 
@@ -6004,8 +6087,6 @@ public class Building {
 			}
 			thNightActionPerformed = true;
 		}
-
-		updateInnSign();
 	}
 
 	private void updateInnSign() {
@@ -6125,8 +6206,6 @@ public class Building {
 
 			thNightActionPerformed = true;
 		}
-
-		updateMarketSigns();
 	}
 
 	private void updateMarketSigns() {
@@ -6297,6 +6376,24 @@ public class Building {
 		}
 	}
 
+	private void updateSigns() {
+		final EnumSignType type = getSignType();
+
+		if (type == EnumSignType.TOWNHALL) {
+			updateTownHallSigns(false);
+		} else if (type == EnumSignType.ARCHIVES) {
+			updateArchiveSigns();
+		} else if (type == EnumSignType.MARKET) {
+			updateMarketSigns();
+		} else if (type == EnumSignType.INN) {
+			updateInnSign();
+		} else if (type == EnumSignType.HOUSE) {
+			updateHouseSign();
+		} else if (type == EnumSignType.DEFAULT) {
+			updateDefaultSign();
+		}
+	}
+
 	private void updateTownHall() throws MillenaireException {
 		if (vrecords.size() > 0) {
 			updateWorldInfo();
@@ -6308,10 +6405,6 @@ public class Building {
 
 		findBuildingProject();
 		findBuildingConstruction();
-
-		if (location.showTownHallSigns) {
-			updateTownHallSigns(false);
-		}
 
 		checkSeller();
 		checkWorkers();

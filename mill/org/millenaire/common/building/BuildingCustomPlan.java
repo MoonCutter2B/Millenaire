@@ -132,6 +132,10 @@ public class BuildingCustomPlan {
 		if (MLN.LogBuildingPlan >= MLN.MAJOR) {
 			MLN.major(this, "Loaded custom building " + buildingKey + nativeName + " pop: " + maleResident + "/" + femaleResident);
 		}
+
+		if (!minResources.containsKey(TypeRes.SIGN)) {
+			MLN.error(this, "No signs in custom building.");
+		}
 	}
 
 	/**
@@ -625,5 +629,10 @@ public class BuildingCustomPlan {
 				posInOthers++;
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "custom:" + buildingKey + ":" + culture.key;
 	}
 }

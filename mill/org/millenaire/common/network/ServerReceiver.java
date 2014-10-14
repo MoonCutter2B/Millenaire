@@ -309,6 +309,7 @@ public class ServerReceiver {
 				GuiActions.newVillageCreation(player, pos, cultureKey, villageType);
 
 			} else if (guiActionId == GUIACTION_NEGATION_WAND) {
+
 				final Point pos = StreamReadWrite.readNullablePoint(data);
 				final Building th = mw.getBuilding(pos);
 				if (th != null) {

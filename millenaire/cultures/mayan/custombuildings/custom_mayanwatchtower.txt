@@ -1,1 +1,1 @@
-native:Cha'an Ka'nal;gameNameKey:mayanwatchtower_A0;tag:Patrol
+native:Cha'an Ka'nal;gameNameKey:mayanwatchtower_A0;tag:Patrol;sign:1

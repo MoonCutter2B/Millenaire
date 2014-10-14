@@ -1438,6 +1438,11 @@ public class BuildingPlan {
 	public int variation;
 	public List<String> subBuildings;
 	public List<String> startingSubBuildings;
+	/**
+	 * Whether to use TH panels IF THE BUILDING IS A TH
+	 * 
+	 * (otherwise not used)
+	 */
 	public boolean showTownHallSigns = true;
 	public List<StartingGood> startingGoods;
 	public String exploreTag = null;
