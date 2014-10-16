@@ -37,7 +37,7 @@ public class DisplayActions {
 	 * Create a GUI to edit an existing custom building
 	 */
 	public static void displayEditCustomBuildingGUI(final EntityPlayer player, final Building building) {
-		Minecraft.getMinecraft().displayGuiScreen(new GuiNewCustomBuilding(player, building));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiCustomBuilding(player, building));
 	}
 
 	public static void displayHelpGUI() {
@@ -64,14 +64,14 @@ public class DisplayActions {
 	 * Create a GUI to confirm the creation of a custom building
 	 */
 	public static void displayNewCustomBuildingGUI(final EntityPlayer player, final Building townHall, final Point pos, final BuildingCustomPlan customBuilding) {
-		Minecraft.getMinecraft().displayGuiScreen(new GuiNewCustomBuilding(player, townHall, pos, customBuilding));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiCustomBuilding(player, townHall, pos, customBuilding));
 	}
 
 	/**
 	 * Create a GUI to confirm the creation of a new village with a custom TH
 	 */
 	public static void displayNewCustomBuildingGUI(final EntityPlayer player, final Point pos, final VillageType villageType) {
-		Minecraft.getMinecraft().displayGuiScreen(new GuiNewCustomBuilding(player, pos, villageType));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiCustomBuilding(player, pos, villageType));
 	}
 
 	public static void displayNewVillageGUI(final EntityPlayer player, final Point pos) {

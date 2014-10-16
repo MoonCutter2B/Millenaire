@@ -187,7 +187,7 @@ public class ClientReceiver {
 				if (thPos != null && pos != null) {
 					final Building townHall = Mill.clientWorld.getBuilding(thPos);
 					if (townHall != null) {
-						final Building building = townHall.getBuildingAtCoord(pos);
+						final Building building = townHall.getBuildingAtCoordPlanar(pos);
 						if (building == null || !building.location.isCustomBuilding) {
 							DisplayActions.displayNewBuildingProjectGUI(Mill.proxy.getTheSinglePlayer(), townHall, pos);
 						} else {

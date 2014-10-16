@@ -204,13 +204,16 @@ public class MillWorldInfo implements Cloneable {
 		lastUpdatedZ = 0;
 	}
 
-	public BuildingLocation getLocationAtCoord(final Point p) {
-		if (locationIP != null && locationIP.isInside(p)) {
+	/**
+	 * Returns the location at that position, if any, ignoring the Y axis
+	 */
+	public BuildingLocation getLocationAtCoordPlanar(final Point p) {
+		if (locationIP != null && locationIP.isInsidePlanar(p)) {
 			return locationIP;
 		}
 
 		for (final BuildingLocation bl : buildingLocations) {
-			if (bl.isInside(p)) {
+			if (bl.isInsidePlanar(p)) {
 				return bl;
 			}
 		}

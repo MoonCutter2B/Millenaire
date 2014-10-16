@@ -306,7 +306,7 @@ public class MillCommonUtilities {
 
 			final AStarNode node = path.get(ip);
 			final Point p = new Point(node);
-			final BuildingLocation l = th.getLocationAtCoord(p);
+			final BuildingLocation l = th.getLocationAtCoordPlanar(p);
 
 			if (l != null) {
 
@@ -651,7 +651,7 @@ public class MillCommonUtilities {
 		boolean leadsToBorder = false;
 		for (int i = index - 1; i >= 0 && !exit; i--) {
 			final Point np = new Point(path.get(i));
-			final BuildingLocation l2 = th.getLocationAtCoord(np);
+			final BuildingLocation l2 = th.getLocationAtCoordPlanar(np);
 
 			if (l2 != l) {
 				leadsToBorder = true;
@@ -665,7 +665,7 @@ public class MillCommonUtilities {
 			exit = false;
 			for (int i = index - 1; i >= 0 && !exit; i--) {
 				final Point np = new Point(path.get(i));
-				final BuildingLocation l2 = th.getLocationAtCoord(np);
+				final BuildingLocation l2 = th.getLocationAtCoordPlanar(np);
 
 				if (l2 != l) {
 					exit = true;
@@ -683,7 +683,7 @@ public class MillCommonUtilities {
 		boolean leadsToBorder = false;
 		for (int i = index + 1; i < path.size() && !exit; i++) {
 			final Point np = new Point(path.get(i));
-			final BuildingLocation l2 = th.getLocationAtCoord(np);
+			final BuildingLocation l2 = th.getLocationAtCoordPlanar(np);
 
 			if (l2 != l) {
 				leadsToBorder = true;
@@ -697,7 +697,7 @@ public class MillCommonUtilities {
 			exit = false;
 			for (int i = index + 1; i < path.size() && !exit; i++) {
 				final Point np = new Point(path.get(i));
-				final BuildingLocation l2 = th.getLocationAtCoord(np);
+				final BuildingLocation l2 = th.getLocationAtCoordPlanar(np);
 
 				if (l2 != l) {
 					exit = true;

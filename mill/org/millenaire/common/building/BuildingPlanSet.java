@@ -61,7 +61,7 @@ public class BuildingPlanSet {
 				MLN.major(this, "Consolidating plan: adding level " + lid);
 			}
 
-			final int ioffset = plan.firstLevel - minLevel;
+			final int ioffset = plan.startLevel - minLevel;
 
 			for (int i = 0; i < plan.plan.length; i++) {
 				for (int j = 0; j < length; j++) {
@@ -83,6 +83,13 @@ public class BuildingPlanSet {
 		return consolidatedPlan;
 	}
 
+	public BuildingPlan getFirstStartingPlan() {
+		if (plans.size() == 0) {
+			return null;
+		}
+		return plans.get(0)[0];
+	}
+
 	public String getFullName(final EntityPlayer player) {
 		final BuildingPlan plan = getRandomStartingPlan();
 
@@ -101,8 +108,8 @@ public class BuildingPlanSet {
 
 		for (int i = 0; i <= level; i++) {
 			final BuildingPlan plan = plans.get(variation)[i];
-			if (plan.plan.length + plan.firstLevel > maxLevel) {
-				maxLevel = plan.plan.length + plan.firstLevel;
+			if (plan.plan.length + plan.startLevel > maxLevel) {
+				maxLevel = plan.plan.length + plan.startLevel;
 			}
 		}
 
@@ -115,8 +122,8 @@ public class BuildingPlanSet {
 
 		for (int i = 0; i <= level; i++) {
 			final BuildingPlan plan = plans.get(variation)[i];
-			if (plan.firstLevel < minLevel) {
-				minLevel = plan.firstLevel;
+			if (plan.startLevel < minLevel) {
+				minLevel = plan.startLevel;
 			}
 		}
 

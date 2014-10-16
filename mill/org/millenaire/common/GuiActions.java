@@ -316,7 +316,7 @@ public class GuiActions {
 
 		if (closestVillage != null && pos.squareRadiusDistance(closestVillage.getPos()) < closestVillage.villageType.radius + 10) {
 			if (closestVillage.controlledBy(player.getDisplayName())) {
-				final Building b = closestVillage.getBuildingAtCoord(pos);
+				final Building b = closestVillage.getBuildingAtCoordPlanar(pos);
 
 				if (b != null) {
 					if (b.location.isCustomBuilding) {

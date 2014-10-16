@@ -38,7 +38,7 @@ import org.millenaire.common.item.Goods;
 import org.millenaire.common.network.ServerSender;
 import org.millenaire.common.pathing.AStarPathing;
 
-public class BuildingPlan {
+public class BuildingPlan implements IBuildingPlan {
 
 	public static class LocationBuildingPair {
 		public Building building;
@@ -1418,7 +1418,11 @@ public class BuildingPlan {
 
 	}
 
-	public int areaToClear, firstLevel, length, width, nbfloors, lengthOffset, widthOffset, buildingOrientation;
+	/**
+	 * Level above ground where plan starts. Typically -1 (building floor)
+	 */
+	public int startLevel;
+	public int areaToClear, length, width, nbfloors, lengthOffset, widthOffset, buildingOrientation;
 	public String nativeName, shop;
 	public final HashMap<String, String> names = new HashMap<String, String>();
 	public List<String> maleResident = new ArrayList<String>();
@@ -2245,7 +2249,7 @@ public class BuildingPlan {
 
 			for (int j = -areaToClear; j < length + areaToClear; j++) {
 				for (int k = -areaToClear; k < width + areaToClear; k++) {
-					for (int i = -10 + firstLevel; i < 0; i++) {
+					for (int i = -10 + startLevel; i < 0; i++) {
 						final int ak = j % 2 == 0 ? k : width - k - 1;
 
 						// how far from building we are in the margin (0=in
@@ -2287,11 +2291,11 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 					final PointType pt = plan[i][j][k];
 					if (pt.isType(bpreserveground)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.PRESERVEGROUNDSURFACE));
 						nbBlocksToPut++;
 					} else if (pt.isType(ballbuttrees)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.CLEARTREE));
 						nbBlocksToPut++;
 					}
@@ -2307,7 +2311,7 @@ public class BuildingPlan {
 
 					final PointType pt = plan[i][j][ak];
 
-					final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, ak - widthOffset, orientation);
+					final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, ak - widthOffset, orientation);
 
 					if (pt.block == Blocks.air) {
 						bblocks.add(new BuildingBlock(p, Blocks.air, 0));
@@ -2322,13 +2326,13 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 
 					final int ak = j % 2 == 0 ? k : width - k - 1;
-					final int ai = i + firstLevel < 0 ? -i - firstLevel - 1 : i;
+					final int ai = i + startLevel < 0 ? -i - startLevel - 1 : i;
 
 					final PointType pt = plan[ai][j][ak];
 					int m = 0;
 					Block b = null;
 
-					final Point p = adjustForOrientation(x, y + ai + firstLevel, z, j - lengthOffset, ak - widthOffset, orientation);
+					final Point p = adjustForOrientation(x, y + ai + startLevel, z, j - lengthOffset, ak - widthOffset, orientation);
 
 					if (pt.block != null && pt.block != Blocks.air && !pt.secondStep) {// standard
 																						// block
@@ -2710,12 +2714,12 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 
 					final int ak = j % 2 == 0 ? k : width - k - 1;
-					final int ai = i + firstLevel < 0 ? -i - firstLevel - 1 : i;
+					final int ai = i + startLevel < 0 ? -i - startLevel - 1 : i;
 
 					final PointType pt = plan[ai][j][ak];
 					int m = 0;
 					Block b = null;
-					final Point p = adjustForOrientation(x, y + ai + firstLevel, z, j - lengthOffset, ak - widthOffset, orientation);
+					final Point p = adjustForOrientation(x, y + ai + startLevel, z, j - lengthOffset, ak - widthOffset, orientation);
 
 					if (pt.block != null && pt.secondStep) {// standard block
 						b = pt.block;
@@ -2832,71 +2836,71 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 					final PointType pt = plan[i][j][k];
 					if (pt.isType(btapestry)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.TAPESTRY));
 						nbBlocksToPut++;
 					} else if (pt.isType(bindianstatue)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.INDIANSTATUE));
 						nbBlocksToPut++;
 					} else if (pt.isType(bmayanstatue)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.MAYANSTATUE));
 						nbBlocksToPut++;
 					} else if (pt.isType(bbyzantineiconsmall)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.BYZANTINEICONSMALL));
 						nbBlocksToPut++;
 					} else if (pt.isType(bbyzantineiconmedium)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.BYZANTINEICONMEDIUM));
 						nbBlocksToPut++;
 					} else if (pt.isType(bbyzantineiconlarge)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.BYZANTINEICONLARGE));
 						nbBlocksToPut++;
 					} else if (pt.isType(boakspawn)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.OAKSPAWN));
 						nbBlocksToPut++;
 					} else if (pt.isType(bpinespawn)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.PINESPAWN));
 						nbBlocksToPut++;
 					} else if (pt.isType(bbirchspawn)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.BIRCHSPAWN));
 						nbBlocksToPut++;
 					} else if (pt.isType(bjunglespawn)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.JUNGLESPAWN));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnerskeleton)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERSKELETON));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnerzombie)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERZOMBIE));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnerspider)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERSPIDER));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnercavespider)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERCAVESPIDER));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnercreeper)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERCREEPER));
 						nbBlocksToPut++;
 					} else if (pt.isType(bspawnerblaze)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.SPAWNERBLAZE));
 						nbBlocksToPut++;
 					} else if (pt.isType(bdispenserunknownpowder)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						bblocks.add(new BuildingBlock(p, 0, 0, BuildingBlock.DISPENDERUNKNOWNPOWDER));
 						nbBlocksToPut++;
 					}
@@ -2909,7 +2913,7 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 					final PointType pt = plan[i][j][k];
 					if (pt.isType(bmainchest)) {
-						final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+						final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 						location.chestPos = p;
 						bblocks.add(new BuildingBlock(p, Mill.lockedChest, 1));
 						nbBlocksToPut++;
@@ -2984,6 +2988,11 @@ public class BuildingPlan {
 		return abblocks;
 	}
 
+	@Override
+	public Culture getCulture() {
+		return culture;
+	}
+
 	private int getDoorMeta(final int direction, final int orientation) {
 		final int faces = (direction + 4 - orientation) % 4;
 
@@ -2996,6 +3005,11 @@ public class BuildingPlan {
 		} else {
 			return 3;
 		}
+	}
+
+	@Override
+	public List<String> getFemaleResident() {
+		return femaleResident;
 	}
 
 	private int getFenceGateMeta(final int direction, final int orientation) {
@@ -3020,6 +3034,7 @@ public class BuildingPlan {
 		return name;
 	}
 
+	@Override
 	public String getGameName() {
 		if (culture.canReadBuildingNames()) {
 			return culture.getBuildingGameName(this);
@@ -3029,6 +3044,16 @@ public class BuildingPlan {
 
 	public String getGameNameKey() {
 		return "_buildingGame:" + culture.key + ":" + buildingKey + ":" + variation + ":" + level;
+	}
+
+	@Override
+	public List<String> getMaleResident() {
+		return maleResident;
+	}
+
+	@Override
+	public String getNativeName() {
+		return nativeName;
 	}
 
 	private int getOrientedBlockMeta(final int direction, final int orientation) {
@@ -3163,7 +3188,7 @@ public class BuildingPlan {
 			priorityMoveIn = 10;
 			nativeName = null;
 			areaToClear = 1;
-			firstLevel = 0;
+			startLevel = 0;
 			buildingOrientation = 1;
 			signOrder = new int[] { 0 };
 			tags = new ArrayList<String>();
@@ -3183,7 +3208,7 @@ public class BuildingPlan {
 			priorityMoveIn = parent.priorityMoveIn;
 			nativeName = parent.nativeName;
 			areaToClear = parent.areaToClear;
-			firstLevel = parent.firstLevel;
+			startLevel = parent.startLevel;
 			buildingOrientation = parent.buildingOrientation;
 			signOrder = parent.signOrder;
 			tags = new ArrayList<String>(parent.tags);
@@ -3267,7 +3292,7 @@ public class BuildingPlan {
 				} else if (key.equalsIgnoreCase("around")) {
 					areaToClear = Integer.parseInt(value);
 				} else if (key.equalsIgnoreCase("startLevel")) {
-					firstLevel = Integer.parseInt(value);
+					startLevel = Integer.parseInt(value);
 				} else if (key.equalsIgnoreCase("orientation")) {
 					buildingOrientation = Integer.parseInt(value);
 				} else if (key.equalsIgnoreCase("pathlevel")) {
@@ -3404,7 +3429,7 @@ public class BuildingPlan {
 				for (int k = 0; k < width; k++) {
 					final PointType pt = plan[i][j][k];
 
-					final Point p = adjustForOrientation(x, y + i + firstLevel, z, j - lengthOffset, k - widthOffset, orientation);
+					final Point p = adjustForOrientation(x, y + i + startLevel, z, j - lengthOffset, k - widthOffset, orientation);
 
 					if (pt.isType(bsoil)) {
 						building.getResManager().addSoilPoint(Mill.CROP_WHEAT, p);

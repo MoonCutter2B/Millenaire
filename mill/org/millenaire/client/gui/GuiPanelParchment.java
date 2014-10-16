@@ -250,7 +250,7 @@ public class GuiPanelParchment extends GuiText {
 
 				int colour = 0;
 
-				final BuildingLocation bl = townHall.getLocationAtCoord(new Point(x + minfo.mapStartX, 0, y + minfo.mapStartZ));
+				final BuildingLocation bl = townHall.getLocationAtCoordPlanar(new Point(x + minfo.mapStartX, 0, y + minfo.mapStartZ));
 
 				final byte groundType = minfo.data[x][y];
 

@@ -19,7 +19,7 @@ import org.millenaire.common.Point;
 import org.millenaire.common.core.MillCommonUtilities;
 import org.millenaire.common.forge.Mill;
 
-public class BuildingCustomPlan {
+public class BuildingCustomPlan implements IBuildingPlan {
 
 	public static enum TypeRes {
 
@@ -90,14 +90,14 @@ public class BuildingCustomPlan {
 	public List<String> maleResident = new ArrayList<String>();
 
 	public List<String> femaleResident = new ArrayList<String>();
+
 	public int priorityMoveIn = 1;
-	public int radius = 5, heightRadius = 4;
+
+	public int radius = 6, heightRadius = 4;
 	public List<String> tags = new ArrayList<String>();
 	public String cropType = null;
 	public String spawnType = null;
-
 	public Map<TypeRes, Integer> minResources = new HashMap<TypeRes, Integer>();
-
 	public Map<TypeRes, Integer> maxResources = new HashMap<TypeRes, Integer>();
 
 	/**
@@ -146,8 +146,11 @@ public class BuildingCustomPlan {
 	 */
 	private void adjustLocationSize(final BuildingLocation location, final Map<TypeRes, List<Point>> resources) {
 		int startX = location.pos.getiX();
+		int startY = location.pos.getiY();
 		int startZ = location.pos.getiZ();
+
 		int endX = location.pos.getiX();
+		int endY = location.pos.getiY();
 		int endZ = location.pos.getiZ();
 
 		for (final TypeRes type : resources.keySet()) {
@@ -155,11 +158,17 @@ public class BuildingCustomPlan {
 				if (startX >= p.getiX()) {
 					startX = p.getiX();
 				}
+				if (startY >= p.getiY()) {
+					startY = p.getiY();
+				}
 				if (startZ >= p.getiZ()) {
 					startZ = p.getiZ();
 				}
 				if (endX <= p.getiX()) {
 					endX = p.getiX();
+				}
+				if (endY <= p.getiY()) {
+					endY = p.getiY();
 				}
 				if (endZ <= p.getiZ()) {
 					endZ = p.getiZ();
@@ -169,6 +178,8 @@ public class BuildingCustomPlan {
 
 		location.minx = startX - 1;
 		location.maxx = endX + 1;
+		location.miny = startY - 1;
+		location.maxy = endY + 1;
 		location.minz = startZ - 1;
 		location.maxz = endZ + 1;
 
@@ -178,13 +189,11 @@ public class BuildingCustomPlan {
 		location.computeMargins();
 	}
 
-	public Map<TypeRes, List<Point>> findResources(final World world, final Point pos) {
+	public Map<TypeRes, List<Point>> findResources(final World world, final Point pos, final Building townHall, final BuildingLocation currentLocation) {
 
 		final Map<TypeRes, List<Point>> resources = new HashMap<TypeRes, List<Point>>();
 
 		int currentRadius = 0;
-
-		MLN.temp(null, "Looking for resources around point: " + pos);
 
 		while (currentRadius < radius) {
 
@@ -196,25 +205,25 @@ public class BuildingCustomPlan {
 				// First side of square: -x to +x with -z
 				z = pos.getiZ() - currentRadius;
 				for (x = pos.getiX() - currentRadius; x <= pos.getiX() + currentRadius; x++) {
-					handlePoint(x, y, z, world, resources);
+					handlePoint(x, y, z, world, resources, townHall, currentLocation);
 				}
 
 				// Second side of square: -z to +z with -x
 				x = pos.getiX() - currentRadius;
 				for (z = pos.getiZ() - currentRadius + 1; z <= pos.getiZ() + currentRadius - 1; z++) {
-					handlePoint(x, y, z, world, resources);
+					handlePoint(x, y, z, world, resources, townHall, currentLocation);
 				}
 
 				// Third side of square: -x to +x with +z
 				z = pos.getiZ() + currentRadius;
 				for (x = pos.getiX() - currentRadius; x <= pos.getiX() + currentRadius; x++) {
-					handlePoint(x, y, z, world, resources);
+					handlePoint(x, y, z, world, resources, townHall, currentLocation);
 				}
 
 				// Fourth side of square: -z to +z with +x
 				x = pos.getiX() + currentRadius;
 				for (z = pos.getiZ() - currentRadius + 1; z <= pos.getiZ() + currentRadius - 1; z++) {
-					handlePoint(x, y, z, world, resources);
+					handlePoint(x, y, z, world, resources, townHall, currentLocation);
 				}
 
 				y++;
@@ -225,10 +234,18 @@ public class BuildingCustomPlan {
 		return resources;
 	}
 
+	@Override
+	public Culture getCulture() {
+		return culture;
+	}
+
+	@Override
+	public List<String> getFemaleResident() {
+		return femaleResident;
+	}
+
 	/**
 	 * Name in native and game language (if readable by player) Ex: Puit (Well)
-	 * 
-	 * @return
 	 */
 	public String getFullDisplayName() {
 		String name = nativeName;
@@ -238,11 +255,12 @@ public class BuildingCustomPlan {
 		return name;
 	}
 
-	/**
-	 * Name in player's language, if readable by player
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return
+	 * @see org.millenaire.common.building.IBuildingPlan#getGameName()
 	 */
+	@Override
 	public String getGameName() {
 		if (culture.canReadBuildingNames()) {
 			return culture.getCustomBuildingGameName(this);
@@ -250,9 +268,48 @@ public class BuildingCustomPlan {
 		return "";
 	}
 
-	private void handlePoint(final int x, final int y, final int z, final World world, final Map<TypeRes, List<Point>> resources) {
+	@Override
+	public List<String> getMaleResident() {
+		return maleResident;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.millenaire.common.building.IBuildingPlan#getNativeName()
+	 */
+	@Override
+	public String getNativeName() {
+		return nativeName;
+	}
+
+	/**
+	 * Checks whether a point is a resource and is not already taken by a
+	 * building
+	 */
+	private void handlePoint(final int x, final int y, final int z, final World world, final Map<TypeRes, List<Point>> resources, final Building townHall, final BuildingLocation currentLocation) {
 
 		final Point p = new Point(x, y, z);
+
+		// If there is a village in the area, need to check whether the point is
+		// already in a building
+		if (townHall != null) {
+
+			final BuildingLocation locationAtPos = townHall.getLocationAtCoord(p);
+
+			// If the point is in the current location we're good, otherwise
+			// need to check
+			if (locationAtPos == null || !locationAtPos.equals(currentLocation)) {
+				for (final BuildingLocation bl : townHall.getLocations()) {
+
+					// If there is a location at that point and it's not the
+					// current one, abort.
+					if ((currentLocation == null || !currentLocation.isSameLocation(bl)) && bl.isInsideZone(p)) {
+						return;
+					}
+				}
+			}
+		}
 
 		final TypeRes res = identifyRes(world, p);
 
@@ -432,7 +489,7 @@ public class BuildingCustomPlan {
 	 * building. Also updates location to fit size to resources found.
 	 */
 	public void registerResources(final Building building, final BuildingLocation location) {
-		final Map<TypeRes, List<Point>> resources = findResources(building.worldObj, location.pos);
+		final Map<TypeRes, List<Point>> resources = findResources(building.worldObj, location.pos, building.getTownHall(), location);
 
 		adjustLocationSize(location, resources);
 

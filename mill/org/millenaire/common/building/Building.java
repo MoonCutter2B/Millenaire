@@ -2819,10 +2819,13 @@ public class Building {
 		return bblocks;
 	}
 
-	public Building getBuildingAtCoord(final Point p) {
+	/**
+	 * Gets the building at the coords given, if any, ignoring Y
+	 */
+	public Building getBuildingAtCoordPlanar(final Point p) {
 
 		for (final Building b : getBuildings()) {
-			if (b.location.isInside(p)) {
+			if (b.location.isInsidePlanar(p)) {
 				return b;
 			}
 		}
@@ -3106,7 +3109,7 @@ public class Building {
 
 	/**
 	 * Returns the first building location matching the coord if it exists, null
-	 * otherwise
+	 * otherwise. Checks the Y axis.
 	 * 
 	 * This can be the location of the current construction
 	 */
@@ -3117,6 +3120,26 @@ public class Building {
 
 		for (final BuildingLocation bl : getLocations()) {
 			if (bl.isInside(p)) {
+				return bl;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the first building location matching the coord if it exists, null
+	 * otherwise. Ignores the Y axis.
+	 * 
+	 * This can be the location of the current construction
+	 */
+	public BuildingLocation getLocationAtCoordPlanar(final Point p) {
+		if (buildingLocationIP != null && buildingLocationIP.isInsidePlanar(p)) {
+			return buildingLocationIP;
+		}
+
+		for (final BuildingLocation bl : getLocations()) {
+			if (bl.isInsidePlanar(p)) {
 				return bl;
 			}
 		}
@@ -3653,7 +3676,7 @@ public class Building {
 		final Point above = p.getAbove(), below = p.getBelow();
 
 		for (final Building b : getBuildings()) {
-			if (b.location != null && b.location.isInside(p)) {
+			if (b.location != null && b.location.isInsidePlanar(p)) {
 
 				if (b.location.tags.contains(tagNoPaths)) {
 					return true;

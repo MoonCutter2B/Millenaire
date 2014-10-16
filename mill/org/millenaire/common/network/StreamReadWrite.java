@@ -141,18 +141,21 @@ public class StreamReadWrite {
 
 		bl.minx = ds.readInt();
 		bl.maxx = ds.readInt();
+		bl.miny = ds.readInt();
+		bl.maxy = ds.readInt();
 		bl.minz = ds.readInt();
 		bl.maxz = ds.readInt();
 
 		bl.minxMargin = ds.readInt();
 		bl.maxxMargin = ds.readInt();
+		bl.minyMargin = ds.readInt();
+		bl.maxyMargin = ds.readInt();
 		bl.minzMargin = ds.readInt();
 		bl.maxzMargin = ds.readInt();
 
 		bl.orientation = ds.readInt();
 		bl.length = ds.readInt();
 		bl.width = ds.readInt();
-		bl.areaToClear = ds.readInt();
 		bl.level = ds.readInt();
 		bl.setVariation(ds.readInt());
 		bl.reputation = ds.readInt();
@@ -583,18 +586,21 @@ public class StreamReadWrite {
 			writeStringList(bl.femaleResident, data);
 			data.writeInt(bl.minx);
 			data.writeInt(bl.maxx);
+			data.writeInt(bl.miny);
+			data.writeInt(bl.maxy);
 			data.writeInt(bl.minz);
 			data.writeInt(bl.maxz);
 
 			data.writeInt(bl.minxMargin);
 			data.writeInt(bl.maxxMargin);
+			data.writeInt(bl.minyMargin);
+			data.writeInt(bl.maxyMargin);
 			data.writeInt(bl.minzMargin);
 			data.writeInt(bl.maxzMargin);
 
 			data.writeInt(bl.orientation);
 			data.writeInt(bl.length);
 			data.writeInt(bl.width);
-			data.writeInt(bl.areaToClear);
 			data.writeInt(bl.level);
 			data.writeInt(bl.getVariation());
 			data.writeInt(bl.reputation);

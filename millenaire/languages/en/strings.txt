@@ -174,6 +174,7 @@ ui.helpbutton=Millénaire Help
 ui.chunkbutton=Map of chunks
 ui.configbutton=Settings
 ui.serverimportforbidden=Only admin users can import buildings on a server.
+ui.inhabitants=Inhabitants
 
 ui.controldiplomacy=Diplomacy
 ui.raidinprogress=Raid in progress!

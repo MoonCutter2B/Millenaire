@@ -13,6 +13,7 @@ import org.millenaire.common.Point;
 import org.millenaire.common.building.Building;
 import org.millenaire.common.building.BuildingCustomPlan;
 import org.millenaire.common.building.BuildingPlanSet;
+import org.millenaire.common.building.IBuildingPlan;
 import org.millenaire.common.forge.Mill;
 
 public class GuiNewBuildingProject extends GuiText {
@@ -81,6 +82,38 @@ public class GuiNewBuildingProject extends GuiText {
 		buttonPagination();
 	}
 
+	private String getCustomPlanDesc(final IBuildingPlan customPlan) {
+		String desc = "";
+
+		if (customPlan.getGameName() != null && customPlan.getGameName().length() > 0) {
+			desc += customPlan.getGameName() + ". ";
+		}
+
+		if (customPlan.getMaleResident().size() > 0 || customPlan.getFemaleResident().size() > 0) {
+			desc += MLN.string("ui.inhabitants") + ": ";
+			boolean first = true;
+			for (final String inhabitant : customPlan.getMaleResident()) {
+				if (first) {
+					first = false;
+				} else {
+					desc += ", ";
+				}
+				desc += customPlan.getCulture().getVillagerType(inhabitant).name;
+			}
+			for (final String inhabitant : customPlan.getFemaleResident()) {
+				if (first) {
+					first = false;
+				} else {
+					desc += ", ";
+				}
+				desc += customPlan.getCulture().getVillagerType(inhabitant).name;
+			}
+			desc += ". ";
+		}
+
+		return desc;
+	}
+
 	@Override
 	public int getLineSizeInPx() {
 		return 195;
@@ -125,9 +158,15 @@ public class GuiNewBuildingProject extends GuiText {
 		text.add(new Line());
 		text.add(new Line(MLN.string("ui.selectabuildingproject_custom")));
 
+		String desc;
+
 		for (final BuildingCustomPlan customBuilding : townHall.villageType.customBuildings) {
-			text.add(new Line(new GuiButtonNewBuilding(customBuilding.buildingKey, customBuilding.getFullDisplayName(), true)));
+			text.add(new Line(new GuiButtonNewBuilding(customBuilding.buildingKey, customBuilding.getNativeName(), true)));
 			text.add(new Line(false));
+			desc = getCustomPlanDesc(customBuilding).trim();
+			if (desc.length() > 0) {
+				text.add(new Line(desc));
+			}
 			text.add(new Line());
 		}
 
@@ -139,8 +178,12 @@ public class GuiNewBuildingProject extends GuiText {
 
 		for (final BuildingPlanSet planSet : townHall.villageType.coreBuildings) {
 			if (townHall.isValidProject(planSet.getBuildingProject())) {
-				text.add(new Line(new GuiButtonNewBuilding(planSet.key, planSet.getFullName(player), false)));
+				text.add(new Line(new GuiButtonNewBuilding(planSet.key, planSet.getNativeName(), false)));
 				text.add(new Line(false));
+				desc = getCustomPlanDesc(planSet.getFirstStartingPlan()).trim();
+				if (desc.length() > 0) {
+					text.add(new Line(desc));
+				}
 				text.add(new Line());
 			}
 		}

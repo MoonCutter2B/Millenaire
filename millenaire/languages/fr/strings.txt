@@ -173,6 +173,7 @@ ui.helpbutton=Aide Millénaire
 ui.chunkbutton=Carte des tronçons
 ui.configbutton=Réglages Millénaire
 ui.serverimportforbidden=Il faut être administrateur pour pouvoir importer des bâtiments sur un serveur.
+ui.inhabitants=Habitants
 
 ui.controldiplomacy=Diplomatie
 ui.raidinprogress=Raid en cours!

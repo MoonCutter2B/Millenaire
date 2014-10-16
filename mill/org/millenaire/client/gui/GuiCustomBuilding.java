@@ -18,7 +18,7 @@ import org.millenaire.common.building.BuildingCustomPlan.TypeRes;
 import org.millenaire.common.forge.Mill;
 
 /**
- * GUI to display resources found for a new custom building
+ * GUI to display resources found for a custom building
  * 
  * Act as a confirmation screen if needed resources available, as an error
  * explanation if not
@@ -26,7 +26,7 @@ import org.millenaire.common.forge.Mill;
  * @author cedricdj
  * 
  */
-public class GuiNewCustomBuilding extends GuiText {
+public class GuiCustomBuilding extends GuiText {
 
 	private static final int BUTTON_CONFIRM = 1;
 	private final Building townHall;
@@ -39,20 +39,26 @@ public class GuiNewCustomBuilding extends GuiText {
 
 	ResourceLocation background = new ResourceLocation(Mill.modId, "textures/gui/ML_panel.png");
 
-	public GuiNewCustomBuilding(final EntityPlayer player, final Building building) {
+	/**
+	 * Creates a GUI to edit an existing custom building
+	 * 
+	 * @param player
+	 * @param building
+	 */
+	public GuiCustomBuilding(final EntityPlayer player, final Building building) {
 		this.townHall = building.getTownHall();
 		existingBuilding = building;
 		villageType = null;
 		pos = building.getPos();
 		this.player = player;
 		this.customBuilding = building.location.getCustomPlan();
-		this.resources = customBuilding.findResources(townHall.worldObj, pos);
+		this.resources = customBuilding.findResources(townHall.worldObj, pos, townHall, building.location);
 	}
 
 	/**
 	 * Create a GUI to confirm the creation of a custom building
 	 */
-	public GuiNewCustomBuilding(final EntityPlayer player, final Building th, final Point p, final BuildingCustomPlan customBuilding) {
+	public GuiCustomBuilding(final EntityPlayer player, final Building th, final Point p, final BuildingCustomPlan customBuilding) {
 
 		townHall = th;
 		villageType = null;
@@ -60,13 +66,13 @@ public class GuiNewCustomBuilding extends GuiText {
 		pos = p;
 		this.player = player;
 		this.customBuilding = customBuilding;
-		this.resources = customBuilding.findResources(th.worldObj, pos);
+		this.resources = customBuilding.findResources(th.worldObj, pos, th, null);
 	}
 
 	/**
 	 * Create a GUI to confirm the creation of a new village with a custom TH
 	 */
-	public GuiNewCustomBuilding(final EntityPlayer player, final Point p, final VillageType villageType) {
+	public GuiCustomBuilding(final EntityPlayer player, final Point p, final VillageType villageType) {
 
 		townHall = null;
 		existingBuilding = null;
@@ -74,7 +80,7 @@ public class GuiNewCustomBuilding extends GuiText {
 		pos = p;
 		this.player = player;
 		this.customBuilding = villageType.customCentre;
-		this.resources = customBuilding.findResources(player.worldObj, pos);
+		this.resources = customBuilding.findResources(player.worldObj, pos, null, null);
 	}
 
 	@Override

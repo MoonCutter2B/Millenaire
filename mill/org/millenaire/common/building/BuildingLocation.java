@@ -36,7 +36,13 @@ public class BuildingLocation implements Cloneable {
 		bl.orientation = nbttagcompound.getInteger(label + "_orientation");
 		bl.length = nbttagcompound.getInteger(label + "_length");
 		bl.width = nbttagcompound.getInteger(label + "_width");
-		bl.areaToClear = nbttagcompound.getInteger(label + "_areaToClear");
+		bl.minx = nbttagcompound.getInteger(label + "_minx");
+		bl.miny = nbttagcompound.getInteger(label + "_miny");
+		bl.minz = nbttagcompound.getInteger(label + "_minz");
+		bl.maxx = nbttagcompound.getInteger(label + "_maxx");
+		bl.maxy = nbttagcompound.getInteger(label + "_maxy");
+		bl.maxz = nbttagcompound.getInteger(label + "_maxz");
+
 		bl.level = nbttagcompound.getInteger(label + "_level");
 		bl.planKey = nbttagcompound.getString(label + "_key");
 
@@ -169,7 +175,11 @@ public class BuildingLocation implements Cloneable {
 			return null;
 		}
 
-		bl.initialise();
+		if (bl.isCustomBuilding) {
+			bl.initialisePlan();
+		} else {
+			bl.computeMargins();
+		}
 
 		return bl;
 	}
@@ -178,9 +188,9 @@ public class BuildingLocation implements Cloneable {
 	public List<String> maleResident;
 	public List<String> femaleResident;
 	public int priorityMoveIn = 10;
-	public int minx, maxx, minz, maxz;
-	public int minxMargin, maxxMargin, minzMargin, maxzMargin;
-	public int orientation, length, width, areaToClear, level, reputation, price;
+	public int minx, maxx, minz, maxz, miny, maxy;
+	public int minxMargin, maxxMargin, minyMargin, maxyMargin, minzMargin, maxzMargin;
+	public int orientation, length, width, level, reputation, price;
 	private int variation;
 
 	public boolean isCustomBuilding = false;
@@ -202,6 +212,9 @@ public class BuildingLocation implements Cloneable {
 	 */
 	public boolean showTownHallSigns;
 
+	/**
+	 * Only for use when reading location from NBT or from server packet
+	 */
 	public BuildingLocation() {
 
 	}
@@ -264,8 +277,9 @@ public class BuildingLocation implements Cloneable {
 		culture = plan.culture;
 		priorityMoveIn = plan.priorityMoveIn;
 
-		initialise();
-
+		if (!isCustomBuilding) {
+			initialisePlan();
+		}
 	}
 
 	@Override
@@ -283,10 +297,12 @@ public class BuildingLocation implements Cloneable {
 	 * Computes margins around building
 	 */
 	public void computeMargins() {
-		minxMargin = minx - (areaToClear + MLN.minDistanceBetweenBuildings);
-		minzMargin = minz - (areaToClear + MLN.minDistanceBetweenBuildings);
-		maxxMargin = maxx + areaToClear + MLN.minDistanceBetweenBuildings;
-		maxzMargin = maxz + areaToClear + MLN.minDistanceBetweenBuildings;
+		minxMargin = minx - MLN.minDistanceBetweenBuildings + 1;
+		minzMargin = minz - MLN.minDistanceBetweenBuildings + 1;
+		minyMargin = miny - 3;
+		maxyMargin = maxy + 1;
+		maxxMargin = maxx + MLN.minDistanceBetweenBuildings + 1;
+		maxzMargin = maxz + MLN.minDistanceBetweenBuildings + 1;
 	}
 
 	public BuildingLocation createLocationForLevel(final int plevel) {
@@ -490,7 +506,7 @@ public class BuildingLocation implements Cloneable {
 	 * Computes X & Z min & max values for plan-based locations from length and
 	 * width and orientation
 	 */
-	private void initialise() {
+	private void initialisePlan() {
 		final Point op1 = BuildingPlan.adjustForOrientation(pos.getiX(), pos.getiY(), pos.getiZ(), length / 2, width / 2, orientation);
 		final Point op2 = BuildingPlan.adjustForOrientation(pos.getiX(), pos.getiY(), pos.getiZ(), -length / 2, -width / 2, orientation);
 
@@ -510,32 +526,59 @@ public class BuildingLocation implements Cloneable {
 			maxz = op2.getiZ();
 		}
 
+		if (getPlan() != null) {
+			miny = pos.getiY() + getPlan().startLevel;
+			maxy = miny + getPlan().nbfloors;
+		} else {
+			/**
+			 * Just a failsafe with values that should generally work
+			 */
+			miny = pos.getiY() - 5;
+			maxy = pos.getiY() + 20;
+		}
+
 		computeMargins();
 	}
 
-	public boolean intersectWith(final BuildingLocation b) {
-
-		if (minxMargin > b.maxxMargin || maxxMargin < b.minxMargin || minzMargin > b.maxzMargin || maxzMargin < b.minzMargin) {
-			return false;
-		}
-
-		return true;
-	}
-
+	/**
+	 * Whether the point is within the location, taking into account the Y axis
+	 */
 	public boolean isInside(final Point p) {
-		if (minx < p.getiX() && p.getiX() <= maxx && minz < p.getiZ() && p.getiZ() <= maxz) {
+		if (minx < p.getiX() && p.getiX() <= maxx && miny < p.getiY() && p.getiY() <= maxy && minz < p.getiZ() && p.getiZ() <= maxz) {
 			return true;
 		}
-		// Log.debug(this, Log.WorldGeneration, "Outside!");
 		return false;
 	}
 
-	public boolean isInsideZone(final Point p) {
+	/**
+	 * Whether the point is within the location, ignoring the Y axis
+	 */
+	public boolean isInsidePlanar(final Point p) {
+		if (minx < p.getiX() && p.getiX() <= maxx && minz < p.getiZ() && p.getiZ() <= maxz) {
+			return true;
+		}
+		return false;
+	}
 
+	/**
+	 * Whether the point is within the location, including margin. Y axis
+	 * checked.
+	 */
+	public boolean isInsideZone(final Point p) {
+		if (minxMargin <= p.getiX() && p.getiX() <= maxxMargin && minyMargin <= p.getiY() && p.getiY() <= maxyMargin && minzMargin <= p.getiZ() && p.getiZ() <= maxzMargin) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Whether the point is within the location, including margin. Y axis
+	 * ignored.
+	 */
+	public boolean isInsideZonePlanar(final Point p) {
 		if (minxMargin <= p.getiX() && p.getiX() <= maxxMargin && minzMargin <= p.getiZ() && p.getiZ() <= maxzMargin) {
 			return true;
 		}
-		// Log.debug(this, Log.WorldGeneration, "Outside!");
 		return false;
 	}
 
@@ -552,7 +595,9 @@ public class BuildingLocation implements Cloneable {
 			return false;
 		}
 
-		return pos.equals(l.pos) && planKey.equals(l.planKey) && orientation == l.orientation && getVariation() == l.getVariation();
+		final boolean samePlanKey = planKey == null && l.planKey == null || planKey.equals(l.planKey);
+
+		return pos.equals(l.pos) && samePlanKey && orientation == l.orientation && getVariation() == l.getVariation() && isCustomBuilding == l.isCustomBuilding;
 	}
 
 	public int oldHashCode() {
@@ -575,9 +620,14 @@ public class BuildingLocation implements Cloneable {
 		nbttagcompound.setBoolean(label + "_isCustomBuilding", isCustomBuilding);
 		nbttagcompound.setString(label + "_culture", culture.key);
 		nbttagcompound.setInteger(label + "_orientation", orientation);
+		nbttagcompound.setInteger(label + "_minx", minx);
+		nbttagcompound.setInteger(label + "_miny", miny);
+		nbttagcompound.setInteger(label + "_minz", minz);
+		nbttagcompound.setInteger(label + "_maxx", maxx);
+		nbttagcompound.setInteger(label + "_maxy", maxy);
+		nbttagcompound.setInteger(label + "_maxz", maxz);
 		nbttagcompound.setInteger(label + "_length", length);
 		nbttagcompound.setInteger(label + "_width", width);
-		nbttagcompound.setInteger(label + "_areaToClear", areaToClear);
 		nbttagcompound.setInteger(label + "_level", level);
 		nbttagcompound.setString(label + "_key", planKey);
 
