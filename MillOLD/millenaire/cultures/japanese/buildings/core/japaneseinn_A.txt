@@ -1,0 +1,5 @@
+native:Shijin;around:4;startLevel:-1;orientation:3;width:17;length:13;tag:inn;signs:1,0;male:japanese_merchant;pathlevel:1;tag:leasure
+
+
+
+pathlevel:2

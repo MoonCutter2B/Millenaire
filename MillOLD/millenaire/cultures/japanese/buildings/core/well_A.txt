@@ -1,0 +1,3 @@
+native:Ido;around:3;startLevel:-8;orientation:3;width:7;length:7;irrigation:10
+irrigation:15;pathlevel:1
+

@@ -1,3 +1,0 @@
-Translation comparison between en and fr
-
-Traduction completness: 100%

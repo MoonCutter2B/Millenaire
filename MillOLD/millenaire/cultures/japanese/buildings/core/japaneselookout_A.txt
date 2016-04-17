@@ -1,0 +1,4 @@
+max:1;priority:83;native:Bourou;around:4;startLevel:-1;orientation:1;tag:Patrol;minDistance:80;width:13;length:17
+startLevel:-1
+startLevel:-1
+startLevel:-1;pathlevel:1

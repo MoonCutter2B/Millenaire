@@ -1,3 +1,0 @@
-sells=cobblestone,stone,sandstone,clay
-
-buys=wood,steelpickaxe

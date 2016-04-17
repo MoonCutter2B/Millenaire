@@ -1,0 +1,10 @@
+max:0;priority:200000;native:Kan Cha'an;english:Observatory;around:4;startLevel:0;orientation:3;signs:2,1,3,5,7,8,6,4,0;shop:mayantownhall;length:22;width:42;male:mayan_King;female:mayan_RichWoman;tag:leasure
+priority:80
+
+priority:50
+
+priority:30
+
+priority:15
+
+priority:5

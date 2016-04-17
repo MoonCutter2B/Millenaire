@@ -1,3 +1,0 @@
-sells=lambraw,lambcooked,leather,feta
-buys=wheat
-deliverto=lambraw

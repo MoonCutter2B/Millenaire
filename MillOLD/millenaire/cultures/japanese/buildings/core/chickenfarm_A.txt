@@ -1,0 +1,2 @@
+native:Youkeijou;around:4;startLevel:-1;orientation:1;width:12;length:21;male:japanese_chickenFarmer;female:japanese_farmwife;tag:chicken
+pathlevel:1

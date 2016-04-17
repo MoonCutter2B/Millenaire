@@ -1,0 +1,5 @@
+max:3;priority:85;native:Noufu Ie;around:4;startLevel:-1;orientation:1;width:11;length:14;male:japanese_Peasant;female:japanese_PeasantWife
+priority:67
+priority:45
+priority:20
+pathlevel:1

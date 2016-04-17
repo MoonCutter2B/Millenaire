@@ -1,0 +1,6 @@
+max:3;priority:80;native:Heisha;around:4;startLevel:-1;orientation:1;male:japanese_samurai;female:japanese_bravewoman;minDistance:50;width:15;length:18
+startLevel:-1
+startLevel:-1
+startLevel:-1
+startLevel:-1;pathlevel:1
+

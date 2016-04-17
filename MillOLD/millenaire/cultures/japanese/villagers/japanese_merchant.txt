@@ -1,0 +1,17 @@
+native_name=Chounin
+gender=male
+familyNameList=low_caste_family_names
+firstNameList=men_names
+tag=visitor
+
+tag=localmerchant
+
+texture=textures/entity/japanese/Japanese_Merchant0.png
+texture=textures/entity/japanese/Japanese_Merchant1.png
+
+goal=gorest
+goal=gopray
+goal=visitInn
+goal=VisitBuilding
+
+tag=helpInAttacks

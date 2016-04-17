@@ -1,0 +1,4 @@
+max:1;priority:500;native:Ichiba;around:4;startLevel:-1;orientation:3;width:22;length:25;tag:market;pathlevel:1;tag:leasure
+
+
+startLevel:-2;pathlevel:2

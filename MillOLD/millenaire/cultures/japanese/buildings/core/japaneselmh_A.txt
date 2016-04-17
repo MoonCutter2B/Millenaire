@@ -1,0 +1,4 @@
+max:2;priority:80;native:Kikori Koya;around:4;startLevel:-1;orientation:1;male:japanese_Lumberman;female:japanese_peasantwife;width:13;length:12
+
+
+pathlevel:1

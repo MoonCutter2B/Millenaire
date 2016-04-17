@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "millenaire:blockMillChest" },
+        "facing=south": { "model": "millenaire:blockMillChest", "y": 180 },
+        "facing=west": { "model": "millenaire:blockMillChest", "y": 270 },
+        "facing=east": { "model": "milleanire:blockMillChest", "y": 90 }
+    }
+}

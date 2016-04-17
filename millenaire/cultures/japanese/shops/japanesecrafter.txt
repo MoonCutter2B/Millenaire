@@ -1,2 +1,0 @@
-sells=paper
-buys=rice

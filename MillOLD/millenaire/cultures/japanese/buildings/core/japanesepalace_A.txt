@@ -1,0 +1,7 @@
+max:0;priority:200000;native:Kumonjo;around:4;startLevel:-1;orientation:1;width:27;length:35;signs:2,1,3,5,0,7,8,6,4;shop:japanesetownhall;male:japanese_kuge;female:japanese_richwoman;tag:Oven;tag:leasure
+priority:200
+priority:200
+priority:20
+priority:10;rebuildpath:true
+priority:11
+priority:12

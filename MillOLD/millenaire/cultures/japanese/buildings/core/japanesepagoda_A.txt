@@ -1,0 +1,6 @@
+native:Buttou;around:4;startLevel:-1;orientation:1;width:21;length:21;male:japanese_monk;tag:Praying;priority:50;pathlevel:1;tag:leasure
+priority:19
+priority:10
+
+pathlevel:2
+priority:2

@@ -1,4 +1,0 @@
-max:1;priority:92;native:Suiden;around:4;startLevel:-2;orientation:2;minDistance:60;width:29;length:28;tag:paddy
-priority:78;pathlevel:1
-priority:35
-priority:15

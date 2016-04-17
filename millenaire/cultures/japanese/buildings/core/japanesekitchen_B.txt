@@ -1,4 +1,0 @@
-native:Daidokoro;around:4;startLevel:-1;orientation:1;width:9;length:12;tag:oven;shop:kitchen;pathlevel:1
-priority:10
-
-pathlevel:2

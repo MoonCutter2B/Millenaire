@@ -1,2 +1,0 @@
-sells=leather,porkchops,porkchopscooked,boudin
-buys=carrot

@@ -1,0 +1,5 @@
+max:1;priority:200;native:Saisekijou;around:4;startLevel:-6;orientation:3;male:japanese_miner;female:japanese_peasantwife;width:14;length:13;
+priority:63;tag:Oven
+priority:43
+priority:25
+priority:19;pathlevel:1
