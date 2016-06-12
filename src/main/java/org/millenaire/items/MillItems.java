@@ -14,7 +14,7 @@ public class MillItems
 {
 	//Class to hold basic items
 	
-	public static Item denier = new Item();
+	public static Item denier;
 	public static Item denierOr;
 	public static Item denierArgent;
 	

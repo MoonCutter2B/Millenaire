@@ -23,8 +23,13 @@ public class ItemMillSeeds extends ItemSeeds
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-		if(VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, stack.getItem()))
-			return super.onItemUse(stack, playerIn, worldIn, pos, side, hitX, hitY, hitZ);
+		if(!worldIn.isRemote)
+		{
+			if(VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, stack.getItem()))
+				return super.onItemUse(stack, playerIn, worldIn, pos, side, hitX, hitY, hitZ);
+			else
+				return false;
+		}
 		else
 			return false;
     }

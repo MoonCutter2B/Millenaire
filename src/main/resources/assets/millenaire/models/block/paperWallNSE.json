@@ -1,0 +1,7 @@
+{
+    "parent": "block/pane_nse",
+    "textures": {
+        "edge": "blocks/planks_spruce",
+        "pane": "millenaire:blocks/paperwall"
+    }
+}

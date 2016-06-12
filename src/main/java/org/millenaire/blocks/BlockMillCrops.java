@@ -80,7 +80,7 @@ public class BlockMillCrops extends BlockCrops
 	}
 	
 	@Override
-    protected Item getSeed()
+    public Item getSeed()
     {
         return (Item)seed;
     }
@@ -91,9 +91,9 @@ public class BlockMillCrops extends BlockCrops
         return (Item)seed;
     }
 	
-	public Block setSeed(final IPlantable seed) 
+	public Block setSeed(final IPlantable seedIn) 
 	{
-		this.seed = seed;
+		this.seed = seedIn;
 		return this;
 	}
 	
@@ -112,23 +112,27 @@ public class BlockMillCrops extends BlockCrops
 
     public static void preinitialize()
     {
-    	cropTurmeric = new BlockMillCrops(false, false).setSeed((ItemMillSeeds)turmeric).setCreativeTab(null).setUnlocalizedName("cropTurmeric");
+    	cropTurmeric = new BlockMillCrops(false, false).setCreativeTab(null).setUnlocalizedName("cropTurmeric");
     	turmeric = new ItemMillSeeds(cropTurmeric).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("turmeric");
+    	((BlockMillCrops) cropTurmeric).setSeed((IPlantable) turmeric);
     	GameRegistry.registerItem(turmeric, "turmeric");
     	GameRegistry.registerBlock(cropTurmeric, "cropTurmeric");
     	
-    	cropRice = new BlockMillCrops(true, false).setSeed((ItemMillSeeds)rice).setCreativeTab(null).setUnlocalizedName("cropRice");
+    	cropRice = new BlockMillCrops(true, false).setCreativeTab(null).setUnlocalizedName("cropRice");
     	rice = new ItemMillSeeds(cropRice).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("rice");
+    	((BlockMillCrops) cropRice).setSeed((IPlantable) rice);
     	GameRegistry.registerItem(rice, "rice");
     	GameRegistry.registerBlock(cropRice, "cropRice");
 
-    	cropMaize = new BlockMillCrops(false, true).setSeed((ItemMillSeeds)maize).setCreativeTab(null).setUnlocalizedName("cropMaize");
+    	cropMaize = new BlockMillCrops(false, true).setCreativeTab(null).setUnlocalizedName("cropMaize");
     	maize = new ItemMillSeeds(cropMaize).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("maize");
+    	((BlockMillCrops) cropMaize).setSeed((IPlantable) maize);
     	GameRegistry.registerItem(maize, "maize");
     	GameRegistry.registerBlock(cropMaize, "cropMaize");
 
-    	cropGrapeVine = new BlockMillCrops(false, false).setSeed((ItemMillSeeds)grapes).setCreativeTab(null).setUnlocalizedName("cropGrapeVine");
+    	cropGrapeVine = new BlockMillCrops(false, false).setCreativeTab(null).setUnlocalizedName("cropGrapeVine");
     	grapes = new ItemMillSeeds(cropGrapeVine).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("grapes");
+    	((BlockMillCrops) cropGrapeVine).setSeed((IPlantable) grapes);
     	GameRegistry.registerItem(grapes, "grapes");
     	GameRegistry.registerBlock(cropGrapeVine, "cropGrapeVine");
     }

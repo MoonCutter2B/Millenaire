@@ -113,6 +113,17 @@ public class BlockMillPath extends Block
     	blockMillPathSlabDouble = new BlockMillPathSlabDouble().setUnlocalizedName("blockMillPathSlabDouble");
     	GameRegistry.registerBlock(blockMillPathSlab, ItemMillPathSlab.class, "blockMillPathSlab", blockMillPathSlab, blockMillPathSlabDouble);
     	GameRegistry.registerBlock(blockMillPathSlabDouble, ItemMillPathSlab.class, "blockMillPathSlabDouble", blockMillPathSlab, blockMillPathSlabDouble);
+    	
+    	for(int i = 0; i < EnumType.values().length; i++)
+    	{
+    		GameRegistry.addRecipe(new ItemStack(blockMillPathSlab, 6, i), 
+    				"AAA",
+    				'A', new ItemStack(blockMillPath, 1, i));
+    		GameRegistry.addRecipe(new ItemStack(blockMillPath, 1, i), 
+    				"A",
+    				"A",
+    				'A', new ItemStack(blockMillPathSlab, 1, i));
+    	}
     }
       
       @SideOnly(Side.CLIENT)
