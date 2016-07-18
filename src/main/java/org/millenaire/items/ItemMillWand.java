@@ -1,10 +1,12 @@
 package org.millenaire.items;
 
 import org.millenaire.CommonUtilities;
+import org.millenaire.MillCulture;
 import org.millenaire.Millenaire;
 import org.millenaire.VillageTracker;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
+import org.millenaire.entities.EntityMillVillager;
 import org.millenaire.entities.TileEntityMillChest;
 
 import net.minecraft.client.Minecraft;
@@ -33,7 +35,18 @@ public class ItemMillWand extends Item
 		{
 			if(worldIn.getBlockState(pos).getBlock() == Blocks.gold_block)
 			{
-				System.out.println("Gold Block Creation");
+				if(!worldIn.isRemote)
+				{	
+					System.out.println("Gold Creation");
+					worldIn.setBlockToAir(pos);
+					EntityMillVillager entity = new EntityMillVillager(worldIn, 100100, MillCulture.normanCulture);
+					System.out.println("cultured: ");
+					entity = entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanGirl"), 1);
+					System.out.println(entity.getVillagerType());
+					entity.setChild();
+					entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+					worldIn.spawnEntityInWorld(entity);
+				}
 				stack.stackSize--;
 				return true;
 			}
@@ -41,15 +54,14 @@ public class ItemMillWand extends Item
 			{
 				if(!worldIn.isRemote)
 				{	
-				System.out.println("Obsidian Creation");
-				/*if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, BlockMillCrops.grapes))
-					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.grapes);
-				if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, BlockMillCrops.maize))
-					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.maize);
-				if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, BlockMillCrops.rice))
-					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.rice);
-				if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, BlockMillCrops.turmeric))
-					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.turmeric);*/
+					System.out.println("Obsidian Creation");
+					worldIn.setBlockToAir(pos);
+					EntityMillVillager entity = new EntityMillVillager(worldIn, 100101, MillCulture.normanCulture);
+					System.out.println("cultured: ");
+					entity = entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanLady"), 1);
+					System.out.println(entity.getVillagerType());
+					entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+					worldIn.spawnEntityInWorld(entity);
 				}
 				stack.stackSize--;
 				return true;

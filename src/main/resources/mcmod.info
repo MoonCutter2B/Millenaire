@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
+  "modid": "millenaire",
+  "name": "Millénaire",
+  "description": "Authentic 11th Century Villages transported to your Minecraft Adventure",
+  "version": "Version 7.0.0 for Forge 1.8.9",
+  "mcversion": "1.8.9",
+  "url": "http://www.millenaire.org",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Kinniken","GalianRyu"],
+  "credits": "The entire Millenaire Community for being patience and amazing",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

@@ -1,11 +1,15 @@
 package org.millenaire;
 
+import java.util.List;
+
 import org.millenaire.blocks.BlockAlchemists;
 import org.millenaire.blocks.BlockDecorative;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
 import org.millenaire.blocks.BlockMillPath;
 import org.millenaire.blocks.BlockVillageStone;
+import org.millenaire.blocks.StoredPosition;
+import org.millenaire.entities.EntityMillVillager;
 import org.millenaire.gui.MillAchievement;
 import org.millenaire.gui.MillGuiHandler;
 import org.millenaire.items.ItemMillAmulet;
@@ -17,8 +21,10 @@ import org.millenaire.items.ItemMillWallet;
 import org.millenaire.items.ItemMillWand;
 import org.millenaire.items.MillItems;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -29,12 +35,15 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = Millenaire.MODID, name = Millenaire.NAME, version = Millenaire.VERSION)
+@Mod(modid = Millenaire.MODID, name = Millenaire.NAME, version = Millenaire.VERSION, guiFactory = Millenaire.GUIFACTORY)
 public class Millenaire 
 {
 	public static final String MODID = "millenaire";
 	public static final String NAME = "Mill\u00e9naire";
 	public static final String VERSION = "7.0.0";
+	public static final String GUIFACTORY = "org.millenaire.gui.MillGuiFactory";
+	
+	public List<Block> forbiddenBlocks;
 	
 	@Instance
 	public static Millenaire instance = new Millenaire();
@@ -50,7 +59,10 @@ public class Millenaire
 	@EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
+		MillConfig.preinitialize();
 		MinecraftForge.EVENT_BUS.register(new RaidEvent.RaidEventHandler());
+		
+		setForbiddenBlocks();
 		
 		MillItems.preinitialize();
 		ItemMillFood.preinitialize();
@@ -66,6 +78,8 @@ public class Millenaire
 		BlockMillPath.preinitialize();
 		BlockAlchemists.preinitialize();
 		BlockVillageStone.preinitialize();
+		StoredPosition.preinitialize();
+		EntityMillVillager.preinitialize();
 		
 		MillAchievement.preinitialize();
 		
@@ -76,6 +90,9 @@ public class Millenaire
 			ItemMillParchment.prerender();
 			BlockDecorative.prerender();
 			BlockMillPath.prerender();
+			EntityMillVillager.prerender();
+			
+			MillConfig.eventRegister();
 		}
     }
 	
@@ -105,4 +122,16 @@ public class Millenaire
     {
 		
     }
+	
+	private void setForbiddenBlocks()
+	{
+		String parsing = MillConfig.forbiddenBlocks.substring(11);
+		for (final String name : parsing.split(", |,"))
+		{
+			if(Block.blockRegistry.containsKey(new ResourceLocation(name)))
+			{
+				forbiddenBlocks.add(Block.blockRegistry.getObject(new ResourceLocation(name)));
+			}
+		}
+	}
 }
