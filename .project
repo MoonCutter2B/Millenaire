@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>mill-naire</name>
-	<comment></comment>
+	<name>Millénaire</name>
+	<comment/>
 	<projects/>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
