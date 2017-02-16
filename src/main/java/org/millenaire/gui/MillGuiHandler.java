@@ -52,6 +52,18 @@ public class MillGuiHandler implements IGuiHandler
 			
 			return new GuiMillChest(player.inventory, lockableContainer, player, teMillChest);
 		}
+		if(ID == 2)
+		{
+			return new GuiOptions(2, "option.negateVillage.text");
+		}
+		if(ID == 3)
+		{
+			return new GuiOptions(3, "option.negateVillager.text");
+		}
+		if(ID == 4)
+		{
+			return new GuiChief();
+		}
 		
 		return null;
 	}

@@ -26,6 +26,7 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.BlockWoodSlab;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -55,8 +56,8 @@ public class BuildingPlan
 	public List<ResourceCost> resCost;
 	public EnumFacing buildingOrientation;
 	public String nativeName;
-	public List<String> maleVillagerType = new ArrayList<String>();
-	public List<String> femaleVillagerType = new ArrayList<String>();
+	public String[] maleVillagerType;
+	public String[] femaleVillagerType;
 	
 	IBlockState[][][] buildingArray;
 	//Note: This should count down to 0 for final level, used by Construction Project MillSign.
@@ -151,7 +152,7 @@ public class BuildingPlan
 		return this;
 	}
 	
-	public BuildingPlan setNameAndType(String nameIn, List<String> maleIn, List<String> femaleIn)
+	public BuildingPlan setNameAndType(String nameIn, String[] maleIn, String[] femaleIn)
 	{
 		this.nativeName = nameIn;
 		this.maleVillagerType = maleIn;
@@ -1071,9 +1072,16 @@ public class BuildingPlan
 	
 	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
-	//Norman Buildings
-	
-	//Hindi Buildings
+	//Declarations
+		public static BuildingPlan normanCommunauteA0;
+		
+	public static void preinitialize()
+	{
+		//Norman Buildings
+		normanCommunauteA0 = new BuildingPlan(MillCulture.normanCulture, 0).setNameAndType("Communauté", new String[]{"normanGuildMaster"}, new String[0]).setLengthWidth(11, 13).setHeightDepth(13, -6).setArea(3).setDistance(0, 1).setOrientation(EnumFacing.getHorizontal(2)).setPlan(
+				new IBlockState[][][]{{{}}});
+		//Hindi Buildings
+	}
 	
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	

@@ -1,5 +1,6 @@
 package org.millenaire;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.millenaire.blocks.StoredPosition;
@@ -35,14 +36,19 @@ public class MillCommand implements ICommand
 	@Override
 	public List<String> getCommandAliases() 
 	{
-		return null;
+		List<String> output = new ArrayList<String>();
+		output.add("mill");
+		return output;
 	}
 
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException 
 	{
 		if(args.length == 0 || args.length > 1)
+		{
 			sender.addChatMessage(new ChatComponentText("invalid argument: use villages, loneBuildings, or showBuildPoints"));
+			return;
+		}
 		
 		if(args[0].equalsIgnoreCase("village"))
 		{

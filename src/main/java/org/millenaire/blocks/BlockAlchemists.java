@@ -25,7 +25,7 @@ public class BlockAlchemists extends Block
 	{
 		super(Material.rock);
 		
-		this.setResistance(6000000.0F);
+		//this.setResistance(6000000.0F);
 	}
 
 	public void alchemistExplosion(final World world, final int i, final int j, final int k) 

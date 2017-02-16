@@ -1,0 +1,56 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+    	"textures": {
+    		"top": "millenaire:blocks/tilestopvert",
+    		"bottom": "blocks/stonebrick",
+    		"front": "millenaire:blocks/tilesfront",
+        	"back": "millenaire:blocks/tilesfront",
+        	"side": "millenaire:blocks/tilesfront"
+        }
+	},
+	"variants": {
+		"facing": {
+			"north,half=bottom": { "y": 270 },
+			"south,half=bottom": { "y": 90 },
+			"east,half=bottom": { "y": 0 },
+			"west,half=bottom": { "y": 180 },
+			"north,half=top": { "y": 270, "x": 180 },
+			"south,half=top": { "y": 90, "x": 180 },
+			"east,half=top": { "y": 0, "x": 180 },
+			"west,half=top": { "y": 180, "x": 180 }
+		},
+		"shape": {
+			"straight": {
+				"submodel": {
+        			"stonePart": { "model": "millenaire:byzantineStairsStonePart", "uvlock": true },
+        			"tilePart": { "model": "millenaire:byzantineStairsTilePart", "uvlock": false }
+        		}
+			},
+			"outer_right": {
+				"submodel": {
+        			"stonePart": { "model": "millenaire:byzantineStairsStoneOuterRight", "uvlock": true },
+        			"tilePart": { "model": "millenaire:byzantineStairsTileOuterRight", "uvlock": false }
+        		}
+			},
+			"outer_left": {
+				"submodel": {
+        			"stonePart": { "model": "millenaire:byzantineStairsStoneOuterLeft", "uvlock": true },
+        			"tilePart": { "model": "millenaire:byzantineStairsTileOuterLeft", "uvlock": false }
+        		}
+			},
+			"inner_right": {
+				"submodel": {
+        			"stonePart": { "model": "millenaire:byzantineStairsStoneInnerRight", "uvlock": true },
+        			"tilePart": { "model": "millenaire:byzantineStairsTileInnerRight", "uvlock": false }
+        		}
+			},
+			"inner_left": {
+				"submodel": {
+        			"stonePart": { "model": "millenaire:byzantineStairsStoneInnerLeft", "uvlock": true },
+        			"tilePart": { "model": "millenaire:byzantineStairsTileInnerLeft", "uvlock": false }
+        		}
+			}
+		}
+	}
+}			

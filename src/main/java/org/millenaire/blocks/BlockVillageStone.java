@@ -52,19 +52,18 @@ public class BlockVillageStone extends BlockContainer
 	@Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-		if(playerIn.getHeldItem() != null && playerIn.getHeldItem().getItem() == ItemMillWand.wandNegation)
-		{
-			willExplode = true;
-			worldIn.scheduleUpdate(pos, this, 60);
-			worldIn.playSoundEffect(pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, "portal.portal", 1.0F, 0.01F);
-		}
-		else
-		{
-			if(worldIn.isRemote)
+		if(worldIn.isRemote)
 				playerIn.addChatMessage(new ChatComponentText("§8The Village name almost seems to shimmer in the twilight"));
-		}
+
         return false;
     }
+	
+	public void negate(World worldIn, BlockPos pos, EntityPlayer playerIn)
+	{
+		willExplode = true;
+		worldIn.scheduleUpdate(pos, this, 60);
+		worldIn.playSoundEffect(pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, "portal.portal", 1.0F, 0.01F);
+	}
 	
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
@@ -73,7 +72,7 @@ public class BlockVillageStone extends BlockContainer
 		{
 			//Do Some Stuff
 			worldIn.setBlockToAir(pos);
-			worldIn.createExplosion(new EntityTNTPrimed(worldIn, pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, null), pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, 6.0F, true);
+			worldIn.createExplosion(new EntityTNTPrimed(worldIn, pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, null), pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, 2.0F, true);
 		}
 	}
 

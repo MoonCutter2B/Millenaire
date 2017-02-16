@@ -32,7 +32,9 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = Millenaire.MODID, name = Millenaire.NAME, version = Millenaire.VERSION, guiFactory = Millenaire.GUIFACTORY)
@@ -47,6 +49,7 @@ public class Millenaire
 	
 	@Instance
 	public static Millenaire instance = new Millenaire();
+	public static SimpleNetworkWrapper simpleNetworkWrapper;
 	
 	public static final CreativeTabs tabMillenaire = new CreativeTabs("MillTab")
 	{
@@ -81,6 +84,8 @@ public class Millenaire
 		StoredPosition.preinitialize();
 		EntityMillVillager.preinitialize();
 		
+		MillCulture.preinitialize();
+		
 		MillAchievement.preinitialize();
 		
 		if(event.getSide() == Side.CLIENT)
@@ -94,6 +99,9 @@ public class Millenaire
 			
 			MillConfig.eventRegister();
 		}
+		
+		simpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("MillChannel");
+		simpleNetworkWrapper.registerMessage(PacketHandlerOnServer.class, MillPacket.class, 69, Side.SERVER);
     }
 	
 	@EventHandler
@@ -114,6 +122,7 @@ public class Millenaire
 			BlockMillChest.render();
 			BlockAlchemists.render();
 			BlockVillageStone.render();
+			StoredPosition.render();
     	}
     }
 	
@@ -133,5 +142,11 @@ public class Millenaire
 				forbiddenBlocks.add(Block.blockRegistry.getObject(new ResourceLocation(name)));
 			}
 		}
+	}
+	
+	@EventHandler
+	public void serverLoad(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new MillCommand());
 	}
 }

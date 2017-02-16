@@ -1,21 +1,19 @@
 package org.millenaire.blocks;
 
-import java.util.List;
 import java.util.Random;
 
 import org.millenaire.Millenaire;
-import org.millenaire.entities.TileEntityVillageStone;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IStringSerializable;
@@ -25,8 +23,39 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class StoredPosition extends BlockAir
+public class StoredPosition extends Block
 {
+	public StoredPosition() 
+	{
+		super(Material.barrier);
+        this.disableStats();
+        this.translucent = true;
+	}
+	
+	@Override
+    public int getRenderType()
+    {
+        return -1;
+    }
+
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+    
+    @Override
+    public boolean isFullCube()
+    {
+        return false;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public float getAmbientOcclusionLightValue()
+    {
+        return 1.0F;
+    }
+
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", StoredPosition.EnumType.class);
 	private boolean showParticles = false;
 	
@@ -64,6 +93,27 @@ public class StoredPosition extends BlockAir
 		}
 	}
 	
+	@Override
+    public boolean canCollideCheck(IBlockState state, boolean hitIfLiquid)
+    {
+        return showParticles;
+    }
+	
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state)
+    {
+         return null;
+    }
+	
+	@Override
+	public AxisAlignedBB getSelectedBoundingBox(World worldIn, BlockPos pos)
+    {
+		if(showParticles)
+			return new AxisAlignedBB((double)pos.getX() + this.minX, (double)pos.getY() + this.minY, (double)pos.getZ() + this.minZ, (double)pos.getX() + this.maxX, (double)pos.getY() + this.maxY, (double)pos.getZ() + this.maxZ);
+		else
+			return null;
+    }
+	
 	public void setShowParticles(boolean bool)
 	{
 		showParticles = bool;
@@ -79,7 +129,7 @@ public class StoredPosition extends BlockAir
         return VARIANT;
     }
 	
-	@Override
+	/*@Override
 	@SideOnly(Side.CLIENT)
     public void getSubBlocks(Item itemIn, CreativeTabs tab, List list)
     {
@@ -94,7 +144,7 @@ public class StoredPosition extends BlockAir
                 list.add(new ItemStack(itemIn, 1, enumtype.getMetadata()));
             }
         }
-    }
+    }*/
 
     public String getUnlocalizedName(int meta)
     {
@@ -126,8 +176,22 @@ public class StoredPosition extends BlockAir
 
     public static void preinitialize()
     {
-    	storedPosition = new BlockVillageStone().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("storedPosition");
+    	storedPosition = new StoredPosition().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("storedPosition");
 		GameRegistry.registerBlock(storedPosition, "storedPosition");
+    }
+    
+    public static void render()
+    {
+    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().registerBuiltInBlocks(storedPosition);
+    	
+    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(storedPosition), 0, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
+    	
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 0, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 1, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 2, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 3, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 4, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 5, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
     }
 	
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

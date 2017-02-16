@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "millenaire:blocks/tilestopvert",
-        "front": "millenaire:blocks/tileshalffront",
-        "side": "millenaire:blocks/tileshalfside"
-    }
-}

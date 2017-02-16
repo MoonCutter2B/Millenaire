@@ -1,8 +1,11 @@
 package org.millenaire.entities;
 
+import java.util.List;
+
 import org.millenaire.MillCulture;
 import org.millenaire.Millenaire;
 import org.millenaire.VillagerType;
+import org.millenaire.gui.MillAchievement;
 import org.millenaire.pathing.MillPathNavigate;
 import org.millenaire.rendering.RenderMillVillager;
 
@@ -24,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
@@ -33,7 +37,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 public class EntityMillVillager extends EntityCreature
 {
 	public int villagerID;
-	private MillCulture culture;
+	public MillCulture culture;
 	private VillagerType type;
 	private final static int TEXTURE = 13;
 	private final static int AGE = 14;
@@ -41,6 +45,7 @@ public class EntityMillVillager extends EntityCreature
 	private final static int NAME = 17;
 
 	private boolean isVillagerSleeping = false;
+	public boolean isPlayerInteracting = false;
 	
 	private InventoryBasic villagerInventory;
 	
@@ -60,6 +65,7 @@ public class EntityMillVillager extends EntityCreature
 		villagerID = idIn;
 		culture = cultureIn;
 		
+		this.villagerInventory = new InventoryBasic("Items", false, 16);
 		isImmuneToFire = true;
 		this.setSize(0.6F, 1.8F);
 		addTasks();
@@ -382,9 +388,22 @@ public class EntityMillVillager extends EntityCreature
 	//handleDoorsAndFenceGates() needs to be malisis-compatible(dummy player with villagers rotationYaw)
 	
 	@Override
-	public boolean interact(final EntityPlayer entityplayer) 
+	public boolean interact(final EntityPlayer playerIn) 
 	{
-		//First Contact Achievement, for Sadhu and Alchemist maitrepenser achievement
+		playerIn.addStat(MillAchievement.firstContact, 1);
+		if(type.hireCost > 0)
+		{
+			this.isPlayerInteracting = true;
+			playerIn.openGui(Millenaire.instance, 5, playerIn.worldObj, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ());
+			return true;
+		}
+		if(type.isChief)
+		{
+			this.isPlayerInteracting = true;
+			playerIn.openGui(Millenaire.instance, 4, playerIn.worldObj, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ());
+			return true;
+		}
+		//for Sadhu and Alchemist maitrepenser achievement
 		//Display Quest GUI if appropriate
 		//Display Hire GUI if Appropriate
 		//Display Chief GUI if Chief
@@ -398,7 +417,7 @@ public class EntityMillVillager extends EntityCreature
 	@Override
 	protected boolean isMovementBlocked() 
 	{
-		return this.getHealth() <= 0 || this.isVillagerSleeping;
+		return this.getHealth() <= 0 || this.isVillagerSleeping || this.isPlayerInteracting;
 	}
 	
 	//When Villager dies, the entity is dead, per normal.  Drop stuff and display messages. Respawn must just create another instance of the same villager (reason to store culture info in V. Stone)
@@ -435,6 +454,14 @@ public class EntityMillVillager extends EntityCreature
 		{
 			super.onUpdate();
 			return;
+		}
+		
+		if(isPlayerInteracting)
+		{
+			List<EntityPlayer> playersNear = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX - 5, posY - 1, posZ - 5, posX + 5, posY + 1, posZ + 5));
+			
+			if(playersNear.isEmpty())
+				isPlayerInteracting = false;
 		}
 
 		/*if (hiredBy != null) 

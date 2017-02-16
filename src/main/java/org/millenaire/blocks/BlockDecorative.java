@@ -38,6 +38,7 @@ public class BlockDecorative
 		public static Block byzantineStoneTile;
 		public static Block byzantineTileSlab;
 		public static Block byzantineTileSlabDouble;
+		public static Block byzantineTileStairs;
 		
 		public static Block paperWall;
 
@@ -63,14 +64,21 @@ public class BlockDecorative
 		byzantineTileSlabDouble = new BlockDecorativeOrientedSlabDouble(Material.rock, byzantineTileSlab).setUnlocalizedName("byzantineTileSlabDouble");
 		GameRegistry.registerBlock(byzantineTileSlab, ItemOrientedSlab.class, "byzantineTileSlab", byzantineTileSlab, byzantineTileSlabDouble);
 		GameRegistry.registerBlock(byzantineTileSlabDouble, ItemOrientedSlab.class, "byzantineTileSlabDouble", byzantineTileSlab, byzantineTileSlabDouble);
+		byzantineTileStairs = new BlockDecorativeOrientedStairs(byzantineStoneTile.getDefaultState()).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("byzantineTileStairs");
+		GameRegistry.registerBlock(byzantineTileStairs, "byzantineTileStairs");
 		
 		paperWall = new BlockDecorativePane(Material.cloth).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("paperWall");
 		GameRegistry.registerBlock(paperWall, "paperWall");
 		
 		GameRegistry.addSmelting(mudBrick, new ItemStack(blockDecorativeStone, 1, 1), 0.3f);
-		GameRegistry.addRecipe(new ItemStack(byzantineStoneTile),
+		GameRegistry.addRecipe(new ItemStack(byzantineStoneTile, 6),
 				"AAA",
 				"BBB",
+				'A', new ItemStack(byzantineTile), 'B', new ItemStack(Blocks.stone));
+		GameRegistry.addRecipe(new ItemStack(byzantineTileStairs, 4),
+				"A  ",
+				"BA ",
+				"BBA",
 				'A', new ItemStack(byzantineTile), 'B', new ItemStack(Blocks.stone));
     }
     
@@ -99,5 +107,6 @@ public class BlockDecorative
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineStoneTile), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineStoneTile", "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTileSlab), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineTileSlab", "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(paperWall), 0, new ModelResourceLocation(Millenaire.MODID + ":paperWall", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTileStairs), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineTileStairs", "inventory"));
 	}
 }

@@ -1,5 +1,10 @@
 {
-"parent": "millenaire:block/byzantineStoneTile",
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "blocks/stonebrick",
+        "top": "millenaire:blocks/tilestophor",
+        "side": "millenaire:blocks/tileshalfside"
+    },
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

@@ -3,6 +3,7 @@ package org.millenaire.building;
 import java.util.List;
 
 import org.millenaire.MillConfig;
+import org.millenaire.entities.EntityMillVillager;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -23,6 +24,9 @@ public class BuildingLocation
 	public List<BlockPos>sleepPos;
 	public List<BlockPos>hidePos;
 	public List<BlockPos>defendPos;
+	
+	List<EntityMillVillager>residents;
+	public List<String> subBuildings;
 	
 	BuildingLocation(BuildingPlan planIn, BlockPos pos, EnumFacing orientIn)
 	{
