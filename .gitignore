@@ -7,9 +7,3 @@
 /bin/
 /bin/
 /bin/
-/eclipse/*
-/.gradle/*
-/.settings/*
-/build/tmp/
-
-*.classpath
