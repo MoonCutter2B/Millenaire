@@ -53,6 +53,12 @@ public class BlockVillageStone extends BlockContainer
     {
 		if(worldIn.isRemote)
 				playerIn.addChatMessage(new ChatComponentText("§8The Village name almost seems to shimmer in the twilight"));
+		
+		TileEntityVillageStone te = (TileEntityVillageStone) worldIn.getTileEntity(pos);
+		if(te.testVar < 16)
+			te.testVar ++;
+		else
+			te.testVar = 0;
 
         return false;
     }
