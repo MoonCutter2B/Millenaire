@@ -27,6 +27,7 @@ public class PlanLoader {
 		//Convert Stream to NBTTagCompound
 		NBTTagCompound tag = CompressedStreamTools.readCompressed(is);
 		
+		//width = x-axis, height = y-axis, length = z-axis
 		short width, height, length;
 		byte[] blocks;
 		byte[] data;
@@ -46,6 +47,7 @@ public class PlanLoader {
 		}
 		
 		//turn into a 3D block array for use with BuildingPlan
+		//in format [x][y][z]
 		IBlockState[][][] organized = new IBlockState[width-1][height-1][length-1];
 		
 		for(int x = 0; x < width; x++) {
