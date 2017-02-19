@@ -4,7 +4,6 @@ import java.util.Random;
 
 import org.millenaire.Millenaire;
 import org.millenaire.entities.TileEntityVillageStone;
-import org.millenaire.items.ItemMillWand;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -27,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockVillageStone extends BlockContainer
 {
-	boolean willExplode = false;
+	private boolean willExplode = false;
 
 	protected BlockVillageStone() 
 	{

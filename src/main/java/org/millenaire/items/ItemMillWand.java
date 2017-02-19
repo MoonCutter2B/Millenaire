@@ -64,6 +64,14 @@ public class ItemMillWand extends Item
 		{
 			if(worldIn.getBlockState(pos).getBlock() == Blocks.gold_block)
 			{
+				
+			}
+			else if(worldIn.getBlockState(pos).getBlock() == Blocks.obsidian)
+			{
+				
+			}
+			else if(worldIn.getBlockState(pos).getBlock() == Blocks.emerald_block)
+			{
 				if(!worldIn.isRemote)
 				{	
 					System.out.println("Gold Creation");
@@ -79,7 +87,7 @@ public class ItemMillWand extends Item
 				stack.stackSize--;
 				return true;
 			}
-			else if(worldIn.getBlockState(pos).getBlock() == Blocks.obsidian)
+			else if(worldIn.getBlockState(pos).getBlock() == Blocks.diamond_block)
 			{
 				if(!worldIn.isRemote)
 				{	

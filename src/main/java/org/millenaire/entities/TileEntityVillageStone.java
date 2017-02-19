@@ -9,11 +9,27 @@ import org.millenaire.VillagerType;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class TileEntityVillageStone extends TileEntity
 {
 	List<EntityMillVillager> currentVillagers = new ArrayList<EntityMillVillager>();
+	
+	public int testVar = 0;
+	
+	@Override
+	public void onLoad()
+    {
+        World world = this.getWorld();
+        BlockPos pos = this.getPos();
+        
+        if (world.getBiomeGenForCoords(pos) != null)
+        {
+        	
+        }
+    }
 	
 	//@SideOnly(Side.SERVER)
 	public EntityMillVillager createVillager(World worldIn, MillCulture cultureIn, int villagerID)
