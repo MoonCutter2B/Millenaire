@@ -1,4 +1,4 @@
-package org.millenaire.entities;
+package org.millenaire.entities.ai;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
@@ -25,6 +25,7 @@ public class EntityAIGateOpen extends EntityAIBase
     
     /** If the entity close the gate */
     boolean closeGate;
+    
     /** The temporisation before the entity close the door (in ticks, always 20 = 1 second) */
     int closeGateTemporisation;
 
@@ -44,6 +45,7 @@ public class EntityAIGateOpen extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
+    @Override
     public boolean shouldExecute()
     {
     	//System.out.println("AI called - should execute");
@@ -90,6 +92,7 @@ public class EntityAIGateOpen extends EntityAIBase
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
+    @Override
     public boolean continueExecuting()
     {
         return this.closeGate && this.closeGateTemporisation > 0 && super.continueExecuting();
@@ -98,9 +101,9 @@ public class EntityAIGateOpen extends EntityAIBase
     /**
      * Execute a one shot task or start executing a continuous task
      */
+    @Override
     public void startExecuting()
     {
-    	System.out.println("AI called - start execute");
         this.closeGateTemporisation = 20;
         this.toggleGate(gateBlock, this.theEntity.worldObj, this.gatePosition, true);
     }
@@ -108,6 +111,7 @@ public class EntityAIGateOpen extends EntityAIBase
     /**
      * Updates the task
      */
+    @Override
     public void updateTask()
     {
     	--this.closeGateTemporisation;
@@ -139,17 +143,14 @@ public class EntityAIGateOpen extends EntityAIBase
     
     private void toggleGate(BlockFenceGate gateIn, World worldIn, BlockPos pos, boolean open)
     {
-    	System.out.println("AI called - toggling gate");
     	if(gateIn == null)
     	{
-    		System.out.println("gate null");
     		return;
     	}
     	
     	IBlockState state = worldIn.getBlockState(pos);
     	if(state.getBlock() != gateIn)
     	{
-    		System.out.println("gate mismatch");
     		return;
     	}
     	

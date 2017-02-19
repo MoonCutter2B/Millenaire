@@ -5,6 +5,7 @@ import java.util.List;
 import org.millenaire.MillCulture;
 import org.millenaire.Millenaire;
 import org.millenaire.VillagerType;
+import org.millenaire.entities.ai.EntityAIGateOpen;
 import org.millenaire.gui.MillAchievement;
 import org.millenaire.pathing.MillPathNavigate;
 import org.millenaire.rendering.RenderMillVillager;

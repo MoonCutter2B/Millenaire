@@ -17,11 +17,12 @@ public class VillagerType
 	final public String[] textures;
 	
 	final public boolean isChief;
+	final public boolean canBuild;
 	final public int hireCost;
 	
 	public List<EntityAIBase>additionalTasks;
 	
-	public VillagerType(String idIn, String nameIn, int genderIn, String[] familyIn, String[] firstIn, String[] textureIn, boolean chiefIn, int hireIn)
+	public VillagerType(String idIn, String nameIn, int genderIn, String[] familyIn, String[] firstIn, String[] textureIn, boolean chiefIn, boolean buildIn, int hireIn)
 	{
 		id = idIn;
 		nativeName = nameIn;
@@ -31,6 +32,7 @@ public class VillagerType
 		textures = textureIn;
 		
 		isChief = chiefIn;
+		canBuild = buildIn;
 		hireCost = hireIn;
 	}
 	
