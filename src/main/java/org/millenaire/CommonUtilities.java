@@ -103,4 +103,16 @@ public class CommonUtilities
 
 		return null;
 	}
+	
+	//TODO: add all villager types
+	public static String getVillagerFromID(int id) {
+		String x;
+		
+		switch(id) {
+		default:
+			x = "unknown";
+		}
+		
+		return x;
+	}
 }
