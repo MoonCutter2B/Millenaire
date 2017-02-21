@@ -1,11 +1,9 @@
-package org.millenaire.test;
+package org.millenaire.building;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.millenaire.CommonUtilities;
 import org.millenaire.MillCulture;
-import org.millenaire.building.BuildingPlan;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -68,14 +66,14 @@ public class PlanLoader {
 		
 		String[] maleInhabitants = new String[maleVillagers.length], femaleInhabitants = new String[femaleVillagers.length];
 		
-		for(int villager : maleVillagers) {
-			CommonUtilities.getVillagerFromID(villager);
+		for(int i = 0; i < maleVillagers.length; i++) {
+			maleInhabitants[i] = culture.getVillagerTypes()[maleVillagers[i]].id;
 		}
-		for(int villager : femaleVillagers) {
-			CommonUtilities.getVillagerFromID(villager);
+		
+		for(int i = 0; i < femaleVillagers.length; i++) {
+			femaleInhabitants[i] = culture.getVillagerTypes()[femaleVillagers[i]].id;
 		}
 
-		//TODO: make everything customizeable
 		return new BuildingPlan(culture, level).setNameAndType(name, maleInhabitants, femaleInhabitants).setLengthWidth(length, width).setHeightDepth(height, depth).setDistance(0, 1)
 				.setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized);
 	}
