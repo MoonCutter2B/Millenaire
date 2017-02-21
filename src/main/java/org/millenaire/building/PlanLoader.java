@@ -16,7 +16,7 @@ import net.minecraftforge.common.util.Constants;
 public class PlanLoader {
 
 	public PlanLoader() {
-
+		
 	}
 
 	public void preinitialize() {
@@ -39,7 +39,7 @@ public class PlanLoader {
 		blocks = nbt.getByteArray("Blocks");
 		data = nbt.getByteArray("Data");
 
-		IBlockState[] states = new IBlockState[width-1*length-1*height-1];
+		IBlockState[] states = new IBlockState[width*length*height];
 
 		//turn block ids and data into blockstates.
 		for(int i = 0; i < states.length; i++) {
@@ -48,7 +48,7 @@ public class PlanLoader {
 
 		//turn into a 3D block array for use with BuildingPlan
 		//in format [y][z][x]! IMPORTANT!
-		IBlockState[][][] organized = new IBlockState[height-1][length-1][width-1];
+		IBlockState[][][] organized = new IBlockState[height][length][width];
 
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
