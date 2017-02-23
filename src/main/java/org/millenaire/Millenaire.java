@@ -7,6 +7,7 @@ import org.millenaire.blocks.BlockDecorative;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
 import org.millenaire.blocks.BlockMillPath;
+import org.millenaire.blocks.BlockMillSign;
 import org.millenaire.blocks.BlockVillageStone;
 import org.millenaire.blocks.StoredPosition;
 import org.millenaire.entities.EntityMillVillager;
@@ -78,6 +79,7 @@ public class Millenaire
 		BlockDecorative.preinitialize();
 		BlockMillCrops.preinitialize();
 		BlockMillChest.preinitialize();
+		BlockMillSign.preinitialize();
 		BlockMillPath.preinitialize();
 		BlockAlchemists.preinitialize();
 		BlockVillageStone.preinitialize();
@@ -120,6 +122,7 @@ public class Millenaire
 			BlockDecorative.render();
 			BlockMillCrops.render();
 			BlockMillChest.render();
+			BlockMillSign.render();
 			BlockAlchemists.render();
 			BlockVillageStone.render();
 			StoredPosition.render();
