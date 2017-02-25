@@ -31,7 +31,7 @@ public class BlockMillPathSlab extends BlockSlab
 		super(Material.ground);
 
 		if(this.isDouble())
-        	this.setDefaultState(this.blockState.getBaseState().withProperty(SEAMLESS, Boolean.valueOf(false)));
+        	this.setDefaultState(this.blockState.getBaseState().withProperty(SEAMLESS, Boolean.valueOf(true)));
         else
         	this.setDefaultState(this.blockState.getBaseState().withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM));
 		
