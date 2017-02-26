@@ -55,6 +55,10 @@ public class GuiOptions extends GuiScreen
 			{
 				Millenaire.simpleNetworkWrapper.sendToServer(new MillPacket(3));
 			}
+			if(eventID == 4)
+			{
+				Millenaire.simpleNetworkWrapper.sendToServer(new MillPacket(4));
+			}
 			this.mc.displayGuiScreen(null);
 	        if (this.mc.currentScreen == null)
 	            this.mc.setIngameFocus();

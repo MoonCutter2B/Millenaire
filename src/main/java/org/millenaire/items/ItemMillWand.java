@@ -64,17 +64,36 @@ public class ItemMillWand extends Item
 		{
 			if(worldIn.getBlockState(pos).getBlock() == Blocks.gold_block)
 			{
-				
+				if(worldIn.isRemote)
+				{	
+					System.out.println("Gold Creation");
+					
+					//Gui confirming action and desired village, then villageStone block is made and villageType assigned
+				}
 			}
 			else if(worldIn.getBlockState(pos).getBlock() == Blocks.obsidian)
 			{
-				
+				if(worldIn.isRemote)
+				{	
+					System.out.println("Obsidian Creation");
+					
+					NBTTagCompound nbt = new NBTTagCompound();
+					stack.setTagCompound(nbt);
+					nbt.setInteger("X", pos.getX());
+					nbt.setInteger("Y", pos.getY());
+					nbt.setInteger("Z", pos.getZ());
+					
+					if(worldIn.isRemote)
+					{
+						playerIn.openGui(Millenaire.instance, 4, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
+					} 
+				}
 			}
 			else if(worldIn.getBlockState(pos).getBlock() == Blocks.emerald_block)
 			{
 				if(!worldIn.isRemote)
 				{	
-					System.out.println("Gold Creation");
+					System.out.println("Emerald Creation");
 					worldIn.setBlockToAir(pos);
 					EntityMillVillager entity = new EntityMillVillager(worldIn, 100100, MillCulture.normanCulture);
 					System.out.println("cultured: " + entity.culture.cultureName);
@@ -91,7 +110,7 @@ public class ItemMillWand extends Item
 			{
 				if(!worldIn.isRemote)
 				{	
-					System.out.println("Obsidian Creation");
+					System.out.println("Diamond Creation");
 					worldIn.setBlockToAir(pos);
 					EntityMillVillager entity = new EntityMillVillager(worldIn, 100101, MillCulture.normanCulture);
 					System.out.println("cultured: ");

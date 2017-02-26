@@ -91,5 +91,23 @@ public class PacketHandlerOnServer implements IMessageHandler<MillPacket, IMessa
 				world.removeEntity(world.getEntityByID(id));
 			}
 		}
+		if(message.getID() == 4)
+		{
+			ItemStack heldItem = sendingPlayer.getHeldItem();
+			if(heldItem.getItem() != ItemMillWand.wandSummoning)
+			{
+				System.err.println("Player not holding Wand of Summoning when attempting to create Village");
+			}
+			else
+			{
+				World world = sendingPlayer.worldObj;
+				NBTTagCompound nbt = heldItem.getTagCompound();
+				int posX = nbt.getInteger("X");
+				int posY = nbt.getInteger("Y");
+				int posZ = nbt.getInteger("Z");
+				
+				world.setBlockState(new BlockPos(posX, posY, posZ), BlockVillageStone.villageStone.getDefaultState());
+			}
+		}
 	}
 }

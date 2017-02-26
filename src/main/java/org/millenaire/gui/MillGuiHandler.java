@@ -62,6 +62,14 @@ public class MillGuiHandler implements IGuiHandler
 		}
 		if(ID == 4)
 		{
+			return new GuiOptions(4, "option.summonRandom.text");
+		}
+		if(ID == 5)
+		{
+			return new GuiChief();
+		}
+		if(ID == 4)
+		{
 			return new GuiChief();
 		}
 		

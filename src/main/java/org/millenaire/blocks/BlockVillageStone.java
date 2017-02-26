@@ -27,6 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockVillageStone extends BlockContainer
 {
 	private boolean willExplode = false;
+	private int villageType;
 
 	protected BlockVillageStone() 
 	{
@@ -79,6 +80,16 @@ public class BlockVillageStone extends BlockContainer
 			worldIn.setBlockToAir(pos);
 			worldIn.createExplosion(new EntityTNTPrimed(worldIn, pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, null), pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, 2.0F, true);
 		}
+	}
+	
+	public void setVillageType(int typeIn)
+	{
+		villageType = typeIn;
+	}
+	
+	public int getVillageType()
+	{
+		return villageType;
 	}
 
 	@Override

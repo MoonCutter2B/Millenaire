@@ -3,11 +3,15 @@ package org.millenaire;
 import java.util.HashMap;
 import java.util.Random;
 
+import org.millenaire.building.BuildingPlan;
+
 public class MillCulture 
 {
 	public final String cultureName;
 	//Entry 0 is male child, entry 1 is female child
 	VillagerType[] villagerTypes;
+	VillageType[] villageTypes;
+	BuildingPlan[] loneBuildings;
 	String[] vocalizations;
 	HashMap<String, String[]> nameLists = new HashMap<String, String[]>();
 	
@@ -19,7 +23,6 @@ public class MillCulture
 	public MillCulture addNameList(String title, String[] list)
 	{
 		this.nameLists.put(title, list);
-		
 		return this;
 	}
 	
@@ -29,10 +32,30 @@ public class MillCulture
 		return this;
 	}
 	
+	public MillCulture setVillageTypes(VillageType[] typeIn)
+	{
+		this.villageTypes = typeIn;
+		return this;
+	}
+	
+	public MillCulture setLoneBuildings (BuildingPlan[] loneIn)
+	{
+		this.loneBuildings = loneIn;
+		return this;
+	}
+	
 	public static MillCulture getCulture(String nameIn)
 	{
 		if(nameIn.equals("norman"))
 			return normanCulture;
+		if(nameIn.equals("hindi"))
+			return hindiCulture;
+		if(nameIn.equals("mayan"))
+			return mayanCulture;
+		if(nameIn.equals("japanese"))
+			return japaneseCulture;
+		if(nameIn.equals("byzantine"))
+			return byzantineCulture;
 		
 		System.err.println("Villager written to NBT with incorrect culture.  Something broke.");
 		return null;
@@ -113,7 +136,7 @@ public class MillCulture
 				new VillagerType("normanWife", "Villageoise", 1, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("femaleNames"), new String[]{"millenaire:textures/entities/norman/normanWife0.png", "millenaire:textures/entities/norman/normanWife1.png"}, false, true, 0),
 				new VillagerType("normanAlchemist", "Alchimiste", 0, new String[]{"Vif-argent"}, new String[]{"Guillaume"}, new String[]{"millenaire:textures/entities/norman/normanAlchemist0.png"}, false, false, 0),
 				new VillagerType("normanAlchemistAssistant", "Assistant", 0, new String[]{"Ulric"}, new String[]{"Robert"}, new String[]{"millenaire:textures/entities/norman/normanAlchemistAssistant0.png"}, false, false, 0),
-				new VillagerType("normanAlchemist Apprentice", "Apprenti Alchimiste", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanApprentice0.png"}, false, false, 0),
+				new VillagerType("normanAlchemistApprentice", "Apprenti Alchimiste", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanApprentice0.png"}, false, false, 0),
 				new VillagerType("normanBandit", "Bandit", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanBandit0.png", "millenaire:textures/entities/norman/normanBandit1.png"}, false, false, 0),
 				new VillagerType("normanArmoredBandit", "ArmoredBandit", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanArmoredBandit0.png", "millenaire:textures/entities/norman/normanArmoredBandit1.png"}, false, false, 0)});
 		
@@ -270,5 +293,21 @@ public class MillCulture
 				new VillagerType("byzantineSoldier", "Stratiotes", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineSoldier0.png"}, false, false, 32),
 				new VillagerType("byzantinePlayerSoldier", "Stratiotes", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineSoldier0.png"}, false, false, 16),
 				new VillagerType("byzantineWife", "Gynaika", 1, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("femaleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineWife0.png", "millenaire:textures/entities/byzantine/byzantineWife1.png", "millenaire:textures/entities/byzantine/byzantineWife2.png"}, false, false, 0)});
+	}
+
+	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	
+	public class VillageType 
+	{
+		public BuildingPlan[] primaryBuildings;
+		public BuildingPlan[] secondaryBuildings;
+		public BuildingPlan[] playerBuildings;
+		
+		public VillageType(BuildingPlan[] primaryIn, BuildingPlan[] secondaryIn, BuildingPlan[] playerIn)
+		{
+			primaryBuildings = primaryIn;
+			secondaryBuildings = secondaryIn;
+			playerBuildings = playerIn;
+		}
 	}
 }

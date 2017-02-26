@@ -69,8 +69,6 @@ public class VillageGeography
 	
 	private void createWorldInfo(final List<BuildingLocation> locations, final BuildingLocation blIP, final int pstartX, final int pstartZ, final int endX, final int endZ)
 	{
-
-
 		chunkStartX = pstartX >> 4;
 		chunkStartZ = pstartZ >> 4;
 		mapStartX = chunkStartX << 4;
@@ -101,25 +99,30 @@ public class VillageGeography
 
 		buildingLocations = new ArrayList<BuildingLocation>();
 
-		for (int i = 0; i < length; i++) {
-			for (int j = 0; j < width; j++) {
+		for (int i = 0; i < length; i++) 
+		{
+			for (int j = 0; j < width; j++) 
+			{
 				buildingLoc[i][j] = false;
 				canBuild[i][j] = false;
 			}
 		}
 
-		for (final BuildingLocation location : locations) {
+		for (final BuildingLocation location : locations) 
+		{
 			registerBuildingLocation(location);
-
 		}
 
 		locationIP = blIP;
-		if (locationIP != null) {
+		if (locationIP != null) 
+		{
 			registerBuildingLocation(locationIP);
 		}
 
-		for (int i = 0; i < length; i += 16) {
-			for (int j = 0; j < width; j += 16) {
+		for (int i = 0; i < length; i += 16) 
+		{
+			for (int j = 0; j < width; j += 16) 
+			{
 				updateChunk(i, j);
 			}
 		}
@@ -142,8 +145,10 @@ public class VillageGeography
 		final int ex = Math.min(bl.maxxMargin - mapStartX, length + 1);
 		final int ez = Math.min(bl.maxzMargin - mapStartZ, width + 1);
 
-		for (int i = sx; i < ex; i++) {
-			for (int j = sz; j < ez; j++) {
+		for (int i = sx; i < ex; i++) 
+		{
+			for (int j = sz; j < ez; j++) 
+			{
 				buildingLoc[i][j] = true;
 			}
 		}
