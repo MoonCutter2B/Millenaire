@@ -61,6 +61,10 @@ public class MillCulture
 		return null;
 	}
 	
+	public VillagerType[] getVillagerTypes() {
+		return this.villagerTypes;
+	}
+	
 	public VillagerType getVillagerType(String typeIn)
 	{
 		for(int i = 0; i < villagerTypes.length; i++)
@@ -98,6 +102,7 @@ public class MillCulture
 	
 	public static void preinitialize()
 	{
+		//MAKE SURE TO ADD NEW VILLAGERS AT THE END OF THE LIST - OTHERWISE THINGS BREAK!!!
 		//Norman Initialization
 		normanCulture= new MillCulture("norman").addNameList("familyNames", new String[]{"Waldemar", "Vilfrid", "Thorstein", "Tankred", "Svenning", "Sigvald", "Sigmar", "Roland", "Reginald", "Radulf", "Otvard", "Odomar", "Norbert", "Manfred", "Lothar", "Lambert", "Klothar", "Ingmar", "Hubert", "Gildwin", "Gervin", "Gerald", "Froward", "Fredegar", "Falko", "Elfride", "Erwin", "Ditmar", "Didrik", "Bernhard", "Answald", "Adalrik"})
 				.addNameList("nobleFamilyNames", new String[]{"de Bayeux", "de Conteville", "de Mortain", "de Falaise", "de Ryes"})

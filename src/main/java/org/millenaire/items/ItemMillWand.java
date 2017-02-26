@@ -233,7 +233,7 @@ public class ItemMillWand extends Item
 			((EntityMillVillager)entity).isPlayerInteracting = true;
 			
 			NBTTagCompound nbt = new NBTTagCompound();
-			player.getHeldItem().setTagCompound(nbt);
+			player.getHeldItem().setTagCompound(nbt); 
 			nbt.setInteger("ID", entity.getEntityId());
 			
 			if(player.worldObj.isRemote)
