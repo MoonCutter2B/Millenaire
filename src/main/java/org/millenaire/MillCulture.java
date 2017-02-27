@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import org.millenaire.building.BuildingPlan;
+import org.millenaire.building.BuildingProject;
 
 public class MillCulture 
 {
@@ -38,30 +39,14 @@ public class MillCulture
 		return this;
 	}
 	
-	public MillCulture setLoneBuildings (BuildingPlan[] loneIn)
+	public MillCulture setLoneBuildings(BuildingPlan[] loneIn)
 	{
 		this.loneBuildings = loneIn;
 		return this;
 	}
 	
-	public static MillCulture getCulture(String nameIn)
+	public VillagerType[] getVillagerTypes() 
 	{
-		if(nameIn.equals("norman"))
-			return normanCulture;
-		if(nameIn.equals("hindi"))
-			return hindiCulture;
-		if(nameIn.equals("mayan"))
-			return mayanCulture;
-		if(nameIn.equals("japanese"))
-			return japaneseCulture;
-		if(nameIn.equals("byzantine"))
-			return byzantineCulture;
-		
-		System.err.println("Villager written to NBT with incorrect culture.  Something broke.");
-		return null;
-	}
-	
-	public VillagerType[] getVillagerTypes() {
 		return this.villagerTypes;
 	}
 	
@@ -85,9 +70,51 @@ public class MillCulture
 			return villagerTypes[1];
 	}
 	
+	public VillageType getVillageType(String typeIn)
+	{
+		for(int i = 0; i < villageTypes.length; i++)
+		{
+			if(villageTypes[i].id.equalsIgnoreCase(typeIn))
+				return villageTypes[i];
+		}
+		
+		System.err.println("villageType " + typeIn + " not found in " + cultureName + " culture.");
+		return null;
+	}
+	
+	public VillageType getRandomVillageType()
+	{
+		Random rand = new Random();
+		int i = rand.nextInt(villageTypes.length);
+		
+		return villageTypes[i];
+	}
+	
+	public String getVillageName()
+	{
+		return "Whoville";
+	}
+	
 	public String getVocalSentence(String vTypeIn)
 	{
 		return "Hi.  How are ya.";
+	}
+	
+	//Remember to catch the Exception and handle it when calling getCulture
+	public static MillCulture getCulture(String nameIn) throws Exception
+	{
+		if(nameIn.equals("norman"))
+			return normanCulture;
+		if(nameIn.equals("hindi"))
+			return hindiCulture;
+		if(nameIn.equals("mayan"))
+			return mayanCulture;
+		if(nameIn.equals("japanese"))
+			return japaneseCulture;
+		if(nameIn.equals("byzantine"))
+			return byzantineCulture;
+		
+		throw new Exception("getCulture called with incorrect culture.  Something broke.");
 	}
 	
 	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -109,7 +136,8 @@ public class MillCulture
 				.addNameList("maleNames", new String[]{"Answald", "Arnbjorn", "Almut", "Arnvald", "Baldrik", "Dankrad", "Dltwin", "Erwin", "Elfride", "Frank", "Froward", "Gerulf", "Gildwin", "Grim", "Hagbard", "Hartmod", "Helge", "Henrik", "Ingvald", "Karl", "Klothar", "Lothar", "Ludvig", "Norbert", "Odomar", "Radulf", "Richard", "Robert", "Roland", "Sigfred", "Tankred", "Thorgal", "Wilhelm"})
 				.addNameList("femaleNames", new String[]{"Alfgard", "Alwine", "Bathilde", "Bernhilde", "Borglinde", "Dithilde", "Frida", "Gisela", "Herleva", "Hermine", "Irmine", "Matilde", "Ottilia", "Ragnhild", "Sighild", "Sigrune", "Solvej", "Thilda", "Ulrika", "Valborg"});
 	
-		normanCulture.setVillagerTypes(new VillagerType[]{new VillagerType("normanBoy", "GarÃ§on", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanBoy0.png", "millenaire:textures/entities/norman/normanBoy1.png"}, false, false, 0),
+		normanCulture.setVillagerTypes(
+				new VillagerType[]{new VillagerType("normanBoy", "GarÃ§on", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanBoy0.png", "millenaire:textures/entities/norman/normanBoy1.png"}, false, false, 0),
 				new VillagerType("normanGirl", "Fille", 1, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("femaleNames"), new String[]{"millenaire:textures/entities/norman/normanGirl0.png", "millenaire:textures/entities/norman/normanGirl1.png"}, false, false, 0),
 				new VillagerType("normanAbbot", "AbbÃ©", 0, normanCulture.nameLists.get("nobleFamilyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanAbbot0.png"}, true, false, 0),
 				new VillagerType("normanLoneAbbot", "AbbÃ©", 0, normanCulture.nameLists.get("nobleFamilyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanAbbot0.png"}, false, false, 0),
@@ -143,7 +171,12 @@ public class MillCulture
 				new VillagerType("normanAlchemistAssistant", "Assistant", 0, new String[]{"Ulric"}, new String[]{"Robert"}, new String[]{"millenaire:textures/entities/norman/normanAlchemistAssistant0.png"}, false, false, 0),
 				new VillagerType("normanAlchemistApprentice", "Apprenti Alchimiste", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanApprentice0.png"}, false, false, 0),
 				new VillagerType("normanBandit", "Bandit", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanBandit0.png", "millenaire:textures/entities/norman/normanBandit1.png"}, false, false, 0),
-				new VillagerType("normanArmoredBandit", "ArmoredBandit", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanArmoredBandit0.png", "millenaire:textures/entities/norman/normanArmoredBandit1.png"}, false, false, 0)});
+				new VillagerType("normanArmoredBandit", "ArmoredBandit", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanArmoredBandit0.png", "millenaire:textures/entities/norman/normanArmoredBandit1.png"}, false, false, 0)
+		});
+		
+		normanCulture.setVillageTypes(new VillageType[]{
+				new VillageType("test").setBuildingTypes(new BuildingPlan[]{BuildingProject.normanCommunauteA0}, new BuildingPlan[]{BuildingProject.testBuilding}, new BuildingPlan[]{BuildingProject.testBuilding}).setStartingBuildings(new BuildingPlan[]{BuildingProject.normanCommunauteA0})				
+		});
 		
 		//Hindi Initialization
 		hindiCulture = new MillCulture("hindi").addNameList("highCasteFamilyNames", new String[]{"Sinha", "Kuwar", "Kuwar", "Mishra", "Pandey", "Jha", "Khatri"})
@@ -152,7 +185,8 @@ public class MillCulture
 				.addNameList("lowCasteFemaleNames", new String[]{"Abha", "Aditi", "Deepti", "Manasi", "Jyoti", "Shobhana", "Shobha", "Rani", "Mayuri", "Geeta", "Seeta", "Chanda", "Titli", "Vimla", "Sudha", "Suman", "Suneeta", "Babli", "Kamala"})
 				.addNameList("maleNames", new String[]{"Ravi", "Rajiv", "Santosh", "Akash", "Akhil", "Raj", "Rahul", "Rohit", "Laxman", "Gopal", "Vishnu", "Ashok", "Akshay", "Chetan", "Dilip", "Deepak", "Govind", "Hari", "Harsh", "Kamal", "Madhav"});
 		
-		hindiCulture.setVillagerTypes(new VillagerType[]{new VillagerType("hindiBoy", "Larka", 0, hindiCulture.nameLists.get("lowCasteFamilyNames"), hindiCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/hindi/hindiBoy0.png", "millenaire:textures/entities/hindi/hindiBoy1.png", "millenaire:textures/entities/hindi/hindiBoy2.png", "millenaire:textures/entities/hindi/hindiBoy3.png"}, false, false, 0),
+		hindiCulture.setVillagerTypes(new VillagerType[]{
+				new VillagerType("hindiBoy", "Larka", 0, hindiCulture.nameLists.get("lowCasteFamilyNames"), hindiCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/hindi/hindiBoy0.png", "millenaire:textures/entities/hindi/hindiBoy1.png", "millenaire:textures/entities/hindi/hindiBoy2.png", "millenaire:textures/entities/hindi/hindiBoy3.png"}, false, false, 0),
 				new VillagerType("hindiGirl", "Larki", 1, hindiCulture.nameLists.get("lowCasteFamilyNames"), hindiCulture.nameLists.get("lowCasteFemaleNames"), new String[]{"millenaire:textures/entities/hindi/hindiGirl0.png", "millenaire:textures/entities/hindi/hindiGirl1.png"}, false, false, 0),
 				new VillagerType("hindiRaja", "Raja", 0, hindiCulture.nameLists.get("highCasteFamilyNames"), hindiCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/hindi/hindiRaja0.png", "millenaire:textures/entities/hindi/hindiRaja1.png"}, true, false, 0),
 				new VillagerType("hindiRajputGeneral", "Rajput Senapati", 0, hindiCulture.nameLists.get("highCasteFamilyNames"), hindiCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/hindi/hindiRajputLeader0.png", "millenaire:textures/entities/hindi/hindiRajputLeader1.png"}, true, false, 0),
@@ -175,7 +209,8 @@ public class MillCulture
 				new VillagerType("hindiSculptor", "Muurtikaar", 0, hindiCulture.nameLists.get("lowCasteFamilyNames"), hindiCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/hindi/hindiSculptor0.png"}, false, false, 0),
 				new VillagerType("hindiSmith", "Loohaar", 0, hindiCulture.nameLists.get("lowCasteFamilyNames"), hindiCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/hindi/hindiSmith0.png"}, false, false, 0),
 				new VillagerType("hindiRajputSoldier", "Rajput Sainik", 0, hindiCulture.nameLists.get("lowCasteFamilyNames"), hindiCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/hindi/hindiRajputWarrior0.png", "millenaire:textures/entities/hindi/hindiRajputWarrior1.png", "millenaire:textures/entities/hindi/hindiRajputWarrior2.png"}, false, false, 32),
-				new VillagerType("hindiSadhu", "Sadhu", 0, new String[]{"Vidya"}, new String[]{"Sadhu"}, new String[]{"millenaire:textures/entities/hindi/hindiSadhu0.png"}, false, false, 0)});
+				new VillagerType("hindiSadhu", "Sadhu", 0, new String[]{"Vidya"}, new String[]{"Sadhu"}, new String[]{"millenaire:textures/entities/hindi/hindiSadhu0.png"}, false, false, 0)
+		});
 		
 		//Mayan Initialization
 		mayanCulture = new MillCulture("mayan").addNameList("highCasteFamilyNames", new String[]{"Yax Pasaj Chan Yoaat", "Ukit Took'", "K'inich Yak K'uk Mo'", "K'u Ix", "B'alam Nan", "Chan Imix K'awiil", "Waxaklajuun Ub'aah K'awiil"})
@@ -184,7 +219,8 @@ public class MillCulture
 				.addNameList("lowCasteFemaleNames", new String[]{"Arana", "Nictha", "Tamay", "Can", "Chan", "Be", "Cantun", "Canche", "Chi", "Chuc", "Coyoc", "Dzib", "Dzul", "Ehuan", "Hoil", "Hau", "May", "Pool", "Zapo", "Ucan", "Pech", "Camal", "Xiu", "Canul", "Cocom", "Tun"})
 				.addNameList("maleNames", new String[]{"Acan", "Ac Yanto", "Ah Kin Xoc", "Ah Tabai", "Bacab", "Balam", "Buluc Chabtan", "Chac Uayab Xoc", "Chantico", "Ekchuah", "Nachancan", "Gucumatz", "Hun-Hunapu", "Itzamna", "Ix", "Ixtab", "Kucumatz", "Tepeu", "Tohil", "Xbalanque", "Kukulcan"});
 		
-		mayanCulture.setVillagerTypes(new VillagerType[]{new VillagerType("mayanBoy", "Mijin", 0, mayanCulture.nameLists.get("lowCasteFamilyNames"), mayanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/mayan/mayanBoy0.png", "millenaire:textures/entities/mayan/mayanBoy1.png", "millenaire:textures/entities/mayan/mayanBoy2.png", "millenaire:textures/entities/mayan/mayanBoy3.png"}, false, false, 0),
+		mayanCulture.setVillagerTypes(new VillagerType[]{
+				new VillagerType("mayanBoy", "Mijin", 0, mayanCulture.nameLists.get("lowCasteFamilyNames"), mayanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/mayan/mayanBoy0.png", "millenaire:textures/entities/mayan/mayanBoy1.png", "millenaire:textures/entities/mayan/mayanBoy2.png", "millenaire:textures/entities/mayan/mayanBoy3.png"}, false, false, 0),
 				new VillagerType("mayanGirl", "Mijin", 1, mayanCulture.nameLists.get("lowCasteFamilyNames"), mayanCulture.nameLists.get("lowCasteFemaleNames"), new String[]{"millenaire:textures/entities/mayan/mayanGirl0.png", "millenaire:textures/entities/mayan/mayanGirl1.png"}, false, false, 0),
 				new VillagerType("mayanChieftain", "Ajaw", 0, mayanCulture.nameLists.get("highCasteFamilyNames"), mayanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/mayan/mayanChieftain0.png", "millenaire:textures/entities/mayan/mayanChieftain1.png"}, true, false, 0),
 				new VillagerType("mayanKing", "Ajaw", 0, mayanCulture.nameLists.get("highCasteFamilyNames"), mayanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/mayan/mayanKing0.png", "millenaire:textures/entities/mayan/mayanKing1.png"}, true, false, 0),
@@ -220,7 +256,8 @@ public class MillCulture
 				new VillagerType("mayanQuestShaman", "Aj K'in", 0, new String[]{"Uchben"}, new String[]{"Tohil"}, new String[]{"millenaire:textures/entities/mayan/mayanShaman0.png", "millenaire:textures/entities/mayan/mayanShaman1.png"}, false, false, 0),
 				new VillagerType("mayanBanditMale", "K'as Mijin", 0, mayanCulture.nameLists.get("lowCasteFamilyNames"), mayanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/mayan/mayanBanditMale0.png", "millenaire:textures/entities/mayan/mayanBanditMale1.png"}, false, false, 0),
 				new VillagerType("mayanBanditFemale", "K'as Aj", 1, mayanCulture.nameLists.get("lowCasteFamilyNames"), mayanCulture.nameLists.get("lowCasteFemaleNames"), new String[]{"millenaire:textures/entities/mayan/mayanBanditFemale0.png", "millenaire:textures/entities/mayan/mayanBanditFemale1.png"}, false, false, 0),
-				new VillagerType("mayanBanditWarrior", "K'as Kanan", 0, mayanCulture.nameLists.get("lowCasteFamilyNames"), mayanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/mayan/mayanBanditWarrior0.png", "millenaire:textures/entities/mayan/mayanBanditWarrior1.png", "millenaire:textures/entities/mayan/mayanBanditWarrior2.png"}, false, false, 0)});
+				new VillagerType("mayanBanditWarrior", "K'as Kanan", 0, mayanCulture.nameLists.get("lowCasteFamilyNames"), mayanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/mayan/mayanBanditWarrior0.png", "millenaire:textures/entities/mayan/mayanBanditWarrior1.png", "millenaire:textures/entities/mayan/mayanBanditWarrior2.png"}, false, false, 0)
+		});
 		
 		//Japanese Initialization
 		japaneseCulture = new MillCulture("japanese").addNameList("highCasteFamilyNames", new String[]{"Minamoto", "Fujiwara", "Taira", "Shikibu", "Ki", "Ariwara", "Tachibana", "Soga"})
@@ -229,7 +266,8 @@ public class MillCulture
 				.addNameList("lowCasteFemaleNames", new String[]{"Akane", "Ami", "Asuka", "Aya", "Ayano", "Hina", "Kana", "Mai", "Mayu", "Miki", "Misaki", "Miyu", "Mizuki", "Nana", "Nanami", "Natsumi", "Reina", "Riko", "Rin", "Saika", "Saki", "Sakura", "Yui", "Yuukama"})
 				.addNameList("maleNames", new String[]{"Akira", "Eiichi", "Entarou", "Gaku", "Gojirou", "Hachitarou", "Hajime", "Haruki", "Hideki", "Hiro", "Hitoshi", "Ichirou", "Itsuo", "Jin", "Kenichi", "Kentaro", "Mineo", "Mitsuru", "Noato", "Osamu", "Reijiro", "Renzo", "Saburo", "Shingo", "Shinjiro", "Shinya", "Shouji", "Tadashi", "Takuji", "Tai", "Toyotomi", "Tsuyoshi", "Yuichiro", "Yuijiro"});
 		
-		japaneseCulture.setVillagerTypes(new VillagerType[]{new VillagerType("japaneseBoy", "Danshi", 0, japaneseCulture.nameLists.get("lowCasteFamilyNames"), japaneseCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/japanese/japaneseBoy0.png", "millenaire:textures/entities/japanese/japaneseBoy1.png"}, false, false, 0),
+		japaneseCulture.setVillagerTypes(new VillagerType[]{
+				new VillagerType("japaneseBoy", "Danshi", 0, japaneseCulture.nameLists.get("lowCasteFamilyNames"), japaneseCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/japanese/japaneseBoy0.png", "millenaire:textures/entities/japanese/japaneseBoy1.png"}, false, false, 0),
 				new VillagerType("japaneseGirl", "Jou", 1, japaneseCulture.nameLists.get("lowCasteFamilyNames"), japaneseCulture.nameLists.get("lowCasteFemaleNames"), new String[]{"millenaire:textures/entities/japanese/japaneseGirl0.png", "millenaire:textures/entities/japanese/japaneseGirl1.png"}, false, false, 0),
 				new VillagerType("japaneseBrewer", "Touji", 0, japaneseCulture.nameLists.get("lowCasteFamilyNames"), japaneseCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/japanese/japaneseBrewer0.png"}, true, false, 0),
 				new VillagerType("japaneseFarmerChief", "Chokan", 0, japaneseCulture.nameLists.get("lowCasteFamilyNames"), japaneseCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/japanese/japanesePeasant1.png"}, true, false, 0),
@@ -260,14 +298,16 @@ public class MillCulture
 				new VillagerType("japaneseBlacksmith", "Kajiya", 0, japaneseCulture.nameLists.get("lowCasteFamilyNames"), japaneseCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/japanese/japaneseSmith0.png"}, false, false, 0),
 				new VillagerType("japaneseSamurai", "Keibou", 0, japaneseCulture.nameLists.get("highCasteFamilyNames"), japaneseCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/japanese/japaneseWarrior0.png", "millenaire:textures/entities/japanese/japaneseWarrior1.png"}, true, false, 32),
 				new VillagerType("japaneseFemaleServant", "Gejo", 1, japaneseCulture.nameLists.get("lowCasteFamilyNames"), japaneseCulture.nameLists.get("lowCasteFemaleNames"), new String[]{"millenaire:textures/entities/japanese/japanesePeasantWife0.png", "millenaire:textures/entities/japanese/japanesePeasantWife1.png"}, false, false, 0),
-				new VillagerType("japaneseBandit", "Hito", 0, japaneseCulture.nameLists.get("lowCasteFamilyNames"), japaneseCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/japanese/japaneseBandit0.png"}, false, false, 0)});
+				new VillagerType("japaneseBandit", "Hito", 0, japaneseCulture.nameLists.get("lowCasteFamilyNames"), japaneseCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/japanese/japaneseBandit0.png"}, false, false, 0)
+		});
 		
 		//Byzantine Initialization
 		byzantineCulture = new MillCulture("byzantine").addNameList("familyNames", new String[]{"Philoponus", "Monachos", "Kinnamos", "Moschopoulos", "Kraikos", "Xenos", "Galanis", "Kandake", "Peleus", "Achilles", "Herodias", "Helios", "Amethea", "Demeter", "Eileithyia", "Eudoxia", "Sophronia", "Ligeia", "Pantagiota", "Rhea"})
 				.addNameList("maleNames", new String[]{"Georgios", "Leo", "Nikephoros", "Eutocius", "Demetrius", "Philipos", "Sokrates", "Platon", "Alexandros", "Lisias", "Ilias", "Ikaros", "Thisseas", "Odysseus", "Egeas", "Iassonas", "Achilleas", "Menelaos", "Ioannis", "Iljios", "Jannis", "Demostenes", "Krateos", "Amphion"})
 				.addNameList("femaleNames", new String[]{"Daphne", "Danae", "Medea", "Helena", "Elena", "Nephele", "Euphoria", "Ariadne", "Alkmene", "Eurydike", "Olympia", "Kassandra", "Athina", "Artemis", "Artemisisa", "Hestia", "Estia", "Antigone", "Alexandra", "Thalia", "Niki", "Nike", "Niobe", "Efgenia", "Ifigenia", "Ismene", "Xenia"});
 		
-		byzantineCulture.setVillagerTypes(new VillagerType[]{new VillagerType("byzantineBoy", "Neos", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineBoy0.png"}, false, false, 0),
+		byzantineCulture.setVillagerTypes(new VillagerType[]{
+				new VillagerType("byzantineBoy", "Neos", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineBoy0.png"}, false, false, 0),
 				new VillagerType("byzantineGirl", "Kore", 1, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("femaleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineGirl0.png"}, false, false, 0),
 				new VillagerType("byzantineBaron", "Akrita", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineBaron0", "millenaire:textures/entities/byzantine/byzantineBaron1.png"}, true, false, 0),
 				new VillagerType("byzantineCenturio", "Kentarios", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineCentaurio0.png", "millenaire:textures/entities/byzantine/byzantineCentaurio1.png"}, true, false, 0),
@@ -297,22 +337,47 @@ public class MillCulture
 				new VillagerType("byzantineSmith", "Sideras", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineSmith0.png", "millenaire:textures/entities/byzantine/byzantineSmith1.png"}, false, false, 0),
 				new VillagerType("byzantineSoldier", "Stratiotes", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineSoldier0.png"}, false, false, 32),
 				new VillagerType("byzantinePlayerSoldier", "Stratiotes", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineSoldier0.png"}, false, false, 16),
-				new VillagerType("byzantineWife", "Gynaika", 1, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("femaleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineWife0.png", "millenaire:textures/entities/byzantine/byzantineWife1.png", "millenaire:textures/entities/byzantine/byzantineWife2.png"}, false, false, 0)});
+				new VillagerType("byzantineWife", "Gynaika", 1, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("femaleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineWife0.png", "millenaire:textures/entities/byzantine/byzantineWife1.png", "millenaire:textures/entities/byzantine/byzantineWife2.png"}, false, false, 0)
+		});
 	}
 
 	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
-	public class VillageType 
+	public static class VillageType 
 	{
+		public String id;
+		
 		public BuildingPlan[] primaryBuildings;
 		public BuildingPlan[] secondaryBuildings;
 		public BuildingPlan[] playerBuildings;
 		
-		public VillageType(BuildingPlan[] primaryIn, BuildingPlan[] secondaryIn, BuildingPlan[] playerIn)
+		//First Building in this array should always be the TownHall
+		public BuildingPlan[] startingBuildings;
+		
+		public VillageType(String idIn)
 		{
-			primaryBuildings = primaryIn;
-			secondaryBuildings = secondaryIn;
-			playerBuildings = playerIn;
+			id = idIn;
+		}
+		
+		public VillageType setBuildingTypes(BuildingPlan[] primaryIn, BuildingPlan[] secondaryIn, BuildingPlan[] playerIn)
+		{
+			this.primaryBuildings = primaryIn;
+			this.secondaryBuildings = secondaryIn;
+			this.playerBuildings = playerIn;
+			
+			return this;
+		}
+
+		public VillageType setStartingBuildings(BuildingPlan[]startIn)
+		{
+			this.startingBuildings = startIn;
+			
+			return this;
+		}
+		
+		public String getVillageName()
+		{
+			return "Whoville";
 		}
 	}
 }

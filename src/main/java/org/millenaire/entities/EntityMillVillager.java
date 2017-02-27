@@ -539,7 +539,15 @@ public class EntityMillVillager extends EntityCreature
 	{
 		super.readFromNBT(nbt);
 		villagerID = nbt.getInteger("villagerID");
-		culture = MillCulture.getCulture(nbt.getString("culture"));
+		try 
+		{
+			culture = MillCulture.getCulture(nbt.getString("culture"));
+		} 
+		catch (Exception ex) 
+		{
+			System.err.println("Villager failed to read from NBT correctly");
+			ex.printStackTrace();
+		}
 		if(culture == null)
 		{
 			System.out.println("Fix this shit!");

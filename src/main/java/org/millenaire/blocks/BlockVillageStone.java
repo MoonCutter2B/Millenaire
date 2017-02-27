@@ -26,8 +26,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockVillageStone extends BlockContainer
 {
-	private boolean willExplode = false;
-	private int villageType;
 
 	protected BlockVillageStone() 
 	{
@@ -66,7 +64,17 @@ public class BlockVillageStone extends BlockContainer
 	
 	public void negate(World worldIn, BlockPos pos, EntityPlayer playerIn)
 	{
-		willExplode = true;
+		TileEntityVillageStone te;
+		
+		if(worldIn.getTileEntity(pos) instanceof TileEntityVillageStone)
+			te = (TileEntityVillageStone) worldIn.getTileEntity(pos);
+		else
+		{
+			System.err.println("Negation failed.  TileEntity not loaded correctly.");
+			return;
+		}
+		
+		te.willExplode = true;
 		worldIn.scheduleUpdate(pos, this, 60);
 		worldIn.playSoundEffect(pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, "portal.portal", 1.0F, 0.01F);
 	}
@@ -74,22 +82,24 @@ public class BlockVillageStone extends BlockContainer
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		if(willExplode)
+		TileEntityVillageStone te;
+		
+		if(worldIn.getTileEntity(pos) instanceof TileEntityVillageStone)
 		{
-			//Do Some Stuff
-			worldIn.setBlockToAir(pos);
-			worldIn.createExplosion(new EntityTNTPrimed(worldIn, pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, null), pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, 2.0F, true);
+			te = (TileEntityVillageStone) worldIn.getTileEntity(pos);
+			
+			if(te.willExplode)
+			{
+				//Do Some Stuff
+				worldIn.setBlockToAir(pos);
+				worldIn.createExplosion(new EntityTNTPrimed(worldIn, pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, null), pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, 2.0F, true);
+			}
 		}
-	}
-	
-	public void setVillageType(int typeIn)
-	{
-		villageType = typeIn;
-	}
-	
-	public int getVillageType()
-	{
-		return villageType;
+		else
+		{
+			System.err.println("Negation failed.  TileEntity not loaded correctly.");
+			return;
+		}
 	}
 
 	@Override
