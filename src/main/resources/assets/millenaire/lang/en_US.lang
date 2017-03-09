@@ -17,6 +17,12 @@ tile.blockDecorativeWood.plainTimberFrame.name=Plain Timber Frame
 tile.blockDecorativeWood.crossTimberFrame.name=Crossed Timber Frame
 tile.blockDecorativeWood.thatch.name=Thatch
 tile.blockDecorativeWood.sericulture.name=Sericulture
+tile.blockSodPlank.oak.name=Oak Sod Planks
+tile.blockSodPlank.pine.name=Pine Sod Planks
+tile.blockSodPlank.birch.name=Birch Sod Planks
+tile.blockSodPlank.jungle.name=Jungle Sod Planks
+tile.blockSodPlank.acacia.name=Acacia Sod Planks
+tile.blockSodPlank.darkoak.name=Dark Oak Sod Planks
 tile.emptySericulture.name=Empty Sericulture
 tile.mudBrick.name=Mud Bricks
 tile.byzantineTile.name=Byzantine Tile
@@ -26,6 +32,7 @@ tile.byzantineTileDoubleSlab.name=Byzantine Tile Double Slab
 tile.paperWall.name=Paper Wall
 
 tile.blockMillChest.name=Millénaire Chest
+tile.blockMillSign.name=Milléniare Sign
 tile.villageStone.name=Village Stone
 
 tile.cropGrapeVine.name=Grape Vines

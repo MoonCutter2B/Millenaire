@@ -2,6 +2,7 @@ package org.millenaire.blocks;
 
 import org.millenaire.Millenaire;
 import org.millenaire.items.ItemBlockDecorativeEarth;
+import org.millenaire.items.ItemBlockDecorativeSodPlank;
 import org.millenaire.items.ItemBlockDecorativeStone;
 import org.millenaire.items.ItemBlockDecorativeWood;
 import org.millenaire.items.ItemOrientedSlab;
@@ -10,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -41,6 +43,8 @@ public class BlockDecorative
 		public static Block byzantineTileStairs;
 		
 		public static Block paperWall;
+		
+		public static Block blockSodPlanks;
 
 	public static void preinitialize()
     {
@@ -50,6 +54,8 @@ public class BlockDecorative
 		GameRegistry.registerBlock(blockDecorativeWood, ItemBlockDecorativeWood.class, "blockDecorativeWood");
 		blockDecorativeEarth = new BlockDecorativeEarth().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("blockDecorativeEarth");
 		GameRegistry.registerBlock(blockDecorativeEarth, ItemBlockDecorativeEarth.class, "blockDecorativeEarth");
+		blockSodPlanks = new BlockDecorativeSodPlank().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("blockSodPlank");
+		GameRegistry.registerBlock(blockSodPlanks, ItemBlockDecorativeSodPlank.class, "blockSodPlank");
 		
 		emptySericulture = new BlockDecorativeUpdate(Material.wood, blockDecorativeWood.getDefaultState().withProperty(BlockDecorativeWood.VARIANT, BlockDecorativeWood.EnumType.SERICULTURE)).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("emptySericulture");
 		GameRegistry.registerBlock(emptySericulture, "emptySericulture");
@@ -94,7 +100,15 @@ public class BlockDecorative
     	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeEarth), 0, new ModelResourceLocation(Millenaire.MODID + ":dirtWall", "inventory"));
     	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeEarth), 1, new ModelResourceLocation(Millenaire.MODID + ":driedBrick", "inventory"));
     	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(byzantineTileSlabDouble), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineTile", "inventory"));
-	}
+    	
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 0, new ModelResourceLocation(Millenaire.MODID + ":sodOak", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 1, new ModelResourceLocation(Millenaire.MODID + ":sodPine", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 2, new ModelResourceLocation(Millenaire.MODID + ":sodBirch", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 3, new ModelResourceLocation(Millenaire.MODID + ":sodJungle", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 4, new ModelResourceLocation(Millenaire.MODID + ":sodJungle", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 5, new ModelResourceLocation(Millenaire.MODID + ":sodPine", "inventory"));
+    	
+    }
     
 	@SideOnly(Side.CLIENT)
 	public static void render()
