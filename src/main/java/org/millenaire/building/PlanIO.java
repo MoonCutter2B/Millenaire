@@ -100,6 +100,10 @@ public class PlanIO {
 	 * @param width the width (x-axis)
 	 * @param height the height (y-axis)
 	 * @param length the length (z-axis)
+	 * @param depth the depth of the build
+	 * @param name the name of the building
+	 * @param maleVillagers the list of male villagers in the building
+	 * @param femaleVillagers the list of female villagers in the building
 	 * @return the file that is outputted to disk
 	 */
 	public File exportBuilding(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, VillagerType[] maleVillagers, VillagerType[] femaleVillagers) {
@@ -115,8 +119,8 @@ public class PlanIO {
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
 				for(int z = 0; z < length; z++) {
-					blockids[(y*length+z)*width+x] = (byte)Block.getIdFromBlock(blocks[x][y][z].getBlock());
-					data[(y*length+z)*width+x] = (byte)blocks[x][y][z].getBlock().getMetaFromState(blocks[x][y][z]);
+					blockids[(y*length+z)*width+x] = (byte)Block.getIdFromBlock(blocks[y][z][x].getBlock());
+					data[(y*length+z)*width+x] = (byte)blocks[x][y][z].getBlock().getMetaFromState(blocks[y][z][x]);
 				}
 			}
 		}
