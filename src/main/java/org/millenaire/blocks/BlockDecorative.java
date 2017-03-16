@@ -11,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -45,6 +44,7 @@ public class BlockDecorative
 		public static Block paperWall;
 		
 		public static Block blockSodPlanks;
+		public static Block blockCarving;
 
 	public static void preinitialize()
     {
@@ -75,6 +75,9 @@ public class BlockDecorative
 		
 		paperWall = new BlockDecorativePane(Material.cloth).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("paperWall");
 		GameRegistry.registerBlock(paperWall, "paperWall");
+		
+		blockCarving = new BlockDecorativeCarving(Material.rock).setUnlocalizedName("inuitCarving");
+		GameRegistry.registerBlock(blockCarving, "inuitCarving");
 		
 		GameRegistry.addSmelting(mudBrick, new ItemStack(blockDecorativeStone, 1, 1), 0.3f);
 		GameRegistry.addRecipe(new ItemStack(byzantineStoneTile, 6),
@@ -122,5 +125,6 @@ public class BlockDecorative
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTileSlab), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineTileSlab", "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(paperWall), 0, new ModelResourceLocation(Millenaire.MODID + ":paperWall", "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTileStairs), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineTileStairs", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockCarving), 0, new ModelResourceLocation(Millenaire.MODID + ":inuitCarving", "inventory"));
 	}
 }

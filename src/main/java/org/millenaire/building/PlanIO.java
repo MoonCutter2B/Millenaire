@@ -107,7 +107,7 @@ public class PlanIO {
 	 * @return the file that is outputted to disk
 	 */
 	public File exportBuilding(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, VillagerType[] maleVillagers, VillagerType[] femaleVillagers) {
-		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + "\\exports");
+		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + "\\exports\\" + name + ".mlplan");
 		if(!f.exists()) {
 			f.mkdirs();
 		}

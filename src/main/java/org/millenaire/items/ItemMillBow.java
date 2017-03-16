@@ -54,7 +54,7 @@ public class ItemMillBow extends ItemBow
 				var7 = 1.0F;
 			}
 
-			final EntityArrow entityArrow = new EntityArrow(worldIn, playerIn, var7 * 2.0F);
+			final EntityArrow entityArrow = new EntityArrow(worldIn, playerIn, var7 * 2.0F * speedFactor);
 
 			if (var7 == 1.0F) 
 			{
@@ -89,9 +89,9 @@ public class ItemMillBow extends ItemBow
 				playerIn.inventory.consumeInventoryItem(Items.arrow);
 
 			// faster MLN arrows
-			entityArrow.motionX *= speedFactor;
-			entityArrow.motionY *= speedFactor;
-			entityArrow.motionZ *= speedFactor;
+			//entityArrow.motionX *= speedFactor;
+			//entityArrow.motionY *= speedFactor;
+			//entityArrow.motionZ *= speedFactor;
 
 			// extra arrow damage
 			entityArrow.setDamage(entityArrow.getDamage() + damageBonus);
