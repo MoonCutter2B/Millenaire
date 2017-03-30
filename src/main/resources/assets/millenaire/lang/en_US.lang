@@ -6,6 +6,9 @@ container.millChestDoubleLocked=Millénaire Large Chest - Locked
 container.millChestUnlocked=Millénaire Chest - Unlocked
 container.millChestDoubleUnlocked=Millénaire Large Chest - Unlocked
 
+tile.storedPosition.name=Stored Position
+
+tile.inuitCarving.name=Carving
 
 tile.blockAlchemists.name=Alchemist's Block
 
@@ -29,6 +32,7 @@ tile.byzantineTile.name=Byzantine Tile
 tile.byzantineStoneTile.name=Byzantine Stone Tile
 tile.byzantineTileSlab.name=Byzantine Tile Slab
 tile.byzantineTileDoubleSlab.name=Byzantine Tile Double Slab
+tile.byzantineTileStairs.name=Byzantine Tile Stairs
 tile.paperWall.name=Paper Wall
 
 tile.blockMillChest.name=Millénaire Chest

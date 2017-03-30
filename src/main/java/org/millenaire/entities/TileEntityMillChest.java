@@ -1,5 +1,7 @@
 package org.millenaire.entities;
 
+import org.millenaire.blocks.BlockMillChest;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,6 +11,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityMillChest extends TileEntityChest
 {
@@ -16,7 +21,7 @@ public class TileEntityMillChest extends TileEntityChest
 	
 	public TileEntityMillChest()
 	{
-		super(2);
+		super();
 	}
 	
 	public boolean setLock()
@@ -53,33 +58,6 @@ public class TileEntityMillChest extends TileEntityChest
 		//	return true;
 		
 		return isLocked;
-	}
-	
-	@Override
-    public IChatComponent getDisplayName()
-    {
-		boolean bool;
-		EntityPlayer currentPlayer = Minecraft.getMinecraft().thePlayer;
-		
-		if(currentPlayer != null)
-			bool = this.isLockedFor(currentPlayer);
-		else
-			bool = isLocked;
-		
-        return (IChatComponent)(bool ? new ChatComponentTranslation("container.millChestLocked", new Object[0]) : new ChatComponentTranslation("container.millChestUnlocked", new Object[0]));
-    }
-	
-	public String getLargeDisplayName()
-	{
-		boolean bool;
-		EntityPlayer currentPlayer = Minecraft.getMinecraft().thePlayer;
-		
-		if(currentPlayer != null)
-			bool = this.isLockedFor(currentPlayer);
-		else
-			bool = isLocked;
-		
-		return bool ? "container.millChestDoubleLocked" : "container.millChestDoubleUnlocked";
 	}
 	
 	@Override

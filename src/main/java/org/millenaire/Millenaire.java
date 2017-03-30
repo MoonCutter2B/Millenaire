@@ -47,6 +47,8 @@ public class Millenaire
 	public static final String VERSION = "7.0.0";
 	public static final String GUIFACTORY = "org.millenaire.gui.MillGuiFactory";
 	
+	public static boolean isServer = true;
+	
 	public List<Block> forbiddenBlocks;
 	
 	@Instance
@@ -101,6 +103,8 @@ public class Millenaire
 			EntityMillVillager.prerender();
 			
 			MillConfig.eventRegister();
+			
+			isServer = false;
 		}
 		
 		simpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("MillChannel");

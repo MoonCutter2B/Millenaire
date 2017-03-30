@@ -10,6 +10,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -64,16 +65,22 @@ public class BlockOrientedSlab extends BlockSlab
         return super.getUnlocalizedName();
     }
     
+    @Override
+    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    {
+        return this.getDefaultState();
+    }
+    
 	@Override
     public IProperty getVariantProperty()
     {
-        return null;
+        return SEAMLESS;
     }
 
     @Override
     public Object getVariant(ItemStack stack)
     {
-        return null;
+        return Boolean.valueOf((stack.getMetadata() & 8) != 0);
     }
     
     @SideOnly(Side.CLIENT)

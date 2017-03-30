@@ -93,7 +93,7 @@ public class BlockMillChest extends BlockChest
         {
             ILockableContainer ilockablecontainer = (TileEntityMillChest)tileentity;
             
-            String doubleName = ((TileEntityMillChest)ilockablecontainer).getLargeDisplayName();
+            //String doubleName = ((TileEntityMillChest)ilockablecontainer).getLargeDisplayName();
 
             if (this.isBlocked(worldIn, pos))
             {
@@ -119,11 +119,11 @@ public class BlockMillChest extends BlockChest
                         {
                             if (enumfacing != EnumFacing.WEST && enumfacing != EnumFacing.NORTH)
                             {
-                                ilockablecontainer = new InventoryLargeChest(doubleName, ilockablecontainer, (TileEntityChest)tileentity1);
+                                ilockablecontainer = new InventoryLargeChest("test", ilockablecontainer, (TileEntityChest)tileentity1);
                             }
                             else
                             {
-                                ilockablecontainer = new InventoryLargeChest(doubleName, (TileEntityChest)tileentity1, ilockablecontainer);
+                                ilockablecontainer = new InventoryLargeChest("test2", (TileEntityChest)tileentity1, ilockablecontainer);
                             }
                         }
                     }
