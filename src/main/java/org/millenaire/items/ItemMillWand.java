@@ -10,8 +10,11 @@ import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
 import org.millenaire.blocks.BlockVillageStone;
 import org.millenaire.blocks.StoredPosition;
+import org.millenaire.building.PlanIO;
 import org.millenaire.entities.EntityMillVillager;
 import org.millenaire.entities.TileEntityMillChest;
+import org.millenaire.networking.PacketImportBuilding;
+import org.millenaire.networking.PacketSayTranslatedMessage;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -20,6 +23,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -38,11 +42,27 @@ public class ItemMillWand extends Item
 	{
 		this.setMaxStackSize(1);
 	}
-	
+
+	@Override
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	{
+		System.out.println("used wand");
+		if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == wandNegation) {
+			PlanIO.exportBuilding(playerIn, worldIn, pos);
+			return true;
+		}
+		else if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == wandSummoning) {
+			System.out.println("sending Packet");
+			PacketImportBuilding packet =  new PacketImportBuilding(pos, playerIn.dimension);
+			Millenaire.simpleNetworkWrapper.sendToServer(packet);
+		}
+		return false;
+	}
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
+	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+	{
 		if(this == wandNegation)
 		{
 			if(worldIn.getBlockState(pos).getBlock() == BlockVillageStone.villageStone)
@@ -52,14 +72,14 @@ public class ItemMillWand extends Item
 				nbt.setInteger("X", pos.getX());
 				nbt.setInteger("Y", pos.getY());
 				nbt.setInteger("Z", pos.getZ());
-				
+
 				if(worldIn.isRemote)
 				{
 					playerIn.openGui(Millenaire.instance, 2, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
 				}
 			}
 		}
-		
+
 		if(this == wandSummoning)
 		{
 			if(worldIn.getBlockState(pos).getBlock() == Blocks.gold_block)
@@ -67,7 +87,7 @@ public class ItemMillWand extends Item
 				if(worldIn.isRemote)
 				{	
 					System.out.println("Gold Creation");
-					
+					Millenaire.simpleNetworkWrapper.sendTo(new PacketSayTranslatedMessage("message.notimplemented"), (EntityPlayerMP)playerIn);
 					//Gui confirming action and desired village, then villageStone block is made and villageType assigned
 				}
 			}
@@ -76,54 +96,54 @@ public class ItemMillWand extends Item
 				if(worldIn.isRemote)
 				{	
 					System.out.println("Obsidian Creation");
-					
+
 					NBTTagCompound nbt = new NBTTagCompound();
 					stack.setTagCompound(nbt);
 					nbt.setInteger("X", pos.getX());
 					nbt.setInteger("Y", pos.getY());
 					nbt.setInteger("Z", pos.getZ());
-					
+
 					if(worldIn.isRemote)
 					{
 						playerIn.openGui(Millenaire.instance, 4, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
 					} 
 				}
 			}
-			else if(worldIn.getBlockState(pos).getBlock() == Blocks.emerald_block)
-			{
-				if(!worldIn.isRemote)
-				{	
-					System.out.println("Emerald Creation");
-					worldIn.setBlockToAir(pos);
-					EntityMillVillager entity = new EntityMillVillager(worldIn, 100100, MillCulture.normanCulture);
-					System.out.println("cultured: " + entity.culture.cultureName);
-					entity = entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanGirl"), 1);
-					System.out.println(entity.getVillagerType());
-					entity.setChild();
-					entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
-					worldIn.spawnEntityInWorld(entity);
-				}
-				stack.stackSize--;
-				return true;
-			}
-			else if(worldIn.getBlockState(pos).getBlock() == Blocks.diamond_block)
-			{
-				if(!worldIn.isRemote)
-				{	
-					System.out.println("Diamond Creation");
-					worldIn.setBlockToAir(pos);
-					EntityMillVillager entity = new EntityMillVillager(worldIn, 100101, MillCulture.normanCulture);
-					System.out.println("cultured: ");
-					entity = entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanLady"), 1);
-					System.out.println(entity.getVillagerType());
-					entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
-					worldIn.spawnEntityInWorld(entity);
-				}
-				stack.stackSize--;
-				return true;
-			}
+//			else if(worldIn.getBlockState(pos).getBlock() == Blocks.emerald_block)
+//			{
+//				if(!worldIn.isRemote)
+//				{	
+//					System.out.println("Emerald Creation");
+//					worldIn.setBlockToAir(pos);
+//					EntityMillVillager entity = new EntityMillVillager(worldIn, 100100, MillCulture.normanCulture);
+//					System.out.println("cultured: " + entity.culture.cultureName);
+//					entity = entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanGirl"), 1);
+//					System.out.println(entity.getVillagerType());
+//					entity.setChild();
+//					entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+//					worldIn.spawnEntityInWorld(entity);
+//				}
+//				stack.stackSize--;
+//				return true;
+//			}
+//			else if(worldIn.getBlockState(pos).getBlock() == Blocks.diamond_block)
+//			{
+//				if(!worldIn.isRemote)
+//				{	
+//					System.out.println("Diamond Creation");
+//					worldIn.setBlockToAir(pos);
+//					EntityMillVillager entity = new EntityMillVillager(worldIn, 100101, MillCulture.normanCulture);
+//					System.out.println("cultured: ");
+//					entity = entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanLady"), 1);
+//					System.out.println(entity.getVillagerType());
+//					entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+//					worldIn.spawnEntityInWorld(entity);
+//				}
+//				stack.stackSize--;
+//				return true;
+//			}
 		}
-		
+
 		if(this == wandCreative)
 		{
 			//Control whether or not you can plant crops
@@ -135,7 +155,7 @@ public class ItemMillWand extends Item
 
 					hasCrop = VillageTracker.get(worldIn).removePlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos));
 					System.out.println(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos).toString());
-					
+
 					if(worldIn.isRemote)
 					{
 						if(hasCrop)
@@ -152,7 +172,7 @@ public class ItemMillWand extends Item
 						VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos));
 						succeeded = true;
 					}
-					
+
 					if(worldIn.isRemote)
 					{
 						if(succeeded)
@@ -173,7 +193,7 @@ public class ItemMillWand extends Item
 					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.rice);
 				if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, BlockMillCrops.turmeric))
 					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.turmeric);
-				
+
 				if(worldIn.isRemote)
 				{
 					playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can now plant everything"));
@@ -183,7 +203,7 @@ public class ItemMillWand extends Item
 			else if(worldIn.getBlockState(pos).getBlock() instanceof BlockMillChest)
 			{
 				boolean isLocked = ((TileEntityMillChest)worldIn.getTileEntity(pos)).setLock();
-				
+
 				if(worldIn.isRemote)
 				{
 					if(isLocked)
@@ -207,76 +227,76 @@ public class ItemMillWand extends Item
 					playerIn.addChatMessage(new ChatComponentText("Fixing Denier in " + playerIn.getDisplayNameString() + "'s Inventory"));
 			}
 		}
-		
+
 		if(this == tuningFork)
 		{
 			IBlockState state = worldIn.getBlockState(pos);
 			String output = state.getBlock().getUnlocalizedName() + " -";
-			
+
 			for(IProperty prop : (java.util.Set<IProperty>)state.getProperties().keySet())
 			{
 				//System.out.println(prop.getName());
 				output = output.concat(" " + prop.getName() + ":" + state.getValue(prop).toString());
 			}
-			
+
 			playerIn.addChatMessage(new ChatComponentText(output));
 		}
-		
-        return false;
-    }
-	
+
+		return false;
+	}
+
 	@Override
-    public boolean itemInteractionForEntity(ItemStack stack, net.minecraft.entity.player.EntityPlayer player, EntityLivingBase entity)
-    {
+	public boolean itemInteractionForEntity(ItemStack stack, net.minecraft.entity.player.EntityPlayer player, EntityLivingBase entity)
+	{
 		if(stack.getItem() == wandNegation && entity instanceof EntityMillVillager)
 		{
 			((EntityMillVillager)entity).isPlayerInteracting = true;
-			
+
 			NBTTagCompound nbt = new NBTTagCompound();
 			player.getHeldItem().setTagCompound(nbt); 
 			nbt.setInteger("ID", entity.getEntityId());
-			
+
 			if(player.worldObj.isRemote)
 			{
 				player.openGui(Millenaire.instance, 3, player.worldObj, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
 			}
 		}
 		return false;
-    }
-	
+	}
+
 	@Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
-    {
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	{
 		if(stack.getItem() == wandCreative)
 			tooltip.add("§lCreative Mode ONLY");
-    }
-	
-    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
-    //Declarations
-    	public static Item wandSummoning;
-    	public static Item wandNegation;
-    	public static Item wandCreative;
-    	public static Item tuningFork;
-    
-    public static void preinitialize()
-    {
-    	wandSummoning = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandSummoning");
-    	GameRegistry.registerItem(wandSummoning, "wandSummoning");
-    	wandNegation = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandNegation");
-    	GameRegistry.registerItem(wandNegation, "wandNegation");
-    	wandCreative = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandCreative");
-    	GameRegistry.registerItem(wandCreative, "wandCreative");
-    	tuningFork = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("tuningFork");
-    	GameRegistry.registerItem(tuningFork, "tuningFork");
-    }
-    
-    @SideOnly(Side.CLIENT)
+	}
+
+	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+	//Declarations
+	public static Item wandSummoning;
+	public static Item wandNegation;
+	public static Item wandCreative;
+	public static Item tuningFork;
+
+	public static void preinitialize()
+	{
+		wandSummoning = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandSummoning");
+		GameRegistry.registerItem(wandSummoning, "wandSummoning");
+		wandNegation = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandNegation");
+		GameRegistry.registerItem(wandNegation, "wandNegation");
+		wandCreative = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandCreative");
+		GameRegistry.registerItem(wandCreative, "wandCreative");
+		tuningFork = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("tuningFork");
+		GameRegistry.registerItem(tuningFork, "tuningFork");
+	}
+
+	@SideOnly(Side.CLIENT)
 	public static void render()
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		
+
 		renderItem.getItemModelMesher().register(wandSummoning, 0, new ModelResourceLocation(Millenaire.MODID + ":wandSummoning", "inventory"));
 		renderItem.getItemModelMesher().register(wandNegation, 0, new ModelResourceLocation(Millenaire.MODID + ":wandNegation", "inventory"));
 		renderItem.getItemModelMesher().register(wandCreative, 0, new ModelResourceLocation(Millenaire.MODID + ":wandCreative", "inventory"));

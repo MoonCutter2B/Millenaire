@@ -81,7 +81,8 @@ public class BlockDecorativeStone extends Block
     public static enum EnumType implements IStringSerializable
     {
         GOLDORNAMENT(0, "goldOrnament"),
-    	COOKEDBRICK(1, "cookedBrick");
+    	COOKEDBRICK(1, "cookedBrick"),
+    	GALIANITEBLOCK(2, "galianiteBlock");
         
         private static final BlockDecorativeStone.EnumType[] META_LOOKUP = new BlockDecorativeStone.EnumType[values().length];
         private final int meta;

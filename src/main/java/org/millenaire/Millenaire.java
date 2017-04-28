@@ -6,6 +6,7 @@ import org.millenaire.blocks.BlockAlchemists;
 import org.millenaire.blocks.BlockDecorative;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
+import org.millenaire.blocks.BlockMillOre;
 import org.millenaire.blocks.BlockMillPath;
 import org.millenaire.blocks.BlockMillSign;
 import org.millenaire.blocks.BlockVillageStone;
@@ -21,11 +22,13 @@ import org.millenaire.items.ItemMillTool;
 import org.millenaire.items.ItemMillWallet;
 import org.millenaire.items.ItemMillWand;
 import org.millenaire.items.MillItems;
+import org.millenaire.networking.MillPacket;
+import org.millenaire.networking.PacketImportBuilding;
+import org.millenaire.networking.PacketSayTranslatedMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -84,6 +87,7 @@ public class Millenaire
 		BlockMillChest.preinitialize();
 		BlockMillSign.preinitialize();
 		BlockMillPath.preinitialize();
+		BlockMillOre.preinitialize();
 		BlockAlchemists.preinitialize();
 		BlockVillageStone.preinitialize();
 		StoredPosition.preinitialize();
@@ -108,7 +112,9 @@ public class Millenaire
 		}
 		
 		simpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("MillChannel");
-		simpleNetworkWrapper.registerMessage(PacketHandlerOnServer.class, MillPacket.class, 69, Side.SERVER);
+		simpleNetworkWrapper.registerMessage(MillPacket.PacketHandlerOnServer.class, MillPacket.class, 0, Side.SERVER);
+		simpleNetworkWrapper.registerMessage(PacketImportBuilding.Handler.class, PacketImportBuilding.class, 1, Side.SERVER);
+		simpleNetworkWrapper.registerMessage(PacketSayTranslatedMessage.Handler.class, PacketSayTranslatedMessage.class, 2, Side.CLIENT);
     }
 	
 	@EventHandler
@@ -130,6 +136,7 @@ public class Millenaire
 			BlockMillSign.render();
 			BlockAlchemists.render();
 			BlockVillageStone.render();
+			BlockMillOre.render();
 			StoredPosition.render();
     	}
     }

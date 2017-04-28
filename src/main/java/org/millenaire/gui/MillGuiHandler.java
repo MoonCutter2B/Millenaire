@@ -68,10 +68,6 @@ public class MillGuiHandler implements IGuiHandler
 		{
 			return new GuiChief();
 		}
-		if(ID == 4)
-		{
-			return new GuiChief();
-		}
 		
 		return null;
 	}

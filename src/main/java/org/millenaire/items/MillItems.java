@@ -25,6 +25,8 @@ public class MillItems
 	public static Item woolClothes;
 	public static Item silkClothes;
 	
+	public static Item galianiteDust;
+	
 	public static void preinitialize()
 	{
 		denier = new Item().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("denier");
@@ -45,6 +47,9 @@ public class MillItems
 		GameRegistry.registerItem(woolClothes, "woolClothes");
 		silkClothes = new Item().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("silkClothes");
 		GameRegistry.registerItem(silkClothes, "silkClothes");
+		
+		galianiteDust = new Item().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("galianiteDust");
+		GameRegistry.registerItem(galianiteDust, "galianiteDust");
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -62,5 +67,6 @@ public class MillItems
 		
 		renderItem.getItemModelMesher().register(woolClothes, 0, new ModelResourceLocation(Millenaire.MODID + ":woolClothes", "inventory"));
 		renderItem.getItemModelMesher().register(silkClothes, 0, new ModelResourceLocation(Millenaire.MODID + ":silkClothes", "inventory"));
+		renderItem.getItemModelMesher().register(galianiteDust, 0, new ModelResourceLocation(Millenaire.MODID + ":galianiteDust", "inventory"));
 	}
 }

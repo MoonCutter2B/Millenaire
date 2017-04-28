@@ -2,8 +2,8 @@ package org.millenaire.gui;
 
 import java.io.IOException;
 
-import org.millenaire.MillPacket;
 import org.millenaire.Millenaire;
+import org.millenaire.networking.MillPacket;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

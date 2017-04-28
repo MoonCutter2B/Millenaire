@@ -9,6 +9,7 @@ container.millChestDoubleUnlocked=Millénaire Large Chest - Unlocked
 tile.storedPosition.name=Stored Position
 
 tile.inuitCarving.name=Carving
+tile.galianiteOre.name=Galianite Ore
 
 tile.blockAlchemists.name=Alchemist's Block
 
@@ -16,6 +17,7 @@ tile.blockDecorativeEarth.dirtWall.name=Dirt Wall
 tile.blockDecorativeEarth.driedBrick.name=Dried Mud Bricks
 tile.blockDecorativeStone.goldOrnament.name=Mayan Gold Ornament
 tile.blockDecorativeStone.cookedBrick.name=Cooked Mud Bricks
+tile.blockDecorativeStone.galianiteBlock.name=Galianite Block
 tile.blockDecorativeWood.plainTimberFrame.name=Plain Timber Frame
 tile.blockDecorativeWood.crossTimberFrame.name=Crossed Timber Frame
 tile.blockDecorativeWood.thatch.name=Thatch
@@ -149,6 +151,7 @@ item.normanBuildingParchment.name=Norman Buildings Scroll
 item.normanItemParchment.name=Norman Food, Tools, and Armaments Scroll
 item.normanAllParchment.name=Complete Norman Scroll
 
+item.galianiteDust.name=Galianite Dust
 
 scroll.normanVillager.title=Norman Villagers
 scroll.normanVillager.leaders=Village Heads\n\nChevalier: Knight. Lives in the fort, from which he goes out to patrol his land and visit the tavern. Beware meeting him in battle! Head of the Military and Gros Bourg villages.\n\nAbbé: Abbot. Lives in the abbey, supervising the work of the monks. Head of the ecclesiastical hamlets and villages.\n\nSénéchal : Seneschal. Oversees the agricultural production of his village from his manor house. Head of the agricultural hamlets and villages.\n\nMaître de la Guilde : Guild Master. Supervises the production of the artisans from a Guild House. Head of the artisanal hamlets and villages.
@@ -157,3 +160,10 @@ scroll.normanVillager.women=Women\n\nVillageoise: Female villager. Almost all ad
 scroll.normanVillager.children=Garçon / fille : boy and girl. Live with their parents until they are big enough to move into a free house and become adult.  Interestingly, in this strange land they seem to grow quite rapidly, but one never sees the change, as if it only happens while all are asleep.
 
 option.negateVillage.text=Do you really want to erase this village from the world?  No one knows what happens to them...\n\nIt may to tough to seek redemption after this act.\n\n\n§o(All villagers will be removed from the world, all chests will be unlocked, and your reputation with this culture will suffer a dramatic decrease.)
+
+message.notimplemented=This hasn't been implemented yet!
+message.error.exporting.unknown=An unknown error occurred while exporting this building :(
+message.error.exporting.zaxis=No end of the building found on the Z-Axis. Make sure the signs are <=256 blocks apart
+message.error.exporting.xaxis=No end of the building found on the X-Axis. Make sure the signs are <=256 blocks apart
+message.error.exporting.noname=You must give the building plan's name on the first line
+message.error.importing.nofile=Building not found. Check the Name and Level
