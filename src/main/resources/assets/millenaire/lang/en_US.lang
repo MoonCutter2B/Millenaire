@@ -151,6 +151,26 @@ item.normanBuildingParchment.name=Norman Buildings Scroll
 item.normanItemParchment.name=Norman Food, Tools, and Armaments Scroll
 item.normanAllParchment.name=Complete Norman Scroll
 
+item.byzantineVillagerParchment.name=Byzantine Villagers Scroll
+item.byzantineBuildingParchment.name=Byzantine Buildings Scroll
+item.byzantineItemParchment.name=Byzantine Food, Tools, and Araments Scroll
+item.byzantineAllParchment.name=Complete Byzantine Scroll
+
+item.hindiVillagerParchment.name=Hindi Villagers Scroll
+item.hindiBuildingParchment.name=Hindi Buildings Scroll
+item.hindiItemParchment.name=Hindi Food, Tools, and Araments Scroll
+item.hindiAllParchment.name=Complete Hindi Scroll
+
+item.mayanVillagerParchment.name=Mayan Villagers Scroll
+item.mayanBuildingParchment.name=Mayan Buildings Scroll
+item.mayanItemParchment.name=Mayan Food, Tools, and Araments Scroll
+item.mayanAllParchment.name=Complete Mayan Scroll
+
+item.japaneseVillagerParchment.name=Japanese Villagers Scroll
+item.japaneseBuildingParchment.name=Japanese Buildings Scroll
+item.japaneseItemParchment.name=Japanese Food, Tools, and Araments Scroll
+item.japaneseAllParchment.name=Complete Japanese Scroll
+
 item.galianiteDust.name=Galianite Dust
 
 scroll.normanVillager.title=Norman Villagers
@@ -162,8 +182,10 @@ scroll.normanVillager.children=Garçon / fille : boy and girl. Live with their p
 option.negateVillage.text=Do you really want to erase this village from the world?  No one knows what happens to them...\n\nIt may to tough to seek redemption after this act.\n\n\n§o(All villagers will be removed from the world, all chests will be unlocked, and your reputation with this culture will suffer a dramatic decrease.)
 
 message.notimplemented=This hasn't been implemented yet!
-message.error.exporting.unknown=An unknown error occurred while exporting this building :(
+message.completed=The operation has been completed!
+message.error.unknown=An unknown error occurred :(
 message.error.exporting.zaxis=No end of the building found on the Z-Axis. Make sure the signs are <=256 blocks apart
 message.error.exporting.xaxis=No end of the building found on the X-Axis. Make sure the signs are <=256 blocks apart
 message.error.exporting.noname=You must give the building plan's name on the first line
 message.error.importing.nofile=Building not found. Check the Name and Level
+message.error.exporting.dimensions=The dimensions of the building provided don't match the dimensions of the building on file!

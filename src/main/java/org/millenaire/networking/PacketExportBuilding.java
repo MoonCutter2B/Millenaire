@@ -10,15 +10,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketImportBuilding implements IMessage {
+public class PacketExportBuilding implements IMessage {
 
 	BlockPos pos;
 	
-	public PacketImportBuilding() {
+	public PacketExportBuilding() {
 		
 	}
 	
-	public PacketImportBuilding(BlockPos startPos) {
+	public PacketExportBuilding(BlockPos startPos) {
 		this.pos = startPos;
 	}
 	
@@ -38,16 +38,16 @@ public class PacketImportBuilding implements IMessage {
 		buf.writeInt(pos.getZ());
 	}
 
-	public static class Handler implements IMessageHandler<PacketImportBuilding, IMessage> {
+	public static class Handler implements IMessageHandler<PacketExportBuilding, IMessage> {
 
 		@Override
-		public IMessage onMessage(PacketImportBuilding message, MessageContext ctx) {
+		public IMessage onMessage(PacketExportBuilding message, MessageContext ctx) {
 			MinecraftServer.getServer().addScheduledTask(() -> handle(message, ctx));
 			return null;
 		}
 		
-		private void handle(PacketImportBuilding message, MessageContext ctx) {
-			PlanIO.importBuilding(ctx.getServerHandler().playerEntity, message.pos);
+		private void handle(PacketExportBuilding message, MessageContext ctx) {
+			PlanIO.exportBuilding(ctx.getServerHandler().playerEntity, message.pos);
 		}
 	}
 }

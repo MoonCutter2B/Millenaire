@@ -23,6 +23,7 @@ import org.millenaire.items.ItemMillWallet;
 import org.millenaire.items.ItemMillWand;
 import org.millenaire.items.MillItems;
 import org.millenaire.networking.MillPacket;
+import org.millenaire.networking.PacketExportBuilding;
 import org.millenaire.networking.PacketImportBuilding;
 import org.millenaire.networking.PacketSayTranslatedMessage;
 
@@ -115,6 +116,7 @@ public class Millenaire
 		simpleNetworkWrapper.registerMessage(MillPacket.PacketHandlerOnServer.class, MillPacket.class, 0, Side.SERVER);
 		simpleNetworkWrapper.registerMessage(PacketImportBuilding.Handler.class, PacketImportBuilding.class, 1, Side.SERVER);
 		simpleNetworkWrapper.registerMessage(PacketSayTranslatedMessage.Handler.class, PacketSayTranslatedMessage.class, 2, Side.CLIENT);
+		simpleNetworkWrapper.registerMessage(PacketExportBuilding.Handler.class, PacketExportBuilding.class, 3, Side.SERVER);
     }
 	
 	@EventHandler

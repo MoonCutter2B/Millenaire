@@ -3,6 +3,7 @@ package org.millenaire.networking;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -49,7 +50,7 @@ public class PacketSayTranslatedMessage implements IMessage {
 		}
 		
 		private void handle(PacketSayTranslatedMessage message, MessageContext ctx) {
-			Minecraft.getMinecraft().thePlayer.sendChatMessage(I18n.format(message.message));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation(message.message));
 		}
 	}
 }

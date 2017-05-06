@@ -1,0 +1,14 @@
+7.0.0-A1
+	Ported to 1.8.9
+	Added all blocks & Items
+7.0.0-A2
+	Added SodPlanks
+	Added Galianite ore/blocks/dust
+	Added the ability to import/export
+	Re-added GUI
+	Fixed some translation issues
+	Fixed some textures
+	Fixed some bugs
+7.0.0-A2.1
+	Changed the Building format-All levels of a building are stored in one file
+	Fixed Bugs

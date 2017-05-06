@@ -32,20 +32,22 @@ import net.minecraftforge.common.util.Constants;
 
 public class PlanIO {
 
+	public static final String FILE_VERSION = "0.2";
+	
 	//IBlockState[y][z][x]
-	public static void exportBuilding(EntityPlayer player, World world, BlockPos startPoint) {
+	public static void exportBuilding(EntityPlayer player, BlockPos startPoint) {
 		try {
-			TileEntitySign sign = (TileEntitySign)world.getTileEntity(startPoint);
+			TileEntitySign sign = (TileEntitySign)player.getEntityWorld().getTileEntity(startPoint);
 
 			String buildingName = sign.signText[0].getUnformattedText();
 			boolean saveSnow = (sign.signText[3].getUnformattedText().toLowerCase() == "snow");
 
 			int buildingLevel = 0;
-			
+
 			if(sign.signText[1] != null && sign.signText[1].getUnformattedText().length() > 0) {
 				buildingLevel = Integer.parseInt(sign.signText[1].getUnformattedText());
 			}
-			
+
 			int startLevel = -1;
 
 			if (sign.signText[2] != null && sign.signText[2].getUnformattedText().length() > 0) {
@@ -53,12 +55,13 @@ public class PlanIO {
 			}
 
 			if(buildingName == null || buildingName.length() == 0) {
-				player.addChatComponentMessage(new ChatComponentTranslation("message.error.exporting.noname"));
+				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.noname");
+				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
 			}
 			boolean foundEnd = false;
 			int xEnd = startPoint.getX() + 1;
 			while(!foundEnd && xEnd < startPoint.getX() + 257) {
-				final IBlockState block = world.getBlockState(new BlockPos(xEnd, startPoint.getY(), startPoint.getZ()));
+				final IBlockState block = player.getEntityWorld().getBlockState(new BlockPos(xEnd, startPoint.getY(), startPoint.getZ()));
 
 				if (block.getBlock() == Blocks.standing_sign) {
 					foundEnd = true;
@@ -67,12 +70,13 @@ public class PlanIO {
 				xEnd++;
 			}
 			if(!foundEnd) {
-				player.addChatComponentMessage(new ChatComponentTranslation("message.error.exporting.xaxis"));
+				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.xaxis");
+				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
 			}
 			foundEnd = false;
 			int zEnd = startPoint.getZ() + 1;
 			while(!foundEnd && zEnd < startPoint.getZ() + 257) {
-				final IBlockState block = world.getBlockState(new BlockPos(startPoint.getX(), startPoint.getY(), zEnd));
+				final IBlockState block = player.getEntityWorld().getBlockState(new BlockPos(startPoint.getX(), startPoint.getY(), zEnd));
 
 				if (block.getBlock() == Blocks.standing_sign) {
 					foundEnd = true;
@@ -81,26 +85,27 @@ public class PlanIO {
 				zEnd++;
 			}
 			if(!foundEnd) {
-				player.addChatComponentMessage(new ChatComponentTranslation("message.error.exporting.zaxis"));
+				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.zaxis");
+				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
 			}
 			final int width = xEnd - startPoint.getX() - 1;
 			final int length = zEnd - startPoint.getZ() - 1;
 
 			boolean stop = false;
 			int y = 0;
-			
+
 			final Map<Integer, IBlockState[][]> ex = new HashMap<Integer, IBlockState[][]>();
-			
+
 			while(!stop) {
-				
+
 				IBlockState[][] level = new IBlockState[width][length];
-				
+
 				boolean blockFound = false;
-				
+
 				for (int x = 0; x < width; x++) {
 					for (int z = 0; z < length; z++) {
-						IBlockState block = world.getBlockState(new BlockPos(x + startPoint.getX() + 1, y + startPoint.getY() + startLevel, z + startPoint.getZ() + 1));
-						
+						IBlockState block = player.getEntityWorld().getBlockState(new BlockPos(x + startPoint.getX() + 1, y + startPoint.getY() + startLevel, z + startPoint.getZ() + 1));
+
 						if(block.getBlock() != Blocks.air) {
 							blockFound = true;
 						}
@@ -112,7 +117,7 @@ public class PlanIO {
 						}
 					}
 				}
-				
+
 				if (blockFound) {
 					ex.put(y, level);
 				} else {
@@ -125,9 +130,9 @@ public class PlanIO {
 					stop = true;
 				}
 			}
-			
+
 			IBlockState[][][] ex2 = new IBlockState[ex.size()][length][width];
-			
+
 			for(int i = 0; i < ex.size(); i++) {
 				IBlockState[][] level = ex.get(i);
 				for(int x = 0; x < width; x++) {
@@ -136,16 +141,16 @@ public class PlanIO {
 					} 
 				}
 			}
-			
-			exportToSchem(ex2, (short)width, (short)ex.size(), (short)length, (short)startLevel, buildingName, buildingLevel, new VillagerType[] {MillCulture.normanCulture.getVillagerType("normanMiner")}, new VillagerType[] {MillCulture.normanCulture.getVillagerType("normanLady")});
+
+			exportToSchem(ex2, (short)width, (short)ex.size(), (short)length, (short)startLevel, buildingName, buildingLevel, new VillagerType[] {MillCulture.normanCulture.getVillagerType("normanMiner")}, new VillagerType[] {MillCulture.normanCulture.getVillagerType("normanLady")}, player);
 		}
 		catch(Exception e) {
-			System.out.println("ERROR! FIX ME NOW!");
 			e.printStackTrace();
-			player.addChatComponentMessage(new ChatComponentTranslation("message.error.exporting.unknown"));
+			PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.unknown");
+			Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
 		}
 	}
-	
+
 	//Called only on the logical server
 	public static void importBuilding(EntityPlayer player, BlockPos startPos) {
 		try {
@@ -155,35 +160,35 @@ public class PlanIO {
 			if(te.signText[1] != null && te.signText[1].getUnformattedText().length() > 0) {
 				level = Integer.parseInt(te.signText[1].getUnformattedText());
 			}
-			
+
 			if(name == null || name.length() == 0) {
 				PacketSayTranslatedMessage message = new PacketSayTranslatedMessage("message.error.exporting.noname");
 				Millenaire.simpleNetworkWrapper.sendTo(message, (EntityPlayerMP)player);
 			}
-			
+
 			World world = MinecraftServer.getServer().getEntityWorld();
-			
-			File schem = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + "//exports//" + name + "_A" + level + ".mlplan");
+
+			File schem = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + "\\millenaire\\exports\\" + name + ".mlplan");
 			if(!schem.exists()) {
 				PacketSayTranslatedMessage message = new PacketSayTranslatedMessage("message.error.importing.nofile");
 				Millenaire.simpleNetworkWrapper.sendTo(message, (EntityPlayerMP)player);
 			}
 			FileInputStream fis = new FileInputStream(schem);
-			
+
 			BuildingPlan plan = loadSchematic(fis, MillCulture.millDefault, level);
 			IBlockState[][][] blocks = plan.buildingArray;
-			
+
 			for(int x = 0; x < plan.width; x++) {
 				for(int y = 0; y < plan.height; y++) {
 					for(int z = 0; z < plan.length; z++) {
-						System.out.println("setting block" + (x + startPos.getX()) +", " + (y + startPos.getY() + plan.depth) + ", " + (z + startPos.getZ()) + ":" + blocks[y][z][x]);
+						//System.out.println("setting block" + (x + startPos.getX()) +", " + (y + startPos.getY() + plan.depth) + ", " + (z + startPos.getZ()) + ":" + blocks[y][z][x]);
 						world.setBlockState(new BlockPos(x + startPos.getX() + 1, y + startPos.getY() + plan.depth, z + startPos.getZ() + 1), blocks[y][z][x], 2);
 					}
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			PacketSayTranslatedMessage message = new PacketSayTranslatedMessage("message.error.importing.unknown");
+			PacketSayTranslatedMessage message = new PacketSayTranslatedMessage("message.error.unknown");
 			Millenaire.simpleNetworkWrapper.sendTo(message, (EntityPlayerMP)player);
 		}
 	}
@@ -201,8 +206,10 @@ public class PlanIO {
 		height = nbt.getShort("Height");
 		length = nbt.getShort("Length"); 
 
-		blocks = nbt.getByteArray("Blocks");
-		data = nbt.getByteArray("Data");
+		//blocks = nbt.getByteArray("Blocks");
+		NBTTagList list = nbt.getTagList("level_" + level, Constants.NBT.TAG_COMPOUND);
+		blocks = list.getCompoundTagAt(0).getByteArray("Blocks");
+		data = list.getCompoundTagAt(0).getByteArray("Data");
 
 		IBlockState[] states = new IBlockState[width*length*height];
 
@@ -251,6 +258,49 @@ public class PlanIO {
 				.setHeightDepth(height, depth).setDistance(0, 1).setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized);
 	}
 
+	public static NBTTagCompound getBuildingTag(final String name) {
+		try {
+			File f1 = getBuildingFile(name);
+			if(!f1.exists()) 
+				return new NBTTagCompound();
+			else {
+				FileInputStream fis = new FileInputStream(f1);
+				return CompressedStreamTools.readCompressed(fis);
+			}
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return new NBTTagCompound();
+		}
+
+	}
+	
+	public static File getBuildingFile(final String name) {
+		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + "\\millenaire\\exports\\");
+		if(!f.exists())
+			f.mkdirs();
+
+		File f1 = new File(f, name + ".mlplan");
+		return f1;
+	}
+	
+	private static boolean valid(short width, short height, short length, short depth, NBTTagCompound tag) {
+		boolean valid = true;
+		if(tag.getShort("Width") != width) {
+			valid = false;
+		}
+		else if(tag.getShort("Height") != height) {
+			valid = false;
+		}
+		else if(tag.getShort("Length") != length) {
+			valid = false;
+		}
+		else if(tag.getShort("StartLevel") != depth) {
+			valid = false;
+		}
+		return valid;
+	}
+
 	/**
 	 * Exports the IBlockState[y][z][x] to a file
 	 * 
@@ -264,15 +314,15 @@ public class PlanIO {
 	 * @param femaleVillagers the list of female villagers in the building
 	 * @return the file that is outputted to disk
 	 */
-	public static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, VillagerType[] maleVillagers, VillagerType[] femaleVillagers) {
-		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + "\\exports\\");
-		if(!f.exists()) {
-			f.mkdirs();
-		}
-		
-		File f1 = new File(f, name + "_A" + level + ".mlplan");
+	public static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, VillagerType[] maleVillagers, VillagerType[] femaleVillagers, EntityPlayer player) {
+		File f1 = getBuildingFile(name);
 
-		NBTTagCompound tag = new NBTTagCompound();
+		NBTTagCompound tag = getBuildingTag(name);
+		
+		if(!valid(width, height, length, depth, tag)) {
+			PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.dimensions");
+			Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
+		}
 
 		byte[] blockids = new byte[width*height*length], data = new byte[width*height*length];
 
@@ -285,9 +335,16 @@ public class PlanIO {
 			}
 		}
 
-		tag.setByteArray("Blocks", blockids);
-		tag.setByteArray("Data", data);
+		NBTTagList LevelTagComp = new NBTTagList();
+		NBTTagCompound tag2 = new NBTTagCompound();
+		tag2.setByteArray("Blocks", blockids);
+		tag2.setByteArray("Data", data);
+		LevelTagComp.appendTag(tag2);
 
+		tag.setTag("level_" + level, LevelTagComp);
+
+		tag.setString("Version", FILE_VERSION);
+		
 		tag.setShort("Width", width);
 		tag.setShort("Height", height);
 		tag.setShort("Length", length);
@@ -300,9 +357,9 @@ public class PlanIO {
 			String s = maleVillagers[i].id;
 			if(s != null)
 			{
-				NBTTagCompound tag2 = new NBTTagCompound();
-				tag2.setString("" + i, s);
-				MaleList.appendTag(tag2);
+				NBTTagCompound tag3 = new NBTTagCompound();
+				tag3.setString("" + i, s);
+				MaleList.appendTag(tag3);
 			}
 		}
 
@@ -312,9 +369,9 @@ public class PlanIO {
 			String s = femaleVillagers[i].id;
 			if(s != null)
 			{
-				NBTTagCompound tag2 = new NBTTagCompound();
-				tag2.setString("" + i, s);
-				FemaleList.appendTag(tag2);
+				NBTTagCompound tag3 = new NBTTagCompound();
+				tag3.setString("" + i, s);
+				FemaleList.appendTag(tag3);
 			}
 		}
 
@@ -326,7 +383,8 @@ public class PlanIO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		return f;
+		PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.completed");
+		Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
+		return f1;
 	}
 }

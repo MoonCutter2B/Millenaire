@@ -13,6 +13,7 @@ import org.millenaire.blocks.StoredPosition;
 import org.millenaire.building.PlanIO;
 import org.millenaire.entities.EntityMillVillager;
 import org.millenaire.entities.TileEntityMillChest;
+import org.millenaire.networking.PacketExportBuilding;
 import org.millenaire.networking.PacketImportBuilding;
 import org.millenaire.networking.PacketSayTranslatedMessage;
 
@@ -46,15 +47,15 @@ public class ItemMillWand extends Item
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		System.out.println("used wand");
 		if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == wandNegation) {
-			PlanIO.exportBuilding(playerIn, worldIn, pos);
+			PacketExportBuilding packet = new PacketExportBuilding(pos);
+			Millenaire.simpleNetworkWrapper.sendToServer(packet);
 			return true;
 		}
 		else if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == wandSummoning) {
-			System.out.println("sending Packet");
-			PacketImportBuilding packet =  new PacketImportBuilding(pos, playerIn.dimension);
+			PacketImportBuilding packet =  new PacketImportBuilding(pos);
 			Millenaire.simpleNetworkWrapper.sendToServer(packet);
+			return true;
 		}
 		return false;
 	}
@@ -84,7 +85,7 @@ public class ItemMillWand extends Item
 		{
 			if(worldIn.getBlockState(pos).getBlock() == Blocks.gold_block)
 			{
-				if(worldIn.isRemote)
+				if(!worldIn.isRemote)
 				{	
 					System.out.println("Gold Creation");
 					Millenaire.simpleNetworkWrapper.sendTo(new PacketSayTranslatedMessage("message.notimplemented"), (EntityPlayerMP)playerIn);
@@ -92,22 +93,21 @@ public class ItemMillWand extends Item
 				}
 			}
 			else if(worldIn.getBlockState(pos).getBlock() == Blocks.obsidian)
-			{
-				if(worldIn.isRemote)
-				{	
-					System.out.println("Obsidian Creation");
+			{	
+				System.out.println("Obsidian Creation");
 
-					NBTTagCompound nbt = new NBTTagCompound();
-					stack.setTagCompound(nbt);
-					nbt.setInteger("X", pos.getX());
-					nbt.setInteger("Y", pos.getY());
-					nbt.setInteger("Z", pos.getZ());
+				NBTTagCompound nbt = new NBTTagCompound();
+				stack.setTagCompound(nbt);
+				nbt.setInteger("X", pos.getX());
+				nbt.setInteger("Y", pos.getY());
+				nbt.setInteger("Z", pos.getZ());
 
-					if(worldIn.isRemote)
-					{
-						playerIn.openGui(Millenaire.instance, 4, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
-					} 
-				}
+				if(!worldIn.isRemote)
+				{
+					Millenaire.simpleNetworkWrapper.sendTo(new PacketSayTranslatedMessage("message.notimplemented"), (EntityPlayerMP)playerIn);
+//					playerIn.openGui(Millenaire.instance, 4, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
+				} 
+
 			}
 //			else if(worldIn.getBlockState(pos).getBlock() == Blocks.emerald_block)
 //			{
