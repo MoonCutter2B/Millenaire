@@ -18,6 +18,7 @@ import org.millenaire.items.ItemMillAmulet;
 import org.millenaire.items.ItemMillArmor;
 import org.millenaire.items.ItemMillFood;
 import org.millenaire.items.ItemMillParchment;
+import org.millenaire.items.ItemMillSign;
 import org.millenaire.items.ItemMillTool;
 import org.millenaire.items.ItemMillWallet;
 import org.millenaire.items.ItemMillWand;
@@ -82,6 +83,7 @@ public class Millenaire
 		ItemMillTool.preinitialize();
 		ItemMillAmulet.preinitialize();
 		ItemMillWallet.preinitialize();
+		ItemMillSign.preinitialize();
 		ItemMillParchment.preinitialize();
 		BlockDecorative.preinitialize();
 		BlockMillCrops.preinitialize();
@@ -132,6 +134,7 @@ public class Millenaire
 			ItemMillWand.render();
 			ItemMillTool.render();
 			ItemMillWallet.render();
+			ItemMillSign.render();
 			BlockDecorative.render();
 			BlockMillCrops.render();
 			BlockMillChest.render();

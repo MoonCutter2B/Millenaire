@@ -32,7 +32,7 @@ import net.minecraftforge.common.util.Constants;
 
 public class PlanIO {
 
-	public static final String FILE_VERSION = "0.2";
+	public static final String FILE_VERSION = "1";
 	
 	//IBlockState[y][z][x]
 	public static void exportBuilding(EntityPlayer player, BlockPos startPoint) {
@@ -42,10 +42,15 @@ public class PlanIO {
 			String buildingName = sign.signText[0].getUnformattedText();
 			boolean saveSnow = (sign.signText[3].getUnformattedText().toLowerCase() == "snow");
 
-			int buildingLevel = 0;
+			int buildingLevel = 1;
 
 			if(sign.signText[1] != null && sign.signText[1].getUnformattedText().length() > 0) {
 				buildingLevel = Integer.parseInt(sign.signText[1].getUnformattedText());
+			}
+			
+			if(buildingLevel <= 0) {
+				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.level0");
+				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
 			}
 
 			int startLevel = -1;
@@ -57,6 +62,9 @@ public class PlanIO {
 			if(buildingName == null || buildingName.length() == 0) {
 				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.noname");
 				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
+				PacketSayTranslatedMessage packet2 = new PacketSayTranslatedMessage("message.notcompleted");
+				Millenaire.simpleNetworkWrapper.sendTo(packet2, (EntityPlayerMP)player);
+				return;
 			}
 			boolean foundEnd = false;
 			int xEnd = startPoint.getX() + 1;
@@ -148,6 +156,8 @@ public class PlanIO {
 			e.printStackTrace();
 			PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.unknown");
 			Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
+			PacketSayTranslatedMessage packet2 = new PacketSayTranslatedMessage("message.notcompleted");
+			Millenaire.simpleNetworkWrapper.sendTo(packet2, (EntityPlayerMP)player);
 		}
 	}
 
@@ -164,6 +174,9 @@ public class PlanIO {
 			if(name == null || name.length() == 0) {
 				PacketSayTranslatedMessage message = new PacketSayTranslatedMessage("message.error.exporting.noname");
 				Millenaire.simpleNetworkWrapper.sendTo(message, (EntityPlayerMP)player);
+				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.notcompleted");
+				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
+				return;
 			}
 
 			World world = MinecraftServer.getServer().getEntityWorld();
@@ -172,6 +185,9 @@ public class PlanIO {
 			if(!schem.exists()) {
 				PacketSayTranslatedMessage message = new PacketSayTranslatedMessage("message.error.importing.nofile");
 				Millenaire.simpleNetworkWrapper.sendTo(message, (EntityPlayerMP)player);
+				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.notcompleted");
+				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
+				return;
 			}
 			FileInputStream fis = new FileInputStream(schem);
 
@@ -181,7 +197,6 @@ public class PlanIO {
 			for(int x = 0; x < plan.width; x++) {
 				for(int y = 0; y < plan.height; y++) {
 					for(int z = 0; z < plan.length; z++) {
-						//System.out.println("setting block" + (x + startPos.getX()) +", " + (y + startPos.getY() + plan.depth) + ", " + (z + startPos.getZ()) + ":" + blocks[y][z][x]);
 						world.setBlockState(new BlockPos(x + startPos.getX() + 1, y + startPos.getY() + plan.depth, z + startPos.getZ() + 1), blocks[y][z][x], 2);
 					}
 				}

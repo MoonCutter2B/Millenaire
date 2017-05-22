@@ -183,9 +183,11 @@ option.negateVillage.text=Do you really want to erase this village from the worl
 
 message.notimplemented=This hasn't been implemented yet!
 message.completed=The operation has been completed!
+message.notcompleted=The operation could not be completed.
 message.error.unknown=An unknown error occurred :(
 message.error.exporting.zaxis=No end of the building found on the Z-Axis. Make sure the signs are <=256 blocks apart
 message.error.exporting.xaxis=No end of the building found on the X-Axis. Make sure the signs are <=256 blocks apart
 message.error.exporting.noname=You must give the building plan's name on the first line
 message.error.importing.nofile=Building not found. Check the Name and Level
 message.error.exporting.dimensions=The dimensions of the building provided don't match the dimensions of the building on file!
+message.error.exporting.level0=The level specified is less than 1. This will never be able to spawn in the world.

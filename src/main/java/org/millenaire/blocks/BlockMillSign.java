@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.millenaire.Millenaire;
 import org.millenaire.entities.TileEntityMillSign;
+import org.millenaire.items.ItemMillSign;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWallSign;
@@ -61,7 +62,7 @@ public class BlockMillSign extends BlockWallSign
 
 	public static void preinitialize()
 	{
-		blockMillSign = new BlockMillSign().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("blockMillSign");
+		blockMillSign = new BlockMillSign().setUnlocalizedName("blockMillSign");
 		GameRegistry.registerBlock(blockMillSign, "blockMillSign");
 
 		GameRegistry.registerTileEntity(TileEntityMillSign.class, "tileEntityMillSign");

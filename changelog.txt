@@ -12,3 +12,5 @@
 7.0.0-A2.1
 	Changed the Building format-All levels of a building are stored in one file
 	Fixed Bugs
+7.0.0-A3
+    Fixed #659175 - bow + Bug of display for the item galianite block

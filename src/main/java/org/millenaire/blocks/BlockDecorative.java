@@ -45,8 +45,6 @@ public class BlockDecorative
 		
 		public static Block blockSodPlanks;
 		public static Block blockCarving;
-		
-		public static Block blockGalianite;
 
 	public static void preinitialize()
     {
