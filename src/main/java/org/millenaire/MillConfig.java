@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.millenaire.events.MillenaireEventHandler;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -54,6 +56,7 @@ public class MillConfig
 	public static void eventRegister()
 	{
 		MinecraftForge.EVENT_BUS.register(new ConfigEventHandler());
+		MinecraftForge.EVENT_BUS.register(new MillenaireEventHandler());
 	}
 	
 	public static Configuration getConfig()
@@ -217,7 +220,8 @@ public class MillConfig
 		{
 			if(event.modID == Millenaire.MODID && !event.isWorldRunning)
 			{
-					syncFromGui();
+				syncFromGui();
+				System.out.println("Reloaded Config");
 			}
 		}
 	}

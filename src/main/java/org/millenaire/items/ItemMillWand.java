@@ -5,6 +5,7 @@ import java.util.List;
 import org.millenaire.CommonUtilities;
 import org.millenaire.MillCulture;
 import org.millenaire.Millenaire;
+import org.millenaire.PlayerTracker;
 import org.millenaire.VillageTracker;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
@@ -153,7 +154,8 @@ public class ItemMillWand extends Item
 				{
 					boolean hasCrop;
 
-					hasCrop = VillageTracker.get(worldIn).removePlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos));
+					//hasCrop = VillageTracker.get(worldIn).removePlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos));
+					hasCrop = PlayerTracker.get(playerIn).canPlayerUseCrop(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getSeed());
 					System.out.println(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos).toString());
 
 					if(worldIn.isRemote)
@@ -167,9 +169,10 @@ public class ItemMillWand extends Item
 				else
 				{
 					boolean succeeded = false;
-					if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos)))
+					if(!PlayerTracker.get(playerIn).canPlayerUseCrop(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getSeed()))
 					{
-						VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos));
+						//VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos));
+						PlayerTracker.get(playerIn).setCanUseCrop(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getSeed(), true);
 						succeeded = true;
 					}
 
@@ -185,14 +188,14 @@ public class ItemMillWand extends Item
 			//Allow you to plant all Crops
 			else if(worldIn.getBlockState(pos).getBlock() == Blocks.cake)
 			{
-				if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, BlockMillCrops.grapes))
-					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.grapes);
-				if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, BlockMillCrops.maize))
-					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.maize);
-				if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, BlockMillCrops.rice))
-					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.rice);
-				if(!VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, BlockMillCrops.turmeric))
-					VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, BlockMillCrops.turmeric);
+				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.grapes))
+					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.grapes, true);
+				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.maize))
+					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.maize, true);
+				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.rice))
+					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.rice, true);
+				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.turmeric))
+					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.turmeric, true);
 
 				if(worldIn.isRemote)
 				{

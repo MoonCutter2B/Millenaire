@@ -1,6 +1,6 @@
 package org.millenaire.items;
 
-import org.millenaire.VillageTracker;
+import org.millenaire.PlayerTracker;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +25,7 @@ public class ItemMillSeeds extends ItemSeeds
     {
 		if(!worldIn.isRemote)
 		{
-			if(VillageTracker.get(worldIn).canPlayerUseCrop(playerIn, stack.getItem()))
+			if(PlayerTracker.get(playerIn).canPlayerUseCrop(stack.getItem()))
 				return super.onItemUse(stack, playerIn, worldIn, pos, side, hitX, hitY, hitZ);
 			else
 				return false;
