@@ -15,24 +15,24 @@ import org.millenaire.networking.PacketSayTranslatedMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 public class PlanIO {
 
-	public static final String FILE_VERSION = "1";
+	public static final String FILE_VERSION = "2";
 	
 	//IBlockState[y][z][x]
 	public static void exportBuilding(EntityPlayer player, BlockPos startPoint) {
@@ -62,9 +62,7 @@ public class PlanIO {
 			if(buildingName == null || buildingName.length() == 0) {
 				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.noname");
 				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
-				PacketSayTranslatedMessage packet2 = new PacketSayTranslatedMessage("message.notcompleted");
-				Millenaire.simpleNetworkWrapper.sendTo(packet2, (EntityPlayerMP)player);
-				return;
+				throw new Exception("Ahhh!");
 			}
 			boolean foundEnd = false;
 			int xEnd = startPoint.getX() + 1;
@@ -80,6 +78,7 @@ public class PlanIO {
 			if(!foundEnd) {
 				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.xaxis");
 				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
+				throw new Exception("Ahhh!");
 			}
 			foundEnd = false;
 			int zEnd = startPoint.getZ() + 1;
@@ -95,6 +94,7 @@ public class PlanIO {
 			if(!foundEnd) {
 				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.zaxis");
 				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
+				throw new Exception("Ahhh!");
 			}
 			final int width = xEnd - startPoint.getX() - 1;
 			final int length = zEnd - startPoint.getZ() - 1;
@@ -166,7 +166,7 @@ public class PlanIO {
 		try {
 			TileEntitySign te = (TileEntitySign)player.getEntityWorld().getTileEntity(startPos);
 			String name = te.signText[0].getUnformattedText();
-			int level = 0;
+			int level = 1;
 			if(te.signText[1] != null && te.signText[1].getUnformattedText().length() > 0) {
 				level = Integer.parseInt(te.signText[1].getUnformattedText());
 			}
@@ -181,7 +181,7 @@ public class PlanIO {
 
 			World world = MinecraftServer.getServer().getEntityWorld();
 
-			File schem = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + "\\millenaire\\exports\\" + name + ".mlplan");
+			File schem = getBuildingFile(name);
 			if(!schem.exists()) {
 				PacketSayTranslatedMessage message = new PacketSayTranslatedMessage("message.error.importing.nofile");
 				Millenaire.simpleNetworkWrapper.sendTo(message, (EntityPlayerMP)player);
@@ -214,8 +214,10 @@ public class PlanIO {
 
 		//width = x-axis, height = y-axis, length = z-axis
 		short width, height, length;
-		byte[] blocks;
-		byte[] data;
+		int[] blocks = {};
+		int[] data = {};
+		
+		String version = nbt.getString("Version");
 
 		width = nbt.getShort("Width");
 		height = nbt.getShort("Height");
@@ -223,8 +225,37 @@ public class PlanIO {
 
 		//blocks = nbt.getByteArray("Blocks");
 		NBTTagList list = nbt.getTagList("level_" + level, Constants.NBT.TAG_COMPOUND);
-		blocks = list.getCompoundTagAt(0).getByteArray("Blocks");
-		data = list.getCompoundTagAt(0).getByteArray("Data");
+//		if(version == "0.2") {
+//			byte[] blockArray = list.getCompoundTagAt(0).getByteArray("Blocks");
+//			byte[] dataArray = list.getCompoundTagAt(0).getByteArray("Data");
+//			
+//			blocks = new int[blockArray.length];
+//			data = new int[dataArray.length];
+//			
+//			for(int x = 0; x <= blockArray.length; x++) {
+//				blocks[x] = (int)blockArray[x];
+//				data[x] = (int)dataArray[x];
+//			}
+//		}
+//		else if(version == "2") {
+			String blockdata = list.getCompoundTagAt(0).getString("BlockData");
+			System.out.println(blockdata);
+			String[] split = blockdata.split(";");
+			blocks = new int[split.length];
+			data = new int[split.length];
+			for(int i = 0; i <= split.length -1; i++) {
+				String s = split[i];
+				String[] s1 = s.split(":");
+				System.out.println(s);
+				blocks[i] = Integer.parseInt(s1[0]);
+				data[i] = Integer.parseInt(s1[1]);
+			}
+//		}
+//		else {
+//			System.out.println("Argg!");
+//			return null;
+//		}
+		
 
 		IBlockState[] states = new IBlockState[width*length*height];
 
@@ -291,7 +322,7 @@ public class PlanIO {
 	}
 	
 	public static File getBuildingFile(final String name) {
-		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + "\\millenaire\\exports\\");
+		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + File.separator + "millenaire" + File.separator + "exports" + File.separator);
 		if(!f.exists())
 			f.mkdirs();
 
@@ -301,16 +332,16 @@ public class PlanIO {
 	
 	private static boolean valid(short width, short height, short length, short depth, NBTTagCompound tag) {
 		boolean valid = true;
-		if(tag.getShort("Width") != width) {
+		if(tag.getShort("Width") != width && tag.getShort("Width") != 0) {
 			valid = false;
 		}
-		else if(tag.getShort("Height") != height) {
+		else if(tag.getShort("Height") != height && tag.getShort("Height") != 0) {
 			valid = false;
 		}
-		else if(tag.getShort("Length") != length) {
+		else if(tag.getShort("Length") != length && tag.getShort("Length") != 0) {
 			valid = false;
 		}
-		else if(tag.getShort("StartLevel") != depth) {
+		else if(tag.getShort("StartLevel") != depth && tag.getShort("StartLevel") != 0) {
 			valid = false;
 		}
 		return valid;
@@ -328,8 +359,9 @@ public class PlanIO {
 	 * @param maleVillagers the list of male villagers in the building
 	 * @param femaleVillagers the list of female villagers in the building
 	 * @return the file that is outputted to disk
+	 * @throws Exception 
 	 */
-	public static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, VillagerType[] maleVillagers, VillagerType[] femaleVillagers, EntityPlayer player) {
+	public static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, VillagerType[] maleVillagers, VillagerType[] femaleVillagers, EntityPlayer player) throws Exception {
 		File f1 = getBuildingFile(name);
 
 		NBTTagCompound tag = getBuildingTag(name);
@@ -337,23 +369,35 @@ public class PlanIO {
 		if(!valid(width, height, length, depth, tag)) {
 			PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.dimensions");
 			Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
+			throw new Exception("Ahhh!");
 		}
 
 		byte[] blockids = new byte[width*height*length], data = new byte[width*height*length];
-
+		
+		String blocklist = "";
+		String[] s = new String[width*height*length];
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
 				for(int z = 0; z < length; z++) {
-					blockids[(y*length+z)*width+x] = (byte)Block.getIdFromBlock(blocks[y][z][x].getBlock());
-					data[(y*length+z)*width+x] = (byte)blocks[y][z][x].getBlock().getMetaFromState(blocks[y][z][x]);
+					s[(y*length+z)*width+x] = Block.getIdFromBlock(blocks[y][z][x].getBlock()) + ":" + blocks[y][z][x].getBlock().getMetaFromState(blocks[y][z][x]) + ";";
+					
+					//blocklist += Block.getIdFromBlock(blocks[y][z][x].getBlock()) + ":" + blocks[y][z][x].getBlock().getMetaFromState(blocks[y][z][x]) + ";";
+					
+					//blockids[(y*length+z)*width+x] = (byte)Block.getIdFromBlock(blocks[y][z][x].getBlock());
+					//data[(y*length+z)*width+x] = (byte)blocks[y][z][x].getBlock().getMetaFromState(blocks[y][z][x]);
 				}
 			}
+		}
+		
+		for(String s1 : s) {
+			blocklist += s1;
 		}
 
 		NBTTagList LevelTagComp = new NBTTagList();
 		NBTTagCompound tag2 = new NBTTagCompound();
-		tag2.setByteArray("Blocks", blockids);
-		tag2.setByteArray("Data", data);
+		tag2.setString("BlockData", blocklist);
+		//tag2.setByteArray("Blocks", blockids);
+		//tag2.setByteArray("Data", data);
 		LevelTagComp.appendTag(tag2);
 
 		tag.setTag("level_" + level, LevelTagComp);
@@ -369,11 +413,11 @@ public class PlanIO {
 		NBTTagList MaleList = new NBTTagList();
 		for(int i = 0; i < maleVillagers.length; i++)
 		{
-			String s = maleVillagers[i].id;
-			if(s != null)
+			String s3 = maleVillagers[i].id;
+			if(s3 != null)
 			{
 				NBTTagCompound tag3 = new NBTTagCompound();
-				tag3.setString("" + i, s);
+				tag3.setString("" + i, s3);
 				MaleList.appendTag(tag3);
 			}
 		}
@@ -381,11 +425,11 @@ public class PlanIO {
 		NBTTagList FemaleList = new NBTTagList();
 		for(int i = 0; i < femaleVillagers.length; i++)
 		{
-			String s = femaleVillagers[i].id;
-			if(s != null)
+			String s4 = femaleVillagers[i].id;
+			if(s4 != null)
 			{
 				NBTTagCompound tag3 = new NBTTagCompound();
-				tag3.setString("" + i, s);
+				tag3.setString("" + i, s4);
 				FemaleList.appendTag(tag3);
 			}
 		}

@@ -189,5 +189,6 @@ message.error.exporting.zaxis=No end of the building found on the Z-Axis. Make s
 message.error.exporting.xaxis=No end of the building found on the X-Axis. Make sure the signs are <=256 blocks apart
 message.error.exporting.noname=You must give the building plan's name on the first line
 message.error.importing.nofile=Building not found. Check the Name and Level
+message.error.importing.wrongversion=The Building you are trying to import is using an invalid building format.
 message.error.exporting.dimensions=The dimensions of the building provided don't match the dimensions of the building on file!
 message.error.exporting.level0=The level specified is less than 1. This will never be able to spawn in the world.

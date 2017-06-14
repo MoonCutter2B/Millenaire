@@ -2,7 +2,8 @@
     "forge_marker": 1,
     "defaults": {
     	"textures": {
-    		"top": "millenaire:blocks/tilestopvert",
+       	    "particle": "blocks:stonebrick",
+       		"top": "millenaire:blocks/tilestopvert",
     		"bottom": "blocks/stonebrick",
     		"front": "millenaire:blocks/tileshalffront",
         	"back": "millenaire:blocks/tileshalffront",
