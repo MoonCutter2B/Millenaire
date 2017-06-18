@@ -191,4 +191,4 @@ message.error.exporting.noname=You must give the building plan's name on the fir
 message.error.importing.nofile=Building not found. Check the Name and Level
 message.error.importing.wrongversion=The Building you are trying to import is using an invalid building format.
 message.error.exporting.dimensions=The dimensions of the building provided don't match the dimensions of the building on file!
-message.error.exporting.level0=The level specified is less than 1. This will never be able to spawn in the world.
+message.error.exporting.level0=Warning! The level specified is less than 1. This will never be able to spawn in the world.

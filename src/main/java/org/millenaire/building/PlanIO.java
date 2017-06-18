@@ -32,8 +32,8 @@ import net.minecraftforge.common.util.Constants;
 
 public class PlanIO {
 
-	public static final String FILE_VERSION = "2";
-	
+	public static final String FILE_VERSION = "1";
+
 	//IBlockState[y][z][x]
 	public static void exportBuilding(EntityPlayer player, BlockPos startPoint) {
 		try {
@@ -47,7 +47,7 @@ public class PlanIO {
 			if(sign.signText[1] != null && sign.signText[1].getUnformattedText().length() > 0) {
 				buildingLevel = Integer.parseInt(sign.signText[1].getUnformattedText());
 			}
-			
+
 			if(buildingLevel <= 0) {
 				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.level0");
 				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
@@ -62,7 +62,7 @@ public class PlanIO {
 			if(buildingName == null || buildingName.length() == 0) {
 				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.noname");
 				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
-				throw new Exception("Ahhh!");
+				throw new Exception("exporting.noname");
 			}
 			boolean foundEnd = false;
 			int xEnd = startPoint.getX() + 1;
@@ -78,7 +78,7 @@ public class PlanIO {
 			if(!foundEnd) {
 				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.xaxis");
 				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
-				throw new Exception("Ahhh!");
+				throw new Exception("exporting.xaxis");
 			}
 			foundEnd = false;
 			int zEnd = startPoint.getZ() + 1;
@@ -154,8 +154,6 @@ public class PlanIO {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-			PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.unknown");
-			Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
 			PacketSayTranslatedMessage packet2 = new PacketSayTranslatedMessage("message.notcompleted");
 			Millenaire.simpleNetworkWrapper.sendTo(packet2, (EntityPlayerMP)player);
 		}
@@ -216,46 +214,26 @@ public class PlanIO {
 		short width, height, length;
 		int[] blocks = {};
 		int[] data = {};
-		
+
 		String version = nbt.getString("Version");
 
 		width = nbt.getShort("Width");
 		height = nbt.getShort("Height");
 		length = nbt.getShort("Length"); 
 
-		//blocks = nbt.getByteArray("Blocks");
 		NBTTagList list = nbt.getTagList("level_" + level, Constants.NBT.TAG_COMPOUND);
-//		if(version == "0.2") {
-//			byte[] blockArray = list.getCompoundTagAt(0).getByteArray("Blocks");
-//			byte[] dataArray = list.getCompoundTagAt(0).getByteArray("Data");
-//			
-//			blocks = new int[blockArray.length];
-//			data = new int[dataArray.length];
-//			
-//			for(int x = 0; x <= blockArray.length; x++) {
-//				blocks[x] = (int)blockArray[x];
-//				data[x] = (int)dataArray[x];
-//			}
-//		}
-//		else if(version == "2") {
-			String blockdata = list.getCompoundTagAt(0).getString("BlockData");
-			System.out.println(blockdata);
-			String[] split = blockdata.split(";");
-			blocks = new int[split.length];
-			data = new int[split.length];
-			for(int i = 0; i <= split.length -1; i++) {
-				String s = split[i];
-				String[] s1 = s.split(":");
-				System.out.println(s);
-				blocks[i] = Integer.parseInt(s1[0]);
-				data[i] = Integer.parseInt(s1[1]);
-			}
-//		}
-//		else {
-//			System.out.println("Argg!");
-//			return null;
-//		}
-		
+		String blockdata = list.getCompoundTagAt(0).getString("BlockData");
+		System.out.println(blockdata);
+		String[] split = blockdata.split(";");
+		blocks = new int[split.length];
+		data = new int[split.length];
+		for(int i = 0; i <= split.length -1; i++) {
+			String s = split[i];
+			String[] s1 = s.split(":");
+			System.out.println(s);
+			blocks[i] = Integer.parseInt(s1[0]);
+			data[i] = Integer.parseInt(s1[1]);
+		}
 
 		IBlockState[] states = new IBlockState[width*length*height];
 
@@ -320,7 +298,7 @@ public class PlanIO {
 		}
 
 	}
-	
+
 	public static File getBuildingFile(final String name) {
 		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + File.separator + "millenaire" + File.separator + "exports" + File.separator);
 		if(!f.exists())
@@ -329,7 +307,7 @@ public class PlanIO {
 		File f1 = new File(f, name + ".mlplan");
 		return f1;
 	}
-	
+
 	private static boolean valid(short width, short height, short length, short depth, NBTTagCompound tag) {
 		boolean valid = true;
 		if(tag.getShort("Width") != width && tag.getShort("Width") != 0) {
@@ -339,9 +317,6 @@ public class PlanIO {
 			valid = false;
 		}
 		else if(tag.getShort("Length") != length && tag.getShort("Length") != 0) {
-			valid = false;
-		}
-		else if(tag.getShort("StartLevel") != depth && tag.getShort("StartLevel") != 0) {
 			valid = false;
 		}
 		return valid;
@@ -365,7 +340,7 @@ public class PlanIO {
 		File f1 = getBuildingFile(name);
 
 		NBTTagCompound tag = getBuildingTag(name);
-		
+
 		if(!valid(width, height, length, depth, tag)) {
 			PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.dimensions");
 			Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
@@ -373,22 +348,22 @@ public class PlanIO {
 		}
 
 		byte[] blockids = new byte[width*height*length], data = new byte[width*height*length];
-		
+
 		String blocklist = "";
 		String[] s = new String[width*height*length];
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
 				for(int z = 0; z < length; z++) {
 					s[(y*length+z)*width+x] = Block.getIdFromBlock(blocks[y][z][x].getBlock()) + ":" + blocks[y][z][x].getBlock().getMetaFromState(blocks[y][z][x]) + ";";
-					
+
 					//blocklist += Block.getIdFromBlock(blocks[y][z][x].getBlock()) + ":" + blocks[y][z][x].getBlock().getMetaFromState(blocks[y][z][x]) + ";";
-					
+
 					//blockids[(y*length+z)*width+x] = (byte)Block.getIdFromBlock(blocks[y][z][x].getBlock());
 					//data[(y*length+z)*width+x] = (byte)blocks[y][z][x].getBlock().getMetaFromState(blocks[y][z][x]);
 				}
 			}
 		}
-		
+
 		for(String s1 : s) {
 			blocklist += s1;
 		}
@@ -403,7 +378,7 @@ public class PlanIO {
 		tag.setTag("level_" + level, LevelTagComp);
 
 		tag.setString("Version", FILE_VERSION);
-		
+
 		tag.setShort("Width", width);
 		tag.setShort("Height", height);
 		tag.setShort("Length", length);

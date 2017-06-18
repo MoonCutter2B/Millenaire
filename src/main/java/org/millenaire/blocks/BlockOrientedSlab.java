@@ -68,19 +68,20 @@ public class BlockOrientedSlab extends BlockSlab
     @Override
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
-        return this.getDefaultState();
+        IBlockState iblockstate = super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM);
+        return this.isDouble() ? iblockstate : (facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate : iblockstate.withProperty(HALF, BlockSlab.EnumBlockHalf.TOP));
     }
     
 	@Override
     public IProperty getVariantProperty()
     {
-        return SEAMLESS;
+        return FACING;
     }
 
     @Override
     public Object getVariant(ItemStack stack)
     {
-        return Boolean.valueOf((stack.getMetadata() & 8) != 0);
+        return EnumFacing.getHorizontal(3);//Boolean.valueOf((stack.getMetadata() & 8) != 0);
     }
     
     @SideOnly(Side.CLIENT)
@@ -114,7 +115,7 @@ public class BlockOrientedSlab extends BlockSlab
 	@Override
     public IBlockState getStateFromMeta(int meta)
     {
-        IBlockState iblockstate = this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 7));
+        IBlockState iblockstate = this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(3));
 
         if (this.isDouble())
         {
@@ -132,7 +133,7 @@ public class BlockOrientedSlab extends BlockSlab
     public int getMetaFromState(IBlockState state)
     {
         byte b0 = 0;
-        int i = b0 | (state.getValue(FACING)).getIndex();
+        int i = b0 | (0);
 
         if (this.isDouble())
         {
@@ -154,5 +155,4 @@ public class BlockOrientedSlab extends BlockSlab
     {
         return this.isDouble() ? new BlockState(this, new IProperty[] {SEAMLESS, FACING}): new BlockState(this, new IProperty[] {HALF, FACING});
     }
-
 }
