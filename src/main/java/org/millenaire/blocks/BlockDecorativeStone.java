@@ -15,7 +15,6 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
 public class BlockDecorativeStone extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeStone.EnumType.class);

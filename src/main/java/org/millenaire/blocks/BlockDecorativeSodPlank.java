@@ -15,7 +15,6 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
 public class BlockDecorativeSodPlank extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeSodPlank.EnumType.class);

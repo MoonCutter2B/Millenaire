@@ -1,6 +1,7 @@
 package org.millenaire.items;
 
 import org.millenaire.Millenaire;
+import org.millenaire.blocks.BlockMillSign;
 
 import net.minecraft.block.BlockStandingSign;
 import net.minecraft.block.BlockWallSign;
@@ -57,7 +58,7 @@ public class ItemMillSign extends Item
 			}
 			else
 			{
-				worldIn.setBlockState(pos, Blocks.wall_sign.getDefaultState().withProperty(BlockWallSign.FACING, side), 3);
+				worldIn.setBlockState(pos, BlockMillSign.blockMillSign.getDefaultState().withProperty(BlockMillSign.FACING, side)/*Blocks.wall_sign.getDefaultState().withProperty(BlockWallSign.FACING, side)*/, 3);
 
 
 				--stack.stackSize;

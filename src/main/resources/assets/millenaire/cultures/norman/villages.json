@@ -1,0 +1,82 @@
+{
+    "types": [
+        {
+            "id": "test1",
+            "tiers": {
+                "1": [
+                    {
+                        "ID": "grove2",
+                        "lvl": 0
+                    },
+                    {
+                        "ID": "mine1",
+                        "lvl": 0
+                    },
+                    {
+                        "ID": "house1",
+                        "lvl": 0
+                    },
+                    {
+                        "ID": "house2",
+                        "lvl": 1
+                    }
+                ],
+                "2": [
+                    {
+                        "ID": "mine1",
+                        "lvl": 2
+                    },
+                    {
+                        "ID": "house1",
+                        "lvl": 2
+                    }
+                ]
+            },
+            "startingBuildings": [
+                {
+                    "ID": "townhall1",
+                    "lvl": 0
+                }
+            ]
+        },
+        {
+            "id": "test2",
+            "tiers": {
+                "1": [
+                    {
+                        "ID": "grove1",
+                        "lvl": 0
+                    },
+                    {
+                        "ID": "mine1",
+                        "lvl": 1
+                    },
+                    {
+                        "ID": "house1",
+                        "lvl": 1
+                    },
+                    {
+                        "ID": "house2",
+                        "lvl": 0
+                    }
+                ],
+                "2": [
+                    {
+                        "ID": "mine1",
+                        "lvl": 3
+                    },
+                    {
+                        "ID": "house1",
+                        "lvl": 2
+                    }
+                ]
+            },
+            "startingBuildings": [
+                {
+                    "ID": "townhall2",
+                    "lvl": 0
+                }
+            ]
+        }
+    ]
+}

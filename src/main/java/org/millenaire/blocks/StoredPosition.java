@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
 public class StoredPosition extends Block
 {
 	public StoredPosition() 

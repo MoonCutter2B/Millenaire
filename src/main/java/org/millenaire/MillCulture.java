@@ -1,10 +1,22 @@
 package org.millenaire;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.millenaire.building.BuildingPlan;
 import org.millenaire.building.BuildingProject;
+import org.millenaire.util.JsonHelper;
+import org.millenaire.util.JsonHelper.VillageTypes;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import net.minecraft.server.MinecraftServer;
 
 public class MillCulture 
 {
@@ -117,6 +129,30 @@ public class MillCulture
 		throw new Exception("getCulture called with incorrect culture.  Something broke.");
 	}
 	
+	public void exportVillages(JsonHelper.VillageTypes villagetypes) {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		System.out.println(gson.toJson(villagetypes));
+		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + File.separator + "millenaire" + File.separator + "exports" + File.separator);
+		File f1 = new File(f, "villages.json");
+		try {
+			f.mkdirs();
+			f1.createNewFile();
+			String g = gson.toJson(villagetypes);
+			FileWriter fw = new FileWriter(f1);
+			fw.write(g);
+			fw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadVillageTypes() {
+		Gson gson = new Gson();
+		InputStream is = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + this.cultureName.toLowerCase() + "/villages.json");
+		VillageTypes vt = gson.fromJson(new InputStreamReader(is), VillageTypes.class);
+		this.villageTypes = vt.types;
+	}
+	
 	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
 	public static MillCulture normanCulture;
@@ -125,11 +161,10 @@ public class MillCulture
 	public static MillCulture japaneseCulture;
 	public static MillCulture byzantineCulture;
 	
-	public static MillCulture millDefault;
+	//public static MillCulture millDefault;
 	
 	public static void preinitialize()
 	{
-		//MAKE SURE TO ADD NEW VILLAGERS AT THE END OF THE LIST - OTHERWISE THINGS BREAK!!!
 		//Norman Initialization
 		normanCulture= new MillCulture("norman").addNameList("familyNames", new String[]{"Waldemar", "Vilfrid", "Thorstein", "Tankred", "Svenning", "Sigvald", "Sigmar", "Roland", "Reginald", "Radulf", "Otvard", "Odomar", "Norbert", "Manfred", "Lothar", "Lambert", "Klothar", "Ingmar", "Hubert", "Gildwin", "Gervin", "Gerald", "Froward", "Fredegar", "Falko", "Elfride", "Erwin", "Ditmar", "Didrik", "Bernhard", "Answald", "Adalrik"})
 				.addNameList("nobleFamilyNames", new String[]{"de Bayeux", "de Conteville", "de Mortain", "de Falaise", "de Ryes"})
@@ -174,9 +209,9 @@ public class MillCulture
 				new VillagerType("normanArmoredBandit", "ArmoredBandit", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanArmoredBandit0.png", "millenaire:textures/entities/norman/normanArmoredBandit1.png"}, false, false, 0)
 		});
 		
-		normanCulture.setVillageTypes(new VillageType[]{
+		/*normanCulture.setVillageTypes(new VillageType[]{
 				new VillageType("test").setBuildingTypes(new BuildingPlan[]{BuildingProject.normanCommunauteA0}, new BuildingPlan[]{BuildingProject.testBuilding}, new BuildingPlan[]{BuildingProject.testBuilding}).setStartingBuildings(new BuildingPlan[]{BuildingProject.normanCommunauteA0})				
-		});
+		});*/
 		
 		//Hindi Initialization
 		hindiCulture = new MillCulture("hindi").addNameList("highCasteFamilyNames", new String[]{"Sinha", "Kuwar", "Kuwar", "Mishra", "Pandey", "Jha", "Khatri"})
@@ -339,6 +374,39 @@ public class MillCulture
 				new VillagerType("byzantinePlayerSoldier", "Stratiotes", 0, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineSoldier0.png"}, false, false, 16),
 				new VillagerType("byzantineWife", "Gynaika", 1, byzantineCulture.nameLists.get("familyNames"), byzantineCulture.nameLists.get("femaleNames"), new String[]{"millenaire:textures/entities/byzantine/byzantineWife0.png", "millenaire:textures/entities/byzantine/byzantineWife1.png", "millenaire:textures/entities/byzantine/byzantineWife2.png"}, false, false, 0)
 		});
+		
+		final VillageTypes types = new VillageTypes(new VillageType[] {
+			new VillageType("test1").setTier(1, 
+				new BuildingProject[] {
+					new BuildingProject("grove2", 0), 
+					new BuildingProject("mine1", 0), 
+					new BuildingProject("house1", 0),
+					new BuildingProject("house2", 1)
+				}).setTier(2, 
+					new BuildingProject[] {
+						new BuildingProject("mine1", 2),
+						new BuildingProject("house1", 2)
+				}).setStartingBuildings(new BuildingProject[] {new BuildingProject("townhall1", 0)}),//.setBuildingTypes(new String[]{"primary1", "primary2"}, new String[]{"secondary1", "secondary2"}, new String[]{"player1"}).setStartingBuildings(new String[] {"townhall1", "grove1", "mine1"}),
+			new VillageType("test2").setTier(1, 
+				new BuildingProject[] {
+					new BuildingProject("grove1", 0), 
+					new BuildingProject("mine1", 1), 
+					new BuildingProject("house1", 1),
+					new BuildingProject("house2", 0)
+				}).setTier(2, 
+					new BuildingProject[] {
+						new BuildingProject("mine1", 3),
+						new BuildingProject("house1", 2)
+				}).setStartingBuildings(new BuildingProject[] {new BuildingProject("townhall2", 0)})//.setBuildingTypes(new String[]{"primary1", "primary2"}, new String[]{"secondary1", "secondary2"}, new String[]{"player1", "player2"}).setStartingBuildings(new String[] {"townhall2", "grove1", "grove2", "mine1"})
+		});
+		
+		//normanCulture.exportVillages(types);
+		
+		normanCulture.loadVillageTypes();
+		
+		for(VillageType type : normanCulture.villageTypes) {
+			System.out.println(type.id);
+		}
 	}
 
 	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -347,37 +415,51 @@ public class MillCulture
 	{
 		public String id;
 		
-		public BuildingPlan[] primaryBuildings;
-		public BuildingPlan[] secondaryBuildings;
-		public BuildingPlan[] playerBuildings;
+		//public String[] primaryBuildings;
+		//public String[] secondaryBuildings;
+		//public String[] playerBuildings;
+		
+		public Map<Integer, BuildingProject[]> tiers = new HashMap<Integer, BuildingProject[]>();
 		
 		//First Building in this array should always be the TownHall
-		public BuildingPlan[] startingBuildings;
+		public BuildingProject[] startingBuildings;
+		
+		public VillageType() {}
 		
 		public VillageType(String idIn)
 		{
 			id = idIn;
 		}
 		
-		public VillageType setBuildingTypes(BuildingPlan[] primaryIn, BuildingPlan[] secondaryIn, BuildingPlan[] playerIn)
-		{
-			this.primaryBuildings = primaryIn;
-			this.secondaryBuildings = secondaryIn;
-			this.playerBuildings = playerIn;
+		public VillageType setTier(int tier, BuildingProject[] buildings) {
+			tiers.put(tier, buildings);
 			
 			return this;
 		}
+		
+		public VillageType setBuildingTypes(String[] primaryIn, String[] secondaryIn, String[] playerIn)
+		{
+			//this.primaryBuildings = primaryIn;
+			//this.secondaryBuildings = secondaryIn;
+			//this.playerBuildings = playerIn;
+			
+			return this;
+		}
+		
+		public VillageType setID(String id) {
+			this.id = id;
+			return this;
+		}
 
-		public VillageType setStartingBuildings(BuildingPlan[]startIn)
+		public VillageType setStartingBuildings(BuildingProject[] startIn)
 		{
 			this.startingBuildings = startIn;
-			
 			return this;
 		}
 		
 		public String getVillageName()
 		{
-			return "Whoville";
+			return id;
 		}
 	}
 }

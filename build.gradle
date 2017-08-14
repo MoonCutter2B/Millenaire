@@ -24,7 +24,7 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = "1.8.9-7.0.0-A2.1"
+version = "1.8.9-7.0.0-A2.3"
 group= "org.millenaire.millenaire" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "millenaire"
 

@@ -68,7 +68,7 @@ public class TileEntityVillageStone extends TileEntity
         		}
         			
         		if(!world.isRemote)
-        			System.out.println(culture + " village " + villageName + " crated at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
+        			System.out.println(culture + " village " + villageName + " created at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
         	}
         	catch(Exception ex)
         	{

@@ -20,7 +20,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings("unchecked")
 public class BlockDecorative 
 {
 	//To become the customizable block, also to hold declarations

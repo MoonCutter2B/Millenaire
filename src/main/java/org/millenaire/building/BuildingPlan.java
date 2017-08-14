@@ -265,7 +265,6 @@ public class BuildingPlan
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private boolean freeBuild(IBlockState state)
 	{
 		if(state.getBlock() == Blocks.dirt || state.getBlock() == Blocks.water || state.getBlock() == Blocks.leaves || state.getBlock() == Blocks.leaves2 || state.getBlock() == Blocks.grass || state.getBlock() == Blocks.tallgrass || state.getBlock() == Blocks.red_flower || state.getBlock() == Blocks.yellow_flower || state.getBlock() == Blocks.double_plant || state.getBlock() == Blocks.deadbush
@@ -698,7 +697,6 @@ public class BuildingPlan
 		return new LocationReturn(l);
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public BuildingBlock[] getBuildingPoints(World worldIn, BuildingLocation location, boolean villageGeneration)
 	{
 		final int x = location.position.getX();
@@ -1042,7 +1040,6 @@ public class BuildingPlan
 			return false;
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void setReferencePositions(IBlockState state, BlockPos pos, BuildingLocation location)
 	{
 		if(state.getBlock() instanceof BlockMillChest)

@@ -48,7 +48,7 @@ public class PlanIO {
 				buildingLevel = Integer.parseInt(sign.signText[1].getUnformattedText());
 			}
 
-			if(buildingLevel <= 0) {
+			if(buildingLevel < 0) {
 				PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.level0");
 				Millenaire.simpleNetworkWrapper.sendTo(packet, (EntityPlayerMP)player);
 			}
@@ -189,7 +189,7 @@ public class PlanIO {
 			}
 			FileInputStream fis = new FileInputStream(schem);
 
-			BuildingPlan plan = loadSchematic(fis, MillCulture.millDefault, level);
+			BuildingPlan plan = loadSchematic(fis, MillCulture.normanCulture, level);
 			IBlockState[][][] blocks = plan.buildingArray;
 
 			for(int x = 0; x < plan.width; x++) {
@@ -218,11 +218,12 @@ public class PlanIO {
 		String version = nbt.getString("Version");
 
 		width = nbt.getShort("Width");
-		height = nbt.getShort("Height");
+		//height = nbt.getShort("Height");
 		length = nbt.getShort("Length"); 
 
 		NBTTagList list = nbt.getTagList("level_" + level, Constants.NBT.TAG_COMPOUND);
 		String blockdata = list.getCompoundTagAt(0).getString("BlockData");
+		height = list.getCompoundTagAt(0).getShort("Height");
 		System.out.println(blockdata);
 		String[] split = blockdata.split(";");
 		blocks = new int[split.length];
@@ -255,30 +256,11 @@ public class PlanIO {
 		}
 
 		//load milleniare extra data
-		short depth = nbt.getShort("StartLevel");
+		short depth = list.getCompoundTagAt(0).getShort("StartLevel");
+		
 		String name = nbt.getString("BuildingName");
 
-		NBTTagList MaleList = nbt.getTagList("MaleVillagers", Constants.NBT.TAG_COMPOUND);
-
-		String[] MaleVillagers = new String[MaleList.tagCount()];
-
-		for(int i = 0; i < MaleList.tagCount(); i++)
-		{
-			NBTTagCompound tag = MaleList.getCompoundTagAt(i);
-			MaleVillagers[i] = tag.getString("" + i);
-		}
-
-		NBTTagList FemaleList = nbt.getTagList("FemaleVillagers", Constants.NBT.TAG_COMPOUND);
-
-		String[] FemaleVillagers = new String[FemaleList.tagCount()];
-
-		for(int i = 0; i < FemaleList.tagCount(); i++)
-		{
-			NBTTagCompound tag = FemaleList.getCompoundTagAt(i);
-			MaleVillagers[i] = tag.getString("" + i);
-		}
-
-		return new BuildingPlan(culture, level).setNameAndType(name, MaleVillagers, new String[0]).setLengthWidth(length, width)
+		return new BuildingPlan(culture, level).setNameAndType(name)
 				.setHeightDepth(height, depth).setDistance(0, 1).setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized);
 	}
 
@@ -371,6 +353,8 @@ public class PlanIO {
 		NBTTagList LevelTagComp = new NBTTagList();
 		NBTTagCompound tag2 = new NBTTagCompound();
 		tag2.setString("BlockData", blocklist);
+		tag2.setShort("Height", height);
+		tag2.setShort("StartLevel", depth);
 		//tag2.setByteArray("Blocks", blockids);
 		//tag2.setByteArray("Data", data);
 		LevelTagComp.appendTag(tag2);
@@ -380,9 +364,9 @@ public class PlanIO {
 		tag.setString("Version", FILE_VERSION);
 
 		tag.setShort("Width", width);
-		tag.setShort("Height", height);
+		//tag.setShort("Height", height);
 		tag.setShort("Length", length);
-		tag.setShort("StartLevel", depth);
+		//tag.setShort("StartLevel", depth);
 		tag.setString("BuildingName", name);
 
 		NBTTagList MaleList = new NBTTagList();

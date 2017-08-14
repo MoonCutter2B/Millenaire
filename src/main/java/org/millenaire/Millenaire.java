@@ -12,6 +12,7 @@ import org.millenaire.blocks.BlockMillSign;
 import org.millenaire.blocks.BlockVillageStone;
 import org.millenaire.blocks.StoredPosition;
 import org.millenaire.entities.EntityMillVillager;
+import org.millenaire.generation.VillageGenerator;
 import org.millenaire.gui.MillAchievement;
 import org.millenaire.gui.MillGuiHandler;
 import org.millenaire.items.ItemMillAmulet;
@@ -42,6 +43,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = Millenaire.MODID, name = Millenaire.NAME, version = Millenaire.VERSION, guiFactory = Millenaire.GUIFACTORY)
@@ -125,6 +127,8 @@ public class Millenaire
     public void init(FMLInitializationEvent event)
     {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new MillGuiHandler());
+		//GameRegistry.registerWorldGenerator(new VillageGenerator(), 0); 
+		//Commented out so things work
 		
 		if(event.getSide() == Side.CLIENT)
     	{	

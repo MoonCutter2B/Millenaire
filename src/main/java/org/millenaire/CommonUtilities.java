@@ -14,6 +14,10 @@ public class CommonUtilities
 {
 	public static Random random = new Random();
 	
+	/**
+	 * pretty much orgainizes the player's money
+	 * @param playerIn The player to orgainize
+	 */
 	public static void changeMoney(EntityPlayer playerIn)
 	{
 		ItemStack denier = new ItemStack(MillItems.denier, 0, 0);
@@ -62,6 +66,10 @@ public class CommonUtilities
 		playerIn.inventory.addItemStackToInventory(or);
 	}
 	
+	/**
+	 * yep
+	 * @return A random non-zero integer
+	 */
 	public static int getRandomNonzero()
 	{
 		int results;
@@ -72,6 +80,10 @@ public class CommonUtilities
 		return results;
 	}
 	
+	/**
+	 * gets a random Millager Gender
+	 * @return
+	 */
 	public static int randomizeGender()
 	{
 		int results = random.nextInt(3) - 2;
@@ -79,6 +91,12 @@ public class CommonUtilities
 		return results;
 	}
 	
+	/**
+	 * yep
+	 * @param b the block to check
+	 * @param surface if the ground is on the top of the ground (true) or underground (false)
+	 * @return
+	 */
 	public static Block getValidGroundBlock(final Block b, final boolean surface) 
 	{
 		if (b == Blocks.bedrock) {
