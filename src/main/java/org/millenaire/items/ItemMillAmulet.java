@@ -3,7 +3,6 @@ package org.millenaire.items;
 import java.util.List;
 
 import org.millenaire.Millenaire;
-import org.millenaire.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -22,28 +21,31 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMillAmulet extends Item {
-	private int[] colorAlchemist = new int[] { 9868950, 10132109, 10395268, 10658427, 11053168, 11316327, 11579486,
-			11842645, 12237387, 12500545, 12763705, 13026863, 13421605, 13684764, 13947923, 14211082 };
-	private int[] colorVishnu = new int[] { 236, 983260, 2031820, 3080380, 4063405, 5111965, 6160525, 7209085, 8192110,
-			9240670, 10289230, 11337790, 12320815, 13369375, 14417935, 15466496 };
-	private int[] colorYggdrasil = new int[] { 396556, 990493, 1453614, 2113086, 2576206, 3104864, 3698799, 4227457,
-			4755857, 5350050, 5878706, 6407106, 7001299, 7464165, 8058100, 8388606, 8781823, 9306111, 9895935, 10420223,
-			10944511, 11534335, 12058623, 12648447, 13172735, 13762559, 14286847, 14876671, 15400959, 15925247,
-			16515071, 16777213 };
+public class ItemMillAmulet extends Item
+{
+	private int[] colorAlchemist = new int[]{9868950, 10132109, 10395268, 10658427, 11053168, 11316327, 11579486, 11842645, 12237387, 12500545, 12763705, 13026863, 13421605, 13684764, 13947923, 14211082};
+	private int[] colorVishnu = new int[]{236, 983260, 2031820, 3080380, 4063405, 5111965, 6160525, 7209085, 8192110, 9240670, 10289230, 11337790, 12320815, 13369375, 14417935, 15466496};
+	private int[] colorYggdrasil = new int[]{396556, 990493, 1453614, 2113086, 2576206, 3104864, 3698799, 4227457, 4755857, 5350050, 5878706, 6407106, 7001299, 7464165, 8058100, 8388606, 
+			8781823, 9306111, 9895935, 10420223, 10944511, 11534335, 12058623, 12648447, 13172735, 13762559, 14286847, 14876671, 15400959, 15925247, 16515071, 16777213};
 
-	public ItemMillAmulet() {
+	public ItemMillAmulet()
+	{
 
 	}
 
 	@Override
-	public ItemStack onItemRightClick(final ItemStack itemstack, final World world, final EntityPlayer entityplayer) {
-		if (this == amuletSkollHati && !world.isRemote) {
+	public ItemStack onItemRightClick(final ItemStack itemstack, final World world, final EntityPlayer entityplayer) 
+	{
+		if(this == amuletSkollHati && !world.isRemote)
+		{
 			final long time = world.getWorldTime() + 24000L;
 
-			if (time % 24000L > 11000L && time % 24000L < 23500L) {
+			if (time % 24000L > 11000L && time % 24000L < 23500L) 
+			{
 				world.setWorldTime(time - time % 24000L - 500L);
-			} else {
+			} 
+			else 
+			{
 				world.setWorldTime(time - time % 24000L + 13000L);
 			}
 
@@ -54,22 +56,27 @@ public class ItemMillAmulet extends Item {
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		if (this == amuletSkollHati)
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+		if(this == amuletSkollHati)
 			return;
 
 		int visScore = 0;
 
-		if (this == amuletAlchemist && entityIn instanceof EntityPlayer) {
+		if(this == amuletAlchemist && entityIn instanceof EntityPlayer)
+		{
 			int radius = 5;
 			BlockPos pos = entityIn.getPosition();
 
 			final int startY = Math.max(pos.getY() - radius, 0);
 			final int endY = Math.min(pos.getY() + radius, 127);
 
-			for (int i = pos.getX() - radius; i < pos.getX() + radius; i++) {
-				for (int j = pos.getZ() - radius; j < pos.getZ() + radius; j++) {
-					for (int k = startY; k < endY; k++) {
+			for (int i = pos.getX() - radius; i < pos.getX() + radius; i++) 
+			{
+				for (int j = pos.getZ() - radius; j < pos.getZ() + radius; j++) 
+				{
+					for (int k = startY; k < endY; k++) 
+					{
 						final Block block = worldIn.getBlockState(new BlockPos(i, k, j)).getBlock();
 						if (block == Blocks.coal_ore)
 							visScore++;
@@ -97,17 +104,16 @@ public class ItemMillAmulet extends Item {
 			visScore = (visScore * 15) / 100;
 		}
 
-		if (this == amuletVishnu && entityIn instanceof EntityPlayer) {
+		if(this == amuletVishnu && entityIn instanceof EntityPlayer)
+		{
 			double level = 0;
 			final int radius = 20;
 			double closestDistance = Double.MAX_VALUE;
 
-			final List<EntityMob> entities = worldIn.getEntitiesWithinAABB(EntityMob.class,
-					new AxisAlignedBB(entityIn.lastTickPosX, entityIn.lastTickPosY, entityIn.lastTickPosZ,
-							entityIn.lastTickPosX + 1.0D, entityIn.lastTickPosY + 1.0D, entityIn.lastTickPosZ + 1.0D)
-									.expand(20, 20, 20));
+			final List<EntityMob> entities = worldIn.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(entityIn.lastTickPosX, entityIn.lastTickPosY, entityIn.lastTickPosZ, entityIn.lastTickPosX + 1.0D, entityIn.lastTickPosY + 1.0D, entityIn.lastTickPosZ + 1.0D).expand(20, 20, 20));
 
-			for (final Entity ent : entities) {
+			for (final Entity ent : entities) 
+			{
 				if (entityIn.getDistanceToEntity(ent) < closestDistance)
 					closestDistance = entityIn.getDistanceToEntity(ent);
 			}
@@ -121,19 +127,20 @@ public class ItemMillAmulet extends Item {
 			visScore = (int) (level * 15);
 		}
 
-		if (this == amuletYggdrasil && entityIn instanceof EntityPlayer) {
+		if(this == amuletYggdrasil && entityIn instanceof EntityPlayer)
+		{
 			int level = (int) Math.floor(entityIn.posY);
 
-			if (level > 255)
+			if(level > 255)
 				level = 255;
-			if (level < 0)
+			if(level < 0)
 				level = 0;
 
 			visScore = level / 8;
 		}
 
 		NBTTagCompound nbt;
-		if (stack.getTagCompound() == null)
+		if(stack.getTagCompound() == null)
 			nbt = new NBTTagCompound();
 		else
 			nbt = stack.getTagCompound();
@@ -144,69 +151,69 @@ public class ItemMillAmulet extends Item {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int renderPass) {
+	public int getColorFromItemStack(ItemStack stack, int renderPass)
+	{
 		NBTTagCompound nbt = stack.getTagCompound();
 
-		if (renderPass != 0) {
-			if (nbt == null) {
-				if (this == amuletAlchemist)
+		if(renderPass != 0)
+		{
+			if(nbt== null)
+			{
+				if(this == amuletAlchemist)
 					return colorAlchemist[0];
-				if (this == amuletVishnu)
+				if(this == amuletVishnu)
 					return colorVishnu[0];
-				if (this == amuletYggdrasil)
+				if(this == amuletYggdrasil)
 					return colorYggdrasil[16];
 			}
 			int score = nbt.getInteger("score");
 
-			if (this == amuletAlchemist)
+			if(this == amuletAlchemist)
 				return colorAlchemist[score];
-			if (this == amuletVishnu)
+			if(this == amuletVishnu)
 				return colorVishnu[score];
-			if (this == amuletYggdrasil)
+			if(this == amuletYggdrasil)
 				return colorYggdrasil[score];
 		}
 		return 16777215;
 	}
 
-	public int getItemStackLimit(ItemStack stack) {
+	public int getItemStackLimit(ItemStack stack)
+	{
 		return 1;
 	}
 
 	@Override
-	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
+	{
 		return !(oldStack.getItem() == this && newStack.getItem() == this);
 	}
 
-	////////////////////////////////////////////////////////// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-	// Declarations
+	//Declarations
 	public static Item amuletSkollHati;
 	public static Item amuletYggdrasil;
 	public static Item amuletAlchemist;
 	public static Item amuletVishnu;
 
-	public static void preinitialize() {
-		amuletSkollHati = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("amuletSkollHati");
+	public static void preinitialize()
+	{
+		amuletSkollHati = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("amuletSkollHati");
 		GameRegistry.registerItem(amuletSkollHati, "amuletSkollHati");
-		amuletAlchemist = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("amuletAlchemist");
+		amuletAlchemist = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("amuletAlchemist");
 		GameRegistry.registerItem(amuletAlchemist, "amuletAlchemist");
 		amuletVishnu = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("amuletVishnu");
 		GameRegistry.registerItem(amuletVishnu, "amuletVishnu");
-		amuletYggdrasil = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("amuletYggdrasil");
+		amuletYggdrasil = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("amuletYggdrasil");
 		GameRegistry.registerItem(amuletYggdrasil, "amuletYggdrasil");
 	}
 
-	public static void prerender() {
-		ModelLoader.setCustomModelResourceLocation(amuletSkollHati, 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":amuletSkollHati"));
-		ModelLoader.setCustomModelResourceLocation(amuletAlchemist, 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":amuletAlchemist"));
-		ModelLoader.setCustomModelResourceLocation(amuletVishnu, 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":amuletVishnu"));
-		ModelLoader.setCustomModelResourceLocation(amuletYggdrasil, 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":amuletYggdrasil"));
+	public static void prerender()
+	{
+		ModelLoader.setCustomModelResourceLocation(amuletSkollHati,0, new ModelResourceLocation(Millenaire.MODID + ":amuletSkollHati"));
+		ModelLoader.setCustomModelResourceLocation(amuletAlchemist, 0, new ModelResourceLocation(Millenaire.MODID + ":amuletAlchemist"));
+		ModelLoader.setCustomModelResourceLocation(amuletVishnu, 0, new ModelResourceLocation(Millenaire.MODID + ":amuletVishnu"));
+		ModelLoader.setCustomModelResourceLocation(amuletYggdrasil, 0, new ModelResourceLocation(Millenaire.MODID + ":amuletYggdrasil"));
 	}
 }

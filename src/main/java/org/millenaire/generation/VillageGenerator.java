@@ -17,40 +17,40 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class VillageGenerator implements IWorldGenerator {
 
 	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator,
-			IChunkProvider chunkProvider) {
-
-		if (world.provider.getDimensionId() == 0) {
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		
+		if(world.provider.getDimensionId() == 0) {
 			BlockPos pos1 = new BlockPos(chunkX * 16, 0, chunkZ * 16);
-			// System.out.println("testing1");
+			//System.out.println("testing1");
 			try {
 				generateVillageAt(random, world.getHeight(pos1), world);
-			} catch (Exception e) {
+			} catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
+	
 	/**
 	 * Attempt to generate the village
 	 */
 	protected boolean generateVillageAt(Random rand, BlockPos pos, World world) {
-		if (!MillConfig.generateVillages && !MillConfig.generateLoneBuildings
-				|| (world.getSpawnPoint().distanceSq(pos) < MillConfig.spawnDistance)) {
-			// System.out.println("testing2");
+		if(!MillConfig.generateVillages && !MillConfig.generateLoneBuildings || (world.getSpawnPoint().distanceSq(pos) < MillConfig.spawnDistance)) {
+			//System.out.println("testing2");
 			return false;
 		}
-		if (world.isRemote) {
-			// System.out.println("testing3");
+		if(world.isRemote) {
+			//System.out.println("testing3");
 			return false;
-		} else {
+		}
+		else {
 			EntityPlayer generatingPlayer = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), -1);
-			// System.out.println("testing4");
-			if (rand.nextInt(50) == 1 && world.getChunkFromBlockCoords(pos).isLoaded()) {
-				// System.out.println("testing5 " + pos.getX() +"," + pos.getZ());
+			//System.out.println("testing4");
+			if(rand.nextInt(50) == 1 && world.getChunkFromBlockCoords(pos).isLoaded()) {
+				//System.out.println("testing5 " + pos.getX() +"," + pos.getZ());
 				world.setBlockState(pos, BlockVillageStone.villageStone.getDefaultState());
-			} else if (!world.getChunkFromBlockCoords(pos).isLoaded()) {
-				// System.out.println("nope");
+			}
+			else if(!world.getChunkFromBlockCoords(pos).isLoaded()) {
+				//System.out.println("nope");
 			}
 			return false;
 		}

@@ -17,74 +17,92 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class RenderMillVillager extends RenderBiped<EntityMillVillager> {
+public class RenderMillVillager extends RenderBiped<EntityMillVillager>
+{
 	protected ResourceLocation villagerTexture;
-
+	
 	protected String name = "Suzy Carmichael";
 	protected String quest = null;
-
-	public RenderMillVillager(RenderManager rendermanagerIn, ModelBiped modelbaseIn, float shadowsizeIn) {
+	
+	public RenderMillVillager(RenderManager rendermanagerIn, ModelBiped modelbaseIn, float shadowsizeIn) 
+	{
 		super(rendermanagerIn, modelbaseIn, shadowsizeIn);
 		this.addLayer(new LayerBipedArmor(this));
-		this.addLayer(new LayerHeldItem(this));
+        this.addLayer(new LayerHeldItem(this));
 	}
-
+	
 	@Override
-	protected boolean canRenderName(EntityMillVillager entity) {
-		return true;
-	}
-
+	protected boolean canRenderName(EntityMillVillager entity)
+    {
+        return true;
+    }
+	
 	@Override
-	protected void preRenderCallback(EntityMillVillager entity, float f) {
+    protected void preRenderCallback(EntityMillVillager entity, float f)
+    {
 		villagerTexture = new ResourceLocation(entity.getTexture());
 		name = entity.getName();
-		// if(entity.isChild())
-		// GL11.glScalef(0.6F, 0.5F, 0.6F);
-		if (!entity.isChild()) {
-			if (entity.getGender() == 1) {
+		//if(entity.isChild())
+		//	GL11.glScalef(0.6F, 0.5F, 0.6F);
+		if(!entity.isChild())
+		{
+			if(entity.getGender() == 1)
+			{
 				this.mainModel = new ModelFemaleAsym();
-			} else if (entity.getGender() == 2) {
+			}
+			else if(entity.getGender() == 2)
+			{
 				this.mainModel = new ModelFemaleSym();
-			} else {
+			}
+			else
+			{
 				this.mainModel = new ModelBiped();
 			}
-		} else {
+    	}
+		else
+		{
 			this.mainModel = new ModelBiped();
 		}
-	}
+    }
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityMillVillager entity) {
+	protected ResourceLocation getEntityTexture(EntityMillVillager entity) 
+	{
 		return villagerTexture;
 	}
-
+	
 	@Override
-	protected void rotateCorpse(EntityMillVillager entityIn, float par2, float par3, float partialTicks) {
-		/*
-		 * if (entityIn.isEntityAlive() && entityIn.isVillagerSleeping()) { final float
-		 * orientation = -entityIn.getBedOrientationInDegrees();
-		 * GL11.glRotatef(orientation, 0.0F, 1.0F, 0.0F);
-		 * GL11.glRotatef(this.getDeathMaxRotation(entityIn), 0.0F, 0.0F, 1.0F);
-		 * GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F); } else {
-		 */
-		super.rotateCorpse(entityIn, par2, par3, partialTicks);
-		// }
+	protected void rotateCorpse(EntityMillVillager entityIn, float par2, float par3, float partialTicks) 
+	{
+		/*if (entityIn.isEntityAlive() && entityIn.isVillagerSleeping()) 
+		{
+			final float orientation = -entityIn.getBedOrientationInDegrees();
+			GL11.glRotatef(orientation, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(this.getDeathMaxRotation(entityIn), 0.0F, 0.0F, 1.0F);
+			GL11.glRotatef(270.0F, 0.0F, 1.0F, 0.0F);
+		} 
+		else 
+		{*/
+			super.rotateCorpse(entityIn, par2, par3, partialTicks);
+		//}
 	}
-
+	
 	@Override
-	protected void renderOffsetLivingLabel(EntityMillVillager entityIn, double x, double y, double z, String str,
-			float p_177069_9_, double p_177069_10_) {
+	protected void renderOffsetLivingLabel(EntityMillVillager entityIn, double x, double y, double z, String str, float p_177069_9_, double p_177069_10_)
+    {
 		float scale = 0.01666667F;
 		float lineHeight = 0.2f;
-
-		if (quest != null) {
+		
+		if(quest != null)
+		{
 			displayText(quest, scale, 11184810, x, y + entityIn.height + 0.5F, z);
 			y += lineHeight;
 		}
 		displayText(name, scale, 16777215, x, y + entityIn.height + 0.5F, z);
-	}
-
-	private void displayText(String text, float scale, int color, double x, double y, double z) {
+    }
+	
+	private void displayText(String text, float scale, int color, double x, double y, double z) 
+	{
 		final FontRenderer fontrenderer = getFontRendererFromRenderManager();
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
@@ -117,15 +135,17 @@ public class RenderMillVillager extends RenderBiped<EntityMillVillager> {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glPopMatrix();
 	}
-
-	////////////////////////////////////////////////////////// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-	public static class millVillagerRenderFactory implements IRenderFactory {
+	
+	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	
+	public static class millVillagerRenderFactory implements IRenderFactory
+	{
 
 		@Override
-		public Render createRenderFor(RenderManager manager) {
+		public Render createRenderFor(RenderManager manager) 
+		{
 			return new RenderMillVillager(manager, new ModelBiped(), 0.5F);
 		}
-
+		
 	}
 }

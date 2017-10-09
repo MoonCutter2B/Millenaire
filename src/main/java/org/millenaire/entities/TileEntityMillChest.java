@@ -15,69 +15,77 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityMillChest extends TileEntityChest {
+public class TileEntityMillChest extends TileEntityChest
+{
 	public boolean isLocked = true;
-
-	public TileEntityMillChest() {
+	
+	public TileEntityMillChest()
+	{
 		super();
 	}
-
-	public boolean setLock() {
-		if (isLocked)
+	
+	public boolean setLock()
+	{
+		if(isLocked)
 			isLocked = false;
 		else
 			isLocked = true;
-
+		
 		checkForAdjacentChests();
-		if (adjacentChestZNeg != null)
-			((TileEntityMillChest) adjacentChestZNeg).isLocked = this.isLocked;
-		if (adjacentChestZPos != null)
-			((TileEntityMillChest) adjacentChestZPos).isLocked = this.isLocked;
-		if (adjacentChestXNeg != null)
-			((TileEntityMillChest) adjacentChestXNeg).isLocked = this.isLocked;
-		if (adjacentChestXPos != null)
-			((TileEntityMillChest) adjacentChestXPos).isLocked = this.isLocked;
-
+		if(adjacentChestZNeg != null)
+			((TileEntityMillChest)adjacentChestZNeg).isLocked = this.isLocked;
+		if(adjacentChestZPos != null)
+			((TileEntityMillChest)adjacentChestZPos).isLocked = this.isLocked;
+		if(adjacentChestXNeg != null)
+			((TileEntityMillChest)adjacentChestXNeg).isLocked = this.isLocked;
+		if(adjacentChestXPos != null)
+			((TileEntityMillChest)adjacentChestXPos).isLocked = this.isLocked;
+		
 		return isLocked;
 	}
-
-	public boolean isLockedFor(EntityPlayer playerIn) {
-		if (playerIn == null)
+	
+	public boolean isLockedFor(EntityPlayer playerIn)
+	{
+		if(playerIn == null)
 			return false;
+		
+		//final Building building = mw.getBuilding(buildingPos);
 
-		// final Building building = mw.getBuilding(buildingPos);
+		//if (building == null)
+		//	return true;
 
-		// if (building == null)
-		// return true;
-
-		// if (building.lockedForPlayer(playerIn.getDisplayName()))
-		// return true;
-
+		//if (building.lockedForPlayer(playerIn.getDisplayName()))
+		//	return true;
+		
 		return isLocked;
 	}
-
+	
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		super.readFromNBT(compound);
-
-		if (compound.hasKey("millChestLocked"))
-			isLocked = compound.getBoolean("millChestLocked");
-	}
-
+	public void readFromNBT(NBTTagCompound compound)
+    {
+        super.readFromNBT(compound);
+        
+        if(compound.hasKey("millChestLocked"))
+        	isLocked = compound.getBoolean("millChestLocked");
+    }
+	
 	@Override
-	public void writeToNBT(NBTTagCompound compound) {
-		super.writeToNBT(compound);
-
-		compound.setBoolean("millChestLocked", isLocked);
-	}
-
+	public void writeToNBT(NBTTagCompound compound)
+    {
+        super.writeToNBT(compound);
+        
+        compound.setBoolean("millChestLocked", isLocked);
+    }
+	
 	@Override
-	public String getGuiID() {
-		return "millenaire:chest";
-	}
-
+    public String getGuiID()
+    {
+        return "millenaire:chest";
+    }
+    
 	@Override
-	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
-		return new ContainerChest(playerInventory, this, playerIn);
-	}
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+    {
+        return new ContainerChest(playerInventory, this, playerIn);
+    }
 }

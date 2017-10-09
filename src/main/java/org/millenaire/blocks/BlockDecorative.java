@@ -1,7 +1,6 @@
 package org.millenaire.blocks;
 
 import org.millenaire.Millenaire;
-import org.millenaire.Reference;
 import org.millenaire.items.ItemBlockDecorativeEarth;
 import org.millenaire.items.ItemBlockDecorativeSodPlank;
 import org.millenaire.items.ItemBlockDecorativeStone;
@@ -21,144 +20,111 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockDecorative {
-	// To become the customizable block, also to hold declarations
+public class BlockDecorative 
+{
+	//To become the customizable block, also to hold declarations
+	
+    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+	//Declarations
+		public static Block blockDecorativeStone;
+		public static Block blockDecorativeWood;
+		public static Block blockDecorativeEarth;
+		
+		public static Block emptySericulture;
+		public static Block mudBrick;
+		
+		public static Block byzantineTile;
+		public static Block byzantineStoneTile;
+		public static Block byzantineTileSlab;
+		public static Block byzantineTileSlabDouble;
+		public static Block byzantineTileStairs;
+		
+		public static Block paperWall;
+		
+		public static Block blockSodPlanks;
+		public static Block blockCarving;
 
-	////////////////////////////////////////////////////////// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-	// Declarations
-	public static Block blockDecorativeStone;
-	public static Block blockDecorativeWood;
-	public static Block blockDecorativeEarth;
-
-	public static Block emptySericulture;
-	public static Block mudBrick;
-
-	public static Block byzantineTile;
-	public static Block byzantineStoneTile;
-	public static Block byzantineTileSlab;
-	public static Block byzantineTileSlabDouble;
-	public static Block byzantineTileStairs;
-
-	public static Block paperWall;
-
-	public static Block blockSodPlanks;
-	public static Block blockCarving;
-
-	public static void preinitialize() {
-		blockDecorativeStone = new BlockDecorativeStone().setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("blockDecorativeStone");
+	public static void preinitialize()
+    {
+    	blockDecorativeStone = new BlockDecorativeStone().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("blockDecorativeStone");
 		GameRegistry.registerBlock(blockDecorativeStone, ItemBlockDecorativeStone.class, "blockDecorativeStone");
-		blockDecorativeWood = new BlockDecorativeWood().setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("blockDecorativeWood");
+		blockDecorativeWood = new BlockDecorativeWood().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("blockDecorativeWood");
 		GameRegistry.registerBlock(blockDecorativeWood, ItemBlockDecorativeWood.class, "blockDecorativeWood");
-		blockDecorativeEarth = new BlockDecorativeEarth().setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("blockDecorativeEarth");
+		blockDecorativeEarth = new BlockDecorativeEarth().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("blockDecorativeEarth");
 		GameRegistry.registerBlock(blockDecorativeEarth, ItemBlockDecorativeEarth.class, "blockDecorativeEarth");
-		blockSodPlanks = new BlockDecorativeSodPlank().setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("blockSodPlank");
+		blockSodPlanks = new BlockDecorativeSodPlank().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("blockSodPlank");
 		GameRegistry.registerBlock(blockSodPlanks, ItemBlockDecorativeSodPlank.class, "blockSodPlank");
-
-		emptySericulture = new BlockDecorativeUpdate(Material.wood,
-				blockDecorativeWood.getDefaultState().withProperty(BlockDecorativeWood.VARIANT,
-						BlockDecorativeWood.EnumType.SERICULTURE)).setCreativeTab(Millenaire.tabMillenaire)
-								.setUnlocalizedName("emptySericulture");
+		
+		emptySericulture = new BlockDecorativeUpdate(Material.wood, blockDecorativeWood.getDefaultState().withProperty(BlockDecorativeWood.VARIANT, BlockDecorativeWood.EnumType.SERICULTURE)).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("emptySericulture");
 		GameRegistry.registerBlock(emptySericulture, "emptySericulture");
-		mudBrick = new BlockDecorativeUpdate(Material.ground,
-				blockDecorativeEarth.getDefaultState().withProperty(BlockDecorativeEarth.VARIANT,
-						BlockDecorativeEarth.EnumType.DRIEDBRICK)).setCreativeTab(Millenaire.tabMillenaire)
-								.setUnlocalizedName("mudBrick");
+		mudBrick = new BlockDecorativeUpdate(Material.ground, blockDecorativeEarth.getDefaultState().withProperty(BlockDecorativeEarth.VARIANT, BlockDecorativeEarth.EnumType.DRIEDBRICK)).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("mudBrick");
 		GameRegistry.registerBlock(mudBrick, "mudBrick");
-
-		byzantineTile = new BlockDecorativeOriented(Material.rock).setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("byzantineTile");
+		
+		byzantineTile = new BlockDecorativeOriented(Material.rock).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("byzantineTile");
 		GameRegistry.registerBlock(byzantineTile, "byzantineTile");
-		byzantineStoneTile = new BlockDecorativeOriented(Material.rock).setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("byzantineStoneTile");
+		byzantineStoneTile = new BlockDecorativeOriented(Material.rock).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("byzantineStoneTile");
 		GameRegistry.registerBlock(byzantineStoneTile, "byzantineStoneTile");
-		byzantineTileSlab = new BlockDecorativeOrientedSlabHalf(Material.rock).setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("byzantineTileSlab");
-		byzantineTileSlabDouble = new BlockDecorativeOrientedSlabDouble(Material.rock, byzantineTileSlab)
-				.setUnlocalizedName("byzantineTileSlabDouble");
-		GameRegistry.registerBlock(byzantineTileSlab, ItemOrientedSlab.class, "byzantineTileSlab", byzantineTileSlab,
-				byzantineTileSlabDouble);
-		GameRegistry.registerBlock(byzantineTileSlabDouble, ItemOrientedSlab.class, "byzantineTileSlabDouble",
-				byzantineTileSlab, byzantineTileSlabDouble);
-		byzantineTileStairs = new BlockDecorativeOrientedStairs(byzantineStoneTile.getDefaultState())
-				.setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("byzantineTileStairs");
+		byzantineTileSlab = new BlockDecorativeOrientedSlabHalf(Material.rock).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("byzantineTileSlab");
+		byzantineTileSlabDouble = new BlockDecorativeOrientedSlabDouble(Material.rock, byzantineTileSlab).setUnlocalizedName("byzantineTileSlabDouble");
+		GameRegistry.registerBlock(byzantineTileSlab, ItemOrientedSlab.class, "byzantineTileSlab", byzantineTileSlab, byzantineTileSlabDouble);
+		GameRegistry.registerBlock(byzantineTileSlabDouble, ItemOrientedSlab.class, "byzantineTileSlabDouble", byzantineTileSlab, byzantineTileSlabDouble);
+		byzantineTileStairs = new BlockDecorativeOrientedStairs(byzantineStoneTile.getDefaultState()).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("byzantineTileStairs");
 		GameRegistry.registerBlock(byzantineTileStairs, "byzantineTileStairs");
-
-		paperWall = new BlockDecorativePane(Material.cloth).setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("paperWall");
+		
+		paperWall = new BlockDecorativePane(Material.cloth).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("paperWall");
 		GameRegistry.registerBlock(paperWall, "paperWall");
-
+		
 		blockCarving = new BlockDecorativeCarving(Material.rock).setUnlocalizedName("inuitCarving");
 		GameRegistry.registerBlock(blockCarving, "inuitCarving");
-
+		
 		GameRegistry.addSmelting(mudBrick, new ItemStack(blockDecorativeStone, 1, 1), 0.3f);
-		GameRegistry.addRecipe(new ItemStack(byzantineStoneTile, 6), "AAA", "BBB", 'A', new ItemStack(byzantineTile),
-				'B', new ItemStack(Blocks.stone));
-		GameRegistry.addRecipe(new ItemStack(byzantineTileStairs, 4), "A  ", "BA ", "BBA", 'A',
-				new ItemStack(byzantineTile), 'B', new ItemStack(Blocks.stone));
-	}
-
+		GameRegistry.addRecipe(new ItemStack(byzantineStoneTile, 6),
+				"AAA",
+				"BBB",
+				'A', new ItemStack(byzantineTile), 'B', new ItemStack(Blocks.stone));
+		GameRegistry.addRecipe(new ItemStack(byzantineTileStairs, 4),
+				"A  ",
+				"BA ",
+				"BBA",
+				'A', new ItemStack(byzantineTile), 'B', new ItemStack(Blocks.stone));
+    }
+    
+    @SideOnly(Side.CLIENT)
+	public static void prerender()
+	{
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeStone), 0, new ModelResourceLocation(Millenaire.MODID + ":goldOrnament", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeStone), 1, new ModelResourceLocation(Millenaire.MODID + ":cookedBrick", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeStone), 2, new ModelResourceLocation(Millenaire.MODID + ":galianiteBlock", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeWood), 0, new ModelResourceLocation(Millenaire.MODID + ":plainTimberFrame", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeWood), 1, new ModelResourceLocation(Millenaire.MODID + ":crossTimberFrame", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeWood), 2, new ModelResourceLocation(Millenaire.MODID + ":thatch", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeWood), 3, new ModelResourceLocation(Millenaire.MODID + ":sericulture", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeEarth), 0, new ModelResourceLocation(Millenaire.MODID + ":dirtWall", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeEarth), 1, new ModelResourceLocation(Millenaire.MODID + ":driedBrick", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(byzantineTileSlabDouble), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineTile", "inventory"));
+    	
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 0, new ModelResourceLocation(Millenaire.MODID + ":sodOak", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 1, new ModelResourceLocation(Millenaire.MODID + ":sodPine", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 2, new ModelResourceLocation(Millenaire.MODID + ":sodBirch", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 3, new ModelResourceLocation(Millenaire.MODID + ":sodJungle", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 4, new ModelResourceLocation(Millenaire.MODID + ":sodJungle", "inventory"));
+    	ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 5, new ModelResourceLocation(Millenaire.MODID + ":sodPine", "inventory"));
+    	
+    }
+    
 	@SideOnly(Side.CLIENT)
-	public static void prerender() {
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeStone), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":goldOrnament", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeStone), 1,
-				new ModelResourceLocation(Reference.MOD_ID + ":cookedBrick", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeStone), 2,
-				new ModelResourceLocation(Reference.MOD_ID + ":galianiteBlock", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeWood), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":plainTimberFrame", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeWood), 1,
-				new ModelResourceLocation(Reference.MOD_ID + ":crossTimberFrame", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeWood), 2,
-				new ModelResourceLocation(Reference.MOD_ID + ":thatch", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeWood), 3,
-				new ModelResourceLocation(Reference.MOD_ID + ":sericulture", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeEarth), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":dirtWall", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockDecorativeEarth), 1,
-				new ModelResourceLocation(Reference.MOD_ID + ":driedBrick", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(byzantineTileSlabDouble), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":byzantineTile", "inventory"));
-
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":sodOak", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 1,
-				new ModelResourceLocation(Reference.MOD_ID + ":sodPine", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 2,
-				new ModelResourceLocation(Reference.MOD_ID + ":sodBirch", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 3,
-				new ModelResourceLocation(Reference.MOD_ID + ":sodJungle", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 4,
-				new ModelResourceLocation(Reference.MOD_ID + ":sodJungle", "inventory"));
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(blockSodPlanks), 5,
-				new ModelResourceLocation(Reference.MOD_ID + ":sodPine", "inventory"));
-
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void render() {
+	public static void render()
+	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(emptySericulture), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":emptySericulture", "inventory"));
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(mudBrick), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":mudBrick", "inventory"));
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTile), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":byzantineTile", "inventory"));
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineStoneTile), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":byzantineStoneTile", "inventory"));
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTileSlab), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":byzantineTileSlab", "inventory"));
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(paperWall), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":paperWall", "inventory"));
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTileStairs), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":byzantineTileStairs", "inventory"));
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockCarving), 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":inuitCarving", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(emptySericulture), 0, new ModelResourceLocation(Millenaire.MODID + ":emptySericulture", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(mudBrick), 0, new ModelResourceLocation(Millenaire.MODID + ":mudBrick", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTile), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineTile", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineStoneTile), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineStoneTile", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTileSlab), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineTileSlab", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(paperWall), 0, new ModelResourceLocation(Millenaire.MODID + ":paperWall", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(byzantineTileStairs), 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineTileStairs", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockCarving), 0, new ModelResourceLocation(Millenaire.MODID + ":inuitCarving", "inventory"));
 	}
 }

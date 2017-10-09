@@ -6,17 +6,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
 
-public class ItemOrientedSlab extends ItemSlab {
+public class ItemOrientedSlab extends ItemSlab
+{
 
-	public ItemOrientedSlab(Block block, BlockDecorativeOrientedSlabHalf singleSlab,
-			BlockDecorativeOrientedSlabDouble doubleSlab) {
-		super(block, (BlockSlab) singleSlab, (BlockSlab) doubleSlab);
-
+	public ItemOrientedSlab(Block block, BlockDecorativeOrientedSlabHalf singleSlab, BlockDecorativeOrientedSlabDouble doubleSlab) 
+	{
+		super(block, (BlockSlab)singleSlab, (BlockSlab)doubleSlab);
+		
 		this.setHasSubtypes(false);
 	}
 
 	@Override
-	public int getMetadata(int damage) {
-		return 0;
-	}
+    public int getMetadata(int damage)
+    {
+        return 0;
+    }
 }

@@ -19,11 +19,11 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class TileEntityVillageStone extends TileEntity {
+public class TileEntityVillageStone extends TileEntity
+{
 	List<EntityMillVillager> currentVillagers = new ArrayList<EntityMillVillager>();
 
-	// Control Value. Changed when using wandSummon, if left as 'biome' when onLoad
-	// called, culture decided by biome.
+	//Control Value.  Changed when using wandSummon, if left as 'biome' when onLoad called, culture decided by biome.
 	public String culture = "biome";
 	public boolean randomVillage = true;
 	public VillageType villageType;
@@ -33,82 +33,96 @@ public class TileEntityVillageStone extends TileEntity {
 	public int testVar = 0;
 
 	@Override
-	public void onLoad() {
+	public void onLoad()
+	{
 		World world = this.getWorld();
 		BlockPos pos = this.getPos();
-		if (!world.isRemote) { // server only
-			if (world.getBlockState(pos).getBlock() instanceof BlockVillageStone) {
+		if(!world.isRemote) { //server only
+			if(world.getBlockState(pos).getBlock() instanceof BlockVillageStone)
+			{
 
-				if (culture.equalsIgnoreCase("biome")) {
-					if (world.getBiomeGenForCoords(pos) != null) {
-						// Do awesome stuff and set culture. Below is simply for testing.
+				if(culture.equalsIgnoreCase("biome"))
+				{
+					if (world.getBiomeGenForCoords(pos) != null)
+					{
+						//Do awesome stuff and set culture.  Below is simply for testing.
 						System.out.println("Village Culture being set by biome");
 						culture = "norman";
 					}
 				}
 
-				try {
-					if (randomVillage)
+				try
+				{
+					if(randomVillage)
 						villageType = MillCulture.getCulture(culture).getRandomVillageType();
 					else
 						villageType = MillCulture.getCulture(culture).getVillageType(villageName);
 
 					villageName = villageType.getVillageName();
 
-					for (BuildingProject proj : villageType.startingBuildings) {
-						PlanIO.loadSchematic(PlanIO.getBuildingTag(proj.ID, MillCulture.getCulture(culture), true),
-								MillCulture.getCulture(culture), proj.lvl);
+					for(BuildingProject proj : villageType.startingBuildings) {
+						PlanIO.loadSchematic(PlanIO.getBuildingTag(proj.ID, MillCulture.getCulture(culture), true), MillCulture.getCulture(culture), proj.lvl);
 					}
 
-					if (MillConfig.villageAnnouncement) {
-						if (!world.isRemote) {
-							for (int i = 0; i < world.playerEntities.size(); i++)
-								world.playerEntities.get(i).addChatMessage(
-										new ChatComponentText(culture + " village " + villageName + " discovered at "
-												+ pos.getX() + ", " + pos.getY() + ", " + pos.getZ()));
+					if(MillConfig.villageAnnouncement)
+					{
+						if(!world.isRemote)
+						{
+							for(int i = 0; i < world.playerEntities.size(); i++)
+								world.playerEntities.get(i).addChatMessage(new ChatComponentText(culture + " village " + villageName + " discovered at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ()));
 						}
 					}
 
-					if (!world.isRemote)
-						System.out.println(culture + " village " + villageName + " created at " + pos.getX() + ", "
-								+ pos.getY() + ", " + pos.getZ());
-				} catch (Exception ex) {
+					if(!world.isRemote)
+						System.out.println(culture + " village " + villageName + " created at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
+				}
+				catch(Exception ex)
+				{
 					System.err.println("Something went catastrophically wrong creating this village");
 					ex.printStackTrace();
 					return;
 				}
-			} else {
+			}
+			else
+			{
 				System.err.println("VillageStone TileEntity loaded wrong");
 			}
 		}
 
 	}
 
-	// @SideOnly(Side.SERVER)
-	public EntityMillVillager createVillager(World worldIn, MillCulture cultureIn, int villagerID) {
+	//@SideOnly(Side.SERVER)
+	public EntityMillVillager createVillager(World worldIn, MillCulture cultureIn, int villagerID)
+	{
 		VillagerType currentVillagerType;
 		int currentGender;
 
-		if (villagerID == 0) {
+		if(villagerID == 0)
+		{
 			int balance = 0;
 			villagerID = CommonUtilities.getRandomNonzero();
 			boolean checkAgain = false;
 
-			for (int i = 0; i < currentVillagers.size(); i++) {
-				if (currentVillagers.get(i).getGender() == 0)
+			for(int i = 0; i < currentVillagers.size(); i++)
+			{
+				if(currentVillagers.get(i).getGender() == 0)
 					balance++;
 				else
 					balance--;
 
-				if (villagerID == currentVillagers.get(i).villagerID) {
+				if(villagerID == currentVillagers.get(i).villagerID)
+				{
 					villagerID = CommonUtilities.getRandomNonzero();
 					checkAgain = true;
 				}
 			}
-			while (checkAgain) {
+			while(checkAgain)
+			{
 				checkAgain = false;
-				for (int i = 0; i < currentVillagers.size(); i++) {
-					if (villagerID == currentVillagers.get(i).villagerID) {
+				for(int i = 0; i < currentVillagers.size(); i++)
+				{
+					if(villagerID == currentVillagers.get(i).villagerID)
+					{
 						villagerID = CommonUtilities.getRandomNonzero();
 						checkAgain = true;
 					}
@@ -117,10 +131,13 @@ public class TileEntityVillageStone extends TileEntity {
 
 			balance += CommonUtilities.randomizeGender();
 
-			if (balance < 0) {
+			if(balance < 0)
+			{
 				currentGender = 0;
 				currentVillagerType = cultureIn.getChildType(0);
-			} else {
+			}
+			else
+			{
 				currentGender = 1;
 				currentVillagerType = cultureIn.getChildType(1);
 			}
@@ -129,9 +146,12 @@ public class TileEntityVillageStone extends TileEntity {
 			newVillager.setTypeAndGender(currentVillagerType, currentGender);
 
 			return newVillager;
-		} else {
-			for (int i = 0; i < currentVillagers.size(); i++) {
-				if (villagerID == currentVillagers.get(i).villagerID)
+		}
+		else
+		{
+			for(int i = 0; i < currentVillagers.size(); i++)
+			{
+				if(villagerID == currentVillagers.get(i).villagerID)
 					return currentVillagers.get(i);
 			}
 
@@ -142,12 +162,14 @@ public class TileEntityVillageStone extends TileEntity {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
+	public void readFromNBT(NBTTagCompound compound)
+	{
 
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound) {
+	public void writeToNBT(NBTTagCompound compound)
+	{
 
 	}
 }

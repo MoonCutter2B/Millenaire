@@ -9,21 +9,21 @@ import org.millenaire.MillCulture.VillageType;
 public class JsonHelper {
 
 	public static class VillageTypes {
-
+		
 		public VillageTypes() {
-
+			
 		}
-
+		
 		public VillageTypes(VillageType[] types) {
 			this.types = types;
 		}
-
+		
 		public MillCulture.VillageType[] types;
-
+		
 		public void setTypes(VillageType[] types) {
 			this.types = types;
 		}
-
+		
 		public MillCulture.VillageType[] getTypes() {
 			return types;
 		}

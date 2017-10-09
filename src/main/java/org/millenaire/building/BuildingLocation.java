@@ -8,31 +8,34 @@ import org.millenaire.entities.EntityMillVillager;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
-public class BuildingLocation {
+public class BuildingLocation 
+{
 	public int minx, maxx, minz, maxz, miny, maxy;
 	public int minxMargin, maxxMargin, minyMargin, maxyMargin, minzMargin, maxzMargin;
 	public int length, width;
-
+	
 	public EnumFacing orientation;
 	public BlockPos position;
-
-	public List<BlockPos> chestPos;
+	
+	public List<BlockPos>chestPos;
 	public BlockPos tradePos;
-	public List<BlockPos> sourcePos;
-	public List<BlockPos> craftPos;
-	public List<BlockPos> sleepPos;
-	public List<BlockPos> hidePos;
-	public List<BlockPos> defendPos;
-
-	List<EntityMillVillager> residents;
+	public List<BlockPos>sourcePos;
+	public List<BlockPos>craftPos;
+	public List<BlockPos>sleepPos;
+	public List<BlockPos>hidePos;
+	public List<BlockPos>defendPos;
+	
+	List<EntityMillVillager>residents;
 	public List<String> subBuildings;
-
-	BuildingLocation(BuildingPlan planIn, BlockPos pos, EnumFacing orientIn) {
+	
+	BuildingLocation(BuildingPlan planIn, BlockPos pos, EnumFacing orientIn)
+	{
 		orientation = orientIn;
 		position = pos;
 	}
-
-	public void computeMargins() {
+	
+	public void computeMargins() 
+	{
 		minxMargin = minx - MillConfig.minBuildingDistance + 1;
 		minzMargin = minz - MillConfig.minBuildingDistance + 1;
 		minyMargin = miny - 3;

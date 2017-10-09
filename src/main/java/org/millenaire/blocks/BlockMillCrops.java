@@ -3,7 +3,6 @@ package org.millenaire.blocks;
 import java.util.Random;
 
 import org.millenaire.Millenaire;
-import org.millenaire.Reference;
 import org.millenaire.items.ItemMillSeeds;
 
 import net.minecraft.block.Block;
@@ -22,120 +21,130 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMillCrops extends BlockCrops {
+public class BlockMillCrops extends BlockCrops
+{
 	private boolean requiresIrrigation;
 	private boolean slowGrowth;
-
+	
 	private IPlantable seed;
-
-	public BlockMillCrops(boolean irrigationIn, boolean growthIn) {
+	
+	public BlockMillCrops(boolean irrigationIn, boolean growthIn)
+	{
 		super();
-
+		
 		requiresIrrigation = irrigationIn;
 		slowGrowth = growthIn;
 	}
-
+	
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		super.checkAndDropBlock(worldIn, pos, state);
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    {
+        super.checkAndDropBlock(worldIn, pos, state);
 
-		if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
-			int i = ((Integer) state.getValue(AGE)).intValue();
+        if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
+        {
+            int i = ((Integer)state.getValue(AGE)).intValue();
 
-			if (i < 7) {
-				float f = getLocalGrowthChance(this, worldIn, pos);
+            if (i < 7)
+            {
+                float f = getLocalGrowthChance(this, worldIn, pos);
 
-				if (f != 0) {
-					if (rand.nextInt((int) (25.0F / f) + 1) == 0) {
-						worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(i + 1)), 2);
-					}
-				}
-			}
-		}
-	}
-
-	protected float getLocalGrowthChance(Block blockIn, World worldIn, BlockPos pos) {
+                if(f != 0)
+                {
+                	if (rand.nextInt((int)(25.0F / f) + 1) == 0)
+                	{
+                		worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(i + 1)), 2);
+                	}
+                }
+            }
+        }
+    }
+	
+	protected float getLocalGrowthChance(Block blockIn, World worldIn, BlockPos pos)
+	{
 		IBlockState groundIn = worldIn.getBlockState(pos.down());
-		if (groundIn.getBlock() != Blocks.farmland) {
+		if(groundIn.getBlock() != Blocks.farmland)
+		{
 			System.err.println("BlockMillCrop growth logic not applied, unrecognized farmland");
 			return getGrowthChance(blockIn, worldIn, pos);
 		}
-		if (requiresIrrigation && groundIn.getValue(BlockFarmland.MOISTURE) < 1)
+		if(requiresIrrigation && groundIn.getValue(BlockFarmland.MOISTURE) < 1)
 			return 0.0F;
-		else {
-			if (slowGrowth)
+		else
+		{
+			if(slowGrowth)
 				return getGrowthChance(blockIn, worldIn, pos) / 2;
 			else
 				return getGrowthChance(blockIn, worldIn, pos);
 		}
 	}
+	
+	@Override
+    public Item getSeed()
+    {
+        return (Item)seed;
+    }
 
 	@Override
-	public Item getSeed() {
-		return (Item) seed;
-	}
-
-	@Override
-	protected Item getCrop() {
-		return (Item) seed;
-	}
-
-	public Block setSeed(final IPlantable seedIn) {
+    protected Item getCrop()
+    {
+        return (Item)seed;
+    }
+	
+	public Block setSeed(final IPlantable seedIn) 
+	{
 		this.seed = seedIn;
 		return this;
 	}
+	
+    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+	//Declarations
+		public static Block cropTurmeric;
+		public static Block cropRice;
+		public static Block cropMaize;
+		public static Block cropGrapeVine;
+		
+		public static Item turmeric;
+		public static Item rice;
+		public static Item maize;
+		public static Item grapes;
 
-	////////////////////////////////////////////////////////// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    public static void preinitialize()
+    {
+    	cropTurmeric = new BlockMillCrops(false, false).setCreativeTab(null).setUnlocalizedName("cropTurmeric");
+    	turmeric = new ItemMillSeeds(cropTurmeric).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("turmeric");
+    	((BlockMillCrops) cropTurmeric).setSeed((IPlantable) turmeric);
+    	GameRegistry.registerItem(turmeric, "turmeric");
+    	GameRegistry.registerBlock(cropTurmeric, "cropTurmeric");
+    	
+    	cropRice = new BlockMillCrops(true, false).setCreativeTab(null).setUnlocalizedName("cropRice");
+    	rice = new ItemMillSeeds(cropRice).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("rice");
+    	((BlockMillCrops) cropRice).setSeed((IPlantable) rice);
+    	GameRegistry.registerItem(rice, "rice");
+    	GameRegistry.registerBlock(cropRice, "cropRice");
 
-	// Declarations
-	public static Block cropTurmeric;
-	public static Block cropRice;
-	public static Block cropMaize;
-	public static Block cropGrapeVine;
+    	cropMaize = new BlockMillCrops(false, true).setCreativeTab(null).setUnlocalizedName("cropMaize");
+    	maize = new ItemMillSeeds(cropMaize).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("maize");
+    	((BlockMillCrops) cropMaize).setSeed((IPlantable) maize);
+    	GameRegistry.registerItem(maize, "maize");
+    	GameRegistry.registerBlock(cropMaize, "cropMaize");
 
-	public static Item turmeric;
-	public static Item rice;
-	public static Item maize;
-	public static Item grapes;
-
-	public static void preinitialize() {
-		cropTurmeric = new BlockMillCrops(false, false).setCreativeTab(null).setUnlocalizedName("cropTurmeric");
-		turmeric = new ItemMillSeeds(cropTurmeric).setCreativeTab(Millenaire.tabMillenaire)
-				.setUnlocalizedName("turmeric");
-		((BlockMillCrops) cropTurmeric).setSeed((IPlantable) turmeric);
-		GameRegistry.registerItem(turmeric, "turmeric");
-		GameRegistry.registerBlock(cropTurmeric, "cropTurmeric");
-
-		cropRice = new BlockMillCrops(true, false).setCreativeTab(null).setUnlocalizedName("cropRice");
-		rice = new ItemMillSeeds(cropRice).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("rice");
-		((BlockMillCrops) cropRice).setSeed((IPlantable) rice);
-		GameRegistry.registerItem(rice, "rice");
-		GameRegistry.registerBlock(cropRice, "cropRice");
-
-		cropMaize = new BlockMillCrops(false, true).setCreativeTab(null).setUnlocalizedName("cropMaize");
-		maize = new ItemMillSeeds(cropMaize).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("maize");
-		((BlockMillCrops) cropMaize).setSeed((IPlantable) maize);
-		GameRegistry.registerItem(maize, "maize");
-		GameRegistry.registerBlock(cropMaize, "cropMaize");
-
-		cropGrapeVine = new BlockMillCrops(false, false).setCreativeTab(null).setUnlocalizedName("cropGrapeVine");
-		grapes = new ItemMillSeeds(cropGrapeVine).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("grapes");
-		((BlockMillCrops) cropGrapeVine).setSeed((IPlantable) grapes);
-		GameRegistry.registerItem(grapes, "grapes");
-		GameRegistry.registerBlock(cropGrapeVine, "cropGrapeVine");
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void render() {
+    	cropGrapeVine = new BlockMillCrops(false, false).setCreativeTab(null).setUnlocalizedName("cropGrapeVine");
+    	grapes = new ItemMillSeeds(cropGrapeVine).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("grapes");
+    	((BlockMillCrops) cropGrapeVine).setSeed((IPlantable) grapes);
+    	GameRegistry.registerItem(grapes, "grapes");
+    	GameRegistry.registerBlock(cropGrapeVine, "cropGrapeVine");
+    }
+    
+    @SideOnly(Side.CLIENT)
+	public static void render()
+	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-
-		renderItem.getItemModelMesher().register(turmeric, 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":turmeric", "inventory"));
-		renderItem.getItemModelMesher().register(rice, 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":rice", "inventory"));
-		renderItem.getItemModelMesher().register(maize, 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":maize", "inventory"));
-		renderItem.getItemModelMesher().register(grapes, 0,
-				new ModelResourceLocation(Reference.MOD_ID + ":grapes", "inventory"));
+		
+		renderItem.getItemModelMesher().register(turmeric, 0, new ModelResourceLocation(Millenaire.MODID + ":turmeric", "inventory"));
+		renderItem.getItemModelMesher().register(rice, 0, new ModelResourceLocation(Millenaire.MODID + ":rice", "inventory"));
+		renderItem.getItemModelMesher().register(maize, 0, new ModelResourceLocation(Millenaire.MODID + ":maize", "inventory"));
+		renderItem.getItemModelMesher().register(grapes, 0, new ModelResourceLocation(Millenaire.MODID + ":grapes", "inventory"));
 	}
 }
