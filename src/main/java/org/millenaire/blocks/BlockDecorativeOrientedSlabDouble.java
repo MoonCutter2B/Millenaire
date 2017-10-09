@@ -8,16 +8,13 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class BlockDecorativeOrientedSlabDouble extends BlockOrientedSlab
-{
-	public BlockDecorativeOrientedSlabDouble(Material materialIn, Block blockIn) 
-	{
+public class BlockDecorativeOrientedSlabDouble extends BlockOrientedSlab {
+	public BlockDecorativeOrientedSlabDouble(Material materialIn, Block blockIn) {
 		super(materialIn, blockIn);
 	}
 
 	@Override
-	public boolean isDouble() 
-	{
+	public boolean isDouble() {
 		return true;
 	}
 }

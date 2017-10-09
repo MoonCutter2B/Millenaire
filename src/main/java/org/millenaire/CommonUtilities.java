@@ -10,95 +10,92 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-public class CommonUtilities 
-{
+public class CommonUtilities {
 	public static Random random = new Random();
-	
+
 	/**
 	 * pretty much orgainizes the player's money
-	 * @param playerIn The player to orgainize
+	 * 
+	 * @param playerIn
+	 *            The player to orgainize
 	 */
-	public static void changeMoney(EntityPlayer playerIn)
-	{
+	public static void changeMoney(EntityPlayer playerIn) {
 		ItemStack denier = new ItemStack(MillItems.denier, 0, 0);
 		ItemStack argent = new ItemStack(MillItems.denierArgent, 0, 0);
 		ItemStack or = new ItemStack(MillItems.denierOr, 0, 0);
-		
-		for(int i = 0; i < playerIn.inventory.getSizeInventory(); i++)
-		{
+
+		for (int i = 0; i < playerIn.inventory.getSizeInventory(); i++) {
 			ItemStack stack = playerIn.inventory.getStackInSlot(i);
-			if(stack != null)
-			{
-				if(stack.getItem() == MillItems.denier)
-				{
+			if (stack != null) {
+				if (stack.getItem() == MillItems.denier) {
 					denier.stackSize = denier.stackSize + stack.stackSize;
 					playerIn.inventory.removeStackFromSlot(i);
 				}
-				if(stack.getItem() == MillItems.denierArgent)
-				{
+				if (stack.getItem() == MillItems.denierArgent) {
 					argent.stackSize = argent.stackSize + stack.stackSize;
 					playerIn.inventory.removeStackFromSlot(i);
 				}
-				if(stack.getItem() == MillItems.denierOr)
-				{
+				if (stack.getItem() == MillItems.denierOr) {
 					or.stackSize = or.stackSize + stack.stackSize;
 					playerIn.inventory.removeStackFromSlot(i);
 				}
 			}
 		}
-		
+
 		argent.stackSize = argent.stackSize + (denier.stackSize / 64);
 		denier.stackSize = denier.stackSize % 64;
-		
+
 		or.stackSize = or.stackSize + (argent.stackSize / 64);
-		if(or.stackSize >= 1)
+		if (or.stackSize >= 1)
 			playerIn.addStat(MillAchievement.cresus, 1);
 		argent.stackSize = argent.stackSize % 64;
-		
+
 		playerIn.inventory.addItemStackToInventory(denier);
 		playerIn.inventory.addItemStackToInventory(argent);
-		
-		while(or.stackSize > 64)
-		{
+
+		while (or.stackSize > 64) {
 			playerIn.inventory.addItemStackToInventory(new ItemStack(MillItems.denierOr, 64, 0));
 			or.stackSize = or.stackSize - 64;
-		}		
+		}
 		playerIn.inventory.addItemStackToInventory(or);
 	}
-	
+
 	/**
 	 * yep
+	 * 
 	 * @return A random non-zero integer
 	 */
-	public static int getRandomNonzero()
-	{
+	public static int getRandomNonzero() {
 		int results;
 		do
 			results = random.nextInt();
-		while(results == 0);
-		
+		while (results == 0);
+
 		return results;
 	}
-	
+
 	/**
 	 * gets a random Millager Gender
+	 * 
 	 * @return
 	 */
-	public static int randomizeGender()
-	{
+	public static int randomizeGender() {
 		int results = random.nextInt(3) - 2;
-		
+
 		return results;
 	}
-	
+
 	/**
 	 * yep
-	 * @param b the block to check
-	 * @param surface if the ground is on the top of the ground (true) or underground (false)
+	 * 
+	 * @param b
+	 *            the block to check
+	 * @param surface
+	 *            if the ground is on the top of the ground (true) or underground
+	 *            (false)
 	 * @return
 	 */
-	public static Block getValidGroundBlock(final Block b, final boolean surface) 
-	{
+	public static Block getValidGroundBlock(final Block b, final boolean surface) {
 		if (b == Blocks.bedrock) {
 			return Blocks.dirt;
 		} else if (b == Blocks.stone && surface) {

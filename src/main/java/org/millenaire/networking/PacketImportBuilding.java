@@ -13,15 +13,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class PacketImportBuilding implements IMessage {
 
 	BlockPos pos;
-	
+
 	public PacketImportBuilding() {
-		
+
 	}
-	
+
 	public PacketImportBuilding(BlockPos startPos) {
 		this.pos = startPos;
 	}
-	
+
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		int x, y, z;
@@ -45,7 +45,7 @@ public class PacketImportBuilding implements IMessage {
 			MinecraftServer.getServer().addScheduledTask(() -> handle(message, ctx));
 			return null;
 		}
-		
+
 		private void handle(PacketImportBuilding message, MessageContext ctx) {
 			PlanIO.importBuilding(ctx.getServerHandler().playerEntity, message.pos);
 		}

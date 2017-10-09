@@ -20,44 +20,39 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMillSign extends BlockWallSign
-{
-	public BlockMillSign()
-	{
+public class BlockMillSign extends BlockWallSign {
+	public BlockMillSign() {
 		super();
 
 		this.setBlockUnbreakable();
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return null;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
-	
+
 	@Override
 	public int getRenderType() {
 		return -1;
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
-	{
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityMillSign();
 	}
- 
-	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-	//Declarations
+	////////////////////////////////////////////////////////// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+	// Declarations
 	public static Block blockMillSign;
 
-	public static void preinitialize()
-	{
+	public static void preinitialize() {
 		blockMillSign = new BlockMillSign().setUnlocalizedName("blockMillSign");
 		GameRegistry.registerBlock(blockMillSign, "blockMillSign");
 
@@ -65,12 +60,12 @@ public class BlockMillSign extends BlockWallSign
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static void render()
-	{
+	public static void render() {
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockMillSign), 0, new ModelResourceLocation(Reference.MOD_ID + ":blockMillSign", "inventory"));
-		
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockMillSign), 0,
+				new ModelResourceLocation(Reference.MOD_ID + ":blockMillSign", "inventory"));
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMillSign.class, new TileEntitySignRenderer());
 	}
 }

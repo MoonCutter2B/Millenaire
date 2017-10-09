@@ -23,18 +23,13 @@ public class BlockDecorativeCarving extends BlockDecorativeOriented {
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
-	{
+	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 
-		if (iblockstate.getBlock() == this)
-		{
-			if (iblockstate.getValue(FACING) == EnumFacing.NORTH || iblockstate.getValue(FACING) == EnumFacing.SOUTH)
-			{
+		if (iblockstate.getBlock() == this) {
+			if (iblockstate.getValue(FACING) == EnumFacing.NORTH || iblockstate.getValue(FACING) == EnumFacing.SOUTH) {
 				this.setBlockBounds(0.25F, 0.0F, 0.0F, 0.75F, 0.5F, 1.0F);
-			}
-			else
-			{
+			} else {
 				this.setBlockBounds(0.0F, 0.0F, 0.25F, 1.0F, 0.5F, 0.75F);
 			}
 		}

@@ -12,43 +12,39 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.fml.common.registry.GameData;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class PlayerTracker implements IExtendedEntityProperties
-{
+public class PlayerTracker implements IExtendedEntityProperties {
 	public final static String IDENTIFIER = "Millenaire.PlayerInfo";
 
 	private final EntityPlayer player;
-	
+
 	private Map<Item, Boolean> playerCropKnowledge = new HashMap<Item, Boolean>();
-	
-	public PlayerTracker(EntityPlayer player)
-	{
+
+	public PlayerTracker(EntityPlayer player) {
 		this.player = player;
 	}
 
 	/**
-	 * Used to register these extended properties for the player during EntityConstructing event
-	 * This method is for convenience only; it will make your code look nicer
+	 * Used to register these extended properties for the player during
+	 * EntityConstructing event This method is for convenience only; it will make
+	 * your code look nicer
 	 */
-	public static final void register(EntityPlayer player)
-	{
+	public static final void register(EntityPlayer player) {
 		player.registerExtendedProperties(PlayerTracker.IDENTIFIER, new PlayerTracker(player));
 	}
 
 	/**
-	 * Returns ExtendedPlayer properties for player
-	 * This method is for convenience only; it will make your code look nicer
+	 * Returns ExtendedPlayer properties for player This method is for convenience
+	 * only; it will make your code look nicer
 	 */
-	public static final PlayerTracker get(EntityPlayer player)
-	{
+	public static final PlayerTracker get(EntityPlayer player) {
 		return (PlayerTracker) player.getExtendedProperties(IDENTIFIER);
 	}
 
 	@Override
-	public void saveNBTData(NBTTagCompound compound)
-	{
+	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
 		NBTTagCompound cropKnowledge = new NBTTagCompound();
-		for(Item i : playerCropKnowledge.keySet()) {
+		for (Item i : playerCropKnowledge.keySet()) {
 			cropKnowledge.setBoolean(Item.itemRegistry.getNameForObject(i).toString(), playerCropKnowledge.get(i));
 		}
 		properties.setTag("cropKnowledge", cropKnowledge);
@@ -56,12 +52,11 @@ public class PlayerTracker implements IExtendedEntityProperties
 	}
 
 	@Override
-	public void loadNBTData(NBTTagCompound compound)
-	{
+	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(IDENTIFIER);
 		NBTTagCompound cropKnowledge = properties.getCompoundTag("cropKnowledge");
-		
-		for(String s : cropKnowledge.getKeySet()) {
+
+		for (String s : cropKnowledge.getKeySet()) {
 			Item i = Item.getByNameOrId(s);
 			Boolean canPlant = cropKnowledge.getBoolean(s);
 			playerCropKnowledge.put(i, canPlant);
@@ -70,19 +65,17 @@ public class PlayerTracker implements IExtendedEntityProperties
 	}
 
 	@Override
-	public void init(Entity entity, World world)
-	{
+	public void init(Entity entity, World world) {
 	}
-	
+
 	public void setCanUseCrop(Item cropIn, boolean canUse) {
 		playerCropKnowledge.put(cropIn, Boolean.valueOf(canUse));
 	}
 
 	public boolean canPlayerUseCrop(Item cropIn) {
-		if(playerCropKnowledge.containsKey(cropIn)) {
+		if (playerCropKnowledge.containsKey(cropIn)) {
 			return playerCropKnowledge.get(cropIn);
-		}
-		else {
+		} else {
 			return false;
 		}
 	}

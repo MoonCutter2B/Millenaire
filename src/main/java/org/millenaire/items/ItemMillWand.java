@@ -36,23 +36,21 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemMillWand extends Item
-{
-	public ItemMillWand() 
-	{
+public class ItemMillWand extends Item {
+	public ItemMillWand() {
 		this.setMaxStackSize(1);
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
-		if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == wandNegation) {
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side,
+			float hitX, float hitY, float hitZ) {
+		if (worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == wandNegation) {
 			PacketExportBuilding packet = new PacketExportBuilding(pos);
 			Millenaire.simpleNetworkWrapper.sendToServer(packet);
 			return true;
-		}
-		else if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == wandSummoning) {
-			PacketImportBuilding packet =  new PacketImportBuilding(pos);
+		} else if (worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote
+				&& this == wandSummoning) {
+			PacketImportBuilding packet = new PacketImportBuilding(pos);
 			Millenaire.simpleNetworkWrapper.sendToServer(packet);
 			return true;
 		}
@@ -60,38 +58,33 @@ public class ItemMillWand extends Item
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
-		if(this == wandNegation)
-		{
-			if(worldIn.getBlockState(pos).getBlock() == BlockVillageStone.villageStone)
-			{
+	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side,
+			float hitX, float hitY, float hitZ) {
+		if (this == wandNegation) {
+			if (worldIn.getBlockState(pos).getBlock() == BlockVillageStone.villageStone) {
 				NBTTagCompound nbt = new NBTTagCompound();
 				stack.setTagCompound(nbt);
 				nbt.setInteger("X", pos.getX());
 				nbt.setInteger("Y", pos.getY());
 				nbt.setInteger("Z", pos.getZ());
 
-				if(worldIn.isRemote)
-				{
-					playerIn.openGui(Millenaire.instance, 2, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
+				if (worldIn.isRemote) {
+					playerIn.openGui(Millenaire.instance, 2, worldIn, playerIn.getPosition().getX(),
+							playerIn.getPosition().getY(), playerIn.getPosition().getZ());
 				}
 			}
 		}
 
-		if(this == wandSummoning)
-		{
-			if(worldIn.getBlockState(pos).getBlock() == Blocks.gold_block)
-			{
-				if(!worldIn.isRemote)
-				{	
+		if (this == wandSummoning) {
+			if (worldIn.getBlockState(pos).getBlock() == Blocks.gold_block) {
+				if (!worldIn.isRemote) {
 					System.out.println("Gold Creation");
-					Millenaire.simpleNetworkWrapper.sendTo(new PacketSayTranslatedMessage("message.notimplemented"), (EntityPlayerMP)playerIn);
-					//Gui confirming action and desired village, then villageStone block is made and villageType assigned
+					Millenaire.simpleNetworkWrapper.sendTo(new PacketSayTranslatedMessage("message.notimplemented"),
+							(EntityPlayerMP) playerIn);
+					// Gui confirming action and desired village, then villageStone block is made
+					// and villageType assigned
 				}
-			}
-			else if(worldIn.getBlockState(pos).getBlock() == Blocks.obsidian)
-			{	
+			} else if (worldIn.getBlockState(pos).getBlock() == Blocks.obsidian) {
 				System.out.println("Obsidian Creation");
 
 				NBTTagCompound nbt = new NBTTagCompound();
@@ -100,142 +93,150 @@ public class ItemMillWand extends Item
 				nbt.setInteger("Y", pos.getY());
 				nbt.setInteger("Z", pos.getZ());
 
-				if(!worldIn.isRemote)
-				{
-					Millenaire.simpleNetworkWrapper.sendTo(new PacketSayTranslatedMessage("message.notimplemented"), (EntityPlayerMP)playerIn);
-//					playerIn.openGui(Millenaire.instance, 4, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
-				} 
+				if (!worldIn.isRemote) {
+					Millenaire.simpleNetworkWrapper.sendTo(new PacketSayTranslatedMessage("message.notimplemented"),
+							(EntityPlayerMP) playerIn);
+					// playerIn.openGui(Millenaire.instance, 4, worldIn,
+					// playerIn.getPosition().getX(), playerIn.getPosition().getY(),
+					// playerIn.getPosition().getZ());
+				}
 
 			}
-//			else if(worldIn.getBlockState(pos).getBlock() == Blocks.emerald_block)
-//			{
-//				if(!worldIn.isRemote)
-//				{	
-//					System.out.println("Emerald Creation");
-//					worldIn.setBlockToAir(pos);
-//					EntityMillVillager entity = new EntityMillVillager(worldIn, 100100, MillCulture.normanCulture);
-//					System.out.println("cultured: " + entity.culture.cultureName);
-//					entity = entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanGirl"), 1);
-//					System.out.println(entity.getVillagerType());
-//					entity.setChild();
-//					entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
-//					worldIn.spawnEntityInWorld(entity);
-//				}
-//				stack.stackSize--;
-//				return true;
-//			}
-//			else if(worldIn.getBlockState(pos).getBlock() == Blocks.diamond_block)
-//			{
-//				if(!worldIn.isRemote)
-//				{	
-//					System.out.println("Diamond Creation");
-//					worldIn.setBlockToAir(pos);
-//					EntityMillVillager entity = new EntityMillVillager(worldIn, 100101, MillCulture.normanCulture);
-//					System.out.println("cultured: ");
-//					entity = entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanLady"), 1);
-//					System.out.println(entity.getVillagerType());
-//					entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
-//					worldIn.spawnEntityInWorld(entity);
-//				}
-//				stack.stackSize--;
-//				return true;
-//			}
+			// else if(worldIn.getBlockState(pos).getBlock() == Blocks.emerald_block)
+			// {
+			// if(!worldIn.isRemote)
+			// {
+			// System.out.println("Emerald Creation");
+			// worldIn.setBlockToAir(pos);
+			// EntityMillVillager entity = new EntityMillVillager(worldIn, 100100,
+			// MillCulture.normanCulture);
+			// System.out.println("cultured: " + entity.culture.cultureName);
+			// entity =
+			// entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanGirl"),
+			// 1);
+			// System.out.println(entity.getVillagerType());
+			// entity.setChild();
+			// entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+			// worldIn.spawnEntityInWorld(entity);
+			// }
+			// stack.stackSize--;
+			// return true;
+			// }
+			// else if(worldIn.getBlockState(pos).getBlock() == Blocks.diamond_block)
+			// {
+			// if(!worldIn.isRemote)
+			// {
+			// System.out.println("Diamond Creation");
+			// worldIn.setBlockToAir(pos);
+			// EntityMillVillager entity = new EntityMillVillager(worldIn, 100101,
+			// MillCulture.normanCulture);
+			// System.out.println("cultured: ");
+			// entity =
+			// entity.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanLady"),
+			// 1);
+			// System.out.println(entity.getVillagerType());
+			// entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+			// worldIn.spawnEntityInWorld(entity);
+			// }
+			// stack.stackSize--;
+			// return true;
+			// }
 		}
 
-		if(this == wandCreative)
-		{
-			//Control whether or not you can plant crops
-			if(worldIn.getBlockState(pos).getBlock() instanceof BlockMillCrops)
-			{
-				if(playerIn.isSneaking())
-				{
+		if (this == wandCreative) {
+			// Control whether or not you can plant crops
+			if (worldIn.getBlockState(pos).getBlock() instanceof BlockMillCrops) {
+				if (playerIn.isSneaking()) {
 					boolean hasCrop;
 
-					//hasCrop = VillageTracker.get(worldIn).removePlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos));
-					hasCrop = PlayerTracker.get(playerIn).canPlayerUseCrop(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getSeed());
-					System.out.println(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos).toString());
+					// hasCrop = VillageTracker.get(worldIn).removePlayerUseCrop(playerIn,
+					// ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn,
+					// pos));
+					hasCrop = PlayerTracker.get(playerIn)
+							.canPlayerUseCrop(((BlockMillCrops) worldIn.getBlockState(pos).getBlock()).getSeed());
+					System.out.println(
+							((BlockMillCrops) worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos).toString());
 
-					if(worldIn.isRemote)
-					{
-						if(hasCrop)
-							playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can no longer plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+					if (worldIn.isRemote) {
+						if (hasCrop)
+							playerIn.addChatMessage(
+									new ChatComponentText(playerIn.getDisplayNameString() + " can no longer plant "
+											+ worldIn.getBlockState(pos).getBlock().getLocalizedName()));
 						else
-							playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " already could not plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+							playerIn.addChatMessage(
+									new ChatComponentText(playerIn.getDisplayNameString() + " already could not plant "
+											+ worldIn.getBlockState(pos).getBlock().getLocalizedName()));
 					}
-				}
-				else
-				{
+				} else {
 					boolean succeeded = false;
-					if(!PlayerTracker.get(playerIn).canPlayerUseCrop(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getSeed()))
-					{
-						//VillageTracker.get(worldIn).setPlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos));
-						PlayerTracker.get(playerIn).setCanUseCrop(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getSeed(), true);
+					if (!PlayerTracker.get(playerIn)
+							.canPlayerUseCrop(((BlockMillCrops) worldIn.getBlockState(pos).getBlock()).getSeed())) {
+						// VillageTracker.get(worldIn).setPlayerUseCrop(playerIn,
+						// ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn,
+						// pos));
+						PlayerTracker.get(playerIn).setCanUseCrop(
+								((BlockMillCrops) worldIn.getBlockState(pos).getBlock()).getSeed(), true);
 						succeeded = true;
 					}
 
-					if(worldIn.isRemote)
-					{
-						if(succeeded)
-							playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can now plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+					if (worldIn.isRemote) {
+						if (succeeded)
+							playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString()
+									+ " can now plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
 						else
-							playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can already plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+							playerIn.addChatMessage(
+									new ChatComponentText(playerIn.getDisplayNameString() + " can already plant "
+											+ worldIn.getBlockState(pos).getBlock().getLocalizedName()));
 					}
 				}
 			}
-			//Allow you to plant all Crops
-			else if(worldIn.getBlockState(pos).getBlock() == Blocks.cake)
-			{
-				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.grapes))
+			// Allow you to plant all Crops
+			else if (worldIn.getBlockState(pos).getBlock() == Blocks.cake) {
+				if (!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.grapes))
 					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.grapes, true);
-				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.maize))
+				if (!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.maize))
 					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.maize, true);
-				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.rice))
+				if (!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.rice))
 					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.rice, true);
-				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.turmeric))
+				if (!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.turmeric))
 					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.turmeric, true);
 
-				if(worldIn.isRemote)
-				{
-					playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can now plant everything"));
+				if (worldIn.isRemote) {
+					playerIn.addChatMessage(
+							new ChatComponentText(playerIn.getDisplayNameString() + " can now plant everything"));
 				}
 			}
-			//Lock and Unlock Chests
-			else if(worldIn.getBlockState(pos).getBlock() instanceof BlockMillChest)
-			{
-				boolean isLocked = ((TileEntityMillChest)worldIn.getTileEntity(pos)).setLock();
+			// Lock and Unlock Chests
+			else if (worldIn.getBlockState(pos).getBlock() instanceof BlockMillChest) {
+				boolean isLocked = ((TileEntityMillChest) worldIn.getTileEntity(pos)).setLock();
 
-				if(worldIn.isRemote)
-				{
-					if(isLocked)
+				if (worldIn.isRemote) {
+					if (isLocked)
 						playerIn.addChatMessage(new ChatComponentText("Chest is now Locked"));
 					else
 						playerIn.addChatMessage(new ChatComponentText("Chest is now Unlocked"));
 				}
-			}
-			else if(worldIn.getBlockState(pos).getBlock() instanceof StoredPosition)
-			{
-				if(playerIn.isSneaking())
+			} else if (worldIn.getBlockState(pos).getBlock() instanceof StoredPosition) {
+				if (playerIn.isSneaking())
 					worldIn.setBlockToAir(pos);
 				else
 					worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(StoredPosition.VARIANT));
 			}
-			//Fixes All Denier in your inventory (if no specific block/entity is clicked)
-			else
-			{
+			// Fixes All Denier in your inventory (if no specific block/entity is clicked)
+			else {
 				CommonUtilities.changeMoney(playerIn);
-				if(worldIn.isRemote)
-					playerIn.addChatMessage(new ChatComponentText("Fixing Denier in " + playerIn.getDisplayNameString() + "'s Inventory"));
+				if (worldIn.isRemote)
+					playerIn.addChatMessage(new ChatComponentText(
+							"Fixing Denier in " + playerIn.getDisplayNameString() + "'s Inventory"));
 			}
 		}
 
-		if(this == tuningFork)
-		{
+		if (this == tuningFork) {
 			IBlockState state = worldIn.getBlockState(pos);
 			String output = state.getBlock().getUnlocalizedName() + " -";
 
-			for(IProperty prop : (java.util.Set<IProperty>)state.getProperties().keySet())
-			{
-				//System.out.println(prop.getName());
+			for (IProperty prop : (java.util.Set<IProperty>) state.getProperties().keySet()) {
+				// System.out.println(prop.getName());
 				output = output.concat(" " + prop.getName() + ":" + state.getValue(prop).toString());
 			}
 
@@ -246,19 +247,18 @@ public class ItemMillWand extends Item
 	}
 
 	@Override
-	public boolean itemInteractionForEntity(ItemStack stack, net.minecraft.entity.player.EntityPlayer player, EntityLivingBase entity)
-	{
-		if(stack.getItem() == wandNegation && entity instanceof EntityMillVillager)
-		{
-			((EntityMillVillager)entity).isPlayerInteracting = true;
+	public boolean itemInteractionForEntity(ItemStack stack, net.minecraft.entity.player.EntityPlayer player,
+			EntityLivingBase entity) {
+		if (stack.getItem() == wandNegation && entity instanceof EntityMillVillager) {
+			((EntityMillVillager) entity).isPlayerInteracting = true;
 
 			NBTTagCompound nbt = new NBTTagCompound();
-			player.getHeldItem().setTagCompound(nbt); 
+			player.getHeldItem().setTagCompound(nbt);
 			nbt.setInteger("ID", entity.getEntityId());
 
-			if(player.worldObj.isRemote)
-			{
-				player.openGui(Millenaire.instance, 3, player.worldObj, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
+			if (player.worldObj.isRemote) {
+				player.openGui(Millenaire.instance, 3, player.worldObj, player.getPosition().getX(),
+						player.getPosition().getY(), player.getPosition().getZ());
 			}
 		}
 		return false;
@@ -266,22 +266,20 @@ public class ItemMillWand extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
-	{
-		if(stack.getItem() == wandCreative)
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+		if (stack.getItem() == wandCreative)
 			tooltip.add("§lCreative Mode ONLY");
 	}
 
-	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	////////////////////////////////////////////////////////// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-	//Declarations
+	// Declarations
 	public static Item wandSummoning;
 	public static Item wandNegation;
 	public static Item wandCreative;
 	public static Item tuningFork;
 
-	public static void preinitialize()
-	{
+	public static void preinitialize() {
 		wandSummoning = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandSummoning");
 		GameRegistry.registerItem(wandSummoning, "wandSummoning");
 		wandNegation = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandNegation");
@@ -293,13 +291,16 @@ public class ItemMillWand extends Item
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static void render()
-	{
+	public static void render() {
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 
-		renderItem.getItemModelMesher().register(wandSummoning, 0, new ModelResourceLocation(Reference.MOD_ID + ":wandSummoning", "inventory"));
-		renderItem.getItemModelMesher().register(wandNegation, 0, new ModelResourceLocation(Reference.MOD_ID + ":wandNegation", "inventory"));
-		renderItem.getItemModelMesher().register(wandCreative, 0, new ModelResourceLocation(Reference.MOD_ID + ":wandCreative", "inventory"));
-		renderItem.getItemModelMesher().register(tuningFork, 0, new ModelResourceLocation(Reference.MOD_ID + ":tuningFork", "inventory"));
+		renderItem.getItemModelMesher().register(wandSummoning, 0,
+				new ModelResourceLocation(Reference.MOD_ID + ":wandSummoning", "inventory"));
+		renderItem.getItemModelMesher().register(wandNegation, 0,
+				new ModelResourceLocation(Reference.MOD_ID + ":wandNegation", "inventory"));
+		renderItem.getItemModelMesher().register(wandCreative, 0,
+				new ModelResourceLocation(Reference.MOD_ID + ":wandCreative", "inventory"));
+		renderItem.getItemModelMesher().register(tuningFork, 0,
+				new ModelResourceLocation(Reference.MOD_ID + ":tuningFork", "inventory"));
 	}
 }

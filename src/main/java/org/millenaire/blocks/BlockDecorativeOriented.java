@@ -10,44 +10,38 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class BlockDecorativeOriented extends BlockDirectional
-{
+public class BlockDecorativeOriented extends BlockDirectional {
 
-	protected BlockDecorativeOriented(Material materialIn) 
-	{
+	protected BlockDecorativeOriented(Material materialIn) {
 		super(materialIn);
 	}
-	
-	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
-    {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ,
+			int meta, EntityLivingBase placer) {
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
 
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-        {
-            enumfacing = EnumFacing.NORTH;
-        }
-
-        return this.getDefaultState().withProperty(FACING, enumfacing);
-    }
-	
 	@Override
-    public int getMetaFromState(IBlockState state)
-    {
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+			enumfacing = EnumFacing.NORTH;
+		}
+
+		return this.getDefaultState().withProperty(FACING, enumfacing);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
 		int meta;
-		meta = ((EnumFacing)state.getValue(FACING)).getIndex();
-        return meta;
-    }
-	
+		meta = ((EnumFacing) state.getValue(FACING)).getIndex();
+		return meta;
+	}
+
 	@Override
-	protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {FACING});
-    }
+	protected BlockState createBlockState() {
+		return new BlockState(this, new IProperty[] { FACING });
+	}
 }

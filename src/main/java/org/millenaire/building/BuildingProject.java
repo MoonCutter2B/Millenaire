@@ -10,8 +10,7 @@ import net.minecraft.util.EnumFacing;
 
 import org.millenaire.MillCulture;
 
-public class BuildingProject
-{
+public class BuildingProject {
 	/**
 	 * Building's internal name
 	 */
@@ -20,14 +19,15 @@ public class BuildingProject
 	 * Pretty self-explainatory
 	 */
 	public int lvl;
-	
+
 	/**
-	 * This is just here to make the JSON parser work correctly. USE OTHER CONSTRUCTOR!
+	 * This is just here to make the JSON parser work correctly. USE OTHER
+	 * CONSTRUCTOR!
 	 */
 	public BuildingProject() {
-		
+
 	}
-	
+
 	/**
 	 * The best constructor
 	 */
