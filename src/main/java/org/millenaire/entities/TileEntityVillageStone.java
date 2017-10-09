@@ -9,6 +9,8 @@ import org.millenaire.MillCulture;
 import org.millenaire.MillCulture.VillageType;
 import org.millenaire.VillagerType;
 import org.millenaire.blocks.BlockVillageStone;
+import org.millenaire.building.BuildingProject;
+import org.millenaire.building.PlanIO;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,75 +22,81 @@ import net.minecraft.world.biome.BiomeGenBase;
 public class TileEntityVillageStone extends TileEntity
 {
 	List<EntityMillVillager> currentVillagers = new ArrayList<EntityMillVillager>();
-	
+
 	//Control Value.  Changed when using wandSummon, if left as 'biome' when onLoad called, culture decided by biome.
 	public String culture = "biome";
 	public boolean randomVillage = true;
 	public VillageType villageType;
 	public String villageName;
 	public boolean willExplode = false;
-	
+
 	public int testVar = 0;
-	
+
 	@Override
 	public void onLoad()
-    {
-        World world = this.getWorld();
-        BlockPos pos = this.getPos();
-        
-        if(world.getBlockState(pos).getBlock() instanceof BlockVillageStone)
-        {
-        	
-        	if(culture.equalsIgnoreCase("biome"))
-        	{
-        		if (world.getBiomeGenForCoords(pos) != null)
-        		{
-        			//Do awesome stuff and set culture.  Below is simply for testing.
-        			System.out.println("Village Culture being set by biome");
-        			culture = "norman";
-        		}
-        	}
-        	
-        	try
-        	{
-        		if(randomVillage)
-        			villageType = MillCulture.getCulture(culture).getRandomVillageType();
-        		else
-        			villageType = MillCulture.getCulture(culture).getVillageType(villageName);
-        		
-        		villageName = villageType.getVillageName();
-        		
-        		if(MillConfig.villageAnnouncement)
-        		{
-        			if(world.isRemote)
-        			{
-        				for(int i = 0; i < world.playerEntities.size(); i++)
-        					world.playerEntities.get(i).addChatMessage(new ChatComponentText(culture + " village " + villageName + " discovered at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ()));
-        			}
-        		}
-        			
-        		if(!world.isRemote)
-        			System.out.println(culture + " village " + villageName + " created at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
-        	}
-        	catch(Exception ex)
-        	{
-        		System.err.println("Something went catastrophically wrong creating this village");
-        		ex.printStackTrace();
-        		return;
-        	}
-        }
-        else
-        {
-        	System.err.println("VillageStone TileEntity loaded wrong");
-        }
-    }
-	
+	{
+		World world = this.getWorld();
+		BlockPos pos = this.getPos();
+		if(!world.isRemote) { //server only
+			if(world.getBlockState(pos).getBlock() instanceof BlockVillageStone)
+			{
+
+				if(culture.equalsIgnoreCase("biome"))
+				{
+					if (world.getBiomeGenForCoords(pos) != null)
+					{
+						//Do awesome stuff and set culture.  Below is simply for testing.
+						System.out.println("Village Culture being set by biome");
+						culture = "norman";
+					}
+				}
+
+				try
+				{
+					if(randomVillage)
+						villageType = MillCulture.getCulture(culture).getRandomVillageType();
+					else
+						villageType = MillCulture.getCulture(culture).getVillageType(villageName);
+
+					villageName = villageType.getVillageName();
+
+					for(BuildingProject proj : villageType.startingBuildings) {
+						PlanIO.loadSchematic(PlanIO.getBuildingTag(proj.ID, MillCulture.getCulture(culture), true), MillCulture.getCulture(culture), proj.lvl);
+					}
+
+					if(MillConfig.villageAnnouncement)
+					{
+						if(!world.isRemote)
+						{
+							for(int i = 0; i < world.playerEntities.size(); i++)
+								world.playerEntities.get(i).addChatMessage(new ChatComponentText(culture + " village " + villageName + " discovered at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ()));
+						}
+					}
+
+					if(!world.isRemote)
+						System.out.println(culture + " village " + villageName + " created at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
+				}
+				catch(Exception ex)
+				{
+					System.err.println("Something went catastrophically wrong creating this village");
+					ex.printStackTrace();
+					return;
+				}
+			}
+			else
+			{
+				System.err.println("VillageStone TileEntity loaded wrong");
+			}
+		}
+
+	}
+
 	//@SideOnly(Side.SERVER)
 	public EntityMillVillager createVillager(World worldIn, MillCulture cultureIn, int villagerID)
 	{
 		VillagerType currentVillagerType;
 		int currentGender;
-		
+
 		if(villagerID == 0)
 		{
 			int balance = 0;
@@ -101,7 +109,7 @@ public class TileEntityVillageStone extends TileEntity
 					balance++;
 				else
 					balance--;
-				
+
 				if(villagerID == currentVillagers.get(i).villagerID)
 				{
 					villagerID = CommonUtilities.getRandomNonzero();
@@ -120,9 +128,9 @@ public class TileEntityVillageStone extends TileEntity
 					}
 				}
 			}
-			
+
 			balance += CommonUtilities.randomizeGender();
-			
+
 			if(balance < 0)
 			{
 				currentGender = 0;
@@ -133,10 +141,10 @@ public class TileEntityVillageStone extends TileEntity
 				currentGender = 1;
 				currentVillagerType = cultureIn.getChildType(1);
 			}
-			
+
 			EntityMillVillager newVillager = new EntityMillVillager(worldIn, villagerID, cultureIn);
 			newVillager.setTypeAndGender(currentVillagerType, currentGender);
-			
+
 			return newVillager;
 		}
 		else
@@ -146,22 +154,22 @@ public class TileEntityVillageStone extends TileEntity
 				if(villagerID == currentVillagers.get(i).villagerID)
 					return currentVillagers.get(i);
 			}
-			
+
 			System.err.println("Attempted to create nonspecific Villager.");
 		}
 
 		return null;
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound compound)
-    {
-		
-    }
-	
+	{
+
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound compound)
-    {
-		
-    }
+	{
+
+	}
 }

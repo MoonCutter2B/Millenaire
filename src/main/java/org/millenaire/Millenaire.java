@@ -127,8 +127,7 @@ public class Millenaire
     public void init(FMLInitializationEvent event)
     {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new MillGuiHandler());
-		//GameRegistry.registerWorldGenerator(new VillageGenerator(), 0); 
-		//Commented out so things work
+		GameRegistry.registerWorldGenerator(new VillageGenerator(), 1000);
 		
 		if(event.getSide() == Side.CLIENT)
     	{	

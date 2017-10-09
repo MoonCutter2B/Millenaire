@@ -107,7 +107,7 @@ public class MillConfig
 		minLoneDistanceProp.setLanguageKey("gui.millConfig.minLoneDistance").setRequiresWorldRestart(true);
 		Property minVillageLoneDistanceProp = config.get(CATEGORYWORLDGEN, "minVillageLoneDistance", 300);
 		minVillageLoneDistanceProp.setLanguageKey("gui.millConfig.minVillageLoneDistance").setRequiresWorldRestart(true);
-		Property spawnDistanceProp = config.get(CATEGORYWORLDGEN, "spawnDistance", 150);
+		Property spawnDistanceProp = config.get(CATEGORYWORLDGEN, "spawnDistance", 200);
 		spawnDistanceProp.setLanguageKey("gui.millConfig.spawnDistance").setRequiresWorldRestart(true);
 		
 		Property loadedRadiusProp = config.get(CATEGORYVILLAGEBEV, "loadedRadius", 200);

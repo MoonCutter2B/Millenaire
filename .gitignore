@@ -1,18 +1,22 @@
-/.project
-/bin/
-/bin/
-/bin/
-/bin/
-/bin/
-/bin/
-/bin/
-/bin/
-*.classpath
-build/
-*.DS_Store
-.settings/
-eclipse/
-.gradle/gradle.log
-.gradle/
+# eclipse
+bin
 *.launch
-run/
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run

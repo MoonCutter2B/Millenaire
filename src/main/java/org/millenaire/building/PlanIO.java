@@ -150,7 +150,7 @@ public class PlanIO {
 				}
 			}
 
-			exportToSchem(ex2, (short)width, (short)ex.size(), (short)length, (short)startLevel, buildingName, buildingLevel, new VillagerType[] {MillCulture.normanCulture.getVillagerType("normanMiner")}, new VillagerType[] {MillCulture.normanCulture.getVillagerType("normanLady")}, player);
+			exportToSchem(ex2, (short)width, (short)ex.size(), (short)length, (short)startLevel, buildingName, buildingLevel, player);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -189,7 +189,7 @@ public class PlanIO {
 			}
 			FileInputStream fis = new FileInputStream(schem);
 
-			BuildingPlan plan = loadSchematic(fis, MillCulture.normanCulture, level);
+			BuildingPlan plan = loadSchematic(CompressedStreamTools.readCompressed(fis), MillCulture.normanCulture, level);
 			IBlockState[][][] blocks = plan.buildingArray;
 
 			for(int x = 0; x < plan.width; x++) {
@@ -206,9 +206,8 @@ public class PlanIO {
 		}
 	}
 
-	public static BuildingPlan loadSchematic(InputStream is, MillCulture culture, int level) throws IOException {
+	public static BuildingPlan loadSchematic(NBTTagCompound nbt, MillCulture culture, int level) throws IOException {
 		//Convert Stream to NBTTagCompound
-		NBTTagCompound nbt = CompressedStreamTools.readCompressed(is);
 
 		//width = x-axis, height = y-axis, length = z-axis
 		short width, height, length;
@@ -257,27 +256,39 @@ public class PlanIO {
 
 		//load milleniare extra data
 		short depth = list.getCompoundTagAt(0).getShort("StartLevel");
-		
+
 		String name = nbt.getString("BuildingName");
 
-		return new BuildingPlan(culture, level).setNameAndType(name)
+		return new BuildingPlan(culture, level)
 				.setHeightDepth(height, depth).setDistance(0, 1).setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized);
 	}
 
-	public static NBTTagCompound getBuildingTag(final String name) {
-		try {
-			File f1 = getBuildingFile(name);
-			if(!f1.exists()) 
+	public static NBTTagCompound getBuildingTag(final String name, MillCulture culture, final boolean packaged) {
+		if(packaged) {
+			InputStream x = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + culture.cultureName.toLowerCase() + "/buildings/");
+			try {
+				return CompressedStreamTools.readCompressed(x);
+			} catch (IOException e) {
+				e.printStackTrace();
 				return new NBTTagCompound();
-			else {
-				FileInputStream fis = new FileInputStream(f1);
-				return CompressedStreamTools.readCompressed(fis);
 			}
 		}
-		catch(Exception ex) {
-			ex.printStackTrace();
-			return new NBTTagCompound();
+		else {
+			try {
+				File f1 = getBuildingFile(name);
+				if(!f1.exists()) 
+					return new NBTTagCompound();
+				else {
+					FileInputStream fis = new FileInputStream(f1);
+					return CompressedStreamTools.readCompressed(fis);
+				}
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+				return new NBTTagCompound();
+			}
 		}
+
 
 	}
 
@@ -318,10 +329,10 @@ public class PlanIO {
 	 * @return the file that is outputted to disk
 	 * @throws Exception 
 	 */
-	public static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, VillagerType[] maleVillagers, VillagerType[] femaleVillagers, EntityPlayer player) throws Exception {
+	public static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, EntityPlayer player) throws Exception {
 		File f1 = getBuildingFile(name);
 
-		NBTTagCompound tag = getBuildingTag(name);
+		NBTTagCompound tag = getBuildingTag(name, null, false);
 
 		if(!valid(width, height, length, depth, tag)) {
 			PacketSayTranslatedMessage packet = new PacketSayTranslatedMessage("message.error.exporting.dimensions");
@@ -368,34 +379,6 @@ public class PlanIO {
 		tag.setShort("Length", length);
 		//tag.setShort("StartLevel", depth);
 		tag.setString("BuildingName", name);
-
-		NBTTagList MaleList = new NBTTagList();
-		for(int i = 0; i < maleVillagers.length; i++)
-		{
-			String s3 = maleVillagers[i].id;
-			if(s3 != null)
-			{
-				NBTTagCompound tag3 = new NBTTagCompound();
-				tag3.setString("" + i, s3);
-				MaleList.appendTag(tag3);
-			}
-		}
-
-		NBTTagList FemaleList = new NBTTagList();
-		for(int i = 0; i < femaleVillagers.length; i++)
-		{
-			String s4 = femaleVillagers[i].id;
-			if(s4 != null)
-			{
-				NBTTagCompound tag3 = new NBTTagCompound();
-				tag3.setString("" + i, s4);
-				FemaleList.appendTag(tag3);
-			}
-		}
-
-		tag.setTag("MaleVillagers", MaleList);
-		tag.setTag("FemaleVillagers", FemaleList);
-
 		try {
 			CompressedStreamTools.writeCompressed(tag, new FileOutputStream(f1));
 		} catch (IOException e) {
