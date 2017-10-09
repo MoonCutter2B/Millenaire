@@ -46,12 +46,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = Reference.MOD_ID, name = Millenaire.NAME, version = Millenaire.VERSION, guiFactory = Millenaire.GUIFACTORY)
+@Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY)
 public class Millenaire {
-	public static final String MODID = "millenaire";
-	public static final String NAME = "Mill\u00e9naire";
-	public static final String VERSION = "7.0.0";
-	public static final String GUIFACTORY = "org.millenaire.gui.MillGuiFactory";
 
 	public static boolean isServer = true;
 
