@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 import org.millenaire.items.ItemMillParchment;
 
 import net.minecraft.client.Minecraft;
@@ -17,8 +17,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiParchment extends GuiScreen
 {
-	final static ResourceLocation PARCHMENTGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_parchment.png");
-	final static ResourceLocation BOOKGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_book.png");
+	final static ResourceLocation PARCHMENTGUI = new ResourceLocation(Reference.MOD_ID + ":textures/gui/ML_parchment.png");
+	final static ResourceLocation BOOKGUI = new ResourceLocation(Reference.MOD_ID + ":textures/gui/ML_book.png");
 	
 	ItemMillParchment item;
 	List<String> stringPages = new ArrayList<String>();

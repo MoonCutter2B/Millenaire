@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.millenaire.CommonUtilities;
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 import org.millenaire.gui.MillAchievement;
 
 import net.minecraft.client.Minecraft;
@@ -163,6 +164,6 @@ public class ItemMillWallet extends Item
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
-		renderItem.getItemModelMesher().register(itemMillPurse, 0, new ModelResourceLocation(Millenaire.MODID + ":itemMillPurse", "inventory"));
+		renderItem.getItemModelMesher().register(itemMillPurse, 0, new ModelResourceLocation(Reference.MOD_ID + ":itemMillPurse", "inventory"));
 	}
 }

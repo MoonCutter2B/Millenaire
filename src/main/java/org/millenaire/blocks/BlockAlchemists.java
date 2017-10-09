@@ -1,6 +1,7 @@
 package org.millenaire.blocks;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -79,6 +80,6 @@ public class BlockAlchemists extends Block
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockAlchemists), 0, new ModelResourceLocation(Millenaire.MODID + ":blockAlchemists", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockAlchemists), 0, new ModelResourceLocation(Reference.MOD_ID + ":blockAlchemists", "inventory"));
 	}
 }

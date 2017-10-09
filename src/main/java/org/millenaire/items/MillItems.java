@@ -1,6 +1,7 @@
 package org.millenaire.items;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -57,16 +58,16 @@ public class MillItems
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
-		renderItem.getItemModelMesher().register(denier, 0, new ModelResourceLocation(Millenaire.MODID + ":denier", "inventory"));
-		renderItem.getItemModelMesher().register(denierOr, 0, new ModelResourceLocation(Millenaire.MODID + ":denierOr", "inventory"));
-		renderItem.getItemModelMesher().register(denierArgent, 0, new ModelResourceLocation(Millenaire.MODID + ":denierArgent", "inventory"));
+		renderItem.getItemModelMesher().register(denier, 0, new ModelResourceLocation(Reference.MOD_ID + ":denier", "inventory"));
+		renderItem.getItemModelMesher().register(denierOr, 0, new ModelResourceLocation(Reference.MOD_ID + ":denierOr", "inventory"));
+		renderItem.getItemModelMesher().register(denierArgent, 0, new ModelResourceLocation(Reference.MOD_ID + ":denierArgent", "inventory"));
 		
-		renderItem.getItemModelMesher().register(silk, 0, new ModelResourceLocation(Millenaire.MODID + ":silk", "inventory"));
-		renderItem.getItemModelMesher().register(obsidianFlake, 0, new ModelResourceLocation(Millenaire.MODID + ":obsidianFlake", "inventory"));
-		renderItem.getItemModelMesher().register(unknownPowder, 0, new ModelResourceLocation(Millenaire.MODID + ":unknownPowder", "inventory"));
+		renderItem.getItemModelMesher().register(silk, 0, new ModelResourceLocation(Reference.MOD_ID + ":silk", "inventory"));
+		renderItem.getItemModelMesher().register(obsidianFlake, 0, new ModelResourceLocation(Reference.MOD_ID + ":obsidianFlake", "inventory"));
+		renderItem.getItemModelMesher().register(unknownPowder, 0, new ModelResourceLocation(Reference.MOD_ID + ":unknownPowder", "inventory"));
 		
-		renderItem.getItemModelMesher().register(woolClothes, 0, new ModelResourceLocation(Millenaire.MODID + ":woolClothes", "inventory"));
-		renderItem.getItemModelMesher().register(silkClothes, 0, new ModelResourceLocation(Millenaire.MODID + ":silkClothes", "inventory"));
-		renderItem.getItemModelMesher().register(galianiteDust, 0, new ModelResourceLocation(Millenaire.MODID + ":galianiteDust", "inventory"));
+		renderItem.getItemModelMesher().register(woolClothes, 0, new ModelResourceLocation(Reference.MOD_ID + ":woolClothes", "inventory"));
+		renderItem.getItemModelMesher().register(silkClothes, 0, new ModelResourceLocation(Reference.MOD_ID + ":silkClothes", "inventory"));
+		renderItem.getItemModelMesher().register(galianiteDust, 0, new ModelResourceLocation(Reference.MOD_ID + ":galianiteDust", "inventory"));
 	}
 }

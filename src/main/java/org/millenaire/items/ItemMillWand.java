@@ -3,15 +3,13 @@ package org.millenaire.items;
 import java.util.List;
 
 import org.millenaire.CommonUtilities;
-import org.millenaire.MillCulture;
 import org.millenaire.Millenaire;
 import org.millenaire.PlayerTracker;
-import org.millenaire.VillageTracker;
+import org.millenaire.Reference;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
 import org.millenaire.blocks.BlockVillageStone;
 import org.millenaire.blocks.StoredPosition;
-import org.millenaire.building.PlanIO;
 import org.millenaire.entities.EntityMillVillager;
 import org.millenaire.entities.TileEntityMillChest;
 import org.millenaire.networking.PacketExportBuilding;
@@ -299,9 +297,9 @@ public class ItemMillWand extends Item
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 
-		renderItem.getItemModelMesher().register(wandSummoning, 0, new ModelResourceLocation(Millenaire.MODID + ":wandSummoning", "inventory"));
-		renderItem.getItemModelMesher().register(wandNegation, 0, new ModelResourceLocation(Millenaire.MODID + ":wandNegation", "inventory"));
-		renderItem.getItemModelMesher().register(wandCreative, 0, new ModelResourceLocation(Millenaire.MODID + ":wandCreative", "inventory"));
-		renderItem.getItemModelMesher().register(tuningFork, 0, new ModelResourceLocation(Millenaire.MODID + ":tuningFork", "inventory"));
+		renderItem.getItemModelMesher().register(wandSummoning, 0, new ModelResourceLocation(Reference.MOD_ID + ":wandSummoning", "inventory"));
+		renderItem.getItemModelMesher().register(wandNegation, 0, new ModelResourceLocation(Reference.MOD_ID + ":wandNegation", "inventory"));
+		renderItem.getItemModelMesher().register(wandCreative, 0, new ModelResourceLocation(Reference.MOD_ID + ":wandCreative", "inventory"));
+		renderItem.getItemModelMesher().register(tuningFork, 0, new ModelResourceLocation(Reference.MOD_ID + ":tuningFork", "inventory"));
 	}
 }

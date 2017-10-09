@@ -3,6 +3,7 @@ package org.millenaire.blocks;
 import java.util.Random;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -183,14 +184,14 @@ public class StoredPosition extends Block
     {
     	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().registerBuiltInBlocks(storedPosition);
     	
-    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(storedPosition), 0, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
+    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(storedPosition), 0, new ModelResourceLocation(Reference.MOD_ID + ":storedPosition", "inventory"));
     	
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 0, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 1, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 2, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 3, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 4, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 5, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 0, new ModelResourceLocation(Reference.MOD_ID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 1, new ModelResourceLocation(Reference.MOD_ID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 2, new ModelResourceLocation(Reference.MOD_ID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 3, new ModelResourceLocation(Reference.MOD_ID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 4, new ModelResourceLocation(Reference.MOD_ID + ":storedPosition", "inventory"));
+    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 5, new ModelResourceLocation(Reference.MOD_ID + ":storedPosition", "inventory"));
     }
 	
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

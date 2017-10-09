@@ -2,7 +2,7 @@ package org.millenaire.gui;
 
 import java.io.IOException;
 
-import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 import org.millenaire.gui.GuiParchment.NextPageButton;
 
 import net.minecraft.client.gui.GuiButton;
@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiChief extends GuiScreen
 {
-	final static ResourceLocation CHIEFGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_village_chief.png");
+	final static ResourceLocation CHIEFGUI = new ResourceLocation(Reference.MOD_ID + ":textures/gui/ML_village_chief.png");
 	private String string;
 	int page = 0;
 	int maxPage = 4;

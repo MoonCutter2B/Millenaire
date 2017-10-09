@@ -1,6 +1,7 @@
 package org.millenaire.items;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 import org.millenaire.blocks.BlockMillCrops;
 import org.millenaire.gui.MillAchievement;
 
@@ -155,27 +156,27 @@ public class ItemMillFood extends ItemFood
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
-		renderItem.getItemModelMesher().register(ciderApple, 0, new ModelResourceLocation(Millenaire.MODID + ":ciderApple", "inventory"));
-		renderItem.getItemModelMesher().register(cider, 0, new ModelResourceLocation(Millenaire.MODID + ":cider", "inventory"));
-		renderItem.getItemModelMesher().register(calva, 0, new ModelResourceLocation(Millenaire.MODID + ":calva", "inventory"));
-		renderItem.getItemModelMesher().register(tripes, 0, new ModelResourceLocation(Millenaire.MODID + ":tripes", "inventory"));
-		renderItem.getItemModelMesher().register(boudinNoir, 0, new ModelResourceLocation(Millenaire.MODID + ":boudinNoir", "inventory"));
+		renderItem.getItemModelMesher().register(ciderApple, 0, new ModelResourceLocation(Reference.MOD_ID + ":ciderApple", "inventory"));
+		renderItem.getItemModelMesher().register(cider, 0, new ModelResourceLocation(Reference.MOD_ID + ":cider", "inventory"));
+		renderItem.getItemModelMesher().register(calva, 0, new ModelResourceLocation(Reference.MOD_ID + ":calva", "inventory"));
+		renderItem.getItemModelMesher().register(tripes, 0, new ModelResourceLocation(Reference.MOD_ID + ":tripes", "inventory"));
+		renderItem.getItemModelMesher().register(boudinNoir, 0, new ModelResourceLocation(Reference.MOD_ID + ":boudinNoir", "inventory"));
 		
-		renderItem.getItemModelMesher().register(vegCurry, 0, new ModelResourceLocation(Millenaire.MODID + ":vegCurry", "inventory"));
-		renderItem.getItemModelMesher().register(murghCurry, 0, new ModelResourceLocation(Millenaire.MODID + ":murghCurry", "inventory"));
-		renderItem.getItemModelMesher().register(rasgulla, 0, new ModelResourceLocation(Millenaire.MODID + ":rasgulla", "inventory"));
+		renderItem.getItemModelMesher().register(vegCurry, 0, new ModelResourceLocation(Reference.MOD_ID + ":vegCurry", "inventory"));
+		renderItem.getItemModelMesher().register(murghCurry, 0, new ModelResourceLocation(Reference.MOD_ID + ":murghCurry", "inventory"));
+		renderItem.getItemModelMesher().register(rasgulla, 0, new ModelResourceLocation(Reference.MOD_ID + ":rasgulla", "inventory"));
 		
-		renderItem.getItemModelMesher().register(cacauhaa, 0, new ModelResourceLocation(Millenaire.MODID + ":cacauhaa", "inventory"));
-		renderItem.getItemModelMesher().register(masa, 0, new ModelResourceLocation(Millenaire.MODID + ":masa", "inventory"));
-		renderItem.getItemModelMesher().register(wah, 0, new ModelResourceLocation(Millenaire.MODID + ":wah", "inventory"));
+		renderItem.getItemModelMesher().register(cacauhaa, 0, new ModelResourceLocation(Reference.MOD_ID + ":cacauhaa", "inventory"));
+		renderItem.getItemModelMesher().register(masa, 0, new ModelResourceLocation(Reference.MOD_ID + ":masa", "inventory"));
+		renderItem.getItemModelMesher().register(wah, 0, new ModelResourceLocation(Reference.MOD_ID + ":wah", "inventory"));
 		
-		renderItem.getItemModelMesher().register(wine, 0, new ModelResourceLocation(Millenaire.MODID + ":wine", "inventory"));
-		renderItem.getItemModelMesher().register(malvasiaWine, 0, new ModelResourceLocation(Millenaire.MODID + ":malvasiaWine", "inventory"));
-		renderItem.getItemModelMesher().register(feta, 0, new ModelResourceLocation(Millenaire.MODID + ":feta", "inventory"));
-		renderItem.getItemModelMesher().register(souvlaki, 0, new ModelResourceLocation(Millenaire.MODID + ":souvlaki", "inventory"));
+		renderItem.getItemModelMesher().register(wine, 0, new ModelResourceLocation(Reference.MOD_ID + ":wine", "inventory"));
+		renderItem.getItemModelMesher().register(malvasiaWine, 0, new ModelResourceLocation(Reference.MOD_ID + ":malvasiaWine", "inventory"));
+		renderItem.getItemModelMesher().register(feta, 0, new ModelResourceLocation(Reference.MOD_ID + ":feta", "inventory"));
+		renderItem.getItemModelMesher().register(souvlaki, 0, new ModelResourceLocation(Reference.MOD_ID + ":souvlaki", "inventory"));
 		
-		renderItem.getItemModelMesher().register(sake, 0, new ModelResourceLocation(Millenaire.MODID + ":sake", "inventory"));
-		renderItem.getItemModelMesher().register(udon, 0, new ModelResourceLocation(Millenaire.MODID + ":udon", "inventory"));
-		renderItem.getItemModelMesher().register(ikayaki, 0, new ModelResourceLocation(Millenaire.MODID + ":ikayaki", "inventory"));
+		renderItem.getItemModelMesher().register(sake, 0, new ModelResourceLocation(Reference.MOD_ID + ":sake", "inventory"));
+		renderItem.getItemModelMesher().register(udon, 0, new ModelResourceLocation(Reference.MOD_ID + ":udon", "inventory"));
+		renderItem.getItemModelMesher().register(ikayaki, 0, new ModelResourceLocation(Reference.MOD_ID + ":ikayaki", "inventory"));
 	}
 }

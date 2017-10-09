@@ -3,6 +3,7 @@ package org.millenaire.gui;
 import java.io.IOException;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 import org.millenaire.networking.MillPacket;
 
 import net.minecraft.client.gui.GuiButton;
@@ -12,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiOptions extends GuiScreen
 {
-	final static ResourceLocation OPTIONGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_village_chief.png");
+	final static ResourceLocation OPTIONGUI = new ResourceLocation(Reference.MOD_ID + ":textures/gui/ML_village_chief.png");
 	private String string;
 	private int eventID;
 	

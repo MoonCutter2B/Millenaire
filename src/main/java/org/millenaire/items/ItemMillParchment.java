@@ -1,6 +1,7 @@
 package org.millenaire.items;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -117,29 +118,29 @@ public class ItemMillParchment extends ItemWritableBook
     
     public static void prerender()
     {
-    	ModelLoader.setCustomModelResourceLocation(normanVillagerParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentVillager"));
-    	ModelLoader.setCustomModelResourceLocation(normanBuildingParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentBuilding"));
-    	ModelLoader.setCustomModelResourceLocation(normanItemParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentItem"));
-    	ModelLoader.setCustomModelResourceLocation(normanAllParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentAll"));
+    	ModelLoader.setCustomModelResourceLocation(normanVillagerParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentVillager"));
+    	ModelLoader.setCustomModelResourceLocation(normanBuildingParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentBuilding"));
+    	ModelLoader.setCustomModelResourceLocation(normanItemParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentItem"));
+    	ModelLoader.setCustomModelResourceLocation(normanAllParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentAll"));
     	
-    	ModelLoader.setCustomModelResourceLocation(byzantineVillagerParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentVillager"));
-    	ModelLoader.setCustomModelResourceLocation(byzantineBuildingParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentBuilding"));
-    	ModelLoader.setCustomModelResourceLocation(byzantineItemParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentItem"));
-    	ModelLoader.setCustomModelResourceLocation(byzantineAllParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentAll"));
+    	ModelLoader.setCustomModelResourceLocation(byzantineVillagerParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentVillager"));
+    	ModelLoader.setCustomModelResourceLocation(byzantineBuildingParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentBuilding"));
+    	ModelLoader.setCustomModelResourceLocation(byzantineItemParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentItem"));
+    	ModelLoader.setCustomModelResourceLocation(byzantineAllParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentAll"));
     	
-    	ModelLoader.setCustomModelResourceLocation(hindiVillagerParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentVillager"));
-    	ModelLoader.setCustomModelResourceLocation(hindiBuildingParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentBuilding"));
-    	ModelLoader.setCustomModelResourceLocation(hindiItemParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentItem"));
-    	ModelLoader.setCustomModelResourceLocation(hindiAllParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentAll"));
+    	ModelLoader.setCustomModelResourceLocation(hindiVillagerParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentVillager"));
+    	ModelLoader.setCustomModelResourceLocation(hindiBuildingParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentBuilding"));
+    	ModelLoader.setCustomModelResourceLocation(hindiItemParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentItem"));
+    	ModelLoader.setCustomModelResourceLocation(hindiAllParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentAll"));
     	
-    	ModelLoader.setCustomModelResourceLocation(mayanVillagerParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentVillager"));
-    	ModelLoader.setCustomModelResourceLocation(mayanBuildingParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentBuilding"));
-    	ModelLoader.setCustomModelResourceLocation(mayanItemParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentItem"));
-    	ModelLoader.setCustomModelResourceLocation(mayanAllParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentAll"));
+    	ModelLoader.setCustomModelResourceLocation(mayanVillagerParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentVillager"));
+    	ModelLoader.setCustomModelResourceLocation(mayanBuildingParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentBuilding"));
+    	ModelLoader.setCustomModelResourceLocation(mayanItemParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentItem"));
+    	ModelLoader.setCustomModelResourceLocation(mayanAllParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentAll"));
     	
-    	ModelLoader.setCustomModelResourceLocation(japaneseVillagerParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentVillager"));
-    	ModelLoader.setCustomModelResourceLocation(japaneseBuildingParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentBuilding"));
-    	ModelLoader.setCustomModelResourceLocation(japaneseItemParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentItem"));
-    	ModelLoader.setCustomModelResourceLocation(japaneseAllParchment, 0, new ModelResourceLocation(Millenaire.MODID + ":parchmentAll"));
+    	ModelLoader.setCustomModelResourceLocation(japaneseVillagerParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentVillager"));
+    	ModelLoader.setCustomModelResourceLocation(japaneseBuildingParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentBuilding"));
+    	ModelLoader.setCustomModelResourceLocation(japaneseItemParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentItem"));
+    	ModelLoader.setCustomModelResourceLocation(japaneseAllParchment, 0, new ModelResourceLocation(Reference.MOD_ID + ":parchmentAll"));
     }
 }

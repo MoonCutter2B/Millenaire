@@ -3,6 +3,7 @@ package org.millenaire.blocks;
 import java.util.Random;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 import org.millenaire.items.ItemMillSeeds;
 
 import net.minecraft.block.Block;
@@ -142,9 +143,9 @@ public class BlockMillCrops extends BlockCrops
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
-		renderItem.getItemModelMesher().register(turmeric, 0, new ModelResourceLocation(Millenaire.MODID + ":turmeric", "inventory"));
-		renderItem.getItemModelMesher().register(rice, 0, new ModelResourceLocation(Millenaire.MODID + ":rice", "inventory"));
-		renderItem.getItemModelMesher().register(maize, 0, new ModelResourceLocation(Millenaire.MODID + ":maize", "inventory"));
-		renderItem.getItemModelMesher().register(grapes, 0, new ModelResourceLocation(Millenaire.MODID + ":grapes", "inventory"));
+		renderItem.getItemModelMesher().register(turmeric, 0, new ModelResourceLocation(Reference.MOD_ID + ":turmeric", "inventory"));
+		renderItem.getItemModelMesher().register(rice, 0, new ModelResourceLocation(Reference.MOD_ID + ":rice", "inventory"));
+		renderItem.getItemModelMesher().register(maize, 0, new ModelResourceLocation(Reference.MOD_ID + ":maize", "inventory"));
+		renderItem.getItemModelMesher().register(grapes, 0, new ModelResourceLocation(Reference.MOD_ID + ":grapes", "inventory"));
 	}
 }

@@ -1,6 +1,7 @@
 package org.millenaire.items;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -132,13 +133,13 @@ public class ItemMillTool
     	@SideOnly(Side.CLIENT)
     	public static void prerender()
     	{
-    		//ModelBakery.addVariantName(japaneseBow_pulling_1, Millenaire.MODID + ":japaneseBow", Millenaire.MODID + ":japaneseBow_pulling_1", Millenaire.MODID + ":japaneseBow_pulling_2", Millenaire.MODID + ":japaneseBow_pulling_3");
-    		ModelBakery.registerItemVariants(japaneseBow, new ModelResourceLocation(Millenaire.MODID + ":japaneseBow", "inventory"), new ModelResourceLocation(Millenaire.MODID + ":japaneseBow_pulling_1", "inventory"),
-    				new ModelResourceLocation(Millenaire.MODID + ":japaneseBow_pulling_2", "inventory"), new ModelResourceLocation(Millenaire.MODID + ":japaneseBow_pulling_3", "inventory"));
-    		ModelLoader.setCustomModelResourceLocation(japaneseBow, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseBow", "inventory"));
-    		/*ModelLoader.setCustomModelResourceLocation(japaneseBow, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseBow_pulling_1", "inventory"));
-        	ModelLoader.setCustomModelResourceLocation(japaneseBow, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseBow_pulling_2", "inventory"));
-        	ModelLoader.setCustomModelResourceLocation(japaneseBow, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseBow_pulling_3", "inventory"));*/
+    		//ModelBakery.addVariantName(japaneseBow_pulling_1, Reference.MOD_ID + ":japaneseBow", Reference.MOD_ID + ":japaneseBow_pulling_1", Reference.MOD_ID + ":japaneseBow_pulling_2", Reference.MOD_ID + ":japaneseBow_pulling_3");
+    		ModelBakery.registerItemVariants(japaneseBow, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBow", "inventory"), new ModelResourceLocation(Reference.MOD_ID + ":japaneseBow_pulling_1", "inventory"),
+    				new ModelResourceLocation(Reference.MOD_ID + ":japaneseBow_pulling_2", "inventory"), new ModelResourceLocation(Reference.MOD_ID + ":japaneseBow_pulling_3", "inventory"));
+    		ModelLoader.setCustomModelResourceLocation(japaneseBow, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBow", "inventory"));
+    		/*ModelLoader.setCustomModelResourceLocation(japaneseBow, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBow_pulling_1", "inventory"));
+        	ModelLoader.setCustomModelResourceLocation(japaneseBow, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBow_pulling_2", "inventory"));
+        	ModelLoader.setCustomModelResourceLocation(japaneseBow, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBow_pulling_3", "inventory"));*/
     	}
     	
     	@SideOnly(Side.CLIENT)
@@ -146,21 +147,21 @@ public class ItemMillTool
     	{
     		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
     		
-    		renderItem.getItemModelMesher().register(normanAxe, 0, new ModelResourceLocation(Millenaire.MODID + ":normanAxe", "inventory"));
-    		renderItem.getItemModelMesher().register(normanShovel, 0, new ModelResourceLocation(Millenaire.MODID + ":normanShovel", "inventory"));
-    		renderItem.getItemModelMesher().register(normanPickaxe, 0, new ModelResourceLocation(Millenaire.MODID + ":normanPickaxe", "inventory"));
-    		renderItem.getItemModelMesher().register(normanHoe, 0, new ModelResourceLocation(Millenaire.MODID + ":normanHoe", "inventory"));
-    		renderItem.getItemModelMesher().register(normanSword, 0, new ModelResourceLocation(Millenaire.MODID + ":normanSword", "inventory"));
+    		renderItem.getItemModelMesher().register(normanAxe, 0, new ModelResourceLocation(Reference.MOD_ID + ":normanAxe", "inventory"));
+    		renderItem.getItemModelMesher().register(normanShovel, 0, new ModelResourceLocation(Reference.MOD_ID + ":normanShovel", "inventory"));
+    		renderItem.getItemModelMesher().register(normanPickaxe, 0, new ModelResourceLocation(Reference.MOD_ID + ":normanPickaxe", "inventory"));
+    		renderItem.getItemModelMesher().register(normanHoe, 0, new ModelResourceLocation(Reference.MOD_ID + ":normanHoe", "inventory"));
+    		renderItem.getItemModelMesher().register(normanSword, 0, new ModelResourceLocation(Reference.MOD_ID + ":normanSword", "inventory"));
     		
-    		renderItem.getItemModelMesher().register(mayanAxe, 0, new ModelResourceLocation(Millenaire.MODID + ":mayanAxe", "inventory"));
-    		renderItem.getItemModelMesher().register(mayanShovel, 0, new ModelResourceLocation(Millenaire.MODID + ":mayanShovel", "inventory"));
-    		renderItem.getItemModelMesher().register(mayanPickaxe, 0, new ModelResourceLocation(Millenaire.MODID + ":mayanPickaxe", "inventory"));
-    		renderItem.getItemModelMesher().register(mayanHoe, 0, new ModelResourceLocation(Millenaire.MODID + ":mayanHoe", "inventory"));
-    		renderItem.getItemModelMesher().register(mayanMace, 0, new ModelResourceLocation(Millenaire.MODID + ":mayanMace", "inventory"));
+    		renderItem.getItemModelMesher().register(mayanAxe, 0, new ModelResourceLocation(Reference.MOD_ID + ":mayanAxe", "inventory"));
+    		renderItem.getItemModelMesher().register(mayanShovel, 0, new ModelResourceLocation(Reference.MOD_ID + ":mayanShovel", "inventory"));
+    		renderItem.getItemModelMesher().register(mayanPickaxe, 0, new ModelResourceLocation(Reference.MOD_ID + ":mayanPickaxe", "inventory"));
+    		renderItem.getItemModelMesher().register(mayanHoe, 0, new ModelResourceLocation(Reference.MOD_ID + ":mayanHoe", "inventory"));
+    		renderItem.getItemModelMesher().register(mayanMace, 0, new ModelResourceLocation(Reference.MOD_ID + ":mayanMace", "inventory"));
     		
-    		renderItem.getItemModelMesher().register(byzantineMace, 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineMace", "inventory"));
+    		renderItem.getItemModelMesher().register(byzantineMace, 0, new ModelResourceLocation(Reference.MOD_ID + ":byzantineMace", "inventory"));
     		
-    		renderItem.getItemModelMesher().register(japaneseSword, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseSword", "inventory"));
-    		//renderItem.getItemModelMesher().register(japaneseBow_pulling_1, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseBow_pulling_1", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseSword, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseSword", "inventory"));
+    		//renderItem.getItemModelMesher().register(japaneseBow_pulling_1, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBow_pulling_1", "inventory"));
     	}
 }

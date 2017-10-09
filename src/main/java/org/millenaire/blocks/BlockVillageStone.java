@@ -3,6 +3,7 @@ package org.millenaire.blocks;
 import java.util.Random;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 import org.millenaire.entities.TileEntityVillageStone;
 
 import net.minecraft.block.Block;
@@ -126,6 +127,6 @@ public class BlockVillageStone extends BlockContainer
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(villageStone), 0, new ModelResourceLocation(Millenaire.MODID + ":villageStone", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(villageStone), 0, new ModelResourceLocation(Reference.MOD_ID + ":villageStone", "inventory"));
 	}
 }

@@ -1,6 +1,7 @@
 package org.millenaire.items;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -10,8 +11,8 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -132,31 +133,31 @@ public class ItemMillArmor
     	{
     		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
     		
-    		renderItem.getItemModelMesher().register(normanHelmet, 0, new ModelResourceLocation(Millenaire.MODID + ":normanHelmet", "inventory"));
-    		renderItem.getItemModelMesher().register(normanChestplate, 0, new ModelResourceLocation(Millenaire.MODID + ":normanChestplate", "inventory"));
-    		renderItem.getItemModelMesher().register(normanLeggings, 0, new ModelResourceLocation(Millenaire.MODID + ":normanLeggings", "inventory"));
-    		renderItem.getItemModelMesher().register(normanBoots, 0, new ModelResourceLocation(Millenaire.MODID + ":normanBoots", "inventory"));
+    		renderItem.getItemModelMesher().register(normanHelmet, 0, new ModelResourceLocation(Reference.MOD_ID + ":normanHelmet", "inventory"));
+    		renderItem.getItemModelMesher().register(normanChestplate, 0, new ModelResourceLocation(Reference.MOD_ID + ":normanChestplate", "inventory"));
+    		renderItem.getItemModelMesher().register(normanLeggings, 0, new ModelResourceLocation(Reference.MOD_ID + ":normanLeggings", "inventory"));
+    		renderItem.getItemModelMesher().register(normanBoots, 0, new ModelResourceLocation(Reference.MOD_ID + ":normanBoots", "inventory"));
     		
-    		renderItem.getItemModelMesher().register(byzantineHelmet, 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineHelmet", "inventory"));
-    		renderItem.getItemModelMesher().register(byzantineChestplate, 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineChestplate", "inventory"));
-    		renderItem.getItemModelMesher().register(byzantineLeggings, 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineLeggings", "inventory"));
-    		renderItem.getItemModelMesher().register(byzantineBoots, 0, new ModelResourceLocation(Millenaire.MODID + ":byzantineBoots", "inventory"));
+    		renderItem.getItemModelMesher().register(byzantineHelmet, 0, new ModelResourceLocation(Reference.MOD_ID + ":byzantineHelmet", "inventory"));
+    		renderItem.getItemModelMesher().register(byzantineChestplate, 0, new ModelResourceLocation(Reference.MOD_ID + ":byzantineChestplate", "inventory"));
+    		renderItem.getItemModelMesher().register(byzantineLeggings, 0, new ModelResourceLocation(Reference.MOD_ID + ":byzantineLeggings", "inventory"));
+    		renderItem.getItemModelMesher().register(byzantineBoots, 0, new ModelResourceLocation(Reference.MOD_ID + ":byzantineBoots", "inventory"));
     		
-    		renderItem.getItemModelMesher().register(japaneseGuardHelmet, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseGuardHelmet", "inventory"));
-    		renderItem.getItemModelMesher().register(japaneseGuardChestplate, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseGuardChestplate", "inventory"));
-    		renderItem.getItemModelMesher().register(japaneseGuardLeggings, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseGuardLeggings", "inventory"));
-    		renderItem.getItemModelMesher().register(japaneseGuardBoots, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseGuardBoots", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseGuardHelmet, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseGuardHelmet", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseGuardChestplate, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseGuardChestplate", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseGuardLeggings, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseGuardLeggings", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseGuardBoots, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseGuardBoots", "inventory"));
     		
-    		renderItem.getItemModelMesher().register(japaneseBlueHelmet, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseBlueHelmet", "inventory"));
-    		renderItem.getItemModelMesher().register(japaneseBlueChestplate, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseBlueChestplate", "inventory"));
-    		renderItem.getItemModelMesher().register(japaneseBlueLeggings, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseBlueLeggings", "inventory"));
-    		renderItem.getItemModelMesher().register(japaneseBlueBoots, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseBlueBoots", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseBlueHelmet, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBlueHelmet", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseBlueChestplate, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBlueChestplate", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseBlueLeggings, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBlueLeggings", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseBlueBoots, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseBlueBoots", "inventory"));
     		
-    		renderItem.getItemModelMesher().register(japaneseRedHelmet, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseRedHelmet", "inventory"));
-    		renderItem.getItemModelMesher().register(japaneseRedChestplate, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseRedChestplate", "inventory"));
-    		renderItem.getItemModelMesher().register(japaneseRedLeggings, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseRedLeggings", "inventory"));
-    		renderItem.getItemModelMesher().register(japaneseRedBoots, 0, new ModelResourceLocation(Millenaire.MODID + ":japaneseRedBoots", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseRedHelmet, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseRedHelmet", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseRedChestplate, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseRedChestplate", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseRedLeggings, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseRedLeggings", "inventory"));
+    		renderItem.getItemModelMesher().register(japaneseRedBoots, 0, new ModelResourceLocation(Reference.MOD_ID + ":japaneseRedBoots", "inventory"));
     		
-    		renderItem.getItemModelMesher().register(mayanQuestCrown, 0, new ModelResourceLocation(Millenaire.MODID + ":mayanquestcrown", "inventory"));
+    		renderItem.getItemModelMesher().register(mayanQuestCrown, 0, new ModelResourceLocation(Reference.MOD_ID + ":mayanquestcrown", "inventory"));
     	}
 }

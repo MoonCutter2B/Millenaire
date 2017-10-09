@@ -1,6 +1,6 @@
 package org.millenaire.gui;
 
-import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 import org.millenaire.blocks.BlockMillCrops;
 import org.millenaire.items.ItemMillAmulet;
 import org.millenaire.items.ItemMillArmor;
@@ -20,7 +20,7 @@ import net.minecraftforge.common.AchievementPage;
 
 public class MillAchievement extends Achievement
 {
-	private final static String SETID = Millenaire.MODID + ".achievement.";
+	private final static String SETID = Reference.MOD_ID + ".achievement.";
 	
 	public MillAchievement(String nameIn, int column, int row, ItemStack iconIn, Achievement parentIn)
     {

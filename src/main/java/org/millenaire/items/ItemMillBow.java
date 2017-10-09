@@ -1,6 +1,6 @@
 package org.millenaire.items;
 
-import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
@@ -113,22 +113,22 @@ public class ItemMillBow extends ItemBow
 			if (k >= 18)
 			{
 				System.out.println("step 3");
-				return new ModelResourceLocation(Millenaire.MODID + ":" + itemName + "_pulling_3", "inventory");
+				return new ModelResourceLocation(Reference.MOD_ID + ":" + itemName + "_pulling_3", "inventory");
 			}
 			else if (k > 13)
 			{
 				System.out.println("step 2");
-				return new ModelResourceLocation(Millenaire.MODID + ":" + itemName + "_pulling_2", "inventory");
+				return new ModelResourceLocation(Reference.MOD_ID + ":" + itemName + "_pulling_2", "inventory");
 			}
 			else if (k > 0)
 			{
 				System.out.println("step 1");
-				return new ModelResourceLocation(Millenaire.MODID + ":" + itemName + "_pulling_1", "inventory");
+				return new ModelResourceLocation(Reference.MOD_ID + ":" + itemName + "_pulling_1", "inventory");
 			}
 			else
-				return new ModelResourceLocation(Millenaire.MODID + ":" + itemName, "inventory");
+				return new ModelResourceLocation(Reference.MOD_ID + ":" + itemName, "inventory");
 		}
 		else
-			return new ModelResourceLocation(Millenaire.MODID + ":" + itemName, "inventory");
+			return new ModelResourceLocation(Reference.MOD_ID + ":" + itemName, "inventory");
 	}
 }

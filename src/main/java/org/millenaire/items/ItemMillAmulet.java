@@ -3,6 +3,7 @@ package org.millenaire.items;
 import java.util.List;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -211,9 +212,9 @@ public class ItemMillAmulet extends Item
 
 	public static void prerender()
 	{
-		ModelLoader.setCustomModelResourceLocation(amuletSkollHati,0, new ModelResourceLocation(Millenaire.MODID + ":amuletSkollHati"));
-		ModelLoader.setCustomModelResourceLocation(amuletAlchemist, 0, new ModelResourceLocation(Millenaire.MODID + ":amuletAlchemist"));
-		ModelLoader.setCustomModelResourceLocation(amuletVishnu, 0, new ModelResourceLocation(Millenaire.MODID + ":amuletVishnu"));
-		ModelLoader.setCustomModelResourceLocation(amuletYggdrasil, 0, new ModelResourceLocation(Millenaire.MODID + ":amuletYggdrasil"));
+		ModelLoader.setCustomModelResourceLocation(amuletSkollHati,0, new ModelResourceLocation(Reference.MOD_ID + ":amuletSkollHati"));
+		ModelLoader.setCustomModelResourceLocation(amuletAlchemist, 0, new ModelResourceLocation(Reference.MOD_ID + ":amuletAlchemist"));
+		ModelLoader.setCustomModelResourceLocation(amuletVishnu, 0, new ModelResourceLocation(Reference.MOD_ID + ":amuletVishnu"));
+		ModelLoader.setCustomModelResourceLocation(amuletYggdrasil, 0, new ModelResourceLocation(Reference.MOD_ID + ":amuletYggdrasil"));
 	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.millenaire.MillConfig;
-import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -50,7 +50,7 @@ public class MillGuiFactory implements IModGuiFactory
 	{
 		public MillConfigGui(GuiScreen parentScreen)
 		{
-			super(parentScreen, getConfigElements(), Millenaire.MODID, false, false, I18n.format("gui.millConfig.mainTitle"));
+			super(parentScreen, getConfigElements(), Reference.MOD_ID, false, false, I18n.format("gui.millConfig.mainTitle"));
 		}
 		
 		private static List<IConfigElement> getConfigElements()

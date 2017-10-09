@@ -3,6 +3,7 @@ package org.millenaire.blocks;
 import java.util.Random;
 
 import org.millenaire.Millenaire;
+import org.millenaire.Reference;
 import org.millenaire.entities.TileEntityMillChest;
 
 import net.minecraft.block.Block;
@@ -177,7 +178,7 @@ public class BlockMillChest extends BlockChest
 	{
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 		
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockMillChest), 0, new ModelResourceLocation(Millenaire.MODID + ":blockMillChest", "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockMillChest), 0, new ModelResourceLocation(Reference.MOD_ID + ":blockMillChest", "inventory"));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMillChest.class, new TileEntityChestRenderer());
 	}
