@@ -11,6 +11,7 @@ import org.millenaire.blocks.BlockMillPath;
 import org.millenaire.blocks.BlockMillSign;
 import org.millenaire.blocks.BlockVillageStone;
 import org.millenaire.blocks.StoredPosition;
+import org.millenaire.building.BuildingTypes;
 import org.millenaire.entities.EntityMillVillager;
 import org.millenaire.generation.VillageGenerator;
 import org.millenaire.gui.MillAchievement;
@@ -152,7 +153,7 @@ public class Millenaire
 	@EventHandler
     public void postinit(FMLPostInitializationEvent event)
     {
-		
+		BuildingTypes.cacheBuildingTypes();
     }
 	
 	private void setForbiddenBlocks()
