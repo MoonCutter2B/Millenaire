@@ -51,7 +51,7 @@ public class BlockVillageStone extends BlockContainer
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
     {
 		if(worldIn.isRemote)
-				playerIn.addChatMessage(new ChatComponentText("§8The Village name almost seems to shimmer in the twilight"));
+				playerIn.addChatMessage(new ChatComponentText("ï¿½8The Village name almost seems to shimmer in the twilight"));
 		
 		TileEntityVillageStone te = (TileEntityVillageStone) worldIn.getTileEntity(pos);
 		if(te.testVar < 16)
@@ -106,26 +106,5 @@ public class BlockVillageStone extends BlockContainer
 	public TileEntity createNewTileEntity(World worldIn, int meta) 
 	{
 		return new TileEntityVillageStone();
-	}
-
-    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
-	//Declarations
-		public static Block villageStone;
-
-    public static void preinitialize()
-    {
-    	villageStone = new BlockVillageStone().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("villageStone");
-		GameRegistry.registerBlock(villageStone, "villageStone");
-		
-		GameRegistry.registerTileEntity(TileEntityVillageStone.class, "tileEntityVillageStone");
-    }
-    
-    @SideOnly(Side.CLIENT)
-	public static void render()
-	{
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(villageStone), 0, new ModelResourceLocation(Millenaire.MODID + ":villageStone", "inventory"));
 	}
 }

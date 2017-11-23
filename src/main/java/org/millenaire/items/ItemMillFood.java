@@ -2,6 +2,7 @@ package org.millenaire.items;
 
 import org.millenaire.Millenaire;
 import org.millenaire.blocks.BlockMillCrops;
+import org.millenaire.blocks.MillBlocks;
 import org.millenaire.gui.MillAchievement;
 
 import net.minecraft.client.Minecraft;
@@ -138,16 +139,16 @@ public class ItemMillFood extends ItemFood
     	ikayaki = ((ItemMillFood)new ItemMillFood(0, 0, 0, 10, 1.0F, false).setCreativeTab(Millenaire.tabMillenaire)).setPotionEffect(Potion.waterBreathing.id, 8 * 60, 2, 1f).setUnlocalizedName("ikayaki");
     	GameRegistry.registerItem(ikayaki, "ikayaki");
     	
-    	GameRegistry.addShapelessRecipe(new ItemStack(vegCurry, 1), new ItemStack(BlockMillCrops.rice), new ItemStack(BlockMillCrops.turmeric));
-    	GameRegistry.addShapelessRecipe(new ItemStack(murghCurry, 1), new ItemStack(BlockMillCrops.rice), new ItemStack(BlockMillCrops.turmeric), new ItemStack(Items.chicken));
+    	GameRegistry.addShapelessRecipe(new ItemStack(vegCurry, 1), new ItemStack(MillItems.rice), new ItemStack(MillItems.turmeric));
+    	GameRegistry.addShapelessRecipe(new ItemStack(murghCurry, 1), new ItemStack(MillItems.rice), new ItemStack(MillItems.turmeric), new ItemStack(Items.chicken));
     	GameRegistry.addRecipe(new ItemStack(masa, 1), 
     			"AAA",
-    			'A', new ItemStack(BlockMillCrops.maize));
+    			'A', new ItemStack(MillItems.maize));
     	GameRegistry.addRecipe(new ItemStack(wah, 1), 
     			"ABA",
-    			'A', new ItemStack(BlockMillCrops.maize), 'B', new ItemStack(Items.chicken));
-    	GameRegistry.addShapelessRecipe(new ItemStack(wine, 1), new ItemStack(BlockMillCrops.grapes), new ItemStack(BlockMillCrops.grapes), new ItemStack(BlockMillCrops.grapes), new ItemStack(BlockMillCrops.grapes), 
-    			new ItemStack(BlockMillCrops.grapes), new ItemStack(BlockMillCrops.grapes));
+    			'A', new ItemStack(MillItems.maize), 'B', new ItemStack(Items.chicken));
+    	GameRegistry.addShapelessRecipe(new ItemStack(wine, 1), new ItemStack(MillItems.grapes), new ItemStack(MillItems.grapes), new ItemStack(MillItems.grapes), new ItemStack(MillItems.grapes), 
+    			new ItemStack(MillItems.grapes), new ItemStack(MillItems.grapes));
     }
     
     @SideOnly(Side.CLIENT)

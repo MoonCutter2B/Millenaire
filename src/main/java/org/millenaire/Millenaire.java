@@ -3,13 +3,13 @@ package org.millenaire;
 import java.util.List;
 
 import org.millenaire.blocks.BlockAlchemists;
-import org.millenaire.blocks.BlockDecorative;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
 import org.millenaire.blocks.BlockMillOre;
 import org.millenaire.blocks.BlockMillPath;
 import org.millenaire.blocks.BlockMillSign;
 import org.millenaire.blocks.BlockVillageStone;
+import org.millenaire.blocks.MillBlocks;
 import org.millenaire.blocks.StoredPosition;
 import org.millenaire.building.BuildingTypes;
 import org.millenaire.entities.EntityMillVillager;
@@ -79,7 +79,11 @@ public class Millenaire
 		
 		setForbiddenBlocks();
 		
+		MillBlocks.preinitialize();
+		MillBlocks.recipes();
+		
 		MillItems.preinitialize();
+		
 		ItemMillFood.preinitialize();
 		ItemMillArmor.preinitialize();
 		ItemMillWand.preinitialize();
@@ -88,15 +92,15 @@ public class Millenaire
 		ItemMillWallet.preinitialize();
 		ItemMillSign.preinitialize();
 		ItemMillParchment.preinitialize();
-		BlockDecorative.preinitialize();
-		BlockMillCrops.preinitialize();
-		BlockMillChest.preinitialize();
-		BlockMillSign.preinitialize();
-		BlockMillPath.preinitialize();
-		BlockMillOre.preinitialize();
-		BlockAlchemists.preinitialize();
-		BlockVillageStone.preinitialize();
-		StoredPosition.preinitialize();
+		//BlockDecorative.preinitialize();
+		//BlockMillCrops.preinitialize();
+		//BlockMillChest.preinitialize();
+		//BlockMillSign.preinitialize();
+		//BlockMillPath.preinitialize();
+		//BlockMillOre.preinitialize();
+		//BlockAlchemists.preinitialize();
+		//BlockVillageStone.preinitialize();
+		//StoredPosition.preinitialize();
 		EntityMillVillager.preinitialize();
 		
 		MillCulture.preinitialize();
@@ -105,11 +109,13 @@ public class Millenaire
 		
 		if(event.getSide() == Side.CLIENT)
 		{
+			MillBlocks.prerender();
+			
 			ItemMillTool.prerender();
 			ItemMillAmulet.prerender();
 			ItemMillParchment.prerender();
-			BlockDecorative.prerender();
-			BlockMillPath.prerender();
+			//BlockDecorative.prerender();
+			//BlockMillPath.prerender();
 			EntityMillVillager.prerender();
 			
 			MillConfig.eventRegister();
@@ -132,21 +138,23 @@ public class Millenaire
 		
 		if(event.getSide() == Side.CLIENT)
     	{	
+			MillBlocks.render();
 			MillItems.render();
+			
 			ItemMillFood.render();
 			ItemMillArmor.render();
 			ItemMillWand.render();
 			ItemMillTool.render();
 			ItemMillWallet.render();
 			ItemMillSign.render();
-			BlockDecorative.render();
-			BlockMillCrops.render();
-			BlockMillChest.render();
-			BlockMillSign.render();
-			BlockAlchemists.render();
-			BlockVillageStone.render();
-			BlockMillOre.render();
-			StoredPosition.render();
+			//BlockDecorative.render();
+			//BlockMillCrops.render();
+			//BlockMillChest.render();
+			//BlockMillSign.render();
+			//BlockAlchemists.render();
+			//BlockVillageStone.render();
+			//BlockMillOre.render();
+			//StoredPosition.render();
     	}
     }
 	

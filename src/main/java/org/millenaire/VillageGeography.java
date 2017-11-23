@@ -1,12 +1,11 @@
 package org.millenaire;
 
-import org.millenaire.building.BuildingLocation;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.millenaire.blocks.BlockDecorative;
 import org.millenaire.blocks.BlockMillPath;
+import org.millenaire.blocks.MillBlocks;
+import org.millenaire.building.BuildingLocation;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
@@ -133,7 +132,7 @@ public class VillageGeography
 	static public boolean isForbiddenBlockForConstruction(final Block block) 
 	{
 		return block == Blocks.water || block == Blocks.flowing_water || block == Blocks.ice || block == Blocks.flowing_lava || block == Blocks.lava || block == Blocks.planks || block == Blocks.cobblestone || block == Blocks.brick_block || block == Blocks.chest || block == Blocks.glass || block == Blocks.stonebrick || block == Blocks.prismarine
-				|| block instanceof BlockWall || block instanceof BlockFence || block == BlockDecorative.blockDecorativeEarth || block == BlockDecorative.blockDecorativeStone || block == BlockDecorative.blockDecorativeWood || block == BlockDecorative.byzantineTile || block == BlockDecorative.byzantineTileSlab || block == BlockDecorative.byzantineStoneTile || block == BlockDecorative.paperWall || block == BlockDecorative.emptySericulture;
+				|| block instanceof BlockWall || block instanceof BlockFence || block == MillBlocks.blockDecorativeEarth || block == MillBlocks.blockDecorativeStone || block == MillBlocks.blockDecorativeWood || block == MillBlocks.byzantineTile || block == MillBlocks.byzantineTileSlab || block == MillBlocks.byzantineStoneTile || block == MillBlocks.paperWall || block == MillBlocks.emptySericulture;
 	}
 	
 	private void registerBuildingLocation(final BuildingLocation bl) 
@@ -387,7 +386,7 @@ public class VillageGeography
 					tree[mx][mz] = false;
 				}
 
-				if (soilBlock == BlockMillPath.blockMillPath || soilBlock == BlockMillPath.blockMillPathSlab || soilBlock == BlockMillPath.blockMillPathSlabDouble) 
+				if (soilBlock == MillBlocks.blockMillPath || soilBlock == MillBlocks.blockMillPathSlab || soilBlock == MillBlocks.blockMillPathSlabDouble) 
 				{
 					path[mx][mz] = true;
 				} 
@@ -787,7 +786,7 @@ public class VillageGeography
 	
 	public static boolean isBlockSolid(Block block)
 	{
-		return block.isFullCube() || block == Blocks.glass || block == Blocks.glass_pane || block instanceof BlockSlab || block instanceof BlockStairs || block instanceof BlockFence || block instanceof BlockWall || block == BlockDecorative.paperWall;
+		return block.isFullCube() || block == Blocks.glass || block == Blocks.glass_pane || block instanceof BlockSlab || block instanceof BlockStairs || block instanceof BlockFence || block instanceof BlockWall || block == MillBlocks.paperWall;
 	}
 	
 	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

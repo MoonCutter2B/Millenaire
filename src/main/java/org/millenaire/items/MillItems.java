@@ -1,11 +1,14 @@
 package org.millenaire.items;
 
 import org.millenaire.Millenaire;
+import org.millenaire.blocks.BlockMillCrops;
+import org.millenaire.blocks.MillBlocks;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,6 +29,12 @@ public class MillItems
 	public static Item silkClothes;
 	
 	public static Item galianiteDust;
+	
+	//Crops
+	public static Item turmeric;
+	public static Item rice;
+	public static Item maize;
+	public static Item grapes;
 	
 	public static void preinitialize()
 	{
@@ -50,6 +59,23 @@ public class MillItems
 		
 		galianiteDust = new Item().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("galianiteDust");
 		GameRegistry.registerItem(galianiteDust, "galianiteDust");
+		
+		//Crops
+		turmeric = new ItemMillSeeds(MillBlocks.cropTurmeric).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("turmeric");
+    	((BlockMillCrops) MillBlocks.cropTurmeric).setSeed((IPlantable) turmeric);
+    	GameRegistry.registerItem(turmeric, "turmeric");
+    	
+    	rice = new ItemMillSeeds(MillBlocks.cropRice).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("rice");
+    	((BlockMillCrops) MillBlocks.cropRice).setSeed((IPlantable) rice);
+    	GameRegistry.registerItem(rice, "rice");
+    	
+    	maize = new ItemMillSeeds(MillBlocks.cropMaize).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("maize");
+    	((BlockMillCrops) MillBlocks.cropMaize).setSeed((IPlantable) maize);
+    	GameRegistry.registerItem(maize, "maize");
+    	
+    	grapes = new ItemMillSeeds(MillBlocks.cropGrapeVine).setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("grapes");
+    	((BlockMillCrops) MillBlocks.cropGrapeVine).setSeed((IPlantable) grapes);
+    	GameRegistry.registerItem(grapes, "grapes");
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -68,5 +94,12 @@ public class MillItems
 		renderItem.getItemModelMesher().register(woolClothes, 0, new ModelResourceLocation(Millenaire.MODID + ":woolClothes", "inventory"));
 		renderItem.getItemModelMesher().register(silkClothes, 0, new ModelResourceLocation(Millenaire.MODID + ":silkClothes", "inventory"));
 		renderItem.getItemModelMesher().register(galianiteDust, 0, new ModelResourceLocation(Millenaire.MODID + ":galianiteDust", "inventory"));
+		
+		//Crops
+		renderItem.getItemModelMesher().register(turmeric, 0, new ModelResourceLocation(Millenaire.MODID + ":turmeric", "inventory"));
+		renderItem.getItemModelMesher().register(rice, 0, new ModelResourceLocation(Millenaire.MODID + ":rice", "inventory"));
+		renderItem.getItemModelMesher().register(maize, 0, new ModelResourceLocation(Millenaire.MODID + ":maize", "inventory"));
+		renderItem.getItemModelMesher().register(grapes, 0, new ModelResourceLocation(Millenaire.MODID + ":grapes", "inventory"));
+
 	}
 }

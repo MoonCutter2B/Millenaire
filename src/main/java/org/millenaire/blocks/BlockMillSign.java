@@ -54,27 +54,4 @@ public class BlockMillSign extends BlockWallSign
 	{
 		return new TileEntityMillSign();
 	}
- 
-	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-	//Declarations
-	public static Block blockMillSign;
-
-	public static void preinitialize()
-	{
-		blockMillSign = new BlockMillSign().setUnlocalizedName("blockMillSign");
-		GameRegistry.registerBlock(blockMillSign, "blockMillSign");
-
-		GameRegistry.registerTileEntity(TileEntityMillSign.class, "tileEntityMillSign");
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void render()
-	{
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockMillSign), 0, new ModelResourceLocation(Millenaire.MODID + ":blockMillSign", "inventory"));
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMillSign.class, new TileEntitySignRenderer());
-	}
 }

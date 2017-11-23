@@ -167,31 +167,6 @@ public class StoredPosition extends Block
     {
         return new BlockState(this, new IProperty[] {VARIANT});
     }
-    
-    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
-	//Declarations
-		public static Block storedPosition;
-
-    public static void preinitialize()
-    {
-    	storedPosition = new StoredPosition().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("storedPosition");
-		GameRegistry.registerBlock(storedPosition, "storedPosition");
-    }
-    
-    public static void render()
-    {
-    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes().registerBuiltInBlocks(storedPosition);
-    	
-    	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(storedPosition), 0, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 0, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 1, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 2, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 3, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 4, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    	//ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(storedPosition), 5, new ModelResourceLocation(Millenaire.MODID + ":storedPosition", "inventory"));
-    }
 	
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 

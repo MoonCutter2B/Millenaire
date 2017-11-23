@@ -44,7 +44,7 @@ public class MillAchievement extends Achievement
 		
 		public static final Achievement cheers = new MillAchievement("cheers", 2, 2, ItemMillFood.calva, firstContact).registerStat();
 		public static final Achievement hired = new MillAchievement("hired", -1, -2, ItemMillTool.normanAxe, firstContact).registerStat();
-		public static final Achievement masterFarmer = new MillAchievement("masterfarmer", 3, -3, BlockMillCrops.grapes, firstContact).registerStat();
+		public static final Achievement masterFarmer = new MillAchievement("masterfarmer", 3, -3, MillItems.grapes, firstContact).registerStat();
 
 		public static final Achievement cresus = new MillAchievement("cresus", 2, -1, MillItems.denierOr, firstContact).registerStat();
 		public static final Achievement summoningWand = new MillAchievement("summoningwand", 5, 0, ItemMillWand.wandSummoning, cresus).registerStat();

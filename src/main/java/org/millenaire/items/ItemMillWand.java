@@ -187,14 +187,14 @@ public class ItemMillWand extends Item
 			//Allow you to plant all Crops
 			else if(worldIn.getBlockState(pos).getBlock() == Blocks.cake)
 			{
-				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.grapes))
-					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.grapes, true);
-				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.maize))
-					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.maize, true);
-				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.rice))
-					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.rice, true);
-				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(BlockMillCrops.turmeric))
-					PlayerTracker.get(playerIn).setCanUseCrop(BlockMillCrops.turmeric, true);
+				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(MillItems.grapes))
+					PlayerTracker.get(playerIn).setCanUseCrop(MillItems.grapes, true);
+				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(MillItems.maize))
+					PlayerTracker.get(playerIn).setCanUseCrop(MillItems.maize, true);
+				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(MillItems.rice))
+					PlayerTracker.get(playerIn).setCanUseCrop(MillItems.rice, true);
+				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(MillItems.turmeric))
+					PlayerTracker.get(playerIn).setCanUseCrop(MillItems.turmeric, true);
 
 				if(worldIn.isRemote)
 				{
@@ -271,7 +271,7 @@ public class ItemMillWand extends Item
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
 		if(stack.getItem() == wandCreative)
-			tooltip.add("§lCreative Mode ONLY");
+			tooltip.add("ï¿½lCreative Mode ONLY");
 	}
 
 	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

@@ -62,23 +62,4 @@ public class BlockAlchemists extends Block
     {
 		alchemistExplosion(worldIn, pos.getX(), pos.getY(), pos.getZ());
     }
-	
-    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
-	//Declarations
-		public static Block blockAlchemists;
-
-    public static void preinitialize()
-    {
-    	blockAlchemists = new BlockAlchemists().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("blockAlchemists");
-		GameRegistry.registerBlock(blockAlchemists, "blockAlchemists");
-    }
-    
-    @SideOnly(Side.CLIENT)
-	public static void render()
-	{
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockAlchemists), 0, new ModelResourceLocation(Millenaire.MODID + ":blockAlchemists", "inventory"));
-	}
 }

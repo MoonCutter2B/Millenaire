@@ -45,22 +45,7 @@ public class BlockMillOre extends Block {
 		return 2;
 	}
     
-    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
-    //TODO: registering
-    
-    public static Block galianiteOre;
-    
-    public static void preinitialize() {
-    	galianiteOre = new BlockMillOre(EnumMillOre.GALIANITE).setUnlocalizedName("galianiteOre");
-    	GameRegistry.registerBlock(galianiteOre, "galianiteOre");
-    }
-    
-    public static void render() {
-    	RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(galianiteOre), 0, new ModelResourceLocation(Millenaire.MODID + ":galianiteOre", "inventory"));
-    }
+    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
 	public static enum EnumMillOre implements IStringSerializable {
 		GALIANITE(0, "galianite", 2, 2, MillItems.galianiteDust);

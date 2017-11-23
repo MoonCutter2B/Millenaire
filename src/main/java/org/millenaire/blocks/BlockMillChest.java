@@ -158,27 +158,4 @@ public class BlockMillChest extends BlockChest
 
         return false;
     }
-	
-    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
-	//Declarations
-		public static Block blockMillChest;
-
-    public static void preinitialize()
-    {
-    	blockMillChest = new BlockMillChest().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("blockMillChest");
-		GameRegistry.registerBlock(blockMillChest, "blockMillChest");
-		
-		GameRegistry.registerTileEntity(TileEntityMillChest.class, "tileEntityMillChest");
-    }
-    
-    @SideOnly(Side.CLIENT)
-	public static void render()
-	{
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockMillChest), 0, new ModelResourceLocation(Millenaire.MODID + ":blockMillChest", "inventory"));
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMillChest.class, new TileEntityChestRenderer());
-	}
 }
