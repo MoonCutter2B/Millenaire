@@ -1,7 +1,9 @@
 package org.millenaire.networking;
 
 import org.millenaire.blocks.BlockVillageStone;
+import org.millenaire.blocks.MillBlocks;
 import org.millenaire.items.ItemMillWand;
+import org.millenaire.items.MillItems;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -105,7 +107,7 @@ public class MillPacket implements IMessage
 			if(message.getID() == 2)
 			{
 				ItemStack heldItem = sendingPlayer.getHeldItem();
-				if(heldItem.getItem() != ItemMillWand.wandNegation)
+				if(heldItem.getItem() != MillItems.wandNegation)
 				{
 					System.err.println("Player not holding Wand of Negation when attempting to delete Village");
 				}
@@ -124,7 +126,7 @@ public class MillPacket implements IMessage
 			if(message.getID() == 3)
 			{
 				ItemStack heldItem = sendingPlayer.getHeldItem();
-				if(heldItem.getItem() != ItemMillWand.wandNegation)
+				if(heldItem.getItem() != MillItems.wandNegation)
 				{
 					System.err.println("Player not holding Wand of Negation when attempting to delete Villager");
 				}
@@ -143,7 +145,7 @@ public class MillPacket implements IMessage
 			if(message.getID() == 4)
 			{
 				ItemStack heldItem = sendingPlayer.getHeldItem();
-				if(heldItem.getItem() != ItemMillWand.wandSummoning)
+				if(heldItem.getItem() != MillItems.wandSummoning)
 				{
 					System.err.println("Player not holding Wand of Summoning when attempting to create Village");
 				}
@@ -155,7 +157,7 @@ public class MillPacket implements IMessage
 					int posY = nbt.getInteger("Y");
 					int posZ = nbt.getInteger("Z");
 					
-					world.setBlockState(new BlockPos(posX, posY, posZ), BlockVillageStone.villageStone.getDefaultState());
+					world.setBlockState(new BlockPos(posX, posY, posZ), MillBlocks.villageStone.getDefaultState());
 				}
 			}
 		}

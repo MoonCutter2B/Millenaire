@@ -3,6 +3,7 @@ package org.millenaire;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.millenaire.blocks.MillBlocks;
 import org.millenaire.blocks.StoredPosition;
 
 import net.minecraft.command.CommandException;
@@ -60,10 +61,10 @@ public class MillCommand implements ICommand
 		}
 		else if(args[0].equalsIgnoreCase("showBuildPoints"))
 		{
-			if(((StoredPosition)StoredPosition.storedPosition).getShowParticles())
-				((StoredPosition)StoredPosition.storedPosition).setShowParticles(false);
+			if(((StoredPosition)MillBlocks.storedPosition).getShowParticles())
+				((StoredPosition)MillBlocks.storedPosition).setShowParticles(false);
 			else
-				((StoredPosition)StoredPosition.storedPosition).setShowParticles(true);
+				((StoredPosition)MillBlocks.storedPosition).setShowParticles(true);
 		}
 	}
 

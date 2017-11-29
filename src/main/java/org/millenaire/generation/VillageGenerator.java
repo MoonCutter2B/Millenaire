@@ -3,12 +3,9 @@ package org.millenaire.generation;
 import java.util.Random;
 
 import org.millenaire.MillConfig;
-import org.millenaire.MillCulture;
-import org.millenaire.blocks.BlockVillageStone;
-import org.millenaire.blocks.StoredPosition;
+import org.millenaire.blocks.MillBlocks;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -47,7 +44,7 @@ public class VillageGenerator implements IWorldGenerator {
 			//System.out.println("testing4");
 			if(rand.nextInt(50) == 1 && world.getChunkFromBlockCoords(pos).isLoaded()) {
 				//System.out.println("testing5 " + pos.getX() +"," + pos.getZ());
-				world.setBlockState(pos, BlockVillageStone.villageStone.getDefaultState());
+				world.setBlockState(pos, MillBlocks.villageStone.getDefaultState());
 			}
 			else if(!world.getChunkFromBlockCoords(pos).isLoaded()) {
 				//System.out.println("nope");

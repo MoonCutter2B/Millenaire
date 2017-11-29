@@ -36,7 +36,7 @@ public class ItemMillAmulet extends Item
 	@Override
 	public ItemStack onItemRightClick(final ItemStack itemstack, final World world, final EntityPlayer entityplayer) 
 	{
-		if(this == amuletSkollHati && !world.isRemote)
+		if(this == MillItems.amuletSkollHati && !world.isRemote)
 		{
 			final long time = world.getWorldTime() + 24000L;
 
@@ -58,12 +58,12 @@ public class ItemMillAmulet extends Item
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
-		if(this == amuletSkollHati)
+		if(this == MillItems.amuletSkollHati)
 			return;
 
 		int visScore = 0;
 
-		if(this == amuletAlchemist && entityIn instanceof EntityPlayer)
+		if(this == MillItems.amuletAlchemist && entityIn instanceof EntityPlayer)
 		{
 			int radius = 5;
 			BlockPos pos = entityIn.getPosition();
@@ -104,7 +104,7 @@ public class ItemMillAmulet extends Item
 			visScore = (visScore * 15) / 100;
 		}
 
-		if(this == amuletVishnu && entityIn instanceof EntityPlayer)
+		if(this == MillItems.amuletVishnu && entityIn instanceof EntityPlayer)
 		{
 			double level = 0;
 			final int radius = 20;
@@ -127,7 +127,7 @@ public class ItemMillAmulet extends Item
 			visScore = (int) (level * 15);
 		}
 
-		if(this == amuletYggdrasil && entityIn instanceof EntityPlayer)
+		if(this == MillItems.amuletYggdrasil && entityIn instanceof EntityPlayer)
 		{
 			int level = (int) Math.floor(entityIn.posY);
 
@@ -159,20 +159,20 @@ public class ItemMillAmulet extends Item
 		{
 			if(nbt== null)
 			{
-				if(this == amuletAlchemist)
+				if(this == MillItems.amuletAlchemist)
 					return colorAlchemist[0];
-				if(this == amuletVishnu)
+				if(this == MillItems.amuletVishnu)
 					return colorVishnu[0];
-				if(this == amuletYggdrasil)
+				if(this == MillItems.amuletYggdrasil)
 					return colorYggdrasil[16];
 			}
 			int score = nbt.getInteger("score");
 
-			if(this == amuletAlchemist)
+			if(this == MillItems.amuletAlchemist)
 				return colorAlchemist[score];
-			if(this == amuletVishnu)
+			if(this == MillItems.amuletVishnu)
 				return colorVishnu[score];
-			if(this == amuletYggdrasil)
+			if(this == MillItems.amuletYggdrasil)
 				return colorYggdrasil[score];
 		}
 		return 16777215;
@@ -187,33 +187,5 @@ public class ItemMillAmulet extends Item
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
 	{
 		return !(oldStack.getItem() == this && newStack.getItem() == this);
-	}
-
-	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-	//Declarations
-	public static Item amuletSkollHati;
-	public static Item amuletYggdrasil;
-	public static Item amuletAlchemist;
-	public static Item amuletVishnu;
-
-	public static void preinitialize()
-	{
-		amuletSkollHati = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("amuletSkollHati");
-		GameRegistry.registerItem(amuletSkollHati, "amuletSkollHati");
-		amuletAlchemist = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("amuletAlchemist");
-		GameRegistry.registerItem(amuletAlchemist, "amuletAlchemist");
-		amuletVishnu = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("amuletVishnu");
-		GameRegistry.registerItem(amuletVishnu, "amuletVishnu");
-		amuletYggdrasil = new ItemMillAmulet().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("amuletYggdrasil");
-		GameRegistry.registerItem(amuletYggdrasil, "amuletYggdrasil");
-	}
-
-	public static void prerender()
-	{
-		ModelLoader.setCustomModelResourceLocation(amuletSkollHati,0, new ModelResourceLocation(Millenaire.MODID + ":amuletSkollHati"));
-		ModelLoader.setCustomModelResourceLocation(amuletAlchemist, 0, new ModelResourceLocation(Millenaire.MODID + ":amuletAlchemist"));
-		ModelLoader.setCustomModelResourceLocation(amuletVishnu, 0, new ModelResourceLocation(Millenaire.MODID + ":amuletVishnu"));
-		ModelLoader.setCustomModelResourceLocation(amuletYggdrasil, 0, new ModelResourceLocation(Millenaire.MODID + ":amuletYggdrasil"));
 	}
 }

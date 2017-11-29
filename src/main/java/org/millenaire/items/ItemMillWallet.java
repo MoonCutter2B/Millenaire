@@ -146,23 +146,4 @@ public class ItemMillWallet extends Item
 			stack.setTagCompound(null);
 		}
 	}
-	
-    //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    
-    //Declarations
-    	public static Item itemMillPurse;
-    	
-    public static void preinitialize()
-    {
-    	itemMillPurse = new ItemMillWallet().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("itemMillPurse");
-    	GameRegistry.registerItem(itemMillPurse, "itemMillPurse");
-    }
-    
-    @SideOnly(Side.CLIENT)
-	public static void render()
-	{
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		
-		renderItem.getItemModelMesher().register(itemMillPurse, 0, new ModelResourceLocation(Millenaire.MODID + ":itemMillPurse", "inventory"));
-	}
 }

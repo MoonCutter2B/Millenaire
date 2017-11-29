@@ -62,23 +62,4 @@ public class ItemMillSign extends Item
 			}
 		}
 	}
-
-	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-	//Declarations
-	public static Item itemMillSign;
-
-	public static void preinitialize()
-	{
-		itemMillSign = new ItemMillSign().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("itemMillSign");
-		GameRegistry.registerItem(itemMillSign, "itemMillSign");
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void render()
-	{
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-
-		renderItem.getItemModelMesher().register(itemMillSign, 0, new ModelResourceLocation(Millenaire.MODID + ":blockMillSign", "inventory"));
-	}
 }

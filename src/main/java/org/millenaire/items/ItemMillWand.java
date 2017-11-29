@@ -3,15 +3,12 @@ package org.millenaire.items;
 import java.util.List;
 
 import org.millenaire.CommonUtilities;
-import org.millenaire.MillCulture;
 import org.millenaire.Millenaire;
 import org.millenaire.PlayerTracker;
-import org.millenaire.VillageTracker;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
-import org.millenaire.blocks.BlockVillageStone;
+import org.millenaire.blocks.MillBlocks;
 import org.millenaire.blocks.StoredPosition;
-import org.millenaire.building.PlanIO;
 import org.millenaire.entities.EntityMillVillager;
 import org.millenaire.entities.TileEntityMillChest;
 import org.millenaire.networking.PacketExportBuilding;
@@ -48,12 +45,12 @@ public class ItemMillWand extends Item
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == wandNegation) {
+		if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == MillItems.wandNegation) {
 			PacketExportBuilding packet = new PacketExportBuilding(pos);
 			Millenaire.simpleNetworkWrapper.sendToServer(packet);
 			return true;
 		}
-		else if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == wandSummoning) {
+		else if(worldIn.getBlockState(pos).getBlock() == Blocks.standing_sign && worldIn.isRemote && this == MillItems.wandSummoning) {
 			PacketImportBuilding packet =  new PacketImportBuilding(pos);
 			Millenaire.simpleNetworkWrapper.sendToServer(packet);
 			return true;
@@ -64,9 +61,9 @@ public class ItemMillWand extends Item
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
 	{
-		if(this == wandNegation)
+		if(this == MillItems.wandNegation)
 		{
-			if(worldIn.getBlockState(pos).getBlock() == BlockVillageStone.villageStone)
+			if(worldIn.getBlockState(pos).getBlock() == MillBlocks.villageStone)
 			{
 				NBTTagCompound nbt = new NBTTagCompound();
 				stack.setTagCompound(nbt);
@@ -81,7 +78,7 @@ public class ItemMillWand extends Item
 			}
 		}
 
-		if(this == wandSummoning)
+		if(this == MillItems.wandSummoning)
 		{
 			if(worldIn.getBlockState(pos).getBlock() == Blocks.gold_block)
 			{
@@ -144,7 +141,7 @@ public class ItemMillWand extends Item
 //			}
 		}
 
-		if(this == wandCreative)
+		if(this == MillItems.wandCreative)
 		{
 			//Control whether or not you can plant crops
 			if(worldIn.getBlockState(pos).getBlock() instanceof BlockMillCrops)
@@ -230,7 +227,7 @@ public class ItemMillWand extends Item
 			}
 		}
 
-		if(this == tuningFork)
+		if(this == MillItems.tuningFork)
 		{
 			IBlockState state = worldIn.getBlockState(pos);
 			String output = state.getBlock().getUnlocalizedName() + " -";
@@ -250,7 +247,7 @@ public class ItemMillWand extends Item
 	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, net.minecraft.entity.player.EntityPlayer player, EntityLivingBase entity)
 	{
-		if(stack.getItem() == wandNegation && entity instanceof EntityMillVillager)
+		if(stack.getItem() == MillItems.wandNegation && entity instanceof EntityMillVillager)
 		{
 			((EntityMillVillager)entity).isPlayerInteracting = true;
 
@@ -270,38 +267,7 @@ public class ItemMillWand extends Item
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
-		if(stack.getItem() == wandCreative)
+		if(stack.getItem() == MillItems.wandCreative)
 			tooltip.add("�lCreative Mode ONLY");
-	}
-
-	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-	//Declarations
-	public static Item wandSummoning;
-	public static Item wandNegation;
-	public static Item wandCreative;
-	public static Item tuningFork;
-
-	public static void preinitialize()
-	{
-		wandSummoning = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandSummoning");
-		GameRegistry.registerItem(wandSummoning, "wandSummoning");
-		wandNegation = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandNegation");
-		GameRegistry.registerItem(wandNegation, "wandNegation");
-		wandCreative = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("wandCreative");
-		GameRegistry.registerItem(wandCreative, "wandCreative");
-		tuningFork = new ItemMillWand().setCreativeTab(Millenaire.tabMillenaire).setUnlocalizedName("tuningFork");
-		GameRegistry.registerItem(tuningFork, "tuningFork");
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void render()
-	{
-		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-
-		renderItem.getItemModelMesher().register(wandSummoning, 0, new ModelResourceLocation(Millenaire.MODID + ":wandSummoning", "inventory"));
-		renderItem.getItemModelMesher().register(wandNegation, 0, new ModelResourceLocation(Millenaire.MODID + ":wandNegation", "inventory"));
-		renderItem.getItemModelMesher().register(wandCreative, 0, new ModelResourceLocation(Millenaire.MODID + ":wandCreative", "inventory"));
-		renderItem.getItemModelMesher().register(tuningFork, 0, new ModelResourceLocation(Millenaire.MODID + ":tuningFork", "inventory"));
 	}
 }

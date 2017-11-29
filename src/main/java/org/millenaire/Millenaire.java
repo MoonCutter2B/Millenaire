@@ -83,15 +83,16 @@ public class Millenaire
 		MillBlocks.recipes();
 		
 		MillItems.preinitialize();
+		MillItems.recipies();
 		
-		ItemMillFood.preinitialize();
-		ItemMillArmor.preinitialize();
-		ItemMillWand.preinitialize();
-		ItemMillTool.preinitialize();
-		ItemMillAmulet.preinitialize();
-		ItemMillWallet.preinitialize();
-		ItemMillSign.preinitialize();
-		ItemMillParchment.preinitialize();
+		//ItemMillFood.preinitialize();
+		//ItemMillArmor.preinitialize();
+		//ItemMillWand.preinitialize();
+		//ItemMillTool.preinitialize();
+		//ItemMillAmulet.preinitialize();
+		//ItemMillWallet.preinitialize();
+		//ItemMillSign.preinitialize();
+		//ItemMillParchment.preinitialize();
 		//BlockDecorative.preinitialize();
 		//BlockMillCrops.preinitialize();
 		//BlockMillChest.preinitialize();
@@ -110,10 +111,11 @@ public class Millenaire
 		if(event.getSide() == Side.CLIENT)
 		{
 			MillBlocks.prerender();
+			MillItems.prerender();
 			
-			ItemMillTool.prerender();
-			ItemMillAmulet.prerender();
-			ItemMillParchment.prerender();
+			//ItemMillTool.prerender();
+			//ItemMillAmulet.prerender();
+			//ItemMillParchment.prerender();
 			//BlockDecorative.prerender();
 			//BlockMillPath.prerender();
 			EntityMillVillager.prerender();
@@ -141,12 +143,12 @@ public class Millenaire
 			MillBlocks.render();
 			MillItems.render();
 			
-			ItemMillFood.render();
-			ItemMillArmor.render();
-			ItemMillWand.render();
-			ItemMillTool.render();
-			ItemMillWallet.render();
-			ItemMillSign.render();
+			//ItemMillFood.render();
+			//ItemMillArmor.render();
+			//ItemMillWand.render();
+			//ItemMillTool.render();
+			//ItemMillWallet.render();
+			//ItemMillSign.render();
 			//BlockDecorative.render();
 			//BlockMillCrops.render();
 			//BlockMillChest.render();
