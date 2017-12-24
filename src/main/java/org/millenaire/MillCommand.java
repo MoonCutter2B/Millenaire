@@ -2,10 +2,13 @@ package org.millenaire;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.millenaire.blocks.MillBlocks;
 import org.millenaire.blocks.StoredPosition;
+import org.millenaire.building.BuildingTypes;
 
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -14,7 +17,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class MillCommand implements ICommand
+public class MillCommand extends CommandBase
 {
 	@Override
 	public int compareTo(ICommand arg0) 
@@ -54,6 +57,11 @@ public class MillCommand implements ICommand
 		if(args[0].equalsIgnoreCase("village"))
 		{
 			//Spit out direction and distance to all villages
+			
+			//test code. remove before command use.
+			for(Entry ent : BuildingTypes.getCache().entrySet()) {
+				sender.addChatMessage(new ChatComponentText(ent.getKey() + " - " + ent.getValue()));
+			}
 		}
 		else if(args[0].equalsIgnoreCase("loneBuildings"))
 		{
@@ -87,8 +95,7 @@ public class MillCommand implements ICommand
 	@Override
 	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getListOfStringsMatchingLastWord(args, new String[] {"village", "loneBuildings", "showBuildPoints"});
 	}
 
 	@Override

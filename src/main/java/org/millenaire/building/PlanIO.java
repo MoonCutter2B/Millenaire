@@ -265,7 +265,7 @@ public class PlanIO {
 
 	public static NBTTagCompound getBuildingTag(final String name, MillCulture culture, final boolean packaged) {
 		if(packaged) {
-			InputStream x = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + culture.cultureName.toLowerCase() + "/buildings/");
+			InputStream x = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + culture.cultureName.toLowerCase() + "/buildings/" + name + ".mlplan");
 			try {
 				return CompressedStreamTools.readCompressed(x);
 			} catch (IOException e) {

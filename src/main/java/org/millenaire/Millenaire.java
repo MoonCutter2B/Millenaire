@@ -84,24 +84,6 @@ public class Millenaire
 		
 		MillItems.preinitialize();
 		MillItems.recipies();
-		
-		//ItemMillFood.preinitialize();
-		//ItemMillArmor.preinitialize();
-		//ItemMillWand.preinitialize();
-		//ItemMillTool.preinitialize();
-		//ItemMillAmulet.preinitialize();
-		//ItemMillWallet.preinitialize();
-		//ItemMillSign.preinitialize();
-		//ItemMillParchment.preinitialize();
-		//BlockDecorative.preinitialize();
-		//BlockMillCrops.preinitialize();
-		//BlockMillChest.preinitialize();
-		//BlockMillSign.preinitialize();
-		//BlockMillPath.preinitialize();
-		//BlockMillOre.preinitialize();
-		//BlockAlchemists.preinitialize();
-		//BlockVillageStone.preinitialize();
-		//StoredPosition.preinitialize();
 		EntityMillVillager.preinitialize();
 		
 		MillCulture.preinitialize();
@@ -113,11 +95,6 @@ public class Millenaire
 			MillBlocks.prerender();
 			MillItems.prerender();
 			
-			//ItemMillTool.prerender();
-			//ItemMillAmulet.prerender();
-			//ItemMillParchment.prerender();
-			//BlockDecorative.prerender();
-			//BlockMillPath.prerender();
 			EntityMillVillager.prerender();
 			
 			MillConfig.eventRegister();
@@ -142,28 +119,13 @@ public class Millenaire
     	{	
 			MillBlocks.render();
 			MillItems.render();
-			
-			//ItemMillFood.render();
-			//ItemMillArmor.render();
-			//ItemMillWand.render();
-			//ItemMillTool.render();
-			//ItemMillWallet.render();
-			//ItemMillSign.render();
-			//BlockDecorative.render();
-			//BlockMillCrops.render();
-			//BlockMillChest.render();
-			//BlockMillSign.render();
-			//BlockAlchemists.render();
-			//BlockVillageStone.render();
-			//BlockMillOre.render();
-			//StoredPosition.render();
     	}
     }
 	
 	@EventHandler
     public void postinit(FMLPostInitializationEvent event)
     {
-		BuildingTypes.cacheBuildingTypes();
+		
     }
 	
 	private void setForbiddenBlocks()

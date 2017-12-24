@@ -38,7 +38,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class BuildingPlan 
 {
-	public MillCulture culture;
 	public int length;
 	public int width;
 	public int height;
@@ -59,8 +58,6 @@ public class BuildingPlan
 	public String[] femaleVillagerType;
 	
 	IBlockState[][][] buildingArray;
-	//Note: This should count down to 0 for final level, used by Construction Project MillSign.
-	int buildLevel;
 	public List<String> subBuildings;
 	public int pathLevel = 0;
 	public int pathWidth = 2;
@@ -68,17 +65,12 @@ public class BuildingPlan
 	
 	public BuildingPlan(MillCulture cultureIn, int level)
 	{
-		culture = cultureIn;
-		buildLevel = level;
 		
 		//computeCost();
 	}
 	
 	public BuildingPlan(int level, int pathLevelIn, BuildingPlan parent)
 	{
-		buildLevel = level;
-		
-		culture = parent.culture;
 		length = parent.length;
 		width = parent.width;
 		height = parent.height;

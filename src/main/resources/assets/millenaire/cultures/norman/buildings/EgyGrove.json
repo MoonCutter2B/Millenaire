@@ -1,0 +1,11 @@
+{
+  "identifier": "norman:EgyGrove",
+  "itemrates": [
+    {
+      "itemid": "minecraft:log",
+      "stacksize": 2,
+      "meta": 0,
+      "ticks": 200
+    }
+  ]
+}

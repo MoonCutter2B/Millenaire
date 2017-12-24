@@ -2,11 +2,14 @@ package org.millenaire.building;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.millenaire.MillCulture;
 import org.millenaire.util.ItemRateWrapper;
 import org.millenaire.util.ResourceLocationUtil;
 
@@ -18,28 +21,31 @@ import net.minecraft.util.ResourceLocation;
 
 public class BuildingTypes {
 	
-	private Map<ResourceLocation, BuildingType> buildingCache = new HashMap<ResourceLocation, BuildingType>();
+	private static Map<ResourceLocation, BuildingType> buildingCache = new HashMap<ResourceLocation, BuildingType>();
 
-	public static void cacheBuildingTypes() {
+	public static void cacheBuildingTypes(MillCulture culture) {
 		
-		BuildingType type = new BuildingType(new ResourceLocation("egypt:house"));
-		type.itemrates.add(new ItemRateWrapper(new ResourceLocation("minecraft:cobblestone"), 2, 0, 20000));
-		type.itemrates.add(new ItemRateWrapper(new ResourceLocation("minecraft:log"), 2, 0, 10000));
+		InputStream is = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + culture.cultureName.toLowerCase() + "/buildings/buildings.json");
+		String[] buildings = new Gson().fromJson(new InputStreamReader(is), String[].class);
 		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		System.out.println(gson.toJson(type));
-		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + File.separator + "millenaire" + File.separator + "exports" + File.separator);
-		File f1 = new File(f, "house.json");
-		try {
-			f.mkdirs();
-			f1.createNewFile();
-			String g = gson.toJson(type);
-			FileWriter fw = new FileWriter(f1);
-			fw.write(g);
-			fw.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		for(String building : buildings) {
+			ResourceLocation loc = new ResourceLocation(building);
+			InputStream file = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + culture.cultureName.toLowerCase() + "/buildings/" + loc.getResourcePath() + ".json");
+			BuildingType type = new Gson().fromJson(new InputStreamReader(file), BuildingType.class);
+			buildingCache.put(loc, type);
 		}
+	}
+	
+	public static BuildingType getTypeByID(ResourceLocation rl) {
+		return buildingCache.get(rl);
+	}
+	
+	public static BuildingType getTypeFromProject(BuildingProject proj) {
+		return buildingCache.get(ResourceLocationUtil.getRL(proj.ID));
+	}
+	
+	public static Map<ResourceLocation, BuildingType> getCache() {
+		return buildingCache;
 	}
 	
 	public static class BuildingType {
@@ -54,6 +60,12 @@ public class BuildingTypes {
 		}
 		
 		public BuildingPlan loadBuilding() {
+			ResourceLocation s = ResourceLocationUtil.getRL(identifier);
+			try {
+				return PlanIO.loadSchematic(PlanIO.getBuildingTag(s.getResourcePath(), MillCulture.getCulture(s.getResourceDomain()), true), MillCulture.getCulture(s.getResourceDomain()), 1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return null;
 		}
 	}

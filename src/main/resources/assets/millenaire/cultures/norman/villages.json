@@ -1,79 +1,36 @@
 {
     "types": [
         {
-            "id": "test1",
+            "id": "egy",
             "tiers": {
                 "1": [
                     {
-                        "ID": "grove2",
+                        "ID": "norman:EgyGrove",
                         "lvl": 0
                     },
                     {
-                        "ID": "mine1",
+                        "ID": "norman:EgyMediumPeasant",
                         "lvl": 0
                     },
                     {
-                        "ID": "house1",
+                        "ID": "norman:EgyQuarry",
                         "lvl": 0
-                    },
-                    {
-                        "ID": "house2",
-                        "lvl": 1
                     }
                 ],
                 "2": [
                     {
-                        "ID": "mine1",
-                        "lvl": 2
+                        "ID": "norman:EgyGrove",
+                        "lvl": 1
                     },
                     {
-                        "ID": "house1",
+                        "ID": "norman:EgyMediumPeasant",
                         "lvl": 2
                     }
                 ]
             },
             "startingBuildings": [
                 {
-                    "ID": "townhall1",
-                    "lvl": 0
-                }
-            ]
-        },
-        {
-            "id": "test2",
-            "tiers": {
-                "1": [
-                    {
-                        "ID": "grove1",
-                        "lvl": 0
-                    },
-                    {
-                        "ID": "mine1",
-                        "lvl": 1
-                    },
-                    {
-                        "ID": "house1",
-                        "lvl": 1
-                    },
-                    {
-                        "ID": "house2",
-                        "lvl": 0
-                    }
-                ],
-                "2": [
-                    {
-                        "ID": "mine1",
-                        "lvl": 3
-                    },
-                    {
-                        "ID": "house1",
-                        "lvl": 2
-                    }
-                ]
-            },
-            "startingBuildings": [
-                {
-                    "ID": "townhall2",
+                    "ID": "norman:EgyTempleHQ",
                     "lvl": 0
                 }
             ]

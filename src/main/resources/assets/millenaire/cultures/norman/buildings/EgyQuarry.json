@@ -1,0 +1,17 @@
+{
+  "identifier": "norman:EgyQuarry",
+  "itemrates": [
+    {
+      "itemid": "minecraft:cobblestone",
+      "stacksize": 2,
+      "meta": 0,
+      "ticks": 200
+    },
+    {
+      "itemid": "minecraft:sandstone",
+      "stacksize": 2,
+      "meta": 0,
+      "ticks": 200
+    }
+  ]
+}

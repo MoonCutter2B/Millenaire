@@ -9,7 +9,10 @@ import org.millenaire.MillCulture;
 import org.millenaire.MillCulture.VillageType;
 import org.millenaire.VillagerType;
 import org.millenaire.blocks.BlockVillageStone;
+import org.millenaire.building.BuildingPlan;
 import org.millenaire.building.BuildingProject;
+import org.millenaire.building.BuildingTypes;
+import org.millenaire.building.BuildingTypes.BuildingType;
 import org.millenaire.building.PlanIO;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +20,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 
 public class TileEntityVillageStone extends TileEntity
 {
@@ -75,6 +77,11 @@ public class TileEntityVillageStone extends TileEntity
 
 					if(!world.isRemote)
 						System.out.println(culture + " village " + villageName + " created at " + pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
+					for(BuildingProject p : MillCulture.getCulture(culture).getVillageType(villageName).startingBuildings) {
+						BuildingType t = BuildingTypes.getTypeFromProject(p);
+						BuildingPlan plan = t.loadBuilding();
+						
+					}
 				}
 				catch(Exception ex)
 				{
