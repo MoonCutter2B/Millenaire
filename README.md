@@ -1,4 +1,4 @@
-Millénaire ![Discord](https://img.shields.io/discord/267477085692362772.svg?label=Chat&colorB=2D2D2D&colorA=E04E14) ![](http://cf.way2muchnoise.eu/full_millenaire_Downloads.svg) ![](http://cf.way2muchnoise.eu/versions/millenaire.svg)
+Millénaire [![Discord](https://img.shields.io/discord/267477085692362772.svg?label=Chat&colorB=2D2D2D&colorA=E04E14)](https://discord.gg/eMz8HhA) [![](http://cf.way2muchnoise.eu/full_millenaire_Downloads.svg)](https://minecraft.curseforge.com/projects/millenaire) [![](http://cf.way2muchnoise.eu/versions/millenaire.svg)](https://minecraft.curseforge.com/projects/millenaire)
 ===============
 ![](https://cdn.discordapp.com/attachments/378798574152187904/378799091557335040/millenaire_big.png)
 
