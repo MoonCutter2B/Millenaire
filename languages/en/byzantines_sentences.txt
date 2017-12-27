@@ -39,6 +39,7 @@ pastor_byzantine.makebooks=Ta biblia mou einai merika apo ta kalytera xeirografa
 
 lumberman_byzantine.BringBackResourcesHome=H gynaika mou prepei na einai perhfanh me olo to xilo pou efera . / My wife must be proud with all the wood I have brought.
 lumberman_byzantine.ChopTrees=Kathe ktirio edw xreiazete xilo, h apokthsh tou einai douleia mou! / Every structure here needs wood, and getting it is my job!
+lumberman_byzantine.ChopTrees=Éna állo déntro káto, perissótero xýlo gia to chorió! / Another tree down, more wood for the village!
 lumberman_byzantine.GatherGoods=Polu wraio dentryllio. / Nice sapling over there.
 lumberman_byzantine.PlantSaplings=Syntoma tha ginei ena megalo, panemorfo dentro! Kai tha to kopsw.  / Soon this will be a big, majestic tree! And I'll cut it down.
 
