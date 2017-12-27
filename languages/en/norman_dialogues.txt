@@ -362,3 +362,11 @@ v2;80;Mais pas plus riches... / But no richer...
 newchat;key:tavern,building:tavern,v1:adult,v2:adult,weigth:10
 v1;0;La taverne est certainement la meilleure chose qu'on ait construite. / The tavern is surely the best thing we've build in the village.
 v2;40;Personne ici ne dira le contraire! / Nobody here will challenge that!
+
+newchat;key:tavern,building:tavern,v1:adult,v2:adult,weight:10
+v1;0;Hahaha! Nous sommes imparables. Nos navires impressionnants et honorables chevaliers sont le fléau du monde!. / Hahaha! We are unstoppable. Our impressive ships and honorable knights are the scourge of the world!
+v2;40;Et quels sont nos ennemis? Un groupe de tricksters romains et amoureux de la pierre Maya / And what are our enemies? A bunch of Roman tricksters and Mayan stone lovers?
+v1;80;Ne pas oublier les fous des neiges qui n'ont même pas le concept de l'argent! / Don't forget the snow fools who don't even have the concept of money!
+v2;120;Hahaha! La vie normande est la meilleure du monde! Merveilleux cidre, meilleurs outils. Ah, c'est notre âge d'or! / Hahaha! The Norman life is the best in the world! Wonderful Cider, best tools. Ah, this is our golden age.
+v1;160;Et nous arrivons à le partager! / And we get to share it!
+v2;200;Hahaha! / Hahaha!
