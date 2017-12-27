@@ -1,5 +1,0 @@
-max:0;priority:3000;native:Chani;around:4;startLevel:-1;orientation:0;width:8;length:11;tag:inn;signs:1,0
-startLevel:-1
-startLevel:-1;priority:10;;pathlevel:1
-startLevel:-1
-

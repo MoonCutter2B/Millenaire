@@ -1,2 +1,0 @@
-max:0;priority:500;native:Freatio;around:4;startLevel:-11;maxDistance:70;width:4;length:4;irrigation:5
-irrigation:15;priority:20

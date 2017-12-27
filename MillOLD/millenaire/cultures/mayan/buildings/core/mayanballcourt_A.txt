@@ -1,1 +1,0 @@
-max:0;priority:20;native:Jalab;english:Ball Court;around:4;startLevel:-1;orientation:3;length:17;width:22;pathlevel:1;tag:leasure

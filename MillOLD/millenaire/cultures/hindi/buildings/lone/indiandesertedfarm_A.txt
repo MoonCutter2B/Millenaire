@@ -1,1 +1,0 @@
-native:Sunsan har;around:4;startLevel:-1;orientation:3;width:14;length:9;startinggood:rice,1,8,16;startinggood:turmeric,1,2,4;startinggood:denier,1,20,44

@@ -1,5 +1,0 @@
-max:1;native:Taverna;around:4;startLevel:-1;orientation:0;width:9;length:13;tag:tavern;priority:5000;tag:drinking;shop:tavernbyz;startLevel:-1;pathlevel:1;tag:leasure
-startLevel:-1
-startLevel:-1;priority:20;pathlevel:2
-startLevel:-1;priority:10
-

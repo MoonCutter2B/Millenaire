@@ -1,3 +1,0 @@
-sells=bottle,netherwart,akwardpotion
-
-buys=glass

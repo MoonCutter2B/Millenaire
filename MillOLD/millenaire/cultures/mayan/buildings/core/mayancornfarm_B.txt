@@ -1,5 +1,0 @@
-max:1;priority:60;native:Maize Makan;english:Corn Farm;around:4;startLevel:-1;orientation:2;male:mayan_Farmer;female:mayan_PeasantWife;minDistance:50;width:17;length:14;tag:maizefarm
-priority:30
-
-
-pathlevel:1

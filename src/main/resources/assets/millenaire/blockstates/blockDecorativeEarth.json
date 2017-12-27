@@ -1,6 +1,0 @@
-{
-    "variants": {
-    	"variant=dirtwall": { "model": "millenaire:dirtWall" },
-        "variant=driedbrick": { "model": "millenaire:driedBrick" }
-    }
-}

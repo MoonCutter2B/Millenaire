@@ -1,3 +1,0 @@
-max:1;priority:10;french:Grande Fontaine;around:3;startLevel:-1;maxDistance:55;width:9;length:9
-pathlevel:1
-pathlevel:2

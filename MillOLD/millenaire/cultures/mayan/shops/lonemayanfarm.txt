@@ -1,3 +1,0 @@
-sells=maize
-
-buys=stone,cobblestone

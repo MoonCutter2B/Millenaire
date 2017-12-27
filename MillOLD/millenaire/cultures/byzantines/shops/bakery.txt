@@ -1,2 +1,0 @@
-sells=bread
-deliverto=wheat

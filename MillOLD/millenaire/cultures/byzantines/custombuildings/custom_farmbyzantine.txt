@@ -1,1 +1,0 @@
-native:Agrotema;gameNameKey:farmbyzantine_A0;male:farmiller_byzantine;female:wife_byzantine;moveinpriority:10;cropType:wheat;chest:1-5;sign:1;field:10-30;radius:10

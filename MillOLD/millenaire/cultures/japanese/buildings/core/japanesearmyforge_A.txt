@@ -1,5 +1,0 @@
-max:1;priority:70;native:Tansetsu;around:4;startLevel:-1;orientation:2;male:japanese_armysmith;female:japanese_peasantwife;shop:armyforge;tag:armoury;width:16;length:15;moveinpriority:15
-
-
-
-pathlevel:1

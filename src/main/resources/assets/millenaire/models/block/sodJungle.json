@@ -1,8 +1,0 @@
-{
-    "parent": "block/cube_bottom_top",
-    "textures": {
-        "side": "millenaire:blocks/sodJungle",
-        "top": "minecraft:blocks/planks_jungle",
-        "bottom": "minecraft:blocks/planks_jungle"
-    }
-}

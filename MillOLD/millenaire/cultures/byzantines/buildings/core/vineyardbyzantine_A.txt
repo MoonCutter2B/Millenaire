@@ -1,3 +1,0 @@
-max:1;native:Ampelonas;around:4;startLevel:-1;orientation:1;width:11;length:22;tag:vineyard;priority:5000
-startLevel:-1;priority:4
-

@@ -1,1 +1,0 @@
-max:0;priority:100000;french:Hôtel particulier;around:5;startLevel:-11;orientation:2;width:18;length:18;reputation:8*64*64;price:4*64*64;pathlevel:2

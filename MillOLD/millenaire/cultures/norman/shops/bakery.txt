@@ -1,3 +1,0 @@
-sells=bread
-
-deliverto=wheat

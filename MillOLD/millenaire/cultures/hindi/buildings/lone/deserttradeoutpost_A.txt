@@ -1,1 +1,0 @@
-priority:5;native:Saray;around:4;startLevel:-5;orientation:3;male:indian_lonetrader;male:indian_soldier;length:12;width:11;startinggood:rice,1,32,32;startinggood:turmeric,1,16,16;startinggood:chickenmeat,1,8,8;startinggood:dye_blue,0.8,32,32;startinggood:diamond,0.5,1,2;startinggood:gold,0.8,8,16;shop:deserttradeoutpost

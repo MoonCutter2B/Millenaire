@@ -1,5 +1,0 @@
-max:1;priority:50000;native:Psaras Spiti;around:4;startLevel:-5;orientation:2;width:18;length:12;male:fisherman_byzantine;female:wife_byzantine;tag:fishingspot;tag:Oven;shop:fishery;moveinpriority:20
-startLevel:-5;priority:10
-startLevel:-5
-startLevel:-5;pathlevel:1
-

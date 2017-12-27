@@ -1,1 +1,0 @@
-type:subbuilding;priority:50;native:Tour de garde;around:4;startLevel:-5;orientation:2;length:32;width:32;male:guard;rebuildpath:false

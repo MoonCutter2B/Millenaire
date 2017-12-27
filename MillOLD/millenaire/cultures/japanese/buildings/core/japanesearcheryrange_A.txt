@@ -1,1 +1,0 @@
-native:Yaba;around:4;startLevel:-1;orientation:1;width:22;length:15;reputation:8*64*64;price:64*64;max:0;priority:100000;pathlevel:1

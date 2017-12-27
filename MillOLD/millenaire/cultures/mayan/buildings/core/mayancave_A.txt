@@ -1,1 +1,0 @@
-max:1;priority:10;native:Ch'en;english:Cave;around:4;startLevel:-7;width:8;length:8;pathlevel:1

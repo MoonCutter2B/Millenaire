@@ -1,1 +1,0 @@
-native:Astiko Chorio;around:4;startLevel:-2;orientation:2;width:16;length:32;reputation:8*64*64;price:5*64*64;pathlevel:2;priority:100000;max:0

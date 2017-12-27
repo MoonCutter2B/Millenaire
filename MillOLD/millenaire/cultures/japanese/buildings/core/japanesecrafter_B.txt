@@ -1,4 +1,0 @@
-native:Shugi Ie;around:4;startLevel:-1;orientation:1;width:14;length:12;male:japanese_Crafter;female:japanese_PeasantWife;shop:japanesecrafter;tag:Oven;moveinpriority:20
-
-
-pathlevel:1

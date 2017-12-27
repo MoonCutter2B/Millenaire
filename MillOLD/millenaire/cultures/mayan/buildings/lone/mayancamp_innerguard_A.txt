@@ -1,1 +1,0 @@
-native:Ajaw Cah;around:4;startLevel:-1;orientation:3;width:31;length:30;male:questkingwarrior;male:questkingwarrior;type:subbuilding;startingGood:denier,1,8,16;startingGood:masa,1,4,15;startingGood:bow,1,1,4;startingGood:arrow,1,16,32

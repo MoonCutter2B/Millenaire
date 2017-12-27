@@ -1,4 +1,0 @@
-max:2;priority:50000;native:Maison du charpentier;around:4;startLevel:-1;orientation:3;male:carpenter;female:Wife;length:8;width:9;moveinpriority:20
-priority:10
-
-pathlevel:1

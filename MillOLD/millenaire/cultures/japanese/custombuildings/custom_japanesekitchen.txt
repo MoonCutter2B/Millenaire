@@ -1,1 +1,0 @@
-native:Daidokoro;gameNameKey:japanesekitchen_A0;tag:oven;shop:kitchen;chest:2-6;craft:1;sign:1

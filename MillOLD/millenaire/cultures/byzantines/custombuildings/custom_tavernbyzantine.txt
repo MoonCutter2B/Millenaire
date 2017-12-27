@@ -1,1 +1,0 @@
-native:Taverna;gameNameKey:tavernbyzantine_A0;shop:tavernbyz;tag:drinking;tag:tavern;chest:2-6;craft:1;sign:1;radius:10

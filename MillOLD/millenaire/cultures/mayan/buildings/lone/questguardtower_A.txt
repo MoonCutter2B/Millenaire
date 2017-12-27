@@ -1,1 +1,0 @@
-native:Cha'an Ka'nal;around:4;startLevel:-1;orientation:3;width:6;length:6;male:questkingscout;male:questkingscout;tag:nopaths

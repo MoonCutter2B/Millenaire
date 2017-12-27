@@ -1,1 +1,0 @@
-native:Psaras Spiti;gameNameKey:fisherbyzantine_A0;male:fisherman_byzantine;female:wife_byzantine;moveinpriority:10;tag:fishingspot;tag:Oven;shop:fishery;chest:1-5;sign:1;fishing:1-5;radius:10

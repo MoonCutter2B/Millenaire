@@ -1,1 +1,0 @@
-native: ;around:4;startLevel:-2;orientation:3;width:34;length:34;tag:male:soldier_byzantine

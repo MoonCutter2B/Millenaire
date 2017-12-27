@@ -1,1 +1,0 @@
-native:Chiisai Ie;around:4;startLevel:-1;orientation:1;width:21;length:17;reputation:64*64;price:64*64;max:0;priority:100000;pathlevel:1

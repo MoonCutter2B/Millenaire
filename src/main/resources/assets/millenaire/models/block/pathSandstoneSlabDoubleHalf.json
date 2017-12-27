@@ -1,8 +1,0 @@
-{
-    "parent": "millenaire:block/path",
-    "textures": {
-        "side": "millenaire:blocks/pathsandstone_halfside",
-        "top": "millenaire:blocks/pathsandstone",
-        "bottom": "millenaire:blocks/pathbottom"
-    }
-}

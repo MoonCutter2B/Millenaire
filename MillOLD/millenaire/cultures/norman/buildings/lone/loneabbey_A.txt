@@ -1,1 +1,0 @@
-priority:3000;french:Abbaye;around:4;startLevel:-1;orientation:0;male:loneabbot;male:lonemonk;male:lonemonk;width:20;length:20;shop:loneabbey;showtownhallsigns:true;tag:Oven;tag:cattle;tag:bakery

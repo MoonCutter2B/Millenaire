@@ -1,1 +1,0 @@
-native:Yashiro;name_english:Shinto Shrine;around:4;startLevel:-1;orientation:3;width:17;length:9;startingGood:denier,1,10,10;startingGood:denierargent,0.5,1,3;startingGood:gold:0.5,1,2;startingGood:diamond:0.5,1,0;startingGood:rice:1,4,4;

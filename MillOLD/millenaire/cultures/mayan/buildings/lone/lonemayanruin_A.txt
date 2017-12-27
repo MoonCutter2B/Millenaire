@@ -1,1 +1,0 @@
-priority:3000;native:Sa'at Maya Otoch;english:Lost Mayan Home;around:4;startLevel:-1;orientation:0;width:13;length:24;showtownhallsigns:false;startingGood:maize,1,1,20;startingGood:denier,1,20,44;startingGood:denierargent,0.3,2,2;startingGood:chickenmeat,1,1,3;startingGood:gold,0.4,4,9;startingGood:bow,0.6,1,1;startingGood:arrow,0.8,10,30;startingGood:pumpkin,0.6,1,5

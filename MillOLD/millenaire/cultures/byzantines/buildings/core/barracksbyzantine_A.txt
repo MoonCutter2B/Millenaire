@@ -1,7 +1,0 @@
-max:1;priority:500;native:Stratones;around:4;startLevel:-1;orientation:2;width:19;length:17;male:soldier_byzantine;tag:patrol;pathlevel:1
-startLevel:-1
-startLevel:-1;priority:10;rebuildpath:true
-startLevel:-1;subbuilding:barracksbyzantine_A_bed;pathlevel:2
-startLevel:-1
-startLevel:-1
-

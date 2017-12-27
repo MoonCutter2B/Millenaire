@@ -1,1 +1,0 @@
-native:Hutte de Bûcheron;gameNameKey:lumbermanhut_A0;male:Lumberman;female:Wife;chest:1-5;sign:1;moveinpriority:10;shop:lumberman

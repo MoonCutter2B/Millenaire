@@ -1,4 +1,0 @@
-native:Bourou;around:4;startLevel:-1;orientation:3;width:13;length:13;tag:Patrol;minDistance:80
-
-
-pathlevel:1

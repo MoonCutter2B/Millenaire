@@ -1,2 +1,0 @@
-max:1;priority:30;native:K'eyem;english:Alter;around:4;startLevel:-2;orientation:2;width:13;length:10;tag:sacrifices
-pathlevel:1

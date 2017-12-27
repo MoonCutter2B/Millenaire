@@ -1,2 +1,0 @@
-max:2;native:Paratereteio;around:4;startLevel:-1;orientation:0;width:7;length:7;tag:patrol;minDistance:80;priority:20
-;pathlevel:1

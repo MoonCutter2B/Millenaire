@@ -1,4 +1,0 @@
-max:1;native:Soushi;around:4;startLevel:-1;orientation:1;width:12;length:11;tag:Praying;tag:leasure;priority:88;
-pathlevel:1
-pathlevel:2
-

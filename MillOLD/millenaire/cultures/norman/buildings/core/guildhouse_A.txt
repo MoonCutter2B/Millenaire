@@ -1,9 +1,0 @@
-max:0;priority:2000;native:Hall de la Guilde;around:5;startLevel:-1;orientation:3;signs:5,3,1,2,4,6,8,7,0;shop:townhall;length:13;width:11;male:GuildMaster;tag:leasure
-
-rebuildpath:true
-startLevel:-9
-startLevel:-1;rebuildpath:true
-
-
-startLevel:-9
-startLevel:-1

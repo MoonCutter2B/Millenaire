@@ -1,3 +1,0 @@
-max:1;priority:10;native:Pwes;english:Cistern;around:4;startLevel:-8;width:8;length:8;irrigation:5
-irrigation:10
-irrigation:20;pathlevel:1

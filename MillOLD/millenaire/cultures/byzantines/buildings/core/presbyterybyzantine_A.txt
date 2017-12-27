@@ -1,4 +1,0 @@
-max:1;native:Prebyterio;around:4;startLevel:-1;orientation:2;width:9;length:8;male:pastor_byzantine;priority:500;;pathlevel:1
-startLevel:-1;priority:10
-startLevel:-1;pathlevel:2
-

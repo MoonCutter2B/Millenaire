@@ -1,8 +1,0 @@
-{
-    "parent": "block/upper_slab",
-    "textures": {
-        "bottom": "millenaire:blocks/tilestopvert",
-        "top": "millenaire:blocks/tilestopvert",
-        "side": "millenaire:blocks/tilesfront"
-    }
-}

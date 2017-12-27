@@ -1,5 +1,0 @@
-max:1;priority:94;native:Tsuribori;around:4;startLevel:-3;orientation:3;minDistance:60;width:22;length:16;male:japanese_fisherman;female:japanese_peasantwife;shop:fishery;tag:fishingspot
-priority:91;native:Gyogyo;tag:Oven
-
-
-pathlevel:1

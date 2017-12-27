@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "variant=plaintimberframe": { "model": "millenaire:plainTimberFrame" },
-        "variant=crosstimberframe": { "model": "millenaire:crossTimberFrame" },
-        "variant=thatch": { "model": "millenaire:thatch" },
-        "variant=sericulture": { "model": "millenaire:sericulture" }
-    }
-}

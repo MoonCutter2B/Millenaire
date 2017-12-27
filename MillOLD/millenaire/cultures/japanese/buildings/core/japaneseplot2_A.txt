@@ -1,3 +1,0 @@
-native:Chuugata Chisho;around:4;startLevel:-1;orientation:1;width:10;length:12;reputation:16*64;price:32*64;max:0;priority:100000
-startLevel:-1;pathlevel:1
-

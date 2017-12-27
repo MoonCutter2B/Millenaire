@@ -1,2 +1,0 @@
-
-buys=wine,bread

@@ -1,1 +1,0 @@
-native:Fournos;gameNameKey:bakerybyzantine_A0;shop:bakery;tag:bakery;tag:leasure;tag:Oven;tag:leasure;craft:1;chest:2-6;sign:1;radius:10

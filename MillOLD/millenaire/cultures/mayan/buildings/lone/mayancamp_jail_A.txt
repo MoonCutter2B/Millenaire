@@ -1,1 +1,0 @@
-native:K'as Maya;around:4;startLevel:-9;orientation:3;width:31;length:30;type:subbuilding

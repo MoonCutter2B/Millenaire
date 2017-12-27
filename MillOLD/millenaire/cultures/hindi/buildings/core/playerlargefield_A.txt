@@ -1,1 +1,0 @@
-max:0;priority:100000;native:Bari saajisa;english:Large Plot;around:4;startLevel:-1;orientation:3;width:12;length:10;reputation:2*64*64;price:10*64;pathlevel:1

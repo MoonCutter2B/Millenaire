@@ -1,4 +1,0 @@
-max:1;priority:3000;french:Carrière;around:4;startLevel:-8;orientation:0;male:Miner;female:Wife;width:12;length:16;minDistance:60
-
-
-pathlevel:1

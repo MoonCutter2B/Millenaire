@@ -1,1 +1,0 @@
-max:0;priority:100000;native:Ix La' Nah;english:Old House;around:4;startLevel:-1;orientation:3;width:10;length:8;reputation:64*64;price:15*64;pathlevel:1

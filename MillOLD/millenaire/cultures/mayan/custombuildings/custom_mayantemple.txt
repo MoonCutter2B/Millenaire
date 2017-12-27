@@ -1,1 +1,0 @@
-native:K'u-nah;gameNameKey:mayantemple_A0;tag:Praying;sign:1;radius:10

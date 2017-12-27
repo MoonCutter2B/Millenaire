@@ -1,1 +1,0 @@
-max:0;priority:500;native:Alsos;around:4;startLevel:-1;orientation:3;minDistance:60;width:10;length:10;tag:grove;pathwidth:1

@@ -1,3 +1,0 @@
-native:Ciwic;around:4;startLevel:-1;orientation:3;width:14;length:15;priority:500;tag:market
-
-pathlevel:1

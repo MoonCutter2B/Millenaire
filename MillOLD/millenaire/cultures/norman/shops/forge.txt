@@ -1,1 +1,0 @@
-sells=normanAxe,normanPickaxe,normanShovel,normanHoe

@@ -1,1 +1,0 @@
-native:Kak Actun;around:4;startLevel:-1;orientation:3;width:30;length:50;max:0;startingsubbuilding:questcave_door

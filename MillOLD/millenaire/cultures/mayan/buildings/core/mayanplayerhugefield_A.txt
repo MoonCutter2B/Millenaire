@@ -1,1 +1,0 @@
-max:0;priority:100000;native:Noh Kuuch;english:Big Plot;around:4;startLevel:-1;orientation:2;width:18;length:18;reputation:8*64*64;price:32*64;pathlevel:1

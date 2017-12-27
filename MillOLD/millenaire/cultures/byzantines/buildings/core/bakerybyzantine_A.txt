@@ -1,6 +1,0 @@
-max:1;priority:20000;native:Fournos;around:4;startLevel:-1;orientation:2;width:6;length:13;tag:bakery;shop:bakery;tag:Oven;pathlevel:1;tag:leasure
-startLevel:-1;priority:10
-startLevel:-1
-startLevel:-1
-startLevel:-1;pathlevel:2
-

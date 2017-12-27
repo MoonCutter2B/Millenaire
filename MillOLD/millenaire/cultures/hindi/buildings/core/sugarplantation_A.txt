@@ -1,1 +1,0 @@
-max:1;priority:500;native:Gannaa baagaana;around:4;startLevel:-1;orientation:3;minDistance:60;width:5;length:7;tag:sugarplantation;pathwidth:1

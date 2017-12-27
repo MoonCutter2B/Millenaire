@@ -1,1 +1,0 @@
-native:Synergio;gameNameKey:workshopbyzantine_A0;male:artisan_byzantine;female:artwife_byzantine;craft:1;chest:1-5;sign:1;shop:clothing;tag:workspace;tag:Oven;moveinpriority:20

@@ -1,1 +1,0 @@
-max:1;priority:50;native:Hu'um-Noh;english:Library;around:4;startLevel:0;orientation:3;width:13;length:11;tag:archives;signs:24,27,30,33,25,28,31,34,26,29,32,35,36,39,42,45,37,40,43,46,38,41,44,47,0,3,6,9,1,4,7,10,2,5,8,11,12,15,18,21,13,16,19,22,14,17,20,23;pathlevel:1

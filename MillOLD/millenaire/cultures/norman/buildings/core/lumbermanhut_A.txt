@@ -1,4 +1,0 @@
-max:2;priority:5;french:Hutte de Bûcheron;around:4;startLevel:-1;orientation:3;male:Lumberman;female:Wife;length:5;width:8;shop:lumberman
-priority:10
-
-pathlevel:1

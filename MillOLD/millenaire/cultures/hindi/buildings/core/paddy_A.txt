@@ -1,1 +1,0 @@
-max:2;priority:50;native:Dhaan;around:4;startLevel:-1;orientation:0;minDistance:60;width:11;length:11;tag:paddy;pathwidth:1

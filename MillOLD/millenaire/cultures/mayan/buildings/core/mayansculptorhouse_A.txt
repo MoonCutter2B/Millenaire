@@ -1,5 +1,0 @@
-max:1;priority:100;native:Uxul Otoch;english:Sculptors Home;around:4;startLevel:-1;orientation:4;male:mayan_Sculptor;female:mayan_PeasantWife;length:10;width:10;moveinpriority:20
-
-
-
-pathlevel:1

@@ -1,1 +1,0 @@
-native:Keban Muul;around:4;startLevel:-30;orientation:3;width:38;length:38;male:questshaman;type:subbuilding

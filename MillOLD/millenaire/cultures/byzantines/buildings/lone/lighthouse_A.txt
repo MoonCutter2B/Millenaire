@@ -1,1 +1,0 @@
-native:Pharos;around:4;startLevel:-1;orientation:3;width:12;length:9;male:keeper_byzantine;shop:lonetower

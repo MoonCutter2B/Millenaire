@@ -1,1 +1,0 @@
-max:0;priority:5;french:Ferme en ruine;around:4;startLevel:-1;orientation:3;length:8;width:17;startingGood:bread,0.5,1,3;startingGood:denier,1,20,44;startingGood:denierargent,0.2,2,2;startingGood:wheat,0.5,8,8;startingGood:normanshovel,0.2,1,0;startingGood:normanhoe,0.2,1,0;

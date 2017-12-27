@@ -1,4 +1,0 @@
-max:1;priority:40;native:Ah Kax Makan;english:Chicken Farm;around:4;startLevel:-1;orientation:2;male:mayan_ChickenFarmer;female:mayan_PeasantWife;width:12;length:16;minDistance:50;shop:mayansheepchickenfarm;tag:chicken;tag:Oven;tag:nopaths
-
-
-pathlevel:1

@@ -1,1 +1,0 @@
-native:Chota Mandir;around:4;startLevel:-1;orientation:3;width:8;length:8;male:indian_pandit

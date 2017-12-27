@@ -1,2 +1,0 @@
-type:subbuilding;priority:50;native:Sena-Nivaas;around:5;orientation:3;startLevel:-1;width:36;length:26;male:indian_soldier
-priority:10

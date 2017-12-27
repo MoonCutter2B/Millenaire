@@ -1,1 +1,0 @@
-native:Atelier d'Alchimie;around:4;startLevel:-1;orientation:3;width:12;length:12;requiredtag:alchemy;male:alchemistapprentice;shop:alchemyworkshop;priority:1000000;pathlevel:1

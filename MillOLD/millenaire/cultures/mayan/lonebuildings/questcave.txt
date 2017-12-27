@@ -1,9 +1,0 @@
-name:Kak Actun
-weight:1000
-radius:20
-max:0
-keyLoneBuilding:true
-generateforplayer:true
-
-//starting buildings:
-centre:questcave

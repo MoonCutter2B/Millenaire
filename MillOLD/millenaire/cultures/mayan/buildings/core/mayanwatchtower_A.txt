@@ -1,2 +1,0 @@
-max:2;priority:40;native:Cha'an Ka'nal;around:4;startLevel:-1;orientation:0;width:9;length:9;tag:Patrol;minDistance:80
-pathlevel:1

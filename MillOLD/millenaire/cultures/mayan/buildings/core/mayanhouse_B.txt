@@ -1,8 +1,0 @@
-max:2;priority:5;native:Maya Otoch;english:Mayan Home;around:4;startLevel:-1;orientation:2;male:mayan_Peasant;female:mayan_PeasantWife;length:10;width:10
-priority:10
-
-
-
-
-
-pathlevel:1

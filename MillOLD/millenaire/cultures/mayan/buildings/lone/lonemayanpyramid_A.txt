@@ -1,1 +1,0 @@
-max:1;priority:10;native:Muul;english:Pyramid;around:4;startLevel:-2;orientation:3;width:38;length:38;startingGood:maize,1,8,16;startingGood:denieror,0.4,1,1;startingGood:denier,1,28,44;startingGood:denierargent,0.6,16,22;startingGood:mayangold,0.8,18,26;startingGood:mayanstatue,0.8,1,2;startingGood:gold,1,20,10;startingGood;diamond,0.5,4,2;

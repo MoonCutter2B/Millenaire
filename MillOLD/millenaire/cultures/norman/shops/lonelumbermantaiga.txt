@@ -1,3 +1,0 @@
-sells=wood,wood_pine,wood_birch,wood_jungle
-
-buys=normanAxe

@@ -1,5 +1,0 @@
-type:subbuilding;priority:10000;native:Chalkeio;startLevel:-1;orientation:3;length:41;width:43;male:armysmith_byzantine;female:wife_byzantine;shop:armyforge;tag:armoury;tag:forge;moveinpriority:15
-startLevel:-1;priority:10
-startLevel:-1
-startLevel:-1
-

@@ -1,2 +1,0 @@
-max:1;priority:500;native:Sikaar;around:4;startLevel:-6;orientation:0;male:indian_miner;female:indian_peasantwife;width:14;length:14;minDistance:60
-startLevel:-1;priority:50

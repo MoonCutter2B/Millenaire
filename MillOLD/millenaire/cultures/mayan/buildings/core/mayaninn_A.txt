@@ -1,3 +1,0 @@
-max:1;priority:40;native:Laak'Noh Nah;english:Others Large Home;around:4;startLevel:0;orientation:3;width:10;length:10;tag:inn;signs:1,0;male:mayan_Merchant;tag:leasure
-
-pathlevel:1

@@ -1,1 +1,0 @@
-type:subbuilding;priority:50;native:Onsenmachi;around:4;startLevel:-3;orientation:3;width:84;length:65;female:japanese_innservant

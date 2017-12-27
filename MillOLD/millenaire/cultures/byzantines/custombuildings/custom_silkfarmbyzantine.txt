@@ -1,1 +1,0 @@
-native:Sirotrofia;gameNameKey:silkfarmbyzantine_A0;male:silkfarmer_byzantine;female:silkfarmerwife_byzantine;moveinpriority:15;tag:silkwormfarm;chest:1-5;sign:1;silk:5-20;radius:10

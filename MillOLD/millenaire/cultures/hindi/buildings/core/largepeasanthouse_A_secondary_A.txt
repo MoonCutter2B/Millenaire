@@ -1,3 +1,0 @@
-type:subbuilding;priority:5;native:Dusra Ghar;around:4;startLevel:-1;orientation:3;male:indian_peasant;female:indian_peasantwife;length:15;width:15
-priority:10
-rebuildpath:true

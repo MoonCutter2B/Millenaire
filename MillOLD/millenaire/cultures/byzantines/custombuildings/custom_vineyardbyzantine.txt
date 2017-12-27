@@ -1,1 +1,0 @@
-native:Ampelonas;gameNameKey:vineyardbyzantine_A0;moveinpriority:10;cropType:vine;field:10-30;tag:vineyard;sign:1;radius:10

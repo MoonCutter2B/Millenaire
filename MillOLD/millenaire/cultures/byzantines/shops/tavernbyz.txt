@@ -1,3 +1,0 @@
-sells=wine,lambcooked,feta,souvlaki
-buys=grapes
-deliverto=grapes,wine,souvlaki,lambcooked,feta

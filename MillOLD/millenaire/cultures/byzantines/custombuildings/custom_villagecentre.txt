@@ -1,1 +1,0 @@
-native:Frourio;gameNameKey:playerfortbyzantine_A0;craft:1;chest:6-20;sign:9;radius:10;shop:townhall;tag:leasure;tag:playerth;tag:Patrol;male:boy_byzantine;male:boy_byzantine;male:boy_byzantine;female:girl_byzantine;female:girl_byzantine;female:girl_byzantine

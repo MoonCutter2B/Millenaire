@@ -1,4 +1,0 @@
-max:2;priority:5;native:Kisaan ka Ghar;around:4;startLevel:-1;orientation:3;male:indian_peasant;female:indian_peasantwife;length:10;width:10
-priority:10;rebuildpath:true
-
-tag:chicken;tag:Oven;rebuildpath:true

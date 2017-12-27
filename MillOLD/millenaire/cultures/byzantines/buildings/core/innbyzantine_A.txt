@@ -1,6 +1,0 @@
-max:0;priority:3000;native:Pandocheio;around:4;startLevel:-1;orientation:2;width:15;length:10;tag:inn;signs:1,0;male:merchant_byzantine;pathlevel:1;tag:leasure
-startLevel:-1
-startLevel:-1;priority:10
-startLevel:-1;;pathlevel:2
-startLevel:-1
-

@@ -1,4 +1,0 @@
-max:1;priority:40;native:Hach Noh Otoch;english:Very Big Home;around:4;startLevel:0;orientation:3;male:mayan_Peasant;female:mayan_PeasantWife;length:15;width:15
-priority:10
-subbuilding:mayanlargepeasanthouse_A_secondary;tag:chicken
-pathlevel:1

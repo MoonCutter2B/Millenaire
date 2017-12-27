@@ -1,1 +1,0 @@
-native:Auberge isolée;around:4;startLevel:-1;orientation:3;width:7;length:13;male:innkeepermale;female:innkeeperfemale;shop:loneinn;tag:market1;tag:drinking;tag:cidre;tag:alembic;showtownhallsigns:false;startingGood:cider,1,8,16;startingGood:calva,1,2,4;startingGood:tripes,1,2,4;startingGood:boudin,1,4,4;startingGood:bread,1,8,16;showtownhallsigns:true

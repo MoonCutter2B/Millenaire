@@ -1,1 +1,0 @@
-native:Tour de guet;gameNameKey:watchtower_A0;tag:Patrol;sign:1

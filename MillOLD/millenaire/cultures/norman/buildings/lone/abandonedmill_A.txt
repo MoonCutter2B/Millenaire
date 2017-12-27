@@ -1,1 +1,0 @@
-native:Moulin Abandonné;around:4;startLevel:-1;orientation:3;width:10;length:8;startingGood:bread,1,2,6;startingGood:denier,1,20,44;startingGood:wheat,1,8,16;startingGood:normanhoe,0.2,1,0;

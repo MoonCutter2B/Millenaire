@@ -1,1 +1,0 @@
-max:1;priority:50;native:Muurtikaar ka Ghar;around:4;startLevel:-1;orientation:3;male:indian_sculptor;female:indian_peasantwife;length:10;width:10;moveinpriority:20

@@ -1,2 +1,0 @@
-max:1;priority:5;native:Lakarhara ka Ghar;around:4;startLevel:-1;orientation:3;male:indian_lumberman;female:indian_peasantwife;length:8;width:11
-priority:10

@@ -1,1 +1,0 @@
-max:0;priority:100000;native:Chak Muul;english:Great Pyramid;around:4;startLevel:0;orientation:2;width:18;length:18;reputation:2*64*64;price:64*64;pathlevel:1

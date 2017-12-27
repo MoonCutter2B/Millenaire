@@ -1,1 +1,0 @@
-native:Baoli;around:2;startLevel:-12;orientation:1;width:13;length:13;max:0;irrigation:20;pathlevel:1

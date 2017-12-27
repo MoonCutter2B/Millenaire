@@ -1,1 +1,0 @@
-native:Prebyterio;gameNameKey:presbyterybyzantine_A0;male:pastor_byzantine;chest:1-2;sign:1;moveinpriority:10

@@ -1,1 +1,0 @@
-native:Moulin à eau isolé;around:4;startLevel:-2;orientation:3;width:9;length:7;male:lonemiller;shop:lonemill;tag:bakery;showtownhallsigns:false;startingGood:bread,1,8,16

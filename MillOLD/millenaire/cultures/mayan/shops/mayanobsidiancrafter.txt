@@ -1,2 +1,0 @@
-sells=mayanaxe,mayanpickaxe,mayanhoe,mayanshovel,mayanmace
-buys=obsidian

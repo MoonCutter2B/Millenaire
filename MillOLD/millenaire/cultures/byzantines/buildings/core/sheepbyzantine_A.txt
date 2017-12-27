@@ -1,5 +1,0 @@
-max:1;priority:5000;native:Boske Probaton;around:4;startLevel:-1;orientation:0;width:18;length:18;male:shepherd_byzantine;female:shepherd_female_byzantine;shop:sheepfarm;tag:sheeps
-startLevel:-1;priority:500;tag:Oven
-startLevel:-1;priority:10
-startLevel:-1;pathlevel:1
-

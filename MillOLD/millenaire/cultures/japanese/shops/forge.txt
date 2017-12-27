@@ -1,2 +1,0 @@
-sells=steelAxe,steelPickaxe,steelShovel,steelHoe
-buys=iron

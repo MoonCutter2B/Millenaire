@@ -1,4 +1,0 @@
-max:0;priority:200;native:Mukhiya ka Ghar;around:5;startLevel:-1;orientation:2;signs:2,1,3,5,7,8,6,4,0;shop:townhall;length:15;width:22;male:indian_villagechief;female:indian_richwoman;tag:leasure
-rebuildpath:true
-startLevel:-5;rebuildpath:true
-startLevel:-1

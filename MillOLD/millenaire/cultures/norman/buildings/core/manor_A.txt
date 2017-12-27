@@ -1,7 +1,0 @@
-max:0;priority:2000;french:Manoir;around:5;startLevel:-1;orientation:3;signs:5,3,1,2,4,6,8,7,0;shop:townhall;length:20;width:9;male:Seneschal;tag:leasure
-startLevel:-9
-startLevel:-1
-
-
-
-startLevel:-9

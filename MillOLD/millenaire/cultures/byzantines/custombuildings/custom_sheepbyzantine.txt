@@ -1,1 +1,0 @@
-native:Boske Probaton;gameNameKey:sheepbyzantine_A0;male:shepherd_byzantine;female:shepherd_female_byzantine;moveinpriority:10;shop:sheepfarm;tag:sheeps;tag:Oven;chest:2-5;craft:1;sign:1;spawn:2-4;spawnType:Sheep;radius:10

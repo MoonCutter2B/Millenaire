@@ -1,1 +1,0 @@
-native:Paratereteio;gameNameKey:watchtowerbyzantine_A0;tag:Patrol;sign:1

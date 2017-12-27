@@ -1,1 +1,0 @@
-native:Doro spiti;around:4;startLevel:-1;orientation:3;width:11;length:7;isgift:true;priority:1000000;max:0

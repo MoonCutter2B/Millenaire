@@ -1,6 +1,0 @@
-max:0;priority:500;native:Qila;around:5;orientation:3;startLevel:-1;width:36;length:26;signs:5,3,1,2,4,6,0,8,7;shop:townhall;male:indian_rajputgeneral;female:indian_richwoman;tag:leasure
-rebuildpath:true
-
-
-subbuilding:fort_A_soldierhouse;rebuildpath:true
-subbuilding:fort_A_forge

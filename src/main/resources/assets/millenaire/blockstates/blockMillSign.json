@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "millenaire:blockMillSign" },
-        "facing=east": { "model": "millenaire:blockMillSign" },
-        "facing=south": { "model": "millenaire:blockMillSign" },
-        "facing=west": { "model": "millenaire:blockMillSign" }
-    }
-}

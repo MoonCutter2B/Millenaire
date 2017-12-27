@@ -1,1 +1,0 @@
-native:Eki Tochi;around:4;startLevel:-1;orientation:1;width:16;length:16;reputation:64*64;price:64*64;max:0;priority:100000;pathlevel:2

@@ -1,1 +1,0 @@
-native:Archeia;sign:10-50;tag:archives;radius:10

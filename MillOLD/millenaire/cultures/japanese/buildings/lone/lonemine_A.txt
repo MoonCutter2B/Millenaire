@@ -1,2 +1,0 @@
-native:Kouku;around:4;startLevel:-6;orientation:3;width:20;length:20;male:japanese_loneminer;male:japanese_loneminer;shop:lonemine
-startLevel:-8

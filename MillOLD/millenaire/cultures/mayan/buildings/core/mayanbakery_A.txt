@@ -1,4 +1,0 @@
-max:0;priority:20;native:Chak;english:Bakery;around:4;startLevel:0;orientation:3;width:8;length:12;tag:bakery;tag:Oven;tag:leasure
-priority:10
-
-pathlevel:1

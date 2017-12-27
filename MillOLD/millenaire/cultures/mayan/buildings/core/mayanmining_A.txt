@@ -1,5 +1,0 @@
-max:1;priority:100;native:Tunich In-ti'a'al;english:Stone Mine;around:4;startLevel:-8;orientation:3;male:mayan_Miner;female:mayan_PeasantWife;width:12;length:16;minDistance:60
-startLevel:-8;priority:35
-
-
-pathlevel:1

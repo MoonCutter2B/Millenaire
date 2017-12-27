@@ -1,1 +1,0 @@
-native:Densha;around:4;startLevel:-2;orientation:1;width:37;length:29;signs:2,1,3,5,0,7,8,6,4;shop:japanesetownhall;max:0;tag:leasure;tag:playerth

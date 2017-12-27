@@ -1,1 +1,0 @@
-max:0;native:Tsukurizakaya;around:4;startLevel:-1;orientation:1;width:30;length:26;signs:3,1,2,0,5,7,8,6,4;shop:japanesetownhall;male:japanese_brewer;female:japanese_brewerwife;tag:Oven

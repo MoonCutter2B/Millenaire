@@ -1,1 +1,0 @@
-native:Maison bonus;around:4;startLevel:-1;orientation:3;width:8;length:11;isgift:true;priority:1000000;max:0;pathlevel:1

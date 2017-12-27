@@ -1,1 +1,0 @@
-native:Mokuzoukaoku;around:4;startLevel:-1;orientation:1;width:15;length:11;reputation:16*64;price:25*64;max:0;priority:100000
