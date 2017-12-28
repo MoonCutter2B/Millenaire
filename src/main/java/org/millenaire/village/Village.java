@@ -2,6 +2,8 @@ package org.millenaire.village;
 
 import java.util.UUID;
 
+import org.millenaire.VillageGeography;
+
 import net.minecraft.util.BlockPos;
 
 public class Village {
@@ -9,9 +11,12 @@ public class Village {
 	private UUID uuid;
 	private VillageBuilding[] buildings;
 	private BlockPos mainBlock;
+	private VillageGeography geo;
 	
 	private Village(BlockPos b) {
-		
+		this.setPos(b);
+		this.uuid = UUID.randomUUID();
+		this.geo = new VillageGeography();
 	}
 	
 	/**
