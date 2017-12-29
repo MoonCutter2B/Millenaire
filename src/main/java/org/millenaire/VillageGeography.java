@@ -129,9 +129,8 @@ public class VillageGeography
 		lastUpdatedX = 0;
 		lastUpdatedZ = 0;
 	}
-	
-	@Contract(pure = true)
-    public static boolean isForbiddenBlockForConstruction(final Block block)
+
+    private static boolean isForbiddenBlockForConstruction(final Block block)
 	{
 		return block == Blocks.water || block == Blocks.flowing_water || block == Blocks.ice || block == Blocks.flowing_lava || block == Blocks.lava || block == Blocks.planks || block == Blocks.cobblestone || block == Blocks.brick_block || block == Blocks.chest || block == Blocks.glass || block == Blocks.stonebrick || block == Blocks.prismarine
 				|| block instanceof BlockWall || block instanceof BlockFence || block == MillBlocks.blockDecorativeEarth || block == MillBlocks.blockDecorativeStone || block == MillBlocks.blockDecorativeWood || block == MillBlocks.byzantineTile || block == MillBlocks.byzantineTileSlab || block == MillBlocks.byzantineStoneTile || block == MillBlocks.paperWall || block == MillBlocks.emptySericulture;
