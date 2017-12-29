@@ -230,7 +230,6 @@ public class PlanIO {
 		for(int i = 0; i <= split.length -1; i++) {
 			String s = split[i];
 			String[] s1 = s.split(":");
-			System.out.println(s);
 			blocks[i] = Integer.parseInt(s1[0]);
 			data[i] = Integer.parseInt(s1[1]);
 		}

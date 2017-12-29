@@ -14,6 +14,7 @@ import org.millenaire.building.BuildingProject;
 import org.millenaire.building.BuildingTypes;
 import org.millenaire.building.BuildingTypes.BuildingType;
 import org.millenaire.building.PlanIO;
+import org.millenaire.util.ResourceLocationUtil;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -63,7 +64,7 @@ public class TileEntityVillageStone extends TileEntity
 					villageName = villageType.getVillageName();
 
 					for(BuildingProject proj : villageType.startingBuildings) {
-						PlanIO.loadSchematic(PlanIO.getBuildingTag(proj.ID, MillCulture.getCulture(culture), true), MillCulture.getCulture(culture), proj.lvl);
+						PlanIO.loadSchematic(PlanIO.getBuildingTag(ResourceLocationUtil.getRL(proj.ID).getResourcePath(), MillCulture.getCulture(culture), true), MillCulture.getCulture(culture), proj.lvl);
 					}
 
 					if(MillConfig.villageAnnouncement)

@@ -30,7 +30,7 @@ public class BuildingTypes {
 		
 		for(String building : buildings) {
 			ResourceLocation loc = new ResourceLocation(building);
-			InputStream file = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + culture.cultureName.toLowerCase() + "/buildings/" + loc.getResourcePath() + ".json");
+			InputStream file = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + loc.getResourceDomain() + "/buildings/" + loc.getResourcePath() + ".json");
 			BuildingType type = new Gson().fromJson(new InputStreamReader(file), BuildingType.class);
 			buildingCache.put(loc, type);
 		}

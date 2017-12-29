@@ -3,6 +3,7 @@
 .metadata
 bin/
 tmp/
+run/
 *.tmp
 *.bak
 *.swp
