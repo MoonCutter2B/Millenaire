@@ -21,8 +21,5 @@ public class ItemMillPath extends ItemBlock
         return ((BlockMillPath)this.block).getUnlocalizedName(stack.getMetadata());
     }
 	
-	public int getMetadata(int damage)
-    {
-        return damage;
-    }
+	public int getMetadata(int damage) { return damage; }
 }

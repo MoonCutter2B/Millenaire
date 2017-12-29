@@ -9,8 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import net.minecraftforge.fml.common.registry.GameData;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class PlayerTracker implements IExtendedEntityProperties
 {
@@ -26,7 +24,7 @@ public class PlayerTracker implements IExtendedEntityProperties
 	 * Used to register these extended properties for the player during EntityConstructing event
 	 * This method is for convenience only; it will make your code look nicer
 	 */
-	public static final void register(EntityPlayer player)
+	public static  void register(EntityPlayer player)
 	{
 		player.registerExtendedProperties(PlayerTracker.IDENTIFIER, new PlayerTracker(player));
 	}
@@ -35,7 +33,7 @@ public class PlayerTracker implements IExtendedEntityProperties
 	 * Returns ExtendedPlayer properties for player
 	 * This method is for convenience only; it will make your code look nicer
 	 */
-	public static final PlayerTracker get(EntityPlayer player)
+	public static PlayerTracker get(EntityPlayer player)
 	{
 		return (PlayerTracker) player.getExtendedProperties(IDENTIFIER);
 	}
@@ -73,7 +71,7 @@ public class PlayerTracker implements IExtendedEntityProperties
 	{
 	}
 	
-	public void setCanUseCrop(Item cropIn, boolean canUse) { playerCropKnowledge.put(cropIn, Boolean.valueOf(canUse)); }
+	public void setCanUseCrop(Item cropIn, boolean canUse) { playerCropKnowledge.put(cropIn, canUse); }
 
 	public boolean canPlayerUseCrop(Item cropIn) {
 		if(playerCropKnowledge.containsKey(cropIn)) {

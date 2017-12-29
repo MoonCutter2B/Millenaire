@@ -14,20 +14,20 @@ import net.minecraft.world.World;
 
 public class EntityAIGateOpen extends EntityAIBase
 {
-    protected EntityLiving theEntity;
-    protected BlockPos gatePosition = BlockPos.ORIGIN;
+    private EntityLiving theEntity;
+    private BlockPos gatePosition = BlockPos.ORIGIN;
     /** The gate block */
-    protected BlockFenceGate gateBlock;
+    private BlockFenceGate gateBlock;
     /** If is true then the Entity has stopped Gate Interaction and completed the task. */
-    boolean hasStoppedDoorInteraction;
-    float entityPositionX;
-    float entityPositionZ;
+    private boolean hasStoppedDoorInteraction;
+    private float entityPositionX;
+    private float entityPositionZ;
     
     /** If the entity close the gate */
-    boolean closeGate;
+    private boolean closeGate;
     
     /** The temporisation before the entity close the door (in ticks, always 20 = 1 second) */
-    int closeGateTemporisation;
+    private int closeGateTemporisation;
 
     public EntityAIGateOpen(EntityLiving entityIn, boolean shouldClose)
     {
@@ -155,9 +155,13 @@ public class EntityAIGateOpen extends EntityAIBase
     	}
     	
     	if(open)
-    		worldIn.setBlockState(pos, state.withProperty(BlockFenceGate.OPEN, true));
+    	{
+            worldIn.setBlockState(pos, state.withProperty(BlockFenceGate.OPEN, true));
+        }
     	
     	if(!open)
-    		worldIn.setBlockState(pos, state.withProperty(BlockFenceGate.OPEN, false));
+    	{
+            worldIn.setBlockState(pos, state.withProperty(BlockFenceGate.OPEN, false));
+        }
     }
 }

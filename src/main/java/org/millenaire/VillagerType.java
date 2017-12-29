@@ -22,7 +22,7 @@ public class VillagerType
 
 	private List<EntityAIBase>additionalTasks;
 
-	private VillagerType(String idIn, String nameIn, int genderIn, String[] familyIn, String[] firstIn, String[] textureIn, boolean chiefIn, boolean buildIn, int hireIn)
+	VillagerType(String idIn, String nameIn, int genderIn, String[] familyIn, String[] firstIn, String[] textureIn, boolean chiefIn, boolean buildIn, int hireIn)
 	{
 		id = idIn;
 		nativeName = nameIn;

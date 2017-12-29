@@ -9,7 +9,6 @@ import org.millenaire.blocks.StoredPosition;
 import org.millenaire.building.BuildingTypes;
 
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,10 +71,7 @@ public class MillCommand extends CommandBase
 		if(sender.getCommandSenderEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
 
-			if (FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().canSendCommands((player).getGameProfile()))
-			{
-				return true;
-			}
+			return FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().canSendCommands((player).getGameProfile());
 		}
 
 		return false;
@@ -84,7 +80,7 @@ public class MillCommand extends CommandBase
 	@Override
 	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) 
 	{
-		return getListOfStringsMatchingLastWord(args, new String[] {"village", "loneBuildings", "showBuildPoints"});
+		return getListOfStringsMatchingLastWord(args, "village", "loneBuildings", "showBuildPoints");
 	}
 
 	@Override

@@ -16,18 +16,12 @@ import net.minecraft.world.storage.MapStorage;
 public class VillageTracker extends WorldSavedData
 {
 	private final static String IDENTITY = "Millenaire.VillageInfo";
+
+	private Map<UUID, Village> villages = new HashMap<UUID, Village>();
 	
-	public Map<UUID, Village> villages = new HashMap<UUID, Village>();
+	public VillageTracker() { super(IDENTITY); }
 	
-	public VillageTracker()
-	{
-		super(IDENTITY);
-	}
-	
-	public VillageTracker(String id)
-	{
-		super(id);
-	}
+	private VillageTracker(String id) { super(id); }
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) 

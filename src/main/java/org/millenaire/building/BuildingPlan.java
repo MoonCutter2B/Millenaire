@@ -62,7 +62,7 @@ public class BuildingPlan
 	public int pathLevel = 0;
 	public int pathWidth = 2;
 	public boolean rebuildPath = false;
-	
+
 	public BuildingPlan(MillCulture cultureIn, int level)
 	{
 		
@@ -94,7 +94,7 @@ public class BuildingPlan
 		
 		//computeCost();
 	}
-	
+
 	public BuildingPlan setLengthWidth(int lenIn, int widIn)
 	{
 		this.length = lenIn;
@@ -113,7 +113,7 @@ public class BuildingPlan
 		
 		return this;
 	}
-	
+
 	public BuildingPlan setArea(int areaIn)
 	{
 		this.areaToClear = areaIn;
@@ -142,7 +142,7 @@ public class BuildingPlan
 		
 		return this;
 	}
-	
+
 	public BuildingPlan setNameAndType(String nameIn, String[] maleIn, String[] femaleIn)
 	{
 		this.nativeName = nameIn;
@@ -832,7 +832,7 @@ public class BuildingPlan
 					IBlockState state = buildingArray[ai][j][ak];
 
 					BlockPos p = adjustForOrientation(x, y + ai + depth, z, j - lengthOffset, ak - widthOffset, orientation);
-					for(IProperty prop : (java.util.Set<IProperty>)state.getProperties().keySet())
+					for(IProperty prop : state.getProperties().keySet())
 			        {
 			            if(prop.getName().equals("facing"))
 			            {
@@ -898,7 +898,7 @@ public class BuildingPlan
 					IBlockState state = buildingArray[ai][j][ak];
 
 					BlockPos p = adjustForOrientation(x, y + ai + depth, z, j - lengthOffset, ak - widthOffset, orientation);
-					for(IProperty prop : (java.util.Set<IProperty>)state.getProperties().keySet())
+					for(IProperty prop : state.getProperties().keySet())
 			        {
 			            if(prop.getName().equals("facing"))
 			            {
@@ -1003,8 +1003,8 @@ public class BuildingPlan
 		
 		return abblocks;
 	}
-	
-	public static BlockPos adjustForOrientation(final int x, final int y, final int z, final int xoffset, final int zoffset, final EnumFacing orientation) 
+
+	private static BlockPos adjustForOrientation(final int x, final int y, final int z, final int xoffset, final int zoffset, final EnumFacing orientation)
 	{
 		BlockPos pos = new BlockPos(x, y, z);
 		if (orientation == EnumFacing.SOUTH)
@@ -1061,7 +1061,7 @@ public class BuildingPlan
 	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
 	//Declarations
-		public static BuildingPlan normanCommunauteA0;
+	private static BuildingPlan normanCommunauteA0;
 		
 	public static void preinitialize()
 	{

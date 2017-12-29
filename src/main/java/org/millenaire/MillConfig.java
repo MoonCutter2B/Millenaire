@@ -206,7 +206,7 @@ public class MillConfig
         @SubscribeEvent(priority = EventPriority.NORMAL)
         public void onEvent(ConfigChangedEvent.OnConfigChangedEvent event)
         {
-            if(event.modID == Millenaire.MODID && !event.isWorldRunning)
+            if(event.modID.equals(Millenaire.MODID) && !event.isWorldRunning)
             {
                 syncFromGui();
                 System.out.println("Reloaded Config");

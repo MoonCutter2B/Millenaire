@@ -23,13 +23,13 @@ public class MillCulture
 {
 	public final String cultureName;
 	//Entry 0 is male child, entry 1 is female child
-	VillagerType[] villagerTypes;
-	VillageType[] villageTypes;
-	BuildingPlan[] loneBuildings;
-	String[] vocalizations;
-	HashMap<String, String[]> nameLists = new HashMap<String, String[]>();
-	
-	public MillCulture(String nameIn)
+	private VillagerType[] villagerTypes;
+	private VillageType[] villageTypes;
+	private BuildingPlan[] loneBuildings;
+	private String[] vocalizations;
+	private HashMap<String, String[]> nameLists = new HashMap<String, String[]>();
+
+	private MillCulture(String nameIn)
 	{
 		cultureName = nameIn;
 	}

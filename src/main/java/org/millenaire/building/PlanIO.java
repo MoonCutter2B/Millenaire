@@ -276,9 +276,12 @@ public class PlanIO {
 		else {
 			try {
 				File f1 = getBuildingFile(name);
-				if(!f1.exists()) 
+				if(!f1.exists())
+				{
 					return new NBTTagCompound();
-				else {
+				}
+				else
+				{
 					FileInputStream fis = new FileInputStream(f1);
 					return CompressedStreamTools.readCompressed(fis);
 				}
@@ -288,14 +291,14 @@ public class PlanIO {
 				return new NBTTagCompound();
 			}
 		}
-
-
 	}
 
-	public static File getBuildingFile(final String name) {
+	private static File getBuildingFile(final String name) {
 		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + File.separator + "millenaire" + File.separator + "exports" + File.separator);
 		if(!f.exists())
+		{
 			f.mkdirs();
+		}
 
 		File f1 = new File(f, name + ".mlplan");
 		return f1;
@@ -329,7 +332,7 @@ public class PlanIO {
 	 * @return the file that is outputted to disk
 	 * @throws Exception 
 	 */
-	public static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, EntityPlayer player) throws Exception {
+	private static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, EntityPlayer player) throws Exception {
 		File f1 = getBuildingFile(name);
 
 		NBTTagCompound tag = getBuildingTag(name, null, false);

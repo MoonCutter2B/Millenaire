@@ -87,7 +87,6 @@ public class TileEntityVillageStone extends TileEntity
 				{
 					System.err.println("Something went catastrophically wrong creating this village");
 					ex.printStackTrace();
-					return;
 				}
 			}
 			else
@@ -107,7 +106,7 @@ public class TileEntityVillageStone extends TileEntity
 		if(villagerID == 0)
 		{
 			int balance = 0;
-			villagerID = CommonUtilities.getRandomNonzero();
+			villagerID = (int)CommonUtilities.getRandomNonzero();
 			boolean checkAgain = false;
 
 			for(int i = 0; i < currentVillagers.size(); i++)
@@ -119,7 +118,7 @@ public class TileEntityVillageStone extends TileEntity
 
 				if(villagerID == currentVillagers.get(i).villagerID)
 				{
-					villagerID = CommonUtilities.getRandomNonzero();
+					villagerID = (int)CommonUtilities.getRandomNonzero();
 					checkAgain = true;
 				}
 			}
@@ -130,7 +129,7 @@ public class TileEntityVillageStone extends TileEntity
 				{
 					if(villagerID == currentVillagers.get(i).villagerID)
 					{
-						villagerID = CommonUtilities.getRandomNonzero();
+						villagerID = (int)CommonUtilities.getRandomNonzero();
 						checkAgain = true;
 					}
 				}
