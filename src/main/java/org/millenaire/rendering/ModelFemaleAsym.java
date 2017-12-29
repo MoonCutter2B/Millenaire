@@ -13,15 +13,9 @@ public class ModelFemaleAsym extends ModelBiped
 	public boolean heldItemLeft;
 	public boolean heldItemRight;
 
-	public ModelFemaleAsym() 
-	{
-		this(0.0F);
-	}
+	public ModelFemaleAsym() { this(0.0F); }
 
-	public ModelFemaleAsym(final float f) 
-	{
-		this(f, 0.0F);
-	}
+	public ModelFemaleAsym(final float f) { this(f, 0.0F); }
 
 	public ModelFemaleAsym(final float f, final float f1) 
 	{

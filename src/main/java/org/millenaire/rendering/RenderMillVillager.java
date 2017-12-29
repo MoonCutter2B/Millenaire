@@ -19,10 +19,10 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 public class RenderMillVillager extends RenderBiped<EntityMillVillager>
 {
-	protected ResourceLocation villagerTexture;
+	private ResourceLocation villagerTexture;
 	
 	protected String name = "Suzy Carmichael";
-	protected String quest = null;
+	private String quest = null;
 	
 	public RenderMillVillager(RenderManager rendermanagerIn, ModelBiped modelbaseIn, float shadowsizeIn) 
 	{
@@ -32,10 +32,7 @@ public class RenderMillVillager extends RenderBiped<EntityMillVillager>
 	}
 	
 	@Override
-	protected boolean canRenderName(EntityMillVillager entity)
-    {
-        return true;
-    }
+	protected boolean canRenderName(EntityMillVillager entity) { return true; }
 	
 	@Override
     protected void preRenderCallback(EntityMillVillager entity, float f)
@@ -66,10 +63,7 @@ public class RenderMillVillager extends RenderBiped<EntityMillVillager>
     }
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityMillVillager entity) 
-	{
-		return villagerTexture;
-	}
+	protected ResourceLocation getEntityTexture(EntityMillVillager entity) { return villagerTexture; }
 	
 	@Override
 	protected void rotateCorpse(EntityMillVillager entityIn, float par2, float par3, float partialTicks) 
@@ -140,12 +134,10 @@ public class RenderMillVillager extends RenderBiped<EntityMillVillager>
 	
 	public static class millVillagerRenderFactory implements IRenderFactory
 	{
-
 		@Override
 		public Render createRenderFor(RenderManager manager) 
 		{
 			return new RenderMillVillager(manager, new ModelBiped(), 0.5F);
 		}
-		
 	}
 }

@@ -14,18 +14,12 @@ public class JsonHelper {
 			
 		}
 		
-		public VillageTypes(VillageType[] types) {
-			this.types = types;
-		}
+		public VillageTypes(VillageType[] types) { this.types = types; }
 		
 		public MillCulture.VillageType[] types;
 		
-		public void setTypes(VillageType[] types) {
-			this.types = types;
-		}
+		public void setTypes(VillageType[] types) { this.types = types; }
 		
-		public MillCulture.VillageType[] getTypes() {
-			return types;
-		}
+		public MillCulture.VillageType[] getTypes() { return types; }
 	}
 }
