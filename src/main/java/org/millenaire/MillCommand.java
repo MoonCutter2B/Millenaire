@@ -20,35 +20,21 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 public class MillCommand extends CommandBase
 {
 	@Override
-	public int compareTo(ICommand arg0) 
-	{
-		return 0;
-	}
+	public int compareTo(ICommand arg0) { return 0; }
 
 	@Override
-	public String getCommandName() 
-	{
-		return "mill";
-	}
+	public String getCommandName() { return "mill"; }
 
 	@Override
-	public String getCommandUsage(ICommandSender sender) 
-	{
-		return "mill <villages, loneBuildings, showBuildPoints>";
-	}
+	public String getCommandUsage(ICommandSender sender) { return "mill <villages, loneBuildings, showBuildPoints>"; }
 
 	@Override
-	public List<String> getCommandAliases() 
-	{
-		List<String> output = new ArrayList<String>();
-		output.add("mill");
-		return output;
-	}
+	public List<String> getCommandAliases() { return new ArrayList<String>() {{ add("mill"); }}; }
 
 	@Override
-	public void processCommand(ICommandSender sender, String[] args) throws CommandException 
+	public void processCommand(ICommandSender sender, String[] args)
 	{
-		if(args.length == 0 || args.length > 1)
+		if(args.length != 1)
 		{
 			sender.addChatMessage(new ChatComponentText("invalid argument: use villages, loneBuildings, or showBuildPoints"));
 			return;
@@ -70,26 +56,29 @@ public class MillCommand extends CommandBase
 		else if(args[0].equalsIgnoreCase("showBuildPoints"))
 		{
 			if(((StoredPosition)MillBlocks.storedPosition).getShowParticles())
-				((StoredPosition)MillBlocks.storedPosition).setShowParticles(false);
+			{
+				((StoredPosition) MillBlocks.storedPosition).setShowParticles(false);
+			}
 			else
-				((StoredPosition)MillBlocks.storedPosition).setShowParticles(true);
+			{
+				((StoredPosition) MillBlocks.storedPosition).setShowParticles(true);
+			}
 		}
 	}
 
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender sender) 
 	{
-		if(sender == null || !(sender.getCommandSenderEntity() instanceof EntityPlayer))
-			return false;
-		else 
-		{
-			EntityPlayer player = (EntityPlayer)sender.getCommandSenderEntity();
-			
-			if(FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().canSendCommands((player).getGameProfile()))
+		if(sender.getCommandSenderEntity() instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
+
+			if (FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().canSendCommands((player).getGameProfile()))
+			{
 				return true;
-			else
-				return false;
+			}
 		}
+
+		return false;
 	}
 
 	@Override
@@ -101,8 +90,6 @@ public class MillCommand extends CommandBase
 	@Override
 	public boolean isUsernameIndex(String[] args, int index) 
 	{
-		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

@@ -14,12 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Contract;
 
 public class BlockDecorativeWood extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeWood.EnumType.class);
 	
-	public BlockDecorativeWood() 
+	protected BlockDecorativeWood()
 	{
 		super(Material.wood);
 	}
@@ -30,10 +31,7 @@ public class BlockDecorativeWood extends Block
         return ((BlockDecorativeWood.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -70,14 +68,11 @@ public class BlockDecorativeWood extends Block
     }
 
     @Override
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {VARIANT});
-    }
+    protected BlockState createBlockState() { return new BlockState(this, new IProperty[] {VARIANT}); }
 
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static enum EnumType implements IStringSerializable
+    public enum EnumType implements IStringSerializable
     {
         PLAINTIMBERFRAME(0, "plainTimberFrame"),
         CROSSTIMBERFRAME(1, "crossTimberFrame"),
@@ -88,22 +83,19 @@ public class BlockDecorativeWood extends Block
         private final int meta;
         private final String name;
 
-        private EnumType(int meta, String name)
+        EnumType(int meta, String name)
         {
             this.meta = meta;
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        @Contract(pure = true)
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String toString() { return this.name; }
 
+        @Contract(pure = true)
         public static BlockDecorativeWood.EnumType byMetadata(int meta)
         {
             if (meta < 0 || meta >= META_LOOKUP.length)
@@ -114,15 +106,11 @@ public class BlockDecorativeWood extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {

@@ -2,6 +2,7 @@ package org.millenaire.blocks;
 
 import java.util.Random;
 
+import org.jetbrains.annotations.Contract;
 import org.millenaire.Millenaire;
 
 import net.minecraft.block.Block;
@@ -24,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class StoredPosition extends Block
 {
-	public StoredPosition() 
+	private StoredPosition()
 	{
 		super(Material.barrier);
         this.disableStats();
@@ -32,32 +33,20 @@ public class StoredPosition extends Block
 	}
 	
 	@Override
-    public int getRenderType()
-    {
-        return -1;
-    }
+    public int getRenderType() { return -1; }
 
     @Override
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
+    public boolean isOpaqueCube() { return false; }
     
     @Override
-    public boolean isFullCube()
-    {
-        return false;
-    }
+    public boolean isFullCube() { return false; }
     
     @SideOnly(Side.CLIENT)
-    public float getAmbientOcclusionLightValue()
-    {
-        return 1.0F;
-    }
+    public float getAmbientOcclusionLightValue() { return 1.0F; }
 
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", StoredPosition.EnumType.class);
 	private boolean showParticles = false;
-	
+
 	private final int sourceColor = 44820;
 	private final int tradeColor = 9983;
 	private final int pathColor = 16766976;
@@ -71,7 +60,7 @@ public class StoredPosition extends Block
 		if(showParticles)
 		{
 			int color = 16777215;
-			
+
 			if(state.getValue(VARIANT) == EnumType.TRADEPOS)
 				color = tradeColor;
 			else if(state.getValue(VARIANT) == EnumType.SOURCEPOS)
@@ -87,7 +76,7 @@ public class StoredPosition extends Block
 			
 			double d0 = (double)(color >> 16 & 255) / 255.0D;
             double d1 = (double)(color >> 8 & 255) / 255.0D;
-            double d2 = (double)(color >> 0 & 255) / 255.0D;
+            double d2 = (double)(color & 255) / 255.0D;
 			worldIn.spawnParticle(EnumParticleTypes.SPELL_MOB, pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, d0, d1, d2, new int[0]);
 		}
 	}
@@ -113,20 +102,11 @@ public class StoredPosition extends Block
 			return null;
     }
 	
-	public void setShowParticles(boolean bool)
-	{
-		showParticles = bool;
-	}
+	public void setShowParticles(boolean bool) { showParticles = bool; }
 	
-	public boolean getShowParticles()
-	{
-		return showParticles;
-	}
+	public boolean getShowParticles() { return showParticles; }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	/*@Override
 	@SideOnly(Side.CLIENT)
@@ -163,10 +143,7 @@ public class StoredPosition extends Block
     }
 
     @Override
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {VARIANT});
-    }
+    protected BlockState createBlockState() { return new BlockState(this, new IProperty[] {VARIANT}); }
 	
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -183,22 +160,19 @@ public class StoredPosition extends Block
         private final int meta;
         private final String name;
 
-        private EnumType(int meta, String name)
+        EnumType(int meta, String name)
         {
             this.meta = meta;
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        @Contract(pure = true)
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String toString() { return this.name; }
 
+        @Contract(pure = true)
         public static StoredPosition.EnumType byMetadata(int meta)
         {
             if (meta < 0 || meta >= META_LOOKUP.length)
@@ -209,15 +183,11 @@ public class StoredPosition extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {

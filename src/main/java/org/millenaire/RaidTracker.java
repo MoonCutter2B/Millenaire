@@ -8,10 +8,7 @@ public class RaidTracker extends WorldSavedData
 {
 	private final static String IDENTITY = "Millenaire.RaidInfo";
 	
-	public RaidTracker()
-	{
-		super(IDENTITY);
-	}
+	private RaidTracker() { super(IDENTITY); }
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) 

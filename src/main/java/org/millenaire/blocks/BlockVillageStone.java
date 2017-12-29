@@ -2,32 +2,23 @@ package org.millenaire.blocks;
 
 import java.util.Random;
 
-import org.millenaire.Millenaire;
 import org.millenaire.entities.TileEntityVillageStone;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockVillageStone extends BlockContainer
 {
 
-	protected BlockVillageStone() 
+	protected BlockVillageStone()
 	{
 		super(Material.rock);
 		
@@ -36,28 +27,28 @@ public class BlockVillageStone extends BlockContainer
 	}
 	
 	@Override
-    public int getRenderType()
-    {
-        return 3;
-    }
+    public int getRenderType() { return 3; }
 	
 	@Override
-    public int quantityDropped(Random random)
-    {
-        return 0;
-    }
+    public int quantityDropped(Random random) { return 0; }
 	
 	@Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
     {
 		if(worldIn.isRemote)
-				playerIn.addChatMessage(new ChatComponentText("�8The Village name almost seems to shimmer in the twilight"));
+		{
+			playerIn.addChatMessage(new ChatComponentText("�8The Village name almost seems to shimmer in the twilight"));
+		}
 		
 		TileEntityVillageStone te = (TileEntityVillageStone) worldIn.getTileEntity(pos);
 		if(te.testVar < 16)
-			te.testVar ++;
+		{
+			te.testVar++;
+		}
 		else
+		{
 			te.testVar = 0;
+		}
 
         return false;
     }
@@ -98,7 +89,6 @@ public class BlockVillageStone extends BlockContainer
 		else
 		{
 			System.err.println("Negation failed.  TileEntity not loaded correctly.");
-			return;
 		}
 	}
 

@@ -1,34 +1,25 @@
 package org.millenaire.blocks;
 
-import org.millenaire.Millenaire;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAlchemists extends Block
 {
 	private static final int EXPLOSIONRADIUS = 32;
 
-	public BlockAlchemists() 
+	protected BlockAlchemists()
 	{
 		super(Material.rock);
 		
 		//this.setResistance(6000000.0F);
 	}
 
-	public void alchemistExplosion(final World world, final int i, final int j, final int k) 
+	private void alchemistExplosion(final World world, final int i, final int j, final int k)
 	{
 		world.setBlockToAir(new BlockPos(i, j, k));
 		world.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, i + 0.5D, j + 0.5D, k+ 0.5D, 0.0D, 0.0D, 0.0D, new int[0]);

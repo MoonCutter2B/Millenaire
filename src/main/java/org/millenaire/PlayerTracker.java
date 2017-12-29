@@ -20,10 +20,7 @@ public class PlayerTracker implements IExtendedEntityProperties
 	
 	private Map<Item, Boolean> playerCropKnowledge = new HashMap<Item, Boolean>();
 	
-	public PlayerTracker(EntityPlayer player)
-	{
-		this.player = player;
-	}
+	public PlayerTracker(EntityPlayer player) { this.player = player; }
 
 	/**
 	 * Used to register these extended properties for the player during EntityConstructing event
@@ -48,9 +45,11 @@ public class PlayerTracker implements IExtendedEntityProperties
 	{
 		NBTTagCompound properties = new NBTTagCompound();
 		NBTTagCompound cropKnowledge = new NBTTagCompound();
+
 		for(Item i : playerCropKnowledge.keySet()) {
 			cropKnowledge.setBoolean(Item.itemRegistry.getNameForObject(i).toString(), playerCropKnowledge.get(i));
 		}
+
 		properties.setTag("cropKnowledge", cropKnowledge);
 		compound.setTag(IDENTIFIER, properties);
 	}
@@ -74,16 +73,13 @@ public class PlayerTracker implements IExtendedEntityProperties
 	{
 	}
 	
-	public void setCanUseCrop(Item cropIn, boolean canUse) {
-		playerCropKnowledge.put(cropIn, Boolean.valueOf(canUse));
-	}
+	public void setCanUseCrop(Item cropIn, boolean canUse) { playerCropKnowledge.put(cropIn, Boolean.valueOf(canUse)); }
 
 	public boolean canPlayerUseCrop(Item cropIn) {
 		if(playerCropKnowledge.containsKey(cropIn)) {
 			return playerCropKnowledge.get(cropIn);
 		}
-		else {
-			return false;
-		}
+
+        return false;
 	}
 }

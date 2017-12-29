@@ -39,7 +39,7 @@ public class VillageTracker extends WorldSavedData
 			}
 		}
 	}
-	
+
 	private Village readVillageFromCompound(NBTTagCompound nbt) {
 		Village vil = new Village();
 		vil.setPos(BlockPos.fromLong(nbt.getLong("pos")));
@@ -59,13 +59,9 @@ public class VillageTracker extends WorldSavedData
 		}
 	}
 	
-	public void registerVillage(UUID id, Village vil) {
-		villages.put(id, vil);
-	}
+	public void registerVillage(UUID id, Village vil) { villages.put(id, vil); }
 	
-	public void unregisterVillage(UUID id) {
-		villages.remove(id);
-	}
+	public void unregisterVillage(UUID id) { villages.remove(id); }
 	
 	public static VillageTracker get(World world)
 	{
