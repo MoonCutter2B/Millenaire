@@ -1,13 +1,6 @@
 package org.millenaire.gui;
 
 import org.millenaire.Millenaire;
-import org.millenaire.blocks.BlockMillCrops;
-import org.millenaire.items.ItemMillAmulet;
-import org.millenaire.items.ItemMillArmor;
-import org.millenaire.items.ItemMillFood;
-import org.millenaire.items.ItemMillParchment;
-import org.millenaire.items.ItemMillTool;
-import org.millenaire.items.ItemMillWand;
 import org.millenaire.items.MillItems;
 
 import net.minecraft.block.Block;
@@ -26,13 +19,13 @@ public class MillAchievement extends Achievement
     {
 		super(SETID + nameIn, nameIn, column, row, iconIn, parentIn);
     }
-	
-	public MillAchievement(String nameIn, int column, int row, Item iconIn, Achievement parentIn)
+
+	private MillAchievement(String nameIn, int column, int row, Item iconIn, Achievement parentIn)
     {
 		super(SETID + nameIn, nameIn, column, row, new ItemStack(iconIn), parentIn);
     }
-	
-	public MillAchievement(String nameIn, int column, int row, Block iconIn, Achievement parentIn)
+
+	private MillAchievement(String nameIn, int column, int row, Block iconIn, Achievement parentIn)
     {
 		super(SETID + nameIn, nameIn, column, row, new ItemStack(iconIn), parentIn);
     }

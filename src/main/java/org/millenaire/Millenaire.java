@@ -2,6 +2,7 @@ package org.millenaire;
 
 import java.util.List;
 
+import org.jetbrains.annotations.Contract;
 import org.millenaire.blocks.BlockAlchemists;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
@@ -54,7 +55,7 @@ public class Millenaire
 	public static final String NAME = "Mill\u00e9naire";
 	public static final String VERSION = "7.0.0";
 	public static final String GUIFACTORY = "org.millenaire.gui.MillGuiFactory";
-	
+
 	public static boolean isServer = true;
 	
 	public List<Block> forbiddenBlocks;
@@ -65,10 +66,8 @@ public class Millenaire
 	
 	public static final CreativeTabs tabMillenaire = new CreativeTabs("MillTab")
 	{
-		public Item getTabIconItem() 
-		{
-			return MillItems.denierOr;
-		}
+		@Contract(pure = true)
+		public Item getTabIconItem() { return MillItems.denierOr; }
 	};
 	
 	@EventHandler
@@ -141,8 +140,5 @@ public class Millenaire
 	}
 	
 	@EventHandler
-	public void serverLoad(FMLServerStartingEvent event)
-	{
-		event.registerServerCommand(new MillCommand());
-	}
+	public void serverLoad(FMLServerStartingEvent event) { event.registerServerCommand(new MillCommand()); }
 }

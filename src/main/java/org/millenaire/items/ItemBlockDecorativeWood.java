@@ -21,8 +21,5 @@ public class ItemBlockDecorativeWood extends ItemBlock
         return ((BlockDecorativeWood)this.block).getUnlocalizedName(stack.getMetadata());
     }
 	
-	public int getMetadata(int damage)
-    {
-        return damage;
-    }
+	public int getMetadata(int damage) { return damage; }
 }

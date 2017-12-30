@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.millenaire.VillageGeography;
 
 import net.minecraft.util.BlockPos;
+import org.jetbrains.annotations.NotNull;
 
 public class Village {
 
@@ -23,25 +24,20 @@ public class Village {
 	 * FOR USE BY VILLAGE TRACKER ONLY
 	 */
 	@Deprecated()
-	public Village() {}
+	public Village() {
+
+	}
 	
 	/**
 	 * FOR USE BY VILLAGE TRACKER ONLY
 	 */
 	@Deprecated
-	public void setPos(BlockPos pos) {
-		mainBlock = pos;
-	}
+	public void setPos(BlockPos pos) { mainBlock = pos; }
 
-	public UUID getUUID() {
-		return uuid;
-	}
+	public UUID getUUID() { return uuid; }
 	
-	public BlockPos getPos() {
-		return mainBlock;
-	}
+	public BlockPos getPos() { return mainBlock; }
 	
-	public static Village createVillage(BlockPos VSPos) {
-		return new Village(VSPos);
-	}
+	@NotNull
+	public static Village createVillage(BlockPos VSPos) { return new Village(VSPos); }
 }

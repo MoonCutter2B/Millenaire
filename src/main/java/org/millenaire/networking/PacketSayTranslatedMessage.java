@@ -16,9 +16,7 @@ public class PacketSayTranslatedMessage implements IMessage {
 		
 	}
 	
-	public PacketSayTranslatedMessage(String message) {
-		this.message = message;
-	}
+	public PacketSayTranslatedMessage(String message) { this.message = message; }
 	
 	@Override
 	public void fromBytes(ByteBuf buf) {

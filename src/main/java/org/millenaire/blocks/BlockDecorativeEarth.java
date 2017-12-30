@@ -14,15 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Contract;
 
 public class BlockDecorativeEarth extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeEarth.EnumType.class);
-	
-	public BlockDecorativeEarth() 
-	{
-		super(Material.ground);
-	}
+
+    protected BlockDecorativeEarth() { super(Material.ground); }
 	
 	@Override
     public int damageDropped(IBlockState state)
@@ -30,10 +28,7 @@ public class BlockDecorativeEarth extends Block
         return ((BlockDecorativeEarth.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -86,22 +81,19 @@ public class BlockDecorativeEarth extends Block
         private final int meta;
         private final String name;
 
-        private EnumType(int meta, String name)
+        EnumType(int meta, String name)
         {
             this.meta = meta;
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        @Contract(pure = true)
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String toString() { return this.name; }
 
+        @Contract(pure = true)
         public static BlockDecorativeEarth.EnumType byMetadata(int meta)
         {
             if (meta < 0 || meta >= META_LOOKUP.length)
@@ -112,15 +104,11 @@ public class BlockDecorativeEarth extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {

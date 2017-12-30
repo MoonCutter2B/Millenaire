@@ -1,7 +1,5 @@
 package org.millenaire.building;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -9,14 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.Contract;
 import org.millenaire.MillCulture;
 import org.millenaire.util.ItemRateWrapper;
 import org.millenaire.util.ResourceLocationUtil;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 
 public class BuildingTypes {
@@ -36,28 +33,23 @@ public class BuildingTypes {
 		}
 	}
 	
-	public static BuildingType getTypeByID(ResourceLocation rl) {
-		return buildingCache.get(rl);
-	}
+	public static BuildingType getTypeByID(ResourceLocation rl) { return buildingCache.get(rl); }
 	
 	public static BuildingType getTypeFromProject(BuildingProject proj) {
 		return buildingCache.get(ResourceLocationUtil.getRL(proj.ID));
 	}
 	
-	public static Map<ResourceLocation, BuildingType> getCache() {
-		return buildingCache;
-	}
+	@Contract(pure = true)
+	public static Map<ResourceLocation, BuildingType> getCache() { return buildingCache; }
 	
 	public static class BuildingType {
 		
-		protected String identifier;
+		private String identifier;
 		protected List<ItemRateWrapper> itemrates = new ArrayList<ItemRateWrapper>();
 		
 		public BuildingType() {}
 		
-		public BuildingType(ResourceLocation cultureandname) {
-			identifier = ResourceLocationUtil.getString(cultureandname);
-		}
+		public BuildingType(ResourceLocation cultureandname) { identifier = ResourceLocationUtil.getString(cultureandname); }
 		
 		public BuildingPlan loadBuilding() {
 			ResourceLocation s = ResourceLocationUtil.getRL(identifier);

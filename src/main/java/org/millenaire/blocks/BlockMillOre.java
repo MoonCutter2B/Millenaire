@@ -1,34 +1,22 @@
 package org.millenaire.blocks;
 
-import java.util.List;
 import java.util.Random;
 
+import org.jetbrains.annotations.Contract;
 import org.millenaire.Millenaire;
 import org.millenaire.items.MillItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMillOre extends Block {
 
 	private EnumMillOre oreType;
 	
-	public BlockMillOre(EnumMillOre oretype) {
+	protected BlockMillOre(EnumMillOre oretype) {
 		super(Material.rock);
 		this.oreType = oretype;
 		this.setCreativeTab(Millenaire.tabMillenaire);
@@ -36,14 +24,10 @@ public class BlockMillOre extends Block {
 	}
 	
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return oreType.itemDropped;
-	}
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) { return oreType.itemDropped; }
 	
 	@Override
-	public int quantityDropped(Random rand) {
-		return 2;
-	}
+	public int quantityDropped(Random rand) { return 2; }
     
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
@@ -66,16 +50,13 @@ public class BlockMillOre extends Block {
 			this.itemDropped = item;
 		}
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        @Contract(pure = true)
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String toString() { return this.name; }
 
+        @Contract(pure = true)
         public static EnumMillOre byMetadata(int meta)
         {
             if (meta < 0 || meta >= META_LOOKUP.length)
@@ -86,15 +67,11 @@ public class BlockMillOre extends Block {
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        @Contract(pure = true)
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {

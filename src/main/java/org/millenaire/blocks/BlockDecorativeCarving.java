@@ -2,8 +2,6 @@ package org.millenaire.blocks;
 
 import org.millenaire.Millenaire;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
@@ -12,15 +10,13 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockDecorativeCarving extends BlockDecorativeOriented {
 
-	public BlockDecorativeCarving(Material materialIn) {
+	protected BlockDecorativeCarving(Material materialIn) {
 		super(materialIn);
 		this.setCreativeTab(Millenaire.tabMillenaire);
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
+	public boolean isOpaqueCube() { return false; }
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)

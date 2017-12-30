@@ -52,7 +52,10 @@ public class CommonUtilities
 		
 		or.stackSize = or.stackSize + (argent.stackSize / 64);
 		if(or.stackSize >= 1)
+		{
 			playerIn.addStat(MillAchievement.cresus, 1);
+		}
+
 		argent.stackSize = argent.stackSize % 64;
 		
 		playerIn.inventory.addItemStackToInventory(denier);
@@ -62,7 +65,8 @@ public class CommonUtilities
 		{
 			playerIn.inventory.addItemStackToInventory(new ItemStack(MillItems.denierOr, 64, 0));
 			or.stackSize = or.stackSize - 64;
-		}		
+		}
+
 		playerIn.inventory.addItemStackToInventory(or);
 	}
 	
@@ -70,26 +74,13 @@ public class CommonUtilities
 	 * yep
 	 * @return A random non-zero integer
 	 */
-	public static int getRandomNonzero()
-	{
-		int results;
-		do
-			results = random.nextInt();
-		while(results == 0);
-		
-		return results;
-	}
+	public static float getRandomNonzero() { return random.nextFloat()+0.1f; }
 	
 	/**
 	 * gets a random Millager Gender
 	 * @return
 	 */
-	public static int randomizeGender()
-	{
-		int results = random.nextInt(3) - 2;
-		
-		return results;
-	}
+	public static int randomizeGender() { return random.nextInt(3) - 2; }
 	
 	/**
 	 * yep
@@ -99,25 +90,26 @@ public class CommonUtilities
 	 */
 	public static Block getValidGroundBlock(final Block b, final boolean surface) 
 	{
-		if (b == Blocks.bedrock) {
-			return Blocks.dirt;
-		} else if (b == Blocks.stone && surface) {
-			return Blocks.dirt;
-		} else if (b == Blocks.stone && !surface) {
-			return Blocks.stone;
-		} else if (b == Blocks.dirt) {
-			return Blocks.dirt;
-		} else if (b == Blocks.grass) {
-			return Blocks.dirt;
-		} else if (b == Blocks.gravel) {
-			return Blocks.gravel;
-		} else if (b == Blocks.sand) {
-			return Blocks.sand;
-		} else if (b == Blocks.sandstone && surface) {
-			return Blocks.sand;
-		} else if (b == Blocks.sandstone && !surface) {
-			return Blocks.sandstone;
-		}
+		if (b == Blocks.bedrock || b == Blocks.dirt ||
+			b == Blocks.grass) {
+            return Blocks.dirt;
+		} else if (b == Blocks.stone) {
+		    if (surface) {
+                return Blocks.dirt;
+            } else {
+                return Blocks.grass;
+            }
+        } else if (b == Blocks.gravel) {
+		    return Blocks.gravel;
+        } else if (b == Blocks.sand) {
+		    return Blocks.sand;
+        } else if (b == Blocks.sandstone) {
+		    if (surface) {
+                return Blocks.sand;
+            } else {
+                return Blocks.sandstone;
+            }
+        }
 
 		return null;
 	}

@@ -23,28 +23,16 @@ public class MillGuiFactory implements IModGuiFactory
 {
 
 	@Override
-	public void initialize(Minecraft minecraftInstance) 
-	{
-		System.out.println("GuiFactory Loaded");
-	}
+	public void initialize(Minecraft minecraftInstance) { System.out.println("GuiFactory Loaded"); }
 
 	@Override
-	public Class<? extends GuiScreen> mainConfigGuiClass() 
-	{
-		return MillConfigGui.class;
-	}
+	public Class<? extends GuiScreen> mainConfigGuiClass() { return MillConfigGui.class; }
 
 	@Override
-	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() 
-	{
-		return null;
-	}
+	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() { return null; }
 
 	@Override
-	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) 
-	{
-		return null;
-	}
+	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) { return null; }
 
 	public static class MillConfigGui extends GuiConfig
 	{

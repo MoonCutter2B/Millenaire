@@ -23,14 +23,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockMillPathSlab extends BlockSlab
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockMillPath.EnumType.class);
-	public static final PropertyBool SEAMLESS = PropertyBool.create("seamless");
+	private static final PropertyBool SEAMLESS = PropertyBool.create("seamless");
 
-	public BlockMillPathSlab() 
+	protected BlockMillPathSlab()
 	{
 		super(Material.ground);
 
 		if(this.isDouble())
-        	this.setDefaultState(this.blockState.getBaseState().withProperty(SEAMLESS, Boolean.valueOf(true)));
+        	this.setDefaultState(this.blockState.getBaseState().withProperty(SEAMLESS, true));
         else
         	this.setDefaultState(this.blockState.getBaseState().withProperty(HALF, BlockSlab.EnumBlockHalf.BOTTOM));
 		
@@ -38,10 +38,7 @@ public class BlockMillPathSlab extends BlockSlab
 	}
 	
 	@Override
-	public boolean isDouble() 
-	{
-		return false;
-	}
+	public boolean isDouble() { return false; }
 
 	@Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
@@ -50,28 +47,21 @@ public class BlockMillPathSlab extends BlockSlab
     }
 
     @SideOnly(Side.CLIENT)
-    public Item getItem(World worldIn, BlockPos pos)
-    {
-        return Item.getItemFromBlock(MillBlocks.blockMillPathSlab);
-    }
+    public Item getItem(World worldIn, BlockPos pos) { return Item.getItemFromBlock(MillBlocks.blockMillPathSlab); }
     
 	@Override
-    public boolean isFullCube()
-    {
-        return false;
-    }
+    public boolean isFullCube() { return false; }
 	
 	@Override
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
+    public boolean isOpaqueCube() { return false; }
 	
     @Override
     public boolean doesSideBlockRendering(IBlockAccess world, BlockPos pos, EnumFacing face)
 	{
-        if ( this.isDouble() )
+        if (this.isDouble())
+        {
             return false;
+        }
         
         // face is on the block being rendered, not this block.
         EnumBlockHalf side = world.getBlockState(pos).getValue(HALF);
@@ -109,10 +99,7 @@ public class BlockMillPathSlab extends BlockSlab
     }
     
 	@Override
-    public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+    public IProperty getVariantProperty() { return VARIANT; }
 
     @Override
     public Object getVariant(ItemStack stack)
@@ -143,7 +130,7 @@ public class BlockMillPathSlab extends BlockSlab
 
         if (this.isDouble())
         {
-            iblockstate = iblockstate.withProperty(SEAMLESS, Boolean.valueOf((meta & 8) != 0));
+            iblockstate = iblockstate.withProperty(SEAMLESS, (meta & 8) != 0);
         }
         else
         {
@@ -161,7 +148,7 @@ public class BlockMillPathSlab extends BlockSlab
 
         if (this.isDouble())
         {
-            if (((Boolean)state.getValue(SEAMLESS)).booleanValue())
+            if (state.getValue(SEAMLESS))
             {
                 i |= 8;
             }

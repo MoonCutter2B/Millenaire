@@ -23,24 +23,24 @@ public class MillCulture
 {
 	public final String cultureName;
 	//Entry 0 is male child, entry 1 is female child
-	VillagerType[] villagerTypes;
-	VillageType[] villageTypes;
-	BuildingPlan[] loneBuildings;
-	String[] vocalizations;
-	HashMap<String, String[]> nameLists = new HashMap<String, String[]>();
-	
-	public MillCulture(String nameIn)
+	private VillagerType[] villagerTypes;
+	private VillageType[] villageTypes;
+	private BuildingPlan[] loneBuildings;
+	private String[] vocalizations;
+	private HashMap<String, String[]> nameLists = new HashMap<String, String[]>();
+
+	private MillCulture(String nameIn)
 	{
 		cultureName = nameIn;
 	}
 	
-	public MillCulture addNameList(String title, String[] list)
+	private MillCulture addNameList(String title, String[] list)
 	{
 		this.nameLists.put(title, list);
 		return this;
 	}
 	
-	public MillCulture setVillagerTypes(VillagerType[] typeIn)
+	private MillCulture setVillagerTypes(VillagerType[] typeIn)
 	{
 		this.villagerTypes = typeIn;
 		return this;
@@ -58,17 +58,16 @@ public class MillCulture
 		return this;
 	}
 	
-	public VillagerType[] getVillagerTypes() 
-	{
-		return this.villagerTypes;
-	}
+	public VillagerType[] getVillagerTypes() { return this.villagerTypes; }
 	
 	public VillagerType getVillagerType(String typeIn)
 	{
 		for(int i = 0; i < villagerTypes.length; i++)
 		{
 			if(villagerTypes[i].id.equalsIgnoreCase(typeIn))
+			{
 				return villagerTypes[i];
+			}
 		}
 		
 		System.err.println("villagerType " + typeIn + " not found in " + cultureName + " culture.");
@@ -78,9 +77,13 @@ public class MillCulture
 	public VillagerType getChildType(int gender)
 	{
 		if(gender == 0)
+		{
 			return villagerTypes[0];
+		}
 		else
+		{
 			return villagerTypes[1];
+		}
 	}
 	
 	public VillageType getVillageType(String typeIn)
@@ -88,7 +91,9 @@ public class MillCulture
 		for(int i = 0; i < villageTypes.length; i++)
 		{
 			if(villageTypes[i].id.equalsIgnoreCase(typeIn))
+			{
 				return villageTypes[i];
+			}
 		}
 		
 		System.err.println("villageType " + typeIn + " not found in " + cultureName + " culture.");
@@ -103,31 +108,27 @@ public class MillCulture
 		return villageTypes[i];
 	}
 	
-	public String getVillageName()
-	{
-		return "Whoville";
-	}
+	public String getVillageName() { return "Whoville"; }
 	
-	public String getVocalSentence(String vTypeIn)
-	{
-		return "Hi.  How are ya.";
-	}
+	public String getVocalSentence(String vTypeIn) { return "Hi.  How are ya."; }
 	
 	//Remember to catch the Exception and handle it when calling getCulture
 	public static MillCulture getCulture(String nameIn) throws Exception
 	{
-		if(nameIn.equals("norman"))
-			return normanCulture;
-		if(nameIn.equals("hindi"))
-			return hindiCulture;
-		if(nameIn.equals("mayan"))
-			return mayanCulture;
-		if(nameIn.equals("japanese"))
-			return japaneseCulture;
-		if(nameIn.equals("byzantine"))
-			return byzantineCulture;
-		
-		throw new Exception("getCulture called with incorrect culture.  Something broke.");
+		switch (nameIn) {
+			case "norman":
+			    return normanCulture;
+            case "hindi":
+                return hindiCulture;
+            case "mayan":
+                return mayanCulture;
+            case "japanese":
+                return japaneseCulture;
+            case "byzantine":
+                return byzantineCulture;
+            default:
+                throw new Exception("getCulture called with incorrect culture.");
+		}
 	}
 	
 	public void exportVillages(JsonHelper.VillageTypes villagetypes) {
@@ -146,8 +147,8 @@ public class MillCulture
 			e.printStackTrace();
 		}
 	}
-	
-	public void loadVillageTypes() {
+
+    private void loadVillageTypes() {
 		Gson gson = new Gson();
 		InputStream is = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + this.cultureName.toLowerCase() + "/villages.json");
 		VillageTypes vt = gson.fromJson(new InputStreamReader(is), VillageTypes.class);
@@ -159,13 +160,13 @@ public class MillCulture
 	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
 	public static MillCulture normanCulture;
-	public static MillCulture hindiCulture;
-	public static MillCulture mayanCulture;
-	public static MillCulture japaneseCulture;
-	public static MillCulture byzantineCulture;
-	
+	private static MillCulture hindiCulture;
+    private static MillCulture mayanCulture;
+    private static MillCulture japaneseCulture;
+    private static MillCulture byzantineCulture;
+
 	//public static MillCulture millDefault;
-	
+
 	public static void preinitialize()
 	{
 		//Norman Initialization
@@ -211,9 +212,9 @@ public class MillCulture
 				new VillagerType("normanBandit", "Bandit", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanBandit0.png", "millenaire:textures/entities/norman/normanBandit1.png"}, false, false, 0),
 				new VillagerType("normanArmoredBandit", "ArmoredBandit", 0, normanCulture.nameLists.get("familyNames"), normanCulture.nameLists.get("maleNames"), new String[]{"millenaire:textures/entities/norman/normanArmoredBandit0.png", "millenaire:textures/entities/norman/normanArmoredBandit1.png"}, false, false, 0)
 		});
-		
+
 		/*normanCulture.setVillageTypes(new VillageType[]{
-				new VillageType("test").setBuildingTypes(new BuildingPlan[]{BuildingProject.normanCommunauteA0}, new BuildingPlan[]{BuildingProject.testBuilding}, new BuildingPlan[]{BuildingProject.testBuilding}).setStartingBuildings(new BuildingPlan[]{BuildingProject.normanCommunauteA0})				
+				new VillageType("test").setBuildingTypes(new BuildingPlan[]{BuildingProject.normanCommunauteA0}, new BuildingPlan[]{BuildingProject.testBuilding}, new BuildingPlan[]{BuildingProject.testBuilding}).setStartingBuildings(new BuildingPlan[]{BuildingProject.normanCommunauteA0})
 		});*/
 		
 		//Hindi Initialization
@@ -379,24 +380,24 @@ public class MillCulture
 		});
 		/*
 		final VillageTypes types = new VillageTypes(new VillageType[] {
-			new VillageType("test1").setTier(1, 
+			new VillageType("test1").setTier(1,
 				new BuildingProject[] {
-					new BuildingProject("grove2", 0), 
-					new BuildingProject("mine1", 0), 
+					new BuildingProject("grove2", 0),
+					new BuildingProject("mine1", 0),
 					new BuildingProject("house1", 0),
 					new BuildingProject("house2", 1)
-				}).setTier(2, 
+				}).setTier(2,
 					new BuildingProject[] {
 						new BuildingProject("mine1", 2),
 						new BuildingProject("house1", 2)
 				}).setStartingBuildings(new BuildingProject[] {new BuildingProject("townhall1", 0)}),//.setBuildingTypes(new String[]{"primary1", "primary2"}, new String[]{"secondary1", "secondary2"}, new String[]{"player1"}).setStartingBuildings(new String[] {"townhall1", "grove1", "mine1"}),
-			new VillageType("test2").setTier(1, 
+			new VillageType("test2").setTier(1,
 				new BuildingProject[] {
-					new BuildingProject("grove1", 0), 
-					new BuildingProject("mine1", 1), 
+					new BuildingProject("grove1", 0),
+					new BuildingProject("mine1", 1),
 					new BuildingProject("house1", 1),
 					new BuildingProject("house2", 0)
-				}).setTier(2, 
+				}).setTier(2,
 					new BuildingProject[] {
 						new BuildingProject("mine1", 3),
 						new BuildingProject("house1", 2)
@@ -413,26 +414,22 @@ public class MillCulture
 	public static class VillageType 
 	{
 		public String id;
-		
+
 		//public String[] primaryBuildings;
 		//public String[] secondaryBuildings;
 		//public String[] playerBuildings;
 		
-		public Map<Integer, BuildingProject[]> tiers = new HashMap<Integer, BuildingProject[]>();
+		private Map<Integer, BuildingProject[]> tiers = new HashMap<Integer, BuildingProject[]>();
 		
 		//First Building in this array should always be the TownHall
 		public BuildingProject[] startingBuildings;
 		
 		public VillageType() {}
 		
-		public VillageType(String idIn)
-		{
-			id = idIn;
-		}
+		public VillageType(String idIn) { id = idIn; }
 		
 		public VillageType setTier(int tier, BuildingProject[] buildings) {
 			tiers.put(tier, buildings);
-			
 			return this;
 		}
 		
@@ -441,7 +438,7 @@ public class MillCulture
 			//this.primaryBuildings = primaryIn;
 			//this.secondaryBuildings = secondaryIn;
 			//this.playerBuildings = playerIn;
-			
+
 			return this;
 		}
 		
@@ -456,9 +453,6 @@ public class MillCulture
 			return this;
 		}
 		
-		public String getVillageName()
-		{
-			return id;
-		}
+		public String getVillageName() { return id; }
 	}
 }

@@ -17,9 +17,6 @@ import org.millenaire.networking.PacketSayTranslatedMessage;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -31,16 +28,12 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMillWand extends Item
 {
-	public ItemMillWand() 
-	{
-		this.setMaxStackSize(1);
-	}
+	protected ItemMillWand() { this.setMaxStackSize(1); }
 
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
@@ -152,14 +145,18 @@ public class ItemMillWand extends Item
 
 					//hasCrop = VillageTracker.get(worldIn).removePlayerUseCrop(playerIn, ((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos));
 					hasCrop = PlayerTracker.get(playerIn).canPlayerUseCrop(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getSeed());
-					System.out.println(((BlockMillCrops)worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos).toString());
+					System.out.println((worldIn.getBlockState(pos).getBlock()).getItem(worldIn, pos).toString());
 
 					if(worldIn.isRemote)
 					{
 						if(hasCrop)
+						{
 							playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can no longer plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+						}
 						else
-							playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " already could not plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+						{
+                            playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " already could not plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+                        }
 					}
 				}
 				else
@@ -175,9 +172,13 @@ public class ItemMillWand extends Item
 					if(worldIn.isRemote)
 					{
 						if(succeeded)
-							playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can now plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+						{
+                            playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can now plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+                        }
 						else
-							playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can already plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+						{
+                            playerIn.addChatMessage(new ChatComponentText(playerIn.getDisplayNameString() + " can already plant " + worldIn.getBlockState(pos).getBlock().getLocalizedName()));
+                        }
 					}
 				}
 			}
@@ -185,13 +186,24 @@ public class ItemMillWand extends Item
 			else if(worldIn.getBlockState(pos).getBlock() == Blocks.cake)
 			{
 				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(MillItems.grapes))
-					PlayerTracker.get(playerIn).setCanUseCrop(MillItems.grapes, true);
+				{
+                    PlayerTracker.get(playerIn).setCanUseCrop(MillItems.grapes, true);
+                }
+
 				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(MillItems.maize))
-					PlayerTracker.get(playerIn).setCanUseCrop(MillItems.maize, true);
+				{
+                    PlayerTracker.get(playerIn).setCanUseCrop(MillItems.maize, true);
+                }
+
 				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(MillItems.rice))
-					PlayerTracker.get(playerIn).setCanUseCrop(MillItems.rice, true);
+				{
+                    PlayerTracker.get(playerIn).setCanUseCrop(MillItems.rice, true);
+                }
+
 				if(!PlayerTracker.get(playerIn).canPlayerUseCrop(MillItems.turmeric))
-					PlayerTracker.get(playerIn).setCanUseCrop(MillItems.turmeric, true);
+				{
+                    PlayerTracker.get(playerIn).setCanUseCrop(MillItems.turmeric, true);
+                }
 
 				if(worldIn.isRemote)
 				{
@@ -206,24 +218,34 @@ public class ItemMillWand extends Item
 				if(worldIn.isRemote)
 				{
 					if(isLocked)
-						playerIn.addChatMessage(new ChatComponentText("Chest is now Locked"));
+					{
+                        playerIn.addChatMessage(new ChatComponentText("Chest is now Locked"));
+                    }
 					else
-						playerIn.addChatMessage(new ChatComponentText("Chest is now Unlocked"));
+					{
+                        playerIn.addChatMessage(new ChatComponentText("Chest is now Unlocked"));
+                    }
 				}
 			}
 			else if(worldIn.getBlockState(pos).getBlock() instanceof StoredPosition)
 			{
 				if(playerIn.isSneaking())
-					worldIn.setBlockToAir(pos);
+				{
+                    worldIn.setBlockToAir(pos);
+                }
 				else
-					worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(StoredPosition.VARIANT));
+				{
+                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).cycleProperty(StoredPosition.VARIANT));
+                }
 			}
 			//Fixes All Denier in your inventory (if no specific block/entity is clicked)
 			else
 			{
 				CommonUtilities.changeMoney(playerIn);
 				if(worldIn.isRemote)
-					playerIn.addChatMessage(new ChatComponentText("Fixing Denier in " + playerIn.getDisplayNameString() + "'s Inventory"));
+				{
+                    playerIn.addChatMessage(new ChatComponentText("Fixing Denier in " + playerIn.getDisplayNameString() + "'s Inventory"));
+                }
 			}
 		}
 
@@ -232,7 +254,7 @@ public class ItemMillWand extends Item
 			IBlockState state = worldIn.getBlockState(pos);
 			String output = state.getBlock().getUnlocalizedName() + " -";
 
-			for(IProperty prop : (java.util.Set<IProperty>)state.getProperties().keySet())
+			for(IProperty prop : state.getProperties().keySet())
 			{
 				//System.out.println(prop.getName());
 				output = output.concat(" " + prop.getName() + ":" + state.getValue(prop).toString());
@@ -268,6 +290,8 @@ public class ItemMillWand extends Item
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
 		if(stack.getItem() == MillItems.wandCreative)
-			tooltip.add("�lCreative Mode ONLY");
+		{
+            tooltip.add("�lCreative Mode ONLY");
+        }
 	}
 }

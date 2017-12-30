@@ -32,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMillChest extends BlockChest
 {
-	public BlockMillChest() 
+	protected BlockMillChest()
 	{
 		super(2);
 		
@@ -40,10 +40,7 @@ public class BlockMillChest extends BlockChest
 	}
 
 	@Override
-	public int quantityDropped(final Random random) 
-	{
-		return 0;
-	}
+	public int quantityDropped(final Random random) { return 0; }
 	
 	@Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
@@ -57,11 +54,7 @@ public class BlockMillChest extends BlockChest
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (worldIn.isRemote)
-        {
-            return true;
-        }
-        else
+        if (!worldIn.isRemote)
         {
             ILockableContainer ilockablecontainer = this.getLockableContainer(worldIn, pos);
 
@@ -69,16 +62,12 @@ public class BlockMillChest extends BlockChest
             {
                 playerIn.openGui(Millenaire.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
             }
-
-            return true;
         }
+        return true;
     }
 	
 	@Override
-	public TileEntity createNewTileEntity(final World world, final int meta) 
-	{
-		return new TileEntityMillChest();
-	}
+	public TileEntity createNewTileEntity(final World world, final int meta) { return new TileEntityMillChest(); }
 	
 	@Override
     public ILockableContainer getLockableContainer(World worldIn, BlockPos pos)

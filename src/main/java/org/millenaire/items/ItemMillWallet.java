@@ -3,19 +3,14 @@ package org.millenaire.items;
 import java.util.List;
 
 import org.millenaire.CommonUtilities;
-import org.millenaire.Millenaire;
 import org.millenaire.gui.MillAchievement;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -25,9 +20,13 @@ public class ItemMillWallet extends Item
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
     {
 		if(playerIn.inventory.hasItem(MillItems.denier) || playerIn.inventory.hasItem(MillItems.denierArgent) || playerIn.inventory.hasItem(MillItems.denierOr))
+		{
 			addDenierToWallet(itemStackIn, playerIn);
+		}
 		else
+		{
 			emptyWallet(itemStackIn, playerIn);
+		}
 		
         return itemStackIn;
     }
@@ -63,8 +62,8 @@ public class ItemMillWallet extends Item
 			}
 		}
     }
-	
-	public void addDenierToWallet(ItemStack stack, EntityPlayer playerIn)
+
+    private void addDenierToWallet(ItemStack stack, EntityPlayer playerIn)
 	{
 		if(stack.getItem() == this)
 		{
@@ -118,8 +117,8 @@ public class ItemMillWallet extends Item
 			nbt.setInteger("DenierOr", or);
 		}
 	}
-	
-	public void emptyWallet(ItemStack stack, EntityPlayer playerIn)
+
+    private void emptyWallet(ItemStack stack, EntityPlayer playerIn)
 	{
 		if(stack.hasTagCompound())
 		{

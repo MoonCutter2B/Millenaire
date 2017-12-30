@@ -49,14 +49,14 @@ public class BuildingBlock
 	public BlockPos position;
 	public byte specialBlock;
 	
-	public BuildingBlock(IBlockState state, BlockPos pos, byte special)
+	protected BuildingBlock(IBlockState state, BlockPos pos, byte special)
 	{
 		blockState = state;
 		position = pos;
 		specialBlock = special;
 	}
-	
-	public BuildingBlock(IBlockState state, BlockPos pos)
+
+	protected BuildingBlock(IBlockState state, BlockPos pos)
 	{
 		blockState = state;
 		position = pos;
@@ -109,6 +109,7 @@ public class BuildingBlock
 						targetblock = Blocks.dirt;
 				}
 
+				assert targetblock != null;
 				worldIn.setBlockState(position, targetblock.getDefaultState());
 				String soundName = targetblock.stepSound.getPlaceSound();
 				worldIn.playSoundEffect(position.getX() + 0.5D, position.getY() + 0.5D, position.getZ() + 0.5D, soundName, 0.3F, 0.6F);
