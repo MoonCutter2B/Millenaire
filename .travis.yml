@@ -1,11 +1,31 @@
 language: java
+
 jdk:
   - oraclejdk8
-script: mvn compile test
-install: true
-notifications:
-  email:
-    recipients:
-      - "benjaminesims@gmail.com"
-    on_success: change
-    on_failure: always
+
+os:
+  - linux
+
+cache:
+  directories:
+  - $HOME/.gradle
+
+before_script:
+  - git fetch
+  - git checkout -b gh-pages
+  - git merge origin/master
+  - git rm --cached --ignore-unmatch index.html
+
+script:
+  - ./gradlew clean publish -i --continue
+  - ./gradlew -b finalize.gradle finalize -i
+
+after_script:
+  - git add .
+  # something@example.com
+  - git config user.email "${GIT_EMAIL}"
+  # First Last
+  - git config user.name "${GIT_NAME}"
+  - git commit -m "updating outputs"
+  # https://${GH_TOKEN}@github.com/asciidoctor/asciidoctor-gradle-examples.git
+- git push -f "${GIT_URL}" gh-pages > /dev/null 2>&1
