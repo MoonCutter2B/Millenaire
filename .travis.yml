@@ -5,3 +5,6 @@ jdk:
 
 os:
   - linux
+
+before_install:
+- chmod +x gradlew
