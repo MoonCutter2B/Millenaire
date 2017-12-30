@@ -2,30 +2,23 @@ package org.millenaire.blocks;
 
 import java.util.Random;
 
-import org.jetbrains.annotations.Contract;
-import org.millenaire.Millenaire;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class StoredPosition extends Block
 {
-	private StoredPosition()
+	StoredPosition()
 	{
 		super(Material.barrier);
         this.disableStats();
@@ -166,13 +159,10 @@ public class StoredPosition extends Block
             this.name = name;
         }
 
-        @Contract(pure = true)
         public int getMetadata() { return this.meta; }
 
-        @Contract(pure = true)
         public String toString() { return this.name; }
 
-        @Contract(pure = true)
         public static StoredPosition.EnumType byMetadata(int meta)
         {
             if (meta < 0 || meta >= META_LOOKUP.length)
@@ -183,10 +173,8 @@ public class StoredPosition extends Block
             return META_LOOKUP[meta];
         }
 
-        @Contract(pure = true)
         public String getName() { return this.name; }
 
-        @Contract(pure = true)
         public String getUnlocalizedName() { return this.name; }
 
         static

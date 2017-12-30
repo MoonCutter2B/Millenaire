@@ -2,7 +2,6 @@ package org.millenaire;
 
 import java.util.List;
 
-import org.jetbrains.annotations.Contract;
 import org.millenaire.blocks.BlockAlchemists;
 import org.millenaire.blocks.BlockMillChest;
 import org.millenaire.blocks.BlockMillCrops;
@@ -66,7 +65,6 @@ public class Millenaire
 	
 	public static final CreativeTabs tabMillenaire = new CreativeTabs("MillTab")
 	{
-		@Contract(pure = true)
 		public Item getTabIconItem() { return MillItems.denierOr; }
 	};
 	

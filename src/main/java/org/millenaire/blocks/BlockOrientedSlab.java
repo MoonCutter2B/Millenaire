@@ -19,7 +19,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.Contract;
 
 public class BlockOrientedSlab extends BlockSlab
 {
@@ -28,7 +27,7 @@ public class BlockOrientedSlab extends BlockSlab
 	
 	private Block singleSlab;
 
-    private BlockOrientedSlab(Material materialIn, Block singleSlabIn)
+    protected BlockOrientedSlab(Material materialIn, Block singleSlabIn)
 	{
 		super(materialIn);
 		singleSlab = singleSlabIn;
@@ -84,7 +83,6 @@ public class BlockOrientedSlab extends BlockSlab
         return EnumFacing.getHorizontal(3);//Boolean.valueOf((stack.getMetadata() & 8) != 0);
     }
     
-    @Contract(value = "null -> false", pure = true)
     @SideOnly(Side.CLIENT)
     private static boolean isSlabX(Block blockIn)
     {

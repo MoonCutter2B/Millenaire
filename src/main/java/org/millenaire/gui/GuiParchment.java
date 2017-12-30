@@ -126,7 +126,7 @@ public class GuiParchment extends GuiScreen
     {
         private final boolean nextPage;
 
-		private NextPageButton(int id, int xIn, int yIn, boolean nextPageIn)
+		NextPageButton(int id, int xIn, int yIn, boolean nextPageIn)
         {
             super(id, xIn, yIn, 18, 10, "");
             this.nextPage = nextPageIn;

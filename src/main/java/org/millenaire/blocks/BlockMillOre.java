@@ -2,7 +2,6 @@ package org.millenaire.blocks;
 
 import java.util.Random;
 
-import org.jetbrains.annotations.Contract;
 import org.millenaire.Millenaire;
 import org.millenaire.items.MillItems;
 
@@ -50,13 +49,10 @@ public class BlockMillOre extends Block {
 			this.itemDropped = item;
 		}
 
-        @Contract(pure = true)
         public int getMetadata() { return this.meta; }
 
-        @Contract(pure = true)
         public String toString() { return this.name; }
 
-        @Contract(pure = true)
         public static EnumMillOre byMetadata(int meta)
         {
             if (meta < 0 || meta >= META_LOOKUP.length)
@@ -67,10 +63,8 @@ public class BlockMillOre extends Block {
             return META_LOOKUP[meta];
         }
 
-        @Contract(pure = true)
         public String getName() { return this.name; }
 
-        @Contract(pure = true)
         public String getUnlocalizedName() { return this.name; }
 
         static

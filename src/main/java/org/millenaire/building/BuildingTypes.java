@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.Contract;
 import org.millenaire.MillCulture;
 import org.millenaire.util.ItemRateWrapper;
 import org.millenaire.util.ResourceLocationUtil;
@@ -39,7 +38,6 @@ public class BuildingTypes {
 		return buildingCache.get(ResourceLocationUtil.getRL(proj.ID));
 	}
 	
-	@Contract(pure = true)
 	public static Map<ResourceLocation, BuildingType> getCache() { return buildingCache; }
 	
 	public static class BuildingType {

@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.Contract;
 
 public class BlockDecorativeStone extends Block
 {
@@ -88,13 +87,10 @@ public class BlockDecorativeStone extends Block
             this.name = name;
         }
 
-        @Contract(pure = true)
         public int getMetadata() { return this.meta; }
 
-        @Contract(pure = true)
         public String toString() { return this.name; }
 
-        @Contract(pure = true)
         public static BlockDecorativeStone.EnumType byMetadata(int meta)
         {
             if (meta < 0 || meta >= META_LOOKUP.length)
@@ -105,10 +101,8 @@ public class BlockDecorativeStone extends Block
             return META_LOOKUP[meta];
         }
 
-        @Contract(pure = true)
         public String getName() { return this.name; }
 
-        @Contract(pure = true)
         public String getUnlocalizedName() { return this.name; }
 
         static

@@ -2,6 +2,7 @@ package org.millenaire.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.millenaire.CommonUtilities;
 import org.millenaire.MillConfig;
@@ -15,6 +16,7 @@ import org.millenaire.building.BuildingTypes;
 import org.millenaire.building.BuildingTypes.BuildingType;
 import org.millenaire.building.PlanIO;
 import org.millenaire.util.ResourceLocationUtil;
+import org.millenaire.village.Village;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -32,6 +34,7 @@ public class TileEntityVillageStone extends TileEntity
 	public VillageType villageType;
 	public String villageName;
 	public boolean willExplode = false;
+	private UUID villageID;
 
 	public int testVar = 0;
 
@@ -62,10 +65,8 @@ public class TileEntityVillageStone extends TileEntity
 						villageType = MillCulture.getCulture(culture).getVillageType(villageName);
 
 					villageName = villageType.getVillageName();
-
-					for(BuildingProject proj : villageType.startingBuildings) {
-						PlanIO.loadSchematic(PlanIO.getBuildingTag(ResourceLocationUtil.getRL(proj.ID).getResourcePath(), MillCulture.getCulture(culture), true), MillCulture.getCulture(culture), proj.lvl);
-					}
+					
+					Village.createVillage(this.getPos(), world, villageType, MillCulture.getCulture(culture));
 
 					if(MillConfig.villageAnnouncement)
 					{

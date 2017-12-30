@@ -3,8 +3,6 @@ package org.millenaire;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.Contract;
-import org.millenaire.blocks.BlockMillPath;
 import org.millenaire.blocks.MillBlocks;
 import org.millenaire.building.BuildingLocation;
 
@@ -129,8 +127,7 @@ public class VillageGeography
 		lastUpdatedX = 0;
 		lastUpdatedZ = 0;
 	}
-  
-  @Contract(pure = true)
+
 	private static boolean isForbiddenBlockForConstruction(final Block block)
 	{
 		return block == Blocks.water || block == Blocks.flowing_water || block == Blocks.ice || block == Blocks.flowing_lava || block == Blocks.lava || block == Blocks.planks || block == Blocks.cobblestone || block == Blocks.brick_block || block == Blocks.chest || block == Blocks.glass || block == Blocks.stonebrick || block == Blocks.prismarine
@@ -727,7 +724,6 @@ public class VillageGeography
 		thread.start();
 	}
 
-    @Contract(pure = true)
     private static boolean isBlockIdGround(final Block b)
 	{
         return (b == Blocks.bedrock || b == Blocks.clay || b == Blocks.dirt ||
@@ -735,7 +731,6 @@ public class VillageGeography
                 b == Blocks.sand || b == Blocks.farmland);
 	}
 
-    @Contract(pure = true)
     private static boolean isBlockIdGroundOrCeiling(final Block b)
 	{
 		return (b == Blocks.stone || b == Blocks.sandstone);
