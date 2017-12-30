@@ -11,4 +11,4 @@ before_install:
 
 cache:
   directories:
-- $HOME/.gradle
+  - $HOME/.gradle
