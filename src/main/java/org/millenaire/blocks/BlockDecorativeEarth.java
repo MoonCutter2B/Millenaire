@@ -18,11 +18,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockDecorativeEarth extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeEarth.EnumType.class);
-	
-	public BlockDecorativeEarth() 
-	{
-		super(Material.ground);
-	}
+
+    protected BlockDecorativeEarth() { super(Material.ground); }
 	
 	@Override
     public int damageDropped(IBlockState state)
@@ -30,10 +27,7 @@ public class BlockDecorativeEarth extends Block
         return ((BlockDecorativeEarth.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -86,21 +80,15 @@ public class BlockDecorativeEarth extends Block
         private final int meta;
         private final String name;
 
-        private EnumType(int meta, String name)
+        EnumType(int meta, String name)
         {
             this.meta = meta;
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        public String toString() { return this.name; }
 
         public static BlockDecorativeEarth.EnumType byMetadata(int meta)
         {
@@ -112,15 +100,9 @@ public class BlockDecorativeEarth extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {

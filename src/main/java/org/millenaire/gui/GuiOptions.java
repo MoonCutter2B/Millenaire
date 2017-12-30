@@ -1,7 +1,5 @@
 package org.millenaire.gui;
 
-import java.io.IOException;
-
 import org.millenaire.Millenaire;
 import org.millenaire.networking.MillPacket;
 
@@ -12,14 +10,14 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiOptions extends GuiScreen
 {
-	final static ResourceLocation OPTIONGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_village_chief.png");
+	private final static ResourceLocation OPTIONGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_village_chief.png");
 	private String string;
 	private int eventID;
-	
-	GuiButton yes;
-	GuiButton no;
-	
-	public GuiOptions(int IDin, String stringIn)
+
+	private GuiButton yes;
+	private GuiButton no;
+
+	protected GuiOptions(int IDin, String stringIn)
 	{
 		string = I18n.format(stringIn);
 		eventID = IDin;
@@ -43,7 +41,7 @@ public class GuiOptions extends GuiScreen
 	}
 	
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException 
+	protected void actionPerformed(GuiButton button)
 	{
 		if(button == this.yes)
 		{
@@ -72,8 +70,5 @@ public class GuiOptions extends GuiScreen
 	}
 	
 	@Override
-	public boolean doesGuiPauseGame() 
-	{
-	    return false;
-	}
+	public boolean doesGuiPauseGame() { return false; }
 }

@@ -3,7 +3,6 @@ package org.millenaire.networking;
 import org.millenaire.building.PlanIO;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -18,9 +17,7 @@ public class PacketImportBuilding implements IMessage {
 		
 	}
 	
-	public PacketImportBuilding(BlockPos startPos) {
-		this.pos = startPos;
-	}
+	public PacketImportBuilding(BlockPos startPos) { this.pos = startPos; }
 	
 	@Override
 	public void fromBytes(ByteBuf buf) {

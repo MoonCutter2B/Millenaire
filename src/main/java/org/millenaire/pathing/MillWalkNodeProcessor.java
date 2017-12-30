@@ -125,10 +125,9 @@ public class MillWalkNodeProcessor extends WalkNodeProcessor
     {
     	BlockPos pos = new BlockPos(x, y, z);
     	Block block = this.blockaccess.getBlockState(pos).getBlock();
-    	
-    	if(block instanceof BlockFenceGate && this.blockaccess.isAirBlock(pos.up()))
-    		return 2;
-    	else
-    		return func_176170_a(this.blockaccess, entityIn, x, y, z, this.entitySizeX, this.entitySizeY, this.entitySizeZ, this.getAvoidsWater(), true, this.getEnterDoors());
+
+        return block instanceof BlockFenceGate && this.blockaccess.isAirBlock(pos.up()) ? 2 :
+                func_176170_a(this.blockaccess, entityIn, x, y, z, this.entitySizeX, this.entitySizeY, this.entitySizeZ,
+                        this.getAvoidsWater(), true, this.getEnterDoors());
     }
 }

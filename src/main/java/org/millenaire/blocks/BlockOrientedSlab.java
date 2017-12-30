@@ -22,12 +22,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockOrientedSlab extends BlockSlab
 {
-	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-	public static final PropertyBool SEAMLESS = PropertyBool.create("seamless");
+    private static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+    private static final PropertyBool SEAMLESS = PropertyBool.create("seamless");
 	
 	private Block singleSlab;
-	
-	public BlockOrientedSlab(Material materialIn, Block singleSlabIn) 
+
+    protected BlockOrientedSlab(Material materialIn, Block singleSlabIn)
 	{
 		super(materialIn);
 		singleSlab = singleSlabIn;
@@ -84,7 +84,7 @@ public class BlockOrientedSlab extends BlockSlab
     }
     
     @SideOnly(Side.CLIENT)
-    protected static boolean isSlabX(Block blockIn)
+    private static boolean isSlabX(Block blockIn)
     {
         return blockIn instanceof BlockSlab;
     }
@@ -132,11 +132,11 @@ public class BlockOrientedSlab extends BlockSlab
     public int getMetaFromState(IBlockState state)
     {
         byte b0 = 0;
-        int i = b0 | (0);
+        int i = b0;
 
         if (this.isDouble())
         {
-            if (((Boolean)state.getValue(SEAMLESS)).booleanValue())
+            if (state.getValue(SEAMLESS))
             {
                 i |= 8;
             }

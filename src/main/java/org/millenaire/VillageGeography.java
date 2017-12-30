@@ -3,7 +3,6 @@ package org.millenaire;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.millenaire.blocks.BlockMillPath;
 import org.millenaire.blocks.MillBlocks;
 import org.millenaire.building.BuildingLocation;
 
@@ -23,16 +22,16 @@ public class VillageGeography
 	private static final int MAP_MARGIN = 10;
 	private static final int BUILDING_MARGIN = 5;
 	private static final int VALIDHEIGHTDIFF = 10;
-	
+
 	public int length = 0;
 	public int width = 0;
-	public int chunkStartX = 0, chunkStartZ = 0;
+	private int chunkStartX = 0, chunkStartZ = 0;
 	public int mapStartX = 0, mapStartZ = 0;
-	public int yBaseline = 0;
-	
-	public short[][] topGround;
+	private int yBaseline = 0;
+
+	private short[][] topGround;
 	public short[][] constructionHeight;
-	public short[][] spaceAbove;
+	private short[][] spaceAbove;
 	
 	public boolean[][] danger;
 	public boolean[][] buildingForbidden;
@@ -40,24 +39,24 @@ public class VillageGeography
 
 	public boolean[][] buildingLoc;
 
-	public boolean[][] water;
-	public boolean[][] tree;
+	private boolean[][] water;
+	private boolean[][] tree;
 	
 	public boolean[][] buildTested = null;
 
-	public boolean[][] topAdjusted;
+	private boolean[][] topAdjusted;
 
 	public boolean[][] path;
 
-	public int frequency = 10;
+	private int frequency = 10;
 	private List<BuildingLocation> buildingLocations = new ArrayList<BuildingLocation>();
-	public BuildingLocation locationIP;
+	private BuildingLocation locationIP;
 
 	public int nbLoc = 0;
 
 	public World world;
 
-	public int lastUpdatedX, lastUpdatedZ;
+	private int lastUpdatedX, lastUpdatedZ;
 
 	private int updateCounter;
 	
@@ -128,8 +127,8 @@ public class VillageGeography
 		lastUpdatedX = 0;
 		lastUpdatedZ = 0;
 	}
-	
-	static public boolean isForbiddenBlockForConstruction(final Block block) 
+
+	private static boolean isForbiddenBlockForConstruction(final Block block)
 	{
 		return block == Blocks.water || block == Blocks.flowing_water || block == Blocks.ice || block == Blocks.flowing_lava || block == Blocks.lava || block == Blocks.planks || block == Blocks.cobblestone || block == Blocks.brick_block || block == Blocks.chest || block == Blocks.glass || block == Blocks.stonebrick || block == Blocks.prismarine
 				|| block instanceof BlockWall || block instanceof BlockFence || block == MillBlocks.blockDecorativeEarth || block == MillBlocks.blockDecorativeStone || block == MillBlocks.blockDecorativeWood || block == MillBlocks.byzantineTile || block == MillBlocks.byzantineTileSlab || block == MillBlocks.byzantineStoneTile || block == MillBlocks.paperWall || block == MillBlocks.emptySericulture;
@@ -155,7 +154,6 @@ public class VillageGeography
 	
 	public boolean update(final World world, final List<BuildingLocation> locations, final BuildingLocation blIP, final BlockPos center, final int radius)
 	{
-
 		this.world = world;
 		this.yBaseline = center.getY();
 		locationIP = blIP;
@@ -251,8 +249,10 @@ public class VillageGeography
 		{
 			for (int j = -1; j < 2; j++) 
 			{
-				if (!world.getChunkProvider().chunkExists((startX + mapStartX >> 4) + i, (startZ + mapStartZ >> 4) + j)) 
+				if (!world.getChunkProvider().chunkExists((startX + mapStartX >> 4) + i, (startZ + mapStartZ >> 4) + j))
+				{
 					return;
+				}
 			}
 		}
 
@@ -283,9 +283,13 @@ public class VillageGeography
 				while (y >= miny && !isBlockIdGround(tblock)) 
 				{
 					if (isBlockIdGroundOrCeiling(tblock))
+					{
 						ceilingSize++;
-					else 
+					}
+					else
+					{
 						ceilingSize = 0;
+					}
 
 					y--;
 
@@ -304,7 +308,9 @@ public class VillageGeography
 				if (y <= maxy && y > 1) 
 				{
 					block = chunk.getBlock(i, y, j);
-				} else {
+				}
+				else
+				{
 					block = null;
 				}
 
@@ -354,7 +360,7 @@ public class VillageGeography
 					}
 				}
 
-				if (onground == false) 
+				if (!onground)
 				{
 					y = lastLiquid;
 				}
@@ -372,28 +378,11 @@ public class VillageGeography
 				final Block soilBlock = chunk.getBlock(i, y - 1, j);
 				block = chunk.getBlock(i, y, j);
 
-				if (block == Blocks.flowing_water || block == Blocks.water) 
-				{
-					water[mx][mz] = true;
-				}
+                water[mx][mz] = (block == Blocks.flowing_water || block == Blocks.water);
 
-				if (soilBlock == Blocks.log) 
-				{
-					tree[mx][mz] = true;
-				} 
-				else 
-				{
-					tree[mx][mz] = false;
-				}
+				tree[mx][mz] = (soilBlock == Blocks.log);
 
-				if (soilBlock == MillBlocks.blockMillPath || soilBlock == MillBlocks.blockMillPathSlab || soilBlock == MillBlocks.blockMillPathSlabDouble) 
-				{
-					path[mx][mz] = true;
-				} 
-				else 
-				{
-					path[mx][mz] = false;
-				}
+				path[mx][mz] = (soilBlock == MillBlocks.blockMillPath || soilBlock == MillBlocks.blockMillPathSlab || soilBlock == MillBlocks.blockMillPathSlabDouble);
 
 				boolean blocked = false;
 
@@ -415,14 +404,8 @@ public class VillageGeography
 					danger[mx][mz] = false;
 					for (final Block forbiddenBlock : Millenaire.instance.forbiddenBlocks) 
 					{
-						if (forbiddenBlock == block) 
-						{
-							danger[mx][mz] = true;
-						}
-						if (soilBlock == block) 
-						{
-							danger[mx][mz] = true;
-						}
+                        danger[mx][mz] = (forbiddenBlock == block);
+                        danger[mx][mz] = (soilBlock == block);
 					}
 				}
 
@@ -434,10 +417,7 @@ public class VillageGeography
 					}
 				}
 
-				if (isForbiddenBlockForConstruction(block)) 
-				{
-					buildingForbidden[mx][mz] = true;
-				}
+				buildingForbidden[mx][mz] = isForbiddenBlockForConstruction(block);
 
 				y++;
 
@@ -454,18 +434,12 @@ public class VillageGeography
 						blocked = true;
 					}
 
-					if (isForbiddenBlockForConstruction(block)) 
-					{
-						buildingForbidden[mx][mz] = true;
-					}
+                    buildingForbidden[mx][mz] = (isForbiddenBlockForConstruction(block));
 
 					y++;
 				}
 
-				if (buildingForbidden[mx][mz]) 
-				{
-					canBuild[mx][mz] = false;
-				}
+                canBuild[mx][mz] = !(buildingForbidden[mx][mz]);
 			}
 		}
 
@@ -723,7 +697,7 @@ public class VillageGeography
 		}
 	}
 	
-	public void updateNextChunk() 
+	private void updateNextChunk()
 	{
 
 		updateCounter = (updateCounter + 1) % frequency;
@@ -749,42 +723,20 @@ public class VillageGeography
 
 		thread.start();
 	}
-	
-	public static boolean isBlockIdGround(final Block b) 
-	{
-		if (b == Blocks.bedrock) {
-			return true;
-		} else if (b == Blocks.clay) {
-			return true;
-		} else if (b == Blocks.dirt) {
-			return true;
-		} else if (b == Blocks.grass) {
-			return true;
-		} else if (b == Blocks.gravel) {
-			return true;
-		} else if (b == Blocks.obsidian) {
-			return true;
-		} else if (b == Blocks.sand) {
-			return true;
-		} else if (b == Blocks.farmland) {
-			return true;
-		}
 
-		return false;
+    private static boolean isBlockIdGround(final Block b)
+	{
+        return (b == Blocks.bedrock || b == Blocks.clay || b == Blocks.dirt ||
+                b == Blocks.grass || b == Blocks.gravel || b == Blocks.obsidian ||
+                b == Blocks.sand || b == Blocks.farmland);
 	}
 
-	public static boolean isBlockIdGroundOrCeiling(final Block b) 
+    private static boolean isBlockIdGroundOrCeiling(final Block b)
 	{
-		if (b == Blocks.stone) {
-			return true;
-		} else if (b == Blocks.sandstone) {
-			return true;
-		}
-
-		return false;
+		return (b == Blocks.stone || b == Blocks.sandstone);
 	}
 	
-	public static boolean isBlockSolid(Block block)
+	private static boolean isBlockSolid(Block block)
 	{
 		return block.isFullCube() || block == Blocks.glass || block == Blocks.glass_pane || block instanceof BlockSlab || block instanceof BlockStairs || block instanceof BlockFence || block instanceof BlockWall || block == MillBlocks.paperWall;
 	}
@@ -797,9 +749,6 @@ public class VillageGeography
 		int z;
 
 		@Override
-		public void run() 
-		{
-			updateChunk(x, z);
-		}
+		public void run() { updateChunk(x, z); }
 	}
 }

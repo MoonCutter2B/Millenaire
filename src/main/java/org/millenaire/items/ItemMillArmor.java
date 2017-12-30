@@ -1,20 +1,13 @@
 package org.millenaire.items;
 
-import org.millenaire.Millenaire;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMillArmor 
 {
@@ -37,13 +30,19 @@ public class ItemMillArmor
 		public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	    {
 			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.respiration.effectId, stack) == 0)
+			{
 				stack.addEnchantment(Enchantment.respiration, 3);
+			}
 			
 			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.aquaAffinity.effectId, stack) == 0)
+			{
 				stack.addEnchantment(Enchantment.aquaAffinity, 1);
+			}
 			
 			if (EnchantmentHelper.getEnchantmentLevel(Enchantment.protection.effectId, stack) == 0)
+			{
 				stack.addEnchantment(Enchantment.protection, 4);
+			}
 	    }
 	}
 }

@@ -16,18 +16,12 @@ import net.minecraft.world.storage.MapStorage;
 public class VillageTracker extends WorldSavedData
 {
 	private final static String IDENTITY = "Millenaire.VillageInfo";
+
+	private Map<UUID, Village> villages = new HashMap<UUID, Village>();
 	
-	public Map<UUID, Village> villages = new HashMap<UUID, Village>();
+	public VillageTracker() { super(IDENTITY); }
 	
-	public VillageTracker()
-	{
-		super(IDENTITY);
-	}
-	
-	public VillageTracker(String id)
-	{
-		super(id);
-	}
+	private VillageTracker(String id) { super(id); }
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) 
@@ -39,7 +33,7 @@ public class VillageTracker extends WorldSavedData
 			}
 		}
 	}
-	
+
 	private Village readVillageFromCompound(NBTTagCompound nbt) {
 		Village vil = new Village();
 		vil.setPos(BlockPos.fromLong(nbt.getLong("pos")));
@@ -59,13 +53,9 @@ public class VillageTracker extends WorldSavedData
 		}
 	}
 	
-	public void registerVillage(UUID id, Village vil) {
-		villages.put(id, vil);
-	}
+	public void registerVillage(UUID id, Village vil) { villages.put(id, vil); }
 	
-	public void unregisterVillage(UUID id) {
-		villages.remove(id);
-	}
+	public void unregisterVillage(UUID id) { villages.remove(id); }
 	
 	public static VillageTracker get(World world)
 	{

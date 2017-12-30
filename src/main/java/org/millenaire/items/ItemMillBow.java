@@ -16,12 +16,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMillBow extends ItemBow
 {
-	public float speedFactor = 1;
-	public float damageBonus = 0;
-	
-	String itemName;
+	private float speedFactor = 1;
+	private float damageBonus = 0;
 
-	public ItemMillBow(float speedFactor, float damageBonus, String nameIn) 
+	private String itemName;
+
+	protected ItemMillBow(float speedFactor, float damageBonus, String nameIn)
 	{
 		super();
 		this.speedFactor = speedFactor;
@@ -84,9 +84,13 @@ public class ItemMillBow extends ItemBow
 			worldIn.playSoundAtEntity(playerIn, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
 
 			if (var5)
-				entityArrow.canBePickedUp = 2;
+			{
+                entityArrow.canBePickedUp = 2;
+            }
 			else
-				playerIn.inventory.consumeInventoryItem(Items.arrow);
+			{
+                playerIn.inventory.consumeInventoryItem(Items.arrow);
+            }
 
 			// faster MLN arrows
 			//entityArrow.motionX *= speedFactor;
@@ -126,9 +130,13 @@ public class ItemMillBow extends ItemBow
 				return new ModelResourceLocation(Millenaire.MODID + ":" + itemName + "_pulling_1", "inventory");
 			}
 			else
+			{
 				return new ModelResourceLocation(Millenaire.MODID + ":" + itemName, "inventory");
+			}
 		}
 		else
+		{
 			return new ModelResourceLocation(Millenaire.MODID + ":" + itemName, "inventory");
+		}
 	}
 }

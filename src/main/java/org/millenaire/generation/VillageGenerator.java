@@ -30,7 +30,7 @@ public class VillageGenerator implements IWorldGenerator {
 	/**
 	 * Attempt to generate the village
 	 */
-	protected boolean generateVillageAt(Random rand, BlockPos pos, World world) {
+	private boolean generateVillageAt(Random rand, BlockPos pos, World world) {
 		if(!MillConfig.generateVillages && !MillConfig.generateLoneBuildings || (world.getSpawnPoint().distanceSq(pos) < MillConfig.spawnDistance)) {
 			//System.out.println("testing2");
 			return false;

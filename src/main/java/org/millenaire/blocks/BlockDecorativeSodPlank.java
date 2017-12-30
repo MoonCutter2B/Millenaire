@@ -18,8 +18,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockDecorativeSodPlank extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeSodPlank.EnumType.class);
-	
-	public BlockDecorativeSodPlank() 
+
+    protected BlockDecorativeSodPlank()
 	{
 		super(Material.wood);
 		this.setHardness(2F);
@@ -33,10 +33,7 @@ public class BlockDecorativeSodPlank extends Block
         return ((BlockDecorativeSodPlank.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -73,10 +70,7 @@ public class BlockDecorativeSodPlank extends Block
     }
 
     @Override
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {VARIANT});
-    }
+    protected BlockState createBlockState() { return new BlockState(this, new IProperty[] {VARIANT}); }
 
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -99,15 +93,9 @@ public class BlockDecorativeSodPlank extends Block
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        public String toString() { return this.name; }
 
         public static BlockDecorativeSodPlank.EnumType byMetadata(int meta)
         {
@@ -119,15 +107,9 @@ public class BlockDecorativeSodPlank extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {

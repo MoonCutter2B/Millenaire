@@ -54,7 +54,7 @@ public class Millenaire
 	public static final String NAME = "Mill\u00e9naire";
 	public static final String VERSION = "7.0.0";
 	public static final String GUIFACTORY = "org.millenaire.gui.MillGuiFactory";
-	
+
 	public static boolean isServer = true;
 	
 	public List<Block> forbiddenBlocks;
@@ -65,10 +65,7 @@ public class Millenaire
 	
 	public static final CreativeTabs tabMillenaire = new CreativeTabs("MillTab")
 	{
-		public Item getTabIconItem() 
-		{
-			return MillItems.denierOr;
-		}
+		public Item getTabIconItem() { return MillItems.denierOr; }
 	};
 	
 	@EventHandler
@@ -141,8 +138,5 @@ public class Millenaire
 	}
 	
 	@EventHandler
-	public void serverLoad(FMLServerStartingEvent event)
-	{
-		event.registerServerCommand(new MillCommand());
-	}
+	public void serverLoad(FMLServerStartingEvent event) { event.registerServerCommand(new MillCommand()); }
 }

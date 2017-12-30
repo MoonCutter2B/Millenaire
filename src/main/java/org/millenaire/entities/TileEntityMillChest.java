@@ -17,29 +17,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityMillChest extends TileEntityChest
 {
-	public boolean isLocked = true;
+	private boolean isLocked = true;
 	
-	public TileEntityMillChest()
-	{
-		super();
-	}
+	public TileEntityMillChest() { super(); }
 	
 	public boolean setLock()
 	{
-		if(isLocked)
-			isLocked = false;
-		else
-			isLocked = true;
+		isLocked = !isLocked;
+
 		
 		checkForAdjacentChests();
-		if(adjacentChestZNeg != null)
-			((TileEntityMillChest)adjacentChestZNeg).isLocked = this.isLocked;
-		if(adjacentChestZPos != null)
-			((TileEntityMillChest)adjacentChestZPos).isLocked = this.isLocked;
-		if(adjacentChestXNeg != null)
-			((TileEntityMillChest)adjacentChestXNeg).isLocked = this.isLocked;
-		if(adjacentChestXPos != null)
-			((TileEntityMillChest)adjacentChestXPos).isLocked = this.isLocked;
+		if(adjacentChestZNeg != null || adjacentChestZPos != null ||
+                adjacentChestXNeg != null || adjacentChestXPos != null) {
+            assert adjacentChestZNeg != null;
+            ((TileEntityMillChest)adjacentChestZNeg).isLocked = this.isLocked;
+        }
 		
 		return isLocked;
 	}
@@ -47,7 +39,9 @@ public class TileEntityMillChest extends TileEntityChest
 	public boolean isLockedFor(EntityPlayer playerIn)
 	{
 		if(playerIn == null)
-			return false;
+		{
+            return false;
+        }
 		
 		//final Building building = mw.getBuilding(buildingPos);
 
@@ -66,7 +60,9 @@ public class TileEntityMillChest extends TileEntityChest
         super.readFromNBT(compound);
         
         if(compound.hasKey("millChestLocked"))
-        	isLocked = compound.getBoolean("millChestLocked");
+        {
+            isLocked = compound.getBoolean("millChestLocked");
+        }
     }
 	
 	@Override

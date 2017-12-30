@@ -2,7 +2,6 @@ package org.millenaire.networking;
 
 import org.millenaire.blocks.BlockVillageStone;
 import org.millenaire.blocks.MillBlocks;
-import org.millenaire.items.ItemMillWand;
 import org.millenaire.items.MillItems;
 
 import io.netty.buffer.ByteBuf;
@@ -23,10 +22,7 @@ public class MillPacket implements IMessage
 	private boolean messageIsValid;
 	
 	// for use by the message handler only.
-	public MillPacket()
-	{
-		messageIsValid = false;
-	}
+	public MillPacket() { messageIsValid = false; }
 	
 	public MillPacket(int IDin)
 	{
@@ -34,15 +30,9 @@ public class MillPacket implements IMessage
 		messageIsValid = true;
 	}
 	
-	public boolean isMessageValid() 
-	{
-		return messageIsValid;
-	}
+	public boolean isMessageValid() { return messageIsValid; }
 	
-	public int getID()
-	{
-		return eventID;
-	}
+	public int getID() { return eventID; }
 
 	@Override
 	public void fromBytes(ByteBuf buf) 
@@ -62,7 +52,9 @@ public class MillPacket implements IMessage
 	public void toBytes(ByteBuf buf) 
 	{
 		if(!messageIsValid)
+		{
 			return;
+		}
 		
 		buf.writeInt(eventID);
 	}
@@ -91,18 +83,12 @@ public class MillPacket implements IMessage
 			}
 			
 			final WorldServer playerWorldServer = sendingPlayer.getServerForPlayer();
-			playerWorldServer.addScheduledTask(new Runnable() 
-			{
-				public void run() 
-				{
-					processMessage(message, sendingPlayer);
-				}
-			});
+			playerWorldServer.addScheduledTask(() -> processMessage(message, sendingPlayer));
 			
 			return null;
 		}
 
-		public void processMessage(MillPacket message, EntityPlayerMP sendingPlayer)
+		private void processMessage(MillPacket message, EntityPlayerMP sendingPlayer)
 		{
 			if(message.getID() == 2)
 			{
@@ -162,5 +148,4 @@ public class MillPacket implements IMessage
 			}
 		}
 	}
-
 }

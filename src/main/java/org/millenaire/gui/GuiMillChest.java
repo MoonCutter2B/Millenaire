@@ -12,12 +12,12 @@ import net.minecraft.util.IChatComponent;
 
 public class GuiMillChest extends GuiChest
 {
-	boolean isLocked;
+	private boolean isLocked;
+
+	private IInventory lowerChestInventory;
+	private TileEntityMillChest chest;
 	
-	IInventory lowerChestInventory;
-	TileEntityMillChest chest;
-	
-	public GuiMillChest(IInventory playerInv, IInventory chestInv, EntityPlayer playerIn, TileEntityMillChest entityIn) 
+	protected GuiMillChest(IInventory playerInv, IInventory chestInv, EntityPlayer playerIn, TileEntityMillChest entityIn)
 	{
 		super(playerInv, chestInv);
 		System.out.println("GuiCreated");
@@ -32,10 +32,10 @@ public class GuiMillChest extends GuiChest
 		chest.checkForAdjacentChests();
 		IChatComponent string;
 		if(chest.adjacentChestXNeg == null && chest.adjacentChestXPos == null && chest.adjacentChestZNeg == null && chest.adjacentChestZPos == null) {
-			string = (IChatComponent)(isLocked ? new ChatComponentTranslation("container.millChestLocked", new Object[0]) : new ChatComponentTranslation("container.millChestUnlocked", new Object[0]));
+			string = (isLocked ? new ChatComponentTranslation("container.millChestLocked") : new ChatComponentTranslation("container.millChestUnlocked"));
 		}
 		else {
-			string = (IChatComponent)(isLocked ? new ChatComponentTranslation("container.millChestDoubleLocked", new Object[0]) : new ChatComponentTranslation("container.millChestDoubleUnlocked", new Object[0]));
+			string = (isLocked ? new ChatComponentTranslation("container.millChestDoubleLocked") : new ChatComponentTranslation("container.millChestDoubleUnlocked"));
 		}
 		
         this.fontRendererObj.drawString(string.getUnformattedText(), 8, 6, 4210752);
