@@ -28,4 +28,4 @@ after_script:
   - git config user.name "${GIT_NAME}"
   - git commit -m "updating outputs"
   # https://${GH_TOKEN}@github.com/asciidoctor/asciidoctor-gradle-examples.git
-- git push -f "${GIT_URL}" gh-pages > /dev/null 2>&1
+  - git push -f "${GIT_URL}" gh-pages > /dev/null 2>&1
