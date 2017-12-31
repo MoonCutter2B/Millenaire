@@ -205,6 +205,18 @@ public class PlanIO {
 			Millenaire.simpleNetworkWrapper.sendTo(message, (EntityPlayerMP)player);
 		}
 	}
+	
+	public static void placeBuilding(BuildingPlan plan, BuildingLocation loc, World world) {
+		IBlockState[][][] blocks = plan.buildingArray;
+
+		for(int x = 0; x < plan.width; x++) {
+			for(int y = 0; y < plan.height; y++) {
+				for(int z = 0; z < plan.length; z++) {
+					world.setBlockState(new BlockPos(x + loc.position.getX() + 1, y + loc.position.getY() + plan.depth, z + loc.position.getZ() + 1), blocks[y][z][x], 2);
+				}
+			}
+		}
+	}
 
 	public static BuildingPlan loadSchematic(NBTTagCompound nbt, MillCulture culture, int level) throws IOException {
 		//Convert Stream to NBTTagCompound
@@ -223,7 +235,7 @@ public class PlanIO {
 		NBTTagList list = nbt.getTagList("level_" + level, Constants.NBT.TAG_COMPOUND);
 		String blockdata = list.getCompoundTagAt(0).getString("BlockData");
 		height = list.getCompoundTagAt(0).getShort("Height");
-		System.out.println(blockdata);
+		//System.out.println(blockdata);
 		String[] split = blockdata.split(";");
 		blocks = new int[split.length];
 		data = new int[split.length];
@@ -259,7 +271,7 @@ public class PlanIO {
 		String name = nbt.getString("BuildingName");
 
 		return new BuildingPlan(culture, level)
-				.setHeightDepth(height, depth).setDistance(0, 1).setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized).setLengthWidth(length, width);
+				.setHeightDepth(height, depth).setDistance(3, 7).setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized).setLengthWidth(length, width);
 	}
 
 	public static NBTTagCompound getBuildingTag(final String name, MillCulture culture, final boolean packaged) {

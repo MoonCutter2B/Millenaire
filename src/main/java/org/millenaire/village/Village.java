@@ -7,9 +7,11 @@ import org.millenaire.MillCulture;
 import org.millenaire.MillCulture.VillageType;
 import org.millenaire.VillageGeography;
 import org.millenaire.VillageTracker;
+import org.millenaire.building.BuildingLocation;
 import org.millenaire.building.BuildingPlan;
 import org.millenaire.building.BuildingProject;
 import org.millenaire.building.PlanIO;
+import org.millenaire.entities.EntityMillVillager;
 import org.millenaire.pathing.MillPathNavigate;
 import org.millenaire.util.ResourceLocationUtil;
 
@@ -25,6 +27,7 @@ public class Village {
 	private VillageType type;
 	private MillCulture culture;
 	private World world;
+	private BuildingLocation[] buildings;
 	
 	private Village(BlockPos b, World worldIn, VillageType typeIn, MillCulture cultureIn) {
 		this.setPos(b);
@@ -57,7 +60,12 @@ public class Village {
 		try {
 			for(BuildingProject proj : type.startingBuildings) {
 				BuildingPlan p = PlanIO.loadSchematic(PlanIO.getBuildingTag(ResourceLocationUtil.getRL(proj.ID).getResourcePath(), culture, true), culture, proj.lvl);
-				p.findBuildingLocation(geo, new MillPathNavigate(null, world), mainBlock, 80, new Random(), EnumFacing.NORTH);
+				
+				EntityMillVillager v = new EntityMillVillager(world, 1, culture);
+				world.spawnEntityInWorld(v);
+				
+				BuildingLocation loc = p.findBuildingLocation(geo, new MillPathNavigate(v, world), mainBlock, 80, new Random(), p.buildingOrientation);
+				PlanIO.placeBuilding(p, loc, world);
 			}
 			return true;
 		}

@@ -66,7 +66,8 @@ public class TileEntityVillageStone extends TileEntity
 
 					villageName = villageType.getVillageName();
 					
-					Village.createVillage(this.getPos(), world, villageType, MillCulture.getCulture(culture));
+					Village v = Village.createVillage(this.getPos(), world, villageType, MillCulture.getCulture(culture));
+					v.setupVillage();
 
 					if(MillConfig.villageAnnouncement)
 					{

@@ -60,7 +60,7 @@ public class EntityMillVillager extends EntityCreature
 		addTasks();
 	}
 
-	protected EntityMillVillager(World worldIn, int idIn, MillCulture cultureIn)
+	public EntityMillVillager(World worldIn, int idIn, MillCulture cultureIn)
 	{
 		super(worldIn);
 		villagerID = idIn;
