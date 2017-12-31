@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMillSign extends BlockWallSign
 {
-	protected BlockMillSign()
+	BlockMillSign()
 	{
 		super();
 

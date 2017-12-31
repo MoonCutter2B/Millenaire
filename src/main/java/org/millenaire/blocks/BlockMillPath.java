@@ -19,7 +19,7 @@ public class BlockMillPath extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockMillPath.EnumType.class);
 
-	protected BlockMillPath()
+	BlockMillPath()
 	{
 		super(Material.ground);
 		

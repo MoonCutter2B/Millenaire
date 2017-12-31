@@ -32,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMillChest extends BlockChest
 {
-	protected BlockMillChest()
+	BlockMillChest()
 	{
 		super(2);
 		

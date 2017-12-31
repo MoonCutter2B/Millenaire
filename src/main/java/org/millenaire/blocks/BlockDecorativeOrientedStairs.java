@@ -5,7 +5,7 @@ import net.minecraft.block.state.IBlockState;
 
 class BlockDecorativeOrientedStairs extends BlockStairs
 {
-	protected BlockDecorativeOrientedStairs(IBlockState modelState)
+	BlockDecorativeOrientedStairs(IBlockState modelState)
 	{
 		super(modelState);
 		

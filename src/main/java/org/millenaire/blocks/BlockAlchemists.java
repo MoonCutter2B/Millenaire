@@ -12,7 +12,7 @@ public class BlockAlchemists extends Block
 {
 	private static final int EXPLOSIONRADIUS = 32;
 
-	protected BlockAlchemists()
+	BlockAlchemists()
 	{
 		super(Material.rock);
 		

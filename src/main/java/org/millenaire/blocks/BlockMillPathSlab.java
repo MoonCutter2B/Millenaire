@@ -25,7 +25,7 @@ public class BlockMillPathSlab extends BlockSlab
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockMillPath.EnumType.class);
 	private static final PropertyBool SEAMLESS = PropertyBool.create("seamless");
 
-	protected BlockMillPathSlab()
+	BlockMillPathSlab()
 	{
 		super(Material.ground);
 

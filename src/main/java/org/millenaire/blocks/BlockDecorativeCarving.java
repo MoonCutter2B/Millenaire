@@ -1,5 +1,7 @@
 package org.millenaire.blocks;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.millenaire.Millenaire;
 
 import net.minecraft.block.material.Material;
@@ -10,13 +12,22 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockDecorativeCarving extends BlockDecorativeOriented {
 
-	protected BlockDecorativeCarving(Material materialIn) {
+	BlockDecorativeCarving(Material materialIn) {
 		super(materialIn);
 		this.setCreativeTab(Millenaire.tabMillenaire);
 	}
 
 	@Override
 	public boolean isOpaqueCube() { return false; }
+
+	@Override
+	public boolean isFullBlock() { return false; }
+
+	@Override
+    public boolean isFullCube() { return false; }
+
+    @SideOnly(Side.CLIENT)
+    public float getAmbientOcclusionLightValue() { return 0.85F; }
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)

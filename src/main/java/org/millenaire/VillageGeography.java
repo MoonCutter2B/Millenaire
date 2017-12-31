@@ -95,7 +95,7 @@ public class VillageGeography
 		path = new boolean[length][width];
 		topAdjusted = new boolean[length][width];
 
-		buildingLocations = new ArrayList<BuildingLocation>();
+		buildingLocations = new ArrayList<>();
 
 		for (int i = 0; i < length; i++) 
 		{
@@ -229,7 +229,7 @@ public class VillageGeography
 		} 
 		else 
 		{
-			buildingLocations = new ArrayList<BuildingLocation>();
+			buildingLocations = new ArrayList<>();
 			for (final BuildingLocation location : locations) 
 			{
 				registerBuildingLocation(location);

@@ -19,7 +19,7 @@ public class BlockDecorativeStone extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeStone.EnumType.class);
 	
-	protected BlockDecorativeStone()
+	BlockDecorativeStone()
 	{
 		super(Material.rock);
 	}

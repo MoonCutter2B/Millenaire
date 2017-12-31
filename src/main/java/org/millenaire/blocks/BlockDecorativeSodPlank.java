@@ -19,7 +19,7 @@ public class BlockDecorativeSodPlank extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeSodPlank.EnumType.class);
 
-    protected BlockDecorativeSodPlank()
+    BlockDecorativeSodPlank()
 	{
 		super(Material.wood);
 		this.setHardness(2F);

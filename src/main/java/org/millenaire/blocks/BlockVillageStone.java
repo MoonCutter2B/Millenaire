@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class BlockVillageStone extends BlockContainer
 {
 
-	protected BlockVillageStone()
+	BlockVillageStone()
 	{
 		super(Material.rock);
 		

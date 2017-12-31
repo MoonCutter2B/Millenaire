@@ -19,7 +19,7 @@ public class BlockDecorativeEarth extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeEarth.EnumType.class);
 
-    protected BlockDecorativeEarth() { super(Material.ground); }
+    BlockDecorativeEarth() { super(Material.ground); }
 	
 	@Override
     public int damageDropped(IBlockState state)

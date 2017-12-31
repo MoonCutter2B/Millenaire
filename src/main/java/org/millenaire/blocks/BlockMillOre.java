@@ -15,7 +15,7 @@ public class BlockMillOre extends Block {
 
 	private EnumMillOre oreType;
 	
-	protected BlockMillOre(EnumMillOre oretype) {
+	BlockMillOre(EnumMillOre oretype) {
 		super(Material.rock);
 		this.oreType = oretype;
 		this.setCreativeTab(Millenaire.tabMillenaire);

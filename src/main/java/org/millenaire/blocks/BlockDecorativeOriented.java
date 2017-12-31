@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class BlockDecorativeOriented extends BlockDirectional
 {
 
-	protected BlockDecorativeOriented(Material materialIn) { super(materialIn); }
+	BlockDecorativeOriented(Material materialIn) { super(materialIn); }
 	
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)

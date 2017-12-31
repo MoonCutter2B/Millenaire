@@ -19,7 +19,7 @@ public class BlockDecorativeWood extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeWood.EnumType.class);
 	
-	protected BlockDecorativeWood()
+	BlockDecorativeWood()
 	{
 		super(Material.wood);
 	}

@@ -28,7 +28,7 @@ public class BlockMillCrops extends BlockCrops
 	
 	private IPlantable seed;
 	
-	protected BlockMillCrops(boolean irrigationIn, boolean growthIn)
+	BlockMillCrops(boolean irrigationIn, boolean growthIn)
 	{
 		super();
 		

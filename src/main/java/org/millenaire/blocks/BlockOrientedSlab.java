@@ -27,7 +27,7 @@ public class BlockOrientedSlab extends BlockSlab
 	
 	private Block singleSlab;
 
-    protected BlockOrientedSlab(Material materialIn, Block singleSlabIn)
+    BlockOrientedSlab(Material materialIn, Block singleSlabIn)
 	{
 		super(materialIn);
 		singleSlab = singleSlabIn;

@@ -12,7 +12,7 @@ public class BlockDecorativeUpdate extends Block
 {
 	private IBlockState updateState;
 
-	protected BlockDecorativeUpdate(Material materialIn, IBlockState updateIn)
+	BlockDecorativeUpdate(Material materialIn, IBlockState updateIn)
 	{
 		super(materialIn);
 		updateState = updateIn;

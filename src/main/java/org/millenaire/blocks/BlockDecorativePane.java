@@ -5,5 +5,5 @@ import net.minecraft.block.material.Material;
 
 class BlockDecorativePane extends BlockPane
 {
-	protected BlockDecorativePane(Material materialIn) { super(materialIn, true); }
+	BlockDecorativePane(Material materialIn) { super(materialIn, true); }
 }
