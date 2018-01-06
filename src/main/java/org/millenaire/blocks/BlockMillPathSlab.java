@@ -113,11 +113,8 @@ public class BlockMillPathSlab extends BlockSlab
         if (itemIn != Item.getItemFromBlock(MillBlocks.blockMillPathSlabDouble))
         {
             BlockMillPath.EnumType[] aenumtype = BlockMillPath.EnumType.values();
-            int i = aenumtype.length;
 
-            for (int j = 0; j < i; ++j)
-            {
-                BlockMillPath.EnumType enumtype = aenumtype[j];
+            for (BlockMillPath.EnumType enumtype : aenumtype) {
                 list.add(new ItemStack(itemIn, 1, enumtype.getMetadata()));
             }
         }
@@ -164,7 +161,7 @@ public class BlockMillPathSlab extends BlockSlab
     @Override
     protected BlockState createBlockState()
     {
-        return this.isDouble() ? new BlockState(this, new IProperty[] {SEAMLESS, VARIANT}): new BlockState(this, new IProperty[] {HALF, VARIANT});
+        return this.isDouble() ? new BlockState(this, SEAMLESS, VARIANT): new BlockState(this, HALF, VARIANT);
     }
 
 	@Override

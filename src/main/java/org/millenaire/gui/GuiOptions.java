@@ -17,7 +17,7 @@ public class GuiOptions extends GuiScreen
 	private GuiButton yes;
 	private GuiButton no;
 
-	protected GuiOptions(int IDin, String stringIn)
+	GuiOptions(int IDin, String stringIn)
 	{
 		string = I18n.format(stringIn);
 		eventID = IDin;

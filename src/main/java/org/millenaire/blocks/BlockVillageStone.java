@@ -37,7 +37,7 @@ public class BlockVillageStone extends BlockContainer
     {
 		if(worldIn.isRemote)
 		{
-			playerIn.addChatMessage(new ChatComponentText("�8The Village name almost seems to shimmer in the twilight"));
+			playerIn.addChatMessage(new ChatComponentText("The Village name almost seems to shimmer in the twilight"));
 		}
 		
 		TileEntityVillageStone te = (TileEntityVillageStone) worldIn.getTileEntity(pos);
@@ -93,8 +93,5 @@ public class BlockVillageStone extends BlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) 
-	{
-		return new TileEntityVillageStone();
-	}
+	public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityVillageStone(); }
 }

@@ -27,7 +27,7 @@ public class GuiParchment extends GuiScreen
 	private GuiButton forward;
 	private GuiButton backward;
 
-	protected GuiParchment(ItemStack stack)
+	GuiParchment(ItemStack stack)
 	{
 		if(stack.getItem() instanceof ItemMillParchment)
 			item = (ItemMillParchment)stack.getItem();

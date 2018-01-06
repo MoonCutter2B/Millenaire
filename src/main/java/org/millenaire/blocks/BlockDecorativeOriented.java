@@ -2,7 +2,6 @@ package org.millenaire.blocks;
 
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,5 +37,5 @@ public class BlockDecorativeOriented extends BlockDirectional
     public int getMetaFromState(IBlockState state) { return (state.getValue(FACING)).getIndex(); }
 	
 	@Override
-	protected BlockState createBlockState() { return new BlockState(this, new IProperty[] {FACING}); }
+	protected BlockState createBlockState() { return new BlockState(this, FACING); }
 }

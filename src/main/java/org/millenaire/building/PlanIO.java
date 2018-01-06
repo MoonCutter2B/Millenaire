@@ -311,8 +311,7 @@ public class PlanIO {
 			f.mkdirs();
 		}
 
-		File f1 = new File(f, name + ".mlplan");
-		return f1;
+		return new File(f, name + ".mlplan");
 	}
 
 	private static boolean valid(short width, short height, short length, short depth, NBTTagCompound tag) {
@@ -356,7 +355,7 @@ public class PlanIO {
 
 		byte[] blockids = new byte[width*height*length], data = new byte[width*height*length];
 
-		String blocklist = "";
+		StringBuilder blocklist = new StringBuilder();
 		String[] s = new String[width*height*length];
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
@@ -372,12 +371,12 @@ public class PlanIO {
 		}
 
 		for(String s1 : s) {
-			blocklist += s1;
+			blocklist.append(s1);
 		}
 
 		NBTTagList LevelTagComp = new NBTTagList();
 		NBTTagCompound tag2 = new NBTTagCompound();
-		tag2.setString("BlockData", blocklist);
+		tag2.setString("BlockData", blocklist.toString());
 		tag2.setShort("Height", height);
 		tag2.setShort("StartLevel", depth);
 		//tag2.setByteArray("Blocks", blockids);

@@ -12,13 +12,13 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class PlayerTracker implements IExtendedEntityProperties
 {
-	public final static String IDENTIFIER = "Millenaire.PlayerInfo";
+	private final static String IDENTIFIER = "Millenaire.PlayerInfo";
 
 	private final EntityPlayer player;
 	
-	private Map<Item, Boolean> playerCropKnowledge = new HashMap<Item, Boolean>();
-	
-	public PlayerTracker(EntityPlayer player) { this.player = player; }
+	private Map<Item, Boolean> playerCropKnowledge = new HashMap<>();
+
+	private PlayerTracker(EntityPlayer player) { this.player = player; }
 
 	/**
 	 * Used to register these extended properties for the player during EntityConstructing event

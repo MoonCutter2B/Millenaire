@@ -14,8 +14,6 @@ import org.millenaire.building.BuildingPlan;
 import org.millenaire.building.BuildingProject;
 import org.millenaire.building.BuildingTypes;
 import org.millenaire.building.BuildingTypes.BuildingType;
-import org.millenaire.building.PlanIO;
-import org.millenaire.util.ResourceLocationUtil;
 import org.millenaire.village.Village;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,7 +24,7 @@ import net.minecraft.world.World;
 
 public class TileEntityVillageStone extends TileEntity
 {
-	List<EntityMillVillager> currentVillagers = new ArrayList<EntityMillVillager>();
+	private List<EntityMillVillager> currentVillagers = new ArrayList<>();
 
 	//Control Value.  Changed when using wandSummon, if left as 'biome' when onLoad called, culture decided by biome.
 	public String culture = "biome";
@@ -112,27 +110,29 @@ public class TileEntityVillageStone extends TileEntity
 			villagerID = (int)CommonUtilities.getRandomNonzero();
 			boolean checkAgain = false;
 
-			for(int i = 0; i < currentVillagers.size(); i++)
-			{
-				if(currentVillagers.get(i).getGender() == 0)
-					balance++;
-				else
-					balance--;
-
-				if(villagerID == currentVillagers.get(i).villagerID)
+			for (EntityMillVillager currentVillager : currentVillagers) {
+				if (currentVillager.getGender() == 0)
 				{
-					villagerID = (int)CommonUtilities.getRandomNonzero();
+                    balance++;
+                }
+				else
+				{
+                    balance--;
+                }
+
+				if (villagerID == currentVillager.villagerID) {
+					villagerID = (int) CommonUtilities.getRandomNonzero();
 					checkAgain = true;
 				}
 			}
 			while(checkAgain)
 			{
 				checkAgain = false;
-				for(int i = 0; i < currentVillagers.size(); i++)
+				for (EntityMillVillager currentVillager : currentVillagers)
 				{
-					if(villagerID == currentVillagers.get(i).villagerID)
+					if (villagerID == currentVillager.villagerID)
 					{
-						villagerID = (int)CommonUtilities.getRandomNonzero();
+						villagerID = (int) CommonUtilities.getRandomNonzero();
 						checkAgain = true;
 					}
 				}
@@ -158,10 +158,12 @@ public class TileEntityVillageStone extends TileEntity
 		}
 		else
 		{
-			for(int i = 0; i < currentVillagers.size(); i++)
+			for (EntityMillVillager currentVillager : currentVillagers)
 			{
-				if(villagerID == currentVillagers.get(i).villagerID)
-					return currentVillagers.get(i);
+				if (villagerID == currentVillager.villagerID)
+				{
+					return currentVillager;
+				}
 			}
 
 			System.err.println("Attempted to create nonspecific Villager.");

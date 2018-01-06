@@ -17,7 +17,7 @@ public class GuiMillChest extends GuiChest
 	private IInventory lowerChestInventory;
 	private TileEntityMillChest chest;
 	
-	protected GuiMillChest(IInventory playerInv, IInventory chestInv, EntityPlayer playerIn, TileEntityMillChest entityIn)
+	GuiMillChest(IInventory playerInv, IInventory chestInv, EntityPlayer playerIn, TileEntityMillChest entityIn)
 	{
 		super(playerInv, chestInv);
 		System.out.println("GuiCreated");

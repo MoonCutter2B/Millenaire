@@ -12,7 +12,7 @@ public class ItemMillParchment extends ItemWritableBook
 	public String title;
 	public String[] contents;
 
-	protected ItemMillParchment(String titleIn, String[] contentIn)
+	ItemMillParchment(String titleIn, String[] contentIn)
 	{
 		title = titleIn;
 		contents = contentIn;

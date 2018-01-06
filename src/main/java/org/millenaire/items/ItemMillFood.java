@@ -17,7 +17,7 @@ public class ItemMillFood extends ItemFood
 	private int drunkDuration;
 	private int regDuration;
 
-	protected ItemMillFood(int healIn, int regIn, int drunkIn, int hungerIn, float saturationIn, boolean drinkIn)
+	ItemMillFood(int healIn, int regIn, int drunkIn, int hungerIn, float saturationIn, boolean drinkIn)
 	{	
 		super(hungerIn, saturationIn, false);
 

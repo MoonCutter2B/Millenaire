@@ -70,13 +70,10 @@ public class BlockMillOre extends Block {
         static
         {
         	EnumMillOre[] var0 = values();
-            int var1 = var0.length;
 
-            for (int var2 = 0; var2 < var1; ++var2)
-            {
-            	EnumMillOre var3 = var0[var2];
-                META_LOOKUP[var3.getMetadata()] = var3;
-            }
+			for (EnumMillOre var3 : var0) {
+				META_LOOKUP[var3.getMetadata()] = var3;
+			}
         }
 		
 	}

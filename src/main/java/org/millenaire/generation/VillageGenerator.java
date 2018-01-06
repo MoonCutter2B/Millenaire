@@ -46,8 +46,6 @@ public class VillageGenerator implements IWorldGenerator {
 			if(rand.nextInt(50) == 1 && world.getChunkFromBlockCoords(pos).isLoaded()) {
 				world.setBlockState(pos, MillBlocks.villageStone.getDefaultState());
 			}
-			else if(!world.getChunkFromBlockCoords(pos).isLoaded()) {
-			}
 			return false;
 		}
 	}

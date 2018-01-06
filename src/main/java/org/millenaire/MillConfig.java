@@ -196,7 +196,9 @@ public class MillConfig
 		forbiddenBlockProp.set(forbiddenBlocks);
 		
 		if(config.hasChanged())
+		{
 			config.save();
+		}
 	}
 	
 	private static Configuration config = null;

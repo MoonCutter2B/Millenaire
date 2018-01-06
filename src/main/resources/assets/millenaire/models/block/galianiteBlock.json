@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "millenaire:blocks/galianite_block"
+        "all": "millenaire:blocks/galianiteBlock"
     }
 }

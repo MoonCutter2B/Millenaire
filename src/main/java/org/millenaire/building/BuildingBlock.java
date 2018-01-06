@@ -49,14 +49,14 @@ public class BuildingBlock
 	public BlockPos position;
 	public byte specialBlock;
 	
-	protected BuildingBlock(IBlockState state, BlockPos pos, byte special)
+	BuildingBlock(IBlockState state, BlockPos pos, byte special)
 	{
 		blockState = state;
 		position = pos;
 		specialBlock = special;
 	}
 
-	protected BuildingBlock(IBlockState state, BlockPos pos)
+	BuildingBlock(IBlockState state, BlockPos pos)
 	{
 		blockState = state;
 		position = pos;

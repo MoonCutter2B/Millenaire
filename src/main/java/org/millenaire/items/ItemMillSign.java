@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 public class ItemMillSign extends Item
 {
-	protected ItemMillSign() { this.setCreativeTab(Millenaire.tabMillenaire); }
+	ItemMillSign() { this.setCreativeTab(Millenaire.tabMillenaire); }
 
 	/**
 	 * Called when a Block is right-clicked with this Item

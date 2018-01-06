@@ -136,7 +136,7 @@ public class StoredPosition extends Block
     }
 
     @Override
-    protected BlockState createBlockState() { return new BlockState(this, new IProperty[] {VARIANT}); }
+    protected BlockState createBlockState() { return new BlockState(this, VARIANT); }
 	
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -180,11 +180,8 @@ public class StoredPosition extends Block
         static
         {
         	StoredPosition.EnumType[] var0 = values();
-            int var1 = var0.length;
 
-            for (int var2 = 0; var2 < var1; ++var2)
-            {
-            	StoredPosition.EnumType var3 = var0[var2];
+            for (EnumType var3 : var0) {
                 META_LOOKUP[var3.getMetadata()] = var3;
             }
         }

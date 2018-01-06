@@ -21,7 +21,7 @@ public class ItemMillBow extends ItemBow
 
 	private String itemName;
 
-	protected ItemMillBow(float speedFactor, float damageBonus, String nameIn)
+	ItemMillBow(float speedFactor, float damageBonus, String nameIn)
 	{
 		super();
 		this.speedFactor = speedFactor;

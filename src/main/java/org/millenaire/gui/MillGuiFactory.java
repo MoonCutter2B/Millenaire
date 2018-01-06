@@ -43,7 +43,7 @@ public class MillGuiFactory implements IModGuiFactory
 		
 		private static List<IConfigElement> getConfigElements()
 		{
-			List<IConfigElement> list = new ArrayList<IConfigElement>();
+			List<IConfigElement> list = new ArrayList<>();
 			
 			list.add(new DummyCategoryElement("UI Options", "gui.millConfig.ctgy.uiOptions", CategoryEntryUIOptions.class));
 			list.add(new DummyCategoryElement("World Generation Options", "gui.millConfig.ctgy.worldGen", CategoryEntryWorldGen.class));

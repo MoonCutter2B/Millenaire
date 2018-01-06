@@ -107,7 +107,7 @@ public class BlockOrientedSlab extends BlockSlab
             IBlockState iblockstate1 = worldIn.getBlockState(blockpos1);
             boolean flag = isSlabX(iblockstate.getBlock()) && iblockstate.getValue(HALF) == BlockOrientedSlab.EnumBlockHalf.TOP;
             boolean flag1 = isSlabX(iblockstate1.getBlock()) && iblockstate1.getValue(HALF) == BlockOrientedSlab.EnumBlockHalf.TOP;
-            return flag1 ? (side == EnumFacing.DOWN ? true : (side == EnumFacing.UP && super.shouldSideBeRendered(worldIn, pos, side) ? true : !isSlabX(iblockstate.getBlock()) || !flag)) : (side == EnumFacing.UP ? true : (side == EnumFacing.DOWN && super.shouldSideBeRendered(worldIn, pos, side) ? true : !isSlabX(iblockstate.getBlock()) || flag));
+            return flag1 ? (side == EnumFacing.DOWN || (side == EnumFacing.UP && super.shouldSideBeRendered(worldIn, pos, side) || (!isSlabX(iblockstate.getBlock()) || !flag))) : (side == EnumFacing.UP || (side == EnumFacing.DOWN && super.shouldSideBeRendered(worldIn, pos, side) || (!isSlabX(iblockstate.getBlock()) || flag)));
         }
     }
 
@@ -118,7 +118,7 @@ public class BlockOrientedSlab extends BlockSlab
 
         if (this.isDouble())
         {
-            iblockstate = iblockstate.withProperty(SEAMLESS, Boolean.valueOf((meta & 8) != 0));
+            iblockstate = iblockstate.withProperty(SEAMLESS, (meta & 8) != 0);
         }
         else
         {

@@ -18,29 +18,29 @@ public class ItemMillTool
 	static ToolMaterial TOOLS_norman = EnumHelper.addToolMaterial("normanTools", 2, 1561, 10.0F, 4.0F, 10);
 	static ToolMaterial TOOLS_obsidian = EnumHelper.addToolMaterial("obsidianTools", 3, 1561, 6.0F, 2.0F, 25);
 
-	protected static class ItemMillAxe extends ItemAxe
+	static class ItemMillAxe extends ItemAxe
 	{
-		protected ItemMillAxe(ToolMaterial material) { super(material); }
+		ItemMillAxe(ToolMaterial material) { super(material); }
 	}
 
-	protected static class ItemMillShovel extends ItemSpade
+	static class ItemMillShovel extends ItemSpade
 	{
-		protected ItemMillShovel(ToolMaterial material) { super(material); }
+		ItemMillShovel(ToolMaterial material) { super(material); }
 	}
 
-	protected static class ItemMillPickaxe extends ItemPickaxe
+	static class ItemMillPickaxe extends ItemPickaxe
 	{
-		protected ItemMillPickaxe(ToolMaterial material) { super(material); }
+		ItemMillPickaxe(ToolMaterial material) { super(material); }
 	}
 
-	protected static class ItemMillHoe extends ItemHoe
+	static class ItemMillHoe extends ItemHoe
 	{
-		protected ItemMillHoe(ToolMaterial material) { super(material); }
+		ItemMillHoe(ToolMaterial material) { super(material); }
 	}
 	
 	public static class ItemMillMace extends ItemSword
 	{
-		protected ItemMillMace(ToolMaterial material) { super(material); }
+		ItemMillMace(ToolMaterial material) { super(material); }
 		
 		@Override
 		public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)

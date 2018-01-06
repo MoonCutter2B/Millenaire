@@ -33,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMillWand extends Item
 {
-	protected ItemMillWand() { this.setMaxStackSize(1); }
+	ItemMillWand() { this.setMaxStackSize(1); }
 
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)

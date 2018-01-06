@@ -1,19 +1,11 @@
 package org.millenaire.entities;
 
-import org.millenaire.blocks.BlockMillChest;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityMillChest extends TileEntityChest
 {

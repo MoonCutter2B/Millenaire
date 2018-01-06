@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiChief extends GuiScreen
 {
-	final static ResourceLocation CHIEFGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_village_chief.png");
+	private final static ResourceLocation CHIEFGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_village_chief.png");
 	private String string;
 	private int page = 0;
 	private int maxPage = 4;

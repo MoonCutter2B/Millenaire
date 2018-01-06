@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class ItemMillSeeds extends ItemSeeds
 {
 
-	protected ItemMillSeeds(Block crops)
+	ItemMillSeeds(Block crops)
 	{
 		super(crops, Blocks.farmland);
 	}

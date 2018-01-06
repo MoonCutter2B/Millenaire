@@ -39,11 +39,8 @@ public class BlockDecorativeWood extends Block
         if (Block.getBlockFromItem(itemIn) == this)
         {
             BlockDecorativeWood.EnumType[] aenumtype = BlockDecorativeWood.EnumType.values();
-            int i = aenumtype.length;
 
-            for (int j = 0; j < i; ++j)
-            {
-            	BlockDecorativeWood.EnumType enumtype = aenumtype[j];
+            for (EnumType enumtype : aenumtype) {
                 list.add(new ItemStack(itemIn, 1, enumtype.getMetadata()));
             }
         }
@@ -67,7 +64,7 @@ public class BlockDecorativeWood extends Block
     }
 
     @Override
-    protected BlockState createBlockState() { return new BlockState(this, new IProperty[] {VARIANT}); }
+    protected BlockState createBlockState() { return new BlockState(this, VARIANT); }
 
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -109,11 +106,8 @@ public class BlockDecorativeWood extends Block
         static
         {
         	BlockDecorativeWood.EnumType[] var0 = values();
-            int var1 = var0.length;
 
-            for (int var2 = 0; var2 < var1; ++var2)
-            {
-            	BlockDecorativeWood.EnumType var3 = var0[var2];
+            for (EnumType var3 : var0) {
                 META_LOOKUP[var3.getMetadata()] = var3;
             }
         }
