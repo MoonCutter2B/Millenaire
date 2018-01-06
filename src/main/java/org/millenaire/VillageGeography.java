@@ -251,7 +251,7 @@ public class VillageGeography
 			{
 				if (!world.getChunkProvider().chunkExists((startX + mapStartX >> 4) + i, (startZ + mapStartZ >> 4) + j))
 				{
-					return;
+					world.getChunkProvider().provideChunk((startX + mapStartX >> 4) + i, (startZ + mapStartZ >> 4) + j);
 				}
 			}
 		}
@@ -313,6 +313,7 @@ public class VillageGeography
 				{
 					block = null;
 				}
+				//System.out.println("y is " + constructionHeight[mx][mz]);
 
 				boolean onground = true;// used to continue looking for surface
 										// if starting in water
@@ -359,6 +360,7 @@ public class VillageGeography
 						block = null;
 					}
 				}
+				//System.out.println("constHeight is now at " + constructionHeight[mx][mz]);
 
 				if (!onground)
 				{

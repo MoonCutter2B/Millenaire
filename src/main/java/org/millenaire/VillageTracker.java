@@ -1,6 +1,8 @@
 package org.millenaire;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -51,6 +53,21 @@ public class VillageTracker extends WorldSavedData
 			
 			nbt.setTag(e.getKey().toString(), villageTag);
 		}
+	}
+	
+	/**
+	 * @return All Villages within a radius from a Block
+	 */
+	public List<Village> getNearVillages(BlockPos pos, int maxDist) {
+		List<Village> nearby = new ArrayList<Village>();
+		
+		for(Village v : villages.values()) {
+			if(v.getPos().distanceSq(pos) <= maxDist*maxDist) {
+				nearby.add(v);
+			}
+		}
+		
+		return nearby;
 	}
 	
 	public void registerVillage(UUID id, Village vil) { villages.put(id, vil); }

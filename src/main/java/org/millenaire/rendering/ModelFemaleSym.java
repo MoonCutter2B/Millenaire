@@ -33,11 +33,11 @@ public class ModelFemaleSym extends ModelBiped
 		bipedBreast.addBox(-3.5F, 0.75F, -3F, 7, 4, 2, f);
 		bipedBreast.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
 		bipedRightArm = new ModelRenderer(this, 40, 17);
-		bipedRightArm.addBox(-1.5F, -2F, -1.5F, 3, 12, 3, f);
+		bipedRightArm.addBox(-1.5F, -2F, -1.5F, 3, 12, 4, f);
 		bipedRightArm.setRotationPoint(-5F, 2.0F + f1, 0.0F);
 		bipedLeftArm = new ModelRenderer(this, 40, 17);
 		bipedLeftArm.mirror = true;
-		bipedLeftArm.addBox(-1.5F, -2F, -1.5F, 3, 12, 3, f);
+		bipedLeftArm.addBox(-1.5F, -2F, -1.5F, 3, 12, 4, f);
 		bipedLeftArm.setRotationPoint(5F, 2.0F + f1, 0.0F);
 		bipedRightLeg = new ModelRenderer(this, 0, 16);
 		bipedRightLeg.addBox(-2F, 0.0F, -2F, 4, 12, 4, f);

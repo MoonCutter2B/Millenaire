@@ -35,7 +35,7 @@ public class BuildingLocation
 	{
 		orientation = orientIn;
 		position = pos;
-		//this.computeMargins();
+		this.computeMargins();
 	}
 	
 	BuildingLocation(ResourceLocation rl, BlockPos pos, EnumFacing orientIn) {

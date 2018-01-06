@@ -212,7 +212,7 @@ public class PlanIO {
 		for(int x = 0; x < plan.width; x++) {
 			for(int y = 0; y < plan.height; y++) {
 				for(int z = 0; z < plan.length; z++) {
-					world.setBlockState(new BlockPos(x + loc.position.getX() + 1, y + loc.position.getY() + plan.depth, z + loc.position.getZ() + 1), blocks[y][z][x], 2);
+					world.setBlockState(new BlockPos(x + loc.position.getX(), y + loc.position.getY() + plan.depth, z + loc.position.getZ()), blocks[y][z][x], 2);
 				}
 			}
 		}
@@ -271,7 +271,7 @@ public class PlanIO {
 		String name = nbt.getString("BuildingName");
 
 		return new BuildingPlan(culture, level)
-				.setHeightDepth(height, depth).setDistance(3, 7).setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized).setLengthWidth(length, width);
+				.setHeightDepth(height, depth).setDistance(0, 5).setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized).setLengthWidth(length, width);
 	}
 
 	public static NBTTagCompound getBuildingTag(final String name, MillCulture culture, final boolean packaged) {

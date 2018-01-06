@@ -1,5 +1,6 @@
 package org.millenaire.village;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
@@ -16,7 +17,6 @@ import org.millenaire.pathing.MillPathNavigate;
 import org.millenaire.util.ResourceLocationUtil;
 
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class Village {
@@ -32,10 +32,11 @@ public class Village {
 	private Village(BlockPos b, World worldIn, VillageType typeIn, MillCulture cultureIn) {
 		this.setPos(b);
 		this.uuid = UUID.randomUUID();
-		this.geo = new VillageGeography();
 		this.world = worldIn;
 		this.type = typeIn;
 		this.culture = cultureIn;
+		this.geo = new VillageGeography();
+		this.geo.update(world, new ArrayList<BuildingLocation>(), null, mainBlock, 64);
 	}
 	
 	/**
@@ -61,10 +62,12 @@ public class Village {
 			for(BuildingProject proj : type.startingBuildings) {
 				BuildingPlan p = PlanIO.loadSchematic(PlanIO.getBuildingTag(ResourceLocationUtil.getRL(proj.ID).getResourcePath(), culture, true), culture, proj.lvl);
 				
-				EntityMillVillager v = new EntityMillVillager(world, 1, culture);
+				EntityMillVillager v = new EntityMillVillager(world, 100100, culture);
+				v.setPosition(mainBlock.getX(), mainBlock.getY(), mainBlock.getZ());
+				v.setTypeAndGender(MillCulture.normanCulture.getVillagerType("normanKnight"), 1);
 				world.spawnEntityInWorld(v);
 				
-				BuildingLocation loc = p.findBuildingLocation(geo, new MillPathNavigate(v, world), mainBlock, 80, new Random(), p.buildingOrientation);
+				BuildingLocation loc = p.findBuildingLocation(geo, new MillPathNavigate(v, world), mainBlock, 64, new Random(), p.buildingOrientation);
 				PlanIO.placeBuilding(p, loc, world);
 			}
 			return true;

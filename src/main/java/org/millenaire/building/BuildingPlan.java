@@ -1058,19 +1058,6 @@ public class BuildingPlan
 			location.defendPos.add(pos);
 	}
 	
-	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-	
-	//Declarations
-	private static BuildingPlan normanCommunauteA0;
-		
-	public static void preinitialize()
-	{
-		//Norman Buildings
-		normanCommunauteA0 = new BuildingPlan(MillCulture.normanCulture, 0).setNameAndType("Communaut�", new String[]{"normanGuildMaster"}, new String[0]).setLengthWidth(11, 13).setHeightDepth(13, -6).setArea(3).setDistance(0, 1).setOrientation(EnumFacing.getHorizontal(2)).setPlan(
-				new IBlockState[][][]{{{}}});
-		//Hindi Buildings
-	}
-	
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	
 	public static class LocationReturn 

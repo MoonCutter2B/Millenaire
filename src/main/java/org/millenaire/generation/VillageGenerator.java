@@ -3,6 +3,7 @@ package org.millenaire.generation;
 import java.util.Random;
 
 import org.millenaire.MillConfig;
+import org.millenaire.VillageTracker;
 import org.millenaire.blocks.MillBlocks;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,22 +33,20 @@ public class VillageGenerator implements IWorldGenerator {
 	 */
 	private boolean generateVillageAt(Random rand, BlockPos pos, World world) {
 		if(!MillConfig.generateVillages && !MillConfig.generateLoneBuildings || (world.getSpawnPoint().distanceSq(pos) < MillConfig.spawnDistance)) {
-			//System.out.println("testing2");
 			return false;
 		}
 		if(world.isRemote) {
-			//System.out.println("testing3");
+			return false;
+		}
+		if(!VillageTracker.get(world).getNearVillages(pos, MillConfig.minVillageDistance).isEmpty()) {
 			return false;
 		}
 		else {
 			EntityPlayer generatingPlayer = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), -1);
-			//System.out.println("testing4");
 			if(rand.nextInt(50) == 1 && world.getChunkFromBlockCoords(pos).isLoaded()) {
-				//System.out.println("testing5 " + pos.getX() +"," + pos.getZ());
 				world.setBlockState(pos, MillBlocks.villageStone.getDefaultState());
 			}
 			else if(!world.getChunkFromBlockCoords(pos).isLoaded()) {
-				//System.out.println("nope");
 			}
 			return false;
 		}
