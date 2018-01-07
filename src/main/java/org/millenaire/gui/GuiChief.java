@@ -1,7 +1,5 @@
 package org.millenaire.gui;
 
-import java.io.IOException;
-
 import org.millenaire.Millenaire;
 import org.millenaire.gui.GuiParchment.NextPageButton;
 
@@ -11,13 +9,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiChief extends GuiScreen
 {
-	final static ResourceLocation CHIEFGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_village_chief.png");
+	private final static ResourceLocation CHIEFGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_village_chief.png");
 	private String string;
-	int page = 0;
-	int maxPage = 4;
-	
-	GuiButton forward;
-	GuiButton backward;
+	private int page = 0;
+	private int maxPage = 4;
+
+	private GuiButton forward;
+	private GuiButton backward;
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) 
@@ -39,7 +37,7 @@ public class GuiChief extends GuiScreen
 	}
 	
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException 
+	protected void actionPerformed(GuiButton button)
 	{
 	    if (button == this.forward) 
 	    {
@@ -55,20 +53,11 @@ public class GuiChief extends GuiScreen
 	
 	private void updateButtons()
 	{
-		if(page == 0)
-			this.backward.visible = false;
-		else
-			this.backward.visible = true;
-		
-		if(page == maxPage - 1)
-			this.forward.visible = false;
-		else
-			this.forward.visible = true;
+		this.backward.visible = page != 0;
+
+		this.forward.visible = page != maxPage - 1;
 	}
 	
 	@Override
-	public boolean doesGuiPauseGame() 
-	{
-	    return false;
-	}
+	public boolean doesGuiPauseGame() { return false; }
 }

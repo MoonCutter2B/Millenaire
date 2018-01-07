@@ -2,10 +2,7 @@ package org.millenaire.items;
 
 import java.util.List;
 
-import org.millenaire.Millenaire;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -28,7 +23,7 @@ public class ItemMillAmulet extends Item
 	private int[] colorYggdrasil = new int[]{396556, 990493, 1453614, 2113086, 2576206, 3104864, 3698799, 4227457, 4755857, 5350050, 5878706, 6407106, 7001299, 7464165, 8058100, 8388606, 
 			8781823, 9306111, 9895935, 10420223, 10944511, 11534335, 12058623, 12648447, 13172735, 13762559, 14286847, 14876671, 15400959, 15925247, 16515071, 16777213};
 
-	public ItemMillAmulet()
+	ItemMillAmulet()
 	{
 
 	}
@@ -106,7 +101,7 @@ public class ItemMillAmulet extends Item
 
 		if(this == MillItems.amuletVishnu && entityIn instanceof EntityPlayer)
 		{
-			double level = 0;
+			double level;
 			final int radius = 20;
 			double closestDistance = Double.MAX_VALUE;
 
@@ -132,9 +127,13 @@ public class ItemMillAmulet extends Item
 			int level = (int) Math.floor(entityIn.posY);
 
 			if(level > 255)
+			{
 				level = 255;
-			if(level < 0)
-				level = 0;
+			}
+			else if(level < 0)
+			{
+			level = 0;
+			}
 
 			visScore = level / 8;
 		}
@@ -178,10 +177,7 @@ public class ItemMillAmulet extends Item
 		return 16777215;
 	}
 
-	public int getItemStackLimit(ItemStack stack)
-	{
-		return 1;
-	}
+	public int getItemStackLimit(ItemStack stack) { return 1; }
 
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)

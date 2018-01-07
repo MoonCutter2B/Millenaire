@@ -19,10 +19,7 @@ public class BlockDecorativeStone extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeStone.EnumType.class);
 	
-	public BlockDecorativeStone() 
-	{
-		super(Material.rock);
-	}
+	BlockDecorativeStone() { super(Material.rock); }
 	
 	@Override
     public int damageDropped(IBlockState state)
@@ -30,10 +27,7 @@ public class BlockDecorativeStone extends Block
         return ((BlockDecorativeStone.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -42,11 +36,8 @@ public class BlockDecorativeStone extends Block
         if (Block.getBlockFromItem(itemIn) == this)
         {
             BlockDecorativeStone.EnumType[] aenumtype = BlockDecorativeStone.EnumType.values();
-            int i = aenumtype.length;
 
-            for (int j = 0; j < i; ++j)
-            {
-            	BlockDecorativeStone.EnumType enumtype = aenumtype[j];
+            for (EnumType enumtype : aenumtype) {
                 list.add(new ItemStack(itemIn, 1, enumtype.getMetadata()));
             }
         }
@@ -70,10 +61,7 @@ public class BlockDecorativeStone extends Block
     }
 
     @Override
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {VARIANT});
-    }
+    protected BlockState createBlockState() { return new BlockState(this, VARIANT); }
 
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -87,21 +75,15 @@ public class BlockDecorativeStone extends Block
         private final int meta;
         private final String name;
 
-        private EnumType(int meta, String name)
+        EnumType(int meta, String name)
         {
             this.meta = meta;
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        public String toString() { return this.name; }
 
         public static BlockDecorativeStone.EnumType byMetadata(int meta)
         {
@@ -113,24 +95,15 @@ public class BlockDecorativeStone extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {
         	BlockDecorativeStone.EnumType[] var0 = values();
-            int var1 = var0.length;
 
-            for (int var2 = 0; var2 < var1; ++var2)
-            {
-            	BlockDecorativeStone.EnumType var3 = var0[var2];
+            for (EnumType var3 : var0) {
                 META_LOOKUP[var3.getMetadata()] = var3;
             }
         }

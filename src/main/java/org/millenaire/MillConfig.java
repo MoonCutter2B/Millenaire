@@ -59,31 +59,18 @@ public class MillConfig
 		MinecraftForge.EVENT_BUS.register(new MillenaireEventHandler());
 	}
 	
-	public static Configuration getConfig()
-	{
-		return config;
-	}
+	public static Configuration getConfig() { return config; }
 	
-	public static void syncFromFile()
-	{
-		syncConfig(true, true);
-	}
+	public static void syncFromFile() { syncConfig(true, true); }
 	
-	public static void syncFromGui()
-	{
-		syncConfig(false, true);
-	}
+	public static void syncFromGui() { syncConfig(false, true); }
 	
-	public static void syncFromFields()
-	{
-		syncConfig(false, false);
-	}
+	public static void syncFromFields() { syncConfig(false, false); }
 	
 	private static void syncConfig(boolean loadConfigFromFile, boolean readFieldsFromConfig)
 	{
 		//Load
-		if(loadConfigFromFile)
-			config.load();
+		if(loadConfigFromFile) { config.load(); }
 		
 		//Define
 		Property learnLanguagesProp = config.get(CATEGORYUIOPTIONS, "learnLanguages", true);
@@ -127,34 +114,37 @@ public class MillConfig
 		Property forbiddenBlockProp = config.get(CATEGORYVILLAGEBEV, "forbiddenBlocks", "forbidden: ");
 		forbiddenBlockProp.setLanguageKey("gui.millconfig.forbiddenBlocks").setRequiresMcRestart(true);
 		
-			//Ordering Config
-			List<String> propOrderUIOptions = new ArrayList<String>();
-			propOrderUIOptions.add(learnLanguagesProp.getName());
-			propOrderUIOptions.add(villageAnnouncementProp.getName());
-			propOrderUIOptions.add(displayNamesProp.getName());
-			propOrderUIOptions.add(nameDistanceProp.getName());
-			propOrderUIOptions.add(dialogueDistanceProp.getName());
-			config.setCategoryPropertyOrder(CATEGORYUIOPTIONS, propOrderUIOptions);
-			
-			List<String> propOrderWorldGen = new ArrayList<String>();
-			propOrderWorldGen.add(generateVillagesProp.getName());
-			propOrderWorldGen.add(generateLoneBuildingsProp.getName());
-			propOrderWorldGen.add(minVillageDistanceProp.getName());
-			propOrderWorldGen.add(minLoneDistanceProp.getName());
-			propOrderWorldGen.add(minVillageLoneDistanceProp.getName());
-			propOrderWorldGen.add(spawnDistanceProp.getName());
-			config.setCategoryPropertyOrder(CATEGORYWORLDGEN, propOrderWorldGen);
-			
-			List<String> propOrderVillageBev = new ArrayList<String>();
-			propOrderVillageBev.add(loadedRadiusProp.getName());
-			propOrderVillageBev.add(minBuildingDistanceProp.getName());
-			propOrderVillageBev.add(maxChildrenProp.getName());
-			propOrderVillageBev.add(buildPathsProp.getName());
-			propOrderVillageBev.add(villageRelationDistanceProp.getName());
-			propOrderVillageBev.add(banditRaidDistanceProp.getName());
-			propOrderVillageBev.add(raidPercentChanceProp.getName());
-			propOrderVillageBev.add(forbiddenBlockProp.getName());
-			config.setCategoryPropertyOrder(CATEGORYVILLAGEBEV, propOrderVillageBev);
+		//Ordering Config
+		List<String> propOrderUIOptions = new ArrayList<String>() {{
+			add(learnLanguagesProp.getName());
+			add(villageAnnouncementProp.getName());
+			add(displayNamesProp.getName());
+			add(nameDistanceProp.getName());
+			add(dialogueDistanceProp.getName());
+		}};
+		config.setCategoryPropertyOrder(CATEGORYUIOPTIONS, propOrderUIOptions);
+
+		List<String> propOrderWorldGen = new ArrayList<String>() {{
+            add(generateVillagesProp.getName());
+            add(generateLoneBuildingsProp.getName());
+            add(minVillageDistanceProp.getName());
+            add(minLoneDistanceProp.getName());
+            add(minVillageLoneDistanceProp.getName());
+            add(spawnDistanceProp.getName());
+        }};
+		config.setCategoryPropertyOrder(CATEGORYWORLDGEN, propOrderWorldGen);
+
+		List<String> propOrderVillageBev = new ArrayList<String>() {{
+            add(loadedRadiusProp.getName());
+            add(minBuildingDistanceProp.getName());
+            add(maxChildrenProp.getName());
+            add(buildPathsProp.getName());
+            add(villageRelationDistanceProp.getName());
+            add(banditRaidDistanceProp.getName());
+            add(raidPercentChanceProp.getName());
+            add(forbiddenBlockProp.getName());
+        }};
+		config.setCategoryPropertyOrder(CATEGORYVILLAGEBEV, propOrderVillageBev);
 		
 		//Read
 		if(readFieldsFromConfig)
@@ -206,23 +196,23 @@ public class MillConfig
 		forbiddenBlockProp.set(forbiddenBlocks);
 		
 		if(config.hasChanged())
+		{
 			config.save();
+		}
 	}
 	
 	private static Configuration config = null;
-	
-	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-	
-	public static class ConfigEventHandler
-	{
-		@SubscribeEvent(priority = EventPriority.NORMAL)
-		public void onEvent(ConfigChangedEvent.OnConfigChangedEvent event)
-		{
-			if(event.modID == Millenaire.MODID && !event.isWorldRunning)
-			{
-				syncFromGui();
-				System.out.println("Reloaded Config");
-			}
-		}
-	}
+
+    public static class ConfigEventHandler
+    {
+        @SubscribeEvent(priority = EventPriority.NORMAL)
+        public void onEvent(ConfigChangedEvent.OnConfigChangedEvent event)
+        {
+            if(event.modID.equals(Millenaire.MODID) && !event.isWorldRunning)
+            {
+                syncFromGui();
+                System.out.println("Reloaded Config");
+            }
+        }
+    }
 }

@@ -205,6 +205,18 @@ public class PlanIO {
 			Millenaire.simpleNetworkWrapper.sendTo(message, (EntityPlayerMP)player);
 		}
 	}
+	
+	public static void placeBuilding(BuildingPlan plan, BuildingLocation loc, World world) {
+		IBlockState[][][] blocks = plan.buildingArray;
+
+		for(int x = 0; x < plan.width; x++) {
+			for(int y = 0; y < plan.height; y++) {
+				for(int z = 0; z < plan.length; z++) {
+					world.setBlockState(new BlockPos(x + loc.position.getX(), y + loc.position.getY() + plan.depth, z + loc.position.getZ()), blocks[y][z][x], 2);
+				}
+			}
+		}
+	}
 
 	public static BuildingPlan loadSchematic(NBTTagCompound nbt, MillCulture culture, int level) throws IOException {
 		//Convert Stream to NBTTagCompound
@@ -223,14 +235,13 @@ public class PlanIO {
 		NBTTagList list = nbt.getTagList("level_" + level, Constants.NBT.TAG_COMPOUND);
 		String blockdata = list.getCompoundTagAt(0).getString("BlockData");
 		height = list.getCompoundTagAt(0).getShort("Height");
-		System.out.println(blockdata);
+		//System.out.println(blockdata);
 		String[] split = blockdata.split(";");
 		blocks = new int[split.length];
 		data = new int[split.length];
 		for(int i = 0; i <= split.length -1; i++) {
 			String s = split[i];
 			String[] s1 = s.split(":");
-			System.out.println(s);
 			blocks[i] = Integer.parseInt(s1[0]);
 			data[i] = Integer.parseInt(s1[1]);
 		}
@@ -260,7 +271,7 @@ public class PlanIO {
 		String name = nbt.getString("BuildingName");
 
 		return new BuildingPlan(culture, level)
-				.setHeightDepth(height, depth).setDistance(0, 1).setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized);
+				.setHeightDepth(height, depth).setDistance(0, 5).setOrientation(EnumFacing.getHorizontal(2)).setPlan(organized).setLengthWidth(length, width);
 	}
 
 	public static NBTTagCompound getBuildingTag(final String name, MillCulture culture, final boolean packaged) {
@@ -276,9 +287,12 @@ public class PlanIO {
 		else {
 			try {
 				File f1 = getBuildingFile(name);
-				if(!f1.exists()) 
+				if(!f1.exists())
+				{
 					return new NBTTagCompound();
-				else {
+				}
+				else
+				{
 					FileInputStream fis = new FileInputStream(f1);
 					return CompressedStreamTools.readCompressed(fis);
 				}
@@ -288,17 +302,16 @@ public class PlanIO {
 				return new NBTTagCompound();
 			}
 		}
-
-
 	}
 
-	public static File getBuildingFile(final String name) {
+	private static File getBuildingFile(final String name) {
 		File f = new File(MinecraftServer.getServer().getDataDirectory().getAbsolutePath() + File.separator + "millenaire" + File.separator + "exports" + File.separator);
 		if(!f.exists())
+		{
 			f.mkdirs();
+		}
 
-		File f1 = new File(f, name + ".mlplan");
-		return f1;
+		return new File(f, name + ".mlplan");
 	}
 
 	private static boolean valid(short width, short height, short length, short depth, NBTTagCompound tag) {
@@ -329,7 +342,7 @@ public class PlanIO {
 	 * @return the file that is outputted to disk
 	 * @throws Exception 
 	 */
-	public static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, EntityPlayer player) throws Exception {
+	private static File exportToSchem(IBlockState[][][] blocks, short width, short height, short length, short depth, String name, int level, EntityPlayer player) throws Exception {
 		File f1 = getBuildingFile(name);
 
 		NBTTagCompound tag = getBuildingTag(name, null, false);
@@ -342,7 +355,7 @@ public class PlanIO {
 
 		byte[] blockids = new byte[width*height*length], data = new byte[width*height*length];
 
-		String blocklist = "";
+		StringBuilder blocklist = new StringBuilder();
 		String[] s = new String[width*height*length];
 		for(int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
@@ -358,12 +371,12 @@ public class PlanIO {
 		}
 
 		for(String s1 : s) {
-			blocklist += s1;
+			blocklist.append(s1);
 		}
 
 		NBTTagList LevelTagComp = new NBTTagList();
 		NBTTagCompound tag2 = new NBTTagCompound();
-		tag2.setString("BlockData", blocklist);
+		tag2.setString("BlockData", blocklist.toString());
 		tag2.setShort("Height", height);
 		tag2.setShort("StartLevel", depth);
 		//tag2.setByteArray("Blocks", blockids);

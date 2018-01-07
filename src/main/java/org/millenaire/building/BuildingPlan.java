@@ -12,7 +12,6 @@ import org.millenaire.blocks.BlockDecorativeEarth;
 import org.millenaire.blocks.BlockDecorativeStone;
 import org.millenaire.blocks.BlockDecorativeWood;
 import org.millenaire.blocks.BlockMillChest;
-import org.millenaire.blocks.BlockMillPath;
 import org.millenaire.blocks.MillBlocks;
 import org.millenaire.blocks.StoredPosition;
 import org.millenaire.pathing.MillPathNavigate;
@@ -62,7 +61,7 @@ public class BuildingPlan
 	public int pathLevel = 0;
 	public int pathWidth = 2;
 	public boolean rebuildPath = false;
-	
+
 	public BuildingPlan(MillCulture cultureIn, int level)
 	{
 		
@@ -94,7 +93,7 @@ public class BuildingPlan
 		
 		//computeCost();
 	}
-	
+
 	public BuildingPlan setLengthWidth(int lenIn, int widIn)
 	{
 		this.length = lenIn;
@@ -113,7 +112,7 @@ public class BuildingPlan
 		
 		return this;
 	}
-	
+
 	public BuildingPlan setArea(int areaIn)
 	{
 		this.areaToClear = areaIn;
@@ -142,7 +141,7 @@ public class BuildingPlan
 		
 		return this;
 	}
-	
+
 	public BuildingPlan setNameAndType(String nameIn, String[] maleIn, String[] femaleIn)
 	{
 		this.nativeName = nameIn;
@@ -258,13 +257,8 @@ public class BuildingPlan
 	
 	private boolean freeBuild(IBlockState state)
 	{
-		if(state.getBlock() == Blocks.dirt || state.getBlock() == Blocks.water || state.getBlock() == Blocks.leaves || state.getBlock() == Blocks.leaves2 || state.getBlock() == Blocks.grass || state.getBlock() == Blocks.tallgrass || state.getBlock() == Blocks.red_flower || state.getBlock() == Blocks.yellow_flower || state.getBlock() == Blocks.double_plant || state.getBlock() == Blocks.deadbush
-				|| state.getBlock() == MillBlocks.blockMillPath || state.getBlock() == MillBlocks.blockMillPathSlab || state.equals(MillBlocks.blockDecorativeEarth.getDefaultState().withProperty(BlockDecorativeEarth.VARIANT, BlockDecorativeEarth.EnumType.DIRTWALL)))
-		{
-			return true;
-		}
-		else
-			return false;
+		return state.getBlock() == Blocks.dirt || state.getBlock() == Blocks.water || state.getBlock() == Blocks.leaves || state.getBlock() == Blocks.leaves2 || state.getBlock() == Blocks.grass || state.getBlock() == Blocks.tallgrass || state.getBlock() == Blocks.red_flower || state.getBlock() == Blocks.yellow_flower || state.getBlock() == Blocks.double_plant || state.getBlock() == Blocks.deadbush
+				|| state.getBlock() == MillBlocks.blockMillPath || state.getBlock() == MillBlocks.blockMillPathSlab || state.equals(MillBlocks.blockDecorativeEarth.getDefaultState().withProperty(BlockDecorativeEarth.VARIANT, BlockDecorativeEarth.EnumType.DIRTWALL));
 	}
 	
 	private void computeCost()
@@ -310,7 +304,6 @@ public class BuildingPlan
 						plankAcaciaCost++;
 					else if (state.getBlock() == Blocks.planks && state.getValue(BlockPlanks.VARIANT) == BlockPlanks.EnumType.DARK_OAK)
 						plankDarkCost++;
-
 					else if (state.getBlock() == MillBlocks.byzantineTile)
 						byzBricksHalf += 2;
 					else if (state.getBlock() == MillBlocks.byzantineTileSlab)
@@ -320,7 +313,6 @@ public class BuildingPlan
 						byzBricksHalf++;
 						addToCost(new ItemStack(Blocks.stone), 1);
 					}
-
 					else if (state.getBlock() == Blocks.glass_pane || state.getBlock() == Blocks.stained_glass_pane)
 						glassPaneCost++;
 					else if (state.getBlock() == Blocks.glass || state.getBlock() == Blocks.stained_glass)
@@ -363,7 +355,6 @@ public class BuildingPlan
 						addToCost(new ItemStack(Blocks.stone), 2);
 					else if (state.getBlock() == Blocks.stonebrick)
 						addToCost(new ItemStack(Blocks.stone), 1);
-					
 					else if (state.getBlock() == Blocks.stone_slab && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.STONE)
 						addToCost(new ItemStack(Blocks.stone), 1);
 					else if (state.getBlock() == Blocks.stone_slab && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.SAND)
@@ -376,7 +367,6 @@ public class BuildingPlan
 						addToCost(new ItemStack(Blocks.brick_block), 1);
 					else if (state.getBlock() == Blocks.stone_slab && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.SMOOTHBRICK)
 						addToCost(new ItemStack(Blocks.stone), 1);
-
 					else if (state.getBlock() == Blocks.wooden_slab && state.getValue(BlockWoodSlab.VARIANT) == BlockPlanks.EnumType.OAK)
 						plankOakCost++;
 					else if (state.getBlock() == Blocks.wooden_slab && state.getValue(BlockWoodSlab.VARIANT) == BlockPlanks.EnumType.SPRUCE)
@@ -389,13 +379,10 @@ public class BuildingPlan
 						plankAcaciaCost++;
 					else if (state.getBlock() == Blocks.wooden_slab && state.getValue(BlockWoodSlab.VARIANT) == BlockPlanks.EnumType.DARK_OAK)
 						plankDarkCost++;
-
 					else if (state.getBlock() == Blocks.wool)
 						addToCost(new ItemStack (Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 1);
-
 					else if (state.getBlock() == Blocks.nether_wart)
 						addToCost(new ItemStack(Items.nether_wart), 1);
-
 					else if (state.getBlock() == Blocks.double_stone_slab && state.getValue(BlockStoneSlab.VARIANT) == BlockStoneSlab.EnumType.STONE)
 						addToCost(new ItemStack(Blocks.stone), 1);
 					else if (state.getBlock() == Blocks.iron_block)
@@ -461,8 +448,6 @@ public class BuildingPlan
 					}					
 					else if (state.getBlock() == MillBlocks.emptySericulture)
 						plankCost += 4;
-
-
 					else if (state.getBlock() != Blocks.air && !freeBuild(state))
 					{
 						addToCost(new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)), 1);
@@ -832,7 +817,7 @@ public class BuildingPlan
 					IBlockState state = buildingArray[ai][j][ak];
 
 					BlockPos p = adjustForOrientation(x, y + ai + depth, z, j - lengthOffset, ak - widthOffset, orientation);
-					for(IProperty prop : (java.util.Set<IProperty>)state.getProperties().keySet())
+					for(IProperty prop : state.getProperties().keySet())
 			        {
 			            if(prop.getName().equals("facing"))
 			            {
@@ -898,7 +883,7 @@ public class BuildingPlan
 					IBlockState state = buildingArray[ai][j][ak];
 
 					BlockPos p = adjustForOrientation(x, y + ai + depth, z, j - lengthOffset, ak - widthOffset, orientation);
-					for(IProperty prop : (java.util.Set<IProperty>)state.getProperties().keySet())
+					for(IProperty prop : state.getProperties().keySet())
 			        {
 			            if(prop.getName().equals("facing"))
 			            {
@@ -1003,8 +988,8 @@ public class BuildingPlan
 		
 		return abblocks;
 	}
-	
-	public static BlockPos adjustForOrientation(final int x, final int y, final int z, final int xoffset, final int zoffset, final EnumFacing orientation) 
+
+	private static BlockPos adjustForOrientation(final int x, final int y, final int z, final int xoffset, final int zoffset, final EnumFacing orientation)
 	{
 		BlockPos pos = new BlockPos(x, y, z);
 		if (orientation == EnumFacing.SOUTH)
@@ -1019,16 +1004,8 @@ public class BuildingPlan
 		return pos;
 	}
 	
-	private boolean firstPass(IBlockState state)
-	{
-		if(state.getBlock().getCreativeTabToDisplayOn() == CreativeTabs.tabBlock)
-			return true;
-		else if(state.getBlock() instanceof BlockDecorativeEarth || state.getBlock() instanceof BlockDecorativeWood || state.getBlock() instanceof BlockDecorativeStone)
-			return true;
-		else if(state.getBlock() == MillBlocks.byzantineStoneTile || state.getBlock() == MillBlocks.byzantineTile || state.getBlock() == MillBlocks.byzantineTileSlab || state.getBlock() == MillBlocks.byzantineTileSlabDouble)
-			return true;
-		else
-			return false;
+	private boolean firstPass(IBlockState state) {
+		return state.getBlock().getCreativeTabToDisplayOn() == CreativeTabs.tabBlock || state.getBlock() instanceof BlockDecorativeEarth || state.getBlock() instanceof BlockDecorativeWood || state.getBlock() instanceof BlockDecorativeStone || state.getBlock() == MillBlocks.byzantineStoneTile || state.getBlock() == MillBlocks.byzantineTile || state.getBlock() == MillBlocks.byzantineTileSlab || state.getBlock() == MillBlocks.byzantineTileSlabDouble;
 	}
 	
 	private void setReferencePositions(IBlockState state, BlockPos pos, BuildingLocation location)
@@ -1056,19 +1033,6 @@ public class BuildingPlan
 			location.hidePos.add(pos);
 		else if(state.getBlock() == MillBlocks.storedPosition && state.getValue(StoredPosition.VARIANT) == StoredPosition.EnumType.DEFENDPOS)
 			location.defendPos.add(pos);
-	}
-	
-	//////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-	
-	//Declarations
-		public static BuildingPlan normanCommunauteA0;
-		
-	public static void preinitialize()
-	{
-		//Norman Buildings
-		normanCommunauteA0 = new BuildingPlan(MillCulture.normanCulture, 0).setNameAndType("Communaut�", new String[]{"normanGuildMaster"}, new String[0]).setLengthWidth(11, 13).setHeightDepth(13, -6).setArea(3).setDistance(0, 1).setOrientation(EnumFacing.getHorizontal(2)).setPlan(
-				new IBlockState[][][]{{{}}});
-		//Hindi Buildings
 	}
 	
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -1151,10 +1115,9 @@ public class BuildingPlan
 					System.err.println("Error! - Resource computed with unidentifed OreID.");
 					return 0;
 				}
-				
-				for(int i = 0; i < odStack.size(); i++)
-				{
-					if(stackIn.getIsItemStackEqual(odStack.get(i)))
+
+				for (ItemStack anOdStack : odStack) {
+					if (stackIn.getIsItemStackEqual(anOdStack))
 						return amount;
 				}
 			}

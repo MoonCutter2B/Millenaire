@@ -18,11 +18,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockDecorativeEarth extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeEarth.EnumType.class);
-	
-	public BlockDecorativeEarth() 
-	{
-		super(Material.ground);
-	}
+
+    BlockDecorativeEarth() { super(Material.ground); }
 	
 	@Override
     public int damageDropped(IBlockState state)
@@ -30,10 +27,7 @@ public class BlockDecorativeEarth extends Block
         return ((BlockDecorativeEarth.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -42,11 +36,8 @@ public class BlockDecorativeEarth extends Block
         if (Block.getBlockFromItem(itemIn) == this)
         {
             BlockDecorativeEarth.EnumType[] aenumtype = BlockDecorativeEarth.EnumType.values();
-            int i = aenumtype.length;
 
-            for (int j = 0; j < i; ++j)
-            {
-            	BlockDecorativeEarth.EnumType enumtype = aenumtype[j];
+            for (EnumType enumtype : aenumtype) {
                 list.add(new ItemStack(itemIn, 1, enumtype.getMetadata()));
             }
         }
@@ -72,7 +63,7 @@ public class BlockDecorativeEarth extends Block
     @Override
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {VARIANT});
+        return new BlockState(this, VARIANT);
     }
 
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -86,21 +77,15 @@ public class BlockDecorativeEarth extends Block
         private final int meta;
         private final String name;
 
-        private EnumType(int meta, String name)
+        EnumType(int meta, String name)
         {
             this.meta = meta;
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        public String toString() { return this.name; }
 
         public static BlockDecorativeEarth.EnumType byMetadata(int meta)
         {
@@ -112,24 +97,15 @@ public class BlockDecorativeEarth extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {
         	BlockDecorativeEarth.EnumType[] var0 = values();
-            int var1 = var0.length;
 
-            for (int var2 = 0; var2 < var1; ++var2)
-            {
-            	BlockDecorativeEarth.EnumType var3 = var0[var2];
+            for (EnumType var3 : var0) {
                 META_LOOKUP[var3.getMetadata()] = var3;
             }
         }

@@ -1,7 +1,5 @@
 package org.millenaire.building;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -14,9 +12,7 @@ import org.millenaire.util.ItemRateWrapper;
 import org.millenaire.util.ResourceLocationUtil;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 
 public class BuildingTypes {
@@ -30,34 +26,28 @@ public class BuildingTypes {
 		
 		for(String building : buildings) {
 			ResourceLocation loc = new ResourceLocation(building);
-			InputStream file = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + culture.cultureName.toLowerCase() + "/buildings/" + loc.getResourcePath() + ".json");
+			InputStream file = MillCulture.class.getClassLoader().getResourceAsStream("assets/millenaire/cultures/" + loc.getResourceDomain() + "/buildings/" + loc.getResourcePath() + ".json");
 			BuildingType type = new Gson().fromJson(new InputStreamReader(file), BuildingType.class);
 			buildingCache.put(loc, type);
 		}
 	}
 	
-	public static BuildingType getTypeByID(ResourceLocation rl) {
-		return buildingCache.get(rl);
-	}
+	public static BuildingType getTypeByID(ResourceLocation rl) { return buildingCache.get(rl); }
 	
 	public static BuildingType getTypeFromProject(BuildingProject proj) {
 		return buildingCache.get(ResourceLocationUtil.getRL(proj.ID));
 	}
 	
-	public static Map<ResourceLocation, BuildingType> getCache() {
-		return buildingCache;
-	}
+	public static Map<ResourceLocation, BuildingType> getCache() { return buildingCache; }
 	
 	public static class BuildingType {
 		
-		protected String identifier;
+		private String identifier;
 		protected List<ItemRateWrapper> itemrates = new ArrayList<ItemRateWrapper>();
 		
 		public BuildingType() {}
 		
-		public BuildingType(ResourceLocation cultureandname) {
-			identifier = ResourceLocationUtil.getString(cultureandname);
-		}
+		public BuildingType(ResourceLocation cultureandname) { identifier = ResourceLocationUtil.getString(cultureandname); }
 		
 		public BuildingPlan loadBuilding() {
 			ResourceLocation s = ResourceLocationUtil.getRL(identifier);

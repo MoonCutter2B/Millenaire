@@ -28,7 +28,7 @@ public class BlockMillCrops extends BlockCrops
 	
 	private IPlantable seed;
 	
-	public BlockMillCrops(boolean irrigationIn, boolean growthIn)
+	BlockMillCrops(boolean irrigationIn, boolean growthIn)
 	{
 		super();
 		
@@ -43,7 +43,7 @@ public class BlockMillCrops extends BlockCrops
 
         if (worldIn.getLightFromNeighbors(pos.up()) >= 9)
         {
-            int i = ((Integer)state.getValue(AGE)).intValue();
+            int i = state.getValue(AGE);
 
             if (i < 7)
             {
@@ -53,14 +53,14 @@ public class BlockMillCrops extends BlockCrops
                 {
                 	if (rand.nextInt((int)(25.0F / f) + 1) == 0)
                 	{
-                		worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(i + 1)), 2);
+                		worldIn.setBlockState(pos, state.withProperty(AGE, i + 1), 2);
                 	}
                 }
             }
         }
     }
 	
-	protected float getLocalGrowthChance(Block blockIn, World worldIn, BlockPos pos)
+	private float getLocalGrowthChance(Block blockIn, World worldIn, BlockPos pos)
 	{
 		IBlockState groundIn = worldIn.getBlockState(pos.down());
 		if(groundIn.getBlock() != Blocks.farmland)
@@ -68,28 +68,25 @@ public class BlockMillCrops extends BlockCrops
 			System.err.println("BlockMillCrop growth logic not applied, unrecognized farmland");
 			return getGrowthChance(blockIn, worldIn, pos);
 		}
-		if(requiresIrrigation && groundIn.getValue(BlockFarmland.MOISTURE) < 1)
-			return 0.0F;
+		if(requiresIrrigation && groundIn.getValue(BlockFarmland.MOISTURE) < 1) { return 0.0F; }
 		else
 		{
 			if(slowGrowth)
+			{
 				return getGrowthChance(blockIn, worldIn, pos) / 2;
+			}
 			else
+			{
 				return getGrowthChance(blockIn, worldIn, pos);
+			}
 		}
 	}
 	
 	@Override
-    public Item getSeed()
-    {
-        return (Item)seed;
-    }
+    public Item getSeed() { return (Item)seed; }
 
 	@Override
-    protected Item getCrop()
-    {
-        return (Item)seed;
-    }
+    protected Item getCrop() { return (Item)seed; }
 	
 	public Block setSeed(final IPlantable seedIn) 
 	{

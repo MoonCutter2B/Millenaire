@@ -1,7 +1,6 @@
 package org.millenaire.blocks;
 
 import org.millenaire.Millenaire;
-import org.millenaire.blocks.BlockMillOre.EnumMillOre;
 import org.millenaire.entities.TileEntityMillChest;
 import org.millenaire.entities.TileEntityMillSign;
 import org.millenaire.entities.TileEntityVillageStone;

@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockMillSign extends BlockWallSign
 {
-	public BlockMillSign()
+	BlockMillSign()
 	{
 		super();
 
@@ -34,24 +34,14 @@ public class BlockMillSign extends BlockWallSign
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return null;
-	}
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) { return null; }
 	
 	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
+	public boolean isOpaqueCube() { return false; }
 	
 	@Override
-	public int getRenderType() {
-		return -1;
-	}
+	public int getRenderType() { return -1; }
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
-	{
-		return new TileEntityMillSign();
-	}
+	public TileEntity createNewTileEntity(World worldIn, int meta) { return new TileEntityMillSign(); }
 }

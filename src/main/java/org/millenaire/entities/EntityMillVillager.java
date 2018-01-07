@@ -38,7 +38,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 public class EntityMillVillager extends EntityCreature
 {
 	public int villagerID;
-	public MillCulture culture;
+	private MillCulture culture;
 	private VillagerType type;
 	private final static int TEXTURE = 13;
 	private final static int AGE = 14;
@@ -60,7 +60,7 @@ public class EntityMillVillager extends EntityCreature
 		addTasks();
 	}
 
-	public EntityMillVillager(World worldIn, int idIn, MillCulture cultureIn) 
+	public EntityMillVillager(World worldIn, int idIn, MillCulture cultureIn)
 	{
 		super(worldIn);
 		villagerID = idIn;
@@ -118,49 +118,22 @@ public class EntityMillVillager extends EntityCreature
 		return this;
 	}
 	
-	public void setChild()
-	{
-		this.dataWatcher.updateObject(AGE, 1);
-	}
+	public void setChild() { this.dataWatcher.updateObject(AGE, 1); }
 	
-	public void setName(String nameIn)
-	{
-		this.dataWatcher.updateObject(NAME, nameIn);
-	}
+	public void setName(String nameIn) { this.dataWatcher.updateObject(NAME, nameIn); }
 	
-	public String getTexture()
-	{
-		return this.dataWatcher.getWatchableObjectString(13);
-	}
+	public String getTexture() { return this.dataWatcher.getWatchableObjectString(13); }
 	
-	public int getGender()
-	{
-		return dataWatcher.getWatchableObjectInt(GENDER);
-	}
+	public int getGender() { return dataWatcher.getWatchableObjectInt(GENDER); }
 	
-	public String getName()
-	{
-		return this.dataWatcher.getWatchableObjectString(NAME);
-	}
+	public String getName() { return this.dataWatcher.getWatchableObjectString(NAME); }
 
-	public VillagerType getVillagerType()
-	{
-		return type;
-	}
+	public VillagerType getVillagerType() { return type; }
 	
 	@Override
-	public boolean isChild()
-	{
-		if(this.dataWatcher.getWatchableObjectInt(AGE) > 0)
-			return true;
-		else
-			return false;
-	}
+	public boolean isChild() { return (this.dataWatcher.getWatchableObjectInt(AGE) > 0); }
 	
-    public boolean allowLeashing()
-    {
-        return false;
-    }
+    public boolean allowLeashing() { return false; }
     
     @Override
     public void onDeath(DamageSource cause)
@@ -608,12 +581,10 @@ public class EntityMillVillager extends EntityCreature
 	
 	public static class millVillagerRenderFactory implements IRenderFactory<EntityMillVillager>
 	{
-
 		@Override
 		public Render<EntityMillVillager> createRenderFor(RenderManager manager) 
 		{
 			return new RenderMillVillager(manager, new ModelBiped(), 0.5F);
 		}
-		
 	}
 }

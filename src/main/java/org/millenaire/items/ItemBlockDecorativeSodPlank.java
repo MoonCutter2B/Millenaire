@@ -21,8 +21,5 @@ public class ItemBlockDecorativeSodPlank extends ItemBlock
         return ((BlockDecorativeSodPlank)this.block).getUnlocalizedName(stack.getMetadata());
     }
 	
-	public int getMetadata(int damage)
-    {
-        return damage;
-    }
+	public int getMetadata(int damage) { return damage; }
 }

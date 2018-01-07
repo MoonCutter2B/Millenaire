@@ -17,17 +17,17 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiParchment extends GuiScreen
 {
-	final static ResourceLocation PARCHMENTGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_parchment.png");
-	final static ResourceLocation BOOKGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_book.png");
-	
-	ItemMillParchment item;
-	List<String> stringPages = new ArrayList<String>();
-	int page = 0;
-	
-	GuiButton forward;
-	GuiButton backward;
-	
-	public GuiParchment(ItemStack stack)
+	private final static ResourceLocation PARCHMENTGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_parchment.png");
+	private final static ResourceLocation BOOKGUI = new ResourceLocation(Millenaire.MODID + ":textures/gui/ML_book.png");
+
+	private ItemMillParchment item;
+	private List<String> stringPages = new ArrayList<String>();
+	private int page = 0;
+
+	private GuiButton forward;
+	private GuiButton backward;
+
+	GuiParchment(ItemStack stack)
 	{
 		if(stack.getItem() instanceof ItemMillParchment)
 			item = (ItemMillParchment)stack.getItem();
@@ -36,7 +36,7 @@ public class GuiParchment extends GuiScreen
 		
 		for(int i = 0; i < item.contents.length; i++)
 		{
-			String current = I18n.format(item.contents[i], new Object[0]);
+			String current = I18n.format(item.contents[i]);
 			int marker = 0;
 			while(marker < current.length())
 			{
@@ -85,7 +85,7 @@ public class GuiParchment extends GuiScreen
 	    mc.getTextureManager().bindTexture(PARCHMENTGUI);
 	    this.drawTexturedModalRect((this.width - 203) / 2, 2, 0, 0, 203, 219);
 	    
-	    String drawTitle = I18n.format(item.title, new Object[0]);
+	    String drawTitle = I18n.format(item.title);
 	    this.fontRendererObj.drawString(drawTitle, (this.width - this.fontRendererObj.getStringWidth(drawTitle)) / 2, 6, 0);
 	    
 	    String drawContents = stringPages.get(page);
@@ -95,7 +95,7 @@ public class GuiParchment extends GuiScreen
 	}
 	
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException 
+	protected void actionPerformed(GuiButton button)
 	{
 	    if (button == this.forward) 
 	    {
@@ -111,15 +111,9 @@ public class GuiParchment extends GuiScreen
 	
 	private void updateButtons()
 	{
-		if(page == 0)
-			this.backward.visible = false;
-		else
-			this.backward.visible = true;
-		
-		if(page == stringPages.size() - 1)
-			this.forward.visible = false;
-		else
-			this.forward.visible = true;
+		this.backward.visible = page != 0;
+
+		this.forward.visible = page != stringPages.size() - 1;
 	}
 	
 	@Override
@@ -132,7 +126,7 @@ public class GuiParchment extends GuiScreen
     {
         private final boolean nextPage;
 
-        public NextPageButton(int id, int xIn, int yIn, boolean nextPageIn)
+		NextPageButton(int id, int xIn, int yIn, boolean nextPageIn)
         {
             super(id, xIn, yIn, 18, 10, "");
             this.nextPage = nextPageIn;

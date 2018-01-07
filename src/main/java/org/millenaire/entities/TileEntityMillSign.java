@@ -22,9 +22,9 @@ public class TileEntityMillSign extends TileEntitySign implements ITickable
 	public static final int controlledProjects = 12;
 	public static final int controlledMilitary = 13;
 
-	public int thisSignType = 0;
+	private int thisSignType = 0;
 
-	public BlockPos villageStoneLocation;
+	private BlockPos villageStoneLocation;
 
 	@Override
 	public boolean executeCommand(final EntityPlayer playerIn)
@@ -33,10 +33,7 @@ public class TileEntityMillSign extends TileEntitySign implements ITickable
 		return false;
 	}
 
-	public void setSignType(int typeIn)
-	{
-		thisSignType = typeIn;
-	}
+	public void setSignType(int typeIn) { thisSignType = typeIn; }
 
 	@Override
 	public void update() 

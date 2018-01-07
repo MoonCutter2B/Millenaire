@@ -7,7 +7,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 
 public class EntityAIBuild extends EntityAIBase
 {
-	protected EntityLiving theEntity;
+	private EntityLiving theEntity;
 	
 	public EntityAIBuild(EntityLiving entityIn)
 	{
@@ -27,21 +27,13 @@ public class EntityAIBuild extends EntityAIBase
      * Returns whether the EntityAIBase should begin execution.
      */
 	@Override
-	public boolean shouldExecute() 
-	{
-		
-		return false;
-	}
+	public boolean shouldExecute() { return false; }
 
 	/**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
 	@Override
-    public boolean continueExecuting()
-    {
-		
-		return false;
-    }
+    public boolean continueExecuting() { return false; }
 	
 	/**
      * Execute a one shot task or start executing a continuous task

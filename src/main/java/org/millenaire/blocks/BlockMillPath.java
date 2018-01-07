@@ -2,23 +2,16 @@ package org.millenaire.blocks;
 
 import java.util.List;
 
-import org.millenaire.Millenaire;
-import org.millenaire.items.ItemMillPath;
-import org.millenaire.items.ItemMillPathSlab;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,7 +19,7 @@ public class BlockMillPath extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockMillPath.EnumType.class);
 
-	public BlockMillPath() 
+	BlockMillPath()
 	{
 		super(Material.ground);
 		
@@ -34,16 +27,10 @@ public class BlockMillPath extends Block
 	}
 	
 	@Override
-    public boolean isFullCube()
-    {
-        return false;
-    }
+    public boolean isFullCube() { return false; }
 	
 	@Override
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
+    public boolean isOpaqueCube() { return false; }
 	
 	@Override
     public int damageDropped(IBlockState state)
@@ -51,10 +38,7 @@ public class BlockMillPath extends Block
         return ((BlockMillPath.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -63,11 +47,8 @@ public class BlockMillPath extends Block
         if (Block.getBlockFromItem(itemIn) == this)
         {
             BlockMillPath.EnumType[] aenumtype = BlockMillPath.EnumType.values();
-            int i = aenumtype.length;
 
-            for (int j = 0; j < i; ++j)
-            {
-            	BlockMillPath.EnumType enumtype = aenumtype[j];
+            for (EnumType enumtype : aenumtype) {
                 list.add(new ItemStack(itemIn, 1, enumtype.getMetadata()));
             }
         }
@@ -91,10 +72,7 @@ public class BlockMillPath extends Block
     }
 
     @Override
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {VARIANT});
-    }
+    protected BlockState createBlockState() { return new BlockState(this, VARIANT); }
     
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -117,15 +95,9 @@ public class BlockMillPath extends Block
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        public String toString() { return this.name; }
 
         public static BlockMillPath.EnumType byMetadata(int meta)
         {
@@ -137,10 +109,7 @@ public class BlockMillPath extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        public String getName() { return this.name; }
 
         public String getUnlocalizedName()
         {
@@ -150,11 +119,8 @@ public class BlockMillPath extends Block
         static
         {
         	BlockMillPath.EnumType[] var0 = values();
-            int var1 = var0.length;
 
-            for (int var2 = 0; var2 < var1; ++var2)
-            {
-            	BlockMillPath.EnumType var3 = var0[var2];
+            for (EnumType var3 : var0) {
                 META_LOOKUP[var3.getMetadata()] = var3;
             }
         }

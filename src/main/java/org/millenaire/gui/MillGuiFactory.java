@@ -23,28 +23,16 @@ public class MillGuiFactory implements IModGuiFactory
 {
 
 	@Override
-	public void initialize(Minecraft minecraftInstance) 
-	{
-		System.out.println("GuiFactory Loaded");
-	}
+	public void initialize(Minecraft minecraftInstance) { System.out.println("GuiFactory Loaded"); }
 
 	@Override
-	public Class<? extends GuiScreen> mainConfigGuiClass() 
-	{
-		return MillConfigGui.class;
-	}
+	public Class<? extends GuiScreen> mainConfigGuiClass() { return MillConfigGui.class; }
 
 	@Override
-	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() 
-	{
-		return null;
-	}
+	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() { return null; }
 
 	@Override
-	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) 
-	{
-		return null;
-	}
+	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) { return null; }
 
 	public static class MillConfigGui extends GuiConfig
 	{
@@ -55,7 +43,7 @@ public class MillGuiFactory implements IModGuiFactory
 		
 		private static List<IConfigElement> getConfigElements()
 		{
-			List<IConfigElement> list = new ArrayList<IConfigElement>();
+			List<IConfigElement> list = new ArrayList<>();
 			
 			list.add(new DummyCategoryElement("UI Options", "gui.millConfig.ctgy.uiOptions", CategoryEntryUIOptions.class));
 			list.add(new DummyCategoryElement("World Generation Options", "gui.millConfig.ctgy.worldGen", CategoryEntryWorldGen.class));

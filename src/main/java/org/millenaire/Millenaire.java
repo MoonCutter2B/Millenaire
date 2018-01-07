@@ -1,29 +1,13 @@
 package org.millenaire;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.millenaire.blocks.BlockAlchemists;
-import org.millenaire.blocks.BlockMillChest;
-import org.millenaire.blocks.BlockMillCrops;
-import org.millenaire.blocks.BlockMillOre;
-import org.millenaire.blocks.BlockMillPath;
-import org.millenaire.blocks.BlockMillSign;
-import org.millenaire.blocks.BlockVillageStone;
 import org.millenaire.blocks.MillBlocks;
-import org.millenaire.blocks.StoredPosition;
-import org.millenaire.building.BuildingTypes;
 import org.millenaire.entities.EntityMillVillager;
 import org.millenaire.generation.VillageGenerator;
 import org.millenaire.gui.MillAchievement;
 import org.millenaire.gui.MillGuiHandler;
-import org.millenaire.items.ItemMillAmulet;
-import org.millenaire.items.ItemMillArmor;
-import org.millenaire.items.ItemMillFood;
-import org.millenaire.items.ItemMillParchment;
-import org.millenaire.items.ItemMillSign;
-import org.millenaire.items.ItemMillTool;
-import org.millenaire.items.ItemMillWallet;
-import org.millenaire.items.ItemMillWand;
 import org.millenaire.items.MillItems;
 import org.millenaire.networking.MillPacket;
 import org.millenaire.networking.PacketExportBuilding;
@@ -54,7 +38,7 @@ public class Millenaire
 	public static final String NAME = "Mill\u00e9naire";
 	public static final String VERSION = "7.0.0";
 	public static final String GUIFACTORY = "org.millenaire.gui.MillGuiFactory";
-	
+
 	public static boolean isServer = true;
 	
 	public List<Block> forbiddenBlocks;
@@ -65,10 +49,7 @@ public class Millenaire
 	
 	public static final CreativeTabs tabMillenaire = new CreativeTabs("MillTab")
 	{
-		public Item getTabIconItem() 
-		{
-			return MillItems.denierOr;
-		}
+		public Item getTabIconItem() { return MillItems.denierOr; }
 	};
 	
 	@EventHandler
@@ -131,6 +112,7 @@ public class Millenaire
 	private void setForbiddenBlocks()
 	{
 		String parsing = MillConfig.forbiddenBlocks.substring(11);
+		forbiddenBlocks = new ArrayList<Block>();
 		for (final String name : parsing.split(", |,"))
 		{
 			if(Block.blockRegistry.containsKey(new ResourceLocation(name)))
@@ -141,8 +123,5 @@ public class Millenaire
 	}
 	
 	@EventHandler
-	public void serverLoad(FMLServerStartingEvent event)
-	{
-		event.registerServerCommand(new MillCommand());
-	}
+	public void serverLoad(FMLServerStartingEvent event) { event.registerServerCommand(new MillCommand()); }
 }

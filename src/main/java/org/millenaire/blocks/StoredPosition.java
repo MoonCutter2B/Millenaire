@@ -2,29 +2,23 @@ package org.millenaire.blocks;
 
 import java.util.Random;
 
-import org.millenaire.Millenaire;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class StoredPosition extends Block
 {
-	public StoredPosition() 
+	StoredPosition()
 	{
 		super(Material.barrier);
         this.disableStats();
@@ -32,32 +26,20 @@ public class StoredPosition extends Block
 	}
 	
 	@Override
-    public int getRenderType()
-    {
-        return -1;
-    }
+    public int getRenderType() { return -1; }
 
     @Override
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
+    public boolean isOpaqueCube() { return false; }
     
     @Override
-    public boolean isFullCube()
-    {
-        return false;
-    }
+    public boolean isFullCube() { return false; }
     
     @SideOnly(Side.CLIENT)
-    public float getAmbientOcclusionLightValue()
-    {
-        return 1.0F;
-    }
+    public float getAmbientOcclusionLightValue() { return 1.0F; }
 
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", StoredPosition.EnumType.class);
 	private boolean showParticles = false;
-	
+
 	private final int sourceColor = 44820;
 	private final int tradeColor = 9983;
 	private final int pathColor = 16766976;
@@ -71,7 +53,7 @@ public class StoredPosition extends Block
 		if(showParticles)
 		{
 			int color = 16777215;
-			
+
 			if(state.getValue(VARIANT) == EnumType.TRADEPOS)
 				color = tradeColor;
 			else if(state.getValue(VARIANT) == EnumType.SOURCEPOS)
@@ -87,7 +69,7 @@ public class StoredPosition extends Block
 			
 			double d0 = (double)(color >> 16 & 255) / 255.0D;
             double d1 = (double)(color >> 8 & 255) / 255.0D;
-            double d2 = (double)(color >> 0 & 255) / 255.0D;
+            double d2 = (double)(color & 255) / 255.0D;
 			worldIn.spawnParticle(EnumParticleTypes.SPELL_MOB, pos.getX() + 0.5D, pos.getY()+ 0.5D, pos.getZ()+ 0.5D, d0, d1, d2, new int[0]);
 		}
 	}
@@ -113,20 +95,11 @@ public class StoredPosition extends Block
 			return null;
     }
 	
-	public void setShowParticles(boolean bool)
-	{
-		showParticles = bool;
-	}
+	public void setShowParticles(boolean bool) { showParticles = bool; }
 	
-	public boolean getShowParticles()
-	{
-		return showParticles;
-	}
+	public boolean getShowParticles() { return showParticles; }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	/*@Override
 	@SideOnly(Side.CLIENT)
@@ -163,10 +136,7 @@ public class StoredPosition extends Block
     }
 
     @Override
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {VARIANT});
-    }
+    protected BlockState createBlockState() { return new BlockState(this, VARIANT); }
 	
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -183,21 +153,15 @@ public class StoredPosition extends Block
         private final int meta;
         private final String name;
 
-        private EnumType(int meta, String name)
+        EnumType(int meta, String name)
         {
             this.meta = meta;
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        public String toString() { return this.name; }
 
         public static StoredPosition.EnumType byMetadata(int meta)
         {
@@ -209,24 +173,15 @@ public class StoredPosition extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {
         	StoredPosition.EnumType[] var0 = values();
-            int var1 = var0.length;
 
-            for (int var2 = 0; var2 < var1; ++var2)
-            {
-            	StoredPosition.EnumType var3 = var0[var2];
+            for (EnumType var3 : var0) {
                 META_LOOKUP[var3.getMetadata()] = var3;
             }
         }

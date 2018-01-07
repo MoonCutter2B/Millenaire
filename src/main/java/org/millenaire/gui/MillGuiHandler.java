@@ -46,7 +46,7 @@ public class MillGuiHandler implements IGuiHandler
 				teMillChest = (TileEntityMillChest)world.getTileEntity(new BlockPos(x, y, z));
 			else
 				System.err.println("TileEntityMillChest Missing");
-			
+
 			BlockMillChest millChest = (BlockMillChest)teMillChest.getBlockType();
 			ILockableContainer lockableContainer = millChest.getLockableContainer(world, new BlockPos(x, y, z));
 			
@@ -54,15 +54,15 @@ public class MillGuiHandler implements IGuiHandler
 		}
 		if(ID == 2)
 		{
-			return new GuiOptions(2, "option.negateVillage.text");
+			return new GuiOptions(ID, "option.negateVillage.text");
 		}
 		if(ID == 3)
 		{
-			return new GuiOptions(3, "option.negateVillager.text");
+			return new GuiOptions(ID, "option.negateVillager.text");
 		}
 		if(ID == 4)
 		{
-			return new GuiOptions(4, "option.summonRandom.text");
+			return new GuiOptions(ID, "option.summonRandom.text");
 		}
 		if(ID == 5)
 		{

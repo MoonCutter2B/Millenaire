@@ -1,34 +1,23 @@
 package org.millenaire.items;
 
-import org.millenaire.Millenaire;
-import org.millenaire.blocks.BlockMillCrops;
-import org.millenaire.blocks.MillBlocks;
 import org.millenaire.gui.MillAchievement;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMillFood extends ItemFood
 {
-	public boolean isDrink;
+	private boolean isDrink;
 	private int healAmount;
 	private int drunkDuration;
 	private int regDuration;
-	
-	public ItemMillFood(int healIn, int regIn, int drunkIn, int hungerIn, float saturationIn, boolean drinkIn) 
+
+	ItemMillFood(int healIn, int regIn, int drunkIn, int hungerIn, float saturationIn, boolean drinkIn)
 	{	
 		super(hungerIn, saturationIn, false);
 
@@ -38,17 +27,13 @@ public class ItemMillFood extends ItemFood
 		
 		isDrink = drinkIn;
 		if(isDrink)
+		{
 			this.setAlwaysEdible();
+		}
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
-    {
-		if(isDrink)
-			return EnumAction.DRINK;
-		else
-			return EnumAction.EAT;
-    }
+	public EnumAction getItemUseAction(ItemStack stack) { return isDrink ? EnumAction.DRINK : EnumAction.EAT; }
 	
 	@Override
 	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)

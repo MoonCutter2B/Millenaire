@@ -19,7 +19,7 @@ public class BlockDecorativeWood extends Block
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockDecorativeWood.EnumType.class);
 	
-	public BlockDecorativeWood() 
+	BlockDecorativeWood()
 	{
 		super(Material.wood);
 	}
@@ -30,10 +30,7 @@ public class BlockDecorativeWood extends Block
         return ((BlockDecorativeWood.EnumType)state.getValue(VARIANT)).getMetadata();
     }
 
-	public IProperty getVariantProperty()
-    {
-        return VARIANT;
-    }
+	public IProperty getVariantProperty() { return VARIANT; }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -42,11 +39,8 @@ public class BlockDecorativeWood extends Block
         if (Block.getBlockFromItem(itemIn) == this)
         {
             BlockDecorativeWood.EnumType[] aenumtype = BlockDecorativeWood.EnumType.values();
-            int i = aenumtype.length;
 
-            for (int j = 0; j < i; ++j)
-            {
-            	BlockDecorativeWood.EnumType enumtype = aenumtype[j];
+            for (EnumType enumtype : aenumtype) {
                 list.add(new ItemStack(itemIn, 1, enumtype.getMetadata()));
             }
         }
@@ -70,14 +64,11 @@ public class BlockDecorativeWood extends Block
     }
 
     @Override
-    protected BlockState createBlockState()
-    {
-        return new BlockState(this, new IProperty[] {VARIANT});
-    }
+    protected BlockState createBlockState() { return new BlockState(this, VARIANT); }
 
     //////////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static enum EnumType implements IStringSerializable
+    public enum EnumType implements IStringSerializable
     {
         PLAINTIMBERFRAME(0, "plainTimberFrame"),
         CROSSTIMBERFRAME(1, "crossTimberFrame"),
@@ -88,21 +79,15 @@ public class BlockDecorativeWood extends Block
         private final int meta;
         private final String name;
 
-        private EnumType(int meta, String name)
+        EnumType(int meta, String name)
         {
             this.meta = meta;
             this.name = name;
         }
 
-        public int getMetadata()
-        {
-            return this.meta;
-        }
+        public int getMetadata() { return this.meta; }
 
-        public String toString()
-        {
-            return this.name;
-        }
+        public String toString() { return this.name; }
 
         public static BlockDecorativeWood.EnumType byMetadata(int meta)
         {
@@ -114,24 +99,15 @@ public class BlockDecorativeWood extends Block
             return META_LOOKUP[meta];
         }
 
-        public String getName()
-        {
-            return this.name;
-        }
+        public String getName() { return this.name; }
 
-        public String getUnlocalizedName()
-        {
-            return this.name;
-        }
+        public String getUnlocalizedName() { return this.name; }
 
         static
         {
         	BlockDecorativeWood.EnumType[] var0 = values();
-            int var1 = var0.length;
 
-            for (int var2 = 0; var2 < var1; ++var2)
-            {
-            	BlockDecorativeWood.EnumType var3 = var0[var2];
+            for (EnumType var3 : var0) {
                 META_LOOKUP[var3.getMetadata()] = var3;
             }
         }

@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 
 public class BlockDecorativeUpdate extends Block
 {
-	IBlockState updateState;
+	private IBlockState updateState;
 
-	public BlockDecorativeUpdate(Material materialIn, IBlockState updateIn) 
+	BlockDecorativeUpdate(Material materialIn, IBlockState updateIn)
 	{
 		super(materialIn);
 		updateState = updateIn;
